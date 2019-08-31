@@ -164,18 +164,22 @@ public class CommerceShipmentItemUtil {
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceShipmentItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByGroupId(long, int, int, OrderByComparator)}
 	 * @param groupId the group ID
 	 * @param start the lower bound of the range of commerce shipment items
 	 * @param end the upper bound of the range of commerce shipment items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce shipment items
 	 */
+	@Deprecated
 	public static List<CommerceShipmentItem> findByGroupId(
 		long groupId, int start, int end,
-		OrderByComparator<CommerceShipmentItem> orderByComparator) {
+		OrderByComparator<CommerceShipmentItem> orderByComparator,
+		boolean useFinderCache) {
 
 		return getPersistence().findByGroupId(
-			groupId, start, end, orderByComparator);
+			groupId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -189,16 +193,14 @@ public class CommerceShipmentItemUtil {
 	 * @param start the lower bound of the range of commerce shipment items
 	 * @param end the upper bound of the range of commerce shipment items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce shipment items
 	 */
 	public static List<CommerceShipmentItem> findByGroupId(
 		long groupId, int start, int end,
-		OrderByComparator<CommerceShipmentItem> orderByComparator,
-		boolean retrieveFromCache) {
+		OrderByComparator<CommerceShipmentItem> orderByComparator) {
 
 		return getPersistence().findByGroupId(
-			groupId, start, end, orderByComparator, retrieveFromCache);
+			groupId, start, end, orderByComparator);
 	}
 
 	/**
@@ -337,18 +339,22 @@ public class CommerceShipmentItemUtil {
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceShipmentItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByCommerceShipment(long, int, int, OrderByComparator)}
 	 * @param commerceShipmentId the commerce shipment ID
 	 * @param start the lower bound of the range of commerce shipment items
 	 * @param end the upper bound of the range of commerce shipment items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce shipment items
 	 */
+	@Deprecated
 	public static List<CommerceShipmentItem> findByCommerceShipment(
 		long commerceShipmentId, int start, int end,
-		OrderByComparator<CommerceShipmentItem> orderByComparator) {
+		OrderByComparator<CommerceShipmentItem> orderByComparator,
+		boolean useFinderCache) {
 
 		return getPersistence().findByCommerceShipment(
-			commerceShipmentId, start, end, orderByComparator);
+			commerceShipmentId, start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -362,17 +368,14 @@ public class CommerceShipmentItemUtil {
 	 * @param start the lower bound of the range of commerce shipment items
 	 * @param end the upper bound of the range of commerce shipment items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce shipment items
 	 */
 	public static List<CommerceShipmentItem> findByCommerceShipment(
 		long commerceShipmentId, int start, int end,
-		OrderByComparator<CommerceShipmentItem> orderByComparator,
-		boolean retrieveFromCache) {
+		OrderByComparator<CommerceShipmentItem> orderByComparator) {
 
 		return getPersistence().findByCommerceShipment(
-			commerceShipmentId, start, end, orderByComparator,
-			retrieveFromCache);
+			commerceShipmentId, start, end, orderByComparator);
 	}
 
 	/**
@@ -582,16 +585,21 @@ public class CommerceShipmentItemUtil {
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceShipmentItemModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findAll(int, int, OrderByComparator)}
 	 * @param start the lower bound of the range of commerce shipment items
 	 * @param end the upper bound of the range of commerce shipment items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce shipment items
 	 */
+	@Deprecated
 	public static List<CommerceShipmentItem> findAll(
 		int start, int end,
-		OrderByComparator<CommerceShipmentItem> orderByComparator) {
+		OrderByComparator<CommerceShipmentItem> orderByComparator,
+		boolean useFinderCache) {
 
-		return getPersistence().findAll(start, end, orderByComparator);
+		return getPersistence().findAll(
+			start, end, orderByComparator, useFinderCache);
 	}
 
 	/**
@@ -604,16 +612,13 @@ public class CommerceShipmentItemUtil {
 	 * @param start the lower bound of the range of commerce shipment items
 	 * @param end the upper bound of the range of commerce shipment items (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of commerce shipment items
 	 */
 	public static List<CommerceShipmentItem> findAll(
 		int start, int end,
-		OrderByComparator<CommerceShipmentItem> orderByComparator,
-		boolean retrieveFromCache) {
+		OrderByComparator<CommerceShipmentItem> orderByComparator) {
 
-		return getPersistence().findAll(
-			start, end, orderByComparator, retrieveFromCache);
+		return getPersistence().findAll(start, end, orderByComparator);
 	}
 
 	/**

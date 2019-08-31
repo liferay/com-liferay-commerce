@@ -130,18 +130,22 @@ public class CPDAvailabilityEstimatePersistenceImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPDAvailabilityEstimateModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByUuid(String, int, int, OrderByComparator)}
 	 * @param uuid the uuid
 	 * @param start the lower bound of the range of cpd availability estimates
 	 * @param end the upper bound of the range of cpd availability estimates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cpd availability estimates
 	 */
+	@Deprecated
 	@Override
 	public List<CPDAvailabilityEstimate> findByUuid(
 		String uuid, int start, int end,
-		OrderByComparator<CPDAvailabilityEstimate> orderByComparator) {
+		OrderByComparator<CPDAvailabilityEstimate> orderByComparator,
+		boolean useFinderCache) {
 
-		return findByUuid(uuid, start, end, orderByComparator, true);
+		return findByUuid(uuid, start, end, orderByComparator);
 	}
 
 	/**
@@ -155,14 +159,12 @@ public class CPDAvailabilityEstimatePersistenceImpl
 	 * @param start the lower bound of the range of cpd availability estimates
 	 * @param end the upper bound of the range of cpd availability estimates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching cpd availability estimates
 	 */
 	@Override
 	public List<CPDAvailabilityEstimate> findByUuid(
 		String uuid, int start, int end,
-		OrderByComparator<CPDAvailabilityEstimate> orderByComparator,
-		boolean retrieveFromCache) {
+		OrderByComparator<CPDAvailabilityEstimate> orderByComparator) {
 
 		uuid = Objects.toString(uuid, "");
 
@@ -182,19 +184,16 @@ public class CPDAvailabilityEstimatePersistenceImpl
 			finderArgs = new Object[] {uuid, start, end, orderByComparator};
 		}
 
-		List<CPDAvailabilityEstimate> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<CPDAvailabilityEstimate>)finderCache.getResult(
+		List<CPDAvailabilityEstimate> list =
+			(List<CPDAvailabilityEstimate>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
-			if ((list != null) && !list.isEmpty()) {
-				for (CPDAvailabilityEstimate cpdAvailabilityEstimate : list) {
-					if (!uuid.equals(cpdAvailabilityEstimate.getUuid())) {
-						list = null;
+		if ((list != null) && !list.isEmpty()) {
+			for (CPDAvailabilityEstimate cpdAvailabilityEstimate : list) {
+				if (!uuid.equals(cpdAvailabilityEstimate.getUuid())) {
+					list = null;
 
-						break;
-					}
+					break;
 				}
 			}
 		}
@@ -692,20 +691,23 @@ public class CPDAvailabilityEstimatePersistenceImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPDAvailabilityEstimateModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByUuid_C(String,long, int, int, OrderByComparator)}
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 * @param start the lower bound of the range of cpd availability estimates
 	 * @param end the upper bound of the range of cpd availability estimates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cpd availability estimates
 	 */
+	@Deprecated
 	@Override
 	public List<CPDAvailabilityEstimate> findByUuid_C(
 		String uuid, long companyId, int start, int end,
-		OrderByComparator<CPDAvailabilityEstimate> orderByComparator) {
+		OrderByComparator<CPDAvailabilityEstimate> orderByComparator,
+		boolean useFinderCache) {
 
-		return findByUuid_C(
-			uuid, companyId, start, end, orderByComparator, true);
+		return findByUuid_C(uuid, companyId, start, end, orderByComparator);
 	}
 
 	/**
@@ -720,14 +722,12 @@ public class CPDAvailabilityEstimatePersistenceImpl
 	 * @param start the lower bound of the range of cpd availability estimates
 	 * @param end the upper bound of the range of cpd availability estimates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching cpd availability estimates
 	 */
 	@Override
 	public List<CPDAvailabilityEstimate> findByUuid_C(
 		String uuid, long companyId, int start, int end,
-		OrderByComparator<CPDAvailabilityEstimate> orderByComparator,
-		boolean retrieveFromCache) {
+		OrderByComparator<CPDAvailabilityEstimate> orderByComparator) {
 
 		uuid = Objects.toString(uuid, "");
 
@@ -749,21 +749,18 @@ public class CPDAvailabilityEstimatePersistenceImpl
 			};
 		}
 
-		List<CPDAvailabilityEstimate> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<CPDAvailabilityEstimate>)finderCache.getResult(
+		List<CPDAvailabilityEstimate> list =
+			(List<CPDAvailabilityEstimate>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
-			if ((list != null) && !list.isEmpty()) {
-				for (CPDAvailabilityEstimate cpdAvailabilityEstimate : list) {
-					if (!uuid.equals(cpdAvailabilityEstimate.getUuid()) ||
-						(companyId != cpdAvailabilityEstimate.getCompanyId())) {
+		if ((list != null) && !list.isEmpty()) {
+			for (CPDAvailabilityEstimate cpdAvailabilityEstimate : list) {
+				if (!uuid.equals(cpdAvailabilityEstimate.getUuid()) ||
+					(companyId != cpdAvailabilityEstimate.getCompanyId())) {
 
-						list = null;
+					list = null;
 
-						break;
-					}
+					break;
 				}
 			}
 		}
@@ -1293,20 +1290,23 @@ public class CPDAvailabilityEstimatePersistenceImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPDAvailabilityEstimateModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByCommerceAvailabilityEstimateId(long, int, int, OrderByComparator)}
 	 * @param commerceAvailabilityEstimateId the commerce availability estimate ID
 	 * @param start the lower bound of the range of cpd availability estimates
 	 * @param end the upper bound of the range of cpd availability estimates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cpd availability estimates
 	 */
+	@Deprecated
 	@Override
 	public List<CPDAvailabilityEstimate> findByCommerceAvailabilityEstimateId(
 		long commerceAvailabilityEstimateId, int start, int end,
-		OrderByComparator<CPDAvailabilityEstimate> orderByComparator) {
+		OrderByComparator<CPDAvailabilityEstimate> orderByComparator,
+		boolean useFinderCache) {
 
 		return findByCommerceAvailabilityEstimateId(
-			commerceAvailabilityEstimateId, start, end, orderByComparator,
-			true);
+			commerceAvailabilityEstimateId, start, end, orderByComparator);
 	}
 
 	/**
@@ -1320,14 +1320,12 @@ public class CPDAvailabilityEstimatePersistenceImpl
 	 * @param start the lower bound of the range of cpd availability estimates
 	 * @param end the upper bound of the range of cpd availability estimates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching cpd availability estimates
 	 */
 	@Override
 	public List<CPDAvailabilityEstimate> findByCommerceAvailabilityEstimateId(
 		long commerceAvailabilityEstimateId, int start, int end,
-		OrderByComparator<CPDAvailabilityEstimate> orderByComparator,
-		boolean retrieveFromCache) {
+		OrderByComparator<CPDAvailabilityEstimate> orderByComparator) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -1349,22 +1347,19 @@ public class CPDAvailabilityEstimatePersistenceImpl
 			};
 		}
 
-		List<CPDAvailabilityEstimate> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<CPDAvailabilityEstimate>)finderCache.getResult(
+		List<CPDAvailabilityEstimate> list =
+			(List<CPDAvailabilityEstimate>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
-			if ((list != null) && !list.isEmpty()) {
-				for (CPDAvailabilityEstimate cpdAvailabilityEstimate : list) {
-					if ((commerceAvailabilityEstimateId !=
-							cpdAvailabilityEstimate.
-								getCommerceAvailabilityEstimateId())) {
+		if ((list != null) && !list.isEmpty()) {
+			for (CPDAvailabilityEstimate cpdAvailabilityEstimate : list) {
+				if ((commerceAvailabilityEstimateId !=
+						cpdAvailabilityEstimate.
+							getCommerceAvailabilityEstimateId())) {
 
-						list = null;
+					list = null;
 
-						break;
-					}
+					break;
 				}
 			}
 		}
@@ -1834,35 +1829,34 @@ public class CPDAvailabilityEstimatePersistenceImpl
 	}
 
 	/**
-	 * Returns the cpd availability estimate where CProductId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the cpd availability estimate where CProductId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #fetchByCProductId(long)}
 	 * @param CProductId the c product ID
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cpd availability estimate, or <code>null</code> if a matching cpd availability estimate could not be found
 	 */
+	@Deprecated
 	@Override
-	public CPDAvailabilityEstimate fetchByCProductId(long CProductId) {
-		return fetchByCProductId(CProductId, true);
+	public CPDAvailabilityEstimate fetchByCProductId(
+		long CProductId, boolean useFinderCache) {
+
+		return fetchByCProductId(CProductId);
 	}
 
 	/**
 	 * Returns the cpd availability estimate where CProductId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param CProductId the c product ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cpd availability estimate, or <code>null</code> if a matching cpd availability estimate could not be found
 	 */
 	@Override
-	public CPDAvailabilityEstimate fetchByCProductId(
-		long CProductId, boolean retrieveFromCache) {
-
+	public CPDAvailabilityEstimate fetchByCProductId(long CProductId) {
 		Object[] finderArgs = new Object[] {CProductId};
 
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = finderCache.getResult(
-				_finderPathFetchByCProductId, finderArgs, this);
-		}
+		Object result = finderCache.getResult(
+			_finderPathFetchByCProductId, finderArgs, this);
 
 		if (result instanceof CPDAvailabilityEstimate) {
 			CPDAvailabilityEstimate cpdAvailabilityEstimate =
@@ -2724,17 +2718,21 @@ public class CPDAvailabilityEstimatePersistenceImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPDAvailabilityEstimateModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findAll(int, int, OrderByComparator)}
 	 * @param start the lower bound of the range of cpd availability estimates
 	 * @param end the upper bound of the range of cpd availability estimates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of cpd availability estimates
 	 */
+	@Deprecated
 	@Override
 	public List<CPDAvailabilityEstimate> findAll(
 		int start, int end,
-		OrderByComparator<CPDAvailabilityEstimate> orderByComparator) {
+		OrderByComparator<CPDAvailabilityEstimate> orderByComparator,
+		boolean useFinderCache) {
 
-		return findAll(start, end, orderByComparator, true);
+		return findAll(start, end, orderByComparator);
 	}
 
 	/**
@@ -2747,14 +2745,12 @@ public class CPDAvailabilityEstimatePersistenceImpl
 	 * @param start the lower bound of the range of cpd availability estimates
 	 * @param end the upper bound of the range of cpd availability estimates (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of cpd availability estimates
 	 */
 	@Override
 	public List<CPDAvailabilityEstimate> findAll(
 		int start, int end,
-		OrderByComparator<CPDAvailabilityEstimate> orderByComparator,
-		boolean retrieveFromCache) {
+		OrderByComparator<CPDAvailabilityEstimate> orderByComparator) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -2772,12 +2768,9 @@ public class CPDAvailabilityEstimatePersistenceImpl
 			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
-		List<CPDAvailabilityEstimate> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<CPDAvailabilityEstimate>)finderCache.getResult(
+		List<CPDAvailabilityEstimate> list =
+			(List<CPDAvailabilityEstimate>)finderCache.getResult(
 				finderPath, finderArgs, this);
-		}
 
 		if (list == null) {
 			StringBundler query = null;

@@ -128,18 +128,22 @@ public class CommerceRegionPersistenceImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceRegionModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByUuid(String, int, int, OrderByComparator)}
 	 * @param uuid the uuid
 	 * @param start the lower bound of the range of commerce regions
 	 * @param end the upper bound of the range of commerce regions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce regions
 	 */
+	@Deprecated
 	@Override
 	public List<CommerceRegion> findByUuid(
 		String uuid, int start, int end,
-		OrderByComparator<CommerceRegion> orderByComparator) {
+		OrderByComparator<CommerceRegion> orderByComparator,
+		boolean useFinderCache) {
 
-		return findByUuid(uuid, start, end, orderByComparator, true);
+		return findByUuid(uuid, start, end, orderByComparator);
 	}
 
 	/**
@@ -153,14 +157,12 @@ public class CommerceRegionPersistenceImpl
 	 * @param start the lower bound of the range of commerce regions
 	 * @param end the upper bound of the range of commerce regions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce regions
 	 */
 	@Override
 	public List<CommerceRegion> findByUuid(
 		String uuid, int start, int end,
-		OrderByComparator<CommerceRegion> orderByComparator,
-		boolean retrieveFromCache) {
+		OrderByComparator<CommerceRegion> orderByComparator) {
 
 		uuid = Objects.toString(uuid, "");
 
@@ -180,19 +182,15 @@ public class CommerceRegionPersistenceImpl
 			finderArgs = new Object[] {uuid, start, end, orderByComparator};
 		}
 
-		List<CommerceRegion> list = null;
+		List<CommerceRegion> list = (List<CommerceRegion>)finderCache.getResult(
+			finderPath, finderArgs, this);
 
-		if (retrieveFromCache) {
-			list = (List<CommerceRegion>)finderCache.getResult(
-				finderPath, finderArgs, this);
+		if ((list != null) && !list.isEmpty()) {
+			for (CommerceRegion commerceRegion : list) {
+				if (!uuid.equals(commerceRegion.getUuid())) {
+					list = null;
 
-			if ((list != null) && !list.isEmpty()) {
-				for (CommerceRegion commerceRegion : list) {
-					if (!uuid.equals(commerceRegion.getUuid())) {
-						list = null;
-
-						break;
-					}
+					break;
 				}
 			}
 		}
@@ -677,20 +675,23 @@ public class CommerceRegionPersistenceImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceRegionModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByUuid_C(String,long, int, int, OrderByComparator)}
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce regions
 	 * @param end the upper bound of the range of commerce regions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce regions
 	 */
+	@Deprecated
 	@Override
 	public List<CommerceRegion> findByUuid_C(
 		String uuid, long companyId, int start, int end,
-		OrderByComparator<CommerceRegion> orderByComparator) {
+		OrderByComparator<CommerceRegion> orderByComparator,
+		boolean useFinderCache) {
 
-		return findByUuid_C(
-			uuid, companyId, start, end, orderByComparator, true);
+		return findByUuid_C(uuid, companyId, start, end, orderByComparator);
 	}
 
 	/**
@@ -705,14 +706,12 @@ public class CommerceRegionPersistenceImpl
 	 * @param start the lower bound of the range of commerce regions
 	 * @param end the upper bound of the range of commerce regions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce regions
 	 */
 	@Override
 	public List<CommerceRegion> findByUuid_C(
 		String uuid, long companyId, int start, int end,
-		OrderByComparator<CommerceRegion> orderByComparator,
-		boolean retrieveFromCache) {
+		OrderByComparator<CommerceRegion> orderByComparator) {
 
 		uuid = Objects.toString(uuid, "");
 
@@ -734,21 +733,17 @@ public class CommerceRegionPersistenceImpl
 			};
 		}
 
-		List<CommerceRegion> list = null;
+		List<CommerceRegion> list = (List<CommerceRegion>)finderCache.getResult(
+			finderPath, finderArgs, this);
 
-		if (retrieveFromCache) {
-			list = (List<CommerceRegion>)finderCache.getResult(
-				finderPath, finderArgs, this);
+		if ((list != null) && !list.isEmpty()) {
+			for (CommerceRegion commerceRegion : list) {
+				if (!uuid.equals(commerceRegion.getUuid()) ||
+					(companyId != commerceRegion.getCompanyId())) {
 
-			if ((list != null) && !list.isEmpty()) {
-				for (CommerceRegion commerceRegion : list) {
-					if (!uuid.equals(commerceRegion.getUuid()) ||
-						(companyId != commerceRegion.getCompanyId())) {
+					list = null;
 
-						list = null;
-
-						break;
-					}
+					break;
 				}
 			}
 		}
@@ -1271,19 +1266,23 @@ public class CommerceRegionPersistenceImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceRegionModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByCommerceCountryId(long, int, int, OrderByComparator)}
 	 * @param commerceCountryId the commerce country ID
 	 * @param start the lower bound of the range of commerce regions
 	 * @param end the upper bound of the range of commerce regions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce regions
 	 */
+	@Deprecated
 	@Override
 	public List<CommerceRegion> findByCommerceCountryId(
 		long commerceCountryId, int start, int end,
-		OrderByComparator<CommerceRegion> orderByComparator) {
+		OrderByComparator<CommerceRegion> orderByComparator,
+		boolean useFinderCache) {
 
 		return findByCommerceCountryId(
-			commerceCountryId, start, end, orderByComparator, true);
+			commerceCountryId, start, end, orderByComparator);
 	}
 
 	/**
@@ -1297,14 +1296,12 @@ public class CommerceRegionPersistenceImpl
 	 * @param start the lower bound of the range of commerce regions
 	 * @param end the upper bound of the range of commerce regions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce regions
 	 */
 	@Override
 	public List<CommerceRegion> findByCommerceCountryId(
 		long commerceCountryId, int start, int end,
-		OrderByComparator<CommerceRegion> orderByComparator,
-		boolean retrieveFromCache) {
+		OrderByComparator<CommerceRegion> orderByComparator) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -1324,21 +1321,17 @@ public class CommerceRegionPersistenceImpl
 			};
 		}
 
-		List<CommerceRegion> list = null;
+		List<CommerceRegion> list = (List<CommerceRegion>)finderCache.getResult(
+			finderPath, finderArgs, this);
 
-		if (retrieveFromCache) {
-			list = (List<CommerceRegion>)finderCache.getResult(
-				finderPath, finderArgs, this);
+		if ((list != null) && !list.isEmpty()) {
+			for (CommerceRegion commerceRegion : list) {
+				if ((commerceCountryId !=
+						commerceRegion.getCommerceCountryId())) {
 
-			if ((list != null) && !list.isEmpty()) {
-				for (CommerceRegion commerceRegion : list) {
-					if ((commerceCountryId !=
-							commerceRegion.getCommerceCountryId())) {
+					list = null;
 
-						list = null;
-
-						break;
-					}
+					break;
 				}
 			}
 		}
@@ -1790,15 +1783,20 @@ public class CommerceRegionPersistenceImpl
 	}
 
 	/**
-	 * Returns the commerce region where commerceCountryId = &#63; and code = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the commerce region where commerceCountryId = &#63; and code = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #fetchByC_C(long,String)}
 	 * @param commerceCountryId the commerce country ID
 	 * @param code the code
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce region, or <code>null</code> if a matching commerce region could not be found
 	 */
+	@Deprecated
 	@Override
-	public CommerceRegion fetchByC_C(long commerceCountryId, String code) {
-		return fetchByC_C(commerceCountryId, code, true);
+	public CommerceRegion fetchByC_C(
+		long commerceCountryId, String code, boolean useFinderCache) {
+
+		return fetchByC_C(commerceCountryId, code);
 	}
 
 	/**
@@ -1806,23 +1804,17 @@ public class CommerceRegionPersistenceImpl
 	 *
 	 * @param commerceCountryId the commerce country ID
 	 * @param code the code
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce region, or <code>null</code> if a matching commerce region could not be found
 	 */
 	@Override
-	public CommerceRegion fetchByC_C(
-		long commerceCountryId, String code, boolean retrieveFromCache) {
-
+	public CommerceRegion fetchByC_C(long commerceCountryId, String code) {
 		code = Objects.toString(code, "");
 
 		Object[] finderArgs = new Object[] {commerceCountryId, code};
 
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = finderCache.getResult(
-				_finderPathFetchByC_C, finderArgs, this);
-		}
+		Object result = finderCache.getResult(
+			_finderPathFetchByC_C, finderArgs, this);
 
 		if (result instanceof CommerceRegion) {
 			CommerceRegion commerceRegion = (CommerceRegion)result;
@@ -2042,20 +2034,24 @@ public class CommerceRegionPersistenceImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceRegionModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByC_A(long,boolean, int, int, OrderByComparator)}
 	 * @param commerceCountryId the commerce country ID
 	 * @param active the active
 	 * @param start the lower bound of the range of commerce regions
 	 * @param end the upper bound of the range of commerce regions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce regions
 	 */
+	@Deprecated
 	@Override
 	public List<CommerceRegion> findByC_A(
 		long commerceCountryId, boolean active, int start, int end,
-		OrderByComparator<CommerceRegion> orderByComparator) {
+		OrderByComparator<CommerceRegion> orderByComparator,
+		boolean useFinderCache) {
 
 		return findByC_A(
-			commerceCountryId, active, start, end, orderByComparator, true);
+			commerceCountryId, active, start, end, orderByComparator);
 	}
 
 	/**
@@ -2070,14 +2066,12 @@ public class CommerceRegionPersistenceImpl
 	 * @param start the lower bound of the range of commerce regions
 	 * @param end the upper bound of the range of commerce regions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce regions
 	 */
 	@Override
 	public List<CommerceRegion> findByC_A(
 		long commerceCountryId, boolean active, int start, int end,
-		OrderByComparator<CommerceRegion> orderByComparator,
-		boolean retrieveFromCache) {
+		OrderByComparator<CommerceRegion> orderByComparator) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -2097,22 +2091,18 @@ public class CommerceRegionPersistenceImpl
 			};
 		}
 
-		List<CommerceRegion> list = null;
+		List<CommerceRegion> list = (List<CommerceRegion>)finderCache.getResult(
+			finderPath, finderArgs, this);
 
-		if (retrieveFromCache) {
-			list = (List<CommerceRegion>)finderCache.getResult(
-				finderPath, finderArgs, this);
+		if ((list != null) && !list.isEmpty()) {
+			for (CommerceRegion commerceRegion : list) {
+				if ((commerceCountryId !=
+						commerceRegion.getCommerceCountryId()) ||
+					(active != commerceRegion.isActive())) {
 
-			if ((list != null) && !list.isEmpty()) {
-				for (CommerceRegion commerceRegion : list) {
-					if ((commerceCountryId !=
-							commerceRegion.getCommerceCountryId()) ||
-						(active != commerceRegion.isActive())) {
+					list = null;
 
-						list = null;
-
-						break;
-					}
+					break;
 				}
 			}
 		}
@@ -3270,17 +3260,20 @@ public class CommerceRegionPersistenceImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceRegionModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findAll(int, int, OrderByComparator)}
 	 * @param start the lower bound of the range of commerce regions
 	 * @param end the upper bound of the range of commerce regions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce regions
 	 */
+	@Deprecated
 	@Override
 	public List<CommerceRegion> findAll(
-		int start, int end,
-		OrderByComparator<CommerceRegion> orderByComparator) {
+		int start, int end, OrderByComparator<CommerceRegion> orderByComparator,
+		boolean useFinderCache) {
 
-		return findAll(start, end, orderByComparator, true);
+		return findAll(start, end, orderByComparator);
 	}
 
 	/**
@@ -3293,13 +3286,12 @@ public class CommerceRegionPersistenceImpl
 	 * @param start the lower bound of the range of commerce regions
 	 * @param end the upper bound of the range of commerce regions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of commerce regions
 	 */
 	@Override
 	public List<CommerceRegion> findAll(
-		int start, int end, OrderByComparator<CommerceRegion> orderByComparator,
-		boolean retrieveFromCache) {
+		int start, int end,
+		OrderByComparator<CommerceRegion> orderByComparator) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -3317,12 +3309,8 @@ public class CommerceRegionPersistenceImpl
 			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
-		List<CommerceRegion> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<CommerceRegion>)finderCache.getResult(
-				finderPath, finderArgs, this);
-		}
+		List<CommerceRegion> list = (List<CommerceRegion>)finderCache.getResult(
+			finderPath, finderArgs, this);
 
 		if (list == null) {
 			StringBundler query = null;

@@ -295,6 +295,31 @@ public class CommerceOrderItemServiceSoap {
 
 	public static com.liferay.commerce.model.CommerceOrderItemSoap
 			updateCommerceOrderItem(
+				long commerceOrderItemId, int quantity,
+				com.liferay.commerce.currency.model.CommerceMoney unitPrice,
+				String json,
+				com.liferay.commerce.context.CommerceContext commerceContext,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+
+		try {
+			com.liferay.commerce.model.CommerceOrderItem returnValue =
+				CommerceOrderItemServiceUtil.updateCommerceOrderItem(
+					commerceOrderItemId, quantity, unitPrice, json,
+					commerceContext, serviceContext);
+
+			return com.liferay.commerce.model.CommerceOrderItemSoap.toSoapModel(
+				returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.model.CommerceOrderItemSoap
+			updateCommerceOrderItem(
 				long commerceOrderItemId, int quantity, String json,
 				com.liferay.commerce.context.CommerceContext commerceContext,
 				com.liferay.portal.kernel.service.ServiceContext serviceContext)

@@ -565,6 +565,15 @@ public class CommerceOrderLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.model.CommerceOrder recalculatePrice(
+			long commerceOrderId, boolean useOrderUnitPrice,
+			com.liferay.commerce.context.CommerceContext commerceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().recalculatePrice(
+			commerceOrderId, useOrderUnitPrice, commerceContext);
+	}
+
+	public static com.liferay.commerce.model.CommerceOrder recalculatePrice(
 			long commerceOrderId,
 			com.liferay.commerce.context.CommerceContext commerceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {

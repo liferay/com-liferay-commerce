@@ -495,6 +495,20 @@ public class CommerceOrderItemLocalServiceWrapper
 
 	@Override
 	public com.liferay.commerce.model.CommerceOrderItem updateCommerceOrderItem(
+			long commerceOrderItemId, int quantity,
+			com.liferay.commerce.currency.model.CommerceMoney unitPrice,
+			String json,
+			com.liferay.commerce.context.CommerceContext commerceContext,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceOrderItemLocalService.updateCommerceOrderItem(
+			commerceOrderItemId, quantity, unitPrice, json, commerceContext,
+			serviceContext);
+	}
+
+	@Override
+	public com.liferay.commerce.model.CommerceOrderItem updateCommerceOrderItem(
 			long commerceOrderItemId, int quantity, String json,
 			com.liferay.commerce.context.CommerceContext commerceContext,
 			com.liferay.portal.kernel.service.ServiceContext serviceContext)
@@ -541,6 +555,18 @@ public class CommerceOrderItemLocalServiceWrapper
 
 		return _commerceOrderItemLocalService.updateCommerceOrderItemPrice(
 			commerceOrderItemId, commerceContext);
+	}
+
+	@Override
+	public com.liferay.commerce.model.CommerceOrderItem
+			updateCommerceOrderItemPrice(
+				long commerceOrderItemId,
+				com.liferay.commerce.currency.model.CommerceMoney unitPrice,
+				com.liferay.commerce.context.CommerceContext commerceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceOrderItemLocalService.updateCommerceOrderItemPrice(
+			commerceOrderItemId, unitPrice, commerceContext);
 	}
 
 	@Override

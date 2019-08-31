@@ -19,6 +19,7 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.commerce.exception.NoSuchOrderPaymentException;
 import com.liferay.commerce.model.CommerceOrderPayment;
 import com.liferay.portal.kernel.service.persistence.BasePersistence;
+import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.io.Serializable;
 
@@ -80,16 +81,19 @@ public interface CommerceOrderPaymentPersistence
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceOrderPaymentModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByCommerceOrderId(long, int, int, OrderByComparator)}
 	 * @param commerceOrderId the commerce order ID
 	 * @param start the lower bound of the range of commerce order payments
 	 * @param end the upper bound of the range of commerce order payments (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce order payments
 	 */
+	@Deprecated
 	public java.util.List<CommerceOrderPayment> findByCommerceOrderId(
 		long commerceOrderId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceOrderPayment>
-			orderByComparator);
+		OrderByComparator<CommerceOrderPayment> orderByComparator,
+		boolean useFinderCache);
 
 	/**
 	 * Returns an ordered range of all the commerce order payments where commerceOrderId = &#63;.
@@ -102,14 +106,11 @@ public interface CommerceOrderPaymentPersistence
 	 * @param start the lower bound of the range of commerce order payments
 	 * @param end the upper bound of the range of commerce order payments (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce order payments
 	 */
 	public java.util.List<CommerceOrderPayment> findByCommerceOrderId(
 		long commerceOrderId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceOrderPayment>
-			orderByComparator,
-		boolean retrieveFromCache);
+		OrderByComparator<CommerceOrderPayment> orderByComparator);
 
 	/**
 	 * Returns the first commerce order payment in the ordered set where commerceOrderId = &#63;.
@@ -121,8 +122,7 @@ public interface CommerceOrderPaymentPersistence
 	 */
 	public CommerceOrderPayment findByCommerceOrderId_First(
 			long commerceOrderId,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<CommerceOrderPayment> orderByComparator)
+			OrderByComparator<CommerceOrderPayment> orderByComparator)
 		throws NoSuchOrderPaymentException;
 
 	/**
@@ -134,8 +134,7 @@ public interface CommerceOrderPaymentPersistence
 	 */
 	public CommerceOrderPayment fetchByCommerceOrderId_First(
 		long commerceOrderId,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceOrderPayment>
-			orderByComparator);
+		OrderByComparator<CommerceOrderPayment> orderByComparator);
 
 	/**
 	 * Returns the last commerce order payment in the ordered set where commerceOrderId = &#63;.
@@ -147,8 +146,7 @@ public interface CommerceOrderPaymentPersistence
 	 */
 	public CommerceOrderPayment findByCommerceOrderId_Last(
 			long commerceOrderId,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<CommerceOrderPayment> orderByComparator)
+			OrderByComparator<CommerceOrderPayment> orderByComparator)
 		throws NoSuchOrderPaymentException;
 
 	/**
@@ -160,8 +158,7 @@ public interface CommerceOrderPaymentPersistence
 	 */
 	public CommerceOrderPayment fetchByCommerceOrderId_Last(
 		long commerceOrderId,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceOrderPayment>
-			orderByComparator);
+		OrderByComparator<CommerceOrderPayment> orderByComparator);
 
 	/**
 	 * Returns the commerce order payments before and after the current commerce order payment in the ordered set where commerceOrderId = &#63;.
@@ -174,8 +171,7 @@ public interface CommerceOrderPaymentPersistence
 	 */
 	public CommerceOrderPayment[] findByCommerceOrderId_PrevAndNext(
 			long commerceOrderPaymentId, long commerceOrderId,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<CommerceOrderPayment> orderByComparator)
+			OrderByComparator<CommerceOrderPayment> orderByComparator)
 		throws NoSuchOrderPaymentException;
 
 	/**
@@ -274,15 +270,18 @@ public interface CommerceOrderPaymentPersistence
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceOrderPaymentModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findAll(int, int, OrderByComparator)}
 	 * @param start the lower bound of the range of commerce order payments
 	 * @param end the upper bound of the range of commerce order payments (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce order payments
 	 */
+	@Deprecated
 	public java.util.List<CommerceOrderPayment> findAll(
 		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceOrderPayment>
-			orderByComparator);
+		OrderByComparator<CommerceOrderPayment> orderByComparator,
+		boolean useFinderCache);
 
 	/**
 	 * Returns an ordered range of all the commerce order payments.
@@ -294,14 +293,11 @@ public interface CommerceOrderPaymentPersistence
 	 * @param start the lower bound of the range of commerce order payments
 	 * @param end the upper bound of the range of commerce order payments (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of commerce order payments
 	 */
 	public java.util.List<CommerceOrderPayment> findAll(
 		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceOrderPayment>
-			orderByComparator,
-		boolean retrieveFromCache);
+		OrderByComparator<CommerceOrderPayment> orderByComparator);
 
 	/**
 	 * Removes all the commerce order payments from the database.

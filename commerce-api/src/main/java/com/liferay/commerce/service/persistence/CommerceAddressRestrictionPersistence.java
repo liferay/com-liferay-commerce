@@ -19,6 +19,7 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.commerce.exception.NoSuchAddressRestrictionException;
 import com.liferay.commerce.model.CommerceAddressRestriction;
 import com.liferay.portal.kernel.service.persistence.BasePersistence;
+import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.io.Serializable;
 
@@ -80,16 +81,19 @@ public interface CommerceAddressRestrictionPersistence
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressRestrictionModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByCommerceCountryId(long, int, int, OrderByComparator)}
 	 * @param commerceCountryId the commerce country ID
 	 * @param start the lower bound of the range of commerce address restrictions
 	 * @param end the upper bound of the range of commerce address restrictions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce address restrictions
 	 */
+	@Deprecated
 	public java.util.List<CommerceAddressRestriction> findByCommerceCountryId(
 		long commerceCountryId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceAddressRestriction> orderByComparator);
+		OrderByComparator<CommerceAddressRestriction> orderByComparator,
+		boolean useFinderCache);
 
 	/**
 	 * Returns an ordered range of all the commerce address restrictions where commerceCountryId = &#63;.
@@ -102,14 +106,11 @@ public interface CommerceAddressRestrictionPersistence
 	 * @param start the lower bound of the range of commerce address restrictions
 	 * @param end the upper bound of the range of commerce address restrictions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce address restrictions
 	 */
 	public java.util.List<CommerceAddressRestriction> findByCommerceCountryId(
 		long commerceCountryId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceAddressRestriction> orderByComparator,
-		boolean retrieveFromCache);
+		OrderByComparator<CommerceAddressRestriction> orderByComparator);
 
 	/**
 	 * Returns the first commerce address restriction in the ordered set where commerceCountryId = &#63;.
@@ -121,8 +122,7 @@ public interface CommerceAddressRestrictionPersistence
 	 */
 	public CommerceAddressRestriction findByCommerceCountryId_First(
 			long commerceCountryId,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<CommerceAddressRestriction> orderByComparator)
+			OrderByComparator<CommerceAddressRestriction> orderByComparator)
 		throws NoSuchAddressRestrictionException;
 
 	/**
@@ -134,8 +134,7 @@ public interface CommerceAddressRestrictionPersistence
 	 */
 	public CommerceAddressRestriction fetchByCommerceCountryId_First(
 		long commerceCountryId,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceAddressRestriction> orderByComparator);
+		OrderByComparator<CommerceAddressRestriction> orderByComparator);
 
 	/**
 	 * Returns the last commerce address restriction in the ordered set where commerceCountryId = &#63;.
@@ -147,8 +146,7 @@ public interface CommerceAddressRestrictionPersistence
 	 */
 	public CommerceAddressRestriction findByCommerceCountryId_Last(
 			long commerceCountryId,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<CommerceAddressRestriction> orderByComparator)
+			OrderByComparator<CommerceAddressRestriction> orderByComparator)
 		throws NoSuchAddressRestrictionException;
 
 	/**
@@ -160,8 +158,7 @@ public interface CommerceAddressRestrictionPersistence
 	 */
 	public CommerceAddressRestriction fetchByCommerceCountryId_Last(
 		long commerceCountryId,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceAddressRestriction> orderByComparator);
+		OrderByComparator<CommerceAddressRestriction> orderByComparator);
 
 	/**
 	 * Returns the commerce address restrictions before and after the current commerce address restriction in the ordered set where commerceCountryId = &#63;.
@@ -174,8 +171,7 @@ public interface CommerceAddressRestrictionPersistence
 	 */
 	public CommerceAddressRestriction[] findByCommerceCountryId_PrevAndNext(
 			long commerceAddressRestrictionId, long commerceCountryId,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<CommerceAddressRestriction> orderByComparator)
+			OrderByComparator<CommerceAddressRestriction> orderByComparator)
 		throws NoSuchAddressRestrictionException;
 
 	/**
@@ -226,17 +222,20 @@ public interface CommerceAddressRestrictionPersistence
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressRestrictionModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByC_C(long,long, int, int, OrderByComparator)}
 	 * @param classNameId the class name ID
 	 * @param classPK the class pk
 	 * @param start the lower bound of the range of commerce address restrictions
 	 * @param end the upper bound of the range of commerce address restrictions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce address restrictions
 	 */
+	@Deprecated
 	public java.util.List<CommerceAddressRestriction> findByC_C(
 		long classNameId, long classPK, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceAddressRestriction> orderByComparator);
+		OrderByComparator<CommerceAddressRestriction> orderByComparator,
+		boolean useFinderCache);
 
 	/**
 	 * Returns an ordered range of all the commerce address restrictions where classNameId = &#63; and classPK = &#63;.
@@ -250,14 +249,11 @@ public interface CommerceAddressRestrictionPersistence
 	 * @param start the lower bound of the range of commerce address restrictions
 	 * @param end the upper bound of the range of commerce address restrictions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce address restrictions
 	 */
 	public java.util.List<CommerceAddressRestriction> findByC_C(
 		long classNameId, long classPK, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceAddressRestriction> orderByComparator,
-		boolean retrieveFromCache);
+		OrderByComparator<CommerceAddressRestriction> orderByComparator);
 
 	/**
 	 * Returns the first commerce address restriction in the ordered set where classNameId = &#63; and classPK = &#63;.
@@ -270,8 +266,7 @@ public interface CommerceAddressRestrictionPersistence
 	 */
 	public CommerceAddressRestriction findByC_C_First(
 			long classNameId, long classPK,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<CommerceAddressRestriction> orderByComparator)
+			OrderByComparator<CommerceAddressRestriction> orderByComparator)
 		throws NoSuchAddressRestrictionException;
 
 	/**
@@ -284,8 +279,7 @@ public interface CommerceAddressRestrictionPersistence
 	 */
 	public CommerceAddressRestriction fetchByC_C_First(
 		long classNameId, long classPK,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceAddressRestriction> orderByComparator);
+		OrderByComparator<CommerceAddressRestriction> orderByComparator);
 
 	/**
 	 * Returns the last commerce address restriction in the ordered set where classNameId = &#63; and classPK = &#63;.
@@ -298,8 +292,7 @@ public interface CommerceAddressRestrictionPersistence
 	 */
 	public CommerceAddressRestriction findByC_C_Last(
 			long classNameId, long classPK,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<CommerceAddressRestriction> orderByComparator)
+			OrderByComparator<CommerceAddressRestriction> orderByComparator)
 		throws NoSuchAddressRestrictionException;
 
 	/**
@@ -312,8 +305,7 @@ public interface CommerceAddressRestrictionPersistence
 	 */
 	public CommerceAddressRestriction fetchByC_C_Last(
 		long classNameId, long classPK,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceAddressRestriction> orderByComparator);
+		OrderByComparator<CommerceAddressRestriction> orderByComparator);
 
 	/**
 	 * Returns the commerce address restrictions before and after the current commerce address restriction in the ordered set where classNameId = &#63; and classPK = &#63;.
@@ -327,8 +319,7 @@ public interface CommerceAddressRestrictionPersistence
 	 */
 	public CommerceAddressRestriction[] findByC_C_PrevAndNext(
 			long commerceAddressRestrictionId, long classNameId, long classPK,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<CommerceAddressRestriction> orderByComparator)
+			OrderByComparator<CommerceAddressRestriction> orderByComparator)
 		throws NoSuchAddressRestrictionException;
 
 	/**
@@ -362,15 +353,19 @@ public interface CommerceAddressRestrictionPersistence
 		throws NoSuchAddressRestrictionException;
 
 	/**
-	 * Returns the commerce address restriction where classNameId = &#63; and classPK = &#63; and commerceCountryId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the commerce address restriction where classNameId = &#63; and classPK = &#63; and commerceCountryId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #fetchByC_C_C(long,long,long)}
 	 * @param classNameId the class name ID
 	 * @param classPK the class pk
 	 * @param commerceCountryId the commerce country ID
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce address restriction, or <code>null</code> if a matching commerce address restriction could not be found
 	 */
+	@Deprecated
 	public CommerceAddressRestriction fetchByC_C_C(
-		long classNameId, long classPK, long commerceCountryId);
+		long classNameId, long classPK, long commerceCountryId,
+		boolean useFinderCache);
 
 	/**
 	 * Returns the commerce address restriction where classNameId = &#63; and classPK = &#63; and commerceCountryId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
@@ -378,12 +373,11 @@ public interface CommerceAddressRestrictionPersistence
 	 * @param classNameId the class name ID
 	 * @param classPK the class pk
 	 * @param commerceCountryId the commerce country ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce address restriction, or <code>null</code> if a matching commerce address restriction could not be found
 	 */
 	public CommerceAddressRestriction fetchByC_C_C(
-		long classNameId, long classPK, long commerceCountryId,
-		boolean retrieveFromCache);
+		long classNameId, long classPK, long commerceCountryId);
 
 	/**
 	 * Removes the commerce address restriction where classNameId = &#63; and classPK = &#63; and commerceCountryId = &#63; from the database.
@@ -493,15 +487,18 @@ public interface CommerceAddressRestrictionPersistence
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressRestrictionModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findAll(int, int, OrderByComparator)}
 	 * @param start the lower bound of the range of commerce address restrictions
 	 * @param end the upper bound of the range of commerce address restrictions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce address restrictions
 	 */
+	@Deprecated
 	public java.util.List<CommerceAddressRestriction> findAll(
 		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceAddressRestriction> orderByComparator);
+		OrderByComparator<CommerceAddressRestriction> orderByComparator,
+		boolean useFinderCache);
 
 	/**
 	 * Returns an ordered range of all the commerce address restrictions.
@@ -513,14 +510,11 @@ public interface CommerceAddressRestrictionPersistence
 	 * @param start the lower bound of the range of commerce address restrictions
 	 * @param end the upper bound of the range of commerce address restrictions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of commerce address restrictions
 	 */
 	public java.util.List<CommerceAddressRestriction> findAll(
 		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceAddressRestriction> orderByComparator,
-		boolean retrieveFromCache);
+		OrderByComparator<CommerceAddressRestriction> orderByComparator);
 
 	/**
 	 * Removes all the commerce address restrictions from the database.

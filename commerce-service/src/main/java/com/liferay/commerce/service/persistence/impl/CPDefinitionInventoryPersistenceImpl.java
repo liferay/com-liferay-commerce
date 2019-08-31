@@ -130,18 +130,22 @@ public class CPDefinitionInventoryPersistenceImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPDefinitionInventoryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByUuid(String, int, int, OrderByComparator)}
 	 * @param uuid the uuid
 	 * @param start the lower bound of the range of cp definition inventories
 	 * @param end the upper bound of the range of cp definition inventories (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition inventories
 	 */
+	@Deprecated
 	@Override
 	public List<CPDefinitionInventory> findByUuid(
 		String uuid, int start, int end,
-		OrderByComparator<CPDefinitionInventory> orderByComparator) {
+		OrderByComparator<CPDefinitionInventory> orderByComparator,
+		boolean useFinderCache) {
 
-		return findByUuid(uuid, start, end, orderByComparator, true);
+		return findByUuid(uuid, start, end, orderByComparator);
 	}
 
 	/**
@@ -155,14 +159,12 @@ public class CPDefinitionInventoryPersistenceImpl
 	 * @param start the lower bound of the range of cp definition inventories
 	 * @param end the upper bound of the range of cp definition inventories (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching cp definition inventories
 	 */
 	@Override
 	public List<CPDefinitionInventory> findByUuid(
 		String uuid, int start, int end,
-		OrderByComparator<CPDefinitionInventory> orderByComparator,
-		boolean retrieveFromCache) {
+		OrderByComparator<CPDefinitionInventory> orderByComparator) {
 
 		uuid = Objects.toString(uuid, "");
 
@@ -182,19 +184,16 @@ public class CPDefinitionInventoryPersistenceImpl
 			finderArgs = new Object[] {uuid, start, end, orderByComparator};
 		}
 
-		List<CPDefinitionInventory> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<CPDefinitionInventory>)finderCache.getResult(
+		List<CPDefinitionInventory> list =
+			(List<CPDefinitionInventory>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
-			if ((list != null) && !list.isEmpty()) {
-				for (CPDefinitionInventory cpDefinitionInventory : list) {
-					if (!uuid.equals(cpDefinitionInventory.getUuid())) {
-						list = null;
+		if ((list != null) && !list.isEmpty()) {
+			for (CPDefinitionInventory cpDefinitionInventory : list) {
+				if (!uuid.equals(cpDefinitionInventory.getUuid())) {
+					list = null;
 
-						break;
-					}
+					break;
 				}
 			}
 		}
@@ -684,15 +683,20 @@ public class CPDefinitionInventoryPersistenceImpl
 	}
 
 	/**
-	 * Returns the cp definition inventory where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the cp definition inventory where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #fetchByUUID_G(String,long)}
 	 * @param uuid the uuid
 	 * @param groupId the group ID
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp definition inventory, or <code>null</code> if a matching cp definition inventory could not be found
 	 */
+	@Deprecated
 	@Override
-	public CPDefinitionInventory fetchByUUID_G(String uuid, long groupId) {
-		return fetchByUUID_G(uuid, groupId, true);
+	public CPDefinitionInventory fetchByUUID_G(
+		String uuid, long groupId, boolean useFinderCache) {
+
+		return fetchByUUID_G(uuid, groupId);
 	}
 
 	/**
@@ -700,23 +704,17 @@ public class CPDefinitionInventoryPersistenceImpl
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp definition inventory, or <code>null</code> if a matching cp definition inventory could not be found
 	 */
 	@Override
-	public CPDefinitionInventory fetchByUUID_G(
-		String uuid, long groupId, boolean retrieveFromCache) {
-
+	public CPDefinitionInventory fetchByUUID_G(String uuid, long groupId) {
 		uuid = Objects.toString(uuid, "");
 
 		Object[] finderArgs = new Object[] {uuid, groupId};
 
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = finderCache.getResult(
-				_finderPathFetchByUUID_G, finderArgs, this);
-		}
+		Object result = finderCache.getResult(
+			_finderPathFetchByUUID_G, finderArgs, this);
 
 		if (result instanceof CPDefinitionInventory) {
 			CPDefinitionInventory cpDefinitionInventory =
@@ -937,20 +935,23 @@ public class CPDefinitionInventoryPersistenceImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPDefinitionInventoryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByUuid_C(String,long, int, int, OrderByComparator)}
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 * @param start the lower bound of the range of cp definition inventories
 	 * @param end the upper bound of the range of cp definition inventories (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching cp definition inventories
 	 */
+	@Deprecated
 	@Override
 	public List<CPDefinitionInventory> findByUuid_C(
 		String uuid, long companyId, int start, int end,
-		OrderByComparator<CPDefinitionInventory> orderByComparator) {
+		OrderByComparator<CPDefinitionInventory> orderByComparator,
+		boolean useFinderCache) {
 
-		return findByUuid_C(
-			uuid, companyId, start, end, orderByComparator, true);
+		return findByUuid_C(uuid, companyId, start, end, orderByComparator);
 	}
 
 	/**
@@ -965,14 +966,12 @@ public class CPDefinitionInventoryPersistenceImpl
 	 * @param start the lower bound of the range of cp definition inventories
 	 * @param end the upper bound of the range of cp definition inventories (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching cp definition inventories
 	 */
 	@Override
 	public List<CPDefinitionInventory> findByUuid_C(
 		String uuid, long companyId, int start, int end,
-		OrderByComparator<CPDefinitionInventory> orderByComparator,
-		boolean retrieveFromCache) {
+		OrderByComparator<CPDefinitionInventory> orderByComparator) {
 
 		uuid = Objects.toString(uuid, "");
 
@@ -994,21 +993,18 @@ public class CPDefinitionInventoryPersistenceImpl
 			};
 		}
 
-		List<CPDefinitionInventory> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<CPDefinitionInventory>)finderCache.getResult(
+		List<CPDefinitionInventory> list =
+			(List<CPDefinitionInventory>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
-			if ((list != null) && !list.isEmpty()) {
-				for (CPDefinitionInventory cpDefinitionInventory : list) {
-					if (!uuid.equals(cpDefinitionInventory.getUuid()) ||
-						(companyId != cpDefinitionInventory.getCompanyId())) {
+		if ((list != null) && !list.isEmpty()) {
+			for (CPDefinitionInventory cpDefinitionInventory : list) {
+				if (!uuid.equals(cpDefinitionInventory.getUuid()) ||
+					(companyId != cpDefinitionInventory.getCompanyId())) {
 
-						list = null;
+					list = null;
 
-						break;
-					}
+					break;
 				}
 			}
 		}
@@ -1527,35 +1523,34 @@ public class CPDefinitionInventoryPersistenceImpl
 	}
 
 	/**
-	 * Returns the cp definition inventory where CPDefinitionId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the cp definition inventory where CPDefinitionId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #fetchByCPDefinitionId(long)}
 	 * @param CPDefinitionId the cp definition ID
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp definition inventory, or <code>null</code> if a matching cp definition inventory could not be found
 	 */
+	@Deprecated
 	@Override
-	public CPDefinitionInventory fetchByCPDefinitionId(long CPDefinitionId) {
-		return fetchByCPDefinitionId(CPDefinitionId, true);
+	public CPDefinitionInventory fetchByCPDefinitionId(
+		long CPDefinitionId, boolean useFinderCache) {
+
+		return fetchByCPDefinitionId(CPDefinitionId);
 	}
 
 	/**
 	 * Returns the cp definition inventory where CPDefinitionId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param CPDefinitionId the cp definition ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching cp definition inventory, or <code>null</code> if a matching cp definition inventory could not be found
 	 */
 	@Override
-	public CPDefinitionInventory fetchByCPDefinitionId(
-		long CPDefinitionId, boolean retrieveFromCache) {
-
+	public CPDefinitionInventory fetchByCPDefinitionId(long CPDefinitionId) {
 		Object[] finderArgs = new Object[] {CPDefinitionId};
 
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = finderCache.getResult(
-				_finderPathFetchByCPDefinitionId, finderArgs, this);
-		}
+		Object result = finderCache.getResult(
+			_finderPathFetchByCPDefinitionId, finderArgs, this);
 
 		if (result instanceof CPDefinitionInventory) {
 			CPDefinitionInventory cpDefinitionInventory =
@@ -2413,17 +2408,21 @@ public class CPDefinitionInventoryPersistenceImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPDefinitionInventoryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findAll(int, int, OrderByComparator)}
 	 * @param start the lower bound of the range of cp definition inventories
 	 * @param end the upper bound of the range of cp definition inventories (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of cp definition inventories
 	 */
+	@Deprecated
 	@Override
 	public List<CPDefinitionInventory> findAll(
 		int start, int end,
-		OrderByComparator<CPDefinitionInventory> orderByComparator) {
+		OrderByComparator<CPDefinitionInventory> orderByComparator,
+		boolean useFinderCache) {
 
-		return findAll(start, end, orderByComparator, true);
+		return findAll(start, end, orderByComparator);
 	}
 
 	/**
@@ -2436,14 +2435,12 @@ public class CPDefinitionInventoryPersistenceImpl
 	 * @param start the lower bound of the range of cp definition inventories
 	 * @param end the upper bound of the range of cp definition inventories (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of cp definition inventories
 	 */
 	@Override
 	public List<CPDefinitionInventory> findAll(
 		int start, int end,
-		OrderByComparator<CPDefinitionInventory> orderByComparator,
-		boolean retrieveFromCache) {
+		OrderByComparator<CPDefinitionInventory> orderByComparator) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -2461,12 +2458,9 @@ public class CPDefinitionInventoryPersistenceImpl
 			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
-		List<CPDefinitionInventory> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<CPDefinitionInventory>)finderCache.getResult(
+		List<CPDefinitionInventory> list =
+			(List<CPDefinitionInventory>)finderCache.getResult(
 				finderPath, finderArgs, this);
-		}
 
 		if (list == null) {
 			StringBundler query = null;

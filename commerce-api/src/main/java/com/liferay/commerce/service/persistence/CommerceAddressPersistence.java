@@ -19,6 +19,7 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.commerce.exception.NoSuchAddressException;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.portal.kernel.service.persistence.BasePersistence;
+import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.io.Serializable;
 
@@ -80,16 +81,19 @@ public interface CommerceAddressPersistence
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByCommerceRegionId(long, int, int, OrderByComparator)}
 	 * @param commerceRegionId the commerce region ID
 	 * @param start the lower bound of the range of commerce addresses
 	 * @param end the upper bound of the range of commerce addresses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce addresses
 	 */
+	@Deprecated
 	public java.util.List<CommerceAddress> findByCommerceRegionId(
 		long commerceRegionId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-			orderByComparator);
+		OrderByComparator<CommerceAddress> orderByComparator,
+		boolean useFinderCache);
 
 	/**
 	 * Returns an ordered range of all the commerce addresses where commerceRegionId = &#63;.
@@ -102,14 +106,11 @@ public interface CommerceAddressPersistence
 	 * @param start the lower bound of the range of commerce addresses
 	 * @param end the upper bound of the range of commerce addresses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce addresses
 	 */
 	public java.util.List<CommerceAddress> findByCommerceRegionId(
 		long commerceRegionId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-			orderByComparator,
-		boolean retrieveFromCache);
+		OrderByComparator<CommerceAddress> orderByComparator);
 
 	/**
 	 * Returns the first commerce address in the ordered set where commerceRegionId = &#63;.
@@ -121,8 +122,7 @@ public interface CommerceAddressPersistence
 	 */
 	public CommerceAddress findByCommerceRegionId_First(
 			long commerceRegionId,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-				orderByComparator)
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException;
 
 	/**
@@ -134,8 +134,7 @@ public interface CommerceAddressPersistence
 	 */
 	public CommerceAddress fetchByCommerceRegionId_First(
 		long commerceRegionId,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-			orderByComparator);
+		OrderByComparator<CommerceAddress> orderByComparator);
 
 	/**
 	 * Returns the last commerce address in the ordered set where commerceRegionId = &#63;.
@@ -147,8 +146,7 @@ public interface CommerceAddressPersistence
 	 */
 	public CommerceAddress findByCommerceRegionId_Last(
 			long commerceRegionId,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-				orderByComparator)
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException;
 
 	/**
@@ -160,8 +158,7 @@ public interface CommerceAddressPersistence
 	 */
 	public CommerceAddress fetchByCommerceRegionId_Last(
 		long commerceRegionId,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-			orderByComparator);
+		OrderByComparator<CommerceAddress> orderByComparator);
 
 	/**
 	 * Returns the commerce addresses before and after the current commerce address in the ordered set where commerceRegionId = &#63;.
@@ -174,8 +171,7 @@ public interface CommerceAddressPersistence
 	 */
 	public CommerceAddress[] findByCommerceRegionId_PrevAndNext(
 			long commerceAddressId, long commerceRegionId,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-				orderByComparator)
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException;
 
 	/**
@@ -224,16 +220,19 @@ public interface CommerceAddressPersistence
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByCommerceCountryId(long, int, int, OrderByComparator)}
 	 * @param commerceCountryId the commerce country ID
 	 * @param start the lower bound of the range of commerce addresses
 	 * @param end the upper bound of the range of commerce addresses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce addresses
 	 */
+	@Deprecated
 	public java.util.List<CommerceAddress> findByCommerceCountryId(
 		long commerceCountryId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-			orderByComparator);
+		OrderByComparator<CommerceAddress> orderByComparator,
+		boolean useFinderCache);
 
 	/**
 	 * Returns an ordered range of all the commerce addresses where commerceCountryId = &#63;.
@@ -246,14 +245,11 @@ public interface CommerceAddressPersistence
 	 * @param start the lower bound of the range of commerce addresses
 	 * @param end the upper bound of the range of commerce addresses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce addresses
 	 */
 	public java.util.List<CommerceAddress> findByCommerceCountryId(
 		long commerceCountryId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-			orderByComparator,
-		boolean retrieveFromCache);
+		OrderByComparator<CommerceAddress> orderByComparator);
 
 	/**
 	 * Returns the first commerce address in the ordered set where commerceCountryId = &#63;.
@@ -265,8 +261,7 @@ public interface CommerceAddressPersistence
 	 */
 	public CommerceAddress findByCommerceCountryId_First(
 			long commerceCountryId,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-				orderByComparator)
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException;
 
 	/**
@@ -278,8 +273,7 @@ public interface CommerceAddressPersistence
 	 */
 	public CommerceAddress fetchByCommerceCountryId_First(
 		long commerceCountryId,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-			orderByComparator);
+		OrderByComparator<CommerceAddress> orderByComparator);
 
 	/**
 	 * Returns the last commerce address in the ordered set where commerceCountryId = &#63;.
@@ -291,8 +285,7 @@ public interface CommerceAddressPersistence
 	 */
 	public CommerceAddress findByCommerceCountryId_Last(
 			long commerceCountryId,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-				orderByComparator)
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException;
 
 	/**
@@ -304,8 +297,7 @@ public interface CommerceAddressPersistence
 	 */
 	public CommerceAddress fetchByCommerceCountryId_Last(
 		long commerceCountryId,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-			orderByComparator);
+		OrderByComparator<CommerceAddress> orderByComparator);
 
 	/**
 	 * Returns the commerce addresses before and after the current commerce address in the ordered set where commerceCountryId = &#63;.
@@ -318,8 +310,7 @@ public interface CommerceAddressPersistence
 	 */
 	public CommerceAddress[] findByCommerceCountryId_PrevAndNext(
 			long commerceAddressId, long commerceCountryId,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-				orderByComparator)
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException;
 
 	/**
@@ -370,17 +361,20 @@ public interface CommerceAddressPersistence
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByC_C(long,long, int, int, OrderByComparator)}
 	 * @param classNameId the class name ID
 	 * @param classPK the class pk
 	 * @param start the lower bound of the range of commerce addresses
 	 * @param end the upper bound of the range of commerce addresses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce addresses
 	 */
+	@Deprecated
 	public java.util.List<CommerceAddress> findByC_C(
 		long classNameId, long classPK, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-			orderByComparator);
+		OrderByComparator<CommerceAddress> orderByComparator,
+		boolean useFinderCache);
 
 	/**
 	 * Returns an ordered range of all the commerce addresses where classNameId = &#63; and classPK = &#63;.
@@ -394,14 +388,11 @@ public interface CommerceAddressPersistence
 	 * @param start the lower bound of the range of commerce addresses
 	 * @param end the upper bound of the range of commerce addresses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce addresses
 	 */
 	public java.util.List<CommerceAddress> findByC_C(
 		long classNameId, long classPK, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-			orderByComparator,
-		boolean retrieveFromCache);
+		OrderByComparator<CommerceAddress> orderByComparator);
 
 	/**
 	 * Returns the first commerce address in the ordered set where classNameId = &#63; and classPK = &#63;.
@@ -414,8 +405,7 @@ public interface CommerceAddressPersistence
 	 */
 	public CommerceAddress findByC_C_First(
 			long classNameId, long classPK,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-				orderByComparator)
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException;
 
 	/**
@@ -428,8 +418,7 @@ public interface CommerceAddressPersistence
 	 */
 	public CommerceAddress fetchByC_C_First(
 		long classNameId, long classPK,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-			orderByComparator);
+		OrderByComparator<CommerceAddress> orderByComparator);
 
 	/**
 	 * Returns the last commerce address in the ordered set where classNameId = &#63; and classPK = &#63;.
@@ -442,8 +431,7 @@ public interface CommerceAddressPersistence
 	 */
 	public CommerceAddress findByC_C_Last(
 			long classNameId, long classPK,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-				orderByComparator)
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException;
 
 	/**
@@ -456,8 +444,7 @@ public interface CommerceAddressPersistence
 	 */
 	public CommerceAddress fetchByC_C_Last(
 		long classNameId, long classPK,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-			orderByComparator);
+		OrderByComparator<CommerceAddress> orderByComparator);
 
 	/**
 	 * Returns the commerce addresses before and after the current commerce address in the ordered set where classNameId = &#63; and classPK = &#63;.
@@ -471,8 +458,7 @@ public interface CommerceAddressPersistence
 	 */
 	public CommerceAddress[] findByC_C_PrevAndNext(
 			long commerceAddressId, long classNameId, long classPK,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-				orderByComparator)
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException;
 
 	/**
@@ -527,18 +513,21 @@ public interface CommerceAddressPersistence
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByG_C_C(long,long,long, int, int, OrderByComparator)}
 	 * @param groupId the group ID
 	 * @param classNameId the class name ID
 	 * @param classPK the class pk
 	 * @param start the lower bound of the range of commerce addresses
 	 * @param end the upper bound of the range of commerce addresses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce addresses
 	 */
+	@Deprecated
 	public java.util.List<CommerceAddress> findByG_C_C(
 		long groupId, long classNameId, long classPK, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-			orderByComparator);
+		OrderByComparator<CommerceAddress> orderByComparator,
+		boolean useFinderCache);
 
 	/**
 	 * Returns an ordered range of all the commerce addresses where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
@@ -553,14 +542,11 @@ public interface CommerceAddressPersistence
 	 * @param start the lower bound of the range of commerce addresses
 	 * @param end the upper bound of the range of commerce addresses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce addresses
 	 */
 	public java.util.List<CommerceAddress> findByG_C_C(
 		long groupId, long classNameId, long classPK, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-			orderByComparator,
-		boolean retrieveFromCache);
+		OrderByComparator<CommerceAddress> orderByComparator);
 
 	/**
 	 * Returns the first commerce address in the ordered set where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
@@ -574,8 +560,7 @@ public interface CommerceAddressPersistence
 	 */
 	public CommerceAddress findByG_C_C_First(
 			long groupId, long classNameId, long classPK,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-				orderByComparator)
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException;
 
 	/**
@@ -589,8 +574,7 @@ public interface CommerceAddressPersistence
 	 */
 	public CommerceAddress fetchByG_C_C_First(
 		long groupId, long classNameId, long classPK,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-			orderByComparator);
+		OrderByComparator<CommerceAddress> orderByComparator);
 
 	/**
 	 * Returns the last commerce address in the ordered set where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
@@ -604,8 +588,7 @@ public interface CommerceAddressPersistence
 	 */
 	public CommerceAddress findByG_C_C_Last(
 			long groupId, long classNameId, long classPK,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-				orderByComparator)
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException;
 
 	/**
@@ -619,8 +602,7 @@ public interface CommerceAddressPersistence
 	 */
 	public CommerceAddress fetchByG_C_C_Last(
 		long groupId, long classNameId, long classPK,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-			orderByComparator);
+		OrderByComparator<CommerceAddress> orderByComparator);
 
 	/**
 	 * Returns the commerce addresses before and after the current commerce address in the ordered set where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
@@ -635,9 +617,7 @@ public interface CommerceAddressPersistence
 	 */
 	public CommerceAddress[] findByG_C_C_PrevAndNext(
 			long commerceAddressId, long groupId, long classNameId,
-			long classPK,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-				orderByComparator)
+			long classPK, OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException;
 
 	/**
@@ -697,6 +677,7 @@ public interface CommerceAddressPersistence
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByG_C_C_DB(long,long,long,boolean, int, int, OrderByComparator)}
 	 * @param groupId the group ID
 	 * @param classNameId the class name ID
 	 * @param classPK the class pk
@@ -704,13 +685,15 @@ public interface CommerceAddressPersistence
 	 * @param start the lower bound of the range of commerce addresses
 	 * @param end the upper bound of the range of commerce addresses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce addresses
 	 */
+	@Deprecated
 	public java.util.List<CommerceAddress> findByG_C_C_DB(
 		long groupId, long classNameId, long classPK, boolean defaultBilling,
 		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-			orderByComparator);
+		OrderByComparator<CommerceAddress> orderByComparator,
+		boolean useFinderCache);
 
 	/**
 	 * Returns an ordered range of all the commerce addresses where groupId = &#63; and classNameId = &#63; and classPK = &#63; and defaultBilling = &#63;.
@@ -726,15 +709,12 @@ public interface CommerceAddressPersistence
 	 * @param start the lower bound of the range of commerce addresses
 	 * @param end the upper bound of the range of commerce addresses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce addresses
 	 */
 	public java.util.List<CommerceAddress> findByG_C_C_DB(
 		long groupId, long classNameId, long classPK, boolean defaultBilling,
 		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-			orderByComparator,
-		boolean retrieveFromCache);
+		OrderByComparator<CommerceAddress> orderByComparator);
 
 	/**
 	 * Returns the first commerce address in the ordered set where groupId = &#63; and classNameId = &#63; and classPK = &#63; and defaultBilling = &#63;.
@@ -750,8 +730,7 @@ public interface CommerceAddressPersistence
 	public CommerceAddress findByG_C_C_DB_First(
 			long groupId, long classNameId, long classPK,
 			boolean defaultBilling,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-				orderByComparator)
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException;
 
 	/**
@@ -766,8 +745,7 @@ public interface CommerceAddressPersistence
 	 */
 	public CommerceAddress fetchByG_C_C_DB_First(
 		long groupId, long classNameId, long classPK, boolean defaultBilling,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-			orderByComparator);
+		OrderByComparator<CommerceAddress> orderByComparator);
 
 	/**
 	 * Returns the last commerce address in the ordered set where groupId = &#63; and classNameId = &#63; and classPK = &#63; and defaultBilling = &#63;.
@@ -783,8 +761,7 @@ public interface CommerceAddressPersistence
 	public CommerceAddress findByG_C_C_DB_Last(
 			long groupId, long classNameId, long classPK,
 			boolean defaultBilling,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-				orderByComparator)
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException;
 
 	/**
@@ -799,8 +776,7 @@ public interface CommerceAddressPersistence
 	 */
 	public CommerceAddress fetchByG_C_C_DB_Last(
 		long groupId, long classNameId, long classPK, boolean defaultBilling,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-			orderByComparator);
+		OrderByComparator<CommerceAddress> orderByComparator);
 
 	/**
 	 * Returns the commerce addresses before and after the current commerce address in the ordered set where groupId = &#63; and classNameId = &#63; and classPK = &#63; and defaultBilling = &#63;.
@@ -817,8 +793,7 @@ public interface CommerceAddressPersistence
 	public CommerceAddress[] findByG_C_C_DB_PrevAndNext(
 			long commerceAddressId, long groupId, long classNameId,
 			long classPK, boolean defaultBilling,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-				orderByComparator)
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException;
 
 	/**
@@ -882,6 +857,7 @@ public interface CommerceAddressPersistence
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByG_C_C_DS(long,long,long,boolean, int, int, OrderByComparator)}
 	 * @param groupId the group ID
 	 * @param classNameId the class name ID
 	 * @param classPK the class pk
@@ -889,13 +865,15 @@ public interface CommerceAddressPersistence
 	 * @param start the lower bound of the range of commerce addresses
 	 * @param end the upper bound of the range of commerce addresses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce addresses
 	 */
+	@Deprecated
 	public java.util.List<CommerceAddress> findByG_C_C_DS(
 		long groupId, long classNameId, long classPK, boolean defaultShipping,
 		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-			orderByComparator);
+		OrderByComparator<CommerceAddress> orderByComparator,
+		boolean useFinderCache);
 
 	/**
 	 * Returns an ordered range of all the commerce addresses where groupId = &#63; and classNameId = &#63; and classPK = &#63; and defaultShipping = &#63;.
@@ -911,15 +889,12 @@ public interface CommerceAddressPersistence
 	 * @param start the lower bound of the range of commerce addresses
 	 * @param end the upper bound of the range of commerce addresses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce addresses
 	 */
 	public java.util.List<CommerceAddress> findByG_C_C_DS(
 		long groupId, long classNameId, long classPK, boolean defaultShipping,
 		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-			orderByComparator,
-		boolean retrieveFromCache);
+		OrderByComparator<CommerceAddress> orderByComparator);
 
 	/**
 	 * Returns the first commerce address in the ordered set where groupId = &#63; and classNameId = &#63; and classPK = &#63; and defaultShipping = &#63;.
@@ -935,8 +910,7 @@ public interface CommerceAddressPersistence
 	public CommerceAddress findByG_C_C_DS_First(
 			long groupId, long classNameId, long classPK,
 			boolean defaultShipping,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-				orderByComparator)
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException;
 
 	/**
@@ -951,8 +925,7 @@ public interface CommerceAddressPersistence
 	 */
 	public CommerceAddress fetchByG_C_C_DS_First(
 		long groupId, long classNameId, long classPK, boolean defaultShipping,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-			orderByComparator);
+		OrderByComparator<CommerceAddress> orderByComparator);
 
 	/**
 	 * Returns the last commerce address in the ordered set where groupId = &#63; and classNameId = &#63; and classPK = &#63; and defaultShipping = &#63;.
@@ -968,8 +941,7 @@ public interface CommerceAddressPersistence
 	public CommerceAddress findByG_C_C_DS_Last(
 			long groupId, long classNameId, long classPK,
 			boolean defaultShipping,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-				orderByComparator)
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException;
 
 	/**
@@ -984,8 +956,7 @@ public interface CommerceAddressPersistence
 	 */
 	public CommerceAddress fetchByG_C_C_DS_Last(
 		long groupId, long classNameId, long classPK, boolean defaultShipping,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-			orderByComparator);
+		OrderByComparator<CommerceAddress> orderByComparator);
 
 	/**
 	 * Returns the commerce addresses before and after the current commerce address in the ordered set where groupId = &#63; and classNameId = &#63; and classPK = &#63; and defaultShipping = &#63;.
@@ -1002,8 +973,7 @@ public interface CommerceAddressPersistence
 	public CommerceAddress[] findByG_C_C_DS_PrevAndNext(
 			long commerceAddressId, long groupId, long classNameId,
 			long classPK, boolean defaultShipping,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-				orderByComparator)
+			OrderByComparator<CommerceAddress> orderByComparator)
 		throws NoSuchAddressException;
 
 	/**
@@ -1108,15 +1078,18 @@ public interface CommerceAddressPersistence
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findAll(int, int, OrderByComparator)}
 	 * @param start the lower bound of the range of commerce addresses
 	 * @param end the upper bound of the range of commerce addresses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce addresses
 	 */
+	@Deprecated
 	public java.util.List<CommerceAddress> findAll(
 		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-			orderByComparator);
+		OrderByComparator<CommerceAddress> orderByComparator,
+		boolean useFinderCache);
 
 	/**
 	 * Returns an ordered range of all the commerce addresses.
@@ -1128,14 +1101,11 @@ public interface CommerceAddressPersistence
 	 * @param start the lower bound of the range of commerce addresses
 	 * @param end the upper bound of the range of commerce addresses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of commerce addresses
 	 */
 	public java.util.List<CommerceAddress> findAll(
 		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceAddress>
-			orderByComparator,
-		boolean retrieveFromCache);
+		OrderByComparator<CommerceAddress> orderByComparator);
 
 	/**
 	 * Removes all the commerce addresses from the database.

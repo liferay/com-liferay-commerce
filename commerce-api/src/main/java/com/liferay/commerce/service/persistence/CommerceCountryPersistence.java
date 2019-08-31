@@ -19,6 +19,7 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.commerce.exception.NoSuchCountryException;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.portal.kernel.service.persistence.BasePersistence;
+import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.io.Serializable;
 
@@ -79,16 +80,19 @@ public interface CommerceCountryPersistence
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCountryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByUuid(String, int, int, OrderByComparator)}
 	 * @param uuid the uuid
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce countries
 	 */
+	@Deprecated
 	public java.util.List<CommerceCountry> findByUuid(
 		String uuid, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-			orderByComparator);
+		OrderByComparator<CommerceCountry> orderByComparator,
+		boolean useFinderCache);
 
 	/**
 	 * Returns an ordered range of all the commerce countries where uuid = &#63;.
@@ -101,14 +105,11 @@ public interface CommerceCountryPersistence
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce countries
 	 */
 	public java.util.List<CommerceCountry> findByUuid(
 		String uuid, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-			orderByComparator,
-		boolean retrieveFromCache);
+		OrderByComparator<CommerceCountry> orderByComparator);
 
 	/**
 	 * Returns the first commerce country in the ordered set where uuid = &#63;.
@@ -119,9 +120,7 @@ public interface CommerceCountryPersistence
 	 * @throws NoSuchCountryException if a matching commerce country could not be found
 	 */
 	public CommerceCountry findByUuid_First(
-			String uuid,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-				orderByComparator)
+			String uuid, OrderByComparator<CommerceCountry> orderByComparator)
 		throws NoSuchCountryException;
 
 	/**
@@ -132,9 +131,7 @@ public interface CommerceCountryPersistence
 	 * @return the first matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
 	public CommerceCountry fetchByUuid_First(
-		String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-			orderByComparator);
+		String uuid, OrderByComparator<CommerceCountry> orderByComparator);
 
 	/**
 	 * Returns the last commerce country in the ordered set where uuid = &#63;.
@@ -145,9 +142,7 @@ public interface CommerceCountryPersistence
 	 * @throws NoSuchCountryException if a matching commerce country could not be found
 	 */
 	public CommerceCountry findByUuid_Last(
-			String uuid,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-				orderByComparator)
+			String uuid, OrderByComparator<CommerceCountry> orderByComparator)
 		throws NoSuchCountryException;
 
 	/**
@@ -158,9 +153,7 @@ public interface CommerceCountryPersistence
 	 * @return the last matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
 	public CommerceCountry fetchByUuid_Last(
-		String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-			orderByComparator);
+		String uuid, OrderByComparator<CommerceCountry> orderByComparator);
 
 	/**
 	 * Returns the commerce countries before and after the current commerce country in the ordered set where uuid = &#63;.
@@ -173,8 +166,7 @@ public interface CommerceCountryPersistence
 	 */
 	public CommerceCountry[] findByUuid_PrevAndNext(
 			long commerceCountryId, String uuid,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-				orderByComparator)
+			OrderByComparator<CommerceCountry> orderByComparator)
 		throws NoSuchCountryException;
 
 	/**
@@ -225,17 +217,20 @@ public interface CommerceCountryPersistence
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCountryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByUuid_C(String,long, int, int, OrderByComparator)}
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce countries
 	 */
+	@Deprecated
 	public java.util.List<CommerceCountry> findByUuid_C(
 		String uuid, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-			orderByComparator);
+		OrderByComparator<CommerceCountry> orderByComparator,
+		boolean useFinderCache);
 
 	/**
 	 * Returns an ordered range of all the commerce countries where uuid = &#63; and companyId = &#63;.
@@ -249,14 +244,11 @@ public interface CommerceCountryPersistence
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce countries
 	 */
 	public java.util.List<CommerceCountry> findByUuid_C(
 		String uuid, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-			orderByComparator,
-		boolean retrieveFromCache);
+		OrderByComparator<CommerceCountry> orderByComparator);
 
 	/**
 	 * Returns the first commerce country in the ordered set where uuid = &#63; and companyId = &#63;.
@@ -269,8 +261,7 @@ public interface CommerceCountryPersistence
 	 */
 	public CommerceCountry findByUuid_C_First(
 			String uuid, long companyId,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-				orderByComparator)
+			OrderByComparator<CommerceCountry> orderByComparator)
 		throws NoSuchCountryException;
 
 	/**
@@ -283,8 +274,7 @@ public interface CommerceCountryPersistence
 	 */
 	public CommerceCountry fetchByUuid_C_First(
 		String uuid, long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-			orderByComparator);
+		OrderByComparator<CommerceCountry> orderByComparator);
 
 	/**
 	 * Returns the last commerce country in the ordered set where uuid = &#63; and companyId = &#63;.
@@ -297,8 +287,7 @@ public interface CommerceCountryPersistence
 	 */
 	public CommerceCountry findByUuid_C_Last(
 			String uuid, long companyId,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-				orderByComparator)
+			OrderByComparator<CommerceCountry> orderByComparator)
 		throws NoSuchCountryException;
 
 	/**
@@ -311,8 +300,7 @@ public interface CommerceCountryPersistence
 	 */
 	public CommerceCountry fetchByUuid_C_Last(
 		String uuid, long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-			orderByComparator);
+		OrderByComparator<CommerceCountry> orderByComparator);
 
 	/**
 	 * Returns the commerce countries before and after the current commerce country in the ordered set where uuid = &#63; and companyId = &#63;.
@@ -326,8 +314,7 @@ public interface CommerceCountryPersistence
 	 */
 	public CommerceCountry[] findByUuid_C_PrevAndNext(
 			long commerceCountryId, String uuid, long companyId,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-				orderByComparator)
+			OrderByComparator<CommerceCountry> orderByComparator)
 		throws NoSuchCountryException;
 
 	/**
@@ -377,16 +364,19 @@ public interface CommerceCountryPersistence
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCountryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByCompanyId(long, int, int, OrderByComparator)}
 	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce countries
 	 */
+	@Deprecated
 	public java.util.List<CommerceCountry> findByCompanyId(
 		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-			orderByComparator);
+		OrderByComparator<CommerceCountry> orderByComparator,
+		boolean useFinderCache);
 
 	/**
 	 * Returns an ordered range of all the commerce countries where companyId = &#63;.
@@ -399,14 +389,11 @@ public interface CommerceCountryPersistence
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce countries
 	 */
 	public java.util.List<CommerceCountry> findByCompanyId(
 		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-			orderByComparator,
-		boolean retrieveFromCache);
+		OrderByComparator<CommerceCountry> orderByComparator);
 
 	/**
 	 * Returns the first commerce country in the ordered set where companyId = &#63;.
@@ -418,8 +405,7 @@ public interface CommerceCountryPersistence
 	 */
 	public CommerceCountry findByCompanyId_First(
 			long companyId,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-				orderByComparator)
+			OrderByComparator<CommerceCountry> orderByComparator)
 		throws NoSuchCountryException;
 
 	/**
@@ -430,9 +416,7 @@ public interface CommerceCountryPersistence
 	 * @return the first matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
 	public CommerceCountry fetchByCompanyId_First(
-		long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-			orderByComparator);
+		long companyId, OrderByComparator<CommerceCountry> orderByComparator);
 
 	/**
 	 * Returns the last commerce country in the ordered set where companyId = &#63;.
@@ -444,8 +428,7 @@ public interface CommerceCountryPersistence
 	 */
 	public CommerceCountry findByCompanyId_Last(
 			long companyId,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-				orderByComparator)
+			OrderByComparator<CommerceCountry> orderByComparator)
 		throws NoSuchCountryException;
 
 	/**
@@ -456,9 +439,7 @@ public interface CommerceCountryPersistence
 	 * @return the last matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
 	public CommerceCountry fetchByCompanyId_Last(
-		long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-			orderByComparator);
+		long companyId, OrderByComparator<CommerceCountry> orderByComparator);
 
 	/**
 	 * Returns the commerce countries before and after the current commerce country in the ordered set where companyId = &#63;.
@@ -471,8 +452,7 @@ public interface CommerceCountryPersistence
 	 */
 	public CommerceCountry[] findByCompanyId_PrevAndNext(
 			long commerceCountryId, long companyId,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-				orderByComparator)
+			OrderByComparator<CommerceCountry> orderByComparator)
 		throws NoSuchCountryException;
 
 	/**
@@ -502,25 +482,28 @@ public interface CommerceCountryPersistence
 		throws NoSuchCountryException;
 
 	/**
-	 * Returns the commerce country where companyId = &#63; and twoLettersISOCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the commerce country where companyId = &#63; and twoLettersISOCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #fetchByC_Tw(long,String)}
 	 * @param companyId the company ID
 	 * @param twoLettersISOCode the two letters iso code
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
+	@Deprecated
 	public CommerceCountry fetchByC_Tw(
-		long companyId, String twoLettersISOCode);
+		long companyId, String twoLettersISOCode, boolean useFinderCache);
 
 	/**
 	 * Returns the commerce country where companyId = &#63; and twoLettersISOCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param companyId the company ID
 	 * @param twoLettersISOCode the two letters iso code
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
 	public CommerceCountry fetchByC_Tw(
-		long companyId, String twoLettersISOCode, boolean retrieveFromCache);
+		long companyId, String twoLettersISOCode);
 
 	/**
 	 * Removes the commerce country where companyId = &#63; and twoLettersISOCode = &#63; from the database.
@@ -554,24 +537,27 @@ public interface CommerceCountryPersistence
 		throws NoSuchCountryException;
 
 	/**
-	 * Returns the commerce country where companyId = &#63; and numericISOCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the commerce country where companyId = &#63; and numericISOCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #fetchByC_N(long,int)}
 	 * @param companyId the company ID
 	 * @param numericISOCode the numeric iso code
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
-	public CommerceCountry fetchByC_N(long companyId, int numericISOCode);
+	@Deprecated
+	public CommerceCountry fetchByC_N(
+		long companyId, int numericISOCode, boolean useFinderCache);
 
 	/**
 	 * Returns the commerce country where companyId = &#63; and numericISOCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param companyId the company ID
 	 * @param numericISOCode the numeric iso code
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce country, or <code>null</code> if a matching commerce country could not be found
 	 */
-	public CommerceCountry fetchByC_N(
-		long companyId, int numericISOCode, boolean retrieveFromCache);
+	public CommerceCountry fetchByC_N(long companyId, int numericISOCode);
 
 	/**
 	 * Removes the commerce country where companyId = &#63; and numericISOCode = &#63; from the database.
@@ -625,17 +611,20 @@ public interface CommerceCountryPersistence
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCountryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByC_A(long,boolean, int, int, OrderByComparator)}
 	 * @param companyId the company ID
 	 * @param active the active
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce countries
 	 */
+	@Deprecated
 	public java.util.List<CommerceCountry> findByC_A(
 		long companyId, boolean active, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-			orderByComparator);
+		OrderByComparator<CommerceCountry> orderByComparator,
+		boolean useFinderCache);
 
 	/**
 	 * Returns an ordered range of all the commerce countries where companyId = &#63; and active = &#63;.
@@ -649,14 +638,11 @@ public interface CommerceCountryPersistence
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce countries
 	 */
 	public java.util.List<CommerceCountry> findByC_A(
 		long companyId, boolean active, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-			orderByComparator,
-		boolean retrieveFromCache);
+		OrderByComparator<CommerceCountry> orderByComparator);
 
 	/**
 	 * Returns the first commerce country in the ordered set where companyId = &#63; and active = &#63;.
@@ -669,8 +655,7 @@ public interface CommerceCountryPersistence
 	 */
 	public CommerceCountry findByC_A_First(
 			long companyId, boolean active,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-				orderByComparator)
+			OrderByComparator<CommerceCountry> orderByComparator)
 		throws NoSuchCountryException;
 
 	/**
@@ -683,8 +668,7 @@ public interface CommerceCountryPersistence
 	 */
 	public CommerceCountry fetchByC_A_First(
 		long companyId, boolean active,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-			orderByComparator);
+		OrderByComparator<CommerceCountry> orderByComparator);
 
 	/**
 	 * Returns the last commerce country in the ordered set where companyId = &#63; and active = &#63;.
@@ -697,8 +681,7 @@ public interface CommerceCountryPersistence
 	 */
 	public CommerceCountry findByC_A_Last(
 			long companyId, boolean active,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-				orderByComparator)
+			OrderByComparator<CommerceCountry> orderByComparator)
 		throws NoSuchCountryException;
 
 	/**
@@ -711,8 +694,7 @@ public interface CommerceCountryPersistence
 	 */
 	public CommerceCountry fetchByC_A_Last(
 		long companyId, boolean active,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-			orderByComparator);
+		OrderByComparator<CommerceCountry> orderByComparator);
 
 	/**
 	 * Returns the commerce countries before and after the current commerce country in the ordered set where companyId = &#63; and active = &#63;.
@@ -726,8 +708,7 @@ public interface CommerceCountryPersistence
 	 */
 	public CommerceCountry[] findByC_A_PrevAndNext(
 			long commerceCountryId, long companyId, boolean active,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-				orderByComparator)
+			OrderByComparator<CommerceCountry> orderByComparator)
 		throws NoSuchCountryException;
 
 	/**
@@ -783,19 +764,21 @@ public interface CommerceCountryPersistence
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCountryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByC_B_A(long,boolean,boolean, int, int, OrderByComparator)}
 	 * @param companyId the company ID
 	 * @param billingAllowed the billing allowed
 	 * @param active the active
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce countries
 	 */
+	@Deprecated
 	public java.util.List<CommerceCountry> findByC_B_A(
 		long companyId, boolean billingAllowed, boolean active, int start,
-		int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-			orderByComparator);
+		int end, OrderByComparator<CommerceCountry> orderByComparator,
+		boolean useFinderCache);
 
 	/**
 	 * Returns an ordered range of all the commerce countries where companyId = &#63; and billingAllowed = &#63; and active = &#63;.
@@ -810,15 +793,11 @@ public interface CommerceCountryPersistence
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce countries
 	 */
 	public java.util.List<CommerceCountry> findByC_B_A(
 		long companyId, boolean billingAllowed, boolean active, int start,
-		int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-			orderByComparator,
-		boolean retrieveFromCache);
+		int end, OrderByComparator<CommerceCountry> orderByComparator);
 
 	/**
 	 * Returns the first commerce country in the ordered set where companyId = &#63; and billingAllowed = &#63; and active = &#63;.
@@ -832,8 +811,7 @@ public interface CommerceCountryPersistence
 	 */
 	public CommerceCountry findByC_B_A_First(
 			long companyId, boolean billingAllowed, boolean active,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-				orderByComparator)
+			OrderByComparator<CommerceCountry> orderByComparator)
 		throws NoSuchCountryException;
 
 	/**
@@ -847,8 +825,7 @@ public interface CommerceCountryPersistence
 	 */
 	public CommerceCountry fetchByC_B_A_First(
 		long companyId, boolean billingAllowed, boolean active,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-			orderByComparator);
+		OrderByComparator<CommerceCountry> orderByComparator);
 
 	/**
 	 * Returns the last commerce country in the ordered set where companyId = &#63; and billingAllowed = &#63; and active = &#63;.
@@ -862,8 +839,7 @@ public interface CommerceCountryPersistence
 	 */
 	public CommerceCountry findByC_B_A_Last(
 			long companyId, boolean billingAllowed, boolean active,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-				orderByComparator)
+			OrderByComparator<CommerceCountry> orderByComparator)
 		throws NoSuchCountryException;
 
 	/**
@@ -877,8 +853,7 @@ public interface CommerceCountryPersistence
 	 */
 	public CommerceCountry fetchByC_B_A_Last(
 		long companyId, boolean billingAllowed, boolean active,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-			orderByComparator);
+		OrderByComparator<CommerceCountry> orderByComparator);
 
 	/**
 	 * Returns the commerce countries before and after the current commerce country in the ordered set where companyId = &#63; and billingAllowed = &#63; and active = &#63;.
@@ -894,8 +869,7 @@ public interface CommerceCountryPersistence
 	public CommerceCountry[] findByC_B_A_PrevAndNext(
 			long commerceCountryId, long companyId, boolean billingAllowed,
 			boolean active,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-				orderByComparator)
+			OrderByComparator<CommerceCountry> orderByComparator)
 		throws NoSuchCountryException;
 
 	/**
@@ -955,19 +929,21 @@ public interface CommerceCountryPersistence
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCountryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByC_S_A(long,boolean,boolean, int, int, OrderByComparator)}
 	 * @param companyId the company ID
 	 * @param shippingAllowed the shipping allowed
 	 * @param active the active
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce countries
 	 */
+	@Deprecated
 	public java.util.List<CommerceCountry> findByC_S_A(
 		long companyId, boolean shippingAllowed, boolean active, int start,
-		int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-			orderByComparator);
+		int end, OrderByComparator<CommerceCountry> orderByComparator,
+		boolean useFinderCache);
 
 	/**
 	 * Returns an ordered range of all the commerce countries where companyId = &#63; and shippingAllowed = &#63; and active = &#63;.
@@ -982,15 +958,11 @@ public interface CommerceCountryPersistence
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce countries
 	 */
 	public java.util.List<CommerceCountry> findByC_S_A(
 		long companyId, boolean shippingAllowed, boolean active, int start,
-		int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-			orderByComparator,
-		boolean retrieveFromCache);
+		int end, OrderByComparator<CommerceCountry> orderByComparator);
 
 	/**
 	 * Returns the first commerce country in the ordered set where companyId = &#63; and shippingAllowed = &#63; and active = &#63;.
@@ -1004,8 +976,7 @@ public interface CommerceCountryPersistence
 	 */
 	public CommerceCountry findByC_S_A_First(
 			long companyId, boolean shippingAllowed, boolean active,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-				orderByComparator)
+			OrderByComparator<CommerceCountry> orderByComparator)
 		throws NoSuchCountryException;
 
 	/**
@@ -1019,8 +990,7 @@ public interface CommerceCountryPersistence
 	 */
 	public CommerceCountry fetchByC_S_A_First(
 		long companyId, boolean shippingAllowed, boolean active,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-			orderByComparator);
+		OrderByComparator<CommerceCountry> orderByComparator);
 
 	/**
 	 * Returns the last commerce country in the ordered set where companyId = &#63; and shippingAllowed = &#63; and active = &#63;.
@@ -1034,8 +1004,7 @@ public interface CommerceCountryPersistence
 	 */
 	public CommerceCountry findByC_S_A_Last(
 			long companyId, boolean shippingAllowed, boolean active,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-				orderByComparator)
+			OrderByComparator<CommerceCountry> orderByComparator)
 		throws NoSuchCountryException;
 
 	/**
@@ -1049,8 +1018,7 @@ public interface CommerceCountryPersistence
 	 */
 	public CommerceCountry fetchByC_S_A_Last(
 		long companyId, boolean shippingAllowed, boolean active,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-			orderByComparator);
+		OrderByComparator<CommerceCountry> orderByComparator);
 
 	/**
 	 * Returns the commerce countries before and after the current commerce country in the ordered set where companyId = &#63; and shippingAllowed = &#63; and active = &#63;.
@@ -1066,8 +1034,7 @@ public interface CommerceCountryPersistence
 	public CommerceCountry[] findByC_S_A_PrevAndNext(
 			long commerceCountryId, long companyId, boolean shippingAllowed,
 			boolean active,
-			com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-				orderByComparator)
+			OrderByComparator<CommerceCountry> orderByComparator)
 		throws NoSuchCountryException;
 
 	/**
@@ -1170,15 +1137,18 @@ public interface CommerceCountryPersistence
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceCountryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findAll(int, int, OrderByComparator)}
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce countries
 	 */
+	@Deprecated
 	public java.util.List<CommerceCountry> findAll(
 		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-			orderByComparator);
+		OrderByComparator<CommerceCountry> orderByComparator,
+		boolean useFinderCache);
 
 	/**
 	 * Returns an ordered range of all the commerce countries.
@@ -1190,14 +1160,11 @@ public interface CommerceCountryPersistence
 	 * @param start the lower bound of the range of commerce countries
 	 * @param end the upper bound of the range of commerce countries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of commerce countries
 	 */
 	public java.util.List<CommerceCountry> findAll(
 		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<CommerceCountry>
-			orderByComparator,
-		boolean retrieveFromCache);
+		OrderByComparator<CommerceCountry> orderByComparator);
 
 	/**
 	 * Removes all the commerce countries from the database.

@@ -613,6 +613,16 @@ public class CommerceOrderLocalServiceWrapper
 
 	@Override
 	public com.liferay.commerce.model.CommerceOrder recalculatePrice(
+			long commerceOrderId, boolean useOrderUnitPrice,
+			com.liferay.commerce.context.CommerceContext commerceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceOrderLocalService.recalculatePrice(
+			commerceOrderId, useOrderUnitPrice, commerceContext);
+	}
+
+	@Override
+	public com.liferay.commerce.model.CommerceOrder recalculatePrice(
 			long commerceOrderId,
 			com.liferay.commerce.context.CommerceContext commerceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {

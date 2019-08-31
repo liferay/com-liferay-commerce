@@ -126,19 +126,23 @@ public class CommerceAddressPersistenceImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByCommerceRegionId(long, int, int, OrderByComparator)}
 	 * @param commerceRegionId the commerce region ID
 	 * @param start the lower bound of the range of commerce addresses
 	 * @param end the upper bound of the range of commerce addresses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce addresses
 	 */
+	@Deprecated
 	@Override
 	public List<CommerceAddress> findByCommerceRegionId(
 		long commerceRegionId, int start, int end,
-		OrderByComparator<CommerceAddress> orderByComparator) {
+		OrderByComparator<CommerceAddress> orderByComparator,
+		boolean useFinderCache) {
 
 		return findByCommerceRegionId(
-			commerceRegionId, start, end, orderByComparator, true);
+			commerceRegionId, start, end, orderByComparator);
 	}
 
 	/**
@@ -152,14 +156,12 @@ public class CommerceAddressPersistenceImpl
 	 * @param start the lower bound of the range of commerce addresses
 	 * @param end the upper bound of the range of commerce addresses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce addresses
 	 */
 	@Override
 	public List<CommerceAddress> findByCommerceRegionId(
 		long commerceRegionId, int start, int end,
-		OrderByComparator<CommerceAddress> orderByComparator,
-		boolean retrieveFromCache) {
+		OrderByComparator<CommerceAddress> orderByComparator) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -179,21 +181,18 @@ public class CommerceAddressPersistenceImpl
 			};
 		}
 
-		List<CommerceAddress> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<CommerceAddress>)finderCache.getResult(
+		List<CommerceAddress> list =
+			(List<CommerceAddress>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
-			if ((list != null) && !list.isEmpty()) {
-				for (CommerceAddress commerceAddress : list) {
-					if ((commerceRegionId !=
-							commerceAddress.getCommerceRegionId())) {
+		if ((list != null) && !list.isEmpty()) {
+			for (CommerceAddress commerceAddress : list) {
+				if ((commerceRegionId !=
+						commerceAddress.getCommerceRegionId())) {
 
-						list = null;
+					list = null;
 
-						break;
-					}
+					break;
 				}
 			}
 		}
@@ -649,19 +648,23 @@ public class CommerceAddressPersistenceImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByCommerceCountryId(long, int, int, OrderByComparator)}
 	 * @param commerceCountryId the commerce country ID
 	 * @param start the lower bound of the range of commerce addresses
 	 * @param end the upper bound of the range of commerce addresses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce addresses
 	 */
+	@Deprecated
 	@Override
 	public List<CommerceAddress> findByCommerceCountryId(
 		long commerceCountryId, int start, int end,
-		OrderByComparator<CommerceAddress> orderByComparator) {
+		OrderByComparator<CommerceAddress> orderByComparator,
+		boolean useFinderCache) {
 
 		return findByCommerceCountryId(
-			commerceCountryId, start, end, orderByComparator, true);
+			commerceCountryId, start, end, orderByComparator);
 	}
 
 	/**
@@ -675,14 +678,12 @@ public class CommerceAddressPersistenceImpl
 	 * @param start the lower bound of the range of commerce addresses
 	 * @param end the upper bound of the range of commerce addresses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce addresses
 	 */
 	@Override
 	public List<CommerceAddress> findByCommerceCountryId(
 		long commerceCountryId, int start, int end,
-		OrderByComparator<CommerceAddress> orderByComparator,
-		boolean retrieveFromCache) {
+		OrderByComparator<CommerceAddress> orderByComparator) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -702,21 +703,18 @@ public class CommerceAddressPersistenceImpl
 			};
 		}
 
-		List<CommerceAddress> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<CommerceAddress>)finderCache.getResult(
+		List<CommerceAddress> list =
+			(List<CommerceAddress>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
-			if ((list != null) && !list.isEmpty()) {
-				for (CommerceAddress commerceAddress : list) {
-					if ((commerceCountryId !=
-							commerceAddress.getCommerceCountryId())) {
+		if ((list != null) && !list.isEmpty()) {
+			for (CommerceAddress commerceAddress : list) {
+				if ((commerceCountryId !=
+						commerceAddress.getCommerceCountryId())) {
 
-						list = null;
+					list = null;
 
-						break;
-					}
+					break;
 				}
 			}
 		}
@@ -1173,20 +1171,23 @@ public class CommerceAddressPersistenceImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByC_C(long,long, int, int, OrderByComparator)}
 	 * @param classNameId the class name ID
 	 * @param classPK the class pk
 	 * @param start the lower bound of the range of commerce addresses
 	 * @param end the upper bound of the range of commerce addresses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce addresses
 	 */
+	@Deprecated
 	@Override
 	public List<CommerceAddress> findByC_C(
 		long classNameId, long classPK, int start, int end,
-		OrderByComparator<CommerceAddress> orderByComparator) {
+		OrderByComparator<CommerceAddress> orderByComparator,
+		boolean useFinderCache) {
 
-		return findByC_C(
-			classNameId, classPK, start, end, orderByComparator, true);
+		return findByC_C(classNameId, classPK, start, end, orderByComparator);
 	}
 
 	/**
@@ -1201,14 +1202,12 @@ public class CommerceAddressPersistenceImpl
 	 * @param start the lower bound of the range of commerce addresses
 	 * @param end the upper bound of the range of commerce addresses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce addresses
 	 */
 	@Override
 	public List<CommerceAddress> findByC_C(
 		long classNameId, long classPK, int start, int end,
-		OrderByComparator<CommerceAddress> orderByComparator,
-		boolean retrieveFromCache) {
+		OrderByComparator<CommerceAddress> orderByComparator) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -1228,21 +1227,18 @@ public class CommerceAddressPersistenceImpl
 			};
 		}
 
-		List<CommerceAddress> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<CommerceAddress>)finderCache.getResult(
+		List<CommerceAddress> list =
+			(List<CommerceAddress>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
-			if ((list != null) && !list.isEmpty()) {
-				for (CommerceAddress commerceAddress : list) {
-					if ((classNameId != commerceAddress.getClassNameId()) ||
-						(classPK != commerceAddress.getClassPK())) {
+		if ((list != null) && !list.isEmpty()) {
+			for (CommerceAddress commerceAddress : list) {
+				if ((classNameId != commerceAddress.getClassNameId()) ||
+					(classPK != commerceAddress.getClassPK())) {
 
-						list = null;
+					list = null;
 
-						break;
-					}
+					break;
 				}
 			}
 		}
@@ -1730,21 +1726,25 @@ public class CommerceAddressPersistenceImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByG_C_C(long,long,long, int, int, OrderByComparator)}
 	 * @param groupId the group ID
 	 * @param classNameId the class name ID
 	 * @param classPK the class pk
 	 * @param start the lower bound of the range of commerce addresses
 	 * @param end the upper bound of the range of commerce addresses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce addresses
 	 */
+	@Deprecated
 	@Override
 	public List<CommerceAddress> findByG_C_C(
 		long groupId, long classNameId, long classPK, int start, int end,
-		OrderByComparator<CommerceAddress> orderByComparator) {
+		OrderByComparator<CommerceAddress> orderByComparator,
+		boolean useFinderCache) {
 
 		return findByG_C_C(
-			groupId, classNameId, classPK, start, end, orderByComparator, true);
+			groupId, classNameId, classPK, start, end, orderByComparator);
 	}
 
 	/**
@@ -1760,14 +1760,12 @@ public class CommerceAddressPersistenceImpl
 	 * @param start the lower bound of the range of commerce addresses
 	 * @param end the upper bound of the range of commerce addresses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce addresses
 	 */
 	@Override
 	public List<CommerceAddress> findByG_C_C(
 		long groupId, long classNameId, long classPK, int start, int end,
-		OrderByComparator<CommerceAddress> orderByComparator,
-		boolean retrieveFromCache) {
+		OrderByComparator<CommerceAddress> orderByComparator) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -1787,22 +1785,19 @@ public class CommerceAddressPersistenceImpl
 			};
 		}
 
-		List<CommerceAddress> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<CommerceAddress>)finderCache.getResult(
+		List<CommerceAddress> list =
+			(List<CommerceAddress>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
-			if ((list != null) && !list.isEmpty()) {
-				for (CommerceAddress commerceAddress : list) {
-					if ((groupId != commerceAddress.getGroupId()) ||
-						(classNameId != commerceAddress.getClassNameId()) ||
-						(classPK != commerceAddress.getClassPK())) {
+		if ((list != null) && !list.isEmpty()) {
+			for (CommerceAddress commerceAddress : list) {
+				if ((groupId != commerceAddress.getGroupId()) ||
+					(classNameId != commerceAddress.getClassNameId()) ||
+					(classPK != commerceAddress.getClassPK())) {
 
-						list = null;
+					list = null;
 
-						break;
-					}
+					break;
 				}
 			}
 		}
@@ -2323,6 +2318,7 @@ public class CommerceAddressPersistenceImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByG_C_C_DB(long,long,long,boolean, int, int, OrderByComparator)}
 	 * @param groupId the group ID
 	 * @param classNameId the class name ID
 	 * @param classPK the class pk
@@ -2330,17 +2326,20 @@ public class CommerceAddressPersistenceImpl
 	 * @param start the lower bound of the range of commerce addresses
 	 * @param end the upper bound of the range of commerce addresses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce addresses
 	 */
+	@Deprecated
 	@Override
 	public List<CommerceAddress> findByG_C_C_DB(
 		long groupId, long classNameId, long classPK, boolean defaultBilling,
 		int start, int end,
-		OrderByComparator<CommerceAddress> orderByComparator) {
+		OrderByComparator<CommerceAddress> orderByComparator,
+		boolean useFinderCache) {
 
 		return findByG_C_C_DB(
 			groupId, classNameId, classPK, defaultBilling, start, end,
-			orderByComparator, true);
+			orderByComparator);
 	}
 
 	/**
@@ -2357,15 +2356,13 @@ public class CommerceAddressPersistenceImpl
 	 * @param start the lower bound of the range of commerce addresses
 	 * @param end the upper bound of the range of commerce addresses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce addresses
 	 */
 	@Override
 	public List<CommerceAddress> findByG_C_C_DB(
 		long groupId, long classNameId, long classPK, boolean defaultBilling,
 		int start, int end,
-		OrderByComparator<CommerceAddress> orderByComparator,
-		boolean retrieveFromCache) {
+		OrderByComparator<CommerceAddress> orderByComparator) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -2388,24 +2385,20 @@ public class CommerceAddressPersistenceImpl
 			};
 		}
 
-		List<CommerceAddress> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<CommerceAddress>)finderCache.getResult(
+		List<CommerceAddress> list =
+			(List<CommerceAddress>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
-			if ((list != null) && !list.isEmpty()) {
-				for (CommerceAddress commerceAddress : list) {
-					if ((groupId != commerceAddress.getGroupId()) ||
-						(classNameId != commerceAddress.getClassNameId()) ||
-						(classPK != commerceAddress.getClassPK()) ||
-						(defaultBilling !=
-							commerceAddress.isDefaultBilling())) {
+		if ((list != null) && !list.isEmpty()) {
+			for (CommerceAddress commerceAddress : list) {
+				if ((groupId != commerceAddress.getGroupId()) ||
+					(classNameId != commerceAddress.getClassNameId()) ||
+					(classPK != commerceAddress.getClassPK()) ||
+					(defaultBilling != commerceAddress.isDefaultBilling())) {
 
-						list = null;
+					list = null;
 
-						break;
-					}
+					break;
 				}
 			}
 		}
@@ -2966,6 +2959,7 @@ public class CommerceAddressPersistenceImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByG_C_C_DS(long,long,long,boolean, int, int, OrderByComparator)}
 	 * @param groupId the group ID
 	 * @param classNameId the class name ID
 	 * @param classPK the class pk
@@ -2973,17 +2967,20 @@ public class CommerceAddressPersistenceImpl
 	 * @param start the lower bound of the range of commerce addresses
 	 * @param end the upper bound of the range of commerce addresses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce addresses
 	 */
+	@Deprecated
 	@Override
 	public List<CommerceAddress> findByG_C_C_DS(
 		long groupId, long classNameId, long classPK, boolean defaultShipping,
 		int start, int end,
-		OrderByComparator<CommerceAddress> orderByComparator) {
+		OrderByComparator<CommerceAddress> orderByComparator,
+		boolean useFinderCache) {
 
 		return findByG_C_C_DS(
 			groupId, classNameId, classPK, defaultShipping, start, end,
-			orderByComparator, true);
+			orderByComparator);
 	}
 
 	/**
@@ -3000,15 +2997,13 @@ public class CommerceAddressPersistenceImpl
 	 * @param start the lower bound of the range of commerce addresses
 	 * @param end the upper bound of the range of commerce addresses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce addresses
 	 */
 	@Override
 	public List<CommerceAddress> findByG_C_C_DS(
 		long groupId, long classNameId, long classPK, boolean defaultShipping,
 		int start, int end,
-		OrderByComparator<CommerceAddress> orderByComparator,
-		boolean retrieveFromCache) {
+		OrderByComparator<CommerceAddress> orderByComparator) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -3031,24 +3026,20 @@ public class CommerceAddressPersistenceImpl
 			};
 		}
 
-		List<CommerceAddress> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<CommerceAddress>)finderCache.getResult(
+		List<CommerceAddress> list =
+			(List<CommerceAddress>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
-			if ((list != null) && !list.isEmpty()) {
-				for (CommerceAddress commerceAddress : list) {
-					if ((groupId != commerceAddress.getGroupId()) ||
-						(classNameId != commerceAddress.getClassNameId()) ||
-						(classPK != commerceAddress.getClassPK()) ||
-						(defaultShipping !=
-							commerceAddress.isDefaultShipping())) {
+		if ((list != null) && !list.isEmpty()) {
+			for (CommerceAddress commerceAddress : list) {
+				if ((groupId != commerceAddress.getGroupId()) ||
+					(classNameId != commerceAddress.getClassNameId()) ||
+					(classPK != commerceAddress.getClassPK()) ||
+					(defaultShipping != commerceAddress.isDefaultShipping())) {
 
-						list = null;
+					list = null;
 
-						break;
-					}
+					break;
 				}
 			}
 		}
@@ -4277,17 +4268,21 @@ public class CommerceAddressPersistenceImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findAll(int, int, OrderByComparator)}
 	 * @param start the lower bound of the range of commerce addresses
 	 * @param end the upper bound of the range of commerce addresses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce addresses
 	 */
+	@Deprecated
 	@Override
 	public List<CommerceAddress> findAll(
 		int start, int end,
-		OrderByComparator<CommerceAddress> orderByComparator) {
+		OrderByComparator<CommerceAddress> orderByComparator,
+		boolean useFinderCache) {
 
-		return findAll(start, end, orderByComparator, true);
+		return findAll(start, end, orderByComparator);
 	}
 
 	/**
@@ -4300,14 +4295,12 @@ public class CommerceAddressPersistenceImpl
 	 * @param start the lower bound of the range of commerce addresses
 	 * @param end the upper bound of the range of commerce addresses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of commerce addresses
 	 */
 	@Override
 	public List<CommerceAddress> findAll(
 		int start, int end,
-		OrderByComparator<CommerceAddress> orderByComparator,
-		boolean retrieveFromCache) {
+		OrderByComparator<CommerceAddress> orderByComparator) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -4325,12 +4318,9 @@ public class CommerceAddressPersistenceImpl
 			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
-		List<CommerceAddress> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<CommerceAddress>)finderCache.getResult(
+		List<CommerceAddress> list =
+			(List<CommerceAddress>)finderCache.getResult(
 				finderPath, finderArgs, this);
-		}
 
 		if (list == null) {
 			StringBundler query = null;

@@ -419,6 +419,11 @@ public interface CommerceOrderLocalService
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrder recalculatePrice(
+			long commerceOrderId, boolean useOrderUnitPrice,
+			CommerceContext commerceContext)
+		throws PortalException;
+
+	public CommerceOrder recalculatePrice(
 			long commerceOrderId, CommerceContext commerceContext)
 		throws PortalException;
 

@@ -19,6 +19,7 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.commerce.exception.NoSuchSubscriptionEntryException;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.portal.kernel.service.persistence.BasePersistence;
+import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.io.Serializable;
 
@@ -79,16 +80,19 @@ public interface CommerceSubscriptionEntryPersistence
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceSubscriptionEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByUuid(String, int, int, OrderByComparator)}
 	 * @param uuid the uuid
 	 * @param start the lower bound of the range of commerce subscription entries
 	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce subscription entries
 	 */
+	@Deprecated
 	public java.util.List<CommerceSubscriptionEntry> findByUuid(
 		String uuid, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceSubscriptionEntry> orderByComparator);
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator,
+		boolean useFinderCache);
 
 	/**
 	 * Returns an ordered range of all the commerce subscription entries where uuid = &#63;.
@@ -101,14 +105,11 @@ public interface CommerceSubscriptionEntryPersistence
 	 * @param start the lower bound of the range of commerce subscription entries
 	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce subscription entries
 	 */
 	public java.util.List<CommerceSubscriptionEntry> findByUuid(
 		String uuid, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceSubscriptionEntry> orderByComparator,
-		boolean retrieveFromCache);
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator);
 
 	/**
 	 * Returns the first commerce subscription entry in the ordered set where uuid = &#63;.
@@ -120,8 +121,7 @@ public interface CommerceSubscriptionEntryPersistence
 	 */
 	public CommerceSubscriptionEntry findByUuid_First(
 			String uuid,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<CommerceSubscriptionEntry> orderByComparator)
+			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException;
 
 	/**
@@ -133,8 +133,7 @@ public interface CommerceSubscriptionEntryPersistence
 	 */
 	public CommerceSubscriptionEntry fetchByUuid_First(
 		String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceSubscriptionEntry> orderByComparator);
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator);
 
 	/**
 	 * Returns the last commerce subscription entry in the ordered set where uuid = &#63;.
@@ -146,8 +145,7 @@ public interface CommerceSubscriptionEntryPersistence
 	 */
 	public CommerceSubscriptionEntry findByUuid_Last(
 			String uuid,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<CommerceSubscriptionEntry> orderByComparator)
+			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException;
 
 	/**
@@ -159,8 +157,7 @@ public interface CommerceSubscriptionEntryPersistence
 	 */
 	public CommerceSubscriptionEntry fetchByUuid_Last(
 		String uuid,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceSubscriptionEntry> orderByComparator);
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator);
 
 	/**
 	 * Returns the commerce subscription entries before and after the current commerce subscription entry in the ordered set where uuid = &#63;.
@@ -173,8 +170,7 @@ public interface CommerceSubscriptionEntryPersistence
 	 */
 	public CommerceSubscriptionEntry[] findByUuid_PrevAndNext(
 			long commerceSubscriptionEntryId, String uuid,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<CommerceSubscriptionEntry> orderByComparator)
+			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException;
 
 	/**
@@ -204,24 +200,27 @@ public interface CommerceSubscriptionEntryPersistence
 		throws NoSuchSubscriptionEntryException;
 
 	/**
-	 * Returns the commerce subscription entry where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the commerce subscription entry where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #fetchByUUID_G(String,long)}
 	 * @param uuid the uuid
 	 * @param groupId the group ID
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
 	 */
-	public CommerceSubscriptionEntry fetchByUUID_G(String uuid, long groupId);
+	@Deprecated
+	public CommerceSubscriptionEntry fetchByUUID_G(
+		String uuid, long groupId, boolean useFinderCache);
 
 	/**
 	 * Returns the commerce subscription entry where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
 	 */
-	public CommerceSubscriptionEntry fetchByUUID_G(
-		String uuid, long groupId, boolean retrieveFromCache);
+	public CommerceSubscriptionEntry fetchByUUID_G(String uuid, long groupId);
 
 	/**
 	 * Removes the commerce subscription entry where uuid = &#63; and groupId = &#63; from the database.
@@ -275,17 +274,20 @@ public interface CommerceSubscriptionEntryPersistence
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceSubscriptionEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByUuid_C(String,long, int, int, OrderByComparator)}
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce subscription entries
 	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce subscription entries
 	 */
+	@Deprecated
 	public java.util.List<CommerceSubscriptionEntry> findByUuid_C(
 		String uuid, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceSubscriptionEntry> orderByComparator);
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator,
+		boolean useFinderCache);
 
 	/**
 	 * Returns an ordered range of all the commerce subscription entries where uuid = &#63; and companyId = &#63;.
@@ -299,14 +301,11 @@ public interface CommerceSubscriptionEntryPersistence
 	 * @param start the lower bound of the range of commerce subscription entries
 	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce subscription entries
 	 */
 	public java.util.List<CommerceSubscriptionEntry> findByUuid_C(
 		String uuid, long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceSubscriptionEntry> orderByComparator,
-		boolean retrieveFromCache);
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator);
 
 	/**
 	 * Returns the first commerce subscription entry in the ordered set where uuid = &#63; and companyId = &#63;.
@@ -319,8 +318,7 @@ public interface CommerceSubscriptionEntryPersistence
 	 */
 	public CommerceSubscriptionEntry findByUuid_C_First(
 			String uuid, long companyId,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<CommerceSubscriptionEntry> orderByComparator)
+			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException;
 
 	/**
@@ -333,8 +331,7 @@ public interface CommerceSubscriptionEntryPersistence
 	 */
 	public CommerceSubscriptionEntry fetchByUuid_C_First(
 		String uuid, long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceSubscriptionEntry> orderByComparator);
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator);
 
 	/**
 	 * Returns the last commerce subscription entry in the ordered set where uuid = &#63; and companyId = &#63;.
@@ -347,8 +344,7 @@ public interface CommerceSubscriptionEntryPersistence
 	 */
 	public CommerceSubscriptionEntry findByUuid_C_Last(
 			String uuid, long companyId,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<CommerceSubscriptionEntry> orderByComparator)
+			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException;
 
 	/**
@@ -361,8 +357,7 @@ public interface CommerceSubscriptionEntryPersistence
 	 */
 	public CommerceSubscriptionEntry fetchByUuid_C_Last(
 		String uuid, long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceSubscriptionEntry> orderByComparator);
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator);
 
 	/**
 	 * Returns the commerce subscription entries before and after the current commerce subscription entry in the ordered set where uuid = &#63; and companyId = &#63;.
@@ -376,8 +371,7 @@ public interface CommerceSubscriptionEntryPersistence
 	 */
 	public CommerceSubscriptionEntry[] findByUuid_C_PrevAndNext(
 			long commerceSubscriptionEntryId, String uuid, long companyId,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<CommerceSubscriptionEntry> orderByComparator)
+			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException;
 
 	/**
@@ -428,16 +422,19 @@ public interface CommerceSubscriptionEntryPersistence
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceSubscriptionEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByCompanyId(long, int, int, OrderByComparator)}
 	 * @param companyId the company ID
 	 * @param start the lower bound of the range of commerce subscription entries
 	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce subscription entries
 	 */
+	@Deprecated
 	public java.util.List<CommerceSubscriptionEntry> findByCompanyId(
 		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceSubscriptionEntry> orderByComparator);
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator,
+		boolean useFinderCache);
 
 	/**
 	 * Returns an ordered range of all the commerce subscription entries where companyId = &#63;.
@@ -450,14 +447,11 @@ public interface CommerceSubscriptionEntryPersistence
 	 * @param start the lower bound of the range of commerce subscription entries
 	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce subscription entries
 	 */
 	public java.util.List<CommerceSubscriptionEntry> findByCompanyId(
 		long companyId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceSubscriptionEntry> orderByComparator,
-		boolean retrieveFromCache);
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator);
 
 	/**
 	 * Returns the first commerce subscription entry in the ordered set where companyId = &#63;.
@@ -469,8 +463,7 @@ public interface CommerceSubscriptionEntryPersistence
 	 */
 	public CommerceSubscriptionEntry findByCompanyId_First(
 			long companyId,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<CommerceSubscriptionEntry> orderByComparator)
+			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException;
 
 	/**
@@ -482,8 +475,7 @@ public interface CommerceSubscriptionEntryPersistence
 	 */
 	public CommerceSubscriptionEntry fetchByCompanyId_First(
 		long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceSubscriptionEntry> orderByComparator);
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator);
 
 	/**
 	 * Returns the last commerce subscription entry in the ordered set where companyId = &#63;.
@@ -495,8 +487,7 @@ public interface CommerceSubscriptionEntryPersistence
 	 */
 	public CommerceSubscriptionEntry findByCompanyId_Last(
 			long companyId,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<CommerceSubscriptionEntry> orderByComparator)
+			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException;
 
 	/**
@@ -508,8 +499,7 @@ public interface CommerceSubscriptionEntryPersistence
 	 */
 	public CommerceSubscriptionEntry fetchByCompanyId_Last(
 		long companyId,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceSubscriptionEntry> orderByComparator);
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator);
 
 	/**
 	 * Returns the commerce subscription entries before and after the current commerce subscription entry in the ordered set where companyId = &#63;.
@@ -522,8 +512,7 @@ public interface CommerceSubscriptionEntryPersistence
 	 */
 	public CommerceSubscriptionEntry[] findByCompanyId_PrevAndNext(
 			long commerceSubscriptionEntryId, long companyId,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<CommerceSubscriptionEntry> orderByComparator)
+			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException;
 
 	/**
@@ -572,16 +561,19 @@ public interface CommerceSubscriptionEntryPersistence
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceSubscriptionEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findBySubscriptionStatus(int, int, int, OrderByComparator)}
 	 * @param subscriptionStatus the subscription status
 	 * @param start the lower bound of the range of commerce subscription entries
 	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce subscription entries
 	 */
+	@Deprecated
 	public java.util.List<CommerceSubscriptionEntry> findBySubscriptionStatus(
 		int subscriptionStatus, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceSubscriptionEntry> orderByComparator);
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator,
+		boolean useFinderCache);
 
 	/**
 	 * Returns an ordered range of all the commerce subscription entries where subscriptionStatus = &#63;.
@@ -594,14 +586,11 @@ public interface CommerceSubscriptionEntryPersistence
 	 * @param start the lower bound of the range of commerce subscription entries
 	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce subscription entries
 	 */
 	public java.util.List<CommerceSubscriptionEntry> findBySubscriptionStatus(
 		int subscriptionStatus, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceSubscriptionEntry> orderByComparator,
-		boolean retrieveFromCache);
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator);
 
 	/**
 	 * Returns the first commerce subscription entry in the ordered set where subscriptionStatus = &#63;.
@@ -613,8 +602,7 @@ public interface CommerceSubscriptionEntryPersistence
 	 */
 	public CommerceSubscriptionEntry findBySubscriptionStatus_First(
 			int subscriptionStatus,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<CommerceSubscriptionEntry> orderByComparator)
+			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException;
 
 	/**
@@ -626,8 +614,7 @@ public interface CommerceSubscriptionEntryPersistence
 	 */
 	public CommerceSubscriptionEntry fetchBySubscriptionStatus_First(
 		int subscriptionStatus,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceSubscriptionEntry> orderByComparator);
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator);
 
 	/**
 	 * Returns the last commerce subscription entry in the ordered set where subscriptionStatus = &#63;.
@@ -639,8 +626,7 @@ public interface CommerceSubscriptionEntryPersistence
 	 */
 	public CommerceSubscriptionEntry findBySubscriptionStatus_Last(
 			int subscriptionStatus,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<CommerceSubscriptionEntry> orderByComparator)
+			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException;
 
 	/**
@@ -652,8 +638,7 @@ public interface CommerceSubscriptionEntryPersistence
 	 */
 	public CommerceSubscriptionEntry fetchBySubscriptionStatus_Last(
 		int subscriptionStatus,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceSubscriptionEntry> orderByComparator);
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator);
 
 	/**
 	 * Returns the commerce subscription entries before and after the current commerce subscription entry in the ordered set where subscriptionStatus = &#63;.
@@ -666,8 +651,7 @@ public interface CommerceSubscriptionEntryPersistence
 	 */
 	public CommerceSubscriptionEntry[] findBySubscriptionStatus_PrevAndNext(
 			long commerceSubscriptionEntryId, int subscriptionStatus,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<CommerceSubscriptionEntry> orderByComparator)
+			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException;
 
 	/**
@@ -718,17 +702,20 @@ public interface CommerceSubscriptionEntryPersistence
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceSubscriptionEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByC_U(long,long, int, int, OrderByComparator)}
 	 * @param companyId the company ID
 	 * @param userId the user ID
 	 * @param start the lower bound of the range of commerce subscription entries
 	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce subscription entries
 	 */
+	@Deprecated
 	public java.util.List<CommerceSubscriptionEntry> findByC_U(
 		long companyId, long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceSubscriptionEntry> orderByComparator);
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator,
+		boolean useFinderCache);
 
 	/**
 	 * Returns an ordered range of all the commerce subscription entries where companyId = &#63; and userId = &#63;.
@@ -742,14 +729,11 @@ public interface CommerceSubscriptionEntryPersistence
 	 * @param start the lower bound of the range of commerce subscription entries
 	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce subscription entries
 	 */
 	public java.util.List<CommerceSubscriptionEntry> findByC_U(
 		long companyId, long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceSubscriptionEntry> orderByComparator,
-		boolean retrieveFromCache);
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator);
 
 	/**
 	 * Returns the first commerce subscription entry in the ordered set where companyId = &#63; and userId = &#63;.
@@ -762,8 +746,7 @@ public interface CommerceSubscriptionEntryPersistence
 	 */
 	public CommerceSubscriptionEntry findByC_U_First(
 			long companyId, long userId,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<CommerceSubscriptionEntry> orderByComparator)
+			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException;
 
 	/**
@@ -776,8 +759,7 @@ public interface CommerceSubscriptionEntryPersistence
 	 */
 	public CommerceSubscriptionEntry fetchByC_U_First(
 		long companyId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceSubscriptionEntry> orderByComparator);
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator);
 
 	/**
 	 * Returns the last commerce subscription entry in the ordered set where companyId = &#63; and userId = &#63;.
@@ -790,8 +772,7 @@ public interface CommerceSubscriptionEntryPersistence
 	 */
 	public CommerceSubscriptionEntry findByC_U_Last(
 			long companyId, long userId,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<CommerceSubscriptionEntry> orderByComparator)
+			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException;
 
 	/**
@@ -804,8 +785,7 @@ public interface CommerceSubscriptionEntryPersistence
 	 */
 	public CommerceSubscriptionEntry fetchByC_U_Last(
 		long companyId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceSubscriptionEntry> orderByComparator);
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator);
 
 	/**
 	 * Returns the commerce subscription entries before and after the current commerce subscription entry in the ordered set where companyId = &#63; and userId = &#63;.
@@ -819,8 +799,7 @@ public interface CommerceSubscriptionEntryPersistence
 	 */
 	public CommerceSubscriptionEntry[] findByC_U_PrevAndNext(
 			long commerceSubscriptionEntryId, long companyId, long userId,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<CommerceSubscriptionEntry> orderByComparator)
+			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException;
 
 	/**
@@ -875,18 +854,21 @@ public interface CommerceSubscriptionEntryPersistence
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceSubscriptionEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByG_C_U(long,long,long, int, int, OrderByComparator)}
 	 * @param groupId the group ID
 	 * @param companyId the company ID
 	 * @param userId the user ID
 	 * @param start the lower bound of the range of commerce subscription entries
 	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce subscription entries
 	 */
+	@Deprecated
 	public java.util.List<CommerceSubscriptionEntry> findByG_C_U(
 		long groupId, long companyId, long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceSubscriptionEntry> orderByComparator);
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator,
+		boolean useFinderCache);
 
 	/**
 	 * Returns an ordered range of all the commerce subscription entries where groupId = &#63; and companyId = &#63; and userId = &#63;.
@@ -901,14 +883,11 @@ public interface CommerceSubscriptionEntryPersistence
 	 * @param start the lower bound of the range of commerce subscription entries
 	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce subscription entries
 	 */
 	public java.util.List<CommerceSubscriptionEntry> findByG_C_U(
 		long groupId, long companyId, long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceSubscriptionEntry> orderByComparator,
-		boolean retrieveFromCache);
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator);
 
 	/**
 	 * Returns the first commerce subscription entry in the ordered set where groupId = &#63; and companyId = &#63; and userId = &#63;.
@@ -922,8 +901,7 @@ public interface CommerceSubscriptionEntryPersistence
 	 */
 	public CommerceSubscriptionEntry findByG_C_U_First(
 			long groupId, long companyId, long userId,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<CommerceSubscriptionEntry> orderByComparator)
+			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException;
 
 	/**
@@ -937,8 +915,7 @@ public interface CommerceSubscriptionEntryPersistence
 	 */
 	public CommerceSubscriptionEntry fetchByG_C_U_First(
 		long groupId, long companyId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceSubscriptionEntry> orderByComparator);
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator);
 
 	/**
 	 * Returns the last commerce subscription entry in the ordered set where groupId = &#63; and companyId = &#63; and userId = &#63;.
@@ -952,8 +929,7 @@ public interface CommerceSubscriptionEntryPersistence
 	 */
 	public CommerceSubscriptionEntry findByG_C_U_Last(
 			long groupId, long companyId, long userId,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<CommerceSubscriptionEntry> orderByComparator)
+			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException;
 
 	/**
@@ -967,8 +943,7 @@ public interface CommerceSubscriptionEntryPersistence
 	 */
 	public CommerceSubscriptionEntry fetchByG_C_U_Last(
 		long groupId, long companyId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceSubscriptionEntry> orderByComparator);
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator);
 
 	/**
 	 * Returns the commerce subscription entries before and after the current commerce subscription entry in the ordered set where groupId = &#63; and companyId = &#63; and userId = &#63;.
@@ -984,8 +959,7 @@ public interface CommerceSubscriptionEntryPersistence
 	public CommerceSubscriptionEntry[] findByG_C_U_PrevAndNext(
 			long commerceSubscriptionEntryId, long groupId, long companyId,
 			long userId,
-			com.liferay.portal.kernel.util.OrderByComparator
-				<CommerceSubscriptionEntry> orderByComparator)
+			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
 		throws NoSuchSubscriptionEntryException;
 
 	/**
@@ -1021,15 +995,19 @@ public interface CommerceSubscriptionEntryPersistence
 		throws NoSuchSubscriptionEntryException;
 
 	/**
-	 * Returns the commerce subscription entry where CPInstanceUuid = &#63; and CProductId = &#63; and commerceOrderItemId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the commerce subscription entry where CPInstanceUuid = &#63; and CProductId = &#63; and commerceOrderItemId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #fetchByC_C_C(String,long,long)}
 	 * @param CPInstanceUuid the cp instance uuid
 	 * @param CProductId the c product ID
 	 * @param commerceOrderItemId the commerce order item ID
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
 	 */
+	@Deprecated
 	public CommerceSubscriptionEntry fetchByC_C_C(
-		String CPInstanceUuid, long CProductId, long commerceOrderItemId);
+		String CPInstanceUuid, long CProductId, long commerceOrderItemId,
+		boolean useFinderCache);
 
 	/**
 	 * Returns the commerce subscription entry where CPInstanceUuid = &#63; and CProductId = &#63; and commerceOrderItemId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
@@ -1037,12 +1015,11 @@ public interface CommerceSubscriptionEntryPersistence
 	 * @param CPInstanceUuid the cp instance uuid
 	 * @param CProductId the c product ID
 	 * @param commerceOrderItemId the commerce order item ID
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
 	 */
 	public CommerceSubscriptionEntry fetchByC_C_C(
-		String CPInstanceUuid, long CProductId, long commerceOrderItemId,
-		boolean retrieveFromCache);
+		String CPInstanceUuid, long CProductId, long commerceOrderItemId);
 
 	/**
 	 * Removes the commerce subscription entry where CPInstanceUuid = &#63; and CProductId = &#63; and commerceOrderItemId = &#63; from the database.
@@ -1152,15 +1129,18 @@ public interface CommerceSubscriptionEntryPersistence
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceSubscriptionEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findAll(int, int, OrderByComparator)}
 	 * @param start the lower bound of the range of commerce subscription entries
 	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce subscription entries
 	 */
+	@Deprecated
 	public java.util.List<CommerceSubscriptionEntry> findAll(
 		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceSubscriptionEntry> orderByComparator);
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator,
+		boolean useFinderCache);
 
 	/**
 	 * Returns an ordered range of all the commerce subscription entries.
@@ -1172,14 +1152,11 @@ public interface CommerceSubscriptionEntryPersistence
 	 * @param start the lower bound of the range of commerce subscription entries
 	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of commerce subscription entries
 	 */
 	public java.util.List<CommerceSubscriptionEntry> findAll(
 		int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator
-			<CommerceSubscriptionEntry> orderByComparator,
-		boolean retrieveFromCache);
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator);
 
 	/**
 	 * Removes all the commerce subscription entries from the database.

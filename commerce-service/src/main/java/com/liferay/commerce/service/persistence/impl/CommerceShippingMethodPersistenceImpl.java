@@ -129,18 +129,22 @@ public class CommerceShippingMethodPersistenceImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceShippingMethodModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByGroupId(long, int, int, OrderByComparator)}
 	 * @param groupId the group ID
 	 * @param start the lower bound of the range of commerce shipping methods
 	 * @param end the upper bound of the range of commerce shipping methods (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce shipping methods
 	 */
+	@Deprecated
 	@Override
 	public List<CommerceShippingMethod> findByGroupId(
 		long groupId, int start, int end,
-		OrderByComparator<CommerceShippingMethod> orderByComparator) {
+		OrderByComparator<CommerceShippingMethod> orderByComparator,
+		boolean useFinderCache) {
 
-		return findByGroupId(groupId, start, end, orderByComparator, true);
+		return findByGroupId(groupId, start, end, orderByComparator);
 	}
 
 	/**
@@ -154,14 +158,12 @@ public class CommerceShippingMethodPersistenceImpl
 	 * @param start the lower bound of the range of commerce shipping methods
 	 * @param end the upper bound of the range of commerce shipping methods (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce shipping methods
 	 */
 	@Override
 	public List<CommerceShippingMethod> findByGroupId(
 		long groupId, int start, int end,
-		OrderByComparator<CommerceShippingMethod> orderByComparator,
-		boolean retrieveFromCache) {
+		OrderByComparator<CommerceShippingMethod> orderByComparator) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -179,19 +181,16 @@ public class CommerceShippingMethodPersistenceImpl
 			finderArgs = new Object[] {groupId, start, end, orderByComparator};
 		}
 
-		List<CommerceShippingMethod> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<CommerceShippingMethod>)finderCache.getResult(
+		List<CommerceShippingMethod> list =
+			(List<CommerceShippingMethod>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
-			if ((list != null) && !list.isEmpty()) {
-				for (CommerceShippingMethod commerceShippingMethod : list) {
-					if ((groupId != commerceShippingMethod.getGroupId())) {
-						list = null;
+		if ((list != null) && !list.isEmpty()) {
+			for (CommerceShippingMethod commerceShippingMethod : list) {
+				if ((groupId != commerceShippingMethod.getGroupId())) {
+					list = null;
 
-						break;
-					}
+					break;
 				}
 			}
 		}
@@ -645,15 +644,20 @@ public class CommerceShippingMethodPersistenceImpl
 	}
 
 	/**
-	 * Returns the commerce shipping method where groupId = &#63; and engineKey = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the commerce shipping method where groupId = &#63; and engineKey = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #fetchByG_E(long,String)}
 	 * @param groupId the group ID
 	 * @param engineKey the engine key
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce shipping method, or <code>null</code> if a matching commerce shipping method could not be found
 	 */
+	@Deprecated
 	@Override
-	public CommerceShippingMethod fetchByG_E(long groupId, String engineKey) {
-		return fetchByG_E(groupId, engineKey, true);
+	public CommerceShippingMethod fetchByG_E(
+		long groupId, String engineKey, boolean useFinderCache) {
+
+		return fetchByG_E(groupId, engineKey);
 	}
 
 	/**
@@ -661,23 +665,17 @@ public class CommerceShippingMethodPersistenceImpl
 	 *
 	 * @param groupId the group ID
 	 * @param engineKey the engine key
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce shipping method, or <code>null</code> if a matching commerce shipping method could not be found
 	 */
 	@Override
-	public CommerceShippingMethod fetchByG_E(
-		long groupId, String engineKey, boolean retrieveFromCache) {
-
+	public CommerceShippingMethod fetchByG_E(long groupId, String engineKey) {
 		engineKey = Objects.toString(engineKey, "");
 
 		Object[] finderArgs = new Object[] {groupId, engineKey};
 
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = finderCache.getResult(
-				_finderPathFetchByG_E, finderArgs, this);
-		}
+		Object result = finderCache.getResult(
+			_finderPathFetchByG_E, finderArgs, this);
 
 		if (result instanceof CommerceShippingMethod) {
 			CommerceShippingMethod commerceShippingMethod =
@@ -899,19 +897,23 @@ public class CommerceShippingMethodPersistenceImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceShippingMethodModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByG_A(long,boolean, int, int, OrderByComparator)}
 	 * @param groupId the group ID
 	 * @param active the active
 	 * @param start the lower bound of the range of commerce shipping methods
 	 * @param end the upper bound of the range of commerce shipping methods (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce shipping methods
 	 */
+	@Deprecated
 	@Override
 	public List<CommerceShippingMethod> findByG_A(
 		long groupId, boolean active, int start, int end,
-		OrderByComparator<CommerceShippingMethod> orderByComparator) {
+		OrderByComparator<CommerceShippingMethod> orderByComparator,
+		boolean useFinderCache) {
 
-		return findByG_A(groupId, active, start, end, orderByComparator, true);
+		return findByG_A(groupId, active, start, end, orderByComparator);
 	}
 
 	/**
@@ -926,14 +928,12 @@ public class CommerceShippingMethodPersistenceImpl
 	 * @param start the lower bound of the range of commerce shipping methods
 	 * @param end the upper bound of the range of commerce shipping methods (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce shipping methods
 	 */
 	@Override
 	public List<CommerceShippingMethod> findByG_A(
 		long groupId, boolean active, int start, int end,
-		OrderByComparator<CommerceShippingMethod> orderByComparator,
-		boolean retrieveFromCache) {
+		OrderByComparator<CommerceShippingMethod> orderByComparator) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -953,21 +953,18 @@ public class CommerceShippingMethodPersistenceImpl
 			};
 		}
 
-		List<CommerceShippingMethod> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<CommerceShippingMethod>)finderCache.getResult(
+		List<CommerceShippingMethod> list =
+			(List<CommerceShippingMethod>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
-			if ((list != null) && !list.isEmpty()) {
-				for (CommerceShippingMethod commerceShippingMethod : list) {
-					if ((groupId != commerceShippingMethod.getGroupId()) ||
-						(active != commerceShippingMethod.isActive())) {
+		if ((list != null) && !list.isEmpty()) {
+			for (CommerceShippingMethod commerceShippingMethod : list) {
+				if ((groupId != commerceShippingMethod.getGroupId()) ||
+					(active != commerceShippingMethod.isActive())) {
 
-						list = null;
+					list = null;
 
-						break;
-					}
+					break;
 				}
 			}
 		}
@@ -2091,17 +2088,21 @@ public class CommerceShippingMethodPersistenceImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceShippingMethodModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findAll(int, int, OrderByComparator)}
 	 * @param start the lower bound of the range of commerce shipping methods
 	 * @param end the upper bound of the range of commerce shipping methods (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce shipping methods
 	 */
+	@Deprecated
 	@Override
 	public List<CommerceShippingMethod> findAll(
 		int start, int end,
-		OrderByComparator<CommerceShippingMethod> orderByComparator) {
+		OrderByComparator<CommerceShippingMethod> orderByComparator,
+		boolean useFinderCache) {
 
-		return findAll(start, end, orderByComparator, true);
+		return findAll(start, end, orderByComparator);
 	}
 
 	/**
@@ -2114,14 +2115,12 @@ public class CommerceShippingMethodPersistenceImpl
 	 * @param start the lower bound of the range of commerce shipping methods
 	 * @param end the upper bound of the range of commerce shipping methods (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of commerce shipping methods
 	 */
 	@Override
 	public List<CommerceShippingMethod> findAll(
 		int start, int end,
-		OrderByComparator<CommerceShippingMethod> orderByComparator,
-		boolean retrieveFromCache) {
+		OrderByComparator<CommerceShippingMethod> orderByComparator) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -2139,12 +2138,9 @@ public class CommerceShippingMethodPersistenceImpl
 			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
-		List<CommerceShippingMethod> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<CommerceShippingMethod>)finderCache.getResult(
+		List<CommerceShippingMethod> list =
+			(List<CommerceShippingMethod>)finderCache.getResult(
 				finderPath, finderArgs, this);
-		}
 
 		if (list == null) {
 			StringBundler query = null;

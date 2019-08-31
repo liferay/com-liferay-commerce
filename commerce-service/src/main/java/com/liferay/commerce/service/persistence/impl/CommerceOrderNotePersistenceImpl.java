@@ -128,19 +128,23 @@ public class CommerceOrderNotePersistenceImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceOrderNoteModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByCommerceOrderId(long, int, int, OrderByComparator)}
 	 * @param commerceOrderId the commerce order ID
 	 * @param start the lower bound of the range of commerce order notes
 	 * @param end the upper bound of the range of commerce order notes (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce order notes
 	 */
+	@Deprecated
 	@Override
 	public List<CommerceOrderNote> findByCommerceOrderId(
 		long commerceOrderId, int start, int end,
-		OrderByComparator<CommerceOrderNote> orderByComparator) {
+		OrderByComparator<CommerceOrderNote> orderByComparator,
+		boolean useFinderCache) {
 
 		return findByCommerceOrderId(
-			commerceOrderId, start, end, orderByComparator, true);
+			commerceOrderId, start, end, orderByComparator);
 	}
 
 	/**
@@ -154,14 +158,12 @@ public class CommerceOrderNotePersistenceImpl
 	 * @param start the lower bound of the range of commerce order notes
 	 * @param end the upper bound of the range of commerce order notes (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce order notes
 	 */
 	@Override
 	public List<CommerceOrderNote> findByCommerceOrderId(
 		long commerceOrderId, int start, int end,
-		OrderByComparator<CommerceOrderNote> orderByComparator,
-		boolean retrieveFromCache) {
+		OrderByComparator<CommerceOrderNote> orderByComparator) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -181,21 +183,18 @@ public class CommerceOrderNotePersistenceImpl
 			};
 		}
 
-		List<CommerceOrderNote> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<CommerceOrderNote>)finderCache.getResult(
+		List<CommerceOrderNote> list =
+			(List<CommerceOrderNote>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
-			if ((list != null) && !list.isEmpty()) {
-				for (CommerceOrderNote commerceOrderNote : list) {
-					if ((commerceOrderId !=
-							commerceOrderNote.getCommerceOrderId())) {
+		if ((list != null) && !list.isEmpty()) {
+			for (CommerceOrderNote commerceOrderNote : list) {
+				if ((commerceOrderId !=
+						commerceOrderNote.getCommerceOrderId())) {
 
-						list = null;
+					list = null;
 
-						break;
-					}
+					break;
 				}
 			}
 		}
@@ -656,20 +655,24 @@ public class CommerceOrderNotePersistenceImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceOrderNoteModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findByC_R(long,boolean, int, int, OrderByComparator)}
 	 * @param commerceOrderId the commerce order ID
 	 * @param restricted the restricted
 	 * @param start the lower bound of the range of commerce order notes
 	 * @param end the upper bound of the range of commerce order notes (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of matching commerce order notes
 	 */
+	@Deprecated
 	@Override
 	public List<CommerceOrderNote> findByC_R(
 		long commerceOrderId, boolean restricted, int start, int end,
-		OrderByComparator<CommerceOrderNote> orderByComparator) {
+		OrderByComparator<CommerceOrderNote> orderByComparator,
+		boolean useFinderCache) {
 
 		return findByC_R(
-			commerceOrderId, restricted, start, end, orderByComparator, true);
+			commerceOrderId, restricted, start, end, orderByComparator);
 	}
 
 	/**
@@ -684,14 +687,12 @@ public class CommerceOrderNotePersistenceImpl
 	 * @param start the lower bound of the range of commerce order notes
 	 * @param end the upper bound of the range of commerce order notes (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of matching commerce order notes
 	 */
 	@Override
 	public List<CommerceOrderNote> findByC_R(
 		long commerceOrderId, boolean restricted, int start, int end,
-		OrderByComparator<CommerceOrderNote> orderByComparator,
-		boolean retrieveFromCache) {
+		OrderByComparator<CommerceOrderNote> orderByComparator) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -711,22 +712,19 @@ public class CommerceOrderNotePersistenceImpl
 			};
 		}
 
-		List<CommerceOrderNote> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<CommerceOrderNote>)finderCache.getResult(
+		List<CommerceOrderNote> list =
+			(List<CommerceOrderNote>)finderCache.getResult(
 				finderPath, finderArgs, this);
 
-			if ((list != null) && !list.isEmpty()) {
-				for (CommerceOrderNote commerceOrderNote : list) {
-					if ((commerceOrderId !=
-							commerceOrderNote.getCommerceOrderId()) ||
-						(restricted != commerceOrderNote.isRestricted())) {
+		if ((list != null) && !list.isEmpty()) {
+			for (CommerceOrderNote commerceOrderNote : list) {
+				if ((commerceOrderId !=
+						commerceOrderNote.getCommerceOrderId()) ||
+					(restricted != commerceOrderNote.isRestricted())) {
 
-						list = null;
+					list = null;
 
-						break;
-					}
+					break;
 				}
 			}
 		}
@@ -1210,17 +1208,20 @@ public class CommerceOrderNotePersistenceImpl
 	}
 
 	/**
-	 * Returns the commerce order note where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the commerce order note where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #fetchByC_ERC(long,String)}
 	 * @param companyId the company ID
 	 * @param externalReferenceCode the external reference code
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce order note, or <code>null</code> if a matching commerce order note could not be found
 	 */
+	@Deprecated
 	@Override
 	public CommerceOrderNote fetchByC_ERC(
-		long companyId, String externalReferenceCode) {
+		long companyId, String externalReferenceCode, boolean useFinderCache) {
 
-		return fetchByC_ERC(companyId, externalReferenceCode, true);
+		return fetchByC_ERC(companyId, externalReferenceCode);
 	}
 
 	/**
@@ -1228,24 +1229,19 @@ public class CommerceOrderNotePersistenceImpl
 	 *
 	 * @param companyId the company ID
 	 * @param externalReferenceCode the external reference code
-	 * @param retrieveFromCache whether to retrieve from the finder cache
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the matching commerce order note, or <code>null</code> if a matching commerce order note could not be found
 	 */
 	@Override
 	public CommerceOrderNote fetchByC_ERC(
-		long companyId, String externalReferenceCode,
-		boolean retrieveFromCache) {
+		long companyId, String externalReferenceCode) {
 
 		externalReferenceCode = Objects.toString(externalReferenceCode, "");
 
 		Object[] finderArgs = new Object[] {companyId, externalReferenceCode};
 
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = finderCache.getResult(
-				_finderPathFetchByC_ERC, finderArgs, this);
-		}
+		Object result = finderCache.getResult(
+			_finderPathFetchByC_ERC, finderArgs, this);
 
 		if (result instanceof CommerceOrderNote) {
 			CommerceOrderNote commerceOrderNote = (CommerceOrderNote)result;
@@ -2075,17 +2071,21 @@ public class CommerceOrderNotePersistenceImpl
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceOrderNoteModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
+	 * @deprecated As of Mueller (7.2.x), replaced by {@link #findAll(int, int, OrderByComparator)}
 	 * @param start the lower bound of the range of commerce order notes
 	 * @param end the upper bound of the range of commerce order notes (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
 	 * @return the ordered range of commerce order notes
 	 */
+	@Deprecated
 	@Override
 	public List<CommerceOrderNote> findAll(
 		int start, int end,
-		OrderByComparator<CommerceOrderNote> orderByComparator) {
+		OrderByComparator<CommerceOrderNote> orderByComparator,
+		boolean useFinderCache) {
 
-		return findAll(start, end, orderByComparator, true);
+		return findAll(start, end, orderByComparator);
 	}
 
 	/**
@@ -2098,14 +2098,12 @@ public class CommerceOrderNotePersistenceImpl
 	 * @param start the lower bound of the range of commerce order notes
 	 * @param end the upper bound of the range of commerce order notes (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param retrieveFromCache whether to retrieve from the finder cache
 	 * @return the ordered range of commerce order notes
 	 */
 	@Override
 	public List<CommerceOrderNote> findAll(
 		int start, int end,
-		OrderByComparator<CommerceOrderNote> orderByComparator,
-		boolean retrieveFromCache) {
+		OrderByComparator<CommerceOrderNote> orderByComparator) {
 
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -2123,12 +2121,9 @@ public class CommerceOrderNotePersistenceImpl
 			finderArgs = new Object[] {start, end, orderByComparator};
 		}
 
-		List<CommerceOrderNote> list = null;
-
-		if (retrieveFromCache) {
-			list = (List<CommerceOrderNote>)finderCache.getResult(
+		List<CommerceOrderNote> list =
+			(List<CommerceOrderNote>)finderCache.getResult(
 				finderPath, finderArgs, this);
-		}
 
 		if (list == null) {
 			StringBundler query = null;

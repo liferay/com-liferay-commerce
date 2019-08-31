@@ -17,6 +17,7 @@ package com.liferay.commerce.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.commerce.context.CommerceContext;
+import com.liferay.commerce.currency.model.CommerceMoney;
 import com.liferay.commerce.exception.NoSuchOrderItemException;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
@@ -343,6 +344,13 @@ public interface CommerceOrderItemLocalService
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrderItem updateCommerceOrderItem(
+			long commerceOrderItemId, int quantity, CommerceMoney unitPrice,
+			String json, CommerceContext commerceContext,
+			ServiceContext serviceContext)
+		throws PortalException;
+
+	@Indexable(type = IndexableType.REINDEX)
+	public CommerceOrderItem updateCommerceOrderItem(
 			long commerceOrderItemId, int quantity, String json,
 			CommerceContext commerceContext, ServiceContext serviceContext)
 		throws PortalException;
@@ -360,9 +368,14 @@ public interface CommerceOrderItemLocalService
 			int requestedDeliveryDateMinute, ServiceContext serviceContext)
 		throws PortalException;
 
-	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrderItem updateCommerceOrderItemPrice(
 			long commerceOrderItemId, CommerceContext commerceContext)
+		throws PortalException;
+
+	@Indexable(type = IndexableType.REINDEX)
+	public CommerceOrderItem updateCommerceOrderItemPrice(
+			long commerceOrderItemId, CommerceMoney unitPrice,
+			CommerceContext commerceContext)
 		throws PortalException;
 
 	public CommerceOrderItem upsertCommerceOrderItem(
