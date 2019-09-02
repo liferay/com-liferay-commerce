@@ -606,18 +606,21 @@ public class PayPalCommercePaymentMethod implements CommercePaymentMethod {
 		boolean success = false;
 		int status = CommerceOrderPaymentConstants.STATUS_FAILED;
 
+		String token = agreement.getToken();
+
 		if (PayPalCommercePaymentMethodConstants.AUTHORIZATION_STATE_CREATED.
-				equals(agreement.getState())) {
+				equalsIgnoreCase(plan.getState()) &&
+			Validator.isNotNull(token)) {
 
 			success = true;
 			status = CommerceOrderConstants.PAYMENT_STATUS_AUTHORIZED;
 		}
 
-		List<String> messages = Arrays.asList(agreement.getState());
+		List<String> messages = Arrays.asList(plan.getState());
 
 		return new CommercePaymentResult(
-			agreement.getToken(), commercePaymentRequest.getCommerceOrderId(),
-			status, true, url, null, messages, success);
+			token, commercePaymentRequest.getCommerceOrderId(), status, true,
+			url, null, messages, success);
 	}
 
 	@Override
