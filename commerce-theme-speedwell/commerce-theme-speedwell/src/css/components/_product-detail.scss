@@ -8,6 +8,10 @@
     font-size: 18px;
     line-height: 30px;
     margin: 20px 0;
+
+    @media only screen and (max-width: 767px) {
+      margin: -10px 0 26px;
+    }
   }
 
   .availability,
@@ -20,5 +24,11 @@
 
   .stockQuantity {
     display: none;
+  }
+
+  @media only screen and (max-width: 767px) {
+    .commerce-price {
+      margin: 25px 0;
+    }
   }
 }
