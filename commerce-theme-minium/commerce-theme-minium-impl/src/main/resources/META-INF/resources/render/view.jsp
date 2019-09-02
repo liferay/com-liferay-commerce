@@ -30,11 +30,11 @@ String galleryId = PortalUtil.generateRandomKey(request, "gallery");
 
 <div class="product-detail" id="<portlet:namespace /><%= cpDefinitionId %>ProductContent">
 	<div class="row">
-		<div class="col-6" id="minium-product-gallery">
+		<div class="col-md-6 col-xs-12" id="minium-product-gallery">
 			<commerce-ui:gallery id="<%= galleryId %>" CPDefinitionId="<%= cpDefinitionId %>" />
 		</div>
 
-		<div class="col-6">
+		<div class="col-md-6 col-xs-12">
 			<header class="minium-product-header">
 				<commerce-ui:compare-checkbox
 					componentId="compareCheckbox"
