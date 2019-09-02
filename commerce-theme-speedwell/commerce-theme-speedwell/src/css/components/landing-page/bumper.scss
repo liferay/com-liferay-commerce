@@ -104,6 +104,8 @@
       overflow-x: auto;
       justify-content: unset;
       scroll-snap-type: x mandatory;
+      -webkit-scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
     }
 
     h3, p {
@@ -136,6 +138,7 @@
         min-width: 100%;
         max-width: 100%;
         scroll-snap-align: center;
+        -webkit-scroll-snap-align: center;
         padding: 0 1em;
       }
 
