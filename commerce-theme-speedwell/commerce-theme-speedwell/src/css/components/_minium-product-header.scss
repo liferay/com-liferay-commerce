@@ -10,5 +10,20 @@
 		font-size: 36px;
 		font-weight: 300;
 		line-height: 60px;
+
+		@media only screen and (max-width: 767px) {
+			font-size: 32px !important;
+			line-height: 52px !important;
+			font-weight: 600 !important;
+		}
+	}
+
+	@media only screen and (max-width: 767px) {
+		.availability {
+			position: absolute;
+			top: 8%;
+			font-size: 14px;
+			line-height: 12px;
+		}
 	}
 }

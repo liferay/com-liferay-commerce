@@ -18,6 +18,10 @@
   .pagination {
     justify-content: center;
 
+    @media only screen and (max-width: 767px) {
+      display: none;
+    }
+
     li {
       a {
         background: transparent;
