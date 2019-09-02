@@ -22,10 +22,11 @@ import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.payment.engine.CommerceSubscriptionEngine;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CProduct;
+import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceOrderItemLocalService;
 import com.liferay.commerce.service.CommerceSubscriptionEntryLocalService;
 import com.liferay.commerce.subscription.CommerceSubscriptionEntryHelper;
-import com.liferay.counter.kernel.service.CounterLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 
@@ -50,7 +51,11 @@ public class CommerceSubscriptionEntryHelperImpl
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setScopeGroupId(commerceOrder.getGroupId());
+		CommerceChannel commerceChannel =
+			_commerceChannelLocalService.getCommerceChannelByOrderGroupId(
+				commerceOrder.getGroupId());
+
+		serviceContext.setScopeGroupId(commerceChannel.getSiteGroupId());
 
 		CommerceAccount commerceAccount = commerceOrder.getCommerceAccount();
 
@@ -142,6 +147,9 @@ public class CommerceSubscriptionEntryHelperImpl
 	}
 
 	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
+
+	@Reference
 	private CommerceOrderItemLocalService _commerceOrderItemLocalService;
 
 	@Reference
@@ -150,8 +158,5 @@ public class CommerceSubscriptionEntryHelperImpl
 	@Reference
 	private CommerceSubscriptionEntryLocalService
 		_commerceSubscriptionEntryLocalService;
-
-	@Reference
-	private CounterLocalService _counterLocalService;
 
 }
