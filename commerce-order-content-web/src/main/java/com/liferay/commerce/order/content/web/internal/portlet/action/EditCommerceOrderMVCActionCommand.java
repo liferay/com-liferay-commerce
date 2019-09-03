@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.order.content.web.internal.portlet.action;
 
+import com.liferay.commerce.account.exception.NoSuchAccountException;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.constants.CommerceWebKeys;
@@ -76,6 +77,10 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 			WebKeys.THEME_DISPLAY);
 
 		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
+
+		if (commerceAccount == null) {
+			throw new NoSuchAccountException();
+		}
 
 		long commerceCurrencyId = 0;
 
@@ -212,7 +217,8 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 			}
 		}
 		catch (Exception e) {
-			if (e instanceof NoSuchOrderException ||
+			if (e instanceof NoSuchAccountException ||
+				e instanceof NoSuchOrderException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(actionRequest, e.getClass());
