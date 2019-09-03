@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ClayForm from '@clayui/form';
+import { ClayCheckbox } from '@clayui/form';
 import ClayButton from '@clayui/button';
 
 import { CheckboxesFilterProps } from './definitions';
@@ -42,7 +42,7 @@ const CheckboxesFilter: React.FunctionComponent<IProps> = (props: IProps) => {
                     }
 
                     return (
-                        <ClayForm.Checkbox
+                        <ClayCheckbox
                             aria-label={item.label}
                             checked={checked}
                             onChange={() => selectCheckbox(item.value)}
