@@ -1,5 +1,5 @@
 import FilterProps from './Filter/definitions';
-import launcher from './entry.es';
+import tableToolbarLauncher from './entry.es';
 
 const filters: FilterProps[] = [
 	{
@@ -78,9 +78,27 @@ const filters: FilterProps[] = [
 		type: 'date',
 		slug: 'date-test',
 		label: 'Date test',
-		value: '',
-		operator: 'eq'
-	}
+		operator: 'eq',
+		value: {
+			day: 1,
+			month: 2,
+			year: 1
+		}
+	},
+	// {
+	// 	type: 'date-time',
+	// 	slug: 'date-time-test',
+	// 	label: 'Date Time test',
+	// 	operator: 'eq',
+	// 	value: {
+	// 		day: 1,
+	// 		month: 10,
+	// 		year: 2010,
+	// 		hours: 20,
+	// 		minutes: 0,
+	// 		seconds: 10
+	// 	}
+	// }
 ]
 
 const props = {
@@ -100,4 +118,4 @@ declare global {
     interface Window { tableToolbar: any; }
 }
 
-window.tableToolbar = launcher('tableToolbar', 'table-toolbar', props);
+window.tableToolbar = tableToolbarLauncher('tableToolbar', 'table-toolbar', props);
