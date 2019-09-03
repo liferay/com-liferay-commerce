@@ -83,7 +83,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 		<div class="col-md-4 d-flex">
 			<commerce-ui:panel
 				elementClasses="flex-fill"
-				title="Order timeline"
+				title="order-timeline"
 			>
 				<div id="order-timeline-root">
 					<ol class="multi-step-indicator-label-top multi-step-nav multi-step-nav-collapse-sm">
