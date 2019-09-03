@@ -333,6 +333,27 @@ public class CommerceOrderItemServiceImpl
 	}
 
 	@Override
+	public CommerceOrderItem updateCommerceOrderItemUnitPrice(
+			long commerceOrderItemId, BigDecimal unitPrice)
+		throws PortalException {
+
+		CommerceOrderItem commerceOrderItem =
+			commerceOrderItemLocalService.getCommerceOrderItem(
+				commerceOrderItemId);
+
+		_commerceOrderModelResourcePermission.check(
+			getPermissionChecker(), commerceOrderItem.getCommerceOrderId(),
+			ActionKeys.UPDATE);
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommerceActionKeys.MANAGE_COMMERCE_ORDER_PRICES);
+
+		return commerceOrderItemLocalService.updateCommerceOrderItemUnitPrice(
+			commerceOrderItemId, unitPrice);
+	}
+
+	@Override
 	public CommerceOrderItem upsertCommerceOrderItem(
 			long commerceOrderId, long cpInstanceId, int quantity,
 			int shippedQuantity, String json, CommerceContext commerceContext,
