@@ -17,13 +17,15 @@
 <%@ include file="/init.jsp" %>
 
 <%
-	CommerceOrderEditDisplayContext commerceOrderEditDisplayContext = (CommerceOrderEditDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
-	SearchContainer<CommerceOrderItem> commerceOrderItemsSearchContainer = commerceOrderEditDisplayContext.getCommerceOrderItemsSearchContainer();
-	PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPortletURL();
+CommerceOrderEditDisplayContext commerceOrderEditDisplayContext = (CommerceOrderEditDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+
+SearchContainer<CommerceOrderItem> commerceOrderItemsSearchContainer = commerceOrderEditDisplayContext.getCommerceOrderItemsSearchContainer();
+PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPortletURL();
 %>
 
 <liferay-portlet:renderURL var="editURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
-	<portlet:param name="mvcRenderCommandName" value="editCommerceOrderNote" />
+	<portlet:param name="mvcRenderCommandName" value="editCommerceOrderShippingAddress" />
+	<portlet:param name="commerceOrderId" value="<%= String.valueOf(commerceOrderEditDisplayContext.getCommerceOrderId()) %>" />
 </liferay-portlet:renderURL>
 
 <div class="container">
@@ -31,19 +33,21 @@
 		<div class="col-md-4 d-flex">
 			<!-- modal -->
 			<commerce-ui:modal
-				url="<%= editURL %>"
+				closeOnSubmit="<%= true %>"
+				showCancel="<%= true %>"
+				showSubmit="<%= true %>"
 				size="full-screen"
 				title="PLACEHOLDER Shipping address and method"
-				closeOnSubmit="<%= true %>"
 				triggerId="shipping-modal-id"
+				url="<%= editURL %>"
 			/>
 			<!-- / modal -->
 			<commerce-ui:panel
 				elementClasses="flex-fill"
+				headerActionId="shipping-modal-id"
 				headerActionLabel="edit"
 				headerActionUrl="<%= editURL %>"
 				title="shipping-address-and-method"
-				headerActionId="shipping-modal-id"
 			>
 				<div class="card-text">PLACEHOLDER PO Box 467 New York NY 10002</div>
 				<div class="card-text mt-3">
@@ -59,18 +63,18 @@
 
 			<!-- modal -->
 			<commerce-ui:modal
-				url="<%= editURL %>"
+				closeOnSubmit="<%= true %>"
 				size="full-screen"
 				title="PLACEHOLDER Shipping address and method"
-				closeOnSubmit="<%= true %>"
 				triggerId="small-modal-id"
+				url="<%= editURL %>"
 			/>
 			<!-- / modal -->
 			<commerce-ui:panel
 				elementClasses="flex-fill"
 				headerActionIcon="plus"
-				title="billing-address"
 				headerActionId="small-modal-id"
+				title="billing-address"
 			>
 				<div class="card-text">PLACEHOLDER PO Box 467 New York NY 10002</div>
 			</commerce-ui:panel>
@@ -82,11 +86,12 @@
 				title="Order timeline"
 			>
 				<div id="order-timeline-root">
-					<ol class="multi-step-nav multi-step-nav-collapse-sm multi-step-indicator-label-top">
+					<ol class="multi-step-indicator-label-top multi-step-nav multi-step-nav-collapse-sm">
 						<li class="active multi-step-item multi-step-item-expand">
 							<div class="multi-step-divider"></div>
 							<div class="multi-step-indicator">
 								<div class="multi-step-indicator-label">PLACEHOLDER Confirmed</div>
+
 								<span class="multi-step-icon" data-multi-step-icon="1"></span>
 							</div>
 						</li>
@@ -94,6 +99,7 @@
 							<div class="multi-step-divider"></div>
 							<div class="multi-step-indicator">
 								<div class="multi-step-indicator-label">PLACEHOLDER Transmitted</div>
+
 								<span class="multi-step-icon" data-multi-step-icon="2"></span>
 							</div>
 						</li>
@@ -101,6 +107,7 @@
 							<div class="multi-step-divider"></div>
 							<div class="multi-step-indicator">
 								<div class="multi-step-indicator-label">PLACEHOLDER Shipped</div>
+
 								<span class="multi-step-icon" data-multi-step-icon="3"></span>
 							</div>
 						</li>
@@ -108,6 +115,7 @@
 							<div class="multi-step-divider"></div>
 							<div class="multi-step-indicator">
 								<div class="multi-step-indicator-label">PLACEHOLDER Completed</div>
+
 								<span class="multi-step-icon" data-multi-step-icon="4"></span>
 							</div>
 						</li>
@@ -301,7 +309,7 @@
 
 		<div class="col-md-4">
 			<commerce-ui:panel
-					showMoreUrl="/test"
+				showMoreUrl="/test"
 				title="recent-order-notes"
 			>
 				<div class="card-text">
