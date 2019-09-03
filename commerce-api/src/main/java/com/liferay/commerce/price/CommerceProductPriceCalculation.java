@@ -34,6 +34,11 @@ public interface CommerceProductPriceCalculation {
 		throws PortalException;
 
 	public CommerceProductPrice getCommerceProductPrice(
+			CommerceMoney unitPrice, long cpInstanceId, int quantity,
+			boolean secure, CommerceContext commerceContext)
+		throws PortalException;
+
+	public CommerceProductPrice getCommerceProductPrice(
 			long cpInstanceId, int quantity, CommerceContext commerceContext)
 		throws PortalException;
 

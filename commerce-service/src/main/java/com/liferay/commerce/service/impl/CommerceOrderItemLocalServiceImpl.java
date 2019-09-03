@@ -431,12 +431,12 @@ public class CommerceOrderItemLocalServiceImpl
 
 		CommerceProductPrice commerceProductPrice =
 			_commerceProductPriceCalculation.getCommerceProductPrice(
-				commerceOrderItem.getCPInstanceId(), quantity, false,
+				unitPrice, commerceOrderItem.getCPInstanceId(), quantity, false,
 				commerceContext);
 
 		if (unitPrice == null) {
-			unitPrice = commerceProductPrice.getUnitPrice();
-		}
+		    unitPrice = commerceProductPrice.getUnitPrice();
+        }
 
 		CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
 
@@ -457,7 +457,7 @@ public class CommerceOrderItemLocalServiceImpl
 		commerceOrderItemPersistence.update(commerceOrderItem);
 
 		commerceOrderLocalService.recalculatePrice(
-			commerceOrderItem.getCommerceOrderId(), commerceContext);
+			commerceOrderItem.getCommerceOrderId(), true, commerceContext);
 
 		return commerceOrderItem;
 	}
@@ -520,10 +520,20 @@ public class CommerceOrderItemLocalServiceImpl
 		return commerceOrderItemPersistence.update(commerceOrderItem);
 	}
 
-	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceOrderItem updateCommerceOrderItemPrice(
 			long commerceOrderItemId, CommerceContext commerceContext)
+		throws PortalException {
+
+		return updateCommerceOrderItemPrice(
+			commerceOrderItemId, null, commerceContext);
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CommerceOrderItem updateCommerceOrderItemPrice(
+			long commerceOrderItemId, CommerceMoney unitPrice,
+			CommerceContext commerceContext)
 		throws PortalException {
 
 		CommerceOrderItem commerceOrderItem =
@@ -531,10 +541,13 @@ public class CommerceOrderItemLocalServiceImpl
 
 		CommerceProductPrice commerceProductPrice =
 			_commerceProductPriceCalculation.getCommerceProductPrice(
-				commerceOrderItem.getCPInstanceId(),
+				unitPrice, commerceOrderItem.getCPInstanceId(),
 				commerceOrderItem.getQuantity(), false, commerceContext);
 
-		CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
+		if (unitPrice == null) {
+		    unitPrice = commerceProductPrice.getUnitPrice();
+        }
+
 		CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
 
 		commerceOrderItem.setUnitPrice(unitPrice.getPrice());

@@ -30,6 +30,11 @@ public interface CommerceOrderPriceCalculation {
 
 	public CommerceOrderPrice getCommerceOrderPrice(
 			CommerceOrder commerceOrder, boolean secure,
+			boolean unitPriceChanged, CommerceContext commerceContext)
+		throws PortalException;
+
+	public CommerceOrderPrice getCommerceOrderPrice(
+			CommerceOrder commerceOrder, boolean secure,
 			CommerceContext commerceContext)
 		throws PortalException;
 
@@ -39,11 +44,21 @@ public interface CommerceOrderPriceCalculation {
 
 	public CommerceMoney getSubtotal(
 			CommerceOrder commerceOrder, boolean secure,
+			boolean unitPriceChanged, CommerceContext commerceContext)
+		throws PortalException;
+
+	public CommerceMoney getSubtotal(
+			CommerceOrder commerceOrder, boolean secure,
 			CommerceContext commerceContext)
 		throws PortalException;
 
 	public CommerceMoney getSubtotal(
 			CommerceOrder commerceOrder, CommerceContext commerceContext)
+		throws PortalException;
+
+	public CommerceMoney getTaxValue(
+			CommerceOrder commerceOrder, boolean secure,
+			boolean unitPriceChanged, CommerceContext commerceContext)
 		throws PortalException;
 
 	public CommerceMoney getTaxValue(

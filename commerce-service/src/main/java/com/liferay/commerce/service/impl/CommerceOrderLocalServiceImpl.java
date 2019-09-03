@@ -696,7 +696,8 @@ public class CommerceOrderLocalServiceImpl
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceOrder recalculatePrice(
-			long commerceOrderId, CommerceContext commerceContext)
+			long commerceOrderId, boolean unitPriceChanged,
+			CommerceContext commerceContext)
 		throws PortalException {
 
 		CommerceOrder commerceOrder = commerceOrderPersistence.findByPrimaryKey(
@@ -705,13 +706,20 @@ public class CommerceOrderLocalServiceImpl
 		for (CommerceOrderItem commerceOrderItem :
 				commerceOrder.getCommerceOrderItems()) {
 
+			CommerceMoney unitPrice = null;
+
+			if (unitPriceChanged) {
+				unitPrice = commerceOrderItem.getUnitPriceMoney();
+			}
+
 			commerceOrderItemLocalService.updateCommerceOrderItemPrice(
-				commerceOrderItem.getCommerceOrderItemId(), commerceContext);
+				commerceOrderItem.getCommerceOrderItemId(), unitPrice,
+				commerceContext);
 		}
 
 		CommerceOrderPrice commerceOrderPrice =
 			_commerceOrderPriceCalculation.getCommerceOrderPrice(
-				commerceOrder, false, commerceContext);
+				commerceOrder, false, unitPriceChanged, commerceContext);
 
 		CommerceMoney shippingValue = commerceOrderPrice.getShippingValue();
 		CommerceMoney subtotal = commerceOrderPrice.getSubtotal();
@@ -731,6 +739,14 @@ public class CommerceOrderLocalServiceImpl
 			commerceOrder, commerceOrderPrice.getTotalDiscountValue());
 
 		return commerceOrderPersistence.update(commerceOrder);
+	}
+
+	@Override
+	public CommerceOrder recalculatePrice(
+			long commerceOrderId, CommerceContext commerceContext)
+		throws PortalException {
+
+		return recalculatePrice(commerceOrderId, false, commerceContext);
 	}
 
 	@Override

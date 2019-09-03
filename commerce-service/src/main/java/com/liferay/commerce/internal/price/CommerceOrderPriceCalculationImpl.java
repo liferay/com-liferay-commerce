@@ -51,7 +51,7 @@ public class CommerceOrderPriceCalculationImpl
 	@Override
 	public CommerceOrderPrice getCommerceOrderPrice(
 			CommerceOrder commerceOrder, boolean secure,
-			CommerceContext commerceContext)
+			boolean unitPriceChanged, CommerceContext commerceContext)
 		throws PortalException {
 
 		if (secure && !_hasViewPricePermission(commerceContext)) {
@@ -63,14 +63,14 @@ public class CommerceOrderPriceCalculationImpl
 				commerceContext.getCommerceCurrency());
 		}
 
-		if (!commerceOrder.isOpen()) {
+		if (!commerceOrder.isOpen() && !unitPriceChanged) {
 			return _getCommerceOrderPriceFromOrder(commerceOrder);
 		}
 
 		CommerceMoney subtotalMoney = getSubtotal(
-			commerceOrder, secure, commerceContext);
+			commerceOrder, secure, unitPriceChanged, commerceContext);
 		CommerceMoney taxValue = getTaxValue(
-			commerceOrder, secure, commerceContext);
+			commerceOrder, secure, unitPriceChanged, commerceContext);
 
 		BigDecimal shippingAmount = commerceOrder.getShippingAmount();
 		BigDecimal subtotalAmount = subtotalMoney.getPrice();
@@ -138,6 +138,16 @@ public class CommerceOrderPriceCalculationImpl
 
 	@Override
 	public CommerceOrderPrice getCommerceOrderPrice(
+			CommerceOrder commerceOrder, boolean secure,
+			CommerceContext commerceContext)
+		throws PortalException {
+
+		return getCommerceOrderPrice(
+			commerceOrder, secure, false, commerceContext);
+	}
+
+	@Override
+	public CommerceOrderPrice getCommerceOrderPrice(
 			CommerceOrder commerceOrder, CommerceContext commerceContext)
 		throws PortalException {
 
@@ -147,7 +157,7 @@ public class CommerceOrderPriceCalculationImpl
 	@Override
 	public CommerceMoney getSubtotal(
 			CommerceOrder commerceOrder, boolean secure,
-			CommerceContext commerceContext)
+			boolean unitPriceChanged, CommerceContext commerceContext)
 		throws PortalException {
 
 		if (secure && !_hasViewPricePermission(commerceContext)) {
@@ -161,7 +171,7 @@ public class CommerceOrderPriceCalculationImpl
 				commerceContext.getCommerceCurrency(), subtotal);
 		}
 
-		if (!commerceOrder.isOpen()) {
+		if (!commerceOrder.isOpen() && !unitPriceChanged) {
 			return _commerceMoneyFactory.create(
 				commerceContext.getCommerceCurrency(),
 				commerceOrder.getSubtotal());
@@ -179,6 +189,15 @@ public class CommerceOrderPriceCalculationImpl
 
 	@Override
 	public CommerceMoney getSubtotal(
+			CommerceOrder commerceOrder, boolean secure,
+			CommerceContext commerceContext)
+		throws PortalException {
+
+		return getSubtotal(commerceOrder, secure, false, commerceContext);
+	}
+
+	@Override
+	public CommerceMoney getSubtotal(
 			CommerceOrder commerceOrder, CommerceContext commerceContext)
 		throws PortalException {
 
@@ -188,7 +207,7 @@ public class CommerceOrderPriceCalculationImpl
 	@Override
 	public CommerceMoney getTaxValue(
 			CommerceOrder commerceOrder, boolean secure,
-			CommerceContext commerceContext)
+			boolean unitPriceChanged, CommerceContext commerceContext)
 		throws PortalException {
 
 		if (secure && !_hasViewPricePermission(commerceContext)) {
@@ -200,7 +219,7 @@ public class CommerceOrderPriceCalculationImpl
 				commerceContext.getCommerceCurrency(), BigDecimal.ZERO);
 		}
 
-		if (!commerceOrder.isOpen()) {
+		if (!commerceOrder.isOpen() && !unitPriceChanged) {
 			return _commerceMoneyFactory.create(
 				commerceContext.getCommerceCurrency(),
 				commerceOrder.getTaxAmount());
@@ -208,6 +227,15 @@ public class CommerceOrderPriceCalculationImpl
 
 		return _commerceTaxCalculation.getTaxAmount(
 			commerceOrder, commerceContext);
+	}
+
+	@Override
+	public CommerceMoney getTaxValue(
+			CommerceOrder commerceOrder, boolean secure,
+			CommerceContext commerceContext)
+		throws PortalException {
+
+		return getTaxValue(commerceOrder, secure, false, commerceContext);
 	}
 
 	@Override

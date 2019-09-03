@@ -65,17 +65,19 @@ public class CommerceProductPriceCalculationImpl
 
 	@Override
 	public CommerceProductPrice getCommerceProductPrice(
-			long cpInstanceId, int quantity, boolean secure,
-			CommerceContext commerceContext)
+			CommerceMoney unitPrice, long cpInstanceId, int quantity,
+			boolean secure, CommerceContext commerceContext)
 		throws PortalException {
 
 		if (secure && !_hasViewPricePermission(commerceContext)) {
 			return null;
 		}
 
-		CommerceMoney unitPrice = getUnitPrice(
-			cpInstanceId, quantity, commerceContext.getCommerceCurrency(),
-			secure, commerceContext);
+		if (unitPrice == null) {
+			unitPrice = getUnitPrice(
+				cpInstanceId, quantity, commerceContext.getCommerceCurrency(),
+				secure, commerceContext);
+		}
 
 		CommerceMoney promoPrice = getPromoPrice(
 			cpInstanceId, quantity, commerceContext.getCommerceCurrency(),
@@ -117,6 +119,16 @@ public class CommerceProductPriceCalculationImpl
 				commerceContext.getCommerceCurrency(), finalPrice));
 
 		return commerceProductPrice;
+	}
+
+	@Override
+	public CommerceProductPrice getCommerceProductPrice(
+			long cpInstanceId, int quantity, boolean secure,
+			CommerceContext commerceContext)
+		throws PortalException {
+
+		return getCommerceProductPrice(
+			null, cpInstanceId, quantity, secure, commerceContext);
 	}
 
 	@Override
