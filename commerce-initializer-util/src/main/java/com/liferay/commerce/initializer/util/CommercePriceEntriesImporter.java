@@ -82,17 +82,14 @@ public class CommercePriceEntriesImporter {
 
 		String sku = jsonObject.getString("Sku");
 
-		String externalReferenceCode = StringBundler.concat(
-			String.valueOf(serviceContext.getScopeGroupId()), "_", sku);
-
 		CPInstance cpInstance =
 			_cpInstanceLocalService.fetchByExternalReferenceCode(
-				serviceContext.getCompanyId(), externalReferenceCode);
+				serviceContext.getCompanyId(),
+				FriendlyURLNormalizerUtil.normalize(sku));
 
 		if (cpInstance == null) {
 			throw new NoSuchCPInstanceException(
-				"No cpInstance found with externalReferenceCode " +
-					externalReferenceCode);
+				"No cpInstance found with sku " + sku);
 		}
 
 		CPDefinition cpDefinition = _cpDefinitionLocalService.fetchCPDefinition(
