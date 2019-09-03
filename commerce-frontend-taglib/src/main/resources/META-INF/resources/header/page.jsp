@@ -67,23 +67,22 @@ String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_header") 
 
 		<div class="commerce-header__actions-wrapper align-items-center d-flex">
 			<div class="commerce-header__actions px-3 d-none d-xl-flex border-right">
-				<%--<c:if test="<%= hasWorkflow %>">--%>
+				<c:if test="<%= false %>">
+					<% String assignedToWrapperId = randomNamespace + "assigned-to"; %>
 
-				<% String assignedToWrapperId = randomNamespace + "assigned-to"; %>
+					<div id="<%= assignedToWrapperId %>"></div>
 
-				<div id="<%= assignedToWrapperId %>"></div>
-
-				<aui:script require="commerce-frontend-react@1.0.0/js/assign_to/entry.es as AssignTo">
-					var assignTo = new AssignTo.default(
-						"<%= assignedToWrapperId %>",
-						"<%= assignedToWrapperId %>",
-						{
-							spritemap: "<%= spritemap %>",
-							currentAssignee: null,
-						}
-					);
-				</aui:script>
-				<%--</c:if>--%>
+					<aui:script require="commerce-frontend-react@1.0.0/js/assign_to/entry.es as AssignTo">
+						var assignTo = new AssignTo.default(
+							"<%= assignedToWrapperId %>",
+							"<%= assignedToWrapperId %>",
+							{
+								spritemap: "<%= spritemap %>",
+								currentAssignee: null,
+							}
+						);
+					</aui:script>
+				</c:if>
 
 				<c:if test="<%= Validator.isNotNull(headerButtonModels) %>">
 					<c:forEach items="<%= headerButtonModels %>" var="headerButtonModel">
