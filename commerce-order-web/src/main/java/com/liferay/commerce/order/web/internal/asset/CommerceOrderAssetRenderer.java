@@ -16,6 +16,7 @@ package com.liferay.commerce.order.web.internal.asset;
 
 import com.liferay.asset.kernel.model.BaseJSPAssetRenderer;
 import com.liferay.commerce.constants.CommerceOrderConstants;
+import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.web.internal.security.permission.resource.CommerceOrderPermission;
 import com.liferay.commerce.product.model.CommerceChannel;
@@ -29,9 +30,12 @@ import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.PortletProvider;
 import com.liferay.portal.kernel.portlet.PortletProviderUtil;
+import com.liferay.portal.kernel.portlet.PortletQName;
+import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.service.GroupLocalServiceUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.ResourceBundleLoader;
 
 import java.util.Locale;
@@ -128,12 +132,28 @@ public class CommerceOrderAssetRenderer
 
 		PortletURL portletURL = PortletProviderUtil.getPortletURL(
 			liferayPortletRequest, group, CommerceOrder.class.getName(),
-			PortletProvider.Action.EDIT);
+			PortletProvider.Action.VIEW);
 
-		portletURL.setParameter("mvcRenderCommandName", "editCommerceOrder");
+		String orderRenderCommand = "viewCommerceOrderDetails";
+
+		if (_commerceOrder.isOpen()) {
+			portletURL = PortletProviderUtil.getPortletURL(
+				liferayPortletRequest, group, CommerceOrder.class.getName(),
+				PortletProvider.Action.EDIT);
+
+			orderRenderCommand = "editCommerceOrder";
+		}
+
 		portletURL.setParameter(
-			"commerceOrderId",
+			"mvcRenderCommandName", orderRenderCommand);
+
+		portletURL.setParameter(
+		"commerceOrderId",
 			String.valueOf(_commerceOrder.getCommerceOrderId()));
+
+		portletURL.setParameter(
+			PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backURL",
+			PortalUtil.getCurrentURL(liferayPortletRequest));
 
 		return portletURL.toString();
 	}
