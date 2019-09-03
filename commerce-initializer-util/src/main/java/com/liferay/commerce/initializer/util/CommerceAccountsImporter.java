@@ -117,9 +117,19 @@ public class CommerceAccountsImporter {
 			String dependenciesPath, ServiceContext serviceContext)
 		throws IOException, PortalException {
 
+		String name = jsonObject.getString("Name");
+
+		CommerceAccount commerceAccount =
+			_commerceAccountLocalService.fetchCommerceAccountByReferenceCode(
+				serviceContext.getCompanyId(),
+				FriendlyURLNormalizerUtil.normalize(name));
+
+		if (commerceAccount != null) {
+			return;
+		}
+
 		String accountType = jsonObject.getString("AccountType");
 		String email = jsonObject.getString("Email");
-		String name = jsonObject.getString("Name");
 		String taxId = jsonObject.getString("TaxId");
 
 		// Add Commerce Account
@@ -131,11 +141,10 @@ public class CommerceAccountsImporter {
 				CommerceAccountConstants.ACCOUNT_TYPE_BUSINESS;
 		}
 
-		CommerceAccount commerceAccount =
-			_commerceAccountLocalService.upsertCommerceAccount(
-				name, CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID, false,
-				null, email, taxId, commerceAccountType, true, name,
-				serviceContext);
+		commerceAccount = _commerceAccountLocalService.addCommerceAccount(
+			name, CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID, email,
+			taxId, commerceAccountType, true,
+			FriendlyURLNormalizerUtil.normalize(name), serviceContext);
 
 		String twoLetterISOCode = jsonObject.getString("Country");
 
