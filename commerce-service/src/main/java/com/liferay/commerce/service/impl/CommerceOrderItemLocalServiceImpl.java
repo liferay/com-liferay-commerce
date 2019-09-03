@@ -134,7 +134,14 @@ public class CommerceOrderItemLocalServiceImpl
 		commerceOrderItem.setShippedQuantity(shippedQuantity);
 		commerceOrderItem.setJson(json);
 		commerceOrderItem.setUnitPrice(unitPrice.getPrice());
-		commerceOrderItem.setPromoPrice(promoPrice.getPrice());
+
+		BigDecimal promoPriceValue = BigDecimal.ZERO;
+
+		if (promoPrice != null) {
+			promoPriceValue = promoPrice.getPrice();
+		}
+
+		commerceOrderItem.setPromoPrice(promoPriceValue);
 		commerceOrderItem.setFinalPrice(finalPrice.getPrice());
 		commerceOrderItem.setNameMap(cpDefinition.getNameMap());
 		commerceOrderItem.setSku(cpInstance.getSku());
@@ -447,7 +454,14 @@ public class CommerceOrderItemLocalServiceImpl
 		commerceOrderItem.setQuantity(quantity);
 		commerceOrderItem.setJson(json);
 		commerceOrderItem.setUnitPrice(unitPrice.getPrice());
-		commerceOrderItem.setPromoPrice(promoPrice.getPrice());
+
+		BigDecimal promoPriceValue = BigDecimal.ZERO;
+
+		if (promoPrice != null) {
+			promoPriceValue = promoPrice.getPrice();
+		}
+
+		commerceOrderItem.setPromoPrice(promoPriceValue);
 		commerceOrderItem.setFinalPrice(finalPrice.getPrice());
 		commerceOrderItem.setExpandoBridgeAttributes(serviceContext);
 
@@ -527,7 +541,14 @@ public class CommerceOrderItemLocalServiceImpl
 		CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
 
 		commerceOrderItem.setUnitPrice(unitPrice.getPrice());
-		commerceOrderItem.setPromoPrice(promoPrice.getPrice());
+
+		BigDecimal promoPriceValue = BigDecimal.ZERO;
+
+		if (promoPrice != null) {
+			promoPriceValue = promoPrice.getPrice();
+		}
+
+		commerceOrderItem.setPromoPrice(promoPriceValue);
 		commerceOrderItem.setFinalPrice(finalPrice.getPrice());
 
 		_setCommerceOrderItemDiscountValue(
