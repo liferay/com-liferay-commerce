@@ -31,6 +31,8 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
+import java.math.BigDecimal;
+
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
@@ -149,9 +151,11 @@ public class EditCommerceOrderItemMVCActionCommand
 				commerceOrderItemId, quantity, commerceContext, serviceContext);
 		}
 		else {
-			_commerceOrderItemService.updateCommerceOrderItem(
-				commerceOrderItemId, quantity, commerceOrderItem.getJson(),
-				commerceContext, serviceContext);
+			BigDecimal price = (BigDecimal)ParamUtil.getNumber(
+				actionRequest, "price");
+
+			_commerceOrderItemService.updateCommerceOrderItemUnitPrice(
+				commerceOrderItemId, price);
 		}
 	}
 
