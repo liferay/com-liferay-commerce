@@ -18,8 +18,8 @@
 
 <%
 CommerceOrderEditDisplayContext commerceOrderEditDisplayContext = (CommerceOrderEditDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
-
 long commerceOrderId = commerceOrderEditDisplayContext.getCommerceOrderId();
+Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>
 
 <portlet:actionURL name="editCommerceOrderNote" var="editCommerceOrderNoteURL">
@@ -27,147 +27,182 @@ long commerceOrderId = commerceOrderEditDisplayContext.getCommerceOrderId();
 	<portlet:param name="screenNavigationCategoryKey" value="<%= CommerceOrderScreenNavigationConstants.CATEGORY_KEY_COMMERCE_ORDER_NOTES %>" />
 </portlet:actionURL>
 
-<aui:form action="<%= editCommerceOrderNoteURL %>" method="post" name="fm">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
-	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-	<aui:input name="commerceOrderId" type="hidden" value="<%= commerceOrderId %>" />
 
-	<liferay-ui:error exception="<%= CommerceOrderNoteContentException.class %>" message="please-enter-valid-content" />
+<div class="container">
+	<div class="row">
+		<div class="col-md-8">
+			<commerce-ui:panel
+				title="notes"
+			>
+				<aui:form action="<%= editCommerceOrderNoteURL %>" method="post" name="fm">
+					<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
+					<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+					<aui:input name="commerceOrderId" type="hidden" value="<%= commerceOrderId %>" />
 
-	<aui:model-context model="<%= CommerceOrderNote.class %>" />
+					<liferay-ui:error exception="<%= CommerceOrderNoteContentException.class %>" message="please-enter-valid-content" />
 
-	<aui:fieldset-group markupView="lexicon">
-		<div class="taglib-discussion">
-			<aui:fieldset cssClass="add-comment">
-				<div class="panel">
-					<div class="panel-body">
-						<div class="lfr-discussion-details position-absolute">
-							<liferay-ui:user-portrait
-								cssClass="user-icon-lg"
-								user="<%= user %>"
-							/>
-						</div>
+					<aui:model-context model="<%= CommerceOrderNote.class %>" />
 
-						<div class="lfr-discussion-body">
-							<aui:input autoFocus="<%= true %>" label="" name="content" placeholder="type-your-note-here" />
+					<% for (CommerceOrderNote commerceOrderNote : commerceOrderEditDisplayContext.getCommerceOrderNotes()) { %>
+						<article class="card-tab-group lfr-discussion">
+							<div class="panel border-bottom m-0">
+								<div class="panel-body px-0 py-4">
+									<div class="row">
+										<div class="col-auto">
+											<liferay-ui:user-portrait
+												cssClass="user-icon-lg"
+												userId="<%=commerceOrderNote.getUserId()%>"
+												userName="<%=commerceOrderNote.getUserName()%>"
+											/>
+										</div>
 
-							<aui:input helpMessage="restricted-help" label="private" name="restricted" type="toggle-switch" />
-
-							<aui:button-row>
-								<aui:button cssClass="btn-large btn-primary" type="submit" />
-							</aui:button-row>
-						</div>
-					</div>
-				</div>
-			</aui:fieldset>
-
-			<%
-			Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
-
-			for (CommerceOrderNote commerceOrderNote : commerceOrderEditDisplayContext.getCommerceOrderNotes()) {
-			%>
-
-				<article class="card-tab-group lfr-discussion">
-					<div class="card list-group-card panel">
-						<div class="panel-body">
-							<div class="card-row">
-								<div class="card-col-content">
-									<div class="lfr-discussion-details position-absolute">
-										<liferay-ui:user-portrait
-											cssClass="user-icon-lg"
-											userId="<%= commerceOrderNote.getUserId() %>"
-											userName="<%= HtmlUtil.escape(commerceOrderNote.getUserName()) %>"
-										/>
-									</div>
-
-									<div class="lfr-discussion-body">
-										<div class="lfr-discussion-message">
+										<div class="col">
 											<header class="lfr-discussion-message-author">
+												<aui:a
+													cssClass="author-link"
+													href="<%=
+														((commerceOrderNote.getUser() != null) && commerceOrderNote.getUser().isActive())
+															? commerceOrderNote.getUser().getDisplayURL(themeDisplay)
+															: null
+													%>"
+												>
+													<%=commerceOrderNote.getUserName() %>
 
-												<%
-												User noteUser = commerceOrderNote.getUser();
-												%>
-
-												<aui:a cssClass="author-link" href="<%= ((noteUser != null) && noteUser.isActive()) ? noteUser.getDisplayURL(themeDisplay) : null %>">
-													<%= HtmlUtil.escape(commerceOrderNote.getUserName()) %>
-
-													<c:if test="<%= commerceOrderNote.getUserId() == user.getUserId() %>">
+													<c:if test="<%=commerceOrderNote.getUserId() == user.getUserId() %>">
 														(<liferay-ui:message key="you" />)
 													</c:if>
 												</aui:a>
 
-												<c:if test="<%= commerceOrderNote.isRestricted() %>">
+												<c:if test="<%=commerceOrderNote.isRestricted() %>">
 													<aui:icon image="lock" markupView="lexicon" message="private" />
 												</c:if>
-
-												<%
-												Date createDate = commerceOrderNote.getCreateDate();
-
-												String createDateDescription = LanguageUtil.getTimeDescription(request, System.currentTimeMillis() - createDate.getTime(), true);
-												%>
-
-												<span class="small">
-													<liferay-ui:message arguments="<%= createDateDescription %>" key="x-ago" translateArguments="<%= false %>" />
-
-													<%
-													Date modifiedDate = commerceOrderNote.getModifiedDate();
-													%>
-
-													<c:if test="<%= createDate.before(modifiedDate) %>">
-														<strong onmouseover="Liferay.Portal.ToolTip.show(this, '<%= HtmlUtil.escapeJS(dateFormatDateTime.format(modifiedDate)) %>');">
-															- <liferay-ui:message key="edited" />
-														</strong>
-													</c:if>
-												</span>
 											</header>
 
 											<div class="lfr-discussion-message-body">
 												<%= HtmlUtil.escape(commerceOrderNote.getContent()) %>
 											</div>
 										</div>
+
+										<div class="col-auto d-flex align-items-center">
+											<span class="small">
+												<liferay-ui:message
+														arguments="<%=LanguageUtil.getTimeDescription(request, System.currentTimeMillis() - commerceOrderNote.getCreateDate().getTime(), true)%>"
+														key="x-ago"
+														translateArguments="<%= false %>"
+												/>
+
+												<c:if test="<%=commerceOrderNote.getCreateDate().before(commerceOrderNote.getModifiedDate()) %>">
+													<strong onmouseover="Liferay.Portal.ToolTip.show(this, '<%=HtmlUtil.escapeJS(dateFormatDateTime.format(commerceOrderNote.getModifiedDate()))%>');">
+														- <liferay-ui:message key="edited" />
+													</strong>
+												</c:if>
+											</span>
+										</div>
+
+										<div class="col-auto d-flex align-items-center">
+											<liferay-ui:icon-menu
+													direction="left"
+													icon="<%= StringPool.BLANK %>"
+													markupView="lexicon"
+													message="<%= StringPool.BLANK %>"
+													showWhenSingleIcon="<%= true %>"
+													triggerCssClass="btn btn-unstyled component-action text-secondary"
+											>
+												<portlet:renderURL var="editURL">
+													<portlet:param name="mvcRenderCommandName" value="editCommerceOrderNote" />
+													<portlet:param name="redirect" value="<%= currentURL %>" />
+													<portlet:param name="commerceOrderNoteId" value="<%= String.valueOf(commerceOrderNote.getCommerceOrderNoteId()) %>" />
+												</portlet:renderURL>
+
+												<liferay-ui:icon
+													message="edit"
+													url="<%= editURL %>"
+												/>
+
+												<portlet:actionURL name="editCommerceOrderNote" var="deleteURL">
+													<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+													<portlet:param name="redirect" value="<%= currentURL %>" />
+													<portlet:param name="commerceOrderNoteId" value="<%= String.valueOf(commerceOrderNote.getCommerceOrderNoteId()) %>" />
+												</portlet:actionURL>
+
+												<liferay-ui:icon-delete
+													label="<%= true %>"
+													url="<%= deleteURL %>"
+												/>
+											</liferay-ui:icon-menu>
+										</div>
 									</div>
 								</div>
-
-								<div class="card-col-field">
-									<liferay-ui:icon-menu
-										direction="left-side"
-										icon="<%= StringPool.BLANK %>"
-										markupView="lexicon"
-										message="<%= StringPool.BLANK %>"
-										showWhenSingleIcon="<%= true %>"
-									>
-										<portlet:renderURL var="editURL">
-											<portlet:param name="mvcRenderCommandName" value="editCommerceOrderNote" />
-											<portlet:param name="redirect" value="<%= currentURL %>" />
-											<portlet:param name="commerceOrderNoteId" value="<%= String.valueOf(commerceOrderNote.getCommerceOrderNoteId()) %>" />
-										</portlet:renderURL>
-
-										<liferay-ui:icon
-											message="edit"
-											url="<%= editURL %>"
+							</div>
+						</article>
+					<% } %>
+					<div class="taglib-discussion">
+						<aui:fieldset cssClass="add-comment">
+							<div class="panel">
+								<div class="panel-body px-0 py-4">
+									<div class="lfr-discussion-details">
+										<liferay-ui:user-portrait
+											cssClass="user-icon-lg"
+											user="<%= user %>"
 										/>
-
-										<portlet:actionURL name="editCommerceOrderNote" var="deleteURL">
-											<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-											<portlet:param name="redirect" value="<%= currentURL %>" />
-											<portlet:param name="commerceOrderNoteId" value="<%= String.valueOf(commerceOrderNote.getCommerceOrderNoteId()) %>" />
-										</portlet:actionURL>
-
-										<liferay-ui:icon-delete
-											label="<%= true %>"
-											url="<%= deleteURL %>"
-										/>
-									</liferay-ui:icon-menu>
+									</div>
+									<div class="lfr-discussion-body">
+										<aui:input autoFocus="<%= true %>" label="" name="content" placeholder="type-your-note-here" />
+										<aui:input helpMessage="restricted-help" label="private" name="restricted" type="toggle-switch" />
+										<aui:button-row>
+											<aui:button cssClass="btn-large btn-primary" type="submit" />
+										</aui:button-row>
+									</div>
 								</div>
 							</div>
-						</div>
+						</aui:fieldset>
 					</div>
-				</article>
-
-			<%
-			}
-			%>
-
+				</aui:form>
+			</commerce-ui:panel>
 		</div>
-	</aui:fieldset-group>
-</aui:form>
+		<div class="col-md-4">
+			<commerce-ui:panel
+					title="order-timeline"
+			>
+				<div class="card-text">PO Box 467 New York NY 10002</div>
+				<div class="card-text mt-3">
+					<clay:icon
+							symbol="geolocation"
+					/>
+					Standard delivery
+				</div>
+			</commerce-ui:panel>
+			<commerce-ui:panel
+				headerActionLabel="edit"
+				headerActionUrl="/placeholder/edit-summary"
+				title="order-summary"
+			>
+				<table class="table table-striped">
+					<tbody>
+						<tr>
+							<td>Item Subtotal</td>
+							<td>$2,208.50</td>
+						</tr>
+						<tr>
+							<td>Order Discount</td>
+							<td>$0.00</td>
+						</tr>
+						<tr>
+							<td>Promotion Codes</td>
+							<td>--</td>
+						</tr>
+						<tr>
+							<td>Estimated Tax</td>
+							<td>$0.00</td>
+						</tr>
+						<tr>
+							<td>Shipping & Handing</td>
+							<td>$50.00</td>
+						</tr>
+					</tbody>
+				</table>
+			</commerce-ui:panel>
+		</div>
+	</div>
+</div>
+
