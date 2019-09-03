@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import ClayForm from '@clayui/form';
+import { ClayRadio, ClayRadioGroup} from '@clayui/form';
 import getAppContext, { ContextProps } from '../Context';
 
 import { MultiFilterProps } from './definitions';
@@ -16,14 +16,14 @@ const RadioFilter: React.FunctionComponent<IProps> = (props: IProps) => {
 
     return (
         <>
-            <ClayForm.RadioGroup
+            <ClayRadioGroup
                 selectedValue={value || ''}
                 onSelectedValueChange={setValue}
             >
                 {props.items.map(item => (
-                    <ClayForm.Radio key={item.value} label={item.label} value={item.value} />
+                    <ClayRadio key={item.value} label={item.label} value={item.value} />
                 ))}
-            </ClayForm.RadioGroup>
+            </ClayRadioGroup>
             <div className="mt-2">
                 <ClayButton
                     className="btn-sm"

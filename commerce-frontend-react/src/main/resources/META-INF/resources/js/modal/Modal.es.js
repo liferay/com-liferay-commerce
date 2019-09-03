@@ -1,4 +1,5 @@
 import React from 'react';
+import ModalBase from './ModalBase.es';
 import ClayModal from '@clayui/modal';
 // import { Status, Size } from '@clayui/modal/src/types';
 import ClayButton from '@clayui/button';
@@ -30,19 +31,18 @@ class Modal extends React.Component {
         super(props);
         this.iframeRef = React.createRef();
         this.state = {
-            open: false,
-            submitActive: !!this.props.submitAvailableAtLoading,
+            visible: false,
+            submitActive: true,
             listenersInitialized: false,
         };
     }
 
     attachListenerToIframe(){
         const iframeDocument = this.iframeRef.current.contentDocument;
-
         if (
             (
-                this.state.showSubmit ||
-                this.state.submitLabel
+                this.props.showSubmit ||
+                this.props.submitLabel
             ) &&
             iframeDocument && 
             !this.state.listenersInitialized
@@ -74,14 +74,13 @@ class Modal extends React.Component {
 
     open() {
         this.setState({
-            open: true
+            visible: true
         });
     }
 
     close() {
         this.setState({
-            open: false,
-            submitActive: !!this.props.submitAvailableAtLoading,
+            visible: false,
             listenersInitialized: false,
         });
     }
@@ -93,121 +92,94 @@ class Modal extends React.Component {
 
             if(this.props.closeOnSubmit) {
                 close();
-            } else {
-                this.setState({
-                    submitActive: false
-                })
             }
         } catch (error) {
             throw new Error('Form not available')            
         }
     }
-    
 
     render() { 
         
         const { 
-            showDelete, 
-            deleteLabel, 
-            showSubmit, 
-            submitLabel, 
-            showCancel, 
-            cancelLabel,
-            size,
-            spritemap,
-            status,
             title,
             url,
-            children
+            showSubmit,
+            submitLabel,
+            showCancel,
+            cancelLabel,
+            spritemap,
+            size,
+            status
         } = this.props;
 
         return (
-            this.state.open && (
-                <ClayModal 
-					onClose={() => this.close()}
-					size={size}
-					spritemap={spritemap}
-					status={status}
-                >
-                    {
-                        onClose => (
-                            <>
-                                {
-                                    title && <ClayModal.Header>{title}</ClayModal.Header>
-                                }
-                                {
-                                    url 
-                                    ? (
-                                        <div className="modal-body modal-body-iframe">
-                                            <iframe 
-                                                src={url} 
-                                                title={url} 
-                                                ref={this.iframeRef} 
-                                                onLoad={() => this.attachListenerToIframe()}
-                                            />
-                                        </div>
-                                    )
-                                    : <ClayModal.Body>{children}</ClayModal.Body>
-                                }
-                                {
-                                    (
-                                        showDelete ||
-                                        deleteLabel ||
-                                        showSubmit ||
-                                        submitLabel ||
-                                        showCancel ||
-                                        cancelLabel 
-                                    ) && (
-                                        <ClayModal.Footer
-                                            first={
-                                                (        
-                                                    showDelete || deleteLabel
+            <ModalBase 
+                visible={this.state.visible}
+                onClose={() => this.close()}
+                spritemap={spritemap}
+                size={size}
+                status={status}
+            >
+                { onClose => (
+                    <>
+                        {
+                            title && <ClayModal.Header>{title}</ClayModal.Header>
+                        }
+                        <div className="modal-body modal-body-iframe">
+                            <iframe 
+                                src={url} 
+                                title={title} 
+                                ref={this.iframeRef} 
+                                onLoad={() => this.attachListenerToIframe()}
+                            />
+                        </div>
+                        {
+                            (
+                                showSubmit ||
+                                submitLabel ||
+                                showCancel ||
+                                cancelLabel 
+                            ) && (
+                                <ClayModal.Footer
+                                    last={
+                                        (
+                                            showSubmit || submitLabel ||
+                                            showCancel || cancelLabel 
+                                        ) && (
+                                            <ClayButton.Group spaced>
+                                                {(
+                                                    showCancel || cancelLabel
                                                 ) && (
-                                                    <ClayButton displayType="link">
-                                                        {deleteLabel || Liferay.Language.get('delete')}
+                                                    <ClayButton 
+                                                        displayType="secondary"
+                                                        onClick={onClose}
+                                                    >
+                                                        {cancelLabel || Liferay.Language.get('cancel')}
                                                     </ClayButton>
-                                                )
-                                            }
-                                            last={
-                                                (
-                                                    showSubmit || submitLabel ||
-                                                    showCancel || cancelLabel 
+                                                )}
+                                                {(
+                                                    showSubmit || submitLabel
                                                 ) && (
-                                                    <ClayButton.Group spaced>
-                                                        {(
-                                                            showCancel || cancelLabel
-                                                        ) && (
-                                                            <ClayButton 
-                                                                displayType="secondary"
-                                                                onClick={onClose}
-                                                            >
-                                                                {cancelLabel || Liferay.Language.get('cancel')}
-                                                            </ClayButton>
-                                                        )}
-                                                        {(
-                                                            showSubmit || submitLabel
-                                                        ) && (
-                                                            <ClayButton 
-                                                                displayType="primary"
-                                                                disabled={!this.state.submitActive}
-                                                                onClick={(e) => this._submit(e, onClose)}
-                                                            >
-                                                                {submitLabel || Liferay.Language.get('submit')}
-                                                            </ClayButton>
-                                                        )}
-                                                    </ClayButton.Group>
-                                                )
-                                            }
-                                        />
-                                    )
-                                }
-                            </>
-                        )
-                    }
-                </ClayModal>
-            )
+                                                    <ClayButton 
+                                                        displayType="primary"
+                                                        disabled={!this.state.submitActive}
+                                                        onClick={(e) => this._submit(e, onClose)}
+                                                    >
+                                                        {submitLabel || Liferay.Language.get('submit')}
+                                                    </ClayButton>
+                                                )}
+                                            </ClayButton.Group>
+                                        )
+                                    }
+                                />
+                            )
+                        }
+                    </>
+                )}
+            </ModalBase>
         )
     }
 }
 
 export default Modal;
+

@@ -1,11 +1,26 @@
 import React from 'react';
 import TextFilter from './Text';
 import NumberFilter from './Number';
-import DateRangeFilter from './DateRange';
 import DateFilter from './Date';
+import DateTimeFilter from './DateTime';
 import RadioFilter from './Radio';
 import SelectFilter from './Select';
 import CheckboxesFilter from './Checkboxes';
+
+export interface DateFormat {
+    year: number,
+    month: number,
+    day: number
+}
+
+export interface DateTimeFormat {
+    year: number,
+    month: number,
+    day: number,
+    hours: number,
+    minutes: number,
+    seconds: number
+}
 
 export interface BaseFilterProps extends React.HTMLAttributes<HTMLDivElement>{
     slug: string,
@@ -37,7 +52,12 @@ export interface TextFilterProps extends BaseFilterProps {
 
 export interface DateFilterProps extends BaseFilterProps {
     type: 'date',
-    value?: string
+    value?: DateFormat
+}
+
+export interface DateTimeFilterProps extends BaseFilterProps {
+    type: 'date-time',
+    value?: DateTimeFormat
 }
 
 export interface NumberFilterProps extends BaseFilterProps {
@@ -49,7 +69,7 @@ export interface NumberFilterProps extends BaseFilterProps {
 }
 
 export interface DateRangeFilterProps extends BaseFilterProps {
-    type: 'date-range'
+    type: 'date-time-range'
     value?: string
 }
 
@@ -73,9 +93,10 @@ export interface MultiFilterProps extends BaseFilterProps {
 
 export type FilterProps = 
     TextFilterProps | 
-    DateFilterProps | 
+    DateTimeFilterProps | 
     NumberFilterProps | 
-    DateRangeFilterProps | 
+    DateFilterProps | 
+    DateTimeFilterProps | 
     CheckboxesFilterProps | 
     MultiFilterProps
 
@@ -84,8 +105,8 @@ export default FilterProps;
 export const filterTypeToComponentMap = {
     'text' : TextFilter,
     'number' : NumberFilter,
-    'date-range' : DateRangeFilter,
     'date' : DateFilter,
+    'date-time' : DateTimeFilter,
     'radio' : RadioFilter,
     'select' : SelectFilter,
     'checkbox' : CheckboxesFilter

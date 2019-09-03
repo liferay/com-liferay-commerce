@@ -19,7 +19,7 @@ const ActiveFiltersBar: React.FunctionComponent = (props) => {
     return filtersActive.length ? (
         <nav className="tbar tbar-inline-md-down subnav-tbar subnav-tbar-primary subnav-tbar-light pt-3 pb-3 border-top">
             <div className="container-fluid container-fluid-max-xl">
-                <ul className="tbar-nav tbar-nav-wrap">
+                <ul className="tbar-nav">
                     <li className="tbar-item tbar-item-expand">
                         <div className="tbar-section">
                             {filtersActive.map((slug, i) => {
