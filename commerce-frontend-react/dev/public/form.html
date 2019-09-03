@@ -22,7 +22,7 @@
 	<noscript>You need to enable JavaScript to run this app.</noscript>
 
 	<div class="container mb-5">
-		<form id="my-custom-form" class="my-custom-form" action="/form-submitted.html">
+		<form id="my-custom-form" class="my-custom-form" action="/form-submitted.html" target="_top">
 			<div class="form-group-autofit">
 				<div class="form-group-item form-group-item-label form-group-item-shrink">
 					<label>Name</label>
@@ -56,6 +56,7 @@
 					<input class="form-control" id="formInlineAutofitCustomAddress2" placeholder="Address 2" type="text">
 				</div>
 			</div>
+			<button type="submit">Submit</button>
 		</form>
 	</div>
 
@@ -63,22 +64,37 @@
 
 	<script type="text/javascript">
 
+	window.onload = () => {
+
 		const form = document.querySelector('#my-custom-form');
 		const inputField = Array.from(form.querySelectorAll("input"))
 
-		inputField.forEach(e => {
-			e.addEventListener('keyup', checkInputValue);
-		})
+		// inputField.forEach(e => {
+		// 	e.addEventListener('keyup', checkInputValue);
+		// })
 		
-		function checkInputValue() {
+		function isFormValid() {
 			const noValue = inputField.find(e => !e.value);
 
-			if(noValue) {
-				form.dispatchEvent(new Event('submitUnavailable'));
-			} else {
-				form.dispatchEvent(new Event('submitAvailable'));
-			}
+			return !noValue
 		}
+
+		form.addEventListener('submit', (e) => {
+			if(!isFormValid()) {
+				e.preventDefault();
+			}
+		})
+
+		// form.onsubmit = (e) => {
+		// 	if(!isFormValid()) {
+		// 		e.preventDefault();
+		// 		window.history.back();
+		// 	}
+		// }
+
+
+		// form.submit()
+	}
 
 		
 	</script>
