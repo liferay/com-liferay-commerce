@@ -342,11 +342,25 @@ public class CPDefinitionsImporter {
 
 		// Commerce product definition
 
+		String externalReferenceCode = jsonObject.getString(
+			"ExternalReferenceCode");
+
+		CPDefinition cpDefinition =
+			_cpDefinitionLocalService.
+				fetchCPDefinitionByCProductExternalReferenceCode(
+					serviceContext.getCompanyId(), externalReferenceCode);
+
+		if (cpDefinition != null) {
+			_commerceChannelRelLocalService.addCommerceChannelRel(
+				CPDefinition.class.getName(), cpDefinition.getCPDefinitionId(),
+				commerceChannelId, serviceContext);
+
+			return cpDefinition;
+		}
+
 		String name = jsonObject.getString("Name");
 		String shortDescription = jsonObject.getString("ShortDescription");
 		String description = jsonObject.getString("Description");
-		String externalReferenceCode = jsonObject.getString(
-			"ExternalReferenceCode");
 		String sku = jsonObject.getString("Sku");
 		String taxCategory = jsonObject.getString("TaxCategory");
 
@@ -364,7 +378,7 @@ public class CPDefinitionsImporter {
 
 		serviceContext.setWorkflowAction(WorkflowConstants.STATUS_DRAFT);
 
-		CPDefinition cpDefinition = _addCPDefinition(
+		cpDefinition = _addCPDefinition(
 			catalogGroupId, name, shortDescription, description,
 			externalReferenceCode, sku, taxCategory, width, height, length,
 			weight, assetCategoryIds, assetTagNames, serviceContext);

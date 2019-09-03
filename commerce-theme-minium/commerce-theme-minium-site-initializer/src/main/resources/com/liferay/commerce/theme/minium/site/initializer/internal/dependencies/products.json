@@ -8,6 +8,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN93015",
 		"Height": 2,
 		"Images": [
 			"Minium_ProductImage_24.png"
@@ -57,6 +58,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN93016",
 		"Height": 2.5,
 		"Images": [
 			"Minium_ProductImage_103.png"
@@ -155,6 +157,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN93017",
 		"Height": 2.5,
 		"Images": [
 			"Minium_ProductImage_103.png"
@@ -206,6 +209,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN93027",
 		"Height": 8.7,
 		"Length": 6.2,
 		"ManufacturerPartNumber": "BB98334",
@@ -251,6 +255,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN93018",
 		"Height": 8.7,
 		"Images": [
 			"Minium_ProductImage_83.png"
@@ -309,6 +314,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN93019",
 		"Height": 8.7,
 		"Images": [
 			"Minium_ProductImage_83.png"
@@ -364,6 +370,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN93020",
 		"Height": 1.7,
 		"Images": [
 			"Minium_ProductImage_30.png"
@@ -416,6 +423,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN93021",
 		"Height": 5.3,
 		"Length": 9.4,
 		"ManufacturerPartNumber": "BB98326",
@@ -462,6 +470,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN93022",
 		"Height": 18,
 		"Length": 12,
 		"MinStockQuantity": 5,
@@ -558,6 +567,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN93023",
 		"Height": 18,
 		"Images": [
 			"Minium_ProductImage_42.png"
@@ -610,6 +620,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN93024",
 		"Height": 3.8,
 		"Images": [
 			"Minium_ProductImage_77.png",
@@ -666,6 +677,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN93025",
 		"Height": 3.8,
 		"Images": [
 			"Minium_ProductImage_77.png",
@@ -722,6 +734,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN93026",
 		"Height": 3.8,
 		"Images": [
 			"Minium_ProductImage_77.png",
@@ -775,6 +788,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN00673",
 		"Height": 1.7,
 		"Length": 10.2,
 		"ManufacturerPartNumber": "EX938051",
@@ -821,6 +835,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN00674",
 		"Height": 5.3,
 		"Length": 9.4,
 		"ManufacturerPartNumber": "EX938052",
@@ -867,6 +882,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN00675",
 		"Height": 18,
 		"Length": 12,
 		"ManufacturerPartNumber": "EX938053",
@@ -913,6 +929,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN00676",
 		"Height": 2.5,
 		"Images": [
 			"Minium_ProductImage_46.png"
@@ -958,6 +975,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN00677",
 		"Height": 2,
 		"Images": [
 			"Minium_ProductImage_33.png"
@@ -1007,6 +1025,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN00678",
 		"Height": 2.5,
 		"Length": 4,
 		"ManufacturerPartNumber": "EX938056",
@@ -1053,6 +1072,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN00679",
 		"Height": 8.7,
 		"Length": 6.2,
 		"ManufacturerPartNumber": "EX938057",
@@ -1099,6 +1119,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN00680",
 		"Height": 1.7,
 		"Length": 10.2,
 		"ManufacturerPartNumber": "EX938058",
@@ -1145,6 +1166,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN00681",
 		"Height": 5.3,
 		"Images": [
 			"Minium_ProductImage_94.png"
@@ -1194,6 +1216,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN00682",
 		"Height": 18,
 		"Length": 12,
 		"ManufacturerPartNumber": "EX938060",
@@ -1240,6 +1263,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN00683",
 		"Height": 1.7,
 		"Length": 10.2,
 		"ManufacturerPartNumber": "EX938061",
@@ -1286,6 +1310,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN77822",
 		"Height": 5.3,
 		"Length": 9.4,
 		"ManufacturerPartNumber": "ES98205",
@@ -1332,6 +1357,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN77823",
 		"Height": 18,
 		"Length": 12,
 		"ManufacturerPartNumber": "ES98206",
@@ -1378,6 +1404,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN77824",
 		"Height": 2.5,
 		"Length": 4,
 		"ManufacturerPartNumber": "ES98207",
@@ -1424,6 +1451,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN77825",
 		"Height": 2,
 		"Length": 7,
 		"ManufacturerPartNumber": "ES98208",
@@ -1470,6 +1498,7 @@
 		"Description": "Includes wastegate actuator. Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment.",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN19999",
 		"FilterAccountGroups": [
 			"North American Accounts"
 		],
@@ -1524,6 +1553,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN38794",
 		"Height": 1.7,
 		"Length": 10.2,
 		"ManufacturerPartNumber": "HM88893",
@@ -1570,6 +1600,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN38795",
 		"Height": 5.3,
 		"Length": 9.4,
 		"ManufacturerPartNumber": "HM88894",
@@ -1616,6 +1647,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN38796",
 		"Height": 18,
 		"Length": 12,
 		"ManufacturerPartNumber": "HM88895",
@@ -1658,6 +1690,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN38797",
 		"Height": 2.5,
 		"Images": [
 			"Minium_ProductImage_20.png"
@@ -1703,6 +1736,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN38798",
 		"Height": 2,
 		"Length": 7,
 		"ManufacturerPartNumber": "HM88897",
@@ -1745,6 +1779,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN38799",
 		"Height": 2.5,
 		"Images": [
 			"Minium_ProductImage_13.png",
@@ -1791,6 +1826,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN38800",
 		"Height": 8.7,
 		"Length": 6.2,
 		"ManufacturerPartNumber": "HM88899",
@@ -1837,6 +1873,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN38801",
 		"Height": 1.7,
 		"Length": 10.2,
 		"ManufacturerPartNumber": "HM88900",
@@ -1879,6 +1916,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN38802",
 		"Height": 5.3,
 		"Length": 9.4,
 		"ManufacturerPartNumber": "HM88901",
@@ -1921,6 +1959,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN38803",
 		"Height": 18,
 		"Length": 12,
 		"ManufacturerPartNumber": "HM88902",
@@ -1967,6 +2006,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN38804",
 		"Height": 1.7,
 		"Length": 10.2,
 		"ManufacturerPartNumber": "HM88903",
@@ -2013,6 +2053,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN38805",
 		"Height": 5.3,
 		"Images": [
 			"Minium_ProductImage_103.png"
@@ -2054,6 +2095,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN55853",
 		"Height": 18,
 		"Length": 12,
 		"ManufacturerPartNumber": "TT00024",
@@ -2096,6 +2138,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN55854",
 		"Height": 2.5,
 		"Images": [
 			"Minium_ProductImage_20.png"
@@ -2141,6 +2184,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN55855",
 		"Height": 2,
 		"Length": 7,
 		"ManufacturerPartNumber": "TT00026",
@@ -2179,6 +2223,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN55856",
 		"Height": 2.5,
 		"Images": [
 			"Minium_ProductImage_103.png"
@@ -2220,6 +2265,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN55857",
 		"Height": 1.7,
 		"Length": 10.2,
 		"ManufacturerPartNumber": "TT00028",
@@ -2266,6 +2312,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN55858",
 		"Height": 5.3,
 		"Length": 9.4,
 		"ManufacturerPartNumber": "TT00029",
@@ -2304,6 +2351,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN55859",
 		"Height": 18,
 		"Length": 12,
 		"ManufacturerPartNumber": "TT00030",
@@ -2350,6 +2398,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN55860",
 		"Height": 2.5,
 		"Length": 4,
 		"ManufacturerPartNumber": "TT00031",
@@ -2396,6 +2445,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "MIN55861",
 		"Height": 2,
 		"Images": [
 			"Minium_ProductImage_64.png"
