@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import React, { ReactEventHandler } from 'react';
+import React from 'react';
 
 // declare global {
 //     interface Window { 
