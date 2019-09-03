@@ -18,6 +18,7 @@
 
 <liferay-ui:error-header />
 
+<liferay-ui:error exception="<%= NoSuchAccountException.class %>" message="no-account-selected" />
 <liferay-ui:error exception="<%= NoSuchOrderException.class %>" message="the-order-could-not-be-found" />
 <liferay-ui:error exception="<%= NoSuchOrderNoteException.class %>" message="the-note-could-not-be-found" />
 
