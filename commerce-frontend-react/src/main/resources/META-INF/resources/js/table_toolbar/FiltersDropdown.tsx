@@ -44,8 +44,8 @@ const FiltersDropdown: React.FunctionComponent = () => {
             onActiveChange={setActive}
         >
             <ClayDropDown.Search 
-                onChange={(e) => setQuery(e.target.value.toLowerCase() || null)}
-                defaultValue={''}
+                onChange={(e) => setQuery(e.target.value)}
+                value={query}
             />
             <ClayDropDown.ItemList>
                 {visibleFilters.map((item: FilterProps, i: number) => (
@@ -53,7 +53,6 @@ const FiltersDropdown: React.FunctionComponent = () => {
                         className="mb-0"
                         collapsable
                         displayTitle={item.label}
-                        displayType="primary"
                         showCollapseIcon={true}
                         key={item.slug}
                     >
