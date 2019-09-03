@@ -19,6 +19,7 @@ import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.web.internal.security.permission.resource.CommerceOrderPermission;
 import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.model.CommerceChannelConstants;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -113,6 +114,14 @@ public class CommerceOrderAssetRenderer
 		CommerceChannel commerceChannel =
 			_commerceChannelLocalService.getCommerceChannelByOrderGroupId(
 				_commerceOrder.getGroupId());
+
+		String commerceChannelType = commerceChannel.getType();
+
+		if (!commerceChannelType.equals(
+			CommerceChannelConstants.CHANNEL_TYPE_SITE)) {
+
+			return null;
+		}
 
 		Group group = GroupLocalServiceUtil.getGroup(
 			commerceChannel.getSiteGroupId());
