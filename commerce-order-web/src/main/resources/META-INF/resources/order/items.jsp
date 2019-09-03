@@ -301,20 +301,12 @@
 
 		<div class="col-md-4">
 			<commerce-ui:panel
-				showMoreRefId="hidden-order-details"
+					showMoreUrl="/test"
 				title="recent-order-notes"
 			>
 				<div class="card-text">
 					Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Nulla porttitor accumsan tincidunt. Donec sollicitudin molestie malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque velit nisi, pretium ut lacinia in, elementum id enim.
 				</div>
-
-				<commerce-ui:panel-hidden-content
-					wrapperId="hidden-order-details"
-				>
-					<div class="card-text">
-						Sed porttitor lectus nibh. Nulla porttitor accumsan tincidunt. Curabitur aliquet quam id dui posuere blandit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus.
-					</div>
-				</commerce-ui:panel-hidden-content>
 			</commerce-ui:panel>
 
 			<commerce-ui:panel
