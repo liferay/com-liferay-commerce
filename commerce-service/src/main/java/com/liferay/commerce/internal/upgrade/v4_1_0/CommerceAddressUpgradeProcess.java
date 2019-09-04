@@ -54,10 +54,6 @@ public class CommerceAddressUpgradeProcess
 
 		PreparedStatement ps = null;
 
-		if (hasColumn(CommerceAddressModelImpl.TABLE_NAME, "groupId")) {
-			dropColumn(CommerceAddressImpl.TABLE_NAME, "groupId");
-		}
-
 		if (hasColumn(CommerceAddressModelImpl.TABLE_NAME, "defaultBilling")) {
 			ps = connection.prepareStatement(
 				"update CommerceAccount set defaultBillingAddressId = ? " +
@@ -65,8 +61,6 @@ public class CommerceAddressUpgradeProcess
 
 			updateCommerceAccountAndSetType(
 				ps, getCommerceAddressResultSet("defaultBilling"));
-
-			dropColumn(CommerceAddressImpl.TABLE_NAME, "defaultBilling");
 		}
 
 		if (hasColumn(CommerceAddressModelImpl.TABLE_NAME, "defaultShipping")) {
@@ -76,8 +70,6 @@ public class CommerceAddressUpgradeProcess
 
 			updateCommerceAccountAndSetType(
 				ps, getCommerceAddressResultSet("defaultShipping"));
-
-			dropColumn(CommerceAddressImpl.TABLE_NAME, "defaultShipping");
 		}
 	}
 
