@@ -76,6 +76,7 @@ public class CommerceCountryWrapper
 		attributes.put("priority", getPriority());
 		attributes.put("active", isActive());
 		attributes.put("lastPublishDate", getLastPublishDate());
+		attributes.put("channelFilterEnabled", isChannelFilterEnabled());
 
 		return attributes;
 	}
@@ -184,6 +185,13 @@ public class CommerceCountryWrapper
 		if (lastPublishDate != null) {
 			setLastPublishDate(lastPublishDate);
 		}
+
+		Boolean channelFilterEnabled = (Boolean)attributes.get(
+			"channelFilterEnabled");
+
+		if (channelFilterEnabled != null) {
+			setChannelFilterEnabled(channelFilterEnabled);
+		}
 	}
 
 	@Override
@@ -220,6 +228,16 @@ public class CommerceCountryWrapper
 	@Override
 	public boolean getBillingAllowed() {
 		return _commerceCountry.getBillingAllowed();
+	}
+
+	/**
+	 * Returns the channel filter enabled of this commerce country.
+	 *
+	 * @return the channel filter enabled of this commerce country
+	 */
+	@Override
+	public boolean getChannelFilterEnabled() {
+		return _commerceCountry.getChannelFilterEnabled();
 	}
 
 	/**
@@ -508,6 +526,16 @@ public class CommerceCountryWrapper
 		return _commerceCountry.isCachedModel();
 	}
 
+	/**
+	 * Returns <code>true</code> if this commerce country is channel filter enabled.
+	 *
+	 * @return <code>true</code> if this commerce country is channel filter enabled; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isChannelFilterEnabled() {
+		return _commerceCountry.isChannelFilterEnabled();
+	}
+
 	@Override
 	public boolean isEscapedModel() {
 		return _commerceCountry.isEscapedModel();
@@ -581,6 +609,16 @@ public class CommerceCountryWrapper
 	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_commerceCountry.setCachedModel(cachedModel);
+	}
+
+	/**
+	 * Sets whether this commerce country is channel filter enabled.
+	 *
+	 * @param channelFilterEnabled the channel filter enabled of this commerce country
+	 */
+	@Override
+	public void setChannelFilterEnabled(boolean channelFilterEnabled) {
+		_commerceCountry.setChannelFilterEnabled(channelFilterEnabled);
 	}
 
 	/**

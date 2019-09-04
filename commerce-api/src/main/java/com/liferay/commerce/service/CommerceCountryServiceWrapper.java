@@ -69,6 +69,15 @@ public class CommerceCountryServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceCountry>
+		getBillingCommerceCountriesByChannelId(
+			long commerceChannelId, int start, int end) {
+
+		return _commerceCountryService.getBillingCommerceCountriesByChannelId(
+			commerceChannelId, start, end);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.model.CommerceCountry>
 		getCommerceCountries(long companyId, boolean active) {
 
 		return _commerceCountryService.getCommerceCountries(companyId, active);
@@ -153,6 +162,15 @@ public class CommerceCountryServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceCountry>
+		getShippingCommerceCountriesByChannelId(
+			long commerceChannelId, int start, int end) {
+
+		return _commerceCountryService.getShippingCommerceCountriesByChannelId(
+			commerceChannelId, start, end);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.model.CommerceCountry>
 			getWarehouseCommerceCountries(long companyId, boolean all)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
@@ -192,6 +210,16 @@ public class CommerceCountryServiceWrapper
 			commerceCountryId, nameMap, billingAllowed, shippingAllowed,
 			twoLettersISOCode, threeLettersISOCode, numericISOCode,
 			subjectToVAT, priority, active, serviceContext);
+	}
+
+	@Override
+	public com.liferay.commerce.model.CommerceCountry
+			updateCommerceCountryChannelFilter(
+				long commerceCountryId, boolean enable)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceCountryService.updateCommerceCountryChannelFilter(
+			commerceCountryId, enable);
 	}
 
 	@Override

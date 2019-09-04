@@ -158,6 +158,9 @@ public class CommerceCountryPersistenceTest {
 
 		newCommerceCountry.setLastPublishDate(RandomTestUtil.nextDate());
 
+		newCommerceCountry.setChannelFilterEnabled(
+			RandomTestUtil.randomBoolean());
+
 		_commerceCountries.add(_persistence.update(newCommerceCountry));
 
 		CommerceCountry existingCommerceCountry = _persistence.findByPrimaryKey(
@@ -212,6 +215,9 @@ public class CommerceCountryPersistenceTest {
 			Time.getShortTimestamp(
 				existingCommerceCountry.getLastPublishDate()),
 			Time.getShortTimestamp(newCommerceCountry.getLastPublishDate()));
+		Assert.assertEquals(
+			existingCommerceCountry.isChannelFilterEnabled(),
+			newCommerceCountry.isChannelFilterEnabled());
 	}
 
 	@Test
@@ -314,7 +320,8 @@ public class CommerceCountryPersistenceTest {
 			true, "modifiedDate", true, "name", true, "billingAllowed", true,
 			"shippingAllowed", true, "twoLettersISOCode", true,
 			"threeLettersISOCode", true, "numericISOCode", true, "subjectToVAT",
-			true, "priority", true, "active", true, "lastPublishDate", true);
+			true, "priority", true, "active", true, "lastPublishDate", true,
+			"channelFilterEnabled", true);
 	}
 
 	@Test
@@ -601,6 +608,8 @@ public class CommerceCountryPersistenceTest {
 		commerceCountry.setActive(RandomTestUtil.randomBoolean());
 
 		commerceCountry.setLastPublishDate(RandomTestUtil.nextDate());
+
+		commerceCountry.setChannelFilterEnabled(RandomTestUtil.randomBoolean());
 
 		_commerceCountries.add(_persistence.update(commerceCountry));
 
