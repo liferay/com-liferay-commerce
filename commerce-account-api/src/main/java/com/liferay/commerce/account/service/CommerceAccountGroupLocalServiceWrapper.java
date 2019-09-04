@@ -343,6 +343,15 @@ public class CommerceAccountGroupLocalServiceWrapper
 	}
 
 	@Override
+	public java.util.List<Long> getCommerceAccountUserIdsFromAccountGroupIds(
+		long[] commerceAccountGroupIds, int start, int end) {
+
+		return _commerceAccountGroupLocalService.
+			getCommerceAccountUserIdsFromAccountGroupIds(
+				commerceAccountGroupIds, start, end);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery
 		getIndexableActionableDynamicQuery() {
 

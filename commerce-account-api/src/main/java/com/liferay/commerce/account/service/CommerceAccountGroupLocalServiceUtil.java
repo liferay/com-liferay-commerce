@@ -312,6 +312,14 @@ public class CommerceAccountGroupLocalServiceUtil {
 		return getService().getCommerceAccountGroupsCount(companyId);
 	}
 
+	public static java.util.List<Long>
+		getCommerceAccountUserIdsFromAccountGroupIds(
+			long[] commerceAccountGroupIds, int start, int end) {
+
+		return getService().getCommerceAccountUserIdsFromAccountGroupIds(
+			commerceAccountGroupIds, start, end);
+	}
+
 	public static
 		com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery
 			getIndexableActionableDynamicQuery() {
