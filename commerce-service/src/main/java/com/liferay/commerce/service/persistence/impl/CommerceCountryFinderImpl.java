@@ -16,6 +16,7 @@ package com.liferay.commerce.service.persistence.impl;
 
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.impl.CommerceCountryImpl;
+import com.liferay.commerce.product.model.impl.CommerceChannelRelImpl;
 import com.liferay.commerce.service.persistence.CommerceCountryFinder;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.dao.orm.custom.sql.CustomSQL;
@@ -24,6 +25,7 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
@@ -38,6 +40,9 @@ public class CommerceCountryFinderImpl
 	public static final String FIND_BY_COMMERCE_WAREHOUSES =
 		CommerceCountryFinder.class.getName() +
 			".findByCommerceInventoryWarehouses";
+
+	public static final String FIND_BY_COMMERCE_CHANNEL =
+		CommerceCountryFinder.class.getName() + ".findByCommerceChannel";
 
 	@Override
 	public List<CommerceCountry> findByCommerceInventoryWarehouses(
@@ -77,10 +82,71 @@ public class CommerceCountryFinderImpl
 		}
 	}
 
+	@Override
+	public List<CommerceCountry> findByCommerceChannel(
+		long commerceChannelId, boolean shippingAllowed, boolean billingAllowed,
+		int start, int end) {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = _customSQL.get(getClass(), FIND_BY_COMMERCE_CHANNEL);
+
+			if (billingAllowed) {
+				sql = StringUtil.replace(sql, _BILLING_SQL, StringPool.BLANK);
+			}
+			else {
+				sql = StringUtil.replace(
+					sql, _BILLING_SQL, _BILLING_ALLOWED_SQL);
+			}
+
+			if (shippingAllowed) {
+				sql = StringUtil.replace(sql, _SHIPPING_SQL, StringPool.BLANK);
+			}
+			else {
+				sql = StringUtil.replace(
+					sql, _SHIPPING_SQL, _SHIPPING_ALLOWED_SQL);
+			}
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			q.addEntity("CommerceCountry", CommerceCountryImpl.class);
+			q.addEntity("CommerceChannelRel", CommerceChannelRelImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(
+				ClassNameLocalServiceUtil.getClassNameId(
+					CommerceCountry.class));
+			qPos.add(commerceChannelId);
+
+			return (List<CommerceCountry>)QueryUtil.list(
+				q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	private static final String _ACTIVE_SQL =
 		"AND (CIWarehouse.active_ = true)";
 
 	private static final String _ALL_SQL = "[$ALL$]";
+
+	private static final String _BILLING_ALLOWED_SQL =
+		"AND (CommerceCountry.billingAllowed = true)";
+
+	private static final String _BILLING_SQL = "[$BILLING]";
+
+	private static final String _SHIPPING_ALLOWED_SQL =
+		"AND (CommerceCountry.shippingAllowed = true)";
+
+	private static final String _SHIPPING_SQL = "[$SHIPPING$]";
 
 	@ServiceReference(type = CustomSQL.class)
 	private CustomSQL _customSQL;
