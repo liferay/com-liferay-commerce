@@ -93,8 +93,8 @@ public class CommerceOrderItemModelImpl
 		{"CProductId", Types.BIGINT}, {"CPInstanceId", Types.BIGINT},
 		{"quantity", Types.INTEGER}, {"shippedQuantity", Types.INTEGER},
 		{"json", Types.CLOB}, {"name", Types.VARCHAR}, {"sku", Types.VARCHAR},
-		{"unitPrice", Types.DECIMAL}, {"discountAmount", Types.DECIMAL},
-		{"finalPrice", Types.DECIMAL},
+		{"unitPrice", Types.DECIMAL}, {"promoPrice", Types.DECIMAL},
+		{"discountAmount", Types.DECIMAL}, {"finalPrice", Types.DECIMAL},
 		{"discountPercentageLevel1", Types.DECIMAL},
 		{"discountPercentageLevel2", Types.DECIMAL},
 		{"discountPercentageLevel3", Types.DECIMAL},
@@ -126,6 +126,7 @@ public class CommerceOrderItemModelImpl
 		TABLE_COLUMNS_MAP.put("name", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("sku", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("unitPrice", Types.DECIMAL);
+		TABLE_COLUMNS_MAP.put("promoPrice", Types.DECIMAL);
 		TABLE_COLUMNS_MAP.put("discountAmount", Types.DECIMAL);
 		TABLE_COLUMNS_MAP.put("finalPrice", Types.DECIMAL);
 		TABLE_COLUMNS_MAP.put("discountPercentageLevel1", Types.DECIMAL);
@@ -141,7 +142,7 @@ public class CommerceOrderItemModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CommerceOrderItem (externalReferenceCode VARCHAR(75) null,commerceOrderItemId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceOrderId LONG,CProductId LONG,CPInstanceId LONG,quantity INTEGER,shippedQuantity INTEGER,json TEXT null,name STRING null,sku VARCHAR(75) null,unitPrice DECIMAL(30, 16) null,discountAmount DECIMAL(30, 16) null,finalPrice DECIMAL(30, 16) null,discountPercentageLevel1 DECIMAL(30, 16) null,discountPercentageLevel2 DECIMAL(30, 16) null,discountPercentageLevel3 DECIMAL(30, 16) null,discountPercentageLevel4 DECIMAL(30, 16) null,subscription BOOLEAN,deliveryGroup VARCHAR(75) null,shippingAddressId LONG,printedNote VARCHAR(75) null,requestedDeliveryDate DATE null,bookedQuantityId LONG)";
+		"create table CommerceOrderItem (externalReferenceCode VARCHAR(75) null,commerceOrderItemId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceOrderId LONG,CProductId LONG,CPInstanceId LONG,quantity INTEGER,shippedQuantity INTEGER,json TEXT null,name STRING null,sku VARCHAR(75) null,unitPrice DECIMAL(30, 16) null,promoPrice DECIMAL(30, 16) null,discountAmount DECIMAL(30, 16) null,finalPrice DECIMAL(30, 16) null,discountPercentageLevel1 DECIMAL(30, 16) null,discountPercentageLevel2 DECIMAL(30, 16) null,discountPercentageLevel3 DECIMAL(30, 16) null,discountPercentageLevel4 DECIMAL(30, 16) null,subscription BOOLEAN,deliveryGroup VARCHAR(75) null,shippingAddressId LONG,printedNote VARCHAR(75) null,requestedDeliveryDate DATE null,bookedQuantityId LONG)";
 
 	public static final String TABLE_SQL_DROP = "drop table CommerceOrderItem";
 
@@ -216,6 +217,7 @@ public class CommerceOrderItemModelImpl
 		model.setName(soapModel.getName());
 		model.setSku(soapModel.getSku());
 		model.setUnitPrice(soapModel.getUnitPrice());
+		model.setPromoPrice(soapModel.getPromoPrice());
 		model.setDiscountAmount(soapModel.getDiscountAmount());
 		model.setFinalPrice(soapModel.getFinalPrice());
 		model.setDiscountPercentageLevel1(
@@ -769,6 +771,28 @@ public class CommerceOrderItemModelImpl
 					CommerceOrderItem commerceOrderItem, Object unitPrice) {
 
 					commerceOrderItem.setUnitPrice((BigDecimal)unitPrice);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"promoPrice",
+			new Function<CommerceOrderItem, Object>() {
+
+				@Override
+				public Object apply(CommerceOrderItem commerceOrderItem) {
+					return commerceOrderItem.getPromoPrice();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"promoPrice",
+			new BiConsumer<CommerceOrderItem, Object>() {
+
+				@Override
+				public void accept(
+					CommerceOrderItem commerceOrderItem, Object promoPrice) {
+
+					commerceOrderItem.setPromoPrice((BigDecimal)promoPrice);
 				}
 
 			});
@@ -1442,6 +1466,17 @@ public class CommerceOrderItemModelImpl
 
 	@JSON
 	@Override
+	public BigDecimal getPromoPrice() {
+		return _promoPrice;
+	}
+
+	@Override
+	public void setPromoPrice(BigDecimal promoPrice) {
+		_promoPrice = promoPrice;
+	}
+
+	@JSON
+	@Override
 	public BigDecimal getDiscountAmount() {
 		return _discountAmount;
 	}
@@ -1729,6 +1764,7 @@ public class CommerceOrderItemModelImpl
 		commerceOrderItemImpl.setName(getName());
 		commerceOrderItemImpl.setSku(getSku());
 		commerceOrderItemImpl.setUnitPrice(getUnitPrice());
+		commerceOrderItemImpl.setPromoPrice(getPromoPrice());
 		commerceOrderItemImpl.setDiscountAmount(getDiscountAmount());
 		commerceOrderItemImpl.setFinalPrice(getFinalPrice());
 		commerceOrderItemImpl.setDiscountPercentageLevel1(
@@ -1928,6 +1964,8 @@ public class CommerceOrderItemModelImpl
 
 		commerceOrderItemCacheModel.unitPrice = getUnitPrice();
 
+		commerceOrderItemCacheModel.promoPrice = getPromoPrice();
+
 		commerceOrderItemCacheModel.discountAmount = getDiscountAmount();
 
 		commerceOrderItemCacheModel.finalPrice = getFinalPrice();
@@ -2077,6 +2115,7 @@ public class CommerceOrderItemModelImpl
 	private String _nameCurrentLanguageId;
 	private String _sku;
 	private BigDecimal _unitPrice;
+	private BigDecimal _promoPrice;
 	private BigDecimal _discountAmount;
 	private BigDecimal _finalPrice;
 	private BigDecimal _discountPercentageLevel1;

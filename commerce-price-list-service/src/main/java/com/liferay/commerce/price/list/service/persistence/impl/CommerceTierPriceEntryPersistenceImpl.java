@@ -2771,7 +2771,7 @@ public class CommerceTierPriceEntryPersistenceImpl
 		msg.append("commercePriceEntryId=");
 		msg.append(commercePriceEntryId);
 
-		msg.append(", minQuantity=");
+		msg.append(", minQuantity<=");
 		msg.append(minQuantity);
 
 		msg.append("}");
@@ -2831,7 +2831,7 @@ public class CommerceTierPriceEntryPersistenceImpl
 		msg.append("commercePriceEntryId=");
 		msg.append(commercePriceEntryId);
 
-		msg.append(", minQuantity=");
+		msg.append(", minQuantity<=");
 		msg.append(minQuantity);
 
 		msg.append("}");

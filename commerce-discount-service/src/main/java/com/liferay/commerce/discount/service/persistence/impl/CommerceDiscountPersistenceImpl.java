@@ -4281,7 +4281,7 @@ public class CommerceDiscountPersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("displayDate=");
+		msg.append("displayDate<");
 		msg.append(displayDate);
 
 		msg.append(", status=");
@@ -4341,7 +4341,7 @@ public class CommerceDiscountPersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("displayDate=");
+		msg.append("displayDate<");
 		msg.append(displayDate);
 
 		msg.append(", status=");
@@ -5299,7 +5299,7 @@ public class CommerceDiscountPersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("expirationDate=");
+		msg.append("expirationDate<");
 		msg.append(expirationDate);
 
 		msg.append(", status=");
@@ -5359,7 +5359,7 @@ public class CommerceDiscountPersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("expirationDate=");
+		msg.append("expirationDate<");
 		msg.append(expirationDate);
 
 		msg.append(", status=");
