@@ -16,7 +16,6 @@ package com.liferay.commerce.service.persistence.impl;
 
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.impl.CommerceCountryImpl;
-import com.liferay.commerce.product.model.impl.CommerceChannelRelImpl;
 import com.liferay.commerce.service.persistence.CommerceCountryFinder;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.dao.orm.custom.sql.CustomSQL;
@@ -113,7 +112,6 @@ public class CommerceCountryFinderImpl
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
 			q.addEntity("CommerceCountry", CommerceCountryImpl.class);
-			q.addEntity("CommerceChannelRel", CommerceChannelRelImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
