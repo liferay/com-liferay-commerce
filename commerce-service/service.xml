@@ -60,19 +60,13 @@
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
-		<finder name="C_C_C" return-type="Collection">
-			<finder-column name="companyId" />
-			<finder-column name="classNameId" />
-			<finder-column name="classPK" />
-		</finder>
-		<finder name="C_C_C_C" return-type="Collection">
-			<finder-column name="companyId" />
-			<finder-column name="classNameId" />
-			<finder-column name="classPK" />
-			<finder-column name="type" />
-		</finder>
 		<finder name="G_C_C" return-type="Collection">
 			<finder-column name="groupId" />
+			<finder-column name="classNameId" />
+			<finder-column name="classPK" />
+		</finder>
+		<finder name="C_C_C" return-type="Collection">
+			<finder-column name="companyId" />
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
@@ -87,6 +81,12 @@
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 			<finder-column name="defaultShipping" />
+		</finder>
+		<finder name="C_C_C_C" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="classNameId" />
+			<finder-column name="classPK" />
+			<finder-column name="type" />
 		</finder>
 	</entity>
 	<entity local-service="true" name="CommerceAddressRestriction" remote-service="true">
