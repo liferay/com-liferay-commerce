@@ -84,12 +84,12 @@ public class CommerceAccountModelImpl
 		{"logoId", Types.BIGINT}, {"email", Types.VARCHAR},
 		{"taxId", Types.VARCHAR}, {"type_", Types.INTEGER},
 		{"active_", Types.BOOLEAN}, {"displayDate", Types.TIMESTAMP},
+		{"defaultBillingAddressId", Types.BIGINT},
+		{"defaultShippingAddressId", Types.BIGINT},
 		{"expirationDate", Types.TIMESTAMP},
 		{"lastPublishDate", Types.TIMESTAMP}, {"status", Types.INTEGER},
 		{"statusByUserId", Types.BIGINT}, {"statusByUserName", Types.VARCHAR},
-		{"statusDate", Types.TIMESTAMP},
-		{"defaultBillingAddressId", Types.BIGINT},
-		{"defaultShippingAddressId", Types.BIGINT}
+		{"statusDate", Types.TIMESTAMP}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
@@ -111,18 +111,18 @@ public class CommerceAccountModelImpl
 		TABLE_COLUMNS_MAP.put("type_", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("active_", Types.BOOLEAN);
 		TABLE_COLUMNS_MAP.put("displayDate", Types.TIMESTAMP);
+		TABLE_COLUMNS_MAP.put("defaultBillingAddressId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("defaultShippingAddressId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("expirationDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("lastPublishDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("status", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("statusByUserId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("statusByUserName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("statusDate", Types.TIMESTAMP);
-		TABLE_COLUMNS_MAP.put("defaultBillingAddressId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("defaultShippingAddressId", Types.BIGINT);
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CommerceAccount (externalReferenceCode VARCHAR(75) null,commerceAccountId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentCommerceAccountId LONG,name VARCHAR(255) null,logoId LONG,email VARCHAR(75) null,taxId VARCHAR(75) null,type_ INTEGER,active_ BOOLEAN,displayDate DATE null,expirationDate DATE null,lastPublishDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null,defaultBillingAddressId LONG,defaultShippingAddressId LONG)";
+		"create table CommerceAccount (externalReferenceCode VARCHAR(75) null,commerceAccountId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentCommerceAccountId LONG,name VARCHAR(255) null,logoId LONG,email VARCHAR(75) null,taxId VARCHAR(75) null,type_ INTEGER,active_ BOOLEAN,displayDate DATE null,defaultBillingAddressId LONG,defaultShippingAddressId LONG,expirationDate DATE null,lastPublishDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 
 	public static final String TABLE_SQL_DROP = "drop table CommerceAccount";
 
@@ -192,16 +192,16 @@ public class CommerceAccountModelImpl
 		model.setType(soapModel.getType());
 		model.setActive(soapModel.isActive());
 		model.setDisplayDate(soapModel.getDisplayDate());
+		model.setDefaultBillingAddressId(
+			soapModel.getDefaultBillingAddressId());
+		model.setDefaultShippingAddressId(
+			soapModel.getDefaultShippingAddressId());
 		model.setExpirationDate(soapModel.getExpirationDate());
 		model.setLastPublishDate(soapModel.getLastPublishDate());
 		model.setStatus(soapModel.getStatus());
 		model.setStatusByUserId(soapModel.getStatusByUserId());
 		model.setStatusByUserName(soapModel.getStatusByUserName());
 		model.setStatusDate(soapModel.getStatusDate());
-		model.setDefaultBillingAddressId(
-			soapModel.getDefaultBillingAddressId());
-		model.setDefaultShippingAddressId(
-			soapModel.getDefaultShippingAddressId());
 
 		return model;
 	}
@@ -695,6 +695,54 @@ public class CommerceAccountModelImpl
 
 			});
 		attributeGetterFunctions.put(
+			"defaultBillingAddressId",
+			new Function<CommerceAccount, Object>() {
+
+				@Override
+				public Object apply(CommerceAccount commerceAccount) {
+					return commerceAccount.getDefaultBillingAddressId();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"defaultBillingAddressId",
+			new BiConsumer<CommerceAccount, Object>() {
+
+				@Override
+				public void accept(
+					CommerceAccount commerceAccount,
+					Object defaultBillingAddressId) {
+
+					commerceAccount.setDefaultBillingAddressId(
+						(Long)defaultBillingAddressId);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"defaultShippingAddressId",
+			new Function<CommerceAccount, Object>() {
+
+				@Override
+				public Object apply(CommerceAccount commerceAccount) {
+					return commerceAccount.getDefaultShippingAddressId();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"defaultShippingAddressId",
+			new BiConsumer<CommerceAccount, Object>() {
+
+				@Override
+				public void accept(
+					CommerceAccount commerceAccount,
+					Object defaultShippingAddressId) {
+
+					commerceAccount.setDefaultShippingAddressId(
+						(Long)defaultShippingAddressId);
+				}
+
+			});
+		attributeGetterFunctions.put(
 			"expirationDate",
 			new Function<CommerceAccount, Object>() {
 
@@ -824,54 +872,6 @@ public class CommerceAccountModelImpl
 					CommerceAccount commerceAccount, Object statusDate) {
 
 					commerceAccount.setStatusDate((Date)statusDate);
-				}
-
-			});
-		attributeGetterFunctions.put(
-			"defaultBillingAddressId",
-			new Function<CommerceAccount, Object>() {
-
-				@Override
-				public Object apply(CommerceAccount commerceAccount) {
-					return commerceAccount.getDefaultBillingAddressId();
-				}
-
-			});
-		attributeSetterBiConsumers.put(
-			"defaultBillingAddressId",
-			new BiConsumer<CommerceAccount, Object>() {
-
-				@Override
-				public void accept(
-					CommerceAccount commerceAccount,
-					Object defaultBillingAddressId) {
-
-					commerceAccount.setDefaultBillingAddressId(
-						(Long)defaultBillingAddressId);
-				}
-
-			});
-		attributeGetterFunctions.put(
-			"defaultShippingAddressId",
-			new Function<CommerceAccount, Object>() {
-
-				@Override
-				public Object apply(CommerceAccount commerceAccount) {
-					return commerceAccount.getDefaultShippingAddressId();
-				}
-
-			});
-		attributeSetterBiConsumers.put(
-			"defaultShippingAddressId",
-			new BiConsumer<CommerceAccount, Object>() {
-
-				@Override
-				public void accept(
-					CommerceAccount commerceAccount,
-					Object defaultShippingAddressId) {
-
-					commerceAccount.setDefaultShippingAddressId(
-						(Long)defaultShippingAddressId);
 				}
 
 			});
@@ -1150,6 +1150,28 @@ public class CommerceAccountModelImpl
 
 	@JSON
 	@Override
+	public long getDefaultBillingAddressId() {
+		return _defaultBillingAddressId;
+	}
+
+	@Override
+	public void setDefaultBillingAddressId(long defaultBillingAddressId) {
+		_defaultBillingAddressId = defaultBillingAddressId;
+	}
+
+	@JSON
+	@Override
+	public long getDefaultShippingAddressId() {
+		return _defaultShippingAddressId;
+	}
+
+	@Override
+	public void setDefaultShippingAddressId(long defaultShippingAddressId) {
+		_defaultShippingAddressId = defaultShippingAddressId;
+	}
+
+	@JSON
+	@Override
 	public Date getExpirationDate() {
 		return _expirationDate;
 	}
@@ -1233,28 +1255,6 @@ public class CommerceAccountModelImpl
 	@Override
 	public void setStatusDate(Date statusDate) {
 		_statusDate = statusDate;
-	}
-
-	@JSON
-	@Override
-	public long getDefaultBillingAddressId() {
-		return _defaultBillingAddressId;
-	}
-
-	@Override
-	public void setDefaultBillingAddressId(long defaultBillingAddressId) {
-		_defaultBillingAddressId = defaultBillingAddressId;
-	}
-
-	@JSON
-	@Override
-	public long getDefaultShippingAddressId() {
-		return _defaultShippingAddressId;
-	}
-
-	@Override
-	public void setDefaultShippingAddressId(long defaultShippingAddressId) {
-		_defaultShippingAddressId = defaultShippingAddressId;
 	}
 
 	@Override
@@ -1390,16 +1390,16 @@ public class CommerceAccountModelImpl
 		commerceAccountImpl.setType(getType());
 		commerceAccountImpl.setActive(isActive());
 		commerceAccountImpl.setDisplayDate(getDisplayDate());
+		commerceAccountImpl.setDefaultBillingAddressId(
+			getDefaultBillingAddressId());
+		commerceAccountImpl.setDefaultShippingAddressId(
+			getDefaultShippingAddressId());
 		commerceAccountImpl.setExpirationDate(getExpirationDate());
 		commerceAccountImpl.setLastPublishDate(getLastPublishDate());
 		commerceAccountImpl.setStatus(getStatus());
 		commerceAccountImpl.setStatusByUserId(getStatusByUserId());
 		commerceAccountImpl.setStatusByUserName(getStatusByUserName());
 		commerceAccountImpl.setStatusDate(getStatusDate());
-		commerceAccountImpl.setDefaultBillingAddressId(
-			getDefaultBillingAddressId());
-		commerceAccountImpl.setDefaultShippingAddressId(
-			getDefaultShippingAddressId());
 
 		commerceAccountImpl.resetOriginalValues();
 
@@ -1573,6 +1573,12 @@ public class CommerceAccountModelImpl
 			commerceAccountCacheModel.displayDate = Long.MIN_VALUE;
 		}
 
+		commerceAccountCacheModel.defaultBillingAddressId =
+			getDefaultBillingAddressId();
+
+		commerceAccountCacheModel.defaultShippingAddressId =
+			getDefaultShippingAddressId();
+
 		Date expirationDate = getExpirationDate();
 
 		if (expirationDate != null) {
@@ -1612,12 +1618,6 @@ public class CommerceAccountModelImpl
 		else {
 			commerceAccountCacheModel.statusDate = Long.MIN_VALUE;
 		}
-
-		commerceAccountCacheModel.defaultBillingAddressId =
-			getDefaultBillingAddressId();
-
-		commerceAccountCacheModel.defaultShippingAddressId =
-			getDefaultShippingAddressId();
 
 		return commerceAccountCacheModel;
 	}
@@ -1715,14 +1715,14 @@ public class CommerceAccountModelImpl
 	private boolean _setOriginalType;
 	private boolean _active;
 	private Date _displayDate;
+	private long _defaultBillingAddressId;
+	private long _defaultShippingAddressId;
 	private Date _expirationDate;
 	private Date _lastPublishDate;
 	private int _status;
 	private long _statusByUserId;
 	private String _statusByUserName;
 	private Date _statusDate;
-	private long _defaultBillingAddressId;
-	private long _defaultShippingAddressId;
 	private long _columnBitmask;
 	private CommerceAccount _escapedModel;
 

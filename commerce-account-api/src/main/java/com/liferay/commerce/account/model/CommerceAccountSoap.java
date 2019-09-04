@@ -50,16 +50,16 @@ public class CommerceAccountSoap implements Serializable {
 		soapModel.setType(model.getType());
 		soapModel.setActive(model.isActive());
 		soapModel.setDisplayDate(model.getDisplayDate());
+		soapModel.setDefaultBillingAddressId(
+			model.getDefaultBillingAddressId());
+		soapModel.setDefaultShippingAddressId(
+			model.getDefaultShippingAddressId());
 		soapModel.setExpirationDate(model.getExpirationDate());
 		soapModel.setLastPublishDate(model.getLastPublishDate());
 		soapModel.setStatus(model.getStatus());
 		soapModel.setStatusByUserId(model.getStatusByUserId());
 		soapModel.setStatusByUserName(model.getStatusByUserName());
 		soapModel.setStatusDate(model.getStatusDate());
-		soapModel.setDefaultBillingAddressId(
-			model.getDefaultBillingAddressId());
-		soapModel.setDefaultShippingAddressId(
-			model.getDefaultShippingAddressId());
 
 		return soapModel;
 	}
@@ -243,6 +243,22 @@ public class CommerceAccountSoap implements Serializable {
 		_displayDate = displayDate;
 	}
 
+	public long getDefaultBillingAddressId() {
+		return _defaultBillingAddressId;
+	}
+
+	public void setDefaultBillingAddressId(long defaultBillingAddressId) {
+		_defaultBillingAddressId = defaultBillingAddressId;
+	}
+
+	public long getDefaultShippingAddressId() {
+		return _defaultShippingAddressId;
+	}
+
+	public void setDefaultShippingAddressId(long defaultShippingAddressId) {
+		_defaultShippingAddressId = defaultShippingAddressId;
+	}
+
 	public Date getExpirationDate() {
 		return _expirationDate;
 	}
@@ -291,22 +307,6 @@ public class CommerceAccountSoap implements Serializable {
 		_statusDate = statusDate;
 	}
 
-	public long getDefaultBillingAddressId() {
-		return _defaultBillingAddressId;
-	}
-
-	public void setDefaultBillingAddressId(long defaultBillingAddressId) {
-		_defaultBillingAddressId = defaultBillingAddressId;
-	}
-
-	public long getDefaultShippingAddressId() {
-		return _defaultShippingAddressId;
-	}
-
-	public void setDefaultShippingAddressId(long defaultShippingAddressId) {
-		_defaultShippingAddressId = defaultShippingAddressId;
-	}
-
 	private String _externalReferenceCode;
 	private long _commerceAccountId;
 	private long _companyId;
@@ -322,13 +322,13 @@ public class CommerceAccountSoap implements Serializable {
 	private int _type;
 	private boolean _active;
 	private Date _displayDate;
+	private long _defaultBillingAddressId;
+	private long _defaultShippingAddressId;
 	private Date _expirationDate;
 	private Date _lastPublishDate;
 	private int _status;
 	private long _statusByUserId;
 	private String _statusByUserName;
 	private Date _statusDate;
-	private long _defaultBillingAddressId;
-	private long _defaultShippingAddressId;
 
 }

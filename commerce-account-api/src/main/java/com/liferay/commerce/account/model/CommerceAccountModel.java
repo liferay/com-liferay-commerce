@@ -314,6 +314,34 @@ public interface CommerceAccountModel
 	public void setDisplayDate(Date displayDate);
 
 	/**
+	 * Returns the default billing address ID of this commerce account.
+	 *
+	 * @return the default billing address ID of this commerce account
+	 */
+	public long getDefaultBillingAddressId();
+
+	/**
+	 * Sets the default billing address ID of this commerce account.
+	 *
+	 * @param defaultBillingAddressId the default billing address ID of this commerce account
+	 */
+	public void setDefaultBillingAddressId(long defaultBillingAddressId);
+
+	/**
+	 * Returns the default shipping address ID of this commerce account.
+	 *
+	 * @return the default shipping address ID of this commerce account
+	 */
+	public long getDefaultShippingAddressId();
+
+	/**
+	 * Sets the default shipping address ID of this commerce account.
+	 *
+	 * @param defaultShippingAddressId the default shipping address ID of this commerce account
+	 */
+	public void setDefaultShippingAddressId(long defaultShippingAddressId);
+
+	/**
 	 * Returns the expiration date of this commerce account.
 	 *
 	 * @return the expiration date of this commerce account
@@ -421,34 +449,6 @@ public interface CommerceAccountModel
 	 */
 	@Override
 	public void setStatusDate(Date statusDate);
-
-	/**
-	 * Returns the default billing address ID of this commerce account.
-	 *
-	 * @return the default billing address ID of this commerce account
-	 */
-	public long getDefaultBillingAddressId();
-
-	/**
-	 * Sets the default billing address ID of this commerce account.
-	 *
-	 * @param defaultBillingAddressId the default billing address ID of this commerce account
-	 */
-	public void setDefaultBillingAddressId(long defaultBillingAddressId);
-
-	/**
-	 * Returns the default shipping address ID of this commerce account.
-	 *
-	 * @return the default shipping address ID of this commerce account
-	 */
-	public long getDefaultShippingAddressId();
-
-	/**
-	 * Sets the default shipping address ID of this commerce account.
-	 *
-	 * @param defaultShippingAddressId the default shipping address ID of this commerce account
-	 */
-	public void setDefaultShippingAddressId(long defaultShippingAddressId);
 
 	/**
 	 * Returns <code>true</code> if this commerce account is approved.

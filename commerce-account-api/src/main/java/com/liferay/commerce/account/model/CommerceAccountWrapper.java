@@ -73,15 +73,15 @@ public class CommerceAccountWrapper
 		attributes.put("type", getType());
 		attributes.put("active", isActive());
 		attributes.put("displayDate", getDisplayDate());
+		attributes.put("defaultBillingAddressId", getDefaultBillingAddressId());
+		attributes.put(
+			"defaultShippingAddressId", getDefaultShippingAddressId());
 		attributes.put("expirationDate", getExpirationDate());
 		attributes.put("lastPublishDate", getLastPublishDate());
 		attributes.put("status", getStatus());
 		attributes.put("statusByUserId", getStatusByUserId());
 		attributes.put("statusByUserName", getStatusByUserName());
 		attributes.put("statusDate", getStatusDate());
-		attributes.put("defaultBillingAddressId", getDefaultBillingAddressId());
-		attributes.put(
-			"defaultShippingAddressId", getDefaultShippingAddressId());
 
 		return attributes;
 	}
@@ -180,6 +180,20 @@ public class CommerceAccountWrapper
 			setDisplayDate(displayDate);
 		}
 
+		Long defaultBillingAddressId = (Long)attributes.get(
+			"defaultBillingAddressId");
+
+		if (defaultBillingAddressId != null) {
+			setDefaultBillingAddressId(defaultBillingAddressId);
+		}
+
+		Long defaultShippingAddressId = (Long)attributes.get(
+			"defaultShippingAddressId");
+
+		if (defaultShippingAddressId != null) {
+			setDefaultShippingAddressId(defaultShippingAddressId);
+		}
+
 		Date expirationDate = (Date)attributes.get("expirationDate");
 
 		if (expirationDate != null) {
@@ -214,20 +228,6 @@ public class CommerceAccountWrapper
 
 		if (statusDate != null) {
 			setStatusDate(statusDate);
-		}
-
-		Long defaultBillingAddressId = (Long)attributes.get(
-			"defaultBillingAddressId");
-
-		if (defaultBillingAddressId != null) {
-			setDefaultBillingAddressId(defaultBillingAddressId);
-		}
-
-		Long defaultShippingAddressId = (Long)attributes.get(
-			"defaultShippingAddressId");
-
-		if (defaultShippingAddressId != null) {
-			setDefaultShippingAddressId(defaultShippingAddressId);
 		}
 	}
 
