@@ -98,6 +98,7 @@ public class CommerceCountryLocalServiceImpl
 		commerceCountry.setSubjectToVAT(subjectToVAT);
 		commerceCountry.setPriority(priority);
 		commerceCountry.setActive(active);
+		commerceCountry.setChannelFilterEnabled(false);
 
 		commerceCountryPersistence.update(commerceCountry);
 
@@ -172,6 +173,14 @@ public class CommerceCountryLocalServiceImpl
 	}
 
 	@Override
+	public List<CommerceCountry> getBillingCommerceCountriesByChannelId(
+		long commerceChannelId, int start, int end) {
+
+		return commerceCountryFinder.findByCommerceChannel(
+			commerceChannelId, false, true, start, end);
+	}
+
+	@Override
 	public List<CommerceCountry> getCommerceCountries(
 		long companyId, boolean active) {
 
@@ -221,6 +230,14 @@ public class CommerceCountryLocalServiceImpl
 
 		return commerceCountryPersistence.findByC_S_A(
 			companyId, shippingAllowed, active);
+	}
+
+	@Override
+	public List<CommerceCountry> getShippingCommerceCountriesByChannelId(
+		long commerceChannelId, int start, int end) {
+
+		return commerceCountryFinder.findByCommerceChannel(
+			commerceChannelId, true, false, start, end);
 	}
 
 	@Override
@@ -386,6 +403,20 @@ public class CommerceCountryLocalServiceImpl
 		commerceCountryPersistence.update(commerceCountry);
 
 		return commerceCountry;
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CommerceCountry updateCommerceCountryChannelFilter(
+			long commerceCountryId, boolean enable)
+		throws PortalException {
+
+		CommerceCountry commerceCountry =
+			commerceCountryLocalService.getCommerceCountry(commerceCountryId);
+
+		commerceCountry.setChannelFilterEnabled(enable);
+
+		return commerceCountryPersistence.update(commerceCountry);
 	}
 
 	protected List<CommerceCountry> getCommerceCountries(Hits hits)
