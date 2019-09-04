@@ -104,15 +104,12 @@
 			SELECT
 				CommerceAccountUserRel.commerceAccountUserId
 			FROM
-				CommerceAccountGroup
-			LEFT JOIN
+				CommerceAccountUserRel
+			INNER JOIN
 				CAccountGroupCAccountRel ON
-					CAccountGroupCAccountRel.commerceAccountGroupId = CommerceAccountGroup.commerceAccountGroupId
-			LEFT JOIN
-				CommerceAccountUserRel ON
-					CommerceAccountUserRel.commerceAccountId = CAccountGroupCAccountRel.commerceAccountId
+					CAccountGroupCAccountRel.commerceAccountId = CommerceAccountUserRel.commerceAccountId
 			WHERE
-				CommerceAccountGroup.commerceAccountGroupId IN ([$ACCOUNT_GROUP_IDS$])
+				CAccountGroupCAccountRel.commerceAccountGroupId IN ([$ACCOUNT_GROUP_IDS$])
 		]]>
 	</sql>
 </custom-sql>
