@@ -53,6 +53,7 @@ public class CommerceOrderItemSoap implements Serializable {
 		soapModel.setName(model.getName());
 		soapModel.setSku(model.getSku());
 		soapModel.setUnitPrice(model.getUnitPrice());
+		soapModel.setPromoPrice(model.getPromoPrice());
 		soapModel.setDiscountAmount(model.getDiscountAmount());
 		soapModel.setFinalPrice(model.getFinalPrice());
 		soapModel.setDiscountPercentageLevel1(
@@ -266,6 +267,14 @@ public class CommerceOrderItemSoap implements Serializable {
 		_unitPrice = unitPrice;
 	}
 
+	public BigDecimal getPromoPrice() {
+		return _promoPrice;
+	}
+
+	public void setPromoPrice(BigDecimal promoPrice) {
+		_promoPrice = promoPrice;
+	}
+
 	public BigDecimal getDiscountAmount() {
 		return _discountAmount;
 	}
@@ -391,6 +400,7 @@ public class CommerceOrderItemSoap implements Serializable {
 	private String _name;
 	private String _sku;
 	private BigDecimal _unitPrice;
+	private BigDecimal _promoPrice;
 	private BigDecimal _discountAmount;
 	private BigDecimal _finalPrice;
 	private BigDecimal _discountPercentageLevel1;

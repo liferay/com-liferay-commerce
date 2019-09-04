@@ -161,6 +161,9 @@ public class CommerceOrderItemPersistenceTest {
 		newCommerceOrderItem.setUnitPrice(
 			new BigDecimal(RandomTestUtil.nextDouble()));
 
+		newCommerceOrderItem.setPromoPrice(
+			new BigDecimal(RandomTestUtil.nextDouble()));
+
 		newCommerceOrderItem.setDiscountAmount(
 			new BigDecimal(RandomTestUtil.nextDouble()));
 
@@ -247,6 +250,9 @@ public class CommerceOrderItemPersistenceTest {
 		Assert.assertEquals(
 			existingCommerceOrderItem.getUnitPrice(),
 			newCommerceOrderItem.getUnitPrice());
+		Assert.assertEquals(
+			existingCommerceOrderItem.getPromoPrice(),
+			newCommerceOrderItem.getPromoPrice());
 		Assert.assertEquals(
 			existingCommerceOrderItem.getDiscountAmount(),
 			newCommerceOrderItem.getDiscountAmount());
@@ -363,12 +369,13 @@ public class CommerceOrderItemPersistenceTest {
 			"userId", true, "userName", true, "createDate", true,
 			"modifiedDate", true, "commerceOrderId", true, "CProductId", true,
 			"CPInstanceId", true, "quantity", true, "shippedQuantity", true,
-			"name", true, "sku", true, "unitPrice", true, "discountAmount",
-			true, "finalPrice", true, "discountPercentageLevel1", true,
-			"discountPercentageLevel2", true, "discountPercentageLevel3", true,
-			"discountPercentageLevel4", true, "subscription", true,
-			"deliveryGroup", true, "shippingAddressId", true, "printedNote",
-			true, "requestedDeliveryDate", true, "bookedQuantityId", true);
+			"name", true, "sku", true, "unitPrice", true, "promoPrice", true,
+			"discountAmount", true, "finalPrice", true,
+			"discountPercentageLevel1", true, "discountPercentageLevel2", true,
+			"discountPercentageLevel3", true, "discountPercentageLevel4", true,
+			"subscription", true, "deliveryGroup", true, "shippingAddressId",
+			true, "printedNote", true, "requestedDeliveryDate", true,
+			"bookedQuantityId", true);
 	}
 
 	@Test
@@ -650,6 +657,9 @@ public class CommerceOrderItemPersistenceTest {
 		commerceOrderItem.setSku(RandomTestUtil.randomString());
 
 		commerceOrderItem.setUnitPrice(
+			new BigDecimal(RandomTestUtil.nextDouble()));
+
+		commerceOrderItem.setPromoPrice(
 			new BigDecimal(RandomTestUtil.nextDouble()));
 
 		commerceOrderItem.setDiscountAmount(

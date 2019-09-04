@@ -3314,7 +3314,7 @@ public class CommerceWishListPersistenceImpl
 		msg.append("userId=");
 		msg.append(userId);
 
-		msg.append(", createDate=");
+		msg.append(", createDate<");
 		msg.append(createDate);
 
 		msg.append("}");
@@ -3374,7 +3374,7 @@ public class CommerceWishListPersistenceImpl
 		msg.append("userId=");
 		msg.append(userId);
 
-		msg.append(", createDate=");
+		msg.append(", createDate<");
 		msg.append(createDate);
 
 		msg.append("}");
