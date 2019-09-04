@@ -73,6 +73,15 @@ public class CommerceCountryServiceImpl extends CommerceCountryServiceBaseImpl {
 	}
 
 	@Override
+	public List<CommerceCountry> getBillingCommerceCountriesByChannelId(
+		long commerceChannelId, int start, int end) {
+
+		return commerceCountryLocalService.
+			getBillingCommerceCountriesByChannelId(
+				commerceChannelId, start, end);
+	}
+
+	@Override
 	public List<CommerceCountry> getCommerceCountries(
 		long companyId, boolean active) {
 
@@ -165,6 +174,15 @@ public class CommerceCountryServiceImpl extends CommerceCountryServiceBaseImpl {
 	}
 
 	@Override
+	public List<CommerceCountry> getShippingCommerceCountriesByChannelId(
+		long commerceChannelId, int start, int end) {
+
+		return commerceCountryLocalService.
+			getShippingCommerceCountriesByChannelId(
+				commerceChannelId, start, end);
+	}
+
+	@Override
 	public List<CommerceCountry> getWarehouseCommerceCountries(
 			long companyId, boolean all)
 		throws PortalException {
@@ -218,6 +236,19 @@ public class CommerceCountryServiceImpl extends CommerceCountryServiceBaseImpl {
 			commerceCountryId, nameMap, billingAllowed, shippingAllowed,
 			twoLettersISOCode, threeLettersISOCode, numericISOCode,
 			subjectToVAT, priority, active, serviceContext);
+	}
+
+	@Override
+	public CommerceCountry updateCommerceCountryChannelFilter(
+			long commerceCountryId, boolean enable)
+		throws PortalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommerceActionKeys.MANAGE_COMMERCE_COUNTRIES);
+
+		return commerceCountryLocalService.updateCommerceCountryChannelFilter(
+			commerceCountryId, enable);
 	}
 
 }
