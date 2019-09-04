@@ -61,6 +61,15 @@ public class TestCommerceContext implements CommerceContext {
 	}
 
 	@Override
+	public long getCommerceChannelId() throws PortalException {
+		if (_commerceChannel == null) {
+			return 0;
+		}
+
+		return _commerceChannel.getCommerceChannelId();
+	}
+
+	@Override
 	public CommerceCurrency getCommerceCurrency() {
 		return _commerceCurrency;
 	}

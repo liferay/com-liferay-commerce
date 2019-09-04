@@ -33,6 +33,8 @@ public interface CommerceContext extends Serializable {
 
 	public long getCommerceChannelGroupId() throws PortalException;
 
+	public long getCommerceChannelId() throws PortalException;
+
 	public CommerceCurrency getCommerceCurrency() throws PortalException;
 
 	public CommerceOrder getCommerceOrder() throws PortalException;
