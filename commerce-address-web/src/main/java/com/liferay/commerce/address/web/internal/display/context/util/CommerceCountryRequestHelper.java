@@ -12,23 +12,20 @@
  * details.
  */
 
-package com.liferay.commerce.address.web.internal.servlet.taglib.ui;
+package com.liferay.commerce.address.web.internal.display.context.util;
+
+import com.liferay.portal.kernel.display.context.util.BaseRequestHelper;
+import com.liferay.portal.kernel.util.PortalUtil;
+
+import javax.portlet.RenderRequest;
 
 /**
- * @author Alessio Antonio Rendina
+ * @author Marco Leo
  */
-public class CommerceCountryScreenNavigationConstants {
+public class CommerceCountryRequestHelper extends BaseRequestHelper {
 
-	public static final String CATEGORY_KEY_COMMERCE_COUNTRY_DETAILS =
-		"details";
-
-	public static final String CATEGORY_KEY_COMMERCE_COUNTRY_CHANNELS =
-		"channels";
-
-	public static final String CATEGORY_KEY_COMMERCE_COUNTRY_REGIONS =
-		"regions";
-
-	public static final String SCREEN_NAVIGATION_KEY_COMMERCE_COUNTRY_GENERAL =
-		"commerce.country.general";
+	public CommerceCountryRequestHelper(RenderRequest renderRequest) {
+		super(PortalUtil.getHttpServletRequest(renderRequest));
+	}
 
 }
