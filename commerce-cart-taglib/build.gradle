@@ -6,7 +6,6 @@ dependencies {
 	compileInclude group: "com.fasterxml.jackson.core", name: "jackson-databind", version: "2.9.9.1"
 
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.currency.api", version: "2.0.0"
-	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.service", version: "5.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.taglib", version: "1.1.0"
 	compileOnly group: "com.liferay.portal", name: "com.liferay.util.taglib", version: "3.0.0"
 	compileOnly group: "com.liferay.portal", name: "release.portal.api", version: "7.1.1"
@@ -23,4 +22,5 @@ dependencies {
 	compileOnly project(":apps:commerce:commerce-api")
 	compileOnly project(":apps:commerce:commerce-product-api")
 	compileOnly project(":apps:commerce:commerce-product-service")
+	compileOnly project(":apps:commerce:commerce-service")
 }
