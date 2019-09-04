@@ -17,6 +17,8 @@
 <%@ include file="/init.jsp" %>
 
 <%
+CommerceContext commerceContext = (CommerceContext)request.getAttribute(CommerceWebKeys.COMMERCE_CONTEXT);
+
 String redirect = ParamUtil.getString(request, "redirect");
 
 String backURL = ParamUtil.getString(request, "backURL", redirect);
@@ -124,11 +126,11 @@ CommerceAccount commerceAccount = commerceAddressDisplayContext.getCommerceAccou
 				select: '<portlet:namespace />commerceCountryId',
 				selectData: function(callback) {
 					Liferay.Service(
-						'/commerce.commercecountry/get-billing-commerce-countries',
+						'/commerce.commercecountry/get-billing-commerce-countries-by-channel-id',
 						{
-							companyId: <%= company.getCompanyId() %>,
-							billingAllowed: true,
-							active: true
+							commerceChannelId: <%= commerceContext.getCommerceChannelId() %>,
+							start: -1,
+							end: -1
 						},
 						callback
 					);
