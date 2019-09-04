@@ -25,6 +25,8 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
 <%@ page import="com.liferay.commerce.constants.CommercePortletKeys" %><%@
 page import="com.liferay.commerce.constants.CommerceShipmentConstants" %><%@
+page import="com.liferay.commerce.constants.CommerceWebKeys" %><%@
+page import="com.liferay.commerce.context.CommerceContext" %><%@
 page import="com.liferay.commerce.exception.CommerceAddressCityException" %><%@
 page import="com.liferay.commerce.exception.CommerceAddressCountryException" %><%@
 page import="com.liferay.commerce.exception.CommerceAddressStreetException" %><%@

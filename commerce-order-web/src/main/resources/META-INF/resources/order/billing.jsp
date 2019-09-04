@@ -17,6 +17,8 @@
 <%@ include file="/init.jsp" %>
 
 <%
+CommerceContext commerceContext = (CommerceContext)request.getAttribute(CommerceWebKeys.COMMERCE_CONTEXT);
+
 CommerceOrderEditDisplayContext commerceOrderEditDisplayContext = (CommerceOrderEditDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
 CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder();
@@ -147,11 +149,11 @@ String commercePaymentMethodKey = BeanParamUtil.getString(commerceOrder, request
 				select: '<portlet:namespace />commerceCountryId',
 				selectData: function(callback) {
 					Liferay.Service(
-						'/commerce.commercecountry/get-billing-commerce-countries',
+						'/commerce.commercecountry/get-billing-commerce-countries-by-channel-id',
 						{
-							companyId: <%= company.getCompanyId() %>,
-							billingAllowed: true,
-							active: true
+							commerceChannelId: <%= commerceContext.getCommerceChannelId() %>,
+							start: -1,
+							end: -1
 						},
 						callback
 					);
