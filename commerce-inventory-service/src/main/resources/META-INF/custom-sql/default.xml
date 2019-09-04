@@ -56,7 +56,7 @@
 	<sql id="com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseItemFinder.countStockQuantityByC_S">
 		<![CDATA[
 			SELECT
-				SUM(CIWarehouseItem.quantity) AS SUM_VALUE
+				SUM(CIWarehouseItem.quantity - CIWarehouseItem.reservedQuantity)  AS SUM_VALUE
 			FROM
 				CIWarehouseItem
 			WHERE
@@ -67,7 +67,7 @@
 	<sql id="com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseItemFinder.countStockQuantityByC_G_S">
 		<![CDATA[
 			SELECT
-				SUM(CIWarehouseItem.quantity) AS SUM_VALUE
+				SUM(CIWarehouseItem.quantity - CIWarehouseItem.reservedQuantity) AS SUM_VALUE
 			FROM
 				CIWarehouseItem
 			INNER JOIN
