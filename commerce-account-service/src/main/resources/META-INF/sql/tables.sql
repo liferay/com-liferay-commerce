@@ -26,14 +26,14 @@ create table CommerceAccount (
 	type_ INTEGER,
 	active_ BOOLEAN,
 	displayDate DATE null,
+	defaultBillingAddressId LONG,
+	defaultShippingAddressId LONG,
 	expirationDate DATE null,
 	lastPublishDate DATE null,
 	status INTEGER,
 	statusByUserId LONG,
 	statusByUserName VARCHAR(75) null,
-	statusDate DATE null,
-	defaultBillingAddressId LONG,
-	defaultShippingAddressId LONG
+	statusDate DATE null
 );
 
 create table CommerceAccountGroup (
