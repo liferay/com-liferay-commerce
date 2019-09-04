@@ -22,7 +22,7 @@
 	<noscript>You need to enable JavaScript to run this app.</noscript>
 
 	<div class="container mb-5">
-		<form id="my-custom-form" class="my-custom-form" action="/form-submitted.html" target="_top">
+		<form id="my-custom-form" class="my-custom-form" action="/form-submitted.html">
 			<div class="form-group-autofit">
 				<div class="form-group-item form-group-item-label form-group-item-shrink">
 					<label>Name</label>
@@ -33,29 +33,8 @@
 						<div class="form-text">Your first name.</div>
 					</div>
 				</div>
-				<div class="form-group-item">
-					<input aria-label="Middle Name" class="form-control" placeholder="Middle" type="text">
-				</div>
-				<div class="form-group-item">
-					<input aria-label="Last Name" class="form-control" placeholder="Last" type="text">
-				</div>
 			</div>
-			<div class="form-group-autofit">
-				<div class="form-group-item form-group-item-label form-group-item-shrink">
-					<label for="formInlineAutofitCustomAddress1">Address 1</label>
-				</div>
-				<div class="form-group-item">
-					<input class="form-control" id="formInlineAutofitCustomAddress1" placeholder="Address 1" type="text">
-				</div>
-			</div>
-			<div class="form-group-autofit">
-				<div class="form-group-item form-group-item-label form-group-item-shrink">
-					<label for="formInlineAutofitCustomAddress2">Address 2</label>
-				</div>
-				<div class="form-group-item">
-					<input class="form-control" id="formInlineAutofitCustomAddress2" placeholder="Address 2" type="text">
-				</div>
-			</div>
+			<div class="text-danger d-none">Error</div>
 			<button type="submit">Submit</button>
 		</form>
 	</div>
@@ -82,6 +61,9 @@
 		form.addEventListener('submit', (e) => {
 			if(!isFormValid()) {
 				e.preventDefault();
+				document.querySelector('.text-danger').classList.remove('d-none')
+			} else {
+				document.querySelector('.text-danger').classList.add('d-none')
 			}
 		})
 

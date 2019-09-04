@@ -30,7 +30,9 @@ long commerceRegionId = BeanParamUtil.getLong(commerceAddress, request, "commerc
 
 <portlet:actionURL name="editCommerceOrder" var="editCommerceOrderItemActionURL" />
 
-<aui:form action="<%= editCommerceOrderItemActionURL %>" cssClass="container-fluid-1280" method="post" name="fm">
+<aui:form
+		id="testtest"
+		action="<%= editCommerceOrderItemActionURL %>" cssClass="container-fluid-1280" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="updateShipping" />
 	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 	<aui:input name="commerceOrderId" type="hidden" value="<%= commerceOrder.getCommerceOrderId() %>" />
@@ -55,9 +57,7 @@ long commerceRegionId = BeanParamUtil.getLong(commerceAddress, request, "commerc
 		</div>
 	</div>
 
-	<aui:button type="submit" />
-
-	<button type="submit">TEST</button>
+	<aui:button type="submit" cssClass="d-none" />
 </aui:form>
 
 <aui:script use="liferay-dynamic-select">
@@ -121,4 +121,6 @@ long commerceRegionId = BeanParamUtil.getLong(commerceAddress, request, "commerc
 				}
 			]
 	);
+
 </aui:script>
+
