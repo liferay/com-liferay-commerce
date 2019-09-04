@@ -19,14 +19,17 @@ import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationCategory;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
+
+import java.io.IOException;
+
+import java.util.Locale;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Locale;
+
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Alessio Antonio Rendina
@@ -45,7 +48,7 @@ public class CommerceCountryChannelsScreenNavigationEntry
 	@Override
 	public String getCategoryKey() {
 		return CommerceCountryScreenNavigationConstants.
-			 CATEGORY_KEY_COMMERCE_COUNTRY_CHANNELS;
+			CATEGORY_KEY_COMMERCE_COUNTRY_CHANNELS;
 	}
 
 	@Override
