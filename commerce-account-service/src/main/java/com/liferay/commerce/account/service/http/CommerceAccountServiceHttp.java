@@ -551,7 +551,8 @@ public class CommerceAccountServiceHttp {
 			updateCommerceAccount(
 				HttpPrincipal httpPrincipal, long commerceAccountId,
 				String name, boolean logo, byte[] logoBytes, String email,
-				String taxId, boolean active,
+				String taxId, boolean active, long defaultBillingAddressId,
+				long defaultShippingAddressId,
 				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
@@ -562,7 +563,8 @@ public class CommerceAccountServiceHttp {
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceAccountId, name, logo, logoBytes, email,
-				taxId, active, serviceContext);
+				taxId, active, defaultBillingAddressId,
+				defaultShippingAddressId, serviceContext);
 
 			Object returnObj = null;
 
@@ -595,8 +597,7 @@ public class CommerceAccountServiceHttp {
 			updateCommerceAccount(
 				HttpPrincipal httpPrincipal, long commerceAccountId,
 				String name, boolean logo, byte[] logoBytes, String email,
-				String taxId, boolean active, long defaultBillingAddressId,
-				long defaultShippingAddressId,
+				String taxId, boolean active,
 				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
@@ -607,8 +608,7 @@ public class CommerceAccountServiceHttp {
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceAccountId, name, logo, logoBytes, email,
-				taxId, active, defaultBillingAddressId,
-				defaultShippingAddressId, serviceContext);
+				taxId, active, serviceContext);
 
 			Object returnObj = null;
 
@@ -817,13 +817,13 @@ public class CommerceAccountServiceHttp {
 	private static final Class<?>[] _updateCommerceAccountParameterTypes12 =
 		new Class[] {
 			long.class, String.class, boolean.class, byte[].class, String.class,
-			String.class, boolean.class,
+			String.class, boolean.class, long.class, long.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
 	private static final Class<?>[] _updateCommerceAccountParameterTypes13 =
 		new Class[] {
 			long.class, String.class, boolean.class, byte[].class, String.class,
-			String.class, boolean.class, long.class, long.class,
+			String.class, boolean.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
 	private static final Class<?>[]

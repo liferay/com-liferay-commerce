@@ -502,7 +502,7 @@ public class CommerceAccountLocalServiceWrapper
 	}
 
 	/**
-	 * @deprecated As of Mueller (7.2.x), Pass Default Billing/Shipping Ids
+	 * @deprecated As of Mueller (7.2.x), pass Default Billing/Shipping Ids
 	 */
 	@Deprecated
 	@Override

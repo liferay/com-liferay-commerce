@@ -426,6 +426,20 @@ public interface CommerceOrderItemModel
 	public void setUnitPrice(BigDecimal unitPrice);
 
 	/**
+	 * Returns the promo price of this commerce order item.
+	 *
+	 * @return the promo price of this commerce order item
+	 */
+	public BigDecimal getPromoPrice();
+
+	/**
+	 * Sets the promo price of this commerce order item.
+	 *
+	 * @param promoPrice the promo price of this commerce order item
+	 */
+	public void setPromoPrice(BigDecimal promoPrice);
+
+	/**
 	 * Returns the discount amount of this commerce order item.
 	 *
 	 * @return the discount amount of this commerce order item

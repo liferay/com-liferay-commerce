@@ -2301,7 +2301,7 @@ public class CPAttachmentFileEntryPersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("displayDate=");
+		msg.append("displayDate<");
 		msg.append(displayDate);
 
 		msg.append(", status=");
@@ -2361,7 +2361,7 @@ public class CPAttachmentFileEntryPersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("displayDate=");
+		msg.append("displayDate<");
 		msg.append(displayDate);
 
 		msg.append(", status=");
@@ -3174,7 +3174,7 @@ public class CPAttachmentFileEntryPersistenceImpl
 		msg.append(", classPK=");
 		msg.append(classPK);
 
-		msg.append(", displayDate=");
+		msg.append(", displayDate<");
 		msg.append(displayDate);
 
 		msg.append(", status=");
@@ -3244,7 +3244,7 @@ public class CPAttachmentFileEntryPersistenceImpl
 		msg.append(", classPK=");
 		msg.append(classPK);
 
-		msg.append(", displayDate=");
+		msg.append(", displayDate<");
 		msg.append(displayDate);
 
 		msg.append(", status=");
@@ -4472,7 +4472,7 @@ public class CPAttachmentFileEntryPersistenceImpl
 		msg.append(", type=");
 		msg.append(type);
 
-		msg.append(", status=");
+		msg.append(", status!=");
 		msg.append(status);
 
 		msg.append("}");
@@ -4542,7 +4542,7 @@ public class CPAttachmentFileEntryPersistenceImpl
 		msg.append(", type=");
 		msg.append(type);
 
-		msg.append(", status=");
+		msg.append(", status!=");
 		msg.append(status);
 
 		msg.append("}");

@@ -69,7 +69,7 @@ public class CommerceOrderItemCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(59);
+		StringBundler sb = new StringBundler(61);
 
 		sb.append("{externalReferenceCode=");
 		sb.append(externalReferenceCode);
@@ -105,6 +105,8 @@ public class CommerceOrderItemCacheModel
 		sb.append(sku);
 		sb.append(", unitPrice=");
 		sb.append(unitPrice);
+		sb.append(", promoPrice=");
+		sb.append(promoPrice);
 		sb.append(", discountAmount=");
 		sb.append(discountAmount);
 		sb.append(", finalPrice=");
@@ -201,6 +203,7 @@ public class CommerceOrderItemCacheModel
 		}
 
 		commerceOrderItemImpl.setUnitPrice(unitPrice);
+		commerceOrderItemImpl.setPromoPrice(promoPrice);
 		commerceOrderItemImpl.setDiscountAmount(discountAmount);
 		commerceOrderItemImpl.setFinalPrice(finalPrice);
 		commerceOrderItemImpl.setDiscountPercentageLevel1(
@@ -274,6 +277,7 @@ public class CommerceOrderItemCacheModel
 		name = objectInput.readUTF();
 		sku = objectInput.readUTF();
 		unitPrice = (BigDecimal)objectInput.readObject();
+		promoPrice = (BigDecimal)objectInput.readObject();
 		discountAmount = (BigDecimal)objectInput.readObject();
 		finalPrice = (BigDecimal)objectInput.readObject();
 		discountPercentageLevel1 = (BigDecimal)objectInput.readObject();
@@ -350,6 +354,7 @@ public class CommerceOrderItemCacheModel
 		}
 
 		objectOutput.writeObject(unitPrice);
+		objectOutput.writeObject(promoPrice);
 		objectOutput.writeObject(discountAmount);
 		objectOutput.writeObject(finalPrice);
 		objectOutput.writeObject(discountPercentageLevel1);
@@ -397,6 +402,7 @@ public class CommerceOrderItemCacheModel
 	public String name;
 	public String sku;
 	public BigDecimal unitPrice;
+	public BigDecimal promoPrice;
 	public BigDecimal discountAmount;
 	public BigDecimal finalPrice;
 	public BigDecimal discountPercentageLevel1;

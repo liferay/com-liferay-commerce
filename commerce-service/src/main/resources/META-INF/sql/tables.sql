@@ -175,6 +175,7 @@ create table CommerceOrderItem (
 	name STRING null,
 	sku VARCHAR(75) null,
 	unitPrice DECIMAL(30, 16) null,
+	promoPrice DECIMAL(30, 16) null,
 	discountAmount DECIMAL(30, 16) null,
 	finalPrice DECIMAL(30, 16) null,
 	discountPercentageLevel1 DECIMAL(30, 16) null,
