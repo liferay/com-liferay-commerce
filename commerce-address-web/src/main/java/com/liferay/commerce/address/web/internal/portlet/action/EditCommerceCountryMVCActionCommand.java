@@ -20,6 +20,9 @@ import com.liferay.commerce.exception.CommerceCountryThreeLettersISOCodeExceptio
 import com.liferay.commerce.exception.CommerceCountryTwoLettersISOCodeException;
 import com.liferay.commerce.exception.NoSuchCountryException;
 import com.liferay.commerce.model.CommerceCountry;
+import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CommerceChannelRel;
+import com.liferay.commerce.product.service.CommerceChannelRelService;
 import com.liferay.commerce.service.CommerceCountryService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
@@ -28,6 +31,9 @@ import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.transaction.Propagation;
+import com.liferay.portal.kernel.transaction.TransactionConfig;
+import com.liferay.portal.kernel.transaction.TransactionInvokerUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -36,6 +42,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.Callable;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -80,6 +87,40 @@ public class EditCommerceCountryMVCActionCommand extends BaseMVCActionCommand {
 				deleteCommerceCountryId);
 		}
 	}
+	@Reference
+	private CommerceChannelRelService _commerceChannelRelService;
+
+	protected void updateChannels(ActionRequest actionRequest)
+		throws PortalException {
+
+		long commerceCountryId = ParamUtil.getLong(
+			actionRequest, "commerceCountryId");
+
+		long[] commerceChannelIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "commerceChannelIds"), 0L);
+
+		boolean channelFilterEnabled = ParamUtil.getBoolean(
+			actionRequest, "channelFilterEnabled");
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			CommerceChannelRel.class.getName(), actionRequest);
+
+		_commerceChannelRelService.deleteCommerceChannelRels(
+			CommerceCountry.class.getName(), commerceCountryId);
+
+		for (long commerceChannelId : commerceChannelIds) {
+			if (commerceChannelId == 0) {
+				continue;
+			}
+
+			_commerceChannelRelService.addCommerceChannelRel(
+				CommerceCountry.class.getName(), commerceCountryId,
+				commerceChannelId, serviceContext);
+		}
+
+		_commerceCountryService.updateCommerceCountryChannelFilter(
+			commerceCountryId, channelFilterEnabled);
+	}
 
 	@Override
 	protected void doProcessAction(
@@ -104,8 +145,15 @@ public class EditCommerceCountryMVCActionCommand extends BaseMVCActionCommand {
 			else if (cmd.equals("setActive")) {
 				setActive(actionRequest);
 			}
+			else if (cmd.equals("updateChannels")) {
+				Callable<Object> commerceCountryChannelsCallable =
+					new CommerceCountryChannelsCallable(actionRequest);
+
+				TransactionInvokerUtil.invoke(
+					_transactionConfig, commerceCountryChannelsCallable);
+			}
 		}
-		catch (Exception e) {
+		catch (Throwable e) {
 			if (e instanceof NoSuchCountryException ||
 				e instanceof PrincipalException) {
 
@@ -124,9 +172,6 @@ public class EditCommerceCountryMVCActionCommand extends BaseMVCActionCommand {
 
 				actionResponse.setRenderParameter(
 					"mvcRenderCommandName", "editCommerceCountry");
-			}
-			else {
-				throw e;
 			}
 		}
 	}
@@ -216,4 +261,24 @@ public class EditCommerceCountryMVCActionCommand extends BaseMVCActionCommand {
 	@Reference
 	private Portal _portal;
 
+	private static final TransactionConfig _transactionConfig =
+		TransactionConfig.Factory.create(
+			Propagation.REQUIRED, new Class<?>[] {Exception.class});
+
+	private class CommerceCountryChannelsCallable implements Callable<Object> {
+
+		@Override
+		public Object call() throws Exception {
+			updateChannels(_actionRequest);
+
+			return null;
+		}
+
+		private CommerceCountryChannelsCallable(ActionRequest actionRequest) {
+			_actionRequest = actionRequest;
+		}
+
+		private final ActionRequest _actionRequest;
+
+	}
 }
