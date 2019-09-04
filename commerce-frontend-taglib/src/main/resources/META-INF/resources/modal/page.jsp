@@ -1,4 +1,4 @@
-<%@ page import="com.liferay.portal.kernel.util.Validator" %><%--
+<%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
@@ -23,6 +23,8 @@
 		"<%= modalId %>",
 		"<%= modalId %>",
 		{
+			id: "<%= modalId %>",
+			portletId: "<%= portletDisplay.getRootPortletId() %>",
 			url: "<%= url %>",
 			size: "<%= size %>",
 			title: "<%= title %>",
@@ -42,8 +44,9 @@
 		.addEventListener(
 			'click',
 			(e) => {
+			    console.log('triggered');
 				e.preventDefault();
-				modal.open();
+				Liferay.fire("<%= modalId %>-open");
 			}
 	);
 </aui:script>
