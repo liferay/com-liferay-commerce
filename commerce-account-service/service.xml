@@ -27,6 +27,8 @@
 		<column name="taxId" type="String" />
 		<column name="type" type="int" />
 		<column name="active" type="boolean" />
+		<column name="defaultBillingAddressId" type="long" />
+		<column name="defaultShippingAddressId" type="long" />
 		<column name="displayDate" type="Date" />
 		<column name="expirationDate" type="Date" />
 		<column name="lastPublishDate" type="Date" />
@@ -34,8 +36,6 @@
 		<column name="statusByUserId" type="long" />
 		<column name="statusByUserName" type="String" />
 		<column name="statusDate" type="Date" />
-		<column name="defaultBillingAddressId" type="long" />
-		<column name="defaultShippingAddressId" type="long" />
 
 		<!-- Order -->
 
