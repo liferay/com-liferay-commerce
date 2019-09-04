@@ -133,6 +133,50 @@ public class CommerceCountryServiceSoap {
 	}
 
 	public static com.liferay.commerce.model.CommerceCountrySoap[]
+			getBillingCommerceCountriesByChannelId(
+				long commerceChannelId, int start, int end)
+		throws RemoteException {
+
+		try {
+			java.util.List<com.liferay.commerce.model.CommerceCountry>
+				returnValue =
+					CommerceCountryServiceUtil.
+						getBillingCommerceCountriesByChannelId(
+							commerceChannelId, start, end);
+
+			return com.liferay.commerce.model.CommerceCountrySoap.toSoapModels(
+				returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.model.CommerceCountrySoap[]
+			getShippingCommerceCountriesByChannelId(
+				long commerceChannelId, int start, int end)
+		throws RemoteException {
+
+		try {
+			java.util.List<com.liferay.commerce.model.CommerceCountry>
+				returnValue =
+					CommerceCountryServiceUtil.
+						getShippingCommerceCountriesByChannelId(
+							commerceChannelId, start, end);
+
+			return com.liferay.commerce.model.CommerceCountrySoap.toSoapModels(
+				returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.model.CommerceCountrySoap[]
 			getCommerceCountries(long companyId, boolean active)
 		throws RemoteException {
 
@@ -142,6 +186,26 @@ public class CommerceCountryServiceSoap {
 					companyId, active);
 
 			return com.liferay.commerce.model.CommerceCountrySoap.toSoapModels(
+				returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.model.CommerceCountrySoap
+			updateCommerceCountryChannelFilter(
+				long commerceCountryId, boolean enable)
+		throws RemoteException {
+
+		try {
+			com.liferay.commerce.model.CommerceCountry returnValue =
+				CommerceCountryServiceUtil.updateCommerceCountryChannelFilter(
+					commerceCountryId, enable);
+
+			return com.liferay.commerce.model.CommerceCountrySoap.toSoapModel(
 				returnValue);
 		}
 		catch (Exception e) {

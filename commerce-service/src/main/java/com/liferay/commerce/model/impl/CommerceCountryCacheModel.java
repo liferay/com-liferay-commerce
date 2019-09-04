@@ -65,7 +65,7 @@ public class CommerceCountryCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(35);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -101,6 +101,8 @@ public class CommerceCountryCacheModel
 		sb.append(active);
 		sb.append(", lastPublishDate=");
 		sb.append(lastPublishDate);
+		sb.append(", channelFilterEnabled=");
+		sb.append(channelFilterEnabled);
 		sb.append("}");
 
 		return sb.toString();
@@ -178,6 +180,8 @@ public class CommerceCountryCacheModel
 			commerceCountryImpl.setLastPublishDate(new Date(lastPublishDate));
 		}
 
+		commerceCountryImpl.setChannelFilterEnabled(channelFilterEnabled);
+
 		commerceCountryImpl.resetOriginalValues();
 
 		return commerceCountryImpl;
@@ -211,6 +215,8 @@ public class CommerceCountryCacheModel
 
 		active = objectInput.readBoolean();
 		lastPublishDate = objectInput.readLong();
+
+		channelFilterEnabled = objectInput.readBoolean();
 	}
 
 	@Override
@@ -271,6 +277,8 @@ public class CommerceCountryCacheModel
 
 		objectOutput.writeBoolean(active);
 		objectOutput.writeLong(lastPublishDate);
+
+		objectOutput.writeBoolean(channelFilterEnabled);
 	}
 
 	public String uuid;
@@ -290,5 +298,6 @@ public class CommerceCountryCacheModel
 	public double priority;
 	public boolean active;
 	public long lastPublishDate;
+	public boolean channelFilterEnabled;
 
 }
