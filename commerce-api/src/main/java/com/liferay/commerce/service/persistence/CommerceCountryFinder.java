@@ -26,4 +26,9 @@ public interface CommerceCountryFinder {
 	public java.util.List<com.liferay.commerce.model.CommerceCountry>
 		findByCommerceInventoryWarehouses(long companyId, boolean all);
 
+	public java.util.List<com.liferay.commerce.model.CommerceCountry>
+		findByCommerceChannel(
+			long commerceChannelId, boolean shippingAllowed,
+			boolean billingAllowed, int start, int end);
+
 }
