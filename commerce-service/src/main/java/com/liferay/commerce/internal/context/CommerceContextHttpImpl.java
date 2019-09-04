@@ -106,6 +106,19 @@ public class CommerceContextHttpImpl implements CommerceContext {
 	}
 
 	@Override
+	public long getCommerceChannelId() throws PortalException {
+		CommerceChannel commerceChannel =
+			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
+				getSiteGroupId());
+
+		if (commerceChannel == null) {
+			return 0;
+		}
+
+		return commerceChannel.getCommerceChannelId();
+	}
+
+	@Override
 	public CommerceCurrency getCommerceCurrency() throws PortalException {
 		if (_commerceCurrency != null) {
 			return _commerceCurrency;
