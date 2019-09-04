@@ -17,6 +17,30 @@
 				CommerceCountry.priority
 		]]>
 	</sql>
+	<sql id="com.liferay.commerce.service.persistence.CommerceCountryFinder.findByCommerceChannel">
+		<![CDATA[
+			SELECT
+				{CommerceCountry.*}
+			FROM
+				CommerceCountry
+			INNER JOIN
+				CommerceChannelRel
+			ON
+				CommerceChannelRel.classPK = CommerceCountry.commerceCountryId
+			WHERE
+				(CommerceCountry.active_ = true) AND
+					(
+						(CommerceCountry.channelFilterEnabled = false) OR
+						(
+							(CommerceCountry.channelFilterEnabled = true) AND
+							(CommerceChannelRel.classNameId = ?) AND
+					(
+						CommerceChannelRel.commerceChannelId = ?)))
+				[$BILLING$] [$SHIPPING$]
+			ORDER BY
+				CommerceCountry.priority
+		]]>
+	</sql>
 	<sql id="com.liferay.commerce.service.persistence.CommerceOrderFinder.countByG_U_C_O">
 		<![CDATA[
 			SELECT
