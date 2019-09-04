@@ -71,6 +71,14 @@ public class CPDefinitionOptionRelLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
+		CPDefinitionOptionRel cpDefinitionOptionRel =
+			cpDefinitionOptionRelLocalService.fetchCPDefinitionOptionRel(
+				cpDefinitionId, cpOptionId);
+
+		if (cpDefinitionOptionRel != null) {
+			return cpDefinitionOptionRel;
+		}
+
 		CPOption cpOption = cpOptionLocalService.getCPOption(cpOptionId);
 
 		return cpDefinitionOptionRelLocalService.addCPDefinitionOptionRel(
