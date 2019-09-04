@@ -38,6 +38,8 @@
 		<column name="latitude" type="double" />
 		<column name="longitude" type="double" />
 		<column name="phoneNumber" type="String" />
+		<column name="defaultBilling" type="boolean" />
+		<column name="defaultShipping" type="boolean" />
 		<column name="type" type="int" />
 
 		<!-- Order -->
