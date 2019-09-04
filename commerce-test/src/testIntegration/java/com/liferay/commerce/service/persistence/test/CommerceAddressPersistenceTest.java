@@ -267,30 +267,21 @@ public class CommerceAddressPersistenceTest {
 	}
 
 	@Test
-	public void testCountByC_C_C() throws Exception {
-		_persistence.countByC_C_C(
-			RandomTestUtil.nextLong(), RandomTestUtil.nextLong(),
-			RandomTestUtil.nextLong());
-
-		_persistence.countByC_C_C(0L, 0L, 0L);
-	}
-
-	@Test
-	public void testCountByC_C_C_C() throws Exception {
-		_persistence.countByC_C_C_C(
-			RandomTestUtil.nextLong(), RandomTestUtil.nextLong(),
-			RandomTestUtil.nextLong(), RandomTestUtil.nextInt());
-
-		_persistence.countByC_C_C_C(0L, 0L, 0L, 0);
-	}
-
-	@Test
 	public void testCountByG_C_C() throws Exception {
 		_persistence.countByG_C_C(
 			RandomTestUtil.nextLong(), RandomTestUtil.nextLong(),
 			RandomTestUtil.nextLong());
 
 		_persistence.countByG_C_C(0L, 0L, 0L);
+	}
+
+	@Test
+	public void testCountByC_C_C() throws Exception {
+		_persistence.countByC_C_C(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong(),
+			RandomTestUtil.nextLong());
+
+		_persistence.countByC_C_C(0L, 0L, 0L);
 	}
 
 	@Test
@@ -311,6 +302,15 @@ public class CommerceAddressPersistenceTest {
 
 		_persistence.countByG_C_C_DS(
 			0L, 0L, 0L, RandomTestUtil.randomBoolean());
+	}
+
+	@Test
+	public void testCountByC_C_C_C() throws Exception {
+		_persistence.countByC_C_C_C(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong(),
+			RandomTestUtil.nextLong(), RandomTestUtil.nextInt());
+
+		_persistence.countByC_C_C_C(0L, 0L, 0L, 0);
 	}
 
 	@Test

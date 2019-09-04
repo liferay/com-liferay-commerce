@@ -5438,7 +5438,7 @@ public class CPInstancePersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("displayDate=");
+		msg.append("displayDate<");
 		msg.append(displayDate);
 
 		msg.append(", status=");
@@ -5498,7 +5498,7 @@ public class CPInstancePersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("displayDate=");
+		msg.append("displayDate<");
 		msg.append(displayDate);
 
 		msg.append(", status=");
@@ -6038,7 +6038,7 @@ public class CPInstancePersistenceImpl
 		msg.append("CPDefinitionId=");
 		msg.append(CPDefinitionId);
 
-		msg.append(", displayDate=");
+		msg.append(", displayDate<");
 		msg.append(displayDate);
 
 		msg.append(", status=");
@@ -6103,7 +6103,7 @@ public class CPInstancePersistenceImpl
 		msg.append("CPDefinitionId=");
 		msg.append(CPDefinitionId);
 
-		msg.append(", displayDate=");
+		msg.append(", displayDate<");
 		msg.append(displayDate);
 
 		msg.append(", status=");

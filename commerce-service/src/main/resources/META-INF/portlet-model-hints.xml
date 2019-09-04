@@ -164,6 +164,7 @@
 		<field localized="true" name="name" type="String" />
 		<field name="sku" type="String" />
 		<field name="unitPrice" type="BigDecimal" />
+		<field name="promoPrice" type="BigDecimal" />
 		<field name="discountAmount" type="BigDecimal" />
 		<field name="finalPrice" type="BigDecimal" />
 		<field name="discountPercentageLevel1" type="BigDecimal" />

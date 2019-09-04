@@ -76,7 +76,15 @@ public interface CommerceOrderItem
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public com.liferay.commerce.currency.model.CommerceMoney
+			getDiscountAmountMoney()
+		throws com.liferay.portal.kernel.exception.PortalException;
+
+	public com.liferay.commerce.currency.model.CommerceMoney
 			getFinalPriceMoney()
+		throws com.liferay.portal.kernel.exception.PortalException;
+
+	public com.liferay.commerce.currency.model.CommerceMoney
+			getPromoPriceMoney()
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public com.liferay.commerce.currency.model.CommerceMoney getUnitPriceMoney()

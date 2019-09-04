@@ -1932,7 +1932,7 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("sentDate=");
+		msg.append("sentDate<");
 		msg.append(sentDate);
 
 		msg.append("}");
@@ -1987,7 +1987,7 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("sentDate=");
+		msg.append("sentDate<");
 		msg.append(sentDate);
 
 		msg.append("}");

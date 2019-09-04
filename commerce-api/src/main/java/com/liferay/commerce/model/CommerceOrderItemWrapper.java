@@ -77,6 +77,7 @@ public class CommerceOrderItemWrapper
 		attributes.put("name", getName());
 		attributes.put("sku", getSku());
 		attributes.put("unitPrice", getUnitPrice());
+		attributes.put("promoPrice", getPromoPrice());
 		attributes.put("discountAmount", getDiscountAmount());
 		attributes.put("finalPrice", getFinalPrice());
 		attributes.put(
@@ -200,6 +201,12 @@ public class CommerceOrderItemWrapper
 
 		if (unitPrice != null) {
 			setUnitPrice(unitPrice);
+		}
+
+		BigDecimal promoPrice = (BigDecimal)attributes.get("promoPrice");
+
+		if (promoPrice != null) {
+			setPromoPrice(promoPrice);
 		}
 
 		BigDecimal discountAmount = (BigDecimal)attributes.get(
@@ -427,6 +434,14 @@ public class CommerceOrderItemWrapper
 		return _commerceOrderItem.getDiscountAmount();
 	}
 
+	@Override
+	public com.liferay.commerce.currency.model.CommerceMoney
+			getDiscountAmountMoney()
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceOrderItem.getDiscountAmountMoney();
+	}
+
 	/**
 	 * Returns the discount percentage level1 of this commerce order item.
 	 *
@@ -629,6 +644,24 @@ public class CommerceOrderItemWrapper
 	@Override
 	public String getPrintedNote() {
 		return _commerceOrderItem.getPrintedNote();
+	}
+
+	/**
+	 * Returns the promo price of this commerce order item.
+	 *
+	 * @return the promo price of this commerce order item
+	 */
+	@Override
+	public BigDecimal getPromoPrice() {
+		return _commerceOrderItem.getPromoPrice();
+	}
+
+	@Override
+	public com.liferay.commerce.currency.model.CommerceMoney
+			getPromoPriceMoney()
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceOrderItem.getPromoPriceMoney();
 	}
 
 	/**
@@ -1093,6 +1126,16 @@ public class CommerceOrderItemWrapper
 	@Override
 	public void setPrintedNote(String printedNote) {
 		_commerceOrderItem.setPrintedNote(printedNote);
+	}
+
+	/**
+	 * Sets the promo price of this commerce order item.
+	 *
+	 * @param promoPrice the promo price of this commerce order item
+	 */
+	@Override
+	public void setPromoPrice(BigDecimal promoPrice) {
+		_commerceOrderItem.setPromoPrice(promoPrice);
 	}
 
 	/**

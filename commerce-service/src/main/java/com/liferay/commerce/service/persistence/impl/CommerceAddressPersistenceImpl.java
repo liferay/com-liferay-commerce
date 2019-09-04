@@ -1705,6 +1705,602 @@ public class CommerceAddressPersistenceImpl
 	private static final String _FINDER_COLUMN_C_C_CLASSPK_2 =
 		"commerceAddress.classPK = ?";
 
+	private FinderPath _finderPathWithPaginationFindByG_C_C;
+	private FinderPath _finderPathWithoutPaginationFindByG_C_C;
+	private FinderPath _finderPathCountByG_C_C;
+
+	/**
+	 * Returns all the commerce addresses where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @return the matching commerce addresses
+	 */
+	@Override
+	public List<CommerceAddress> findByG_C_C(
+		long groupId, long classNameId, long classPK) {
+
+		return findByG_C_C(
+			groupId, classNameId, classPK, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
+	}
+
+	/**
+	 * Returns a range of all the commerce addresses where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param start the lower bound of the range of commerce addresses
+	 * @param end the upper bound of the range of commerce addresses (not inclusive)
+	 * @return the range of matching commerce addresses
+	 */
+	@Override
+	public List<CommerceAddress> findByG_C_C(
+		long groupId, long classNameId, long classPK, int start, int end) {
+
+		return findByG_C_C(groupId, classNameId, classPK, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce addresses where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param start the lower bound of the range of commerce addresses
+	 * @param end the upper bound of the range of commerce addresses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce addresses
+	 */
+	@Override
+	public List<CommerceAddress> findByG_C_C(
+		long groupId, long classNameId, long classPK, int start, int end,
+		OrderByComparator<CommerceAddress> orderByComparator) {
+
+		return findByG_C_C(
+			groupId, classNameId, classPK, start, end, orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce addresses where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param start the lower bound of the range of commerce addresses
+	 * @param end the upper bound of the range of commerce addresses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching commerce addresses
+	 */
+	@Override
+	public List<CommerceAddress> findByG_C_C(
+		long groupId, long classNameId, long classPK, int start, int end,
+		OrderByComparator<CommerceAddress> orderByComparator,
+		boolean useFinderCache) {
+
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+			(orderByComparator == null)) {
+
+			pagination = false;
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByG_C_C;
+				finderArgs = new Object[] {groupId, classNameId, classPK};
+			}
+		}
+		else if (useFinderCache) {
+			finderPath = _finderPathWithPaginationFindByG_C_C;
+			finderArgs = new Object[] {
+				groupId, classNameId, classPK, start, end, orderByComparator
+			};
+		}
+
+		List<CommerceAddress> list = null;
+
+		if (useFinderCache) {
+			list = (List<CommerceAddress>)finderCache.getResult(
+				finderPath, finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (CommerceAddress commerceAddress : list) {
+					if ((groupId != commerceAddress.getGroupId()) ||
+						(classNameId != commerceAddress.getClassNameId()) ||
+						(classPK != commerceAddress.getClassPK())) {
+
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(
+					5 + (orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(5);
+			}
+
+			query.append(_SQL_SELECT_COMMERCEADDRESS_WHERE);
+
+			query.append(_FINDER_COLUMN_G_C_C_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_C_C_CLASSNAMEID_2);
+
+			query.append(_FINDER_COLUMN_G_C_C_CLASSPK_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
+			}
+			else if (pagination) {
+				query.append(CommerceAddressModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(classNameId);
+
+				qPos.add(classPK);
+
+				if (!pagination) {
+					list = (List<CommerceAddress>)QueryUtil.list(
+						q, getDialect(), start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<CommerceAddress>)QueryUtil.list(
+						q, getDialect(), start, end);
+				}
+
+				cacheResult(list);
+
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
+			}
+			catch (Exception e) {
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first commerce address in the ordered set where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce address
+	 * @throws NoSuchAddressException if a matching commerce address could not be found
+	 */
+	@Override
+	public CommerceAddress findByG_C_C_First(
+			long groupId, long classNameId, long classPK,
+			OrderByComparator<CommerceAddress> orderByComparator)
+		throws NoSuchAddressException {
+
+		CommerceAddress commerceAddress = fetchByG_C_C_First(
+			groupId, classNameId, classPK, orderByComparator);
+
+		if (commerceAddress != null) {
+			return commerceAddress;
+		}
+
+		StringBundler msg = new StringBundler(8);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("groupId=");
+		msg.append(groupId);
+
+		msg.append(", classNameId=");
+		msg.append(classNameId);
+
+		msg.append(", classPK=");
+		msg.append(classPK);
+
+		msg.append("}");
+
+		throw new NoSuchAddressException(msg.toString());
+	}
+
+	/**
+	 * Returns the first commerce address in the ordered set where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce address, or <code>null</code> if a matching commerce address could not be found
+	 */
+	@Override
+	public CommerceAddress fetchByG_C_C_First(
+		long groupId, long classNameId, long classPK,
+		OrderByComparator<CommerceAddress> orderByComparator) {
+
+		List<CommerceAddress> list = findByG_C_C(
+			groupId, classNameId, classPK, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last commerce address in the ordered set where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce address
+	 * @throws NoSuchAddressException if a matching commerce address could not be found
+	 */
+	@Override
+	public CommerceAddress findByG_C_C_Last(
+			long groupId, long classNameId, long classPK,
+			OrderByComparator<CommerceAddress> orderByComparator)
+		throws NoSuchAddressException {
+
+		CommerceAddress commerceAddress = fetchByG_C_C_Last(
+			groupId, classNameId, classPK, orderByComparator);
+
+		if (commerceAddress != null) {
+			return commerceAddress;
+		}
+
+		StringBundler msg = new StringBundler(8);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("groupId=");
+		msg.append(groupId);
+
+		msg.append(", classNameId=");
+		msg.append(classNameId);
+
+		msg.append(", classPK=");
+		msg.append(classPK);
+
+		msg.append("}");
+
+		throw new NoSuchAddressException(msg.toString());
+	}
+
+	/**
+	 * Returns the last commerce address in the ordered set where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce address, or <code>null</code> if a matching commerce address could not be found
+	 */
+	@Override
+	public CommerceAddress fetchByG_C_C_Last(
+		long groupId, long classNameId, long classPK,
+		OrderByComparator<CommerceAddress> orderByComparator) {
+
+		int count = countByG_C_C(groupId, classNameId, classPK);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<CommerceAddress> list = findByG_C_C(
+			groupId, classNameId, classPK, count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the commerce addresses before and after the current commerce address in the ordered set where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * @param commerceAddressId the primary key of the current commerce address
+	 * @param groupId the group ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce address
+	 * @throws NoSuchAddressException if a commerce address with the primary key could not be found
+	 */
+	@Override
+	public CommerceAddress[] findByG_C_C_PrevAndNext(
+			long commerceAddressId, long groupId, long classNameId,
+			long classPK, OrderByComparator<CommerceAddress> orderByComparator)
+		throws NoSuchAddressException {
+
+		CommerceAddress commerceAddress = findByPrimaryKey(commerceAddressId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CommerceAddress[] array = new CommerceAddressImpl[3];
+
+			array[0] = getByG_C_C_PrevAndNext(
+				session, commerceAddress, groupId, classNameId, classPK,
+				orderByComparator, true);
+
+			array[1] = commerceAddress;
+
+			array[2] = getByG_C_C_PrevAndNext(
+				session, commerceAddress, groupId, classNameId, classPK,
+				orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected CommerceAddress getByG_C_C_PrevAndNext(
+		Session session, CommerceAddress commerceAddress, long groupId,
+		long classNameId, long classPK,
+		OrderByComparator<CommerceAddress> orderByComparator,
+		boolean previous) {
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(
+				6 + (orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(5);
+		}
+
+		query.append(_SQL_SELECT_COMMERCEADDRESS_WHERE);
+
+		query.append(_FINDER_COLUMN_G_C_C_GROUPID_2);
+
+		query.append(_FINDER_COLUMN_G_C_C_CLASSNAMEID_2);
+
+		query.append(_FINDER_COLUMN_G_C_C_CLASSPK_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(CommerceAddressModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		qPos.add(classNameId);
+
+		qPos.add(classPK);
+
+		if (orderByComparator != null) {
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceAddress)) {
+
+				qPos.add(orderByConditionValue);
+			}
+		}
+
+		List<CommerceAddress> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the commerce addresses where groupId = &#63; and classNameId = &#63; and classPK = &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 */
+	@Override
+	public void removeByG_C_C(long groupId, long classNameId, long classPK) {
+		for (CommerceAddress commerceAddress :
+				findByG_C_C(
+					groupId, classNameId, classPK, QueryUtil.ALL_POS,
+					QueryUtil.ALL_POS, null)) {
+
+			remove(commerceAddress);
+		}
+	}
+
+	/**
+	 * Returns the number of commerce addresses where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @return the number of matching commerce addresses
+	 */
+	@Override
+	public int countByG_C_C(long groupId, long classNameId, long classPK) {
+		FinderPath finderPath = _finderPathCountByG_C_C;
+
+		Object[] finderArgs = new Object[] {groupId, classNameId, classPK};
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_COUNT_COMMERCEADDRESS_WHERE);
+
+			query.append(_FINDER_COLUMN_G_C_C_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_C_C_CLASSNAMEID_2);
+
+			query.append(_FINDER_COLUMN_G_C_C_CLASSPK_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(classNameId);
+
+				qPos.add(classPK);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_G_C_C_GROUPID_2 =
+		"commerceAddress.groupId = ? AND ";
+
+	private static final String _FINDER_COLUMN_G_C_C_CLASSNAMEID_2 =
+		"commerceAddress.classNameId = ? AND ";
+
+	private static final String _FINDER_COLUMN_G_C_C_CLASSPK_2 =
+		"commerceAddress.classPK = ?";
+
 	private FinderPath _finderPathWithPaginationFindByC_C_C;
 	private FinderPath _finderPathWithoutPaginationFindByC_C_C;
 	private FinderPath _finderPathCountByC_C_C;
@@ -2301,1245 +2897,6 @@ public class CommerceAddressPersistenceImpl
 		"commerceAddress.classNameId = ? AND ";
 
 	private static final String _FINDER_COLUMN_C_C_C_CLASSPK_2 =
-		"commerceAddress.classPK = ?";
-
-	private FinderPath _finderPathWithPaginationFindByC_C_C_C;
-	private FinderPath _finderPathWithoutPaginationFindByC_C_C_C;
-	private FinderPath _finderPathCountByC_C_C_C;
-
-	/**
-	 * Returns all the commerce addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63;.
-	 *
-	 * @param companyId the company ID
-	 * @param classNameId the class name ID
-	 * @param classPK the class pk
-	 * @param type the type
-	 * @return the matching commerce addresses
-	 */
-	@Override
-	public List<CommerceAddress> findByC_C_C_C(
-		long companyId, long classNameId, long classPK, int type) {
-
-		return findByC_C_C_C(
-			companyId, classNameId, classPK, type, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
-	}
-
-	/**
-	 * Returns a range of all the commerce addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param companyId the company ID
-	 * @param classNameId the class name ID
-	 * @param classPK the class pk
-	 * @param type the type
-	 * @param start the lower bound of the range of commerce addresses
-	 * @param end the upper bound of the range of commerce addresses (not inclusive)
-	 * @return the range of matching commerce addresses
-	 */
-	@Override
-	public List<CommerceAddress> findByC_C_C_C(
-		long companyId, long classNameId, long classPK, int type, int start,
-		int end) {
-
-		return findByC_C_C_C(
-			companyId, classNameId, classPK, type, start, end, null);
-	}
-
-	/**
-	 * Returns an ordered range of all the commerce addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param companyId the company ID
-	 * @param classNameId the class name ID
-	 * @param classPK the class pk
-	 * @param type the type
-	 * @param start the lower bound of the range of commerce addresses
-	 * @param end the upper bound of the range of commerce addresses (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching commerce addresses
-	 */
-	@Override
-	public List<CommerceAddress> findByC_C_C_C(
-		long companyId, long classNameId, long classPK, int type, int start,
-		int end, OrderByComparator<CommerceAddress> orderByComparator) {
-
-		return findByC_C_C_C(
-			companyId, classNameId, classPK, type, start, end,
-			orderByComparator, true);
-	}
-
-	/**
-	 * Returns an ordered range of all the commerce addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param companyId the company ID
-	 * @param classNameId the class name ID
-	 * @param classPK the class pk
-	 * @param type the type
-	 * @param start the lower bound of the range of commerce addresses
-	 * @param end the upper bound of the range of commerce addresses (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param useFinderCache whether to use the finder cache
-	 * @return the ordered range of matching commerce addresses
-	 */
-	@Override
-	public List<CommerceAddress> findByC_C_C_C(
-		long companyId, long classNameId, long classPK, int type, int start,
-		int end, OrderByComparator<CommerceAddress> orderByComparator,
-		boolean useFinderCache) {
-
-		boolean pagination = true;
-		FinderPath finderPath = null;
-		Object[] finderArgs = null;
-
-		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-			(orderByComparator == null)) {
-
-			pagination = false;
-
-			if (useFinderCache) {
-				finderPath = _finderPathWithoutPaginationFindByC_C_C_C;
-				finderArgs = new Object[] {
-					companyId, classNameId, classPK, type
-				};
-			}
-		}
-		else if (useFinderCache) {
-			finderPath = _finderPathWithPaginationFindByC_C_C_C;
-			finderArgs = new Object[] {
-				companyId, classNameId, classPK, type, start, end,
-				orderByComparator
-			};
-		}
-
-		List<CommerceAddress> list = null;
-
-		if (useFinderCache) {
-			list = (List<CommerceAddress>)finderCache.getResult(
-				finderPath, finderArgs, this);
-
-			if ((list != null) && !list.isEmpty()) {
-				for (CommerceAddress commerceAddress : list) {
-					if ((companyId != commerceAddress.getCompanyId()) ||
-						(classNameId != commerceAddress.getClassNameId()) ||
-						(classPK != commerceAddress.getClassPK()) ||
-						(type != commerceAddress.getType())) {
-
-						list = null;
-
-						break;
-					}
-				}
-			}
-		}
-
-		if (list == null) {
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(
-					6 + (orderByComparator.getOrderByFields().length * 2));
-			}
-			else {
-				query = new StringBundler(6);
-			}
-
-			query.append(_SQL_SELECT_COMMERCEADDRESS_WHERE);
-
-			query.append(_FINDER_COLUMN_C_C_C_C_COMPANYID_2);
-
-			query.append(_FINDER_COLUMN_C_C_C_C_CLASSNAMEID_2);
-
-			query.append(_FINDER_COLUMN_C_C_C_C_CLASSPK_2);
-
-			query.append(_FINDER_COLUMN_C_C_C_C_TYPE_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(
-					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
-			}
-			else if (pagination) {
-				query.append(CommerceAddressModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				qPos.add(classNameId);
-
-				qPos.add(classPK);
-
-				qPos.add(type);
-
-				if (!pagination) {
-					list = (List<CommerceAddress>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceAddress>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
-
-				cacheResult(list);
-
-				if (useFinderCache) {
-					finderCache.putResult(finderPath, finderArgs, list);
-				}
-			}
-			catch (Exception e) {
-				if (useFinderCache) {
-					finderCache.removeResult(finderPath, finderArgs);
-				}
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	/**
-	 * Returns the first commerce address in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63;.
-	 *
-	 * @param companyId the company ID
-	 * @param classNameId the class name ID
-	 * @param classPK the class pk
-	 * @param type the type
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching commerce address
-	 * @throws NoSuchAddressException if a matching commerce address could not be found
-	 */
-	@Override
-	public CommerceAddress findByC_C_C_C_First(
-			long companyId, long classNameId, long classPK, int type,
-			OrderByComparator<CommerceAddress> orderByComparator)
-		throws NoSuchAddressException {
-
-		CommerceAddress commerceAddress = fetchByC_C_C_C_First(
-			companyId, classNameId, classPK, type, orderByComparator);
-
-		if (commerceAddress != null) {
-			return commerceAddress;
-		}
-
-		StringBundler msg = new StringBundler(10);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("companyId=");
-		msg.append(companyId);
-
-		msg.append(", classNameId=");
-		msg.append(classNameId);
-
-		msg.append(", classPK=");
-		msg.append(classPK);
-
-		msg.append(", type=");
-		msg.append(type);
-
-		msg.append("}");
-
-		throw new NoSuchAddressException(msg.toString());
-	}
-
-	/**
-	 * Returns the first commerce address in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63;.
-	 *
-	 * @param companyId the company ID
-	 * @param classNameId the class name ID
-	 * @param classPK the class pk
-	 * @param type the type
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching commerce address, or <code>null</code> if a matching commerce address could not be found
-	 */
-	@Override
-	public CommerceAddress fetchByC_C_C_C_First(
-		long companyId, long classNameId, long classPK, int type,
-		OrderByComparator<CommerceAddress> orderByComparator) {
-
-		List<CommerceAddress> list = findByC_C_C_C(
-			companyId, classNameId, classPK, type, 0, 1, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the last commerce address in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63;.
-	 *
-	 * @param companyId the company ID
-	 * @param classNameId the class name ID
-	 * @param classPK the class pk
-	 * @param type the type
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching commerce address
-	 * @throws NoSuchAddressException if a matching commerce address could not be found
-	 */
-	@Override
-	public CommerceAddress findByC_C_C_C_Last(
-			long companyId, long classNameId, long classPK, int type,
-			OrderByComparator<CommerceAddress> orderByComparator)
-		throws NoSuchAddressException {
-
-		CommerceAddress commerceAddress = fetchByC_C_C_C_Last(
-			companyId, classNameId, classPK, type, orderByComparator);
-
-		if (commerceAddress != null) {
-			return commerceAddress;
-		}
-
-		StringBundler msg = new StringBundler(10);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("companyId=");
-		msg.append(companyId);
-
-		msg.append(", classNameId=");
-		msg.append(classNameId);
-
-		msg.append(", classPK=");
-		msg.append(classPK);
-
-		msg.append(", type=");
-		msg.append(type);
-
-		msg.append("}");
-
-		throw new NoSuchAddressException(msg.toString());
-	}
-
-	/**
-	 * Returns the last commerce address in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63;.
-	 *
-	 * @param companyId the company ID
-	 * @param classNameId the class name ID
-	 * @param classPK the class pk
-	 * @param type the type
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching commerce address, or <code>null</code> if a matching commerce address could not be found
-	 */
-	@Override
-	public CommerceAddress fetchByC_C_C_C_Last(
-		long companyId, long classNameId, long classPK, int type,
-		OrderByComparator<CommerceAddress> orderByComparator) {
-
-		int count = countByC_C_C_C(companyId, classNameId, classPK, type);
-
-		if (count == 0) {
-			return null;
-		}
-
-		List<CommerceAddress> list = findByC_C_C_C(
-			companyId, classNameId, classPK, type, count - 1, count,
-			orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the commerce addresses before and after the current commerce address in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63;.
-	 *
-	 * @param commerceAddressId the primary key of the current commerce address
-	 * @param companyId the company ID
-	 * @param classNameId the class name ID
-	 * @param classPK the class pk
-	 * @param type the type
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next commerce address
-	 * @throws NoSuchAddressException if a commerce address with the primary key could not be found
-	 */
-	@Override
-	public CommerceAddress[] findByC_C_C_C_PrevAndNext(
-			long commerceAddressId, long companyId, long classNameId,
-			long classPK, int type,
-			OrderByComparator<CommerceAddress> orderByComparator)
-		throws NoSuchAddressException {
-
-		CommerceAddress commerceAddress = findByPrimaryKey(commerceAddressId);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			CommerceAddress[] array = new CommerceAddressImpl[3];
-
-			array[0] = getByC_C_C_C_PrevAndNext(
-				session, commerceAddress, companyId, classNameId, classPK, type,
-				orderByComparator, true);
-
-			array[1] = commerceAddress;
-
-			array[2] = getByC_C_C_C_PrevAndNext(
-				session, commerceAddress, companyId, classNameId, classPK, type,
-				orderByComparator, false);
-
-			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected CommerceAddress getByC_C_C_C_PrevAndNext(
-		Session session, CommerceAddress commerceAddress, long companyId,
-		long classNameId, long classPK, int type,
-		OrderByComparator<CommerceAddress> orderByComparator,
-		boolean previous) {
-
-		StringBundler query = null;
-
-		if (orderByComparator != null) {
-			query = new StringBundler(
-				7 + (orderByComparator.getOrderByConditionFields().length * 3) +
-					(orderByComparator.getOrderByFields().length * 3));
-		}
-		else {
-			query = new StringBundler(6);
-		}
-
-		query.append(_SQL_SELECT_COMMERCEADDRESS_WHERE);
-
-		query.append(_FINDER_COLUMN_C_C_C_C_COMPANYID_2);
-
-		query.append(_FINDER_COLUMN_C_C_C_C_CLASSNAMEID_2);
-
-		query.append(_FINDER_COLUMN_C_C_C_C_CLASSPK_2);
-
-		query.append(_FINDER_COLUMN_C_C_C_C_TYPE_2);
-
-		if (orderByComparator != null) {
-			String[] orderByConditionFields =
-				orderByComparator.getOrderByConditionFields();
-
-			if (orderByConditionFields.length > 0) {
-				query.append(WHERE_AND);
-			}
-
-			for (int i = 0; i < orderByConditionFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByConditionFields[i]);
-
-				if ((i + 1) < orderByConditionFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN_HAS_NEXT);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN);
-					}
-				}
-			}
-
-			query.append(ORDER_BY_CLAUSE);
-
-			String[] orderByFields = orderByComparator.getOrderByFields();
-
-			for (int i = 0; i < orderByFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByFields[i]);
-
-				if ((i + 1) < orderByFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC_HAS_NEXT);
-					}
-					else {
-						query.append(ORDER_BY_DESC_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC);
-					}
-					else {
-						query.append(ORDER_BY_DESC);
-					}
-				}
-			}
-		}
-		else {
-			query.append(CommerceAddressModelImpl.ORDER_BY_JPQL);
-		}
-
-		String sql = query.toString();
-
-		Query q = session.createQuery(sql);
-
-		q.setFirstResult(0);
-		q.setMaxResults(2);
-
-		QueryPos qPos = QueryPos.getInstance(q);
-
-		qPos.add(companyId);
-
-		qPos.add(classNameId);
-
-		qPos.add(classPK);
-
-		qPos.add(type);
-
-		if (orderByComparator != null) {
-			for (Object orderByConditionValue :
-					orderByComparator.getOrderByConditionValues(
-						commerceAddress)) {
-
-				qPos.add(orderByConditionValue);
-			}
-		}
-
-		List<CommerceAddress> list = q.list();
-
-		if (list.size() == 2) {
-			return list.get(1);
-		}
-		else {
-			return null;
-		}
-	}
-
-	/**
-	 * Removes all the commerce addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63; from the database.
-	 *
-	 * @param companyId the company ID
-	 * @param classNameId the class name ID
-	 * @param classPK the class pk
-	 * @param type the type
-	 */
-	@Override
-	public void removeByC_C_C_C(
-		long companyId, long classNameId, long classPK, int type) {
-
-		for (CommerceAddress commerceAddress :
-				findByC_C_C_C(
-					companyId, classNameId, classPK, type, QueryUtil.ALL_POS,
-					QueryUtil.ALL_POS, null)) {
-
-			remove(commerceAddress);
-		}
-	}
-
-	/**
-	 * Returns the number of commerce addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63;.
-	 *
-	 * @param companyId the company ID
-	 * @param classNameId the class name ID
-	 * @param classPK the class pk
-	 * @param type the type
-	 * @return the number of matching commerce addresses
-	 */
-	@Override
-	public int countByC_C_C_C(
-		long companyId, long classNameId, long classPK, int type) {
-
-		FinderPath finderPath = _finderPathCountByC_C_C_C;
-
-		Object[] finderArgs = new Object[] {
-			companyId, classNameId, classPK, type
-		};
-
-		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(5);
-
-			query.append(_SQL_COUNT_COMMERCEADDRESS_WHERE);
-
-			query.append(_FINDER_COLUMN_C_C_C_C_COMPANYID_2);
-
-			query.append(_FINDER_COLUMN_C_C_C_C_CLASSNAMEID_2);
-
-			query.append(_FINDER_COLUMN_C_C_C_C_CLASSPK_2);
-
-			query.append(_FINDER_COLUMN_C_C_C_C_TYPE_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				qPos.add(classNameId);
-
-				qPos.add(classPK);
-
-				qPos.add(type);
-
-				count = (Long)q.uniqueResult();
-
-				finderCache.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String _FINDER_COLUMN_C_C_C_C_COMPANYID_2 =
-		"commerceAddress.companyId = ? AND ";
-
-	private static final String _FINDER_COLUMN_C_C_C_C_CLASSNAMEID_2 =
-		"commerceAddress.classNameId = ? AND ";
-
-	private static final String _FINDER_COLUMN_C_C_C_C_CLASSPK_2 =
-		"commerceAddress.classPK = ? AND ";
-
-	private static final String _FINDER_COLUMN_C_C_C_C_TYPE_2 =
-		"commerceAddress.type = ?";
-
-	private FinderPath _finderPathWithPaginationFindByG_C_C;
-	private FinderPath _finderPathWithoutPaginationFindByG_C_C;
-	private FinderPath _finderPathCountByG_C_C;
-
-	/**
-	 * Returns all the commerce addresses where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param classNameId the class name ID
-	 * @param classPK the class pk
-	 * @return the matching commerce addresses
-	 */
-	@Override
-	public List<CommerceAddress> findByG_C_C(
-		long groupId, long classNameId, long classPK) {
-
-		return findByG_C_C(
-			groupId, classNameId, classPK, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			null);
-	}
-
-	/**
-	 * Returns a range of all the commerce addresses where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param groupId the group ID
-	 * @param classNameId the class name ID
-	 * @param classPK the class pk
-	 * @param start the lower bound of the range of commerce addresses
-	 * @param end the upper bound of the range of commerce addresses (not inclusive)
-	 * @return the range of matching commerce addresses
-	 */
-	@Override
-	public List<CommerceAddress> findByG_C_C(
-		long groupId, long classNameId, long classPK, int start, int end) {
-
-		return findByG_C_C(groupId, classNameId, classPK, start, end, null);
-	}
-
-	/**
-	 * Returns an ordered range of all the commerce addresses where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param groupId the group ID
-	 * @param classNameId the class name ID
-	 * @param classPK the class pk
-	 * @param start the lower bound of the range of commerce addresses
-	 * @param end the upper bound of the range of commerce addresses (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching commerce addresses
-	 */
-	@Override
-	public List<CommerceAddress> findByG_C_C(
-		long groupId, long classNameId, long classPK, int start, int end,
-		OrderByComparator<CommerceAddress> orderByComparator) {
-
-		return findByG_C_C(
-			groupId, classNameId, classPK, start, end, orderByComparator, true);
-	}
-
-	/**
-	 * Returns an ordered range of all the commerce addresses where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param groupId the group ID
-	 * @param classNameId the class name ID
-	 * @param classPK the class pk
-	 * @param start the lower bound of the range of commerce addresses
-	 * @param end the upper bound of the range of commerce addresses (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param useFinderCache whether to use the finder cache
-	 * @return the ordered range of matching commerce addresses
-	 */
-	@Override
-	public List<CommerceAddress> findByG_C_C(
-		long groupId, long classNameId, long classPK, int start, int end,
-		OrderByComparator<CommerceAddress> orderByComparator,
-		boolean useFinderCache) {
-
-		boolean pagination = true;
-		FinderPath finderPath = null;
-		Object[] finderArgs = null;
-
-		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-			(orderByComparator == null)) {
-
-			pagination = false;
-
-			if (useFinderCache) {
-				finderPath = _finderPathWithoutPaginationFindByG_C_C;
-				finderArgs = new Object[] {groupId, classNameId, classPK};
-			}
-		}
-		else if (useFinderCache) {
-			finderPath = _finderPathWithPaginationFindByG_C_C;
-			finderArgs = new Object[] {
-				groupId, classNameId, classPK, start, end, orderByComparator
-			};
-		}
-
-		List<CommerceAddress> list = null;
-
-		if (useFinderCache) {
-			list = (List<CommerceAddress>)finderCache.getResult(
-				finderPath, finderArgs, this);
-
-			if ((list != null) && !list.isEmpty()) {
-				for (CommerceAddress commerceAddress : list) {
-					if ((groupId != commerceAddress.getGroupId()) ||
-						(classNameId != commerceAddress.getClassNameId()) ||
-						(classPK != commerceAddress.getClassPK())) {
-
-						list = null;
-
-						break;
-					}
-				}
-			}
-		}
-
-		if (list == null) {
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(
-					5 + (orderByComparator.getOrderByFields().length * 2));
-			}
-			else {
-				query = new StringBundler(5);
-			}
-
-			query.append(_SQL_SELECT_COMMERCEADDRESS_WHERE);
-
-			query.append(_FINDER_COLUMN_G_C_C_GROUPID_2);
-
-			query.append(_FINDER_COLUMN_G_C_C_CLASSNAMEID_2);
-
-			query.append(_FINDER_COLUMN_G_C_C_CLASSPK_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(
-					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
-			}
-			else if (pagination) {
-				query.append(CommerceAddressModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				qPos.add(classNameId);
-
-				qPos.add(classPK);
-
-				if (!pagination) {
-					list = (List<CommerceAddress>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceAddress>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
-
-				cacheResult(list);
-
-				if (useFinderCache) {
-					finderCache.putResult(finderPath, finderArgs, list);
-				}
-			}
-			catch (Exception e) {
-				if (useFinderCache) {
-					finderCache.removeResult(finderPath, finderArgs);
-				}
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	/**
-	 * Returns the first commerce address in the ordered set where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param classNameId the class name ID
-	 * @param classPK the class pk
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching commerce address
-	 * @throws NoSuchAddressException if a matching commerce address could not be found
-	 */
-	@Override
-	public CommerceAddress findByG_C_C_First(
-			long groupId, long classNameId, long classPK,
-			OrderByComparator<CommerceAddress> orderByComparator)
-		throws NoSuchAddressException {
-
-		CommerceAddress commerceAddress = fetchByG_C_C_First(
-			groupId, classNameId, classPK, orderByComparator);
-
-		if (commerceAddress != null) {
-			return commerceAddress;
-		}
-
-		StringBundler msg = new StringBundler(8);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("groupId=");
-		msg.append(groupId);
-
-		msg.append(", classNameId=");
-		msg.append(classNameId);
-
-		msg.append(", classPK=");
-		msg.append(classPK);
-
-		msg.append("}");
-
-		throw new NoSuchAddressException(msg.toString());
-	}
-
-	/**
-	 * Returns the first commerce address in the ordered set where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param classNameId the class name ID
-	 * @param classPK the class pk
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching commerce address, or <code>null</code> if a matching commerce address could not be found
-	 */
-	@Override
-	public CommerceAddress fetchByG_C_C_First(
-		long groupId, long classNameId, long classPK,
-		OrderByComparator<CommerceAddress> orderByComparator) {
-
-		List<CommerceAddress> list = findByG_C_C(
-			groupId, classNameId, classPK, 0, 1, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the last commerce address in the ordered set where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param classNameId the class name ID
-	 * @param classPK the class pk
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching commerce address
-	 * @throws NoSuchAddressException if a matching commerce address could not be found
-	 */
-	@Override
-	public CommerceAddress findByG_C_C_Last(
-			long groupId, long classNameId, long classPK,
-			OrderByComparator<CommerceAddress> orderByComparator)
-		throws NoSuchAddressException {
-
-		CommerceAddress commerceAddress = fetchByG_C_C_Last(
-			groupId, classNameId, classPK, orderByComparator);
-
-		if (commerceAddress != null) {
-			return commerceAddress;
-		}
-
-		StringBundler msg = new StringBundler(8);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("groupId=");
-		msg.append(groupId);
-
-		msg.append(", classNameId=");
-		msg.append(classNameId);
-
-		msg.append(", classPK=");
-		msg.append(classPK);
-
-		msg.append("}");
-
-		throw new NoSuchAddressException(msg.toString());
-	}
-
-	/**
-	 * Returns the last commerce address in the ordered set where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param classNameId the class name ID
-	 * @param classPK the class pk
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching commerce address, or <code>null</code> if a matching commerce address could not be found
-	 */
-	@Override
-	public CommerceAddress fetchByG_C_C_Last(
-		long groupId, long classNameId, long classPK,
-		OrderByComparator<CommerceAddress> orderByComparator) {
-
-		int count = countByG_C_C(groupId, classNameId, classPK);
-
-		if (count == 0) {
-			return null;
-		}
-
-		List<CommerceAddress> list = findByG_C_C(
-			groupId, classNameId, classPK, count - 1, count, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the commerce addresses before and after the current commerce address in the ordered set where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
-	 *
-	 * @param commerceAddressId the primary key of the current commerce address
-	 * @param groupId the group ID
-	 * @param classNameId the class name ID
-	 * @param classPK the class pk
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next commerce address
-	 * @throws NoSuchAddressException if a commerce address with the primary key could not be found
-	 */
-	@Override
-	public CommerceAddress[] findByG_C_C_PrevAndNext(
-			long commerceAddressId, long groupId, long classNameId,
-			long classPK, OrderByComparator<CommerceAddress> orderByComparator)
-		throws NoSuchAddressException {
-
-		CommerceAddress commerceAddress = findByPrimaryKey(commerceAddressId);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			CommerceAddress[] array = new CommerceAddressImpl[3];
-
-			array[0] = getByG_C_C_PrevAndNext(
-				session, commerceAddress, groupId, classNameId, classPK,
-				orderByComparator, true);
-
-			array[1] = commerceAddress;
-
-			array[2] = getByG_C_C_PrevAndNext(
-				session, commerceAddress, groupId, classNameId, classPK,
-				orderByComparator, false);
-
-			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected CommerceAddress getByG_C_C_PrevAndNext(
-		Session session, CommerceAddress commerceAddress, long groupId,
-		long classNameId, long classPK,
-		OrderByComparator<CommerceAddress> orderByComparator,
-		boolean previous) {
-
-		StringBundler query = null;
-
-		if (orderByComparator != null) {
-			query = new StringBundler(
-				6 + (orderByComparator.getOrderByConditionFields().length * 3) +
-					(orderByComparator.getOrderByFields().length * 3));
-		}
-		else {
-			query = new StringBundler(5);
-		}
-
-		query.append(_SQL_SELECT_COMMERCEADDRESS_WHERE);
-
-		query.append(_FINDER_COLUMN_G_C_C_GROUPID_2);
-
-		query.append(_FINDER_COLUMN_G_C_C_CLASSNAMEID_2);
-
-		query.append(_FINDER_COLUMN_G_C_C_CLASSPK_2);
-
-		if (orderByComparator != null) {
-			String[] orderByConditionFields =
-				orderByComparator.getOrderByConditionFields();
-
-			if (orderByConditionFields.length > 0) {
-				query.append(WHERE_AND);
-			}
-
-			for (int i = 0; i < orderByConditionFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByConditionFields[i]);
-
-				if ((i + 1) < orderByConditionFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN_HAS_NEXT);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN);
-					}
-				}
-			}
-
-			query.append(ORDER_BY_CLAUSE);
-
-			String[] orderByFields = orderByComparator.getOrderByFields();
-
-			for (int i = 0; i < orderByFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByFields[i]);
-
-				if ((i + 1) < orderByFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC_HAS_NEXT);
-					}
-					else {
-						query.append(ORDER_BY_DESC_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC);
-					}
-					else {
-						query.append(ORDER_BY_DESC);
-					}
-				}
-			}
-		}
-		else {
-			query.append(CommerceAddressModelImpl.ORDER_BY_JPQL);
-		}
-
-		String sql = query.toString();
-
-		Query q = session.createQuery(sql);
-
-		q.setFirstResult(0);
-		q.setMaxResults(2);
-
-		QueryPos qPos = QueryPos.getInstance(q);
-
-		qPos.add(groupId);
-
-		qPos.add(classNameId);
-
-		qPos.add(classPK);
-
-		if (orderByComparator != null) {
-			for (Object orderByConditionValue :
-					orderByComparator.getOrderByConditionValues(
-						commerceAddress)) {
-
-				qPos.add(orderByConditionValue);
-			}
-		}
-
-		List<CommerceAddress> list = q.list();
-
-		if (list.size() == 2) {
-			return list.get(1);
-		}
-		else {
-			return null;
-		}
-	}
-
-	/**
-	 * Removes all the commerce addresses where groupId = &#63; and classNameId = &#63; and classPK = &#63; from the database.
-	 *
-	 * @param groupId the group ID
-	 * @param classNameId the class name ID
-	 * @param classPK the class pk
-	 */
-	@Override
-	public void removeByG_C_C(long groupId, long classNameId, long classPK) {
-		for (CommerceAddress commerceAddress :
-				findByG_C_C(
-					groupId, classNameId, classPK, QueryUtil.ALL_POS,
-					QueryUtil.ALL_POS, null)) {
-
-			remove(commerceAddress);
-		}
-	}
-
-	/**
-	 * Returns the number of commerce addresses where groupId = &#63; and classNameId = &#63; and classPK = &#63;.
-	 *
-	 * @param groupId the group ID
-	 * @param classNameId the class name ID
-	 * @param classPK the class pk
-	 * @return the number of matching commerce addresses
-	 */
-	@Override
-	public int countByG_C_C(long groupId, long classNameId, long classPK) {
-		FinderPath finderPath = _finderPathCountByG_C_C;
-
-		Object[] finderArgs = new Object[] {groupId, classNameId, classPK};
-
-		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(4);
-
-			query.append(_SQL_COUNT_COMMERCEADDRESS_WHERE);
-
-			query.append(_FINDER_COLUMN_G_C_C_GROUPID_2);
-
-			query.append(_FINDER_COLUMN_G_C_C_CLASSNAMEID_2);
-
-			query.append(_FINDER_COLUMN_G_C_C_CLASSPK_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				qPos.add(classNameId);
-
-				qPos.add(classPK);
-
-				count = (Long)q.uniqueResult();
-
-				finderCache.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String _FINDER_COLUMN_G_C_C_GROUPID_2 =
-		"commerceAddress.groupId = ? AND ";
-
-	private static final String _FINDER_COLUMN_G_C_C_CLASSNAMEID_2 =
-		"commerceAddress.classNameId = ? AND ";
-
-	private static final String _FINDER_COLUMN_G_C_C_CLASSPK_2 =
 		"commerceAddress.classPK = ?";
 
 	private FinderPath _finderPathWithPaginationFindByG_C_C_DB;
@@ -4842,6 +4199,649 @@ public class CommerceAddressPersistenceImpl
 	private static final String _FINDER_COLUMN_G_C_C_DS_DEFAULTSHIPPING_2 =
 		"commerceAddress.defaultShipping = ?";
 
+	private FinderPath _finderPathWithPaginationFindByC_C_C_C;
+	private FinderPath _finderPathWithoutPaginationFindByC_C_C_C;
+	private FinderPath _finderPathCountByC_C_C_C;
+
+	/**
+	 * Returns all the commerce addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param type the type
+	 * @return the matching commerce addresses
+	 */
+	@Override
+	public List<CommerceAddress> findByC_C_C_C(
+		long companyId, long classNameId, long classPK, int type) {
+
+		return findByC_C_C_C(
+			companyId, classNameId, classPK, type, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the commerce addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param type the type
+	 * @param start the lower bound of the range of commerce addresses
+	 * @param end the upper bound of the range of commerce addresses (not inclusive)
+	 * @return the range of matching commerce addresses
+	 */
+	@Override
+	public List<CommerceAddress> findByC_C_C_C(
+		long companyId, long classNameId, long classPK, int type, int start,
+		int end) {
+
+		return findByC_C_C_C(
+			companyId, classNameId, classPK, type, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param type the type
+	 * @param start the lower bound of the range of commerce addresses
+	 * @param end the upper bound of the range of commerce addresses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce addresses
+	 */
+	@Override
+	public List<CommerceAddress> findByC_C_C_C(
+		long companyId, long classNameId, long classPK, int type, int start,
+		int end, OrderByComparator<CommerceAddress> orderByComparator) {
+
+		return findByC_C_C_C(
+			companyId, classNameId, classPK, type, start, end,
+			orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAddressModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param type the type
+	 * @param start the lower bound of the range of commerce addresses
+	 * @param end the upper bound of the range of commerce addresses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching commerce addresses
+	 */
+	@Override
+	public List<CommerceAddress> findByC_C_C_C(
+		long companyId, long classNameId, long classPK, int type, int start,
+		int end, OrderByComparator<CommerceAddress> orderByComparator,
+		boolean useFinderCache) {
+
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+			(orderByComparator == null)) {
+
+			pagination = false;
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByC_C_C_C;
+				finderArgs = new Object[] {
+					companyId, classNameId, classPK, type
+				};
+			}
+		}
+		else if (useFinderCache) {
+			finderPath = _finderPathWithPaginationFindByC_C_C_C;
+			finderArgs = new Object[] {
+				companyId, classNameId, classPK, type, start, end,
+				orderByComparator
+			};
+		}
+
+		List<CommerceAddress> list = null;
+
+		if (useFinderCache) {
+			list = (List<CommerceAddress>)finderCache.getResult(
+				finderPath, finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (CommerceAddress commerceAddress : list) {
+					if ((companyId != commerceAddress.getCompanyId()) ||
+						(classNameId != commerceAddress.getClassNameId()) ||
+						(classPK != commerceAddress.getClassPK()) ||
+						(type != commerceAddress.getType())) {
+
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(
+					6 + (orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(6);
+			}
+
+			query.append(_SQL_SELECT_COMMERCEADDRESS_WHERE);
+
+			query.append(_FINDER_COLUMN_C_C_C_C_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_C_C_C_C_CLASSNAMEID_2);
+
+			query.append(_FINDER_COLUMN_C_C_C_C_CLASSPK_2);
+
+			query.append(_FINDER_COLUMN_C_C_C_C_TYPE_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
+			}
+			else if (pagination) {
+				query.append(CommerceAddressModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(classNameId);
+
+				qPos.add(classPK);
+
+				qPos.add(type);
+
+				if (!pagination) {
+					list = (List<CommerceAddress>)QueryUtil.list(
+						q, getDialect(), start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<CommerceAddress>)QueryUtil.list(
+						q, getDialect(), start, end);
+				}
+
+				cacheResult(list);
+
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
+			}
+			catch (Exception e) {
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first commerce address in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param type the type
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce address
+	 * @throws NoSuchAddressException if a matching commerce address could not be found
+	 */
+	@Override
+	public CommerceAddress findByC_C_C_C_First(
+			long companyId, long classNameId, long classPK, int type,
+			OrderByComparator<CommerceAddress> orderByComparator)
+		throws NoSuchAddressException {
+
+		CommerceAddress commerceAddress = fetchByC_C_C_C_First(
+			companyId, classNameId, classPK, type, orderByComparator);
+
+		if (commerceAddress != null) {
+			return commerceAddress;
+		}
+
+		StringBundler msg = new StringBundler(10);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("companyId=");
+		msg.append(companyId);
+
+		msg.append(", classNameId=");
+		msg.append(classNameId);
+
+		msg.append(", classPK=");
+		msg.append(classPK);
+
+		msg.append(", type=");
+		msg.append(type);
+
+		msg.append("}");
+
+		throw new NoSuchAddressException(msg.toString());
+	}
+
+	/**
+	 * Returns the first commerce address in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param type the type
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce address, or <code>null</code> if a matching commerce address could not be found
+	 */
+	@Override
+	public CommerceAddress fetchByC_C_C_C_First(
+		long companyId, long classNameId, long classPK, int type,
+		OrderByComparator<CommerceAddress> orderByComparator) {
+
+		List<CommerceAddress> list = findByC_C_C_C(
+			companyId, classNameId, classPK, type, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last commerce address in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param type the type
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce address
+	 * @throws NoSuchAddressException if a matching commerce address could not be found
+	 */
+	@Override
+	public CommerceAddress findByC_C_C_C_Last(
+			long companyId, long classNameId, long classPK, int type,
+			OrderByComparator<CommerceAddress> orderByComparator)
+		throws NoSuchAddressException {
+
+		CommerceAddress commerceAddress = fetchByC_C_C_C_Last(
+			companyId, classNameId, classPK, type, orderByComparator);
+
+		if (commerceAddress != null) {
+			return commerceAddress;
+		}
+
+		StringBundler msg = new StringBundler(10);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("companyId=");
+		msg.append(companyId);
+
+		msg.append(", classNameId=");
+		msg.append(classNameId);
+
+		msg.append(", classPK=");
+		msg.append(classPK);
+
+		msg.append(", type=");
+		msg.append(type);
+
+		msg.append("}");
+
+		throw new NoSuchAddressException(msg.toString());
+	}
+
+	/**
+	 * Returns the last commerce address in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param type the type
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce address, or <code>null</code> if a matching commerce address could not be found
+	 */
+	@Override
+	public CommerceAddress fetchByC_C_C_C_Last(
+		long companyId, long classNameId, long classPK, int type,
+		OrderByComparator<CommerceAddress> orderByComparator) {
+
+		int count = countByC_C_C_C(companyId, classNameId, classPK, type);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<CommerceAddress> list = findByC_C_C_C(
+			companyId, classNameId, classPK, type, count - 1, count,
+			orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the commerce addresses before and after the current commerce address in the ordered set where companyId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63;.
+	 *
+	 * @param commerceAddressId the primary key of the current commerce address
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param type the type
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce address
+	 * @throws NoSuchAddressException if a commerce address with the primary key could not be found
+	 */
+	@Override
+	public CommerceAddress[] findByC_C_C_C_PrevAndNext(
+			long commerceAddressId, long companyId, long classNameId,
+			long classPK, int type,
+			OrderByComparator<CommerceAddress> orderByComparator)
+		throws NoSuchAddressException {
+
+		CommerceAddress commerceAddress = findByPrimaryKey(commerceAddressId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CommerceAddress[] array = new CommerceAddressImpl[3];
+
+			array[0] = getByC_C_C_C_PrevAndNext(
+				session, commerceAddress, companyId, classNameId, classPK, type,
+				orderByComparator, true);
+
+			array[1] = commerceAddress;
+
+			array[2] = getByC_C_C_C_PrevAndNext(
+				session, commerceAddress, companyId, classNameId, classPK, type,
+				orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected CommerceAddress getByC_C_C_C_PrevAndNext(
+		Session session, CommerceAddress commerceAddress, long companyId,
+		long classNameId, long classPK, int type,
+		OrderByComparator<CommerceAddress> orderByComparator,
+		boolean previous) {
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(
+				7 + (orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(6);
+		}
+
+		query.append(_SQL_SELECT_COMMERCEADDRESS_WHERE);
+
+		query.append(_FINDER_COLUMN_C_C_C_C_COMPANYID_2);
+
+		query.append(_FINDER_COLUMN_C_C_C_C_CLASSNAMEID_2);
+
+		query.append(_FINDER_COLUMN_C_C_C_C_CLASSPK_2);
+
+		query.append(_FINDER_COLUMN_C_C_C_C_TYPE_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(CommerceAddressModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(companyId);
+
+		qPos.add(classNameId);
+
+		qPos.add(classPK);
+
+		qPos.add(type);
+
+		if (orderByComparator != null) {
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceAddress)) {
+
+				qPos.add(orderByConditionValue);
+			}
+		}
+
+		List<CommerceAddress> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the commerce addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63; from the database.
+	 *
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param type the type
+	 */
+	@Override
+	public void removeByC_C_C_C(
+		long companyId, long classNameId, long classPK, int type) {
+
+		for (CommerceAddress commerceAddress :
+				findByC_C_C_C(
+					companyId, classNameId, classPK, type, QueryUtil.ALL_POS,
+					QueryUtil.ALL_POS, null)) {
+
+			remove(commerceAddress);
+		}
+	}
+
+	/**
+	 * Returns the number of commerce addresses where companyId = &#63; and classNameId = &#63; and classPK = &#63; and type = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param type the type
+	 * @return the number of matching commerce addresses
+	 */
+	@Override
+	public int countByC_C_C_C(
+		long companyId, long classNameId, long classPK, int type) {
+
+		FinderPath finderPath = _finderPathCountByC_C_C_C;
+
+		Object[] finderArgs = new Object[] {
+			companyId, classNameId, classPK, type
+		};
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(5);
+
+			query.append(_SQL_COUNT_COMMERCEADDRESS_WHERE);
+
+			query.append(_FINDER_COLUMN_C_C_C_C_COMPANYID_2);
+
+			query.append(_FINDER_COLUMN_C_C_C_C_CLASSNAMEID_2);
+
+			query.append(_FINDER_COLUMN_C_C_C_C_CLASSPK_2);
+
+			query.append(_FINDER_COLUMN_C_C_C_C_TYPE_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(classNameId);
+
+				qPos.add(classPK);
+
+				qPos.add(type);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_C_C_C_C_COMPANYID_2 =
+		"commerceAddress.companyId = ? AND ";
+
+	private static final String _FINDER_COLUMN_C_C_C_C_CLASSNAMEID_2 =
+		"commerceAddress.classNameId = ? AND ";
+
+	private static final String _FINDER_COLUMN_C_C_C_C_CLASSPK_2 =
+		"commerceAddress.classPK = ? AND ";
+
+	private static final String _FINDER_COLUMN_C_C_C_C_TYPE_2 =
+		"commerceAddress.type = ?";
+
 	public CommerceAddressPersistenceImpl() {
 		setModelClass(CommerceAddress.class);
 
@@ -5152,27 +5152,6 @@ public class CommerceAddressPersistenceImpl
 				_finderPathWithoutPaginationFindByC_C, args);
 
 			args = new Object[] {
-				commerceAddressModelImpl.getCompanyId(),
-				commerceAddressModelImpl.getClassNameId(),
-				commerceAddressModelImpl.getClassPK()
-			};
-
-			finderCache.removeResult(_finderPathCountByC_C_C, args);
-			finderCache.removeResult(
-				_finderPathWithoutPaginationFindByC_C_C, args);
-
-			args = new Object[] {
-				commerceAddressModelImpl.getCompanyId(),
-				commerceAddressModelImpl.getClassNameId(),
-				commerceAddressModelImpl.getClassPK(),
-				commerceAddressModelImpl.getType()
-			};
-
-			finderCache.removeResult(_finderPathCountByC_C_C_C, args);
-			finderCache.removeResult(
-				_finderPathWithoutPaginationFindByC_C_C_C, args);
-
-			args = new Object[] {
 				commerceAddressModelImpl.getGroupId(),
 				commerceAddressModelImpl.getClassNameId(),
 				commerceAddressModelImpl.getClassPK()
@@ -5181,6 +5160,16 @@ public class CommerceAddressPersistenceImpl
 			finderCache.removeResult(_finderPathCountByG_C_C, args);
 			finderCache.removeResult(
 				_finderPathWithoutPaginationFindByG_C_C, args);
+
+			args = new Object[] {
+				commerceAddressModelImpl.getCompanyId(),
+				commerceAddressModelImpl.getClassNameId(),
+				commerceAddressModelImpl.getClassPK()
+			};
+
+			finderCache.removeResult(_finderPathCountByC_C_C, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByC_C_C, args);
 
 			args = new Object[] {
 				commerceAddressModelImpl.getGroupId(),
@@ -5203,6 +5192,17 @@ public class CommerceAddressPersistenceImpl
 			finderCache.removeResult(_finderPathCountByG_C_C_DS, args);
 			finderCache.removeResult(
 				_finderPathWithoutPaginationFindByG_C_C_DS, args);
+
+			args = new Object[] {
+				commerceAddressModelImpl.getCompanyId(),
+				commerceAddressModelImpl.getClassNameId(),
+				commerceAddressModelImpl.getClassPK(),
+				commerceAddressModelImpl.getType()
+			};
+
+			finderCache.removeResult(_finderPathCountByC_C_C_C, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByC_C_C_C, args);
 
 			finderCache.removeResult(_finderPathCountAll, FINDER_ARGS_EMPTY);
 			finderCache.removeResult(
@@ -5279,58 +5279,6 @@ public class CommerceAddressPersistenceImpl
 			}
 
 			if ((commerceAddressModelImpl.getColumnBitmask() &
-				 _finderPathWithoutPaginationFindByC_C_C.getColumnBitmask()) !=
-					 0) {
-
-				Object[] args = new Object[] {
-					commerceAddressModelImpl.getOriginalCompanyId(),
-					commerceAddressModelImpl.getOriginalClassNameId(),
-					commerceAddressModelImpl.getOriginalClassPK()
-				};
-
-				finderCache.removeResult(_finderPathCountByC_C_C, args);
-				finderCache.removeResult(
-					_finderPathWithoutPaginationFindByC_C_C, args);
-
-				args = new Object[] {
-					commerceAddressModelImpl.getCompanyId(),
-					commerceAddressModelImpl.getClassNameId(),
-					commerceAddressModelImpl.getClassPK()
-				};
-
-				finderCache.removeResult(_finderPathCountByC_C_C, args);
-				finderCache.removeResult(
-					_finderPathWithoutPaginationFindByC_C_C, args);
-			}
-
-			if ((commerceAddressModelImpl.getColumnBitmask() &
-				 _finderPathWithoutPaginationFindByC_C_C_C.
-					 getColumnBitmask()) != 0) {
-
-				Object[] args = new Object[] {
-					commerceAddressModelImpl.getOriginalCompanyId(),
-					commerceAddressModelImpl.getOriginalClassNameId(),
-					commerceAddressModelImpl.getOriginalClassPK(),
-					commerceAddressModelImpl.getOriginalType()
-				};
-
-				finderCache.removeResult(_finderPathCountByC_C_C_C, args);
-				finderCache.removeResult(
-					_finderPathWithoutPaginationFindByC_C_C_C, args);
-
-				args = new Object[] {
-					commerceAddressModelImpl.getCompanyId(),
-					commerceAddressModelImpl.getClassNameId(),
-					commerceAddressModelImpl.getClassPK(),
-					commerceAddressModelImpl.getType()
-				};
-
-				finderCache.removeResult(_finderPathCountByC_C_C_C, args);
-				finderCache.removeResult(
-					_finderPathWithoutPaginationFindByC_C_C_C, args);
-			}
-
-			if ((commerceAddressModelImpl.getColumnBitmask() &
 				 _finderPathWithoutPaginationFindByG_C_C.getColumnBitmask()) !=
 					 0) {
 
@@ -5353,6 +5301,31 @@ public class CommerceAddressPersistenceImpl
 				finderCache.removeResult(_finderPathCountByG_C_C, args);
 				finderCache.removeResult(
 					_finderPathWithoutPaginationFindByG_C_C, args);
+			}
+
+			if ((commerceAddressModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByC_C_C.getColumnBitmask()) !=
+					 0) {
+
+				Object[] args = new Object[] {
+					commerceAddressModelImpl.getOriginalCompanyId(),
+					commerceAddressModelImpl.getOriginalClassNameId(),
+					commerceAddressModelImpl.getOriginalClassPK()
+				};
+
+				finderCache.removeResult(_finderPathCountByC_C_C, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByC_C_C, args);
+
+				args = new Object[] {
+					commerceAddressModelImpl.getCompanyId(),
+					commerceAddressModelImpl.getClassNameId(),
+					commerceAddressModelImpl.getClassPK()
+				};
+
+				finderCache.removeResult(_finderPathCountByC_C_C, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByC_C_C, args);
 			}
 
 			if ((commerceAddressModelImpl.getColumnBitmask() &
@@ -5407,6 +5380,33 @@ public class CommerceAddressPersistenceImpl
 				finderCache.removeResult(_finderPathCountByG_C_C_DS, args);
 				finderCache.removeResult(
 					_finderPathWithoutPaginationFindByG_C_C_DS, args);
+			}
+
+			if ((commerceAddressModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByC_C_C_C.
+					 getColumnBitmask()) != 0) {
+
+				Object[] args = new Object[] {
+					commerceAddressModelImpl.getOriginalCompanyId(),
+					commerceAddressModelImpl.getOriginalClassNameId(),
+					commerceAddressModelImpl.getOriginalClassPK(),
+					commerceAddressModelImpl.getOriginalType()
+				};
+
+				finderCache.removeResult(_finderPathCountByC_C_C_C, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByC_C_C_C, args);
+
+				args = new Object[] {
+					commerceAddressModelImpl.getCompanyId(),
+					commerceAddressModelImpl.getClassNameId(),
+					commerceAddressModelImpl.getClassPK(),
+					commerceAddressModelImpl.getType()
+				};
+
+				finderCache.removeResult(_finderPathCountByC_C_C_C, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByC_C_C_C, args);
 			}
 		}
 
@@ -5934,74 +5934,6 @@ public class CommerceAddressPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_C",
 			new String[] {Long.class.getName(), Long.class.getName()});
 
-		_finderPathWithPaginationFindByC_C_C = new FinderPath(
-			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
-			CommerceAddressImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByC_C_C",
-			new String[] {
-				Long.class.getName(), Long.class.getName(),
-				Long.class.getName(), Integer.class.getName(),
-				Integer.class.getName(), OrderByComparator.class.getName()
-			});
-
-		_finderPathWithoutPaginationFindByC_C_C = new FinderPath(
-			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
-			CommerceAddressImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByC_C_C",
-			new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName()
-			},
-			CommerceAddressModelImpl.COMPANYID_COLUMN_BITMASK |
-			CommerceAddressModelImpl.CLASSNAMEID_COLUMN_BITMASK |
-			CommerceAddressModelImpl.CLASSPK_COLUMN_BITMASK |
-			CommerceAddressModelImpl.CREATEDATE_COLUMN_BITMASK);
-
-		_finderPathCountByC_C_C = new FinderPath(
-			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_C_C",
-			new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName()
-			});
-
-		_finderPathWithPaginationFindByC_C_C_C = new FinderPath(
-			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
-			CommerceAddressImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByC_C_C_C",
-			new String[] {
-				Long.class.getName(), Long.class.getName(),
-				Long.class.getName(), Integer.class.getName(),
-				Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-
-		_finderPathWithoutPaginationFindByC_C_C_C = new FinderPath(
-			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
-			CommerceAddressImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByC_C_C_C",
-			new String[] {
-				Long.class.getName(), Long.class.getName(),
-				Long.class.getName(), Integer.class.getName()
-			},
-			CommerceAddressModelImpl.COMPANYID_COLUMN_BITMASK |
-			CommerceAddressModelImpl.CLASSNAMEID_COLUMN_BITMASK |
-			CommerceAddressModelImpl.CLASSPK_COLUMN_BITMASK |
-			CommerceAddressModelImpl.TYPE_COLUMN_BITMASK |
-			CommerceAddressModelImpl.CREATEDATE_COLUMN_BITMASK);
-
-		_finderPathCountByC_C_C_C = new FinderPath(
-			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
-			CommerceAddressModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_C_C_C",
-			new String[] {
-				Long.class.getName(), Long.class.getName(),
-				Long.class.getName(), Integer.class.getName()
-			});
-
 		_finderPathWithPaginationFindByG_C_C = new FinderPath(
 			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
@@ -6030,6 +5962,38 @@ public class CommerceAddressPersistenceImpl
 			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceAddressModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_C_C",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName()
+			});
+
+		_finderPathWithPaginationFindByC_C_C = new FinderPath(
+			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAddressImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByC_C_C",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Long.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByC_C_C = new FinderPath(
+			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAddressImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByC_C_C",
+			new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName()
+			},
+			CommerceAddressModelImpl.COMPANYID_COLUMN_BITMASK |
+			CommerceAddressModelImpl.CLASSNAMEID_COLUMN_BITMASK |
+			CommerceAddressModelImpl.CLASSPK_COLUMN_BITMASK |
+			CommerceAddressModelImpl.CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByC_C_C = new FinderPath(
+			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_C_C",
 			new String[] {
 				Long.class.getName(), Long.class.getName(), Long.class.getName()
 			});
@@ -6104,6 +6068,42 @@ public class CommerceAddressPersistenceImpl
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
 				Long.class.getName(), Boolean.class.getName()
+			});
+
+		_finderPathWithPaginationFindByC_C_C_C = new FinderPath(
+			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAddressImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByC_C_C_C",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Long.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByC_C_C_C = new FinderPath(
+			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAddressImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByC_C_C_C",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Long.class.getName(), Integer.class.getName()
+			},
+			CommerceAddressModelImpl.COMPANYID_COLUMN_BITMASK |
+			CommerceAddressModelImpl.CLASSNAMEID_COLUMN_BITMASK |
+			CommerceAddressModelImpl.CLASSPK_COLUMN_BITMASK |
+			CommerceAddressModelImpl.TYPE_COLUMN_BITMASK |
+			CommerceAddressModelImpl.CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByC_C_C_C = new FinderPath(
+			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_C_C_C",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Long.class.getName(), Integer.class.getName()
 			});
 	}
 
