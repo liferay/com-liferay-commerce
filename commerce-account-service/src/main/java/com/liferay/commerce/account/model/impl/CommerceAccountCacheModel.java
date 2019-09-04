@@ -97,6 +97,10 @@ public class CommerceAccountCacheModel
 		sb.append(active);
 		sb.append(", displayDate=");
 		sb.append(displayDate);
+		sb.append(", defaultBillingAddressId=");
+		sb.append(defaultBillingAddressId);
+		sb.append(", defaultShippingAddressId=");
+		sb.append(defaultShippingAddressId);
 		sb.append(", expirationDate=");
 		sb.append(expirationDate);
 		sb.append(", lastPublishDate=");
@@ -109,10 +113,6 @@ public class CommerceAccountCacheModel
 		sb.append(statusByUserName);
 		sb.append(", statusDate=");
 		sb.append(statusDate);
-		sb.append(", defaultBillingAddressId=");
-		sb.append(defaultBillingAddressId);
-		sb.append(", defaultShippingAddressId=");
-		sb.append(defaultShippingAddressId);
 		sb.append("}");
 
 		return sb.toString();
@@ -189,6 +189,10 @@ public class CommerceAccountCacheModel
 			commerceAccountImpl.setDisplayDate(new Date(displayDate));
 		}
 
+		commerceAccountImpl.setDefaultBillingAddressId(defaultBillingAddressId);
+		commerceAccountImpl.setDefaultShippingAddressId(
+			defaultShippingAddressId);
+
 		if (expirationDate == Long.MIN_VALUE) {
 			commerceAccountImpl.setExpirationDate(null);
 		}
@@ -220,10 +224,6 @@ public class CommerceAccountCacheModel
 			commerceAccountImpl.setStatusDate(new Date(statusDate));
 		}
 
-		commerceAccountImpl.setDefaultBillingAddressId(defaultBillingAddressId);
-		commerceAccountImpl.setDefaultShippingAddressId(
-			defaultShippingAddressId);
-
 		commerceAccountImpl.resetOriginalValues();
 
 		return commerceAccountImpl;
@@ -253,6 +253,10 @@ public class CommerceAccountCacheModel
 
 		active = objectInput.readBoolean();
 		displayDate = objectInput.readLong();
+
+		defaultBillingAddressId = objectInput.readLong();
+
+		defaultShippingAddressId = objectInput.readLong();
 		expirationDate = objectInput.readLong();
 		lastPublishDate = objectInput.readLong();
 
@@ -261,10 +265,6 @@ public class CommerceAccountCacheModel
 		statusByUserId = objectInput.readLong();
 		statusByUserName = objectInput.readUTF();
 		statusDate = objectInput.readLong();
-
-		defaultBillingAddressId = objectInput.readLong();
-
-		defaultShippingAddressId = objectInput.readLong();
 	}
 
 	@Override
@@ -321,6 +321,10 @@ public class CommerceAccountCacheModel
 
 		objectOutput.writeBoolean(active);
 		objectOutput.writeLong(displayDate);
+
+		objectOutput.writeLong(defaultBillingAddressId);
+
+		objectOutput.writeLong(defaultShippingAddressId);
 		objectOutput.writeLong(expirationDate);
 		objectOutput.writeLong(lastPublishDate);
 
@@ -336,10 +340,6 @@ public class CommerceAccountCacheModel
 		}
 
 		objectOutput.writeLong(statusDate);
-
-		objectOutput.writeLong(defaultBillingAddressId);
-
-		objectOutput.writeLong(defaultShippingAddressId);
 	}
 
 	public String externalReferenceCode;
@@ -357,13 +357,13 @@ public class CommerceAccountCacheModel
 	public int type;
 	public boolean active;
 	public long displayDate;
+	public long defaultBillingAddressId;
+	public long defaultShippingAddressId;
 	public long expirationDate;
 	public long lastPublishDate;
 	public int status;
 	public long statusByUserId;
 	public String statusByUserName;
 	public long statusDate;
-	public long defaultBillingAddressId;
-	public long defaultShippingAddressId;
 
 }
