@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 
-import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -98,20 +97,7 @@ public class AvailabilityCommerceOrderValidatorImpl
 			cpInstance.getCompanyId(), commerceOrder.getGroupId(),
 			cpInstance.getSku());
 
-		List<CommerceOrderItem> commerceOrderItems =
-			commerceOrder.getCommerceOrderItems(cpInstance.getCPInstanceId());
-
-		int orderQuantity = 0;
-
-		if (!commerceOrderItems.isEmpty()) {
-			CommerceOrderItem commerceOrderItem = commerceOrderItems.get(0);
-
-			orderQuantity = commerceOrderItem.getQuantity();
-		}
-
-		orderQuantity += quantity;
-
-		if (orderQuantity > availableQuantity) {
+		if (quantity > availableQuantity) {
 			return new CommerceOrderValidatorResult(
 				false,
 				_getLocalizedMessage(locale, "that-quantity-is-unavailable"));
