@@ -6,7 +6,7 @@ dependencies {
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.currency.api", version: "2.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.discount.api", version: "3.1.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.price.list.api", version: "4.1.0"
-	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.api", version: "11.0.0"
+	compileOnly project(":apps:commerce:commerce-product-api")
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.headless.commerce.admin.pricing.api", version: "4.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.headless.commerce.core.api", version: "1.1.0"
 	compileOnly group: "com.liferay.portal", name: "release.portal.api", version: "7.1.1"
