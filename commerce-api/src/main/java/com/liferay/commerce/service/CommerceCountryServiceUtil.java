@@ -70,6 +70,14 @@ public class CommerceCountryServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.model.CommerceCountry>
+		getBillingCommerceCountriesByChannelId(
+			long commerceChannelId, int start, int end) {
+
+		return getService().getBillingCommerceCountriesByChannelId(
+			commerceChannelId, start, end);
+	}
+
+	public static java.util.List<com.liferay.commerce.model.CommerceCountry>
 		getCommerceCountries(long companyId, boolean active) {
 
 		return getService().getCommerceCountries(companyId, active);
@@ -143,6 +151,14 @@ public class CommerceCountryServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.model.CommerceCountry>
+		getShippingCommerceCountriesByChannelId(
+			long commerceChannelId, int start, int end) {
+
+		return getService().getShippingCommerceCountriesByChannelId(
+			commerceChannelId, start, end);
+	}
+
+	public static java.util.List<com.liferay.commerce.model.CommerceCountry>
 			getWarehouseCommerceCountries(long companyId, boolean all)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
@@ -179,6 +195,15 @@ public class CommerceCountryServiceUtil {
 			commerceCountryId, nameMap, billingAllowed, shippingAllowed,
 			twoLettersISOCode, threeLettersISOCode, numericISOCode,
 			subjectToVAT, priority, active, serviceContext);
+	}
+
+	public static com.liferay.commerce.model.CommerceCountry
+			updateCommerceCountryChannelFilter(
+				long commerceCountryId, boolean enable)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().updateCommerceCountryChannelFilter(
+			commerceCountryId, enable);
 	}
 
 	public static CommerceCountryService getService() {
