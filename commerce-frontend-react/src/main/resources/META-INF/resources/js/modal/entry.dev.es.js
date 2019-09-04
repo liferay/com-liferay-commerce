@@ -16,6 +16,7 @@ const props = {
 	submitLabel: 'Create',
 	showCancel: true,
 	size: 'full-scfeen',
+	closeOnSubmit: true
 };
 
 // declare global {
@@ -28,7 +29,7 @@ const modalTrigger = launcher(
 	() => (
 		<button 
 			className="btn btn-primary"
-			onClick={() => modal.open()}
+			onClick={() => window.dispatchEvent(new Event('zeasc-open'))}
 		>
 			Open modal
 		</button>
