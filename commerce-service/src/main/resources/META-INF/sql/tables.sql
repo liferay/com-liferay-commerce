@@ -103,7 +103,8 @@ create table CommerceCountry (
 	subjectToVAT BOOLEAN,
 	priority DOUBLE,
 	active_ BOOLEAN,
-	lastPublishDate DATE null
+	lastPublishDate DATE null,
+	channelFilterEnabled BOOLEAN
 );
 
 create table CommerceOrder (

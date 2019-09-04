@@ -89,6 +89,7 @@
 		</field>
 		<field name="active" type="boolean" />
 		<field name="lastPublishDate" type="Date" />
+		<field name="channelFilterEnabled" type="boolean" />
 	</model>
 	<model name="com.liferay.commerce.model.CommerceOrder">
 		<field name="uuid" type="String" />

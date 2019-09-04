@@ -451,6 +451,27 @@ public interface CommerceCountryModel
 	 */
 	public void setLastPublishDate(Date lastPublishDate);
 
+	/**
+	 * Returns the channel filter enabled of this commerce country.
+	 *
+	 * @return the channel filter enabled of this commerce country
+	 */
+	public boolean getChannelFilterEnabled();
+
+	/**
+	 * Returns <code>true</code> if this commerce country is channel filter enabled.
+	 *
+	 * @return <code>true</code> if this commerce country is channel filter enabled; <code>false</code> otherwise
+	 */
+	public boolean isChannelFilterEnabled();
+
+	/**
+	 * Sets whether this commerce country is channel filter enabled.
+	 *
+	 * @param channelFilterEnabled the channel filter enabled of this commerce country
+	 */
+	public void setChannelFilterEnabled(boolean channelFilterEnabled);
+
 	@Override
 	public boolean isNew();
 

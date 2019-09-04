@@ -51,6 +51,7 @@ public class CommerceCountrySoap implements Serializable {
 		soapModel.setPriority(model.getPriority());
 		soapModel.setActive(model.isActive());
 		soapModel.setLastPublishDate(model.getLastPublishDate());
+		soapModel.setChannelFilterEnabled(model.isChannelFilterEnabled());
 
 		return soapModel;
 	}
@@ -262,6 +263,18 @@ public class CommerceCountrySoap implements Serializable {
 		_lastPublishDate = lastPublishDate;
 	}
 
+	public boolean getChannelFilterEnabled() {
+		return _channelFilterEnabled;
+	}
+
+	public boolean isChannelFilterEnabled() {
+		return _channelFilterEnabled;
+	}
+
+	public void setChannelFilterEnabled(boolean channelFilterEnabled) {
+		_channelFilterEnabled = channelFilterEnabled;
+	}
+
 	private String _uuid;
 	private long _commerceCountryId;
 	private long _companyId;
@@ -279,5 +292,6 @@ public class CommerceCountrySoap implements Serializable {
 	private double _priority;
 	private boolean _active;
 	private Date _lastPublishDate;
+	private boolean _channelFilterEnabled;
 
 }

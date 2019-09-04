@@ -81,6 +81,10 @@ public interface CommerceCountryService extends BaseService {
 		long companyId, boolean billingAllowed, boolean active);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceCountry> getBillingCommerceCountriesByChannelId(
+		long commerceChannelId, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceCountry> getCommerceCountries(
 		long companyId, boolean active);
 
@@ -124,6 +128,10 @@ public interface CommerceCountryService extends BaseService {
 		long companyId, boolean shippingAllowed, boolean active);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceCountry> getShippingCommerceCountriesByChannelId(
+		long commerceChannelId, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceCountry> getWarehouseCommerceCountries(
 			long companyId, boolean all)
 		throws PortalException;
@@ -142,6 +150,10 @@ public interface CommerceCountryService extends BaseService {
 			String twoLettersISOCode, String threeLettersISOCode,
 			int numericISOCode, boolean subjectToVAT, double priority,
 			boolean active, ServiceContext serviceContext)
+		throws PortalException;
+
+	public CommerceCountry updateCommerceCountryChannelFilter(
+			long commerceCountryId, boolean enable)
 		throws PortalException;
 
 }

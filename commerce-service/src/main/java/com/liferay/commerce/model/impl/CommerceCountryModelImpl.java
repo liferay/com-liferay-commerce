@@ -93,7 +93,8 @@ public class CommerceCountryModelImpl
 		{"threeLettersISOCode", Types.VARCHAR},
 		{"numericISOCode", Types.INTEGER}, {"subjectToVAT", Types.BOOLEAN},
 		{"priority", Types.DOUBLE}, {"active_", Types.BOOLEAN},
-		{"lastPublishDate", Types.TIMESTAMP}
+		{"lastPublishDate", Types.TIMESTAMP},
+		{"channelFilterEnabled", Types.BOOLEAN}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
@@ -117,10 +118,11 @@ public class CommerceCountryModelImpl
 		TABLE_COLUMNS_MAP.put("priority", Types.DOUBLE);
 		TABLE_COLUMNS_MAP.put("active_", Types.BOOLEAN);
 		TABLE_COLUMNS_MAP.put("lastPublishDate", Types.TIMESTAMP);
+		TABLE_COLUMNS_MAP.put("channelFilterEnabled", Types.BOOLEAN);
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CommerceCountry (uuid_ VARCHAR(75) null,commerceCountryId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name STRING null,billingAllowed BOOLEAN,shippingAllowed BOOLEAN,twoLettersISOCode VARCHAR(75) null,threeLettersISOCode VARCHAR(75) null,numericISOCode INTEGER,subjectToVAT BOOLEAN,priority DOUBLE,active_ BOOLEAN,lastPublishDate DATE null)";
+		"create table CommerceCountry (uuid_ VARCHAR(75) null,commerceCountryId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name STRING null,billingAllowed BOOLEAN,shippingAllowed BOOLEAN,twoLettersISOCode VARCHAR(75) null,threeLettersISOCode VARCHAR(75) null,numericISOCode INTEGER,subjectToVAT BOOLEAN,priority DOUBLE,active_ BOOLEAN,lastPublishDate DATE null,channelFilterEnabled BOOLEAN)";
 
 	public static final String TABLE_SQL_DROP = "drop table CommerceCountry";
 
@@ -197,6 +199,7 @@ public class CommerceCountryModelImpl
 		model.setPriority(soapModel.getPriority());
 		model.setActive(soapModel.isActive());
 		model.setLastPublishDate(soapModel.getLastPublishDate());
+		model.setChannelFilterEnabled(soapModel.isChannelFilterEnabled());
 
 		return model;
 	}
@@ -733,6 +736,30 @@ public class CommerceCountryModelImpl
 				}
 
 			});
+		attributeGetterFunctions.put(
+			"channelFilterEnabled",
+			new Function<CommerceCountry, Object>() {
+
+				@Override
+				public Object apply(CommerceCountry commerceCountry) {
+					return commerceCountry.getChannelFilterEnabled();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"channelFilterEnabled",
+			new BiConsumer<CommerceCountry, Object>() {
+
+				@Override
+				public void accept(
+					CommerceCountry commerceCountry,
+					Object channelFilterEnabled) {
+
+					commerceCountry.setChannelFilterEnabled(
+						(Boolean)channelFilterEnabled);
+				}
+
+			});
 
 		_attributeGetterFunctions = Collections.unmodifiableMap(
 			attributeGetterFunctions);
@@ -1167,6 +1194,23 @@ public class CommerceCountryModelImpl
 		_lastPublishDate = lastPublishDate;
 	}
 
+	@JSON
+	@Override
+	public boolean getChannelFilterEnabled() {
+		return _channelFilterEnabled;
+	}
+
+	@JSON
+	@Override
+	public boolean isChannelFilterEnabled() {
+		return _channelFilterEnabled;
+	}
+
+	@Override
+	public void setChannelFilterEnabled(boolean channelFilterEnabled) {
+		_channelFilterEnabled = channelFilterEnabled;
+	}
+
 	@Override
 	public StagedModelType getStagedModelType() {
 		return new StagedModelType(
@@ -1292,6 +1336,7 @@ public class CommerceCountryModelImpl
 		commerceCountryImpl.setPriority(getPriority());
 		commerceCountryImpl.setActive(isActive());
 		commerceCountryImpl.setLastPublishDate(getLastPublishDate());
+		commerceCountryImpl.setChannelFilterEnabled(isChannelFilterEnabled());
 
 		commerceCountryImpl.resetOriginalValues();
 
@@ -1490,6 +1535,9 @@ public class CommerceCountryModelImpl
 			commerceCountryCacheModel.lastPublishDate = Long.MIN_VALUE;
 		}
 
+		commerceCountryCacheModel.channelFilterEnabled =
+			isChannelFilterEnabled();
+
 		return commerceCountryCacheModel;
 	}
 
@@ -1594,6 +1642,7 @@ public class CommerceCountryModelImpl
 	private boolean _originalActive;
 	private boolean _setOriginalActive;
 	private Date _lastPublishDate;
+	private boolean _channelFilterEnabled;
 	private long _columnBitmask;
 	private CommerceCountry _escapedModel;
 

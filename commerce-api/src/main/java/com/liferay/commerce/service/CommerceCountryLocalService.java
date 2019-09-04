@@ -222,6 +222,10 @@ public interface CommerceCountryLocalService
 	public List<CommerceCountry> getBillingCommerceCountries(
 		long companyId, boolean billingAllowed, boolean active);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceCountry> getBillingCommerceCountriesByChannelId(
+		long commerceChannelId, int start, int end);
+
 	/**
 	 * Returns a range of all the commerce countries.
 	 *
@@ -317,6 +321,10 @@ public interface CommerceCountryLocalService
 		long companyId, boolean shippingAllowed, boolean active);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceCountry> getShippingCommerceCountriesByChannelId(
+		long commerceChannelId, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceCountry> getWarehouseCommerceCountries(
 		long companyId, boolean all);
 
@@ -348,6 +356,11 @@ public interface CommerceCountryLocalService
 			String twoLettersISOCode, String threeLettersISOCode,
 			int numericISOCode, boolean subjectToVAT, double priority,
 			boolean active, ServiceContext serviceContext)
+		throws PortalException;
+
+	@Indexable(type = IndexableType.REINDEX)
+	public CommerceCountry updateCommerceCountryChannelFilter(
+			long commerceCountryId, boolean enable)
 		throws PortalException;
 
 }
