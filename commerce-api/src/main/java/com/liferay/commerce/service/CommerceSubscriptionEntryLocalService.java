@@ -78,12 +78,25 @@ public interface CommerceSubscriptionEntryLocalService
 	public CommerceSubscriptionEntry addCommerceSubscriptionEntry(
 		CommerceSubscriptionEntry commerceSubscriptionEntry);
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), pass userId and groupId
+	 */
+	@Deprecated
 	public CommerceSubscriptionEntry addCommerceSubscriptionEntry(
 			long cpInstanceId, long commerceOrderItemId,
 			ServiceContext serviceContext)
 		throws PortalException;
 
 	@Indexable(type = IndexableType.REINDEX)
+	public CommerceSubscriptionEntry addCommerceSubscriptionEntry(
+			long userId, long groupId, String cpInstanceUuid, long cProductId,
+			long commerceOrderItemId)
+		throws PortalException;
+
+	/**
+	 * @deprecated As of Mueller (7.2.x), pass userId and groupId
+	 */
+	@Deprecated
 	public CommerceSubscriptionEntry addCommerceSubscriptionEntry(
 			String cpInstanceUuid, long cProductId, long commerceOrderItemId,
 			ServiceContext serviceContext)

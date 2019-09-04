@@ -54,6 +54,10 @@ public class CommerceSubscriptionEntryLocalServiceWrapper
 			addCommerceSubscriptionEntry(commerceSubscriptionEntry);
 	}
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), pass userId and groupId
+	 */
+	@Deprecated
 	@Override
 	public com.liferay.commerce.model.CommerceSubscriptionEntry
 			addCommerceSubscriptionEntry(
@@ -66,6 +70,23 @@ public class CommerceSubscriptionEntryLocalServiceWrapper
 				cpInstanceId, commerceOrderItemId, serviceContext);
 	}
 
+	@Override
+	public com.liferay.commerce.model.CommerceSubscriptionEntry
+			addCommerceSubscriptionEntry(
+				long userId, long groupId, String cpInstanceUuid,
+				long cProductId, long commerceOrderItemId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceSubscriptionEntryLocalService.
+			addCommerceSubscriptionEntry(
+				userId, groupId, cpInstanceUuid, cProductId,
+				commerceOrderItemId);
+	}
+
+	/**
+	 * @deprecated As of Mueller (7.2.x), pass userId and groupId
+	 */
+	@Deprecated
 	@Override
 	public com.liferay.commerce.model.CommerceSubscriptionEntry
 			addCommerceSubscriptionEntry(
