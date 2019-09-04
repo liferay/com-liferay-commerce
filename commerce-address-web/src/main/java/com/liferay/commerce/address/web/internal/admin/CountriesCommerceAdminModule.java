@@ -19,6 +19,8 @@ import com.liferay.commerce.address.web.internal.portlet.action.ActionHelper;
 import com.liferay.commerce.admin.CommerceAdminModule;
 import com.liferay.commerce.admin.constants.CommerceAdminConstants;
 import com.liferay.commerce.constants.CommerceActionKeys;
+import com.liferay.commerce.product.service.CommerceChannelRelService;
+import com.liferay.commerce.product.service.CommerceChannelService;
 import com.liferay.commerce.service.CommerceCountryService;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -89,7 +91,8 @@ public class CountriesCommerceAdminModule implements CommerceAdminModule {
 
 		CommerceCountriesDisplayContext commerceCountriesDisplayContext =
 			new CommerceCountriesDisplayContext(
-				_actionHelper, _commerceCountryService, renderRequest,
+				_actionHelper, _commerceChannelRelService,
+				_commerceChannelService, _commerceCountryService, renderRequest,
 				renderResponse);
 
 		renderRequest.setAttribute(
@@ -108,6 +111,13 @@ public class CountriesCommerceAdminModule implements CommerceAdminModule {
 
 	@Reference
 	private JSPRenderer _jspRenderer;
+
+
+	@Reference
+	private CommerceChannelRelService _commerceChannelRelService;
+
+	@Reference
+	private CommerceChannelService _commerceChannelService;
 
 	@Reference
 	private Portal _portal;
