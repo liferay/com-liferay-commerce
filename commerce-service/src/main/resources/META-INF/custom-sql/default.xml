@@ -29,13 +29,14 @@
 				CommerceChannelRel.classPK = CommerceCountry.commerceCountryId
 			WHERE
 				(CommerceCountry.active_ = true) AND
+				(
+					(CommerceCountry.channelFilterEnabled = false) OR
 					(
-						(CommerceCountry.channelFilterEnabled = false) OR
-						(
-							(CommerceCountry.channelFilterEnabled = true) AND
-							(CommerceChannelRel.classNameId = ?) AND
-					(
-						CommerceChannelRel.commerceChannelId = ?)))
+						(CommerceCountry.channelFilterEnabled = true) AND
+						(CommerceChannelRel.classNameId = ?) AND
+						(CommerceChannelRel.commerceChannelId = ?)
+					)
+				)
 				[$BILLING$] [$SHIPPING$]
 			ORDER BY
 				CommerceCountry.priority

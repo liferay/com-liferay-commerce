@@ -91,13 +91,13 @@ public class EditCommerceCountryMVCRenderCommand implements MVCRenderCommand {
 	private ActionHelper _actionHelper;
 
 	@Reference
-	private CommerceCountryService _commerceCountryService;
-
-	@Reference
 	private CommerceChannelRelService _commerceChannelRelService;
 
 	@Reference
 	private CommerceChannelService _commerceChannelService;
+
+	@Reference
+	private CommerceCountryService _commerceCountryService;
 
 	@Reference
 	private Portal _portal;

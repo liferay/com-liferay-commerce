@@ -20,7 +20,6 @@ import com.liferay.commerce.exception.CommerceCountryThreeLettersISOCodeExceptio
 import com.liferay.commerce.exception.CommerceCountryTwoLettersISOCodeException;
 import com.liferay.commerce.exception.NoSuchCountryException;
 import com.liferay.commerce.model.CommerceCountry;
-import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CommerceChannelRel;
 import com.liferay.commerce.product.service.CommerceChannelRelService;
 import com.liferay.commerce.service.CommerceCountryService;
@@ -86,40 +85,6 @@ public class EditCommerceCountryMVCActionCommand extends BaseMVCActionCommand {
 			_commerceCountryService.deleteCommerceCountry(
 				deleteCommerceCountryId);
 		}
-	}
-	@Reference
-	private CommerceChannelRelService _commerceChannelRelService;
-
-	protected void updateChannels(ActionRequest actionRequest)
-		throws PortalException {
-
-		long commerceCountryId = ParamUtil.getLong(
-			actionRequest, "commerceCountryId");
-
-		long[] commerceChannelIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "commerceChannelIds"), 0L);
-
-		boolean channelFilterEnabled = ParamUtil.getBoolean(
-			actionRequest, "channelFilterEnabled");
-
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			CommerceChannelRel.class.getName(), actionRequest);
-
-		_commerceChannelRelService.deleteCommerceChannelRels(
-			CommerceCountry.class.getName(), commerceCountryId);
-
-		for (long commerceChannelId : commerceChannelIds) {
-			if (commerceChannelId == 0) {
-				continue;
-			}
-
-			_commerceChannelRelService.addCommerceChannelRel(
-				CommerceCountry.class.getName(), commerceCountryId,
-				commerceChannelId, serviceContext);
-		}
-
-		_commerceCountryService.updateCommerceCountryChannelFilter(
-			commerceCountryId, channelFilterEnabled);
 	}
 
 	@Override
@@ -211,6 +176,38 @@ public class EditCommerceCountryMVCActionCommand extends BaseMVCActionCommand {
 		_commerceCountryService.setActive(commerceCountryId, active);
 	}
 
+	protected void updateChannels(ActionRequest actionRequest)
+		throws PortalException {
+
+		long commerceCountryId = ParamUtil.getLong(
+			actionRequest, "commerceCountryId");
+
+		long[] commerceChannelIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "commerceChannelIds"), 0L);
+
+		boolean channelFilterEnabled = ParamUtil.getBoolean(
+			actionRequest, "channelFilterEnabled");
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			CommerceChannelRel.class.getName(), actionRequest);
+
+		_commerceChannelRelService.deleteCommerceChannelRels(
+			CommerceCountry.class.getName(), commerceCountryId);
+
+		for (long commerceChannelId : commerceChannelIds) {
+			if (commerceChannelId == 0) {
+				continue;
+			}
+
+			_commerceChannelRelService.addCommerceChannelRel(
+				CommerceCountry.class.getName(), commerceCountryId,
+				commerceChannelId, serviceContext);
+		}
+
+		_commerceCountryService.updateCommerceCountryChannelFilter(
+			commerceCountryId, channelFilterEnabled);
+	}
+
 	protected CommerceCountry updateCommerceCountry(ActionRequest actionRequest)
 		throws Exception {
 
@@ -255,15 +252,18 @@ public class EditCommerceCountryMVCActionCommand extends BaseMVCActionCommand {
 		return commerceCountry;
 	}
 
+	private static final TransactionConfig _transactionConfig =
+		TransactionConfig.Factory.create(
+			Propagation.REQUIRED, new Class<?>[] {Exception.class});
+
+	@Reference
+	private CommerceChannelRelService _commerceChannelRelService;
+
 	@Reference
 	private CommerceCountryService _commerceCountryService;
 
 	@Reference
 	private Portal _portal;
-
-	private static final TransactionConfig _transactionConfig =
-		TransactionConfig.Factory.create(
-			Propagation.REQUIRED, new Class<?>[] {Exception.class});
 
 	private class CommerceCountryChannelsCallable implements Callable<Object> {
 
@@ -281,4 +281,5 @@ public class EditCommerceCountryMVCActionCommand extends BaseMVCActionCommand {
 		private final ActionRequest _actionRequest;
 
 	}
+
 }
