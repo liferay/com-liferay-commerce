@@ -17,7 +17,6 @@ package com.liferay.commerce.address.web.internal.display.context;
 import com.liferay.commerce.address.web.internal.display.context.util.CommerceCountryRequestHelper;
 import com.liferay.commerce.address.web.internal.portlet.action.ActionHelper;
 import com.liferay.commerce.model.CommerceCountry;
-import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.model.CommerceChannelRel;
 import com.liferay.commerce.product.service.CommerceChannelRelService;
@@ -32,11 +31,9 @@ import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.QueryConfig;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.Sort;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.Serializable;
 
@@ -67,8 +64,28 @@ public class CommerceCountriesDisplayContext
 		_commerceChannelService = commerceChannelService;
 		_commerceCountryService = commerceCountryService;
 
-		_commerceCountryRequestHelper =
-			new CommerceCountryRequestHelper(renderRequest);
+		_commerceCountryRequestHelper = new CommerceCountryRequestHelper(
+			renderRequest);
+	}
+
+	public long[] getCommerceChannelRelCommerceChannelIds()
+		throws PortalException {
+
+		List<CommerceChannelRel> commerceChannelRels =
+			_commerceChannelRelService.getCommerceChannelRels(
+				CommerceCountry.class.getName(), getCommerceCountryId(),
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+
+		Stream<CommerceChannelRel> stream = commerceChannelRels.stream();
+
+		return stream.mapToLong(
+			CommerceChannelRel::getCommerceChannelId
+		).toArray();
+	}
+
+	public List<CommerceChannel> getCommerceChannels() throws PortalException {
+		return _commerceChannelService.getCommerceChannels(
+			_commerceCountryRequestHelper.getCompanyId());
 	}
 
 	@Override
@@ -116,8 +133,9 @@ public class CommerceCountriesDisplayContext
 				orderByCol, orderByType);
 
 			SearchContext searchContext = buildSearchContext(
-				_commerceCountryRequestHelper.getCompanyId(), active, getKeywords(),
-				searchContainer.getStart(), searchContainer.getEnd(), sort);
+				_commerceCountryRequestHelper.getCompanyId(), active,
+				getKeywords(), searchContainer.getStart(),
+				searchContainer.getEnd(), sort);
 
 			BaseModelSearchResult<CommerceCountry>
 				commerceCountryBaseModelSearchResult =
@@ -210,30 +228,9 @@ public class CommerceCountriesDisplayContext
 		return false;
 	}
 
-	public long[] getCommerceChannelRelCommerceChannelIds()
-		throws PortalException {
-
-		List<CommerceChannelRel> commerceChannelRels =
-			_commerceChannelRelService.getCommerceChannelRels(
-				CommerceCountry.class.getName(), getCommerceCountryId(),
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-
-		Stream<CommerceChannelRel> stream = commerceChannelRels.stream();
-
-		return stream.mapToLong(
-			CommerceChannelRel::getCommerceChannelId
-		).toArray();
-	}
-
-	public List<CommerceChannel> getCommerceChannels() throws PortalException {
-		return _commerceChannelService.getCommerceChannels(
-			_commerceCountryRequestHelper.getCompanyId());
-	}
-
 	private final CommerceChannelRelService _commerceChannelRelService;
 	private final CommerceChannelService _commerceChannelService;
 	private final CommerceCountryRequestHelper _commerceCountryRequestHelper;
-
 	private final CommerceCountryService _commerceCountryService;
 	private String _keywords;
 
