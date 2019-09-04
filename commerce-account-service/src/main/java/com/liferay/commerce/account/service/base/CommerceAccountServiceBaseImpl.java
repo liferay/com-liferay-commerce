@@ -18,6 +18,7 @@ import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.account.service.persistence.CommerceAccountFinder;
 import com.liferay.commerce.account.service.persistence.CommerceAccountGroupCommerceAccountRelPersistence;
+import com.liferay.commerce.account.service.persistence.CommerceAccountGroupFinder;
 import com.liferay.commerce.account.service.persistence.CommerceAccountGroupPersistence;
 import com.liferay.commerce.account.service.persistence.CommerceAccountGroupRelPersistence;
 import com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelPersistence;
@@ -212,6 +213,26 @@ public abstract class CommerceAccountServiceBaseImpl
 		CommerceAccountGroupPersistence commerceAccountGroupPersistence) {
 
 		this.commerceAccountGroupPersistence = commerceAccountGroupPersistence;
+	}
+
+	/**
+	 * Returns the commerce account group finder.
+	 *
+	 * @return the commerce account group finder
+	 */
+	public CommerceAccountGroupFinder getCommerceAccountGroupFinder() {
+		return commerceAccountGroupFinder;
+	}
+
+	/**
+	 * Sets the commerce account group finder.
+	 *
+	 * @param commerceAccountGroupFinder the commerce account group finder
+	 */
+	public void setCommerceAccountGroupFinder(
+		CommerceAccountGroupFinder commerceAccountGroupFinder) {
+
+		this.commerceAccountGroupFinder = commerceAccountGroupFinder;
 	}
 
 	/**
@@ -921,6 +942,9 @@ public abstract class CommerceAccountServiceBaseImpl
 
 	@BeanReference(type = CommerceAccountGroupPersistence.class)
 	protected CommerceAccountGroupPersistence commerceAccountGroupPersistence;
+
+	@BeanReference(type = CommerceAccountGroupFinder.class)
+	protected CommerceAccountGroupFinder commerceAccountGroupFinder;
 
 	@BeanReference(
 		type = com.liferay.commerce.account.service.CommerceAccountGroupCommerceAccountRelLocalService.class
