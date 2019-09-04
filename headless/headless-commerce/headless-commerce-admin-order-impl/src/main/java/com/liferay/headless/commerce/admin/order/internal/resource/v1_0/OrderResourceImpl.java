@@ -16,6 +16,7 @@ package com.liferay.headless.commerce.admin.order.internal.resource.v1_0;
 
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
+import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.context.CommerceContextFactory;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyService;
@@ -400,9 +401,13 @@ public class OrderResourceImpl extends BaseOrderResourceImpl {
 			order.getPaymentMethod(), commerceShippingMethodId,
 			order.getShippingOption(), order.getPurchaseOrderNumber(),
 			order.getSubtotal(), order.getShippingAmount(), order.getTotal(),
-			GetterUtil.get(order.getPaymentStatus(), 0),
-			GetterUtil.get(order.getOrderStatus(), 0), order.getAdvanceStatus(),
-			order.getExternalReferenceCode(),
+			GetterUtil.get(
+				order.getPaymentStatus(),
+				CommerceOrderConstants.PAYMENT_STATUS_PENDING),
+			GetterUtil.get(
+				order.getOrderStatus(),
+				CommerceOrderConstants.ORDER_STATUS_AWAITING_FULFILLMENT),
+			order.getAdvanceStatus(), order.getExternalReferenceCode(),
 			_commerceContextFactory.create(
 				contextCompany.getCompanyId(), commerceChannel.getSiteGroupId(),
 				_user.getUserId(), 0L, commerceAccount.getCommerceAccountId()),

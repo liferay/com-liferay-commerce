@@ -1260,12 +1260,18 @@ public class CommerceOrderLocalServiceImpl
 		}
 
 		if (commerceOrder != null) {
-			return commerceOrderLocalService.updateCommerceOrder(
+			commerceOrderLocalService.updateCommerceOrder(
 				commerceOrder.getCommerceOrderId(), billingAddressId,
 				shippingAddressId, commercePaymentMethodKey,
 				commerceShippingMethodId, shippingOptionName,
 				purchaseOrderNumber, subtotal, shippingAmount, total,
 				advanceStatus, externalReferenceCode, commerceContext);
+
+			commerceOrderLocalService.updatePaymentStatus(
+				userId, commerceOrder.getCommerceOrderId(), paymentStatus);
+
+			return commerceOrderLocalService.updateOrderStatus(
+				commerceOrder.getCommerceOrderId(), orderStatus);
 		}
 
 		// Add
