@@ -1,0 +1,33 @@
+.side-panel {
+  background-color: #F1F2F5;
+  box-shadow: -10px 20px 30px rgba(39, 40, 51, 0.15);
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  transition: all ease 200ms;
+  z-index: 1000;
+
+  &.is-hidden {
+    transform: translateX(100%);
+    box-shadow: 0 0 0 transparent;
+  }
+
+  &--xsmall { width: 25%; }
+  &--small { width: 33%; }
+  &--medium { width: 50%; }
+  &--large { width: 66%; }
+  &--xlarge { width: 75%; }
+  &--full { width: 100%; }
+
+  .tab-content,
+  .tab-pane {
+    height: 100%;
+  }
+
+  iframe {
+    height: 100%;
+    width: 100%;
+  }
+}
