@@ -23,7 +23,7 @@
 				{CommerceCountry.*}
 			FROM
 				CommerceCountry
-			INNER JOIN
+			LEFT JOIN
 				CommerceChannelRel
 			ON
 				CommerceChannelRel.classPK = CommerceCountry.commerceCountryId
