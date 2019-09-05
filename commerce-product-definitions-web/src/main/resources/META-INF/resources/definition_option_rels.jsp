@@ -60,7 +60,7 @@ CPDefinition cpDefinition = cpDefinitionOptionRelDisplayContext.getCPDefinition(
 	<div class="container-fluid-1280" id="<portlet:namespace />CPOptionsEditor">
 		<soy:template-renderer
 			context="<%= context %>"
-			module="commerce-product-definitions-web@2.0.5/definition_option_rel/CPDefinitionOptionsEditor.es"
+			module="commerce-product-definitions-web@2.0.6/definition_option_rel/CPDefinitionOptionsEditor.es"
 			templateNamespace="CPDefinitionOptionsEditor.render"
 		/>
 	</div>
