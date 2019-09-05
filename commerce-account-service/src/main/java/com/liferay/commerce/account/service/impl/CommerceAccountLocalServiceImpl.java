@@ -796,9 +796,11 @@ public class CommerceAccountLocalServiceImpl
 			commerceAccountPersistence.fetchByC_ERC(
 				companyId, externalReferenceCode);
 
-		if ((commerceAccount != null) &&
-			(commerceAccount.getCommerceAccountId() != commerceAccountId)) {
+		if (commerceAccount == null) {
+			return;
+		}
 
+		if (commerceAccount.getCommerceAccountId() != commerceAccountId) {
 			throw new DuplicateCommerceAccountException(
 				"There is another commerce account with external reference " +
 					"code " + externalReferenceCode);
