@@ -87,6 +87,8 @@ CommerceAccountAdminDisplayContext commerceAccountAdminDisplayContext = (Commerc
 	</liferay-frontend:management-bar>
 
 	<div class="container-fluid-1280">
+		<liferay-ui:error exception="<%= CommerceAccountOrdersException.class %>" message="accounts-with-orders-cannot-be-deleted" />
+
 		<portlet:actionURL name="editCommerceAccount" var="editCommerceAccountActionURL" />
 
 		<aui:form action="<%= editCommerceAccountActionURL %>" method="post" name="fm">
