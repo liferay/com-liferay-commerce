@@ -44,7 +44,6 @@
 		.addEventListener(
 			'click',
 			(e) => {
-			    console.log('triggered');
 				e.preventDefault();
 				Liferay.fire("<%= modalId %>-open");
 			}
