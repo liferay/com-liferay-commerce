@@ -94,19 +94,19 @@ public class CommerceCountryFinderImpl
 			String sql = _customSQL.get(getClass(), FIND_BY_COMMERCE_CHANNEL);
 
 			if (billingAllowed) {
-				sql = StringUtil.replace(sql, _BILLING_SQL, StringPool.BLANK);
-			}
-			else {
 				sql = StringUtil.replace(
 					sql, _BILLING_SQL, _BILLING_ALLOWED_SQL);
 			}
+			else {
+				sql = StringUtil.replace(sql, _BILLING_SQL, StringPool.BLANK);
+			}
 
 			if (shippingAllowed) {
-				sql = StringUtil.replace(sql, _SHIPPING_SQL, StringPool.BLANK);
-			}
-			else {
 				sql = StringUtil.replace(
 					sql, _SHIPPING_SQL, _SHIPPING_ALLOWED_SQL);
+			}
+			else {
+				sql = StringUtil.replace(sql, _SHIPPING_SQL, StringPool.BLANK);
 			}
 
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
@@ -139,7 +139,7 @@ public class CommerceCountryFinderImpl
 	private static final String _BILLING_ALLOWED_SQL =
 		"AND (CommerceCountry.billingAllowed = true)";
 
-	private static final String _BILLING_SQL = "[$BILLING]";
+	private static final String _BILLING_SQL = "[$BILLING$]";
 
 	private static final String _SHIPPING_ALLOWED_SQL =
 		"AND (CommerceCountry.shippingAllowed = true)";
