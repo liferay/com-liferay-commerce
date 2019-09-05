@@ -612,6 +612,15 @@ public class CommerceOrderLocalServiceImpl
 	}
 
 	@Override
+	public List<CommerceOrder> getCommerceOrdersByCommerceAccountId(
+		long commerceAccountId, int start, int end,
+		OrderByComparator<CommerceOrder> orderByComparator) {
+
+		return commerceOrderPersistence.findByCommerceAccountId(
+			commerceAccountId, start, end, orderByComparator);
+	}
+
+	@Override
 	public List<CommerceOrder> getCommerceOrdersByShippingAddress(
 		long shippingAddressId) {
 
@@ -641,6 +650,14 @@ public class CommerceOrderLocalServiceImpl
 
 		return commerceOrderLocalService.searchCommerceOrdersCount(
 			searchContext);
+	}
+
+	@Override
+	public int getCommerceOrdersCountByCommerceAccountId(
+		long commerceAccountId) {
+
+		return commerceOrderPersistence.countByCommerceAccountId(
+			commerceAccountId);
 	}
 
 	/**
