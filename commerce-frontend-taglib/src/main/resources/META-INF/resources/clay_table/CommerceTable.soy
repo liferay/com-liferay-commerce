@@ -143,7 +143,7 @@
 	{@param? spritemap: string}
 
 	<td>
-		{if isNonnull($item.promoPrice)}
+		{if isNonnull($item.promoPrice) and $item.promoPrice != ''}
 			<span class="price">
 				<span class="price__value price__value--promo-price">
 					{$item.promoPrice}
