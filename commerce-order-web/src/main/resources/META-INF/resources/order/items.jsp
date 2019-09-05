@@ -36,7 +36,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 				closeOnSubmit="<%= true %>"
 				showCancel="<%= true %>"
 				showSubmit="<%= true %>"
-				size="full-screen"
+				size="lg"
 				title="PLACEHOLDER Shipping address and method"
 				triggerId="shipping-modal-id"
 				url="<%= editURL %>"
@@ -64,8 +64,8 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 			<!-- modal -->
 			<commerce-ui:modal
 				closeOnSubmit="<%= true %>"
-				size="full-screen"
-				title="PLACEHOLDER Shipping address and method"
+				size="sm"
+				title="shipping-address-and-method"
 				triggerId="small-modal-id"
 				url="<%= editURL %>"
 			/>
