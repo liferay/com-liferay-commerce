@@ -29,6 +29,10 @@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
 taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
 taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
+
+<%@ page import="com.liferay.commerce.price.CommerceProductPrice" %>
+<%@ page import="com.liferay.commerce.discount.CommerceDiscountValue" %>
+
 <%@ page import="com.liferay.commerce.constants.CommerceOrderConstants" %><%@
 page import="com.liferay.commerce.constants.CommerceWebKeys" %><%@
 page import="com.liferay.commerce.context.CommerceContext" %><%@
@@ -79,6 +83,8 @@ page import="com.liferay.portal.kernel.workflow.WorkflowDefinition" %>
 page import="java.util.List" %>
 
 <%@ page import="javax.portlet.PortletURL" %>
+<%@ page import="com.liferay.commerce.context.CommerceContext" %>
+<%@ page import="com.liferay.commerce.constants.CommerceWebKeys" %>
 
 <liferay-frontend:defineObjects />
 
