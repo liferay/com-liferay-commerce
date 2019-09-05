@@ -23,6 +23,12 @@ CommerceAccount commerceAccount = commerceAccountAddressAdminDisplayContext.getC
 
 CommerceAddress commerceAddress = commerceAccountAddressAdminDisplayContext.getCommerceAddress();
 
+int selectedType = CommerceAddressConstants.ADDRESS_TYPE_BILLING_AND_SHIPPING;
+
+if (commerceAddress != null) {
+	selectedType = commerceAddress.getType();
+}
+
 long commerceAddressId = commerceAccountAddressAdminDisplayContext.getCommerceAddressId();
 long commerceCountryId = commerceAccountAddressAdminDisplayContext.getCommerceCountryId();
 long commerceRegionId = commerceAccountAddressAdminDisplayContext.getCommerceRegionId();
@@ -104,12 +110,6 @@ long commerceRegionId = commerceAccountAddressAdminDisplayContext.getCommerceReg
 						<aui:select label="type" name="type" showEmptyOption="<%= false %>">
 
 							<%
-							int selectedType = CommerceAddressConstants.ADDRESS_TYPE_BILLING_AND_SHIPPING;
-
-							if (commerceAddress != null) {
-								selectedType = commerceAddress.getType();
-							}
-
 							for (int type : CommerceAddressConstants.ADDRESS_TYPES) {
 							%>
 
@@ -170,7 +170,7 @@ long commerceRegionId = commerceAccountAddressAdminDisplayContext.getCommerceReg
 		}
 	}
 
-	window.onload = setDefaultToggles(<%= commerceAddress.getType() %>);
+	window.onload = setDefaultToggles(<%= selectedType %>);
 </aui:script>
 
 <aui:script use="aui-base,liferay-dynamic-select">
