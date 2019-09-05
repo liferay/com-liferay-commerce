@@ -24,6 +24,12 @@ import com.liferay.commerce.payment.method.mercanet.internal.configuration.Merca
 import com.liferay.commerce.payment.method.mercanet.internal.connector.Environment;
 import com.liferay.commerce.payment.method.mercanet.internal.connector.PaypageClient;
 import com.liferay.commerce.payment.method.mercanet.internal.constants.MercanetCommercePaymentMethodConstants;
+import com.liferay.commerce.payment.method.mercanet.internal.worldline.sips.model.CaptureMode;
+import com.liferay.commerce.payment.method.mercanet.internal.worldline.sips.model.Currency;
+import com.liferay.commerce.payment.method.mercanet.internal.worldline.sips.model.InitializationResponse;
+import com.liferay.commerce.payment.method.mercanet.internal.worldline.sips.model.OrderChannel;
+import com.liferay.commerce.payment.method.mercanet.internal.worldline.sips.model.PaymentRequest;
+import com.liferay.commerce.payment.method.mercanet.internal.worldline.sips.model.RedirectionStatusCode;
 import com.liferay.commerce.payment.request.CommercePaymentRequest;
 import com.liferay.commerce.payment.result.CommercePaymentResult;
 import com.liferay.commerce.product.model.CommerceChannel;
@@ -41,13 +47,6 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.URLCodec;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
-
-import com.worldline.sips.model.CaptureMode;
-import com.worldline.sips.model.Currency;
-import com.worldline.sips.model.InitializationResponse;
-import com.worldline.sips.model.OrderChannel;
-import com.worldline.sips.model.PaymentRequest;
-import com.worldline.sips.model.RedirectionStatusCode;
 
 import java.math.BigDecimal;
 

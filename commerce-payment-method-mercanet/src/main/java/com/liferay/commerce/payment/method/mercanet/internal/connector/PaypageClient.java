@@ -18,12 +18,11 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import com.liferay.commerce.payment.method.mercanet.internal.worldline.sips.model.InitializationResponse;
+import com.liferay.commerce.payment.method.mercanet.internal.worldline.sips.model.PaymentRequest;
+import com.liferay.commerce.payment.method.mercanet.internal.worldline.sips.model.PaypageResponse;
+import com.liferay.commerce.payment.method.mercanet.internal.worldline.sips.util.SealCalculator;
 import com.liferay.portal.kernel.util.Validator;
-
-import com.worldline.sips.model.InitializationResponse;
-import com.worldline.sips.model.PaymentRequest;
-import com.worldline.sips.model.PaypageResponse;
-import com.worldline.sips.util.SealCalculator;
 
 import java.io.IOException;
 
