@@ -29,8 +29,6 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 
 
 <div class="container">
-	<div class="row">
-		<div class="col-md-8">
 			<commerce-ui:panel
 				title="notes"
 			>
@@ -159,50 +157,5 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 					</div>
 				</aui:form>
 			</commerce-ui:panel>
-		</div>
-		<div class="col-md-4">
-			<commerce-ui:panel
-					title="order-timeline"
-			>
-				<div class="card-text">PO Box 467 New York NY 10002</div>
-				<div class="card-text mt-3">
-					<clay:icon
-							symbol="geolocation"
-					/>
-					Standard delivery
-				</div>
-			</commerce-ui:panel>
-			<commerce-ui:panel
-				headerActionLabel="edit"
-				headerActionUrl="/placeholder/edit-summary"
-				title="order-summary"
-			>
-				<table class="table table-striped">
-					<tbody>
-						<tr>
-							<td>Item Subtotal</td>
-							<td>$2,208.50</td>
-						</tr>
-						<tr>
-							<td>Order Discount</td>
-							<td>$0.00</td>
-						</tr>
-						<tr>
-							<td>Promotion Codes</td>
-							<td>--</td>
-						</tr>
-						<tr>
-							<td>Estimated Tax</td>
-							<td>$0.00</td>
-						</tr>
-						<tr>
-							<td>Shipping & Handing</td>
-							<td>$50.00</td>
-						</tr>
-					</tbody>
-				</table>
-			</commerce-ui:panel>
-		</div>
-	</div>
 </div>
 
