@@ -302,6 +302,9 @@
 		<finder name="UserId" return-type="Collection">
 			<finder-column name="userId" />
 		</finder>
+		<finder name="CommerceAccountId" return-type="Collection">
+			<finder-column name="commerceAccountId" />
+		</finder>
 		<finder name="BillingAddressId" return-type="Collection">
 			<finder-column name="billingAddressId" />
 		</finder>
