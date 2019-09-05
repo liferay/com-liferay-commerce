@@ -1,5 +1,5 @@
 Bundle-Name: Liferay Commerce Notification Service
 Bundle-SymbolicName: com.liferay.commerce.notification.service
-Bundle-Version: 1.0.15
+Bundle-Version: 1.0.16
 Liferay-Require-SchemaVersion: 2.0.0
 Liferay-Service: true
