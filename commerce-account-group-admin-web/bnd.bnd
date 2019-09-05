@@ -1,4 +1,4 @@
 Bundle-Name: Liferay Commerce Account Group Admin Web
 Bundle-SymbolicName: com.liferay.commerce.account.group.admin.web
-Bundle-Version: 1.0.6
+Bundle-Version: 1.0.7
 Web-ContextPath: /commerce-account-group-admin-web
