@@ -16,6 +16,7 @@ package com.liferay.commerce.account.service.impl;
 
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.exception.CommerceAccountNameException;
+import com.liferay.commerce.account.exception.CommerceAccountOrdersException;
 import com.liferay.commerce.account.exception.DuplicateCommerceAccountException;
 import com.liferay.commerce.account.internal.search.CommerceAccountIndexer;
 import com.liferay.commerce.account.model.CommerceAccount;
@@ -26,6 +27,7 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.QueryDefinition;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.exception.ModelListenerException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.GroupConstants;
@@ -233,7 +235,12 @@ public class CommerceAccountLocalServiceImpl
 
 		// Commerce account
 
-		commerceAccountPersistence.remove(commerceAccount);
+		try {
+			commerceAccountPersistence.remove(commerceAccount);
+		}
+		catch (ModelListenerException mle) {
+			throw new CommerceAccountOrdersException(mle);
+		}
 
 		// Resources
 

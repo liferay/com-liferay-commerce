@@ -16,6 +16,7 @@ package com.liferay.commerce.account.admin.web.internal.portlet.action;
 
 import com.liferay.commerce.account.constants.CommerceAccountPortletKeys;
 import com.liferay.commerce.account.exception.CommerceAccountNameException;
+import com.liferay.commerce.account.exception.CommerceAccountOrdersException;
 import com.liferay.commerce.account.exception.NoSuchAccountException;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
@@ -120,6 +121,11 @@ public class EditCommerceAccountMVCActionCommand extends BaseMVCActionCommand {
 				SessionErrors.add(actionRequest, e.getClass());
 
 				actionResponse.setRenderParameter("mvcPath", "/error.jsp");
+			}
+			else if (e instanceof CommerceAccountOrdersException) {
+				SessionErrors.add(actionRequest, e.getClass());
+
+				hideDefaultErrorMessage(actionRequest);
 			}
 			else {
 				_log.error(e, e);
