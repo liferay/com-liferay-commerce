@@ -51,6 +51,8 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.WebKeys;
 
+import java.math.BigDecimal;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -203,7 +205,11 @@ public class CommercePendingOrderItemClayTable
 					CommerceMoney unitPromoPrice =
 						commerceProductPrice.getUnitPromoPrice();
 
-					if (unitPromoPrice != null) {
+					BigDecimal promoPriceValue = unitPromoPrice.getPrice();
+
+					if ((unitPromoPrice != null) &&
+						(promoPriceValue.compareTo(BigDecimal.ZERO) > 0)) {
+
 						promoPrice = unitPromoPrice.format(
 							themeDisplay.getLocale());
 					}
