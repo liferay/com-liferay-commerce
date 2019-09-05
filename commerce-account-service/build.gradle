@@ -14,5 +14,5 @@ dependencies {
 	compileOnly group: "org.osgi", name: "org.osgi.core", version: "5.0.0"
 	compileOnly group: "org.springframework", name: "spring-aop", version: "4.3.22.RELEASE"
 	compileOnly group: "org.springframework", name: "spring-tx", version: "4.3.22.RELEASE"
-	compileOnly project(":apps:commerce:commerce-account-api")
+	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.account.api", version: "3.5.0"
 }
