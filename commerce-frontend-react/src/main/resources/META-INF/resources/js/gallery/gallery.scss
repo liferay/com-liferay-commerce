@@ -1,0 +1,54 @@
+.commerce-gallery {
+  display: grid;
+  grid-gap: 14px;
+  grid-template-columns: repeat(auto-fill, 104px);
+
+  img {
+    border: 1px solid transparent;
+    border-radius: 4px;
+    box-shadow: 0 0 0 0 transparent;
+    transition: all ease 200ms;
+    width: 100%;
+
+    &:hover {
+      border-color: rgba(57, 58, 74, 0.2);
+      box-shadow: 0 20px 30px -20px rgba(57, 58, 74, 0.3);
+    }
+
+    &.is-selected {
+      border: 3px solid rgba(11, 95, 255, 0.3);
+    }
+  }
+}
+
+.upload-image {
+  border: 1px dashed #A7A9BC;
+  border-radius: 4px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  &.is-dragging {
+    background: #ccc;
+  }
+
+  .file-input {
+    display: none;
+  }
+}
+
+.gallery-zoom {
+  background-color: #fff;
+  max-width: 100%;
+  max-height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
