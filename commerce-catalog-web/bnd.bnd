@@ -1,4 +1,4 @@
 Bundle-Name: Liferay Commerce Catalog Web
 Bundle-SymbolicName: com.liferay.commerce.catalog.web
-Bundle-Version: 1.0.5
+Bundle-Version: 1.0.6
 Web-ContextPath: /commerce-catalog-web
