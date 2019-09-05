@@ -17,8 +17,6 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CommerceContext commerceContext = (CommerceContext)request.getAttribute(CommerceWebKeys.COMMERCE_CONTEXT);
-
 CommerceAccountAddressAdminDisplayContext commerceAccountAddressAdminDisplayContext = (CommerceAccountAddressAdminDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
 CommerceAccount commerceAccount = commerceAccountAddressAdminDisplayContext.getCommerceAccount();
@@ -182,9 +180,9 @@ long commerceRegionId = commerceAccountAddressAdminDisplayContext.getCommerceReg
 				select: '<portlet:namespace />commerceCountryId',
 				selectData: function(callback) {
 					Liferay.Service(
-						'/commerce.commercecountry/get-billing-commerce-countries-by-channel-id',
+						'/commerce.commercecountry/get-billing-commerce-countries',
 						{
-							commerceChannelId: <%= commerceContext.getCommerceChannelId() %>,
+							companyId: <%= company.getCompanyId() %>,
 							start: -1,
 							end: -1
 						},
