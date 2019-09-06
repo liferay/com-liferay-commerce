@@ -195,6 +195,18 @@ public class CommerceOrderItemServiceImpl
 	}
 
 	@Override
+	public int getCommerceOrderItemsCount(
+			long commerceOrderId, long cpInstanceId)
+		throws PortalException {
+
+		_commerceOrderModelResourcePermission.check(
+			getPermissionChecker(), commerceOrderId, ActionKeys.VIEW);
+
+		return commerceOrderItemLocalService.getCommerceOrderItemsCount(
+			commerceOrderId, cpInstanceId);
+	}
+
+	@Override
 	public int getCommerceOrderItemsQuantity(long commerceOrderId)
 		throws PortalException {
 
