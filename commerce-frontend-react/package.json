@@ -21,9 +21,9 @@
 		"redux": "^4.0.4"
 	},
 	"devDependencies": {
-		"@types/react": "^16.8.24",
 		"@babel/preset-react": "^7.0.0",
 		"@babel/preset-typescript": "^7.0.0",
+		"@types/react": "^16.8.24",
 		"babel-core": "^6.26.3",
 		"babel-plugin-module-resolver": "^3.2.0",
 		"check-source-formatting": "^2.0.14",

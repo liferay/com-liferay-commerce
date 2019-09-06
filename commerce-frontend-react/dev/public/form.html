@@ -22,19 +22,23 @@
 	<noscript>You need to enable JavaScript to run this app.</noscript>
 
 	<div class="container mb-5">
-		<form id="my-custom-form" class="my-custom-form" action="/form-submitted.html">
+		<form action="/form-submitted.html" class="my-custom-form" id="my-custom-form">
 			<div class="form-group-autofit">
 				<div class="form-group-item form-group-item-label form-group-item-shrink">
 					<label>Name</label>
 				</div>
+
 				<div class="form-group-item">
-					<input aria-label="First Name" class="form-control" placeholder="First" type="text">
+					<input aria-label="First Name" class="form-control" placeholder="First" type="text" />
+
 					<div class="form-feedback-group">
 						<div class="form-text">Your first name.</div>
 					</div>
 				</div>
 			</div>
+
 			<div class="text-danger d-none">Error</div>
+
 			<button type="submit">Submit</button>
 		</form>
 	</div>
@@ -51,7 +55,7 @@
 		// inputField.forEach(e => {
 		// 	e.addEventListener('keyup', checkInputValue);
 		// })
-		
+
 		function isFormValid() {
 			const noValue = inputField.find(e => !e.value);
 
@@ -74,11 +78,9 @@
 		// 	}
 		// }
 
-
 		// form.submit()
 	}
 
-		
 	</script>
 	<!--
 	  This HTML file is a template.

@@ -1,4 +1,5 @@
-<%@ taglib prefix="liferay-ui" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ include file="/header/init.jsp" %>
+
 <%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
@@ -15,7 +16,7 @@
  */
 --%>
 
-<%@ include file="/header/init.jsp" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="liferay-ui" %>
 
 <%
 Object bean = request.getAttribute("liferay-commerce:header:bean");
@@ -68,7 +69,10 @@ String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_header") 
 		<div class="commerce-header__actions-wrapper align-items-center d-flex">
 			<div class="commerce-header__actions px-3 d-none d-xl-flex border-right">
 				<c:if test="<%= false %>">
-					<% String assignedToWrapperId = randomNamespace + "assigned-to"; %>
+
+					<%
+					String assignedToWrapperId = randomNamespace + "assigned-to";
+					%>
 
 					<div id="<%= assignedToWrapperId %>"></div>
 
@@ -78,7 +82,7 @@ String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_header") 
 							"<%= assignedToWrapperId %>",
 							{
 								spritemap: "<%= spritemap %>",
-								currentAssignee: null,
+								currentAssignee: null
 							}
 						);
 					</aui:script>

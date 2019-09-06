@@ -16,7 +16,7 @@
 
 <%@ include file="/modal/init.jsp" %>
 
-<div id="<%= modalId %>" class="modal-root"></div>
+<div class="modal-root" id="<%= modalId %>"></div>
 
 <aui:script require="commerce-frontend-react@1.0.0/js/modal/entry.es as Modal">
 	var modal = new Modal.default(

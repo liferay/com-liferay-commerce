@@ -27,7 +27,6 @@ import com.liferay.taglib.util.IncludeTag;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
 /**
@@ -138,8 +137,12 @@ public class HeaderTag extends IncludeTag {
 
 		if (Validator.isNull(_spritemap)) {
 			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-					WebKeys.THEME_DISPLAY);
-			spritemap = themeDisplay.getPathThemeImages().concat("/clay/icons.svg");
+				WebKeys.THEME_DISPLAY);
+
+			spritemap = themeDisplay.getPathThemeImages(
+			).concat(
+				"/clay/icons.svg"
+			);
 		}
 
 		request.setAttribute("liferay-commerce:header:bean", _bean);

@@ -16,24 +16,19 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %><%@
-taglib uri="http://liferay.com/tld/clay" prefix="clay" %><%@
+<%@ taglib uri="http://liferay.com/tld/clay" prefix="clay" %><%@
 taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 
-<%@ page import="com.liferay.petra.string.StringPool" %><%@
-page import="com.liferay.portal.kernel.util.PortalUtil" %><%@
-page import="com.liferay.portal.kernel.util.Validator" %>
+<%@ page import="com.liferay.portal.kernel.util.Validator" %>
 
 <liferay-theme:defineObjects />
 
 <%
-	String spritemap = (String)request.getAttribute("liferay-commerce:panel:spritemap");
 	String title = (String)request.getAttribute("liferay-commerce:panel:title");
 	String headerActionUrl = (String)request.getAttribute("liferay-commerce:panel:headerActionUrl");
 	String headerActionLabel = (String)request.getAttribute("liferay-commerce:panel:headerActionLabel");
 	String headerActionIcon = (String)request.getAttribute("liferay-commerce:panel:headerActionIcon");
 	String headerActionId = (String)request.getAttribute("liferay-commerce:panel:headerActionId");
-	String showMoreRefId = (String)request.getAttribute("liferay-commerce:panel:showMoreRefId");
 	String showMoreId = (String)request.getAttribute("liferay-commerce:panel:showMoreId");
 	String showMoreUrl = (String)request.getAttribute("liferay-commerce:panel:showMoreUrl");
 
