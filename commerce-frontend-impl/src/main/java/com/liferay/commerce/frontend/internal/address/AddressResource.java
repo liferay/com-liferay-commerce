@@ -28,6 +28,7 @@ import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.commerce.service.CommerceCountryService;
 import com.liferay.commerce.service.CommerceRegionService;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -117,6 +118,10 @@ public class AddressResource {
 		).build();
 	}
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), passing companyId is redundant
+	 */
+	@Deprecated
 	@GET
 	@Path("/address/countries")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -126,6 +131,35 @@ public class AddressResource {
 
 		List<CommerceCountry> commerceCountries =
 			_commerceCountryService.getCommerceCountries(companyId, true);
+
+		return _getCommerceCountries(
+			commerceCountries, themeDisplay.getLanguageId());
+	}
+
+	@GET
+	@Path("/address/countries")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getShippingCommerceCountries(
+		@Context ThemeDisplay themeDisplay) {
+
+		List<CommerceCountry> commerceCountries =
+			_commerceCountryService.getCommerceCountries(
+				themeDisplay.getCompanyId(), true);
+
+		return _getCommerceCountries(
+			commerceCountries, themeDisplay.getLanguageId());
+	}
+
+	@GET
+	@Path("/address/countries-by-channel-id")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getShippingCommerceCountriesByChannelId(
+		@QueryParam("channelId") long channelId,
+		@Context ThemeDisplay themeDisplay) {
+
+		List<CommerceCountry> commerceCountries =
+			_commerceCountryService.getShippingCommerceCountriesByChannelId(
+				channelId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		return _getCommerceCountries(
 			commerceCountries, themeDisplay.getLanguageId());

@@ -14,12 +14,18 @@
 
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
+import com.liferay.commerce.constants.CommerceWebKeys;
+import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.frontend.taglib.internal.js.loader.modules.extender.npm.NPMResolverProvider;
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.WebKeys;
 
 /**
@@ -32,10 +38,27 @@ public class AddressModalTag extends ComponentRendererTag {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		putValue(
-			"countriesAPI",
-			PortalUtil.getPortalURL(request) +
-				"/o/commerce-ui/address/countries/");
+		try {
+			CommerceContext commerceContext =
+				(CommerceContext)request.getAttribute(
+					CommerceWebKeys.COMMERCE_CONTEXT);
+
+			putValue(
+				"countriesAPI",
+				StringBundler.concat(
+					PortalUtil.getPortalURL(request),
+					"/o/commerce-ui/address/countries-by-channel-id?channelId=",
+					String.valueOf(commerceContext.getCommerceChannelId())));
+		}
+		catch (PortalException pe) {
+			_log.error(pe, pe);
+
+			putValue(
+				"countriesAPI",
+				PortalUtil.getPortalURL(request) +
+					"/o/commerce-ui/address/countries/");
+		}
+
 		putValue(
 			"regionsAPI",
 			PortalUtil.getPortalURL(request) +
@@ -60,5 +83,8 @@ public class AddressModalTag extends ComponentRendererTag {
 		return npmResolver.resolveModuleName(
 			"commerce-frontend-taglib/address_modal/AddressModal.es");
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		AddressModalTag.class);
 
 }

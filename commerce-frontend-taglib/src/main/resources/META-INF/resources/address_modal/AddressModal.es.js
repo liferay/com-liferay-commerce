@@ -152,7 +152,7 @@ class AddressModal extends Component {
 
 	_fetchCountries() {
 		return fetch(
-			this.countriesAPI + '?companyId=' + themeDisplay.getCompanyId(),
+			this.countriesAPI,
 			{
 				method: 'GET'
 			}
