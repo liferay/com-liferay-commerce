@@ -19,7 +19,6 @@ import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationCategory;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 
 import java.io.IOException;
@@ -34,7 +33,7 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 /**
- * @author Andrea Di Giorgi
+ * @author Alessio Antonio Rendina
  */
 @Component(
 	property = {
@@ -43,13 +42,13 @@ import org.osgi.service.component.annotations.Reference;
 	},
 	service = {ScreenNavigationCategory.class, ScreenNavigationEntry.class}
 )
-public class CommerceOrderShippingScreenNavigationEntry
+public class CommerceOrderShipmentsScreenNavigationEntry
 	implements ScreenNavigationCategory, ScreenNavigationEntry<CommerceOrder> {
 
 	@Override
 	public String getCategoryKey() {
 		return CommerceOrderScreenNavigationConstants.
-			CATEGORY_KEY_COMMERCE_ORDER_SHIPPING;
+			CATEGORY_KEY_COMMERCE_ORDER_SHIPMENTS;
 	}
 
 	@Override
@@ -72,18 +71,13 @@ public class CommerceOrderShippingScreenNavigationEntry
 	}
 
 	@Override
-	public boolean isVisible(User user, CommerceOrder commerceOrder) {
-		return false;
-	}
-
-	@Override
 	public void render(
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse)
 		throws IOException {
 
 		_jspRenderer.renderJSP(
-			httpServletRequest, httpServletResponse, "/order/shipping.jsp");
+			httpServletRequest, httpServletResponse, "/order/shipments.jsp");
 	}
 
 	@Reference
