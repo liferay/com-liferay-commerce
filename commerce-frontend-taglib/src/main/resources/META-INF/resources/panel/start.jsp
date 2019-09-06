@@ -35,7 +35,7 @@
 				</c:when>
 				<c:when test="<%= Validator.isNotNull(headerActionIcon) %>">
 					<clay:link
-						elementClasses="btn btn-primary btn-monospaced btn-sm text-white"
+						elementClasses="btn btn-monospaced btn-primary btn-sm text-white"
 						href="<%= headerActionUrl %>"
 						icon="<%= headerActionIcon %>"
 						id="<%= headerActionLinkId %>"
