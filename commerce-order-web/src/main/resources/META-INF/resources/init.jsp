@@ -29,15 +29,12 @@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
 taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %><%@
 taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
-
-<%@ page import="com.liferay.commerce.price.CommerceProductPrice" %>
-<%@ page import="com.liferay.commerce.discount.CommerceDiscountValue" %>
-
 <%@ page import="com.liferay.commerce.constants.CommerceOrderConstants" %><%@
 page import="com.liferay.commerce.constants.CommerceWebKeys" %><%@
 page import="com.liferay.commerce.context.CommerceContext" %><%@
 page import="com.liferay.commerce.currency.model.CommerceCurrency" %><%@
 page import="com.liferay.commerce.currency.model.CommerceMoney" %><%@
+page import="com.liferay.commerce.discount.CommerceDiscountValue" %><%@
 page import="com.liferay.commerce.exception.CommerceOrderBillingAddressException" %><%@
 page import="com.liferay.commerce.exception.CommerceOrderNoteContentException" %><%@
 page import="com.liferay.commerce.exception.NoSuchOrderException" %><%@
@@ -56,13 +53,13 @@ page import="com.liferay.commerce.order.web.internal.security.permission.resourc
 page import="com.liferay.commerce.order.web.internal.servlet.taglib.ui.CommerceOrderFormNavigatorConstants" %><%@
 page import="com.liferay.commerce.order.web.internal.servlet.taglib.ui.CommerceOrderScreenNavigationConstants" %><%@
 page import="com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel" %><%@
+page import="com.liferay.commerce.price.CommerceProductPrice" %><%@
 page import="com.liferay.commerce.product.model.CommerceChannel" %><%@
 page import="com.liferay.petra.string.StringPool" %><%@
 page import="com.liferay.portal.kernel.bean.BeanParamUtil" %><%@
 page import="com.liferay.portal.kernel.dao.search.ResultRow" %><%@
 page import="com.liferay.portal.kernel.dao.search.SearchContainer" %><%@
 page import="com.liferay.portal.kernel.language.LanguageUtil" %><%@
-page import="com.liferay.portal.kernel.model.User" %><%@
 page import="com.liferay.portal.kernel.model.WorkflowDefinitionLink" %><%@
 page import="com.liferay.portal.kernel.portlet.LiferayWindowState" %><%@
 page import="com.liferay.portal.kernel.security.permission.ActionKeys" %><%@
@@ -77,12 +74,9 @@ page import="com.liferay.portal.kernel.workflow.WorkflowDefinition" %>
 
 <%@ page import="java.text.Format" %>
 
-<%@ page import="java.util.Date" %><%@
-page import="java.util.List" %>
+<%@ page import="java.util.List" %>
 
 <%@ page import="javax.portlet.PortletURL" %>
-<%@ page import="com.liferay.commerce.context.CommerceContext" %>
-<%@ page import="com.liferay.commerce.constants.CommerceWebKeys" %>
 
 <liferay-frontend:defineObjects />
 
