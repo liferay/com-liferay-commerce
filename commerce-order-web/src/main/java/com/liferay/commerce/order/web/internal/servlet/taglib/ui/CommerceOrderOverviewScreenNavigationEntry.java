@@ -73,7 +73,7 @@ public class CommerceOrderOverviewScreenNavigationEntry
 
 	@Override
 	public boolean isVisible(User user, CommerceOrder commerceOrder) {
-		return !commerceOrder.isOpen();
+		return false;
 	}
 
 	@Override
