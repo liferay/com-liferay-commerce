@@ -25,9 +25,16 @@ public class CommerceCountryUpgradeProcess
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		addColumn(
-			CommerceCountryModelImpl.class, CommerceCountryModelImpl.TABLE_NAME,
-			"channelFilterEnabled", "BOOLEAN");
+		if (!hasColumn(
+				CommerceCountryModelImpl.TABLE_NAME, "channelFilterEnabled")) {
+
+			addColumn(
+				CommerceCountryModelImpl.class,
+				CommerceCountryModelImpl.TABLE_NAME, "channelFilterEnabled",
+				"BOOLEAN");
+
+			runSQL("update CommerceCountry set channelFilterEnabled = false");
+		}
 	}
 
 }
