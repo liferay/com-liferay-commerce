@@ -41,25 +41,29 @@ public class PanelTag extends IncludeTag {
 
 	@Override
 	public int doStartTag() throws JspException {
-
-
 		setAttributeNamespace(_ATTRIBUTE_NAMESPACE);
 
-		String randomNamespace = PortalUtil.generateRandomKey(request, "commerce_panel") + StringPool.UNDERLINE;
+		String randomNamespace =
+			PortalUtil.generateRandomKey(request, "commerce_panel") +
+				StringPool.UNDERLINE;
 
 		String spritemap = _spritemap;
 
 		if (Validator.isNull(_spritemap)) {
 			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-					WebKeys.THEME_DISPLAY);
-			spritemap = themeDisplay.getPathThemeImages().concat("/clay/icons.svg");
+				WebKeys.THEME_DISPLAY);
+
+			spritemap = themeDisplay.getPathThemeImages(
+			).concat(
+				"/clay/icons.svg"
+			);
 		}
 
 		setNamespacedAttribute(request, "spritemap", spritemap);
 		setNamespacedAttribute(request, "title", _title);
 		setNamespacedAttribute(request, "headerActionUrl", _headerActionUrl);
 		setNamespacedAttribute(
-				request, "headerActionLabel", _headerActionLabel);
+			request, "headerActionLabel", _headerActionLabel);
 		setNamespacedAttribute(request, "headerActionIcon", _headerActionIcon);
 		setNamespacedAttribute(request, "headerActionId", _headerActionId);
 		setNamespacedAttribute(request, "showMoreId", _showMoreId);
