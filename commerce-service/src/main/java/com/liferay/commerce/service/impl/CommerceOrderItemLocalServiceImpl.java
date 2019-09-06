@@ -350,6 +350,14 @@ public class CommerceOrderItemLocalServiceImpl
 	}
 
 	@Override
+	public int getCommerceOrderItemsCount(
+		long commerceOrderId, long cpInstanceId) {
+
+		return commerceOrderItemPersistence.countByC_I(
+			commerceOrderId, cpInstanceId);
+	}
+
+	@Override
 	public int getCommerceOrderItemsQuantity(long commerceOrderId) {
 		return commerceOrderItemFinder.getCommerceOrderItemsQuantity(
 			commerceOrderId);
