@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.search.filter.BooleanFilter;
-import com.liferay.portal.kernel.service.ClassNameLocalService;
 import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.util.Locale;
@@ -208,9 +207,6 @@ public class CommerceAddressIndexer extends BaseIndexer<CommerceAddress> {
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceAddressIndexer.class);
-
-	@Reference
-	private ClassNameLocalService _classNameLocalService;
 
 	@Reference
 	private CommerceAddressLocalService _commerceAddressLocalService;
