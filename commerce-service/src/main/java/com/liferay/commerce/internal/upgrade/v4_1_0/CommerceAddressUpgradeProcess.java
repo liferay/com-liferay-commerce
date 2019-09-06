@@ -49,7 +49,7 @@ public class CommerceAddressUpgradeProcess
 		}
 
 		addColumn(
-			CommerceAddressImpl.class, CommerceAddressImpl.TABLE_NAME, "type",
+			CommerceAddressImpl.class, CommerceAddressImpl.TABLE_NAME, "type_",
 			"INTEGER");
 
 		PreparedStatement ps = null;
