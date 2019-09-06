@@ -106,6 +106,12 @@ public class CommerceOrderImpl extends CommerceOrderBaseImpl {
 	}
 
 	@Override
+	public int getCommerceOrderItemsCount(long cpInstanceId) {
+		return CommerceOrderItemLocalServiceUtil.getCommerceOrderItemsCount(
+			getCommerceOrderId(), cpInstanceId);
+	}
+
+	@Override
 	public CommerceShippingMethod getCommerceShippingMethod()
 		throws PortalException {
 
