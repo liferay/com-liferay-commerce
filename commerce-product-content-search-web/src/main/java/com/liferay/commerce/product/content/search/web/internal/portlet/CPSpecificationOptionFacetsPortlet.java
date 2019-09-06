@@ -110,7 +110,7 @@ public class CPSpecificationOptionFacetsPortlet
 							facet.getFieldName());
 
 				Optional<String[]> parameterValuesOptional =
-					portletSharedSearchSettings.getParameterValues(
+					portletSharedSearchSettings.getParameterValues71(
 						cpSpecificationOptionKey);
 
 				SerializableMultiValueFacet serializableMultiValueFacet =
