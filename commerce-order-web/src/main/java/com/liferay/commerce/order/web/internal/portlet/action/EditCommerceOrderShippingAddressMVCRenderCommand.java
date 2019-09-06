@@ -27,12 +27,13 @@ import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.WebKeys;
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Alessio Antonio Rendina
@@ -44,7 +45,8 @@ import javax.portlet.RenderResponse;
 	},
 	service = MVCRenderCommand.class
 )
-public class EditCommerceOrderShippingAddressMVCRenderCommand implements MVCRenderCommand {
+public class EditCommerceOrderShippingAddressMVCRenderCommand
+	implements MVCRenderCommand {
 
 	@Override
 	public String render(
