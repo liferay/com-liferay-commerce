@@ -21,7 +21,6 @@ import com.liferay.commerce.frontend.taglib.internal.js.loader.modules.extender.
 import com.liferay.commerce.frontend.taglib.internal.util.ProductHelperProvider;
 import com.liferay.commerce.frontend.util.ProductHelper;
 import com.liferay.commerce.model.CommerceOrder;
-import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
 import com.liferay.petra.string.StringPool;
@@ -31,7 +30,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.jsp.PageContext;
@@ -76,10 +74,8 @@ public class AddToCartTag extends ComponentRendererTag {
 			if (commerceOrder != null) {
 				putValue("orderId", commerceOrder.getCommerceOrderId());
 
-				List<CommerceOrderItem> commerceOrderItems =
-					commerceOrder.getCommerceOrderItems(cpInstanceId);
-
-				productOrderQuantity = commerceOrderItems.size();
+				productOrderQuantity = commerceOrder.getCommerceOrderItemsCount(
+					cpInstanceId);
 			}
 
 			putValue("quantity", productOrderQuantity);
