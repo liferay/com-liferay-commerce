@@ -304,19 +304,16 @@
 			<name>url</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<name>size</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<name>title</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<name>spritemap</name>
@@ -328,7 +325,6 @@
 			<name>triggerId</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<name>showSubmit</name>
@@ -340,7 +336,6 @@
 			<name>submitLabel</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<name>closeOnSubmit</name>
@@ -364,7 +359,6 @@
 			<name>deleteLabel</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.String</type>
 		</attribute>
 		<attribute>
 			<name>showCancel</name>
@@ -376,7 +370,6 @@
 			<name>cancelLabel</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>java.lang.String</type>
 		</attribute>
 	</tag>
 	<tag>
