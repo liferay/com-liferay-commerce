@@ -28,7 +28,6 @@ long commerceAccountId = commerceAccountAdminDisplayContext.getCommerceAccountId
 <aui:form action="<%= editCommerceAccountActionURL %>" cssClass="container-fluid-1280" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (commerceAccount == null) ? Constants.ADD : Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-	<aui:input name="backURL" type="hidden" value="<%= backURL %>" />
 	<aui:input name="commerceAccountId" type="hidden" value="<%= commerceAccountId %>" />
 
 	<aui:model-context bean="<%= commerceAccount %>" model="<%= CommerceAccount.class %>" />

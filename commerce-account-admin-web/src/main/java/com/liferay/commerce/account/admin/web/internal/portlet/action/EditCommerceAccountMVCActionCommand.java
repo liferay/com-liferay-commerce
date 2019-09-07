@@ -135,6 +135,8 @@ public class EditCommerceAccountMVCActionCommand extends BaseMVCActionCommand {
 			PortletRequest.RENDER_PHASE);
 
 		if (commerceAccount != null) {
+			portletURL.setParameter("backURL", portletURL.toString());
+
 			portletURL.setParameter(
 				"mvcRenderCommandName", "editCommerceAccount");
 			portletURL.setParameter(
@@ -144,11 +146,6 @@ public class EditCommerceAccountMVCActionCommand extends BaseMVCActionCommand {
 			String redirect = ParamUtil.getString(actionRequest, "redirect");
 
 			portletURL.setParameter("redirect", redirect);
-
-			String backURL = ParamUtil.getString(
-				actionRequest, "backURL", redirect);
-
-			portletURL.setParameter("backURL", backURL);
 		}
 
 		return portletURL.toString();
