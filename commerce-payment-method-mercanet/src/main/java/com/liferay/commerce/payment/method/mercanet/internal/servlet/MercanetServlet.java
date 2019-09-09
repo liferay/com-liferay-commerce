@@ -20,6 +20,8 @@ import com.liferay.commerce.payment.method.mercanet.internal.configuration.Merca
 import com.liferay.commerce.payment.method.mercanet.internal.connector.Environment;
 import com.liferay.commerce.payment.method.mercanet.internal.connector.PaypageClient;
 import com.liferay.commerce.payment.method.mercanet.internal.constants.MercanetCommercePaymentMethodConstants;
+import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringPool;
@@ -156,9 +158,14 @@ public class MercanetServlet extends HttpServlet {
 					_commerceOrderLocalService.getCommerceOrderByUuidAndGroupId(
 						uuid, groupId);
 
+				CommerceChannel commerceChannel =
+					_commerceChannelLocalService.
+						getCommerceChannelByOrderGroupId(
+							commerceOrder.getGroupId());
+
 				MercanetGroupServiceConfiguration
 					mercanetGroupServiceConfiguration = _getConfiguration(
-						commerceOrder.getGroupId());
+						commerceChannel.getSiteGroupId());
 
 				String environment = StringUtil.toUpperCase(
 					mercanetGroupServiceConfiguration.environment());
@@ -237,6 +244,9 @@ public class MercanetServlet extends HttpServlet {
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		MercanetServlet.class);
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private CommerceOrderLocalService _commerceOrderLocalService;
