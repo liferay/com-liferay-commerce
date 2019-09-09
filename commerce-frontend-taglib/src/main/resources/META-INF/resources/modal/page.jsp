@@ -18,7 +18,7 @@
 
 <div class="modal-root" id="<%= modalId %>"></div>
 
-<aui:script require="commerce-frontend-js@1.0.0/js/modal/entry.es as Modal">
+<aui:script require="commerce-frontend-js/js/modal/entry.es as Modal">
 	var modal = new Modal.default(
 		"<%= modalId %>",
 		"<%= modalId %>",
