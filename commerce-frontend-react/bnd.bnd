@@ -1,4 +1,0 @@
-Bundle-Name: Liferay Commerce Frontend React
-Bundle-SymbolicName: com.liferay.commerce.frontend.react
-Bundle-Version: 1.0.0
-Web-ContextPath: /commerce-frontend-react
