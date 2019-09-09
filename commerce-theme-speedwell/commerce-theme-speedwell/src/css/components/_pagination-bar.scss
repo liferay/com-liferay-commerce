@@ -9,6 +9,10 @@
     font-size: 14px;
     line-height: 12px;
     color: $stroke;
+
+    @media only screen and (max-width: 767px) {
+      display: none;
+    }
   }
 
   .pagination-results {
@@ -17,10 +21,6 @@
 
   .pagination {
     justify-content: center;
-
-    @media only screen and (max-width: 767px) {
-      display: none;
-    }
 
     li {
       a {
