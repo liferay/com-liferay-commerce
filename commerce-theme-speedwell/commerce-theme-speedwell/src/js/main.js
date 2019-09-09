@@ -66,8 +66,9 @@ Liferay.on(
 			});
 		});
 
-		document.querySelector('.speedwell-main-menu__links .main-link')
-			.addEventListener('mouseover', function() {
+		const carPartsMenuButton = document.querySelectorAll('.speedwell-main-menu__links .main-link')[1];
+
+		!!carPartsMenuButton && carPartsMenuButton.addEventListener('mouseover', function() {
 				var element = document.querySelector('.speedwell-category-nav');
 
 				element.focus();
@@ -85,6 +86,11 @@ Liferay.on(
 		const speedwellWrapper = document.getElementById("speedwell");
 		const speedwellTranslucentTopbar = speedwellWrapper &&
 			speedwellWrapper.querySelector('.speedwell-topbar--translucent');
+
+		const addToCardButtonInline =
+			document.querySelector('.add-to-cart-button--inline .commerce-button');
+
+		const openFilters = document.querySelector('.commerce-catalog .mobile-filters-button');
 
 		window.addEventListener("scroll", function() {
 			const offset = window.scrollY - lastKnownScrollPosition;
@@ -108,6 +114,7 @@ Liferay.on(
 						.classList.toggle("is-scrolled", window.scrollY > scrollThreshold);
 
 					handleTranslucentTopbar(speedwellTranslucentTopbar, scrollThreshold);
+					fixAddToCartButtonInline(addToCardButtonInline);
 					ticking = false;
 				});
 
@@ -128,7 +135,48 @@ Liferay.on(
 			}
 		}
 
+		function doOpenFilters(e) {
+			const isOpenClass = 'is-open';
+			const filtersAreClosed = !!e.target && !e.target.classList.contains('is-open');
+
+			e.target.classList.toggle(isOpenClass, filtersAreClosed);
+
+			window.removeEventListener('click', doOpenFilters);
+
+			if (filtersAreClosed) {
+				const closeButton = document.querySelector('.commerce-catalog .mobile-filters-header .close-button');
+
+				!!closeButton && window.addEventListener('click', doOpenFilters);
+			}
+		}
+
+		function fixAddToCartButtonInline(e) {
+			if (!addToCardButtonInline.classList.contains('fixed')
+				&& addToCardButtonInline.getBoundingClientRect().top <= 0) {
+
+				addToCardButtonInline.classList.add('fixed');
+				window.removeEventListener('scroll', fixAddToCartButtonInline);
+				window.addEventListener('scroll', unfixAddToCartButtonInline);
+			}
+		}
+
+		function unfixAddToCartButtonInline(element) {
+			if (addToCardButtonInline.classList.contains('fixed') &&
+				addToCardButtonInline.getBoundingClientRect().top > 0) {
+
+				addToCardButtonInline.classList.remove('fixed');
+				window.removeEventListener('scroll', unfixAddToCartButtonInline);
+				window.addEventListener('scroll', fixAddToCartButtonInline);
+			}
+		}
+
 		window.addEventListener('keydown', needsAccessibility);
+
+		document.documentElement.classList.contains('mobile') &&
+			!!openFilters && openFilters.addEventListener('click', doOpenFilters);
+
+		!!addToCardButtonInline &&
+			window.addEventListener('scroll', fixAddToCartButtonInline);
 
 		setTimeout(removeUnusedListeners, 5000);
 	}

@@ -55,11 +55,11 @@
 
 			&::before {
 				@include transformButton(
-											50%, 50%,
-											-22px, -35px,
-											70px, 44px,
-											3px solid $inputOutline,
-											rgba(255, 255, 255, 1)
+					50%, 50%,
+					-22px, -35px,
+					70px, 44px,
+					3px solid $inputOutline,
+					rgba(255, 255, 255, 1)
 				);
 				animation: toInput .3s ease-in 1 forwards;
 				border-radius: 4px;
@@ -127,6 +127,10 @@
 				&__tip {
 					transform: translateX(-23px);
 				}
+			}
+
+			@media only screen and (max-width: 767px) {
+				display: none;
 			}
 		}
 
@@ -198,10 +202,34 @@
 	&--inline {
 		display: flex;
 
+		@media only screen and (max-width: 767px) {
+			flex-direction: column;
+			z-index: 100;
+			left: 0;
+			bottom: 0;
+			width: 100%;
+		}
+
 		.commerce-button {
 			font-size: 12px;
 			height: 60px;
 			min-width: 160px;
+
+			@media only screen and (max-width: 767px) {
+				display: flex;
+				align-self: center;
+				width: 100%;
+				transition: width .2s ease-out;
+
+				&.fixed {
+					position: fixed;
+					width: 100%;
+					bottom: 0;
+					border-radius: 0;
+					z-index: 101;
+					transition: width .2s ease-out;
+				}
+			}
 
 			&.commerce-button--good {
 				&:hover {
@@ -226,10 +254,19 @@
 			font-size: 12px;
 			margin-right: 10px;
 
+			@media only screen and (max-width: 767px) {
+				display: flex;
+			}
+
 			&__input {
 				font-size: 18px;
 				height: 60px;
 				width: 60px;
+
+				@media only screen and (max-width: 767px) {
+					width: 100px;
+					margin: 12px 30px;
+				}
 			}
 
 			&__select {
