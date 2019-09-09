@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const outputPath = path.resolve(__dirname, './dev/public');
 
 const getComponentPath = (component, entry) => path.join(
+	// eslint-disable-next-line no-undef
 	__dirname,
 	'src',
 	'main',
@@ -17,6 +18,7 @@ const getComponentPath = (component, entry) => path.join(
 	entry
 );
 
+// eslint-disable-next-line no-undef
 module.exports = {
 	entry: {
 		add_or_create: getComponentPath('add_or_create', 'entry.dev.es.js'),
@@ -25,6 +27,7 @@ module.exports = {
 		gallery: getComponentPath('gallery', 'entry.dev.es.js'),
 		modal: getComponentPath('modal', 'entry.dev.es.js'),
 		side_panel: getComponentPath('side_panel', 'entry.dev.es.js'),
+		step_tracker: getComponentPath('step_tracker', 'entry.dev.es.js'),
 		utilities: getComponentPath('utilities', 'entry.js'),
 	},
 	mode: 'development',
@@ -61,6 +64,7 @@ module.exports = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
+			// eslint-disable-next-line no-undef
 			template: path.resolve(__dirname, './dev/public/index.html'),
 			inject: false,
 		}),
@@ -72,7 +76,6 @@ module.exports = {
 		compress: false,
 		publicPath: '/',
 		contentBase: './dev/public',
-		// filename: path.join(outputPath, '/bundle.js'),
 		open: true,
 		port: 9000,
 		hot: true,
