@@ -14,16 +14,19 @@
 
 package com.liferay.headless.commerce.admin.catalog.internal.util.v1_0;
 
+import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
 import com.liferay.commerce.product.exception.NoSuchCPDefinitionLinkException;
+import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionLink;
 import com.liferay.commerce.product.service.CPDefinitionLinkService;
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Product;
+import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.RelatedProduct;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 /**
  * @author Alessio Antonio Rendina
@@ -32,11 +35,10 @@ public class RelatedProductUtil {
 
 	public static CPDefinitionLink upsertCPDefinitionLink(
 			CPDefinitionLinkService cpDefinitionLinkService,
+			CPDefinitionService cpDefinitionService,
 			RelatedProduct relatedProduct, long cpDefinitionId,
 			ServiceContext serviceContext)
 		throws PortalException {
-
-		Product product = relatedProduct.getProduct();
 
 		try {
 			CPDefinitionLink cpDefinitionLink =
@@ -58,8 +60,36 @@ public class RelatedProductUtil {
 			}
 		}
 
+		CPDefinition cpDefinition = null;
+
+		if (Validator.isNotNull(
+				relatedProduct.getProductExternalReferenceCode())) {
+
+			cpDefinition =
+				cpDefinitionService.
+					fetchCPDefinitionByCProductExternalReferenceCode(
+						serviceContext.getCompanyId(),
+						relatedProduct.getProductExternalReferenceCode());
+
+			if (cpDefinition == null) {
+				throw new NoSuchCPDefinitionException(
+					"Unable to find Product with externalReferenceCode: " +
+						relatedProduct.getProductExternalReferenceCode());
+			}
+		}
+		else {
+			cpDefinition = cpDefinitionService.fetchCPDefinitionByCProductId(
+				relatedProduct.getProductId());
+
+			if (cpDefinition == null) {
+				throw new NoSuchCPDefinitionException(
+					"Unable to find Product with ID: " +
+						relatedProduct.getProductId());
+			}
+		}
+
 		return cpDefinitionLinkService.addCPDefinitionLink(
-			cpDefinitionId, product.getId(),
+			cpDefinitionId, cpDefinition.getCProductId(),
 			GetterUtil.get(relatedProduct.getPriority(), 0D),
 			relatedProduct.getType(), serviceContext);
 	}

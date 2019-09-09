@@ -14,17 +14,12 @@
 
 package com.liferay.headless.commerce.admin.catalog.internal.dto.v1_0.converter;
 
-import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionLink;
 import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.service.CPDefinitionLinkService;
-import com.liferay.commerce.product.service.CPDefinitionService;
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Product;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.RelatedProduct;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterContext;
-import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistry;
-import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverterContext;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -52,22 +47,13 @@ public class RelatedProductDTOConverter implements DTOConverter {
 
 		CProduct cProduct = cpDefinitionLink.getCProduct();
 
-		CPDefinition cpDefinition = _cpDefinitionService.getCPDefinition(
-			cProduct.getPublishedCPDefinitionId());
-
-		DTOConverter productDTOConverter =
-			_dtoConverterRegistry.getDTOConverter(
-				cpDefinition.getModelClassName());
-
 		return new RelatedProduct() {
 			{
 				id = cpDefinitionLink.getCPDefinitionLinkId();
 				priority = cpDefinitionLink.getPriority();
-				product = (Product)productDTOConverter.toDTO(
-					new DefaultDTOConverterContext(
-						dtoConverterContext.getLocale(),
-						cpDefinition.getCPDefinitionId()));
-				productId = cpDefinitionLink.getCPDefinitionId();
+				productExternalReferenceCode =
+					cProduct.getExternalReferenceCode();
+				productId = cProduct.getCProductId();
 				type = cpDefinitionLink.getType();
 			}
 		};
@@ -75,11 +61,5 @@ public class RelatedProductDTOConverter implements DTOConverter {
 
 	@Reference
 	private CPDefinitionLinkService _cpDefinitionLinkService;
-
-	@Reference
-	private CPDefinitionService _cpDefinitionService;
-
-	@Reference
-	private DTOConverterRegistry _dtoConverterRegistry;
 
 }

@@ -14,11 +14,13 @@
 
 package com.liferay.headless.commerce.admin.catalog.internal.resource.v1_0;
 
+import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
 import com.liferay.commerce.product.exception.NoSuchCPDefinitionSpecificationOptionValueException;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
+import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CPDefinitionSpecificationOptionValueService;
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Product;
+import com.liferay.commerce.product.service.CPSpecificationOptionService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductSpecification;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductSpecificationUtil;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.ProductSpecificationResource;
@@ -29,7 +31,6 @@ import com.liferay.headless.commerce.core.util.ServiceContextHelper;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
@@ -55,24 +56,26 @@ public class ProductSpecificationResourceImpl
 			Long id, Pagination pagination)
 		throws Exception {
 
-		DTOConverter productDTOConverter =
-			_dtoConverterRegistry.getDTOConverter(CPDefinition.class.getName());
+		CPDefinition cpDefinition =
+			_cpDefinitionService.fetchCPDefinitionByCProductId(id);
 
-		Product product = (Product)productDTOConverter.toDTO(
-			new DefaultDTOConverterContext(
-				contextAcceptLanguage.getPreferredLocale(),
-				GetterUtil.getLong(id)));
+		if (cpDefinition == null) {
+			throw new NoSuchCPDefinitionException(
+				"Unable to find Product with ID: " + id);
+		}
 
 		List<CPDefinitionSpecificationOptionValue>
 			cpDefinitionSpecificationOptionValues =
 				_cpDefinitionSpecificationOptionValueService.
 					getCPDefinitionSpecificationOptionValues(
-						product.getId(), pagination.getStartPosition(),
+						cpDefinition.getCPDefinitionId(),
+						pagination.getStartPosition(),
 						pagination.getEndPosition(), null);
 
 		int totalItems =
 			_cpDefinitionSpecificationOptionValueService.
-				getCPDefinitionSpecificationOptionValuesCount(product.getId());
+				getCPDefinitionSpecificationOptionValuesCount(
+					cpDefinition.getCPDefinitionId());
 
 		return Page.of(
 			_toProductSpecifications(cpDefinitionSpecificationOptionValues),
@@ -161,8 +164,8 @@ public class ProductSpecificationResourceImpl
 			cpDefinitionSpecificationOptionValue =
 				ProductSpecificationUtil.
 					addCPDefinitionSpecificationOptionValue(
-						_cpDefinitionSpecificationOptionValueService, id,
-						productSpecification,
+						_cpDefinitionSpecificationOptionValueService,
+						_cpSpecificationOptionService, id, productSpecification,
 						_serviceContextHelper.getServiceContext());
 
 		DTOConverter productSpecificationDTOConverter =
@@ -180,8 +183,14 @@ public class ProductSpecificationResourceImpl
 		ProductSpecificationResourceImpl.class);
 
 	@Reference
+	private CPDefinitionService _cpDefinitionService;
+
+	@Reference
 	private CPDefinitionSpecificationOptionValueService
 		_cpDefinitionSpecificationOptionValueService;
+
+	@Reference
+	private CPSpecificationOptionService _cpSpecificationOptionService;
 
 	@Reference
 	private DTOConverterRegistry _dtoConverterRegistry;
