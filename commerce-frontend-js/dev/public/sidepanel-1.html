@@ -22,11 +22,7 @@
 	<noscript>You need to enable JavaScript to run this app.</noscript>
 
 	<button onclick="window.parent.SidePanel.close();">Close</button>
-	<button onclick="window.SidePanel.load([{
-		url: `/sidepanel-2.html?${Math.random()}`,
-		pageName: 'Comments',
-		slug: 'comments',
-	}]);">Open</button>
+	<button onclick="window.SidePanel.open(`/sidepanel-2.html?${Math.random()}`);">Open</button>
 	<div id="side-panel"></div>
 
 <p>

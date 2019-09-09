@@ -9,8 +9,8 @@ export default class Tabs extends React.Component {
 		return (
 			<ul className="nav nav-underline" role="tablist">
 				{this.props.tabs.map(tab => (
-					<li className="nav-item" key={tab.slug}>
-						<a aria-controls="navUnderlineFields" aria-expanded="true" className={`nav-link ${tab.slug === this.props.current && 'active'}`} data-toggle="tab" href="#navUnderlineFields" id="navUnderlineFieldsTab" role="tab" onClick={() => this.props.onChange(tab.slug)}>{tab.pageName}</a>
+					<li className="nav-item" key={tab.url}>
+						<a aria-controls="navUnderlineFields" aria-expanded="true" className={`nav-link ${tab.url === this.props.current && 'active'}`} data-toggle="tab" id="navUnderlineFieldsTab" role="tab" onClick={() => this.props.onChange(tab.url)}>{tab.pageName}</a>
 					</li>
 				))}
 			</ul>
