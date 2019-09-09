@@ -19,7 +19,7 @@
 
 <div class="container">
 <div class="product-hint">
-<div class="hint-text">
+			<div class="hint-text">
 				<span class="hint-text__category" data-slide-type="captionCategory"></span>
 				<span class="hint-text__name-slider" data-slide-type="captionText"></span>
 				<span data-slide-type="captionButton"></span>
@@ -42,22 +42,24 @@
 	</div>
 
 	<#if StaticHighlight.getSiblings()?has_content>
-<div class="bumper__overlay">
-			<#list StaticHighlight.getSiblings() as cur_StaticHighlight>
-<div class="feature">
-					<#if cur_StaticHighlight.HighlightIcon.getData()?? && cur_StaticHighlight.HighlightIcon.getData() != "">
-<div class="feature__icon">
-<img src="${cur_StaticHighlight.HighlightIcon.getData()}">
-						</div>
-					</#if>
-<div class="feature__text">
-						<h3>${cur_StaticHighlight.getData()}</h3>
-
-						<p>${cur_StaticHighlight.HighlightDesc.getData()}</p>
-					</div>
+	<div class="bumper__overlay">
+		<div class="container">
+		<#list StaticHighlight.getSiblings() as cur_StaticHighlight>
+			<div class="feature">
+				<#if cur_StaticHighlight.HighlightIcon.getData()?? && cur_StaticHighlight.HighlightIcon.getData() != "">
+				<div class="feature__icon">
+						<img src="${cur_StaticHighlight.HighlightIcon.getData()}">
 				</div>
-			</#list>
+				</#if>
+				<div class="feature__text">
+					<h3>${cur_StaticHighlight.getData()}</h3>
+
+					<p>${cur_StaticHighlight.HighlightDesc.getData()}</p>
+				</div>
+			</div>
+		</#list>
 		</div>
+	</div>
 	</#if>
 
 	<script>
