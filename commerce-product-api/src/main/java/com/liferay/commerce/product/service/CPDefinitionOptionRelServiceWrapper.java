@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CPDefinitionOptionRelService
  * @generated
  */
-@ProviderType
 public class CPDefinitionOptionRelServiceWrapper
 	implements CPDefinitionOptionRelService,
 			   ServiceWrapper<CPDefinitionOptionRelService> {
@@ -36,6 +33,11 @@ public class CPDefinitionOptionRelServiceWrapper
 		_cpDefinitionOptionRelService = cpDefinitionOptionRelService;
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link CPDefinitionOptionRelServiceUtil} to access the cp definition option rel remote service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPDefinitionOptionRelServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
 	@Override
 	public com.liferay.commerce.product.model.CPDefinitionOptionRel
 			addCPDefinitionOptionRel(

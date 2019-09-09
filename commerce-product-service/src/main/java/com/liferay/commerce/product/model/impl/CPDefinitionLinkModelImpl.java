@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CPDefinitionLink;
 import com.liferay.commerce.product.model.CPDefinitionLinkModel;
 import com.liferay.commerce.product.model.CPDefinitionLinkSoap;
@@ -65,11 +63,10 @@ import java.util.function.Function;
  * @generated
  */
 @JSON(strict = true)
-@ProviderType
 public class CPDefinitionLinkModelImpl
 	extends BaseModelImpl<CPDefinitionLink> implements CPDefinitionLinkModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a cp definition link model instance should use the <code>CPDefinitionLink</code> interface instead.

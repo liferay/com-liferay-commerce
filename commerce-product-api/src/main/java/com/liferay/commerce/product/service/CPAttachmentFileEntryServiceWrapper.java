@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CPAttachmentFileEntryService
  * @generated
  */
-@ProviderType
 public class CPAttachmentFileEntryServiceWrapper
 	implements CPAttachmentFileEntryService,
 			   ServiceWrapper<CPAttachmentFileEntryService> {
@@ -36,6 +33,11 @@ public class CPAttachmentFileEntryServiceWrapper
 		_cpAttachmentFileEntryService = cpAttachmentFileEntryService;
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link CPAttachmentFileEntryServiceUtil} to access the cp attachment file entry remote service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPAttachmentFileEntryServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
 	@Override
 	public com.liferay.commerce.product.model.CPAttachmentFileEntry
 			addCPAttachmentFileEntry(

@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.service.persistence.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.exception.NoSuchCPFriendlyURLEntryException;
 import com.liferay.commerce.product.model.CPFriendlyURLEntry;
 import com.liferay.commerce.product.model.impl.CPFriendlyURLEntryImpl;
@@ -68,12 +66,11 @@ import java.util.Set;
  * @author Marco Leo
  * @generated
  */
-@ProviderType
 public class CPFriendlyURLEntryPersistenceImpl
 	extends BasePersistenceImpl<CPFriendlyURLEntry>
 	implements CPFriendlyURLEntryPersistence {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Always use <code>CPFriendlyURLEntryUtil</code> to access the cp friendly url entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.

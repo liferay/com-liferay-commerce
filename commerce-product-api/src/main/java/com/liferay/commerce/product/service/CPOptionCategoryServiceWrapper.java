@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CPOptionCategoryService
  * @generated
  */
-@ProviderType
 public class CPOptionCategoryServiceWrapper
 	implements CPOptionCategoryService,
 			   ServiceWrapper<CPOptionCategoryService> {
@@ -36,6 +33,11 @@ public class CPOptionCategoryServiceWrapper
 		_cpOptionCategoryService = cpOptionCategoryService;
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link CPOptionCategoryServiceUtil} to access the cp option category remote service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPOptionCategoryServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
 	@Override
 	public com.liferay.commerce.product.model.CPOptionCategory
 			addCPOptionCategory(

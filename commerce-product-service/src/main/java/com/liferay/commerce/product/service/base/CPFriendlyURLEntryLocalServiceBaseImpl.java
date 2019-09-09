@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.service.base;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CPFriendlyURLEntry;
 import com.liferay.commerce.product.service.CPFriendlyURLEntryLocalService;
 import com.liferay.commerce.product.service.persistence.CPAttachmentFileEntryFinder;
@@ -92,12 +90,11 @@ import javax.sql.DataSource;
  * @see com.liferay.commerce.product.service.impl.CPFriendlyURLEntryLocalServiceImpl
  * @generated
  */
-@ProviderType
 public abstract class CPFriendlyURLEntryLocalServiceBaseImpl
 	extends BaseLocalServiceImpl
 	implements CPFriendlyURLEntryLocalService, IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CPFriendlyURLEntryLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.product.service.CPFriendlyURLEntryLocalServiceUtil</code>.

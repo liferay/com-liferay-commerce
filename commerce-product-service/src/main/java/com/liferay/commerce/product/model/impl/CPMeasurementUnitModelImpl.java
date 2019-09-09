@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CPMeasurementUnit;
 import com.liferay.commerce.product.model.CPMeasurementUnitModel;
 import com.liferay.commerce.product.model.CPMeasurementUnitSoap;
@@ -72,11 +70,10 @@ import java.util.function.Function;
  * @generated
  */
 @JSON(strict = true)
-@ProviderType
 public class CPMeasurementUnitModelImpl
 	extends BaseModelImpl<CPMeasurementUnit> implements CPMeasurementUnitModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a cp measurement unit model instance should use the <code>CPMeasurementUnit</code> interface instead.

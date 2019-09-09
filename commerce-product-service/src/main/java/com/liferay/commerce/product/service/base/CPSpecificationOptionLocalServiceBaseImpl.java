@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.service.base;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CPSpecificationOption;
 import com.liferay.commerce.product.service.CPSpecificationOptionLocalService;
 import com.liferay.commerce.product.service.persistence.CPAttachmentFileEntryFinder;
@@ -91,12 +89,11 @@ import javax.sql.DataSource;
  * @see com.liferay.commerce.product.service.impl.CPSpecificationOptionLocalServiceImpl
  * @generated
  */
-@ProviderType
 public abstract class CPSpecificationOptionLocalServiceBaseImpl
 	extends BaseLocalServiceImpl
 	implements CPSpecificationOptionLocalService, IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CPSpecificationOptionLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.product.service.CPSpecificationOptionLocalServiceUtil</code>.

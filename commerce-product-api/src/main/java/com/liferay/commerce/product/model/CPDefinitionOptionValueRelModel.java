@@ -49,7 +49,7 @@ public interface CPDefinitionOptionValueRelModel
 	extends BaseModel<CPDefinitionOptionValueRel>, GroupedModel, LocalizedModel,
 			ShardedModel, StagedAuditedModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. All methods that expect a cp definition option value rel model instance should use the {@link CPDefinitionOptionValueRel} interface instead.

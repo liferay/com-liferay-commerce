@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CPDefinitionOptionRelModel;
 import com.liferay.commerce.product.model.CPDefinitionOptionRelSoap;
@@ -72,12 +70,11 @@ import java.util.function.Function;
  * @generated
  */
 @JSON(strict = true)
-@ProviderType
 public class CPDefinitionOptionRelModelImpl
 	extends BaseModelImpl<CPDefinitionOptionRel>
 	implements CPDefinitionOptionRelModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a cp definition option rel model instance should use the <code>CPDefinitionOptionRel</code> interface instead.

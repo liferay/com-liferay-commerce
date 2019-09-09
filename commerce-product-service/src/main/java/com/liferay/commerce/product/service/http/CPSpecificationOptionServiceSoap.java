@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.service.CPSpecificationOptionServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -65,7 +63,6 @@ import java.util.Map;
  * @see CPSpecificationOptionServiceHttp
  * @generated
  */
-@ProviderType
 public class CPSpecificationOptionServiceSoap {
 
 	public static com.liferay.commerce.product.model.CPSpecificationOptionSoap
@@ -105,6 +102,26 @@ public class CPSpecificationOptionServiceSoap {
 		try {
 			CPSpecificationOptionServiceUtil.deleteCPSpecificationOption(
 				cpSpecificationOptionId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.product.model.CPSpecificationOptionSoap
+			fetchCPSpecificationOption(long companyId, String key)
+		throws RemoteException {
+
+		try {
+			com.liferay.commerce.product.model.CPSpecificationOption
+				returnValue =
+					CPSpecificationOptionServiceUtil.fetchCPSpecificationOption(
+						companyId, key);
+
+			return com.liferay.commerce.product.model.CPSpecificationOptionSoap.
+				toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

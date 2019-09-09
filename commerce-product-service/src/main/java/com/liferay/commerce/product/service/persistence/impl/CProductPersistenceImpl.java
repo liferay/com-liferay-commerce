@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.service.persistence.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.exception.NoSuchCProductException;
 import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.model.impl.CProductImpl;
@@ -68,11 +66,10 @@ import java.util.Set;
  * @author Marco Leo
  * @generated
  */
-@ProviderType
 public class CProductPersistenceImpl
 	extends BasePersistenceImpl<CProduct> implements CProductPersistence {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Always use <code>CProductUtil</code> to access the c product persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.

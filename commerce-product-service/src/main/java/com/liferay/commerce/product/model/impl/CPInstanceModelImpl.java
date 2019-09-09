@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPInstanceModel;
 import com.liferay.commerce.product.model.CPInstanceSoap;
@@ -69,11 +67,10 @@ import java.util.function.Function;
  * @generated
  */
 @JSON(strict = true)
-@ProviderType
 public class CPInstanceModelImpl
 	extends BaseModelImpl<CPInstance> implements CPInstanceModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a cp instance model instance should use the <code>CPInstance</code> interface instead.

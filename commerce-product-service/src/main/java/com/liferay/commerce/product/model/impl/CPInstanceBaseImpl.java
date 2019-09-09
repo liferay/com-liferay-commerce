@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceLocalServiceUtil;
 
@@ -31,11 +29,10 @@ import com.liferay.commerce.product.service.CPInstanceLocalServiceUtil;
  * @see CPInstance
  * @generated
  */
-@ProviderType
 public abstract class CPInstanceBaseImpl
 	extends CPInstanceModelImpl implements CPInstance {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a cp instance model instance should use the <code>CPInstance</code> interface instead.

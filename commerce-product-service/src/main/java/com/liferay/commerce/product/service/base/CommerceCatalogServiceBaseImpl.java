@@ -71,7 +71,7 @@ public abstract class CommerceCatalogServiceBaseImpl
 	extends BaseServiceImpl
 	implements CommerceCatalogService, IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CommerceCatalogService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.product.service.CommerceCatalogServiceUtil</code>.

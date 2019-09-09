@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.util.tracker.ServiceTracker;
@@ -32,10 +30,9 @@ import org.osgi.util.tracker.ServiceTracker;
  * @see CPAttachmentFileEntryLocalService
  * @generated
  */
-@ProviderType
 public class CPAttachmentFileEntryLocalServiceUtil {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify this class directly. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPAttachmentFileEntryLocalServiceImpl</code> and rerun ServiceBuilder to regenerate this class.

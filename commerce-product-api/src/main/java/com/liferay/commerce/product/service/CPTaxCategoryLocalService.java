@@ -60,7 +60,7 @@ import java.util.Map;
 public interface CPTaxCategoryLocalService
 	extends BaseLocalService, PersistedModelLocalService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CPTaxCategoryLocalServiceUtil} to access the cp tax category local service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPTaxCategoryLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.

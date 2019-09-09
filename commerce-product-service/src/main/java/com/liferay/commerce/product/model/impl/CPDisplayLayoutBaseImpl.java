@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CPDisplayLayout;
 import com.liferay.commerce.product.service.CPDisplayLayoutLocalServiceUtil;
 
@@ -31,11 +29,10 @@ import com.liferay.commerce.product.service.CPDisplayLayoutLocalServiceUtil;
  * @see CPDisplayLayout
  * @generated
  */
-@ProviderType
 public abstract class CPDisplayLayoutBaseImpl
 	extends CPDisplayLayoutModelImpl implements CPDisplayLayout {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a cp display layout model instance should use the <code>CPDisplayLayout</code> interface instead.

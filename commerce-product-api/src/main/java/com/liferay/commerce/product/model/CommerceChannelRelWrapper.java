@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -36,7 +34,6 @@ import java.util.Objects;
  * @see CommerceChannelRel
  * @generated
  */
-@ProviderType
 public class CommerceChannelRelWrapper
 	implements CommerceChannelRel, ModelWrapper<CommerceChannelRel> {
 
@@ -297,6 +294,11 @@ public class CommerceChannelRelWrapper
 		return _commerceChannelRel.isNew();
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a commerce channel rel model instance should use the <code>CommerceChannelRel</code> interface instead.
+	 */
 	@Override
 	public void persist() {
 		_commerceChannelRel.persist();

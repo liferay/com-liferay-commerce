@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.service.base;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
 import com.liferay.commerce.product.service.CPDefinitionSpecificationOptionValueLocalService;
 import com.liferay.commerce.product.service.persistence.CPAttachmentFileEntryFinder;
@@ -91,13 +89,12 @@ import javax.sql.DataSource;
  * @see com.liferay.commerce.product.service.impl.CPDefinitionSpecificationOptionValueLocalServiceImpl
  * @generated
  */
-@ProviderType
 public abstract class CPDefinitionSpecificationOptionValueLocalServiceBaseImpl
 	extends BaseLocalServiceImpl
 	implements CPDefinitionSpecificationOptionValueLocalService,
 			   IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CPDefinitionSpecificationOptionValueLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.product.service.CPDefinitionSpecificationOptionValueLocalServiceUtil</code>.

@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.service.persistence.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.impl.CPDefinitionImpl;
@@ -69,12 +67,11 @@ import java.util.Set;
  * @author Marco Leo
  * @generated
  */
-@ProviderType
 public class CPDefinitionPersistenceImpl
 	extends BasePersistenceImpl<CPDefinition>
 	implements CPDefinitionPersistence {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Always use <code>CPDefinitionUtil</code> to access the cp definition persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.

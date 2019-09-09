@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CPOptionValue;
 import com.liferay.commerce.product.service.CPOptionValueLocalServiceUtil;
 
@@ -31,11 +29,10 @@ import com.liferay.commerce.product.service.CPOptionValueLocalServiceUtil;
  * @see CPOptionValue
  * @generated
  */
-@ProviderType
 public abstract class CPOptionValueBaseImpl
 	extends CPOptionValueModelImpl implements CPOptionValue {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a cp option value model instance should use the <code>CPOptionValue</code> interface instead.

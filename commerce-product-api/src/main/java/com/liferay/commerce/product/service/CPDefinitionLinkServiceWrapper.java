@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CPDefinitionLinkService
  * @generated
  */
-@ProviderType
 public class CPDefinitionLinkServiceWrapper
 	implements CPDefinitionLinkService,
 			   ServiceWrapper<CPDefinitionLinkService> {
@@ -36,6 +33,11 @@ public class CPDefinitionLinkServiceWrapper
 		_cpDefinitionLinkService = cpDefinitionLinkService;
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link CPDefinitionLinkServiceUtil} to access the cp definition link remote service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPDefinitionLinkServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
 	@Override
 	public com.liferay.commerce.product.model.CPDefinitionLink
 			addCPDefinitionLink(

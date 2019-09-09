@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.exportimport.kernel.lar.StagedModelType;
 import com.liferay.portal.kernel.model.ModelWrapper;
@@ -37,7 +35,6 @@ import java.util.Objects;
  * @see CPAttachmentFileEntry
  * @generated
  */
-@ProviderType
 public class CPAttachmentFileEntryWrapper
 	implements CPAttachmentFileEntry, ModelWrapper<CPAttachmentFileEntry> {
 
@@ -705,6 +702,11 @@ public class CPAttachmentFileEntryWrapper
 		return _cpAttachmentFileEntry.isScheduled();
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a cp attachment file entry model instance should use the <code>CPAttachmentFileEntry</code> interface instead.
+	 */
 	@Override
 	public void persist() {
 		_cpAttachmentFileEntry.persist();

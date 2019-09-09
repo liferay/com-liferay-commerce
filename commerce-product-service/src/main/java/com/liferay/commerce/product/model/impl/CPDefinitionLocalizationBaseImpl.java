@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CPDefinitionLocalization;
 
 /**
@@ -30,12 +28,11 @@ import com.liferay.commerce.product.model.CPDefinitionLocalization;
  * @see CPDefinitionLocalization
  * @generated
  */
-@ProviderType
 public abstract class CPDefinitionLocalizationBaseImpl
 	extends CPDefinitionLocalizationModelImpl
 	implements CPDefinitionLocalization {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a cp definition localization model instance should use the <code>CPDefinitionLocalization</code> interface instead.

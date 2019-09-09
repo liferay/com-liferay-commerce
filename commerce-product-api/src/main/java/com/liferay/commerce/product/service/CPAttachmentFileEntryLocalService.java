@@ -63,7 +63,7 @@ import java.util.Map;
 public interface CPAttachmentFileEntryLocalService
 	extends BaseLocalService, PersistedModelLocalService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CPAttachmentFileEntryLocalServiceUtil} to access the cp attachment file entry local service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPAttachmentFileEntryLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.

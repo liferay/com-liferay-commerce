@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CommerceCatalogLocalServiceUtil;
 
@@ -31,11 +29,10 @@ import com.liferay.commerce.product.service.CommerceCatalogLocalServiceUtil;
  * @see CommerceCatalog
  * @generated
  */
-@ProviderType
 public abstract class CommerceCatalogBaseImpl
 	extends CommerceCatalogModelImpl implements CommerceCatalog {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce catalog model instance should use the <code>CommerceCatalog</code> interface instead.

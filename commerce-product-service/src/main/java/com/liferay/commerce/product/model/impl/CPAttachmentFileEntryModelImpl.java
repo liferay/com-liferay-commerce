@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPAttachmentFileEntryModel;
 import com.liferay.commerce.product.model.CPAttachmentFileEntrySoap;
@@ -73,12 +71,11 @@ import java.util.function.Function;
  * @generated
  */
 @JSON(strict = true)
-@ProviderType
 public class CPAttachmentFileEntryModelImpl
 	extends BaseModelImpl<CPAttachmentFileEntry>
 	implements CPAttachmentFileEntryModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a cp attachment file entry model instance should use the <code>CPAttachmentFileEntry</code> interface instead.

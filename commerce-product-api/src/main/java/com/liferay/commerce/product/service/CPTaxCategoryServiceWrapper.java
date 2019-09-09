@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CPTaxCategoryService
  * @generated
  */
-@ProviderType
 public class CPTaxCategoryServiceWrapper
 	implements CPTaxCategoryService, ServiceWrapper<CPTaxCategoryService> {
 
@@ -35,6 +32,11 @@ public class CPTaxCategoryServiceWrapper
 		_cpTaxCategoryService = cpTaxCategoryService;
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link CPTaxCategoryServiceUtil} to access the cp tax category remote service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPTaxCategoryServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
 	@Override
 	public com.liferay.commerce.product.model.CPTaxCategory addCPTaxCategory(
 			java.util.Map<java.util.Locale, String> nameMap,

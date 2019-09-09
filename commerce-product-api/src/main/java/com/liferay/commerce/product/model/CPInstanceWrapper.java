@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.exportimport.kernel.lar.StagedModelType;
 import com.liferay.portal.kernel.model.ModelWrapper;
@@ -39,7 +37,6 @@ import java.util.Objects;
  * @see CPInstance
  * @generated
  */
-@ProviderType
 public class CPInstanceWrapper implements CPInstance, ModelWrapper<CPInstance> {
 
 	public CPInstanceWrapper(CPInstance cpInstance) {
@@ -923,6 +920,11 @@ public class CPInstanceWrapper implements CPInstance, ModelWrapper<CPInstance> {
 		return _cpInstance.isSubscriptionEnabled();
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a cp instance model instance should use the <code>CPInstance</code> interface instead.
+	 */
 	@Override
 	public void persist() {
 		_cpInstance.persist();

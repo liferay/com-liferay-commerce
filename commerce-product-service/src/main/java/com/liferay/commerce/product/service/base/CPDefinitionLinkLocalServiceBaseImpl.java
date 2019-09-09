@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.service.base;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CPDefinitionLink;
 import com.liferay.commerce.product.service.CPDefinitionLinkLocalService;
 import com.liferay.commerce.product.service.persistence.CPAttachmentFileEntryFinder;
@@ -91,12 +89,11 @@ import javax.sql.DataSource;
  * @see com.liferay.commerce.product.service.impl.CPDefinitionLinkLocalServiceImpl
  * @generated
  */
-@ProviderType
 public abstract class CPDefinitionLinkLocalServiceBaseImpl
 	extends BaseLocalServiceImpl
 	implements CPDefinitionLinkLocalService, IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CPDefinitionLinkLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.product.service.CPDefinitionLinkLocalServiceUtil</code>.

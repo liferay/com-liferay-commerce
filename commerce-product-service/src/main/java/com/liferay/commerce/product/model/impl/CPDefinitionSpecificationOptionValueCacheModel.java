@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
@@ -34,7 +32,6 @@ import java.util.Date;
  * @author Marco Leo
  * @generated
  */
-@ProviderType
 public class CPDefinitionSpecificationOptionValueCacheModel
 	implements CacheModel<CPDefinitionSpecificationOptionValue>,
 			   Externalizable {

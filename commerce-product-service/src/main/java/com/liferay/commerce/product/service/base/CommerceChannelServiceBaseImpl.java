@@ -70,7 +70,7 @@ public abstract class CommerceChannelServiceBaseImpl
 	extends BaseServiceImpl
 	implements CommerceChannelService, IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CommerceChannelService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.product.service.CommerceChannelServiceUtil</code>.

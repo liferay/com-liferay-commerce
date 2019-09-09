@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.service.persistence.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.exception.NoSuchCPDefinitionSpecificationOptionValueException;
 import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
 import com.liferay.commerce.product.model.impl.CPDefinitionSpecificationOptionValueImpl;
@@ -67,12 +65,11 @@ import java.util.Set;
  * @author Marco Leo
  * @generated
  */
-@ProviderType
 public class CPDefinitionSpecificationOptionValuePersistenceImpl
 	extends BasePersistenceImpl<CPDefinitionSpecificationOptionValue>
 	implements CPDefinitionSpecificationOptionValuePersistence {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Always use <code>CPDefinitionSpecificationOptionValueUtil</code> to access the cp definition specification option value persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.

@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
 import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValueModel;
 import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValueSoap;
@@ -72,12 +70,11 @@ import java.util.function.Function;
  * @generated
  */
 @JSON(strict = true)
-@ProviderType
 public class CPDefinitionSpecificationOptionValueModelImpl
 	extends BaseModelImpl<CPDefinitionSpecificationOptionValue>
 	implements CPDefinitionSpecificationOptionValueModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a cp definition specification option value model instance should use the <code>CPDefinitionSpecificationOptionValue</code> interface instead.

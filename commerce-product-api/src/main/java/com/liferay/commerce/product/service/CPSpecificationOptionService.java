@@ -58,7 +58,7 @@ import java.util.Map;
 )
 public interface CPSpecificationOptionService extends BaseService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CPSpecificationOptionServiceUtil} to access the cp specification option remote service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPSpecificationOptionServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
@@ -70,6 +70,11 @@ public interface CPSpecificationOptionService extends BaseService {
 		throws PortalException;
 
 	public void deleteCPSpecificationOption(long cpSpecificationOptionId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CPSpecificationOption fetchCPSpecificationOption(
+			long companyId, String key)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

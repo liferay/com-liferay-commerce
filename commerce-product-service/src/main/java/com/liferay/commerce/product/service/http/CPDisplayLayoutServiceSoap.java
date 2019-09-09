@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.service.CPDisplayLayoutServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -61,7 +59,6 @@ import java.rmi.RemoteException;
  * @see CPDisplayLayoutServiceHttp
  * @generated
  */
-@ProviderType
 public class CPDisplayLayoutServiceSoap {
 
 	public static com.liferay.commerce.product.model.CPDisplayLayoutSoap

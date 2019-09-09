@@ -67,7 +67,7 @@ import java.util.Map;
 public interface CPDefinitionOptionValueRelLocalService
 	extends BaseLocalService, PersistedModelLocalService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CPDefinitionOptionValueRelLocalServiceUtil} to access the cp definition option value rel local service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPDefinitionOptionValueRelLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.

@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CPSpecificationOptionService
  * @generated
  */
-@ProviderType
 public class CPSpecificationOptionServiceWrapper
 	implements CPSpecificationOptionService,
 			   ServiceWrapper<CPSpecificationOptionService> {
@@ -36,6 +33,11 @@ public class CPSpecificationOptionServiceWrapper
 		_cpSpecificationOptionService = cpSpecificationOptionService;
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link CPSpecificationOptionServiceUtil} to access the cp specification option remote service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPSpecificationOptionServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
 	@Override
 	public com.liferay.commerce.product.model.CPSpecificationOption
 			addCPSpecificationOption(
@@ -57,6 +59,15 @@ public class CPSpecificationOptionServiceWrapper
 
 		_cpSpecificationOptionService.deleteCPSpecificationOption(
 			cpSpecificationOptionId);
+	}
+
+	@Override
+	public com.liferay.commerce.product.model.CPSpecificationOption
+			fetchCPSpecificationOption(long companyId, String key)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _cpSpecificationOptionService.fetchCPSpecificationOption(
+			companyId, key);
 	}
 
 	@Override

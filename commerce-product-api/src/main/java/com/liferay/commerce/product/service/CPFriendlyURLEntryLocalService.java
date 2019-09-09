@@ -59,7 +59,7 @@ import java.util.Map;
 public interface CPFriendlyURLEntryLocalService
 	extends BaseLocalService, PersistedModelLocalService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CPFriendlyURLEntryLocalServiceUtil} to access the cp friendly url entry local service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPFriendlyURLEntryLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.

@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.service.CPDisplayLayoutServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -51,7 +49,6 @@ import com.liferay.portal.kernel.util.MethodKey;
  * @see CPDisplayLayoutServiceSoap
  * @generated
  */
-@ProviderType
 public class CPDisplayLayoutServiceHttp {
 
 	public static com.liferay.commerce.product.model.CPDisplayLayout

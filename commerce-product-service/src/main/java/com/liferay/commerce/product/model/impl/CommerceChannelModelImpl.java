@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.model.CommerceChannelModel;
 import com.liferay.commerce.product.model.CommerceChannelSoap;
@@ -64,11 +62,10 @@ import java.util.function.Function;
  * @generated
  */
 @JSON(strict = true)
-@ProviderType
 public class CommerceChannelModelImpl
 	extends BaseModelImpl<CommerceChannel> implements CommerceChannelModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce channel model instance should use the <code>CommerceChannel</code> interface instead.

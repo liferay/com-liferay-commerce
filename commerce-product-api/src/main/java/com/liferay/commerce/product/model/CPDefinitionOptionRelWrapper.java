@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.exportimport.kernel.lar.StagedModelType;
 import com.liferay.portal.kernel.model.ModelWrapper;
@@ -37,7 +35,6 @@ import java.util.Objects;
  * @see CPDefinitionOptionRel
  * @generated
  */
-@ProviderType
 public class CPDefinitionOptionRelWrapper
 	implements CPDefinitionOptionRel, ModelWrapper<CPDefinitionOptionRel> {
 
@@ -613,6 +610,11 @@ public class CPDefinitionOptionRelWrapper
 		return _cpDefinitionOptionRel.isSkuContributor();
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a cp definition option rel model instance should use the <code>CPDefinitionOptionRel</code> interface instead.
+	 */
 	@Override
 	public void persist() {
 		_cpDefinitionOptionRel.persist();

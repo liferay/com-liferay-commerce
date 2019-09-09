@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CPTaxCategory;
 import com.liferay.commerce.product.model.CPTaxCategoryModel;
 import com.liferay.commerce.product.model.CPTaxCategorySoap;
@@ -71,11 +69,10 @@ import java.util.function.Function;
  * @generated
  */
 @JSON(strict = true)
-@ProviderType
 public class CPTaxCategoryModelImpl
 	extends BaseModelImpl<CPTaxCategory> implements CPTaxCategoryModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a cp tax category model instance should use the <code>CPTaxCategory</code> interface instead.

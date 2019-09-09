@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.model.CProductModel;
 import com.liferay.expando.kernel.model.ExpandoBridge;
@@ -61,11 +59,10 @@ import java.util.function.Function;
  * @see CProductImpl
  * @generated
  */
-@ProviderType
 public class CProductModelImpl
 	extends BaseModelImpl<CProduct> implements CProductModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a c product model instance should use the <code>CProduct</code> interface instead.
