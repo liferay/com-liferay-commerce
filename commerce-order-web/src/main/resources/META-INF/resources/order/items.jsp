@@ -49,12 +49,12 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 				headerActionUrl="<%= editURL %>"
 				title="shipping-address-and-method"
 			>
-				<div class="card-text">PLACEHOLDER PO Box 467 New York NY 10002</div>
+				<div class="card-text">PO Box 467 New York NY 10002</div>
 				<div class="card-text mt-3">
 					<clay:icon
 						symbol="geolocation"
 					/>
-					PLACEHOLDER (Standard delivery)
+					(Standard delivery)
 				</div>
 			</commerce-ui:panel>
 		</div>
@@ -76,7 +76,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 				headerActionId="small-modal-id"
 				title="billing-address"
 			>
-				<div class="card-text">PLACEHOLDER PO Box 467 New York NY 10002</div>
+				<div class="card-text">PO Box 467 New York NY 10002</div>
 			</commerce-ui:panel>
 		</div>
 
@@ -90,7 +90,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 						<li class="active multi-step-item multi-step-item-expand">
 							<div class="multi-step-divider"></div>
 							<div class="multi-step-indicator">
-								<div class="multi-step-indicator-label">PLACEHOLDER Confirmed</div>
+								<div class="multi-step-indicator-label">Confirmed</div>
 
 								<span class="multi-step-icon" data-multi-step-icon="1"></span>
 							</div>
@@ -98,7 +98,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 						<li class="disabled multi-step-item multi-step-item-expand">
 							<div class="multi-step-divider"></div>
 							<div class="multi-step-indicator">
-								<div class="multi-step-indicator-label">PLACEHOLDER Transmitted</div>
+								<div class="multi-step-indicator-label">Transmitted</div>
 
 								<span class="multi-step-icon" data-multi-step-icon="2"></span>
 							</div>
@@ -106,7 +106,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 						<li class="disabled multi-step-item multi-step-item-expand">
 							<div class="multi-step-divider"></div>
 							<div class="multi-step-indicator">
-								<div class="multi-step-indicator-label">PLACEHOLDER Shipped</div>
+								<div class="multi-step-indicator-label">Shipped</div>
 
 								<span class="multi-step-icon" data-multi-step-icon="3"></span>
 							</div>
@@ -114,7 +114,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 						<li class="disabled multi-step-item">
 							<div class="multi-step-divider"></div>
 							<div class="multi-step-indicator">
-								<div class="multi-step-indicator-label">PLACEHOLDER Completed</div>
+								<div class="multi-step-indicator-label">Completed</div>
 
 								<span class="multi-step-icon" data-multi-step-icon="4"></span>
 							</div>
