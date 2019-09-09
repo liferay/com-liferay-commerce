@@ -22,6 +22,7 @@ import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountGroupRes
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverterContext;
+import com.liferay.headless.commerce.core.util.ExpandoUtil;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -30,6 +31,7 @@ import com.liferay.portal.vulcan.pagination.Pagination;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.ws.rs.core.Response;
 
@@ -164,6 +166,16 @@ public class AccountGroupResourceImpl extends BaseAccountGroupResourceImpl {
 			commerceAccountGroup.getCommerceAccountGroupId(),
 			accountGroup.getName(), _serviceContextHelper.getServiceContext());
 
+		// Expando
+
+		Map<String, ?> customFields = accountGroup.getCustomFields();
+
+		if ((customFields != null) && !customFields.isEmpty()) {
+			ExpandoUtil.updateExpando(
+				contextCompany.getCompanyId(), CommerceAccountGroup.class,
+				commerceAccountGroup.getPrimaryKey(), customFields);
+		}
+
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
@@ -180,12 +192,6 @@ public class AccountGroupResourceImpl extends BaseAccountGroupResourceImpl {
 				_commerceAccountGroupService.fetchByExternalReferenceCode(
 					contextCompany.getCompanyId(),
 					accountGroup.getExternalReferenceCode());
-
-			if (commerceAccountGroup == null) {
-				throw new NoSuchAccountGroupException(
-					"Unable to find AccountGroup with externalReferenceCode: " +
-						accountGroup.getExternalReferenceCode());
-			}
 		}
 
 		if (commerceAccountGroup == null) {
@@ -201,6 +207,16 @@ public class AccountGroupResourceImpl extends BaseAccountGroupResourceImpl {
 					commerceAccountGroup.getCommerceAccountGroupId(),
 					accountGroup.getName(),
 					_serviceContextHelper.getServiceContext());
+		}
+
+		// Expando
+
+		Map<String, ?> customFields = accountGroup.getCustomFields();
+
+		if ((customFields != null) && !customFields.isEmpty()) {
+			ExpandoUtil.updateExpando(
+				contextCompany.getCompanyId(), CommerceAccountGroup.class,
+				commerceAccountGroup.getPrimaryKey(), customFields);
 		}
 
 		DTOConverter accountGroupDTOConverter =
