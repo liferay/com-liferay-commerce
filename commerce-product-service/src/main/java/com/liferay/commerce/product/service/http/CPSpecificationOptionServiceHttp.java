@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.service.CPSpecificationOptionServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -51,7 +49,6 @@ import com.liferay.portal.kernel.util.MethodKey;
  * @see CPSpecificationOptionServiceSoap
  * @generated
  */
-@ProviderType
 public class CPSpecificationOptionServiceHttp {
 
 	public static com.liferay.commerce.product.model.CPSpecificationOption
@@ -136,6 +133,47 @@ public class CPSpecificationOptionServiceHttp {
 	}
 
 	public static com.liferay.commerce.product.model.CPSpecificationOption
+			fetchCPSpecificationOption(
+				HttpPrincipal httpPrincipal, long companyId, String key)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CPSpecificationOptionServiceUtil.class,
+				"fetchCPSpecificationOption",
+				_fetchCPSpecificationOptionParameterTypes2);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, companyId, key);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return (com.liferay.commerce.product.model.CPSpecificationOption)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.commerce.product.model.CPSpecificationOption
 			getCPSpecificationOption(
 				HttpPrincipal httpPrincipal, long cpSpecificationOptionId)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -144,7 +182,7 @@ public class CPSpecificationOptionServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CPSpecificationOptionServiceUtil.class,
 				"getCPSpecificationOption",
-				_getCPSpecificationOptionParameterTypes2);
+				_getCPSpecificationOptionParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, cpSpecificationOptionId);
@@ -188,7 +226,7 @@ public class CPSpecificationOptionServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CPSpecificationOptionServiceUtil.class,
 				"searchCPSpecificationOptions",
-				_searchCPSpecificationOptionsParameterTypes3);
+				_searchCPSpecificationOptionsParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, companyId, facetable, keywords, start, end, sort);
@@ -235,7 +273,7 @@ public class CPSpecificationOptionServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CPSpecificationOptionServiceUtil.class,
 				"updateCPSpecificationOption",
-				_updateCPSpecificationOptionParameterTypes4);
+				_updateCPSpecificationOptionParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, cpSpecificationOptionId, cpOptionCategoryId,
@@ -278,15 +316,17 @@ public class CPSpecificationOptionServiceHttp {
 		};
 	private static final Class<?>[]
 		_deleteCPSpecificationOptionParameterTypes1 = new Class[] {long.class};
-	private static final Class<?>[] _getCPSpecificationOptionParameterTypes2 =
+	private static final Class<?>[] _fetchCPSpecificationOptionParameterTypes2 =
+		new Class[] {long.class, String.class};
+	private static final Class<?>[] _getCPSpecificationOptionParameterTypes3 =
 		new Class[] {long.class};
 	private static final Class<?>[]
-		_searchCPSpecificationOptionsParameterTypes3 = new Class[] {
+		_searchCPSpecificationOptionsParameterTypes4 = new Class[] {
 			long.class, Boolean.class, String.class, int.class, int.class,
 			com.liferay.portal.kernel.search.Sort.class
 		};
 	private static final Class<?>[]
-		_updateCPSpecificationOptionParameterTypes4 = new Class[] {
+		_updateCPSpecificationOptionParameterTypes5 = new Class[] {
 			long.class, long.class, java.util.Map.class, java.util.Map.class,
 			boolean.class, String.class,
 			com.liferay.portal.kernel.service.ServiceContext.class

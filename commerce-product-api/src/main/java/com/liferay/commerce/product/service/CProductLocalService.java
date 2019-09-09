@@ -60,7 +60,7 @@ import java.util.List;
 public interface CProductLocalService
 	extends BaseLocalService, PersistedModelLocalService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CProductLocalServiceUtil} to access the c product local service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CProductLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.

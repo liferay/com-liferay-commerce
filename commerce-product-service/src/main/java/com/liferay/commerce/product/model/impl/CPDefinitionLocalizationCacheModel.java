@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CPDefinitionLocalization;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.model.MVCCModel;
@@ -33,7 +31,6 @@ import java.io.ObjectOutput;
  * @author Marco Leo
  * @generated
  */
-@ProviderType
 public class CPDefinitionLocalizationCacheModel
 	implements CacheModel<CPDefinitionLocalization>, Externalizable, MVCCModel {
 

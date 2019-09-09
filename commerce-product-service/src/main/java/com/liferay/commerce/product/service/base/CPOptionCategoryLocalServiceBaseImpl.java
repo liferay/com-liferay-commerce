@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.service.base;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CPOptionCategory;
 import com.liferay.commerce.product.service.CPOptionCategoryLocalService;
 import com.liferay.commerce.product.service.persistence.CPAttachmentFileEntryFinder;
@@ -90,12 +88,11 @@ import javax.sql.DataSource;
  * @see com.liferay.commerce.product.service.impl.CPOptionCategoryLocalServiceImpl
  * @generated
  */
-@ProviderType
 public abstract class CPOptionCategoryLocalServiceBaseImpl
 	extends BaseLocalServiceImpl
 	implements CPOptionCategoryLocalService, IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CPOptionCategoryLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.product.service.CPOptionCategoryLocalServiceUtil</code>.

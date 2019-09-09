@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -35,7 +33,6 @@ import java.util.Objects;
  * @see CPDefinitionLocalization
  * @generated
  */
-@ProviderType
 public class CPDefinitionLocalizationWrapper
 	implements CPDefinitionLocalization,
 			   ModelWrapper<CPDefinitionLocalization> {

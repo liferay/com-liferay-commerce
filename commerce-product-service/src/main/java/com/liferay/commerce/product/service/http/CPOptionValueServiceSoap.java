@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.service.CPOptionValueServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -65,7 +63,6 @@ import java.util.Map;
  * @see CPOptionValueServiceHttp
  * @generated
  */
-@ProviderType
 public class CPOptionValueServiceSoap {
 
 	public static com.liferay.commerce.product.model.CPOptionValueSoap

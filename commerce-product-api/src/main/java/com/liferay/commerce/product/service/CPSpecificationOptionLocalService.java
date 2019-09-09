@@ -64,7 +64,7 @@ import java.util.Map;
 public interface CPSpecificationOptionLocalService
 	extends BaseLocalService, PersistedModelLocalService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CPSpecificationOptionLocalServiceUtil} to access the cp specification option local service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPSpecificationOptionLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.

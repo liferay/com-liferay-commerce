@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.service.CPDefinitionSpecificationOptionValueServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -51,7 +49,6 @@ import com.liferay.portal.kernel.util.MethodKey;
  * @see CPDefinitionSpecificationOptionValueServiceSoap
  * @generated
  */
-@ProviderType
 public class CPDefinitionSpecificationOptionValueServiceHttp {
 
 	public static

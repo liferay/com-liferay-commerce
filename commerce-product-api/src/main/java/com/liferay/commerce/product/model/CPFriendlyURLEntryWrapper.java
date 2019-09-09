@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.exportimport.kernel.lar.StagedModelType;
 import com.liferay.portal.kernel.model.ModelWrapper;
@@ -37,7 +35,6 @@ import java.util.Objects;
  * @see CPFriendlyURLEntry
  * @generated
  */
-@ProviderType
 public class CPFriendlyURLEntryWrapper
 	implements CPFriendlyURLEntry, ModelWrapper<CPFriendlyURLEntry> {
 
@@ -374,6 +371,11 @@ public class CPFriendlyURLEntryWrapper
 		return _cpFriendlyURLEntry.isNew();
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a cp friendly url entry model instance should use the <code>CPFriendlyURLEntry</code> interface instead.
+	 */
 	@Override
 	public void persist() {
 		_cpFriendlyURLEntry.persist();

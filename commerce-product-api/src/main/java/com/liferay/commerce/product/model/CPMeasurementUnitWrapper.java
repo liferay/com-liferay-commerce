@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.exportimport.kernel.lar.StagedModelType;
 import com.liferay.portal.kernel.model.ModelWrapper;
@@ -37,7 +35,6 @@ import java.util.Objects;
  * @see CPMeasurementUnit
  * @generated
  */
-@ProviderType
 public class CPMeasurementUnitWrapper
 	implements CPMeasurementUnit, ModelWrapper<CPMeasurementUnit> {
 
@@ -468,6 +465,11 @@ public class CPMeasurementUnitWrapper
 		return _cpMeasurementUnit.isPrimary();
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a cp measurement unit model instance should use the <code>CPMeasurementUnit</code> interface instead.
+	 */
 	@Override
 	public void persist() {
 		_cpMeasurementUnit.persist();

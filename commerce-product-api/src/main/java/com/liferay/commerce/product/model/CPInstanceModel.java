@@ -47,7 +47,7 @@ public interface CPInstanceModel
 	extends BaseModel<CPInstance>, ShardedModel, StagedGroupedModel,
 			WorkflowedModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. All methods that expect a cp instance model instance should use the {@link CPInstance} interface instead.

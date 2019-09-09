@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.service.persistence;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CPSpecificationOption;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -42,10 +40,9 @@ import org.osgi.util.tracker.ServiceTracker;
  * @see CPSpecificationOptionPersistence
  * @generated
  */
-@ProviderType
 public class CPSpecificationOptionUtil {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.

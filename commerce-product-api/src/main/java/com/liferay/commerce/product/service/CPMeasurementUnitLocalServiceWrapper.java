@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CPMeasurementUnitLocalService
  * @generated
  */
-@ProviderType
 public class CPMeasurementUnitLocalServiceWrapper
 	implements CPMeasurementUnitLocalService,
 			   ServiceWrapper<CPMeasurementUnitLocalService> {
