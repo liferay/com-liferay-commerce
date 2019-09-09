@@ -21,14 +21,12 @@
 <body>
 	<noscript>You need to enable JavaScript to run this app.</noscript>
 
-	<button onclick="window.SidePanel.load([{
+	<button onclick="window.SidePanel.open([{
 		url: `/sidepanel-1.html?${Math.random()}`,
 		pageName: 'Page 1',
-		slug: 'p1',
 	}, {
 		url: `/sidepanel-1.html?${Math.random()}`,
 		pageName: 'Page 2',
-		slug: 'p2',
 	}]);">Open</button>
 	<div id="side-panel"></div>
 
