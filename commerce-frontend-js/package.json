@@ -61,9 +61,9 @@
 		"build": "liferay-npm-scripts build",
 		"checkFormat": "liferay-npm-scripts check",
 		"format": "liferay-npm-scripts fix",
-		"start": "webpack-dev-server --config webpack.config.dev.js",
+		"start": "webpack-dev-server --config webpack.config.dev.js --host 0.0.0.0",
 		"test": "liferay-npm-scripts test",
-		"watch": "liferay-npm-scripts webpack --watch"
+		"watch": "liferay-npm-scripts webpack --watch --host 0.0.0.0"
 	},
 	"version": "1.0.0"
 }
