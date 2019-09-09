@@ -20,12 +20,19 @@ import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Sku;
 import com.liferay.headless.commerce.admin.catalog.internal.util.DateConfigUtil;
 import com.liferay.headless.commerce.core.util.DateConfig;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 
+import java.math.BigDecimal;
+
 import java.util.Calendar;
+import java.util.Map;
 
 /**
  * @author Alessio Antonio Rendina
@@ -62,13 +69,14 @@ public class SkuUtil {
 		return cpInstanceService.upsertCPInstance(
 			cpDefinition.getCPDefinitionId(), cpDefinition.getGroupId(),
 			sku.getSku(), sku.getGtin(), sku.getManufacturerPartNumber(),
-			GetterUtil.get(sku.getPurchasable(), false),
-			GetterUtil.getString(sku.getOptions()),
+			GetterUtil.get(sku.getPurchasable(), false), _getOptions(sku),
 			GetterUtil.get(sku.getWidth(), 0.0),
 			GetterUtil.get(sku.getHeight(), 0.0),
 			GetterUtil.get(sku.getDepth(), 0.0),
-			GetterUtil.get(sku.getWeight(), 0.0), sku.getPrice(),
-			sku.getPromoPrice(), sku.getCost(),
+			GetterUtil.get(sku.getWeight(), 0.0),
+			(BigDecimal)GetterUtil.get(sku.getPrice(), BigDecimal.ZERO),
+			(BigDecimal)GetterUtil.get(sku.getPromoPrice(), BigDecimal.ZERO),
+			(BigDecimal)GetterUtil.get(sku.getCost(), BigDecimal.ZERO),
 			GetterUtil.get(sku.getPublished(), false),
 			sku.getExternalReferenceCode(), displayDateConfig.getMonth(),
 			displayDateConfig.getDay(), displayDateConfig.getYear(),
@@ -77,6 +85,30 @@ public class SkuUtil {
 			expirationDateConfig.getYear(), expirationDateConfig.getHour(),
 			expirationDateConfig.getMinute(),
 			GetterUtil.get(sku.getNeverExpire(), false), serviceContext);
+	}
+
+	private static String _getOptions(Sku sku) {
+		Map<String, String> options = sku.getOptions();
+
+		if (options == null) {
+			return StringPool.BLANK;
+		}
+
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		for (Map.Entry<String, String> entry : options.entrySet()) {
+			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+
+			jsonObject.put("key", entry.getKey());
+
+			JSONArray valueJSONArray = JSONFactoryUtil.createJSONArray();
+
+			jsonObject.put("value", valueJSONArray.put(entry.getValue()));
+
+			jsonArray.put(jsonObject);
+		}
+
+		return jsonArray.toString();
 	}
 
 }
