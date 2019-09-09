@@ -49,6 +49,34 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class AccountGroup {
 
 	@Schema
+	public Map<String, ?> getCustomFields() {
+		return customFields;
+	}
+
+	public void setCustomFields(Map<String, ?> customFields) {
+		this.customFields = customFields;
+	}
+
+	@JsonIgnore
+	public void setCustomFields(
+		UnsafeSupplier<Map<String, ?>, Exception> customFieldsUnsafeSupplier) {
+
+		try {
+			customFields = customFieldsUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected Map<String, ?> customFields;
+
+	@Schema
 	public String getExternalReferenceCode() {
 		return externalReferenceCode;
 	}
@@ -155,6 +183,16 @@ public class AccountGroup {
 		StringBundler sb = new StringBundler();
 
 		sb.append("{");
+
+		if (customFields != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"customFields\": ");
+
+			sb.append(_toJSON(customFields));
+		}
 
 		if (externalReferenceCode != null) {
 			if (sb.length() > 1) {
