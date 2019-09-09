@@ -59,48 +59,38 @@ public abstract class BaseProductOptionResourceImpl
 	implements ProductOptionResource {
 
 	@Override
-	@DELETE
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/productOptions/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "ProductOption")})
-	public Response deleteProductOption(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
 	@GET
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/productOptions/{id}")
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "id"),
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/products/{id}/productOptions/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "ProductOption")})
-	public ProductOption getProductOption(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
+	public Page<ProductOption> getProductIdProductOptionsPage(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			@Context Pagination pagination)
 		throws Exception {
 
-		return new ProductOption();
+		return Page.of(Collections.emptyList());
 	}
 
 	@Override
 	@Consumes({"application/json", "application/xml"})
-	@PATCH
+	@POST
 	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/productOptions/{id}")
+	@Path("/products/{id}/productOptions/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "ProductOption")})
-	public Response patchProductOption(
+	public Page<ProductOption> postProductIdProductOptionsPage(
 			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			ProductOption productOption)
+			ProductOption[] productOptions)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return Page.of(Collections.emptyList());
 	}
 
 	@Override
@@ -153,38 +143,48 @@ public abstract class BaseProductOptionResourceImpl
 	}
 
 	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.PATH, name = "id"),
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/products/{id}/productOptions/")
+	@DELETE
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/productOptions/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "ProductOption")})
-	public Page<ProductOption> getProductIdProductOptionsPage(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			@Context Pagination pagination)
+	public Response deleteProductOption(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
 		throws Exception {
 
-		return Page.of(Collections.emptyList());
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/productOptions/{id}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "ProductOption")})
+	public ProductOption getProductOption(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
+		throws Exception {
+
+		return new ProductOption();
 	}
 
 	@Override
 	@Consumes({"application/json", "application/xml"})
-	@POST
+	@PATCH
 	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/products/{id}/productOptions/")
+	@Path("/productOptions/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "ProductOption")})
-	public Page<ProductOption> postProductIdProductOptionsPage(
+	public Response patchProductOption(
 			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			ProductOption[] productOptions)
+			ProductOption productOption)
 		throws Exception {
 
-		return Page.of(Collections.emptyList());
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
 	}
 
 	public void setContextCompany(Company contextCompany) {

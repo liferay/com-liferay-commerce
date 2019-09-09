@@ -59,24 +59,6 @@ public abstract class BaseOptionCategoryResourceImpl
 	implements OptionCategoryResource {
 
 	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/optionCategories/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "OptionCategory")})
-	public Page<OptionCategory> getOptionCategoriesPage(
-			@Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
 	@DELETE
 	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
 	@Path("/optionCategories/{id}")
@@ -122,9 +104,27 @@ public abstract class BaseOptionCategoryResourceImpl
 	}
 
 	@Override
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/optionCategories/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "OptionCategory")})
+	public Page<OptionCategory> getOptionCategoriesPage(
+			@Context Pagination pagination)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
+
+	@Override
 	@Consumes({"application/json", "application/xml"})
 	@POST
-	@Path("/optionCategory/")
+	@Path("/optionCategories/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "OptionCategory")})
 	public OptionCategory postOptionCategory(OptionCategory optionCategory)

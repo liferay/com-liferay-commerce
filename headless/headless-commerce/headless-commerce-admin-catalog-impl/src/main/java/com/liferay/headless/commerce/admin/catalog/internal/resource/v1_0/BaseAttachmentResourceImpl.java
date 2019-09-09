@@ -59,6 +59,51 @@ public abstract class BaseAttachmentResourceImpl implements AttachmentResource {
 
 	@Override
 	@DELETE
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/attachments/{id}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Attachment")})
+	public Response deleteAttachment(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/attachments/{id}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Attachment")})
+	public Attachment getAttachment(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
+		throws Exception {
+
+		return new Attachment();
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@PATCH
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/attachments/{id}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Attachment")})
+	public Response patchAttachment(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			Attachment attachment)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@DELETE
 	@Parameters(
 		value = {
 			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
@@ -118,111 +163,38 @@ public abstract class BaseAttachmentResourceImpl implements AttachmentResource {
 	}
 
 	@Override
-	@DELETE
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/attachments/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Attachment")})
-	public Response deleteAttachment(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/attachments/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Attachment")})
-	public Attachment getAttachment(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
-		throws Exception {
-
-		return new Attachment();
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@PATCH
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/attachments/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Attachment")})
-	public Response patchAttachment(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			Attachment attachment)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
-		}
-	)
-	@Path(
-		"/products/by-externalReferenceCode/{externalReferenceCode}/attachment/"
-	)
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Attachment")})
-	public Attachment postProductByExternalReferenceCodeAttachment(
-			@NotNull @Parameter(hidden = true)
-			@PathParam("externalReferenceCode") String externalReferenceCode,
-			Attachment attachment)
-		throws Exception {
-
-		return new Attachment();
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
-		}
-	)
-	@Path("/products/by-externalReferenceCode/{externalReferenceCode}/image/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Attachment")})
-	public Attachment postProductByExternalReferenceCodeImage(
-			@NotNull @Parameter(hidden = true)
-			@PathParam("externalReferenceCode") String externalReferenceCode,
-			Attachment attachment)
-		throws Exception {
-
-		return new Attachment();
-	}
-
-	@Override
 	@GET
 	@Parameters(
 		value = {
-			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode"),
+			@Parameter(in = ParameterIn.PATH, name = "id"),
 			@Parameter(in = ParameterIn.QUERY, name = "page"),
 			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
 		}
 	)
-	@Path("/products/by-externalReferenceCode/{externalReferenceCode}/images/")
+	@Path("/products/{id}/attachments/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Attachment")})
-	public Page<Attachment> getProductByExternalReferenceCodeImagesPage(
-			@NotNull @Parameter(hidden = true)
-			@PathParam("externalReferenceCode") String externalReferenceCode,
+	public Page<Attachment> getProductIdAttachmentsPage(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
 			@Context Pagination pagination)
 		throws Exception {
 
 		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/products/{id}/attachments/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Attachment")})
+	public Attachment postProductIdAttachment(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			Attachment attachment)
+		throws Exception {
+
+		return new Attachment();
 	}
 
 	@Override
@@ -253,48 +225,22 @@ public abstract class BaseAttachmentResourceImpl implements AttachmentResource {
 	@Override
 	@Consumes({"application/json", "application/xml"})
 	@POST
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/products/{id}/attachment/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Attachment")})
-	public Attachment postProductIdAttachment(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			Attachment attachment)
-		throws Exception {
-
-		return new Attachment();
-	}
-
-	@Override
-	@GET
 	@Parameters(
 		value = {
-			@Parameter(in = ParameterIn.PATH, name = "id"),
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
 		}
 	)
-	@Path("/products/{id}/attachments/")
+	@Path(
+		"/products/by-externalReferenceCode{externalReferenceCode}/attachments/"
+	)
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Attachment")})
-	public Page<Attachment> getProductIdAttachmentsPage(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			@Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/products/{id}/image/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Attachment")})
-	public Attachment postProductIdImage(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			Attachment attachment)
+	public Attachment
+			postProductByExternalReferenceCodeexternalReferenceCodeAttachment(
+				@NotNull @Parameter(hidden = true)
+				@PathParam("externalReferenceCode") String
+					externalReferenceCode,
+				Attachment attachment)
 		throws Exception {
 
 		return new Attachment();
@@ -318,6 +264,62 @@ public abstract class BaseAttachmentResourceImpl implements AttachmentResource {
 		throws Exception {
 
 		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/products/{id}/images/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Attachment")})
+	public Attachment postProductIdImage(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			Attachment attachment)
+		throws Exception {
+
+		return new Attachment();
+	}
+
+	@Override
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode"),
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/products/by-externalReferenceCode/{externalReferenceCode}/images/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Attachment")})
+	public Page<Attachment> getProductByExternalReferenceCodeImagesPage(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode,
+			@Context Pagination pagination)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
+		}
+	)
+	@Path("/products/by-externalReferenceCode/{externalReferenceCode}/images/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Attachment")})
+	public Attachment postProductByExternalReferenceCodeImage(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode,
+			Attachment attachment)
+		throws Exception {
+
+		return new Attachment();
 	}
 
 	public void setContextCompany(Company contextCompany) {

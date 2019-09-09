@@ -55,6 +55,36 @@ public abstract class BaseProductConfigurationResourceImpl
 
 	@Override
 	@GET
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/products/{id}/configuration/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "ProductConfiguration")})
+	public ProductConfiguration getProductIdConfiguration(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
+		throws Exception {
+
+		return new ProductConfiguration();
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@PATCH
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/products/{id}/configuration/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "ProductConfiguration")})
+	public Response patchProductIdConfiguration(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			ProductConfiguration productConfiguration)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
 	@Parameters(
 		value = {
 			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
@@ -89,36 +119,6 @@ public abstract class BaseProductConfigurationResourceImpl
 	public Response patchProductByExternalReferenceCodeConfiguration(
 			@NotNull @Parameter(hidden = true)
 			@PathParam("externalReferenceCode") String externalReferenceCode,
-			ProductConfiguration productConfiguration)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/products/{id}/configuration/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "ProductConfiguration")})
-	public ProductConfiguration getProductIdConfiguration(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
-		throws Exception {
-
-		return new ProductConfiguration();
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@PATCH
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/products/{id}/configuration/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "ProductConfiguration")})
-	public Response patchProductIdConfiguration(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
 			ProductConfiguration productConfiguration)
 		throws Exception {
 

@@ -32,12 +32,12 @@ import javax.annotation.Generated;
 @Generated("")
 public interface ProductOptionValueResource {
 
-	public ProductOptionValue postProductOptionIdProductOptionValue(
-			Long id, ProductOptionValue productOptionValue)
-		throws Exception;
-
 	public Page<ProductOptionValue> getProductOptionIdProductOptionValuesPage(
 			Long id, Pagination pagination)
+		throws Exception;
+
+	public ProductOptionValue postProductOptionIdProductOptionValue(
+			Long id, ProductOptionValue productOptionValue)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

@@ -56,21 +56,6 @@ public abstract class BaseProductSpecificationResourceImpl
 	implements ProductSpecificationResource {
 
 	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/products/{id}/productSpecification/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "ProductSpecification")})
-	public ProductSpecification postProductIdProductSpecification(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			ProductSpecification productSpecification)
-		throws Exception {
-
-		return new ProductSpecification();
-	}
-
-	@Override
 	@GET
 	@Parameters(
 		value = {
@@ -88,6 +73,21 @@ public abstract class BaseProductSpecificationResourceImpl
 		throws Exception {
 
 		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/products/{id}/productSpecifications/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "ProductSpecification")})
+	public ProductSpecification postProductIdProductSpecification(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			ProductSpecification productSpecification)
+		throws Exception {
+
+		return new ProductSpecification();
 	}
 
 	public void setContextCompany(Company contextCompany) {
