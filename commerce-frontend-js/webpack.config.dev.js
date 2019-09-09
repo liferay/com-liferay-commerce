@@ -1,52 +1,24 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
-
 const {defineServerResponses} = require('./dev/fakeServerUtilities');
-const components = require('./src/main/resources/META-INF/resources/components/index');
+
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const outputPath = path.resolve(__dirname, './dev/public');
 
-const getComponentPath = (component, entry) => path.join(
-	__dirname,
-	'src',
-	'main',
-	'resources',
-	'META-INF',
-	'resources',
-	'components',
-	component,
-	entry
-);
-
-// eslint-disable-next-line no-undef
 module.exports = {
-	devServer: {
-		before(app) {
-			defineServerResponses(app);
-		},
-		compress: false,
-		contentBase: './dev/public',
-		open: true,
-		openPage: 'index.html',
-		port: 9000,
-		proxy: {
-			context: [
-				'/o',
-				'/group',
-				'/c',
-				'/web',
-				'/image'
-			],
-			target: 'http://localhost:8080/'
-		},
-		publicPath: '/',
+	entry: {
+		components: [
+			path.join(__dirname, './src/main/resources/META-INF/resources/js/add_or_create/entry.dev.es.js'),
+			path.join(__dirname, './src/main/resources/META-INF/resources/js/assign_to/entry.dev.es.js'),
+			path.join(__dirname, './src/main/resources/META-INF/resources/js/table_toolbar/entry.dev.es.tsx'),
+			path.join(__dirname, './src/main/resources/META-INF/resources/js/gallery/entry.dev.es.js'),
+			path.join(__dirname, './src/main/resources/META-INF/resources/js/modal/entry.dev.es.js'),
+			path.join(__dirname, './src/main/resources/META-INF/resources/js/side_panel/entry.dev.es.js'),
+			path.join(__dirname, './src/main/resources/META-INF/resources/js/utilities/entry.js'),
+		],
 	},
-	devtool: 'inline-source-map',
-	entry: components.reduce((comp, current) => {
-		comp[current.folder] = getComponentPath(current.folder, current.entry_dev)
-		return comp;
-	}, {}),
 	mode: 'development',
+	devtool: 'inline-source-map',
 	module: {
 		rules: [
 			{
@@ -67,23 +39,36 @@ module.exports = {
 				],
 			},
 			{
-				exclude: /node_modules/,
 				test: /\.tsx?$/,
 				use: 'ts-loader',
+				exclude: /node_modules/,
 			},
 		],
 	},
 	output: {
-		filename: '[name].js',
+		filename: `bundle.js`,
 		path: outputPath,
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			inject: false,
 			template: path.resolve(__dirname, './dev/public/index.html'),
+			inject: false,
 		}),
 	],
 	resolve: {
 		extensions: ['.js', '.jsx', '.ts', '.tsx'],
+	},
+	devServer: {
+		compress: false,
+		publicPath: '/',
+		contentBase: './dev/public',
+		// filename: path.join(outputPath, '/bundle.js'),
+		open: true,
+		port: 9000,
+		hot: true,
+		historyApiFallback: true,
+		before: function(app) {
+			defineServerResponses(app);
+		},
 	},
 };
