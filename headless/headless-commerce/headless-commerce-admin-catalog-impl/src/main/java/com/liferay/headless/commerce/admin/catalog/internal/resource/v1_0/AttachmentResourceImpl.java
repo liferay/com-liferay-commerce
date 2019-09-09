@@ -244,8 +244,9 @@ public class AttachmentResourceImpl extends BaseAttachmentResourceImpl {
 	}
 
 	@Override
-	public Attachment postProductByExternalReferenceCodeAttachment(
-			String externalReferenceCode, Attachment attachment)
+	public Attachment
+			postProductByExternalReferenceCodeexternalReferenceCodeAttachment(
+				String externalReferenceCode, Attachment attachment)
 		throws Exception {
 
 		CPDefinition cpDefinition =
