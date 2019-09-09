@@ -56,21 +56,34 @@ public abstract class BaseOptionValueResourceImpl
 	implements OptionValueResource {
 
 	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
+	@GET
 	@Parameters(
 		value = {
-			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
+			@Parameter(in = ParameterIn.PATH, name = "id"),
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
 		}
 	)
-	@Path(
-		"/options/by-externalReferenceCode/{externalReferenceCode}/optionValue/"
-	)
+	@Path("/options/{id}/optionValues/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "OptionValue")})
-	public OptionValue postOptionByExternalReferenceCodeOptionValue(
-			@NotNull @Parameter(hidden = true)
-			@PathParam("externalReferenceCode") String externalReferenceCode,
+	public Page<OptionValue> getOptionIdOptionValuesPage(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			@Context Pagination pagination)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/options/{id}/optionValues/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "OptionValue")})
+	public OptionValue postOptionIdOptionValue(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
 			OptionValue optionValue)
 		throws Exception {
 
@@ -103,36 +116,23 @@ public abstract class BaseOptionValueResourceImpl
 	@Override
 	@Consumes({"application/json", "application/xml"})
 	@POST
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/options/{id}/optionValue/")
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
+		}
+	)
+	@Path(
+		"/options/by-externalReferenceCode/{externalReferenceCode}/optionValues/"
+	)
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "OptionValue")})
-	public OptionValue postOptionIdOptionValue(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+	public OptionValue postOptionByExternalReferenceCodeOptionValue(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode,
 			OptionValue optionValue)
 		throws Exception {
 
 		return new OptionValue();
-	}
-
-	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.PATH, name = "id"),
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/options/{id}/optionValues/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "OptionValue")})
-	public Page<OptionValue> getOptionIdOptionValuesPage(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			@Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
 	}
 
 	public void setContextCompany(Company contextCompany) {

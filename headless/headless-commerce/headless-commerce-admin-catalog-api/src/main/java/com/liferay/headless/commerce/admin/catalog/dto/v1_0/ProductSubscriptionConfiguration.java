@@ -49,7 +49,7 @@ public class ProductSubscriptionConfiguration {
 
 	public static enum SubscriptionType {
 
-		DAY("day"), MONTH("month"), WEEK("week"), YEAR("year");
+		DAY("day"), WEEK("week"), MONTH("month"), YEAR("year");
 
 		@JsonCreator
 		public static SubscriptionType create(String value) {

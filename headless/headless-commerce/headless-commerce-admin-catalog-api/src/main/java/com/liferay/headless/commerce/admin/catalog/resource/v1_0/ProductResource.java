@@ -16,6 +16,8 @@ package com.liferay.headless.commerce.admin.catalog.resource.v1_0;
 
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Product;
 import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.search.filter.Filter;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
@@ -34,10 +36,11 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface ProductResource {
 
-	public Product postProduct(Product product) throws Exception;
+	public Response deleteProduct(Long id) throws Exception;
 
-	public Page<Product> getProductsPage(Pagination pagination)
-		throws Exception;
+	public Product getProduct(Long id) throws Exception;
+
+	public Response patchProduct(Long id, Product product) throws Exception;
 
 	public Response deleteProductByExternalReferenceCode(
 			String externalReferenceCode)
@@ -51,11 +54,11 @@ public interface ProductResource {
 			String externalReferenceCode, Product product)
 		throws Exception;
 
-	public Response deleteProduct(Long id) throws Exception;
+	public Page<Product> getProductsPage(
+			Filter filter, Pagination pagination, Sort[] sorts)
+		throws Exception;
 
-	public Product getProduct(Long id) throws Exception;
-
-	public Response patchProduct(Long id, Product product) throws Exception;
+	public Product postProduct(Product product) throws Exception;
 
 	public void setContextCompany(Company contextCompany);
 

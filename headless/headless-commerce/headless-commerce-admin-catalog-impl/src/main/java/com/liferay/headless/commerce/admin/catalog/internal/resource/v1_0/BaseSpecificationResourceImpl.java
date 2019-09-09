@@ -59,36 +59,6 @@ public abstract class BaseSpecificationResourceImpl
 	implements SpecificationResource {
 
 	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Path("/specification/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Specification")})
-	public Specification postSpecification(Specification specification)
-		throws Exception {
-
-		return new Specification();
-	}
-
-	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/specifications/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Specification")})
-	public Page<Specification> getSpecificationsPage(
-			@Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
 	@DELETE
 	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
 	@Path("/specifications/{id}")
@@ -131,6 +101,36 @@ public abstract class BaseSpecificationResourceImpl
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/specifications/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Specification")})
+	public Page<Specification> getSpecificationsPage(
+			@Context Pagination pagination)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Path("/specifications/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Specification")})
+	public Specification postSpecification(Specification specification)
+		throws Exception {
+
+		return new Specification();
 	}
 
 	public void setContextCompany(Company contextCompany) {

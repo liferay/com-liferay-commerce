@@ -34,19 +34,19 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface CategoryResource {
 
+	public Page<Category> getProductIdCategoriesPage(
+			Long id, Pagination pagination)
+		throws Exception;
+
+	public Response patchProductIdCategory(Long id, Category[] categories)
+		throws Exception;
+
 	public Page<Category> getProductByExternalReferenceCodeCategoriesPage(
 			String externalReferenceCode, Pagination pagination)
 		throws Exception;
 
 	public Response patchProductByExternalReferenceCodeCategory(
 			String externalReferenceCode, Category[] categories)
-		throws Exception;
-
-	public Page<Category> getProductIdCategoriesPage(
-			Long id, Pagination pagination)
-		throws Exception;
-
-	public Response patchProductIdCategory(Long id, Category[] categories)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

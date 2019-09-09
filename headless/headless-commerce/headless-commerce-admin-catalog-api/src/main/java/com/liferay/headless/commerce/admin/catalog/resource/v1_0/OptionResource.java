@@ -34,9 +34,11 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface OptionResource {
 
-	public Option postOption(Option option) throws Exception;
+	public Response deleteOption(Long id) throws Exception;
 
-	public Page<Option> getOptionsPage(Pagination pagination) throws Exception;
+	public Option getOption(Long id) throws Exception;
+
+	public Response patchOption(Long id, Option option) throws Exception;
 
 	public Response deleteOptionByExternalReferenceCode(
 			String externalReferenceCode)
@@ -49,11 +51,9 @@ public interface OptionResource {
 			String externalReferenceCode, Option option)
 		throws Exception;
 
-	public Response deleteOption(Long id) throws Exception;
+	public Page<Option> getOptionsPage(Pagination pagination) throws Exception;
 
-	public Option getOption(Long id) throws Exception;
-
-	public Response patchOption(Long id, Option option) throws Exception;
+	public Option postOption(Option option) throws Exception;
 
 	public void setContextCompany(Company contextCompany);
 
