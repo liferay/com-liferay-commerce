@@ -111,7 +111,7 @@ const Modal = (props) => {
             iframeForm.addEventListener('submitAvailable', () => enableSubmit());
             iframeForm.addEventListener('submitUnavailable', () => disableSubmit());
             
-            if(iframeWindow.Liferay.on) {
+            if(iframeWindow.Liferay && iframeWindow.Liferay.on) {
                 iframeWindow.Liferay.on(
                     'endNavigate',
                     (e) => {
