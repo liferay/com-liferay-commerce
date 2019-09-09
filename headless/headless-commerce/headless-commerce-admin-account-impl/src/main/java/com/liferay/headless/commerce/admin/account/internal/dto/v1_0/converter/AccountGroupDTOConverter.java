@@ -16,6 +16,7 @@ package com.liferay.headless.commerce.admin.account.internal.dto.v1_0.converter;
 
 import com.liferay.commerce.account.model.CommerceAccountGroup;
 import com.liferay.commerce.account.service.CommerceAccountGroupService;
+import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountGroup;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterContext;
@@ -44,8 +45,11 @@ public class AccountGroupDTOConverter implements DTOConverter {
 			_commerceAccountGroupService.getCommerceAccountGroup(
 				dtoConverterContext.getResourcePrimKey());
 
+		ExpandoBridge expandoBridge = commerceAccountGroup.getExpandoBridge();
+
 		return new AccountGroup() {
 			{
+				customFields = expandoBridge.getAttributes();
 				id = commerceAccountGroup.getCommerceAccountGroupId();
 				externalReferenceCode =
 					commerceAccountGroup.getExternalReferenceCode();
