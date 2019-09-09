@@ -55,7 +55,7 @@
 		"webpack": "^4.33.0",
 		"webpack-cli": "^3.3.3"
 	},
-	"name": "commerce-frontend-react",
+	"name": "commerce-frontend-js",
 	"private": true,
 	"scripts": {
 		"build": "liferay-npm-scripts build",
