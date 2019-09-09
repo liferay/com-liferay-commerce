@@ -16,17 +16,11 @@ package com.liferay.headless.commerce.admin.catalog.internal.dto.v1_0.converter;
 
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
-import com.liferay.commerce.product.model.CPOptionCategory;
 import com.liferay.commerce.product.model.CPSpecificationOption;
 import com.liferay.commerce.product.service.CPDefinitionSpecificationOptionValueService;
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.OptionCategory;
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Product;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductSpecification;
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Specification;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterContext;
-import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistry;
-import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverterContext;
 import com.liferay.headless.commerce.core.util.LanguageUtils;
 
 import org.osgi.service.component.annotations.Component;
@@ -57,39 +51,22 @@ public class ProductSpecificationDTOConverter implements DTOConverter {
 
 		CPDefinition cpDefinition =
 			cpDefinitionSpecificationOptionValue.getCPDefinition();
-		CPOptionCategory cpOptionCategory =
-			cpDefinitionSpecificationOptionValue.getCPOptionCategory();
 		CPSpecificationOption cpSpecificationOption =
 			cpDefinitionSpecificationOptionValue.getCPSpecificationOption();
-
-		DTOConverter optionCategoryDTOConverter =
-			_dtoConverterRegistry.getDTOConverter(
-				CPOptionCategory.class.getName());
-		DTOConverter productDTOConverter =
-			_dtoConverterRegistry.getDTOConverter(CPDefinition.class.getName());
-		DTOConverter specificationDTOConverter =
-			_dtoConverterRegistry.getDTOConverter(
-				CPSpecificationOption.class.getName());
 
 		return new ProductSpecification() {
 			{
 				id =
 					cpDefinitionSpecificationOptionValue.
 						getCPDefinitionSpecificationOptionValueId();
-				optionCategory =
-					(OptionCategory)optionCategoryDTOConverter.toDTO(
-						new DefaultDTOConverterContext(
-							dtoConverterContext.getLocale(),
-							cpOptionCategory.getCPOptionCategoryId()));
+				optionCategoryId =
+					cpDefinitionSpecificationOptionValue.
+						getCPOptionCategoryId();
 				priority = cpDefinitionSpecificationOptionValue.getPriority();
-				product = (Product)productDTOConverter.toDTO(
-					new DefaultDTOConverterContext(
-						dtoConverterContext.getLocale(),
-						cpDefinition.getCPDefinitionId()));
-				specification = (Specification)specificationDTOConverter.toDTO(
-					new DefaultDTOConverterContext(
-						dtoConverterContext.getLocale(),
-						cpSpecificationOption.getCPSpecificationOptionId()));
+				productId = cpDefinition.getCProductId();
+				specificationId =
+					cpSpecificationOption.getCPSpecificationOptionId();
+				specificationKey = cpSpecificationOption.getKey();
 				value = LanguageUtils.getLanguageIdMap(
 					cpDefinitionSpecificationOptionValue.getValueMap());
 			}
@@ -99,8 +76,5 @@ public class ProductSpecificationDTOConverter implements DTOConverter {
 	@Reference
 	private CPDefinitionSpecificationOptionValueService
 		_cpDefinitionSpecificationOptionValueService;
-
-	@Reference
-	private DTOConverterRegistry _dtoConverterRegistry;
 
 }

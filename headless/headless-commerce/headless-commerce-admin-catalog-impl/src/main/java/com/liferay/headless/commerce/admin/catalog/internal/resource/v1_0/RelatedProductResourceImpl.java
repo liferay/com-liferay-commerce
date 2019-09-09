@@ -196,7 +196,7 @@ public class RelatedProductResourceImpl extends BaseRelatedProductResourceImpl {
 
 		CPDefinitionLink cpDefinitionLink =
 			RelatedProductUtil.upsertCPDefinitionLink(
-				_cpDefinitionLinkService, relatedProduct,
+				_cpDefinitionLinkService, _cpDefinitionService, relatedProduct,
 				cpDefinition.getCPDefinitionId(),
 				_serviceContextHelper.getServiceContext(
 					cpDefinition.getGroupId()));
