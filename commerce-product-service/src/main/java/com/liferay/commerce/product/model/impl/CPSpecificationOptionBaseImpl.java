@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CPSpecificationOption;
 import com.liferay.commerce.product.service.CPSpecificationOptionLocalServiceUtil;
 
@@ -31,11 +29,10 @@ import com.liferay.commerce.product.service.CPSpecificationOptionLocalServiceUti
  * @see CPSpecificationOption
  * @generated
  */
-@ProviderType
 public abstract class CPSpecificationOptionBaseImpl
 	extends CPSpecificationOptionModelImpl implements CPSpecificationOption {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a cp specification option model instance should use the <code>CPSpecificationOption</code> interface instead.

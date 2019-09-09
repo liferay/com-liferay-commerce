@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.service.CPDefinitionLinkServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -61,7 +59,6 @@ import java.rmi.RemoteException;
  * @see CPDefinitionLinkServiceHttp
  * @generated
  */
-@ProviderType
 public class CPDefinitionLinkServiceSoap {
 
 	public static com.liferay.commerce.product.model.CPDefinitionLinkSoap

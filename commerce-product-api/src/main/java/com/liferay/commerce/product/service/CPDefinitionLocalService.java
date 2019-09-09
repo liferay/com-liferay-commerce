@@ -71,7 +71,7 @@ import javax.servlet.http.HttpServletRequest;
 public interface CPDefinitionLocalService
 	extends BaseLocalService, PersistedModelLocalService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CPDefinitionLocalServiceUtil} to access the cp definition local service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPDefinitionLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.

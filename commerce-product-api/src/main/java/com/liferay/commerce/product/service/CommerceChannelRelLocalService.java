@@ -56,7 +56,7 @@ import java.util.List;
 public interface CommerceChannelRelLocalService
 	extends BaseLocalService, PersistedModelLocalService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceChannelRelLocalServiceUtil} to access the commerce channel rel local service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CommerceChannelRelLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.

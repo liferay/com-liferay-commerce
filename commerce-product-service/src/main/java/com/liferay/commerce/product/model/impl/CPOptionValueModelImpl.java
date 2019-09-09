@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CPOptionValue;
 import com.liferay.commerce.product.model.CPOptionValueModel;
 import com.liferay.commerce.product.model.CPOptionValueSoap;
@@ -72,11 +70,10 @@ import java.util.function.Function;
  * @generated
  */
 @JSON(strict = true)
-@ProviderType
 public class CPOptionValueModelImpl
 	extends BaseModelImpl<CPOptionValue> implements CPOptionValueModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a cp option value model instance should use the <code>CPOptionValue</code> interface instead.

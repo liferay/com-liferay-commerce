@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.service.CommerceChannelServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -61,7 +59,6 @@ import java.rmi.RemoteException;
  * @see CommerceChannelServiceHttp
  * @generated
  */
-@ProviderType
 public class CommerceChannelServiceSoap {
 
 	public static com.liferay.commerce.product.model.CommerceChannelSoap

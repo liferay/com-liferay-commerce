@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceChannelRelService
  * @generated
  */
-@ProviderType
 public class CommerceChannelRelServiceWrapper
 	implements CommerceChannelRelService,
 			   ServiceWrapper<CommerceChannelRelService> {
@@ -36,6 +33,11 @@ public class CommerceChannelRelServiceWrapper
 		_commerceChannelRelService = commerceChannelRelService;
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link CommerceChannelRelServiceUtil} to access the commerce channel rel remote service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CommerceChannelRelServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
 	@Override
 	public com.liferay.commerce.product.model.CommerceChannelRel
 			addCommerceChannelRel(

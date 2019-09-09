@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
 import com.liferay.commerce.product.service.CPDefinitionOptionValueRelLocalServiceUtil;
 
@@ -31,12 +29,11 @@ import com.liferay.commerce.product.service.CPDefinitionOptionValueRelLocalServi
  * @see CPDefinitionOptionValueRel
  * @generated
  */
-@ProviderType
 public abstract class CPDefinitionOptionValueRelBaseImpl
 	extends CPDefinitionOptionValueRelModelImpl
 	implements CPDefinitionOptionValueRel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a cp definition option value rel model instance should use the <code>CPDefinitionOptionValueRel</code> interface instead.

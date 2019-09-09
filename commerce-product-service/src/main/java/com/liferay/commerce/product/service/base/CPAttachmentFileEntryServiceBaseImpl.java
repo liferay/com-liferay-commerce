@@ -71,7 +71,7 @@ public abstract class CPAttachmentFileEntryServiceBaseImpl
 	extends BaseServiceImpl
 	implements CPAttachmentFileEntryService, IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CPAttachmentFileEntryService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.product.service.CPAttachmentFileEntryServiceUtil</code>.

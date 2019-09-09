@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CPFriendlyURLEntry;
 import com.liferay.commerce.product.service.CPFriendlyURLEntryLocalServiceUtil;
 
@@ -31,11 +29,10 @@ import com.liferay.commerce.product.service.CPFriendlyURLEntryLocalServiceUtil;
  * @see CPFriendlyURLEntry
  * @generated
  */
-@ProviderType
 public abstract class CPFriendlyURLEntryBaseImpl
 	extends CPFriendlyURLEntryModelImpl implements CPFriendlyURLEntry {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a cp friendly url entry model instance should use the <code>CPFriendlyURLEntry</code> interface instead.

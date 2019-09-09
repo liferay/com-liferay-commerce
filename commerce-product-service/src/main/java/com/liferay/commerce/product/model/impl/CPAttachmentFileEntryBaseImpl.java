@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.service.CPAttachmentFileEntryLocalServiceUtil;
 
@@ -31,11 +29,10 @@ import com.liferay.commerce.product.service.CPAttachmentFileEntryLocalServiceUti
  * @see CPAttachmentFileEntry
  * @generated
  */
-@ProviderType
 public abstract class CPAttachmentFileEntryBaseImpl
 	extends CPAttachmentFileEntryModelImpl implements CPAttachmentFileEntry {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a cp attachment file entry model instance should use the <code>CPAttachmentFileEntry</code> interface instead.

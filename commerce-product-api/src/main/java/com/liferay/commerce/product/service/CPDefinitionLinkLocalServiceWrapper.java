@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CPDefinitionLinkLocalService
  * @generated
  */
-@ProviderType
 public class CPDefinitionLinkLocalServiceWrapper
 	implements CPDefinitionLinkLocalService,
 			   ServiceWrapper<CPDefinitionLinkLocalService> {

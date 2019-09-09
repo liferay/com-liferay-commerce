@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.service.CommerceChannelRelServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -51,7 +49,6 @@ import com.liferay.portal.kernel.util.MethodKey;
  * @see CommerceChannelRelServiceSoap
  * @generated
  */
-@ProviderType
 public class CommerceChannelRelServiceHttp {
 
 	public static com.liferay.commerce.product.model.CommerceChannelRel

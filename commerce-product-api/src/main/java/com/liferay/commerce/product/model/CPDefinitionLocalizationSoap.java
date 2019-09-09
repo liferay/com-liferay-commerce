@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -27,7 +25,6 @@ import java.util.List;
  * @author Marco Leo
  * @generated
  */
-@ProviderType
 public class CPDefinitionLocalizationSoap implements Serializable {
 
 	public static CPDefinitionLocalizationSoap toSoapModel(

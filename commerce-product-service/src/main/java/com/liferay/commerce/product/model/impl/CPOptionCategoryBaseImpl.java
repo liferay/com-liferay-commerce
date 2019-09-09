@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CPOptionCategory;
 import com.liferay.commerce.product.service.CPOptionCategoryLocalServiceUtil;
 
@@ -31,11 +29,10 @@ import com.liferay.commerce.product.service.CPOptionCategoryLocalServiceUtil;
  * @see CPOptionCategory
  * @generated
  */
-@ProviderType
 public abstract class CPOptionCategoryBaseImpl
 	extends CPOptionCategoryModelImpl implements CPOptionCategory {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a cp option category model instance should use the <code>CPOptionCategory</code> interface instead.

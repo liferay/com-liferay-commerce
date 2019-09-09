@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.service.CPAttachmentFileEntryServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -51,7 +49,6 @@ import com.liferay.portal.kernel.util.MethodKey;
  * @see CPAttachmentFileEntryServiceSoap
  * @generated
  */
-@ProviderType
 public class CPAttachmentFileEntryServiceHttp {
 
 	public static com.liferay.commerce.product.model.CPAttachmentFileEntry

@@ -46,7 +46,7 @@ public interface CPDefinitionModel
 	extends BaseModel<CPDefinition>, ShardedModel, StagedGroupedModel,
 			WorkflowedModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. All methods that expect a cp definition model instance should use the {@link CPDefinition} interface instead.

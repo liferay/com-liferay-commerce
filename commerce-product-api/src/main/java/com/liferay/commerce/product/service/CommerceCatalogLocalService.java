@@ -60,7 +60,7 @@ import java.util.List;
 public interface CommerceCatalogLocalService
 	extends BaseLocalService, PersistedModelLocalService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceCatalogLocalServiceUtil} to access the commerce catalog local service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CommerceCatalogLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.

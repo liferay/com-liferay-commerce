@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CPDisplayLayoutLocalService
  * @generated
  */
-@ProviderType
 public class CPDisplayLayoutLocalServiceWrapper
 	implements CPDisplayLayoutLocalService,
 			   ServiceWrapper<CPDisplayLayoutLocalService> {
@@ -36,6 +33,11 @@ public class CPDisplayLayoutLocalServiceWrapper
 		_cpDisplayLayoutLocalService = cpDisplayLayoutLocalService;
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link CPDisplayLayoutLocalServiceUtil} to access the cp display layout local service. Add custom service methods to <code>com.liferay.commerce.product.service.impl.CPDisplayLayoutLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
 	@Override
 	public com.liferay.commerce.product.model.CPDisplayLayout
 			addCPDisplayLayout(

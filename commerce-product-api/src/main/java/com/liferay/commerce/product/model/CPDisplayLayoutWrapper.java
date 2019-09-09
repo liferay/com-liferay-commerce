@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.exportimport.kernel.lar.StagedModelType;
 import com.liferay.portal.kernel.model.ModelWrapper;
@@ -37,7 +35,6 @@ import java.util.Objects;
  * @see CPDisplayLayout
  * @generated
  */
-@ProviderType
 public class CPDisplayLayoutWrapper
 	implements CPDisplayLayout, ModelWrapper<CPDisplayLayout> {
 
@@ -339,6 +336,11 @@ public class CPDisplayLayoutWrapper
 		return _cpDisplayLayout.isNew();
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a cp display layout model instance should use the <code>CPDisplayLayout</code> interface instead.
+	 */
 	@Override
 	public void persist() {
 		_cpDisplayLayout.persist();
