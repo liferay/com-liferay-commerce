@@ -48,7 +48,7 @@ public class OptionValueDTOConverter implements DTOConverter {
 			{
 				externalReferenceCode =
 					cpOptionValue.getExternalReferenceCode();
-				id = cpOptionValue.getCPOptionId();
+				id = cpOptionValue.getCPOptionValueId();
 				key = cpOptionValue.getKey();
 				name = LanguageUtils.getLanguageIdMap(
 					cpOptionValue.getNameMap());
