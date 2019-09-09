@@ -104,20 +104,24 @@ public class RelatedProduct {
 	protected Double priority;
 
 	@Schema
-	public Product getProduct() {
-		return product;
+	public String getProductExternalReferenceCode() {
+		return productExternalReferenceCode;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setProductExternalReferenceCode(
+		String productExternalReferenceCode) {
+
+		this.productExternalReferenceCode = productExternalReferenceCode;
 	}
 
 	@JsonIgnore
-	public void setProduct(
-		UnsafeSupplier<Product, Exception> productUnsafeSupplier) {
+	public void setProductExternalReferenceCode(
+		UnsafeSupplier<String, Exception>
+			productExternalReferenceCodeUnsafeSupplier) {
 
 		try {
-			product = productUnsafeSupplier.get();
+			productExternalReferenceCode =
+				productExternalReferenceCodeUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -129,7 +133,7 @@ public class RelatedProduct {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Product product;
+	protected String productExternalReferenceCode;
 
 	@Schema
 	public Long getProductId() {
@@ -156,7 +160,7 @@ public class RelatedProduct {
 	}
 
 	@GraphQLField
-	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	@NotNull
 	protected Long productId;
 
@@ -234,14 +238,18 @@ public class RelatedProduct {
 			sb.append(priority);
 		}
 
-		if (product != null) {
+		if (productExternalReferenceCode != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"product\": ");
+			sb.append("\"productExternalReferenceCode\": ");
 
-			sb.append(String.valueOf(product));
+			sb.append("\"");
+
+			sb.append(_escape(productExternalReferenceCode));
+
+			sb.append("\"");
 		}
 
 		if (productId != null) {

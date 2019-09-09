@@ -32,12 +32,12 @@ import javax.annotation.Generated;
 @Generated("")
 public interface ProductSpecificationResource {
 
-	public ProductSpecification postProductIdProductSpecification(
-			Long id, ProductSpecification productSpecification)
-		throws Exception;
-
 	public Page<ProductSpecification> getProductIdProductSpecificationsPage(
 			Long id, Pagination pagination)
+		throws Exception;
+
+	public ProductSpecification postProductIdProductSpecification(
+			Long id, ProductSpecification productSpecification)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

@@ -33,6 +33,7 @@ import java.util.Set;
 
 import javax.annotation.Generated;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -44,7 +45,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Generated("")
 @GraphQLName("ProductSpecification")
 @JsonFilter("Liferay.Vulcan")
-@Schema(requiredProperties = {"value"})
+@Schema(requiredProperties = {"specificationKey", "value"})
 @XmlRootElement(name = "ProductSpecification")
 public class ProductSpecification {
 
@@ -75,21 +76,20 @@ public class ProductSpecification {
 	protected Long id;
 
 	@Schema
-	public OptionCategory getOptionCategory() {
-		return optionCategory;
+	public Long getOptionCategoryId() {
+		return optionCategoryId;
 	}
 
-	public void setOptionCategory(OptionCategory optionCategory) {
-		this.optionCategory = optionCategory;
+	public void setOptionCategoryId(Long optionCategoryId) {
+		this.optionCategoryId = optionCategoryId;
 	}
 
 	@JsonIgnore
-	public void setOptionCategory(
-		UnsafeSupplier<OptionCategory, Exception>
-			optionCategoryUnsafeSupplier) {
+	public void setOptionCategoryId(
+		UnsafeSupplier<Long, Exception> optionCategoryIdUnsafeSupplier) {
 
 		try {
-			optionCategory = optionCategoryUnsafeSupplier.get();
+			optionCategoryId = optionCategoryIdUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -101,7 +101,7 @@ public class ProductSpecification {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected OptionCategory optionCategory;
+	protected Long optionCategoryId;
 
 	@Schema
 	public Double getPriority() {
@@ -132,20 +132,20 @@ public class ProductSpecification {
 	protected Double priority;
 
 	@Schema
-	public Product getProduct() {
-		return product;
+	public Long getProductId() {
+		return productId;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setProductId(Long productId) {
+		this.productId = productId;
 	}
 
 	@JsonIgnore
-	public void setProduct(
-		UnsafeSupplier<Product, Exception> productUnsafeSupplier) {
+	public void setProductId(
+		UnsafeSupplier<Long, Exception> productIdUnsafeSupplier) {
 
 		try {
-			product = productUnsafeSupplier.get();
+			productId = productIdUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -157,23 +157,23 @@ public class ProductSpecification {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Product product;
+	protected Long productId;
 
 	@Schema
-	public Specification getSpecification() {
-		return specification;
+	public Long getSpecificationId() {
+		return specificationId;
 	}
 
-	public void setSpecification(Specification specification) {
-		this.specification = specification;
+	public void setSpecificationId(Long specificationId) {
+		this.specificationId = specificationId;
 	}
 
 	@JsonIgnore
-	public void setSpecification(
-		UnsafeSupplier<Specification, Exception> specificationUnsafeSupplier) {
+	public void setSpecificationId(
+		UnsafeSupplier<Long, Exception> specificationIdUnsafeSupplier) {
 
 		try {
-			specification = specificationUnsafeSupplier.get();
+			specificationId = specificationIdUnsafeSupplier.get();
 		}
 		catch (RuntimeException re) {
 			throw re;
@@ -185,7 +185,36 @@ public class ProductSpecification {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Specification specification;
+	protected Long specificationId;
+
+	@Schema
+	public String getSpecificationKey() {
+		return specificationKey;
+	}
+
+	public void setSpecificationKey(String specificationKey) {
+		this.specificationKey = specificationKey;
+	}
+
+	@JsonIgnore
+	public void setSpecificationKey(
+		UnsafeSupplier<String, Exception> specificationKeyUnsafeSupplier) {
+
+		try {
+			specificationKey = specificationKeyUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	@NotEmpty
+	protected String specificationKey;
 
 	@Schema
 	public Map<String, String> getValue() {
@@ -254,14 +283,14 @@ public class ProductSpecification {
 			sb.append(id);
 		}
 
-		if (optionCategory != null) {
+		if (optionCategoryId != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"optionCategory\": ");
+			sb.append("\"optionCategoryId\": ");
 
-			sb.append(String.valueOf(optionCategory));
+			sb.append(optionCategoryId);
 		}
 
 		if (priority != null) {
@@ -274,24 +303,38 @@ public class ProductSpecification {
 			sb.append(priority);
 		}
 
-		if (product != null) {
+		if (productId != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"product\": ");
+			sb.append("\"productId\": ");
 
-			sb.append(String.valueOf(product));
+			sb.append(productId);
 		}
 
-		if (specification != null) {
+		if (specificationId != null) {
 			if (sb.length() > 1) {
 				sb.append(", ");
 			}
 
-			sb.append("\"specification\": ");
+			sb.append("\"specificationId\": ");
 
-			sb.append(String.valueOf(specification));
+			sb.append(specificationId);
+		}
+
+		if (specificationKey != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"specificationKey\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(specificationKey));
+
+			sb.append("\"");
 		}
 
 		if (value != null) {
