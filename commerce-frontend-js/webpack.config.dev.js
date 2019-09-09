@@ -5,17 +5,27 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const outputPath = path.resolve(__dirname, './dev/public');
 
+const getComponentPath = (component, entry) => path.join(
+	__dirname,
+	'src',
+	'main',
+	'resources',
+	'META-INF',
+	'resources',
+	'js',
+	component,
+	entry
+);
+
 module.exports = {
 	entry: {
-		components: [
-			path.join(__dirname, './src/main/resources/META-INF/resources/js/add_or_create/entry.dev.es.js'),
-			path.join(__dirname, './src/main/resources/META-INF/resources/js/assign_to/entry.dev.es.js'),
-			path.join(__dirname, './src/main/resources/META-INF/resources/js/table_toolbar/entry.dev.es.tsx'),
-			path.join(__dirname, './src/main/resources/META-INF/resources/js/gallery/entry.dev.es.js'),
-			path.join(__dirname, './src/main/resources/META-INF/resources/js/modal/entry.dev.es.js'),
-			path.join(__dirname, './src/main/resources/META-INF/resources/js/side_panel/entry.dev.es.js'),
-			path.join(__dirname, './src/main/resources/META-INF/resources/js/utilities/entry.js'),
-		],
+		add_or_create: getComponentPath('add_or_create', 'entry.dev.es.js'),
+		assign_to: getComponentPath('assign_to', 'entry.dev.es.js'),
+		table_toolbar: getComponentPath('table_toolbar', 'entry.dev.es.tsx'),
+		gallery: getComponentPath('gallery', 'entry.dev.es.js'),
+		modal: getComponentPath('modal', 'entry.dev.es.js'),
+		side_panel: getComponentPath('side_panel', 'entry.dev.es.js'),
+		utilities: getComponentPath('utilities', 'entry.js'),
 	},
 	mode: 'development',
 	devtool: 'inline-source-map',
@@ -46,7 +56,7 @@ module.exports = {
 		],
 	},
 	output: {
-		filename: `bundle.js`,
+		filename: '[name].js',
 		path: outputPath,
 	},
 	plugins: [
