@@ -76,6 +76,8 @@ module.exports = {
 		compress: false,
 		publicPath: '/',
 		contentBase: './dev/public',
+		disableHostCheck: true,
+		// filename: path.join(outputPath, '/bundle.js'),
 		open: true,
 		port: 9000,
 		hot: true,
