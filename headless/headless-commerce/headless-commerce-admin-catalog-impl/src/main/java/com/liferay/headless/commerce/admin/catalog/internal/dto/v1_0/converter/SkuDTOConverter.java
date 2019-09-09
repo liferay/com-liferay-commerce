@@ -14,6 +14,8 @@
 
 package com.liferay.headless.commerce.admin.catalog.internal.dto.v1_0.converter;
 
+import com.liferay.commerce.product.model.CPDefinitionOptionRel;
+import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.commerce.product.util.CPInstanceHelper;
@@ -21,11 +23,9 @@ import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Sku;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterContext;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.util.KeyValuePair;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import org.osgi.service.component.annotations.Component;
@@ -60,8 +60,7 @@ public class SkuDTOConverter implements DTOConverter {
 				height = cpInstance.getHeight();
 				id = cpInstance.getCPInstanceId();
 				manufacturerPartNumber = cpInstance.getManufacturerPartNumber();
-				options = _getOptions(
-					cpInstance, dtoConverterContext.getLocale());
+				options = _getOptions(cpInstance);
 				price = cpInstance.getPrice();
 				promoPrice = cpInstance.getPromoPrice();
 				published = cpInstance.isPublished();
@@ -73,17 +72,34 @@ public class SkuDTOConverter implements DTOConverter {
 		};
 	}
 
-	private Map<String, String> _getOptions(
-			CPInstance cpInstance, Locale locale)
+	private Map<String, String> _getOptions(CPInstance cpInstance)
 		throws PortalException {
 
 		Map<String, String> options = new HashMap<>();
 
-		List<KeyValuePair> keyValuePairs = _cpInstanceHelper.getKeyValuePairs(
-			cpInstance.getJson(), locale);
+		Map<CPDefinitionOptionRel, List<CPDefinitionOptionValueRel>>
+			cpDefinitionOptionRelsMap =
+				_cpInstanceHelper.getCPDefinitionOptionRelsMap(
+					cpInstance.getJson());
 
-		for (KeyValuePair keyValuePair : keyValuePairs) {
-			options.put(keyValuePair.getKey(), keyValuePair.getValue());
+		for (Map.Entry<CPDefinitionOptionRel, List<CPDefinitionOptionValueRel>>
+				entry : cpDefinitionOptionRelsMap.entrySet()) {
+
+			CPDefinitionOptionRel cpDefinitionOptionRel = entry.getKey();
+
+			List<CPDefinitionOptionValueRel> cpDefinitionOptionValueRels =
+				entry.getValue();
+
+			for (CPDefinitionOptionValueRel cpDefinitionOptionValueRel :
+					cpDefinitionOptionValueRels) {
+
+				options.put(
+					String.valueOf(
+						cpDefinitionOptionRel.getCPDefinitionOptionRelId()),
+					String.valueOf(
+						cpDefinitionOptionValueRel.
+							getCPDefinitionOptionValueRelId()));
+			}
 		}
 
 		return options;
