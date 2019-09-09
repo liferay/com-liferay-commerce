@@ -63,6 +63,23 @@ public class CPSpecificationOptionServiceImpl
 	}
 
 	@Override
+	public CPSpecificationOption fetchCPSpecificationOption(
+			long companyId, String key)
+		throws PortalException {
+
+		CPSpecificationOption cpSpecificationOption =
+			cpSpecificationOptionLocalService.fetchCPSpecificationOption(
+				companyId, key);
+
+		if (cpSpecificationOption != null) {
+			_cpSpecificationOptionModelResourcePermission.check(
+				getPermissionChecker(), cpSpecificationOption, ActionKeys.VIEW);
+		}
+
+		return cpSpecificationOption;
+	}
+
+	@Override
 	public CPSpecificationOption getCPSpecificationOption(
 			long cpSpecificationOptionId)
 		throws PortalException {
