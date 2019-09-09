@@ -14,6 +14,7 @@
 
 package com.liferay.headless.commerce.admin.catalog.internal.resource.v1_0;
 
+import com.liferay.asset.kernel.service.AssetCategoryLocalService;
 import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
 import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
 import com.liferay.commerce.product.model.CPDefinition;
@@ -28,6 +29,7 @@ import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CPDefinitionSpecificationOptionValueService;
 import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.commerce.product.service.CPOptionService;
+import com.liferay.commerce.product.service.CPSpecificationOptionService;
 import com.liferay.commerce.product.service.CommerceCatalogLocalService;
 import com.liferay.commerce.service.CPDefinitionInventoryService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Attachment;
@@ -242,6 +244,7 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 	@Override
 	public Product postProduct(Product product) throws Exception {
 		CPDefinition cpDefinition = _upsertProduct(product);
+
 		DTOConverter productDTOConverter =
 			_dtoConverterRegistry.getDTOConverter(CPDefinition.class.getName());
 
@@ -403,15 +406,20 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 					productSpecifications) {
 
 				CPDefinitionSpecificationOptionValue
+					cpDefinitionSpecificationOptionValue = null;
+
+				if (productSpecification.getId() != null) {
 					cpDefinitionSpecificationOptionValue =
 						_cpDefinitionSpecificationOptionValueService.
 							fetchCPDefinitionSpecificationOptionValue(
 								productSpecification.getId());
+				}
 
 				if (cpDefinitionSpecificationOptionValue == null) {
 					ProductSpecificationUtil.
 						addCPDefinitionSpecificationOptionValue(
 							_cpDefinitionSpecificationOptionValueService,
+							_cpSpecificationOptionService,
 							cpDefinition.getCPDefinitionId(),
 							productSpecification, serviceContext);
 				}
@@ -461,8 +469,8 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 		if (relatedProducts != null) {
 			for (RelatedProduct relatedProduct : relatedProducts) {
 				RelatedProductUtil.upsertCPDefinitionLink(
-					_cpDefinitionLinkService, relatedProduct,
-					cpDefinition.getCPDefinitionId(),
+					_cpDefinitionLinkService, _cpDefinitionService,
+					relatedProduct, cpDefinition.getCPDefinitionId(),
 					_serviceContextHelper.getServiceContext(
 						cpDefinition.getGroupId()));
 			}
@@ -512,6 +520,14 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 		DateConfig expirationDateConfig = new DateConfig(expirationCalendar);
 
 		boolean neverExpire = Boolean.TRUE;
+
+		if (product.getCategories() == null) {
+			long[] categoryIds = _assetCategoryLocalService.getCategoryIds(
+				cpDefinition.getModelClassName(),
+				cpDefinition.getCPDefinitionId());
+
+			serviceContext.setAssetCategoryIds(categoryIds);
+		}
 
 		cpDefinition = _cpDefinitionService.updateCPDefinition(
 			cpDefinition.getCPDefinitionId(),
@@ -577,7 +593,21 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 		ProductTaxConfiguration taxConfiguration = _getProductTaxConfiguration(
 			product);
 
-		CPDefinition cpDefinition = _cpDefinitionService.upsertCPDefinition(
+		CPDefinition cpDefinition =
+			_cpDefinitionService.
+				fetchCPDefinitionByCProductExternalReferenceCode(
+					contextCompany.getCompanyId(),
+					product.getExternalReferenceCode());
+
+		if ((product.getCategories() == null) && (cpDefinition != null)) {
+			long[] categoryIds = _assetCategoryLocalService.getCategoryIds(
+				cpDefinition.getModelClassName(),
+				cpDefinition.getCPDefinitionId());
+
+			serviceContext.setAssetCategoryIds(categoryIds);
+		}
+
+		cpDefinition = _cpDefinitionService.upsertCPDefinition(
 			commerceCatalog.getGroupId(), _user.getUserId(),
 			LanguageUtils.getLocalizedMap(product.getName()),
 			LanguageUtils.getLocalizedMap(product.getShortDescription()),
@@ -643,6 +673,9 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 	}
 
 	@Reference
+	private AssetCategoryLocalService _assetCategoryLocalService;
+
+	@Reference
 	private ClassNameLocalService _classNameLocalService;
 
 	@Reference
@@ -676,6 +709,9 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 
 	@Reference
 	private CPOptionService _cpOptionService;
+
+	@Reference
+	private CPSpecificationOptionService _cpSpecificationOptionService;
 
 	@Reference
 	private DTOConverterRegistry _dtoConverterRegistry;

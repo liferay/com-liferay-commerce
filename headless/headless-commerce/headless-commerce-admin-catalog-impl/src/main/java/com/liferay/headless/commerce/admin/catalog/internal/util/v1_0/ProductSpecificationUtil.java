@@ -15,10 +15,10 @@
 package com.liferay.headless.commerce.admin.catalog.internal.util.v1_0;
 
 import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
+import com.liferay.commerce.product.model.CPSpecificationOption;
 import com.liferay.commerce.product.service.CPDefinitionSpecificationOptionValueService;
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.OptionCategory;
+import com.liferay.commerce.product.service.CPSpecificationOptionService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductSpecification;
-import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Specification;
 import com.liferay.headless.commerce.core.util.LanguageUtils;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -33,6 +33,7 @@ public class ProductSpecificationUtil {
 			addCPDefinitionSpecificationOptionValue(
 				CPDefinitionSpecificationOptionValueService
 					cpDefinitionSpecificationOptionValueService,
+				CPSpecificationOptionService cpSpecificationOptionService,
 				long cpDefinitionId, ProductSpecification productSpecification,
 				ServiceContext serviceContext)
 		throws Exception {
@@ -40,7 +41,9 @@ public class ProductSpecificationUtil {
 		return cpDefinitionSpecificationOptionValueService.
 			addCPDefinitionSpecificationOptionValue(
 				cpDefinitionId,
-				getCPSpecificationOptionId(productSpecification),
+				getCPSpecificationOptionId(
+					cpSpecificationOptionService, productSpecification,
+					serviceContext.getCompanyId()),
 				getCPOptionCategoryId(productSpecification),
 				LanguageUtils.getLocalizedMap(productSpecification.getValue()),
 				GetterUtil.get(productSpecification.getPriority(), 0D),
@@ -48,27 +51,29 @@ public class ProductSpecificationUtil {
 	}
 
 	public static long getCPOptionCategoryId(
-		ProductSpecification specificationValue) {
+		ProductSpecification productSpecification) {
 
-		OptionCategory optionCategory = specificationValue.getOptionCategory();
-
-		if (optionCategory == null) {
+		if (productSpecification.getOptionCategoryId() == null) {
 			return 0;
 		}
 
-		return optionCategory.getId();
+		return productSpecification.getOptionCategoryId();
 	}
 
 	public static long getCPSpecificationOptionId(
-		ProductSpecification specificationValue) {
+			CPSpecificationOptionService cpSpecificationOptionService,
+			ProductSpecification productSpecification, long companyId)
+		throws PortalException {
 
-		Specification specification = specificationValue.getSpecification();
+		CPSpecificationOption cpSpecificationOption =
+			cpSpecificationOptionService.fetchCPSpecificationOption(
+				companyId, productSpecification.getSpecificationKey());
 
-		if (specification == null) {
+		if (cpSpecificationOption == null) {
 			return 0;
 		}
 
-		return specification.getId();
+		return cpSpecificationOption.getCPSpecificationOptionId();
 	}
 
 	public static CPDefinitionSpecificationOptionValue

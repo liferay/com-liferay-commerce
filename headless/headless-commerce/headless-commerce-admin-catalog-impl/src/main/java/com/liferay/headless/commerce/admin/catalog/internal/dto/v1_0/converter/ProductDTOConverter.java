@@ -24,6 +24,7 @@ import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionLink;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
+import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
 import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CPDefinitionLinkService;
@@ -35,6 +36,7 @@ import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Product;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductConfiguration;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductOption;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductShippingConfiguration;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductSpecification;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductSubscriptionConfiguration;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductTaxConfiguration;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.RelatedProduct;
@@ -119,6 +121,8 @@ public class ProductDTOConverter implements DTOConverter {
 					cpDefinition.getNameMap());
 				options = _getProductOptions(cpDefinition, dtoConverterContext);
 				productId = cProduct.getCProductId();
+				productSpecifications = _getProductSpecifications(
+					cpDefinition, dtoConverterContext);
 				productType = cpDefinition.getProductTypeName();
 				relatedProducts = _getRelatedProducts(
 					cpDefinition, dtoConverterContext);
@@ -229,6 +233,33 @@ public class ProductDTOConverter implements DTOConverter {
 		Stream<ProductOption> stream = productOptions.stream();
 
 		return stream.toArray(ProductOption[]::new);
+	}
+
+	private ProductSpecification[] _getProductSpecifications(
+			CPDefinition cpDefinition, DTOConverterContext dtoConverterContext)
+		throws Exception {
+
+		List<ProductSpecification> productSpecifications = new ArrayList<>();
+
+		DTOConverter productSpecificationDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				CPDefinitionSpecificationOptionValue.class.getName());
+
+		for (CPDefinitionSpecificationOptionValue
+				cpDefinitionSpecificationOptionValue :
+					cpDefinition.getCPDefinitionSpecificationOptionValues()) {
+
+			productSpecifications.add(
+				(ProductSpecification)productSpecificationDTOConverter.toDTO(
+					new DefaultDTOConverterContext(
+						dtoConverterContext.getLocale(),
+						cpDefinitionSpecificationOptionValue.
+							getCPDefinitionSpecificationOptionValueId())));
+		}
+
+		Stream<ProductSpecification> stream = productSpecifications.stream();
+
+		return stream.toArray(ProductSpecification[]::new);
 	}
 
 	private RelatedProduct[] _getRelatedProducts(
