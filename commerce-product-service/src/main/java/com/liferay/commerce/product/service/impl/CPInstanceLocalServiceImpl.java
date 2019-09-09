@@ -945,8 +945,12 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 			boolean neverExpire, ServiceContext serviceContext)
 		throws PortalException {
 
-		CPInstance cpInstance = cpInstancePersistence.fetchByC_ERC(
-			serviceContext.getCompanyId(), externalReferenceCode);
+		CPInstance cpInstance = null;
+
+		if (Validator.isNotNull(externalReferenceCode)) {
+			cpInstance = cpInstancePersistence.fetchByC_ERC(
+				serviceContext.getCompanyId(), externalReferenceCode);
+		}
 
 		if (cpInstance == null) {
 			cpInstance = addCPInstance(
