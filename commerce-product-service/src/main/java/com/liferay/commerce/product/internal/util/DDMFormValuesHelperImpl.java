@@ -169,11 +169,11 @@ public class DDMFormValuesHelperImpl implements DDMFormValuesHelper {
 
 		ddmFormFieldValue.setName(key);
 
-		JSONArray valuelJSONArray = jsonObject.getJSONArray("value");
+		JSONArray valueJSONArray = jsonObject.getJSONArray("value");
 
-		for (int i = 0; i < valuelJSONArray.length(); i++) {
+		for (int i = 0; i < valueJSONArray.length(); i++) {
 			long cpDefinitionOptionValueRelId = GetterUtil.getLong(
-				valuelJSONArray.get(i));
+				valueJSONArray.get(i));
 
 			if (cpDefinitionOptionValueRelId > 0) {
 				String ddmFormFieldValueValue = String.valueOf(
