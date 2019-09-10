@@ -46,8 +46,14 @@ export default class SidePanel extends React.Component {
 		this.toggle(true);
 	}
 
-	close() {
+	close(destroy = false) {
 		this.toggle(false);
+		destroy && this.panel.current.addEventListener('transitionend', () => {
+			this.setState({
+				loading: true,
+				loaded: false,
+			});
+		}, {once: true});
 	}
 
 	toggle(status = !this.state.show) {
@@ -83,11 +89,11 @@ export default class SidePanel extends React.Component {
 
 		return (
 			<div className={`side-panel side-panel--${this.state.size} ${visibility} ${loading}`} ref={this.panel}>
-				{this.state.pages.length > 1 && <Tabs tabs={this.state.pages} onChange={this.selectTab} current={this.state.currentTab} />}
+				{this.state.pages.length > 1 ? <Tabs tabs={this.state.pages} onChange={this.selectTab} current={this.state.currentTab} /> : null}
 				<div className="tab-content">
 					<div className="side-panel__loader"><ClayLoadingIndicator /></div>
 					<div className="active fade show tab-pane" role="tabpanel">
-						{this.showIframe() && <iframe src={this.state.currentTab} frameBorder="0" onLoad={this.contentLoaded}></iframe>}
+						{this.showIframe() ? <iframe src={this.state.currentTab} frameBorder="0" onLoad={this.contentLoaded}></iframe> : null}
 					</div>
 				</div>
 			</div>
