@@ -77,12 +77,12 @@ public class PanelTag extends IncludeTag {
 		return EVAL_BODY_INCLUDE;
 	}
 
-	public String getElementClasses() {
-		return _elementClasses;
-	}
-
 	public String getBodyClasses() {
 		return _bodyClasses;
+	}
+
+	public String getElementClasses() {
+		return _elementClasses;
 	}
 
 	public String getHeaderActionIcon() {
@@ -117,12 +117,12 @@ public class PanelTag extends IncludeTag {
 		return _title;
 	}
 
-	public void setElementClasses(String elementClasses) {
-		_elementClasses = elementClasses;
-	}
-
 	public void setBodyClasses(String bodyClasses) {
 		_bodyClasses = bodyClasses;
+	}
+
+	public void setElementClasses(String elementClasses) {
+		_elementClasses = elementClasses;
 	}
 
 	public void setHeaderActionIcon(String headerActionIcon) {
@@ -168,8 +168,8 @@ public class PanelTag extends IncludeTag {
 	protected void cleanUp() {
 		super.cleanUp();
 
-		_elementClasses = null;
 		_bodyClasses = null;
+		_elementClasses = null;
 		_headerActionIcon = null;
 		_headerActionId = null;
 		_headerActionLabel = null;
@@ -199,8 +199,8 @@ public class PanelTag extends IncludeTag {
 
 	private static final Log _log = LogFactoryUtil.getLog(PanelTag.class);
 
-	private String _elementClasses;
 	private String _bodyClasses;
+	private String _elementClasses;
 	private String _headerActionIcon;
 	private String _headerActionId;
 	private String _headerActionLabel;

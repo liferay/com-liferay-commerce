@@ -23,9 +23,10 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.taglib.util.IncludeTag;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.PageContext;
-import java.util.List;
 
 /**
  * @author Fabio Diego Mastrorilli
@@ -55,13 +56,12 @@ public class StepTrackerTag extends IncludeTag {
 		_steps = steps;
 	}
 
-
 	@Override
 	protected void cleanUp() {
 		super.cleanUp();
 
-		_steps = null;
 		_spritemap = null;
+		_steps = null;
 	}
 
 	@Override
@@ -84,14 +84,15 @@ public class StepTrackerTag extends IncludeTag {
 		}
 
 		request.setAttribute("liferay-commerce:step-tracker:steps", _steps);
-		request.setAttribute("liferay-commerce:step-tracker_spritemap", _spritemap);
+		request.setAttribute(
+			"liferay-commerce:step-tracker_spritemap", _spritemap);
 	}
 
 	private static final String _PAGE = "/step_tracker/page.jsp";
 
 	private static final Log _log = LogFactoryUtil.getLog(StepTrackerTag.class);
 
-	private List<StepModel> _steps;
 	private String _spritemap;
+	private List<StepModel> _steps;
 
 }
