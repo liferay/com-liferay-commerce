@@ -34,6 +34,7 @@ import com.liferay.headless.commerce.admin.order.dto.v1_0.BillingAddress;
 import com.liferay.headless.commerce.admin.order.dto.v1_0.Order;
 import com.liferay.headless.commerce.admin.order.dto.v1_0.OrderItem;
 import com.liferay.headless.commerce.admin.order.dto.v1_0.ShippingAddress;
+import com.liferay.headless.commerce.admin.order.internal.odata.entity.v1_0.OrderEntityModel;
 import com.liferay.headless.commerce.admin.order.internal.util.v1_0.BillingAddressUtil;
 import com.liferay.headless.commerce.admin.order.internal.util.v1_0.OrderItemUtil;
 import com.liferay.headless.commerce.admin.order.internal.util.v1_0.ShippingAddressUtil;
@@ -52,8 +53,10 @@ import com.liferay.portal.kernel.search.filter.Filter;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.odata.entity.EntityModel;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
+import com.liferay.portal.vulcan.resource.EntityModelResource;
 import com.liferay.portal.vulcan.util.SearchUtil;
 
 import java.math.BigDecimal;
@@ -63,6 +66,7 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
@@ -76,7 +80,8 @@ import org.osgi.service.component.annotations.ServiceScope;
 	properties = "OSGI-INF/liferay/rest/v1_0/order.properties",
 	scope = ServiceScope.PROTOTYPE, service = OrderResource.class
 )
-public class OrderResourceImpl extends BaseOrderResourceImpl {
+public class OrderResourceImpl
+	extends BaseOrderResourceImpl implements EntityModelResource {
 
 	@Override
 	public Response deleteOrder(Long id) throws Exception {
@@ -108,6 +113,11 @@ public class OrderResourceImpl extends BaseOrderResourceImpl {
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
+	}
+
+	@Override
+	public EntityModel getEntityModel(MultivaluedMap multivaluedMap) {
+		return _entityModel;
 	}
 
 	@Override
@@ -430,6 +440,8 @@ public class OrderResourceImpl extends BaseOrderResourceImpl {
 
 		return commerceOrder;
 	}
+
+	private static final EntityModel _entityModel = new OrderEntityModel();
 
 	@Reference
 	private CommerceAccountService _commerceAccountService;

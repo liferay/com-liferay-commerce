@@ -103,9 +103,12 @@ public class ProductDTOConverter implements DTOConverter {
 					(ProductConfiguration)
 						productConfigurationDTOConverter.toDTO(
 							dtoConverterContext);
+				createDate = cpDefinition.getCreateDate();
 				description = LanguageUtils.getLanguageIdMap(
 					cpDefinition.getDescriptionMap());
+				displayDate = cpDefinition.getDisplayDate();
 				expando = expandoBridge.getAttributes();
+				expirationDate = cpDefinition.getExpirationDate();
 				externalReferenceCode = cProduct.getExternalReferenceCode();
 				id = cpDefinition.getCPDefinitionId();
 				images = _getAttachments(
@@ -117,6 +120,7 @@ public class ProductDTOConverter implements DTOConverter {
 					cpDefinition.getMetaKeywordsMap());
 				metaTitle = LanguageUtils.getLanguageIdMap(
 					cpDefinition.getMetaTitleMap());
+				modifiedDate = cpDefinition.getModifiedDate();
 				name = LanguageUtils.getLanguageIdMap(
 					cpDefinition.getNameMap());
 				options = _getProductOptions(cpDefinition, dtoConverterContext);
