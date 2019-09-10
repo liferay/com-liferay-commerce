@@ -207,16 +207,14 @@ public abstract class BaseAttachmentResourceImpl implements AttachmentResource {
 		}
 	)
 	@Path(
-		"/products/by-externalReferenceCode{externalReferenceCode}/attachments/"
+		"/products/by-externalReferenceCode/{externalReferenceCode}/attachments/"
 	)
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Attachment")})
-	public Page<Attachment>
-			getProductByExternalReferenceCodeexternalReferenceCodeAttachmentsPage(
-				@NotNull @Parameter(hidden = true)
-				@PathParam("externalReferenceCode") String
-					externalReferenceCode,
-				@Context Pagination pagination)
+	public Page<Attachment> getProductByExternalReferenceCodeAttachmentsPage(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode,
+			@Context Pagination pagination)
 		throws Exception {
 
 		return Page.of(Collections.emptyList());
@@ -231,16 +229,14 @@ public abstract class BaseAttachmentResourceImpl implements AttachmentResource {
 		}
 	)
 	@Path(
-		"/products/by-externalReferenceCode{externalReferenceCode}/attachments/"
+		"/products/by-externalReferenceCode/{externalReferenceCode}/attachments/"
 	)
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Attachment")})
-	public Attachment
-			postProductByExternalReferenceCodeexternalReferenceCodeAttachment(
-				@NotNull @Parameter(hidden = true)
-				@PathParam("externalReferenceCode") String
-					externalReferenceCode,
-				Attachment attachment)
+	public Attachment postProductByExternalReferenceCodeAttachment(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode,
+			Attachment attachment)
 		throws Exception {
 
 		return new Attachment();

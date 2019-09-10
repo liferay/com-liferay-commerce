@@ -34,6 +34,13 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface OrderItemResource {
 
+	public Response deleteOrderItem(Long id) throws Exception;
+
+	public OrderItem getOrderItem(Long id) throws Exception;
+
+	public Response patchOrderItem(Long id, OrderItem orderItem)
+		throws Exception;
+
 	public Response deleteOrderItemByExternalReferenceCode(
 			String externalReferenceCode)
 		throws Exception;
@@ -46,11 +53,11 @@ public interface OrderItemResource {
 			String externalReferenceCode, OrderItem orderItem)
 		throws Exception;
 
-	public Response deleteOrderItem(Long id) throws Exception;
+	public Page<OrderItem> getOrderIdOrderItemsPage(
+			Long id, Pagination pagination)
+		throws Exception;
 
-	public OrderItem getOrderItem(Long id) throws Exception;
-
-	public Response patchOrderItem(Long id, OrderItem orderItem)
+	public OrderItem postOrderIdOrderItem(Long id, OrderItem orderItem)
 		throws Exception;
 
 	public Page<OrderItem> getOrderByExternalReferenceCodeOrderItemsPage(
@@ -59,13 +66,6 @@ public interface OrderItemResource {
 
 	public OrderItem postOrderByExternalReferenceCodeOrderItem(
 			String externalReferenceCode, OrderItem orderItem)
-		throws Exception;
-
-	public Page<OrderItem> getOrderIdOrderItemsPage(
-			Long id, Pagination pagination)
-		throws Exception;
-
-	public OrderItem postOrderIdOrderItem(Long id, OrderItem orderItem)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);
