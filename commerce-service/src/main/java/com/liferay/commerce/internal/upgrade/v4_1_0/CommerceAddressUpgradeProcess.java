@@ -105,7 +105,7 @@ public class CommerceAddressUpgradeProcess
 		throws Exception {
 
 		PreparedStatement ps = connection.prepareStatement(
-			"update CommerceAddress set type = ? where commerceAddressId = ?");
+			"update CommerceAddress set type_ = ? where commerceAddressId = ?");
 
 		int type = CommerceAddressConstants.ADDRESS_TYPE_SHIPPING;
 
