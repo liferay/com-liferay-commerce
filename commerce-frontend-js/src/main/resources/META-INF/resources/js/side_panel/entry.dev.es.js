@@ -6,16 +6,16 @@ window.SidePanel = launcher('sidePanel', 'side-panel', {
 	show: false,
 	pages: [
 		{
-			url: `/sidepanel.html?${Math.random()}`,
-			pageName: 'Comments',
+			url: `/index.html?${Math.random()}`,
+			pageName: 'Index',
 		},
 		{
-			url: `/sidepanel.html?${Math.random()}`,
-			pageName: 'Edit',
+			url: `/addorcreate.html?${Math.random()}`,
+			pageName: 'Add or create',
 		},
 		{
-			url: `/sidepanel.html?${Math.random()}`,
-			pageName: 'Changelog',
+			url: `/gallery.html?${Math.random()}`,
+			pageName: 'Gallery',
 		},
 	],
 });
