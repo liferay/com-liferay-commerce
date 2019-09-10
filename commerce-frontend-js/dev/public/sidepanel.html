@@ -16,18 +16,35 @@
 	<title>React App</title>
 
 	<link href="https://cdn.jsdelivr.net/npm/clay/lib/css/atlas.css" rel="stylesheet" />
+	<style>
+		body {padding: 20px;}
+	</style>
 </head>
 
 <body>
 	<noscript>You need to enable JavaScript to run this app.</noscript>
 
-	<button onclick="window.SidePanel.open([{
-		url: `/sidepanel-1.html?${Math.random()}`,
-		pageName: 'Page 1',
-	}, {
-		url: `/sidepanel-1.html?${Math.random()}`,
-		pageName: 'Page 2',
-	}]);">Open</button>
+	<div>
+		<button onclick="window.SidePanel.open([{
+			url: `/sidepanel-1.html?${Math.random()}`,
+			pageName: 'Page 1',
+		}, {
+			url: `/sidepanel.html?${Math.random()}`,
+			pageName: 'Page 2',
+		}], 'large');" class="btn btn-info" type="button">Load</button>
+		<button onclick="window.SidePanel.open();" class="btn btn-primary" type="button">Open</button>
+		<button onclick="window.SidePanel.close();" class="btn btn-warning" type="button">Close</button>
+		<button onclick="window.SidePanel.toggle();" class="btn btn-secondary" type="button">Toggle</button>
+	</div>
+	<h2>Resize</h2>
+	<div>
+		<button onclick="window.SidePanel.setSize('xsmall');" class="btn btn-secondary" type="button">X-Small [25%]</button>
+		<button onclick="window.SidePanel.setSize('small');" class="btn btn-secondary" type="button">Small [33%]</button>
+		<button onclick="window.SidePanel.setSize('medium');" class="btn btn-secondary" type="button">Medium [50% default]</button>
+		<button onclick="window.SidePanel.setSize('large');" class="btn btn-secondary" type="button">Large [66%]</button>
+		<button onclick="window.SidePanel.setSize('xlarge');" class="btn btn-secondary" type="button">X-Large [75%]</button>
+		<button onclick="window.SidePanel.setSize('full');" class="btn btn-secondary" type="button">Full [100%]</button>
+	</div>
 	<div id="side-panel"></div>
 
 	<script type="text/javascript" src="/side_panel.js"></script>
