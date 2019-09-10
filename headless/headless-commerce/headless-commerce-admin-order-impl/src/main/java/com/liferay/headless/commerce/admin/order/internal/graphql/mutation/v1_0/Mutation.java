@@ -87,6 +87,20 @@ public class Mutation {
 	}
 
 	@GraphQLInvokeDetached
+	public Response patchOrderIdBillingAddress(
+			@GraphQLName("id") Long id,
+			@GraphQLName("billingAddress") BillingAddress billingAddress)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_billingAddressResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			billingAddressResource ->
+				billingAddressResource.patchOrderIdBillingAddress(
+					id, billingAddress));
+	}
+
+	@GraphQLInvokeDetached
 	public Response patchOrderByExternalReferenceCodeBillingAddress(
 			@GraphQLName("externalReferenceCode") String externalReferenceCode,
 			@GraphQLName("billingAddress") BillingAddress billingAddress)
@@ -102,26 +116,51 @@ public class Mutation {
 	}
 
 	@GraphQLInvokeDetached
-	public Response patchOrderIdBillingAddress(
+	public Response patchOrderIdShippingAddress(
 			@GraphQLName("id") Long id,
-			@GraphQLName("billingAddress") BillingAddress billingAddress)
+			@GraphQLName("shippingAddress") ShippingAddress shippingAddress)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
-			_billingAddressResourceComponentServiceObjects,
+			_shippingAddressResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			billingAddressResource ->
-				billingAddressResource.patchOrderIdBillingAddress(
-					id, billingAddress));
+			shippingAddressResource ->
+				shippingAddressResource.patchOrderIdShippingAddress(
+					id, shippingAddress));
 	}
 
-	@GraphQLField
 	@GraphQLInvokeDetached
-	public Order postOrder(@GraphQLName("order") Order order) throws Exception {
+	public Response patchOrderByExternalReferenceCodeShippingAddress(
+			@GraphQLName("externalReferenceCode") String externalReferenceCode,
+			@GraphQLName("shippingAddress") ShippingAddress shippingAddress)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_shippingAddressResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			shippingAddressResource ->
+				shippingAddressResource.
+					patchOrderByExternalReferenceCodeShippingAddress(
+						externalReferenceCode, shippingAddress));
+	}
+
+	@GraphQLInvokeDetached
+	public Response deleteOrder(@GraphQLName("id") Long id) throws Exception {
 		return _applyComponentServiceObjects(
 			_orderResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			orderResource -> orderResource.postOrder(order));
+			orderResource -> orderResource.deleteOrder(id));
+	}
+
+	@GraphQLInvokeDetached
+	public Response patchOrder(
+			@GraphQLName("id") Long id, @GraphQLName("order") Order order)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_orderResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			orderResource -> orderResource.patchOrder(id, order));
 	}
 
 	@GraphQLInvokeDetached
@@ -149,23 +188,36 @@ public class Mutation {
 				externalReferenceCode, order));
 	}
 
+	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response deleteOrder(@GraphQLName("id") Long id) throws Exception {
+	public Order postOrder(@GraphQLName("order") Order order) throws Exception {
 		return _applyComponentServiceObjects(
 			_orderResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			orderResource -> orderResource.deleteOrder(id));
+			orderResource -> orderResource.postOrder(order));
 	}
 
 	@GraphQLInvokeDetached
-	public Response patchOrder(
-			@GraphQLName("id") Long id, @GraphQLName("order") Order order)
+	public Response deleteOrderItem(@GraphQLName("id") Long id)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
-			_orderResourceComponentServiceObjects,
+			_orderItemResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			orderResource -> orderResource.patchOrder(id, order));
+			orderItemResource -> orderItemResource.deleteOrderItem(id));
+	}
+
+	@GraphQLInvokeDetached
+	public Response patchOrderItem(
+			@GraphQLName("id") Long id,
+			@GraphQLName("orderItem") OrderItem orderItem)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_orderItemResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			orderItemResource -> orderItemResource.patchOrderItem(
+				id, orderItem));
 	}
 
 	@GraphQLInvokeDetached
@@ -195,18 +247,9 @@ public class Mutation {
 					externalReferenceCode, orderItem));
 	}
 
+	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response deleteOrderItem(@GraphQLName("id") Long id)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_orderItemResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			orderItemResource -> orderItemResource.deleteOrderItem(id));
-	}
-
-	@GraphQLInvokeDetached
-	public Response patchOrderItem(
+	public OrderItem postOrderIdOrderItem(
 			@GraphQLName("id") Long id,
 			@GraphQLName("orderItem") OrderItem orderItem)
 		throws Exception {
@@ -214,7 +257,7 @@ public class Mutation {
 		return _applyComponentServiceObjects(
 			_orderItemResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			orderItemResource -> orderItemResource.patchOrderItem(
+			orderItemResource -> orderItemResource.postOrderIdOrderItem(
 				id, orderItem));
 	}
 
@@ -233,18 +276,27 @@ public class Mutation {
 					externalReferenceCode, orderItem));
 	}
 
-	@GraphQLField
 	@GraphQLInvokeDetached
-	public OrderItem postOrderIdOrderItem(
-			@GraphQLName("id") Long id,
-			@GraphQLName("orderItem") OrderItem orderItem)
+	public Response deleteOrderNote(@GraphQLName("id") Long id)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
-			_orderItemResourceComponentServiceObjects,
+			_orderNoteResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			orderItemResource -> orderItemResource.postOrderIdOrderItem(
-				id, orderItem));
+			orderNoteResource -> orderNoteResource.deleteOrderNote(id));
+	}
+
+	@GraphQLInvokeDetached
+	public Response patchOrderNote(
+			@GraphQLName("id") Long id,
+			@GraphQLName("orderNote") OrderNote orderNote)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_orderNoteResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			orderNoteResource -> orderNoteResource.patchOrderNote(
+				id, orderNote));
 	}
 
 	@GraphQLInvokeDetached
@@ -274,18 +326,9 @@ public class Mutation {
 					externalReferenceCode, orderNote));
 	}
 
+	@GraphQLField
 	@GraphQLInvokeDetached
-	public Response deleteOrderNote(@GraphQLName("id") Long id)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_orderNoteResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			orderNoteResource -> orderNoteResource.deleteOrderNote(id));
-	}
-
-	@GraphQLInvokeDetached
-	public Response patchOrderNote(
+	public OrderNote postOrderIdOrderNote(
 			@GraphQLName("id") Long id,
 			@GraphQLName("orderNote") OrderNote orderNote)
 		throws Exception {
@@ -293,7 +336,7 @@ public class Mutation {
 		return _applyComponentServiceObjects(
 			_orderNoteResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			orderNoteResource -> orderNoteResource.patchOrderNote(
+			orderNoteResource -> orderNoteResource.postOrderIdOrderNote(
 				id, orderNote));
 	}
 
@@ -310,49 +353,6 @@ public class Mutation {
 			orderNoteResource ->
 				orderNoteResource.postOrderByExternalReferenceCodeOrderNote(
 					externalReferenceCode, orderNote));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public OrderNote postOrderIdOrderNote(
-			@GraphQLName("id") Long id,
-			@GraphQLName("orderNote") OrderNote orderNote)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_orderNoteResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			orderNoteResource -> orderNoteResource.postOrderIdOrderNote(
-				id, orderNote));
-	}
-
-	@GraphQLInvokeDetached
-	public Response patchOrderByExternalReferenceCodeShippingAddress(
-			@GraphQLName("externalReferenceCode") String externalReferenceCode,
-			@GraphQLName("shippingAddress") ShippingAddress shippingAddress)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_shippingAddressResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			shippingAddressResource ->
-				shippingAddressResource.
-					patchOrderByExternalReferenceCodeShippingAddress(
-						externalReferenceCode, shippingAddress));
-	}
-
-	@GraphQLInvokeDetached
-	public Response patchOrderIdShippingAddress(
-			@GraphQLName("id") Long id,
-			@GraphQLName("shippingAddress") ShippingAddress shippingAddress)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_shippingAddressResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			shippingAddressResource ->
-				shippingAddressResource.patchOrderIdShippingAddress(
-					id, shippingAddress));
 	}
 
 	private <T, R, E1 extends Throwable, E2 extends Throwable> R

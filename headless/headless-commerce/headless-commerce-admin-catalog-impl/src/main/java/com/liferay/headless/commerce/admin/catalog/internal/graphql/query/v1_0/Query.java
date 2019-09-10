@@ -260,7 +260,7 @@ public class Query {
 	@GraphQLField
 	@GraphQLInvokeDetached
 	public Collection<Attachment>
-			getProductByExternalReferenceCodeexternalReferenceCodeAttachmentsPage(
+			getProductByExternalReferenceCodeAttachmentsPage(
 				@GraphQLName("externalReferenceCode") String
 					externalReferenceCode,
 				@GraphQLName("pageSize") int pageSize,
@@ -273,7 +273,7 @@ public class Query {
 			attachmentResource -> {
 				Page paginationPage =
 					attachmentResource.
-						getProductByExternalReferenceCodeexternalReferenceCodeAttachmentsPage(
+						getProductByExternalReferenceCodeAttachmentsPage(
 							externalReferenceCode,
 							Pagination.of(pageSize, page));
 
