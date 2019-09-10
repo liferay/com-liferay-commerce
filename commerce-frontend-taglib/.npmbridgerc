@@ -1,0 +1,15 @@
+{
+	"commerce-frontend-taglib": {
+		"dest-mod-name-mapper": {
+			"from": "(.*)\\.js$",
+			"to": "bridge/commerce-frontend-taglib/$1"
+		},
+		"file-globs": "**/*.es.js,**/*.soy.js",
+		"input": "classes/META-INF/resources",
+		"output": "classes/META-INF/resources/bridge/commerce-frontend-taglib",
+		"src-mod-name-mapper": {
+			"from": "(.*)\\.js$",
+			"to": "commerce-frontend-taglib/$1"
+		}
+	}
+}

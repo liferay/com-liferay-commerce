@@ -273,11 +273,11 @@ public class MiniumCPContentListEntryRenderer
 		Set<String> dependencies = new HashSet<>();
 
 		dependencies.add(
-			"commerce-frontend-taglib@2.1.9/add_to_cart/AddToCartButton.es");
+			"commerce-frontend-taglib/add_to_cart/AddToCartButton.es");
 		dependencies.add(
-			"commerce-frontend-taglib@2.1.9/compare_checkbox" +
+			"commerce-frontend-taglib/compare_checkbox" +
 				"/CompareCheckbox.es");
-		dependencies.add("commerce-frontend-taglib@2.1.9/price/Price.es");
+		dependencies.add("commerce-frontend-taglib/price/Price.es");
 
 		ComponentDescriptor componentDescriptor = new ComponentDescriptor(
 			"ProductCard.render", moduleName, null, dependencies, false, true,
