@@ -69,6 +69,7 @@ public class PanelTag extends IncludeTag {
 		setNamespacedAttribute(request, "showMoreId", _showMoreId);
 		setNamespacedAttribute(request, "showMoreUrl", _showMoreUrl);
 		setNamespacedAttribute(request, "elementClasses", _elementClasses);
+		setNamespacedAttribute(request, "bodyClasses", _bodyClasses);
 		setNamespacedAttribute(request, "randomNamespace", randomNamespace);
 
 		super.doStartTag();
@@ -78,6 +79,10 @@ public class PanelTag extends IncludeTag {
 
 	public String getElementClasses() {
 		return _elementClasses;
+	}
+
+	public String getBodyClasses() {
+		return _bodyClasses;
 	}
 
 	public String getHeaderActionIcon() {
@@ -114,6 +119,10 @@ public class PanelTag extends IncludeTag {
 
 	public void setElementClasses(String elementClasses) {
 		_elementClasses = elementClasses;
+	}
+
+	public void setBodyClasses(String bodyClasses) {
+		_bodyClasses = bodyClasses;
 	}
 
 	public void setHeaderActionIcon(String headerActionIcon) {
@@ -160,6 +169,7 @@ public class PanelTag extends IncludeTag {
 		super.cleanUp();
 
 		_elementClasses = null;
+		_bodyClasses = null;
 		_headerActionIcon = null;
 		_headerActionId = null;
 		_headerActionLabel = null;
@@ -190,6 +200,7 @@ public class PanelTag extends IncludeTag {
 	private static final Log _log = LogFactoryUtil.getLog(PanelTag.class);
 
 	private String _elementClasses;
+	private String _bodyClasses;
 	private String _headerActionIcon;
 	private String _headerActionId;
 	private String _headerActionLabel;
