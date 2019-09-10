@@ -130,9 +130,8 @@ public class AttachmentResourceImpl extends BaseAttachmentResourceImpl {
 	}
 
 	@Override
-	public Page<Attachment>
-			getProductByExternalReferenceCodeexternalReferenceCodeAttachmentsPage(
-				String externalReferenceCode, Pagination pagination)
+	public Page<Attachment> getProductByExternalReferenceCodeAttachmentsPage(
+			String externalReferenceCode, Pagination pagination)
 		throws Exception {
 
 		CPDefinition cpDefinition =
@@ -244,9 +243,8 @@ public class AttachmentResourceImpl extends BaseAttachmentResourceImpl {
 	}
 
 	@Override
-	public Attachment
-			postProductByExternalReferenceCodeexternalReferenceCodeAttachment(
-				String externalReferenceCode, Attachment attachment)
+	public Attachment postProductByExternalReferenceCodeAttachment(
+			String externalReferenceCode, Attachment attachment)
 		throws Exception {
 
 		CPDefinition cpDefinition =

@@ -44,6 +44,7 @@ import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductSubscriptionC
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductTaxConfiguration;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.RelatedProduct;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Sku;
+import com.liferay.headless.commerce.admin.catalog.internal.odata.entity.v1_0.ProductEntityModel;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.AttachmentUtil;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductConfigurationUtil;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductOptionUtil;
@@ -74,8 +75,10 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.odata.entity.EntityModel;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
+import com.liferay.portal.vulcan.resource.EntityModelResource;
 import com.liferay.portal.vulcan.util.SearchUtil;
 import com.liferay.upload.UniqueFileNameProvider;
 
@@ -88,6 +91,7 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
@@ -103,7 +107,8 @@ import org.osgi.service.component.annotations.ServiceScope;
 	properties = "OSGI-INF/liferay/rest/v1_0/product.properties",
 	scope = ServiceScope.PROTOTYPE, service = ProductResource.class
 )
-public class ProductResourceImpl extends BaseProductResourceImpl {
+public class ProductResourceImpl
+	extends BaseProductResourceImpl implements EntityModelResource {
 
 	@Override
 	public Response deleteProduct(Long id) throws Exception {
@@ -145,6 +150,11 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
+	}
+
+	@Override
+	public EntityModel getEntityModel(MultivaluedMap multivaluedMap) {
+		return _entityModel;
 	}
 
 	@Override
@@ -540,8 +550,6 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 
 		DateConfig expirationDateConfig = new DateConfig(expirationCalendar);
 
-		boolean neverExpire = Boolean.TRUE;
-
 		if (product.getCategories() == null) {
 			long[] categoryIds = _assetCategoryLocalService.getCategoryIds(
 				cpDefinition.getModelClassName(),
@@ -565,7 +573,8 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 			displayDateConfig.getMinute(), expirationDateConfig.getMonth(),
 			expirationDateConfig.getDay(), expirationDateConfig.getYear(),
 			expirationDateConfig.getHour(), expirationDateConfig.getMinute(),
-			neverExpire, serviceContext);
+			GetterUtil.getBoolean(product.getNeverExpire(), true),
+			serviceContext);
 
 		// Expando
 
@@ -586,8 +595,6 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 	}
 
 	private CPDefinition _upsertProduct(Product product) throws Exception {
-		boolean neverExpire = Boolean.TRUE;
-
 		CommerceCatalog commerceCatalog =
 			_commerceCatalogLocalService.getCommerceCatalog(
 				product.getCatalogId());
@@ -655,7 +662,8 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 			displayDateConfig.getMinute(), expirationDateConfig.getMonth(),
 			expirationDateConfig.getDay(), expirationDateConfig.getYear(),
 			expirationDateConfig.getHour(), expirationDateConfig.getMinute(),
-			neverExpire, product.getDefaultSku(),
+			GetterUtil.getBoolean(product.getNeverExpire(), true),
+			product.getDefaultSku(),
 			GetterUtil.getBoolean(subscriptionConfiguration.getEnable(), false),
 			GetterUtil.getInteger(subscriptionConfiguration.getLength(), 0),
 			GetterUtil.getString(
@@ -692,6 +700,8 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 
 		return cpDefinition;
 	}
+
+	private static final EntityModel _entityModel = new ProductEntityModel();
 
 	@Reference
 	private AssetCategoryLocalService _assetCategoryLocalService;
