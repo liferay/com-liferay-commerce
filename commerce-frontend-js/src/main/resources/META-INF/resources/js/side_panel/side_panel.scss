@@ -6,12 +6,13 @@
   top: 0;
   bottom: 0;
   width: 50%;
-  transition: all ease 200ms;
+  transition: all ease 500ms;
+  will-change: transform, box-shadow;
   z-index: 1000;
 
   &.is-hidden {
     transform: translateX(100%);
-    box-shadow: 0 0 0 transparent;
+    box-shadow: 0 0 0 rgba(39, 40, 51, 0.15);
   }
 
   &--xsmall { width: 25%; }
@@ -24,10 +25,38 @@
   .tab-content,
   .tab-pane {
     height: 100%;
+    position: relative;
+  }
+
+  .nav {
+    border-bottom: 1px solid #DDDEE7;
+  }
+
+  &__loader {
+    align-items: center;
+    background-color: #F1F2F5;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 10;
+    
+    .side-panel:not(.is-loading) & {
+      transition: all ease 200ms;
+      opacity: 0;
+      pointer-events: none;
+    }
   }
 
   iframe {
     height: 100%;
     width: 100%;
+  }
+
+  &.is-loading iframe {
+    display: none;
   }
 }
