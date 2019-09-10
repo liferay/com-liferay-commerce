@@ -44,6 +44,7 @@ import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -426,7 +427,8 @@ public class CommerceUsersImporter {
 						_commerceAccountLocalService.
 							fetchByExternalReferenceCode(
 								serviceContext.getCompanyId(),
-								accountJSONObject.getString("name"));
+								FriendlyURLNormalizerUtil.normalize(
+									accountJSONObject.getString("name")));
 
 					CommerceAccountUserRelPK commerceAccountUserRelPK =
 						new CommerceAccountUserRelPK(

@@ -20,6 +20,7 @@ import com.liferay.commerce.account.service.CommerceAccountGroupLocalService;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.price.list.model.CommercePriceList;
+import com.liferay.commerce.price.list.model.CommercePriceListCommerceAccountGroupRel;
 import com.liferay.commerce.price.list.service.CommercePriceListCommerceAccountGroupRelLocalService;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -32,7 +33,6 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Calendar;
@@ -78,18 +78,19 @@ public class CommercePriceListsImporter {
 			return;
 		}
 
+		long companyId = serviceContext.getCompanyId();
+
 		CommerceCurrency commerceCurrency =
 			_commerceCurrencyLocalService.getCommerceCurrency(
-				serviceContext.getCompanyId(), currencyCode);
+				companyId, currencyCode);
 
 		long parentPriceListId = 0;
 
 		String parentPriceListName = jsonObject.getString("ParentPriceList");
 
 		if (!Validator.isBlank(parentPriceListName)) {
-			String externalReferenceCode = StringBundler.concat(
-				String.valueOf(catalogGroupId), "_",
-				FriendlyURLNormalizerUtil.normalize(parentPriceListName));
+			String externalReferenceCode = FriendlyURLNormalizerUtil.normalize(
+				parentPriceListName);
 
 			CommercePriceList parentPriceList =
 				_commercePriceListLocalService.
@@ -158,9 +159,8 @@ public class CommercePriceListsImporter {
 
 		// Add Commerce Price List
 
-		String externalReferenceCode = StringBundler.concat(
-			String.valueOf(catalogGroupId), "_",
-			FriendlyURLNormalizerUtil.normalize(name));
+		String externalReferenceCode = FriendlyURLNormalizerUtil.normalize(
+			name);
 
 		CommercePriceList commercePriceList =
 			_commercePriceListLocalService.upsertCommercePriceList(
@@ -179,10 +179,8 @@ public class CommercePriceListsImporter {
 			for (int i = 0; i < accountGroupsJSONArray.length(); i++) {
 				try {
 					String accountGroupExternalReferenceCode =
-						StringBundler.concat(
-							String.valueOf(serviceContext.getCompanyId()), "_",
-							FriendlyURLNormalizerUtil.normalize(
-								accountGroupsJSONArray.getString(i)));
+						FriendlyURLNormalizerUtil.normalize(
+							accountGroupsJSONArray.getString(i));
 
 					CommerceAccountGroup commerceAccountGroup =
 						_commerceAccountGroupLocalService.
@@ -194,11 +192,26 @@ public class CommercePriceListsImporter {
 						throw new NoSuchAccountGroupException();
 					}
 
-					_commercePriceListCommerceAccountGroupRelLocalService.
-						addCommercePriceListCommerceAccountGroupRel(
-							commercePriceList.getCommercePriceListId(),
-							commerceAccountGroup.getCommerceAccountGroupId(), 0,
-							serviceContext);
+					long commercePriceListId =
+						commercePriceList.getCommercePriceListId();
+					long commerceAccountGroupId =
+						commerceAccountGroup.getCommerceAccountGroupId();
+
+					CommercePriceListCommerceAccountGroupRel
+						commercePriceListCommerceAccountGroupRel =
+							_commercePriceListCommerceAccountGroupRelLocalService.
+								fetchCommercePriceListCommerceAccountGroupRel(
+									commercePriceListId,
+									commerceAccountGroupId);
+
+					if (commercePriceListCommerceAccountGroupRel == null) {
+						_commercePriceListCommerceAccountGroupRelLocalService.
+							addCommercePriceListCommerceAccountGroupRel(
+								commercePriceList.getCommercePriceListId(),
+								commerceAccountGroup.
+									getCommerceAccountGroupId(),
+								0, serviceContext);
+					}
 				}
 				catch (NoSuchAccountGroupException nsage) {
 					_log.error(nsage, nsage);
