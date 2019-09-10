@@ -63,8 +63,12 @@ import com.liferay.headless.commerce.core.util.DateConfig;
 import com.liferay.headless.commerce.core.util.ExpandoUtil;
 import com.liferay.headless.commerce.core.util.LanguageUtils;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
+import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.search.BaseModelSearchResult;
+import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.search.filter.Filter;
 import com.liferay.portal.kernel.service.ClassNameLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
@@ -72,15 +76,16 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
+import com.liferay.portal.vulcan.util.SearchUtil;
 import com.liferay.upload.UniqueFileNameProvider;
 
 import java.io.Serializable;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
@@ -187,18 +192,31 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 	}
 
 	@Override
-	public Page<Product> getProductsPage(Pagination pagination)
+	public Page<Product> getProductsPage(
+			Filter filter, Pagination pagination, Sort[] sorts)
 		throws Exception {
 
-		BaseModelSearchResult<CPDefinition> cpDefinitionBaseModelSearchResult =
-			_cpDefinitionService.searchCPDefinitions(
-				contextCompany.getCompanyId(), null, null, null,
-				pagination.getStartPosition(), pagination.getEndPosition(),
-				null);
+		return SearchUtil.search(
+			booleanQuery -> booleanQuery.getPreBooleanFilter(), filter,
+			CPDefinition.class, StringPool.BLANK, pagination,
+			queryConfig -> queryConfig.setSelectedFieldNames(
+				Field.ENTRY_CLASS_PK),
+			searchContext -> {
+				searchContext.setCompanyId(contextCompany.getCompanyId());
 
-		return Page.of(
-			_toProducts(cpDefinitionBaseModelSearchResult.getBaseModels()),
-			pagination, cpDefinitionBaseModelSearchResult.getLength());
+				long[] getCommerceCatalogGroupIds =
+					_getCommerceCatalogGroupIds();
+
+				if ((getCommerceCatalogGroupIds != null) &&
+					(getCommerceCatalogGroupIds.length > 0)) {
+
+					searchContext.setGroupIds(getCommerceCatalogGroupIds);
+				}
+			},
+			document -> _toProduct(
+				_cpDefinitionService.getCPDefinition(
+					GetterUtil.getLong(document.get(Field.ENTRY_CLASS_PK)))),
+			sorts);
 	}
 
 	@Override
@@ -254,6 +272,18 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 				cpDefinition.getCPDefinitionId()));
 	}
 
+	private long[] _getCommerceCatalogGroupIds() throws PortalException {
+		List<CommerceCatalog> commerceCatalogs =
+			_commerceCatalogLocalService.searchCommerceCatalogs(
+				contextCompany.getCompanyId());
+
+		Stream<CommerceCatalog> stream = commerceCatalogs.stream();
+
+		return stream.mapToLong(
+			CommerceCatalog::getGroupId
+		).toArray();
+	}
+
 	private ProductShippingConfiguration _getProductShippingConfiguration(
 		Product product) {
 
@@ -293,23 +323,14 @@ public class ProductResourceImpl extends BaseProductResourceImpl {
 		return new ProductTaxConfiguration();
 	}
 
-	private List<Product> _toProducts(List<CPDefinition> cpDefinitions)
-		throws Exception {
-
-		List<Product> products = new ArrayList<>();
-
+	private Product _toProduct(CPDefinition cpDefinition) throws Exception {
 		DTOConverter productDTOConverter =
 			_dtoConverterRegistry.getDTOConverter(CPDefinition.class.getName());
 
-		for (CPDefinition cpDefinition : cpDefinitions) {
-			products.add(
-				(Product)productDTOConverter.toDTO(
-					new DefaultDTOConverterContext(
-						contextAcceptLanguage.getPreferredLocale(),
-						cpDefinition.getCPDefinitionId())));
-		}
-
-		return products;
+		return (Product)productDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(),
+				cpDefinition.getCPDefinitionId()));
 	}
 
 	private CPDefinition _updateNestedResources(
