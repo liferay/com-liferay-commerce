@@ -67,7 +67,7 @@ Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(),
 							<liferay-ui:message key="description" />
 						</dt>
 						<dd class="h6">
-							<%= HtmlUtil.escape(description) %>
+							<%= description %>
 						</dd>
 					</c:if>
 
