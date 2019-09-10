@@ -100,6 +100,7 @@ public class CommerceOrderIndexer extends BaseIndexer<CommerceOrder> {
 
 		document.addNumberSortable(
 			Field.ENTRY_CLASS_PK, commerceOrder.getCommerceOrderId());
+		document.addKeyword(Field.STATUS, commerceOrder.getStatus());
 		document.addKeyword("advanceStatus", commerceOrder.getAdvanceStatus());
 		document.addKeyword(
 			"commerceAccountId", commerceOrder.getCommerceAccountId());
