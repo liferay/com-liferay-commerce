@@ -28,300 +28,298 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 	<portlet:param name="commerceOrderId" value="<%= String.valueOf(commerceOrderEditDisplayContext.getCommerceOrderId()) %>" />
 </liferay-portlet:renderURL>
 
+<commerce-ui:modal
+	closeOnSubmit="<%= true %>"
+	showCancel="<%= true %>"
+	showSubmit="<%= true %>"
+	size="lg"
+	title="Billing address"
+	triggerId="billing-modal-id"
+	url="<%= editURL %>"
+/>
+<commerce-ui:modal
+	closeOnSubmit="<%= true %>"
+	showCancel="<%= true %>"
+	showSubmit="<%= true %>"
+	size="lg"
+	title="Shipping address"
+	triggerId="shipping-modal-id"
+	url="<%= editURL %>"
+/>
+<commerce-ui:modal
+		closeOnSubmit="<%= true %>"
+		showCancel="<%= true %>"
+		showSubmit="<%= true %>"
+		size="lg"
+		title="Purchase order number"
+		triggerId="purchase-modal-id"
+		url="<%= editURL %>"
+/>
+<commerce-ui:modal
+		closeOnSubmit="<%= true %>"
+		showCancel="<%= true %>"
+		showSubmit="<%= true %>"
+		size="lg"
+		title="Request delivery date"
+		triggerId="request-delivery-id"
+		url="<%= editURL %>"
+/>
+
+
 <div class="container">
-	<div class="row">
-		<div class="col-md-4 d-flex">
-			<commerce-ui:modal
-				closeOnSubmit="<%= true %>"
-				showCancel="<%= true %>"
-				showSubmit="<%= true %>"
-				size="lg"
-				title="PLACEHOLDER Shipping address and method"
-				triggerId="shipping-modal-id"
-				url="<%= editURL %>"
-			/>
-			<commerce-ui:panel
-				elementClasses="flex-fill"
-				headerActionId="shipping-modal-id"
-				headerActionLabel="edit"
-				headerActionUrl="<%= editURL %>"
-				title="shipping-address-and-method"
-			>
-				<div class="card-text">PO Box 467 New York NY 10002</div>
-				<div class="card-text mt-3">
-					<clay:icon
-						symbol="geolocation"
-					/>
-					(Standard delivery)
-				</div>
-			</commerce-ui:panel>
-		</div>
 
-		<div class="col-md-4 d-flex">
-
-			<!-- modal -->
-			<commerce-ui:modal
-				closeOnSubmit="<%= true %>"
-				size="sm"
-				title="shipping-address-and-method"
-				triggerId="small-modal-id"
-				url="<%= editURL %>"
-			/>
-			<!-- / modal -->
-			<commerce-ui:panel
-				elementClasses="flex-fill"
-				headerActionIcon="plus"
-				headerActionId="small-modal-id"
-				title="billing-address"
-			>
-				<div class="card-text">PO Box 467 New York NY 10002</div>
-			</commerce-ui:panel>
-		</div>
-
-		<div class="col-md-4 d-flex">
-			<commerce-ui:panel
-				elementClasses="flex-fill"
-				title="order-timeline"
-			>
-				<div id="order-timeline-root">
-					<ol class="multi-step-indicator-label-top multi-step-nav multi-step-nav-collapse-sm">
-						<li class="active multi-step-item multi-step-item-expand">
-							<div class="multi-step-divider"></div>
-							<div class="multi-step-indicator">
-								<div class="multi-step-indicator-label">Confirmed</div>
-
-								<span class="multi-step-icon" data-multi-step-icon="1"></span>
-							</div>
-						</li>
-						<li class="disabled multi-step-item multi-step-item-expand">
-							<div class="multi-step-divider"></div>
-							<div class="multi-step-indicator">
-								<div class="multi-step-indicator-label">Transmitted</div>
-
-								<span class="multi-step-icon" data-multi-step-icon="2"></span>
-							</div>
-						</li>
-						<li class="disabled multi-step-item multi-step-item-expand">
-							<div class="multi-step-divider"></div>
-							<div class="multi-step-indicator">
-								<div class="multi-step-indicator-label">Shipped</div>
-
-								<span class="multi-step-icon" data-multi-step-icon="3"></span>
-							</div>
-						</li>
-						<li class="disabled multi-step-item">
-							<div class="multi-step-divider"></div>
-							<div class="multi-step-indicator">
-								<div class="multi-step-indicator-label">Completed</div>
-
-								<span class="multi-step-icon" data-multi-step-icon="4"></span>
-							</div>
-						</li>
-					</ol>
-				</div>
-			</commerce-ui:panel>
-		</div>
+	<div class="col-12 mb-4">
+		<commerce-ui:step-tracker 
+			steps="<%= commerceOrderEditDisplayContext.getOrderSteps() %>"
+		/>
 	</div>
 
-	<div class="row">
-		<div class="col-md-8">
-			<commerce-ui:panel
-				title="Items"
+	<div class="col-12">
+		<commerce-ui:panel
+			elementClasses="flex-fill"
+			headerActionUrl="<%= editURL %>"
+			bodyClasses="pb-0"
+			title="info"
+		>
+			<div class="row vertically-divided">
+				<div class="col-md-4">
+					<div class="info-box mb-3">
+						<div class="flex">
+							<h4>Billing address</h4>
+						</div>
+						<div class="description">
+							PO Box 467 New York NY 10002
+						</div>
+					</div>
+					<div class="info-box mb-3">
+						<div class="flex">
+							<h4>Billing address</h4>
+						</div>
+						<div class="description">
+							PO Box 467 New York NY 10002
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="info-box mb-3">
+						<div class="flex">
+							<h4>Billing address</h4>
+						</div>
+						<div class="description">
+							PO Box 467 New York NY 10002
+						</div>
+					</div>
+					<div class="info-box mb-3">
+						<div class="flex">
+							<h4>Billing address</h4>
+						</div>
+						<div class="description">
+							PO Box 467 New York NY 10002
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="info-box mb-3">
+						<div class="flex">
+							<h4>Billing address</h4>
+						</div>
+						<div class="description">
+							PO Box 467 New York NY 10002
+						</div>
+					</div>
+				</div>
+			</div>
+		</commerce-ui:panel>
+	</div>
+
+	<div class="col-12">
+		<commerce-ui:panel
+			title="items"
+		>
+			<liferay-frontend:management-bar
+				includeCheckBox="<%= true %>"
+				searchContainerId="commerceOrderItems"
 			>
-				<liferay-frontend:management-bar
-					includeCheckBox="<%= true %>"
-					searchContainerId="commerceOrderItems"
-				>
-					<liferay-frontend:management-bar-filters>
-						<liferay-frontend:management-bar-sort
-							orderByCol="<%= commerceOrderItemsSearchContainer.getOrderByCol() %>"
-							orderByType="<%= commerceOrderItemsSearchContainer.getOrderByType() %>"
-							orderColumns="<%= commerceOrderItemsSearchContainer.getOrderableHeaders() %>"
-							portletURL="<%= portletURL %>"
-						/>
+				<liferay-frontend:management-bar-filters>
+					<liferay-frontend:management-bar-sort
+						orderByCol="<%= commerceOrderItemsSearchContainer.getOrderByCol() %>"
+						orderByType="<%= commerceOrderItemsSearchContainer.getOrderByType() %>"
+						orderColumns="<%= commerceOrderItemsSearchContainer.getOrderableHeaders() %>"
+						portletURL="<%= portletURL %>"
+					/>
 
-						<li>
-							<aui:form action="<%= portletURL %>" method="get" name="fm">
-								<liferay-portlet:renderURLParams portletURL="<%= portletURL %>" />
+					<li>
+						<aui:form action="<%= portletURL %>" method="get" name="fm">
+							<liferay-portlet:renderURLParams portletURL="<%= portletURL %>" />
 
-								<liferay-ui:search-form
-									page="/order/item_search.jsp"
-									servletContext="<%= application %>"
-								/>
-							</aui:form>
-						</li>
-					</liferay-frontend:management-bar-filters>
-
-					<liferay-frontend:management-bar-buttons>
-						<portlet:actionURL name="editCommerceOrderItem" var="addCommerceOrderItemURL" />
-
-						<aui:form action="<%= addCommerceOrderItemURL %>" cssClass="hide" name="addCommerceOrderItemFm">
-							<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
-							<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-							<aui:input name="commerceOrderId" type="hidden" value="<%= commerceOrderEditDisplayContext.getCommerceOrderId() %>" />
-							<aui:input name="cpInstanceIds" type="hidden" value="" />
+							<liferay-ui:search-form
+								page="/order/item_search.jsp"
+								servletContext="<%= application %>"
+							/>
 						</aui:form>
+					</li>
+				</liferay-frontend:management-bar-filters>
 
-						<liferay-frontend:add-menu
-							inline="<%= true %>"
-						>
-							<liferay-frontend:add-menu-item
-								id="addCommerceOrderItem"
-								title='<%= LanguageUtil.get(request, "add-item") %>'
-								url="javascript:;"
-							/>
-						</liferay-frontend:add-menu>
-					</liferay-frontend:management-bar-buttons>
+				<liferay-frontend:management-bar-buttons>
+					<portlet:actionURL name="editCommerceOrderItem" var="addCommerceOrderItemURL" />
 
-					<liferay-frontend:management-bar-action-buttons>
-						<liferay-frontend:management-bar-button
-							href='<%= "javascript:" + renderResponse.getNamespace() + "deleteCommerceOrderItems();" %>'
-							icon="times"
-							label="delete"
-						/>
-					</liferay-frontend:management-bar-action-buttons>
-				</liferay-frontend:management-bar>
+					<aui:form action="<%= addCommerceOrderItemURL %>" cssClass="hide" name="addCommerceOrderItemFm">
+						<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
+						<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+						<aui:input name="commerceOrderId" type="hidden" value="<%= commerceOrderEditDisplayContext.getCommerceOrderId() %>" />
+						<aui:input name="cpInstanceIds" type="hidden" value="" />
+					</aui:form>
 
-				<div class="container-fluid-1280">
-					<liferay-ui:search-container
-						id="commerceOrderItems"
-						searchContainer="<%= commerceOrderItemsSearchContainer %>"
+					<liferay-frontend:add-menu
+						inline="<%= true %>"
 					>
-						<liferay-ui:search-container-row
-							className="com.liferay.commerce.model.CommerceOrderItem"
-							escapedModel="<%= true %>"
-							keyProperty="commerceOrderItemId"
-							modelVar="commerceOrderItem"
-						>
-
-							<%
-							PortletURL rowURL = renderResponse.createRenderURL();
-
-							rowURL.setParameter("mvcRenderCommandName", "editCommerceOrderItem");
-							rowURL.setParameter("redirect", currentURL);
-							rowURL.setParameter("commerceOrderId", String.valueOf(commerceOrderItem.getCommerceOrderId()));
-							rowURL.setParameter("commerceOrderItemId", String.valueOf(commerceOrderItem.getCommerceOrderItemId()));
-
-							CommerceOrder commerceOrder = commerceOrderItem.getCommerceOrder();
-							%>
-
-							<liferay-ui:search-container-column-text
-								cssClass="important table-cell-content"
-								href="<%= rowURL %>"
-								property="sku"
-							/>
-
-							<liferay-ui:search-container-column-text
-								cssClass="table-cell-content"
-								name="name"
-								value="<%= commerceOrderItem.getName(locale) %>"
-							/>
-
-							<%
-							CommerceProductPrice commerceProductPrice = commerceOrderEditDisplayContext.getCommerceProductPrice(commerceOrderItem);
-							%>
-
-							<liferay-ui:search-container-column-text
-								cssClass="table-cell-content"
-								name="price"
-							>
-								<c:if test="<%= commerceProductPrice != null %>">
-
-									<%
-									CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
-									%>
-
-									<div class="value-section">
-										<span class="commerce-value">
-											<%= HtmlUtil.escape(unitPrice.format(locale)) %>
-										</span>
-										<span class="commerce-subscription-info">
-											<liferay-commerce:subscription-info
-												commerceOrderItemId="<%= commerceOrder.isOpen() ? 0 : commerceOrderItem.getCommerceOrderItemId() %>"
-												CPInstanceId="<%= commerceOrderItem.getCPInstanceId() %>"
-												showDuration="<%= false %>"
-											/>
-										</span>
-									</div>
-								</c:if>
-							</liferay-ui:search-container-column-text>
-
-							<liferay-ui:search-container-column-text
-								name="discount"
-							>
-								<c:if test="<%= commerceProductPrice != null %>">
-
-									<%
-									CommerceDiscountValue commerceDiscountValue = commerceProductPrice.getDiscountValue();
-									%>
-
-									<c:if test="<%= commerceDiscountValue != null %>">
-
-										<%
-										CommerceMoney discountAmount = commerceDiscountValue.getDiscountAmount();
-										%>
-
-										<div class="value-section">
-											<span class="commerce-value">
-												<%= HtmlUtil.escape(discountAmount.format(locale)) %>
-											</span>
-										</div>
-									</c:if>
-								</c:if>
-							</liferay-ui:search-container-column-text>
-
-							<liferay-ui:search-container-column-text
-								property="quantity"
-							/>
-
-							<liferay-ui:search-container-column-text
-								name="total"
-							>
-								<c:if test="<%= commerceProductPrice != null %>">
-
-									<%
-									CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
-									%>
-
-									<div class="value-section">
-										<span class="commerce-value">
-											<%= HtmlUtil.escape(finalPrice.format(locale)) %>
-										</span>
-									</div>
-								</c:if>
-							</liferay-ui:search-container-column-text>
-
-							<liferay-ui:search-container-column-jsp
-								cssClass="entry-action-column"
-								path="/order/item_action.jsp"
-							/>
-						</liferay-ui:search-container-row>
-
-						<liferay-ui:search-iterator
-							markupView="lexicon"
+						<liferay-frontend:add-menu-item
+							id="addCommerceOrderItem"
+							title='<%= LanguageUtil.get(request, "add-item") %>'
+							url="javascript:;"
 						/>
-					</liferay-ui:search-container>
-				</div>
-			</commerce-ui:panel>
-		</div>
+					</liferay-frontend:add-menu>
+				</liferay-frontend:management-bar-buttons>
 
-		<div class="col-md-4">
-			<commerce-ui:panel
-				showMoreUrl="/test"
-				title="recent-order-notes"
-			>
-				<div class="card-text">
-					Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Nulla porttitor accumsan tincidunt. Donec sollicitudin molestie malesuada. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque velit nisi, pretium ut lacinia in, elementum id enim.
-				</div>
-			</commerce-ui:panel>
+				<liferay-frontend:management-bar-action-buttons>
+					<liferay-frontend:management-bar-button
+						href='<%= "javascript:" + renderResponse.getNamespace() + "deleteCommerceOrderItems();" %>'
+						icon="times"
+						label="delete"
+					/>
+				</liferay-frontend:management-bar-action-buttons>
+			</liferay-frontend:management-bar>
 
-			<commerce-ui:panel
-				headerActionLabel="edit"
-				title="order-summary"
-			>
-				<div id="order-timeline-root"></div>
-			</commerce-ui:panel>
-		</div>
+			<div class="container-fluid-1280">
+				<liferay-ui:search-container
+					id="commerceOrderItems"
+					searchContainer="<%= commerceOrderItemsSearchContainer %>"
+				>
+					<liferay-ui:search-container-row
+						className="com.liferay.commerce.model.CommerceOrderItem"
+						escapedModel="<%= true %>"
+						keyProperty="commerceOrderItemId"
+						modelVar="commerceOrderItem"
+					>
+
+						<%
+						PortletURL rowURL = renderResponse.createRenderURL();
+
+						rowURL.setParameter("mvcRenderCommandName", "editCommerceOrderItem");
+						rowURL.setParameter("redirect", currentURL);
+						rowURL.setParameter("commerceOrderId", String.valueOf(commerceOrderItem.getCommerceOrderId()));
+						rowURL.setParameter("commerceOrderItemId", String.valueOf(commerceOrderItem.getCommerceOrderItemId()));
+
+						CommerceOrder commerceOrder = commerceOrderItem.getCommerceOrder();
+						%>
+
+						<liferay-ui:search-container-column-text
+							cssClass="important table-cell-content"
+							href="<%= rowURL %>"
+							property="sku"
+						/>
+
+						<liferay-ui:search-container-column-text
+							cssClass="table-cell-content"
+							name="name"
+							value="<%= commerceOrderItem.getName(locale) %>"
+						/>
+
+						<%
+						CommerceProductPrice commerceProductPrice = commerceOrderEditDisplayContext.getCommerceProductPrice(commerceOrderItem);
+						%>
+
+						<liferay-ui:search-container-column-text
+							cssClass="table-cell-content"
+							name="price"
+						>
+							<c:if test="<%= commerceProductPrice != null %>">
+
+								<%
+								CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
+								%>
+
+								<div class="value-section">
+									<span class="commerce-value">
+										<%= HtmlUtil.escape(unitPrice.format(locale)) %>
+									</span>
+									<span class="commerce-subscription-info">
+										<liferay-commerce:subscription-info
+											commerceOrderItemId="<%= commerceOrder.isOpen() ? 0 : commerceOrderItem.getCommerceOrderItemId() %>"
+											CPInstanceId="<%= commerceOrderItem.getCPInstanceId() %>"
+											showDuration="<%= false %>"
+										/>
+									</span>
+								</div>
+							</c:if>
+						</liferay-ui:search-container-column-text>
+
+						<liferay-ui:search-container-column-text
+							name="discount"
+						>
+							<c:if test="<%= commerceProductPrice != null %>">
+
+								<%
+								CommerceDiscountValue commerceDiscountValue = commerceProductPrice.getDiscountValue();
+								%>
+
+								<c:if test="<%= commerceDiscountValue != null %>">
+
+									<%
+									CommerceMoney discountAmount = commerceDiscountValue.getDiscountAmount();
+									%>
+
+									<div class="value-section">
+										<span class="commerce-value">
+											<%= HtmlUtil.escape(discountAmount.format(locale)) %>
+										</span>
+									</div>
+								</c:if>
+							</c:if>
+						</liferay-ui:search-container-column-text>
+
+						<liferay-ui:search-container-column-text
+							property="quantity"
+						/>
+
+						<liferay-ui:search-container-column-text
+							name="total"
+						>
+							<c:if test="<%= commerceProductPrice != null %>">
+
+								<%
+								CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
+								%>
+
+								<div class="value-section">
+									<span class="commerce-value">
+										<%= HtmlUtil.escape(finalPrice.format(locale)) %>
+									</span>
+								</div>
+							</c:if>
+						</liferay-ui:search-container-column-text>
+
+						<liferay-ui:search-container-column-jsp
+							cssClass="entry-action-column"
+							path="/order/item_action.jsp"
+						/>
+					</liferay-ui:search-container-row>
+
+					<liferay-ui:search-iterator
+						markupView="lexicon"
+					/>
+				</liferay-ui:search-container>
+			</div>
+		</commerce-ui:panel>
+	</div>
+
+	<div class="col-12">
+		<commerce-ui:panel
+			headerActionLabel="edit"
+			title="order-summary"
+		>
+			<div id="order-timeline-root"></div>
+		</commerce-ui:panel>
 	</div>
 </div>
 
