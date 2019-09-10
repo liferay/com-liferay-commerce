@@ -83,7 +83,7 @@ if (cpDefinitions == null) {
 												<liferay-ui:message key="description" />
 											</dt>
 											<dd class="h6 sidebar-caption">
-												<%= HtmlUtil.escape(description) %>
+												<%= description %>
 											</dd>
 										</c:if>
 
