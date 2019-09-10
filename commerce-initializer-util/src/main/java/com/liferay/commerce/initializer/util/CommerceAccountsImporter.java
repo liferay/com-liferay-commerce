@@ -246,10 +246,9 @@ public class CommerceAccountsImporter {
 		if (priceListsJSONArray != null) {
 			for (int i = 0; i < priceListsJSONArray.length(); i++) {
 				try {
-					String externalReferenceCode = StringBundler.concat(
-						String.valueOf(serviceContext.getScopeGroupId()), "_",
+					String externalReferenceCode =
 						FriendlyURLNormalizerUtil.normalize(
-							priceListsJSONArray.getString(i)));
+							priceListsJSONArray.getString(i));
 
 					CommercePriceList commercePriceList =
 						_commercePriceListLocalService.
@@ -282,9 +281,8 @@ public class CommerceAccountsImporter {
 					String accountGroupName = accountGroupsJSONArray.getString(
 						i);
 
-					String externalReferenceCode = StringBundler.concat(
-						String.valueOf(serviceContext.getCompanyId()), "_",
-						FriendlyURLNormalizerUtil.normalize(accountGroupName));
+					String externalReferenceCode =
+						FriendlyURLNormalizerUtil.normalize(accountGroupName);
 
 					CommerceAccountGroup commerceAccountGroup =
 						_commerceAccountGroupLocalService.
@@ -305,7 +303,6 @@ public class CommerceAccountsImporter {
 					}
 
 					String relExternalReferenceCode = StringBundler.concat(
-						String.valueOf(serviceContext.getCompanyId()), "_",
 						FriendlyURLNormalizerUtil.normalize(accountGroupName),
 						"_",
 						FriendlyURLNormalizerUtil.normalize(
