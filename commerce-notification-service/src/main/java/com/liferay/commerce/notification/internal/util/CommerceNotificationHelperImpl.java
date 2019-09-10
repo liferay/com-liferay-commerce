@@ -89,16 +89,16 @@ public class CommerceNotificationHelperImpl
 				CommerceNotificationTemplateCommerceAccountGroupRel.
 					COMMERCE_ACCOUNT_GROUP_ID_ACCESSOR);
 
-			if (ArrayUtil.isEmpty(userIds)) {
-				sendNotificationsToAccountGroupUsers(
-					commerceAccountGroupIds, commerceNotificationTemplate,
-					commerceNotificationType, object);
-			}
-			else {
+			if (ArrayUtil.isNotEmpty(userIds)) {
 				sendNotificationsToUserIds(
 					userIds, commerceAccountGroupIds,
 					commerceNotificationTemplate, commerceNotificationType,
 					object);
+			}
+			else if (ArrayUtil.isNotEmpty(commerceAccountGroupIds)) {
+				sendNotificationsToAccountGroupUsers(
+					commerceAccountGroupIds, commerceNotificationTemplate,
+					commerceNotificationType, object);
 			}
 		}
 	}
