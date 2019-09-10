@@ -15,6 +15,7 @@
 package com.liferay.commerce.initializer.util;
 
 import com.liferay.commerce.price.list.exception.NoSuchPriceListException;
+import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceEntryLocalService;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
@@ -30,7 +31,6 @@ import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 
 import java.math.BigDecimal;
 
@@ -67,9 +67,8 @@ public class CommercePriceEntriesImporter {
 
 		String name = jsonObject.getString("PriceList");
 
-		String priceListExternalReferenceCode = StringBundler.concat(
-			String.valueOf(serviceContext.getScopeGroupId()), "_",
-			FriendlyURLNormalizerUtil.normalize(name));
+		String priceListExternalReferenceCode =
+			FriendlyURLNormalizerUtil.normalize(name);
 
 		CommercePriceList commercePriceList =
 			_commercePriceListLocalService.fetchByExternalReferenceCode(
@@ -82,14 +81,24 @@ public class CommercePriceEntriesImporter {
 
 		String sku = jsonObject.getString("Sku");
 
+		String externalReferenceCode = FriendlyURLNormalizerUtil.normalize(sku);
+
 		CPInstance cpInstance =
 			_cpInstanceLocalService.fetchByExternalReferenceCode(
-				serviceContext.getCompanyId(),
-				FriendlyURLNormalizerUtil.normalize(sku));
+				serviceContext.getCompanyId(), externalReferenceCode);
 
 		if (cpInstance == null) {
 			throw new NoSuchCPInstanceException(
 				"No cpInstance found with sku " + sku);
+		}
+
+		CommercePriceEntry commercePriceEntry =
+			_commercePriceEntryLocalService.fetchCommercePriceEntry(
+				commercePriceList.getCommercePriceListId(),
+				cpInstance.getCPInstanceUuid());
+
+		if (commercePriceEntry != null) {
+			return;
 		}
 
 		CPDefinition cpDefinition = _cpDefinitionLocalService.fetchCPDefinition(

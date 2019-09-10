@@ -73,7 +73,6 @@ import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
@@ -308,6 +307,12 @@ public class CPDefinitionsImporter {
 			String imageDependenciesPath, ServiceContext serviceContext)
 		throws Exception {
 
+		Company company = _companyLocalService.getCompany(
+			serviceContext.getCompanyId());
+
+		long companyId = company.getCompanyId();
+		long companyGroupId = company.getGroupId();
+
 		// Categories
 
 		List<AssetCategory> assetCategories = Collections.emptyList();
@@ -315,12 +320,9 @@ public class CPDefinitionsImporter {
 		JSONArray categoriesJSONArray = jsonObject.getJSONArray("Categories");
 
 		if (categoriesJSONArray != null) {
-			Company company = _companyLocalService.getCompany(
-				serviceContext.getCompanyId());
-
 			assetCategories = _assetCategoriesImporter.importAssetCategories(
 				categoriesJSONArray, assetVocabularyName, classLoader,
-				imageDependenciesPath, company.getGroupId(),
+				imageDependenciesPath, companyGroupId,
 				serviceContext.getUserId());
 		}
 
@@ -329,12 +331,8 @@ public class CPDefinitionsImporter {
 		JSONArray tagsJSONArray = jsonObject.getJSONArray("Tags");
 
 		if (tagsJSONArray != null) {
-			Company company = _companyLocalService.getCompany(
-				serviceContext.getCompanyId());
-
 			_assetTagsImporter.importAssetTags(
-				tagsJSONArray, company.getGroupId(),
-				serviceContext.getUserId());
+				tagsJSONArray, companyGroupId, serviceContext.getUserId());
 		}
 		else {
 			tagsJSONArray = new JSONArrayImpl();
@@ -348,7 +346,7 @@ public class CPDefinitionsImporter {
 		CPDefinition cpDefinition =
 			_cpDefinitionLocalService.
 				fetchCPDefinitionByCProductExternalReferenceCode(
-					serviceContext.getCompanyId(), externalReferenceCode);
+					companyId, externalReferenceCode);
 
 		if (cpDefinition != null) {
 			_commerceChannelRelLocalService.addCommerceChannelRel(
@@ -425,9 +423,8 @@ public class CPDefinitionsImporter {
 				JSONObject skuJSONObject = skusJSONArray.getJSONObject(i);
 
 				_importCPInstance(
-					catalogGroupId, cpDefinition.getCPDefinitionId(),
-					skuJSONObject, commerceInventoryWarehouseIds, calendar,
-					serviceContext);
+					cpDefinition.getCPDefinitionId(), skuJSONObject,
+					commerceInventoryWarehouseIds, calendar, serviceContext);
 			}
 		}
 		else {
@@ -470,8 +467,8 @@ public class CPDefinitionsImporter {
 
 				cpInstance.setManufacturerPartNumber(manufacturerPartNumber);
 
-				String cpInstaceExternalReferenceCode = StringBundler.concat(
-					String.valueOf(catalogGroupId), "_", sku);
+				String cpInstaceExternalReferenceCode =
+					FriendlyURLNormalizerUtil.normalize(sku);
 
 				cpInstance.setExternalReferenceCode(
 					cpInstaceExternalReferenceCode);
@@ -588,16 +585,14 @@ public class CPDefinitionsImporter {
 			cpDefinition.setAccountGroupFilterEnabled(true);
 
 			for (int i = 0; i < filterAccountGroupsJSONArray.length(); i++) {
-				String accountGroupExternalReferenceCode = StringBundler.concat(
-					String.valueOf(serviceContext.getCompanyId()), "_",
+				String accountGroupExternalReferenceCode =
 					FriendlyURLNormalizerUtil.normalize(
-						filterAccountGroupsJSONArray.getString(i)));
+						filterAccountGroupsJSONArray.getString(i));
 
 				CommerceAccountGroup commerceAccountGroup =
 					_commerceAccountGroupLocalService.
 						fetchCommerceAccountGroupByReferenceCode(
-							serviceContext.getCompanyId(),
-							accountGroupExternalReferenceCode);
+							companyId, accountGroupExternalReferenceCode);
 
 				if (commerceAccountGroup != null) {
 					_commerceAccountGroupRelLocalService.
@@ -719,7 +714,7 @@ public class CPDefinitionsImporter {
 	}
 
 	private CPInstance _importCPInstance(
-			long catalogGroupId, long cpDefinitionId, JSONObject skuJSONObject,
+			long cpDefinitionId, JSONObject skuJSONObject,
 			long[] commerceInventoryWarehouseIds, Calendar calendar,
 			ServiceContext serviceContext)
 		throws PortalException {
@@ -791,8 +786,7 @@ public class CPDefinitionsImporter {
 		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
 			cpDefinitionId);
 
-		String externalReferenceCode = StringBundler.concat(
-			String.valueOf(catalogGroupId), "_", sku);
+		String externalReferenceCode = FriendlyURLNormalizerUtil.normalize(sku);
 
 		CPInstance cpInstance = _cpInstanceLocalService.addCPInstance(
 			cpDefinitionId, cpDefinition.getGroupId(), sku, null,
