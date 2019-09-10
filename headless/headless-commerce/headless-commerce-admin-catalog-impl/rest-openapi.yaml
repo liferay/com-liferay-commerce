@@ -343,6 +343,10 @@ components:
                     type: array
                 configuration:
                     $ref: '#/components/schemas/ProductConfiguration'
+                createDate:
+                    example: 2017-07-21
+                    format: date
+                    type: string
                 defaultSku:
                     example: Blue handle, 00001l, 70cm, lifetime warranty
                     type: string
@@ -355,9 +359,17 @@ components:
                         hr_HR: Product Description HR
                         hu_HU: Product Description HU
                     type: object
+                displayDate:
+                    example: 2017-07-21
+                    format: date
+                    type: string
                 expando:
                     additionalProperties: true
                     type: object
+                expirationDate:
+                    example: 2017-08-21
+                    format: date
+                    type: string
                 externalReferenceCode:
                     example: AB-34098-789-N
                     type: string
@@ -395,6 +407,10 @@ components:
                         hr_HR: Meta title HU
                         hu_HU: Meta title HU
                     type: object
+                modifiedDate:
+                    example: 2017-08-21
+                    format: date
+                    type: string
                 name:
                     additionalProperties:
                         type: string
@@ -403,6 +419,9 @@ components:
                         hr_HR: Product Name HR
                         hu_HU: Product Name HU
                     type: object
+                neverExpire:
+                    example: true
+                    type: boolean
                 options:
                     items:
                         $ref: '#/components/schemas/ProductOption'
@@ -3165,6 +3184,156 @@ paths:
             summary: Creates or updates a Product.
             tags:
                 - Product
+    /products/by-externalReferenceCode/{externalReferenceCode}/attachments/:
+        get:
+            operationId: getProductByExternalReferenceCodeAttachmentsPage
+            parameters:
+                - in: path
+                  explode: false
+                  name: externalReferenceCode
+                  required: true
+                  schema:
+                      description: The resource external reference code
+                      example: AB-34098-789-N
+                      minLength: 1
+                      type: string
+                  style: simple
+                - in: query
+                  explode: true
+                  name: page
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+                - in: query
+                  explode: true
+                  name: pageSize
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/Attachment'
+                                type: array
+                        application/xml:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/Attachment'
+                                type: array
+                    description: Successful operation
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminCatalog.read
+            summary: Gets a list of Attachments related to a Product.
+            tags:
+                - Attachment
+        post:
+            operationId: postProductByExternalReferenceCodeAttachment
+            parameters:
+                - in: path
+                  explode: false
+                  name: externalReferenceCode
+                  required: true
+                  schema:
+                      description: The resource external reference code
+                      example: AB-34098-789-N
+                      minLength: 1
+                      type: string
+                  style: simple
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Attachment'
+                    application/xml:
+                        schema:
+                            $ref: '#/components/schemas/Attachment'
+                required: true
+            responses:
+                201:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Attachment'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Attachment'
+                    description: Created
+                202:
+                    description: Accepted - Async
+                204:
+                    description: Updated
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - HeadlessCommerceAdminCatalog.write
+            summary: Creates or updates a Attachment related to a Product.
+            tags:
+                - Attachment
     /products/by-externalReferenceCode/{externalReferenceCode}/categories/:
         get:
             operationId: getProductByExternalReferenceCodeCategoriesPage
@@ -4585,156 +4754,6 @@ paths:
             summary: Updates a Product by external reference code.
             tags:
                 - Product
-    /products/by-externalReferenceCode{externalReferenceCode}/attachments/:
-        get:
-            operationId: getProductByExternalReferenceCodeexternalReferenceCodeAttachmentsPage
-            parameters:
-                - in: path
-                  explode: false
-                  name: externalReferenceCode
-                  required: true
-                  schema:
-                      description: The resource external reference code
-                      example: AB-34098-789-N
-                      minLength: 1
-                      type: string
-                  style: simple
-                - in: query
-                  explode: true
-                  name: page
-                  required: false
-                  schema:
-                      type: integer
-                  style: form
-                - in: query
-                  explode: true
-                  name: pageSize
-                  required: false
-                  schema:
-                      type: integer
-                  style: form
-            responses:
-                200:
-                    content:
-                        application/json:
-                            schema:
-                                items:
-                                    $ref: '#/components/schemas/Attachment'
-                                type: array
-                        application/xml:
-                            schema:
-                                items:
-                                    $ref: '#/components/schemas/Attachment'
-                                type: array
-                    description: Successful operation
-                401:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                        application/xml:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
-                404:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                        application/xml:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
-                500:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                        application/xml:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                    description: Unexpected error
-            security:
-                - BasicAuth: []
-                - BearerAuth: []
-                - OAuth2:
-                      - HeadlessCommerceAdminCatalog.read
-            summary: Gets a list of Attachments related to a Product.
-            tags:
-                - Attachment
-        post:
-            operationId: postProductByExternalReferenceCodeexternalReferenceCodeAttachment
-            parameters:
-                - in: path
-                  explode: false
-                  name: externalReferenceCode
-                  required: true
-                  schema:
-                      description: The resource external reference code
-                      example: AB-34098-789-N
-                      minLength: 1
-                      type: string
-                  style: simple
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/Attachment'
-                    application/xml:
-                        schema:
-                            $ref: '#/components/schemas/Attachment'
-                required: true
-            responses:
-                201:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Attachment'
-                        application/xml:
-                            schema:
-                                $ref: '#/components/schemas/Attachment'
-                    description: Created
-                202:
-                    description: Accepted - Async
-                204:
-                    description: Updated
-                400:
-                    description: Invalid input
-                401:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                        application/xml:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
-                404:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                        application/xml:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
-                500:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                        application/xml:
-                            schema:
-                                $ref: '#/components/schemas/Error'
-                    description: Unexpected error
-            security:
-                - BasicAuth: []
-                - BearerAuth: []
-                - OAuth2:
-                      - HeadlessCommerceAdminCatalog.write
-            summary: Creates or updates a Attachment related to a Product.
-            tags:
-                - Attachment
     /products/{id}/attachments/:
         get:
             operationId: getProductIdAttachmentsPage
