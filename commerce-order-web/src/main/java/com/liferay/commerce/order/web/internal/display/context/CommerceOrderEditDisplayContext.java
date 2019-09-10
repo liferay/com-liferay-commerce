@@ -151,45 +151,6 @@ public class CommerceOrderEditDisplayContext {
 		return _commerceOrderItem;
 	}
 
-	public List<StepModel> getOrderSteps() throws PortalException {
-
-		List stepList = new ArrayList<>();
-
-		StepModel step1 = new StepModel();
-		StepModel step2 = new StepModel();
-		StepModel step3 = new StepModel();
-		StepModel step4 = new StepModel();
-		StepModel step5 = new StepModel();
-
-		step1.setId("received");
-		step1.setLabel("Received");
-		step1.setState("completed");
-
-		step2.setId("confirmed");
-		step2.setLabel("Confirmed");
-		step2.setState("active");
-
-		step3.setId("trasmitted");
-		step3.setLabel("Trasmitted");
-		step3.setState("inactive");
-
-		step4.setId("shipped");
-		step4.setLabel("Shipped");
-		step4.setState("inactive");
-
-		step5.setId("completed");
-		step5.setLabel("Completed");
-		step5.setState("inactive");
-
-		stepList.add(step1);
-		stepList.add(step2);
-		stepList.add(step3);
-		stepList.add(step4);
-		stepList.add(step5);
-
-		return stepList;
-	}
-
 	public PortletURL getCommerceOrderItemsPortletURL() throws PortalException {
 		LiferayPortletResponse liferayPortletResponse =
 			_commerceOrderRequestHelper.getLiferayPortletResponse();
@@ -376,6 +337,44 @@ public class CommerceOrderEditDisplayContext {
 			cpInstanceItemSelectorCriterion);
 
 		return itemSelectorURL.toString();
+	}
+
+	public List<StepModel> getOrderSteps() throws PortalException {
+		List stepList = new ArrayList<>();
+
+		StepModel step1 = new StepModel();
+		StepModel step2 = new StepModel();
+		StepModel step3 = new StepModel();
+		StepModel step4 = new StepModel();
+		StepModel step5 = new StepModel();
+
+		step1.setId("received");
+		step1.setLabel("Received");
+		step1.setState("completed");
+
+		step2.setId("confirmed");
+		step2.setLabel("Confirmed");
+		step2.setState("active");
+
+		step3.setId("trasmitted");
+		step3.setLabel("Trasmitted");
+		step3.setState("inactive");
+
+		step4.setId("shipped");
+		step4.setLabel("Shipped");
+		step4.setState("inactive");
+
+		step5.setId("completed");
+		step5.setLabel("Completed");
+		step5.setState("inactive");
+
+		stepList.add(step1);
+		stepList.add(step2);
+		stepList.add(step3);
+		stepList.add(step4);
+		stepList.add(step5);
+
+		return stepList;
 	}
 
 	private final CommerceOrder _commerceOrder;

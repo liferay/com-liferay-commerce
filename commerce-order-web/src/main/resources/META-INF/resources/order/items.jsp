@@ -37,6 +37,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 	triggerId="billing-modal-id"
 	url="<%= editURL %>"
 />
+
 <commerce-ui:modal
 	closeOnSubmit="<%= true %>"
 	showCancel="<%= true %>"
@@ -46,39 +47,39 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 	triggerId="shipping-modal-id"
 	url="<%= editURL %>"
 />
+
 <commerce-ui:modal
-		closeOnSubmit="<%= true %>"
-		showCancel="<%= true %>"
-		showSubmit="<%= true %>"
-		size="lg"
-		title="Purchase order number"
-		triggerId="purchase-modal-id"
-		url="<%= editURL %>"
-/>
-<commerce-ui:modal
-		closeOnSubmit="<%= true %>"
-		showCancel="<%= true %>"
-		showSubmit="<%= true %>"
-		size="lg"
-		title="Request delivery date"
-		triggerId="request-delivery-id"
-		url="<%= editURL %>"
+	closeOnSubmit="<%= true %>"
+	showCancel="<%= true %>"
+	showSubmit="<%= true %>"
+	size="lg"
+	title="Purchase order number"
+	triggerId="purchase-modal-id"
+	url="<%= editURL %>"
 />
 
+<commerce-ui:modal
+	closeOnSubmit="<%= true %>"
+	showCancel="<%= true %>"
+	showSubmit="<%= true %>"
+	size="lg"
+	title="Request delivery date"
+	triggerId="request-delivery-id"
+	url="<%= editURL %>"
+/>
 
 <div class="container">
-
 	<div class="col-12 mb-4">
-		<commerce-ui:step-tracker 
+		<commerce-ui:step-tracker
 			steps="<%= commerceOrderEditDisplayContext.getOrderSteps() %>"
 		/>
 	</div>
 
 	<div class="col-12">
 		<commerce-ui:panel
+			bodyClasses="pb-0"
 			elementClasses="flex-fill"
 			headerActionUrl="<%= editURL %>"
-			bodyClasses="pb-0"
 			title="info"
 		>
 			<div class="row vertically-divided">
@@ -87,42 +88,51 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 						<div class="flex">
 							<h4>Billing address</h4>
 						</div>
+
 						<div class="description">
 							PO Box 467 New York NY 10002
 						</div>
 					</div>
+
 					<div class="info-box mb-3">
 						<div class="flex">
 							<h4>Billing address</h4>
 						</div>
-						<div class="description">
-							PO Box 467 New York NY 10002
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="info-box mb-3">
-						<div class="flex">
-							<h4>Billing address</h4>
-						</div>
-						<div class="description">
-							PO Box 467 New York NY 10002
-						</div>
-					</div>
-					<div class="info-box mb-3">
-						<div class="flex">
-							<h4>Billing address</h4>
-						</div>
+
 						<div class="description">
 							PO Box 467 New York NY 10002
 						</div>
 					</div>
 				</div>
+
 				<div class="col-md-4">
 					<div class="info-box mb-3">
 						<div class="flex">
 							<h4>Billing address</h4>
 						</div>
+
+						<div class="description">
+							PO Box 467 New York NY 10002
+						</div>
+					</div>
+
+					<div class="info-box mb-3">
+						<div class="flex">
+							<h4>Billing address</h4>
+						</div>
+
+						<div class="description">
+							PO Box 467 New York NY 10002
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-4">
+					<div class="info-box mb-3">
+						<div class="flex">
+							<h4>Billing address</h4>
+						</div>
+
 						<div class="description">
 							PO Box 467 New York NY 10002
 						</div>
