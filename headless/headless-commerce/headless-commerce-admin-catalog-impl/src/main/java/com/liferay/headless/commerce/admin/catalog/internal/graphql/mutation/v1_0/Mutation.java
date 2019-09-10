@@ -278,20 +278,17 @@ public class Mutation {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Attachment
-			postProductByExternalReferenceCodeexternalReferenceCodeAttachment(
-				@GraphQLName("externalReferenceCode") String
-					externalReferenceCode,
-				@GraphQLName("attachment") Attachment attachment)
+	public Attachment postProductByExternalReferenceCodeAttachment(
+			@GraphQLName("externalReferenceCode") String externalReferenceCode,
+			@GraphQLName("attachment") Attachment attachment)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
 			_attachmentResourceComponentServiceObjects,
 			this::_populateResourceContext,
 			attachmentResource ->
-				attachmentResource.
-					postProductByExternalReferenceCodeexternalReferenceCodeAttachment(
-						externalReferenceCode, attachment));
+				attachmentResource.postProductByExternalReferenceCodeAttachment(
+					externalReferenceCode, attachment));
 	}
 
 	@GraphQLField

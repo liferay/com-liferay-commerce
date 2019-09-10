@@ -60,14 +60,12 @@ public interface AttachmentResource {
 	public Attachment postProductIdAttachment(Long id, Attachment attachment)
 		throws Exception;
 
-	public Page<Attachment>
-			getProductByExternalReferenceCodeexternalReferenceCodeAttachmentsPage(
-				String externalReferenceCode, Pagination pagination)
+	public Page<Attachment> getProductByExternalReferenceCodeAttachmentsPage(
+			String externalReferenceCode, Pagination pagination)
 		throws Exception;
 
-	public Attachment
-			postProductByExternalReferenceCodeexternalReferenceCodeAttachment(
-				String externalReferenceCode, Attachment attachment)
+	public Attachment postProductByExternalReferenceCodeAttachment(
+			String externalReferenceCode, Attachment attachment)
 		throws Exception;
 
 	public Page<Attachment> getProductIdImagesPage(
