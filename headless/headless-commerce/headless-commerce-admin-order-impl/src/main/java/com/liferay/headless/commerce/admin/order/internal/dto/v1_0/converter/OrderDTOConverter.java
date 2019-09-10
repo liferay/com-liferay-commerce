@@ -82,6 +82,7 @@ public class OrderDTOConverter implements DTOConverter {
 				billingAddressId = commerceOrder.getBillingAddressId();
 				channelId = commerceChannel.getCommerceChannelId();
 				couponCode = commerceOrder.getCouponCode();
+				createDate = commerceOrder.getCreateDate();
 				currencyCode = commerceCurrency.getName(
 					dtoConverterContext.getLocale());
 				customFields = expandoBridge.getAttributes();
@@ -90,6 +91,7 @@ public class OrderDTOConverter implements DTOConverter {
 				id = commerceOrder.getCommerceAccountId();
 				items = _getOrderItems(commerceOrder, dtoConverterContext);
 				lastPriceUpdateDate = commerceOrder.getLastPriceUpdateDate();
+				modifiedDate = commerceOrder.getModifiedDate();
 				orderStatus = commerceOrder.getOrderStatus();
 				paymentMethod = commerceOrder.getCommercePaymentMethodKey();
 				paymentStatus = commerceOrder.getPaymentStatus();
