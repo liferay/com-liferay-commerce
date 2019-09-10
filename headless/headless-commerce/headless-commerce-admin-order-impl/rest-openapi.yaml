@@ -110,6 +110,10 @@ components:
                 couponCode:
                     example: save20
                     type: string
+                createDate:
+                    example: 2017-07-21
+                    format: date
+                    type: string
                 currencyCode:
                     example: USD
                     type: string
@@ -129,6 +133,11 @@ components:
                         $ref: '#/components/schemas/OrderItem'
                     type: array
                 lastPriceUpdateDate:
+                    example: 2017-07-21
+                    format: date
+                    type: string
+                modifiedDate:
+                    example: 2017-08-21
                     format: date
                     type: string
                 orderStatus:
@@ -151,6 +160,7 @@ components:
                     example: Abcd1234
                     type: string
                 requestedDeliveryDate:
+                    example: 2017-07-21
                     format: date
                     type: string
                 shippingAddress:
@@ -343,6 +353,7 @@ components:
                     minimum: 0
                     type: integer
                 requestedDeliveryDate:
+                    example: 2017-07-21
                     format: date
                     type: string
                 shippedQuantity:
@@ -478,6 +489,9 @@ info:
         email: team-commerce@liferay.com
         name: Commerce Team
     description: Liferay Commerce Admin Order API
+    license:
+        name: GNU Lesser General Public License 2.1
+        url: https://www.gnu.org/licenses/lgpl-2.1.html
     title: Liferay Commerce Admin Order API
     version: v1.0
 openapi: 3.0.0
