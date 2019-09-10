@@ -1,30 +1,30 @@
 import launcher from './entry.es';
 import './step-tracker.scss';
 
-window.AddOrCreate = launcher('stepTracker', 'step-tracker', {
+window.AddOrCreate = launcher('step_tracker', 'step-tracker', {
 	steps: [
 		{
-			slug: 'received',
+			id: 'received',
 			label: 'Received',
 			state: 'completed',
 		},
 		{
-			slug: 'confirmed',
+			id: 'confirmed',
 			label: 'Confirmed',
 			state: 'active',
 		},
 		{
-			slug: 'trasmitted',
+			id: 'trasmitted',
 			label: 'Trasmitted',
 			state: 'inactive',
 		},
 		{
-			slug: 'shipped',
+			id: 'shipped',
 			label: 'Shipped',
 			state: 'inactive',
 		},
 		{
-			slug: 'completed',
+			id: 'completed',
 			label: 'Completed',
 			state: 'inactive',
 		},

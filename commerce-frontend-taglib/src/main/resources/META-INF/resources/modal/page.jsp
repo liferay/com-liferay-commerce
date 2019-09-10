@@ -40,12 +40,15 @@
 		}
 	);
 
-	document.getElementById('<%= triggerId %>')
-		.addEventListener(
+	const modalTrigger = document.getElementById('<%= triggerId %>')
+
+	if(modalTrigger) {
+		modalTrigger.addEventListener(
 			'click',
 			(e) => {
 				e.preventDefault();
 				Liferay.fire("<%= modalId %>-open");
 			}
-	);
+		);
+	}
 </aui:script>

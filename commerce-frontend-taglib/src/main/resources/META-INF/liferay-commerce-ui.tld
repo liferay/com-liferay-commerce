@@ -26,6 +26,21 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>step-tracker</name>
+		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.StepTrackerTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>spritemap</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>steps</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<description><![CDATA[Creates a configurable header.]]></description>
 		<name>header</name>
 		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.HeaderTag</tag-class>
