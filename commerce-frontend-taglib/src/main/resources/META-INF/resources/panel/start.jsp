@@ -18,6 +18,7 @@
 
 <%
 	String cardCssClasses = "card d-flex" + (Validator.isNotNull(elementClasses) ? " " + elementClasses : "");
+	String bodyCssClasses = "card-body" + (Validator.isNotNull(bodyClasses) ? " " + bodyClasses : "");
 %>
 
 <div class="<%= cardCssClasses %>">
@@ -45,4 +46,4 @@
 		</div>
 	</c:if>
 
-	<div class="card-body">
+	<div class="<%= bodyCssClasses %>">
