@@ -16,6 +16,8 @@ package com.liferay.commerce.internal.search;
 
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
+import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -98,12 +100,18 @@ public class CommerceOrderIndexer extends BaseIndexer<CommerceOrder> {
 
 		Document document = getBaseModelDocument(CLASS_NAME, commerceOrder);
 
+		CommerceChannel commerceChannel =
+			_commerceChannelLocalService.getCommerceChannelByOrderGroupId(
+				commerceOrder.getGroupId());
+
 		document.addNumberSortable(
 			Field.ENTRY_CLASS_PK, commerceOrder.getCommerceOrderId());
 		document.addKeyword(Field.STATUS, commerceOrder.getStatus());
 		document.addKeyword("advanceStatus", commerceOrder.getAdvanceStatus());
 		document.addKeyword(
 			"commerceAccountId", commerceOrder.getCommerceAccountId());
+		document.addKeyword(
+			"commerceChannelId", commerceChannel.getCommerceChannelId());
 		document.addNumber("itemsQuantity", getItemsQuantity(commerceOrder));
 		document.addKeyword("orderStatus", commerceOrder.getOrderStatus());
 		document.addKeyword(
@@ -199,6 +207,9 @@ public class CommerceOrderIndexer extends BaseIndexer<CommerceOrder> {
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceOrderIndexer.class);
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private CommerceOrderLocalService _commerceOrderLocalService;
