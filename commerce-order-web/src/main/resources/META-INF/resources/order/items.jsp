@@ -31,7 +31,6 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 <div class="container">
 	<div class="row">
 		<div class="col-md-4 d-flex">
-			<!-- modal -->
 			<commerce-ui:modal
 				closeOnSubmit="<%= true %>"
 				showCancel="<%= true %>"
@@ -41,7 +40,6 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 				triggerId="shipping-modal-id"
 				url="<%= editURL %>"
 			/>
-			<!-- / modal -->
 			<commerce-ui:panel
 				elementClasses="flex-fill"
 				headerActionId="shipping-modal-id"
