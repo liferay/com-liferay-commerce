@@ -24,7 +24,7 @@ function Step(props) {
 function StepTracker(props) {
 	return (
 		<div className="step-tracker rounded">
-			{props.steps.map(step => <Step key={step.slug} label={step.label} state={step.state} />)}
+			{props.steps.map(step => <Step key={step.id} label={step.label} state={step.state} />)}
 		</div>
 	);
 }

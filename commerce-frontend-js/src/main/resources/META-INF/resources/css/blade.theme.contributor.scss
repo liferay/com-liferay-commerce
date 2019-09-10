@@ -1,0 +1,23 @@
+@import "bourbon";
+@import "mixins";
+
+@import "../js/add_or_create/add-or-create";
+@import "../js/side_panel/side_panel";
+@import "../js/step_tracker/step-tracker";
+
+
+.vertically-divided {
+  overflow: hidden;
+
+  & > [class*="col"] {
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: 10;
+      border-right: 1px solid grey;
+      top: 0;
+      bottom: 0;
+      right: -1px;
+    }
+  }
+}
