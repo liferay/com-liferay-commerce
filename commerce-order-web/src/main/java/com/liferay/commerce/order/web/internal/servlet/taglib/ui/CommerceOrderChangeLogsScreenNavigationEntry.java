@@ -19,11 +19,7 @@ import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationCategory;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
-import com.liferay.taglib.util.CustomAttributesUtil;
 
 import java.io.IOException;
 
@@ -37,22 +33,22 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 /**
- * @author Alec Sloan
+ * @author Alessio Antonio Rendina
  */
 @Component(
 	property = {
-		"screen.navigation.category.order:Integer=100",
+		"screen.navigation.category.order:Integer=60",
 		"screen.navigation.entry.order:Integer=10"
 	},
 	service = {ScreenNavigationCategory.class, ScreenNavigationEntry.class}
 )
-public class CommerceOrderCustomFieldsScreenNavigationEntry
+public class CommerceOrderChangeLogsScreenNavigationEntry
 	implements ScreenNavigationCategory, ScreenNavigationEntry<CommerceOrder> {
 
 	@Override
 	public String getCategoryKey() {
 		return CommerceOrderScreenNavigationConstants.
-			CATEGORY_KEY_COMMERCE_ORDER_CUSTOM_FIELDS;
+			CATEGORY_KEY_COMMERCE_ORDER_CHANGE_LOGS;
 	}
 
 	@Override
@@ -75,37 +71,14 @@ public class CommerceOrderCustomFieldsScreenNavigationEntry
 	}
 
 	@Override
-	public boolean isVisible(User user, CommerceOrder commerceOrder) {
-		boolean hasCustomAttributesAvailable = false;
-
-		try {
-			hasCustomAttributesAvailable =
-				CustomAttributesUtil.hasCustomAttributes(
-					user.getCompanyId(), CommerceOrder.class.getName(),
-					commerceOrder.getCommerceOrderId(), null);
-		}
-		catch (Exception e) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(e, e);
-			}
-		}
-
-		return hasCustomAttributesAvailable;
-	}
-
-	@Override
 	public void render(
 			HttpServletRequest httpServletRequest,
 			HttpServletResponse httpServletResponse)
 		throws IOException {
 
 		_jspRenderer.renderJSP(
-			httpServletRequest, httpServletResponse,
-			"/order/custom_fields.jsp");
+			httpServletRequest, httpServletResponse, "/order/change_logs.jsp");
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		CommerceOrderCustomFieldsScreenNavigationEntry.class);
 
 	@Reference
 	private JSPRenderer _jspRenderer;
