@@ -33,6 +33,7 @@ import com.liferay.commerce.exception.CommerceOrderShippingMethodException;
 import com.liferay.commerce.exception.CommerceOrderStatusException;
 import com.liferay.commerce.exception.CommercePaymentEngineException;
 import com.liferay.commerce.exception.GuestCartMaxAllowedException;
+import com.liferay.commerce.internal.order.comparator.CommerceOrderModifiedDateComparator;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
@@ -524,7 +525,8 @@ public class CommerceOrderLocalServiceImpl
 		long commerceAccountId, long groupId, int orderStatus) {
 
 		return commerceOrderPersistence.fetchByG_C_O_First(
-			groupId, commerceAccountId, orderStatus, null);
+			groupId, commerceAccountId, orderStatus,
+			new CommerceOrderModifiedDateComparator());
 	}
 
 	@Override
