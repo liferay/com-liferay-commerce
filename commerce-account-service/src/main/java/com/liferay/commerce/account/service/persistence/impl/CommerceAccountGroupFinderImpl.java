@@ -15,15 +15,16 @@
 package com.liferay.commerce.account.service.persistence.impl;
 
 import com.liferay.commerce.account.service.persistence.CommerceAccountGroupFinder;
-import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.dao.orm.custom.sql.CustomSQL;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,6 +42,10 @@ public class CommerceAccountGroupFinderImpl
 	public List<Long> findAccountUserIdsFromAccountGroupIds(
 		long[] commerceAccountGroupIds, int start, int end) {
 
+		if (ArrayUtil.isEmpty(commerceAccountGroupIds)) {
+			return new ArrayList<>();
+		}
+
 		Session session = null;
 
 		try {
@@ -49,7 +54,9 @@ public class CommerceAccountGroupFinderImpl
 			String sql = _customSQL.get(
 				getClass(), FIND_ACCOUNT_USER_IDS_FROM_ACCOUNT_GROUP_IDS);
 
-			sql = replaceAccountGroupIds(sql, commerceAccountGroupIds);
+			sql = StringUtil.replace(
+				sql, "[$ACCOUNT_GROUP_IDS$]",
+				StringUtil.merge(commerceAccountGroupIds));
 
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
@@ -61,22 +68,6 @@ public class CommerceAccountGroupFinderImpl
 		finally {
 			closeSession(session);
 		}
-	}
-
-	protected String replaceAccountGroupIds(
-		String sql, long[] accountGroupIds) {
-
-		StringBundler sb = new StringBundler(accountGroupIds.length);
-
-		for (int i = 0; i < accountGroupIds.length; i++) {
-			sb.append(accountGroupIds[i]);
-
-			if (i != (accountGroupIds.length - 1)) {
-				sb.append(", ");
-			}
-		}
-
-		return StringUtil.replace(sql, "[$ACCOUNT_GROUP_IDS$]", sb.toString());
 	}
 
 	@ServiceReference(type = CustomSQL.class)
