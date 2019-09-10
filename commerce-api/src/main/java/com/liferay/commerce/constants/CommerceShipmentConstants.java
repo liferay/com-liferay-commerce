@@ -20,9 +20,12 @@ package com.liferay.commerce.constants;
 public class CommerceShipmentConstants {
 
 	public static final int[] ALLOWED_ORDER_STATUSES = {
-		CommerceOrderConstants.ORDER_STATUS_TO_TRANSMIT,
+		CommerceOrderConstants.ORDER_STATUS_TRANSMITTED,
+		CommerceOrderConstants.ORDER_STATUS_AWAITING_FULFILLMENT,
 		CommerceOrderConstants.ORDER_STATUS_AWAITING_SHIPMENT,
-		CommerceOrderConstants.ORDER_STATUS_PARTIALLY_SHIPPED
+		CommerceOrderConstants.ORDER_STATUS_PARTIALLY_REFUNDED,
+		CommerceOrderConstants.ORDER_STATUS_PARTIALLY_SHIPPED,
+		CommerceOrderConstants.ORDER_STATUS_DISPUTED
 	};
 
 	public static final int SHIPMENT_STATUS_DELIVERED = 3;

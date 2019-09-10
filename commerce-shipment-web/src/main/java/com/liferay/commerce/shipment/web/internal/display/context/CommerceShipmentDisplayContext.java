@@ -37,12 +37,14 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
+import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.QueryConfig;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.util.Collections;
 import java.util.List;
@@ -285,6 +287,9 @@ public class CommerceShipmentDisplayContext
 
 		searchContext.setAttribute(
 			"useSearchResultPermissionFilter", Boolean.FALSE);
+
+		searchContext.setAttribute(
+			Field.STATUS, WorkflowConstants.STATUS_APPROVED);
 
 		searchContext.setCompanyId(cpRequestHelper.getCompanyId());
 		searchContext.setStart(QueryUtil.ALL_POS);
