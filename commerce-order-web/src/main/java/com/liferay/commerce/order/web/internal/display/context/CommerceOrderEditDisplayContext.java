@@ -15,6 +15,7 @@
 package com.liferay.commerce.order.web.internal.display.context;
 
 import com.liferay.commerce.frontend.model.HeaderButtonModel;
+import com.liferay.commerce.frontend.model.StepModel;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceOrderNote;
@@ -63,6 +64,7 @@ import javax.portlet.RenderRequest;
 /**
  * @author Andrea Di Giorgi
  * @author Luca Pellizzon
+ * @author Fabio Diego Mastrorilli
  */
 public class CommerceOrderEditDisplayContext {
 
@@ -147,6 +149,45 @@ public class CommerceOrderEditDisplayContext {
 		}
 
 		return _commerceOrderItem;
+	}
+
+	public List<StepModel> getOrderSteps() throws PortalException {
+
+		List stepList = new ArrayList<>();
+
+		StepModel step1 = new StepModel();
+		StepModel step2 = new StepModel();
+		StepModel step3 = new StepModel();
+		StepModel step4 = new StepModel();
+		StepModel step5 = new StepModel();
+
+		step1.setId("received");
+		step1.setLabel("Received");
+		step1.setState("completed");
+
+		step2.setId("confirmed");
+		step2.setLabel("Confirmed");
+		step2.setState("active");
+
+		step3.setId("trasmitted");
+		step3.setLabel("Trasmitted");
+		step3.setState("inactive");
+
+		step4.setId("shipped");
+		step4.setLabel("Shipped");
+		step4.setState("inactive");
+
+		step5.setId("completed");
+		step5.setLabel("Completed");
+		step5.setState("inactive");
+
+		stepList.add(step1);
+		stepList.add(step2);
+		stepList.add(step3);
+		stepList.add(step4);
+		stepList.add(step5);
+
+		return stepList;
 	}
 
 	public PortletURL getCommerceOrderItemsPortletURL() throws PortalException {
