@@ -1,5 +1,7 @@
-<%@ page import="com.liferay.portal.kernel.json.JSONSerializer" %>
-<%@ page import="com.liferay.portal.kernel.json.JSONFactoryUtil" %><%--
+<%@ page import="com.liferay.portal.kernel.json.JSONFactoryUtil" %><%@
+page import="com.liferay.portal.kernel.json.JSONSerializer" %>
+
+<%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
@@ -18,10 +20,10 @@
 <%@ include file="/step_tracker/init.jsp" %>
 
 <%
-	String spritemap = (String)request.getAttribute("liferay-commerce:step-tracker:spritemap");
-	List<StepModel> steps = (List<StepModel>)request.getAttribute("liferay-commerce:step-tracker:steps");
-	String stepTrackerId = randomNamespace + "step-tracker-id";
-    JSONSerializer jsonSerializer = JSONFactoryUtil.createJSONSerializer();
+String spritemap = (String)request.getAttribute("liferay-commerce:step-tracker:spritemap");
+List<StepModel> steps = (List<StepModel>)request.getAttribute("liferay-commerce:step-tracker:steps");
+String stepTrackerId = randomNamespace + "step-tracker-id";
+JSONSerializer jsonSerializer = JSONFactoryUtil.createJSONSerializer();
 %>
 
 <div class="step-tracker-root" id="<%= stepTrackerId %>"></div>

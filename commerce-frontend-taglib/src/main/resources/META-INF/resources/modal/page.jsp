@@ -42,7 +42,7 @@
 
 	const modalTrigger = document.getElementById('<%= triggerId %>')
 
-	if(modalTrigger) {
+	if (modalTrigger) {
 		modalTrigger.addEventListener(
 			'click',
 			(e) => {
