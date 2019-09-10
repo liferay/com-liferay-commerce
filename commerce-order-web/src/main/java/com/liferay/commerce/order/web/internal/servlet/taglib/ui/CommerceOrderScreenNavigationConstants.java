@@ -20,10 +20,18 @@ package com.liferay.commerce.order.web.internal.servlet.taglib.ui;
  */
 public class CommerceOrderScreenNavigationConstants {
 
+	public static final String CATEGORY_KEY_COMMERCE_ORDER_ATTACHMENTS =
+		"attachments";
+
 	public static final String CATEGORY_KEY_COMMERCE_ORDER_BILLING = "billing";
+
+	public static final String CATEGORY_KEY_COMMERCE_ORDER_CHANGE_LOGS =
+		"change-logs";
 
 	public static final String CATEGORY_KEY_COMMERCE_ORDER_CUSTOM_FIELDS =
 		"custom-fields";
+
+	public static final String CATEGORY_KEY_COMMERCE_ORDER_EMAILS = "emails";
 
 	public static final String CATEGORY_KEY_COMMERCE_ORDER_ITEM_DETAIL =
 		"detail";
