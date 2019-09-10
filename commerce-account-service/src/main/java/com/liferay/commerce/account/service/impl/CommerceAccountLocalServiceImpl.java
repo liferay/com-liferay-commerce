@@ -796,28 +796,28 @@ public class CommerceAccountLocalServiceImpl
 			commerceAccountPersistence.fetchByC_ERC(
 				companyId, externalReferenceCode);
 
-		if ((commerceAccount != null) &&
-			(commerceAccount.getCommerceAccountId() != commerceAccountId)) {
+		if (commerceAccount != null) {
+			if (commerceAccount.getCommerceAccountId() != commerceAccountId) {
+				throw new DuplicateCommerceAccountException(
+					"There is another commerce account with external " +
+						"reference code " + externalReferenceCode);
+			}
 
-			throw new DuplicateCommerceAccountException(
-				"There is another commerce account with external reference " +
-					"code " + externalReferenceCode);
-		}
+			if ((commerceAccount.getDefaultBillingAddressId() != 0) &&
+				(defaultBillingAddressId != 0) &&
+				(commerceAccount.getDefaultBillingAddressId() !=
+					defaultBillingAddressId)) {
 
-		if ((commerceAccount.getDefaultBillingAddressId() != 0) &&
-			(defaultBillingAddressId != 0) &&
-			(commerceAccount.getDefaultBillingAddressId() !=
-				defaultBillingAddressId)) {
+				throw new CommerceAccountDefaultBillingAddressException();
+			}
 
-			throw new CommerceAccountDefaultBillingAddressException();
-		}
+			if ((commerceAccount.getDefaultBillingAddressId() != 0) &&
+				(defaultShippingAddressId != 0) &&
+				(commerceAccount.getDefaultBillingAddressId() !=
+					defaultShippingAddressId)) {
 
-		if ((commerceAccount.getDefaultBillingAddressId() != 0) &&
-			(defaultShippingAddressId != 0) &&
-			(commerceAccount.getDefaultBillingAddressId() !=
-				defaultShippingAddressId)) {
-
-			throw new CommerceAccountDefaultShippingAddressException();
+				throw new CommerceAccountDefaultShippingAddressException();
+			}
 		}
 	}
 
