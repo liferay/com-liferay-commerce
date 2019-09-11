@@ -34,7 +34,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 	showSubmit="<%= true %>"
 	size="lg"
 	title="Billing address"
-	triggerId="billing-modal-id"
+	id="billing-modal"
 	url="<%= editURL %>"
 />
 
@@ -44,7 +44,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 	showSubmit="<%= true %>"
 	size="lg"
 	title="Shipping address"
-	triggerId="shipping-modal-id"
+	id="shipping-modal"
 	url="<%= editURL %>"
 />
 
@@ -54,7 +54,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 	showSubmit="<%= true %>"
 	size="lg"
 	title="Purchase order number"
-	triggerId="purchase-modal-id"
+	id="purchase-order-number-modal"
 	url="<%= editURL %>"
 />
 
@@ -63,8 +63,18 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 	showCancel="<%= true %>"
 	showSubmit="<%= true %>"
 	size="lg"
-	title="Request delivery date"
-	triggerId="request-delivery-id"
+	title="Requested delivery date"
+	id="requested-delivery-modal"
+	url="<%= editURL %>"
+/>
+
+<commerce-ui:modal
+	closeOnSubmit="<%= true %>"
+	showCancel="<%= true %>"
+	showSubmit="<%= true %>"
+	size="lg"
+	title="Order notes"
+	id="order-notes-modal"
 	url="<%= editURL %>"
 />
 
@@ -77,66 +87,60 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 
 	<div class="col-12">
 		<commerce-ui:panel
-			bodyClasses="pb-0"
 			elementClasses="flex-fill"
 			headerActionUrl="<%= editURL %>"
 			title="info"
 		>
 			<div class="row vertically-divided">
 				<div class="col-md-4">
-					<div class="info-box mb-3">
-						<div class="flex">
-							<h4>Billing address</h4>
-						</div>
+					<commerce-ui:info-box
+						elementClasses="py-3"
+						title="Billing address"
+						actionTargetId="billing-modal"
+						actionLabel="edit"
+					>
+						PO Box 467 New York NY 10002
+					</commerce-ui:info-box>
 
-						<div class="description">
-							PO Box 467 New York NY 10002
-						</div>
-					</div>
-
-					<div class="info-box mb-3">
-						<div class="flex">
-							<h4>Billing address</h4>
-						</div>
-
-						<div class="description">
-							PO Box 467 New York NY 10002
-						</div>
-					</div>
+					<commerce-ui:info-box
+							elementClasses="py-3"
+							title="Shipping address"
+							actionTargetId="shipping-modal"
+							actionLabel="edit"
+					>
+						PO Box 467 New York NY 10002
+					</commerce-ui:info-box>
 				</div>
 
 				<div class="col-md-4">
-					<div class="info-box mb-3">
-						<div class="flex">
-							<h4>Billing address</h4>
-						</div>
+					<commerce-ui:info-box
+							elementClasses="py-3"
+							title="Purchase Order Number"
+							actionTargetId="purchase-order-number-modal"
+							actionLabel="edit"
+					>
+						#56731451
+					</commerce-ui:info-box>
 
-						<div class="description">
-							PO Box 467 New York NY 10002
-						</div>
-					</div>
-
-					<div class="info-box mb-3">
-						<div class="flex">
-							<h4>Billing address</h4>
-						</div>
-
-						<div class="description">
-							PO Box 467 New York NY 10002
-						</div>
-					</div>
+					<commerce-ui:info-box
+							elementClasses="py-3"
+							title="Requested delivery date"
+							actionTargetId="purchase-order-number-modal"
+							actionLabel="edit"
+					>
+						Aug 24, 2019
+					</commerce-ui:info-box>
 				</div>
 
 				<div class="col-md-4">
-					<div class="info-box mb-3">
-						<div class="flex">
-							<h4>Billing address</h4>
-						</div>
-
-						<div class="description">
-							PO Box 467 New York NY 10002
-						</div>
-					</div>
+					<commerce-ui:info-box
+							elementClasses="py-3"
+							title="Order notes"
+							actionTargetId="order-notes-modal"
+							actionLabel="edit"
+					>
+						Cras ultricies ligula sed magna dictum porta. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.
+					</commerce-ui:info-box>
 				</div>
 			</div>
 		</commerce-ui:panel>
