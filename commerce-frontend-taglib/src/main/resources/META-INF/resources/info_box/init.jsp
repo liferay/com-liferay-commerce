@@ -18,10 +18,11 @@
 
 <%@ taglib uri="http://liferay.com/tld/clay" prefix="clay" %><%@
 taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.HashMap" %>
 
 <%@ page import="com.liferay.portal.kernel.util.Validator" %>
+
+<%@ page import="java.util.HashMap" %><%@
+page import="java.util.Map" %>
 
 <liferay-theme:defineObjects />
 

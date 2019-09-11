@@ -24,19 +24,19 @@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 <liferay-theme:defineObjects />
 
 <%
-	String title = (String)request.getAttribute("liferay-commerce:panel:title");
-	String headerActionUrl = (String)request.getAttribute("liferay-commerce:panel:headerActionUrl");
-	String headerActionLabel = (String)request.getAttribute("liferay-commerce:panel:headerActionLabel");
-	String headerActionIcon = (String)request.getAttribute("liferay-commerce:panel:headerActionIcon");
-	String headerActionId = (String)request.getAttribute("liferay-commerce:panel:headerActionId");
-	String showMoreId = (String)request.getAttribute("liferay-commerce:panel:showMoreId");
-	String showMoreUrl = (String)request.getAttribute("liferay-commerce:panel:showMoreUrl");
+String title = (String)request.getAttribute("liferay-commerce:panel:title");
+String headerActionUrl = (String)request.getAttribute("liferay-commerce:panel:headerActionUrl");
+String headerActionLabel = (String)request.getAttribute("liferay-commerce:panel:headerActionLabel");
+String headerActionIcon = (String)request.getAttribute("liferay-commerce:panel:headerActionIcon");
+String headerActionId = (String)request.getAttribute("liferay-commerce:panel:headerActionId");
+String showMoreId = (String)request.getAttribute("liferay-commerce:panel:showMoreId");
+String showMoreUrl = (String)request.getAttribute("liferay-commerce:panel:showMoreUrl");
 
-	String elementClasses = (String)request.getAttribute("liferay-commerce:panel:elementClasses");
-	String bodyClasses = (String)request.getAttribute("liferay-commerce:panel:bodyClasses");
-	String randomNamespace = (String)request.getAttribute("liferay-commerce:panel:randomNamespace");
+String elementClasses = (String)request.getAttribute("liferay-commerce:panel:elementClasses");
+String bodyClasses = (String)request.getAttribute("liferay-commerce:panel:bodyClasses");
+String randomNamespace = (String)request.getAttribute("liferay-commerce:panel:randomNamespace");
 
-	String headerActionLinkId = Validator.isNotNull(headerActionId) ? headerActionId : (randomNamespace + "header-link");
-	String showMoreButtonId = Validator.isNotNull(showMoreId) ? showMoreId : (randomNamespace + "show-more-button");
-	String showMoreButtonWrapperId = randomNamespace + "show-more-button-wrapper";
+String headerActionLinkId = Validator.isNotNull(headerActionId) ? headerActionId : (randomNamespace + "header-link");
+String showMoreButtonId = Validator.isNotNull(showMoreId) ? showMoreId : (randomNamespace + "show-more-button");
+String showMoreButtonWrapperId = randomNamespace + "show-more-button-wrapper";
 %>

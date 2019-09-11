@@ -53,7 +53,7 @@
 
 			<clay:button
 				elementClasses="ml-3"
-				label="refound"
+				label="refund"
 				style="secondary"
 			/>
 		</commerce-ui:panel>
