@@ -1,5 +1,3 @@
-<%@ include file="/header/init.jsp" %>
-
 <%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
@@ -15,6 +13,8 @@
  * details.
  */
 --%>
+
+<%@ include file="/header/init.jsp" %>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="liferay-ui" %>
 

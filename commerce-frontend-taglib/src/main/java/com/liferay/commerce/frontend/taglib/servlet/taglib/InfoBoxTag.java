@@ -15,13 +15,6 @@
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
 import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
-import com.liferay.petra.string.StringPool;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.PortalUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.jsp.JspException;
@@ -43,10 +36,6 @@ public class InfoBoxTag extends IncludeTag {
 	public int doStartTag() throws JspException {
 		setAttributeNamespace(_ATTRIBUTE_NAMESPACE);
 
-		String randomNamespace =
-			PortalUtil.generateRandomKey(request, "commerce_panel") +
-				StringPool.UNDERLINE;
-
 		setNamespacedAttribute(request, "elementClasses", _elementClasses);
 		setNamespacedAttribute(request, "title", _title);
 		setNamespacedAttribute(request, "actionTargetId", _actionTargetId);
@@ -58,30 +47,41 @@ public class InfoBoxTag extends IncludeTag {
 		return EVAL_BODY_INCLUDE;
 	}
 
+	public String getActionLabel() {
+		return _actionLabel;
+	}
+
+	public String getActionTargetId() {
+		return _actionTargetId;
+	}
+
+	public String getActionUrl() {
+		return _actionUrl;
+	}
+
 	public String getElementClasses() {
 		return _elementClasses;
 	}
-	public String getTitle() {return _title; }
-	public String getActionTargetId() {return _actionTargetId; }
-	public String getActionLabel() {return _actionLabel; }
-	public String getActionUrl() {return _actionUrl; }
 
-	public void setElementClasses(String elementClasses) {
-		_elementClasses = elementClasses;
+	public String getTitle() {
+		return _title;
 	}
-	public void setTitle(String title) {
-		_title = title;
-	}
-	public void setActionTargetId(String actionTargetId) {
-		_actionTargetId = actionTargetId;
-	}
+
 	public void setActionLabel(String actionLabel) {
 		_actionLabel = actionLabel;
 	}
+
+	public void setActionTargetId(String actionTargetId) {
+		_actionTargetId = actionTargetId;
+	}
+
 	public void setActionUrl(String actionUrl) {
 		_actionUrl = actionUrl;
 	}
 
+	public void setElementClasses(String elementClasses) {
+		_elementClasses = elementClasses;
+	}
 
 	@Override
 	public void setPageContext(PageContext pageContext) {
@@ -90,15 +90,19 @@ public class InfoBoxTag extends IncludeTag {
 		servletContext = ServletContextUtil.getServletContext();
 	}
 
+	public void setTitle(String title) {
+		_title = title;
+	}
+
 	@Override
 	protected void cleanUp() {
 		super.cleanUp();
-		_title = null;
-		_actionTargetId = null;
+
 		_actionLabel = null;
+		_actionTargetId = null;
 		_actionUrl = null;
 		_elementClasses = null;
-
+		_title = null;
 	}
 
 	@Override
@@ -118,13 +122,10 @@ public class InfoBoxTag extends IncludeTag {
 
 	private static final String _START_PAGE = "/info_box/start.jsp";
 
-	private static final Log _log = LogFactoryUtil.getLog(InfoBoxTag.class);
-
-
-	private String _title;
-	private String _actionTargetId;
 	private String _actionLabel;
+	private String _actionTargetId;
 	private String _actionUrl;
 	private String _elementClasses;
+	private String _title;
 
 }

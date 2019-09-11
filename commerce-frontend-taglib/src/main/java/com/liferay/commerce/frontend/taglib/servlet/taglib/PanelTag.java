@@ -16,8 +16,6 @@ package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
 import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
 import com.liferay.petra.string.StringPool;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -47,19 +45,14 @@ public class PanelTag extends IncludeTag {
 			PortalUtil.generateRandomKey(request, "commerce_panel") +
 				StringPool.UNDERLINE;
 
-		String spritemap = _spritemap;
-
 		if (Validator.isNull(_spritemap)) {
 			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-			spritemap = themeDisplay.getPathThemeImages(
-			).concat(
-				"/clay/icons.svg"
-			);
+			_spritemap = themeDisplay.getPathThemeImages() + "/clay/icons.svg";
 		}
 
-		setNamespacedAttribute(request, "spritemap", spritemap);
+		setNamespacedAttribute(request, "spritemap", _spritemap);
 		setNamespacedAttribute(request, "title", _title);
 		setNamespacedAttribute(request, "headerActionUrl", _headerActionUrl);
 		setNamespacedAttribute(
@@ -196,8 +189,6 @@ public class PanelTag extends IncludeTag {
 	private static final String _END_PAGE = "/panel/end.jsp";
 
 	private static final String _START_PAGE = "/panel/start.jsp";
-
-	private static final Log _log = LogFactoryUtil.getLog(PanelTag.class);
 
 	private String _bodyClasses;
 	private String _elementClasses;
