@@ -20,6 +20,7 @@ import com.liferay.commerce.account.model.CommerceAccountGroupRel;
 import com.liferay.commerce.account.service.CommerceAccountGroupRelService;
 import com.liferay.commerce.account.service.CommerceAccountGroupService;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
+import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CommerceCatalogService;
@@ -169,6 +170,26 @@ public class CPDefinitionAccountGroupDisplayContext
 		}
 
 		return itemSelectorURL.toString();
+	}
+
+	@Override
+	public PortletURL getPortletURL() throws PortalException {
+		PortletURL portletURL = super.getPortletURL();
+
+		portletURL.setParameter(
+			"mvcRenderCommandName", "editProductDefinition");
+		portletURL.setParameter(
+			"screenNavigationCategoryKey", getScreenNavigationCategoryKey());
+		portletURL.setParameter(
+			"screenNavigationEntryKey",
+			CPDefinitionScreenNavigationConstants.ENTRY_KEY_ACCOUNT_GROUPS);
+
+		return portletURL;
+	}
+
+	@Override
+	public String getScreenNavigationCategoryKey() {
+		return CPDefinitionScreenNavigationConstants.CATEGORY_KEY_CONFIGURATION;
 	}
 
 	private void _setOrderByColAndType(
