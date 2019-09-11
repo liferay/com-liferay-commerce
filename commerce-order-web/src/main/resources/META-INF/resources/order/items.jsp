@@ -30,51 +30,51 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 
 <commerce-ui:modal
 	closeOnSubmit="<%= true %>"
+	id="billing-modal"
 	showCancel="<%= true %>"
 	showSubmit="<%= true %>"
 	size="lg"
 	title="Billing address"
-	id="billing-modal"
 	url="<%= editURL %>"
 />
 
 <commerce-ui:modal
 	closeOnSubmit="<%= true %>"
+	id="shipping-modal"
 	showCancel="<%= true %>"
 	showSubmit="<%= true %>"
 	size="lg"
 	title="Shipping address"
-	id="shipping-modal"
 	url="<%= editURL %>"
 />
 
 <commerce-ui:modal
 	closeOnSubmit="<%= true %>"
+	id="purchase-order-number-modal"
 	showCancel="<%= true %>"
 	showSubmit="<%= true %>"
 	size="lg"
 	title="Purchase order number"
-	id="purchase-order-number-modal"
 	url="<%= editURL %>"
 />
 
 <commerce-ui:modal
 	closeOnSubmit="<%= true %>"
+	id="requested-delivery-modal"
 	showCancel="<%= true %>"
 	showSubmit="<%= true %>"
 	size="lg"
 	title="Requested delivery date"
-	id="requested-delivery-modal"
 	url="<%= editURL %>"
 />
 
 <commerce-ui:modal
 	closeOnSubmit="<%= true %>"
+	id="order-notes-modal"
 	showCancel="<%= true %>"
 	showSubmit="<%= true %>"
 	size="lg"
 	title="Order notes"
-	id="order-notes-modal"
 	url="<%= editURL %>"
 />
 
@@ -94,19 +94,19 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 			<div class="row vertically-divided">
 				<div class="col-md-4">
 					<commerce-ui:info-box
+						actionLabel="edit"
+						actionTargetId="billing-modal"
 						elementClasses="py-3"
 						title="Billing address"
-						actionTargetId="billing-modal"
-						actionLabel="edit"
 					>
 						PO Box 467 New York NY 10002
 					</commerce-ui:info-box>
 
 					<commerce-ui:info-box
-							elementClasses="py-3"
-							title="Shipping address"
-							actionTargetId="shipping-modal"
-							actionLabel="edit"
+						actionLabel="edit"
+						actionTargetId="shipping-modal"
+						elementClasses="py-3"
+						title="Shipping address"
 					>
 						PO Box 467 New York NY 10002
 					</commerce-ui:info-box>
@@ -114,19 +114,19 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 
 				<div class="col-md-4">
 					<commerce-ui:info-box
-							elementClasses="py-3"
-							title="Purchase Order Number"
-							actionTargetId="purchase-order-number-modal"
-							actionLabel="edit"
+						actionLabel="edit"
+						actionTargetId="purchase-order-number-modal"
+						elementClasses="py-3"
+						title="Purchase Order Number"
 					>
 						#56731451
 					</commerce-ui:info-box>
 
 					<commerce-ui:info-box
-							elementClasses="py-3"
-							title="Requested delivery date"
-							actionTargetId="purchase-order-number-modal"
-							actionLabel="edit"
+						actionLabel="edit"
+						actionTargetId="purchase-order-number-modal"
+						elementClasses="py-3"
+						title="Requested delivery date"
 					>
 						Aug 24, 2019
 					</commerce-ui:info-box>
@@ -134,10 +134,10 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 
 				<div class="col-md-4">
 					<commerce-ui:info-box
-							elementClasses="py-3"
-							title="Order notes"
-							actionTargetId="order-notes-modal"
-							actionLabel="edit"
+						actionLabel="edit"
+						actionTargetId="order-notes-modal"
+						elementClasses="py-3"
+						title="Order notes"
 					>
 						Cras ultricies ligula sed magna dictum porta. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.
 					</commerce-ui:info-box>
