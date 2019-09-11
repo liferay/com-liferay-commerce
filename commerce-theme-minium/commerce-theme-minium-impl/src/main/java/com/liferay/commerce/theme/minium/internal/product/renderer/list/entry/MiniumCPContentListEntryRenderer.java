@@ -275,8 +275,7 @@ public class MiniumCPContentListEntryRenderer
 		dependencies.add(
 			"commerce-frontend-taglib/add_to_cart/AddToCartButton.es");
 		dependencies.add(
-			"commerce-frontend-taglib/compare_checkbox" +
-				"/CompareCheckbox.es");
+			"commerce-frontend-taglib/compare_checkbox/CompareCheckbox.es");
 		dependencies.add("commerce-frontend-taglib/price/Price.es");
 
 		ComponentDescriptor componentDescriptor = new ComponentDescriptor(
