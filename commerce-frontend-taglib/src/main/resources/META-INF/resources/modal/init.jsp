@@ -14,28 +14,30 @@
  */
 --%>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %><%@
 taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 
 <%@ page import="com.liferay.petra.string.StringPool" %><%@
-page import="com.liferay.portal.kernel.util.PortalUtil" %>
-<%@ page import="com.liferay.portal.kernel.util.Validator" %>
+page import="com.liferay.portal.kernel.util.PortalUtil" %><%@
+page import="com.liferay.portal.kernel.util.Validator" %>
 
 <liferay-theme:defineObjects />
 
 <%
-	String url = (String)request.getAttribute("liferay-commerce:modal:url");
-	String size = (String)request.getAttribute("liferay-commerce:modal:size");
-	String title = (String)request.getAttribute("liferay-commerce:modal:title");
-	String spritemap = (String)request.getAttribute("liferay-commerce:modal:spritemap");
-	String id = (String)request.getAttribute("liferay-commerce:modal:id");
-	Boolean showSubmit = (Boolean)request.getAttribute("liferay-commerce:modal:showSubmit");
-	String submitLabel = (String)request.getAttribute("liferay-commerce:modal:submitLabel");
-	Boolean closeOnSubmit = (Boolean)request.getAttribute("liferay-commerce:modal:closeOnSubmit");
-	Boolean submitAvailableAtLoading = (Boolean)request.getAttribute("liferay-commerce:modal:submitAvailableAtLoading");
-	Boolean showDelete = (Boolean)request.getAttribute("liferay-commerce:modal:showDelete");
-	String deleteLabel = (String)request.getAttribute("liferay-commerce:modal:deleteLabel");
-	Boolean showCancel = (Boolean)request.getAttribute("liferay-commerce:modal:showCancel");
-	String cancelLabel = (String)request.getAttribute("liferay-commerce:modal:cancelLabel");
-	String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_modal") + StringPool.UNDERLINE;
+String url = (String)request.getAttribute("liferay-commerce:modal:url");
+String size = (String)request.getAttribute("liferay-commerce:modal:size");
+String title = (String)request.getAttribute("liferay-commerce:modal:title");
+String spritemap = (String)request.getAttribute("liferay-commerce:modal:spritemap");
+String id = (String)request.getAttribute("liferay-commerce:modal:id");
+boolean showSubmit = (boolean)request.getAttribute("liferay-commerce:modal:showSubmit");
+String submitLabel = (String)request.getAttribute("liferay-commerce:modal:submitLabel");
+boolean closeOnSubmit = (boolean)request.getAttribute("liferay-commerce:modal:closeOnSubmit");
+boolean submitAvailableAtLoading = (boolean)request.getAttribute("liferay-commerce:modal:submitAvailableAtLoading");
+boolean showDelete = (boolean)request.getAttribute("liferay-commerce:modal:showDelete");
+String deleteLabel = (String)request.getAttribute("liferay-commerce:modal:deleteLabel");
+boolean showCancel = (boolean)request.getAttribute("liferay-commerce:modal:showCancel");
+String cancelLabel = (String)request.getAttribute("liferay-commerce:modal:cancelLabel");
+String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_modal") + StringPool.UNDERLINE;
 %>

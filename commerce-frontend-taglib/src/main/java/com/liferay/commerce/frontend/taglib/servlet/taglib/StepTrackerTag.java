@@ -16,8 +16,6 @@ package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
 import com.liferay.commerce.frontend.model.StepModel;
 import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -71,16 +69,11 @@ public class StepTrackerTag extends IncludeTag {
 
 	@Override
 	protected void setAttributes(HttpServletRequest httpServletRequest) {
-		String spritemap = _spritemap;
-
 		if (Validator.isNull(_spritemap)) {
 			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-			spritemap = themeDisplay.getPathThemeImages(
-			).concat(
-				"/clay/icons.svg"
-			);
+			_spritemap = themeDisplay.getPathThemeImages() + "/clay/icons.svg";
 		}
 
 		request.setAttribute("liferay-commerce:step-tracker:steps", _steps);
@@ -89,8 +82,6 @@ public class StepTrackerTag extends IncludeTag {
 	}
 
 	private static final String _PAGE = "/step_tracker/page.jsp";
-
-	private static final Log _log = LogFactoryUtil.getLog(StepTrackerTag.class);
 
 	private String _spritemap;
 	private List<StepModel> _steps;
