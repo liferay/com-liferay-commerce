@@ -1,5 +1,5 @@
 import launcher from './entry.es';
-import './step-tracker.scss';
+import './_step-tracker.scss';
 
 window.AddOrCreate = launcher('step_tracker', 'step-tracker', {
 	steps: [
