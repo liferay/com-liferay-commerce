@@ -42,7 +42,8 @@ public class QuantitySelectorTag extends ComponentRendererTag {
 		}
 
 		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/js/quantity_selector/QuantitySelector.es");
+			"commerce-frontend-taglib/js/quantity_selector" +
+				"/QuantitySelector.es");
 	}
 
 }

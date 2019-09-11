@@ -17,8 +17,6 @@ package com.liferay.commerce.frontend.taglib.servlet.taglib;
 import com.liferay.commerce.frontend.model.HeaderButtonModel;
 import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
 import com.liferay.frontend.taglib.clay.servlet.taglib.util.DropdownItem;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -118,9 +116,11 @@ public class HeaderTag extends IncludeTag {
 		super.cleanUp();
 
 		_bean = null;
+		_dropdownItems = null;
 		_headerButtonModels = null;
 		_model = null;
 		_previewUrl = null;
+		_spritemap = null;
 		_thumbnailUrl = null;
 		_title = null;
 		_version = null;
@@ -133,16 +133,11 @@ public class HeaderTag extends IncludeTag {
 
 	@Override
 	protected void setAttributes(HttpServletRequest httpServletRequest) {
-		String spritemap = _spritemap;
-
 		if (Validator.isNull(_spritemap)) {
 			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-			spritemap = themeDisplay.getPathThemeImages(
-			).concat(
-				"/clay/icons.svg"
-			);
+			_spritemap = themeDisplay.getPathThemeImages() + "/clay/icons.svg";
 		}
 
 		request.setAttribute("liferay-commerce:header:bean", _bean);
@@ -154,7 +149,7 @@ public class HeaderTag extends IncludeTag {
 			"liferay-commerce:header:headerButtonModels", _headerButtonModels);
 		request.setAttribute("liferay-commerce:header:model", _model);
 		request.setAttribute("liferay-commerce:header:previewUrl", _previewUrl);
-		request.setAttribute("liferay-commerce:header:spritemap", spritemap);
+		request.setAttribute("liferay-commerce:header:spritemap", _spritemap);
 		request.setAttribute(
 			"liferay-commerce:header:thumbnailUrl", _thumbnailUrl);
 		request.setAttribute("liferay-commerce:header:title", _title);
@@ -162,8 +157,6 @@ public class HeaderTag extends IncludeTag {
 	}
 
 	private static final String _PAGE = "/header/page.jsp";
-
-	private static final Log _log = LogFactoryUtil.getLog(HeaderTag.class);
 
 	private Object _bean;
 	private List<DropdownItem> _dropdownItems;

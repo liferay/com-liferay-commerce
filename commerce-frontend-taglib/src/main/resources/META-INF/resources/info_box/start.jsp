@@ -25,24 +25,24 @@
 		<c:if test="<%= Validator.isNotNull(title) %>">
 			<h4 class="title"><%= title %></h4>
 		</c:if>
-		<c:if test="<%= Validator.isNotNull(actionLabel)%>">
-			<%
 
+		<c:if test="<%= Validator.isNotNull(actionLabel) %>">
+
+			<%
 				Map<String, String> data = new HashMap<>();
 
-				if(Validator.isNotNull(actionTargetId)){
-					data.put("toggle", "modal");
+				if (Validator.isNotNull(actionTargetId)) {
 					data.put("target", actionTargetId);
+					data.put("toggle", "modal");
 				}
-
 			%>
+
 			<clay:link
-				href="<%= Validator.isNotNull(actionUrl) ? actionUrl : "#" %>"
-				label="<%= actionLabel %>"
 				data="<%= data %>"
+				href='<%= Validator.isNotNull(actionUrl) ? actionUrl : "#" %>'
+				label="<%= actionLabel %>"
 			/>
 		</c:if>
 	</header>
 
 	<div class="description">
-

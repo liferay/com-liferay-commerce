@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
@@ -18,9 +17,8 @@
 <%@ include file="/modal/init.jsp" %>
 
 <%
-	String containerId = randomNamespace + "modal-root";
+String containerId = randomNamespace + "modal-root";
 %>
-
 
 <div class="modal-root" id="<%= randomNamespace %>"></div>
 
@@ -63,5 +61,4 @@
 			);
 		}
 	</c:if>
-
 </aui:script>

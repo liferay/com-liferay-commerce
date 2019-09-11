@@ -16,8 +16,6 @@ package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
 import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
 import com.liferay.petra.string.StringPool;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -41,6 +39,10 @@ public class ModalTag extends IncludeTag {
 
 	public String getDeleteLabel() {
 		return _deleteLabel;
+	}
+
+	public String getId() {
+		return _id;
 	}
 
 	public Boolean getShowCancel() {
@@ -75,10 +77,6 @@ public class ModalTag extends IncludeTag {
 		return _title;
 	}
 
-	public String getId() {
-		return _id;
-	}
-
 	public String getUrl() {
 		return _url;
 	}
@@ -93,6 +91,10 @@ public class ModalTag extends IncludeTag {
 
 	public void setDeleteLabel(String deleteLabel) {
 		_deleteLabel = deleteLabel;
+	}
+
+	public void setId(String id) {
+		_id = id;
 	}
 
 	@Override
@@ -134,10 +136,6 @@ public class ModalTag extends IncludeTag {
 		_title = title;
 	}
 
-	public void setId(String id) {
-		_id = id;
-	}
-
 	public void setUrl(String url) {
 		_url = url;
 	}
@@ -149,6 +147,7 @@ public class ModalTag extends IncludeTag {
 		_cancelLabel = StringPool.BLANK;
 		_closeOnSubmit = false;
 		_deleteLabel = StringPool.BLANK;
+		_id = StringPool.BLANK;
 		_showCancel = false;
 		_showDelete = false;
 		_showSubmit = false;
@@ -157,7 +156,6 @@ public class ModalTag extends IncludeTag {
 		_submitAvailableAtLoading = false;
 		_submitLabel = StringPool.BLANK;
 		_title = StringPool.BLANK;
-		_id = StringPool.BLANK;
 		_url = StringPool.BLANK;
 	}
 
@@ -168,16 +166,11 @@ public class ModalTag extends IncludeTag {
 
 	@Override
 	protected void setAttributes(HttpServletRequest httpServletRequest) {
-		String spritemap = _spritemap;
-
-		if (Validator.isNull(spritemap)) {
+		if (Validator.isNull(_spritemap)) {
 			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-			spritemap = themeDisplay.getPathThemeImages(
-			).concat(
-				"/clay/icons.svg"
-			);
+			_spritemap = themeDisplay.getPathThemeImages() + "/clay/icons.svg";
 		}
 
 		request.setAttribute(
@@ -186,37 +179,35 @@ public class ModalTag extends IncludeTag {
 			"liferay-commerce:modal:closeOnSubmit", _closeOnSubmit);
 		request.setAttribute(
 			"liferay-commerce:modal:deleteLabel", _deleteLabel);
+		request.setAttribute("liferay-commerce:modal:id", _id);
 		request.setAttribute("liferay-commerce:modal:showCancel", _showCancel);
 		request.setAttribute("liferay-commerce:modal:showDelete", _showDelete);
 		request.setAttribute("liferay-commerce:modal:showSubmit", _showSubmit);
 		request.setAttribute("liferay-commerce:modal:size", _size);
-		request.setAttribute("liferay-commerce:modal:spritemap", spritemap);
+		request.setAttribute("liferay-commerce:modal:spritemap", _spritemap);
 		request.setAttribute(
 			"liferay-commerce:modal:submitAvailableAtLoading",
 			_submitAvailableAtLoading);
 		request.setAttribute(
 			"liferay-commerce:modal:submitLabel", _submitLabel);
 		request.setAttribute("liferay-commerce:modal:title", _title);
-		request.setAttribute("liferay-commerce:modal:id", _id);
 		request.setAttribute("liferay-commerce:modal:url", _url);
 	}
 
 	private static final String _PAGE = "/modal/page.jsp";
 
-	private static final Log _log = LogFactoryUtil.getLog(ModalTag.class);
-
 	private String _cancelLabel = StringPool.BLANK;
-	private Boolean _closeOnSubmit;
+	private boolean _closeOnSubmit;
 	private String _deleteLabel = StringPool.BLANK;
-	private Boolean _showCancel;
-	private Boolean _showDelete;
-	private Boolean _showSubmit;
+	private String _id = StringPool.BLANK;
+	private boolean _showCancel;
+	private boolean _showDelete;
+	private boolean _showSubmit;
 	private String _size = StringPool.BLANK;
 	private String _spritemap = StringPool.BLANK;
-	private Boolean _submitAvailableAtLoading;
+	private boolean _submitAvailableAtLoading;
 	private String _submitLabel = StringPool.BLANK;
 	private String _title = StringPool.BLANK;
-	private String _id = StringPool.BLANK;
 	private String _url = StringPool.BLANK;
 
 }
