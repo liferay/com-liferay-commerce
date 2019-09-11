@@ -3,8 +3,6 @@ import React from 'react';
 import ClayList from '@clayui/list';
 import Expose from './Expose.es';
 
-import './add-or-create.scss';
-
 function Suggestions({list, selected, action, onHover}) {
 	return (
 		<>
