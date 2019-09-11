@@ -5,7 +5,6 @@
 @import "../js/side_panel/side_panel";
 @import "../js/step_tracker/step-tracker";
 
-
 .vertically-divided {
   overflow: hidden;
 
@@ -14,10 +13,24 @@
       content: '';
       position: absolute;
       z-index: 10;
-      border-right: 1px solid grey;
+      border-right: 1px solid #e6e7ed;
       top: 0;
       bottom: 0;
       right: -1px;
     }
+  }
+}
+
+.info-box {
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .action {
+    padding: 4px;
+    margin-top: -4px;
+    margin-right: -4px;
+    line-height: 1;
   }
 }
