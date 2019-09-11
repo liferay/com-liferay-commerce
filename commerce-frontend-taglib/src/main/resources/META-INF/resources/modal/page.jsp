@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
@@ -16,14 +17,19 @@
 
 <%@ include file="/modal/init.jsp" %>
 
-<div class="modal-root" id="<%= modalId %>"></div>
+<%
+	String containerId = randomNamespace + "modal-root";
+%>
+
+
+<div class="modal-root" id="<%= randomNamespace %>"></div>
 
 <aui:script require="commerce-frontend-js/js/modal/entry.es as Modal">
-	var modal = new Modal.default(
-		"<%= modalId %>",
-		"<%= modalId %>",
+	new Modal.default(
+		"<%= containerId %>",
+		"<%= randomNamespace %>",
 		{
-			id: "<%= modalId %>",
+			id: "<%= id %>",
 			portletId: "<%= portletDisplay.getRootPortletId() %>",
 			url: "<%= url %>",
 			size: "<%= size %>",
@@ -40,15 +46,22 @@
 		}
 	);
 
-	const modalTrigger = document.getElementById('<%= triggerId %>')
+	<c:if test="<%= Validator.isNotNull(id) %>">
+		const modalTriggers = document.querySelectorAll('[data-toggle="modal"][data-target="<%= id %>"]')
 
-	if (modalTrigger) {
-		modalTrigger.addEventListener(
-			'click',
-			(e) => {
-				e.preventDefault();
-				Liferay.fire("<%= modalId %>-open");
-			}
-		);
-	}
+		if (modalTriggers.length) {
+			modalTriggers.forEach(
+				function(trigger) {
+					trigger.addEventListener(
+						'click',
+						function(e) {
+							e.preventDefault();
+							Liferay.fire("<%= id %>-open");
+						}
+					)
+				}
+			);
+		}
+	</c:if>
+
 </aui:script>

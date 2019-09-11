@@ -216,6 +216,36 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>info-box</name>
+		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.InfoBoxTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>title</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>actionTargetId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>actionLabel</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>actionUrl</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>elementClasses</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>modal</name>
 		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.ModalTag</tag-class>
 		<body-content>empty</body-content>
@@ -241,8 +271,8 @@
 			<type>boolean</type>
 		</attribute>
 		<attribute>
-			<name>triggerId</name>
-			<required>false</required>
+			<name>id</name>
+			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
