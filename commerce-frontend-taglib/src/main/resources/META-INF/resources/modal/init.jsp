@@ -19,6 +19,7 @@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 
 <%@ page import="com.liferay.petra.string.StringPool" %><%@
 page import="com.liferay.portal.kernel.util.PortalUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.Validator" %>
 
 <liferay-theme:defineObjects />
 
@@ -27,7 +28,7 @@ page import="com.liferay.portal.kernel.util.PortalUtil" %>
 	String size = (String)request.getAttribute("liferay-commerce:modal:size");
 	String title = (String)request.getAttribute("liferay-commerce:modal:title");
 	String spritemap = (String)request.getAttribute("liferay-commerce:modal:spritemap");
-	String triggerId = (String)request.getAttribute("liferay-commerce:modal:triggerId");
+	String id = (String)request.getAttribute("liferay-commerce:modal:id");
 	Boolean showSubmit = (Boolean)request.getAttribute("liferay-commerce:modal:showSubmit");
 	String submitLabel = (String)request.getAttribute("liferay-commerce:modal:submitLabel");
 	Boolean closeOnSubmit = (Boolean)request.getAttribute("liferay-commerce:modal:closeOnSubmit");
@@ -37,6 +38,4 @@ page import="com.liferay.portal.kernel.util.PortalUtil" %>
 	Boolean showCancel = (Boolean)request.getAttribute("liferay-commerce:modal:showCancel");
 	String cancelLabel = (String)request.getAttribute("liferay-commerce:modal:cancelLabel");
 	String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_modal") + StringPool.UNDERLINE;
-
-	String modalId = randomNamespace + "modal-root";
 %>

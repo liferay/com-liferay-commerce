@@ -75,8 +75,8 @@ public class ModalTag extends IncludeTag {
 		return _title;
 	}
 
-	public String getTriggerId() {
-		return _triggerId;
+	public String getId() {
+		return _id;
 	}
 
 	public String getUrl() {
@@ -134,8 +134,8 @@ public class ModalTag extends IncludeTag {
 		_title = title;
 	}
 
-	public void setTriggerId(String triggerId) {
-		_triggerId = triggerId;
+	public void setId(String id) {
+		_id = id;
 	}
 
 	public void setUrl(String url) {
@@ -157,7 +157,7 @@ public class ModalTag extends IncludeTag {
 		_submitAvailableAtLoading = false;
 		_submitLabel = StringPool.BLANK;
 		_title = StringPool.BLANK;
-		_triggerId = StringPool.BLANK;
+		_id = StringPool.BLANK;
 		_url = StringPool.BLANK;
 	}
 
@@ -197,7 +197,7 @@ public class ModalTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-commerce:modal:submitLabel", _submitLabel);
 		request.setAttribute("liferay-commerce:modal:title", _title);
-		request.setAttribute("liferay-commerce:modal:triggerId", _triggerId);
+		request.setAttribute("liferay-commerce:modal:id", _id);
 		request.setAttribute("liferay-commerce:modal:url", _url);
 	}
 
@@ -216,7 +216,7 @@ public class ModalTag extends IncludeTag {
 	private Boolean _submitAvailableAtLoading;
 	private String _submitLabel = StringPool.BLANK;
 	private String _title = StringPool.BLANK;
-	private String _triggerId = StringPool.BLANK;
+	private String _id = StringPool.BLANK;
 	private String _url = StringPool.BLANK;
 
 }

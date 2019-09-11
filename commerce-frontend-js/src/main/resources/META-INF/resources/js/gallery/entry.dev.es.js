@@ -1,4 +1,5 @@
 import launcher from './entry.es';
+import './_gallery.scss';
 
 window.Gallery = launcher('gallery', 'gallery', {
 	onImageClick: console.log,
