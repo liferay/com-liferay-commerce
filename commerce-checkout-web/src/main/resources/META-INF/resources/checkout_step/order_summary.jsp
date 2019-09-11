@@ -156,11 +156,28 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 
 								<%
 								CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
+								CommerceMoney promoPrice = commerceProductPrice.getUnitPromoPrice();
+
+								BigDecimal promoPriceValue = promoPrice.getPrice();
 								%>
 
 								<div class="value-section">
-									<span class="commerce-value">
-										<%= HtmlUtil.escape(unitPrice.format(locale)) %>
+									<span class="price">
+										<c:choose>
+											<c:when test="<%= (promoPrice != null) && (promoPriceValue.compareTo(BigDecimal.ZERO) > 0) %>">
+												<span class="price__value price__value--promo-price">
+													<%= HtmlUtil.escape(promoPrice.format(locale)) %>
+												</span>
+												<span class="price__value price__value--inactive">
+													<%= HtmlUtil.escape(unitPrice.format(locale)) %>
+												</span>
+											</c:when>
+											<c:otherwise>
+												<span class="price__value {$additionalPriceClasses}">
+													<%= HtmlUtil.escape(unitPrice.format(locale)) %>
+												</span>
+											</c:otherwise>
+										</c:choose>
 									</span>
 
 									<c:if test="<%= Validator.isNotNull(cpInstance.getCPSubscriptionInfo()) %>">

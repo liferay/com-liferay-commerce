@@ -28,12 +28,15 @@ import com.liferay.commerce.order.content.web.internal.frontend.util.CommerceOrd
 import com.liferay.commerce.order.content.web.internal.model.OrderItem;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.service.CommerceOrderItemService;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
+
+import java.math.BigDecimal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +85,10 @@ public class CommercePlacedOrderItemClayTable
 
 		clayTableSchemaBuilder.addField("name", "name");
 
-		clayTableSchemaBuilder.addField("price", "price");
+		ClayTableSchemaField priceField = clayTableSchemaBuilder.addField(
+			"price", "price");
+
+		priceField.setContentRenderer("commerceTablePrice");
 
 		clayTableSchemaBuilder.addField("discount", "discount");
 
@@ -139,9 +145,19 @@ public class CommercePlacedOrderItemClayTable
 				Locale locale = themeDisplay.getLocale();
 
 				String price = unitPriceMoney.format(locale);
-				String promoPrice = promoPriceMoney.format(locale);
 				String discount = discountAmountMoney.format(locale);
 				String total = finalPriceMoney.format(locale);
+
+				String promoPrice = StringPool.BLANK;
+
+				BigDecimal promoPriceValue = promoPriceMoney.getPrice();
+
+				if ((promoPriceMoney != null) &&
+					(promoPriceValue.compareTo(BigDecimal.ZERO) > 0)) {
+
+					promoPrice = promoPriceMoney.format(
+						themeDisplay.getLocale());
+				}
 
 				String viewShipmentURL = null;
 
