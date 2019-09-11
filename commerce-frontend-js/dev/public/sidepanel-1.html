@@ -16,6 +16,7 @@
 	<title>React App</title>
 
 	<link href="https://cdn.jsdelivr.net/npm/clay/lib/css/atlas.css" rel="stylesheet" />
+
 	<style>
 		body {padding: 20px;}
 	</style>
@@ -28,11 +29,12 @@
 	<button onclick="window.SidePanel.open();" class="btn btn-primary" type="button">Open</button>
 	<button onclick="window.SidePanel.close();" class="btn btn-warning" type="button">Close</button>
 	<button onclick="window.SidePanel.toggle();" class="btn btn-secondary" type="button">Toggle</button>
-	<button onclick="window.parent.SidePanel.close();" class="btn btn-danger" type="button">
+	<button class="btn btn-danger" onclick="window.parent.SidePanel.close();" type="button">
 		<svg class="lexicon-icon lexicon-icon-times" focusable="false" role="presentation">
 			<use xlink:href="./icons.svg#times" />
 		</svg>
 	</button>
+
 	<div id="side-panel"></div>
 
 <p>
