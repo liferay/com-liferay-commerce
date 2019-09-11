@@ -2,7 +2,6 @@ import React from 'react';
 import Images from './Images.es';
 import Upload from './Upload.es';
 import Zoom from './Zoom.es';
-import './gallery.scss';
 
 export default class Gallery extends React.Component {
 	constructor(props) {
