@@ -72,14 +72,6 @@ SearchContainer<CommerceAccountGroupRel> commerceAccountGroupRelSearchContainer 
 								navigationParam="activeNavigation"
 								portletURL="<%= cpDefinitionAccountGroupDisplayContext.getPortletURL() %>"
 							/>
-
-							<li>
-								<aui:form action="<%= String.valueOf(cpDefinitionAccountGroupDisplayContext.getPortletURL()) %>" name="searchFm">
-									<liferay-ui:input-search
-										markupView="lexicon"
-									/>
-								</aui:form>
-							</li>
 						</liferay-frontend:management-bar-filters>
 
 						<liferay-frontend:management-bar-action-buttons>
