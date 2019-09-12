@@ -201,9 +201,15 @@ public class EditCommerceAccountMVCActionCommand extends BaseMVCActionCommand {
 				StringPool.BLANK, serviceContext);
 		}
 		else {
+			long defaultBillingAddressId = ParamUtil.getLong(
+				actionRequest, "defaultBillingAddressId");
+			long defaultShippingAddressId = ParamUtil.getLong(
+				actionRequest, "defaultShippingAddressId");
+
 			commerceAccount = _commerceAccountService.updateCommerceAccount(
 				commerceAccountId, name, !deleteLogo, logoBytes, email, taxId,
-				active, serviceContext);
+				active, defaultBillingAddressId, defaultShippingAddressId,
+				serviceContext);
 		}
 
 		return commerceAccount;
