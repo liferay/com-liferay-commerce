@@ -14,13 +14,10 @@
  */
 --%>
 
-<%@ include file="/init.jsp" %>
+<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 
-<commerce-ui:panel
-	bodyClasses="p-0"
-	title="emails"
->
-	<liferay-ui:empty-result-message
-		message="there-are-no-attachments"
-	/>
-</commerce-ui:panel>
+<%@ page import="com.liferay.commerce.frontend.model.SummaryElement" %>
+
+<%@ page import="java.util.List" %>
+
+<liferay-theme:defineObjects />

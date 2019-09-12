@@ -23,9 +23,9 @@ const props = {
 //     interface Window { modal: any; }
 // }
 
-const modal = modalLauncher('modal', 'modal-root', props);
+modalLauncher('modal', 'modal-root', props);
 
-const modalTrigger = launcher(
+launcher(
 	() => (
 		<button 
 			className="btn btn-primary"

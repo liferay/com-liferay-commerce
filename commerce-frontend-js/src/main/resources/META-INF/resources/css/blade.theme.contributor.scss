@@ -25,12 +25,21 @@
   .header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: baseline;
   }
   .action {
     padding: 4px;
     margin-top: -4px;
     margin-right: -4px;
     line-height: 1;
+  }
+}
+
+.list-group-no-bordered .list-group-item {
+  border-width: 0 0 1px 0;
+  margin-bottom: 0;
+
+  &:last-child {
+    border-width: 0; 
   }
 }
