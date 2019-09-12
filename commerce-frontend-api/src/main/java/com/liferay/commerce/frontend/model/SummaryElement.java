@@ -1,4 +1,3 @@
-<%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
@@ -12,15 +11,43 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
---%>
 
-<%@ include file="/init.jsp" %>
+package com.liferay.commerce.frontend.model;
 
-<commerce-ui:panel
-	bodyClasses="p-0"
-	title="emails"
->
-	<liferay-ui:empty-result-message
-		message="there-are-no-attachments"
-	/>
-</commerce-ui:panel>
+/**
+ * @author Fabio Diego Mastrorilli
+ */
+public class SummaryElement {
+
+	public SummaryElement() {
+	}
+
+	public String getLabel() {
+		return _label;
+	}
+
+	public String getStyle() {
+		return _style;
+	}
+
+	public String getValue() {
+		return _value;
+	}
+
+	public void setLabel(String label) {
+		_label = label;
+	}
+
+	public void setStyle(String style) {
+		_style = style;
+	}
+
+	public void setValue(String value) {
+		_value = value;
+	}
+
+	private String _label;
+	private String _style;
+	private String _value;
+
+}
