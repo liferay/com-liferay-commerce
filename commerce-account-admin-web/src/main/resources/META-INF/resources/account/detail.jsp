@@ -83,6 +83,36 @@ long commerceAccountId = commerceAccountAdminDisplayContext.getCommerceAccountId
 								/>
 							</c:if>
 						</div>
+
+						<c:if test="<%= commerceAccount != null %>">
+							<aui:select label="default-billing" name="defaultBillingAddressId" showEmptyOption="<%= true %>">
+
+								<%
+								for (CommerceAddress billingAddress : commerceAccountAdminDisplayContext.getBillingCommerceAddresses()) {
+								%>
+
+									<aui:option label="<%= billingAddress.getName() %>" selected="<%= billingAddress.getCommerceAddressId() == commerceAccount.getDefaultBillingAddressId() %>" value="<%= billingAddress.getCommerceAddressId() %>" />
+
+								<%
+								}
+								%>
+
+							</aui:select>
+
+							<aui:select label="default-shipping" name="defaultShippingAddressId" showEmptyOption="<%= true %>">
+
+								<%
+								for (CommerceAddress shippingAddress : commerceAccountAdminDisplayContext.getShippingCommerceAddresses()) {
+								%>
+
+									<aui:option label="<%= shippingAddress.getName() %>" selected="<%= shippingAddress.getCommerceAddressId() == commerceAccount.getDefaultShippingAddressId() %>" value="<%= shippingAddress.getCommerceAddressId() %>" />
+
+								<%
+								}
+								%>
+
+							</aui:select>
+						</c:if>
 					</div>
 				</div>
 			</aui:fieldset>
