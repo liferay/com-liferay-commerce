@@ -127,9 +127,7 @@ public class CommerceAccountLocalServiceImpl
 		parentCommerceAccountId = getParentCommerceAccountId(
 			serviceContext.getCompanyId(), parentCommerceAccountId);
 
-		validate(
-			serviceContext.getCompanyId(), 0, name, externalReferenceCode, 0,
-			0);
+		validate(serviceContext.getCompanyId(), 0, name, externalReferenceCode);
 
 		long commerceAccountId = counterLocalService.increment();
 
@@ -500,7 +498,7 @@ public class CommerceAccountLocalServiceImpl
 		validate(
 			serviceContext.getCompanyId(),
 			commerceAccount.getCommerceAccountId(), name,
-			commerceAccount.getExternalReferenceCode(), 0, 0);
+			commerceAccount.getExternalReferenceCode());
 
 		commerceAccount.setName(name);
 
@@ -553,11 +551,6 @@ public class CommerceAccountLocalServiceImpl
 		CommerceAccount commerceAccount =
 			commerceAccountPersistence.findByPrimaryKey(commerceAccountId);
 
-		validate(
-			commerceAccount.getCompanyId(), commerceAccountId,
-			commerceAccount.getName(),
-			commerceAccount.getExternalReferenceCode(), commerceAddressId, 0);
-
 		commerceAccount.setDefaultBillingAddressId(commerceAddressId);
 
 		return commerceAccountPersistence.update(commerceAccount);
@@ -571,11 +564,6 @@ public class CommerceAccountLocalServiceImpl
 
 		CommerceAccount commerceAccount =
 			commerceAccountPersistence.findByPrimaryKey(commerceAccountId);
-
-		validate(
-			commerceAccount.getCompanyId(), commerceAccountId,
-			commerceAccount.getName(),
-			commerceAccount.getExternalReferenceCode(), 0, commerceAddressId);
 
 		commerceAccount.setDefaultShippingAddressId(commerceAddressId);
 
@@ -780,8 +768,7 @@ public class CommerceAccountLocalServiceImpl
 
 	protected void validate(
 			long companyId, long commerceAccountId, String name,
-			String externalReferenceCode, long defaultBillingAddressId,
-			long defaultShippingAddressId)
+			String externalReferenceCode)
 		throws PortalException {
 
 		if (Validator.isNull(name)) {
@@ -796,28 +783,12 @@ public class CommerceAccountLocalServiceImpl
 			commerceAccountPersistence.fetchByC_ERC(
 				companyId, externalReferenceCode);
 
-		if (commerceAccount != null) {
-			if (commerceAccount.getCommerceAccountId() != commerceAccountId) {
-				throw new DuplicateCommerceAccountException(
-					"There is another commerce account with external " +
-						"reference code " + externalReferenceCode);
-			}
+		if ((commerceAccount != null) &&
+			(commerceAccount.getCommerceAccountId() != commerceAccountId)) {
 
-			if ((commerceAccount.getDefaultBillingAddressId() != 0) &&
-				(defaultBillingAddressId != 0) &&
-				(commerceAccount.getDefaultBillingAddressId() !=
-					defaultBillingAddressId)) {
-
-				throw new CommerceAccountDefaultBillingAddressException();
-			}
-
-			if ((commerceAccount.getDefaultBillingAddressId() != 0) &&
-				(defaultShippingAddressId != 0) &&
-				(commerceAccount.getDefaultBillingAddressId() !=
-					defaultShippingAddressId)) {
-
-				throw new CommerceAccountDefaultShippingAddressException();
-			}
+			throw new DuplicateCommerceAccountException(
+				"There is another commerce account with external reference " +
+					"code " + externalReferenceCode);
 		}
 	}
 
