@@ -19,8 +19,6 @@
 <%
 CommerceAccountAddressAdminDisplayContext commerceAccountAddressAdminDisplayContext = (CommerceAccountAddressAdminDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-CommerceAccount commerceAccount = commerceAccountAddressAdminDisplayContext.getCommerceAccount();
-
 CommerceAddress commerceAddress = commerceAccountAddressAdminDisplayContext.getCommerceAddress();
 
 int selectedType = CommerceAddressConstants.ADDRESS_TYPE_BILLING_AND_SHIPPING;
@@ -121,9 +119,6 @@ long commerceRegionId = commerceAccountAddressAdminDisplayContext.getCommerceReg
 
 						</aui:select>
 
-						<aui:input checked="<%= commerceAccount.getDefaultBillingAddressId() == commerceAddressId %>" name="defaultBilling" type="toggle-switch" />
-
-						<aui:input checked="<%= commerceAccount.getDefaultShippingAddressId() == commerceAddressId %>" name="defaultShipping" type="toggle-switch" />
 					</aui:fieldset>
 				</div>
 
@@ -136,42 +131,6 @@ long commerceRegionId = commerceAccountAddressAdminDisplayContext.getCommerceReg
 		</div>
 	</aui:form>
 </div>
-
-<aui:script use="aui-base">
-	var typeSelector = A.one('#<portlet:namespace />type');
-
-	typeSelector.on(
-		'change',
-		function() {
-			setDefaultToggles(typeSelector.val());
-		}
-	);
-
-	function setDefaultToggles(type) {
-		if (type == <%= CommerceAddressConstants.ADDRESS_TYPE_BILLING %>) {
-			A.one('#<portlet:namespace />defaultBilling').attr("disabled", false);
-			A.one('#<portlet:namespace />defaultShipping').attr("disabled", true);
-
-			if (A.one('#<portlet:namespace />defaultShipping').attr("checked")) {
-				A.one('#<portlet:namespace />defaultShipping').attr("checked", false);
-			}
-		}
-		else if (type == <%= CommerceAddressConstants.ADDRESS_TYPE_SHIPPING %>) {
-			A.one('#<portlet:namespace />defaultShipping').attr("disabled", false);
-			A.one('#<portlet:namespace />defaultBilling').attr("disabled", true);
-
-			if (A.one('#<portlet:namespace />defaultBilling').attr("checked")) {
-				A.one('#<portlet:namespace />defaultBilling').attr("checked", false);
-			}
-		}
-		else {
-			A.one('#<portlet:namespace />defaultShipping').attr("disabled", false);
-			A.one('#<portlet:namespace />defaultBilling').attr("disabled", false);
-		}
-	}
-
-	window.onload = setDefaultToggles(<%= selectedType %>);
-</aui:script>
 
 <aui:script use="aui-base,liferay-dynamic-select">
 	new Liferay.DynamicSelect(
