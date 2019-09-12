@@ -16,6 +16,7 @@ package com.liferay.commerce.order.web.internal.display.context;
 
 import com.liferay.commerce.frontend.model.HeaderButtonModel;
 import com.liferay.commerce.frontend.model.StepModel;
+import com.liferay.commerce.frontend.model.SummaryElement;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceOrderNote;
@@ -378,6 +379,61 @@ public class CommerceOrderEditDisplayContext {
 		stepList.add(step5);
 
 		return stepList;
+	}
+
+	public List<SummaryElement> getSummary() {
+		List<SummaryElement> summary = new ArrayList<>();
+
+		SummaryElement summaryElement1 = new SummaryElement();
+		SummaryElement summaryElement2 = new SummaryElement();
+		SummaryElement summaryElement3 = new SummaryElement();
+		SummaryElement summaryElement4 = new SummaryElement();
+		SummaryElement summaryElement5 = new SummaryElement();
+		SummaryElement summaryElement6 = new SummaryElement();
+		SummaryElement summaryElement7 = new SummaryElement();
+		SummaryElement summaryElement8 = new SummaryElement();
+		SummaryElement summaryElement9 = new SummaryElement();
+
+		summaryElement1.setLabel("Items subtotal");
+		summaryElement1.setValue("$ 2,208.50");
+
+		summaryElement2.setLabel("Order discount");
+		summaryElement2.setValue("$ 0.00");
+
+		summaryElement3.setLabel("Promotion codes");
+		summaryElement3.setValue("--");
+
+		summaryElement4.setLabel("Estimated tax");
+		summaryElement4.setValue("$ 0.00");
+
+		summaryElement5.setLabel("Shipping & Handing");
+		summaryElement5.setValue("$ 50.00");
+
+		summaryElement6.setLabel("Grand Total");
+		summaryElement6.setValue("$ 2,258.50");
+		summaryElement6.setStyle("big");
+
+		summaryElement7.setStyle("divider");
+
+		summaryElement8.setLabel("Total return refounds");
+		summaryElement8.setValue("$ 0.00");
+		summaryElement8.setStyle("danger");
+
+		summaryElement9.setLabel("Total appeasement refunds");
+		summaryElement9.setValue("$ 0.00");
+		summaryElement9.setStyle("danger");
+
+		summary.add(summaryElement1);
+		summary.add(summaryElement2);
+		summary.add(summaryElement3);
+		summary.add(summaryElement4);
+		summary.add(summaryElement5);
+		summary.add(summaryElement6);
+		summary.add(summaryElement7);
+		summary.add(summaryElement8);
+		summary.add(summaryElement9);
+
+		return summary;
 	}
 
 	private final CommerceOrder _commerceOrder;
