@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.account.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -36,7 +34,6 @@ import java.util.Objects;
  * @see CommerceAccountOrganizationRel
  * @generated
  */
-@ProviderType
 public class CommerceAccountOrganizationRelWrapper
 	implements CommerceAccountOrganizationRel,
 			   ModelWrapper<CommerceAccountOrganizationRel> {
@@ -261,6 +258,11 @@ public class CommerceAccountOrganizationRelWrapper
 		return _commerceAccountOrganizationRel.isNew();
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a commerce account organization rel model instance should use the <code>CommerceAccountOrganizationRel</code> interface instead.
+	 */
 	@Override
 	public void persist() {
 		_commerceAccountOrganizationRel.persist();

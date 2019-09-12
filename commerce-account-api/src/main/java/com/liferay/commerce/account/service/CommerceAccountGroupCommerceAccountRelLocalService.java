@@ -56,7 +56,7 @@ import java.util.List;
 public interface CommerceAccountGroupCommerceAccountRelLocalService
 	extends BaseLocalService, PersistedModelLocalService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceAccountGroupCommerceAccountRelLocalServiceUtil} to access the commerce account group commerce account rel local service. Add custom service methods to <code>com.liferay.commerce.account.service.impl.CommerceAccountGroupCommerceAccountRelLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
