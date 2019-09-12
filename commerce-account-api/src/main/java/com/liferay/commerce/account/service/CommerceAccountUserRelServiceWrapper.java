@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.account.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceAccountUserRelService
  * @generated
  */
-@ProviderType
 public class CommerceAccountUserRelServiceWrapper
 	implements CommerceAccountUserRelService,
 			   ServiceWrapper<CommerceAccountUserRelService> {
@@ -36,6 +33,11 @@ public class CommerceAccountUserRelServiceWrapper
 		_commerceAccountUserRelService = commerceAccountUserRelService;
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link CommerceAccountUserRelServiceUtil} to access the commerce account user rel remote service. Add custom service methods to <code>com.liferay.commerce.account.service.impl.CommerceAccountUserRelServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
 	@Override
 	public com.liferay.commerce.account.model.CommerceAccountUserRel
 			addCommerceAccountUserRel(

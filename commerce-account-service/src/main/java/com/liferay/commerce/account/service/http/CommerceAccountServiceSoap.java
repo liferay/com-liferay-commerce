@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.account.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.account.service.CommerceAccountServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -61,7 +59,6 @@ import java.rmi.RemoteException;
  * @see CommerceAccountServiceHttp
  * @generated
  */
-@ProviderType
 public class CommerceAccountServiceSoap {
 
 	public static com.liferay.commerce.account.model.CommerceAccountSoap

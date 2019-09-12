@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.account.service.persistence;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 
@@ -25,7 +23,6 @@ import java.io.Serializable;
  * @author Marco Leo
  * @generated
  */
-@ProviderType
 public class CommerceAccountOrganizationRelPK
 	implements Comparable<CommerceAccountOrganizationRelPK>, Serializable {
 

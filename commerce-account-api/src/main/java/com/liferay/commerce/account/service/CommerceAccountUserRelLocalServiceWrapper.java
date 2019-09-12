@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.account.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceAccountUserRelLocalService
  * @generated
  */
-@ProviderType
 public class CommerceAccountUserRelLocalServiceWrapper
 	implements CommerceAccountUserRelLocalService,
 			   ServiceWrapper<CommerceAccountUserRelLocalService> {

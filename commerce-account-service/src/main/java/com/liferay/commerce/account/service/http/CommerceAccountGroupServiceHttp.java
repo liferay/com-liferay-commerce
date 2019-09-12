@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.account.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.account.service.CommerceAccountGroupServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -51,7 +49,6 @@ import com.liferay.portal.kernel.util.MethodKey;
  * @see CommerceAccountGroupServiceSoap
  * @generated
  */
-@ProviderType
 public class CommerceAccountGroupServiceHttp {
 
 	public static com.liferay.commerce.account.model.CommerceAccountGroup

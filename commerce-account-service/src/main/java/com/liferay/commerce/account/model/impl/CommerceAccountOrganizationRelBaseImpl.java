@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.account.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.account.model.CommerceAccountOrganizationRel;
 import com.liferay.commerce.account.service.CommerceAccountOrganizationRelLocalServiceUtil;
 
@@ -31,12 +29,11 @@ import com.liferay.commerce.account.service.CommerceAccountOrganizationRelLocalS
  * @see CommerceAccountOrganizationRel
  * @generated
  */
-@ProviderType
 public abstract class CommerceAccountOrganizationRelBaseImpl
 	extends CommerceAccountOrganizationRelModelImpl
 	implements CommerceAccountOrganizationRel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce account organization rel model instance should use the <code>CommerceAccountOrganizationRel</code> interface instead.

@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.account.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountLocalServiceUtil;
 
@@ -31,11 +29,10 @@ import com.liferay.commerce.account.service.CommerceAccountLocalServiceUtil;
  * @see CommerceAccount
  * @generated
  */
-@ProviderType
 public abstract class CommerceAccountBaseImpl
 	extends CommerceAccountModelImpl implements CommerceAccount {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce account model instance should use the <code>CommerceAccount</code> interface instead.

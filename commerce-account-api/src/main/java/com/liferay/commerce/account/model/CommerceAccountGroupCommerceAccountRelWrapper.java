@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.account.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -36,7 +34,6 @@ import java.util.Objects;
  * @see CommerceAccountGroupCommerceAccountRel
  * @generated
  */
-@ProviderType
 public class CommerceAccountGroupCommerceAccountRelWrapper
 	implements CommerceAccountGroupCommerceAccountRel,
 			   ModelWrapper<CommerceAccountGroupCommerceAccountRel> {
@@ -305,6 +302,11 @@ public class CommerceAccountGroupCommerceAccountRelWrapper
 		return _commerceAccountGroupCommerceAccountRel.isNew();
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a commerce account group commerce account rel model instance should use the <code>CommerceAccountGroupCommerceAccountRel</code> interface instead.
+	 */
 	@Override
 	public void persist() {
 		_commerceAccountGroupCommerceAccountRel.persist();

@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.account.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceAccountService
  * @generated
  */
-@ProviderType
 public class CommerceAccountServiceWrapper
 	implements CommerceAccountService, ServiceWrapper<CommerceAccountService> {
 
@@ -35,6 +32,11 @@ public class CommerceAccountServiceWrapper
 		_commerceAccountService = commerceAccountService;
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link CommerceAccountServiceUtil} to access the commerce account remote service. Add custom service methods to <code>com.liferay.commerce.account.service.impl.CommerceAccountServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
 	@Override
 	public com.liferay.commerce.account.model.CommerceAccount
 			addBusinessCommerceAccount(

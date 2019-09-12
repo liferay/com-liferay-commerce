@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.account.service.persistence.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.account.exception.NoSuchAccountOrganizationRelException;
 import com.liferay.commerce.account.model.CommerceAccountOrganizationRel;
 import com.liferay.commerce.account.model.impl.CommerceAccountOrganizationRelImpl;
@@ -62,12 +60,11 @@ import java.util.Set;
  * @author Marco Leo
  * @generated
  */
-@ProviderType
 public class CommerceAccountOrganizationRelPersistenceImpl
 	extends BasePersistenceImpl<CommerceAccountOrganizationRel>
 	implements CommerceAccountOrganizationRelPersistence {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Always use <code>CommerceAccountOrganizationRelUtil</code> to access the commerce account organization rel persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.

@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.account.service.base;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.account.model.CommerceAccountGroup;
 import com.liferay.commerce.account.service.CommerceAccountGroupLocalService;
 import com.liferay.commerce.account.service.persistence.CommerceAccountFinder;
@@ -71,12 +69,11 @@ import javax.sql.DataSource;
  * @see com.liferay.commerce.account.service.impl.CommerceAccountGroupLocalServiceImpl
  * @generated
  */
-@ProviderType
 public abstract class CommerceAccountGroupLocalServiceBaseImpl
 	extends BaseLocalServiceImpl
 	implements CommerceAccountGroupLocalService, IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CommerceAccountGroupLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.account.service.CommerceAccountGroupLocalServiceUtil</code>.
