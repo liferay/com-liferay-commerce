@@ -18,6 +18,7 @@ import com.liferay.commerce.account.admin.web.internal.display.context.CommerceA
 import com.liferay.commerce.account.constants.CommerceAccountPortletKeys;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
+import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
@@ -77,8 +78,8 @@ public class CommerceAccountAdminPortlet extends MVCPortlet {
 				commerceAccountAdminDisplayContext =
 					new CommerceAccountAdminDisplayContext(
 						_commerceAccountModelResourcePermission,
-						_commerceAccountService, renderRequest,
-						_userFileUploadsConfiguration);
+						_commerceAccountService, _commerceAddressService,
+						renderRequest, _userFileUploadsConfiguration);
 
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -106,6 +107,9 @@ public class CommerceAccountAdminPortlet extends MVCPortlet {
 
 	@Reference
 	private CommerceAccountService _commerceAccountService;
+
+	@Reference
+	private CommerceAddressService _commerceAddressService;
 
 	private volatile UserFileUploadsConfiguration _userFileUploadsConfiguration;
 
