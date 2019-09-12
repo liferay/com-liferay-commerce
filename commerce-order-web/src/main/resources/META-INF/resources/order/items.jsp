@@ -329,10 +329,11 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 
 	<div class="col-12">
 		<commerce-ui:panel
-			headerActionLabel="edit"
 			title="order-summary"
 		>
-			<div id="order-timeline-root"></div>
+			<commerce-ui:summary-table
+				data="<%= commerceOrderEditDisplayContext.getSummary() %>"
+			/>
 		</commerce-ui:panel>
 	</div>
 </div>
