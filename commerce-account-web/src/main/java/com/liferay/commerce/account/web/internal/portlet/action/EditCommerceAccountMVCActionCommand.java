@@ -16,8 +16,6 @@ package com.liferay.commerce.account.web.internal.portlet.action;
 
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.constants.CommerceAccountPortletKeys;
-import com.liferay.commerce.account.exception.CommerceAccountDefaultBillingAddressException;
-import com.liferay.commerce.account.exception.CommerceAccountDefaultShippingAddressException;
 import com.liferay.commerce.account.exception.CommerceAccountNameException;
 import com.liferay.commerce.account.exception.DuplicateCommerceAccountException;
 import com.liferay.commerce.account.exception.NoSuchAccountException;
@@ -99,11 +97,7 @@ public class EditCommerceAccountMVCActionCommand extends BaseMVCActionCommand {
 
 				actionResponse.setRenderParameter("mvcPath", "/error.jsp");
 			}
-			else if (t instanceof
-						CommerceAccountDefaultBillingAddressException ||
-					 t instanceof
-						 CommerceAccountDefaultShippingAddressException ||
-					 t instanceof CommerceAccountNameException ||
+			else if (t instanceof CommerceAccountNameException ||
 					 t instanceof DuplicateCommerceAccountException) {
 
 				hideDefaultErrorMessage(actionRequest);

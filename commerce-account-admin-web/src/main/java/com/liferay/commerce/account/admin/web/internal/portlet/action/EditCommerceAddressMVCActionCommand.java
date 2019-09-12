@@ -15,8 +15,6 @@
 package com.liferay.commerce.account.admin.web.internal.portlet.action;
 
 import com.liferay.commerce.account.constants.CommerceAccountPortletKeys;
-import com.liferay.commerce.account.exception.CommerceAccountDefaultBillingAddressException;
-import com.liferay.commerce.account.exception.CommerceAccountDefaultShippingAddressException;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.exception.CommerceAddressCityException;
@@ -105,11 +103,7 @@ public class EditCommerceAddressMVCActionCommand extends BaseMVCActionCommand {
 
 				actionResponse.setRenderParameter("mvcPath", "/error.jsp");
 			}
-			else if (e instanceof
-						CommerceAccountDefaultBillingAddressException ||
-					 e instanceof
-						 CommerceAccountDefaultShippingAddressException ||
-					 e instanceof CommerceAddressCityException ||
+			else if (e instanceof CommerceAddressCityException ||
 					 e instanceof CommerceAddressCountryException ||
 					 e instanceof CommerceAddressStreetException) {
 

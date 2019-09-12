@@ -28,8 +28,6 @@ taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
 <%@ page import="com.liferay.commerce.account.constants.CommerceAccountActionKeys" %><%@
 page import="com.liferay.commerce.account.constants.CommerceAccountConstants" %><%@
-page import="com.liferay.commerce.account.exception.CommerceAccountDefaultBillingAddressException" %><%@
-page import="com.liferay.commerce.account.exception.CommerceAccountDefaultShippingAddressException" %><%@
 page import="com.liferay.commerce.account.exception.NoSuchAccountException" %><%@
 page import="com.liferay.commerce.account.model.CommerceAccount" %><%@
 page import="com.liferay.commerce.account.web.internal.display.context.CommerceAccountDisplayContext" %><%@
