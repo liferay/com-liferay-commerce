@@ -32,16 +32,25 @@ import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.GroupConstants;
 import com.liferay.portal.kernel.model.Layout;
+import com.liferay.portal.kernel.model.LayoutConstants;
 import com.liferay.portal.kernel.model.LayoutFriendlyURLComposite;
+import com.liferay.portal.kernel.model.LayoutTemplate;
+import com.liferay.portal.kernel.model.LayoutTypePortlet;
 import com.liferay.portal.kernel.portlet.FriendlyURLResolver;
+import com.liferay.portal.kernel.portlet.PortletIdCodec;
+import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.service.LayoutLocalService;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.InheritableMap;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Portal;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.List;
@@ -263,10 +272,22 @@ public class ProductFriendlyURLResolver implements FriendlyURLResolver {
 				layoutUuid, groupId, privateLayout);
 		}
 
-		long plid = _portal.getPlidFromPortletId(
+		// Use custom implementation instead of _portal.getPlidFromPortletId to
+		// work around LPS-101469. Switch back after 7.2 SP1 is released.
+
+		long plid = _getPlidFromPortletId(
 			groupId, privateLayout, CPPortletKeys.CP_CONTENT_WEB);
 
-		return _layoutLocalService.getLayout(plid);
+		try {
+			return _layoutLocalService.getLayout(plid);
+		}
+		catch (PortalException pe) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(pe, pe);
+			}
+
+			throw pe;
+		}
 	}
 
 	private long _getCommerceAccountId(
@@ -288,6 +309,94 @@ public class ProductFriendlyURLResolver implements FriendlyURLResolver {
 		return commerceAccountId;
 	}
 
+	private long _getPlidFromPortletId(
+		List<Layout> layouts, String portletId, long scopeGroupId) {
+
+		for (Layout layout : layouts) {
+			LayoutTypePortlet layoutTypePortlet =
+				(LayoutTypePortlet)layout.getLayoutType();
+
+			if (_hasNonstaticPortletId(layoutTypePortlet, portletId) &&
+				(_portal.getScopeGroupId(layout, portletId) == scopeGroupId)) {
+
+				return layout.getPlid();
+			}
+		}
+
+		return LayoutConstants.DEFAULT_PLID;
+	}
+
+	private long _getPlidFromPortletId(
+		long groupId, boolean privateLayout, String portletId) {
+
+		long scopeGroupId = groupId;
+
+		try {
+			Group group = _groupLocalService.getGroup(groupId);
+
+			if (group.isLayout()) {
+				Layout scopeLayout = _layoutLocalService.getLayout(
+					group.getClassPK());
+
+				groupId = scopeLayout.getGroupId();
+			}
+
+			String[] validLayoutTypes = {
+				LayoutConstants.TYPE_PORTLET,
+				LayoutConstants.TYPE_FULL_PAGE_APPLICATION,
+				LayoutConstants.TYPE_PANEL
+			};
+
+			for (String layoutType : validLayoutTypes) {
+				List<Layout> layouts = _layoutLocalService.getLayouts(
+					groupId, privateLayout, layoutType);
+
+				long plid = _getPlidFromPortletId(
+					layouts, portletId, scopeGroupId);
+
+				if (plid != LayoutConstants.DEFAULT_PLID) {
+					return plid;
+				}
+			}
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
+		}
+
+		return LayoutConstants.DEFAULT_PLID;
+	}
+
+	private boolean _hasNonstaticPortletId(
+		LayoutTypePortlet layoutTypePortlet, String portletId) {
+
+		LayoutTemplate layoutTemplate = layoutTypePortlet.getLayoutTemplate();
+
+		for (String columnId : layoutTemplate.getColumns()) {
+			String[] columnValues = StringUtil.split(
+				layoutTypePortlet.getTypeSettingsProperty(columnId));
+
+			for (String nonstaticPortletId : columnValues) {
+				if (nonstaticPortletId.equals(portletId)) {
+					return true;
+				}
+
+				String decodedNonStaticPortletName =
+					PortletIdCodec.decodePortletName(nonstaticPortletId);
+
+				if (decodedNonStaticPortletName.equals(portletId)) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		ProductFriendlyURLResolver.class);
+
 	@Reference
 	private AssetTagLocalService _assetTagLocalService;
 
@@ -305,6 +414,9 @@ public class ProductFriendlyURLResolver implements FriendlyURLResolver {
 
 	@Reference
 	private CProductLocalService _cProductLocalService;
+
+	@Reference
+	private GroupLocalService _groupLocalService;
 
 	@Reference
 	private Http _http;
