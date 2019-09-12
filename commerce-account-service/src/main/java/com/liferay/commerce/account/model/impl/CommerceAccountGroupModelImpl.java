@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.account.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.account.model.CommerceAccountGroup;
 import com.liferay.commerce.account.model.CommerceAccountGroupModel;
 import com.liferay.commerce.account.model.CommerceAccountGroupSoap;
@@ -63,12 +61,11 @@ import java.util.function.Function;
  * @generated
  */
 @JSON(strict = true)
-@ProviderType
 public class CommerceAccountGroupModelImpl
 	extends BaseModelImpl<CommerceAccountGroup>
 	implements CommerceAccountGroupModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce account group model instance should use the <code>CommerceAccountGroup</code> interface instead.

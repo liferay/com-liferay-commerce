@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.account.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceAccountLocalService
  * @generated
  */
-@ProviderType
 public class CommerceAccountLocalServiceWrapper
 	implements CommerceAccountLocalService,
 			   ServiceWrapper<CommerceAccountLocalService> {
@@ -36,6 +33,11 @@ public class CommerceAccountLocalServiceWrapper
 		_commerceAccountLocalService = commerceAccountLocalService;
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link CommerceAccountLocalServiceUtil} to access the commerce account local service. Add custom service methods to <code>com.liferay.commerce.account.service.impl.CommerceAccountLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
 	@Override
 	public com.liferay.commerce.account.model.CommerceAccount
 			addBusinessCommerceAccount(

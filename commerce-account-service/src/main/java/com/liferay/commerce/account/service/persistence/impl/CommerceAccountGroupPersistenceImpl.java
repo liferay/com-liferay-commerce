@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.account.service.persistence.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.account.exception.NoSuchAccountGroupException;
 import com.liferay.commerce.account.model.CommerceAccountGroup;
 import com.liferay.commerce.account.model.impl.CommerceAccountGroupImpl;
@@ -70,12 +68,11 @@ import java.util.Set;
  * @author Marco Leo
  * @generated
  */
-@ProviderType
 public class CommerceAccountGroupPersistenceImpl
 	extends BasePersistenceImpl<CommerceAccountGroup>
 	implements CommerceAccountGroupPersistence {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Always use <code>CommerceAccountGroupUtil</code> to access the commerce account group persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.

@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.account.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
@@ -34,7 +32,6 @@ import java.util.Date;
  * @author Marco Leo
  * @generated
  */
-@ProviderType
 public class CommerceAccountCacheModel
 	implements CacheModel<CommerceAccount>, Externalizable {
 

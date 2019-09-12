@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.account.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.account.model.CommerceAccountUserRel;
 import com.liferay.commerce.account.service.persistence.CommerceAccountUserRelPK;
 import com.liferay.portal.kernel.model.CacheModel;
@@ -35,7 +33,6 @@ import java.util.Date;
  * @author Marco Leo
  * @generated
  */
-@ProviderType
 public class CommerceAccountUserRelCacheModel
 	implements CacheModel<CommerceAccountUserRel>, Externalizable {
 

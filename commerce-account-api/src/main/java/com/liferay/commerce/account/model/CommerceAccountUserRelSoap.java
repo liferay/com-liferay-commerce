@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.account.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.account.service.persistence.CommerceAccountUserRelPK;
 
 import java.io.Serializable;
@@ -30,7 +28,6 @@ import java.util.List;
  * @author Marco Leo
  * @generated
  */
-@ProviderType
 public class CommerceAccountUserRelSoap implements Serializable {
 
 	public static CommerceAccountUserRelSoap toSoapModel(

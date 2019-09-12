@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.account.service.persistence.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.account.exception.NoSuchAccountUserRelException;
 import com.liferay.commerce.account.model.CommerceAccountUserRel;
 import com.liferay.commerce.account.model.impl.CommerceAccountUserRelImpl;
@@ -62,12 +60,11 @@ import java.util.Set;
  * @author Marco Leo
  * @generated
  */
-@ProviderType
 public class CommerceAccountUserRelPersistenceImpl
 	extends BasePersistenceImpl<CommerceAccountUserRel>
 	implements CommerceAccountUserRelPersistence {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Always use <code>CommerceAccountUserRelUtil</code> to access the commerce account user rel persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.

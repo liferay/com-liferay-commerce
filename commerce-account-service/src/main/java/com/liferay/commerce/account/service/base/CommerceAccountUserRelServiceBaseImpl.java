@@ -55,7 +55,7 @@ public abstract class CommerceAccountUserRelServiceBaseImpl
 	extends BaseServiceImpl
 	implements CommerceAccountUserRelService, IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CommerceAccountUserRelService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.account.service.CommerceAccountUserRelServiceUtil</code>.
