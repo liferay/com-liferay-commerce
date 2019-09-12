@@ -47,9 +47,6 @@ if (commerceAddress != null) {
 
 		<aui:model-context bean="<%= commerceAccount %>" model="<%= CommerceAccount.class %>" />
 
-		<liferay-ui:error exception="<%= CommerceAccountDefaultBillingAddressException.class %>" message="to-set-this-address-as-the-default-billing-you-must-first-unmark-the-current-one" />
-		<liferay-ui:error exception="<%= CommerceAccountDefaultShippingAddressException.class %>" message="to-set-this-address-as-the-default-shipping-you-must-first-unmark-the-current-one" />
-
 		<section class="panel panel-secondary">
 			<div class="panel-body">
 				<div class="row">

@@ -15,8 +15,6 @@
 package com.liferay.commerce.account.service.impl;
 
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
-import com.liferay.commerce.account.exception.CommerceAccountDefaultBillingAddressException;
-import com.liferay.commerce.account.exception.CommerceAccountDefaultShippingAddressException;
 import com.liferay.commerce.account.exception.CommerceAccountNameException;
 import com.liferay.commerce.account.exception.DuplicateCommerceAccountException;
 import com.liferay.commerce.account.internal.search.CommerceAccountIndexer;
