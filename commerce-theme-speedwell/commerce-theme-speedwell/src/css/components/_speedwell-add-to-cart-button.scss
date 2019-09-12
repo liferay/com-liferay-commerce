@@ -221,7 +221,7 @@
 				width: 100%;
 				transition: width .2s ease-out;
 
-				&.fixed {
+				&.is-fixed {
 					position: fixed;
 					width: 100%;
 					bottom: 0;

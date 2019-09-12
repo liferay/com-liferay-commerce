@@ -7,7 +7,6 @@
 	<meta content="initial-scale=1.0, width=device-width" name="viewport" />
 
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap" rel="stylesheet">
-	<script type="text/javascript" src="${javascript_folder}/intersection-observer.js"></script>
 	<script type="text/javascript" src="${javascript_folder}/standalone/SpeedwellSlider.js" defer></script>
 	<@liferay_util["include"] page=top_head_include />
 </head>
@@ -118,5 +117,11 @@
 			<@liferay_util["include"] page=bottom_include />
 		</div>
 	</div>
+	<script type="text/javascript" src="${javascript_folder}/intersection-observer.js"></script>
+	<script type="text/javascript" src="${javascript_folder}/DOM/context.js"></script>
+	<script type="text/javascript" src="${javascript_folder}/DOM/accessibility.js"></script>
+	<script type="text/javascript" src="${javascript_folder}/DOM/scrollHandler.js"></script>
+	<script type="text/javascript" src="${javascript_folder}/DOM/topbar.js"></script>
+	<script type="text/javascript" src="${javascript_folder}/DOM/mobile.js"></script>
 </body>
 </html>
