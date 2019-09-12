@@ -46,16 +46,23 @@
 			elementClasses="flex-fill"
 			title="payment-status"
 		>
-			<clay:label
-				label="Authorize and capture"
-				style="success"
-			/>
+			<div class="row">
+				<div class="col d-flex">
+					<clay:label
+						elementClasses="align-self-center"
+						label="Authorize and capture"
+						style="success"
+					/>
+				</div>
 
-			<clay:button
-				elementClasses="ml-3"
-				label="refund"
-				style="secondary"
-			/>
+				<div class="col-auto">
+					<clay:button
+						elementClasses="ml-3"
+						label="refund"
+						style="secondary"
+					/>
+				</div>
+			</div>
 		</commerce-ui:panel>
 	</div>
 
@@ -111,6 +118,9 @@
 					</liferay-ui:search-container-column-text>
 				</liferay-ui:search-container-row>
 			</liferay-ui:search-container>
+			<liferay-ui:empty-result-message
+					message="there-are-no-payments"
+			/>
 		</commerce-ui:panel>
 	</div>
 </div>
