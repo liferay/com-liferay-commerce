@@ -17,6 +17,8 @@ package com.liferay.commerce.account.admin.web.internal.display.context;
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
+import com.liferay.commerce.model.CommerceAddress;
+import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -40,6 +42,7 @@ public class CommerceAccountAdminDisplayContext
 		ModelResourcePermission<CommerceAccount>
 			commerceAccountModelResourcePermission,
 		CommerceAccountService commerceAccountService,
+		CommerceAddressService commerceAddressService,
 		RenderRequest renderRequest,
 		UserFileUploadsConfiguration userFileUploadsConfiguration) {
 
@@ -47,7 +50,22 @@ public class CommerceAccountAdminDisplayContext
 			commerceAccountModelResourcePermission, commerceAccountService,
 			renderRequest);
 
+		_commerceAddressService = commerceAddressService;
 		_userFileUploadsConfiguration = userFileUploadsConfiguration;
+	}
+
+	public List<CommerceAddress> getBillingCommerceAddresses()
+		throws PortalException {
+
+		CommerceAccount commerceAccount = getCommerceAccount();
+
+		if (commerceAccount == null) {
+			return null;
+		}
+
+		return _commerceAddressService.getBillingCommerceAddresses(
+			commerceAccount.getCompanyId(), CommerceAccount.class.getName(),
+			commerceAccount.getCommerceAccountId());
 	}
 
 	public PortletURL getPortletURL() {
@@ -93,6 +111,20 @@ public class CommerceAccountAdminDisplayContext
 		_searchContainer.setResults(results);
 
 		return _searchContainer;
+	}
+
+	public List<CommerceAddress> getShippingCommerceAddresses()
+		throws PortalException {
+
+		CommerceAccount commerceAccount = getCommerceAccount();
+
+		if (commerceAccount == null) {
+			return null;
+		}
+
+		return _commerceAddressService.getShippingCommerceAddresses(
+			commerceAccount.getCompanyId(), CommerceAccount.class.getName(),
+			commerceAccount.getCommerceAccountId());
 	}
 
 	public UserFileUploadsConfiguration getUserFileUploadsConfiguration() {
@@ -143,6 +175,7 @@ public class CommerceAccountAdminDisplayContext
 			suffix + "Navigation", "all");
 	}
 
+	private final CommerceAddressService _commerceAddressService;
 	private SearchContainer<CommerceAccount> _searchContainer;
 	private final UserFileUploadsConfiguration _userFileUploadsConfiguration;
 
