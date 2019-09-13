@@ -138,11 +138,13 @@ public class CommerceShipmentModelImpl
 			"value.object.column.bitmask.enabled.com.liferay.commerce.model.CommerceShipment"),
 		true);
 
-	public static final long GROUPID_COLUMN_BITMASK = 1L;
+	public static final long COMMERCEADDRESSID_COLUMN_BITMASK = 1L;
 
-	public static final long STATUS_COLUMN_BITMASK = 2L;
+	public static final long GROUPID_COLUMN_BITMASK = 2L;
 
-	public static final long CREATEDATE_COLUMN_BITMASK = 4L;
+	public static final long STATUS_COLUMN_BITMASK = 4L;
+
+	public static final long CREATEDATE_COLUMN_BITMASK = 8L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -838,7 +840,19 @@ public class CommerceShipmentModelImpl
 
 	@Override
 	public void setCommerceAddressId(long commerceAddressId) {
+		_columnBitmask |= COMMERCEADDRESSID_COLUMN_BITMASK;
+
+		if (!_setOriginalCommerceAddressId) {
+			_setOriginalCommerceAddressId = true;
+
+			_originalCommerceAddressId = _commerceAddressId;
+		}
+
 		_commerceAddressId = commerceAddressId;
+	}
+
+	public long getOriginalCommerceAddressId() {
+		return _originalCommerceAddressId;
 	}
 
 	@JSON
@@ -1068,6 +1082,11 @@ public class CommerceShipmentModelImpl
 
 		commerceShipmentModelImpl._setModifiedDate = false;
 
+		commerceShipmentModelImpl._originalCommerceAddressId =
+			commerceShipmentModelImpl._commerceAddressId;
+
+		commerceShipmentModelImpl._setOriginalCommerceAddressId = false;
+
 		commerceShipmentModelImpl._originalStatus =
 			commerceShipmentModelImpl._status;
 
@@ -1254,6 +1273,8 @@ public class CommerceShipmentModelImpl
 	private boolean _setModifiedDate;
 	private long _commerceAccountId;
 	private long _commerceAddressId;
+	private long _originalCommerceAddressId;
+	private boolean _setOriginalCommerceAddressId;
 	private long _commerceShippingMethodId;
 	private String _shippingOptionName;
 	private String _carrier;

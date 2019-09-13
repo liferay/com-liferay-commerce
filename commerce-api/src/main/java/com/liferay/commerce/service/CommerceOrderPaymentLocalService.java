@@ -227,6 +227,11 @@ public interface CommerceOrderPaymentLocalService
 	public List<CommerceOrderPayment> getCommerceOrderPayments(
 		int start, int end);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceOrderPayment> getCommerceOrderPayments(
+		long commerceOrderId, int start, int end,
+		OrderByComparator<CommerceOrderPayment> orderByComparator);
+
 	/**
 	 * Returns the number of commerce order payments.
 	 *
@@ -234,6 +239,9 @@ public interface CommerceOrderPaymentLocalService
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceOrderPaymentsCount();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceOrderPaymentsCount(long commerceOrderId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
