@@ -60,6 +60,7 @@ context.put("vocabularyIds", cpPublisherConfigurationDisplayContext.getVocabular
 
 <soy:template-renderer
 	context="<%= context %>"
-	module="asset-publisher-web/js/AutoField.es"
+	useNamespace="<%= true %>"
+	module="js/AutoField.es"
 	templateNamespace="com.liferay.asset.publisher.web.AutoField.render"
 />
