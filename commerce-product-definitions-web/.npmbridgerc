@@ -1,0 +1,15 @@
+{
+	"commerce-product-definitions-web": {
+		"dest-mod-name-mapper": {
+			"from": "(.*)\\.js$",
+			"to": "bridge/commerce-product-definitions-web/$1"
+		},
+		"file-globs": "**/*.es.js,**/*.soy.js",
+		"input": "classes/META-INF/resources",
+		"output": "classes/META-INF/resources/bridge/commerce-product-definitions-web",
+		"src-mod-name-mapper": {
+			"from": "(.*)\\.js$",
+			"to": "commerce-product-definitions-web/$1"
+		}
+	}
+}

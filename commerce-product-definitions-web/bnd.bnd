@@ -1,6 +1,7 @@
 Bundle-Name: Liferay Commerce Product Definitions Web
 Bundle-SymbolicName: com.liferay.commerce.product.definitions.web
 Bundle-Version: 2.0.8
+Liferay-JS-Submodules-Bridge: commerce-product-definitions-web
 Export-Package:\
 	com.liferay.commerce.product.definitions.web.display.context,\
 	com.liferay.commerce.product.definitions.web.portlet.action,\
