@@ -1575,7 +1575,7 @@ public class CommerceOrderLocalServiceImpl
 		int previousOrderStatus = commerceOrder.getOrderStatus();
 
 		commerceOrder.setOrderStatus(
-			CommerceOrderConstants.ORDER_STATUS_TO_TRANSMIT);
+			CommerceOrderConstants.ORDER_STATUS_TO_FULFILL);
 		commerceOrder.setStatus(WorkflowConstants.STATUS_PENDING);
 
 		commerceOrderPersistence.update(commerceOrder);
@@ -1719,11 +1719,9 @@ public class CommerceOrderLocalServiceImpl
 	}
 
 	protected static final int[] AVAILABLE_ORDER_STATUSES = {
-		CommerceOrderConstants.ORDER_STATUS_TO_TRANSMIT,
-		CommerceOrderConstants.ORDER_STATUS_TRANSMITTED,
-		CommerceOrderConstants.ORDER_STATUS_AWAITING_FULFILLMENT,
+		CommerceOrderConstants.ORDER_STATUS_TO_FULFILL,
 		CommerceOrderConstants.ORDER_STATUS_AWAITING_PICKUP,
-		CommerceOrderConstants.ORDER_STATUS_AWAITING_SHIPMENT,
+		CommerceOrderConstants.ORDER_STATUS_FULFILLED,
 		CommerceOrderConstants.ORDER_STATUS_PARTIALLY_REFUNDED,
 		CommerceOrderConstants.ORDER_STATUS_PARTIALLY_SHIPPED,
 		CommerceOrderConstants.ORDER_STATUS_REFUNDED,
