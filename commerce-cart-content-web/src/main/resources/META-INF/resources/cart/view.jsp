@@ -63,7 +63,7 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 	displayStyleGroupId="<%= commerceCartContentDisplayContext.getDisplayStyleGroupId() %>"
 	entries="<%= commerceOrderItemSearchContainer.getResults() %>"
 >
-	<div class="container-fluid-1280" id="<portlet:namespace />orderItemsContainer">
+	<div class="container-fluid-1280 commerce-order-items" id="<portlet:namespace />orderItemsContainer">
 		<div class="commerce-order-items-container" id="<portlet:namespace />entriesContainer">
 			<liferay-ui:search-container
 				id="commerceOrderItems"
