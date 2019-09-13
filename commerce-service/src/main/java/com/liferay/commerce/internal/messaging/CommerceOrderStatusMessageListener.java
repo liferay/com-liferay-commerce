@@ -52,7 +52,7 @@ public class CommerceOrderStatusMessageListener extends BaseMessageListener {
 			_commerceChannelLocalService.getCommerceChannelByOrderGroupId(
 				commerceOrder.getGroupId());
 
-		if (orderStatus == CommerceOrderConstants.ORDER_STATUS_TO_TRANSMIT) {
+		if (orderStatus == CommerceOrderConstants.ORDER_STATUS_TO_FULFILL) {
 			_commerceNotificationHelper.sendNotifications(
 				commerceChannel.getSiteGroupId(), commerceOrder.getUserId(),
 				CommerceOrderConstants.ORDER_NOTIFICATION_PLACED,
