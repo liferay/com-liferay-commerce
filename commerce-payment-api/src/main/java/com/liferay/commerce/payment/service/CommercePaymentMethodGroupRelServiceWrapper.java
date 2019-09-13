@@ -162,6 +162,17 @@ public class CommercePaymentMethodGroupRelServiceWrapper
 	public java.util.List
 		<com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel>
 				getCommercePaymentMethodGroupRels(
+					long groupId, boolean active, int start, int end)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commercePaymentMethodGroupRelService.
+			getCommercePaymentMethodGroupRels(groupId, active, start, end);
+	}
+
+	@Override
+	public java.util.List
+		<com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel>
+				getCommercePaymentMethodGroupRels(
 					long groupId, long commerceCountryId, boolean active)
 			throws com.liferay.portal.kernel.exception.PortalException {
 

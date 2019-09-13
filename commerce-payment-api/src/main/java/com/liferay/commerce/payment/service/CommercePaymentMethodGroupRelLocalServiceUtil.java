@@ -343,6 +343,15 @@ public class CommercePaymentMethodGroupRelLocalServiceUtil {
 	public static java.util.List
 		<com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel>
 			getCommercePaymentMethodGroupRels(
+				long groupId, boolean active, int start, int end) {
+
+		return getService().getCommercePaymentMethodGroupRels(
+			groupId, active, start, end);
+	}
+
+	public static java.util.List
+		<com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel>
+			getCommercePaymentMethodGroupRels(
 				long groupId, long commerceCountryId, boolean active) {
 
 		return getService().getCommercePaymentMethodGroupRels(

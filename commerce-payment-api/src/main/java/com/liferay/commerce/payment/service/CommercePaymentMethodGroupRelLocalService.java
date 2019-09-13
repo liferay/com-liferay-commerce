@@ -261,6 +261,11 @@ public interface CommercePaymentMethodGroupRelLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommercePaymentMethodGroupRel>
 		getCommercePaymentMethodGroupRels(
+			long groupId, boolean active, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommercePaymentMethodGroupRel>
+		getCommercePaymentMethodGroupRels(
 			long groupId, long commerceCountryId, boolean active);
 
 	/**
