@@ -368,6 +368,16 @@ public class CommercePaymentMethodGroupRelLocalServiceWrapper
 	public java.util.List
 		<com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel>
 			getCommercePaymentMethodGroupRels(
+				long groupId, boolean active, int start, int end) {
+
+		return _commercePaymentMethodGroupRelLocalService.
+			getCommercePaymentMethodGroupRels(groupId, active, start, end);
+	}
+
+	@Override
+	public java.util.List
+		<com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel>
+			getCommercePaymentMethodGroupRels(
 				long groupId, long commerceCountryId, boolean active) {
 
 		return _commercePaymentMethodGroupRelLocalService.

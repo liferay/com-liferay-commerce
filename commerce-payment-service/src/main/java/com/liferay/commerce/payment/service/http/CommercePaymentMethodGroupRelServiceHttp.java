@@ -513,6 +513,50 @@ public class CommercePaymentMethodGroupRelServiceHttp {
 	public static java.util.List
 		<com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel>
 				getCommercePaymentMethodGroupRels(
+					HttpPrincipal httpPrincipal, long groupId, boolean active,
+					int start, int end)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommercePaymentMethodGroupRelServiceUtil.class,
+				"getCommercePaymentMethodGroupRels",
+				_getCommercePaymentMethodGroupRelsParameterTypes11);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, groupId, active, start, end);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return (java.util.List
+				<com.liferay.commerce.payment.model.
+					CommercePaymentMethodGroupRel>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static java.util.List
+		<com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel>
+				getCommercePaymentMethodGroupRels(
 					HttpPrincipal httpPrincipal, long groupId,
 					long commerceCountryId, boolean active)
 			throws com.liferay.portal.kernel.exception.PortalException {
@@ -521,7 +565,7 @@ public class CommercePaymentMethodGroupRelServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommercePaymentMethodGroupRelServiceUtil.class,
 				"getCommercePaymentMethodGroupRels",
-				_getCommercePaymentMethodGroupRelsParameterTypes11);
+				_getCommercePaymentMethodGroupRelsParameterTypes12);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, groupId, commerceCountryId, active);
@@ -562,7 +606,7 @@ public class CommercePaymentMethodGroupRelServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommercePaymentMethodGroupRelServiceUtil.class,
 				"getCommercePaymentMethodGroupRelsCount",
-				_getCommercePaymentMethodGroupRelsCountParameterTypes12);
+				_getCommercePaymentMethodGroupRelsCountParameterTypes13);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, groupId, active);
@@ -603,7 +647,7 @@ public class CommercePaymentMethodGroupRelServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommercePaymentMethodGroupRelServiceUtil.class, "setActive",
-				_setActiveParameterTypes13);
+				_setActiveParameterTypes14);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commercePaymentMethodGroupRelId, active);
@@ -653,7 +697,7 @@ public class CommercePaymentMethodGroupRelServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommercePaymentMethodGroupRelServiceUtil.class,
 				"updateCommercePaymentMethodGroupRel",
-				_updateCommercePaymentMethodGroupRelParameterTypes14);
+				_updateCommercePaymentMethodGroupRelParameterTypes15);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commercePaymentMethodGroupRelId, nameMap,
@@ -740,17 +784,21 @@ public class CommercePaymentMethodGroupRelServiceHttp {
 		};
 	private static final Class<?>[]
 		_getCommercePaymentMethodGroupRelsParameterTypes11 = new Class[] {
+			long.class, boolean.class, int.class, int.class
+		};
+	private static final Class<?>[]
+		_getCommercePaymentMethodGroupRelsParameterTypes12 = new Class[] {
 			long.class, long.class, boolean.class
 		};
 	private static final Class<?>[]
-		_getCommercePaymentMethodGroupRelsCountParameterTypes12 = new Class[] {
+		_getCommercePaymentMethodGroupRelsCountParameterTypes13 = new Class[] {
 			long.class, boolean.class
 		};
-	private static final Class<?>[] _setActiveParameterTypes13 = new Class[] {
+	private static final Class<?>[] _setActiveParameterTypes14 = new Class[] {
 		long.class, boolean.class
 	};
 	private static final Class<?>[]
-		_updateCommercePaymentMethodGroupRelParameterTypes14 = new Class[] {
+		_updateCommercePaymentMethodGroupRelParameterTypes15 = new Class[] {
 			long.class, java.util.Map.class, java.util.Map.class,
 			java.io.File.class, java.util.Map.class, double.class,
 			boolean.class,

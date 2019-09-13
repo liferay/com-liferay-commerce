@@ -268,6 +268,30 @@ public class CommercePaymentMethodGroupRelServiceSoap {
 	public static
 		com.liferay.commerce.payment.model.CommercePaymentMethodGroupRelSoap[]
 				getCommercePaymentMethodGroupRels(
+					long groupId, boolean active, int start, int end)
+			throws RemoteException {
+
+		try {
+			java.util.List
+				<com.liferay.commerce.payment.model.
+					CommercePaymentMethodGroupRel> returnValue =
+						CommercePaymentMethodGroupRelServiceUtil.
+							getCommercePaymentMethodGroupRels(
+								groupId, active, start, end);
+
+			return com.liferay.commerce.payment.model.
+				CommercePaymentMethodGroupRelSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static
+		com.liferay.commerce.payment.model.CommercePaymentMethodGroupRelSoap[]
+				getCommercePaymentMethodGroupRels(
 					long groupId, long commerceCountryId, boolean active)
 			throws RemoteException {
 

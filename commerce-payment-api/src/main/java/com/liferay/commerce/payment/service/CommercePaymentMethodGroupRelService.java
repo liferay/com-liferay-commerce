@@ -122,6 +122,12 @@ public interface CommercePaymentMethodGroupRelService extends BaseService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommercePaymentMethodGroupRel>
 			getCommercePaymentMethodGroupRels(
+				long groupId, boolean active, int start, int end)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommercePaymentMethodGroupRel>
+			getCommercePaymentMethodGroupRels(
 				long groupId, long commerceCountryId, boolean active)
 		throws PortalException;
 
