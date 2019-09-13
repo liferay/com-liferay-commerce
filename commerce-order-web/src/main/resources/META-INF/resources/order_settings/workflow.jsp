@@ -33,7 +33,7 @@ List<WorkflowDefinition> workflowDefinitions = commerceOrderSettingsDisplayConte
 		<%@ include file="/order_settings/workflow_definition.jspf" %>
 
 		<%
-		typePK = CommerceOrderConstants.TYPE_PK_TRANSMISSION;
+		typePK = CommerceOrderConstants.TYPE_PK_FULFILLMENT;
 		typePrefix = "transmission";
 		%>
 
