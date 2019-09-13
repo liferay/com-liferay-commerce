@@ -113,9 +113,10 @@ public class CommerceOrderItemLocalServiceImpl
 			_commerceProductPriceCalculation.getCommerceProductPrice(
 				cpInstanceId, quantity, false, commerceContext);
 
-		CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
-		CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
-		CommerceMoney promoPrice = commerceProductPrice.getUnitPromoPrice();
+		CommerceMoney unitPriceMoney = commerceProductPrice.getUnitPrice();
+		CommerceMoney finalPriceMoney = commerceProductPrice.getFinalPrice();
+		CommerceMoney unitPromoPriceMoney =
+			commerceProductPrice.getUnitPromoPrice();
 
 		long commerceOrderItemId = counterLocalService.increment();
 
@@ -133,16 +134,16 @@ public class CommerceOrderItemLocalServiceImpl
 		commerceOrderItem.setQuantity(quantity);
 		commerceOrderItem.setShippedQuantity(shippedQuantity);
 		commerceOrderItem.setJson(json);
-		commerceOrderItem.setUnitPrice(unitPrice.getPrice());
+		commerceOrderItem.setUnitPrice(unitPriceMoney.getPrice());
 
-		BigDecimal promoPriceValue = BigDecimal.ZERO;
+		BigDecimal promoPrice = BigDecimal.ZERO;
 
-		if (promoPrice != null) {
-			promoPriceValue = promoPrice.getPrice();
+		if (unitPromoPriceMoney != null) {
+			promoPrice = unitPromoPriceMoney.getPrice();
 		}
 
-		commerceOrderItem.setPromoPrice(promoPriceValue);
-		commerceOrderItem.setFinalPrice(finalPrice.getPrice());
+		commerceOrderItem.setPromoPrice(promoPrice);
+		commerceOrderItem.setFinalPrice(finalPriceMoney.getPrice());
 		commerceOrderItem.setNameMap(cpDefinition.getNameMap());
 		commerceOrderItem.setSku(cpInstance.getSku());
 		commerceOrderItem.setExpandoBridgeAttributes(serviceContext);
@@ -442,9 +443,10 @@ public class CommerceOrderItemLocalServiceImpl
 				commerceOrderItem.getCPInstanceId(), quantity, false,
 				commerceContext);
 
-		CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
-		CommerceMoney promoPrice = commerceProductPrice.getUnitPromoPrice();
-		CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
+		CommerceMoney unitPriceMoney = commerceProductPrice.getUnitPrice();
+		CommerceMoney unitPromoPriceMoney =
+			commerceProductPrice.getUnitPromoPrice();
+		CommerceMoney finalPriceMoney = commerceProductPrice.getFinalPrice();
 
 		validate(
 			serviceContext.getLocale(), commerceOrderItem.getCommerceOrder(),
@@ -453,16 +455,16 @@ public class CommerceOrderItemLocalServiceImpl
 
 		commerceOrderItem.setQuantity(quantity);
 		commerceOrderItem.setJson(json);
-		commerceOrderItem.setUnitPrice(unitPrice.getPrice());
+		commerceOrderItem.setUnitPrice(unitPriceMoney.getPrice());
 
-		BigDecimal promoPriceValue = BigDecimal.ZERO;
+		BigDecimal promoPrice = BigDecimal.ZERO;
 
-		if (promoPrice != null) {
-			promoPriceValue = promoPrice.getPrice();
+		if (unitPromoPriceMoney != null) {
+			promoPrice = unitPromoPriceMoney.getPrice();
 		}
 
-		commerceOrderItem.setPromoPrice(promoPriceValue);
-		commerceOrderItem.setFinalPrice(finalPrice.getPrice());
+		commerceOrderItem.setPromoPrice(promoPrice);
+		commerceOrderItem.setFinalPrice(finalPriceMoney.getPrice());
 		commerceOrderItem.setExpandoBridgeAttributes(serviceContext);
 
 		_setCommerceOrderItemDiscountValue(
@@ -536,20 +538,21 @@ public class CommerceOrderItemLocalServiceImpl
 				commerceOrderItem.getCPInstanceId(),
 				commerceOrderItem.getQuantity(), false, commerceContext);
 
-		CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
-		CommerceMoney promoPrice = commerceProductPrice.getUnitPromoPrice();
-		CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
+		CommerceMoney unitPriceMoney = commerceProductPrice.getUnitPrice();
+		CommerceMoney unitPromoPriceMoney =
+			commerceProductPrice.getUnitPromoPrice();
+		CommerceMoney finalPriceMoney = commerceProductPrice.getFinalPrice();
 
-		commerceOrderItem.setUnitPrice(unitPrice.getPrice());
+		commerceOrderItem.setUnitPrice(unitPriceMoney.getPrice());
 
-		BigDecimal promoPriceValue = BigDecimal.ZERO;
+		BigDecimal promoPrice = BigDecimal.ZERO;
 
-		if (promoPrice != null) {
-			promoPriceValue = promoPrice.getPrice();
+		if (unitPromoPriceMoney != null) {
+			promoPrice = unitPromoPriceMoney.getPrice();
 		}
 
-		commerceOrderItem.setPromoPrice(promoPriceValue);
-		commerceOrderItem.setFinalPrice(finalPrice.getPrice());
+		commerceOrderItem.setPromoPrice(promoPrice);
+		commerceOrderItem.setFinalPrice(finalPriceMoney.getPrice());
 
 		_setCommerceOrderItemDiscountValue(
 			commerceOrderItem, commerceProductPrice.getDiscountValue());

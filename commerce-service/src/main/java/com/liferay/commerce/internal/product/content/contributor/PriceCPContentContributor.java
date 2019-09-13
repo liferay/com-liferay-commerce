@@ -95,25 +95,27 @@ public class PriceCPContentContributor implements CPContentContributor {
 				cpDefinitionInventoryEngine.getMinOrderQuantity(cpInstance),
 				commerceContext);
 
-		CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
+		CommerceMoney unitPriceMoney = commerceProductPrice.getUnitPrice();
 
-		if (unitPrice != null) {
+		if (unitPriceMoney != null) {
 			Locale locale = _portal.getLocale(httpServletRequest);
 
 			jsonObject.put(
-				CPContentContributorConstants.PRICE, unitPrice.format(locale));
+				CPContentContributorConstants.PRICE,
+				unitPriceMoney.format(locale));
 
-			CommerceMoney promoPrice = commerceProductPrice.getUnitPromoPrice();
+			CommerceMoney promoPriceMoney =
+				commerceProductPrice.getUnitPromoPrice();
 
-			BigDecimal promo = promoPrice.getPrice();
+			BigDecimal promoPrice = promoPriceMoney.getPrice();
 
-			if ((promoPrice != null) &&
-				(promo.compareTo(BigDecimal.ZERO) > 0) &&
-				(promo.compareTo(unitPrice.getPrice()) <= 0)) {
+			if ((promoPriceMoney != null) &&
+				(promoPrice.compareTo(BigDecimal.ZERO) > 0) &&
+				(promoPrice.compareTo(unitPriceMoney.getPrice()) <= 0)) {
 
 				jsonObject.put(
 					CPContentContributorConstants.PROMO_PRICE,
-					promoPrice.format(locale));
+					promoPriceMoney.format(locale));
 			}
 		}
 

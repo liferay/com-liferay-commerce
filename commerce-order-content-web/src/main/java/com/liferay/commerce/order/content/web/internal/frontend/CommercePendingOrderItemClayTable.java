@@ -184,10 +184,10 @@ public class CommercePendingOrderItemClayTable
 
 		try {
 			for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
-				String price = StringPool.BLANK;
-				String promoPrice = StringPool.BLANK;
-				String discount = StringPool.BLANK;
-				String total = StringPool.BLANK;
+				String formattedUnitPrice = StringPool.BLANK;
+				String formattedPromoPrice = StringPool.BLANK;
+				String formattedDiscountAmount = StringPool.BLANK;
+				String formattedFinalPrice = StringPool.BLANK;
 
 				CommerceProductPrice commerceProductPrice =
 					_commerceProductPriceCalculation.getCommerceProductPrice(
@@ -195,30 +195,32 @@ public class CommercePendingOrderItemClayTable
 						commerceOrderItem.getQuantity(), commerceContext);
 
 				if (commerceProductPrice != null) {
-					CommerceMoney unitPrice =
+					CommerceMoney unitPriceMoney =
 						commerceProductPrice.getUnitPrice();
 
-					if (unitPrice != null) {
-						price = unitPrice.format(themeDisplay.getLocale());
-					}
-
-					CommerceMoney unitPromoPrice =
-						commerceProductPrice.getUnitPromoPrice();
-
-					BigDecimal promoPriceValue = unitPromoPrice.getPrice();
-
-					if ((unitPromoPrice != null) &&
-						(promoPriceValue.compareTo(BigDecimal.ZERO) > 0)) {
-
-						promoPrice = unitPromoPrice.format(
+					if (unitPriceMoney != null) {
+						formattedUnitPrice = unitPriceMoney.format(
 							themeDisplay.getLocale());
 					}
 
-					CommerceMoney finalPrice =
+					CommerceMoney unitPromoPriceMoney =
+						commerceProductPrice.getUnitPromoPrice();
+
+					BigDecimal promoPrice = unitPromoPriceMoney.getPrice();
+
+					if ((unitPromoPriceMoney != null) &&
+						(promoPrice.compareTo(BigDecimal.ZERO) > 0)) {
+
+						formattedPromoPrice = unitPromoPriceMoney.format(
+							themeDisplay.getLocale());
+					}
+
+					CommerceMoney finalPriceMoney =
 						commerceProductPrice.getFinalPrice();
 
-					if (finalPrice != null) {
-						total = finalPrice.format(themeDisplay.getLocale());
+					if (finalPriceMoney != null) {
+						formattedFinalPrice = finalPriceMoney.format(
+							themeDisplay.getLocale());
 					}
 
 					CommerceDiscountValue discountValue =
@@ -228,7 +230,7 @@ public class CommercePendingOrderItemClayTable
 						CommerceMoney discountAmount =
 							discountValue.getDiscountAmount();
 
-						discount = discountAmount.format(
+						formattedDiscountAmount = discountAmount.format(
 							themeDisplay.getLocale());
 					}
 				}
@@ -239,8 +241,9 @@ public class CommercePendingOrderItemClayTable
 						commerceOrderItem.getCommerceOrderId(),
 						commerceOrderItem.getSku(),
 						commerceOrderItem.getName(themeDisplay.getLocale()),
-						price, promoPrice, discount,
-						commerceOrderItem.getQuantity(), total,
+						formattedUnitPrice, formattedPromoPrice,
+						formattedDiscountAmount,
+						commerceOrderItem.getQuantity(), formattedFinalPrice,
 						_cpInstanceHelper.getCPInstanceThumbnailSrc(
 							commerceOrderItem.getCPInstanceId()),
 						CommerceOrderClayTableUtil.getViewShipmentURL(
