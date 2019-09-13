@@ -21,67 +21,83 @@
   }
 }
 
-.commerce-order-items-container {
-  font-size: 12px;
-
-  .table {
-    th, td {
-      border-color: $stroke-alt;
-    }
-
-    th:first-child {
-      color: transparent;
-    }
+.commerce-order-items {
+  @media only screen and (max-width: 767px) {
+    padding: 0;
   }
 
-  tbody {
-    font-size: 1.1em;
-  }
+  &-container {
+    font-size: 12px;
 
-  .lfr-product-column {
-    text-align: right;
+    .table {
+      th, td {
+        border-color: $stroke-alt;
+      }
 
-    .sticker {
-      height: 5rem;
-      width: 5rem;
+      th:first-child {
+        color: transparent;
+      }
     }
-  }
 
-  .lfr-description-column {
-    min-width: 450px;
+    tbody {
+      font-size: 1.1em;
+    }
 
-    a {
+    .lfr-product-column {
+      text-align: right;
+
+      @media only screen and (max-width: 767px) {
+        padding: 0 !important;
+        text-align: center;
+      }
+
+
+      .sticker {
+        height: 5rem;
+        width: 5rem;
+      }
+    }
+
+    .lfr-description-column {
+      min-width: 450px;
+
+      @media only screen and (max-width: 767px) {
+        min-width: 150px;
+      }
+
+      a {
+        font-weight: bold;
+      }
+    }
+
+    .lfr-unit-price-column,
+    .lfr-price-column {
+      max-width: 60px;
+    }
+
+    .lfr-price-column {
+      text-align: right;
+    }
+
+    .lfr-price-column td {
       font-weight: bold;
     }
-  }
 
-  .lfr-unit-price-column,
-  .lfr-price-column {
-    max-width: 60px;
-  }
+    .lfr-entry-action-column {
+      .item-remove span {
+        color: transparent;
+      }
 
-  .lfr-price-column {
-    text-align: right;
-  }
-
-  .lfr-price-column td {
-    font-weight: bold;
-  }
-
-  .lfr-entry-action-column {
-    .item-remove span {
-      color: transparent;
-    }
-
-    .item-remove span::before {
-      content: '\00d7';
-      position: absolute;
-      text-align: center;
-      width: 40px;
-      height: 40px;
-      font-size: 2em;
-      color: $stroke;
-      margin: -10px 0 0;
+      .item-remove span::before {
+        content: '\00d7';
+        position: absolute;
+        text-align: center;
+        width: 40px;
+        height: 40px;
+        font-size: 2em;
+        color: $stroke;
+        margin: -10px 0 0;
+      }
     }
   }
 }
