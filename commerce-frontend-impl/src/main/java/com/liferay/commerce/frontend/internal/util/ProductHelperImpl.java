@@ -55,19 +55,20 @@ public class ProductHelperImpl implements ProductHelper {
 			return null;
 		}
 
-		CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
+		CommerceMoney unitPriceMoney = commerceProductPrice.getUnitPrice();
 
-		PriceModel priceModel = new PriceModel(unitPrice.format(locale));
+		PriceModel priceModel = new PriceModel(unitPriceMoney.format(locale));
 
-		CommerceMoney unitPromoPrice = commerceProductPrice.getUnitPromoPrice();
+		CommerceMoney unitPromoPriceMoney =
+			commerceProductPrice.getUnitPromoPrice();
 
-		BigDecimal promoPrice = unitPromoPrice.getPrice();
+		BigDecimal unitPromoPrice = unitPromoPriceMoney.getPrice();
 
-		if ((promoPrice != null) &&
-			(promoPrice.compareTo(BigDecimal.ZERO) > 0) &&
-			(promoPrice.compareTo(unitPrice.getPrice()) < 0)) {
+		if ((unitPromoPrice != null) &&
+			(unitPromoPrice.compareTo(BigDecimal.ZERO) > 0) &&
+			(unitPromoPrice.compareTo(unitPriceMoney.getPrice()) < 0)) {
 
-			priceModel.setPromoPrice(unitPromoPrice.format(locale));
+			priceModel.setPromoPrice(unitPromoPriceMoney.format(locale));
 		}
 
 		CommerceDiscountValue discountValue =

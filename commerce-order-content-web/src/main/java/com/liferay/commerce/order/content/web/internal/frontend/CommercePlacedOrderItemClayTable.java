@@ -144,18 +144,19 @@ public class CommercePlacedOrderItemClayTable
 
 				Locale locale = themeDisplay.getLocale();
 
-				String price = unitPriceMoney.format(locale);
-				String discount = discountAmountMoney.format(locale);
-				String total = finalPriceMoney.format(locale);
+				String formattedUnitPrice = unitPriceMoney.format(locale);
+				String formattedDiscountAmount = discountAmountMoney.format(
+					locale);
+				String formattedFinalPrice = finalPriceMoney.format(locale);
 
-				String promoPrice = StringPool.BLANK;
+				String formattedPromoPrice = StringPool.BLANK;
 
 				BigDecimal promoPriceValue = promoPriceMoney.getPrice();
 
 				if ((promoPriceMoney != null) &&
 					(promoPriceValue.compareTo(BigDecimal.ZERO) > 0)) {
 
-					promoPrice = promoPriceMoney.format(
+					formattedPromoPrice = promoPriceMoney.format(
 						themeDisplay.getLocale());
 				}
 
@@ -174,8 +175,9 @@ public class CommercePlacedOrderItemClayTable
 						commerceOrderItem.getCommerceOrderId(),
 						commerceOrderItem.getSku(),
 						commerceOrderItem.getName(themeDisplay.getLocale()),
-						price, promoPrice, discount,
-						commerceOrderItem.getQuantity(), total,
+						formattedUnitPrice, formattedPromoPrice,
+						formattedDiscountAmount,
+						commerceOrderItem.getQuantity(), formattedFinalPrice,
 						_cpInstanceHelper.getCPInstanceThumbnailSrc(
 							commerceOrderItem.getCPInstanceId()),
 						viewShipmentURL,

@@ -155,26 +155,26 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 							<c:if test="<%= commerceProductPrice != null %>">
 
 								<%
-								CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
-								CommerceMoney promoPrice = commerceProductPrice.getUnitPromoPrice();
+								CommerceMoney unitPriceMoney = commerceProductPrice.getUnitPrice();
+								CommerceMoney unitPromoPriceMoney = commerceProductPrice.getUnitPromoPrice();
 
-								BigDecimal promoPriceValue = promoPrice.getPrice();
+								BigDecimal promoPrice = unitPromoPriceMoney.getPrice();
 								%>
 
 								<div class="value-section">
 									<span class="price">
 										<c:choose>
-											<c:when test="<%= (promoPrice != null) && (promoPriceValue.compareTo(BigDecimal.ZERO) > 0) %>">
+											<c:when test="<%= (unitPromoPriceMoney != null) && (promoPrice.compareTo(BigDecimal.ZERO) > 0) %>">
 												<span class="price__value price__value--promo-price">
-													<%= HtmlUtil.escape(promoPrice.format(locale)) %>
+													<%= HtmlUtil.escape(unitPromoPriceMoney.format(locale)) %>
 												</span>
 												<span class="price__value price__value--inactive">
-													<%= HtmlUtil.escape(unitPrice.format(locale)) %>
+													<%= HtmlUtil.escape(unitPriceMoney.format(locale)) %>
 												</span>
 											</c:when>
 											<c:otherwise>
 												<span class="price__value {$additionalPriceClasses}">
-													<%= HtmlUtil.escape(unitPrice.format(locale)) %>
+													<%= HtmlUtil.escape(unitPriceMoney.format(locale)) %>
 												</span>
 											</c:otherwise>
 										</c:choose>
@@ -221,12 +221,12 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 							<c:if test="<%= commerceProductPrice != null %>">
 
 								<%
-								CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
+								CommerceMoney finalPriceMoney = commerceProductPrice.getFinalPrice();
 								%>
 
 								<div class="value-section">
 									<span class="commerce-value">
-										<%= HtmlUtil.escape(finalPrice.format(locale)) %>
+										<%= HtmlUtil.escape(finalPriceMoney.format(locale)) %>
 									</span>
 								</div>
 							</c:if>

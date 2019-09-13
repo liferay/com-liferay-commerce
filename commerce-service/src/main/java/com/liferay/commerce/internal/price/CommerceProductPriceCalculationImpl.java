@@ -73,11 +73,11 @@ public class CommerceProductPriceCalculationImpl
 			return null;
 		}
 
-		CommerceMoney unitPrice = getUnitPrice(
+		CommerceMoney unitPriceMoney = getUnitPrice(
 			cpInstanceId, quantity, commerceContext.getCommerceCurrency(),
 			secure, commerceContext);
 
-		CommerceMoney promoPrice = getPromoPrice(
+		CommerceMoney promoPriceMoney = getPromoPrice(
 			cpInstanceId, quantity, commerceContext.getCommerceCurrency(),
 			secure, commerceContext);
 
@@ -85,17 +85,18 @@ public class CommerceProductPriceCalculationImpl
 			new CommerceProductPriceImpl();
 
 		commerceProductPrice.setQuantity(quantity);
-		commerceProductPrice.setUnitPrice(unitPrice);
-		commerceProductPrice.setUnitPromoPrice(promoPrice);
+		commerceProductPrice.setUnitPrice(unitPriceMoney);
+		commerceProductPrice.setUnitPromoPrice(promoPriceMoney);
 
-		BigDecimal finalPrice = unitPrice.getPrice();
+		BigDecimal finalPrice = unitPriceMoney.getPrice();
 
-		BigDecimal promo = promoPrice.getPrice();
+		BigDecimal promoPrice = promoPriceMoney.getPrice();
 
-		if ((promo != null) && (promo.compareTo(BigDecimal.ZERO) > 0) &&
-			(promo.compareTo(unitPrice.getPrice()) <= 0)) {
+		if ((promoPrice != null) &&
+			(promoPrice.compareTo(BigDecimal.ZERO) > 0) &&
+			(promoPrice.compareTo(unitPriceMoney.getPrice()) <= 0)) {
 
-			finalPrice = promoPrice.getPrice();
+			finalPrice = promoPriceMoney.getPrice();
 		}
 
 		CommerceDiscountValue commerceDiscountValue =
@@ -105,10 +106,10 @@ public class CommerceProductPriceCalculationImpl
 		finalPrice = finalPrice.multiply(BigDecimal.valueOf(quantity));
 
 		if (commerceDiscountValue != null) {
-			CommerceMoney discountAmount =
+			CommerceMoney discountAmountMoney =
 				commerceDiscountValue.getDiscountAmount();
 
-			finalPrice = finalPrice.subtract(discountAmount.getPrice());
+			finalPrice = finalPrice.subtract(discountAmountMoney.getPrice());
 		}
 
 		commerceProductPrice.setCommerceDiscountValue(commerceDiscountValue);
