@@ -30,6 +30,7 @@ class CPOptionValueDetail extends Component {
 		var url = new URL(this.optionValueURL);
 
 		url.searchParams.append(this.namespace + 'cpOptionValueId', cpOptionValueId);
+		url.searchParams.set('p_auth', Liferay.authToken);
 
 		fetch(
 			url,
@@ -117,6 +118,8 @@ class CPOptionValueDetail extends Component {
 
 		var formData = new FormData(form);
 
+		formData.set('p_auth', Liferay.authToken);
+
 		fetch(
 			form.action,
 			{
@@ -139,6 +142,8 @@ class CPOptionValueDetail extends Component {
 		form.querySelector('[name=' + this.namespace + 'cpOptionId]').value = this.cpOptionId;
 
 		var formData = new FormData(form);
+
+		formData.set('p_auth', Liferay.authToken);
 
 		fetch(
 			form.action,

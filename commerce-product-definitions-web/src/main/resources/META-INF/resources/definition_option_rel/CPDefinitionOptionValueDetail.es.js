@@ -31,6 +31,7 @@ class CPDefinitionOptionValueDetail extends Component {
 
 		url.searchParams.append(this.namespace + 'cpDefinitionId', this.cpDefinitionId);
 		url.searchParams.append(this.namespace + 'cpDefinitionOptionValueRelId', cpDefinitionOptionValueRelId);
+		url.searchParams.set('p_auth', Liferay.authToken);
 
 		fetch(
 			url,
@@ -119,6 +120,8 @@ class CPDefinitionOptionValueDetail extends Component {
 
 		var formData = new FormData(form);
 
+		formData.set('p_auth', Liferay.authToken);
+
 		fetch(
 			form.action,
 			{
@@ -141,6 +144,8 @@ class CPDefinitionOptionValueDetail extends Component {
 		form.querySelector('[name=' + this.namespace + 'cpDefinitionOptionRelId]').value = this.cpDefinitionOptionRelId;
 
 		var formData = new FormData(form);
+
+		formData.set('p_auth', Liferay.authToken);
 
 		fetch(
 			form.action,

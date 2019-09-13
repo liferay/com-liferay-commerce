@@ -108,7 +108,7 @@ class UserInvitation extends Component {
 
 	_fetchUsers() {
 		return fetch(
-			this.usersAPI + '?q=' + this.query,
+			this.usersAPI + '?p_auth=' + Liferay.authToken + '&q=' + this.query,
 			{
 				method: 'GET'
 			}

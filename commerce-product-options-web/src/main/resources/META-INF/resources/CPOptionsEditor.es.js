@@ -27,8 +27,12 @@ class CPOptionsEditor extends Component {
 	}
 
 	loadOptions() {
+		var url = new URL(this.optionsURL);
+
+		url.searchParams.set('p_auth', window.Liferay.authToken);
+
 		fetch(
-			this.optionsURL,
+			url,
 			{
 				credentials: 'include',
 				method: 'GET'
