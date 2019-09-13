@@ -224,6 +224,20 @@ public class CommercePaymentMethodGroupRelServiceImpl
 	@Override
 	public List<CommercePaymentMethodGroupRel>
 			getCommercePaymentMethodGroupRels(
+				long groupId, boolean active, int start, int end)
+		throws PortalException {
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), groupId,
+			CommerceActionKeys.MANAGE_COMMERCE_PAYMENT_METHODS);
+
+		return commercePaymentMethodGroupRelLocalService.
+			getCommercePaymentMethodGroupRels(groupId, active, start, end);
+	}
+
+	@Override
+	public List<CommercePaymentMethodGroupRel>
+			getCommercePaymentMethodGroupRels(
 				long groupId, long commerceCountryId, boolean active)
 		throws PortalException {
 
