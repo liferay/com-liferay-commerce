@@ -17,5 +17,5 @@
 <%@ include file="/init.jsp" %>
 
 <liferay-ui:empty-result-message
-        message="there-are-no-shipments"
+	message="there-are-no-shipments"
 />
