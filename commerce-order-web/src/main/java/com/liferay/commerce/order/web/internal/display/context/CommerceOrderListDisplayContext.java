@@ -297,7 +297,7 @@ public class CommerceOrderListDisplayContext {
 		}
 		else if (tabs1.equals("pending")) {
 			orderStatuses = new int[] {
-				CommerceOrderConstants.ORDER_STATUS_TO_TRANSMIT
+				CommerceOrderConstants.ORDER_STATUS_TO_FULFILL
 			};
 		}
 		else if (orderStatus == CommerceOrderConstants.ORDER_STATUS_ANY) {
@@ -306,7 +306,7 @@ public class CommerceOrderListDisplayContext {
 			orderStatuses = new int[] {
 				CommerceOrderConstants.ORDER_STATUS_IN_PROGRESS,
 				CommerceOrderConstants.ORDER_STATUS_OPEN,
-				CommerceOrderConstants.ORDER_STATUS_TO_TRANSMIT
+				CommerceOrderConstants.ORDER_STATUS_TO_FULFILL
 			};
 		}
 		else {
