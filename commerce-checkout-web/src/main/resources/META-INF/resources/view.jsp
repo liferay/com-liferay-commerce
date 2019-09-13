@@ -21,7 +21,7 @@ CheckoutDisplayContext checkoutDisplayContext = (CheckoutDisplayContext)request.
 %>
 
 <div class="row">
-	<div class="container-fluid container-fluid-max-xl">
+	<div class="container-fluid container-fluid-max-xl commerce-checkout">
 		<c:choose>
 			<c:when test="<%= checkoutDisplayContext.isEmptyCommerceOrder() %>">
 				<div class="alert alert-info mx-auto">
