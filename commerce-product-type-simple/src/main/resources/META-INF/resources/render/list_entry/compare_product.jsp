@@ -99,6 +99,7 @@ CPSku cpSku = cpContentHelper.getDefaultCPSku(cpCatalogEntry);
 						elementClasses="btn-block btn-primary text-truncate"
 						taglibQuantityInputId='<%= renderResponse.getNamespace() + quantityInputId %>'
 					/>
+				</div>
 			</div>
 		</c:if>
 	</div>
