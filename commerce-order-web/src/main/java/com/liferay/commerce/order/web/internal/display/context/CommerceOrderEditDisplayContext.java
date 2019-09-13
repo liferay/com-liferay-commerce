@@ -20,6 +20,7 @@ import com.liferay.commerce.frontend.model.SummaryElement;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceOrderNote;
+import com.liferay.commerce.model.CommerceOrderPayment;
 import com.liferay.commerce.order.web.internal.display.context.util.CommerceOrderRequestHelper;
 import com.liferay.commerce.order.web.internal.search.CommerceOrderItemSearch;
 import com.liferay.commerce.order.web.internal.search.CommerceOrderItemSearchTerms;
@@ -29,8 +30,11 @@ import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelService
 import com.liferay.commerce.price.CommerceProductPrice;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.item.selector.criterion.CPInstanceItemSelectorCriterion;
+import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceOrderNoteService;
+import com.liferay.commerce.service.CommerceOrderPaymentLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.frontend.taglib.clay.servlet.taglib.util.DropdownItem;
 import com.liferay.item.selector.ItemSelector;
@@ -69,22 +73,27 @@ import javax.portlet.RenderRequest;
  * @author Andrea Di Giorgi
  * @author Luca Pellizzon
  * @author Fabio Diego Mastrorilli
+ * @author Alessio Antonio Rendina
  */
 public class CommerceOrderEditDisplayContext {
 
 	public CommerceOrderEditDisplayContext(
+			CommerceChannelLocalService commerceChannelLocalService,
 			CommerceOrderService commerceOrderService,
 			CommerceOrderItemService commerceOrderItemService,
 			CommerceOrderNoteService commerceOrderNoteService,
+			CommerceOrderPaymentLocalService commerceOrderPaymentLocalService,
 			CommercePaymentMethodGroupRelService
 				commercePaymentMethodGroupRelService,
 			CommerceProductPriceCalculation commerceProductPriceCalculation,
 			ItemSelector itemSelector, RenderRequest renderRequest)
 		throws PortalException {
 
+		_commerceChannelLocalService = commerceChannelLocalService;
 		_commerceOrderService = commerceOrderService;
 		_commerceOrderItemService = commerceOrderItemService;
 		_commerceOrderNoteService = commerceOrderNoteService;
+		_commerceOrderPaymentLocalService = commerceOrderPaymentLocalService;
 		_commercePaymentMethodGroupRelService =
 			commercePaymentMethodGroupRelService;
 		_commerceProductPriceCalculation = commerceProductPriceCalculation;
@@ -237,6 +246,80 @@ public class CommerceOrderEditDisplayContext {
 
 		return _commerceOrderNoteService.getCommerceOrderNotes(
 			commerceOrderId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	}
+
+	public String getCommerceOrderPaymentMethodName() throws PortalException {
+		if ((_commerceOrder == null) ||
+			Validator.isNull(_commerceOrder.getCommercePaymentMethodKey())) {
+
+			return StringPool.BLANK;
+		}
+
+		CommerceChannel commerceChannel =
+			_commerceChannelLocalService.getCommerceChannelByOrderGroupId(
+				_commerceOrder.getGroupId());
+
+		CommercePaymentMethodGroupRel commercePaymentMethodGroupRel =
+			_commercePaymentMethodGroupRelService.
+				getCommercePaymentMethodGroupRel(
+					commerceChannel.getSiteGroupId(),
+					_commerceOrder.getCommercePaymentMethodKey());
+
+		return commercePaymentMethodGroupRel.getName(
+			_commerceOrderRequestHelper.getLocale());
+	}
+
+	public PortletURL getCommerceOrderPaymentsPortletURL() {
+		LiferayPortletResponse liferayPortletResponse =
+			_commerceOrderRequestHelper.getLiferayPortletResponse();
+
+		PortletURL portletURL = liferayPortletResponse.createRenderURL();
+
+		portletURL.setParameter("mvcRenderCommandName", "editCommerceOrder");
+		portletURL.setParameter(
+			"commerceOrderId", String.valueOf(getCommerceOrderId()));
+		portletURL.setParameter(
+			"screenNavigationCategoryKey",
+			CommerceOrderScreenNavigationConstants.
+				CATEGORY_KEY_COMMERCE_ORDER_PAYMENTS);
+
+		String redirect = ParamUtil.getString(
+			_commerceOrderRequestHelper.getRequest(), "redirect");
+
+		if (Validator.isNotNull(redirect)) {
+			portletURL.setParameter("redirect", redirect);
+		}
+
+		return portletURL;
+	}
+
+	public SearchContainer<CommerceOrderPayment>
+			getCommerceOrderPaymentsSearchContainer()
+		throws PortalException {
+
+		if (_paymentSearchContainer != null) {
+			return _paymentSearchContainer;
+		}
+
+		_paymentSearchContainer = new SearchContainer<>(
+			_commerceOrderRequestHelper.getLiferayPortletRequest(),
+			getCommerceOrderPaymentsPortletURL(), null,
+			"there-are-no-payment-transactions");
+
+		int total =
+			_commerceOrderPaymentLocalService.getCommerceOrderPaymentsCount(
+				getCommerceOrderId());
+
+		_paymentSearchContainer.setTotal(total);
+
+		List<CommerceOrderPayment> results =
+			_commerceOrderPaymentLocalService.getCommerceOrderPayments(
+				getCommerceOrderId(), _paymentSearchContainer.getStart(),
+				_paymentSearchContainer.getEnd(), null);
+
+		_paymentSearchContainer.setResults(results);
+
+		return _paymentSearchContainer;
 	}
 
 	public String getCommercePaymentMethodLabel(
@@ -436,11 +519,14 @@ public class CommerceOrderEditDisplayContext {
 		return summary;
 	}
 
+	private final CommerceChannelLocalService _commerceChannelLocalService;
 	private final CommerceOrder _commerceOrder;
 	private final Format _commerceOrderDateFormatDateTime;
 	private CommerceOrderItem _commerceOrderItem;
 	private final CommerceOrderItemService _commerceOrderItemService;
 	private final CommerceOrderNoteService _commerceOrderNoteService;
+	private final CommerceOrderPaymentLocalService
+		_commerceOrderPaymentLocalService;
 	private final CommerceOrderRequestHelper _commerceOrderRequestHelper;
 	private final CommerceOrderService _commerceOrderService;
 	private final CommercePaymentMethodGroupRelService
@@ -449,5 +535,6 @@ public class CommerceOrderEditDisplayContext {
 		_commerceProductPriceCalculation;
 	private SearchContainer<CommerceOrderItem> _itemSearchContainer;
 	private final ItemSelector _itemSelector;
+	private SearchContainer<CommerceOrderPayment> _paymentSearchContainer;
 
 }
