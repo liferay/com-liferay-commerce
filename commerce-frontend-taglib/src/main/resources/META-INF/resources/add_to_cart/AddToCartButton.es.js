@@ -82,6 +82,7 @@ function doSubmit() {
 	formData.append('languageId', themeDisplay.getLanguageId());
 	formData.append('quantity', this.quantity);
 	formData.append('options', this.options);
+	formData.append('p_auth', Liferay.authToken);
 
 	if (this.orderId) {
 		formData.append('orderId', this.orderId);

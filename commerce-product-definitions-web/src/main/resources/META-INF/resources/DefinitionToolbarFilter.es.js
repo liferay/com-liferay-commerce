@@ -237,6 +237,7 @@ class DefinitionToolbarFilter extends Component {
 		var url = new URL(this.cpDefinitionsFacetsURL);
 
 		url.searchParams.append(this.namespace + 'fieldName', this._currentSelection);
+		url.searchParams.set('p_auth', Liferay.authToken);
 
 		fetch(
 			url,
@@ -257,6 +258,7 @@ class DefinitionToolbarFilter extends Component {
 		var url = new URL(this.cpDefinitionsFacetsURL);
 
 		url.searchParams.append(this.namespace + 'fieldName', 'OPTION_' + this._currentOption);
+		url.searchParams.set('p_auth', Liferay.authToken);
 
 		fetch(
 			url,

@@ -80,7 +80,8 @@ class SearchResults extends Component {
 		this.lock = true;
 
 		fetch(
-			`${this.searchAPI}${themeDisplay.getPlid()}?q=${this.queryString}&groupId=${themeDisplay.getScopeGroupId()}&commerceAccountId=${this.commerceAccountId}`,
+			`${this.searchAPI}${themeDisplay.getPlid()}?commerceAccountId=${this.commerceAccountId}&
+				groupId=${themeDisplay.getScopeGroupId()}&p_auth=${Liferay.authToken}&q=${this.queryString}`,
 			{
 				method: 'GET'
 			}

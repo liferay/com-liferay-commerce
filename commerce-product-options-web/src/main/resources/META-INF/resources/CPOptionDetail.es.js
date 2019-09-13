@@ -28,6 +28,7 @@ class CPOptionDetail extends Component {
 		var url = new URL(this.optionURL);
 
 		url.searchParams.append(this.namespace + 'cpOptionId', cpOptionId);
+		url.searchParams.set('p_auth', window.Liferay.authToken);
 
 		fetch(
 			url,
@@ -115,6 +116,8 @@ class CPOptionDetail extends Component {
 
 		var formData = new FormData(form);
 
+		formData.set('p_auth', Liferay.authToken);
+
 		fetch(
 			form.action,
 			{
@@ -135,6 +138,8 @@ class CPOptionDetail extends Component {
 		let form = this.element.querySelector('.option-detail form');
 
 		var formData = new FormData(form);
+
+		formData.set('p_auth', Liferay.authToken);
 
 		fetch(
 			form.action,

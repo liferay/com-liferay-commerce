@@ -38,6 +38,7 @@ class CPOptionValuesEditor extends Component {
 		var url = new URL(this.optionValuesURL);
 
 		url.searchParams.append(this.namespace + 'cpOptionId', this.cpOptionId);
+		url.searchParams.set('p_auth', Liferay.authToken);
 
 		fetch(
 			url,
