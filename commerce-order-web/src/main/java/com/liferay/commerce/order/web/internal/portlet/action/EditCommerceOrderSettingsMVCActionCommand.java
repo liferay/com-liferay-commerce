@@ -120,8 +120,8 @@ public class EditCommerceOrderSettingsMVCActionCommand
 				"approval"));
 		workflowDefinitionOVPs.add(
 			getWorkflowDefinitionOVP(
-				actionRequest, CommerceOrderConstants.TYPE_PK_TRANSMISSION,
-				"transmission"));
+				actionRequest, CommerceOrderConstants.TYPE_PK_FULFILLMENT,
+				"fulfillment"));
 
 		long commerceChannelGroupIdBySiteGroupId =
 			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(

@@ -279,8 +279,7 @@ public class CommerceShipmentLocalServiceImpl
 				CommerceShipmentConstants.SHIPMENT_STATUS_READY_TO_BE_SHIPPED) {
 
 			commerceOrderLocalService.updateOrderStatus(
-				commerceOrderId,
-				CommerceOrderConstants.ORDER_STATUS_AWAITING_SHIPMENT);
+				commerceOrderId, CommerceOrderConstants.ORDER_STATUS_FULFILLED);
 		}
 		else if (status == CommerceShipmentConstants.SHIPMENT_STATUS_SHIPPED) {
 			if (commerceOrderItems.isEmpty()) {
