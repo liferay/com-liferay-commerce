@@ -37,8 +37,8 @@
 
         if (isBelowViewport && isFixed(ADD_TO_CART_INLINE)) {
             ADD_TO_CART_INLINE.classList.remove(IS_FIXED_CLASS);
-            Speedwell.features.scroll.unregisterCallback(restoreAddToCartButton);
-            Speedwell.features.scroll.registerCallback(fixAddToCartButton);
+            w.removeEventListener('scroll', restoreAddToCartButton);
+            w.addEventListener('scroll', fixAddToCartButton);
         }
     }
 
@@ -47,8 +47,8 @@
 
         if (isAboveViewport && !isFixed(ADD_TO_CART_INLINE)) {
             ADD_TO_CART_INLINE.classList.add(IS_FIXED_CLASS);
-            Speedwell.features.scroll.unregisterCallback(fixAddToCartButton);
-            Speedwell.features.scroll.registerCallback(restoreAddToCartButton);
+            w.removeEventListener('scroll', fixAddToCartButton);
+            w.addEventListener('scroll', restoreAddToCartButton);
         }
     }
 
@@ -73,7 +73,7 @@
 
             !!ADD_TO_CART_INLINE &&
                 (ADD_TO_CART_INLINE_DEFAULT_POS = ADD_TO_CART_INLINE.getBoundingClientRect().top) &&
-                Speedwell.features.scroll.registerCallback(fixAddToCartButton);
+                window.addEventListener('scroll', fixAddToCartButton);
 
             console.log('%c[%cINIT%c] %cMobile', 'color: white;', 'color: red', 'color: white', 'color: cyan');
         },
