@@ -16,11 +16,18 @@
 
 <%@ include file="/init.jsp" %>
 
+<%
+CommerceOrderEditDisplayContext commerceOrderEditDisplayContext = (CommerceOrderEditDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+
+SearchContainer<CommerceOrderPayment> commerceOrderPaymentsSearchContainer = commerceOrderEditDisplayContext.getCommerceOrderPaymentsSearchContainer();
+CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder();
+%>
+
 <div class="row">
 	<div class="col-md-6 d-flex">
 		<commerce-ui:panel
 			elementClasses="flex-fill"
-			title="payment-method"
+			title='<%= LanguageUtil.get(request, "payment-method") %>'
 		>
 			<div class="align-items-center d-flex payment-info">
 				<clay:icon
@@ -28,13 +35,13 @@
 				/>
 
 				<span class="ml-3 payment-name">
-					Credit Card
+					<%= HtmlUtil.escape(commerceOrderEditDisplayContext.getCommerceOrderPaymentMethodName()) %>
 				</span>
 
 				<clay:button
-					componentId="id-test"
+					componentId="editPaymentMethodButton"
 					elementClasses="ml-3"
-					label="edit"
+					label='<%= LanguageUtil.get(request, "edit") %>'
 					style="link"
 				/>
 			</div>
@@ -44,21 +51,21 @@
 	<div class="col-md-6 d-flex">
 		<commerce-ui:panel
 			elementClasses="flex-fill"
-			title="payment-status"
+			title='<%= LanguageUtil.get(request, "payment-status") %>'
 		>
 			<div class="row">
 				<div class="col d-flex">
 					<clay:label
 						elementClasses="align-self-center"
-						label="Authorize and capture"
-						style="success"
+						label="<%= LanguageUtil.get(request, CommerceOrderConstants.getPaymentStatusLabel(commerceOrder.getPaymentStatus())) %>"
+						style="<%= CommerceOrderConstants.getPaymentLabelStyle(commerceOrder.getPaymentStatus()) %>"
 					/>
 				</div>
 
 				<div class="col-auto">
 					<clay:button
 						elementClasses="ml-3"
-						label="refund"
+						label='<%= LanguageUtil.get(request, "refund") %>'
 						style="secondary"
 					/>
 				</div>
@@ -70,56 +77,61 @@
 		<commerce-ui:panel
 			bodyClasses="p-0"
 			elementClasses="flex-fill"
-			title="payment-transactions"
+			title='<%= LanguageUtil.get(request, "payment-transactions") %>'
 		>
 			<liferay-ui:search-container
-				id="commerceOrderItems"
+				id="commerceOrderPayments"
+				searchContainer="<%= commerceOrderPaymentsSearchContainer %>"
 			>
 				<liferay-ui:search-container-row
-					className="com.liferay.commerce.model.CommerceOrderPaymentModel"
+					className="com.liferay.commerce.model.CommerceOrderPayment"
 					cssClass="entry-display-style"
-					keyProperty="CommerceOrderPaymentId"
-					modelVar="commerceOrderItem"
+					escapedModel="<%= true %>"
+					keyProperty="commerceOrderPaymentId"
+					modelVar="commerceOrderPayment"
 				>
 					<liferay-ui:search-container-column-text
 						name="type"
 					>
 						<clay:label
-							label="authorize-and-capture"
-							style="error"
+							label="<%= LanguageUtil.get(request, CommerceOrderPaymentConstants.getOrderPaymentStatusLabel(commerceOrderPayment.getStatus())) %>"
+							style="<%= CommerceOrderPaymentConstants.getOrderPaymentLabelStyle(commerceOrderPayment.getStatus()) %>"
 						/>
 					</liferay-ui:search-container-column-text>
+
+					<%
+					String amount = StringPool.BLANK;
+
+					CommerceMoney totalMoney = commerceOrder.getTotalMoney();
+
+					if (totalMoney != null) {
+						amount = totalMoney.format(locale);
+					}
+					%>
 
 					<liferay-ui:search-container-column-text
 						name="amount"
 					>
-						$ 2,230.50
+						<%= HtmlUtil.escape(amount) %>
 					</liferay-ui:search-container-column-text>
 
-					<liferay-ui:search-container-column-text
+					<liferay-ui:search-container-column-date
 						name="date"
-					>
-						01.09.2019
-					</liferay-ui:search-container-column-text>
+						property="createDate"
+					/>
 
 					<liferay-ui:search-container-column-text
-						name="succesfull"
-					>
-						true
-					</liferay-ui:search-container-column-text>
-
-					<liferay-ui:search-container-column-text
-						name="additional-field"
-					>
-						<div>Exp. date = 01.22</div>
-						<div>Name on card = Mario Rossi</div>
-						<div>Card type = Mastercard</div>
-						<div>Last four = 5378</div>
-					</liferay-ui:search-container-column-text>
+						property="content"
+					/>
 				</liferay-ui:search-container-row>
+
+				<liferay-ui:search-iterator
+					markupView="lexicon"
+				/>
 			</liferay-ui:search-container>
+
 			<liferay-ui:empty-result-message
-					message="there-are-no-payments"
+				message="there-are-no-payments"
 			/>
 		</commerce-ui:panel>
 	</div>
