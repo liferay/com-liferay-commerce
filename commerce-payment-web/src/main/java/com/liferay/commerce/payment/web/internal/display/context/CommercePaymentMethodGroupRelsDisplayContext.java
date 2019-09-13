@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -33,11 +34,15 @@ import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Stream;
 
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
@@ -59,6 +64,7 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 		_commercePaymentMethodGroupRelService =
 			commercePaymentMethodGroupRelService;
 		_portletResourcePermission = portletResourcePermission;
+		_commerceDefaultPaymentMethodGroupRels = Collections.emptyList();
 		_renderRequest = renderRequest;
 		_renderResponse = renderResponse;
 	}
@@ -86,6 +92,51 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 		}
 
 		return _commercePaymentMethodGroupRel;
+	}
+
+	public List<CommercePaymentMethodGroupRel>
+			getDefaultCommercePaymentMethodGroupRels()
+		throws PortalException {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)_renderRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		List<CommercePaymentMethodGroupRel>
+			commercePaymentMethodGroupRelsToRemove = new ArrayList<>();
+
+		commercePaymentMethodGroupRelsToRemove =
+			_commercePaymentMethodGroupRelService.
+				getCommercePaymentMethodGroupRels(
+					themeDisplay.getScopeGroupId());
+
+		Stream<CommercePaymentMethodGroupRel> stream =
+			commercePaymentMethodGroupRelsToRemove.stream();
+
+		String[] array = stream.map(
+			CommercePaymentMethodGroupRel::getEngineKey
+		).toArray(
+			String[]::new
+		);
+
+		_commerceDefaultPaymentMethodGroupRels =
+			addDefaultCommercePaymentMethodGroupRels(
+				_commerceDefaultPaymentMethodGroupRels);
+
+		for (Iterator<CommercePaymentMethodGroupRel> iterator =
+				_commerceDefaultPaymentMethodGroupRels.iterator();
+			 iterator.hasNext();) {
+
+			CommercePaymentMethodGroupRel commercePaymentMethodGroupRel =
+				(CommercePaymentMethodGroupRel)iterator.next();
+
+			if (ArrayUtil.contains(
+					array, commercePaymentMethodGroupRel.getEngineKey())) {
+
+				iterator.remove();
+			}
+		}
+
+		return _commerceDefaultPaymentMethodGroupRels;
 	}
 
 	public PortletURL getPortletURL() {
@@ -132,34 +183,39 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 		_searchContainer = new SearchContainer<>(
 			_renderRequest, getPortletURL(), null, emptyResultsMessage);
 
-		List<CommercePaymentMethodGroupRel> results = null;
+		List<CommercePaymentMethodGroupRel> commercePaymentMethodGroupRels =
+			null;
+		int commercePaymentMethodGroupRelsCount = 0;
 
 		if (active != null) {
-			results =
+			commercePaymentMethodGroupRels =
 				_commercePaymentMethodGroupRelService.
 					getCommercePaymentMethodGroupRels(
-						themeDisplay.getScopeGroupId(), active);
+						themeDisplay.getScopeGroupId(), active,
+						_searchContainer.getStart(), _searchContainer.getEnd());
 		}
 		else {
-			results =
+			commercePaymentMethodGroupRels =
 				_commercePaymentMethodGroupRelService.
 					getCommercePaymentMethodGroupRels(
 						themeDisplay.getScopeGroupId());
 		}
 
 		if ((active == null) || !active) {
-			results = addDefaultCommercePaymentMethodGroupRels(results);
+			commercePaymentMethodGroupRels = addDefaultCommercePaymentMethodGroupRels(commercePaymentMethodGroupRels);
 		}
 
-		if (ListUtil.isNotEmpty(results)) {
-			results = ListUtil.sort(
-				results,
+		if (ListUtil.isNotEmpty(commercePaymentMethodGroupRels)) {
+			commercePaymentMethodGroupRels = ListUtil.sort(
+					commercePaymentMethodGroupRels,
 				new CommercePaymentMethodGroupRelNameComparator(
 					themeDisplay.getLocale()));
 		}
+		commercePaymentMethodGroupRelsCount +=
+			commercePaymentMethodGroupRels.size();
 
-		_searchContainer.setResults(results);
-		_searchContainer.setTotal(results.size());
+		_searchContainer.setResults(commercePaymentMethodGroupRels);
+		_searchContainer.setTotal(commercePaymentMethodGroupRelsCount);
 
 		return _searchContainer;
 	}
@@ -241,6 +297,8 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 		return ParamUtil.getString(_renderRequest, "navigation");
 	}
 
+	private List<CommercePaymentMethodGroupRel>
+		_commerceDefaultPaymentMethodGroupRels;
 	private CommercePaymentMethodGroupRel _commercePaymentMethodGroupRel;
 	private final CommercePaymentMethodGroupRelService
 		_commercePaymentMethodGroupRelService;

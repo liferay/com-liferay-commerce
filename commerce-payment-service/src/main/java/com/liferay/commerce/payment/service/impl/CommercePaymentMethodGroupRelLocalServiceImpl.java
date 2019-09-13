@@ -223,6 +223,15 @@ public class CommercePaymentMethodGroupRelLocalServiceImpl
 	@Override
 	public List<CommercePaymentMethodGroupRel>
 		getCommercePaymentMethodGroupRels(
+			long groupId, boolean active, int start, int end) {
+
+		return commercePaymentMethodGroupRelPersistence.findByG_A(
+			groupId, active, start, end);
+	}
+
+	@Override
+	public List<CommercePaymentMethodGroupRel>
+		getCommercePaymentMethodGroupRels(
 			long groupId, long commerceCountryId, boolean active) {
 
 		List<CommercePaymentMethodGroupRel>

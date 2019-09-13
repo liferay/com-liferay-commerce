@@ -37,6 +37,33 @@ CommercePaymentMethodGroupRelsDisplayContext commercePaymentMethodGroupRelsDispl
 				portletURL="<%= commercePaymentMethodGroupRelsDisplayContext.getPortletURL() %>"
 				selectedDisplayStyle="list"
 			/>
+
+			<liferay-frontend:add-menu
+				inline="<%= true %>"
+			>
+
+				<%
+				for (CommercePaymentMethodGroupRel curCommercePaymentMethodGroupRel : commercePaymentMethodGroupRelsDisplayContext.getDefaultCommercePaymentMethodGroupRels()) {
+				%>
+
+					<liferay-portlet:renderURL var="addCommercePaymentMethodGroupRelUrl">
+						<portlet:param name="mvcRenderCommandName" value="editCommercePaymentMethodGroupRel" />
+						<portlet:param name="commercePaymentMethodGroupRelId" value="<%= String.valueOf(curCommercePaymentMethodGroupRel.getCommercePaymentMethodGroupRelId()) %>" />
+						<portlet:param name="engineKey" value="<%= curCommercePaymentMethodGroupRel.getEngineKey() %>" />
+						<portlet:param name="redirect" value="<%= currentURL %>" />
+					</liferay-portlet:renderURL>
+
+					<liferay-frontend:add-menu-item
+						title="<%= curCommercePaymentMethodGroupRel.getName(locale) %>"
+						url="<%= addCommercePaymentMethodGroupRelUrl %>"
+					/>
+
+				<%
+				}
+				%>
+
+			</liferay-frontend:add-menu>
+
 		</liferay-frontend:management-bar-buttons>
 	</liferay-frontend:management-bar>
 

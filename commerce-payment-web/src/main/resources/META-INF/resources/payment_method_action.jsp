@@ -56,5 +56,17 @@ CommercePaymentMethodGroupRel commercePaymentMethodGroupRel = (CommercePaymentMe
 			message='<%= commercePaymentMethodGroupRel.isActive() ? "deactivate" : "activate" %>'
 			url="<%= setActiveURL %>"
 		/>
+
+		<portlet:actionURL name="editCommercePaymentMethodGroupRel" var="editURL">
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="commercePaymentMethodGroupRelId" value="<%= String.valueOf(commercePaymentMethodGroupRel.getCommercePaymentMethodGroupRelId()) %>" />
+			<portlet:param name="engineKey" value="<%= commercePaymentMethodGroupRel.getEngineKey() %>" />
+		</portlet:actionURL>
+
+		<liferay-ui:icon
+			message="delete"
+			url="<%= editURL %>"
+		/>
 	</c:if>
 </liferay-ui:icon-menu>
