@@ -42,11 +42,7 @@ public class CommerceOrderConstants {
 
 	public static final int ORDER_STATUS_ANY = WorkflowConstants.STATUS_ANY;
 
-	public static final int ORDER_STATUS_AWAITING_FULFILLMENT = 11;
-
 	public static final int ORDER_STATUS_AWAITING_PICKUP = 13;
-
-	public static final int ORDER_STATUS_AWAITING_SHIPMENT = 12;
 
 	public static final int ORDER_STATUS_CANCELLED =
 		WorkflowConstants.STATUS_IN_TRASH;
@@ -57,6 +53,8 @@ public class CommerceOrderConstants {
 	public static final int ORDER_STATUS_DECLINED = 16;
 
 	public static final int ORDER_STATUS_DISPUTED = 18;
+
+	public static final int ORDER_STATUS_FULFILLED = 10;
 
 	public static final int ORDER_STATUS_IN_PROGRESS =
 		WorkflowConstants.STATUS_INCOMPLETE;
@@ -73,16 +71,13 @@ public class CommerceOrderConstants {
 
 	public static final int ORDER_STATUS_SUBSCRIPTION = 9;
 
-	public static final int ORDER_STATUS_TO_TRANSMIT =
+	public static final int ORDER_STATUS_TO_FULFILL =
 		WorkflowConstants.STATUS_PENDING;
 
-	public static final int ORDER_STATUS_TRANSMITTED = 10;
-
 	public static final int[] ORDER_STATUSES = {
-		ORDER_STATUS_ANY, ORDER_STATUS_COMPLETED, ORDER_STATUS_TO_TRANSMIT,
+		ORDER_STATUS_ANY, ORDER_STATUS_COMPLETED, ORDER_STATUS_TO_FULFILL,
 		ORDER_STATUS_OPEN, ORDER_STATUS_IN_PROGRESS, ORDER_STATUS_CANCELLED,
-		ORDER_STATUS_SUBSCRIPTION, ORDER_STATUS_TRANSMITTED,
-		ORDER_STATUS_AWAITING_FULFILLMENT, ORDER_STATUS_AWAITING_SHIPMENT,
+		ORDER_STATUS_SUBSCRIPTION, ORDER_STATUS_FULFILLED,
 		ORDER_STATUS_AWAITING_PICKUP, ORDER_STATUS_PARTIALLY_SHIPPED,
 		ORDER_STATUS_SHIPPED, ORDER_STATUS_DECLINED, ORDER_STATUS_REFUNDED,
 		ORDER_STATUS_DISPUTED, ORDER_STATUS_PARTIALLY_REFUNDED
@@ -105,7 +100,7 @@ public class CommerceOrderConstants {
 
 	public static final long TYPE_PK_APPROVAL = 0;
 
-	public static final long TYPE_PK_TRANSMISSION = 1;
+	public static final long TYPE_PK_FULFILLMENT = 1;
 
 	public static String getNotificationKey(int orderStatus) {
 		if (orderStatus == CommerceOrderConstants.ORDER_STATUS_TRANSMITTED) {
@@ -133,16 +128,10 @@ public class CommerceOrderConstants {
 
 	public static String getOrderStatusLabel(int orderStatus) {
 		if (orderStatus == ORDER_STATUS_ANY) {
-			return "any";
-		}
-		else if (orderStatus == ORDER_STATUS_AWAITING_FULFILLMENT) {
-			return "awaiting-fulfillment";
+			return WorkflowConstants.LABEL_ANY;
 		}
 		else if (orderStatus == ORDER_STATUS_AWAITING_PICKUP) {
 			return "awaiting-pickup";
-		}
-		else if (orderStatus == ORDER_STATUS_AWAITING_SHIPMENT) {
-			return "awaiting-shipment";
 		}
 		else if (orderStatus == ORDER_STATUS_CANCELLED) {
 			return "cancelled";
@@ -155,6 +144,9 @@ public class CommerceOrderConstants {
 		}
 		else if (orderStatus == ORDER_STATUS_DISPUTED) {
 			return "disputed";
+		}
+		else if (orderStatus == ORDER_STATUS_FULFILLED) {
+			return "fulfilled";
 		}
 		else if (orderStatus == ORDER_STATUS_IN_PROGRESS) {
 			return "in-progress";
@@ -177,14 +169,25 @@ public class CommerceOrderConstants {
 		else if (orderStatus == ORDER_STATUS_SUBSCRIPTION) {
 			return "subscription";
 		}
-		else if (orderStatus == ORDER_STATUS_TO_TRANSMIT) {
-			return "to-transmit";
-		}
-		else if (orderStatus == ORDER_STATUS_TRANSMITTED) {
-			return "transmitted";
+		else if (orderStatus == ORDER_STATUS_TO_FULFILL) {
+			return "to-fulfill";
 		}
 
 		return null;
+	}
+
+	public static String getPaymentLabelStyle(int paymentStatus) {
+		if (paymentStatus == PAYMENT_STATUS_AUTHORIZED) {
+			return "info";
+		}
+		else if (paymentStatus == PAYMENT_STATUS_PAID) {
+			return "success";
+		}
+		else if (paymentStatus == PAYMENT_STATUS_PENDING) {
+			return "warning";
+		}
+
+		return StringPool.BLANK;
 	}
 
 	public static String getPaymentStatusLabel(int paymentStatus) {
