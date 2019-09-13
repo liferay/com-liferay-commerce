@@ -26,6 +26,7 @@ import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.search.CPDefinitionIndexer;
 import com.liferay.commerce.product.service.CPOptionLocalService;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
+import com.liferay.commerce.search.facet.SerializableMultiValueFacet;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -41,7 +42,6 @@ import com.liferay.portal.kernel.search.facet.collector.FacetCollector;
 import com.liferay.portal.kernel.search.facet.collector.TermCollector;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Portal;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.search.web.portlet.shared.search.PortletSharedSearchContributor;
 import com.liferay.portal.search.web.portlet.shared.search.PortletSharedSearchRequest;
@@ -112,20 +112,21 @@ public class CPOptionFacetsPortlet
 				Optional<String[]> parameterValuesOptional =
 					portletSharedSearchSettings.getParameterValues(cpOptionKey);
 
-				MultiValueFacet multiValueFacet = new MultiValueFacet(
-					searchContext);
+				SerializableMultiValueFacet serializableMultiValueFacet =
+					new SerializableMultiValueFacet(searchContext);
 
-				multiValueFacet.setFieldName(facet.getFieldName());
+				serializableMultiValueFacet.setFieldName(facet.getFieldName());
 
 				if (parameterValuesOptional.isPresent()) {
-					multiValueFacet.setValues(parameterValuesOptional.get());
+					serializableMultiValueFacet.setValues(
+						parameterValuesOptional.get());
 
 					searchContext.setAttribute(
-						facet.getFieldName(),
-						StringUtil.merge(parameterValuesOptional.get()));
+						facet.getFieldName(), parameterValuesOptional.get());
 				}
 
-				portletSharedSearchSettings.addFacet(multiValueFacet);
+				portletSharedSearchSettings.addFacet(
+					serializableMultiValueFacet);
 			}
 		}
 		catch (Exception e) {
