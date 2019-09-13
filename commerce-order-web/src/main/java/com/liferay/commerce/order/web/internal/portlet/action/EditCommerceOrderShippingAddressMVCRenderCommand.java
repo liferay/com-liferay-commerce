@@ -19,8 +19,10 @@ import com.liferay.commerce.exception.NoSuchOrderException;
 import com.liferay.commerce.order.web.internal.display.context.CommerceOrderEditDisplayContext;
 import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelService;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceOrderNoteService;
+import com.liferay.commerce.service.CommerceOrderPaymentLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
@@ -56,8 +58,9 @@ public class EditCommerceOrderShippingAddressMVCRenderCommand
 		try {
 			CommerceOrderEditDisplayContext commerceOrderEditDisplayContext =
 				new CommerceOrderEditDisplayContext(
-					_commerceOrderService, _commerceOrderItemService,
-					_commerceOrderNoteService,
+					_commerceChannelLocalService, _commerceOrderService,
+					_commerceOrderItemService, _commerceOrderNoteService,
+					_commerceOrderPaymentLocalService,
 					_commercePaymentMethodGroupRelService,
 					_commerceProductPriceCalculation, _itemSelector,
 					renderRequest);
@@ -82,10 +85,16 @@ public class EditCommerceOrderShippingAddressMVCRenderCommand
 	}
 
 	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
+
+	@Reference
 	private CommerceOrderItemService _commerceOrderItemService;
 
 	@Reference
 	private CommerceOrderNoteService _commerceOrderNoteService;
+
+	@Reference
+	private CommerceOrderPaymentLocalService _commerceOrderPaymentLocalService;
 
 	@Reference
 	private CommerceOrderService _commerceOrderService;
