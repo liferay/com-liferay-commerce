@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.exportimport.kernel.lar.StagedModelType;
 import com.liferay.portal.kernel.model.ModelWrapper;
@@ -37,7 +35,6 @@ import java.util.Objects;
  * @see CPDefinitionInventory
  * @generated
  */
-@ProviderType
 public class CPDefinitionInventoryWrapper
 	implements CPDefinitionInventory, ModelWrapper<CPDefinitionInventory> {
 
@@ -494,6 +491,11 @@ public class CPDefinitionInventoryWrapper
 		return _cpDefinitionInventory.isNew();
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a cp definition inventory model instance should use the <code>CPDefinitionInventory</code> interface instead.
+	 */
 	@Override
 	public void persist() {
 		_cpDefinitionInventory.persist();

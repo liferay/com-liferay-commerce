@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.exportimport.kernel.lar.StagedModelType;
 import com.liferay.portal.kernel.model.ModelWrapper;
@@ -37,7 +35,6 @@ import java.util.Objects;
  * @see CommerceAvailabilityEstimate
  * @generated
  */
-@ProviderType
 public class CommerceAvailabilityEstimateWrapper
 	implements CommerceAvailabilityEstimate,
 			   ModelWrapper<CommerceAvailabilityEstimate> {
@@ -384,6 +381,11 @@ public class CommerceAvailabilityEstimateWrapper
 		return _commerceAvailabilityEstimate.isNew();
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a commerce availability estimate model instance should use the <code>CommerceAvailabilityEstimate</code> interface instead.
+	 */
 	@Override
 	public void persist() {
 		_commerceAvailabilityEstimate.persist();

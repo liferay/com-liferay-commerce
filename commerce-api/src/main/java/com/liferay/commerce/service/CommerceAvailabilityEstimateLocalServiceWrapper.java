@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceAvailabilityEstimateLocalService
  * @generated
  */
-@ProviderType
 public class CommerceAvailabilityEstimateLocalServiceWrapper
 	implements CommerceAvailabilityEstimateLocalService,
 			   ServiceWrapper<CommerceAvailabilityEstimateLocalService> {

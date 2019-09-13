@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -28,7 +26,6 @@ import java.util.List;
  * @author Alessio Antonio Rendina
  * @generated
  */
-@ProviderType
 public class CommerceCountrySoap implements Serializable {
 
 	public static CommerceCountrySoap toSoapModel(CommerceCountry model) {

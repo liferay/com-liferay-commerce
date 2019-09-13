@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceSubscriptionEntryService
  * @generated
  */
-@ProviderType
 public class CommerceSubscriptionEntryServiceWrapper
 	implements CommerceSubscriptionEntryService,
 			   ServiceWrapper<CommerceSubscriptionEntryService> {
@@ -36,6 +33,11 @@ public class CommerceSubscriptionEntryServiceWrapper
 		_commerceSubscriptionEntryService = commerceSubscriptionEntryService;
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link CommerceSubscriptionEntryServiceUtil} to access the commerce subscription entry remote service. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceSubscriptionEntryServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
 	@Override
 	public void deleteCommerceSubscriptionEntry(
 			long commerceSubscriptionEntryId)

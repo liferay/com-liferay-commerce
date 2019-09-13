@@ -56,7 +56,7 @@ import java.util.List;
 public interface CommerceOrderPaymentLocalService
 	extends BaseLocalService, PersistedModelLocalService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceOrderPaymentLocalServiceUtil} to access the commerce order payment local service. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceOrderPaymentLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.

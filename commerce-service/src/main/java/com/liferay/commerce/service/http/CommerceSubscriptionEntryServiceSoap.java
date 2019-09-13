@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.service.CommerceSubscriptionEntryServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -61,7 +59,6 @@ import java.rmi.RemoteException;
  * @see CommerceSubscriptionEntryServiceHttp
  * @generated
  */
-@ProviderType
 public class CommerceSubscriptionEntryServiceSoap {
 
 	public static void deleteCommerceSubscriptionEntry(

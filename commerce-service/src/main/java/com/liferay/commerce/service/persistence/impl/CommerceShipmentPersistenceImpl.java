@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service.persistence.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.exception.NoSuchShipmentException;
 import com.liferay.commerce.model.CommerceShipment;
 import com.liferay.commerce.model.impl.CommerceShipmentImpl;
@@ -65,12 +63,11 @@ import java.util.Set;
  * @author Alessio Antonio Rendina
  * @generated
  */
-@ProviderType
 public class CommerceShipmentPersistenceImpl
 	extends BasePersistenceImpl<CommerceShipment>
 	implements CommerceShipmentPersistence {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Always use <code>CommerceShipmentUtil</code> to access the commerce shipment persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.

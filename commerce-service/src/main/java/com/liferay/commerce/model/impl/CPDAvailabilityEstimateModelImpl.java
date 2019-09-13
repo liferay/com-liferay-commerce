@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.model.CPDAvailabilityEstimate;
 import com.liferay.commerce.model.CPDAvailabilityEstimateModel;
 import com.liferay.commerce.model.CPDAvailabilityEstimateSoap;
@@ -65,12 +63,11 @@ import java.util.function.Function;
  * @generated
  */
 @JSON(strict = true)
-@ProviderType
 public class CPDAvailabilityEstimateModelImpl
 	extends BaseModelImpl<CPDAvailabilityEstimate>
 	implements CPDAvailabilityEstimateModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a cpd availability estimate model instance should use the <code>CPDAvailabilityEstimate</code> interface instead.

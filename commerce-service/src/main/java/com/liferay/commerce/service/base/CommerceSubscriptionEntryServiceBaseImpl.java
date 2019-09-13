@@ -66,7 +66,7 @@ public abstract class CommerceSubscriptionEntryServiceBaseImpl
 	extends BaseServiceImpl
 	implements CommerceSubscriptionEntryService, IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CommerceSubscriptionEntryService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.service.CommerceSubscriptionEntryServiceUtil</code>.

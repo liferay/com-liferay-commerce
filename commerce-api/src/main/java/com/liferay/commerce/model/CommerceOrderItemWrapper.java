@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -38,7 +36,6 @@ import java.util.Objects;
  * @see CommerceOrderItem
  * @generated
  */
-@ProviderType
 public class CommerceOrderItemWrapper
 	implements CommerceOrderItem, ModelWrapper<CommerceOrderItem> {
 
@@ -801,6 +798,11 @@ public class CommerceOrderItemWrapper
 		return _commerceOrderItem.isSubscription();
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a commerce order item model instance should use the <code>CommerceOrderItem</code> interface instead.
+	 */
 	@Override
 	public void persist() {
 		_commerceOrderItem.persist();

@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.service.CommerceCountryLocalServiceUtil;
 
@@ -31,11 +29,10 @@ import com.liferay.commerce.service.CommerceCountryLocalServiceUtil;
  * @see CommerceCountry
  * @generated
  */
-@ProviderType
 public abstract class CommerceCountryBaseImpl
 	extends CommerceCountryModelImpl implements CommerceCountry {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce country model instance should use the <code>CommerceCountry</code> interface instead.

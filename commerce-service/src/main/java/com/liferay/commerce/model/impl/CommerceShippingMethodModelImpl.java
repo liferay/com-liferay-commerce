@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.model.CommerceShippingMethod;
 import com.liferay.commerce.model.CommerceShippingMethodModel;
 import com.liferay.commerce.model.CommerceShippingMethodSoap;
@@ -70,12 +68,11 @@ import java.util.function.Function;
  * @generated
  */
 @JSON(strict = true)
-@ProviderType
 public class CommerceShippingMethodModelImpl
 	extends BaseModelImpl<CommerceShippingMethod>
 	implements CommerceShippingMethodModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce shipping method model instance should use the <code>CommerceShippingMethod</code> interface instead.

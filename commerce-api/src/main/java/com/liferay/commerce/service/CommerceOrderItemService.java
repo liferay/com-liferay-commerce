@@ -31,6 +31,8 @@ import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 
+import java.math.BigDecimal;
+
 import java.util.List;
 
 /**
@@ -58,7 +60,7 @@ import java.util.List;
 )
 public interface CommerceOrderItemService extends BaseService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceOrderItemServiceUtil} to access the commerce order item remote service. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceOrderItemServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
@@ -147,6 +149,15 @@ public interface CommerceOrderItemService extends BaseService {
 			int requestedDeliveryDateMonth, int requestedDeliveryDateDay,
 			int requestedDeliveryDateYear, int requestedDeliveryDateHour,
 			int requestedDeliveryDateMinute, ServiceContext serviceContext)
+		throws PortalException;
+
+	public CommerceOrderItem updateCommerceOrderItemPrices(
+			long commerceOrderItemId, BigDecimal unitPrice,
+			BigDecimal promoPrice, BigDecimal discountAmount,
+			BigDecimal finalPrice, BigDecimal discountPercentageLevel1,
+			BigDecimal discountPercentageLevel2,
+			BigDecimal discountPercentageLevel3,
+			BigDecimal discountPercentageLevel4)
 		throws PortalException;
 
 	public CommerceOrderItem upsertCommerceOrderItem(

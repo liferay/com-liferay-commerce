@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service.base;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.model.CommerceShippingMethod;
 import com.liferay.commerce.service.CommerceShippingMethodLocalService;
 import com.liferay.commerce.service.persistence.CPDAvailabilityEstimatePersistence;
@@ -82,12 +80,11 @@ import javax.sql.DataSource;
  * @see com.liferay.commerce.service.impl.CommerceShippingMethodLocalServiceImpl
  * @generated
  */
-@ProviderType
 public abstract class CommerceShippingMethodLocalServiceBaseImpl
 	extends BaseLocalServiceImpl
 	implements CommerceShippingMethodLocalService, IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CommerceShippingMethodLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.service.CommerceShippingMethodLocalServiceUtil</code>.

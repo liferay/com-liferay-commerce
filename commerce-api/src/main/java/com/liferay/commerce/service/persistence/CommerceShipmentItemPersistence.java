@@ -40,7 +40,7 @@ import java.util.Set;
 public interface CommerceShipmentItemPersistence
 	extends BasePersistence<CommerceShipmentItem> {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceShipmentItemUtil} to access the commerce shipment item persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.

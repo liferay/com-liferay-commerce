@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.model.CommerceOrderNote;
 import com.liferay.commerce.service.CommerceOrderNoteLocalServiceUtil;
 
@@ -31,11 +29,10 @@ import com.liferay.commerce.service.CommerceOrderNoteLocalServiceUtil;
  * @see CommerceOrderNote
  * @generated
  */
-@ProviderType
 public abstract class CommerceOrderNoteBaseImpl
 	extends CommerceOrderNoteModelImpl implements CommerceOrderNote {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce order note model instance should use the <code>CommerceOrderNote</code> interface instead.

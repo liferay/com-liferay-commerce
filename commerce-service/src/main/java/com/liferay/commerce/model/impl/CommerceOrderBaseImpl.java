@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.service.CommerceOrderLocalServiceUtil;
 
@@ -31,11 +29,10 @@ import com.liferay.commerce.service.CommerceOrderLocalServiceUtil;
  * @see CommerceOrder
  * @generated
  */
-@ProviderType
 public abstract class CommerceOrderBaseImpl
 	extends CommerceOrderModelImpl implements CommerceOrder {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce order model instance should use the <code>CommerceOrder</code> interface instead.

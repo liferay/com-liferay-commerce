@@ -66,7 +66,7 @@ public abstract class CommerceShipmentServiceBaseImpl
 	extends BaseServiceImpl
 	implements CommerceShipmentService, IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CommerceShipmentService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.service.CommerceShipmentServiceUtil</code>.

@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceShipmentService
  * @generated
  */
-@ProviderType
 public class CommerceShipmentServiceWrapper
 	implements CommerceShipmentService,
 			   ServiceWrapper<CommerceShipmentService> {
@@ -36,6 +33,11 @@ public class CommerceShipmentServiceWrapper
 		_commerceShipmentService = commerceShipmentService;
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link CommerceShipmentServiceUtil} to access the commerce shipment remote service. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceShipmentServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
 	@Override
 	public com.liferay.commerce.model.CommerceShipment addCommerceShipment(
 			long commerceOrderId,

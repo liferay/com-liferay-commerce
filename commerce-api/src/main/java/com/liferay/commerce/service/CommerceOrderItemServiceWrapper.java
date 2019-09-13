@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceOrderItemService
  * @generated
  */
-@ProviderType
 public class CommerceOrderItemServiceWrapper
 	implements CommerceOrderItemService,
 			   ServiceWrapper<CommerceOrderItemService> {
@@ -36,6 +33,11 @@ public class CommerceOrderItemServiceWrapper
 		_commerceOrderItemService = commerceOrderItemService;
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link CommerceOrderItemServiceUtil} to access the commerce order item remote service. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceOrderItemServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
 	@Override
 	public com.liferay.commerce.model.CommerceOrderItem addCommerceOrderItem(
 			long commerceOrderId, long cpInstanceId, int quantity,
@@ -210,6 +212,25 @@ public class CommerceOrderItemServiceWrapper
 			requestedDeliveryDateMonth, requestedDeliveryDateDay,
 			requestedDeliveryDateYear, requestedDeliveryDateHour,
 			requestedDeliveryDateMinute, serviceContext);
+	}
+
+	@Override
+	public com.liferay.commerce.model.CommerceOrderItem
+			updateCommerceOrderItemPrices(
+				long commerceOrderItemId, java.math.BigDecimal unitPrice,
+				java.math.BigDecimal promoPrice,
+				java.math.BigDecimal discountAmount,
+				java.math.BigDecimal finalPrice,
+				java.math.BigDecimal discountPercentageLevel1,
+				java.math.BigDecimal discountPercentageLevel2,
+				java.math.BigDecimal discountPercentageLevel3,
+				java.math.BigDecimal discountPercentageLevel4)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceOrderItemService.updateCommerceOrderItemPrices(
+			commerceOrderItemId, unitPrice, promoPrice, discountAmount,
+			finalPrice, discountPercentageLevel1, discountPercentageLevel2,
+			discountPercentageLevel3, discountPercentageLevel4);
 	}
 
 	@Override

@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.service.CommerceShippingMethodServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -61,7 +59,6 @@ import java.rmi.RemoteException;
  * @see CommerceShippingMethodServiceHttp
  * @generated
  */
-@ProviderType
 public class CommerceShippingMethodServiceSoap {
 
 	public static com.liferay.commerce.model.CommerceAddressRestrictionSoap

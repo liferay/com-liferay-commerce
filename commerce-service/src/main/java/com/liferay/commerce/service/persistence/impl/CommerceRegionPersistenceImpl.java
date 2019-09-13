@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service.persistence.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.exception.NoSuchRegionException;
 import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.model.impl.CommerceRegionImpl;
@@ -67,12 +65,11 @@ import java.util.Set;
  * @author Alessio Antonio Rendina
  * @generated
  */
-@ProviderType
 public class CommerceRegionPersistenceImpl
 	extends BasePersistenceImpl<CommerceRegion>
 	implements CommerceRegionPersistence {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Always use <code>CommerceRegionUtil</code> to access the commerce region persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.

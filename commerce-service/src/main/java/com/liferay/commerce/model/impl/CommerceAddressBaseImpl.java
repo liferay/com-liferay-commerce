@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.service.CommerceAddressLocalServiceUtil;
 
@@ -31,11 +29,10 @@ import com.liferay.commerce.service.CommerceAddressLocalServiceUtil;
  * @see CommerceAddress
  * @generated
  */
-@ProviderType
 public abstract class CommerceAddressBaseImpl
 	extends CommerceAddressModelImpl implements CommerceAddress {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce address model instance should use the <code>CommerceAddress</code> interface instead.

@@ -64,7 +64,7 @@ import java.util.Map;
 public interface CommerceCountryLocalService
 	extends BaseLocalService, PersistedModelLocalService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceCountryLocalServiceUtil} to access the commerce country local service. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceCountryLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.

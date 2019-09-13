@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.service.CommerceAvailabilityEstimateServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -65,7 +63,6 @@ import java.util.Map;
  * @see CommerceAvailabilityEstimateServiceHttp
  * @generated
  */
-@ProviderType
 public class CommerceAvailabilityEstimateServiceSoap {
 
 	public static com.liferay.commerce.model.CommerceAvailabilityEstimateSoap

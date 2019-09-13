@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceSubscriptionEntryLocalService
  * @generated
  */
-@ProviderType
 public class CommerceSubscriptionEntryLocalServiceWrapper
 	implements CommerceSubscriptionEntryLocalService,
 			   ServiceWrapper<CommerceSubscriptionEntryLocalService> {

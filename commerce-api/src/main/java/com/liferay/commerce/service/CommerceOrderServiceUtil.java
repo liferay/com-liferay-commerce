@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.util.tracker.ServiceTracker;
@@ -32,13 +30,18 @@ import org.osgi.util.tracker.ServiceTracker;
  * @see CommerceOrderService
  * @generated
  */
-@ProviderType
 public class CommerceOrderServiceUtil {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify this class directly. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceOrderServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
+	 */
+
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link CommerceOrderServiceUtil} to access the commerce order remote service. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceOrderServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public static com.liferay.commerce.model.CommerceOrder addCommerceOrder(
 			long userId, long groupId, long commerceAccountId,
@@ -332,6 +335,40 @@ public class CommerceOrderServiceUtil {
 			commercePaymentMethodKey, commerceShippingMethodId,
 			shippingOptionName, purchaseOrderNumber, subtotal, shippingAmount,
 			total, advanceStatus, externalReferenceCode, commerceContext);
+	}
+
+	public static com.liferay.commerce.model.CommerceOrder
+			updateCommerceOrderPrices(
+				long commerceOrderId, java.math.BigDecimal subtotal,
+				java.math.BigDecimal subtotalDiscountAmount,
+				java.math.BigDecimal subtotalDiscountPercentageLevel1,
+				java.math.BigDecimal subtotalDiscountPercentageLevel2,
+				java.math.BigDecimal subtotalDiscountPercentageLevel3,
+				java.math.BigDecimal subtotalDiscountPercentageLevel4,
+				java.math.BigDecimal shippingAmount,
+				java.math.BigDecimal shippingDiscountAmount,
+				java.math.BigDecimal shippingDiscountPercentageLevel1,
+				java.math.BigDecimal shippingDiscountPercentageLevel2,
+				java.math.BigDecimal shippingDiscountPercentageLevel3,
+				java.math.BigDecimal shippingDiscountPercentageLevel4,
+				java.math.BigDecimal taxAmount, java.math.BigDecimal total,
+				java.math.BigDecimal totalDiscountAmount,
+				java.math.BigDecimal totalDiscountPercentageLevel1,
+				java.math.BigDecimal totalDiscountPercentageLevel2,
+				java.math.BigDecimal totalDiscountPercentageLevel3,
+				java.math.BigDecimal totalDiscountPercentageLevel4)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().updateCommerceOrderPrices(
+			commerceOrderId, subtotal, subtotalDiscountAmount,
+			subtotalDiscountPercentageLevel1, subtotalDiscountPercentageLevel2,
+			subtotalDiscountPercentageLevel3, subtotalDiscountPercentageLevel4,
+			shippingAmount, shippingDiscountAmount,
+			shippingDiscountPercentageLevel1, shippingDiscountPercentageLevel2,
+			shippingDiscountPercentageLevel3, shippingDiscountPercentageLevel4,
+			taxAmount, total, totalDiscountAmount,
+			totalDiscountPercentageLevel1, totalDiscountPercentageLevel2,
+			totalDiscountPercentageLevel3, totalDiscountPercentageLevel4);
 	}
 
 	public static com.liferay.commerce.model.CommerceOrder

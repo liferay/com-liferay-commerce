@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.model.CommerceRegionModel;
 import com.liferay.commerce.model.CommerceRegionSoap;
@@ -65,11 +63,10 @@ import java.util.function.Function;
  * @generated
  */
 @JSON(strict = true)
-@ProviderType
 public class CommerceRegionModelImpl
 	extends BaseModelImpl<CommerceRegion> implements CommerceRegionModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce region model instance should use the <code>CommerceRegion</code> interface instead.
