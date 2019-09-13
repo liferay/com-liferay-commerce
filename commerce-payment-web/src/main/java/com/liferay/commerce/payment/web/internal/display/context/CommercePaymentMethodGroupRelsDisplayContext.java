@@ -151,9 +151,11 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 			results = addDefaultCommercePaymentMethodGroupRels(results);
 		}
 
-		results.sort(
-			new CommercePaymentMethodGroupRelNameComparator(
-				themeDisplay.getLocale()));
+		if (!results.isEmpty()) {
+			results.sort(
+				new CommercePaymentMethodGroupRelNameComparator(
+					themeDisplay.getLocale()));
+		}
 
 		_searchContainer.setResults(results);
 		_searchContainer.setTotal(results.size());
