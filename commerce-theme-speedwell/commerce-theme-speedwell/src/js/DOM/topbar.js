@@ -19,7 +19,7 @@
     let TOPBAR,
         translucencyIsEnabled = false;
 
-    function hideOnMenuOpen() {
+    function hideFiltersButtonOnMenuOpen() {
         const catalogFiltersButton = Speedwell.features.mobile.getFiltersButton();
 
         !!catalogFiltersButton &&
@@ -32,11 +32,14 @@
 
         TOGGLES[currentToggle].buttons.forEach(function(button) {
             button.addEventListener('click', function(e) {
+                const categoryNav = Speedwell.features.categoryMenu.getElement();
+
                 button.focus();
                 toggleWrapper.classList.toggle(IS_OPEN, !isOpen(toggleWrapper));
+                categoryNav.classList.remove(IS_OPEN);
 
                 if (Speedwell.isMobile()) {
-                    hideOnMenuOpen();
+                    hideFiltersButtonOnMenuOpen();
                 }
             });
         })

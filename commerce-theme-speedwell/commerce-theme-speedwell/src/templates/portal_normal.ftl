@@ -122,6 +122,7 @@
 	<script type="text/javascript" src="${javascript_folder}/DOM/accessibility.js"></script>
 	<script type="text/javascript" src="${javascript_folder}/DOM/scrollHandler.js"></script>
 	<script type="text/javascript" src="${javascript_folder}/DOM/topbar.js"></script>
+	<script type="text/javascript" src="${javascript_folder}/DOM/categoryMenu.js"></script>
 	<script type="text/javascript" src="${javascript_folder}/DOM/mobile.js"></script>
 </body>
 </html>
