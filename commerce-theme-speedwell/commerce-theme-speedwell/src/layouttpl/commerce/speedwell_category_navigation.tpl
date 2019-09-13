@@ -2,9 +2,7 @@
      id="main-content"
      role="main">
 
-    <div class="portlet-layout category-page__head"
-         style="background-image: url('${themeDisplay.getPathThemeImages()}/category_head.jpeg')">
-
+    <div class="portlet-layout category-page__head">
         <div class="portlet-layout container">
             <div class="portlet-layout row">
                 <div class="portlet-column portlet-column-only col-12" id="column-1">
