@@ -985,6 +985,66 @@ public class CommerceOrderLocalServiceImpl
 		return commerceOrderPersistence.update(commerceOrder);
 	}
 
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CommerceOrder updateCommerceOrderPrices(
+			long commerceOrderId, BigDecimal subtotal,
+			BigDecimal subtotalDiscountAmount,
+			BigDecimal subtotalDiscountPercentageLevel1,
+			BigDecimal subtotalDiscountPercentageLevel2,
+			BigDecimal subtotalDiscountPercentageLevel3,
+			BigDecimal subtotalDiscountPercentageLevel4,
+			BigDecimal shippingAmount, BigDecimal shippingDiscountAmount,
+			BigDecimal shippingDiscountPercentageLevel1,
+			BigDecimal shippingDiscountPercentageLevel2,
+			BigDecimal shippingDiscountPercentageLevel3,
+			BigDecimal shippingDiscountPercentageLevel4, BigDecimal taxAmount,
+			BigDecimal total, BigDecimal totalDiscountAmount,
+			BigDecimal totalDiscountPercentageLevel1,
+			BigDecimal totalDiscountPercentageLevel2,
+			BigDecimal totalDiscountPercentageLevel3,
+			BigDecimal totalDiscountPercentageLevel4)
+		throws PortalException {
+
+		CommerceOrder commerceOrder = commerceOrderPersistence.findByPrimaryKey(
+			commerceOrderId);
+
+		commerceOrder.setLastPriceUpdateDate(new Date());
+		commerceOrder.setSubtotal(subtotal);
+		commerceOrder.setSubtotalDiscountAmount(subtotalDiscountAmount);
+		commerceOrder.setSubtotalDiscountPercentageLevel1(
+			subtotalDiscountPercentageLevel1);
+		commerceOrder.setSubtotalDiscountPercentageLevel2(
+			subtotalDiscountPercentageLevel2);
+		commerceOrder.setSubtotalDiscountPercentageLevel3(
+			subtotalDiscountPercentageLevel3);
+		commerceOrder.setSubtotalDiscountPercentageLevel4(
+			subtotalDiscountPercentageLevel4);
+		commerceOrder.setShippingAmount(shippingAmount);
+		commerceOrder.setShippingDiscountAmount(shippingDiscountAmount);
+		commerceOrder.setShippingDiscountPercentageLevel1(
+			shippingDiscountPercentageLevel1);
+		commerceOrder.setShippingDiscountPercentageLevel2(
+			shippingDiscountPercentageLevel2);
+		commerceOrder.setShippingDiscountPercentageLevel3(
+			shippingDiscountPercentageLevel3);
+		commerceOrder.setShippingDiscountPercentageLevel4(
+			shippingDiscountPercentageLevel4);
+		commerceOrder.setTaxAmount(taxAmount);
+		commerceOrder.setTotal(total);
+		commerceOrder.setTotalDiscountAmount(totalDiscountAmount);
+		commerceOrder.setTotalDiscountPercentageLevel1(
+			totalDiscountPercentageLevel1);
+		commerceOrder.setTotalDiscountPercentageLevel2(
+			totalDiscountPercentageLevel2);
+		commerceOrder.setTotalDiscountPercentageLevel3(
+			totalDiscountPercentageLevel3);
+		commerceOrder.setTotalDiscountPercentageLevel4(
+			totalDiscountPercentageLevel4);
+
+		return commerceOrderPersistence.update(commerceOrder);
+	}
+
 	@Override
 	public CommerceOrder updateCommercePaymentMethodKey(
 			long commerceOrderId, String commercePaymentMethodKey)

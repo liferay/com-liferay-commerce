@@ -560,6 +560,32 @@ public class CommerceOrderItemLocalServiceImpl
 		return commerceOrderItemPersistence.update(commerceOrderItem);
 	}
 
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CommerceOrderItem updateCommerceOrderItemPrices(
+			long commerceOrderItemId, BigDecimal unitPrice,
+			BigDecimal promoPrice, BigDecimal discountAmount,
+			BigDecimal finalPrice, BigDecimal discountPercentageLevel1,
+			BigDecimal discountPercentageLevel2,
+			BigDecimal discountPercentageLevel3,
+			BigDecimal discountPercentageLevel4)
+		throws PortalException {
+
+		CommerceOrderItem commerceOrderItem =
+			commerceOrderItemPersistence.findByPrimaryKey(commerceOrderItemId);
+
+		commerceOrderItem.setUnitPrice(unitPrice);
+		commerceOrderItem.setPromoPrice(promoPrice);
+		commerceOrderItem.setDiscountAmount(discountAmount);
+		commerceOrderItem.setFinalPrice(finalPrice);
+		commerceOrderItem.setDiscountPercentageLevel1(discountPercentageLevel1);
+		commerceOrderItem.setDiscountPercentageLevel2(discountPercentageLevel2);
+		commerceOrderItem.setDiscountPercentageLevel3(discountPercentageLevel3);
+		commerceOrderItem.setDiscountPercentageLevel4(discountPercentageLevel4);
+
+		return commerceOrderItemPersistence.update(commerceOrderItem);
+	}
+
 	@Override
 	public CommerceOrderItem upsertCommerceOrderItem(
 			long commerceOrderId, long cpInstanceId, int quantity,
