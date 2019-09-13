@@ -141,14 +141,14 @@ public class EditCommerceAccountGroupMVCActionCommand
 				String.valueOf(
 					commerceAccountGroup.getCommerceAccountGroupId()));
 
+			String backURL = ParamUtil.getString(
+				actionRequest, "backURL", portletURL.toString());
+
+			portletURL.setParameter("backURL", backURL);
+
 			String redirect = ParamUtil.getString(actionRequest, "redirect");
 
 			portletURL.setParameter("redirect", redirect);
-
-			String backURL = ParamUtil.getString(
-				actionRequest, "backURL", redirect);
-
-			portletURL.setParameter("backURL", backURL);
 		}
 
 		return portletURL.toString();
