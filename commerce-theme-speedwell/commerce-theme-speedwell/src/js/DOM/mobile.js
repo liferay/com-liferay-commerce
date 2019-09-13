@@ -3,7 +3,8 @@
 
     let FILTERS_BUTTON,
         FILTERS_HEADER,
-        ADD_TO_CART_INLINE;
+        ADD_TO_CART_INLINE,
+        ADD_TO_CART_INLINE_DEFAULT_POS;
 
     const IS_OPEN_CLASS = 'is-open',
         IS_FIXED_CLASS = 'is-fixed';
@@ -27,11 +28,28 @@
         );
     }
 
-    function handleInlineAddToCartButtonPosition() {
+    function isFixed(element) {
+        return element.classList.contains(IS_FIXED_CLASS);
+    }
+
+    function restoreAddToCartButton() {
+        const isBelowViewport = ADD_TO_CART_INLINE.getBoundingClientRect().top < ADD_TO_CART_INLINE_DEFAULT_POS;
+
+        if (isBelowViewport && isFixed(ADD_TO_CART_INLINE)) {
+            ADD_TO_CART_INLINE.classList.remove(IS_FIXED_CLASS);
+            Speedwell.features.scroll.unregisterCallback(restoreAddToCartButton);
+            Speedwell.features.scroll.registerCallback(fixAddToCartButton);
+        }
+    }
+
+    function fixAddToCartButton() {
         const isAboveViewport = ADD_TO_CART_INLINE.getBoundingClientRect().top <= 0;
 
-        ADD_TO_CART_INLINE
-            .classList.toggle(IS_FIXED_CLASS, isAboveViewport);
+        if (isAboveViewport && !isFixed(ADD_TO_CART_INLINE)) {
+            ADD_TO_CART_INLINE.classList.add(IS_FIXED_CLASS);
+            Speedwell.features.scroll.unregisterCallback(fixAddToCartButton);
+            Speedwell.features.scroll.registerCallback(restoreAddToCartButton);
+        }
     }
 
     function selectElements() {
@@ -54,7 +72,8 @@
 
 
             !!ADD_TO_CART_INLINE &&
-                Speedwell.features.scroll.registerCallback(handleInlineAddToCartButtonPosition);
+                (ADD_TO_CART_INLINE_DEFAULT_POS = ADD_TO_CART_INLINE.getBoundingClientRect().top) &&
+                Speedwell.features.scroll.registerCallback(fixAddToCartButton);
 
             console.log('%c[%cINIT%c] %cMobile', 'color: white;', 'color: red', 'color: white', 'color: cyan');
         },
