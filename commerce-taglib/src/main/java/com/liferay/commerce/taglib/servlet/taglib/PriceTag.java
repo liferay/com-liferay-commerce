@@ -312,19 +312,20 @@ public class PriceTag extends IncludeTag {
 				return;
 			}
 
-			CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
+			CommerceMoney unitPriceMoney = commerceProductPrice.getUnitPrice();
 
-			_formattedPrice = unitPrice.format(locale);
+			_formattedPrice = unitPriceMoney.format(locale);
 
 			_formattedPromoPrice = StringPool.BLANK;
 
 			if (_showPromo) {
-				CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
+				CommerceMoney finalPriceMoney =
+					commerceProductPrice.getFinalPrice();
 
-				BigDecimal promoPrice = finalPrice.getPrice();
+				BigDecimal promoPrice = finalPriceMoney.getPrice();
 
-				if (promoPrice.compareTo(unitPrice.getPrice()) < 0) {
-					_formattedPromoPrice = finalPrice.format(locale);
+				if (promoPrice.compareTo(unitPriceMoney.getPrice()) < 0) {
+					_formattedPromoPrice = finalPriceMoney.format(locale);
 				}
 			}
 
