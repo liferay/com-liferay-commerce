@@ -25,7 +25,6 @@ import com.liferay.commerce.subscription.CommerceSubscriptionEntryHelper;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
-import com.liferay.portal.kernel.service.WorkflowDefinitionLinkLocalService;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -53,7 +52,7 @@ public class CommerceOrderStatusMessageListener extends BaseMessageListener {
 			_commerceChannelLocalService.getCommerceChannelByOrderGroupId(
 				commerceOrder.getGroupId());
 
-		if (orderStatus == CommerceOrderConstants.ORDER_STATUS_TO_TRANSMIT) {
+		if (orderStatus == CommerceOrderConstants.ORDER_STATUS_TO_FULFILL) {
 			_commerceNotificationHelper.sendNotifications(
 				commerceChannel.getSiteGroupId(),
 				CommerceOrderConstants.ORDER_NOTIFICATION_PLACED,
@@ -81,9 +80,5 @@ public class CommerceOrderStatusMessageListener extends BaseMessageListener {
 
 	@Reference
 	private CommerceSubscriptionEntryHelper _commerceSubscriptionEntryHelper;
-
-	@Reference
-	private WorkflowDefinitionLinkLocalService
-		_workflowDefinitionLinkLocalService;
 
 }

@@ -91,7 +91,7 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 		VirtualCPTypeTestUtil.addCPDefinitionVirtualSetting(
 			_group.getGroupId(), cpDefinition.getModelClassName(),
 			cpDefinition.getCPDefinitionId(), 0L,
-			CommerceOrderConstants.ORDER_STATUS_TO_TRANSMIT, 0L, 0L, 0L);
+			CommerceOrderConstants.ORDER_STATUS_TO_FULFILL, 0L, 0L, 0L);
 
 		CommerceTestUtil.addBackOrderCPDefinitionInventory(cpDefinition);
 
@@ -106,7 +106,7 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 
 		commerceOrder = _setCommerceOrderStatuses(
 			commerceOrder, CommerceOrderConstants.PAYMENT_STATUS_PAID,
-			CommerceOrderConstants.ORDER_STATUS_TO_TRANSMIT);
+			CommerceOrderConstants.ORDER_STATUS_TO_FULFILL);
 
 		_commerceVirtualOrderItemChecker.checkCommerceVirtualOrderItems(
 			commerceOrder.getCommerceOrderId());
@@ -128,7 +128,7 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 
 			Assert.assertEquals(true, commerceVirtualOrderItem.isActive());
 			Assert.assertEquals(
-				CommerceOrderConstants.ORDER_STATUS_TO_TRANSMIT,
+				CommerceOrderConstants.ORDER_STATUS_TO_FULFILL,
 				commerceVirtualOrderItem.getActivationStatus());
 			Assert.assertEquals(0L, commerceVirtualOrderItem.getDuration());
 			Assert.assertEquals(null, commerceVirtualOrderItem.getEndDate());
@@ -155,7 +155,7 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 		VirtualCPTypeTestUtil.addCPDefinitionVirtualSetting(
 			_group.getGroupId(), cpDefinition.getModelClassName(),
 			cpDefinition.getCPDefinitionId(), 0L,
-			CommerceOrderConstants.ORDER_STATUS_TO_TRANSMIT, 0L, 0L, 0L);
+			CommerceOrderConstants.ORDER_STATUS_TO_FULFILL, 0L, 0L, 0L);
 
 		CommerceTestUtil.addBackOrderCPDefinitionInventory(cpDefinition);
 
@@ -175,7 +175,7 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 
 		commerceOrder = _setCommerceOrderStatuses(
 			commerceOrder, CommerceOrderConstants.PAYMENT_STATUS_PAID,
-			CommerceOrderConstants.ORDER_STATUS_TO_TRANSMIT);
+			CommerceOrderConstants.ORDER_STATUS_TO_FULFILL);
 
 		_commerceSubscriptionEntryHelper.checkCommerceSubscriptions(
 			commerceOrder);
@@ -200,7 +200,7 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 
 			Assert.assertEquals(true, commerceVirtualOrderItem.isActive());
 			Assert.assertEquals(
-				CommerceOrderConstants.ORDER_STATUS_TO_TRANSMIT,
+				CommerceOrderConstants.ORDER_STATUS_TO_FULFILL,
 				commerceVirtualOrderItem.getActivationStatus());
 			Assert.assertEquals(0L, commerceVirtualOrderItem.getDuration());
 
