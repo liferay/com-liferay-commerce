@@ -24,7 +24,7 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -43,7 +43,7 @@ public class CommerceAccountGroupFinderImpl
 		long[] commerceAccountGroupIds, int start, int end) {
 
 		if (ArrayUtil.isEmpty(commerceAccountGroupIds)) {
-			return new ArrayList<>();
+			return Collections.emptyList();
 		}
 
 		Session session = null;
