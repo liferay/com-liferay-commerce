@@ -291,8 +291,9 @@ class Cart extends Component {
 
 	_sendUpdateRequest(productId) {
 		return fetch(
-			`${this.cartAPI}/cart-item/${productId}?groupId=${themeDisplay.getScopeGroupId()}&
-					commerceAccountId=${this.commerceAccountId}&quantity=${this._getProductProperty(productId, 'quantity')}`,
+			`${this.cartAPI}/cart-item/${productId}?commerceAccountId=${this.commerceAccountId}&
+				groupId=${themeDisplay.getScopeGroupId()}&p_auth=${Liferay.authToken}&
+				quantity=${this._getProductProperty(productId, 'quantity')}`,
 			{
 				headers: new Headers({'Content-Type': 'application/json',
 					'Accept': 'application/json'}),
@@ -359,7 +360,8 @@ class Cart extends Component {
 
 	_getProducts() {
 		return fetch(
-			`${this.cartAPI}/${this.orderId}?groupId=${themeDisplay.getScopeGroupId()}&commerceAccountId=${this.commerceAccountId}`,
+			`${this.cartAPI}/${this.orderId}?commerceAccountId=${this.commerceAccountId}&
+				groupId=${themeDisplay.getScopeGroupId()}&p_auth=${Liferay.authToken}`,
 			{
 				method: 'GET'
 			}
@@ -394,7 +396,8 @@ class Cart extends Component {
 		this._addPendingOperation(productId);
 
 		return fetch(
-			`${this.cartAPI}/cart-item/${productId}?groupId=${themeDisplay.getScopeGroupId()}&commerceAccountId=${this.commerceAccountId}`,
+			`${this.cartAPI}/cart-item/${productId}?commerceAccountId=${this.commerceAccountId}&
+				groupId=${themeDisplay.getScopeGroupId()}&p_auth=${Liferay.authToken}`,
 			{
 				method: 'DELETE'
 			}

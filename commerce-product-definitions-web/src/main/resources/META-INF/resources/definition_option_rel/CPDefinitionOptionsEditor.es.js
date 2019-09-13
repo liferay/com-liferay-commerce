@@ -40,6 +40,7 @@ class CPDefinitionOptionsEditor extends Component {
 								formData.append(instance.namespace + 'cmd', 'add_multiple');
 								formData.append(instance.namespace + 'cpDefinitionId', instance.cpDefinitionId);
 								formData.append(instance.namespace + 'cpOptionIds', selectedItems);
+								formData.append('p_auth', Liferay.authToken);
 
 								fetch(
 									instance.editProductDefinitionOptionRelURL,
@@ -72,8 +73,12 @@ class CPDefinitionOptionsEditor extends Component {
 	updateState() {
 		this._updateCPDefinitionId();
 
+		var url = new URL(this.cpDefinitionOptionsURL);
+
+		url.searchParams.set('p_auth', window.Liferay.authToken);
+
 		fetch(
-			this.cpDefinitionOptionsURL,
+			url,
 			{
 				credentials: 'include',
 				method: 'GET'

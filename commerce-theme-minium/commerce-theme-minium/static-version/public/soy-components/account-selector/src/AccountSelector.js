@@ -67,7 +67,7 @@ class AccountSelector extends Component {
 
 	fetchAccounts(query = '') {
 		return fetch(
-			this.accountsAPI + '/' + query,
+			this.accountsAPI + '/' + _authorize(query),
 			{
 				method: 'GET'
 			}
@@ -84,7 +84,7 @@ class AccountSelector extends Component {
 
 	fetchOrders(query = '') {
 		return fetch(
-			this.accountsAPI + '/' + this.currentAccount.id + '/orders/' + query,
+			this.accountsAPI + '/' + this.currentAccount.id + '/orders/' + _authorize(query),
 			{
 				method: 'GET'
 			}
@@ -98,6 +98,17 @@ class AccountSelector extends Component {
 				return this.orders = orders;
 			}
 		)
+	}
+
+	_authorize(query) {
+		if (!query.includes('?')) {
+			query += '?p_auth=' + Liferay.authToken;
+		}
+		else if (!query.includes('p_auth=')) {
+			query += '&p_auth=' + Liferay.authToken
+		}
+
+		return query;
 	}
 }
 

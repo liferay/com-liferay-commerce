@@ -76,7 +76,7 @@ class UserInvitation extends Component {
 
 	_fetchUsers() {
 		return fetch(
-			this.usersAPI + '/' + this.query,
+			this.usersAPI + '/' + _authorize(this.query),
 			{
 				method: 'GET'
 			}
@@ -97,7 +97,7 @@ class UserInvitation extends Component {
 			return false;
 		};
 		return fetch(
-			this.invitationAPI,
+			this.invitationAPI + '?p_auth=' + Liferay.authToken,
 			{
 				method: 'POST',
 				body: JSON.stringify(this.addedUsers)
@@ -109,6 +109,17 @@ class UserInvitation extends Component {
 		.then(
 			invitation => invitation.state
 		);
+	}
+
+	_authorize(query) {
+		if (!query.includes('?')) {
+			query += '?p_auth=' + Liferay.authToken;
+		}
+		else if (!query.includes('p_auth=')) {
+			query += '&p_auth=' + Liferay.authToken
+		}
+
+		return query;
 	}
 };
 

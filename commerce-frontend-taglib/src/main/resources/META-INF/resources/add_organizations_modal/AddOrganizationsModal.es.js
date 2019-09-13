@@ -76,7 +76,7 @@ class AddOrganizationModal extends Component {
 
 	_fetchOrganizations() {
 		return fetch(
-			this.organizationsAPI + '?groupId=' + themeDisplay.getScopeGroupId() + '&q=' + this.query,
+			this.organizationsAPI + '?groupId=' + themeDisplay.getScopeGroupId() + '&p_auth=' + Liferay.authToken + '&q=' + this.query,
 			{
 				method: 'GET'
 			}

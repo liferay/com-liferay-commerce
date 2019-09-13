@@ -40,6 +40,7 @@ class CPDefinitionOptionValuesEditor extends Component {
 		var url = new URL(this.cpDefinitionOptionValueRelsURL);
 
 		url.searchParams.append(this.namespace + 'cpDefinitionOptionRelId', this.cpDefinitionOptionRelId);
+		url.searchParams.set('p_auth', Liferay.authToken);
 
 		fetch(
 			url,

@@ -119,7 +119,7 @@ class AddressModal extends Component {
 
 	fetchExistingAddress(id) {
 		fetch(
-			'/o/commerce-ui/address/' + id,
+			'/o/commerce-ui/address/' + id + '?p_auth=' + Liferay.authToken,
 			{
 				method: 'GET'
 			}
@@ -152,7 +152,7 @@ class AddressModal extends Component {
 
 	_fetchCountries() {
 		return fetch(
-			this.countriesAPI,
+			this.countriesAPI + '?p_auth=' + Liferay.authToken,
 			{
 				method: 'GET'
 			}
@@ -170,7 +170,7 @@ class AddressModal extends Component {
 
 	_fetchRegions() {
 		return fetch(
-			this.regionsAPI + this._formData.country,
+			this.regionsAPI + this._formData.country + '?p_auth=' + Liferay.authToken,
 			{
 				method: 'GET'
 			}

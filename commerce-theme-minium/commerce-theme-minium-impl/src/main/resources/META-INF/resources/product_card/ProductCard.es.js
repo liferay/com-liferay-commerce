@@ -52,6 +52,7 @@ class ProductCard extends Component {
 
 		formData.append(this.compareContentNamespace + 'cpDefinitionId', this.productId);
 		formData.append(this.compareContentNamespace + this.productId + 'Compare', false);
+		formData.append('p_auth', Liferay.authToken);
 
 		return fetch(
 			this.editCompareProductActionURL,
@@ -85,6 +86,7 @@ class ProductCard extends Component {
 		formData.append('productId', this.productId);
 		formData.append('skuId', this.skuId ? this.skuId : 0);
 		formData.append('options', '[]');
+		formData.append('p_auth', Liferay.authToken);
 
 		fetch(
 			this.wishlistAPI,
