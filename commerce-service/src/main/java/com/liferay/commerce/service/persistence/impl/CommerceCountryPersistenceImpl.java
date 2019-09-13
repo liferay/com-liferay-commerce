@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service.persistence.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.exception.NoSuchCountryException;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.impl.CommerceCountryImpl;
@@ -67,12 +65,11 @@ import java.util.Set;
  * @author Alessio Antonio Rendina
  * @generated
  */
-@ProviderType
 public class CommerceCountryPersistenceImpl
 	extends BasePersistenceImpl<CommerceCountry>
 	implements CommerceCountryPersistence {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Always use <code>CommerceCountryUtil</code> to access the commerce country persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.

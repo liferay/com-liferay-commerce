@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service.persistence.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.exception.NoSuchAddressException;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.impl.CommerceAddressImpl;
@@ -64,12 +62,11 @@ import java.util.Set;
  * @author Alessio Antonio Rendina
  * @generated
  */
-@ProviderType
 public class CommerceAddressPersistenceImpl
 	extends BasePersistenceImpl<CommerceAddress>
 	implements CommerceAddressPersistence {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Always use <code>CommerceAddressUtil</code> to access the commerce address persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.

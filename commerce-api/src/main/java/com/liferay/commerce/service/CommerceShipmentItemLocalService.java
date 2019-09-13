@@ -58,7 +58,7 @@ import java.util.List;
 public interface CommerceShipmentItemLocalService
 	extends BaseLocalService, PersistedModelLocalService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceShipmentItemLocalServiceUtil} to access the commerce shipment item local service. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceShipmentItemLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.

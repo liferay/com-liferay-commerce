@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.util.tracker.ServiceTracker;
@@ -32,13 +30,18 @@ import org.osgi.util.tracker.ServiceTracker;
  * @see CommerceOrderItemService
  * @generated
  */
-@ProviderType
 public class CommerceOrderItemServiceUtil {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify this class directly. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceOrderItemServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
+	 */
+
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link CommerceOrderItemServiceUtil} to access the commerce order item remote service. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceOrderItemServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public static com.liferay.commerce.model.CommerceOrderItem
 			addCommerceOrderItem(
@@ -193,6 +196,24 @@ public class CommerceOrderItemServiceUtil {
 			requestedDeliveryDateMonth, requestedDeliveryDateDay,
 			requestedDeliveryDateYear, requestedDeliveryDateHour,
 			requestedDeliveryDateMinute, serviceContext);
+	}
+
+	public static com.liferay.commerce.model.CommerceOrderItem
+			updateCommerceOrderItemPrices(
+				long commerceOrderItemId, java.math.BigDecimal unitPrice,
+				java.math.BigDecimal promoPrice,
+				java.math.BigDecimal discountAmount,
+				java.math.BigDecimal finalPrice,
+				java.math.BigDecimal discountPercentageLevel1,
+				java.math.BigDecimal discountPercentageLevel2,
+				java.math.BigDecimal discountPercentageLevel3,
+				java.math.BigDecimal discountPercentageLevel4)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().updateCommerceOrderItemPrices(
+			commerceOrderItemId, unitPrice, promoPrice, discountAmount,
+			finalPrice, discountPercentageLevel1, discountPercentageLevel2,
+			discountPercentageLevel3, discountPercentageLevel4);
 	}
 
 	public static com.liferay.commerce.model.CommerceOrderItem

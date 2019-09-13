@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.model.CommerceOrderPayment;
 import com.liferay.commerce.model.CommerceOrderPaymentModel;
 import com.liferay.expando.kernel.model.ExpandoBridge;
@@ -59,12 +57,11 @@ import java.util.function.Function;
  * @see CommerceOrderPaymentImpl
  * @generated
  */
-@ProviderType
 public class CommerceOrderPaymentModelImpl
 	extends BaseModelImpl<CommerceOrderPayment>
 	implements CommerceOrderPaymentModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce order payment model instance should use the <code>CommerceOrderPayment</code> interface instead.

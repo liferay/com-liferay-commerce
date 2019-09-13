@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.model.CommerceShipment;
 import com.liferay.commerce.service.CommerceShipmentLocalServiceUtil;
 
@@ -31,11 +29,10 @@ import com.liferay.commerce.service.CommerceShipmentLocalServiceUtil;
  * @see CommerceShipment
  * @generated
  */
-@ProviderType
 public abstract class CommerceShipmentBaseImpl
 	extends CommerceShipmentModelImpl implements CommerceShipment {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce shipment model instance should use the <code>CommerceShipment</code> interface instead.

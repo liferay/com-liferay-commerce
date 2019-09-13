@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.service.CommerceOrderItemServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -61,7 +59,6 @@ import java.rmi.RemoteException;
  * @see CommerceOrderItemServiceHttp
  * @generated
  */
-@ProviderType
 public class CommerceOrderItemServiceSoap {
 
 	public static com.liferay.commerce.model.CommerceOrderItemSoap
@@ -334,6 +331,36 @@ public class CommerceOrderItemServiceSoap {
 					requestedDeliveryDateDay, requestedDeliveryDateYear,
 					requestedDeliveryDateHour, requestedDeliveryDateMinute,
 					serviceContext);
+
+			return com.liferay.commerce.model.CommerceOrderItemSoap.toSoapModel(
+				returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.model.CommerceOrderItemSoap
+			updateCommerceOrderItemPrices(
+				long commerceOrderItemId, java.math.BigDecimal unitPrice,
+				java.math.BigDecimal promoPrice,
+				java.math.BigDecimal discountAmount,
+				java.math.BigDecimal finalPrice,
+				java.math.BigDecimal discountPercentageLevel1,
+				java.math.BigDecimal discountPercentageLevel2,
+				java.math.BigDecimal discountPercentageLevel3,
+				java.math.BigDecimal discountPercentageLevel4)
+		throws RemoteException {
+
+		try {
+			com.liferay.commerce.model.CommerceOrderItem returnValue =
+				CommerceOrderItemServiceUtil.updateCommerceOrderItemPrices(
+					commerceOrderItemId, unitPrice, promoPrice, discountAmount,
+					finalPrice, discountPercentageLevel1,
+					discountPercentageLevel2, discountPercentageLevel3,
+					discountPercentageLevel4);
 
 			return com.liferay.commerce.model.CommerceOrderItemSoap.toSoapModel(
 				returnValue);

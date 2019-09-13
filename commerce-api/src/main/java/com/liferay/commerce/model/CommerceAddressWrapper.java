@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -36,7 +34,6 @@ import java.util.Objects;
  * @see CommerceAddress
  * @generated
  */
-@ProviderType
 public class CommerceAddressWrapper
 	implements CommerceAddress, ModelWrapper<CommerceAddress> {
 
@@ -593,6 +590,11 @@ public class CommerceAddressWrapper
 		return _commerceAddress.isSameAddress(commerceAddress);
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a commerce address model instance should use the <code>CommerceAddress</code> interface instead.
+	 */
 	@Override
 	public void persist() {
 		_commerceAddress.persist();

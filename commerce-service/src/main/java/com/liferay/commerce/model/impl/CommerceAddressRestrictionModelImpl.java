@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.model.CommerceAddressRestriction;
 import com.liferay.commerce.model.CommerceAddressRestrictionModel;
 import com.liferay.commerce.model.CommerceAddressRestrictionSoap;
@@ -66,12 +64,11 @@ import java.util.function.Function;
  * @generated
  */
 @JSON(strict = true)
-@ProviderType
 public class CommerceAddressRestrictionModelImpl
 	extends BaseModelImpl<CommerceAddressRestriction>
 	implements CommerceAddressRestrictionModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce address restriction model instance should use the <code>CommerceAddressRestriction</code> interface instead.

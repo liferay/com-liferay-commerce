@@ -40,6 +40,8 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.io.Serializable;
 
+import java.math.BigDecimal;
+
 import java.util.List;
 
 /**
@@ -60,7 +62,7 @@ import java.util.List;
 public interface CommerceOrderItemLocalService
 	extends BaseLocalService, PersistedModelLocalService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceOrderItemLocalServiceUtil} to access the commerce order item local service. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceOrderItemLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
@@ -363,6 +365,16 @@ public interface CommerceOrderItemLocalService
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrderItem updateCommerceOrderItemPrice(
 			long commerceOrderItemId, CommerceContext commerceContext)
+		throws PortalException;
+
+	@Indexable(type = IndexableType.REINDEX)
+	public CommerceOrderItem updateCommerceOrderItemPrices(
+			long commerceOrderItemId, BigDecimal unitPrice,
+			BigDecimal promoPrice, BigDecimal discountAmount,
+			BigDecimal finalPrice, BigDecimal discountPercentageLevel1,
+			BigDecimal discountPercentageLevel2,
+			BigDecimal discountPercentageLevel3,
+			BigDecimal discountPercentageLevel4)
 		throws PortalException;
 
 	public CommerceOrderItem upsertCommerceOrderItem(

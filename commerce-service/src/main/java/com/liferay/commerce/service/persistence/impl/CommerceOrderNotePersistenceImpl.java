@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service.persistence.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.exception.NoSuchOrderNoteException;
 import com.liferay.commerce.model.CommerceOrderNote;
 import com.liferay.commerce.model.impl.CommerceOrderNoteImpl;
@@ -64,12 +62,11 @@ import java.util.Set;
  * @author Alessio Antonio Rendina
  * @generated
  */
-@ProviderType
 public class CommerceOrderNotePersistenceImpl
 	extends BasePersistenceImpl<CommerceOrderNote>
 	implements CommerceOrderNotePersistence {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Always use <code>CommerceOrderNoteUtil</code> to access the commerce order note persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.

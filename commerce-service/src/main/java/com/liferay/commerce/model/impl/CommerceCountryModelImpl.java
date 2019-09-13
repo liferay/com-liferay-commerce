@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.CommerceCountryModel;
 import com.liferay.commerce.model.CommerceCountrySoap;
@@ -72,11 +70,10 @@ import java.util.function.Function;
  * @generated
  */
 @JSON(strict = true)
-@ProviderType
 public class CommerceCountryModelImpl
 	extends BaseModelImpl<CommerceCountry> implements CommerceCountryModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce country model instance should use the <code>CommerceCountry</code> interface instead.

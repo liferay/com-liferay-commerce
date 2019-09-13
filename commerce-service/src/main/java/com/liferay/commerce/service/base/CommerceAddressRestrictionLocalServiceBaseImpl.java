@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service.base;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.model.CommerceAddressRestriction;
 import com.liferay.commerce.service.CommerceAddressRestrictionLocalService;
 import com.liferay.commerce.service.persistence.CPDAvailabilityEstimatePersistence;
@@ -81,12 +79,11 @@ import javax.sql.DataSource;
  * @see com.liferay.commerce.service.impl.CommerceAddressRestrictionLocalServiceImpl
  * @generated
  */
-@ProviderType
 public abstract class CommerceAddressRestrictionLocalServiceBaseImpl
 	extends BaseLocalServiceImpl
 	implements CommerceAddressRestrictionLocalService, IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CommerceAddressRestrictionLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.service.CommerceAddressRestrictionLocalServiceUtil</code>.

@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service.base;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.model.CPDefinitionInventory;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalService;
 import com.liferay.commerce.service.persistence.CPDAvailabilityEstimatePersistence;
@@ -87,12 +85,11 @@ import javax.sql.DataSource;
  * @see com.liferay.commerce.service.impl.CPDefinitionInventoryLocalServiceImpl
  * @generated
  */
-@ProviderType
 public abstract class CPDefinitionInventoryLocalServiceBaseImpl
 	extends BaseLocalServiceImpl
 	implements CPDefinitionInventoryLocalService, IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CPDefinitionInventoryLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.service.CPDefinitionInventoryLocalServiceUtil</code>.

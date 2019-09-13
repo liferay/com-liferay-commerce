@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceAddressRestrictionLocalService
  * @generated
  */
-@ProviderType
 public class CommerceAddressRestrictionLocalServiceWrapper
 	implements CommerceAddressRestrictionLocalService,
 			   ServiceWrapper<CommerceAddressRestrictionLocalService> {

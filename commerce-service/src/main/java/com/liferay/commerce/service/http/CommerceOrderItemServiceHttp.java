@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.service.CommerceOrderItemServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -51,7 +49,6 @@ import com.liferay.portal.kernel.util.MethodKey;
  * @see CommerceOrderItemServiceSoap
  * @generated
  */
-@ProviderType
 public class CommerceOrderItemServiceHttp {
 
 	public static com.liferay.commerce.model.CommerceOrderItem
@@ -707,6 +704,56 @@ public class CommerceOrderItemServiceHttp {
 	}
 
 	public static com.liferay.commerce.model.CommerceOrderItem
+			updateCommerceOrderItemPrices(
+				HttpPrincipal httpPrincipal, long commerceOrderItemId,
+				java.math.BigDecimal unitPrice, java.math.BigDecimal promoPrice,
+				java.math.BigDecimal discountAmount,
+				java.math.BigDecimal finalPrice,
+				java.math.BigDecimal discountPercentageLevel1,
+				java.math.BigDecimal discountPercentageLevel2,
+				java.math.BigDecimal discountPercentageLevel3,
+				java.math.BigDecimal discountPercentageLevel4)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceOrderItemServiceUtil.class,
+				"updateCommerceOrderItemPrices",
+				_updateCommerceOrderItemPricesParameterTypes16);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceOrderItemId, unitPrice, promoPrice,
+				discountAmount, finalPrice, discountPercentageLevel1,
+				discountPercentageLevel2, discountPercentageLevel3,
+				discountPercentageLevel4);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return (com.liferay.commerce.model.CommerceOrderItem)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.commerce.model.CommerceOrderItem
 			upsertCommerceOrderItem(
 				HttpPrincipal httpPrincipal, long commerceOrderId,
 				long cpInstanceId, int quantity, int shippedQuantity,
@@ -718,7 +765,7 @@ public class CommerceOrderItemServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceOrderItemServiceUtil.class, "upsertCommerceOrderItem",
-				_upsertCommerceOrderItemParameterTypes16);
+				_upsertCommerceOrderItemParameterTypes17);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceOrderId, cpInstanceId, quantity,
@@ -813,7 +860,14 @@ public class CommerceOrderItemServiceHttp {
 			int.class, int.class, int.class, int.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
-	private static final Class<?>[] _upsertCommerceOrderItemParameterTypes16 =
+	private static final Class<?>[]
+		_updateCommerceOrderItemPricesParameterTypes16 = new Class[] {
+			long.class, java.math.BigDecimal.class, java.math.BigDecimal.class,
+			java.math.BigDecimal.class, java.math.BigDecimal.class,
+			java.math.BigDecimal.class, java.math.BigDecimal.class,
+			java.math.BigDecimal.class, java.math.BigDecimal.class
+		};
+	private static final Class<?>[] _upsertCommerceOrderItemParameterTypes17 =
 		new Class[] {
 			long.class, long.class, int.class, int.class, String.class,
 			com.liferay.commerce.context.CommerceContext.class,
