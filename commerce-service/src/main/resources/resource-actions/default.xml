@@ -8,6 +8,7 @@
 			<supports>
 				<action-key>MANAGE_COMMERCE_AVAILABILITY_ESTIMATES</action-key>
 				<action-key>MANAGE_COMMERCE_COUNTRIES</action-key>
+				<action-key>MANAGE_COMMERCE_ORDER_PRICES</action-key>
 				<action-key>MANAGE_COMMERCE_SHIPMENTS</action-key>
 				<action-key>MANAGE_COMMERCE_SUBSCRIPTIONS</action-key>
 			</supports>
@@ -16,6 +17,7 @@
 			<guest-unsupported>
 				<action-key>MANAGE_COMMERCE_AVAILABILITY_ESTIMATES</action-key>
 				<action-key>MANAGE_COMMERCE_COUNTRIES</action-key>
+				<action-key>MANAGE_COMMERCE_ORDER_PRICES</action-key>
 				<action-key>MANAGE_COMMERCE_SHIPMENTS</action-key>
 				<action-key>MANAGE_COMMERCE_SUBSCRIPTIONS</action-key>
 			</guest-unsupported>
