@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.service.CommerceSubscriptionEntryLocalServiceUtil;
 
@@ -31,12 +29,11 @@ import com.liferay.commerce.service.CommerceSubscriptionEntryLocalServiceUtil;
  * @see CommerceSubscriptionEntry
  * @generated
  */
-@ProviderType
 public abstract class CommerceSubscriptionEntryBaseImpl
 	extends CommerceSubscriptionEntryModelImpl
 	implements CommerceSubscriptionEntry {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce subscription entry model instance should use the <code>CommerceSubscriptionEntry</code> interface instead.

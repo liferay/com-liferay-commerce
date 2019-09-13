@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service.persistence.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.exception.NoSuchOrderException;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.impl.CommerceOrderImpl;
@@ -70,12 +68,11 @@ import java.util.Set;
  * @author Alessio Antonio Rendina
  * @generated
  */
-@ProviderType
 public class CommerceOrderPersistenceImpl
 	extends BasePersistenceImpl<CommerceOrder>
 	implements CommerceOrderPersistence {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Always use <code>CommerceOrderUtil</code> to access the commerce order persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.

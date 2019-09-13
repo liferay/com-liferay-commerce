@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.model.CPDefinitionInventory;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalServiceUtil;
 
@@ -31,11 +29,10 @@ import com.liferay.commerce.service.CPDefinitionInventoryLocalServiceUtil;
  * @see CPDefinitionInventory
  * @generated
  */
-@ProviderType
 public abstract class CPDefinitionInventoryBaseImpl
 	extends CPDefinitionInventoryModelImpl implements CPDefinitionInventory {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a cp definition inventory model instance should use the <code>CPDefinitionInventory</code> interface instead.

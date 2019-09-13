@@ -56,7 +56,7 @@ import java.util.List;
 public interface CommerceAddressRestrictionLocalService
 	extends BaseLocalService, PersistedModelLocalService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceAddressRestrictionLocalServiceUtil} to access the commerce address restriction local service. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceAddressRestrictionLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.

@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceOrderPaymentLocalService
  * @generated
  */
-@ProviderType
 public class CommerceOrderPaymentLocalServiceWrapper
 	implements CommerceOrderPaymentLocalService,
 			   ServiceWrapper<CommerceOrderPaymentLocalService> {
@@ -288,6 +285,18 @@ public class CommerceOrderPaymentLocalServiceWrapper
 			start, end);
 	}
 
+	@Override
+	public java.util.List<com.liferay.commerce.model.CommerceOrderPayment>
+		getCommerceOrderPayments(
+			long commerceOrderId, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.liferay.commerce.model.CommerceOrderPayment>
+					orderByComparator) {
+
+		return _commerceOrderPaymentLocalService.getCommerceOrderPayments(
+			commerceOrderId, start, end, orderByComparator);
+	}
+
 	/**
 	 * Returns the number of commerce order payments.
 	 *
@@ -297,6 +306,12 @@ public class CommerceOrderPaymentLocalServiceWrapper
 	public int getCommerceOrderPaymentsCount() {
 		return _commerceOrderPaymentLocalService.
 			getCommerceOrderPaymentsCount();
+	}
+
+	@Override
+	public int getCommerceOrderPaymentsCount(long commerceOrderId) {
+		return _commerceOrderPaymentLocalService.getCommerceOrderPaymentsCount(
+			commerceOrderId);
 	}
 
 	@Override

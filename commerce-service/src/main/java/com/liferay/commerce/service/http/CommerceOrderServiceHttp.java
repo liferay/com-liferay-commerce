@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.service.CommerceOrderServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -51,7 +49,6 @@ import com.liferay.portal.kernel.util.MethodKey;
  * @see CommerceOrderServiceSoap
  * @generated
  */
-@ProviderType
 public class CommerceOrderServiceHttp {
 
 	public static com.liferay.commerce.model.CommerceOrder addCommerceOrder(

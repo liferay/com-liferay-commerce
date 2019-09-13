@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CPDefinitionInventoryService
  * @generated
  */
-@ProviderType
 public class CPDefinitionInventoryServiceWrapper
 	implements CPDefinitionInventoryService,
 			   ServiceWrapper<CPDefinitionInventoryService> {
@@ -36,6 +33,11 @@ public class CPDefinitionInventoryServiceWrapper
 		_cpDefinitionInventoryService = cpDefinitionInventoryService;
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link CPDefinitionInventoryServiceUtil} to access the cp definition inventory remote service. Add custom service methods to <code>com.liferay.commerce.service.impl.CPDefinitionInventoryServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
 	@Override
 	public com.liferay.commerce.model.CPDefinitionInventory
 			addCPDefinitionInventory(

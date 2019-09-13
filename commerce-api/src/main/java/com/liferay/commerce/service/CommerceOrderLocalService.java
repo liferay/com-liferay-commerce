@@ -65,7 +65,7 @@ import java.util.Map;
 public interface CommerceOrderLocalService
 	extends BaseLocalService, PersistedModelLocalService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceOrderLocalServiceUtil} to access the commerce order local service. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceOrderLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.

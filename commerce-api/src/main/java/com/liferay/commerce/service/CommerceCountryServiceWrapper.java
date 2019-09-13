@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceCountryService
  * @generated
  */
-@ProviderType
 public class CommerceCountryServiceWrapper
 	implements CommerceCountryService, ServiceWrapper<CommerceCountryService> {
 
@@ -35,6 +32,11 @@ public class CommerceCountryServiceWrapper
 		_commerceCountryService = commerceCountryService;
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link CommerceCountryServiceUtil} to access the commerce country remote service. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceCountryServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
 	@Override
 	public com.liferay.commerce.model.CommerceCountry addCommerceCountry(
 			java.util.Map<java.util.Locale, String> nameMap,

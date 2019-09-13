@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceOrderLocalService
  * @generated
  */
-@ProviderType
 public class CommerceOrderLocalServiceWrapper
 	implements CommerceOrderLocalService,
 			   ServiceWrapper<CommerceOrderLocalService> {

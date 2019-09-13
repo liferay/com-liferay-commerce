@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.model.CPDAvailabilityEstimate;
 import com.liferay.commerce.service.CPDAvailabilityEstimateLocalServiceUtil;
 
@@ -31,12 +29,11 @@ import com.liferay.commerce.service.CPDAvailabilityEstimateLocalServiceUtil;
  * @see CPDAvailabilityEstimate
  * @generated
  */
-@ProviderType
 public abstract class CPDAvailabilityEstimateBaseImpl
 	extends CPDAvailabilityEstimateModelImpl
 	implements CPDAvailabilityEstimate {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a cpd availability estimate model instance should use the <code>CPDAvailabilityEstimate</code> interface instead.
