@@ -44,7 +44,7 @@ public class CommerceOrderStatusMessageListener extends BaseMessageListener {
 	protected void doReceive(Message message) throws Exception {
 		int orderStatus = message.getInteger("orderStatus");
 
-		if (orderStatus == CommerceOrderConstants.ORDER_STATUS_TO_TRANSMIT) {
+		if (orderStatus == CommerceOrderConstants.ORDER_STATUS_TO_FULFILL) {
 			long commerceOrderId = message.getLong("commerceOrderId");
 
 			CommerceOrder commerceOrder =
