@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -36,7 +34,6 @@ import java.util.Objects;
  * @see CommerceAddressRestriction
  * @generated
  */
-@ProviderType
 public class CommerceAddressRestrictionWrapper
 	implements CommerceAddressRestriction,
 			   ModelWrapper<CommerceAddressRestriction> {
@@ -321,6 +318,11 @@ public class CommerceAddressRestrictionWrapper
 		return _commerceAddressRestriction.isNew();
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a commerce address restriction model instance should use the <code>CommerceAddressRestriction</code> interface instead.
+	 */
 	@Override
 	public void persist() {
 		_commerceAddressRestriction.persist();

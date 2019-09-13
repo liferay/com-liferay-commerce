@@ -66,7 +66,7 @@ public abstract class CommerceCountryServiceBaseImpl
 	extends BaseServiceImpl
 	implements CommerceCountryService, IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CommerceCountryService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.service.CommerceCountryServiceUtil</code>.

@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.model.CommerceShippingMethod;
 import com.liferay.commerce.service.CommerceShippingMethodLocalServiceUtil;
 
@@ -31,11 +29,10 @@ import com.liferay.commerce.service.CommerceShippingMethodLocalServiceUtil;
  * @see CommerceShippingMethod
  * @generated
  */
-@ProviderType
 public abstract class CommerceShippingMethodBaseImpl
 	extends CommerceShippingMethodModelImpl implements CommerceShippingMethod {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce shipping method model instance should use the <code>CommerceShippingMethod</code> interface instead.

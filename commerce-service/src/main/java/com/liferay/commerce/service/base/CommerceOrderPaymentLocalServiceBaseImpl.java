@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service.base;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.model.CommerceOrderPayment;
 import com.liferay.commerce.service.CommerceOrderPaymentLocalService;
 import com.liferay.commerce.service.persistence.CPDAvailabilityEstimatePersistence;
@@ -81,12 +79,11 @@ import javax.sql.DataSource;
  * @see com.liferay.commerce.service.impl.CommerceOrderPaymentLocalServiceImpl
  * @generated
  */
-@ProviderType
 public abstract class CommerceOrderPaymentLocalServiceBaseImpl
 	extends BaseLocalServiceImpl
 	implements CommerceOrderPaymentLocalService, IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CommerceOrderPaymentLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.service.CommerceOrderPaymentLocalServiceUtil</code>.

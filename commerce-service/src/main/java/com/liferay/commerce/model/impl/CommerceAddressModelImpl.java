@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceAddressModel;
 import com.liferay.commerce.model.CommerceAddressSoap;
@@ -66,11 +64,10 @@ import java.util.function.Function;
  * @generated
  */
 @JSON(strict = true)
-@ProviderType
 public class CommerceAddressModelImpl
 	extends BaseModelImpl<CommerceAddress> implements CommerceAddressModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce address model instance should use the <code>CommerceAddress</code> interface instead.

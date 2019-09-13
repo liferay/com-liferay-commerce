@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.service.CommerceOrderServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -61,7 +59,6 @@ import java.rmi.RemoteException;
  * @see CommerceOrderServiceHttp
  * @generated
  */
-@ProviderType
 public class CommerceOrderServiceSoap {
 
 	public static com.liferay.commerce.model.CommerceOrderSoap addCommerceOrder(
@@ -677,6 +674,55 @@ public class CommerceOrderServiceSoap {
 					shippingOptionName, purchaseOrderNumber, subtotal,
 					shippingAmount, total, advanceStatus, externalReferenceCode,
 					commerceContext);
+
+			return com.liferay.commerce.model.CommerceOrderSoap.toSoapModel(
+				returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.model.CommerceOrderSoap
+			updateCommerceOrderPrices(
+				long commerceOrderId, java.math.BigDecimal subtotal,
+				java.math.BigDecimal subtotalDiscountAmount,
+				java.math.BigDecimal subtotalDiscountPercentageLevel1,
+				java.math.BigDecimal subtotalDiscountPercentageLevel2,
+				java.math.BigDecimal subtotalDiscountPercentageLevel3,
+				java.math.BigDecimal subtotalDiscountPercentageLevel4,
+				java.math.BigDecimal shippingAmount,
+				java.math.BigDecimal shippingDiscountAmount,
+				java.math.BigDecimal shippingDiscountPercentageLevel1,
+				java.math.BigDecimal shippingDiscountPercentageLevel2,
+				java.math.BigDecimal shippingDiscountPercentageLevel3,
+				java.math.BigDecimal shippingDiscountPercentageLevel4,
+				java.math.BigDecimal taxAmount, java.math.BigDecimal total,
+				java.math.BigDecimal totalDiscountAmount,
+				java.math.BigDecimal totalDiscountPercentageLevel1,
+				java.math.BigDecimal totalDiscountPercentageLevel2,
+				java.math.BigDecimal totalDiscountPercentageLevel3,
+				java.math.BigDecimal totalDiscountPercentageLevel4)
+		throws RemoteException {
+
+		try {
+			com.liferay.commerce.model.CommerceOrder returnValue =
+				CommerceOrderServiceUtil.updateCommerceOrderPrices(
+					commerceOrderId, subtotal, subtotalDiscountAmount,
+					subtotalDiscountPercentageLevel1,
+					subtotalDiscountPercentageLevel2,
+					subtotalDiscountPercentageLevel3,
+					subtotalDiscountPercentageLevel4, shippingAmount,
+					shippingDiscountAmount, shippingDiscountPercentageLevel1,
+					shippingDiscountPercentageLevel2,
+					shippingDiscountPercentageLevel3,
+					shippingDiscountPercentageLevel4, taxAmount, total,
+					totalDiscountAmount, totalDiscountPercentageLevel1,
+					totalDiscountPercentageLevel2,
+					totalDiscountPercentageLevel3,
+					totalDiscountPercentageLevel4);
 
 			return com.liferay.commerce.model.CommerceOrderSoap.toSoapModel(
 				returnValue);

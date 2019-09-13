@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.model.CommerceAvailabilityEstimate;
 import com.liferay.commerce.service.CommerceAvailabilityEstimateLocalServiceUtil;
 
@@ -31,12 +29,11 @@ import com.liferay.commerce.service.CommerceAvailabilityEstimateLocalServiceUtil
  * @see CommerceAvailabilityEstimate
  * @generated
  */
-@ProviderType
 public abstract class CommerceAvailabilityEstimateBaseImpl
 	extends CommerceAvailabilityEstimateModelImpl
 	implements CommerceAvailabilityEstimate {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce availability estimate model instance should use the <code>CommerceAvailabilityEstimate</code> interface instead.

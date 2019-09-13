@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceRegionService
  * @generated
  */
-@ProviderType
 public class CommerceRegionServiceWrapper
 	implements CommerceRegionService, ServiceWrapper<CommerceRegionService> {
 
@@ -35,6 +32,11 @@ public class CommerceRegionServiceWrapper
 		_commerceRegionService = commerceRegionService;
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link CommerceRegionServiceUtil} to access the commerce region remote service. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceRegionServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
 	@Override
 	public com.liferay.commerce.model.CommerceRegion addCommerceRegion(
 			long commerceCountryId, String name, String code, double priority,

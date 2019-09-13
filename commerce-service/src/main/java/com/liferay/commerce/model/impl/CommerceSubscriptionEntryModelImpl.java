@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.model.CommerceSubscriptionEntryModel;
 import com.liferay.commerce.model.CommerceSubscriptionEntrySoap;
@@ -66,12 +64,11 @@ import java.util.function.Function;
  * @generated
  */
 @JSON(strict = true)
-@ProviderType
 public class CommerceSubscriptionEntryModelImpl
 	extends BaseModelImpl<CommerceSubscriptionEntry>
 	implements CommerceSubscriptionEntryModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce subscription entry model instance should use the <code>CommerceSubscriptionEntry</code> interface instead.
