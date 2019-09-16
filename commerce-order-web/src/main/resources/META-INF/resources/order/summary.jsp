@@ -19,6 +19,7 @@
 <%
 CommerceOrderEditDisplayContext commerceOrderEditDisplayContext = (CommerceOrderEditDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
+CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder();
 SearchContainer<CommerceOrderItem> commerceOrderItemsSearchContainer = commerceOrderEditDisplayContext.getCommerceOrderItemsSearchContainer();
 PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPortletURL();
 %>
@@ -34,7 +35,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 	showCancel="<%= true %>"
 	showSubmit="<%= true %>"
 	size="lg"
-	title="Billing address"
+	title='<%= LanguageUtil.get(request, "billing-address") %>'
 	url="<%= editURL %>"
 />
 
@@ -44,7 +45,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 	showCancel="<%= true %>"
 	showSubmit="<%= true %>"
 	size="lg"
-	title="Shipping address"
+	title='<%= LanguageUtil.get(request, "shipping-address") %>'
 	url="<%= editURL %>"
 />
 
@@ -54,7 +55,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 	showCancel="<%= true %>"
 	showSubmit="<%= true %>"
 	size="lg"
-	title="Purchase order number"
+	title='<%= LanguageUtil.get(request, "purchase-order-number") %>'
 	url="<%= editURL %>"
 />
 
@@ -64,17 +65,17 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 	showCancel="<%= true %>"
 	showSubmit="<%= true %>"
 	size="lg"
-	title="Requested delivery date"
+	title='<%= LanguageUtil.get(request, "requested-delivery-date") %>'
 	url="<%= editURL %>"
 />
 
 <commerce-ui:modal
 	closeOnSubmit="<%= true %>"
-	id="order-notes-modal"
+	id="printed-note-modal"
 	showCancel="<%= true %>"
 	showSubmit="<%= true %>"
 	size="lg"
-	title="Order notes"
+	title='<%= LanguageUtil.get(request, "printed-note") %>'
 	url="<%= editURL %>"
 />
 
@@ -89,57 +90,57 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 		<commerce-ui:panel
 			elementClasses="flex-fill"
 			headerActionUrl="<%= editURL %>"
-			title="info"
+			title='<%= LanguageUtil.get(request, "info") %>'
 		>
 			<div class="row vertically-divided">
 				<div class="col-md-4">
 					<commerce-ui:info-box
-						actionLabel="edit"
+						actionLabel='<%= LanguageUtil.get(request, "edit") %>'
 						actionTargetId="billing-modal"
 						elementClasses="py-3"
-						title="Billing address"
+						title='<%= LanguageUtil.get(request, "billing-address") %>'
 					>
-						PO Box 467 New York NY 10002
+						<%= HtmlUtil.escape(commerceOrderEditDisplayContext.getDescriptiveCommerceAddress(commerceOrder.getBillingAddress())) %>
 					</commerce-ui:info-box>
 
 					<commerce-ui:info-box
-						actionLabel="edit"
+						actionLabel='<%= LanguageUtil.get(request, "edit") %>'
 						actionTargetId="shipping-modal"
 						elementClasses="py-3"
-						title="Shipping address"
+						title='<%= LanguageUtil.get(request, "shipping-address") %>'
 					>
-						PO Box 467 New York NY 10002
+						<%= HtmlUtil.escape(commerceOrderEditDisplayContext.getDescriptiveCommerceAddress(commerceOrder.getShippingAddress())) %>
 					</commerce-ui:info-box>
 				</div>
 
 				<div class="col-md-4">
 					<commerce-ui:info-box
-						actionLabel="edit"
+						actionLabel='<%= LanguageUtil.get(request, "edit") %>'
 						actionTargetId="purchase-order-number-modal"
 						elementClasses="py-3"
-						title="Purchase Order Number"
+						title='<%= LanguageUtil.get(request, "purchase-order-number") %>'
 					>
-						#56731451
+						<%= HtmlUtil.escape(commerceOrder.getPurchaseOrderNumber()) %>
 					</commerce-ui:info-box>
 
 					<commerce-ui:info-box
-						actionLabel="edit"
+						actionLabel='<%= LanguageUtil.get(request, "edit") %>'
 						actionTargetId="purchase-order-number-modal"
 						elementClasses="py-3"
-						title="Requested delivery date"
+						title='<%= LanguageUtil.get(request, "requested-delivery-date") %>'
 					>
-						Aug 24, 2019
+						<%= commerceOrderEditDisplayContext.getCommerceOrderDateTime(commerceOrder.getRequestedDeliveryDate()) %>
 					</commerce-ui:info-box>
 				</div>
 
 				<div class="col-md-4">
 					<commerce-ui:info-box
-						actionLabel="edit"
-						actionTargetId="order-notes-modal"
+						actionLabel='<%= LanguageUtil.get(request, "edit") %>'
+						actionTargetId="printed-note-modal"
 						elementClasses="py-3"
-						title="Order notes"
+						title='<%= LanguageUtil.get(request, "printed-note") %>'
 					>
-						Cras ultricies ligula sed magna dictum porta. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.
+						<%= HtmlUtil.escape(commerceOrder.getPrintedNote()) %>
 					</commerce-ui:info-box>
 				</div>
 			</div>
@@ -148,7 +149,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 
 	<div class="col-12">
 		<commerce-ui:panel
-			title="items"
+			title='<%= LanguageUtil.get(request, "items") %>'
 		>
 			<liferay-frontend:management-bar
 				includeCheckBox="<%= true %>"
@@ -224,7 +225,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 						rowURL.setParameter("commerceOrderId", String.valueOf(commerceOrderItem.getCommerceOrderId()));
 						rowURL.setParameter("commerceOrderItemId", String.valueOf(commerceOrderItem.getCommerceOrderItemId()));
 
-						CommerceOrder commerceOrder = commerceOrderItem.getCommerceOrder();
+						CommerceOrder curCommerceOrder = commerceOrderItem.getCommerceOrder();
 						%>
 
 						<liferay-ui:search-container-column-text
@@ -259,7 +260,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 									</span>
 									<span class="commerce-subscription-info">
 										<liferay-commerce:subscription-info
-											commerceOrderItemId="<%= commerceOrder.isOpen() ? 0 : commerceOrderItem.getCommerceOrderItemId() %>"
+											commerceOrderItemId="<%= curCommerceOrder.isOpen() ? 0 : commerceOrderItem.getCommerceOrderItemId() %>"
 											CPInstanceId="<%= commerceOrderItem.getCPInstanceId() %>"
 											showDuration="<%= false %>"
 										/>
@@ -329,7 +330,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 
 	<div class="col-12">
 		<commerce-ui:panel
-			title="order-summary"
+			title='<%= LanguageUtil.get(request, "order-summary") %>'
 		>
 			<commerce-ui:summary-table
 				data="<%= commerceOrderEditDisplayContext.getSummary() %>"

@@ -34,6 +34,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Alessio Antonio Rendina
  */
 @Component(
 	property = {
@@ -42,13 +43,13 @@ import org.osgi.service.component.annotations.Reference;
 	},
 	service = {ScreenNavigationCategory.class, ScreenNavigationEntry.class}
 )
-public class CommerceOrderItemsScreenNavigationEntry
+public class CommerceOrderSummaryScreenNavigationEntry
 	implements ScreenNavigationCategory, ScreenNavigationEntry<CommerceOrder> {
 
 	@Override
 	public String getCategoryKey() {
 		return CommerceOrderScreenNavigationConstants.
-			CATEGORY_KEY_COMMERCE_ORDER_ITEMS;
+			CATEGORY_KEY_COMMERCE_ORDER_SUMMARY;
 	}
 
 	@Override
@@ -61,7 +62,7 @@ public class CommerceOrderItemsScreenNavigationEntry
 		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
 			"content.Language", locale, getClass());
 
-		return LanguageUtil.get(resourceBundle, "summary");
+		return LanguageUtil.get(resourceBundle, getCategoryKey());
 	}
 
 	@Override
@@ -77,7 +78,7 @@ public class CommerceOrderItemsScreenNavigationEntry
 		throws IOException {
 
 		_jspRenderer.renderJSP(
-			httpServletRequest, httpServletResponse, "/order/items.jsp");
+			httpServletRequest, httpServletResponse, "/order/summary.jsp");
 	}
 
 	@Reference
