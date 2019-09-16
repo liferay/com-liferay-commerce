@@ -27,7 +27,7 @@ import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceRegionService;
 import com.liferay.commerce.service.CommerceShipmentItemService;
 import com.liferay.commerce.shipment.web.internal.portlet.action.ActionHelper;
-import com.liferay.commerce.shipment.web.internal.util.CommerceShipmentPortletUtil;
+import com.liferay.commerce.util.CommerceUtil;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -178,9 +178,8 @@ public class CommerceShipmentItemDisplayContext
 			liferayPortletRequest, getPortletURL(), null, null);
 
 		OrderByComparator<CommerceShipmentItem> orderByComparator =
-			CommerceShipmentPortletUtil.
-				getCommerceShipmentItemOrderByComparator(
-					getOrderByCol(), getOrderByType());
+			CommerceUtil.getCommerceShipmentItemOrderByComparator(
+				getOrderByCol(), getOrderByType());
 
 		searchContainer.setEmptyResultsMessage("no-shipment-items-were-found");
 		searchContainer.setOrderByCol(getOrderByCol());
