@@ -96,7 +96,7 @@ String externalReferenceCode = commerceOrder.getExternalReferenceCode();
 
 						</aui:select>
 
-						<aui:input disabled="<%= true %>" label="created" name="createDate" readonly="<%= true %>" type="textbox" value="<%= commerceOrderEditDisplayContext.getCommerceOrderDateTime() %>" />
+						<aui:input bean="<%= commerceOrder %>" label="created" model="<%= CommerceOrder.class %>" name="createDate" readonly="<%= true %>" type="textbox" value="<%= commerceOrderEditDisplayContext.getCommerceOrderDateTime(commerceOrder.getCreateDate()) %>" />
 
 						<aui:input name="orderDate" />
 

@@ -129,10 +129,6 @@ CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder()
 					markupView="lexicon"
 				/>
 			</liferay-ui:search-container>
-
-			<liferay-ui:empty-result-message
-				message="there-are-no-payments"
-			/>
 		</commerce-ui:panel>
 	</div>
 </div>
