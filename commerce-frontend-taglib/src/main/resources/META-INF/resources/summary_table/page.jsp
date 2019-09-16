@@ -1,5 +1,3 @@
-<%@ include file="/summary_table/init.jsp" %>
-
 <%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
@@ -16,7 +14,7 @@
  */
 --%>
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ include file="/summary_table/init.jsp" %>
 
 <%
 List<SummaryElement> data = (List<SummaryElement>)request.getAttribute("liferay-commerce:summary-table:data");
