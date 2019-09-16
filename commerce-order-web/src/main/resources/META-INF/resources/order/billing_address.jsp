@@ -21,7 +21,7 @@ CommerceOrderEditDisplayContext commerceOrderEditDisplayContext = (CommerceOrder
 
 CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder();
 
-CommerceAddress commerceAddress = commerceOrder.getShippingAddress();
+CommerceAddress commerceAddress = commerceOrder.getBillingAddress();
 
 long commerceCountryId = BeanParamUtil.getLong(commerceAddress, request, "commerceCountryId", 0);
 long commerceRegionId = BeanParamUtil.getLong(commerceAddress, request, "commerceRegionId", 0);
@@ -30,7 +30,7 @@ long commerceRegionId = BeanParamUtil.getLong(commerceAddress, request, "commerc
 <portlet:actionURL name="editCommerceOrder" var="editCommerceOrderItemActionURL" />
 
 <aui:form action="<%= editCommerceOrderItemActionURL %>" cssClass="container-fluid-1280" id="testtest" method="post" name="fm">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="shippingAddress" />
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="billingAddress" />
 	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 	<aui:input name="commerceOrderId" type="hidden" value="<%= commerceOrder.getCommerceOrderId() %>" />
 
@@ -74,10 +74,10 @@ long commerceRegionId = BeanParamUtil.getLong(commerceAddress, request, "commerc
 						}
 
 						Liferay.Service(
-							'/commerce.commercecountry/get-shipping-commerce-countries',
+							'/commerce.commercecountry/get-billing-commerce-countries',
 							{
 								companyId: <%= company.getCompanyId() %>,
-								shippingAllowed: true,
+								billingAllowed: true,
 								active: true
 							},
 							injectCountryPlaceholder
