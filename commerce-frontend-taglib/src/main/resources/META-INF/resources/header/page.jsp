@@ -16,8 +16,6 @@
 
 <%@ include file="/header/init.jsp" %>
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="liferay-ui" %>
-
 <%
 Object bean = request.getAttribute("liferay-commerce:header:bean");
 Class<?> model = (Class<?>)request.getAttribute("liferay-commerce:header:model");
@@ -45,7 +43,9 @@ String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_header") 
 			<div class="d-flex mr-3 py-2">
 				<div class="pr-3">
 					<div class="d-flex">
-						<h3 class="mb-0"><liferay-ui:message key="<%= title %>" /></h3>
+						<h3 class="mb-0">
+							<%= HtmlUtil.escape(title) %>
+						</h3>
 
 						<c:if test="<%= Validator.isNotNull(version) %>">
 							<span class="badge badge-secondary ml-2">
