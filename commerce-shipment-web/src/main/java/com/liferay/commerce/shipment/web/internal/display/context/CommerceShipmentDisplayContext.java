@@ -30,7 +30,7 @@ import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.service.CommerceShipmentItemLocalServiceUtil;
 import com.liferay.commerce.service.CommerceShipmentService;
 import com.liferay.commerce.shipment.web.internal.portlet.action.ActionHelper;
-import com.liferay.commerce.shipment.web.internal.util.CommerceShipmentPortletUtil;
+import com.liferay.commerce.util.CommerceUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -215,7 +215,7 @@ public class CommerceShipmentDisplayContext
 			liferayPortletRequest, getPortletURL(), null, null);
 
 		OrderByComparator<CommerceShipment> orderByComparator =
-			CommerceShipmentPortletUtil.getCommerceShipmentOrderByComparator(
+			CommerceUtil.getCommerceShipmentOrderByComparator(
 				getOrderByCol(), getOrderByType());
 
 		String emptyResultsMessage = "no-shipments-were-found";
