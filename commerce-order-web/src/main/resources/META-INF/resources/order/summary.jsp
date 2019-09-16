@@ -24,7 +24,7 @@ SearchContainer<CommerceOrderItem> commerceOrderItemsSearchContainer = commerceO
 PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPortletURL();
 %>
 
-<liferay-portlet:renderURL var="editURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+<liferay-portlet:renderURL var="editBillingAddressURL">
 	<portlet:param name="mvcRenderCommandName" value="editCommerceOrderShippingAddress" />
 	<portlet:param name="commerceOrderId" value="<%= String.valueOf(commerceOrderEditDisplayContext.getCommerceOrderId()) %>" />
 </liferay-portlet:renderURL>
@@ -36,8 +36,13 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 	showSubmit="<%= true %>"
 	size="lg"
 	title='<%= LanguageUtil.get(request, "billing-address") %>'
-	url="<%= editURL %>"
+	url="<%= editBillingAddressURL %>"
 />
+
+<liferay-portlet:renderURL var="editShippingAddressURL">
+	<portlet:param name="mvcRenderCommandName" value="editCommerceOrderShippingAddress" />
+	<portlet:param name="commerceOrderId" value="<%= String.valueOf(commerceOrderEditDisplayContext.getCommerceOrderId()) %>" />
+</liferay-portlet:renderURL>
 
 <commerce-ui:modal
 	closeOnSubmit="<%= true %>"
@@ -46,7 +51,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 	showSubmit="<%= true %>"
 	size="lg"
 	title='<%= LanguageUtil.get(request, "shipping-address") %>'
-	url="<%= editURL %>"
+	url="<%= editShippingAddressURL %>"
 />
 
 <commerce-ui:modal
@@ -56,17 +61,17 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 	showSubmit="<%= true %>"
 	size="lg"
 	title='<%= LanguageUtil.get(request, "purchase-order-number") %>'
-	url="<%= editURL %>"
+	url="<%= editBillingAddressURL %>"
 />
 
 <commerce-ui:modal
 	closeOnSubmit="<%= true %>"
-	id="requested-delivery-modal"
+	id="requested-delivery-date-modal"
 	showCancel="<%= true %>"
 	showSubmit="<%= true %>"
 	size="lg"
 	title='<%= LanguageUtil.get(request, "requested-delivery-date") %>'
-	url="<%= editURL %>"
+	url="<%= editBillingAddressURL %>"
 />
 
 <commerce-ui:modal
@@ -76,7 +81,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 	showSubmit="<%= true %>"
 	size="lg"
 	title='<%= LanguageUtil.get(request, "printed-note") %>'
-	url="<%= editURL %>"
+	url="<%= editBillingAddressURL %>"
 />
 
 <div class="container">
@@ -89,14 +94,14 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 	<div class="col-12">
 		<commerce-ui:panel
 			elementClasses="flex-fill"
-			headerActionUrl="<%= editURL %>"
+			headerActionUrl="<%= editBillingAddressURL %>"
 			title='<%= LanguageUtil.get(request, "info") %>'
 		>
 			<div class="row vertically-divided">
 				<div class="col-md-4">
 					<commerce-ui:info-box
 						actionLabel='<%= LanguageUtil.get(request, "edit") %>'
-						actionTargetId="billing-modal"
+						actionUrl="<%= editBillingAddressURL %>"
 						elementClasses="py-3"
 						title='<%= LanguageUtil.get(request, "billing-address") %>'
 					>
@@ -105,7 +110,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 
 					<commerce-ui:info-box
 						actionLabel='<%= LanguageUtil.get(request, "edit") %>'
-						actionTargetId="shipping-modal"
+						actionUrl="<%= editShippingAddressURL %>"
 						elementClasses="py-3"
 						title='<%= LanguageUtil.get(request, "shipping-address") %>'
 					>
@@ -117,6 +122,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 					<commerce-ui:info-box
 						actionLabel='<%= LanguageUtil.get(request, "edit") %>'
 						actionTargetId="purchase-order-number-modal"
+						actionUrl="<%= editBillingAddressURL %>"
 						elementClasses="py-3"
 						title='<%= LanguageUtil.get(request, "purchase-order-number") %>'
 					>
@@ -125,7 +131,8 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 
 					<commerce-ui:info-box
 						actionLabel='<%= LanguageUtil.get(request, "edit") %>'
-						actionTargetId="purchase-order-number-modal"
+						actionTargetId="requested-delivery-date-modal"
+						actionUrl="<%= editBillingAddressURL %>"
 						elementClasses="py-3"
 						title='<%= LanguageUtil.get(request, "requested-delivery-date") %>'
 					>
@@ -137,6 +144,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 					<commerce-ui:info-box
 						actionLabel='<%= LanguageUtil.get(request, "edit") %>'
 						actionTargetId="printed-note-modal"
+						actionUrl="<%= editBillingAddressURL %>"
 						elementClasses="py-3"
 						title='<%= LanguageUtil.get(request, "printed-note") %>'
 					>
