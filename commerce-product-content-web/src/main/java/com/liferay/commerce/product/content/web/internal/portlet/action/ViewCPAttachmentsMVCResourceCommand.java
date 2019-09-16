@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.portlet.JSONPortletResponseUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCResourceCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCResourceCommand;
@@ -35,6 +36,7 @@ import javax.portlet.PortletException;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
+import com.liferay.portal.kernel.util.Portal;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -90,6 +92,19 @@ public class ViewCPAttachmentsMVCResourceCommand
 				jsonArray.put(jsonObject);
 			}
 
+			if (cpAttachmentFileEntries.isEmpty()) {
+				Company company = _portal.getCompany(resourceRequest);
+
+				JSONObject jsonObject = _jsonFactory.createJSONObject();
+
+				String attachmentURL =
+					_commerceMediaResolver.getDefaultUrl(company.getGroupId());
+
+				jsonObject.put("url", attachmentURL);
+
+				jsonArray.put(jsonObject);
+			}
+
 			JSONPortletResponseUtil.writeJSON(
 				resourceRequest, resourceResponse, jsonArray);
 		}
@@ -109,5 +124,8 @@ public class ViewCPAttachmentsMVCResourceCommand
 
 	@Reference
 	private JSONFactory _jsonFactory;
+
+	@Reference
+	private Portal _portal;
 
 }
