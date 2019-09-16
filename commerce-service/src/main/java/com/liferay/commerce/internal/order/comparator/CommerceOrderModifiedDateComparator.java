@@ -24,9 +24,9 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 public class CommerceOrderModifiedDateComparator
 	extends OrderByComparator<CommerceOrder> {
 
-	public static final String ORDER_BY_ASC = "createDate ASC";
+	public static final String ORDER_BY_ASC = "modifiedDate ASC";
 
-	public static final String ORDER_BY_DESC = "createDate DESC";
+	public static final String ORDER_BY_DESC = "modifiedDate DESC";
 
 	public static final String[] ORDER_BY_FIELDS = {"modifiedDate"};
 
