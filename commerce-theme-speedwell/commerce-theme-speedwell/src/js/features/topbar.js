@@ -97,8 +97,6 @@
 
             translucencyIsEnabled &&
                 Speedwell.features.scroll.registerCallback(toggleTranslucencyOnScroll);
-
-            console.log('%c[%cINIT%c] %cTopbar', 'color: white;', 'color: red', 'color: white', 'color: cyan');
         },
 
         getToggleElements: function() {

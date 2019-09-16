@@ -140,6 +140,10 @@
 			transition: all .1s ease;
 			transition-delay: 0ms !important;
 
+			.added-quantity {
+				color: white;
+			}
+
 			&:hover {
 				.added-quantity {
 					color: white;
@@ -200,6 +204,8 @@
 	}
 
 	&--inline {
+		$button-height: 60px;
+
 		display: flex;
 
 		@media only screen and (max-width: 767px) {
@@ -213,7 +219,7 @@
 
 		.commerce-button {
 			font-size: 12px;
-			height: 60px;
+			height: $button-height;
 			min-width: 160px;
 
 			@media only screen and (max-width: 767px) {

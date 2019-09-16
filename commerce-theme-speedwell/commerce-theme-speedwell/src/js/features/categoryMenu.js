@@ -51,8 +51,6 @@
         initialize: function() {
             selectElements();
             attachListeners();
-
-            console.log('%c[%cINIT%c] %cTopbar Category Nav', 'color: white;', 'color: red', 'color: white', 'color: cyan');
         },
 
         getElement() {
