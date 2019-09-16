@@ -24,12 +24,19 @@ import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceAddressRestriction;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.CommerceRegion;
+import com.liferay.commerce.model.CommerceShipment;
+import com.liferay.commerce.model.CommerceShipmentItem;
 import com.liferay.commerce.util.comparator.CommerceAddressCreateDateComparator;
 import com.liferay.commerce.util.comparator.CommerceAddressRestrictionCreateDateComparator;
 import com.liferay.commerce.util.comparator.CommerceCountryNameComparator;
 import com.liferay.commerce.util.comparator.CommerceCountryPriorityComparator;
 import com.liferay.commerce.util.comparator.CommerceRegionNameComparator;
 import com.liferay.commerce.util.comparator.CommerceRegionPriorityComparator;
+import com.liferay.commerce.util.comparator.CommerceShipmentCreateDateComparator;
+import com.liferay.commerce.util.comparator.CommerceShipmentExpectedDateComparator;
+import com.liferay.commerce.util.comparator.CommerceShipmentIdComparator;
+import com.liferay.commerce.util.comparator.CommerceShipmentItemCreateDateComparator;
+import com.liferay.commerce.util.comparator.CommerceShipmentShippingDateComparator;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.search.SortFactoryUtil;
@@ -274,6 +281,57 @@ public class CommerceUtil {
 		}
 		else if (orderByCol.equals("priority")) {
 			orderByComparator = new CommerceRegionPriorityComparator(
+				orderByAsc);
+		}
+
+		return orderByComparator;
+	}
+
+	public static OrderByComparator<CommerceShipmentItem>
+		getCommerceShipmentItemOrderByComparator(
+			String orderByCol, String orderByType) {
+
+		boolean orderByAsc = false;
+
+		if (orderByType.equals("asc")) {
+			orderByAsc = true;
+		}
+
+		OrderByComparator<CommerceShipmentItem> orderByComparator = null;
+
+		if (orderByCol.equals("create-date")) {
+			orderByComparator = new CommerceShipmentItemCreateDateComparator(
+				orderByAsc);
+		}
+
+		return orderByComparator;
+	}
+
+	public static OrderByComparator<CommerceShipment>
+		getCommerceShipmentOrderByComparator(
+			String orderByCol, String orderByType) {
+
+		boolean orderByAsc = false;
+
+		if (orderByType.equals("asc")) {
+			orderByAsc = true;
+		}
+
+		OrderByComparator<CommerceShipment> orderByComparator = null;
+
+		if (orderByCol.equals("create-date")) {
+			orderByComparator = new CommerceShipmentCreateDateComparator(
+				orderByAsc);
+		}
+		else if (orderByCol.equals("expected-delivery-date")) {
+			orderByComparator = new CommerceShipmentExpectedDateComparator(
+				orderByAsc);
+		}
+		else if (orderByCol.equals("shipment-number")) {
+			orderByComparator = new CommerceShipmentIdComparator(orderByAsc);
+		}
+		else if (orderByCol.equals("shipping-date")) {
+			orderByComparator = new CommerceShipmentShippingDateComparator(
 				orderByAsc);
 		}
 
