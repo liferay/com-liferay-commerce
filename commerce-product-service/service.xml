@@ -205,6 +205,7 @@
 
 		<!-- References -->
 
+		<reference entity="AssetCategory" package-path="com.liferay.portlet.asset" />
 		<reference entity="DLApp" package-path="com.liferay.portlet.documentlibrary" />
 		<reference entity="DLFileEntry" package-path="com.liferay.portlet.documentlibrary" />
 		<reference entity="ExpandoRow" package-path="com.liferay.portlet.expando" />
