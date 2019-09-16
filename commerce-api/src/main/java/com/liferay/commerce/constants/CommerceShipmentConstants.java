@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.constants;
 
+import com.liferay.petra.string.StringPool;
+
 /**
  * @author Alessio Antonio Rendina
  */
@@ -38,6 +40,22 @@ public class CommerceShipmentConstants {
 		SHIPMENT_STATUS_DELIVERED, SHIPMENT_STATUS_PROCESSING,
 		SHIPMENT_STATUS_READY_TO_BE_SHIPPED, SHIPMENT_STATUS_SHIPPED
 	};
+
+	public static String getShipmentLabelStyle(int shipmentStatus) {
+		if (shipmentStatus == SHIPMENT_STATUS_DELIVERED) {
+			return "info";
+		}
+		else if ((shipmentStatus == SHIPMENT_STATUS_READY_TO_BE_SHIPPED) ||
+				 (shipmentStatus == SHIPMENT_STATUS_PROCESSING)) {
+
+			return "warning";
+		}
+		else if (shipmentStatus == SHIPMENT_STATUS_SHIPPED) {
+			return "success";
+		}
+
+		return StringPool.BLANK;
+	}
 
 	public static Integer getShipmentStatus(String label) {
 		if (label.equals("delivered")) {
