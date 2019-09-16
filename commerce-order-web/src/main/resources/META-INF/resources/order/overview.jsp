@@ -86,7 +86,7 @@ int orderStatus = BeanParamUtil.getInteger(commerceOrder, request, "orderStatus"
 
 						</aui:select>
 
-						<aui:input bean="<%= commerceOrder %>" label="created" model="<%= CommerceOrder.class %>" name="createDate" readonly="<%= true %>" type="textbox" value="<%= commerceOrderEditDisplayContext.getCommerceOrderDateTime() %>" />
+						<aui:input bean="<%= commerceOrder %>" label="created" model="<%= CommerceOrder.class %>" name="createDate" readonly="<%= true %>" type="textbox" value="<%= commerceOrderEditDisplayContext.getCommerceOrderDateTime(commerceOrder.getCreateDate()) %>" />
 
 						<aui:button-row>
 							<aui:icon cssClass="edit-form-link" image="edit" label="edit-order-status" url="javascript:;" />
