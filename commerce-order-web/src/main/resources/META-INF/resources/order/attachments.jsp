@@ -18,7 +18,7 @@
 
 <commerce-ui:panel
 	bodyClasses="p-0"
-	title="emails"
+	title="attachments"
 >
 	<liferay-ui:empty-result-message
 		message="there-are-no-attachments"
