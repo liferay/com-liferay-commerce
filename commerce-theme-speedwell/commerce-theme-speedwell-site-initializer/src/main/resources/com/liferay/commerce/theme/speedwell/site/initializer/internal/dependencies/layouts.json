@@ -375,6 +375,7 @@
 				"privateLayout": false
 			},
 			{
+				"hidden": true,
 				"layoutTemplateId": "speedwell_account",
 				"name": "My Payment Methods",
 				"permissions": [
