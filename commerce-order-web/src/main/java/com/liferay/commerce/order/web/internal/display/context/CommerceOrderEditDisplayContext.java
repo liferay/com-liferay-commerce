@@ -14,19 +14,27 @@
 
 package com.liferay.commerce.order.web.internal.display.context;
 
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.currency.model.CommerceMoney;
+import com.liferay.commerce.discount.CommerceDiscountValue;
 import com.liferay.commerce.frontend.model.HeaderButtonModel;
 import com.liferay.commerce.frontend.model.StepModel;
 import com.liferay.commerce.frontend.model.SummaryElement;
+import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceOrderNote;
 import com.liferay.commerce.model.CommerceOrderPayment;
+import com.liferay.commerce.model.CommerceRegion;
+import com.liferay.commerce.model.CommerceShipment;
 import com.liferay.commerce.order.web.internal.display.context.util.CommerceOrderRequestHelper;
 import com.liferay.commerce.order.web.internal.search.CommerceOrderItemSearch;
 import com.liferay.commerce.order.web.internal.search.CommerceOrderItemSearchTerms;
 import com.liferay.commerce.order.web.internal.servlet.taglib.ui.CommerceOrderScreenNavigationConstants;
 import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
 import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelService;
+import com.liferay.commerce.price.CommerceOrderPrice;
+import com.liferay.commerce.price.CommerceOrderPriceCalculation;
 import com.liferay.commerce.price.CommerceProductPrice;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.item.selector.criterion.CPInstanceItemSelectorCriterion;
@@ -36,6 +44,8 @@ import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceOrderNoteService;
 import com.liferay.commerce.service.CommerceOrderPaymentLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
+import com.liferay.commerce.service.CommerceShipmentService;
+import com.liferay.commerce.util.CommerceUtil;
 import com.liferay.frontend.taglib.clay.servlet.taglib.util.DropdownItem;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorReturnType;
@@ -58,12 +68,14 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.webserver.WebServerServletTokenUtil;
 
 import java.text.DateFormat;
 import java.text.Format;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import javax.portlet.PortletURL;
@@ -85,7 +97,9 @@ public class CommerceOrderEditDisplayContext {
 			CommerceOrderPaymentLocalService commerceOrderPaymentLocalService,
 			CommercePaymentMethodGroupRelService
 				commercePaymentMethodGroupRelService,
+			CommerceOrderPriceCalculation commerceOrderPriceCalculation,
 			CommerceProductPriceCalculation commerceProductPriceCalculation,
+			CommerceShipmentService commerceShipmentService,
 			ItemSelector itemSelector, RenderRequest renderRequest)
 		throws PortalException {
 
@@ -96,7 +110,9 @@ public class CommerceOrderEditDisplayContext {
 		_commerceOrderPaymentLocalService = commerceOrderPaymentLocalService;
 		_commercePaymentMethodGroupRelService =
 			commercePaymentMethodGroupRelService;
+		_commerceOrderPriceCalculation = commerceOrderPriceCalculation;
 		_commerceProductPriceCalculation = commerceProductPriceCalculation;
+		_commerceShipmentService = commerceShipmentService;
 		_itemSelector = itemSelector;
 
 		long commerceOrderId = ParamUtil.getLong(
@@ -127,17 +143,45 @@ public class CommerceOrderEditDisplayContext {
 			getCommerceOrderId());
 	}
 
-	public CommerceOrder getCommerceOrder() {
-		return _commerceOrder;
-	}
-
-	public String getCommerceOrderDateTime() {
+	public String getCommerceAccountThumbnailURL() throws PortalException {
 		if (_commerceOrder == null) {
 			return StringPool.BLANK;
 		}
 
-		return _commerceOrderDateFormatDateTime.format(
-			_commerceOrder.getCreateDate());
+		CommerceAccount commerceAccount = _commerceOrder.getCommerceAccount();
+
+		ThemeDisplay themeDisplay =
+			_commerceOrderRequestHelper.getThemeDisplay();
+
+		StringBundler sb = new StringBundler(5);
+
+		sb.append(themeDisplay.getPathImage());
+
+		if (commerceAccount.getLogoId() == 0) {
+			sb.append("/organization_logo?img_id=0");
+		}
+		else {
+			sb.append("/organization_logo?img_id=");
+			sb.append(commerceAccount.getLogoId());
+			sb.append("&t=");
+			sb.append(
+				WebServerServletTokenUtil.getToken(
+					commerceAccount.getLogoId()));
+		}
+
+		return sb.toString();
+	}
+
+	public CommerceOrder getCommerceOrder() {
+		return _commerceOrder;
+	}
+
+	public String getCommerceOrderDateTime(Date date) {
+		if ((_commerceOrder == null) || (date == null)) {
+			return StringPool.BLANK;
+		}
+
+		return _commerceOrderDateFormatDateTime.format(date);
 	}
 
 	public long getCommerceOrderId() {
@@ -176,7 +220,7 @@ public class CommerceOrderEditDisplayContext {
 		portletURL.setParameter(
 			"screenNavigationCategoryKey",
 			CommerceOrderScreenNavigationConstants.
-				CATEGORY_KEY_COMMERCE_ORDER_ITEMS);
+				CATEGORY_KEY_COMMERCE_ORDER_SUMMARY);
 
 		String redirect = ParamUtil.getString(
 			_commerceOrderRequestHelper.getRequest(), "redirect");
@@ -362,6 +406,112 @@ public class CommerceOrderEditDisplayContext {
 			_commerceOrderRequestHelper.getCommerceContext());
 	}
 
+	public CommerceShipment getCommerceShipment() throws PortalException {
+		if (_commerceShipment != null) {
+			return _commerceShipment;
+		}
+
+		long commerceShipmentId = ParamUtil.getLong(
+			_commerceOrderRequestHelper.getRequest(), "commerceShipmentId");
+
+		if (commerceShipmentId > 0) {
+			_commerceShipment = _commerceShipmentService.getCommerceShipment(
+				commerceShipmentId);
+		}
+
+		return _commerceShipment;
+	}
+
+	public PortletURL getCommerceShipmentsPortletURL() {
+		LiferayPortletResponse liferayPortletResponse =
+			_commerceOrderRequestHelper.getLiferayPortletResponse();
+
+		PortletURL portletURL = liferayPortletResponse.createRenderURL();
+
+		portletURL.setParameter("mvcRenderCommandName", "editCommerceOrder");
+		portletURL.setParameter(
+			"commerceOrderId", String.valueOf(getCommerceOrderId()));
+		portletURL.setParameter(
+			"screenNavigationCategoryKey",
+			CommerceOrderScreenNavigationConstants.
+				CATEGORY_KEY_COMMERCE_ORDER_SHIPMENTS);
+
+		String redirect = ParamUtil.getString(
+			_commerceOrderRequestHelper.getRequest(), "redirect");
+
+		if (Validator.isNotNull(redirect)) {
+			portletURL.setParameter("redirect", redirect);
+		}
+
+		return portletURL;
+	}
+
+	public SearchContainer<CommerceShipment>
+			getCommerceShipmentsSearchContainer()
+		throws PortalException {
+
+		if (_shipmentSearchContainer != null) {
+			return _shipmentSearchContainer;
+		}
+
+		_shipmentSearchContainer = new SearchContainer<>(
+			_commerceOrderRequestHelper.getLiferayPortletRequest(),
+			getCommerceShipmentsPortletURL(), null, "there-are-no-shipments");
+
+		_shipmentSearchContainer.setOrderByCol(getOrderByCol());
+		_shipmentSearchContainer.setOrderByComparator(
+			CommerceUtil.getCommerceShipmentOrderByComparator(
+				getOrderByCol(), getOrderByType()));
+		_shipmentSearchContainer.setOrderByType(getOrderByType());
+
+		_shipmentSearchContainer.setRowChecker(
+			new EmptyOnClickRowChecker(
+				_commerceOrderRequestHelper.getLiferayPortletResponse()));
+
+		int total = _commerceShipmentService.getCommerceShipmentsCount(
+			_commerceOrderRequestHelper.getCompanyId(),
+			_commerceOrder.getShippingAddressId());
+
+		_shipmentSearchContainer.setTotal(total);
+
+		List<CommerceShipment> results =
+			_commerceShipmentService.getCommerceShipments(
+				_commerceOrderRequestHelper.getCompanyId(),
+				_commerceOrder.getShippingAddressId(),
+				_shipmentSearchContainer.getStart(),
+				_shipmentSearchContainer.getEnd(), null);
+
+		_shipmentSearchContainer.setResults(results);
+
+		return _shipmentSearchContainer;
+	}
+
+	public String getDescriptiveCommerceAddress(CommerceAddress commerceAddress)
+		throws PortalException {
+
+		if (commerceAddress == null) {
+			return StringPool.BLANK;
+		}
+
+		CommerceRegion commerceRegion = commerceAddress.getCommerceRegion();
+
+		StringBundler sb = new StringBundler((commerceRegion == null) ? 5 : 7);
+
+		sb.append(commerceAddress.getStreet1());
+		sb.append(StringPool.SPACE);
+		sb.append(commerceAddress.getCity());
+		sb.append(StringPool.NEW_LINE);
+
+		if (commerceRegion != null) {
+			sb.append(commerceRegion.getCode());
+			sb.append(StringPool.SPACE);
+		}
+
+		sb.append(commerceAddress.getZip());
+
+		return sb.toString();
+	}
+
 	public List<DropdownItem> getDropdownItems() {
 		List<DropdownItem> headerDropdownItems = new ArrayList<>();
 
@@ -426,6 +576,18 @@ public class CommerceOrderEditDisplayContext {
 		return itemSelectorURL.toString();
 	}
 
+	public String getOrderByCol() {
+		return ParamUtil.getString(
+			_commerceOrderRequestHelper.getLiferayPortletRequest(),
+			"orderByCol", "create-date");
+	}
+
+	public String getOrderByType() {
+		return ParamUtil.getString(
+			_commerceOrderRequestHelper.getLiferayPortletRequest(),
+			"orderByType", "desc");
+	}
+
 	public List<StepModel> getOrderSteps() throws PortalException {
 		List stepList = new ArrayList<>();
 
@@ -464,57 +626,97 @@ public class CommerceOrderEditDisplayContext {
 		return stepList;
 	}
 
-	public List<SummaryElement> getSummary() {
+	public List<SummaryElement> getSummary() throws PortalException {
 		List<SummaryElement> summary = new ArrayList<>();
 
-		SummaryElement summaryElement1 = new SummaryElement();
-		SummaryElement summaryElement2 = new SummaryElement();
-		SummaryElement summaryElement3 = new SummaryElement();
-		SummaryElement summaryElement4 = new SummaryElement();
-		SummaryElement summaryElement5 = new SummaryElement();
-		SummaryElement summaryElement6 = new SummaryElement();
-		SummaryElement summaryElement7 = new SummaryElement();
-		SummaryElement summaryElement8 = new SummaryElement();
-		SummaryElement summaryElement9 = new SummaryElement();
+		if (_commerceOrder == null) {
+			return summary;
+		}
 
-		summaryElement1.setLabel("Items subtotal");
-		summaryElement1.setValue("$ 2,208.50");
+		SummaryElement itemsSubtotalSummaryElement = new SummaryElement();
+		SummaryElement orderDiscountSummaryElement = new SummaryElement();
+		SummaryElement promotionCodesSummaryElement = new SummaryElement();
+		SummaryElement estimatedTaxSummaryElement = new SummaryElement();
+		SummaryElement shippingAndHandingSummaryElement = new SummaryElement();
+		SummaryElement grandTotalSummaryElement = new SummaryElement();
 
-		summaryElement2.setLabel("Order discount");
-		summaryElement2.setValue("$ 0.00");
+		itemsSubtotalSummaryElement.setLabel(
+			LanguageUtil.get(
+				_commerceOrderRequestHelper.getRequest(), "items-subtotal"));
 
-		summaryElement3.setLabel("Promotion codes");
-		summaryElement3.setValue("--");
+		CommerceOrderPrice commerceOrderPrice =
+			_commerceOrderPriceCalculation.getCommerceOrderPrice(
+				_commerceOrder,
+				_commerceOrderRequestHelper.getCommerceContext());
 
-		summaryElement4.setLabel("Estimated tax");
-		summaryElement4.setValue("$ 0.00");
+		CommerceMoney subtotal = commerceOrderPrice.getSubtotal();
 
-		summaryElement5.setLabel("Shipping & Handing");
-		summaryElement5.setValue("$ 50.00");
+		if (subtotal != null) {
+			itemsSubtotalSummaryElement.setValue(
+				subtotal.format(_commerceOrderRequestHelper.getLocale()));
+		}
 
-		summaryElement6.setLabel("Grand Total");
-		summaryElement6.setValue("$ 2,258.50");
-		summaryElement6.setStyle("big");
+		orderDiscountSummaryElement.setLabel(
+			LanguageUtil.get(
+				_commerceOrderRequestHelper.getRequest(), "order-discount"));
 
-		summaryElement7.setStyle("divider");
+		CommerceDiscountValue totalDiscountValue =
+			commerceOrderPrice.getTotalDiscountValue();
 
-		summaryElement8.setLabel("Total return refounds");
-		summaryElement8.setValue("$ 0.00");
-		summaryElement8.setStyle("danger");
+		if (totalDiscountValue != null) {
+			CommerceMoney discountAmount =
+				totalDiscountValue.getDiscountAmount();
 
-		summaryElement9.setLabel("Total appeasement refunds");
-		summaryElement9.setValue("$ 0.00");
-		summaryElement9.setStyle("danger");
+			orderDiscountSummaryElement.setValue(
+				discountAmount.format(_commerceOrderRequestHelper.getLocale()));
+		}
 
-		summary.add(summaryElement1);
-		summary.add(summaryElement2);
-		summary.add(summaryElement3);
-		summary.add(summaryElement4);
-		summary.add(summaryElement5);
-		summary.add(summaryElement6);
-		summary.add(summaryElement7);
-		summary.add(summaryElement8);
-		summary.add(summaryElement9);
+		promotionCodesSummaryElement.setLabel(
+			LanguageUtil.get(
+				_commerceOrderRequestHelper.getRequest(), "promotion-codes"));
+		promotionCodesSummaryElement.setValue(_commerceOrder.getCouponCode());
+
+		estimatedTaxSummaryElement.setLabel(
+			LanguageUtil.get(
+				_commerceOrderRequestHelper.getRequest(), "estimated-tax"));
+
+		CommerceMoney taxValue = commerceOrderPrice.getTaxValue();
+
+		if (taxValue != null) {
+			estimatedTaxSummaryElement.setValue(
+				taxValue.format(_commerceOrderRequestHelper.getLocale()));
+		}
+
+		shippingAndHandingSummaryElement.setLabel(
+			LanguageUtil.get(
+				_commerceOrderRequestHelper.getRequest(),
+				"shipping-and-handing"));
+
+		CommerceMoney shippingValue = commerceOrderPrice.getShippingValue();
+
+		if (shippingValue != null) {
+			shippingAndHandingSummaryElement.setValue(
+				shippingValue.format(_commerceOrderRequestHelper.getLocale()));
+		}
+
+		grandTotalSummaryElement.setLabel(
+			LanguageUtil.get(
+				_commerceOrderRequestHelper.getRequest(), "grand-total"));
+		grandTotalSummaryElement.setStyle("big");
+
+		CommerceMoney total = commerceOrderPrice.getTotal();
+
+		if (total != null) {
+			grandTotalSummaryElement.setValue(
+				total.format(_commerceOrderRequestHelper.getLocale()));
+		}
+
+		summary.add(itemsSubtotalSummaryElement);
+		summary.add(orderDiscountSummaryElement);
+		summary.add(promotionCodesSummaryElement);
+		summary.add(estimatedTaxSummaryElement);
+		summary.add(shippingAndHandingSummaryElement);
+		summary.add(grandTotalSummaryElement);
 
 		return summary;
 	}
@@ -527,14 +729,18 @@ public class CommerceOrderEditDisplayContext {
 	private final CommerceOrderNoteService _commerceOrderNoteService;
 	private final CommerceOrderPaymentLocalService
 		_commerceOrderPaymentLocalService;
+	private final CommerceOrderPriceCalculation _commerceOrderPriceCalculation;
 	private final CommerceOrderRequestHelper _commerceOrderRequestHelper;
 	private final CommerceOrderService _commerceOrderService;
 	private final CommercePaymentMethodGroupRelService
 		_commercePaymentMethodGroupRelService;
 	private final CommerceProductPriceCalculation
 		_commerceProductPriceCalculation;
+	private CommerceShipment _commerceShipment;
+	private final CommerceShipmentService _commerceShipmentService;
 	private SearchContainer<CommerceOrderItem> _itemSearchContainer;
 	private final ItemSelector _itemSelector;
 	private SearchContainer<CommerceOrderPayment> _paymentSearchContainer;
+	private SearchContainer<CommerceShipment> _shipmentSearchContainer;
 
 }
