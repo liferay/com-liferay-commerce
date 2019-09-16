@@ -49,6 +49,7 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
@@ -127,7 +128,8 @@ public class CPDefinitionsFacetsMVCResourceCommand
 			resourceRequest, "filterFields");
 		String filtersValues = ParamUtil.getString(
 			resourceRequest, "filtersValues");
-		String indexFieldName = _getIndexFieldName(fieldName);
+		String indexFieldName = _getIndexFieldName(
+			fieldName, themeDisplay.getLanguageId());
 
 		String currentOptionKey = StringPool.BLANK;
 
@@ -241,11 +243,12 @@ public class CPDefinitionsFacetsMVCResourceCommand
 		ServletResponseUtil.write(httpServletResponse, jsonArray.toString());
 	}
 
-	private String _getIndexFieldName(String fieldName) {
+	private String _getIndexFieldName(String fieldName, String languageId) {
 		if (fieldName.startsWith("OPTION_")) {
 			fieldName = fieldName.replace("OPTION_", StringPool.BLANK);
 
-			return "ATTRIBUTE_" + fieldName + "_VALUES_NAMES";
+			return StringBundler.concat(
+				languageId, "_ATTRIBUTE_", fieldName, "_VALUES_NAMES");
 		}
 
 		return fieldName;

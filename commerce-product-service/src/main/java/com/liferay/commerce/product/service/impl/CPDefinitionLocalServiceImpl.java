@@ -84,6 +84,7 @@ import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
@@ -973,7 +974,8 @@ public class CPDefinitionLocalServiceImpl
 				if (key.startsWith("OPTION_")) {
 					key = key.replace("OPTION_", StringPool.BLANK);
 
-					key = _getIndexFieldName(key);
+					key = _getIndexFieldName(
+						key, searchContext.getLanguageId());
 
 					options.add(key);
 				}
@@ -2112,8 +2114,9 @@ public class CPDefinitionLocalServiceImpl
 			cpDefinitionLocalization);
 	}
 
-	private String _getIndexFieldName(String optionKey) {
-		return "ATTRIBUTE_" + optionKey + "_VALUES_NAMES";
+	private String _getIndexFieldName(String optionKey, String languageId) {
+		return StringBundler.concat(
+			languageId, "_ATTRIBUTE_", optionKey, "_VALUES_NAMES");
 	}
 
 	private Map<Locale, String> _getUniqueUrlTitles(
