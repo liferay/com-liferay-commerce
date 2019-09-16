@@ -58,13 +58,6 @@
     return {
         initialize: function() {
             w.addEventListener(SCROLL_EVENT, handleOnScroll, false);
-
-            console.log('%c[%cINIT%c] %cScroll',
-                'color: white;',
-                'color: red',
-                'color: white',
-                'color: cyan'
-            );
         },
 
         registerCallback: function(callback) {

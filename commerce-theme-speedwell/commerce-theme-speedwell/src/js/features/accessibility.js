@@ -27,8 +27,6 @@
     return {
         initialize: function() {
             w.addEventListener(KEYDOWN_EVENT, needsAccessibility);
-
-            console.log('%c[%cINIT%c] %cAccessibility', 'color: white;', 'color: red', 'color: white', 'color: cyan');
         },
 
         isAccessible: function() {

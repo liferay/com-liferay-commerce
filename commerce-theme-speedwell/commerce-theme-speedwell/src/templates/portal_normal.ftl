@@ -46,7 +46,7 @@
 			</div>
 
 			<footer class="speedwell-footer">
-				<div class="speedwell-footer__info">
+				<!-- div class="speedwell-footer__info">
 					<div class="payment-methods">
 						<div class="payment-methods__method"><img src="${themeDisplay.getPathThemeImages()}/Visa.png" /></div>
 						<div class="payment-methods__method"><img src="${themeDisplay.getPathThemeImages()}/MasterCard.png" /></div>
@@ -98,7 +98,7 @@
 							Saturday 7:00am - 5:00pm
 						</p>
 					</section>
-				</div>
+				</div-->
 
 				<div class="speedwell-footer__closing">
 					<img alt="${logo_description}" class="logo" src="${site_logo}" />
@@ -118,11 +118,12 @@
 		</div>
 	</div>
 	<script type="text/javascript" src="${javascript_folder}/intersection-observer.js"></script>
-	<script type="text/javascript" src="${javascript_folder}/DOM/context.js"></script>
-	<script type="text/javascript" src="${javascript_folder}/DOM/accessibility.js"></script>
-	<script type="text/javascript" src="${javascript_folder}/DOM/scrollHandler.js"></script>
-	<script type="text/javascript" src="${javascript_folder}/DOM/topbar.js"></script>
-	<script type="text/javascript" src="${javascript_folder}/DOM/categoryMenu.js"></script>
-	<script type="text/javascript" src="${javascript_folder}/DOM/mobile.js"></script>
+	<script type="text/javascript" src="${javascript_folder}/features/context.js"></script>
+	<script type="text/javascript" src="${javascript_folder}/features/accessibility.js"></script>
+	<script type="text/javascript" src="${javascript_folder}/features/scrollHandler.js"></script>
+	<script type="text/javascript" src="${javascript_folder}/features/topbar.js"></script>
+	<script type="text/javascript" src="${javascript_folder}/features/categoryMenu.js"></script>
+	<script type="text/javascript" src="${javascript_folder}/features/mobile.js"></script>
+	<script type="text/javascript" src="${javascript_folder}/features/init.js"></script>
 </body>
 </html>
