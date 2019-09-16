@@ -26,6 +26,8 @@
 .btn-primary.btn-default:active {
   background-color: $color-theme;
   border: 0;
+  font-weight: 600;
+  font-size: 14px;
 }
 
 .multi-step-item.active .multi-step-icon,

@@ -15,6 +15,10 @@
     margin-bottom: 50px;
     font-size: 1.5em;
     font-weight: 300;
+
+    @media only screen and (max-width: 767px) {
+      margin-bottom: 25px;
+    }
   }
 
   &__pill {
@@ -32,6 +36,7 @@
 
     @media screen and (max-width: 767px) {
       width: 100%;
+      grid-template-columns: 85px 1fr;
     }
 
     &:hover {
