@@ -125,6 +125,30 @@ public class CommerceShipmentServiceImpl
 	}
 
 	@Override
+	public List<CommerceShipment> getCommerceShipments(
+			long companyId, long commerceAddressId, int start, int end,
+			OrderByComparator<CommerceShipment> orderByComparator)
+		throws PortalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommerceActionKeys.MANAGE_COMMERCE_SHIPMENTS);
+
+		List<CommerceChannel> commerceChannels =
+			_commerceChannelService.searchCommerceChannels(companyId);
+
+		Stream<CommerceChannel> stream = commerceChannels.stream();
+
+		long[] commerceChannelGroupIds = stream.mapToLong(
+			CommerceChannel::getGroupId
+		).toArray();
+
+		return commerceShipmentLocalService.getCommerceShipments(
+			commerceChannelGroupIds, commerceAddressId, start, end,
+			orderByComparator);
+	}
+
+	@Override
 	public int getCommerceShipmentsCount(long companyId)
 		throws PortalException {
 
@@ -168,6 +192,27 @@ public class CommerceShipmentServiceImpl
 
 		return commerceShipmentLocalService.getCommerceShipmentsCount(
 			commerceChannelGroupIds, status);
+	}
+
+	@Override
+	public int getCommerceShipmentsCount(long companyId, long commerceAddressId)
+		throws PortalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommerceActionKeys.MANAGE_COMMERCE_SHIPMENTS);
+
+		List<CommerceChannel> commerceChannels =
+			_commerceChannelService.searchCommerceChannels(companyId);
+
+		Stream<CommerceChannel> stream = commerceChannels.stream();
+
+		long[] commerceChannelGroupIds = stream.mapToLong(
+			CommerceChannel::getGroupId
+		).toArray();
+
+		return commerceShipmentLocalService.getCommerceShipmentsCount(
+			commerceChannelGroupIds, commerceAddressId);
 	}
 
 	@Override
