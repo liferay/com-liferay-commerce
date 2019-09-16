@@ -84,7 +84,7 @@ public class EditCommerceOrderShippingAddressMVCRenderCommand
 			throw new PortletException(e);
 		}
 
-		return "/order/test.jsp";
+		return "/order/shipping_address.jsp";
 	}
 
 	@Reference
