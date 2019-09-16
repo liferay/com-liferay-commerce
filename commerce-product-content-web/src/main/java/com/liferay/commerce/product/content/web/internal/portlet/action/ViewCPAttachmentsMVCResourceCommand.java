@@ -18,7 +18,10 @@ import com.liferay.commerce.media.CommerceMediaResolver;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
+import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.service.CPAttachmentFileEntryService;
 import com.liferay.commerce.product.util.CPInstanceHelper;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -28,7 +31,10 @@ import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.portlet.JSONPortletResponseUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCResourceCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCResourceCommand;
+import com.liferay.portal.kernel.service.ClassNameLocalService;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Portal;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.util.List;
 
@@ -36,7 +42,6 @@ import javax.portlet.PortletException;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
-import com.liferay.portal.kernel.util.Portal;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -71,9 +76,34 @@ public class ViewCPAttachmentsMVCResourceCommand
 			resourceRequest, "cpDefinitionId");
 
 		try {
+			JSONArray ddmFormValuesJSONArray = _jsonFactory.createJSONArray(
+				ddmFormValues);
+
 			List<CPAttachmentFileEntry> cpAttachmentFileEntries =
 				_cpInstanceHelper.getCPAttachmentFileEntries(
 					cpDefinitionId, ddmFormValues, type);
+
+			if (cpAttachmentFileEntries.isEmpty() &&
+				(ddmFormValuesJSONArray.length() > 0)) {
+
+				JSONObject jsonObject = ddmFormValuesJSONArray.getJSONObject(0);
+
+				JSONArray valuesJSONArray = _jsonFactory.createJSONArray(
+					jsonObject.getString("value"));
+
+				if (valuesJSONArray.length() == 0) {
+					long cpDefinitionClassNameId =
+						_classNameLocalService.getClassNameId(
+							CPDefinition.class);
+
+					cpAttachmentFileEntries =
+						_cpAttachmentFileEntryService.
+							getCPAttachmentFileEntries(
+								cpDefinitionClassNameId, cpDefinitionId, type,
+								WorkflowConstants.STATUS_APPROVED,
+								QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+				}
+			}
 
 			for (CPAttachmentFileEntry cpAttachmentFileEntry :
 					cpAttachmentFileEntries) {
@@ -97,8 +127,8 @@ public class ViewCPAttachmentsMVCResourceCommand
 
 				JSONObject jsonObject = _jsonFactory.createJSONObject();
 
-				String attachmentURL =
-					_commerceMediaResolver.getDefaultUrl(company.getGroupId());
+				String attachmentURL = _commerceMediaResolver.getDefaultUrl(
+					company.getGroupId());
 
 				jsonObject.put("url", attachmentURL);
 
@@ -117,7 +147,13 @@ public class ViewCPAttachmentsMVCResourceCommand
 		ViewCPAttachmentsMVCResourceCommand.class);
 
 	@Reference
+	private ClassNameLocalService _classNameLocalService;
+
+	@Reference
 	private CommerceMediaResolver _commerceMediaResolver;
+
+	@Reference
+	private CPAttachmentFileEntryService _cpAttachmentFileEntryService;
 
 	@Reference
 	private CPInstanceHelper _cpInstanceHelper;
