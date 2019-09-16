@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.product.service.impl;
 
+import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.exception.CPAttachmentFileEntryDisplayDateException;
 import com.liferay.commerce.product.exception.CPAttachmentFileEntryExpirationDateException;
@@ -23,6 +24,7 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.base.CPAttachmentFileEntryLocalServiceBaseImpl;
 import com.liferay.document.library.kernel.model.DLFolderConstants;
 import com.liferay.portal.kernel.dao.orm.QueryDefinition;
+import com.liferay.portal.kernel.exception.NoSuchClassNameException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -46,6 +48,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.TempFileEntryUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 
@@ -63,7 +66,10 @@ import java.util.Map;
 public class CPAttachmentFileEntryLocalServiceImpl
 	extends CPAttachmentFileEntryLocalServiceBaseImpl {
 
-	@Indexable(type = IndexableType.REINDEX)
+	/**
+	 * @deprecated As of Mueller (7.2.x), pass userId directly
+	 */
+	@Deprecated
 	@Override
 	public CPAttachmentFileEntry addCPAttachmentFileEntry(
 			long classNameId, long classPK, long fileEntryId,
@@ -75,18 +81,18 @@ public class CPAttachmentFileEntryLocalServiceImpl
 			double priority, int type, ServiceContext serviceContext)
 		throws PortalException {
 
-		return cpAttachmentFileEntryLocalService.addCPAttachmentFileEntry(
-			classNameId, classPK, fileEntryId, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire, titleMap,
-			json, priority, type, null, serviceContext);
+		return addCPAttachmentFileEntry(
+			serviceContext.getUserId(), classNameId, classPK, fileEntryId,
+			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
+			displayDateMinute, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			neverExpire, titleMap, json, priority, type, null serviceContext);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CPAttachmentFileEntry addCPAttachmentFileEntry(
-			long classNameId, long classPK, long fileEntryId,
+			long userId, long classNameId, long classPK, long fileEntryId,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
@@ -98,8 +104,9 @@ public class CPAttachmentFileEntryLocalServiceImpl
 
 		// Commerce product attachment file entry
 
-		User user = userLocalService.getUser(serviceContext.getUserId());
-		long groupId = serviceContext.getScopeGroupId();
+		long groupId = getGroupId(classNameId, classPK);
+
+		User user = userLocalService.getUser(userId);
 
 		Locale locale = LocaleUtil.getSiteDefault();
 
@@ -398,7 +405,27 @@ public class CPAttachmentFileEntryLocalServiceImpl
 			double priority, int type, ServiceContext serviceContext)
 		throws PortalException {
 
-		User user = userLocalService.getUser(serviceContext.getUserId());
+		return updateCPAttachmentFileEntry(
+			serviceContext.getUserId(), cpAttachmentFileEntryId, fileEntryId,
+			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
+			displayDateMinute, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			neverExpire, titleMap, json, priority, type, serviceContext);
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CPAttachmentFileEntry updateCPAttachmentFileEntry(
+			long userId, long cpAttachmentFileEntryId, long fileEntryId,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
+			int expirationDateDay, int expirationDateYear,
+			int expirationDateHour, int expirationDateMinute,
+			boolean neverExpire, Map<Locale, String> titleMap, String json,
+			double priority, int type, ServiceContext serviceContext)
+		throws PortalException {
+
+		User user = userLocalService.getUser(userId);
 
 		Locale locale = LocaleUtil.getSiteDefault();
 
@@ -619,6 +646,31 @@ public class CPAttachmentFileEntryLocalServiceImpl
 					WorkflowConstants.STATUS_EXPIRED, serviceContext,
 					new HashMap<String, Serializable>());
 			}
+		}
+	}
+
+	protected long getGroupId(long classNameId, long classPK)
+		throws PortalException {
+
+		long cpDefinitionClassNameId = classNameLocalService.getClassNameId(
+			CPDefinition.class);
+		long assetCategoryClassNameId = classNameLocalService.getClassNameId(
+			AssetCategory.class);
+
+		if (classNameId == assetCategoryClassNameId) {
+			AssetCategory assetCategory =
+				assetCategoryLocalService.getAssetCategory(classPK);
+
+			return assetCategory.getGroupId();
+		}
+		else if (classNameId == cpDefinitionClassNameId) {
+			CPDefinition cpDefinition =
+				cpDefinitionLocalService.getCPDefinition(classPK);
+
+			return cpDefinition.getGroupId();
+		}
+		else {
+			throw new NoSuchClassNameException();
 		}
 	}
 
