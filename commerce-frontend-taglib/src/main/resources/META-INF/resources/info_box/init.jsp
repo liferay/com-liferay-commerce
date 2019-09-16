@@ -27,9 +27,9 @@ page import="java.util.Map" %>
 <liferay-theme:defineObjects />
 
 <%
-	String title = (String)request.getAttribute("liferay-commerce:panel:title");
-	String actionTargetId = (String)request.getAttribute("liferay-commerce:panel:actionTargetId");
-	String actionLabel = (String)request.getAttribute("liferay-commerce:panel:actionLabel");
-	String actionUrl = (String)request.getAttribute("liferay-commerce:panel:actionUrl");
-	String elementClasses = (String)request.getAttribute("liferay-commerce:panel:elementClasses");
+String title = (String)request.getAttribute("liferay-commerce:info-box:title");
+String actionTargetId = (String)request.getAttribute("liferay-commerce:info-box:actionTargetId");
+String actionLabel = (String)request.getAttribute("liferay-commerce:info-box:actionLabel");
+String actionUrl = (String)request.getAttribute("liferay-commerce:info-box:actionUrl");
+String elementClasses = (String)request.getAttribute("liferay-commerce:info-box:elementClasses");
 %>

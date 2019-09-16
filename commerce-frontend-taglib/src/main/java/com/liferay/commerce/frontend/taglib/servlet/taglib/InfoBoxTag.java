@@ -116,7 +116,7 @@ public class InfoBoxTag extends IncludeTag {
 	}
 
 	private static final String _ATTRIBUTE_NAMESPACE =
-		"liferay-commerce:panel:";
+		"liferay-commerce:info-box:";
 
 	private static final String _END_PAGE = "/info_box/end.jsp";
 
