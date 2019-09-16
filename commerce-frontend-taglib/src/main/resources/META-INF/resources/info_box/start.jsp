@@ -17,7 +17,7 @@
 <%@ include file="/info_box/init.jsp" %>
 
 <%
-	String infoxBoxCssClasses = "info-box" + (Validator.isNotNull(elementClasses) ? " " + elementClasses : "");
+String infoxBoxCssClasses = "info-box" + (Validator.isNotNull(elementClasses) ? " " + elementClasses : "");
 %>
 
 <div class="<%= infoxBoxCssClasses %>">
