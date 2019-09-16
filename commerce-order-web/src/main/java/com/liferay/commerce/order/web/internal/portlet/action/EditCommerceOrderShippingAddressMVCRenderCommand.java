@@ -18,12 +18,14 @@ import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.exception.NoSuchOrderException;
 import com.liferay.commerce.order.web.internal.display.context.CommerceOrderEditDisplayContext;
 import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelService;
+import com.liferay.commerce.price.CommerceOrderPriceCalculation;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceOrderNoteService;
 import com.liferay.commerce.service.CommerceOrderPaymentLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
+import com.liferay.commerce.service.CommerceShipmentService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
@@ -62,8 +64,9 @@ public class EditCommerceOrderShippingAddressMVCRenderCommand
 					_commerceOrderItemService, _commerceOrderNoteService,
 					_commerceOrderPaymentLocalService,
 					_commercePaymentMethodGroupRelService,
-					_commerceProductPriceCalculation, _itemSelector,
-					renderRequest);
+					_commerceOrderPriceCalculation,
+					_commerceProductPriceCalculation, _commerceShipmentService,
+					_itemSelector, renderRequest);
 
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -97,6 +100,9 @@ public class EditCommerceOrderShippingAddressMVCRenderCommand
 	private CommerceOrderPaymentLocalService _commerceOrderPaymentLocalService;
 
 	@Reference
+	private CommerceOrderPriceCalculation _commerceOrderPriceCalculation;
+
+	@Reference
 	private CommerceOrderService _commerceOrderService;
 
 	@Reference
@@ -105,6 +111,9 @@ public class EditCommerceOrderShippingAddressMVCRenderCommand
 
 	@Reference
 	private CommerceProductPriceCalculation _commerceProductPriceCalculation;
+
+	@Reference
+	private CommerceShipmentService _commerceShipmentService;
 
 	@Reference
 	private ItemSelector _itemSelector;
