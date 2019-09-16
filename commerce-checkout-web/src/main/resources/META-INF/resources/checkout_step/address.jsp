@@ -188,6 +188,8 @@ long commerceRegionId = BeanParamUtil.getLong(currentCommerceAddress, request, "
 				}
 				else {
 					<portlet:namespace />updateAddressFields(commerceAddress.get('selectedIndex'));
+
+					Liferay.Form.get('<portlet:namespace />fm').formValidator.validate();
 				}
 
 				commerceAddressParamName.val(commerceAddressVal);
