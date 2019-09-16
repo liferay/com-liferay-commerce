@@ -78,7 +78,7 @@ public class CommerceOrderShipmentAttachmentsScreenNavigationEntry
 
 		_jspRenderer.renderJSP(
 			httpServletRequest, httpServletResponse,
-			"/shipment/attachments.jsp");
+			"/order_shipment/attachments.jsp");
 	}
 
 	@Reference
