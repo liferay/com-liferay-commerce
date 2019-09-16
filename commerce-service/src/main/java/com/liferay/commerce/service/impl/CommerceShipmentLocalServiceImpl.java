@@ -129,6 +129,15 @@ public class CommerceShipmentLocalServiceImpl
 	}
 
 	@Override
+	public List<CommerceShipment> getCommerceShipments(
+		long[] groupIds, long commerceAddressId, int start, int end,
+		OrderByComparator<CommerceShipment> orderByComparator) {
+
+		return commerceShipmentPersistence.findByG_C(
+			groupIds, commerceAddressId, start, end, orderByComparator);
+	}
+
+	@Override
 	public int getCommerceShipmentsCount(long[] groupIds) {
 		return commerceShipmentPersistence.countByGroupIds(groupIds);
 	}
@@ -136,6 +145,14 @@ public class CommerceShipmentLocalServiceImpl
 	@Override
 	public int getCommerceShipmentsCount(long[] groupIds, int status) {
 		return commerceShipmentPersistence.countByG_S(groupIds, status);
+	}
+
+	@Override
+	public int getCommerceShipmentsCount(
+		long[] groupIds, long commerceAddressId) {
+
+		return commerceShipmentPersistence.countByG_C(
+			groupIds, commerceAddressId);
 	}
 
 	@Override
