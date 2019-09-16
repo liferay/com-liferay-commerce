@@ -15,7 +15,6 @@
 --%>
 
 <%@ include file="/init.jsp" %>
-<!-- test edit_order -->
 
 <%
 CommerceOrderEditDisplayContext commerceOrderEditDisplayContext = (CommerceOrderEditDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
@@ -39,22 +38,16 @@ if (commerceOrder != null) {
 else {
 	headerTitle = LanguageUtil.get(request, "add-order");
 }
-
-renderResponse.setTitle(headerTitle);
 %>
 
-<!-- header -->
 <commerce-ui:header
 	bean="<%= commerceOrder %>"
 	dropdownItems="<%= commerceOrderEditDisplayContext.getDropdownItems() %>"
 	headerButtons="<%= commerceOrderEditDisplayContext.getHeaderButtonModels() %>"
 	model="<%= CommerceOrder.class %>"
-	previewUrl="/preview"
-	thumbnailUrl="//via.placeholder.com/50"
+	thumbnailUrl="<%= commerceOrderEditDisplayContext.getCommerceAccountThumbnailURL() %>"
 	title="<%= headerTitle %>"
-	version="1.1"
 />
-<!-- /header -->
 
 <div id="<portlet:namespace />editOrderContainer">
 	<liferay-frontend:screen-navigation
