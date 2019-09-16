@@ -85,10 +85,20 @@ public interface CommerceShipmentService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceShipment> getCommerceShipments(
+			long companyId, long commerceAddressId, int start, int end,
+			OrderByComparator<CommerceShipment> orderByComparator)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceShipmentsCount(long companyId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceShipmentsCount(long companyId, int status)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceShipmentsCount(long companyId, long commerceAddressId)
 		throws PortalException;
 
 	/**

@@ -277,6 +277,18 @@ public class CommerceShipmentLocalServiceWrapper
 			groupIds, start, end, orderByComparator);
 	}
 
+	@Override
+	public java.util.List<com.liferay.commerce.model.CommerceShipment>
+		getCommerceShipments(
+			long[] groupIds, long commerceAddressId, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.liferay.commerce.model.CommerceShipment>
+					orderByComparator) {
+
+		return _commerceShipmentLocalService.getCommerceShipments(
+			groupIds, commerceAddressId, start, end, orderByComparator);
+	}
+
 	/**
 	 * Returns the number of commerce shipments.
 	 *
@@ -297,6 +309,14 @@ public class CommerceShipmentLocalServiceWrapper
 	public int getCommerceShipmentsCount(long[] groupIds, int status) {
 		return _commerceShipmentLocalService.getCommerceShipmentsCount(
 			groupIds, status);
+	}
+
+	@Override
+	public int getCommerceShipmentsCount(
+		long[] groupIds, long commerceAddressId) {
+
+		return _commerceShipmentLocalService.getCommerceShipmentsCount(
+			groupIds, commerceAddressId);
 	}
 
 	@Override
