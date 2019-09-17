@@ -65,8 +65,16 @@ public class CommerceNotificationHelperImpl
 			long groupId, String key, Object object, long[] userIds)
 		throws PortalException {
 
+		if (Validator.isBlank(key)) {
+			return;
+		}
+
 		CommerceNotificationType commerceNotificationType =
 			_commerceNotificationTypeRegistry.getCommerceNotificationType(key);
+
+		if (commerceNotificationType == null) {
+			return;
+		}
 
 		List<CommerceNotificationTemplate> commerceNotificationTemplates =
 			_commerceNotificationTemplateLocalService.

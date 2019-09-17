@@ -16,7 +16,6 @@ package com.liferay.commerce.internal.messaging;
 
 import com.liferay.commerce.constants.CommerceDestinationNames;
 import com.liferay.commerce.constants.CommerceOrderConstants;
-import com.liferay.commerce.internal.notification.type.OrderPlacedCommerceNotificationTypeImpl;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.notification.util.CommerceNotificationHelper;
 import com.liferay.commerce.product.model.CommerceChannel;
@@ -26,6 +25,7 @@ import com.liferay.commerce.subscription.CommerceSubscriptionEntryHelper;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
+import com.liferay.portal.kernel.service.WorkflowDefinitionLinkLocalService;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -44,25 +44,28 @@ public class CommerceOrderStatusMessageListener extends BaseMessageListener {
 	protected void doReceive(Message message) throws Exception {
 		int orderStatus = message.getInteger("orderStatus");
 
+		long commerceOrderId = message.getLong("commerceOrderId");
+
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.getCommerceOrder(commerceOrderId);
+
+		CommerceChannel commerceChannel =
+			_commerceChannelLocalService.getCommerceChannelByOrderGroupId(
+				commerceOrder.getGroupId());
+
 		if (orderStatus == CommerceOrderConstants.ORDER_STATUS_TO_TRANSMIT) {
-			long commerceOrderId = message.getLong("commerceOrderId");
-
-			CommerceOrder commerceOrder =
-				_commerceOrderLocalService.getCommerceOrder(commerceOrderId);
-
-			// Commerce notifications
-
-			CommerceChannel commerceChannel =
-				_commerceChannelLocalService.getCommerceChannelByOrderGroupId(
-					commerceOrder.getGroupId());
-
 			_commerceNotificationHelper.sendNotifications(
 				commerceChannel.getSiteGroupId(),
-				OrderPlacedCommerceNotificationTypeImpl.KEY, commerceOrder);
-
-			// Commerce subscriptions
+				CommerceOrderConstants.ORDER_NOTIFICATION_PLACED,
+				commerceOrder);
 
 			_commerceSubscriptionEntryHelper.checkCommerceSubscriptions(
+				commerceOrder);
+		}
+		else {
+			_commerceNotificationHelper.sendNotifications(
+				commerceChannel.getSiteGroupId(),
+				CommerceOrderConstants.getNotificationKey(orderStatus),
 				commerceOrder);
 		}
 	}
@@ -78,5 +81,9 @@ public class CommerceOrderStatusMessageListener extends BaseMessageListener {
 
 	@Reference
 	private CommerceSubscriptionEntryHelper _commerceSubscriptionEntryHelper;
+
+	@Reference
+	private WorkflowDefinitionLinkLocalService
+		_workflowDefinitionLinkLocalService;
 
 }

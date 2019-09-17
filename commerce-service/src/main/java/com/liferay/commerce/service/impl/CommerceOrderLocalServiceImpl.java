@@ -325,6 +325,12 @@ public class CommerceOrderLocalServiceImpl
 			commerceOrder.getCompanyId(), commerceOrder.getScopeGroupId(),
 			CommerceOrder.class.getName(), commerceOrder.getCommerceOrderId());
 
+		// Messaging
+
+		sendOrderStatusMessage(
+			commerceOrderId, commerceOrder.getOrderStatus(),
+			commerceOrder.getOrderStatus());
+
 		return commerceOrder;
 	}
 
@@ -950,8 +956,16 @@ public class CommerceOrderLocalServiceImpl
 		serviceContext.setUserId(userId);
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
 
-		return startWorkflowInstance(
+		commerceOrder = startWorkflowInstance(
 			serviceContext.getUserId(), commerceOrder, serviceContext);
+
+		// Messaging
+
+		sendOrderStatusMessage(
+			commerceOrderId, commerceOrder.getOrderStatus(),
+			commerceOrder.getOrderStatus());
+
+		return commerceOrder;
 	}
 
 	@Override
