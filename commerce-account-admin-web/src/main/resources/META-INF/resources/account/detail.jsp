@@ -87,10 +87,10 @@ long commerceAccountId = commerceAccountAdminDisplayContext.getCommerceAccountId
 							<aui:select label="default-billing" name="defaultBillingAddressId" showEmptyOption="<%= true %>">
 
 								<%
-								for (CommerceAddress billingAddress : commerceAccountAdminDisplayContext.getBillingCommerceAddresses()) {
+								for (CommerceAddress billingCommerceAddress : commerceAccountAdminDisplayContext.getBillingCommerceAddresses()) {
 								%>
 
-									<aui:option label="<%= billingAddress.getName() %>" selected="<%= billingAddress.getCommerceAddressId() == commerceAccount.getDefaultBillingAddressId() %>" value="<%= billingAddress.getCommerceAddressId() %>" />
+									<aui:option label="<%= billingCommerceAddress.getName() %>" selected="<%= billingCommerceAddress.getCommerceAddressId() == commerceAccount.getDefaultBillingAddressId() %>" value="<%= billingCommerceAddress.getCommerceAddressId() %>" />
 
 								<%
 								}
@@ -101,10 +101,10 @@ long commerceAccountId = commerceAccountAdminDisplayContext.getCommerceAccountId
 							<aui:select label="default-shipping" name="defaultShippingAddressId" showEmptyOption="<%= true %>">
 
 								<%
-								for (CommerceAddress shippingAddress : commerceAccountAdminDisplayContext.getShippingCommerceAddresses()) {
+								for (CommerceAddress shippingCommerceAddress : commerceAccountAdminDisplayContext.getShippingCommerceAddresses()) {
 								%>
 
-									<aui:option label="<%= shippingAddress.getName() %>" selected="<%= shippingAddress.getCommerceAddressId() == commerceAccount.getDefaultShippingAddressId() %>" value="<%= shippingAddress.getCommerceAddressId() %>" />
+									<aui:option label="<%= shippingCommerceAddress.getName() %>" selected="<%= shippingCommerceAddress.getCommerceAddressId() == commerceAccount.getDefaultShippingAddressId() %>" value="<%= shippingCommerceAddress.getCommerceAddressId() %>" />
 
 								<%
 								}

@@ -310,9 +310,6 @@ public class CPDefinitionsImporter {
 		Company company = _companyLocalService.getCompany(
 			serviceContext.getCompanyId());
 
-		long companyId = company.getCompanyId();
-		long companyGroupId = company.getGroupId();
-
 		// Categories
 
 		List<AssetCategory> assetCategories = Collections.emptyList();
@@ -322,7 +319,7 @@ public class CPDefinitionsImporter {
 		if (categoriesJSONArray != null) {
 			assetCategories = _assetCategoriesImporter.importAssetCategories(
 				categoriesJSONArray, assetVocabularyName, classLoader,
-				imageDependenciesPath, companyGroupId,
+				imageDependenciesPath, company.getGroupId(),
 				serviceContext.getUserId());
 		}
 
@@ -332,7 +329,8 @@ public class CPDefinitionsImporter {
 
 		if (tagsJSONArray != null) {
 			_assetTagsImporter.importAssetTags(
-				tagsJSONArray, companyGroupId, serviceContext.getUserId());
+				tagsJSONArray, company.getGroupId(),
+				serviceContext.getUserId());
 		}
 		else {
 			tagsJSONArray = new JSONArrayImpl();
@@ -346,7 +344,7 @@ public class CPDefinitionsImporter {
 		CPDefinition cpDefinition =
 			_cpDefinitionLocalService.
 				fetchCPDefinitionByCProductExternalReferenceCode(
-					companyId, externalReferenceCode);
+					company.getCompanyId(), externalReferenceCode);
 
 		if (cpDefinition != null) {
 			_commerceChannelRelLocalService.addCommerceChannelRel(
@@ -467,11 +465,11 @@ public class CPDefinitionsImporter {
 
 				cpInstance.setManufacturerPartNumber(manufacturerPartNumber);
 
-				String cpInstaceExternalReferenceCode =
+				String cpInstanceExternalReferenceCode =
 					FriendlyURLNormalizerUtil.normalize(sku);
 
 				cpInstance.setExternalReferenceCode(
-					cpInstaceExternalReferenceCode);
+					cpInstanceExternalReferenceCode);
 
 				_cpInstanceLocalService.updateCPInstance(cpInstance);
 
@@ -592,7 +590,8 @@ public class CPDefinitionsImporter {
 				CommerceAccountGroup commerceAccountGroup =
 					_commerceAccountGroupLocalService.
 						fetchCommerceAccountGroupByReferenceCode(
-							companyId, accountGroupExternalReferenceCode);
+							company.getCompanyId(),
+							accountGroupExternalReferenceCode);
 
 				if (commerceAccountGroup != null) {
 					_commerceAccountGroupRelLocalService.
