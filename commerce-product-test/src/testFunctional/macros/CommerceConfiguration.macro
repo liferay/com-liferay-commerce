@@ -2,11 +2,36 @@ definition {
 
 	macro commerceAdminSetUp {
 		ProductMenu.gotoPortlet(
-			category = "Configuration",
+			category = "Users",
 			panel = "Control Panel",
-			portlet = "Search");
+			portlet = "Users and Organizations");
 
-		SearchAdministration.executeSearchActions(actionsDescription = "Reindex all search indexes.");
+		User.addCP(
+			userEmailAddress = "commerceuser@liferay.com",
+			userFirstName = "Commerce",
+			userLastName = "User",
+			userScreenName = "commerceuser");
+
+		CommerceEntry.createNewCurrenciesEntry(
+			code = "USD",
+			entryName = "US Dollar");
+
+		ProductMenu.gotoPortlet(
+			category = "Commerce",
+			panel = "Control Panel",
+			portlet = "Channels"
+		);
+
+		Click(locator1 = "Button#PLUS");
+
+		CommerceEntry.addNewChannelEntry(
+			entryName = "Liferay",
+			criteriaType = "Site",
+			siteName = "Guest");
+
+		Button.clickSave();
+
+		AssertElementPresent(locator1 = "Message#SUCCESS");
 	}
 
 	macro commerceAdminTearDown {
@@ -23,33 +48,45 @@ definition {
 
 		User.deleteCP(userFirstName = "Commerce");
 
-		UsersAndOrganizationsNavigator.gotoOrganizations();
+		ProductMenu.gotoPortlet(
+			category = "Users",
+			panel = "Control Panel",
+			portlet = "Accounts");
 
-		if (IsElementPresent(locator1 = "UsersAndOrganizations#ORGANIZATION_TABLE_NAME", key_orgName = "Commerce Organization")) {
-			Organization.deleteCP(orgName = "Commerce Organization");
+		if (IsElementNotPresent(locator1 = "CommerceNavigation#EMPTY_SEARCH_CONTAINER")) {
+			CommerceProducts.deleteEntries(deleteMessage = "Are you sure you want to delete the selected accounts?");
 		}
 
 		ProductMenu.gotoPortlet(
 			category = "Users",
 			panel = "Control Panel",
-			portlet = "User Groups");
+			portlet = "Account Groups");
 
 		if (IsElementNotPresent(locator1 = "CommerceNavigation#EMPTY_SEARCH_CONTAINER")) {
-			UserGroup.deleteCP(userGroupName = "Commerce UserGroup");
+			CommerceProducts.deleteEntries(deleteMessage = "Are you sure you want to delete the selected account groups?");
 		}
 
 		ProductMenu.gotoPortlet(
 			category = "Commerce",
-			panel = "Site Administration",
-			portlet = "Account groupss");
+			panel = "Control Panel",
+			portlet = "Channels");
 
 		if (IsElementNotPresent(locator1 = "CommerceNavigation#EMPTY_SEARCH_CONTAINER")) {
-			CommerceProducts.deleteEntries(deleteMessage = "Are you sure you want to delete the selected entries? They will be deleted immediately.");
+			CommerceProducts.deleteEntries(deleteMessage = "Are you sure you want to delete the selected channels?");
 		}
 
 		ProductMenu.gotoPortlet(
 			category = "Commerce",
-			panel = "Site Administration",
+			panel = "Control Panel",
+			portlet = "Catalogs");
+		
+		if (IsElementPresent(locator1 = "CommerceNavigation#SELECTABLE_CHECKBOX")) {
+					CommerceProducts.deleteEntries(deleteMessage = "Are you sure you want to delete the selected catalogs?");
+		}
+
+		ProductMenu.gotoPortlet(
+			category = "Commerce",
+			panel = "Control Panel",
 			portlet = "Price Lists");
 
 		if (IsElementNotPresent(locator1 = "CommerceNavigation#EMPTY_SEARCH_CONTAINER")) {
@@ -58,22 +95,16 @@ definition {
 
 		ProductMenu.gotoPortlet(
 			category = "Commerce",
-			panel = "Site Administration",
+			panel = "Control Panel",
 			portlet = "Discounts");
 
 		if (IsElementNotPresent(locator1 = "CommerceNavigation#EMPTY_SEARCH_CONTAINER")) {
 			CommerceProducts.deleteEntries(deleteMessage = "Are you sure you want to delete the selected discounts?");
 		}
 
-		User.logoutPG();
-	}
-
-	macro commerceSettingsTearDown {
-		Navigator.openURL();
-
 		ProductMenu.gotoPortlet(
 			category = "Commerce",
-			panel = "Site Administration",
+			panel = "Control Panel",
 			portlet = "Settings");
 
 		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Availability Estimates");
@@ -91,7 +122,7 @@ definition {
 		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Currencies");
 
 		if (IsElementNotPresent(locator1 = "CommerceNavigation#EMPTY_SEARCH_CONTAINER")) {
-			PortletEntry.deleteViaMenuItem(rowEntry = "New Currency");
+			PortletEntry.deleteViaMenuItem(rowEntry = "US Dollar");
 		}
 
 		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Measurement Units");
@@ -105,17 +136,9 @@ definition {
 		if (IsElementPresent(locator1 = "Icon#ROW_VERTICAL_ELLIPSIS", key_rowEntry = "New Weight Unit")) {
 			PortletEntry.deleteViaMenuItem(rowEntry = "New Weight Unit");
 		}
-
-		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Notifications");
-
-		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Notification Templates");
-
-		if (IsElementNotPresent(locator1 = "CommerceNavigation#EMPTY_SEARCH_CONTAINER")) {
-			PortletEntry.deleteViaMenuItem(rowEntry = "New Notification Template");
-		}
 	}
 
-	macro commerceSetUp {
+	macro commerceStoreFrontSetUp {
 		ProductMenu.gotoPortlet(
 			category = "Commerce",
 			panel = "Site Administration",
@@ -123,7 +146,23 @@ definition {
 
 		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Health Check");
 
-		for (var buttonRowNumber : list "1,2,3,4,5,6,7,8,9,10") {
+		for (var buttonRowNumber : list "1,2,3,4,5") {
+			if (!(IsElementPresent(locator1 = "CommerceEntry#FIX_ISSUE_BUTTON", key_buttonStatus = "disabled"))) {
+				Click(
+					key_buttonRowNumber = "${buttonRowNumber}",
+					key_buttonStatus = "",
+					locator1 = "CommerceEntry#FIX_ISSUE_BUTTON");
+			}
+		}
+
+		ProductMenu.gotoPortlet(
+			category = "Commerce",
+			panel = "Control Panel",
+			portlet = "Settings");
+
+		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Health Check");
+
+		for (var buttonRowNumber : list "1,2,3,4") {
 			if (!(IsElementPresent(locator1 = "CommerceEntry#FIX_ISSUE_BUTTON", key_buttonStatus = "disabled"))) {
 				Click(
 					key_buttonRowNumber = "${buttonRowNumber}",
