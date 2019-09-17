@@ -15,9 +15,11 @@
 package com.liferay.commerce.payment.internal.engine;
 
 import com.liferay.commerce.constants.CommerceSubscriptionEntryConstants;
+import com.liferay.commerce.constants.CommerceSubscriptionNotificationConstants;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
+import com.liferay.commerce.notification.util.CommerceNotificationHelper;
 import com.liferay.commerce.payment.engine.CommerceSubscriptionEngine;
 import com.liferay.commerce.payment.method.CommercePaymentMethod;
 import com.liferay.commerce.payment.request.CommercePaymentRequest;
@@ -90,6 +92,13 @@ public class CommerceSubscriptionEngineImpl
 				CommerceSubscriptionEntryConstants.SUBSCRIPTION_STATUS_ACTIVE);
 		}
 
+		// Notifications
+
+		_commerceNotificationHelper.sendNotifications(
+			commerceOrder.getGroupId(),
+			CommerceSubscriptionNotificationConstants.SUBSCRIPTION_ACTIVATED,
+			commerceSubscriptionEntry);
+
 		return activateSubscription;
 	}
 
@@ -139,6 +148,13 @@ public class CommerceSubscriptionEngineImpl
 				CommerceSubscriptionEntryConstants.
 					SUBSCRIPTION_STATUS_CANCELLED);
 		}
+
+		// Notifications
+
+		_commerceNotificationHelper.sendNotifications(
+			commerceOrder.getGroupId(),
+			CommerceSubscriptionNotificationConstants.SUBSCRIPTION_CANCELLED,
+			commerceSubscriptionEntry);
 
 		return activateSubscription;
 	}
@@ -305,8 +321,18 @@ public class CommerceSubscriptionEngineImpl
 					SUBSCRIPTION_STATUS_SUSPENDED);
 		}
 
+		// Notifications
+
+		_commerceNotificationHelper.sendNotifications(
+			commerceOrder.getGroupId(),
+			CommerceSubscriptionNotificationConstants.SUBSCRIPTION_SUSPENDED,
+			commerceSubscriptionEntry);
+
 		return suspendSubscription;
 	}
+
+	@Reference
+	private CommerceNotificationHelper _commerceNotificationHelper;
 
 	@Reference
 	private CommerceOrderLocalService _commerceOrderLocalService;
