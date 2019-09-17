@@ -6,35 +6,24 @@ definition {
 			editor = "description");
 	}
 
-	macro addNewAccountGroupsEntry {
+	macro addNewAccountsEntry {
 		Type(
-			locator1 = "CommerceEntry#MODAL_NAME_FIELD_SMALL",
+			locator1 = "CommerceEntry#NAME_FIELD",
 			value1 = "${entryName}");
-
-		Button.clickSave();
-
-		CommerceNavigator.gotoEntry(entryName = "${entryName}");
-
-		CommerceEntry.gotoNestedMenu(nestedMenu = "Criteria");
-
-		Click(locator1 = "Button#PLUS");
 
 		Select(
 			locator1 = "Select#TYPE",
 			value1 = "${criteriaType}");
 
-		if ("${criteriaType}" == "Roles") {
-			Click(
-				key_roleType = "${roleType}",
-				locator1 = "CommerceEntry#ROLE_SELECT_BUTTON");
-		}
-		else {
-			Click(locator1 = "Button#SELECT");
-		}
+		Button.clickSave();
 
-		CommerceItemSelector.selectEntry(entryName = "${criterionEntryName}");
+		CommerceEntry.gotoNestedMenu(nestedMenu = "Users");
 
-		Click(
+		Click(locator1 = "Button#PLUS");
+
+		CommerceItemSelector.selectEntry(entryName = "${user}");
+
+		AssertClick(
 			locator1 = "ItemSelector#ADD_BUTTON",
 			value1 = "Add");
 	}
@@ -145,7 +134,11 @@ definition {
 			locator1 = "CommerceEntry#DISCOUNT_TARGET_SELECT",
 			value1 = "${discountTarget}");
 
-		Click(locator1 = "Button#SELECT");
+		Check.checkToggleSwitch(locator1 = "CommerceEntry#CHANNEL_CHECKBOX");
+
+		AssertClick(
+			locator1 = "Button#SELECT",
+			value1 = "Select");
 
 		CommerceItemSelector.selectEntry(entryName = "${accountGroup}");
 
@@ -205,7 +198,7 @@ definition {
 
 		Click(locator1 = "CommerceEntry#ACCOUNT_GROUPS_RELS_SELECT");
 
-		CommerceItemSelector.selectEntry(entryName = "${accountGroupName}");
+		CommerceItemSelector.selectEntry(entryName = "${accountGroupsEntryName}");
 
 		Click(
 			locator1 = "ItemSelector#ADD_BUTTON",
@@ -294,27 +287,45 @@ definition {
 
 	macro createNewAccountGroup {
 		ProductMenu.gotoPortlet(
-			category = "Commerce",
-			panel = "Site Administration",
-			portlet = "Account groupss");
+			category = "Users",
+			panel = "Control Panel",
+			portlet = "Accounts");
 
 		Click(locator1 = "Button#PLUS");
 
-		CommerceEntry.addNewAccountGroupsEntry(
-			criteriaType = "${criteriaType}",
-			criterionEntryName = "${criterionEntryName}",
-			entryName = "${entryName}",
-			roleType = "${roleType}");
+		CommerceEntry.addNewAccountsEntry(
+			entryName = "${accountsEntryName}",
+			criteriaType = "${accountCriteriaType}",
+			user = "${user}");
+
+		ProductMenu.gotoPortlet(
+			category = "Users",
+			panel = "Control Panel",
+			portlet = "Account Groups");
+
+		Click(locator1 = "Button#PLUS");
+
+		CommerceEntry.addNewAccountGroupsEntry(entryName = "${accountGroupsEntryName}");
 
 		Button.clickSave();
 
 		AssertElementPresent(locator1 = "Message#SUCCESS");
+
+		CommerceEntry.gotoNestedMenu(nestedMenu = "Accounts");
+
+		Click(locator1 = "Button#PLUS");
+
+		CommerceItemSelector.selectEntry(entryName = "${accountsEntryName}");
+
+		Click(
+			locator1 = "ItemSelector#ADD_BUTTON",
+			value1 = "Add");
 	}
 
 	macro createNewCurrenciesEntry {
 		ProductMenu.gotoPortlet(
 			category = "Commerce",
-			panel = "Site Administration",
+			panel = "Control Panel",
 			portlet = "Settings");
 
 		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Currencies");
