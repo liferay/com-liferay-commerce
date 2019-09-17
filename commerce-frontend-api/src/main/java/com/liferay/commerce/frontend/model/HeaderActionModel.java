@@ -14,12 +14,24 @@
 
 package com.liferay.commerce.frontend.model;
 
+import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+
 /**
  * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
-public class HeaderButtonModel {
+public class HeaderActionModel {
 
-	public HeaderButtonModel() {
+	public HeaderActionModel() {
+	}
+
+	public String getHref() {
+		return _href;
+	}
+
+	public String getId() {
+		return _id;
 	}
 
 	public String getLabel() {
@@ -30,8 +42,16 @@ public class HeaderButtonModel {
 		return _style;
 	}
 
-	public String getType() {
-		return _type;
+	public void setHref(String href) {
+		if (Validator.isNull(href)) {
+			href = StringPool.POUND;
+		}
+
+		_href = href;
+	}
+
+	public void setId(String id) {
+		_id = id;
 	}
 
 	public void setLabel(String label) {
@@ -39,15 +59,16 @@ public class HeaderButtonModel {
 	}
 
 	public void setStyle(String style) {
+		if (Validator.isNull(style)) {
+			style = "primary";
+		}
+
 		_style = style;
 	}
 
-	public void setType(String type) {
-		_type = type;
-	}
-
+	private String _href = StringPool.POUND;
+	private String _id;
 	private String _label;
-	private String _style;
-	private String _type;
+	private String _style = "primary";
 
 }

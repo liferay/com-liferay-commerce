@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
-import com.liferay.commerce.frontend.model.HeaderButtonModel;
+import com.liferay.commerce.frontend.model.HeaderActionModel;
 import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
 import com.liferay.frontend.taglib.clay.servlet.taglib.util.DropdownItem;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -40,8 +40,8 @@ public class HeaderTag extends IncludeTag {
 		return _dropdownItems;
 	}
 
-	public List<HeaderButtonModel> getHeaderButtons() {
-		return _headerButtonModels;
+	public List<HeaderActionModel> getHeaderActions() {
+		return _headerActionModels;
 	}
 
 	public Class<?> getModel() {
@@ -76,8 +76,8 @@ public class HeaderTag extends IncludeTag {
 		_dropdownItems = dropdownItems;
 	}
 
-	public void setHeaderButtons(List<HeaderButtonModel> headerButtonModels) {
-		_headerButtonModels = headerButtonModels;
+	public void setHeaderActions(List<HeaderActionModel> headerActionModels) {
+		_headerActionModels = headerActionModels;
 	}
 
 	public void setModel(Class<?> model) {
@@ -117,7 +117,7 @@ public class HeaderTag extends IncludeTag {
 
 		_bean = null;
 		_dropdownItems = null;
-		_headerButtonModels = null;
+		_headerActionModels = null;
 		_model = null;
 		_previewUrl = null;
 		_spritemap = null;
@@ -146,7 +146,7 @@ public class HeaderTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-commerce:header:hasWorkflow", Boolean.FALSE);
 		request.setAttribute(
-			"liferay-commerce:header:headerButtonModels", _headerButtonModels);
+			"liferay-commerce:header:headerActionModels", _headerActionModels);
 		request.setAttribute("liferay-commerce:header:model", _model);
 		request.setAttribute("liferay-commerce:header:previewUrl", _previewUrl);
 		request.setAttribute("liferay-commerce:header:spritemap", _spritemap);
@@ -160,7 +160,7 @@ public class HeaderTag extends IncludeTag {
 
 	private Object _bean;
 	private List<DropdownItem> _dropdownItems;
-	private List<HeaderButtonModel> _headerButtonModels;
+	private List<HeaderActionModel> _headerActionModels;
 	private Class<?> _model;
 	private String _previewUrl;
 	private String _spritemap;
