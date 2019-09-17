@@ -17,7 +17,7 @@ package com.liferay.commerce.order.web.internal.display.context;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.currency.model.CommerceMoney;
 import com.liferay.commerce.discount.CommerceDiscountValue;
-import com.liferay.commerce.frontend.model.HeaderButtonModel;
+import com.liferay.commerce.frontend.model.HeaderActionModel;
 import com.liferay.commerce.frontend.model.StepModel;
 import com.liferay.commerce.frontend.model.SummaryElement;
 import com.liferay.commerce.model.CommerceAddress;
@@ -535,26 +535,25 @@ public class CommerceOrderEditDisplayContext {
 		return headerDropdownItems;
 	}
 
-	public List<HeaderButtonModel> getHeaderButtonModels() {
-		List<HeaderButtonModel> headerButtonModels = new ArrayList<>();
+	public List<HeaderActionModel> getHeaderActionModels()
+		throws PortalException {
 
-		HeaderButtonModel headerButtonModel = new HeaderButtonModel();
+		List<HeaderActionModel> headerActionModels = new ArrayList<>();
 
-		headerButtonModel.setLabel("Azione 1");
-		headerButtonModel.setStyle("secondary");
-		headerButtonModel.setType("button");
+		HeaderActionModel headerActionModel1 = new HeaderActionModel();
 
-		headerButtonModels.add(headerButtonModel);
+		headerActionModel1.setLabel("Action 1");
+		headerActionModel1.setStyle("secondary");
 
-		HeaderButtonModel headerButtonModel2 = new HeaderButtonModel();
+		headerActionModels.add(headerActionModel1);
 
-		headerButtonModel2.setLabel("Azione 2");
-		headerButtonModel2.setStyle("primary");
-		headerButtonModel2.setType("button");
+		HeaderActionModel headerActionModel2 = new HeaderActionModel();
 
-		headerButtonModels.add(headerButtonModel2);
+		headerActionModel2.setLabel("Action 2");
 
-		return headerButtonModels;
+		headerActionModels.add(headerActionModel2);
+
+		return headerActionModels;
 	}
 
 	public String getItemSelectorUrl() {
