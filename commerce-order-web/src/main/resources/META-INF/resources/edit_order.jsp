@@ -43,7 +43,7 @@ else {
 <commerce-ui:header
 	bean="<%= commerceOrder %>"
 	dropdownItems="<%= commerceOrderEditDisplayContext.getDropdownItems() %>"
-	headerButtons="<%= commerceOrderEditDisplayContext.getHeaderButtonModels() %>"
+	headerActions="<%= commerceOrderEditDisplayContext.getHeaderActionModels() %>"
 	model="<%= CommerceOrder.class %>"
 	thumbnailUrl="<%= commerceOrderEditDisplayContext.getCommerceAccountThumbnailURL() %>"
 	title="<%= headerTitle %>"
