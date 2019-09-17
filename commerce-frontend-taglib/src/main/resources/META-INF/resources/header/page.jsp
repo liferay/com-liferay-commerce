@@ -24,7 +24,7 @@ String spritemap = (String)request.getAttribute("liferay-commerce:header:spritem
 String version = (String)request.getAttribute("liferay-commerce:header:version");
 String previewUrl = (String)request.getAttribute("liferay-commerce:header:previewUrl");
 String thumbnailUrl = (String)request.getAttribute("liferay-commerce:header:thumbnailUrl");
-List<HeaderButtonModel> headerButtonModels = (List<HeaderButtonModel>)request.getAttribute("liferay-commerce:header:headerButtonModels");
+List<HeaderActionModel> headerActionModels = (List<HeaderActionModel>)request.getAttribute("liferay-commerce:header:headerActionModels");
 List<DropdownItem> dropdownItems = (List<DropdownItem>)request.getAttribute("liferay-commerce:header:dropdownItems");
 String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_header") + StringPool.UNDERLINE;
 %>
@@ -88,15 +88,24 @@ String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_header") 
 					</aui:script>
 				</c:if>
 
-				<c:if test="<%= Validator.isNotNull(headerButtonModels) %>">
-					<c:forEach items="<%= headerButtonModels %>" var="headerButtonModel">
-						<clay:button
+				<c:if test="<%= headerActionModels != null %>">
+
+					<%
+					for (HeaderActionModel headerActionModel : headerActionModels) {
+					%>
+
+						<clay:link
+							buttonStyle="<%= headerActionModel.getStyle() %>"
 							elementClasses="mr-1"
-							label="${headerButtonModel.getLabel()}"
-							style="${headerButtonModel.getStyle()}"
-							type="${headerButtonModel.getType()}"
+							href="<%= headerActionModel.getHref() %>"
+							id="<%= headerActionModel.getId() %>"
+							label="<%= headerActionModel.getLabel() %>"
 						/>
-					</c:forEach>
+
+					<%
+					}
+					%>
+
 				</c:if>
 			</div>
 
