@@ -61,7 +61,7 @@ if (Validator.isNotNull(cpDisplayLayout)) {
 
 	<aui:fieldset-group markupView="lexicon">
 		<aui:fieldset>
-			<liferay-ui:asset-categories-error />
+			<liferay-asset:asset-categories-error />
 
 			<h4><liferay-ui:message key="select-categories" /></h4>
 
