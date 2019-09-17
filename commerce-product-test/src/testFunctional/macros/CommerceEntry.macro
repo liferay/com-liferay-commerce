@@ -39,6 +39,12 @@ definition {
 			value1 = "Add");
 	}
 
+	macro addNewAccountGroupsEntry {
+		Type(
+			locator1 = "CommerceEntry#NAME_FIELD",
+			value1 = "${entryName}");
+	}
+
 	macro addNewAvailabilityEstimatesEntry {
 		Type(
 			locator1 = "CommerceEntry#TITLE_FIELD",
