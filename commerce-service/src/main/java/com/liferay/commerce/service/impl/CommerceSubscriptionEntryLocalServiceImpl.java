@@ -15,12 +15,12 @@
 package com.liferay.commerce.service.impl;
 
 import com.liferay.commerce.constants.CommerceSubscriptionEntryConstants;
+import com.liferay.commerce.constants.CommerceSubscriptionNotificationConstants;
 import com.liferay.commerce.exception.CommerceSubscriptionCPInstanceIdException;
 import com.liferay.commerce.exception.CommerceSubscriptionEntryNextIterationDateException;
 import com.liferay.commerce.exception.CommerceSubscriptionEntryStartDateException;
 import com.liferay.commerce.exception.CommerceSubscriptionEntrySubscriptionStatusException;
 import com.liferay.commerce.exception.CommerceSubscriptionTypeException;
-import com.liferay.commerce.internal.notification.type.SubscriptionRenewedCommerceNotificationTypeImpl;
 import com.liferay.commerce.internal.search.CommerceSubscriptionEntryIndexer;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
@@ -296,8 +296,8 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 
 			_commerceNotificationHelper.sendNotifications(
 				commerceOrder.getGroupId(),
-				SubscriptionRenewedCommerceNotificationTypeImpl.KEY,
-				commerceOrder);
+				CommerceSubscriptionNotificationConstants.SUBSCRIPTION_RENEWED,
+				updatedSubscriptionEntry);
 		}
 
 		return updatedSubscriptionEntry;
