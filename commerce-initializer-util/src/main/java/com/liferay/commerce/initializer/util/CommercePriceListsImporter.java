@@ -78,11 +78,9 @@ public class CommercePriceListsImporter {
 			return;
 		}
 
-		long companyId = serviceContext.getCompanyId();
-
 		CommerceCurrency commerceCurrency =
 			_commerceCurrencyLocalService.getCommerceCurrency(
-				companyId, currencyCode);
+				serviceContext.getCompanyId(), currencyCode);
 
 		long parentPriceListId = 0;
 
@@ -192,17 +190,13 @@ public class CommercePriceListsImporter {
 						throw new NoSuchAccountGroupException();
 					}
 
-					long commercePriceListId =
-						commercePriceList.getCommercePriceListId();
-					long commerceAccountGroupId =
-						commerceAccountGroup.getCommerceAccountGroupId();
-
 					CommercePriceListCommerceAccountGroupRel
 						commercePriceListCommerceAccountGroupRel =
 							_commercePriceListCommerceAccountGroupRelLocalService.
 								fetchCommercePriceListCommerceAccountGroupRel(
-									commercePriceListId,
-									commerceAccountGroupId);
+									commercePriceList.getCommercePriceListId(),
+									commerceAccountGroup.
+										getCommerceAccountGroupId());
 
 					if (commercePriceListCommerceAccountGroupRel == null) {
 						_commercePriceListCommerceAccountGroupRelLocalService.
