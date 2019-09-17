@@ -16,7 +16,6 @@ package com.liferay.commerce.order.web.internal.asset;
 
 import com.liferay.asset.kernel.model.BaseJSPAssetRenderer;
 import com.liferay.commerce.constants.CommerceOrderConstants;
-import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.web.internal.security.permission.resource.CommerceOrderPermission;
 import com.liferay.commerce.product.model.CommerceChannel;
@@ -31,7 +30,6 @@ import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.PortletProvider;
 import com.liferay.portal.kernel.portlet.PortletProviderUtil;
 import com.liferay.portal.kernel.portlet.PortletQName;
-import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.service.GroupLocalServiceUtil;
@@ -122,7 +120,7 @@ public class CommerceOrderAssetRenderer
 		String commerceChannelType = commerceChannel.getType();
 
 		if (!commerceChannelType.equals(
-			CommerceChannelConstants.CHANNEL_TYPE_SITE)) {
+				CommerceChannelConstants.CHANNEL_TYPE_SITE)) {
 
 			return null;
 		}
@@ -144,11 +142,10 @@ public class CommerceOrderAssetRenderer
 			orderRenderCommand = "editCommerceOrder";
 		}
 
-		portletURL.setParameter(
-			"mvcRenderCommandName", orderRenderCommand);
+		portletURL.setParameter("mvcRenderCommandName", orderRenderCommand);
 
 		portletURL.setParameter(
-		"commerceOrderId",
+			"commerceOrderId",
 			String.valueOf(_commerceOrder.getCommerceOrderId()));
 
 		portletURL.setParameter(
