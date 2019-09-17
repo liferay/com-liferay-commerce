@@ -15,13 +15,10 @@ definition {
 	}
 
 	macro gotoFrontStoreProductPage {
-		Click(locator1 = "CommerceEntry#FRONT_STORE_PRODUCT_LINK");
+		var productName = StringUtil.replace("${productName}", " ", "-");
+		var productName = StringUtil.lowerCase("${productName}");
 
-		Pause(locator1 = "30000");
-
-		var siteName = TestCase.getSiteName(siteName = "${siteName}");
-
-		SelectWindow(locator1 = "title=${productName} - Product - ${siteName}");
+		Navigator.openSpecificURL(url = "localhost:8080/web/guest/p/${productName}");
 	}
 
 	macro gotoOptionValues {
