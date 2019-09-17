@@ -24,7 +24,7 @@ SearchContainer<CommerceOrderItem> commerceOrderItemsSearchContainer = commerceO
 PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPortletURL();
 %>
 
-<liferay-portlet:renderURL var="editBillingAddressURL">
+<liferay-portlet:renderURL var="editBillingAddressURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 	<portlet:param name="mvcRenderCommandName" value="editCommerceOrderShippingAddress" />
 	<portlet:param name="commerceOrderId" value="<%= String.valueOf(commerceOrderEditDisplayContext.getCommerceOrderId()) %>" />
 </liferay-portlet:renderURL>
@@ -39,7 +39,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 	url="<%= editBillingAddressURL %>"
 />
 
-<liferay-portlet:renderURL var="editShippingAddressURL">
+<liferay-portlet:renderURL var="editShippingAddressURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 	<portlet:param name="mvcRenderCommandName" value="editCommerceOrderShippingAddress" />
 	<portlet:param name="commerceOrderId" value="<%= String.valueOf(commerceOrderEditDisplayContext.getCommerceOrderId()) %>" />
 </liferay-portlet:renderURL>
@@ -101,8 +101,8 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 				<div class="col-md-4">
 					<commerce-ui:info-box
 						actionLabel='<%= LanguageUtil.get(request, "edit") %>'
-						actionUrl="<%= editBillingAddressURL %>"
 						actionTargetId="billing-address-modal"
+						actionUrl="<%= editBillingAddressURL %>"
 						elementClasses="py-3"
 						title='<%= LanguageUtil.get(request, "billing-address") %>'
 					>
@@ -111,8 +111,8 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 
 					<commerce-ui:info-box
 						actionLabel='<%= LanguageUtil.get(request, "edit") %>'
-						actionUrl="<%= editShippingAddressURL %>"
 						actionTargetId="shipping-address-modal"
+						actionUrl="<%= editShippingAddressURL %>"
 						elementClasses="py-3"
 						title='<%= LanguageUtil.get(request, "shipping-address") %>'
 					>
