@@ -49,6 +49,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>SELECTABLE_CHECKBOX</td>
+	<td>//tr[@data-selectable="true"]//..//input[@type='checkbox']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>ORGANIZATIONS_TABLE_CHECKBOX</td>
 	<td>//tr[@data-name="${key_orgName}"]//input[@type="checkbox"]</td>
 	<td></td>
@@ -56,6 +61,11 @@
 <tr>
 	<td>APPLY_BUTTON</td>
 	<td>//span[normalize-space()='${key_text}']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>CHOOSE_SITE_BUTTON</td>
+	<td>//tr/td[contains(.,'${key_siteName}')]//..//button[contains(.,'Choose')]</td>
 	<td></td>
 </tr>
 </tbody>
