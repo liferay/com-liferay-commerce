@@ -33,7 +33,6 @@ String infoxBoxCssClasses = "info-box" + (Validator.isNotNull(elementClasses) ? 
 
 				if (Validator.isNotNull(actionTargetId)) {
 					data.put("target", actionTargetId);
-					data.put("toggle", "modal");
 				}
 			%>
 
