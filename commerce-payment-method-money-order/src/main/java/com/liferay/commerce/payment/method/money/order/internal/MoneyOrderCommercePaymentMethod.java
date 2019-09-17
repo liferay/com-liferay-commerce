@@ -47,7 +47,7 @@ public class MoneyOrderCommercePaymentMethod implements CommercePaymentMethod {
 
 		return new CommercePaymentResult(
 			null, commercePaymentRequest.getCommerceOrderId(),
-			CommerceOrderConstants.PAYMENT_STATUS_PAID, false, null, null,
+			CommerceOrderConstants.PAYMENT_STATUS_PENDING, false, null, null,
 			Collections.emptyList(), true);
 	}
 
