@@ -390,8 +390,9 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 			String commerceOrderUuid = CookieKeys.getCookie(
 				themeDisplay.getRequest(), cookieName, true);
 
-			commerceOrder = _commerceOrderService.fetchCommerceOrder(
-				commerceOrderUuid, commerceChannel.getGroupId());
+			commerceOrder =
+				_commerceOrderLocalService.fetchCommerceOrderByUuidAndGroupId(
+					commerceOrderUuid, commerceChannel.getGroupId());
 
 			if (commerceOrder == null) {
 				commerceOrder = _commerceOrderService.fetchCommerceOrder(
