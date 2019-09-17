@@ -31,7 +31,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 
 <commerce-ui:modal
 	closeOnSubmit="<%= true %>"
-	id="billing-modal"
+	id="billing-address-modal"
 	showCancel="<%= true %>"
 	showSubmit="<%= true %>"
 	size="lg"
@@ -46,7 +46,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 
 <commerce-ui:modal
 	closeOnSubmit="<%= true %>"
-	id="shipping-modal"
+	id="shipping-address-modal"
 	showCancel="<%= true %>"
 	showSubmit="<%= true %>"
 	size="lg"
@@ -102,6 +102,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 					<commerce-ui:info-box
 						actionLabel='<%= LanguageUtil.get(request, "edit") %>'
 						actionUrl="<%= editBillingAddressURL %>"
+						actionTargetId="billing-address-modal"
 						elementClasses="py-3"
 						title='<%= LanguageUtil.get(request, "billing-address") %>'
 					>
@@ -111,6 +112,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 					<commerce-ui:info-box
 						actionLabel='<%= LanguageUtil.get(request, "edit") %>'
 						actionUrl="<%= editShippingAddressURL %>"
+						actionTargetId="shipping-address-modal"
 						elementClasses="py-3"
 						title='<%= LanguageUtil.get(request, "shipping-address") %>'
 					>
