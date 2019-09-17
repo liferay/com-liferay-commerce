@@ -163,7 +163,7 @@ const Modal = (props) => {
                 {
                     props.title && <ClayModal.Header>{props.title}</ClayModal.Header>
                 }
-                <div className="modal-body modal-body-iframe">
+                <div className="modal-body modal-body-iframe" style={{height: '450px', maxHeight: '100%'}}>
                     <iframe 
                         src={props.url} 
                         title={props.title} 
