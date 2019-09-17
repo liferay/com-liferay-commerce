@@ -116,7 +116,6 @@ long commerceRegionId = commerceAccountAddressAdminDisplayContext.getCommerceReg
 							%>
 
 						</aui:select>
-
 					</aui:fieldset>
 				</div>
 

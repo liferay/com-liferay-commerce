@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.taglib.util.CustomAttributesUtil;
 import com.liferay.users.admin.configuration.UserFileUploadsConfiguration;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.portlet.PortletURL;
@@ -60,7 +61,7 @@ public class CommerceAccountAdminDisplayContext
 		CommerceAccount commerceAccount = getCommerceAccount();
 
 		if (commerceAccount == null) {
-			return null;
+			return Collections.emptyList();
 		}
 
 		return _commerceAddressService.getBillingCommerceAddresses(
@@ -119,7 +120,7 @@ public class CommerceAccountAdminDisplayContext
 		CommerceAccount commerceAccount = getCommerceAccount();
 
 		if (commerceAccount == null) {
-			return null;
+			return Collections.emptyList();
 		}
 
 		return _commerceAddressService.getShippingCommerceAddresses(
