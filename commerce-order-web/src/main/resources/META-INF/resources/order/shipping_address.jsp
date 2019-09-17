@@ -29,7 +29,7 @@ long commerceRegionId = BeanParamUtil.getLong(commerceAddress, request, "commerc
 
 <portlet:actionURL name="editCommerceOrder" var="editCommerceOrderItemActionURL" />
 
-<aui:form action="<%= editCommerceOrderItemActionURL %>" cssClass="container-fluid-1280" id="testtest" method="post" name="fm">
+<aui:form action="<%= editCommerceOrderItemActionURL %>" cssClass="container-fluid-1280 p-0" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="shippingAddress" />
 	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 	<aui:input name="commerceOrderId" type="hidden" value="<%= commerceOrder.getCommerceOrderId() %>" />
@@ -37,24 +37,20 @@ long commerceRegionId = BeanParamUtil.getLong(commerceAddress, request, "commerc
 	<aui:model-context bean="<%= commerceAddress %>" model="<%= CommerceAddress.class %>" />
 
 	<div class="address-fields sheet">
-		<div class="form-group-autofit">
-			<aui:input name="name" wrapperCssClass="form-group-item" />
+		<aui:input name="name" wrapperCssClass="form-group-item" />
 
-			<aui:input name="phoneNumber" wrapperCssClass="form-group-item" />
+		<aui:input name="phoneNumber" wrapperCssClass="form-group-item" />
 
-			<aui:input name="street1" wrapperCssClass="form-group-item" />
+		<aui:input name="street1" wrapperCssClass="form-group-item" />
 
-			<aui:select label="country" name="commerceCountryId" wrapperCssClass="form-group-item" />
+		<aui:select label="country" name="commerceCountryId" wrapperCssClass="form-group-item" />
 
-			<aui:input name="zip" wrapperCssClass="form-group-item" />
+		<aui:input name="zip" wrapperCssClass="form-group-item" />
 
-			<aui:input name="city" wrapperCssClass="form-group-item" />
+		<aui:input name="city" wrapperCssClass="form-group-item" />
 
-			<aui:select label="region" name="commerceRegionId" wrapperCssClass="form-group-item" />
-		</div>
+		<aui:select label="region" name="commerceRegionId" wrapperCssClass="form-group-item" />
 	</div>
-
-	<aui:button type="submit" />
 </aui:form>
 
 <aui:script use="liferay-dynamic-select">
