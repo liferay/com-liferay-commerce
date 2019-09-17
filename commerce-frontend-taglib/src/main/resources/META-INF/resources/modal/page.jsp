@@ -45,7 +45,7 @@ String containerId = randomNamespace + "modal-root";
 	);
 
 	<c:if test="<%= Validator.isNotNull(id) %>">
-		const modalTriggers = document.querySelectorAll('[data-toggle="modal"][data-target="<%= id %>"]')
+		const modalTriggers = document.querySelectorAll('[data-target="<%= id %>"]')
 
 		if (modalTriggers.length) {
 			modalTriggers.forEach(
