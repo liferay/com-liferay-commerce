@@ -78,7 +78,8 @@ public class UserResourceImpl extends BaseUserResourceImpl {
 				contextCompany.getCompanyId(), true, null, null, true, null,
 				user.getEmail(), 0L, null, LocaleUtil.getDefault(),
 				user.getFirstName(), user.getMiddleName(), user.getLastName(),
-				0L, 0L, user.getMale(), 1, 1, 1970, user.getJobTitle(),
+				0L, 0L, GetterUtil.getBoolean(user.getMale(), true), 1, 1, 1970,
+				user.getJobTitle(),
 				new long[] {commerceAccount.getCommerceAccountGroupId()}, null,
 				null, null, false, serviceContext);
 		}
