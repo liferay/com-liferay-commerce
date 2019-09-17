@@ -18,7 +18,11 @@ import com.liferay.commerce.constants.CommerceSubscriptionEntryConstants;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
+import com.liferay.commerce.notification.util.CommerceNotificationHelper;
 import com.liferay.commerce.payment.engine.CommerceSubscriptionEngine;
+import com.liferay.commerce.payment.internal.notification.type.SubscriptionActivatedCommerceNotificationTypeImpl;
+import com.liferay.commerce.payment.internal.notification.type.SubscriptionCancelledCommerceNotificationTypeImpl;
+import com.liferay.commerce.payment.internal.notification.type.SubscriptionSuspendedCommerceNotificationTypeImpl;
 import com.liferay.commerce.payment.method.CommercePaymentMethod;
 import com.liferay.commerce.payment.request.CommercePaymentRequest;
 import com.liferay.commerce.payment.request.CommercePaymentRequestProvider;
@@ -90,6 +94,13 @@ public class CommerceSubscriptionEngineImpl
 				CommerceSubscriptionEntryConstants.SUBSCRIPTION_STATUS_ACTIVE);
 		}
 
+		// Notifications
+
+		_commerceNotificationHelper.sendNotifications(
+			commerceOrder.getGroupId(),
+			SubscriptionActivatedCommerceNotificationTypeImpl.KEY,
+			commerceOrder);
+
 		return activateSubscription;
 	}
 
@@ -139,6 +150,13 @@ public class CommerceSubscriptionEngineImpl
 				CommerceSubscriptionEntryConstants.
 					SUBSCRIPTION_STATUS_CANCELLED);
 		}
+
+		// Notifications
+
+		_commerceNotificationHelper.sendNotifications(
+			commerceOrder.getGroupId(),
+			SubscriptionCancelledCommerceNotificationTypeImpl.KEY,
+			commerceOrder);
 
 		return activateSubscription;
 	}
@@ -305,8 +323,18 @@ public class CommerceSubscriptionEngineImpl
 					SUBSCRIPTION_STATUS_SUSPENDED);
 		}
 
+		// Notifications
+
+		_commerceNotificationHelper.sendNotifications(
+			commerceOrder.getGroupId(),
+			SubscriptionSuspendedCommerceNotificationTypeImpl.KEY,
+			commerceOrder);
+
 		return suspendSubscription;
 	}
+
+	@Reference
+	private CommerceNotificationHelper _commerceNotificationHelper;
 
 	@Reference
 	private CommerceOrderLocalService _commerceOrderLocalService;
