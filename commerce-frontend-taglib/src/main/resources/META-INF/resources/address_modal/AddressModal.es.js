@@ -152,7 +152,7 @@ class AddressModal extends Component {
 
 	_fetchCountries() {
 		return fetch(
-			this.countriesAPI + '?p_auth=' + Liferay.authToken,
+			this.countriesAPI,
 			{
 				method: 'GET'
 			}
