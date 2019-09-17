@@ -45,6 +45,39 @@ definition {
 			value1 = "${entryName}");
 	}
 
+	macro addNewChannelEntry {
+		Type(
+			locator1 = "CommerceEntry#NAME_FIELD",
+			value1 = "${entryName}");
+
+		Select(
+			locator1 = "Select#TYPE",
+			value1 = "${criteriaType}");
+
+		AssertClick(
+			locator1 = "Button#SELECT",
+			value1 = "Select Site");
+
+		var key_siteName = "${siteName}";
+
+		IFrame.selectModalFrame();
+
+		Click(
+			key_siteName = "${siteName}",
+			locator1 = "CommerceNavigation#CHOOSE_SITE_BUTTON");
+
+		SelectFrameTop(value1 = "relative=top");
+
+
+		Pause(locator1 = "5000");
+	}
+
+	macro addNewCatalogsEntry {
+		Type(
+			locator1 = "CommerceEntry#NAME_FIELD",
+			value1 = "${entryName}");
+	}
+
 	macro addNewCountriesEntry {
 		Type(
 			locator1 = "CommerceEntry#NAME_FIELD",
