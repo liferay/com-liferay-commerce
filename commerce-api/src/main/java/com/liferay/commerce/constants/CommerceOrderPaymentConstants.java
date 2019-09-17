@@ -25,6 +25,8 @@ public class CommerceOrderPaymentConstants {
 
 	public static final int STATUS_ANY = WorkflowConstants.STATUS_ANY;
 
+	public static final int STATUS_AUTHORIZED = WorkflowConstants.STATUS_DRAFT;
+
 	public static final int STATUS_CANCELLED =
 		WorkflowConstants.STATUS_IN_TRASH;
 
@@ -37,7 +39,7 @@ public class CommerceOrderPaymentConstants {
 
 	public static String getOrderPaymentLabelStyle(int orderPaymentStatus) {
 		if ((orderPaymentStatus == STATUS_ANY) ||
-			(orderPaymentStatus == STATUS_CANCELLED)) {
+			(orderPaymentStatus == STATUS_AUTHORIZED)) {
 
 			return "info";
 		}
@@ -47,7 +49,9 @@ public class CommerceOrderPaymentConstants {
 		else if (orderPaymentStatus == STATUS_PENDING) {
 			return "warning";
 		}
-		else if (orderPaymentStatus == STATUS_FAILED) {
+		else if ((orderPaymentStatus == STATUS_FAILED) ||
+				 (orderPaymentStatus == STATUS_CANCELLED)) {
+
 			return "danger";
 		}
 
@@ -57,6 +61,9 @@ public class CommerceOrderPaymentConstants {
 	public static String getOrderPaymentStatusLabel(int orderPaymentStatus) {
 		if (orderPaymentStatus == STATUS_ANY) {
 			return WorkflowConstants.LABEL_ANY;
+		}
+		else if (orderPaymentStatus == STATUS_AUTHORIZED) {
+			return "authorized";
 		}
 		else if (orderPaymentStatus == STATUS_CANCELLED) {
 			return "cancelled";
