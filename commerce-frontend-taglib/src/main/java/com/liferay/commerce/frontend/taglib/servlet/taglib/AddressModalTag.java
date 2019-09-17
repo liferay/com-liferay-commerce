@@ -23,6 +23,7 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.auth.AuthTokenUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -48,15 +49,18 @@ public class AddressModalTag extends ComponentRendererTag {
 				StringBundler.concat(
 					PortalUtil.getPortalURL(request),
 					"/o/commerce-ui/address/countries-by-channel-id?channelId=",
-					String.valueOf(commerceContext.getCommerceChannelId())));
+					String.valueOf(commerceContext.getCommerceChannelId()),
+					"&p_auth=", AuthTokenUtil.getToken(request)));
 		}
 		catch (PortalException pe) {
 			_log.error(pe, pe);
 
 			putValue(
 				"countriesAPI",
-				PortalUtil.getPortalURL(request) +
-					"/o/commerce-ui/address/countries/");
+				StringBundler.concat(
+					PortalUtil.getPortalURL(request),
+					"/o/commerce-ui/address/countries/?p_auth=",
+					AuthTokenUtil.getToken(request)));
 		}
 
 		putValue(
