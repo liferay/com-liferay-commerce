@@ -28,8 +28,8 @@ definition {
 
 		ProductMenu.gotoPortlet(
 			category = "Commerce",
-			panel = "Site Administration",
-			portlet = "Catalog");
+			panel = "Control Panel",
+			portlet = "Products");
 
 		echo("Creating new Option complete with Values...");
 
