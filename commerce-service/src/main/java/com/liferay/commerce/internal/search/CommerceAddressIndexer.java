@@ -85,9 +85,9 @@ public class CommerceAddressIndexer extends BaseIndexer<CommerceAddress> {
 		}
 
 		long classPK = GetterUtil.getLong(
-			searchContext.getAttribute(Field.CLASS_PK));
+			searchContext.getAttribute(Field.CLASS_PK), Long.MIN_VALUE);
 
-		if (classPK > 0) {
+		if (classPK > Long.MIN_VALUE) {
 			contextBooleanFilter.addTerm(
 				Field.CLASS_PK, String.valueOf(classPK),
 				BooleanClauseOccur.MUST);
