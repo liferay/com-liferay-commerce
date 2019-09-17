@@ -23,6 +23,26 @@ definition {
 		}
 	}
 
+	test CreateNewAvailabilityEstimate {
+		property portal.acceptance = "true";
+		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewAvailabilityEstimate";
+
+		ProductMenu.gotoPortlet(
+			category = "Commerce",
+			panel = "Control Panel",
+			portlet = "Settings");
+
+		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Availability Estimates");
+
+		Click(locator1 = "Button#PLUS");
+
+		CommerceEntry.addNewAvailabilityEstimatesEntry(entryName = "New Availability Estimate");
+
+		Button.clickSave();
+
+		AssertElementPresent(locator1 = "Message#SUCCESS");
+	}
+
 	test CreateNewCatalog {
 		property portal.acceptance = "true";
 		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewCatalog";
@@ -41,27 +61,6 @@ definition {
 		AssertElementPresent(locator1 = "Message#SUCCESS");
 	}
 
-	test CreateNewAvailabilityEstimate {
-		property portal.acceptance = "true";
-		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewAvailabilityEstimate";
-
-		ProductMenu.gotoPortlet(
-			category = "Commerce",
-			panel = "Control Panel",
-			portlet = "Settings"
-		);
-
-		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Availability Estimates");
-
-		Click(locator1 = "Button#PLUS");
-
-		CommerceEntry.addNewAvailabilityEstimatesEntry(entryName = "New Availability Estimate");
-
-		Button.clickSave();
-
-		AssertElementPresent(locator1 = "Message#SUCCESS");
-	}
-
 	test CreateNewCountry {
 		property portal.acceptance = "true";
 		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewCountry";
@@ -69,8 +68,7 @@ definition {
 		ProductMenu.gotoPortlet(
 			category = "Commerce",
 			panel = "Control Panel",
-			portlet = "Settings"
-		);
+			portlet = "Settings");
 
 		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Countries");
 
@@ -88,8 +86,7 @@ definition {
 
 		CommerceEntry.addNewRegionsEntry(
 			code = "NRE",
-			entryName = "New Region"
-		);
+			entryName = "New Region");
 
 		Button.clickSave();
 
@@ -101,27 +98,25 @@ definition {
 		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewDiscount";
 
 		CommerceEntry.createNewAccountGroup(
-			accountsEntryName = "Commerce Account",
 			accountCriteriaType = "Business",
-			user = "Commerce",
-			accountGroupsEntryName = "Commerce Account Group");
+			accountGroupsEntryName = "Commerce Account Group",
+			accountsEntryName = "Commerce Account",
+			user = "Commerce");
 
 		ProductMenu.gotoPortlet(
 			category = "Commerce",
 			panel = "Control Panel",
-			portlet = "Discounts"
-		);
+			portlet = "Discounts");
 
 		Click(locator1 = "Button#PLUS");
 
 		CommerceEntry.addNewDiscountsEntry(
 			accountGroup = "Commerce Account Group",
+			channelsEntryName = "Liferay",
 			discountLevel = "15",
 			discountTarget = "Apply to Product",
-			channelsEntryName = "Liferay",
 			entryTitle = "New Discount",
-			maximumDiscountAmount = "10"
-		);
+			maximumDiscountAmount = "10");
 
 		Button.clickPublish();
 
@@ -166,14 +161,12 @@ definition {
 		CommerceEntry.createNewAccountGroup(
 			criteriaType = "Users",
 			criterionEntryName = "Commerce User",
-			entryName = "Account groups"
-		);
+			entryName = "Account groups");
 
 		ProductMenu.gotoPortlet(
 			category = "Commerce",
 			panel = "Site Administration",
-			portlet = "Settings"
-		);
+			portlet = "Settings");
 
 		CommerceNavigator.gotoCommercePortletNavItem(navItem = "Notificatios");
 
@@ -186,8 +179,7 @@ definition {
 			entryName = "New Notification Template",
 			fromAddress = "test@liferay.com",
 			fromName = "Test Test",
-			notificationType = "Order Placed"
-		);
+			notificationType = "Order Placed");
 
 		Button.clickSave();
 
@@ -199,24 +191,22 @@ definition {
 		property test.name.skip.portal.instance = "CommerceAdmin#CreateNewPriceList";
 
 		CommerceEntry.createNewAccountGroup(
-			accountsEntryName = "Commerce Account",
 			accountCriteriaType = "Business",
-			user = "Commerce",
-			accountGroupsEntryName = "Commerce Account Group");
+			accountGroupsEntryName = "Commerce Account Group",
+			accountsEntryName = "Commerce Account",
+			user = "Commerce");
 
 		ProductMenu.gotoPortlet(
 			category = "Commerce",
 			panel = "Control Panel",
 			portlet = "Price Lists");
 
-		Click(locator1 = "Button#PLUS"
-		);
+		Click(locator1 = "Button#PLUS");
 
 		CommerceEntry.addNewPriceListsEntry(
 			accountGroupsEntryName = "Commerce Account Group",
 			currencyCode = "USD",
-			entryName = "New Price List"
-		);
+			entryName = "New Price List");
 
 		Button.clickPublish();
 

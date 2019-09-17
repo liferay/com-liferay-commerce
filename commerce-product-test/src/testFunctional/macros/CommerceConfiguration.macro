@@ -19,14 +19,13 @@ definition {
 		ProductMenu.gotoPortlet(
 			category = "Commerce",
 			panel = "Control Panel",
-			portlet = "Channels"
-		);
+			portlet = "Channels");
 
 		Click(locator1 = "Button#PLUS");
 
 		CommerceEntry.addNewChannelEntry(
-			entryName = "Liferay",
 			criteriaType = "Site",
+			entryName = "Liferay",
 			siteName = "Guest");
 
 		Button.clickSave();
@@ -79,9 +78,9 @@ definition {
 			category = "Commerce",
 			panel = "Control Panel",
 			portlet = "Catalogs");
-		
+
 		if (IsElementPresent(locator1 = "CommerceNavigation#SELECTABLE_CHECKBOX")) {
-					CommerceProducts.deleteEntries(deleteMessage = "Are you sure you want to delete the selected catalogs?");
+			CommerceProducts.deleteEntries(deleteMessage = "Are you sure you want to delete the selected catalogs?");
 		}
 
 		ProductMenu.gotoPortlet(
