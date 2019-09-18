@@ -25,7 +25,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 %>
 
 <liferay-portlet:renderURL var="editBillingAddressURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
-	<portlet:param name="mvcRenderCommandName" value="editCommerceOrderShippingAddress" />
+	<portlet:param name="mvcRenderCommandName" value="editCommerceOrderBillingAddress" />
 	<portlet:param name="commerceOrderId" value="<%= String.valueOf(commerceOrderEditDisplayContext.getCommerceOrderId()) %>" />
 </liferay-portlet:renderURL>
 
@@ -54,6 +54,11 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 	url="<%= editShippingAddressURL %>"
 />
 
+<liferay-portlet:renderURL var="editPurchaseOrderNumberURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+	<portlet:param name="mvcRenderCommandName" value="editCommerceOrderPurchaseOrderNumber" />
+	<portlet:param name="commerceOrderId" value="<%= String.valueOf(commerceOrderEditDisplayContext.getCommerceOrderId()) %>" />
+</liferay-portlet:renderURL>
+
 <commerce-ui:modal
 	closeOnSubmit="<%= true %>"
 	id="purchase-order-number-modal"
@@ -61,8 +66,13 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 	showSubmit="<%= true %>"
 	size="lg"
 	title='<%= LanguageUtil.get(request, "purchase-order-number") %>'
-	url="<%= editBillingAddressURL %>"
+	url="<%= editPurchaseOrderNumberURL %>"
 />
+
+<liferay-portlet:renderURL var="editRequestedDeliveryDateURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+	<portlet:param name="mvcRenderCommandName" value="editCommerceOrderRequestedDeliveryDate" />
+	<portlet:param name="commerceOrderId" value="<%= String.valueOf(commerceOrderEditDisplayContext.getCommerceOrderId()) %>" />
+</liferay-portlet:renderURL>
 
 <commerce-ui:modal
 	closeOnSubmit="<%= true %>"
@@ -71,8 +81,13 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 	showSubmit="<%= true %>"
 	size="lg"
 	title='<%= LanguageUtil.get(request, "requested-delivery-date") %>'
-	url="<%= editBillingAddressURL %>"
+	url="<%= editRequestedDeliveryDateURL %>"
 />
+
+<liferay-portlet:renderURL var="editPrintedNoteURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+	<portlet:param name="mvcRenderCommandName" value="editCommerceOrderPrintedNote" />
+	<portlet:param name="commerceOrderId" value="<%= String.valueOf(commerceOrderEditDisplayContext.getCommerceOrderId()) %>" />
+</liferay-portlet:renderURL>
 
 <commerce-ui:modal
 	closeOnSubmit="<%= true %>"
@@ -81,7 +96,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 	showSubmit="<%= true %>"
 	size="lg"
 	title='<%= LanguageUtil.get(request, "printed-note") %>'
-	url="<%= editBillingAddressURL %>"
+	url="<%= editPrintedNoteURL %>"
 />
 
 <div class="container">
@@ -99,58 +114,125 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 		>
 			<div class="row vertically-divided">
 				<div class="col-md-4">
+
+					<%
+					CommerceAddress billingAddress = commerceOrder.getBillingAddress();
+					%>
+
 					<commerce-ui:info-box
-						actionLabel='<%= LanguageUtil.get(request, "edit") %>'
+						actionLabel='<%= LanguageUtil.get(request, (billingAddress == null) ? "add" : "edit") %>'
 						actionTargetId="billing-address-modal"
 						actionUrl="<%= editBillingAddressURL %>"
 						elementClasses="py-3"
 						title='<%= LanguageUtil.get(request, "billing-address") %>'
 					>
-						<%= HtmlUtil.escape(commerceOrderEditDisplayContext.getDescriptiveCommerceAddress(commerceOrder.getBillingAddress())) %>
+						<c:choose>
+							<c:when test="<%= billingAddress == null %>">
+								<span class="text-muted">
+									<%= LanguageUtil.get(request, "click-add-to-insert") %>
+								</span>
+							</c:when>
+							<c:otherwise>
+								<%= HtmlUtil.escape(commerceOrderEditDisplayContext.getDescriptiveCommerceAddress(billingAddress)) %>
+							</c:otherwise>
+						</c:choose>
 					</commerce-ui:info-box>
 
+					<%
+					CommerceAddress shippingAddress = commerceOrder.getShippingAddress();
+					%>
+
 					<commerce-ui:info-box
-						actionLabel='<%= LanguageUtil.get(request, "edit") %>'
+						actionLabel='<%= LanguageUtil.get(request, (shippingAddress == null) ? "add" : "edit") %>'
 						actionTargetId="shipping-address-modal"
 						actionUrl="<%= editShippingAddressURL %>"
 						elementClasses="py-3"
 						title='<%= LanguageUtil.get(request, "shipping-address") %>'
 					>
-						<%= HtmlUtil.escape(commerceOrderEditDisplayContext.getDescriptiveCommerceAddress(commerceOrder.getShippingAddress())) %>
+						<c:choose>
+							<c:when test="<%= shippingAddress == null %>">
+								<span class="text-muted">
+									<%= LanguageUtil.get(request, "click-add-to-insert") %>
+								</span>
+							</c:when>
+							<c:otherwise>
+								<%= HtmlUtil.escape(commerceOrderEditDisplayContext.getDescriptiveCommerceAddress(shippingAddress)) %>
+							</c:otherwise>
+						</c:choose>
 					</commerce-ui:info-box>
 				</div>
 
 				<div class="col-md-4">
+
+					<%
+					String purchaseOrderNumber = commerceOrder.getPurchaseOrderNumber();
+					%>
+
 					<commerce-ui:info-box
-						actionLabel='<%= LanguageUtil.get(request, "edit") %>'
+						actionLabel='<%= LanguageUtil.get(request, Validator.isNull(purchaseOrderNumber) ? "add" : "edit") %>'
 						actionTargetId="purchase-order-number-modal"
-						actionUrl="<%= editBillingAddressURL %>"
+						actionUrl="<%= editPurchaseOrderNumberURL %>"
 						elementClasses="py-3"
 						title='<%= LanguageUtil.get(request, "purchase-order-number") %>'
 					>
-						<%= HtmlUtil.escape(commerceOrder.getPurchaseOrderNumber()) %>
+						<c:choose>
+							<c:when test="<%= Validator.isNull(purchaseOrderNumber) %>">
+								<span class="text-muted">
+									<%= LanguageUtil.get(request, "click-add-to-insert") %>
+								</span>
+							</c:when>
+							<c:otherwise>
+								<%= HtmlUtil.escape(purchaseOrderNumber) %>
+							</c:otherwise>
+						</c:choose>
 					</commerce-ui:info-box>
 
+					<%
+					Date requestedDeliveryDate = commerceOrder.getRequestedDeliveryDate();
+					%>
+
 					<commerce-ui:info-box
-						actionLabel='<%= LanguageUtil.get(request, "edit") %>'
+						actionLabel='<%= LanguageUtil.get(request, (requestedDeliveryDate == null) ? "add" : "edit") %>'
 						actionTargetId="requested-delivery-date-modal"
-						actionUrl="<%= editBillingAddressURL %>"
+						actionUrl="<%= editRequestedDeliveryDateURL %>"
 						elementClasses="py-3"
 						title='<%= LanguageUtil.get(request, "requested-delivery-date") %>'
 					>
-						<%= commerceOrderEditDisplayContext.getCommerceOrderDateTime(commerceOrder.getRequestedDeliveryDate()) %>
+						<c:choose>
+							<c:when test="<%= requestedDeliveryDate == null %>">
+								<span class="text-muted">
+									<%= LanguageUtil.get(request, "click-add-to-insert") %>
+								</span>
+							</c:when>
+							<c:otherwise>
+								<%= commerceOrderEditDisplayContext.getCommerceOrderDateTime(requestedDeliveryDate) %>
+							</c:otherwise>
+						</c:choose>
 					</commerce-ui:info-box>
 				</div>
 
+				<%
+				String printedNote = commerceOrder.getPrintedNote();
+				%>
+
 				<div class="col-md-4">
 					<commerce-ui:info-box
-						actionLabel='<%= LanguageUtil.get(request, "edit") %>'
+						actionLabel='<%= LanguageUtil.get(request, Validator.isNull(printedNote) ? "add" : "edit") %>'
 						actionTargetId="printed-note-modal"
-						actionUrl="<%= editBillingAddressURL %>"
+						actionUrl="<%= editPrintedNoteURL %>"
 						elementClasses="py-3"
 						title='<%= LanguageUtil.get(request, "printed-note") %>'
 					>
-						<%= HtmlUtil.escape(commerceOrder.getPrintedNote()) %>
+						<c:choose>
+							<c:when test="<%= Validator.isNull(printedNote) %>">
+								<span class="text-muted">
+									<%= LanguageUtil.get(request, "click-add-to-insert") %>
+								</span>
+							</c:when>
+							<c:otherwise>
+								<%= HtmlUtil.escape(printedNote) %>
+							</c:otherwise>
+						</c:choose>
 					</commerce-ui:info-box>
 				</div>
 			</div>
