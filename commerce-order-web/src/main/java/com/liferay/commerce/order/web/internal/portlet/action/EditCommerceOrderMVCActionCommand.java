@@ -125,6 +125,12 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 		else if (cmd.equals("printedNote")) {
 			updatePrintedNote(actionRequest);
 		}
+		else if (cmd.equals("purchaseOrderNumber")) {
+			updatePurchaseOrderNumber(actionRequest);
+		}
+		else if (cmd.equals("requestedDeliveryDate")) {
+			updateRequestedDeliveryDate(actionRequest);
+		}
 		else if (cmd.equals("shippingAddress")) {
 			updateShippingAddress(actionRequest);
 		}
@@ -336,6 +342,55 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 		String printedNote = ParamUtil.getString(actionRequest, "printedNote");
 
 		_commerceOrderService.updatePrintedNote(commerceOrderId, printedNote);
+	}
+
+	protected void updatePurchaseOrderNumber(ActionRequest actionRequest)
+		throws Exception {
+
+		long commerceOrderId = ParamUtil.getLong(
+			actionRequest, "commerceOrderId");
+
+		String purchaseOrderNumber = ParamUtil.getString(
+			actionRequest, "purchaseOrderNumber");
+
+		_commerceOrderService.updatePurchaseOrderNumber(
+			commerceOrderId, purchaseOrderNumber);
+	}
+
+	protected void updateRequestedDeliveryDate(ActionRequest actionRequest)
+		throws Exception {
+
+		long commerceOrderId = ParamUtil.getLong(
+			actionRequest, "commerceOrderId");
+
+		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
+			commerceOrderId);
+
+		int requestedDeliveryDateMonth = ParamUtil.getInteger(
+			actionRequest, "requestedDeliveryDateMonth");
+		int requestedDeliveryDateDay = ParamUtil.getInteger(
+			actionRequest, "requestedDeliveryDateDay");
+		int requestedDeliveryDateYear = ParamUtil.getInteger(
+			actionRequest, "requestedDeliveryDateYear");
+		int requestedDeliveryDateHour = ParamUtil.getInteger(
+			actionRequest, "requestedDeliveryDateHour");
+		int requestedDeliveryDateMinute = ParamUtil.getInteger(
+			actionRequest, "requestedDeliveryDateMinute");
+		int requestedDeliveryDateAmPm = ParamUtil.getInteger(
+			actionRequest, "requestedDeliveryDateAmPm");
+
+		if (requestedDeliveryDateAmPm == Calendar.PM) {
+			requestedDeliveryDateHour += 12;
+		}
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			CommerceOrder.class.getName(), actionRequest);
+
+		_commerceOrderService.updateInfo(
+			commerceOrder.getCommerceOrderId(), commerceOrder.getPrintedNote(),
+			requestedDeliveryDateMonth, requestedDeliveryDateDay,
+			requestedDeliveryDateYear, requestedDeliveryDateHour,
+			requestedDeliveryDateMinute, serviceContext);
 	}
 
 	protected void updateShippingAddress(ActionRequest actionRequest)
