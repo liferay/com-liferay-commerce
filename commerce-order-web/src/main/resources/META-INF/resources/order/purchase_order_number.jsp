@@ -22,17 +22,17 @@ CommerceOrderEditDisplayContext commerceOrderEditDisplayContext = (CommerceOrder
 CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder();
 %>
 
-<portlet:actionURL name="editCommerceOrder" var="editCommerceOrderPrintedNoteActionURL" />
+<portlet:actionURL name="editCommerceOrder" var="editCommerceOrderPurchaseOrderNumberActionURL" />
 
-<aui:form action="<%= editCommerceOrderPrintedNoteActionURL %>" cssClass="container-fluid-1280 p-0" method="post" name="fm">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="printedNote" />
+<aui:form action="<%= editCommerceOrderPurchaseOrderNumberActionURL %>" cssClass="container-fluid-1280 p-0" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="purchaseOrderNumber" />
 	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 	<aui:input name="commerceOrderId" type="hidden" value="<%= commerceOrder.getCommerceOrderId() %>" />
 
 	<aui:model-context bean="<%= commerceOrder %>" model="<%= CommerceOrder.class %>" />
 
 	<div class="border-0 sheet">
-		<aui:input name="printedNote" wrapperCssClass="form-group-item" />
+		<aui:input name="purchaseOrderNumber" wrapperCssClass="form-group-item" />
 	</div>
 
 	<aui:button type="submit" />
