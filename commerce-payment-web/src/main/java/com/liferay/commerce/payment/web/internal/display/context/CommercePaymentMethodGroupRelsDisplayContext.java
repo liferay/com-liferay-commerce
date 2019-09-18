@@ -35,13 +35,12 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import javax.portlet.PortletURL;
@@ -64,7 +63,7 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 		_commercePaymentMethodGroupRelService =
 			commercePaymentMethodGroupRelService;
 		_portletResourcePermission = portletResourcePermission;
-		_commerceDefaultPaymentMethodGroupRels = Collections.emptyList();
+		_defaultCommercePaymentMethodGroupRels = new ArrayList<>();
 		_renderRequest = renderRequest;
 		_renderResponse = renderResponse;
 	}
@@ -101,16 +100,13 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 		ThemeDisplay themeDisplay = (ThemeDisplay)_renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		List<CommercePaymentMethodGroupRel>
-			commercePaymentMethodGroupRelsToRemove = new ArrayList<>();
-
-		commercePaymentMethodGroupRelsToRemove =
+		List<CommercePaymentMethodGroupRel> commercePaymentMethodGroupRels =
 			_commercePaymentMethodGroupRelService.
 				getCommercePaymentMethodGroupRels(
 					themeDisplay.getScopeGroupId());
 
 		Stream<CommercePaymentMethodGroupRel> stream =
-			commercePaymentMethodGroupRelsToRemove.stream();
+			commercePaymentMethodGroupRels.stream();
 
 		String[] array = stream.map(
 			CommercePaymentMethodGroupRel::getEngineKey
@@ -118,25 +114,19 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 			String[]::new
 		);
 
-		_commerceDefaultPaymentMethodGroupRels =
+		_defaultCommercePaymentMethodGroupRels =
 			addDefaultCommercePaymentMethodGroupRels(
-				_commerceDefaultPaymentMethodGroupRels);
+				_defaultCommercePaymentMethodGroupRels);
 
-		for (Iterator<CommercePaymentMethodGroupRel> iterator =
-				_commerceDefaultPaymentMethodGroupRels.iterator();
-			 iterator.hasNext();) {
+		stream = _defaultCommercePaymentMethodGroupRels.stream();
 
-			CommercePaymentMethodGroupRel commercePaymentMethodGroupRel =
-				(CommercePaymentMethodGroupRel)iterator.next();
+		_defaultCommercePaymentMethodGroupRels = stream.filter(
+			e -> !ArrayUtil.contains(array, e.getEngineKey())
+		).collect(
+			Collectors.toList()
+		);
 
-			if (ArrayUtil.contains(
-					array, commercePaymentMethodGroupRel.getEngineKey())) {
-
-				iterator.remove();
-			}
-		}
-
-		return _commerceDefaultPaymentMethodGroupRels;
+		return _defaultCommercePaymentMethodGroupRels;
 	}
 
 	public PortletURL getPortletURL() {
@@ -193,12 +183,18 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 					getCommercePaymentMethodGroupRels(
 						themeDisplay.getScopeGroupId(), active,
 						_searchContainer.getStart(), _searchContainer.getEnd());
+			commercePaymentMethodGroupRelsCount =
+				_commercePaymentMethodGroupRelService.
+					getCommercePaymentMethodGroupRelsCount(
+						themeDisplay.getScopeGroupId(), active);
 		}
 		else {
 			commercePaymentMethodGroupRels =
 				_commercePaymentMethodGroupRelService.
 					getCommercePaymentMethodGroupRels(
 						themeDisplay.getScopeGroupId());
+			commercePaymentMethodGroupRelsCount =
+				commercePaymentMethodGroupRels.size();
 		}
 
 		if ((active == null) || !active) {
@@ -297,12 +293,12 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 		return ParamUtil.getString(_renderRequest, "navigation");
 	}
 
-	private List<CommercePaymentMethodGroupRel>
-		_commerceDefaultPaymentMethodGroupRels;
 	private CommercePaymentMethodGroupRel _commercePaymentMethodGroupRel;
 	private final CommercePaymentMethodGroupRelService
 		_commercePaymentMethodGroupRelService;
 	private final CommercePaymentMethodRegistry _commercePaymentMethodRegistry;
+	private List<CommercePaymentMethodGroupRel>
+		_defaultCommercePaymentMethodGroupRels;
 	private final PortletResourcePermission _portletResourcePermission;
 	private final RenderRequest _renderRequest;
 	private final RenderResponse _renderResponse;
