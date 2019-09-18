@@ -6,13 +6,13 @@ export default class SidePanel extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			show: !!props.show,
+			visible: !!props.visible,
 			animating: false,
 			loading: !!props.pages,
 			loaded: !!props.pages,
 			pages: this.formatPages(props.pages),
 			currentTab: this.getFirstTab(props.pages),
-			size: props.size || 'medium',
+			size: props.size || 'md',
 		}
 		this.selectTab = this.selectTab.bind(this);
 		this.contentLoaded = this.contentLoaded.bind(this);
@@ -29,7 +29,7 @@ export default class SidePanel extends React.Component {
 		});
 	}
 
-	setSize(size = 'medium') {
+	setSize(size = 'md') {
 		this.setState({size});
 	}
 
@@ -48,19 +48,31 @@ export default class SidePanel extends React.Component {
 
 	close(destroy = false) {
 		this.toggle(false);
-		destroy && this.panel.current.addEventListener('transitionend', () => {
-			this.setState({
-				loading: true,
-				loaded: false,
-			});
-		}, {once: true});
+		destroy && this.panel.current.addEventListener(
+			'transitionend',
+			() => {
+				this.setState({
+					loading: true,
+					loaded: false,
+				});
+			},
+			{
+				once: true
+			}
+		);
 	}
 
-	toggle(status = !this.state.show) {
-		this.setState({show: status, animating: true});
-		this.panel.current.addEventListener('transitionend', () => {
-			this.setState({animating: false});
-		}, {once: true});
+	toggle(status = !this.state.visible) {
+		this.setState({visible: status, animating: true});
+		this.panel.current.addEventListener(
+			'transitionend',
+			() => {
+				this.setState({animating: false});
+			},
+			{
+				once: true
+			}
+		);
 	}
 
 	selectTab(url) {
@@ -80,20 +92,35 @@ export default class SidePanel extends React.Component {
 	}
 
 	showIframe() {
-		return this.state.loaded || (this.state.show ^ this.state.animating);
+		return this.state.loaded || (this.state.visible ^ this.state.animating);
 	}
 
 	render() {
-		const visibility = this.state.show ? 'is-visible' : 'is-hidden';
+		const visibility = this.state.visible ? 'is-visible' : 'is-hidden';
 		const loading = this.state.loading ? 'is-loading' : '';
 
 		return (
-			<div className={`side-panel side-panel--${this.state.size} ${visibility} ${loading}`} ref={this.panel}>
-				{this.state.pages.length > 1 ? <Tabs tabs={this.state.pages} onChange={this.selectTab} current={this.state.currentTab} /> : null}
+			<div 
+				className={`side-panel side-panel--${this.state.size} ${visibility} ${loading}`} 
+				ref={this.panel}
+			>
+				{
+					this.state.pages.length && 
+					<Tabs 
+						tabs={this.state.pages}
+						onChange={this.selectTab}
+						current={this.state.currentTab}
+					/>
+				}
 				<div className="tab-content">
-					<div className="side-panel__loader"><ClayLoadingIndicator /></div>
+					<div className="side-panel__loader">
+						<ClayLoadingIndicator />
+					</div>
 					<div className="active fade show tab-pane" role="tabpanel">
-						{this.showIframe() ? <iframe src={this.state.currentTab} frameBorder="0" onLoad={this.contentLoaded}></iframe> : null}
+						{
+							this.showIframe() && 
+							<iframe src={this.state.currentTab} frameBorder="0" onLoad={this.contentLoaded}></iframe> 
+						}
 					</div>
 				</div>
 			</div>
