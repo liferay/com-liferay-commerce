@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.service.CommerceCountryServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -65,7 +63,6 @@ import java.util.Map;
  * @see CommerceCountryServiceHttp
  * @generated
  */
-@ProviderType
 public class CommerceCountryServiceSoap {
 
 	public static com.liferay.commerce.model.CommerceCountrySoap

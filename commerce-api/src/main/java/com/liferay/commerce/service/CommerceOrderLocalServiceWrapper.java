@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceOrderLocalService
  * @generated
  */
-@ProviderType
 public class CommerceOrderLocalServiceWrapper
 	implements CommerceOrderLocalService,
 			   ServiceWrapper<CommerceOrderLocalService> {
@@ -656,6 +653,15 @@ public class CommerceOrderLocalServiceWrapper
 
 		return _commerceOrderLocalService.searchCommerceOrdersCount(
 			searchContext);
+	}
+
+	@Override
+	public com.liferay.commerce.model.CommerceOrder setCommerceOrderToTransmit(
+			long userId, com.liferay.commerce.model.CommerceOrder commerceOrder)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceOrderLocalService.setCommerceOrderToTransmit(
+			userId, commerceOrder);
 	}
 
 	@Override

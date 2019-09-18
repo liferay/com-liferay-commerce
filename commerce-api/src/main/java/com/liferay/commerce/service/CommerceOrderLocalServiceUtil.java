@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.util.tracker.ServiceTracker;
@@ -32,10 +30,9 @@ import org.osgi.util.tracker.ServiceTracker;
  * @see CommerceOrderLocalService
  * @generated
  */
-@ProviderType
 public class CommerceOrderLocalServiceUtil {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify this class directly. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceOrderLocalServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
@@ -601,6 +598,15 @@ public class CommerceOrderLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().searchCommerceOrdersCount(searchContext);
+	}
+
+	public static com.liferay.commerce.model.CommerceOrder
+			setCommerceOrderToTransmit(
+				long userId,
+				com.liferay.commerce.model.CommerceOrder commerceOrder)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().setCommerceOrderToTransmit(userId, commerceOrder);
 	}
 
 	public static com.liferay.commerce.model.CommerceOrder submitCommerceOrder(

@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service.base;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.model.CommerceAvailabilityEstimate;
 import com.liferay.commerce.service.CommerceAvailabilityEstimateLocalService;
 import com.liferay.commerce.service.persistence.CPDAvailabilityEstimatePersistence;
@@ -87,13 +85,12 @@ import javax.sql.DataSource;
  * @see com.liferay.commerce.service.impl.CommerceAvailabilityEstimateLocalServiceImpl
  * @generated
  */
-@ProviderType
 public abstract class CommerceAvailabilityEstimateLocalServiceBaseImpl
 	extends BaseLocalServiceImpl
 	implements CommerceAvailabilityEstimateLocalService,
 			   IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CommerceAvailabilityEstimateLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.service.CommerceAvailabilityEstimateLocalServiceUtil</code>.

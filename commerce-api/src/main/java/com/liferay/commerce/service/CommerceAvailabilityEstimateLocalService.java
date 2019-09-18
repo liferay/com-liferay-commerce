@@ -62,7 +62,7 @@ import java.util.Map;
 public interface CommerceAvailabilityEstimateLocalService
 	extends BaseLocalService, PersistedModelLocalService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceAvailabilityEstimateLocalServiceUtil} to access the commerce availability estimate local service. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceAvailabilityEstimateLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.

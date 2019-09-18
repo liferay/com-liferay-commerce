@@ -66,7 +66,7 @@ public abstract class CommerceAddressServiceBaseImpl
 	extends BaseServiceImpl
 	implements CommerceAddressService, IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CommerceAddressService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.service.CommerceAddressServiceUtil</code>.

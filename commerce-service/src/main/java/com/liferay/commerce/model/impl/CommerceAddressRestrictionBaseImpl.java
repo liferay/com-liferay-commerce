@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.model.CommerceAddressRestriction;
 import com.liferay.commerce.service.CommerceAddressRestrictionLocalServiceUtil;
 
@@ -31,12 +29,11 @@ import com.liferay.commerce.service.CommerceAddressRestrictionLocalServiceUtil;
  * @see CommerceAddressRestriction
  * @generated
  */
-@ProviderType
 public abstract class CommerceAddressRestrictionBaseImpl
 	extends CommerceAddressRestrictionModelImpl
 	implements CommerceAddressRestriction {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce address restriction model instance should use the <code>CommerceAddressRestriction</code> interface instead.

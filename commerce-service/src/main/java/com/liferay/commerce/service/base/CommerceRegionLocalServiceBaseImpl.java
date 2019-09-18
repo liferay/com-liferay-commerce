@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service.base;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.service.CommerceRegionLocalService;
 import com.liferay.commerce.service.persistence.CPDAvailabilityEstimatePersistence;
@@ -87,12 +85,11 @@ import javax.sql.DataSource;
  * @see com.liferay.commerce.service.impl.CommerceRegionLocalServiceImpl
  * @generated
  */
-@ProviderType
 public abstract class CommerceRegionLocalServiceBaseImpl
 	extends BaseLocalServiceImpl
 	implements CommerceRegionLocalService, IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CommerceRegionLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.service.CommerceRegionLocalServiceUtil</code>.

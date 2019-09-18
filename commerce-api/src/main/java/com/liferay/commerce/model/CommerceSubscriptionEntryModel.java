@@ -45,7 +45,7 @@ public interface CommerceSubscriptionEntryModel
 	extends BaseModel<CommerceSubscriptionEntry>, GroupedModel, ShardedModel,
 			StagedAuditedModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. All methods that expect a commerce subscription entry model instance should use the {@link CommerceSubscriptionEntry} interface instead.

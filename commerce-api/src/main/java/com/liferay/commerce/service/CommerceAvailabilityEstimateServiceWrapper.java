@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceAvailabilityEstimateService
  * @generated
  */
-@ProviderType
 public class CommerceAvailabilityEstimateServiceWrapper
 	implements CommerceAvailabilityEstimateService,
 			   ServiceWrapper<CommerceAvailabilityEstimateService> {
@@ -38,6 +35,11 @@ public class CommerceAvailabilityEstimateServiceWrapper
 			commerceAvailabilityEstimateService;
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link CommerceAvailabilityEstimateServiceUtil} to access the commerce availability estimate remote service. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceAvailabilityEstimateServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
 	@Override
 	public com.liferay.commerce.model.CommerceAvailabilityEstimate
 			addCommerceAvailabilityEstimate(
