@@ -11,7 +11,8 @@
     const CONTAINER = Speedwell.getContainer();
 
     function showCategoryNavigationMenu(e) {
-        const isCatalogLink = e.currentTarget.href.indexOf('/catalog') > -1;
+        const isCatalogLink = e.currentTarget.href.indexOf('/car-parts') > -1 ||
+            e.currentTarget.href.indexOf('/catalog') > -1;
 
         if (isCatalogLink) {
             categoryNavigationElement.focus();

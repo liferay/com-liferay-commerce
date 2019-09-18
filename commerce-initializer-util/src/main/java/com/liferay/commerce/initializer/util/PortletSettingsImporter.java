@@ -30,15 +30,10 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.model.Layout;
-import com.liferay.portal.kernel.model.LayoutConstants;
-import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.model.*;
 import com.liferay.portal.kernel.portlet.PortletIdCodec;
 import com.liferay.portal.kernel.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.portal.kernel.service.ClassNameLocalService;
-import com.liferay.portal.kernel.service.LayoutLocalService;
-import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.service.UserLocalService;
+import com.liferay.portal.kernel.service.*;
 import com.liferay.portal.kernel.template.TemplateConstants;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.Portal;
@@ -211,9 +206,17 @@ public class PortletSettingsImporter {
 			else if (key.equals("assetVocabularyId")) {
 				value = portletPreferencesJSONObject.getString(key);
 
+				if (Validator.isBlank(value)) {
+					Group group = serviceContext.getScopeGroup();
+
+					value = group.getName(serviceContext.getLanguageId());
+				}
+
+				Company company = _companyLocalService.getCompany(serviceContext.getCompanyId());
+
 				AssetVocabulary assetVocabulary =
 					_assetVocabularyLocalService.getGroupVocabulary(
-						assetVocabularyGroupId, value);
+						company.getGroupId(), value);
 
 				value = String.valueOf(assetVocabulary.getVocabularyId());
 			}
@@ -283,6 +286,9 @@ public class PortletSettingsImporter {
 
 	@Reference
 	private AssetVocabularyLocalService _assetVocabularyLocalService;
+
+	@Reference
+	private CompanyLocalService _companyLocalService;
 
 	@Reference
 	private ClassNameLocalService _classNameLocalService;

@@ -5,8 +5,8 @@
 		"portletPreferences": {
 			"displayDepth": "0",
 			"displayStyle": {
-				"FileName": "MINIUM_SITE_NAVIGATION.ftl",
-				"Name": "Minium Site Navigation",
+				"FileName": "SPEEDWELL_SITE_NAVIGATION.ftl",
+				"Name": "Speedwell Site Navigation",
 				"PortletClassName": "com.liferay.portal.kernel.theme.NavItem"
 			},
 			"displayStyleGroupId": "",
@@ -24,8 +24,8 @@
 		"portletPreferences": {
 			"displayDepth": "0",
 			"displayStyle": {
-				"FileName": "MINIUM_SUB_SITE_NAVIGATION.ftl",
-				"Name": "Minium Sub Site Navigation",
+				"FileName": "SPEEDWELL_SUB_SITE_NAVIGATION.ftl",
+				"Name": "Speedwell Sub Site Navigation",
 				"PortletClassName": "com.liferay.portal.kernel.theme.NavItem"
 			},
 			"displayStyleGroupId": "",
@@ -34,6 +34,26 @@
 			"portletSetupPortletDecoratorId": "barebone",
 			"portletSetupUseCustomTitle": "false",
 			"rootMenuItemLevel": "1",
+			"rootMenuItemType": "relative"
+		}
+	},
+	{
+		"instanceId": "cpAssetCategoriesNavigationPortlet_navigation_menu",
+		"portletName": "com_liferay_commerce_product_asset_categories_navigation_web_internal_portlet_CPAssetCategoriesNavigationPortlet",
+		"portletPreferences": {
+			"assetVocabularyId": "",
+			"displayDepth": "0",
+			"displayStyle": {
+				"FileName": "SPEEDWELL_CATEGORY_NAVIGATION.ftl",
+				"Name": "Speedwell Category Navigation",
+				"PortletClassName": "com.liferay.commerce.product.asset.categories.navigation.web.internal.portlet.CPAssetCategoriesNavigationPortlet"
+			},
+			"displayStyleGroupId": "",
+			"includedLayouts": "auto",
+			"portletSetupCss": "",
+			"portletSetupPortletDecoratorId": "barebone",
+			"portletSetupUseCustomTitle": "false",
+			"rootMenuItemLevel": "0",
 			"rootMenuItemType": "relative"
 		}
 	}
