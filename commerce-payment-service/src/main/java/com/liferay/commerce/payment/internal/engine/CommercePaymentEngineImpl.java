@@ -15,6 +15,7 @@
 package com.liferay.commerce.payment.internal.engine;
 
 import com.liferay.commerce.constants.CommerceOrderConstants;
+import com.liferay.commerce.constants.CommercePaymentConstants;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.payment.engine.CommercePaymentEngine;
@@ -188,9 +189,19 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 		CommercePaymentResult commercePaymentResult =
 			commercePaymentMethod.completePayment(commercePaymentRequest);
 
-		updateOrderPaymentStatus(
+		CommerceOrder commerceOrder = updateOrderPaymentStatus(
 			commerceOrderId, commercePaymentResult.getNewPaymentStatus(),
 			commercePaymentResult.getAuthTransactionId());
+
+		if ((commercePaymentMethod.getPaymentType() ==
+				CommercePaymentConstants.
+					COMMERCE_PAYMENT_METHOD_TYPE_OFFLINE) &&
+			(commerceOrder.getPaymentStatus() ==
+				CommerceOrderConstants.PAYMENT_STATUS_PENDING)) {
+
+			_commerceOrderLocalService.setCommerceOrderToTransmit(
+				commerceOrder.getUserId(), commerceOrder);
+		}
 
 		return commercePaymentResult;
 	}
