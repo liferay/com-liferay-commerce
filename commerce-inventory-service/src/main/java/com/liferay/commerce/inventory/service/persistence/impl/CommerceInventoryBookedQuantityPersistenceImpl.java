@@ -757,9 +757,9 @@ public class CommerceInventoryBookedQuantityPersistenceImpl
 				for (CommerceInventoryBookedQuantity
 						commerceInventoryBookedQuantity : list) {
 
-					if ((expirationDate.getTime() <=
+					if (expirationDate.getTime() <=
 							commerceInventoryBookedQuantity.
-								getExpirationDate().getTime())) {
+								getExpirationDate().getTime()) {
 
 						list = null;
 

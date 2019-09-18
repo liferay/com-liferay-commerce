@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.inventory.service.http;
 
-
 /**
  * Provides the SOAP utility for the
  * <code>com.liferay.commerce.inventory.service.CommerceInventoryAuditServiceUtil</code> service

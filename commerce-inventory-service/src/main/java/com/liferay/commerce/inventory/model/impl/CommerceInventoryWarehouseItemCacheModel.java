@@ -66,9 +66,11 @@ public class CommerceInventoryWarehouseItemCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(23);
 
-		sb.append("{commerceInventoryWarehouseItemId=");
+		sb.append("{externalReferenceCode=");
+		sb.append(externalReferenceCode);
+		sb.append(", commerceInventoryWarehouseItemId=");
 		sb.append(commerceInventoryWarehouseItemId);
 		sb.append(", companyId=");
 		sb.append(companyId);
@@ -97,6 +99,14 @@ public class CommerceInventoryWarehouseItemCacheModel
 	public CommerceInventoryWarehouseItem toEntityModel() {
 		CommerceInventoryWarehouseItemImpl commerceInventoryWarehouseItemImpl =
 			new CommerceInventoryWarehouseItemImpl();
+
+		if (externalReferenceCode == null) {
+			commerceInventoryWarehouseItemImpl.setExternalReferenceCode("");
+		}
+		else {
+			commerceInventoryWarehouseItemImpl.setExternalReferenceCode(
+				externalReferenceCode);
+		}
 
 		commerceInventoryWarehouseItemImpl.setCommerceInventoryWarehouseItemId(
 			commerceInventoryWarehouseItemId);
@@ -147,6 +157,8 @@ public class CommerceInventoryWarehouseItemCacheModel
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		externalReferenceCode = objectInput.readUTF();
+
 		commerceInventoryWarehouseItemId = objectInput.readLong();
 
 		companyId = objectInput.readLong();
@@ -166,6 +178,13 @@ public class CommerceInventoryWarehouseItemCacheModel
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput) throws IOException {
+		if (externalReferenceCode == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(externalReferenceCode);
+		}
+
 		objectOutput.writeLong(commerceInventoryWarehouseItemId);
 
 		objectOutput.writeLong(companyId);
@@ -196,6 +215,7 @@ public class CommerceInventoryWarehouseItemCacheModel
 		objectOutput.writeInt(reservedQuantity);
 	}
 
+	public String externalReferenceCode;
 	public long commerceInventoryWarehouseItemId;
 	public long companyId;
 	public long userId;

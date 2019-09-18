@@ -208,9 +208,9 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 				for (CommerceInventoryReplenishmentItem
 						commerceInventoryReplenishmentItem : list) {
 
-					if ((commerceInventoryWarehouseId !=
+					if (commerceInventoryWarehouseId !=
 							commerceInventoryReplenishmentItem.
-								getCommerceInventoryWarehouseId())) {
+								getCommerceInventoryWarehouseId()) {
 
 						list = null;
 

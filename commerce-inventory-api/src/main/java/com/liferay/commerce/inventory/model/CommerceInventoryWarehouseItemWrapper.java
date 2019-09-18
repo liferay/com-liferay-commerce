@@ -58,6 +58,7 @@ public class CommerceInventoryWarehouseItemWrapper
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put(
 			"commerceInventoryWarehouseItemId",
 			getCommerceInventoryWarehouseItemId());
@@ -77,6 +78,13 @@ public class CommerceInventoryWarehouseItemWrapper
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		String externalReferenceCode = (String)attributes.get(
+			"externalReferenceCode");
+
+		if (externalReferenceCode != null) {
+			setExternalReferenceCode(externalReferenceCode);
+		}
+
 		Long commerceInventoryWarehouseItemId = (Long)attributes.get(
 			"commerceInventoryWarehouseItemId");
 
@@ -208,6 +216,16 @@ public class CommerceInventoryWarehouseItemWrapper
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _commerceInventoryWarehouseItem.getExpandoBridge();
+	}
+
+	/**
+	 * Returns the external reference code of this commerce inventory warehouse item.
+	 *
+	 * @return the external reference code of this commerce inventory warehouse item
+	 */
+	@Override
+	public String getExternalReferenceCode() {
+		return _commerceInventoryWarehouseItem.getExternalReferenceCode();
 	}
 
 	/**
@@ -393,6 +411,17 @@ public class CommerceInventoryWarehouseItemWrapper
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		_commerceInventoryWarehouseItem.setExpandoBridgeAttributes(
 			serviceContext);
+	}
+
+	/**
+	 * Sets the external reference code of this commerce inventory warehouse item.
+	 *
+	 * @param externalReferenceCode the external reference code of this commerce inventory warehouse item
+	 */
+	@Override
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_commerceInventoryWarehouseItem.setExternalReferenceCode(
+			externalReferenceCode);
 	}
 
 	/**

@@ -239,6 +239,22 @@ public abstract class CommerceInventoryWarehouseItemLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the commerce inventory warehouse item with the matching external reference code and company.
+	 *
+	 * @param companyId the primary key of the company
+	 * @param externalReferenceCode the commerce inventory warehouse item's external reference code
+	 * @return the matching commerce inventory warehouse item, or <code>null</code> if a matching commerce inventory warehouse item could not be found
+	 */
+	@Override
+	public CommerceInventoryWarehouseItem
+		fetchCommerceInventoryWarehouseItemByReferenceCode(
+			long companyId, String externalReferenceCode) {
+
+		return commerceInventoryWarehouseItemPersistence.fetchByC_ERC(
+			companyId, externalReferenceCode);
+	}
+
+	/**
 	 * Returns the commerce inventory warehouse item with the primary key.
 	 *
 	 * @param commerceInventoryWarehouseItemId the primary key of the commerce inventory warehouse item

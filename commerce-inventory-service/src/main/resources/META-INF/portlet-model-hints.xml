@@ -61,6 +61,7 @@
 		<field name="type" type="String" />
 	</model>
 	<model name="com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem">
+		<field name="externalReferenceCode" type="String" />
 		<field name="commerceInventoryWarehouseItemId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />

@@ -72,6 +72,7 @@ create table CIWarehouseGroupRel (
 );
 
 create table CIWarehouseItem (
+	externalReferenceCode VARCHAR(75) null,
 	CIWarehouseItemId LONG not null primary key,
 	companyId LONG,
 	userId LONG,

@@ -739,8 +739,8 @@ public class CommerceInventoryAuditPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceInventoryAudit commerceInventoryAudit : list) {
-					if ((createDate.getTime() <=
-							commerceInventoryAudit.getCreateDate().getTime())) {
+					if (createDate.getTime() <=
+							commerceInventoryAudit.getCreateDate().getTime()) {
 
 						list = null;
 

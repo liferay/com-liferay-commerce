@@ -194,8 +194,8 @@ public class CommerceInventoryWarehousePersistenceImpl
 				for (CommerceInventoryWarehouse commerceInventoryWarehouse :
 						list) {
 
-					if ((companyId !=
-							commerceInventoryWarehouse.getCompanyId())) {
+					if (companyId !=
+							commerceInventoryWarehouse.getCompanyId()) {
 
 						list = null;
 
