@@ -151,8 +151,9 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 			results = addDefaultCommercePaymentMethodGroupRels(results);
 		}
 
-		if (!results.isEmpty()) {
-			results.sort(
+		if (ListUtil.isNotEmpty(results)) {
+			ListUtil.sort(
+				results,
 				new CommercePaymentMethodGroupRelNameComparator(
 					themeDisplay.getLocale()));
 		}
