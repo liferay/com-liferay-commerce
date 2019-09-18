@@ -3,7 +3,7 @@ import './_side_panel.scss';
 
 window.SidePanel = launcher('sidePanel', 'side-panel', {
 	size: 'medium',
-	show: false,
+	visible: false,
 	pages: [
 		{
 			url: `/index.html?${Math.random()}`,

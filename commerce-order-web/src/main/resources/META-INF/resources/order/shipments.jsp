@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.HashMap" %><%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
@@ -66,71 +67,78 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceShipmentsPort
 	</liferay-frontend:management-bar-action-buttons>
 </liferay-frontend:management-bar>
 
-<div class="container-fluid-1280">
-	<liferay-ui:search-container
-		id="commerceShipments"
-		searchContainer="<%= commerceShipmentsSearchContainer %>"
+<liferay-ui:search-container
+	id="commerceShipments"
+	searchContainer="<%= commerceShipmentsSearchContainer %>"
+>
+	<liferay-ui:search-container-row
+		className="com.liferay.commerce.model.CommerceShipment"
+		escapedModel="<%= true %>"
+		keyProperty="commerceShipmentId"
+		modelVar="commerceShipment"
 	>
-		<liferay-ui:search-container-row
-			className="com.liferay.commerce.model.CommerceShipment"
-			escapedModel="<%= true %>"
-			keyProperty="commerceShipmentId"
-			modelVar="commerceShipment"
-		>
 
-			<%
-			PortletURL rowURL = renderResponse.createRenderURL();
+		<%
+		PortletURL rowURL = renderResponse.createRenderURL();
 
-			rowURL.setParameter("mvcRenderCommandName", "editCommerceOrderShipment");
-			rowURL.setParameter("redirect", currentURL);
-			rowURL.setParameter("commerceOrderId", String.valueOf(commerceOrderEditDisplayContext.getCommerceOrderId()));
-			rowURL.setParameter("commerceShipmentId", String.valueOf(commerceShipment.getCommerceShipmentId()));
-			%>
+		rowURL.setParameter("mvcRenderCommandName", "editCommerceOrderShipment");
+		rowURL.setParameter("redirect", currentURL);
+		rowURL.setParameter("commerceOrderId", String.valueOf(commerceOrderEditDisplayContext.getCommerceOrderId()));
+		rowURL.setParameter("commerceShipmentId", String.valueOf(commerceShipment.getCommerceShipmentId()));
+		%>
 
-			<liferay-ui:search-container-column-text
+		<liferay-ui:search-container-column-text
 				cssClass="important table-cell-content"
-				href="<%= rowURL %>"
 				name="shipment-id"
-				value="<%= String.valueOf(commerceShipment.getCommerceShipmentId()) %>"
+		>
+			<%
+				Map<String, String> dataAttributes = new HashMap<>();
+				dataAttributes.put("panel-url", rowURL.toString());
+				dataAttributes.put("target", renderResponse.getNamespace() + "sidePanel");
+			%>
+			<clay:link
+				href="<%= rowURL.toString() %>"
+				data="<%= dataAttributes %>"
+				label="<%= String.valueOf(commerceShipment.getCommerceShipmentId()) %>"
 			/>
+		</liferay-ui:search-container-column-text>
 
-			<liferay-ui:search-container-column-text
-				cssClass="table-cell-content"
-				name="address"
-				value="<%= commerceOrderEditDisplayContext.getDescriptiveCommerceAddress(commerceShipment.fetchCommerceAddress()) %>"
-			/>
-
-			<liferay-ui:search-container-column-date
-				cssClass="table-cell-content"
-				name="create-date"
-				property="createDate"
-			/>
-
-			<liferay-ui:search-container-column-text
-				name="status"
-			>
-				<clay:label
-					label="<%= LanguageUtil.get(request, CommerceShipmentConstants.getShipmentStatusLabel(commerceShipment.getStatus())) %>"
-					style="<%= CommerceShipmentConstants.getShipmentLabelStyle(commerceShipment.getStatus()) %>"
-				/>
-			</liferay-ui:search-container-column-text>
-
-			<liferay-ui:search-container-column-text
-				name="tracking"
-				property="trackingNumber"
-			/>
-
-			<liferay-ui:search-container-column-jsp
-				cssClass="entry-action-column"
-				path="/order/shipment_action.jsp"
-			/>
-		</liferay-ui:search-container-row>
-
-		<liferay-ui:search-iterator
-			markupView="lexicon"
+		<liferay-ui:search-container-column-text
+			cssClass="table-cell-content"
+			name="address"
+			value="<%= commerceOrderEditDisplayContext.getDescriptiveCommerceAddress(commerceShipment.fetchCommerceAddress()) %>"
 		/>
-	</liferay-ui:search-container>
-</div>
+
+		<liferay-ui:search-container-column-date
+			cssClass="table-cell-content"
+			name="create-date"
+			property="createDate"
+		/>
+
+		<liferay-ui:search-container-column-text
+			name="status"
+		>
+			<clay:label
+				label="<%= LanguageUtil.get(request, CommerceShipmentConstants.getShipmentStatusLabel(commerceShipment.getStatus())) %>"
+				style="<%= CommerceShipmentConstants.getShipmentLabelStyle(commerceShipment.getStatus()) %>"
+			/>
+		</liferay-ui:search-container-column-text>
+
+		<liferay-ui:search-container-column-text
+			name="tracking"
+			property="trackingNumber"
+		/>
+
+		<liferay-ui:search-container-column-jsp
+			cssClass="entry-action-column"
+			path="/order/shipment_action.jsp"
+		/>
+	</liferay-ui:search-container-row>
+
+	<liferay-ui:search-iterator
+		markupView="lexicon"
+	/>
+</liferay-ui:search-container>
 
 <aui:script>
 	function <portlet:namespace />deleteCommerceShipments() {
@@ -144,4 +152,41 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceShipmentsPort
 			submitForm(form, '<portlet:actionURL name="editCommerceShipment" />');
 		}
 	}
+</aui:script>
+
+<div id="<portlet:namespace />side-panel-root"></div>
+
+<aui:script require="commerce-frontend-js/js/side_panel/entry.es as SidePanel">
+	new SidePanel.default(
+		"<portlet:namespace />sidePanel",
+		"<portlet:namespace />side-panel-root",
+		{
+			size: "lg"
+		}
+	);
+
+	Promise.all(
+	    [
+			Liferay.componentReady('<portlet:namespace />commerceShipments'),
+			Liferay.componentReady('<portlet:namespace />sidePanel')
+		]
+	).then(function(
+	    [
+			table,
+			panel
+		]
+	){
+		document.getElementById('<portlet:namespace />commerceShipments')
+			.addEventListener(
+				'click',
+				function(e){
+                    e.preventDefault();
+
+                    if(e.target.dataset.target === '<portlet:namespace />sidePanel') {
+						panel.open(e.target.dataset.panelUrl);
+					}
+				}
+			)
+		}
+	)
 </aui:script>

@@ -15,11 +15,11 @@
     box-shadow: 0 0 0 rgba(39, 40, 51, 0.15);
   }
 
-  &--xsmall { width: 25%; }
-  &--small { width: 33%; }
-  &--medium { width: 50%; }
-  &--large { width: 66%; }
-  &--xlarge { width: 75%; }
+  &--xs { width: 25%; }
+  &--sm { width: 33%; }
+  &--md { width: 50%; }
+  &--lg { width: 66%; }
+  &--xl { width: 75%; }
   &--full { width: 100%; }
 
   .tab-content,
