@@ -159,7 +159,7 @@
 
 		<reference entity="ExpandoRow" package-path="com.liferay.portlet.expando" />
 	</entity>
-	<entity local-service="true" name="CommerceInventoryWarehouseItem" remote-service="true" table="CIWarehouseItem">
+	<entity external-reference-code="true" local-service="true" name="CommerceInventoryWarehouseItem" remote-service="true" table="CIWarehouseItem">
 
 		<!-- PK fields -->
 
