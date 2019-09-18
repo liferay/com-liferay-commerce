@@ -1,27 +1,22 @@
-var Speedwell = Speedwell || { features: {} };
+var Speedwell = Speedwell || { features: {}, initializeFeatures: function() {} };
 
 
 AUI().ready(
 	function() {
-		console.log('%c[AUI ready]', 'background-color: #000; color: #00FFFF');
+		console.log('%c[ AUI ready ]', 'background-color: #000; color: #00FFFF');
 
-		Speedwell.initializeFeatures();
+		!!Speedwell && Speedwell.initializeFeatures();
 	}
 );
 
 Liferay.Portlet.ready(
-	function(portletId, node) {
-		// console.log('%c[Portlet: ' + portletId + ' ready]', 'background-color: #000; color: #00FF00');
-	}
+	function(portletId, node) {}
 );
 
 Liferay.on(
 	'allPortletsReady',
 
 	function() {
-		console.log('%c[All portlets ready]', 'background-color: #000; color: #FFFF00');
-
-
-
+		console.log('%c[ All portlets ready ]', 'background-color: #000; color: #FFFF00');
 	}
 );

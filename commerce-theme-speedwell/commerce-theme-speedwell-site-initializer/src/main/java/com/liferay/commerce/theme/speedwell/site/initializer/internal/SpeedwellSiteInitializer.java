@@ -585,7 +585,7 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 			jsonArray, group.getName(serviceContext.getLocale()),
 			_speedwellDependencyResolver.getImageClassLoader(),
 			_speedwellDependencyResolver.getImageDependencyPath(),
-			company.getGroupId(), serviceContext.getUserId());
+			company.getGroupId(), serviceContext.getUserId(), true);
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Asset categories successfully imported");
