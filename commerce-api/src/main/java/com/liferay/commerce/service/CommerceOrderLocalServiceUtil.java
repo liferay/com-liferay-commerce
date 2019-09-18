@@ -630,6 +630,15 @@ public class CommerceOrderLocalServiceUtil {
 		return getService().searchCommerceOrdersCount(searchContext);
 	}
 
+	public static com.liferay.commerce.model.CommerceOrder
+			setCommerceOrderToTransmit(
+				long userId,
+				com.liferay.commerce.model.CommerceOrder commerceOrder)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().setCommerceOrderToTransmit(userId, commerceOrder);
+	}
+
 	public static com.liferay.commerce.model.CommerceOrder submitCommerceOrder(
 			long userId, long commerceOrderId)
 		throws com.liferay.portal.kernel.exception.PortalException {

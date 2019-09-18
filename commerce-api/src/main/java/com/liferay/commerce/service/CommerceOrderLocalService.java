@@ -459,6 +459,10 @@ public interface CommerceOrderLocalService
 	public long searchCommerceOrdersCount(SearchContext searchContext)
 		throws PortalException;
 
+	public CommerceOrder setCommerceOrderToTransmit(
+			long userId, CommerceOrder commerceOrder)
+		throws PortalException;
+
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrder submitCommerceOrder(long userId, long commerceOrderId)
 		throws PortalException;

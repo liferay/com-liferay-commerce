@@ -688,6 +688,15 @@ public class CommerceOrderLocalServiceWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.model.CommerceOrder setCommerceOrderToTransmit(
+			long userId, com.liferay.commerce.model.CommerceOrder commerceOrder)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceOrderLocalService.setCommerceOrderToTransmit(
+			userId, commerceOrder);
+	}
+
+	@Override
 	public com.liferay.commerce.model.CommerceOrder submitCommerceOrder(
 			long userId, long commerceOrderId)
 		throws com.liferay.portal.kernel.exception.PortalException {
