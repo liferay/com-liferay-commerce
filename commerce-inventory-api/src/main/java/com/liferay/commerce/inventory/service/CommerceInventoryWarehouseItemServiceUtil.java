@@ -54,6 +54,18 @@ public class CommerceInventoryWarehouseItemServiceUtil {
 			userId, commerceInventoryWarehouseId, sku, quantity);
 	}
 
+	public static
+		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
+				addCommerceInventoryWarehouseItem(
+					long userId, long commerceInventoryWarehouseId,
+					String externalReferenceCode, String sku, int quantity)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().addCommerceInventoryWarehouseItem(
+			userId, commerceInventoryWarehouseId, externalReferenceCode, sku,
+			quantity);
+	}
+
 	public static void deleteCommerceInventoryWarehouseItem(
 			long commerceInventoryWarehouseItemId)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -74,12 +86,32 @@ public class CommerceInventoryWarehouseItemServiceUtil {
 
 	public static
 		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
+				fetchCommerceInventoryWarehouseItemByReferenceCode(
+					long companyId, String externalReferenceCode)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().fetchCommerceInventoryWarehouseItemByReferenceCode(
+			companyId, externalReferenceCode);
+	}
+
+	public static
+		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
 				getCommerceInventoryWarehouseItem(
 					long commerceInventoryWarehouseItemId)
 			throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().getCommerceInventoryWarehouseItem(
 			commerceInventoryWarehouseItemId);
+	}
+
+	public static
+		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
+				getCommerceInventoryWarehouseItemByReferenceCode(
+					long companyId, String externalReferenceCode)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getCommerceInventoryWarehouseItemByReferenceCode(
+			companyId, externalReferenceCode);
 	}
 
 	public static java.util.List
@@ -117,6 +149,19 @@ public class CommerceInventoryWarehouseItemServiceUtil {
 
 		return getService().updateCommerceInventoryWarehouseItem(
 			commerceInventoryWarehouseItemId, quantity);
+	}
+
+	public static
+		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
+				upsertCommerceInventoryWarehouseItem(
+					long companyId, long userId,
+					long commerceInventoryWarehouseId,
+					String externalReferenceCode, String sku, int quantity)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().upsertCommerceInventoryWarehouseItem(
+			companyId, userId, commerceInventoryWarehouseId,
+			externalReferenceCode, sku, quantity);
 	}
 
 	public static

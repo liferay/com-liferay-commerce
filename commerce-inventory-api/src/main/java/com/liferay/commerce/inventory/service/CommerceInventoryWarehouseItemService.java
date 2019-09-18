@@ -64,6 +64,11 @@ public interface CommerceInventoryWarehouseItemService extends BaseService {
 			int quantity)
 		throws PortalException;
 
+	public CommerceInventoryWarehouseItem addCommerceInventoryWarehouseItem(
+			long userId, long commerceInventoryWarehouseId,
+			String externalReferenceCode, String sku, int quantity)
+		throws PortalException;
+
 	public void deleteCommerceInventoryWarehouseItem(
 			long commerceInventoryWarehouseItemId)
 		throws PortalException;
@@ -74,8 +79,20 @@ public interface CommerceInventoryWarehouseItemService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceInventoryWarehouseItem
+			fetchCommerceInventoryWarehouseItemByReferenceCode(
+				long companyId, String externalReferenceCode)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceInventoryWarehouseItem getCommerceInventoryWarehouseItem(
 			long commerceInventoryWarehouseItemId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceInventoryWarehouseItem
+			getCommerceInventoryWarehouseItemByReferenceCode(
+				long companyId, String externalReferenceCode)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -98,6 +115,11 @@ public interface CommerceInventoryWarehouseItemService extends BaseService {
 
 	public CommerceInventoryWarehouseItem updateCommerceInventoryWarehouseItem(
 			long commerceInventoryWarehouseItemId, int quantity)
+		throws PortalException;
+
+	public CommerceInventoryWarehouseItem upsertCommerceInventoryWarehouseItem(
+			long companyId, long userId, long commerceInventoryWarehouseId,
+			String externalReferenceCode, String sku, int quantity)
 		throws PortalException;
 
 	public CommerceInventoryWarehouseItem upsertCommerceInventoryWarehouseItem(

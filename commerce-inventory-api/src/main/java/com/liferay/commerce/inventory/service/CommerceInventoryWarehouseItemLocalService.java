@@ -76,6 +76,11 @@ public interface CommerceInventoryWarehouseItemLocalService
 			int quantity)
 		throws PortalException;
 
+	public CommerceInventoryWarehouseItem addCommerceInventoryWarehouseItem(
+			long userId, long commerceInventoryWarehouseId,
+			String externalReferenceCode, String sku, int quantity)
+		throws PortalException;
+
 	/**
 	 * Creates a new commerce inventory warehouse item with the primary key. Does not add the commerce inventory warehouse item to the database.
 	 *
@@ -192,6 +197,18 @@ public interface CommerceInventoryWarehouseItemLocalService
 	public CommerceInventoryWarehouseItem fetchCommerceInventoryWarehouseItem(
 		long commerceInventoryWarehouseId, String sku);
 
+	/**
+	 * Returns the commerce inventory warehouse item with the matching external reference code and company.
+	 *
+	 * @param companyId the primary key of the company
+	 * @param externalReferenceCode the commerce inventory warehouse item's external reference code
+	 * @return the matching commerce inventory warehouse item, or <code>null</code> if a matching commerce inventory warehouse item could not be found
+	 */
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceInventoryWarehouseItem
+		fetchCommerceInventoryWarehouseItemByReferenceCode(
+			long companyId, String externalReferenceCode);
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
 
@@ -205,6 +222,12 @@ public interface CommerceInventoryWarehouseItemLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceInventoryWarehouseItem getCommerceInventoryWarehouseItem(
 			long commerceInventoryWarehouseItemId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceInventoryWarehouseItem
+			getCommerceInventoryWarehouseItemByReferenceCode(
+				long companyId, String externalReferenceCode)
 		throws PortalException;
 
 	/**
@@ -273,6 +296,11 @@ public interface CommerceInventoryWarehouseItemLocalService
 
 	public CommerceInventoryWarehouseItem updateCommerceInventoryWarehouseItem(
 			long commerceInventoryWarehouseItemId, int quantity)
+		throws PortalException;
+
+	public CommerceInventoryWarehouseItem upsertCommerceInventoryWarehouseItem(
+			long companyId, long userId, long commerceInventoryWarehouseId,
+			String externalReferenceCode, String sku, int quantity)
 		throws PortalException;
 
 	public CommerceInventoryWarehouseItem upsertCommerceInventoryWarehouseItem(

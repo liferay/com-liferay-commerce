@@ -401,6 +401,59 @@ public interface CommerceInventoryWarehouseItemPersistence
 	public int countByC_S(long commerceInventoryWarehouseId, String sku);
 
 	/**
+	 * Returns the commerce inventory warehouse item where companyId = &#63; and externalReferenceCode = &#63; or throws a <code>NoSuchInventoryWarehouseItemException</code> if it could not be found.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @return the matching commerce inventory warehouse item
+	 * @throws NoSuchInventoryWarehouseItemException if a matching commerce inventory warehouse item could not be found
+	 */
+	public CommerceInventoryWarehouseItem findByC_ERC(
+			long companyId, String externalReferenceCode)
+		throws NoSuchInventoryWarehouseItemException;
+
+	/**
+	 * Returns the commerce inventory warehouse item where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @return the matching commerce inventory warehouse item, or <code>null</code> if a matching commerce inventory warehouse item could not be found
+	 */
+	public CommerceInventoryWarehouseItem fetchByC_ERC(
+		long companyId, String externalReferenceCode);
+
+	/**
+	 * Returns the commerce inventory warehouse item where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the matching commerce inventory warehouse item, or <code>null</code> if a matching commerce inventory warehouse item could not be found
+	 */
+	public CommerceInventoryWarehouseItem fetchByC_ERC(
+		long companyId, String externalReferenceCode, boolean useFinderCache);
+
+	/**
+	 * Removes the commerce inventory warehouse item where companyId = &#63; and externalReferenceCode = &#63; from the database.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @return the commerce inventory warehouse item that was removed
+	 */
+	public CommerceInventoryWarehouseItem removeByC_ERC(
+			long companyId, String externalReferenceCode)
+		throws NoSuchInventoryWarehouseItemException;
+
+	/**
+	 * Returns the number of commerce inventory warehouse items where companyId = &#63; and externalReferenceCode = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @return the number of matching commerce inventory warehouse items
+	 */
+	public int countByC_ERC(long companyId, String externalReferenceCode);
+
+	/**
 	 * Caches the commerce inventory warehouse item in the entity cache if it is enabled.
 	 *
 	 * @param commerceInventoryWarehouseItem the commerce inventory warehouse item

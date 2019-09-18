@@ -73,6 +73,7 @@ public class CommerceInventoryWarehouseItemModelImpl
 	public static final String TABLE_NAME = "CIWarehouseItem";
 
 	public static final Object[][] TABLE_COLUMNS = {
+		{"externalReferenceCode", Types.VARCHAR},
 		{"CIWarehouseItemId", Types.BIGINT}, {"companyId", Types.BIGINT},
 		{"userId", Types.BIGINT}, {"userName", Types.VARCHAR},
 		{"createDate", Types.TIMESTAMP}, {"modifiedDate", Types.TIMESTAMP},
@@ -84,6 +85,7 @@ public class CommerceInventoryWarehouseItemModelImpl
 		new HashMap<String, Integer>();
 
 	static {
+		TABLE_COLUMNS_MAP.put("externalReferenceCode", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("CIWarehouseItemId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("userId", Types.BIGINT);
@@ -97,7 +99,7 @@ public class CommerceInventoryWarehouseItemModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CIWarehouseItem (CIWarehouseItemId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceInventoryWarehouseId LONG,sku VARCHAR(75) null,quantity INTEGER,reservedQuantity INTEGER)";
+		"create table CIWarehouseItem (externalReferenceCode VARCHAR(75) null,CIWarehouseItemId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceInventoryWarehouseId LONG,sku VARCHAR(75) null,quantity INTEGER,reservedQuantity INTEGER)";
 
 	public static final String TABLE_SQL_DROP = "drop table CIWarehouseItem";
 
@@ -130,10 +132,14 @@ public class CommerceInventoryWarehouseItemModelImpl
 
 	public static final long COMMERCEINVENTORYWAREHOUSEID_COLUMN_BITMASK = 1L;
 
-	public static final long SKU_COLUMN_BITMASK = 2L;
+	public static final long COMPANYID_COLUMN_BITMASK = 2L;
+
+	public static final long EXTERNALREFERENCECODE_COLUMN_BITMASK = 4L;
+
+	public static final long SKU_COLUMN_BITMASK = 8L;
 
 	public static final long COMMERCEINVENTORYWAREHOUSEITEMID_COLUMN_BITMASK =
-		4L;
+		16L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -151,6 +157,7 @@ public class CommerceInventoryWarehouseItemModelImpl
 		CommerceInventoryWarehouseItem model =
 			new CommerceInventoryWarehouseItemImpl();
 
+		model.setExternalReferenceCode(soapModel.getExternalReferenceCode());
 		model.setCommerceInventoryWarehouseItemId(
 			soapModel.getCommerceInventoryWarehouseItemId());
 		model.setCompanyId(soapModel.getCompanyId());
@@ -328,6 +335,35 @@ public class CommerceInventoryWarehouseItemModelImpl
 				new LinkedHashMap
 					<String, BiConsumer<CommerceInventoryWarehouseItem, ?>>();
 
+		attributeGetterFunctions.put(
+			"externalReferenceCode",
+			new Function<CommerceInventoryWarehouseItem, Object>() {
+
+				@Override
+				public Object apply(
+					CommerceInventoryWarehouseItem
+						commerceInventoryWarehouseItem) {
+
+					return commerceInventoryWarehouseItem.
+						getExternalReferenceCode();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"externalReferenceCode",
+			new BiConsumer<CommerceInventoryWarehouseItem, Object>() {
+
+				@Override
+				public void accept(
+					CommerceInventoryWarehouseItem
+						commerceInventoryWarehouseItem,
+					Object externalReferenceCode) {
+
+					commerceInventoryWarehouseItem.setExternalReferenceCode(
+						(String)externalReferenceCode);
+				}
+
+			});
 		attributeGetterFunctions.put(
 			"commerceInventoryWarehouseItemId",
 			new Function<CommerceInventoryWarehouseItem, Object>() {
@@ -619,6 +655,32 @@ public class CommerceInventoryWarehouseItemModelImpl
 
 	@JSON
 	@Override
+	public String getExternalReferenceCode() {
+		if (_externalReferenceCode == null) {
+			return "";
+		}
+		else {
+			return _externalReferenceCode;
+		}
+	}
+
+	@Override
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_columnBitmask |= EXTERNALREFERENCECODE_COLUMN_BITMASK;
+
+		if (_originalExternalReferenceCode == null) {
+			_originalExternalReferenceCode = _externalReferenceCode;
+		}
+
+		_externalReferenceCode = externalReferenceCode;
+	}
+
+	public String getOriginalExternalReferenceCode() {
+		return GetterUtil.getString(_originalExternalReferenceCode);
+	}
+
+	@JSON
+	@Override
 	public long getCommerceInventoryWarehouseItemId() {
 		return _commerceInventoryWarehouseItemId;
 	}
@@ -638,7 +700,19 @@ public class CommerceInventoryWarehouseItemModelImpl
 
 	@Override
 	public void setCompanyId(long companyId) {
+		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
+
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	@JSON
@@ -824,6 +898,8 @@ public class CommerceInventoryWarehouseItemModelImpl
 		CommerceInventoryWarehouseItemImpl commerceInventoryWarehouseItemImpl =
 			new CommerceInventoryWarehouseItemImpl();
 
+		commerceInventoryWarehouseItemImpl.setExternalReferenceCode(
+			getExternalReferenceCode());
 		commerceInventoryWarehouseItemImpl.setCommerceInventoryWarehouseItemId(
 			getCommerceInventoryWarehouseItemId());
 		commerceInventoryWarehouseItemImpl.setCompanyId(getCompanyId());
@@ -903,6 +979,14 @@ public class CommerceInventoryWarehouseItemModelImpl
 		CommerceInventoryWarehouseItemModelImpl
 			commerceInventoryWarehouseItemModelImpl = this;
 
+		commerceInventoryWarehouseItemModelImpl._originalExternalReferenceCode =
+			commerceInventoryWarehouseItemModelImpl._externalReferenceCode;
+
+		commerceInventoryWarehouseItemModelImpl._originalCompanyId =
+			commerceInventoryWarehouseItemModelImpl._companyId;
+
+		commerceInventoryWarehouseItemModelImpl._setOriginalCompanyId = false;
+
 		commerceInventoryWarehouseItemModelImpl._setModifiedDate = false;
 
 		commerceInventoryWarehouseItemModelImpl.
@@ -924,6 +1008,19 @@ public class CommerceInventoryWarehouseItemModelImpl
 		CommerceInventoryWarehouseItemCacheModel
 			commerceInventoryWarehouseItemCacheModel =
 				new CommerceInventoryWarehouseItemCacheModel();
+
+		commerceInventoryWarehouseItemCacheModel.externalReferenceCode =
+			getExternalReferenceCode();
+
+		String externalReferenceCode =
+			commerceInventoryWarehouseItemCacheModel.externalReferenceCode;
+
+		if ((externalReferenceCode != null) &&
+			(externalReferenceCode.length() == 0)) {
+
+			commerceInventoryWarehouseItemCacheModel.externalReferenceCode =
+				null;
+		}
 
 		commerceInventoryWarehouseItemCacheModel.
 			commerceInventoryWarehouseItemId =
@@ -1058,8 +1155,12 @@ public class CommerceInventoryWarehouseItemModelImpl
 
 	}
 
+	private String _externalReferenceCode;
+	private String _originalExternalReferenceCode;
 	private long _commerceInventoryWarehouseItemId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
