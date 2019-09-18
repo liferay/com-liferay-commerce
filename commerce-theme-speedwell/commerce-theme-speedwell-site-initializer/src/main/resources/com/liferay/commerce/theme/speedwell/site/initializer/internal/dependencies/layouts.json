@@ -48,7 +48,7 @@
 	{
 		"icon": "icon_catalog.png",
 		"layoutTemplateId": "speedwell_sidebar",
-		"name": "Catalog",
+		"name": "Car Parts",
 		"portlets": [
 			{
 				"layoutColumnId": "column-1",
@@ -86,10 +86,21 @@
 				"portletName": "com_liferay_commerce_product_content_web_internal_portlet_CPCompareContentMiniPortlet_INSTANCE_speedwell"
 			}
 		],
-		"sublayouts": [
+		"subLayouts": [
 			{
 				"layoutTemplateId": "speedwell_category_navigation",
 				"name": "Category",
+				"lookAndFeel": {
+					"lfr-theme:regular:translucent-topbar": "true",
+					"lfr-theme:regular:wide-layout": "true"
+				},
+				"permissions": [
+					{
+						"actionIds": [],
+						"roleName": "Guest",
+						"scope": 4
+					}
+				],
 				"portlets": [
 					{
 						"layoutColumnId": "column-1",
@@ -97,24 +108,39 @@
 						"portletName": "com_liferay_commerce_product_content_web_internal_portlet_CPCategoryContentPortlet"
 					},
 					{
-						"layoutColumnId": "column-2",
+						"layoutColumnId": "column-3",
 						"layoutColumnPos": 0,
-						"portletName": "com_liferay_site_navigation_breadcrumb_web_portlet_SiteNavigationBreadcrumbPortlet_INSTANCE_speedwell"
+						"portletName": "com_liferay_portal_search_web_category_facet_portlet_CategoryFacetPortlet_INSTANCE_speedwell",
+						"portletPreferences": {
+							"preferenceDisplayStyle": "list"
+						}
 					},
 					{
 						"layoutColumnId": "column-3",
-						"layoutColumnPos": 0,
-						"portletName": "com_liferay_portal_search_web_category_facet_portlet_CategoryFacetPortlet_INSTANCE_speedwell"
+						"layoutColumnPos": 1,
+						"portletName": "com_liferay_portal_search_web_search_options_portlet_SearchOptionsPortlet",
+						"portletPreferences": {
+							"allowEmptySearches": "true"
+						}
 					},
 					{
 						"layoutColumnId": "column-4",
 						"layoutColumnPos": 0,
-						"portletName": "com_liferay_commerce_product_content_search_web_internal_portlet_CPSearchResultsPortlet_INSTANCE_speedwell"
+						"portletName": "com_liferay_commerce_product_content_search_web_internal_portlet_CPSearchResultsPortlet_INSTANCE_speedwell",
+						"portletPreferences": {
+							"cpContentListRendererKey": "list-minium",
+							"grouped--cpTypeListEntryRendererKey": "list-entry-minium",
+							"simple--cpTypeListEntryRendererKey": "list-entry-minium",
+							"virtual--cpTypeListEntryRendererKey": "list-entry-minium"
+						}
 					},
 					{
 						"layoutColumnId": "column-4",
-						"layoutColumnPos": 0,
-						"portletName": "com_liferay_commerce_product_content_web_internal_portlet_CPCompareContentMiniPortlet"
+						"layoutColumnPos": 1,
+						"portletName": "com_liferay_commerce_product_content_web_internal_portlet_CPCompareContentMiniPortlet",
+						"portletPreferences": {
+							"cpContentListRendererKey": "compare-list-minium"
+						}
 					}
 				]
 			}

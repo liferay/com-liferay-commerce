@@ -124,7 +124,7 @@
       .is-open {
         .speedwell-topbar__button,
         .speedwell-cart .commerce-topbar-button {
-          background-color: transparent;
+          background-color: $stroke;
           color: $color-bg;
         }
       }

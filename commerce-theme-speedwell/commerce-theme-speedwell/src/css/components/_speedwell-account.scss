@@ -1,5 +1,6 @@
 .speedwell-account {
   position: relative;
+  perspective: 1000px;
 
   &__dropdown {
     background-color: #FFF;
@@ -15,13 +16,18 @@
     display: none;
   }
 
+  &.is-open &__dropdown {
+    animation: openDropdown .2s $easeOutQuart 1 forwards;
+    transform-origin: top center;
+
+    @keyframes openDropdown {
+      to { opacity: 1; }
+    }
+  }
+
   &.is-open .speedwell-topbar__button {
     background: $stroke;
     color: $color-bg;
-
-    // &:hover {
-    // color: inherit;
-    // }
 
     &::before {
       mix-blend-mode: color;
