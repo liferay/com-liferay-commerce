@@ -4,6 +4,7 @@ import './_side_panel.scss';
 window.SidePanel = launcher('sidePanel', 'side-panel', {
 	size: 'medium',
 	visible: false,
+	spritemap: './icons.svg',
 	pages: [
 		{
 			url: `/index.html?${Math.random()}`,

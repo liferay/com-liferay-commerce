@@ -291,6 +291,11 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<name>headerActionTarget</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>headerActionUrl</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>

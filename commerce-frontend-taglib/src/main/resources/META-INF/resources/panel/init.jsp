@@ -18,6 +18,8 @@
 
 <%@ taglib uri="http://liferay.com/tld/clay" prefix="clay" %><%@
 taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.Map" %>
 
 <%@ page import="com.liferay.portal.kernel.util.Validator" %>
 
@@ -26,6 +28,7 @@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 <%
 String title = (String)request.getAttribute("liferay-commerce:panel:title");
 String headerActionUrl = (String)request.getAttribute("liferay-commerce:panel:headerActionUrl");
+String headerActionTarget = (String)request.getAttribute("liferay-commerce:panel:headerActionTarget");
 String headerActionLabel = (String)request.getAttribute("liferay-commerce:panel:headerActionLabel");
 String headerActionIcon = (String)request.getAttribute("liferay-commerce:panel:headerActionIcon");
 String headerActionId = (String)request.getAttribute("liferay-commerce:panel:headerActionId");

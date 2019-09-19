@@ -15,20 +15,27 @@ if(!window.Liferay) {
 	}
 }
 
-export function launcher(Component, componentId, id, props) {
-	const portletFrame = window.document.getElementById(id);
+
+export function launcher(Component, componentId, rootId, props, portletId) {
+	const portletFrame = window.document.getElementById(rootId);
 
 	if(!portletFrame) {
-		return null
+		throw new Error(`Component container not found: "${rootId}"`)		
 	}
-	
+
 	const componentInstance = ReactDOM.render(
 		<Component {...props} />,
 		portletFrame
 	);
 
-	if (window.Liferay && window.Liferay.component) {
-		window.Liferay.component(componentId, componentInstance);
+	if (Liferay) {
+		Liferay.component(componentId, componentInstance);
+		Liferay.on('beforeNavigate', destroyComponent);
+
+		function destroyComponent() {
+			Liferay.destroyComponent(componentId);
+			Liferay.detach('beforeNavigate', destroyComponent);
+		}
 	}
 
 	return componentInstance;

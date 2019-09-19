@@ -2,6 +2,7 @@ import launcher from './entry.es';
 import './_step-tracker.scss';
 
 window.AddOrCreate = launcher('step_tracker', 'step-tracker', {
+	spritemap: './icons.svg',
 	steps: [
 		{
 			id: 'received',

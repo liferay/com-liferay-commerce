@@ -26,17 +26,9 @@
 	<noscript>You need to enable JavaScript to run this app.</noscript>
 
 	<div>
-		<button onclick="window.SidePanel.open([{
-			url: `/sidepanel-1.html?${Math.random()}`,
-			pageName: 'Page 1',
-		}, {
-			url: `/sidepanel.html?${Math.random()}`,
-			pageName: 'Page 2',
-		}], 'large');" class="btn btn-info" type="button">Load</button>
+		<button onclick="window.SidePanel.open(`/sidepanel-1.html?${Math.random()}`, 'large');" class="btn btn-info" type="button">Load</button>
 		<button onclick="window.SidePanel.open();" class="btn btn-primary" type="button">Open</button>
 		<button onclick="window.SidePanel.close();" class="btn btn-warning" type="button">Close</button>
-		<button onclick="window.SidePanel.close(true);" class="btn btn-warning" type="button">Destroy</button>
-		<button onclick="window.SidePanel.toggle();" class="btn btn-secondary" type="button">Toggle</button>
 	</div>
 
 	<h2>Resize</h2>
