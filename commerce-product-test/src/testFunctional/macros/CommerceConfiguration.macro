@@ -169,6 +169,22 @@ definition {
 					locator1 = "CommerceEntry#FIX_ISSUE_BUTTON");
 			}
 		}
+
+		ProductMenu.gotoPortlet(
+			category = "Commerce",
+			panel = "Control Panel",
+			portlet = "Channels");
+
+		Click(locator1 = "Button#PLUS");
+
+		CommerceEntry.addNewChannelEntry(
+			criteriaType = "Site",
+			entryName = "Liferay",
+			siteName = "Guest");
+
+		Button.clickSave();
+
+		AssertElementPresent(locator1 = "Message#SUCCESS");
 	}
 
 	macro commerceStoreFrontTearDown {
