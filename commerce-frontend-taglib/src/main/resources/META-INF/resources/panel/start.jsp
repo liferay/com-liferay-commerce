@@ -21,7 +21,8 @@
 	String bodyCssClasses = "card-body" + (Validator.isNotNull(bodyClasses) ? " " + bodyClasses : "");
 
 	Map<String, String> data = new HashMap<>();
-	if(Validator.isNotNull(headerActionTarget)) {
+
+	if (Validator.isNotNull(headerActionTarget)) {
 		data.put("target", headerActionTarget);
 	}
 %>
@@ -34,19 +35,19 @@
 			<c:choose>
 				<c:when test="<%= Validator.isNotNull(headerActionLabel) %>">
 					<clay:link
+						data="<%= data %>"
 						href="<%= headerActionUrl %>"
 						id="<%= headerActionLinkId %>"
 						label="<%= headerActionLabel %>"
-						data="<%= data %>"
 					/>
 				</c:when>
 				<c:when test="<%= Validator.isNotNull(headerActionIcon) %>">
 					<clay:link
+						data="<%= data %>"
 						elementClasses="btn btn-monospaced btn-primary btn-sm text-white"
 						href="<%= headerActionUrl %>"
 						icon="<%= headerActionIcon %>"
 						id="<%= headerActionLinkId %>"
-						data="<%= data %>"
 					/>
 				</c:when>
 			</c:choose>
