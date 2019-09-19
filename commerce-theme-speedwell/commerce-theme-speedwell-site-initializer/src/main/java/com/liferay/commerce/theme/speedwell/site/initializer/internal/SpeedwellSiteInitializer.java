@@ -889,11 +889,15 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 
 		JSONArray jsonArray = _getJSONArray("portlet-settings.json");
 
+		Company company = _companyLocalService.getCompany(
+				serviceContext.getCompanyId());
+
 		_portletSettingsImporter.importPortletSettings(
-			jsonArray,
-			_speedwellDependencyResolver.getDisplayTemplatesClassLoader(),
-			_speedwellDependencyResolver.getDisplayTemplatesDependencyPath(),
-			serviceContext.getScopeGroupId(), serviceContext.getUserId());
+				jsonArray,
+				_speedwellDependencyResolver.getDisplayTemplatesClassLoader(),
+				_speedwellDependencyResolver.getDisplayTemplatesDependencyPath(),
+				serviceContext.getScopeGroupId(), company.getGroupId(),
+				serviceContext.getUserId());
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Portlet settings successfully imported");
@@ -952,11 +956,15 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 
 		JSONArray jsonArray = _getJSONArray("theme-portlet-settings.json");
 
+		Company company = _companyLocalService.getCompany(
+				serviceContext.getCompanyId());
+
 		_portletSettingsImporter.importPortletSettings(
-			jsonArray,
-			_speedwellDependencyResolver.getDisplayTemplatesClassLoader(),
-			_speedwellDependencyResolver.getDisplayTemplatesDependencyPath(),
-			serviceContext.getScopeGroupId(), serviceContext.getUserId());
+				jsonArray,
+				_speedwellDependencyResolver.getDisplayTemplatesClassLoader(),
+				_speedwellDependencyResolver.getDisplayTemplatesDependencyPath(),
+				serviceContext.getScopeGroupId(), company.getGroupId(),
+				serviceContext.getUserId());
 	}
 
 	private static final String _SPEEDWELL_THEME_ID =
