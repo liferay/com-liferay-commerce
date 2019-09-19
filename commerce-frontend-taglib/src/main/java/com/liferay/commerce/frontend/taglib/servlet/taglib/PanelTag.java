@@ -54,11 +54,12 @@ public class PanelTag extends IncludeTag {
 
 		setNamespacedAttribute(request, "spritemap", _spritemap);
 		setNamespacedAttribute(request, "title", _title);
-		setNamespacedAttribute(request, "headerActionUrl", _headerActionUrl);
 		setNamespacedAttribute(
 			request, "headerActionLabel", _headerActionLabel);
 		setNamespacedAttribute(request, "headerActionIcon", _headerActionIcon);
 		setNamespacedAttribute(request, "headerActionId", _headerActionId);
+		setNamespacedAttribute(request, "headerActionTarget", _headerActionTarget);
+		setNamespacedAttribute(request, "headerActionUrl", _headerActionUrl);
 		setNamespacedAttribute(request, "showMoreId", _showMoreId);
 		setNamespacedAttribute(request, "showMoreUrl", _showMoreUrl);
 		setNamespacedAttribute(request, "elementClasses", _elementClasses);
@@ -88,6 +89,10 @@ public class PanelTag extends IncludeTag {
 
 	public String getHeaderActionLabel() {
 		return _headerActionLabel;
+	}
+
+	public String getHeaderActionTarget() {
+		return _headerActionTarget;
 	}
 
 	public String getHeaderActionUrl() {
@@ -130,6 +135,10 @@ public class PanelTag extends IncludeTag {
 		_headerActionLabel = headerActionLabel;
 	}
 
+	public void setHeaderActionTarget(String headerActionTarget) {
+		_headerActionTarget = headerActionTarget;
+	}
+
 	public void setHeaderActionUrl(String headerActionUrl) {
 		_headerActionUrl = headerActionUrl;
 	}
@@ -166,6 +175,7 @@ public class PanelTag extends IncludeTag {
 		_headerActionIcon = null;
 		_headerActionId = null;
 		_headerActionLabel = null;
+		_headerActionTarget = null;
 		_headerActionUrl = null;
 		_showMoreId = null;
 		_showMoreUrl = null;
@@ -195,6 +205,7 @@ public class PanelTag extends IncludeTag {
 	private String _headerActionIcon;
 	private String _headerActionId;
 	private String _headerActionLabel;
+	private String _headerActionTarget;
 	private String _headerActionUrl;
 	private String _showMoreId;
 	private String _showMoreUrl;
