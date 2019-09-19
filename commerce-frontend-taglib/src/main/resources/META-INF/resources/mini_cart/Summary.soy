@@ -12,6 +12,7 @@
 	{@param? checkoutUrl: string}
 	{@param? discount: string}
 	{@param? taxes: string}
+	{@param? status: int}
 
 	<div class="commerce-cart__footer">
 
@@ -64,7 +65,13 @@
 		{/let}
 
 		{if isNonnull($checkoutUrl)}
-			<a class="commerce-button commerce-button--block{$submitModifiers}" href="{$checkoutUrl}">{msg desc="Checkout"}Checkout{/msg}</a>
+			<a class="commerce-button commerce-button--block{$submitModifiers}" href="{$checkoutUrl}">
+				{if $status == 0}
+					{msg desc="Checkout"}checkout{/msg}
+				{else}
+					{msg desc="Review order"}review-order{/msg}
+				{/if}
+			</a>
 		{/if}
 	</div>
 {/template}

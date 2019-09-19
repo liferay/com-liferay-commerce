@@ -478,6 +478,7 @@ Cart.STATE = {
 	},
 	productsQuantity: Config.number().internal().value(0),
 	spritemap: Config.string().required(),
+	workflowStatus: Config.number(),
 	summary: Config.shapeOf(
 		{
 			checkoutUrl: Config.string(),
