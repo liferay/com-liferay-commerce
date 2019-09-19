@@ -15,3 +15,28 @@
 --%>
 
 <%@ include file="/init.jsp" %>
+
+<commerce-ui:panel title="info">
+    <div class="row">
+        <div class="col-md-4">
+            <commerce-ui:info-box title="courier-detail">
+                Shipping ID <clay:link href="#" label="1ZKAS23JLKNASDJL" />
+
+            </commerce-ui:info-box>
+        </div>
+        <div class="col-md-4">
+            <commerce-ui:info-box title="barcode">
+                International Article Number 07053 23123
+
+            </commerce-ui:info-box>
+        </div>
+        <div class="col-md-4">
+            <commerce-ui:info-box title="shipment-status">
+                <clay:label
+                    label="ready-to-ship"
+                    style="danger"
+                />
+            </commerce-ui:info-box>
+        </div>
+    </div>
+</commerce-ui:panel>
