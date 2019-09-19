@@ -421,7 +421,25 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 	</div>
 
 	<div class="col-12">
+		<liferay-portlet:renderURL var="editOrderSummaryURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+			<portlet:param name="mvcRenderCommandName" value="editCommerceOrderSummary" />
+			<portlet:param name="commerceOrderId" value="<%= String.valueOf(commerceOrderEditDisplayContext.getCommerceOrderId()) %>" />
+		</liferay-portlet:renderURL>
+
+		<commerce-ui:modal
+			closeOnSubmit="<%= true %>"
+			id="order-summary-modal"
+			showCancel="<%= true %>"
+			showSubmit="<%= true %>"
+			size="lg"
+			title='<%= LanguageUtil.get(request, "order-summary") %>'
+			url="<%= editOrderSummaryURL %>"
+		/>
+
 		<commerce-ui:panel
+			headerActionId="order-summary-modal"
+			headerActionLabel='<%= LanguageUtil.get(request, "edit") %>'
+			headerActionUrl="<%= editOrderSummaryURL %>"
 			title='<%= LanguageUtil.get(request, "order-summary") %>'
 		>
 			<commerce-ui:summary-table
