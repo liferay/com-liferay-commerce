@@ -15,6 +15,7 @@
 package com.liferay.commerce.order.web.internal.display.context;
 
 import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.currency.model.CommerceMoney;
 import com.liferay.commerce.discount.CommerceDiscountValue;
 import com.liferay.commerce.frontend.model.HeaderActionModel;
@@ -588,7 +589,11 @@ public class CommerceOrderEditDisplayContext {
 	}
 
 	public List<StepModel> getOrderSteps() throws PortalException {
-		List stepList = new ArrayList<>();
+		List<StepModel> steps = new ArrayList<>();
+
+		if (_commerceOrder == null) {
+			return steps;
+		}
 
 		StepModel step1 = new StepModel();
 		StepModel step2 = new StepModel();
@@ -596,33 +601,100 @@ public class CommerceOrderEditDisplayContext {
 		StepModel step4 = new StepModel();
 		StepModel step5 = new StepModel();
 
-		step1.setId("received");
-		step1.setLabel("Received");
-		step1.setState("completed");
+		step1.setId(
+			CommerceOrderConstants.getOrderStatusLabel(
+				CommerceOrderConstants.ORDER_STATUS_TO_FULFILL));
+		step1.setLabel(
+			LanguageUtil.get(
+				_commerceOrderRequestHelper.getRequest(),
+				CommerceOrderConstants.getOrderStatusLabel(
+					CommerceOrderConstants.ORDER_STATUS_TO_FULFILL)));
 
-		step2.setId("confirmed");
-		step2.setLabel("Confirmed");
-		step2.setState("active");
+		step2.setId(
+			CommerceOrderConstants.getOrderStatusLabel(
+				CommerceOrderConstants.ORDER_STATUS_FULFILLED));
+		step2.setLabel(
+			LanguageUtil.get(
+				_commerceOrderRequestHelper.getRequest(),
+				CommerceOrderConstants.getOrderStatusLabel(
+					CommerceOrderConstants.ORDER_STATUS_FULFILLED)));
 
-		step3.setId("trasmitted");
-		step3.setLabel("Trasmitted");
-		step3.setState("inactive");
+		step3.setId(
+			CommerceOrderConstants.getOrderStatusLabel(
+				CommerceOrderConstants.ORDER_STATUS_PARTIALLY_SHIPPED));
+		step3.setLabel(
+			LanguageUtil.get(
+				_commerceOrderRequestHelper.getRequest(),
+				CommerceOrderConstants.getOrderStatusLabel(
+					CommerceOrderConstants.ORDER_STATUS_PARTIALLY_SHIPPED)));
 
-		step4.setId("shipped");
-		step4.setLabel("Shipped");
-		step4.setState("inactive");
+		step4.setId(
+			CommerceOrderConstants.getOrderStatusLabel(
+				CommerceOrderConstants.ORDER_STATUS_SHIPPED));
+		step4.setLabel(
+			LanguageUtil.get(
+				_commerceOrderRequestHelper.getRequest(),
+				CommerceOrderConstants.getOrderStatusLabel(
+					CommerceOrderConstants.ORDER_STATUS_SHIPPED)));
 
-		step5.setId("completed");
-		step5.setLabel("Completed");
-		step5.setState("inactive");
+		step5.setId(
+			CommerceOrderConstants.getOrderStatusLabel(
+				CommerceOrderConstants.ORDER_STATUS_COMPLETED));
+		step5.setLabel(
+			LanguageUtil.get(
+				_commerceOrderRequestHelper.getRequest(),
+				CommerceOrderConstants.getOrderStatusLabel(
+					CommerceOrderConstants.ORDER_STATUS_COMPLETED)));
 
-		stepList.add(step1);
-		stepList.add(step2);
-		stepList.add(step3);
-		stepList.add(step4);
-		stepList.add(step5);
+		int orderStatus = _commerceOrder.getOrderStatus();
 
-		return stepList;
+		if (orderStatus == CommerceOrderConstants.ORDER_STATUS_COMPLETED) {
+			step1.setState("completed");
+			step2.setState("completed");
+			step3.setState("completed");
+			step4.setState("completed");
+			step5.setState("completed");
+		}
+		else if (orderStatus ==
+					CommerceOrderConstants.ORDER_STATUS_TO_FULFILL) {
+
+			step1.setState("active");
+			step2.setState("inactive");
+			step3.setState("inactive");
+			step4.setState("inactive");
+			step5.setState("inactive");
+		}
+		else if (orderStatus == CommerceOrderConstants.ORDER_STATUS_FULFILLED) {
+			step1.setState("completed");
+			step2.setState("active");
+			step3.setState("inactive");
+			step4.setState("inactive");
+			step5.setState("inactive");
+		}
+		else if (orderStatus ==
+					CommerceOrderConstants.ORDER_STATUS_PARTIALLY_SHIPPED) {
+
+			step1.setState("completed");
+			step2.setState("completed");
+			step3.setState("active");
+			step4.setState("inactive");
+			step5.setState("inactive");
+		}
+		else if (orderStatus == CommerceOrderConstants.ORDER_STATUS_SHIPPED) {
+			step1.setState("completed");
+			step2.setState("completed");
+			step3.setState("completed");
+			step4.setState("active");
+			step5.setState("inactive");
+		}
+
+		steps.add(step1);
+		steps.add(step2);
+		steps.add(step3);
+		steps.add(step4);
+		steps.add(step5);
+
+		return steps;
 	}
 
 	public List<SummaryElement> getSummary() throws PortalException {
