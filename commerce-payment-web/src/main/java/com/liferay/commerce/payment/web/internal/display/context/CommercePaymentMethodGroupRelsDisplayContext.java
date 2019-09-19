@@ -203,7 +203,7 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 
 		if (ListUtil.isNotEmpty(commercePaymentMethodGroupRels)) {
 			commercePaymentMethodGroupRels = ListUtil.sort(
-					commercePaymentMethodGroupRels,
+				commercePaymentMethodGroupRels,
 				new CommercePaymentMethodGroupRelNameComparator(
 					themeDisplay.getLocale()));
 		}
