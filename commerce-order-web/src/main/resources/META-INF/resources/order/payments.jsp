@@ -25,26 +25,53 @@ CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder()
 
 <div class="row">
 	<div class="col-md-6 d-flex">
+		<liferay-portlet:renderURL var="editOrderPaymentMethodURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+			<portlet:param name="mvcRenderCommandName" value="editCommerceOrderPaymentMethod" />
+			<portlet:param name="commerceOrderId" value="<%= String.valueOf(commerceOrderEditDisplayContext.getCommerceOrderId()) %>" />
+		</liferay-portlet:renderURL>
+
+		<commerce-ui:modal
+			closeOnSubmit="<%= true %>"
+			id="order-payment-method-modal"
+			showCancel="<%= true %>"
+			showSubmit="<%= true %>"
+			size="lg"
+			title='<%= LanguageUtil.get(request, "payment-method") %>'
+			url="<%= editOrderPaymentMethodURL %>"
+		/>
+
 		<commerce-ui:panel
 			elementClasses="flex-fill"
+			headerActionId="order-payment-method-modal"
+			headerActionLabel='<%= LanguageUtil.get(request, Validator.isNull(commerceOrder.getCommercePaymentMethodKey()) ? "add" : "edit") %>'
+			headerActionUrl="<%= editOrderPaymentMethodURL %>"
 			title='<%= LanguageUtil.get(request, "payment-method") %>'
 		>
-			<div class="align-items-center d-flex payment-info">
-				<clay:icon
-					symbol="info-circle"
-				/>
 
-				<span class="ml-3 payment-name">
-					<%= HtmlUtil.escape(commerceOrderEditDisplayContext.getCommerceOrderPaymentMethodName()) %>
-				</span>
+			<%
+			String commerceOrderPaymentMethodName = commerceOrderEditDisplayContext.getCommerceOrderPaymentMethodName();
+			%>
 
-				<clay:button
-					componentId="editPaymentMethodButton"
-					elementClasses="ml-3"
-					label='<%= LanguageUtil.get(request, "edit") %>'
-					style="link"
-				/>
-			</div>
+			<c:choose>
+				<c:when test="<%= Validator.isNull(commerceOrderPaymentMethodName) %>">
+					<div class="align-items-center d-flex payment-info">
+						<span class="ml-3 payment-name text-muted">
+							<%= LanguageUtil.get(request, "click-add-to-insert") %>
+						</span>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div class="align-items-center d-flex payment-info">
+						<clay:icon
+							symbol="info-circle"
+						/>
+
+						<span class="ml-3 payment-name">
+							<%= HtmlUtil.escape(commerceOrderPaymentMethodName) %>
+						</span>
+					</div>
+				</c:otherwise>
+			</c:choose>
 		</commerce-ui:panel>
 	</div>
 
@@ -58,15 +85,8 @@ CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder()
 					<clay:label
 						elementClasses="align-self-center"
 						label="<%= LanguageUtil.get(request, CommerceOrderConstants.getPaymentStatusLabel(commerceOrder.getPaymentStatus())) %>"
+						size="lg"
 						style="<%= CommerceOrderConstants.getPaymentLabelStyle(commerceOrder.getPaymentStatus()) %>"
-					/>
-				</div>
-
-				<div class="col-auto">
-					<clay:button
-						elementClasses="ml-3"
-						label='<%= LanguageUtil.get(request, "refund") %>'
-						style="secondary"
 					/>
 				</div>
 			</div>
