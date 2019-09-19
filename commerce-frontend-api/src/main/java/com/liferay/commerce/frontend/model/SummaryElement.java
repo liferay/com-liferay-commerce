@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.frontend.model;
 
+import com.liferay.portal.kernel.util.Validator;
+
 /**
  * @author Fabio Diego Mastrorilli
  */
@@ -44,6 +46,15 @@ public class SummaryElement {
 
 	public void setValue(String value) {
 		_value = value;
+	}
+
+	public void setValue(String value, String defaultValue) {
+		if (Validator.isNull(value)) {
+			_value = defaultValue;
+		}
+		else {
+			_value = value;
+		}
 	}
 
 	private String _label;

@@ -705,10 +705,14 @@ public class CommerceOrderEditDisplayContext {
 		}
 
 		SummaryElement itemsSubtotalSummaryElement = new SummaryElement();
+		SummaryElement itemsSubtotalDiscountSummaryElement =
+			new SummaryElement();
 		SummaryElement orderDiscountSummaryElement = new SummaryElement();
-		SummaryElement promotionCodesSummaryElement = new SummaryElement();
+		SummaryElement promotionCodeSummaryElement = new SummaryElement();
 		SummaryElement estimatedTaxSummaryElement = new SummaryElement();
 		SummaryElement shippingAndHandingSummaryElement = new SummaryElement();
+		SummaryElement shippingAndHandingDiscountSummaryElement =
+			new SummaryElement();
 		SummaryElement grandTotalSummaryElement = new SummaryElement();
 
 		itemsSubtotalSummaryElement.setLabel(
@@ -727,6 +731,22 @@ public class CommerceOrderEditDisplayContext {
 				subtotal.format(_commerceOrderRequestHelper.getLocale()));
 		}
 
+		itemsSubtotalDiscountSummaryElement.setLabel(
+			LanguageUtil.get(
+				_commerceOrderRequestHelper.getRequest(),
+				"items-subtotal-discount"));
+
+		CommerceDiscountValue subtotalDiscountValue =
+			commerceOrderPrice.getSubtotalDiscountValue();
+
+		if (subtotalDiscountValue != null) {
+			CommerceMoney discountAmount =
+				subtotalDiscountValue.getDiscountAmount();
+
+			itemsSubtotalDiscountSummaryElement.setValue(
+				discountAmount.format(_commerceOrderRequestHelper.getLocale()));
+		}
+
 		orderDiscountSummaryElement.setLabel(
 			LanguageUtil.get(
 				_commerceOrderRequestHelper.getRequest(), "order-discount"));
@@ -742,10 +762,11 @@ public class CommerceOrderEditDisplayContext {
 				discountAmount.format(_commerceOrderRequestHelper.getLocale()));
 		}
 
-		promotionCodesSummaryElement.setLabel(
+		promotionCodeSummaryElement.setLabel(
 			LanguageUtil.get(
-				_commerceOrderRequestHelper.getRequest(), "promotion-codes"));
-		promotionCodesSummaryElement.setValue(_commerceOrder.getCouponCode());
+				_commerceOrderRequestHelper.getRequest(), "promotion-code"));
+		promotionCodeSummaryElement.setValue(
+			_commerceOrder.getCouponCode(), "--");
 
 		estimatedTaxSummaryElement.setLabel(
 			LanguageUtil.get(
@@ -770,6 +791,22 @@ public class CommerceOrderEditDisplayContext {
 				shippingValue.format(_commerceOrderRequestHelper.getLocale()));
 		}
 
+		shippingAndHandingDiscountSummaryElement.setLabel(
+			LanguageUtil.get(
+				_commerceOrderRequestHelper.getRequest(),
+				"shipping-and-handing-discount"));
+
+		CommerceDiscountValue shippingDiscountValue =
+			commerceOrderPrice.getShippingDiscountValue();
+
+		if (shippingDiscountValue != null) {
+			CommerceMoney discountAmount =
+				shippingDiscountValue.getDiscountAmount();
+
+			shippingAndHandingDiscountSummaryElement.setValue(
+				discountAmount.format(_commerceOrderRequestHelper.getLocale()));
+		}
+
 		grandTotalSummaryElement.setLabel(
 			LanguageUtil.get(
 				_commerceOrderRequestHelper.getRequest(), "grand-total"));
@@ -783,10 +820,12 @@ public class CommerceOrderEditDisplayContext {
 		}
 
 		summary.add(itemsSubtotalSummaryElement);
+		summary.add(itemsSubtotalDiscountSummaryElement);
 		summary.add(orderDiscountSummaryElement);
-		summary.add(promotionCodesSummaryElement);
+		summary.add(promotionCodeSummaryElement);
 		summary.add(estimatedTaxSummaryElement);
 		summary.add(shippingAndHandingSummaryElement);
+		summary.add(shippingAndHandingDiscountSummaryElement);
 		summary.add(grandTotalSummaryElement);
 
 		return summary;
