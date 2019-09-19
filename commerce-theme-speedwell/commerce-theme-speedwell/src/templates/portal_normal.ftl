@@ -117,6 +117,7 @@
 			<@liferay_util["include"] page=bottom_include />
 		</div>
 	</div>
+
 	<script type="text/javascript" src="${javascript_folder}/intersection-observer.js"></script>
 	<script type="text/javascript" src="${javascript_folder}/features/context.js"></script>
 	<script type="text/javascript" src="${javascript_folder}/features/accessibility.js"></script>

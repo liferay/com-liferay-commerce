@@ -1,5 +1,6 @@
 [
 	{
+		"Image": "Brake_System.jpg",
 		"Permissions": [
 			{
 				"ActionIds": [
@@ -9,10 +10,10 @@
 				"Scope": 4
 			}
 		],
-		"Title": "Brake System",
-		"Image": "Brake_System.jpg"
+		"Title": "Brake System"
 	},
 	{
+		"Image": "Engine.jpg",
 		"Permissions": [
 			{
 				"ActionIds": [
@@ -22,10 +23,10 @@
 				"Scope": 4
 			}
 		],
-		"Title": "Engine",
-		"Image": "Engine.jpg"
+		"Title": "Engine"
 	},
 	{
+		"Image": "Exhaust_System.jpg",
 		"Permissions": [
 			{
 				"ActionIds": [
@@ -35,10 +36,10 @@
 				"Scope": 4
 			}
 		],
-		"Title": "Exhaust System",
-		"Image": "Exhaust_System.jpg"
+		"Title": "Exhaust System"
 	},
 	{
+		"Image": "Suspension.jpg",
 		"Permissions": [
 			{
 				"ActionIds": [
@@ -48,10 +49,10 @@
 				"Scope": 4
 			}
 		],
-		"Title": "Suspension",
-		"Image": "Suspension.jpg"
+		"Title": "Suspension"
 	},
 	{
+		"Image": "Transmission.jpg",
 		"Permissions": [
 			{
 				"ActionIds": [
@@ -61,10 +62,10 @@
 				"Scope": 4
 			}
 		],
-		"Title": "Transmission",
-		"Image": "Transmission.jpg"
+		"Title": "Transmission"
 	},
 	{
+		"Image": "Turbocharger.jpg",
 		"Permissions": [
 			{
 				"ActionIds": [
@@ -74,7 +75,6 @@
 				"Scope": 4
 			}
 		],
-		"Title": "Turbocharger",
-		"Image": "Turbocharger.jpg"
+		"Title": "Turbocharger"
 	}
 ]

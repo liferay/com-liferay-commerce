@@ -13,17 +13,17 @@
 
 		@media only screen and (max-width: 767px) {
 			font-size: 32px !important;
-			line-height: 52px !important;
 			font-weight: 600 !important;
+			line-height: 52px !important;
 		}
 	}
 
 	@media only screen and (max-width: 767px) {
 		.availability {
-			position: absolute;
-			top: 6%;
 			font-size: 14px;
 			line-height: 12px;
+			position: absolute;
+			top: 6%;
 		}
 	}
 }

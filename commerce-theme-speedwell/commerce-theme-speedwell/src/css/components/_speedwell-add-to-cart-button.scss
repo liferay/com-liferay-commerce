@@ -209,12 +209,12 @@
 		display: flex;
 
 		@media only screen and (max-width: 767px) {
-			flex-direction: column;
-			z-index: 100;
-			left: 0;
 			bottom: 0;
-			width: 100%;
+			flex-direction: column;
 			height: 170px;
+			left: 0;
+			width: 100%;
+			z-index: 100;
 		}
 
 		.commerce-button {
@@ -223,19 +223,19 @@
 			min-width: 160px;
 
 			@media only screen and (max-width: 767px) {
-				display: flex;
 				align-self: center;
-				width: 100%;
 				bottom: 10px;
+				display: flex;
 				transition: width .2s ease-out;
+				width: 100%;
 
 				&.is-fixed {
-					position: fixed;
-					width: 100%;
-					bottom: 0;
 					border-radius: 0;
-					z-index: 101;
+					bottom: 0;
+					position: fixed;
 					transition: width .2s ease-out;
+					width: 100%;
+					z-index: 101;
 				}
 			}
 
@@ -272,8 +272,8 @@
 				width: 60px;
 
 				@media only screen and (max-width: 767px) {
-					width: 100px;
 					margin: 12px 30px;
+					width: 100px;
 				}
 			}
 
