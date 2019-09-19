@@ -23,7 +23,10 @@
 
 .btn-primary.btn-default,
 .btn-primary.btn-default:hover,
-.btn-primary.btn-default:active {
+.btn-primary.btn-default:active,
+.btn-primary.btn-action,
+.btn-primary.btn-action:hover,
+.btn-primary.btn-action:active {
   background-color: $color-theme;
   border: 0;
   font-weight: 600;
