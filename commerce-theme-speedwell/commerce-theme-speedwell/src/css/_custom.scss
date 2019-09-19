@@ -93,6 +93,10 @@ body.has-control-menu {
     @media only screen and (max-width: 375px) {
       padding-top: calc(#{$speedwell-topbar-size-small} - 10px) !important;
     }
+
+    @media only screen and (max-width: 450px) {
+      padding-top: $speedwell-topbar-size-small !important;
+    }
   }
 }
 

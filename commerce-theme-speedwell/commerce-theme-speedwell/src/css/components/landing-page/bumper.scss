@@ -42,6 +42,10 @@
     margin-top: -8%;
     padding: 0;
 
+    @media only screen and (max-width: 767px) {
+      width: 100% !important;
+    }
+
     .hint-text {
       color: $stroke-alt;
 
