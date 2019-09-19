@@ -29,7 +29,7 @@ List<DropdownItem> dropdownItems = (List<DropdownItem>)request.getAttribute("lif
 String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_header") + StringPool.UNDERLINE;
 %>
 
-<div id="commerce-admin-header" class="commerce-admin-header bg-white border-bottom container-fluid">
+<div class="bg-white border-bottom commerce-admin-header container-fluid" id="commerce-admin-header">
 	<div class="container d-flex">
 		<div class="align-items-center d-flex flex-grow-1">
 			<c:if test="<%= Validator.isNotNull(thumbnailUrl) %>">
