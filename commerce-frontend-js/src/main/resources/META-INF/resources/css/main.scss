@@ -18,6 +18,19 @@
   }
 }
 
+.commerce-admin-header {
+  position: sticky;
+  z-index: 989;
+
+  .ie11 & {
+    position: static
+  }
+
+  .has-control-menu & {
+    top: 56px;
+  }
+}
+
 .info-box {
   .header {
     display: flex;
