@@ -392,9 +392,16 @@ public class CommerceOrderEditDisplayContext {
 	public List<CommercePaymentMethodGroupRel> getCommercePaymentMethods()
 		throws PortalException {
 
+		if (_commerceOrder == null) {
+			return Collections.emptyList();
+		}
+
+		CommerceChannel commerceChannel =
+			_commerceChannelLocalService.getCommerceChannelByOrderGroupId(
+				_commerceOrder.getGroupId());
+
 		return _commercePaymentMethodGroupRelService.
-			getCommercePaymentMethodGroupRels(
-				_commerceOrderRequestHelper.getScopeGroupId());
+			getCommercePaymentMethodGroupRels(commerceChannel.getSiteGroupId());
 	}
 
 	public CommerceProductPrice getCommerceProductPrice(
