@@ -61,6 +61,7 @@ public class MiniCartTag extends ComponentRendererTag {
 				putValue("orderId", commerceOrder.getCommerceOrderId());
 				putValue(
 					"commerceAccountId", commerceOrder.getCommerceAccountId());
+				putValue("workflowStatus", commerceOrder.getStatus());
 			}
 			else {
 				CommerceAccount commerceAccount =

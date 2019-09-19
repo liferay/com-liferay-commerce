@@ -36,6 +36,8 @@
 		total: string
 	]}
 
+	{@param? workflowStatus: int}
+
 	{@param? _open: bool}
 	{@param? _loading: bool}
 
@@ -134,6 +136,7 @@
 					{param itemsQuantity: $summary.itemsQuantity /}
 					{param productsQuantity: $formattedProductsQuantity /}
 					{param loading: $_loading /}
+					{param status: $workflowStatus /}
 				{/call}
 			{/if}
 
