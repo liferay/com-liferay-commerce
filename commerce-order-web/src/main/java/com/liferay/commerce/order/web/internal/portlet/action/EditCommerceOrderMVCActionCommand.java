@@ -119,8 +119,11 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 		else if (cmd.equals("orderStatus")) {
 			updateOrderStatus(actionRequest);
 		}
-		else if (cmd.equals("payment")) {
-			updatePayment(actionRequest);
+		else if (cmd.equals("orderSummary")) {
+			//TODO update order summary
+		}
+		else if (cmd.equals("paymentMethod")) {
+			updatePaymentMethod(actionRequest);
 		}
 		else if (cmd.equals("printedNote")) {
 			updatePrintedNote(actionRequest);
@@ -287,50 +290,17 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 			orderDateHour, orderDateMinute, serviceContext);
 	}
 
-	protected void updatePayment(ActionRequest actionRequest) throws Exception {
-		CommerceContext commerceContext =
-			(CommerceContext)actionRequest.getAttribute(
-				CommerceWebKeys.COMMERCE_CONTEXT);
+	protected void updatePaymentMethod(ActionRequest actionRequest)
+		throws Exception {
 
 		long commerceOrderId = ParamUtil.getLong(
 			actionRequest, "commerceOrderId");
 
-		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
-			commerceOrderId);
-
 		String commercePaymentMethodKey = ParamUtil.getString(
 			actionRequest, "commercePaymentMethodKey");
-		String advanceStatus = ParamUtil.getString(
-			actionRequest, "advanceStatus");
-		int paymentStatus = ParamUtil.getInteger(
-			actionRequest, "paymentStatus");
-		String purchaseOrderNumber = ParamUtil.getString(
-			actionRequest, "purchaseOrderNumber");
 
-		invokeTransaction(
-			new Callable<Void>() {
-
-				@Override
-				public Void call() throws Exception {
-					_commerceOrderService.updateCommerceOrder(
-						commerceOrder.getCommerceOrderId(),
-						commerceOrder.getBillingAddressId(),
-						commerceOrder.getShippingAddressId(),
-						commercePaymentMethodKey,
-						commerceOrder.getCommerceShippingMethodId(),
-						commerceOrder.getShippingOptionName(),
-						purchaseOrderNumber, commerceOrder.getSubtotal(),
-						commerceOrder.getShippingAmount(),
-						commerceOrder.getTotal(), advanceStatus,
-						commerceContext);
-
-					_commerceOrderService.updatePaymentStatus(
-						commerceOrder.getCommerceOrderId(), paymentStatus);
-
-					return null;
-				}
-
-			});
+		_commerceOrderService.updateCommercePaymentMethodKey(
+			commerceOrderId, commercePaymentMethodKey);
 	}
 
 	protected void updatePrintedNote(ActionRequest actionRequest)
