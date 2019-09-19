@@ -58,7 +58,8 @@ public class PanelTag extends IncludeTag {
 			request, "headerActionLabel", _headerActionLabel);
 		setNamespacedAttribute(request, "headerActionIcon", _headerActionIcon);
 		setNamespacedAttribute(request, "headerActionId", _headerActionId);
-		setNamespacedAttribute(request, "headerActionTarget", _headerActionTarget);
+		setNamespacedAttribute(
+			request, "headerActionTarget", _headerActionTarget);
 		setNamespacedAttribute(request, "headerActionUrl", _headerActionUrl);
 		setNamespacedAttribute(request, "showMoreId", _showMoreId);
 		setNamespacedAttribute(request, "showMoreUrl", _showMoreUrl);
