@@ -92,14 +92,14 @@ public class PortletSettingsImporter {
 					_importPortletSettings(
 						jsonObject, portletName, classLoader,
 						displayTemplateDependenciesPath, assetVocabularyGroupId,
-                            serviceContext);
+						serviceContext);
 				}
 			}
 			else {
 				_importPortletSettings(
 					jsonObject, portletName, classLoader,
 					displayTemplateDependenciesPath, assetVocabularyGroupId,
-                        serviceContext);
+					serviceContext);
 			}
 		}
 	}
@@ -212,7 +212,8 @@ public class PortletSettingsImporter {
 					value = group.getName(serviceContext.getLanguageId());
 				}
 
-				Company company = _companyLocalService.getCompany(serviceContext.getCompanyId());
+				Company company = _companyLocalService.getCompany(
+					serviceContext.getCompanyId());
 
 				AssetVocabulary assetVocabulary =
 					_assetVocabularyLocalService.getGroupVocabulary(
@@ -288,10 +289,10 @@ public class PortletSettingsImporter {
 	private AssetVocabularyLocalService _assetVocabularyLocalService;
 
 	@Reference
-	private CompanyLocalService _companyLocalService;
+	private ClassNameLocalService _classNameLocalService;
 
 	@Reference
-	private ClassNameLocalService _classNameLocalService;
+	private CompanyLocalService _companyLocalService;
 
 	@Reference
 	private CPFileImporter _cpFileImporter;
