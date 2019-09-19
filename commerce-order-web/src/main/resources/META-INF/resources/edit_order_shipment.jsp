@@ -37,11 +37,11 @@ portletDisplay.setURLBack(redirect);
 
 <div id="<portlet:namespace />editOrderShipmentContainer">
 	<liferay-frontend:screen-navigation
+		containerWrapperCssClass="container-fluid"
+		fullContainerCssClass="col-12 mt-4 px-4"
+		headerContainerCssClass="side-panel-header"
 		key="<%= CommerceOrderScreenNavigationConstants.SCREEN_NAVIGATION_KEY_COMMERCE_ORDER_SHIPMENT_GENERAL %>"
 		modelBean="<%= commerceShipment %>"
-		fullContainerCssClass="col-12 mt-4 px-4"
 		portletURL="<%= currentURLObj %>"
-		containerWrapperCssClass="container-fluid"
-		headerContainerCssClass="side-panel-header"
 	/>
 </div>
