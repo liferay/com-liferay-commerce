@@ -20,6 +20,10 @@
 String searchContainerId = ParamUtil.getString(request, "searchContainerId", "cpDefinitions");
 
 CPDefinitionsDisplayContext cpDefinitionsDisplayContext = (CPDefinitionsDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
+
+NPMResolver npmResolver = (NPMResolver)request.getAttribute("NPMResolver");
+
+String definitionToolbarFilterRequire = npmResolver.resolveModuleName("commerce-product-definitions-web/DefinitionToolbarFilter.es") + " as DefinitionToolbarFilter";
 %>
 
 <div class="definition-toolbar-managment-bar">
@@ -105,7 +109,7 @@ CPDefinitionsDisplayContext cpDefinitionsDisplayContext = (CPDefinitionsDisplayC
 
 <liferay-portlet:resourceURL id="cpDefinitionsFacets" var="cpDefinitionsFacetsURL" />
 
-<aui:script require="commerce-product-definitions-web@2.0.8/DefinitionToolbarFilter.es as DefinitionToolbarFilter">
+<aui:script require="<%= definitionToolbarFilterRequire %>">
 	var definitionToolbarFilter = new DefinitionToolbarFilter.default(
 		{
 			categorySelectorURL: '<%= cpDefinitionsDisplayContext.getCategorySelectorURL(renderResponse.getNamespace() + "selectCategory") %>',

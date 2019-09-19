@@ -17,6 +17,10 @@
 <%@ include file="/init.jsp" %>
 
 <%
+NPMResolver npmResolver = (NPMResolver)request.getAttribute("NPMResolver");
+
+String cpOptionsEditorRequire = npmResolver.resolveModuleName("commerce-product-options-web/CPOptionsEditor.es") + " as CPOptionsEditor";
+
 renderResponse.setTitle(LanguageUtil.get(request, "catalog"));
 %>
 
@@ -55,7 +59,7 @@ navigationItem.setLabel(LanguageUtil.get(request, "option-templates"));
 	<portlet:param name="mvcRenderCommandName" value="editProductOptionValue" />
 </liferay-portlet:renderURL>
 
-<aui:script require="commerce-product-options-web@1.0.23/CPOptionsEditor.es as CPOptionsEditor">
+<aui:script require="<%= cpOptionsEditorRequire %>">
 	var cpOptionsEditor = new CPOptionsEditor.default(
 		{
 			hasEditPermission : <%= PortalPermissionUtil.contains(permissionChecker, CPActionKeys.ADD_COMMERCE_PRODUCT_OPTION) %>,
