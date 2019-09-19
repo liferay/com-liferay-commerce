@@ -1,5 +1,4 @@
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.HashMap" %><%--
+<%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
@@ -88,17 +87,19 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceShipmentsPort
 		%>
 
 		<liferay-ui:search-container-column-text
-				cssClass="important table-cell-content"
-				name="shipment-id"
+			cssClass="important table-cell-content"
+			name="shipment-id"
 		>
+
 			<%
-				Map<String, String> dataAttributes = new HashMap<>();
-				dataAttributes.put("panel-url", rowURL.toString());
-				dataAttributes.put("target", renderResponse.getNamespace() + "sidePanel");
+			Map<String, String> dataAttributes = new HashMap<>();
+			dataAttributes.put("panel-url", rowURL.toString());
+			dataAttributes.put("target", renderResponse.getNamespace() + "sidePanel");
 			%>
+
 			<clay:link
-				href="<%= rowURL.toString() %>"
 				data="<%= dataAttributes %>"
+				href="<%= rowURL.toString() %>"
 				label="<%= String.valueOf(commerceShipment.getCommerceShipmentId()) %>"
 			/>
 		</liferay-ui:search-container-column-text>
@@ -166,23 +167,23 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceShipmentsPort
 	);
 
 	Promise.all(
-	    [
+		[
 			Liferay.componentReady('<portlet:namespace />commerceShipments'),
 			Liferay.componentReady('<portlet:namespace />sidePanel')
 		]
 	).then(function(
-	    [
+		[
 			table,
 			panel
 		]
-	){
+	) {
 		document.getElementById('<portlet:namespace />commerceShipments')
 			.addEventListener(
 				'click',
-				function(e){
-                    e.preventDefault();
+				function(e) {
+					e.preventDefault();
 
-                    if(e.target.dataset.target === '<portlet:namespace />sidePanel') {
+					if (e.target.dataset.target === '<portlet:namespace />sidePanel') {
 						panel.open(e.target.dataset.panelUrl);
 					}
 				}
