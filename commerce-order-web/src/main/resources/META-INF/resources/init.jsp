@@ -40,6 +40,7 @@ page import="com.liferay.commerce.currency.model.CommerceMoney" %><%@
 page import="com.liferay.commerce.discount.CommerceDiscountValue" %><%@
 page import="com.liferay.commerce.exception.CommerceOrderBillingAddressException" %><%@
 page import="com.liferay.commerce.exception.CommerceOrderNoteContentException" %><%@
+page import="com.liferay.commerce.exception.CommerceOrderPaymentMethodException" %><%@
 page import="com.liferay.commerce.exception.NoSuchOrderException" %><%@
 page import="com.liferay.commerce.exception.NoSuchOrderNoteException" %><%@
 page import="com.liferay.commerce.model.CommerceAddress" %><%@
