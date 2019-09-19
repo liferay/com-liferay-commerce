@@ -84,6 +84,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceShipmentsPort
 		rowURL.setParameter("redirect", currentURL);
 		rowURL.setParameter("commerceOrderId", String.valueOf(commerceOrderEditDisplayContext.getCommerceOrderId()));
 		rowURL.setParameter("commerceShipmentId", String.valueOf(commerceShipment.getCommerceShipmentId()));
+		rowURL.setWindowState(LiferayWindowState.POP_UP);
 		%>
 
 		<liferay-ui:search-container-column-text
@@ -156,13 +157,16 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceShipmentsPort
 </aui:script>
 
 <div id="<portlet:namespace />side-panel-root"></div>
+<div id="<portlet:namespace />side-panel-wrapper"></div>
 
 <aui:script require="commerce-frontend-js/js/side_panel/entry.es as SidePanel">
 	new SidePanel.default(
 		"<portlet:namespace />sidePanel",
 		"<portlet:namespace />side-panel-root",
 		{
-			size: "lg"
+			size: "lg",
+			spritemap: "<%= themeDisplay.getPathThemeImages() + "/clay/icons.svg" %>",
+			portalWrapperId: "<portlet:namespace />side-panel-wrapper"
 		}
 	);
 
