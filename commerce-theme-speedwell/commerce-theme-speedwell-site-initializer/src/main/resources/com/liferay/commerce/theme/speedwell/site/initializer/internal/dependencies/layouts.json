@@ -95,14 +95,15 @@
 				"portletName": "com_liferay_commerce_product_content_web_internal_portlet_CPCompareContentMiniPortlet_INSTANCE_speedwell"
 			}
 		],
+		"privateLayout": false,
 		"subLayouts": [
 			{
 				"layoutTemplateId": "speedwell_category_navigation",
-				"name": "Category",
 				"lookAndFeel": {
 					"lfr-theme:regular:translucent-topbar": "true",
 					"lfr-theme:regular:wide-layout": "true"
 				},
+				"name": "Category",
 				"permissions": [
 					{
 						"actionIds": [],
@@ -153,8 +154,7 @@
 					}
 				]
 			}
-		],
-		"privateLayout": false
+		]
 	},
 	{
 		"layoutTemplateId": "1_column",
