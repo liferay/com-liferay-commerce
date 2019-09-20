@@ -60,8 +60,7 @@ import org.osgi.service.component.annotations.Reference;
 		"javax.portlet.name=" + CommerceWishListPortletKeys.MY_COMMERCE_WISH_LISTS,
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user",
-		"javax.portlet.supported-public-render-parameter=commerceWishListId",
-		"javax.portlet.supports.mime-type=text/html"
+		"javax.portlet.supported-public-render-parameter=commerceWishListId"
 	},
 	service = {MyCommerceWishListsPortlet.class, Portlet.class}
 )

@@ -56,8 +56,7 @@ import org.osgi.service.component.annotations.Reference;
 		"javax.portlet.init-param.view-template=/view_option_categories.jsp",
 		"javax.portlet.name=" + CPPortletKeys.CP_OPTION_CATEGORIES,
 		"javax.portlet.resource-bundle=content.Language",
-		"javax.portlet.security-role-ref=power-user,user",
-		"javax.portlet.supports.mime-type=text/html"
+		"javax.portlet.security-role-ref=power-user,user"
 	},
 	service = {CPOptionCategoriesPortlet.class, Portlet.class}
 )
