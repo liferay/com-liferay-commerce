@@ -16,13 +16,8 @@ package com.liferay.commerce.taglib.servlet.taglib;
 
 import com.liferay.commerce.constants.CPDefinitionInventoryConstants;
 import com.liferay.commerce.model.CPDefinitionInventory;
-import com.liferay.commerce.product.model.CPDefinition;
-import com.liferay.commerce.product.service.CPDefinitionServiceUtil;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalServiceUtil;
 import com.liferay.commerce.taglib.servlet.taglib.internal.servlet.ServletContextUtil;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,46 +26,35 @@ import javax.servlet.jsp.PageContext;
 
 /**
  * @author Marco Leo
+ * @author Luca Pellizzon
  */
 public class QuantityInputTag extends IncludeTag {
 
 	@Override
 	public int doStartTag() throws JspException {
-		try {
-			_allowedOrderQuantities = new int[0];
-			_maxOrderQuantity =
-				CPDefinitionInventoryConstants.DEFAULT_MAX_ORDER_QUANTITY;
-			_minOrderQuantity =
-				CPDefinitionInventoryConstants.DEFAULT_MIN_ORDER_QUANTITY;
+		_allowedOrderQuantities = new int[0];
+		_maxOrderQuantity =
+			CPDefinitionInventoryConstants.DEFAULT_MAX_ORDER_QUANTITY;
+		_minOrderQuantity =
+			CPDefinitionInventoryConstants.DEFAULT_MIN_ORDER_QUANTITY;
+		_multipleOrderQuantity =
+			CPDefinitionInventoryConstants.DEFAULT_MULTIPLE_ORDER_QUANTITY;
+
+		CPDefinitionInventory cpDefinitionInventory =
+			CPDefinitionInventoryLocalServiceUtil.
+				fetchCPDefinitionInventoryByCPDefinitionId(_cpDefinitionId);
+
+		if (cpDefinitionInventory != null) {
+			_allowedOrderQuantities =
+				cpDefinitionInventory.getAllowedOrderQuantitiesArray();
+			_maxOrderQuantity = cpDefinitionInventory.getMaxOrderQuantity();
+			_minOrderQuantity = cpDefinitionInventory.getMinOrderQuantity();
 			_multipleOrderQuantity =
-				CPDefinitionInventoryConstants.DEFAULT_MULTIPLE_ORDER_QUANTITY;
-
-			CPDefinitionInventory cpDefinitionInventory =
-				CPDefinitionInventoryLocalServiceUtil.
-					fetchCPDefinitionInventoryByCPDefinitionId(_cpDefinitionId);
-
-			if (cpDefinitionInventory != null) {
-				_allowedOrderQuantities =
-					cpDefinitionInventory.getAllowedOrderQuantitiesArray();
-				_maxOrderQuantity = cpDefinitionInventory.getMaxOrderQuantity();
-				_minOrderQuantity = cpDefinitionInventory.getMinOrderQuantity();
-				_multipleOrderQuantity =
-					cpDefinitionInventory.getMultipleOrderQuantity();
-			}
-
-			_cpDefinition = CPDefinitionServiceUtil.getCPDefinition(
-				_cpDefinitionId);
-
-			if (_value == 0) {
-				_value = _minOrderQuantity;
-			}
+				cpDefinitionInventory.getMultipleOrderQuantity();
 		}
-		catch (PortalException pe) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(pe, pe);
-			}
 
-			return SKIP_BODY;
+		if (_value == 0) {
+			_value = _minOrderQuantity;
 		}
 
 		return super.doStartTag();
@@ -128,7 +112,6 @@ public class QuantityInputTag extends IncludeTag {
 		super.cleanUp();
 
 		_allowedOrderQuantities = null;
-		_cpDefinition = null;
 		_cpDefinitionId = 0;
 		_maxOrderQuantity = 0;
 		_minOrderQuantity = 0;
@@ -150,7 +133,7 @@ public class QuantityInputTag extends IncludeTag {
 			"liferay-commerce:quantity-input:allowedOrderQuantities",
 			_allowedOrderQuantities);
 		request.setAttribute(
-			"liferay-commerce:quantity-input:cpDefinition", _cpDefinition);
+			"liferay-commerce:quantity-input:cpDefinitionId", _cpDefinitionId);
 		request.setAttribute(
 			"liferay-commerce:quantity-input:maxOrderQuantity",
 			_maxOrderQuantity);
@@ -170,11 +153,7 @@ public class QuantityInputTag extends IncludeTag {
 
 	private static final String _PAGE = "/quantity_input/page.jsp";
 
-	private static final Log _log = LogFactoryUtil.getLog(
-		QuantityInputTag.class);
-
 	private int[] _allowedOrderQuantities;
-	private CPDefinition _cpDefinition;
 	private long _cpDefinitionId;
 	private int _maxOrderQuantity;
 	private int _minOrderQuantity;

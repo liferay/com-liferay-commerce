@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.taglib.servlet.taglib;
 
+import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.configuration.CommercePriceConfiguration;
 import com.liferay.commerce.constants.CPDefinitionInventoryConstants;
 import com.liferay.commerce.constants.CommerceConstants;
@@ -26,10 +27,9 @@ import com.liferay.commerce.discount.CommerceDiscountValue;
 import com.liferay.commerce.model.CPDefinitionInventory;
 import com.liferay.commerce.price.CommerceProductPrice;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
-import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.model.CPInstance;
-import com.liferay.commerce.product.service.CPDefinitionServiceUtil;
-import com.liferay.commerce.product.service.CPInstanceServiceUtil;
+import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalServiceUtil;
 import com.liferay.commerce.taglib.servlet.taglib.internal.servlet.ServletContextUtil;
@@ -56,25 +56,26 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author Marco Leo
  * @author Alessio Antonio Rendina
+ * @author Luca Pellizzon
  */
 public class PriceTag extends IncludeTag {
 
 	@Override
 	public int doStartTag() throws JspException {
 		try {
-			CommerceContext commerceContext =
-				(CommerceContext)request.getAttribute(
-					CommerceWebKeys.COMMERCE_CONTEXT);
-			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			_commerceContext = (CommerceContext)request.getAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT);
+			_themeDisplay = (ThemeDisplay)request.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
 			setProductInfo();
 
-			setPriceInfo(commerceContext, themeDisplay.getLocale());
+			setPriceInfo(_commerceContext, _themeDisplay.getLocale());
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 
+			_commerceContext = null;
 			_commerceDiscountValue = null;
 			_discountLabel = null;
 			_displayDiscountLevels = false;
@@ -86,6 +87,7 @@ public class PriceTag extends IncludeTag {
 			_showPercentage = false;
 			_showPriceRange = false;
 			_showPromo = false;
+			_themeDisplay = null;
 
 			return SKIP_BODY;
 		}
@@ -152,6 +154,8 @@ public class PriceTag extends IncludeTag {
 		commerceProductPriceCalculation =
 			ServletContextUtil.getCommercePriceCalculation();
 		configurationProvider = ServletContextUtil.getConfigurationProvider();
+		cpDefinitionHelper = ServletContextUtil.getCPDefinitionHelper();
+		cpInstanceHelper = ServletContextUtil.getCPInstanceHelper();
 		servletContext = ServletContextUtil.getServletContext();
 	}
 
@@ -188,7 +192,6 @@ public class PriceTag extends IncludeTag {
 		super.cleanUp();
 
 		_cpDefinitionId = 0;
-		_cpInstance = null;
 		_cpInstanceId = 0;
 		_decimalFormat = null;
 		_discountLabel = null;
@@ -237,7 +240,8 @@ public class PriceTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-commerce:price:commerceDiscountValue",
 			_commerceDiscountValue);
-		request.setAttribute("liferay-commerce:price:cpInstance", _cpInstance);
+		request.setAttribute(
+			"liferay-commerce:price:cpInstanceId", _cpInstanceId);
 		request.setAttribute(
 			"liferay-commerce:price:decimalFormat", _decimalFormat);
 		request.setAttribute(
@@ -299,14 +303,14 @@ public class PriceTag extends IncludeTag {
 
 		_formattedPromoPrice = StringPool.BLANK;
 
-		if (_cpInstance == null) {
+		if (_cpInstanceId <= 0) {
 			_formattedPrice = getFormattedPrice(
 				_quantity, commerceContext, locale);
 		}
 		else {
 			CommerceProductPrice commerceProductPrice =
 				commerceProductPriceCalculation.getCommerceProductPrice(
-					_cpInstance.getCPInstanceId(), _quantity, commerceContext);
+					_cpInstanceId, _quantity, commerceContext);
 
 			if (commerceProductPrice == null) {
 				return;
@@ -336,8 +340,12 @@ public class PriceTag extends IncludeTag {
 	}
 
 	protected void setProductInfo() throws Exception {
-		CPDefinition cpDefinition = CPDefinitionServiceUtil.getCPDefinition(
-			_cpDefinitionId);
+		CommerceAccount commerceAccount = _commerceContext.getCommerceAccount();
+
+		CPCatalogEntry cpCatalogEntry = cpDefinitionHelper.getCPCatalogEntry(
+			commerceAccount.getCommerceAccountId(),
+			_commerceContext.getSiteGroupId(), _cpDefinitionId,
+			_themeDisplay.getLocale());
 
 		if (_quantity <= 0) {
 			CPDefinitionInventory cpDefinitionInventory =
@@ -353,30 +361,29 @@ public class PriceTag extends IncludeTag {
 			}
 		}
 
-		if (_cpInstanceId > 0) {
-			_cpInstance = CPInstanceServiceUtil.getCPInstance(_cpInstanceId);
-		}
-		else {
-			if (cpDefinition.isIgnoreSKUCombinations()) {
-				CPInstanceHelper cpInstanceHelper =
-					ServletContextUtil.getCPInstanceHelper();
+		if (!(_cpInstanceId > 0) && cpCatalogEntry.isIgnoreSKUCombinations()) {
+			CPInstanceHelper cpInstanceHelper =
+				ServletContextUtil.getCPInstanceHelper();
 
-				_cpInstance = cpInstanceHelper.getCPInstance(
-					_cpDefinitionId, null);
-			}
+			CPInstance cpInstance = cpInstanceHelper.getCPInstance(
+				_cpDefinitionId, null);
+
+			_cpInstanceId = cpInstance.getCPInstanceId();
 		}
 	}
 
 	protected CommerceProductPriceCalculation commerceProductPriceCalculation;
 	protected ConfigurationProvider configurationProvider;
+	protected CPDefinitionHelper cpDefinitionHelper;
+	protected CPInstanceHelper cpInstanceHelper;
 
 	private static final String _PAGE = "/price/page.jsp";
 
 	private static final Log _log = LogFactoryUtil.getLog(PriceTag.class);
 
+	private CommerceContext _commerceContext;
 	private CommerceDiscountValue _commerceDiscountValue;
 	private long _cpDefinitionId;
-	private CPInstance _cpInstance;
 	private long _cpInstanceId;
 	private DecimalFormat _decimalFormat;
 	private String _discountLabel;
@@ -390,5 +397,6 @@ public class PriceTag extends IncludeTag {
 	private boolean _showPercentage = true;
 	private boolean _showPriceRange;
 	private boolean _showPromo = true;
+	private ThemeDisplay _themeDisplay;
 
 }
