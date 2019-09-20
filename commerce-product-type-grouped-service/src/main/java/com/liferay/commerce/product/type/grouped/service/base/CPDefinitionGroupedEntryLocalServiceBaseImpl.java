@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.type.grouped.service.base;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry;
 import com.liferay.commerce.product.type.grouped.service.CPDefinitionGroupedEntryLocalService;
 import com.liferay.commerce.product.type.grouped.service.persistence.CPDefinitionGroupedEntryPersistence;
@@ -68,12 +66,11 @@ import javax.sql.DataSource;
  * @see com.liferay.commerce.product.type.grouped.service.impl.CPDefinitionGroupedEntryLocalServiceImpl
  * @generated
  */
-@ProviderType
 public abstract class CPDefinitionGroupedEntryLocalServiceBaseImpl
 	extends BaseLocalServiceImpl
 	implements CPDefinitionGroupedEntryLocalService, IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CPDefinitionGroupedEntryLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.product.type.grouped.service.CPDefinitionGroupedEntryLocalServiceUtil</code>.

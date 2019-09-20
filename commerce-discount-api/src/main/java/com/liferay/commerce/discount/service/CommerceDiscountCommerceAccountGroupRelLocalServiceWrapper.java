@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.discount.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceDiscountCommerceAccountGroupRelLocalService
  * @generated
  */
-@ProviderType
 public class CommerceDiscountCommerceAccountGroupRelLocalServiceWrapper
 	implements CommerceDiscountCommerceAccountGroupRelLocalService,
 			   ServiceWrapper

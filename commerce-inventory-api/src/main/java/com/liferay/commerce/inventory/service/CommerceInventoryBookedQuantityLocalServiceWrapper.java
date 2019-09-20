@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.inventory.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceInventoryBookedQuantityLocalService
  * @generated
  */
-@ProviderType
 public class CommerceInventoryBookedQuantityLocalServiceWrapper
 	implements CommerceInventoryBookedQuantityLocalService,
 			   ServiceWrapper<CommerceInventoryBookedQuantityLocalService> {
@@ -38,6 +35,11 @@ public class CommerceInventoryBookedQuantityLocalServiceWrapper
 			commerceInventoryBookedQuantityLocalService;
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link CommerceInventoryBookedQuantityLocalServiceUtil} to access the commerce inventory booked quantity local service. Add custom service methods to <code>com.liferay.commerce.inventory.service.impl.CommerceInventoryBookedQuantityLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
 	@Override
 	public com.liferay.commerce.inventory.model.CommerceInventoryBookedQuantity
 			addCommerceBookedQuantity(

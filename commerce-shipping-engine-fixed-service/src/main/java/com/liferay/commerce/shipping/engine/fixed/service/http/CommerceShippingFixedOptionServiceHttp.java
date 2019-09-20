@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.shipping.engine.fixed.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedOptionServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -51,7 +49,6 @@ import com.liferay.portal.kernel.util.MethodKey;
  * @see CommerceShippingFixedOptionServiceSoap
  * @generated
  */
-@ProviderType
 public class CommerceShippingFixedOptionServiceHttp {
 
 	public static

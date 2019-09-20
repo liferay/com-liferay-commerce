@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.shipping.engine.fixed.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOption;
 import com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionModel;
 import com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionSoap;
@@ -72,12 +70,11 @@ import java.util.function.Function;
  * @generated
  */
 @JSON(strict = true)
-@ProviderType
 public class CommerceShippingFixedOptionModelImpl
 	extends BaseModelImpl<CommerceShippingFixedOption>
 	implements CommerceShippingFixedOptionModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce shipping fixed option model instance should use the <code>CommerceShippingFixedOption</code> interface instead.

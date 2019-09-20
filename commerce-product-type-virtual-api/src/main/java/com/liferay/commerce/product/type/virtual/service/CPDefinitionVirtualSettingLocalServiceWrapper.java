@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.type.virtual.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CPDefinitionVirtualSettingLocalService
  * @generated
  */
-@ProviderType
 public class CPDefinitionVirtualSettingLocalServiceWrapper
 	implements CPDefinitionVirtualSettingLocalService,
 			   ServiceWrapper<CPDefinitionVirtualSettingLocalService> {

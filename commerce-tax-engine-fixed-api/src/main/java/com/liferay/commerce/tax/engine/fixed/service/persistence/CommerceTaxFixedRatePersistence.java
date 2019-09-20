@@ -40,7 +40,7 @@ import java.util.Set;
 public interface CommerceTaxFixedRatePersistence
 	extends BasePersistence<CommerceTaxFixedRate> {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceTaxFixedRateUtil} to access the commerce tax fixed rate persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.

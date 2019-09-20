@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.wish.list.service.persistence;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.wish.list.model.CommerceWishList;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -43,10 +41,9 @@ import org.osgi.util.tracker.ServiceTracker;
  * @see CommerceWishListPersistence
  * @generated
  */
-@ProviderType
 public class CommerceWishListUtil {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.

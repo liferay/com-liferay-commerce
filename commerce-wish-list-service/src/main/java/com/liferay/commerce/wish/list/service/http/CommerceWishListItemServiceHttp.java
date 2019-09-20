@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.wish.list.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.wish.list.service.CommerceWishListItemServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -51,7 +49,6 @@ import com.liferay.portal.kernel.util.MethodKey;
  * @see CommerceWishListItemServiceSoap
  * @generated
  */
-@ProviderType
 public class CommerceWishListItemServiceHttp {
 
 	public static com.liferay.commerce.wish.list.model.CommerceWishListItem

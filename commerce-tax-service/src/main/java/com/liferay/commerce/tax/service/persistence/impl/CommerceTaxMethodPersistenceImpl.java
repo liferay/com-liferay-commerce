@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.tax.service.persistence.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.tax.exception.NoSuchTaxMethodException;
 import com.liferay.commerce.tax.model.CommerceTaxMethod;
 import com.liferay.commerce.tax.model.impl.CommerceTaxMethodImpl;
@@ -65,12 +63,11 @@ import java.util.Set;
  * @author Marco Leo
  * @generated
  */
-@ProviderType
 public class CommerceTaxMethodPersistenceImpl
 	extends BasePersistenceImpl<CommerceTaxMethod>
 	implements CommerceTaxMethodPersistence {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Always use <code>CommerceTaxMethodUtil</code> to access the commerce tax method persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.

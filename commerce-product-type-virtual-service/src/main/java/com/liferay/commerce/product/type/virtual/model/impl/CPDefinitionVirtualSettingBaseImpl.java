@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.type.virtual.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting;
 import com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingLocalServiceUtil;
 
@@ -31,12 +29,11 @@ import com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSett
  * @see CPDefinitionVirtualSetting
  * @generated
  */
-@ProviderType
 public abstract class CPDefinitionVirtualSettingBaseImpl
 	extends CPDefinitionVirtualSettingModelImpl
 	implements CPDefinitionVirtualSetting {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a cp definition virtual setting model instance should use the <code>CPDefinitionVirtualSetting</code> interface instead.

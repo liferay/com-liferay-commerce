@@ -50,7 +50,7 @@ public interface CommerceCurrencyModel
 	extends BaseModel<CommerceCurrency>, LocalizedModel, ShardedModel,
 			StagedAuditedModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. All methods that expect a commerce currency model instance should use the {@link CommerceCurrency} interface instead.

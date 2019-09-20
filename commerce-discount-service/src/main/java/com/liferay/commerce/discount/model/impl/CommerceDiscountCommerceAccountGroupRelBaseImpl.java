@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.discount.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.discount.model.CommerceDiscountCommerceAccountGroupRel;
 import com.liferay.commerce.discount.service.CommerceDiscountCommerceAccountGroupRelLocalServiceUtil;
 
@@ -31,12 +29,11 @@ import com.liferay.commerce.discount.service.CommerceDiscountCommerceAccountGrou
  * @see CommerceDiscountCommerceAccountGroupRel
  * @generated
  */
-@ProviderType
 public abstract class CommerceDiscountCommerceAccountGroupRelBaseImpl
 	extends CommerceDiscountCommerceAccountGroupRelModelImpl
 	implements CommerceDiscountCommerceAccountGroupRel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce discount commerce account group rel model instance should use the <code>CommerceDiscountCommerceAccountGroupRel</code> interface instead.

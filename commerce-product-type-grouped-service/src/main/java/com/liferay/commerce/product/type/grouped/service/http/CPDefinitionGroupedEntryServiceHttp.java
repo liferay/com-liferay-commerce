@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.type.grouped.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.type.grouped.service.CPDefinitionGroupedEntryServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -51,7 +49,6 @@ import com.liferay.portal.kernel.util.MethodKey;
  * @see CPDefinitionGroupedEntryServiceSoap
  * @generated
  */
-@ProviderType
 public class CPDefinitionGroupedEntryServiceHttp {
 
 	public static void addCPDefinitionGroupedEntries(

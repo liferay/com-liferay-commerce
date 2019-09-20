@@ -51,7 +51,7 @@ public abstract class CommerceDiscountRelServiceBaseImpl
 	extends BaseServiceImpl
 	implements CommerceDiscountRelService, IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CommerceDiscountRelService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.discount.service.CommerceDiscountRelServiceUtil</code>.

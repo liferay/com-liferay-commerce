@@ -58,7 +58,7 @@ import java.util.List;
 public interface CPDefinitionGroupedEntryLocalService
 	extends BaseLocalService, PersistedModelLocalService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CPDefinitionGroupedEntryLocalServiceUtil} to access the cp definition grouped entry local service. Add custom service methods to <code>com.liferay.commerce.product.type.grouped.service.impl.CPDefinitionGroupedEntryLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.

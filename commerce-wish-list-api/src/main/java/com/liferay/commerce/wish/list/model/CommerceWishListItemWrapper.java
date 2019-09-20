@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.wish.list.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -36,7 +34,6 @@ import java.util.Objects;
  * @see CommerceWishListItem
  * @generated
  */
-@ProviderType
 public class CommerceWishListItemWrapper
 	implements CommerceWishListItem, ModelWrapper<CommerceWishListItem> {
 
@@ -351,6 +348,11 @@ public class CommerceWishListItemWrapper
 		return _commerceWishListItem.isNew();
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a commerce wish list item model instance should use the <code>CommerceWishListItem</code> interface instead.
+	 */
 	@Override
 	public void persist() {
 		_commerceWishListItem.persist();

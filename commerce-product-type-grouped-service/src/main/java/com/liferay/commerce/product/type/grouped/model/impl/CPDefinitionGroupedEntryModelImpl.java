@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.type.grouped.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry;
 import com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntryModel;
 import com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntrySoap;
@@ -65,12 +63,11 @@ import java.util.function.Function;
  * @generated
  */
 @JSON(strict = true)
-@ProviderType
 public class CPDefinitionGroupedEntryModelImpl
 	extends BaseModelImpl<CPDefinitionGroupedEntry>
 	implements CPDefinitionGroupedEntryModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a cp definition grouped entry model instance should use the <code>CPDefinitionGroupedEntry</code> interface instead.

@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.wish.list.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.wish.list.model.CommerceWishList;
 import com.liferay.commerce.wish.list.service.CommerceWishListLocalServiceUtil;
 
@@ -31,11 +29,10 @@ import com.liferay.commerce.wish.list.service.CommerceWishListLocalServiceUtil;
  * @see CommerceWishList
  * @generated
  */
-@ProviderType
 public abstract class CommerceWishListBaseImpl
 	extends CommerceWishListModelImpl implements CommerceWishList {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce wish list model instance should use the <code>CommerceWishList</code> interface instead.

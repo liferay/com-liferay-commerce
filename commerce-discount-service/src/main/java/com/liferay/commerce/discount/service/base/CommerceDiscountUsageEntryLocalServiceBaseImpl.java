@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.discount.service.base;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.discount.model.CommerceDiscountUsageEntry;
 import com.liferay.commerce.discount.service.CommerceDiscountUsageEntryLocalService;
 import com.liferay.commerce.discount.service.persistence.CommerceDiscountCommerceAccountGroupRelPersistence;
@@ -66,12 +64,11 @@ import javax.sql.DataSource;
  * @see com.liferay.commerce.discount.service.impl.CommerceDiscountUsageEntryLocalServiceImpl
  * @generated
  */
-@ProviderType
 public abstract class CommerceDiscountUsageEntryLocalServiceBaseImpl
 	extends BaseLocalServiceImpl
 	implements CommerceDiscountUsageEntryLocalService, IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CommerceDiscountUsageEntryLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.discount.service.CommerceDiscountUsageEntryLocalServiceUtil</code>.

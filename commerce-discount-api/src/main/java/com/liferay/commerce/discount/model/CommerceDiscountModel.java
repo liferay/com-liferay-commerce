@@ -47,7 +47,7 @@ public interface CommerceDiscountModel
 	extends BaseModel<CommerceDiscount>, ShardedModel, StagedAuditedModel,
 			WorkflowedModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. All methods that expect a commerce discount model instance should use the {@link CommerceDiscount} interface instead.

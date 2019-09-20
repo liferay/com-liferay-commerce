@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.inventory.service.persistence.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.inventory.exception.NoSuchInventoryBookedQuantityException;
 import com.liferay.commerce.inventory.model.CommerceInventoryBookedQuantity;
 import com.liferay.commerce.inventory.model.impl.CommerceInventoryBookedQuantityImpl;
@@ -67,12 +65,11 @@ import java.util.Set;
  * @author Luca Pellizzon
  * @generated
  */
-@ProviderType
 public class CommerceInventoryBookedQuantityPersistenceImpl
 	extends BasePersistenceImpl<CommerceInventoryBookedQuantity>
 	implements CommerceInventoryBookedQuantityPersistence {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Always use <code>CommerceInventoryBookedQuantityUtil</code> to access the commerce inventory booked quantity persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.

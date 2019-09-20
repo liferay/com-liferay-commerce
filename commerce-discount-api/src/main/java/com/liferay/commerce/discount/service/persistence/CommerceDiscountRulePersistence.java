@@ -40,7 +40,7 @@ import java.util.Set;
 public interface CommerceDiscountRulePersistence
 	extends BasePersistence<CommerceDiscountRule> {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceDiscountRuleUtil} to access the commerce discount rule persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.

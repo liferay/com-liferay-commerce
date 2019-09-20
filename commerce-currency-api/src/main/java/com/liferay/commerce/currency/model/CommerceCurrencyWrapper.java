@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.currency.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.exportimport.kernel.lar.StagedModelType;
 import com.liferay.portal.kernel.model.ModelWrapper;
@@ -39,7 +37,6 @@ import java.util.Objects;
  * @see CommerceCurrency
  * @generated
  */
-@ProviderType
 public class CommerceCurrencyWrapper
 	implements CommerceCurrency, ModelWrapper<CommerceCurrency> {
 
@@ -606,6 +603,11 @@ public class CommerceCurrencyWrapper
 		return _commerceCurrency.isPrimary();
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a commerce currency model instance should use the <code>CommerceCurrency</code> interface instead.
+	 */
 	@Override
 	public void persist() {
 		_commerceCurrency.persist();

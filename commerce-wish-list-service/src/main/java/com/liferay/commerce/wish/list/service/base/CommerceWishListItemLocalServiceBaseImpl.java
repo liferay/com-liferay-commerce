@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.wish.list.service.base;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.wish.list.model.CommerceWishListItem;
 import com.liferay.commerce.wish.list.service.CommerceWishListItemLocalService;
 import com.liferay.commerce.wish.list.service.persistence.CommerceWishListItemPersistence;
@@ -63,12 +61,11 @@ import javax.sql.DataSource;
  * @see com.liferay.commerce.wish.list.service.impl.CommerceWishListItemLocalServiceImpl
  * @generated
  */
-@ProviderType
 public abstract class CommerceWishListItemLocalServiceBaseImpl
 	extends BaseLocalServiceImpl
 	implements CommerceWishListItemLocalService, IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CommerceWishListItemLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.wish.list.service.CommerceWishListItemLocalServiceUtil</code>.

@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.discount.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import java.io.Serializable;
 
 import java.math.BigDecimal;
@@ -30,7 +28,6 @@ import java.util.List;
  * @author Marco Leo
  * @generated
  */
-@ProviderType
 public class CommerceDiscountSoap implements Serializable {
 
 	public static CommerceDiscountSoap toSoapModel(CommerceDiscount model) {

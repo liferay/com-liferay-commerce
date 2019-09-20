@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.wish.list.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceWishListService
  * @generated
  */
-@ProviderType
 public class CommerceWishListServiceWrapper
 	implements CommerceWishListService,
 			   ServiceWrapper<CommerceWishListService> {
@@ -36,6 +33,11 @@ public class CommerceWishListServiceWrapper
 		_commerceWishListService = commerceWishListService;
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link CommerceWishListServiceUtil} to access the commerce wish list remote service. Add custom service methods to <code>com.liferay.commerce.wish.list.service.impl.CommerceWishListServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
 	@Override
 	public com.liferay.commerce.wish.list.model.CommerceWishList
 			addCommerceWishList(

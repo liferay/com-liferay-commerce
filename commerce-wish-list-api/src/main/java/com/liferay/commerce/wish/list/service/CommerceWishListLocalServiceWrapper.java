@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.wish.list.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceWishListLocalService
  * @generated
  */
-@ProviderType
 public class CommerceWishListLocalServiceWrapper
 	implements CommerceWishListLocalService,
 			   ServiceWrapper<CommerceWishListLocalService> {

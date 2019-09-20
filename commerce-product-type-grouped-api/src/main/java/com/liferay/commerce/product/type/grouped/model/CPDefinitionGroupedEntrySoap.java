@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.type.grouped.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -28,7 +26,6 @@ import java.util.List;
  * @author Andrea Di Giorgi
  * @generated
  */
-@ProviderType
 public class CPDefinitionGroupedEntrySoap implements Serializable {
 
 	public static CPDefinitionGroupedEntrySoap toSoapModel(

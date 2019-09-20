@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.tax.engine.fixed.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -28,7 +26,6 @@ import java.util.List;
  * @author Alessio Antonio Rendina
  * @generated
  */
-@ProviderType
 public class CommerceTaxFixedRateSoap implements Serializable {
 
 	public static CommerceTaxFixedRateSoap toSoapModel(

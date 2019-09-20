@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.type.virtual.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -65,7 +63,6 @@ import java.util.Map;
  * @see CPDefinitionVirtualSettingServiceHttp
  * @generated
  */
-@ProviderType
 public class CPDefinitionVirtualSettingServiceSoap {
 
 	public static com.liferay.commerce.product.type.virtual.model.

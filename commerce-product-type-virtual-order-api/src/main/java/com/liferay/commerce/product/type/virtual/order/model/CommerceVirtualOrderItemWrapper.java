@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.type.virtual.order.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.exportimport.kernel.lar.StagedModelType;
 import com.liferay.portal.kernel.model.ModelWrapper;
@@ -37,7 +35,6 @@ import java.util.Objects;
  * @see CommerceVirtualOrderItem
  * @generated
  */
-@ProviderType
 public class CommerceVirtualOrderItemWrapper
 	implements CommerceVirtualOrderItem,
 			   ModelWrapper<CommerceVirtualOrderItem> {
@@ -462,6 +459,11 @@ public class CommerceVirtualOrderItemWrapper
 		return _commerceVirtualOrderItem.isNew();
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a commerce virtual order item model instance should use the <code>CommerceVirtualOrderItem</code> interface instead.
+	 */
 	@Override
 	public void persist() {
 		_commerceVirtualOrderItem.persist();

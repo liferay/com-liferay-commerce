@@ -56,7 +56,7 @@ import java.util.List;
 public interface CommerceWishListItemLocalService
 	extends BaseLocalService, PersistedModelLocalService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceWishListItemLocalServiceUtil} to access the commerce wish list item local service. Add custom service methods to <code>com.liferay.commerce.wish.list.service.impl.CommerceWishListItemLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.

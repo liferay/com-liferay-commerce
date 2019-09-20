@@ -45,7 +45,7 @@ public interface CommercePriceListModel
 	extends BaseModel<CommercePriceList>, ShardedModel, StagedGroupedModel,
 			WorkflowedModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. All methods that expect a commerce price list model instance should use the {@link CommercePriceList} interface instead.

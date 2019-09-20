@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.discount.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -36,7 +34,6 @@ import java.util.Objects;
  * @see CommerceDiscountRule
  * @generated
  */
-@ProviderType
 public class CommerceDiscountRuleWrapper
 	implements CommerceDiscountRule, ModelWrapper<CommerceDiscountRule> {
 
@@ -294,6 +291,11 @@ public class CommerceDiscountRuleWrapper
 		return _commerceDiscountRule.isNew();
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a commerce discount rule model instance should use the <code>CommerceDiscountRule</code> interface instead.
+	 */
 	@Override
 	public void persist() {
 		_commerceDiscountRule.persist();

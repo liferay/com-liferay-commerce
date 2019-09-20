@@ -56,7 +56,7 @@ import java.util.List;
 public interface CommerceDiscountRuleLocalService
 	extends BaseLocalService, PersistedModelLocalService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceDiscountRuleLocalServiceUtil} to access the commerce discount rule local service. Add custom service methods to <code>com.liferay.commerce.discount.service.impl.CommerceDiscountRuleLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.

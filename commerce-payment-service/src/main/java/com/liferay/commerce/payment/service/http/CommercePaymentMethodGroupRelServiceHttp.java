@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.payment.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -51,7 +49,6 @@ import com.liferay.portal.kernel.util.MethodKey;
  * @see CommercePaymentMethodGroupRelServiceSoap
  * @generated
  */
-@ProviderType
 public class CommercePaymentMethodGroupRelServiceHttp {
 
 	public static com.liferay.commerce.model.CommerceAddressRestriction

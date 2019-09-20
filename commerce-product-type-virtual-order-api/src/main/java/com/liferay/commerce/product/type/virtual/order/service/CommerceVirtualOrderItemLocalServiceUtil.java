@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.type.virtual.order.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.util.tracker.ServiceTracker;
@@ -32,10 +30,9 @@ import org.osgi.util.tracker.ServiceTracker;
  * @see CommerceVirtualOrderItemLocalService
  * @generated
  */
-@ProviderType
 public class CommerceVirtualOrderItemLocalServiceUtil {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify this class directly. Add custom service methods to <code>com.liferay.commerce.product.type.virtual.order.service.impl.CommerceVirtualOrderItemLocalServiceImpl</code> and rerun ServiceBuilder to regenerate this class.

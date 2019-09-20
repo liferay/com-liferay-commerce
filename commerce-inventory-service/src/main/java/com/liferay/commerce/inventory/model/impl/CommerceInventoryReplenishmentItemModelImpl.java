@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.inventory.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.inventory.model.CommerceInventoryReplenishmentItem;
 import com.liferay.commerce.inventory.model.CommerceInventoryReplenishmentItemModel;
 import com.liferay.commerce.inventory.model.CommerceInventoryReplenishmentItemSoap;
@@ -63,12 +61,11 @@ import java.util.function.Function;
  * @generated
  */
 @JSON(strict = true)
-@ProviderType
 public class CommerceInventoryReplenishmentItemModelImpl
 	extends BaseModelImpl<CommerceInventoryReplenishmentItem>
 	implements CommerceInventoryReplenishmentItemModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce inventory replenishment item model instance should use the <code>CommerceInventoryReplenishmentItem</code> interface instead.

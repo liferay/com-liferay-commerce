@@ -58,7 +58,7 @@ import java.util.List;
 public interface CommerceShippingFixedOptionRelLocalService
 	extends BaseLocalService, PersistedModelLocalService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceShippingFixedOptionRelLocalServiceUtil} to access the commerce shipping fixed option rel local service. Add custom service methods to <code>com.liferay.commerce.shipping.engine.fixed.service.impl.CommerceShippingFixedOptionRelLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.

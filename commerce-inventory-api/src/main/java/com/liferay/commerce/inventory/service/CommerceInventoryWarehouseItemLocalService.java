@@ -55,7 +55,7 @@ import java.util.List;
 public interface CommerceInventoryWarehouseItemLocalService
 	extends BaseLocalService, PersistedModelLocalService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceInventoryWarehouseItemLocalServiceUtil} to access the commerce inventory warehouse item local service. Add custom service methods to <code>com.liferay.commerce.inventory.service.impl.CommerceInventoryWarehouseItemLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.

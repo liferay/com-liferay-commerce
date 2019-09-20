@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.tax.engine.fixed.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceTaxFixedRateAddressRelService
  * @generated
  */
-@ProviderType
 public class CommerceTaxFixedRateAddressRelServiceWrapper
 	implements CommerceTaxFixedRateAddressRelService,
 			   ServiceWrapper<CommerceTaxFixedRateAddressRelService> {
@@ -38,6 +35,11 @@ public class CommerceTaxFixedRateAddressRelServiceWrapper
 			commerceTaxFixedRateAddressRelService;
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link CommerceTaxFixedRateAddressRelServiceUtil} to access the commerce tax fixed rate address rel remote service. Add custom service methods to <code>com.liferay.commerce.tax.engine.fixed.service.impl.CommerceTaxFixedRateAddressRelServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
 	@Override
 	public
 		com.liferay.commerce.tax.engine.fixed.model.

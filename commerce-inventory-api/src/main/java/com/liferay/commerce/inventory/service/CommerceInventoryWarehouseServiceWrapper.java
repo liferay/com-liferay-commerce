@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.inventory.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceInventoryWarehouseService
  * @generated
  */
-@ProviderType
 public class CommerceInventoryWarehouseServiceWrapper
 	implements CommerceInventoryWarehouseService,
 			   ServiceWrapper<CommerceInventoryWarehouseService> {
@@ -36,6 +33,11 @@ public class CommerceInventoryWarehouseServiceWrapper
 		_commerceInventoryWarehouseService = commerceInventoryWarehouseService;
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link CommerceInventoryWarehouseServiceUtil} to access the commerce inventory warehouse remote service. Add custom service methods to <code>com.liferay.commerce.inventory.service.impl.CommerceInventoryWarehouseServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
 	@Override
 	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouse
 			addCommerceInventoryWarehouse(

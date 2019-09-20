@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.notification.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.notification.model.CommerceNotificationQueueEntry;
 import com.liferay.commerce.notification.model.CommerceNotificationQueueEntryModel;
 import com.liferay.commerce.notification.model.CommerceNotificationQueueEntrySoap;
@@ -63,12 +61,11 @@ import java.util.function.Function;
  * @generated
  */
 @JSON(strict = true)
-@ProviderType
 public class CommerceNotificationQueueEntryModelImpl
 	extends BaseModelImpl<CommerceNotificationQueueEntry>
 	implements CommerceNotificationQueueEntryModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce notification queue entry model instance should use the <code>CommerceNotificationQueueEntry</code> interface instead.

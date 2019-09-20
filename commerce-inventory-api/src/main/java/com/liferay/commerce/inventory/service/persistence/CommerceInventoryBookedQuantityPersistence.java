@@ -41,7 +41,7 @@ import java.util.Set;
 public interface CommerceInventoryBookedQuantityPersistence
 	extends BasePersistence<CommerceInventoryBookedQuantity> {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceInventoryBookedQuantityUtil} to access the commerce inventory booked quantity persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.

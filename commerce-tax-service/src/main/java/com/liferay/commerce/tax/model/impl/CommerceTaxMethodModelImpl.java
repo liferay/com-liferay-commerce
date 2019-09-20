@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.tax.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.tax.model.CommerceTaxMethod;
 import com.liferay.commerce.tax.model.CommerceTaxMethodModel;
 import com.liferay.commerce.tax.model.CommerceTaxMethodSoap;
@@ -71,11 +69,10 @@ import java.util.function.Function;
  * @generated
  */
 @JSON(strict = true)
-@ProviderType
 public class CommerceTaxMethodModelImpl
 	extends BaseModelImpl<CommerceTaxMethod> implements CommerceTaxMethodModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce tax method model instance should use the <code>CommerceTaxMethod</code> interface instead.
