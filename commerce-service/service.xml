@@ -557,9 +557,9 @@
 		<column name="shippingOptionName" type="String" />
 		<column name="carrier" type="String" />
 		<column name="trackingNumber" type="String" />
-		<column name="status" type="int" />
 		<column name="shippingDate" type="Date" />
 		<column name="expectedDate" type="Date" />
+		<column name="status" type="int" />
 
 		<!-- Order -->
 

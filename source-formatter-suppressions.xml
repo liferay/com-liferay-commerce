@@ -78,6 +78,8 @@
 		<suppress checks="JavaAPISignatureCheck" files="headless/headless-commerce/headless-commerce-admin-pricing-impl/src/main/java/com/liferay/headless/commerce/admin/pricing/internal/util/v1_0/PriceListAccountGroupUtil\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="headless/headless-commerce/headless-commerce-admin-pricing-impl/src/main/java/com/liferay/headless/commerce/admin/pricing/internal/util/v1_0/TierPriceUtil\.java" />
 		<suppress checks="JavaConfigurationCategoryCheck" files=".*" />
+		<suppress checks="JavaInternalPackageCheck" files="commerce-product-service/.*" />
+		<suppress checks="JavaInternalPackageCheck" files="commerce-service/.*" />
 		<suppress checks="JavaModuleServiceProxyFactoryCheck" files="commerce-account-service/src/main/java/com/liferay/commerce/account/service/impl/CommerceAccountLocalServiceImpl\.java" />
 		<suppress checks="JSPLanguageKeysCheck" files="commerce-theme-minium/commerce-theme-minium-login-web-fragment/src/main/resources/META-INF/resources/login\.jsp" />
 		<suppress checks="XMLServiceEntityNameCheck" files="commerce-account-service/service\.xml" />
