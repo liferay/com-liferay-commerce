@@ -133,6 +133,15 @@ public class CommerceOrderItemServiceWrapper
 	}
 
 	@Override
+	public int getCommerceOrderItemsCount(
+			long commerceOrderId, long cpInstanceId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceOrderItemService.getCommerceOrderItemsCount(
+			commerceOrderId, cpInstanceId);
+	}
+
+	@Override
 	public int getCommerceOrderItemsQuantity(long commerceOrderId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 

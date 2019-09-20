@@ -559,6 +559,11 @@ public class CommerceOrderWrapper
 		return _commerceOrder.getCommerceOrderItems(cpInstanceId);
 	}
 
+	@Override
+	public int getCommerceOrderItemsCount(long cpInstanceId) {
+		return _commerceOrder.getCommerceOrderItemsCount(cpInstanceId);
+	}
+
 	/**
 	 * Returns the commerce payment method key of this commerce order.
 	 *

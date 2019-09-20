@@ -354,6 +354,13 @@ public class CommerceOrderItemLocalServiceUtil {
 		return getService().getCommerceOrderItemsCount(commerceOrderId);
 	}
 
+	public static int getCommerceOrderItemsCount(
+		long commerceOrderId, long cpInstanceId) {
+
+		return getService().getCommerceOrderItemsCount(
+			commerceOrderId, cpInstanceId);
+	}
+
 	public static int getCommerceOrderItemsQuantity(long commerceOrderId) {
 		return getService().getCommerceOrderItemsQuantity(commerceOrderId);
 	}

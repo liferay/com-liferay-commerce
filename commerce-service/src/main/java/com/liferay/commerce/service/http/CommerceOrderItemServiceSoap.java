@@ -250,6 +250,24 @@ public class CommerceOrderItemServiceSoap {
 		}
 	}
 
+	public static int getCommerceOrderItemsCount(
+			long commerceOrderId, long cpInstanceId)
+		throws RemoteException {
+
+		try {
+			int returnValue =
+				CommerceOrderItemServiceUtil.getCommerceOrderItemsCount(
+					commerceOrderId, cpInstanceId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static int getCommerceOrderItemsQuantity(long commerceOrderId)
 		throws RemoteException {
 
