@@ -347,16 +347,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			long companyId, long groupId, int start, int end)
 		throws PortalException {
 
-		long[] commerceAccountIds =
-			_commerceAccountHelper.getUserCommerceAccountIds(
-				getUserId(), groupId);
-
-		if (PortalPermissionUtil.contains(
-				getPermissionChecker(),
-				CommerceAccountActionKeys.MANAGE_ALL_ACCOUNTS)) {
-
-			commerceAccountIds = null;
-		}
+		long[] commerceAccountIds = _getCommerceAccountIds(groupId);
 
 		return commerceOrderLocalService.getCommerceOrders(
 			companyId, groupId, commerceAccountIds,
@@ -388,16 +379,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 	public long getPendingCommerceOrdersCount(long companyId, long groupId)
 		throws PortalException {
 
-		long[] commerceAccountIds =
-			_commerceAccountHelper.getUserCommerceAccountIds(
-				getUserId(), groupId);
-
-		if (PortalPermissionUtil.contains(
-				getPermissionChecker(),
-				CommerceAccountActionKeys.MANAGE_ALL_ACCOUNTS)) {
-
-			commerceAccountIds = null;
-		}
+		long[] commerceAccountIds = _getCommerceAccountIds(groupId);
 
 		return commerceOrderLocalService.getCommerceOrdersCount(
 			companyId, groupId, commerceAccountIds,
@@ -427,16 +409,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			long companyId, long groupId, int start, int end)
 		throws PortalException {
 
-		long[] commerceAccountIds =
-			_commerceAccountHelper.getUserCommerceAccountIds(
-				getUserId(), groupId);
-
-		if (PortalPermissionUtil.contains(
-				getPermissionChecker(),
-				CommerceAccountActionKeys.MANAGE_ALL_ACCOUNTS)) {
-
-			commerceAccountIds = null;
-		}
+		long[] commerceAccountIds = _getCommerceAccountIds(groupId);
 
 		return commerceOrderLocalService.getCommerceOrders(
 			companyId, groupId, commerceAccountIds,
@@ -468,16 +441,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 	public long getPlacedCommerceOrdersCount(long companyId, long groupId)
 		throws PortalException {
 
-		long[] commerceAccountIds =
-			_commerceAccountHelper.getUserCommerceAccountIds(
-				getUserId(), groupId);
-
-		if (PortalPermissionUtil.contains(
-				getPermissionChecker(),
-				CommerceAccountActionKeys.MANAGE_ALL_ACCOUNTS)) {
-
-			commerceAccountIds = null;
-		}
+		long[] commerceAccountIds = _getCommerceAccountIds(groupId);
 
 		return commerceOrderLocalService.getCommerceOrdersCount(
 			companyId, groupId, commerceAccountIds,
@@ -853,6 +817,21 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 				getPermissionChecker(),
 				commerceAccount.getCommerceAccountGroup(), action);
 		}
+	}
+
+	private long[] _getCommerceAccountIds(long groupId) throws PortalException {
+		long[] commerceAccountIds = null;
+
+		if (!PortalPermissionUtil.contains(
+			getPermissionChecker(),
+			CommerceAccountActionKeys.MANAGE_ALL_ACCOUNTS)) {
+
+			commerceAccountIds =
+				_commerceAccountHelper.getUserCommerceAccountIds(
+					getUserId(), groupId);;
+		}
+
+		return commerceAccountIds;
 	}
 
 	private static volatile ModelResourcePermission<CommerceOrder>

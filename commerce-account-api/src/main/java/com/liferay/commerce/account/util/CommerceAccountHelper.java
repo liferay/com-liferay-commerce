@@ -42,7 +42,7 @@ public interface CommerceAccountHelper {
 			long groupId, HttpServletRequest httpServletRequest)
 		throws PortalException;
 
-	public long[] getUserCommerceAccountIds(long userId, long groupId)
+	public long[] getUserCommerceAccountIds(long userId, long siteGroupId)
 		throws PortalException;
 
 	public void setCurrentCommerceAccount(
