@@ -117,10 +117,11 @@ portletURL.setParameter("mvcRenderCommandName", "viewCommerceAccount");
 			</div>
 		</div>
 	</section>
-</div>
 
-<liferay-frontend:screen-navigation
-	context="<%= commerceAccount %>"
-	key="<%= CommerceAccountScreenNavigationConstants.SCREEN_NAVIGATION_KEY %>"
-	portletURL="<%= portletURL %>"
-/>
+	<liferay-frontend:screen-navigation
+			context="<%= commerceAccount %>"
+			key="<%= CommerceAccountScreenNavigationConstants.SCREEN_NAVIGATION_KEY %>"
+			portletURL="<%= portletURL %>"
+			containerWrapperCssClass="mt-1"
+	/>
+</div>
