@@ -18,7 +18,7 @@
 
 <%
 boolean checked = (boolean)request.getAttribute("liferay-commerce:compare-product:checked");
-CPDefinition cpDefinition = (CPDefinition)request.getAttribute("liferay-commerce:compare-product:cpDefinition");
+long cpDefinitionId = (long)request.getAttribute("liferay-commerce:compare-product:cpDefinitionId");
 
 String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_commerce_compare_product_page") + StringPool.UNDERLINE;
 %>
@@ -28,8 +28,8 @@ String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_commerce_
 <div class="commerce-compare-product-container">
 	<aui:form action="<%= editCompareProductActionURL %>" name='<%= randomNamespace + "Fm" %>' portletNamespace="<%= PortalUtil.getPortletNamespace(CPPortletKeys.CP_COMPARE_CONTENT_WEB) %>">
 		<aui:input name="redirect" type="hidden" value="<%= PortalUtil.getCurrentURL(request) %>" />
-		<aui:input name="cpDefinitionId" type="hidden" value="<%= cpDefinition.getCPDefinitionId() %>" />
+		<aui:input name="cpDefinitionId" type="hidden" value="<%= cpDefinitionId %>" />
 
-		<aui:input checked="<%= checked %>" ignoreRequestValue="<%= true %>" label="compare" name='<%= cpDefinition.getCPDefinitionId() + "Compare" %>' onClick="this.form.submit();" type="checkbox" />
+		<aui:input checked="<%= checked %>" ignoreRequestValue="<%= true %>" label="compare" name='<%= cpDefinitionId + "Compare" %>' onClick="this.form.submit();" type="checkbox" />
 	</aui:form>
 </div>

@@ -18,7 +18,7 @@
 
 <%
 int[] allowedOrderQuantities = (int[])request.getAttribute("liferay-commerce:quantity-input:allowedOrderQuantities");
-CPDefinition cpDefinition = (CPDefinition)request.getAttribute("liferay-commerce:quantity-input:cpDefinition");
+long cpDefinitionId = (long)request.getAttribute("liferay-commerce:quantity-input:cpDefinitionId");
 int maxOrderQuantity = (int)request.getAttribute("liferay-commerce:quantity-input:maxOrderQuantity");
 int minOrderQuantity = (int)request.getAttribute("liferay-commerce:quantity-input:minOrderQuantity");
 int multipleOrderQuantity = (int)request.getAttribute("liferay-commerce:quantity-input:multipleOrderQuantity");
@@ -26,8 +26,6 @@ String name = (String)request.getAttribute("liferay-commerce:quantity-input:name
 boolean showLabel = (boolean)request.getAttribute("liferay-commerce:quantity-input:showLabel");
 boolean useSelect = (boolean)request.getAttribute("liferay-commerce:quantity-input:useSelect");
 int value = (int)request.getAttribute("liferay-commerce:quantity-input:value");
-
-long cpDefinitionId = cpDefinition.getCPDefinitionId();
 
 if (Validator.isNull(name)) {
 	name = cpDefinitionId + "Quantity";

@@ -18,7 +18,7 @@
 
 <%
 CommerceDiscountValue commerceDiscountValue = (CommerceDiscountValue)request.getAttribute("liferay-commerce:price:commerceDiscountValue");
-CPInstance cpInstance = (CPInstance)request.getAttribute("liferay-commerce:price:cpInstance");
+long cpInstanceId = (long)request.getAttribute("liferay-commerce:price:cpInstanceId");
 DecimalFormat decimalFormat = (DecimalFormat)request.getAttribute("liferay-commerce:price:decimalFormat");
 boolean displayDiscountLevels = (boolean)request.getAttribute("liferay-commerce:price:displayDiscountLevels");
 String discountLabel = (String)request.getAttribute("liferay-commerce:price:discountLabel");
@@ -34,7 +34,7 @@ boolean showPriceRange = (boolean)request.getAttribute("liferay-commerce:price:s
 <c:choose>
 	<c:when test="<%= Validator.isNull(formattedPrice) %>">
 	</c:when>
-	<c:when test="<%= cpInstance == null %>">
+	<c:when test="<%= cpInstanceId <= 0 %>">
 		<span class="product-price">
 			<c:if test="<%= !showPriceRange %>">
 				<span class="product-price-label">
