@@ -387,6 +387,14 @@ public class CommerceOrderItemLocalServiceWrapper
 	}
 
 	@Override
+	public int getCommerceOrderItemsCount(
+		long commerceOrderId, long cpInstanceId) {
+
+		return _commerceOrderItemLocalService.getCommerceOrderItemsCount(
+			commerceOrderId, cpInstanceId);
+	}
+
+	@Override
 	public int getCommerceOrderItemsQuantity(long commerceOrderId) {
 		return _commerceOrderItemLocalService.getCommerceOrderItemsQuantity(
 			commerceOrderId);
