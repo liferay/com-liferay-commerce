@@ -21,6 +21,7 @@ import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHelper;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
+import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
@@ -36,6 +37,7 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Marco Leo
  * @author Alessio Antonio Rendina
+ * @author Luca Pellizzon
  */
 @Component(immediate = true, service = ServletContextUtil.class)
 public class ServletContextUtil {
@@ -68,6 +70,10 @@ public class ServletContextUtil {
 
 	public static final ConfigurationProvider getConfigurationProvider() {
 		return _instance._getConfigurationProvider();
+	}
+
+	public static final CPDefinitionHelper getCPDefinitionHelper() {
+		return _instance._getCPDefinitionHelper();
 	}
 
 	public static final CPInstanceHelper getCPInstanceHelper() {
@@ -150,6 +156,13 @@ public class ServletContextUtil {
 	}
 
 	@Reference(unbind = "-")
+	protected void setCPDefinitionHelper(
+		CPDefinitionHelper cpDefinitionHelper) {
+
+		_cpDefinitionHelper = cpDefinitionHelper;
+	}
+
+	@Reference(unbind = "-")
 	protected void setCPInstanceHelper(CPInstanceHelper cpInstanceHelper) {
 		_cpInstanceHelper = cpInstanceHelper;
 	}
@@ -207,6 +220,10 @@ public class ServletContextUtil {
 		return _configurationProvider;
 	}
 
+	private CPDefinitionHelper _getCPDefinitionHelper() {
+		return _cpDefinitionHelper;
+	}
+
 	private CPInstanceHelper _getCPInstanceHelper() {
 		return _cpInstanceHelper;
 	}
@@ -236,6 +253,7 @@ public class ServletContextUtil {
 	private CommercePriceListLocalService _commercePriceListLocalService;
 	private CommerceProductPriceCalculation _commerceProductPriceCalculation;
 	private ConfigurationProvider _configurationProvider;
+	private CPDefinitionHelper _cpDefinitionHelper;
 	private CPInstanceHelper _cpInstanceHelper;
 	private CPSubscriptionTypeRegistry _cpSubscriptionTypeRegistry;
 	private PanelAppRegistry _panelAppRegistry;
