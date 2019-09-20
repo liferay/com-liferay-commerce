@@ -431,6 +431,13 @@ public class CommerceOrderPersistenceTest {
 	}
 
 	@Test
+	public void testCountByCommerceAccountId() throws Exception {
+		_persistence.countByCommerceAccountId(RandomTestUtil.nextLong());
+
+		_persistence.countByCommerceAccountId(0L);
+	}
+
+	@Test
 	public void testCountByBillingAddressId() throws Exception {
 		_persistence.countByBillingAddressId(RandomTestUtil.nextLong());
 

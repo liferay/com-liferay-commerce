@@ -2518,6 +2518,534 @@ public class CommerceOrderPersistenceImpl
 	private static final String _FINDER_COLUMN_USERID_USERID_2 =
 		"commerceOrder.userId = ?";
 
+	private FinderPath _finderPathWithPaginationFindByCommerceAccountId;
+	private FinderPath _finderPathWithoutPaginationFindByCommerceAccountId;
+	private FinderPath _finderPathCountByCommerceAccountId;
+
+	/**
+	 * Returns all the commerce orders where commerceAccountId = &#63;.
+	 *
+	 * @param commerceAccountId the commerce account ID
+	 * @return the matching commerce orders
+	 */
+	@Override
+	public List<CommerceOrder> findByCommerceAccountId(long commerceAccountId) {
+		return findByCommerceAccountId(
+			commerceAccountId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the commerce orders where commerceAccountId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceOrderModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param commerceAccountId the commerce account ID
+	 * @param start the lower bound of the range of commerce orders
+	 * @param end the upper bound of the range of commerce orders (not inclusive)
+	 * @return the range of matching commerce orders
+	 */
+	@Override
+	public List<CommerceOrder> findByCommerceAccountId(
+		long commerceAccountId, int start, int end) {
+
+		return findByCommerceAccountId(commerceAccountId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce orders where commerceAccountId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceOrderModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param commerceAccountId the commerce account ID
+	 * @param start the lower bound of the range of commerce orders
+	 * @param end the upper bound of the range of commerce orders (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce orders
+	 */
+	@Override
+	public List<CommerceOrder> findByCommerceAccountId(
+		long commerceAccountId, int start, int end,
+		OrderByComparator<CommerceOrder> orderByComparator) {
+
+		return findByCommerceAccountId(
+			commerceAccountId, start, end, orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce orders where commerceAccountId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceOrderModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param commerceAccountId the commerce account ID
+	 * @param start the lower bound of the range of commerce orders
+	 * @param end the upper bound of the range of commerce orders (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching commerce orders
+	 */
+	@Override
+	public List<CommerceOrder> findByCommerceAccountId(
+		long commerceAccountId, int start, int end,
+		OrderByComparator<CommerceOrder> orderByComparator,
+		boolean useFinderCache) {
+
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+			(orderByComparator == null)) {
+
+			pagination = false;
+
+			if (useFinderCache) {
+				finderPath =
+					_finderPathWithoutPaginationFindByCommerceAccountId;
+				finderArgs = new Object[] {commerceAccountId};
+			}
+		}
+		else if (useFinderCache) {
+			finderPath = _finderPathWithPaginationFindByCommerceAccountId;
+			finderArgs = new Object[] {
+				commerceAccountId, start, end, orderByComparator
+			};
+		}
+
+		List<CommerceOrder> list = null;
+
+		if (useFinderCache) {
+			list = (List<CommerceOrder>)finderCache.getResult(
+				finderPath, finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (CommerceOrder commerceOrder : list) {
+					if (commerceAccountId !=
+							commerceOrder.getCommerceAccountId()) {
+
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_COMMERCEORDER_WHERE);
+
+			query.append(_FINDER_COLUMN_COMMERCEACCOUNTID_COMMERCEACCOUNTID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
+			}
+			else if (pagination) {
+				query.append(CommerceOrderModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(commerceAccountId);
+
+				if (!pagination) {
+					list = (List<CommerceOrder>)QueryUtil.list(
+						q, getDialect(), start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<CommerceOrder>)QueryUtil.list(
+						q, getDialect(), start, end);
+				}
+
+				cacheResult(list);
+
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
+			}
+			catch (Exception e) {
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first commerce order in the ordered set where commerceAccountId = &#63;.
+	 *
+	 * @param commerceAccountId the commerce account ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce order
+	 * @throws NoSuchOrderException if a matching commerce order could not be found
+	 */
+	@Override
+	public CommerceOrder findByCommerceAccountId_First(
+			long commerceAccountId,
+			OrderByComparator<CommerceOrder> orderByComparator)
+		throws NoSuchOrderException {
+
+		CommerceOrder commerceOrder = fetchByCommerceAccountId_First(
+			commerceAccountId, orderByComparator);
+
+		if (commerceOrder != null) {
+			return commerceOrder;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("commerceAccountId=");
+		msg.append(commerceAccountId);
+
+		msg.append("}");
+
+		throw new NoSuchOrderException(msg.toString());
+	}
+
+	/**
+	 * Returns the first commerce order in the ordered set where commerceAccountId = &#63;.
+	 *
+	 * @param commerceAccountId the commerce account ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce order, or <code>null</code> if a matching commerce order could not be found
+	 */
+	@Override
+	public CommerceOrder fetchByCommerceAccountId_First(
+		long commerceAccountId,
+		OrderByComparator<CommerceOrder> orderByComparator) {
+
+		List<CommerceOrder> list = findByCommerceAccountId(
+			commerceAccountId, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last commerce order in the ordered set where commerceAccountId = &#63;.
+	 *
+	 * @param commerceAccountId the commerce account ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce order
+	 * @throws NoSuchOrderException if a matching commerce order could not be found
+	 */
+	@Override
+	public CommerceOrder findByCommerceAccountId_Last(
+			long commerceAccountId,
+			OrderByComparator<CommerceOrder> orderByComparator)
+		throws NoSuchOrderException {
+
+		CommerceOrder commerceOrder = fetchByCommerceAccountId_Last(
+			commerceAccountId, orderByComparator);
+
+		if (commerceOrder != null) {
+			return commerceOrder;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("commerceAccountId=");
+		msg.append(commerceAccountId);
+
+		msg.append("}");
+
+		throw new NoSuchOrderException(msg.toString());
+	}
+
+	/**
+	 * Returns the last commerce order in the ordered set where commerceAccountId = &#63;.
+	 *
+	 * @param commerceAccountId the commerce account ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce order, or <code>null</code> if a matching commerce order could not be found
+	 */
+	@Override
+	public CommerceOrder fetchByCommerceAccountId_Last(
+		long commerceAccountId,
+		OrderByComparator<CommerceOrder> orderByComparator) {
+
+		int count = countByCommerceAccountId(commerceAccountId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<CommerceOrder> list = findByCommerceAccountId(
+			commerceAccountId, count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the commerce orders before and after the current commerce order in the ordered set where commerceAccountId = &#63;.
+	 *
+	 * @param commerceOrderId the primary key of the current commerce order
+	 * @param commerceAccountId the commerce account ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce order
+	 * @throws NoSuchOrderException if a commerce order with the primary key could not be found
+	 */
+	@Override
+	public CommerceOrder[] findByCommerceAccountId_PrevAndNext(
+			long commerceOrderId, long commerceAccountId,
+			OrderByComparator<CommerceOrder> orderByComparator)
+		throws NoSuchOrderException {
+
+		CommerceOrder commerceOrder = findByPrimaryKey(commerceOrderId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CommerceOrder[] array = new CommerceOrderImpl[3];
+
+			array[0] = getByCommerceAccountId_PrevAndNext(
+				session, commerceOrder, commerceAccountId, orderByComparator,
+				true);
+
+			array[1] = commerceOrder;
+
+			array[2] = getByCommerceAccountId_PrevAndNext(
+				session, commerceOrder, commerceAccountId, orderByComparator,
+				false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected CommerceOrder getByCommerceAccountId_PrevAndNext(
+		Session session, CommerceOrder commerceOrder, long commerceAccountId,
+		OrderByComparator<CommerceOrder> orderByComparator, boolean previous) {
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_COMMERCEORDER_WHERE);
+
+		query.append(_FINDER_COLUMN_COMMERCEACCOUNTID_COMMERCEACCOUNTID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(CommerceOrderModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(commerceAccountId);
+
+		if (orderByComparator != null) {
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceOrder)) {
+
+				qPos.add(orderByConditionValue);
+			}
+		}
+
+		List<CommerceOrder> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the commerce orders where commerceAccountId = &#63; from the database.
+	 *
+	 * @param commerceAccountId the commerce account ID
+	 */
+	@Override
+	public void removeByCommerceAccountId(long commerceAccountId) {
+		for (CommerceOrder commerceOrder :
+				findByCommerceAccountId(
+					commerceAccountId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+					null)) {
+
+			remove(commerceOrder);
+		}
+	}
+
+	/**
+	 * Returns the number of commerce orders where commerceAccountId = &#63;.
+	 *
+	 * @param commerceAccountId the commerce account ID
+	 * @return the number of matching commerce orders
+	 */
+	@Override
+	public int countByCommerceAccountId(long commerceAccountId) {
+		FinderPath finderPath = _finderPathCountByCommerceAccountId;
+
+		Object[] finderArgs = new Object[] {commerceAccountId};
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_COMMERCEORDER_WHERE);
+
+			query.append(_FINDER_COLUMN_COMMERCEACCOUNTID_COMMERCEACCOUNTID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(commerceAccountId);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String
+		_FINDER_COLUMN_COMMERCEACCOUNTID_COMMERCEACCOUNTID_2 =
+			"commerceOrder.commerceAccountId = ?";
+
 	private FinderPath _finderPathWithPaginationFindByBillingAddressId;
 	private FinderPath _finderPathWithoutPaginationFindByBillingAddressId;
 	private FinderPath _finderPathCountByBillingAddressId;
@@ -6674,6 +7202,12 @@ public class CommerceOrderPersistenceImpl
 			finderCache.removeResult(
 				_finderPathWithoutPaginationFindByUserId, args);
 
+			args = new Object[] {commerceOrderModelImpl.getCommerceAccountId()};
+
+			finderCache.removeResult(_finderPathCountByCommerceAccountId, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByCommerceAccountId, args);
+
 			args = new Object[] {commerceOrderModelImpl.getBillingAddressId()};
 
 			finderCache.removeResult(_finderPathCountByBillingAddressId, args);
@@ -6798,6 +7332,29 @@ public class CommerceOrderPersistenceImpl
 				finderCache.removeResult(_finderPathCountByUserId, args);
 				finderCache.removeResult(
 					_finderPathWithoutPaginationFindByUserId, args);
+			}
+
+			if ((commerceOrderModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByCommerceAccountId.
+					 getColumnBitmask()) != 0) {
+
+				Object[] args = new Object[] {
+					commerceOrderModelImpl.getOriginalCommerceAccountId()
+				};
+
+				finderCache.removeResult(
+					_finderPathCountByCommerceAccountId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceAccountId, args);
+
+				args = new Object[] {
+					commerceOrderModelImpl.getCommerceAccountId()
+				};
+
+				finderCache.removeResult(
+					_finderPathCountByCommerceAccountId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceAccountId, args);
 			}
 
 			if ((commerceOrderModelImpl.getColumnBitmask() &
@@ -7478,6 +8035,30 @@ public class CommerceOrderPersistenceImpl
 			CommerceOrderModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUserId",
 			new String[] {Long.class.getName()});
+
+		_finderPathWithPaginationFindByCommerceAccountId = new FinderPath(
+			CommerceOrderModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceOrderModelImpl.FINDER_CACHE_ENABLED,
+			CommerceOrderImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByCommerceAccountId",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByCommerceAccountId = new FinderPath(
+			CommerceOrderModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceOrderModelImpl.FINDER_CACHE_ENABLED,
+			CommerceOrderImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findByCommerceAccountId", new String[] {Long.class.getName()},
+			CommerceOrderModelImpl.COMMERCEACCOUNTID_COLUMN_BITMASK |
+			CommerceOrderModelImpl.CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByCommerceAccountId = new FinderPath(
+			CommerceOrderModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceOrderModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByCommerceAccountId", new String[] {Long.class.getName()});
 
 		_finderPathWithPaginationFindByBillingAddressId = new FinderPath(
 			CommerceOrderModelImpl.ENTITY_CACHE_ENABLED,
