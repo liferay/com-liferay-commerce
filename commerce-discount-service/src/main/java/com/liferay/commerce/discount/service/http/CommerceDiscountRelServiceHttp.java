@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.discount.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.discount.service.CommerceDiscountRelServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -51,7 +49,6 @@ import com.liferay.portal.kernel.util.MethodKey;
  * @see CommerceDiscountRelServiceSoap
  * @generated
  */
-@ProviderType
 public class CommerceDiscountRelServiceHttp {
 
 	public static com.liferay.commerce.discount.model.CommerceDiscountRel

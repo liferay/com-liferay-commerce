@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.tax.service.base;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.tax.model.CommerceTaxMethod;
 import com.liferay.commerce.tax.service.CommerceTaxMethodLocalService;
 import com.liferay.commerce.tax.service.persistence.CommerceTaxMethodPersistence;
@@ -62,12 +60,11 @@ import javax.sql.DataSource;
  * @see com.liferay.commerce.tax.service.impl.CommerceTaxMethodLocalServiceImpl
  * @generated
  */
-@ProviderType
 public abstract class CommerceTaxMethodLocalServiceBaseImpl
 	extends BaseLocalServiceImpl
 	implements CommerceTaxMethodLocalService, IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CommerceTaxMethodLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.tax.service.CommerceTaxMethodLocalServiceUtil</code>.

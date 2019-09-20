@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.type.grouped.service.persistence.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.type.grouped.exception.NoSuchCPDefinitionGroupedEntryException;
 import com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry;
 import com.liferay.commerce.product.type.grouped.model.impl.CPDefinitionGroupedEntryImpl;
@@ -67,12 +65,11 @@ import java.util.Set;
  * @author Andrea Di Giorgi
  * @generated
  */
-@ProviderType
 public class CPDefinitionGroupedEntryPersistenceImpl
 	extends BasePersistenceImpl<CPDefinitionGroupedEntry>
 	implements CPDefinitionGroupedEntryPersistence {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Always use <code>CPDefinitionGroupedEntryUtil</code> to access the cp definition grouped entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.

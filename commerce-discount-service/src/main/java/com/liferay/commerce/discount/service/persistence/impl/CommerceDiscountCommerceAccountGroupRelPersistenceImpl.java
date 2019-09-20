@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.discount.service.persistence.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.discount.exception.NoSuchDiscountCommerceAccountGroupRelException;
 import com.liferay.commerce.discount.model.CommerceDiscountCommerceAccountGroupRel;
 import com.liferay.commerce.discount.model.impl.CommerceDiscountCommerceAccountGroupRelImpl;
@@ -64,12 +62,11 @@ import java.util.Set;
  * @author Marco Leo
  * @generated
  */
-@ProviderType
 public class CommerceDiscountCommerceAccountGroupRelPersistenceImpl
 	extends BasePersistenceImpl<CommerceDiscountCommerceAccountGroupRel>
 	implements CommerceDiscountCommerceAccountGroupRelPersistence {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Always use <code>CommerceDiscountCommerceAccountGroupRelUtil</code> to access the commerce discount commerce account group rel persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.

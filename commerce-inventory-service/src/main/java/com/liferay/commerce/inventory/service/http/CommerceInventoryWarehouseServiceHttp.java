@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.inventory.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -51,7 +49,6 @@ import com.liferay.portal.kernel.util.MethodKey;
  * @see CommerceInventoryWarehouseServiceSoap
  * @generated
  */
-@ProviderType
 public class CommerceInventoryWarehouseServiceHttp {
 
 	public static

@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.notification.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.notification.service.CommerceNotificationTemplateServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -65,7 +63,6 @@ import java.util.Map;
  * @see CommerceNotificationTemplateServiceHttp
  * @generated
  */
-@ProviderType
 public class CommerceNotificationTemplateServiceSoap {
 
 	public static

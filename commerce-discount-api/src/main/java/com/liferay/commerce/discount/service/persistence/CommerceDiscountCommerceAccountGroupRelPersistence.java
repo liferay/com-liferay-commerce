@@ -40,7 +40,7 @@ import java.util.Set;
 public interface CommerceDiscountCommerceAccountGroupRelPersistence
 	extends BasePersistence<CommerceDiscountCommerceAccountGroupRel> {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceDiscountCommerceAccountGroupRelUtil} to access the commerce discount commerce account group rel persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.

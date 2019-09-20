@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.discount.service.persistence.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.discount.exception.NoSuchDiscountRelException;
 import com.liferay.commerce.discount.model.CommerceDiscountRel;
 import com.liferay.commerce.discount.model.impl.CommerceDiscountRelImpl;
@@ -62,12 +60,11 @@ import java.util.Set;
  * @author Marco Leo
  * @generated
  */
-@ProviderType
 public class CommerceDiscountRelPersistenceImpl
 	extends BasePersistenceImpl<CommerceDiscountRel>
 	implements CommerceDiscountRelPersistence {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Always use <code>CommerceDiscountRelUtil</code> to access the commerce discount rel persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.

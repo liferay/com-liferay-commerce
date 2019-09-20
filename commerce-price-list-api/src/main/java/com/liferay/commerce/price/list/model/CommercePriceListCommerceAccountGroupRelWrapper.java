@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.price.list.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.exportimport.kernel.lar.StagedModelType;
 import com.liferay.portal.kernel.model.ModelWrapper;
@@ -37,7 +35,6 @@ import java.util.Objects;
  * @see CommercePriceListCommerceAccountGroupRel
  * @generated
  */
-@ProviderType
 public class CommercePriceListCommerceAccountGroupRelWrapper
 	implements CommercePriceListCommerceAccountGroupRel,
 			   ModelWrapper<CommercePriceListCommerceAccountGroupRel> {
@@ -348,6 +345,11 @@ public class CommercePriceListCommerceAccountGroupRelWrapper
 		return _commercePriceListCommerceAccountGroupRel.isNew();
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a commerce price list commerce account group rel model instance should use the <code>CommercePriceListCommerceAccountGroupRel</code> interface instead.
+	 */
 	@Override
 	public void persist() {
 		_commercePriceListCommerceAccountGroupRel.persist();

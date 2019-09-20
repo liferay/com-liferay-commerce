@@ -65,7 +65,7 @@ import java.util.Map;
 public interface CommerceCurrencyLocalService
 	extends BaseLocalService, PersistedModelLocalService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceCurrencyLocalServiceUtil} to access the commerce currency local service. Add custom service methods to <code>com.liferay.commerce.currency.service.impl.CommerceCurrencyLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.

@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.shipping.engine.fixed.service.persistence;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOption;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -42,10 +40,9 @@ import org.osgi.util.tracker.ServiceTracker;
  * @see CommerceShippingFixedOptionPersistence
  * @generated
  */
-@ProviderType
 public class CommerceShippingFixedOptionUtil {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.

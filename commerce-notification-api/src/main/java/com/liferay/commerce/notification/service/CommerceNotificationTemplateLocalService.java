@@ -62,7 +62,7 @@ import java.util.Map;
 public interface CommerceNotificationTemplateLocalService
 	extends BaseLocalService, PersistedModelLocalService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceNotificationTemplateLocalServiceUtil} to access the commerce notification template local service. Add custom service methods to <code>com.liferay.commerce.notification.service.impl.CommerceNotificationTemplateLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.

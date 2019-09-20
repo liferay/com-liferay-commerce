@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.price.list.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommercePriceListService
  * @generated
  */
-@ProviderType
 public class CommercePriceListServiceWrapper
 	implements CommercePriceListService,
 			   ServiceWrapper<CommercePriceListService> {
@@ -36,6 +33,11 @@ public class CommercePriceListServiceWrapper
 		_commercePriceListService = commercePriceListService;
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link CommercePriceListServiceUtil} to access the commerce price list remote service. Add custom service methods to <code>com.liferay.commerce.price.list.service.impl.CommercePriceListServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
 	@Override
 	public com.liferay.commerce.price.list.model.CommercePriceList
 			addCommercePriceList(

@@ -56,7 +56,7 @@ import java.util.List;
 public interface CommerceTaxFixedRateAddressRelLocalService
 	extends BaseLocalService, PersistedModelLocalService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceTaxFixedRateAddressRelLocalServiceUtil} to access the commerce tax fixed rate address rel local service. Add custom service methods to <code>com.liferay.commerce.tax.engine.fixed.service.impl.CommerceTaxFixedRateAddressRelLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.

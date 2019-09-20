@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.currency.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import java.io.Serializable;
 
 import java.math.BigDecimal;
@@ -30,7 +28,6 @@ import java.util.List;
  * @author Andrea Di Giorgi
  * @generated
  */
-@ProviderType
 public class CommerceCurrencySoap implements Serializable {
 
 	public static CommerceCurrencySoap toSoapModel(CommerceCurrency model) {

@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.discount.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.discount.model.CommerceDiscountRule;
 import com.liferay.commerce.discount.model.CommerceDiscountRuleModel;
 import com.liferay.commerce.discount.model.CommerceDiscountRuleSoap;
@@ -64,12 +62,11 @@ import java.util.function.Function;
  * @generated
  */
 @JSON(strict = true)
-@ProviderType
 public class CommerceDiscountRuleModelImpl
 	extends BaseModelImpl<CommerceDiscountRule>
 	implements CommerceDiscountRuleModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce discount rule model instance should use the <code>CommerceDiscountRule</code> interface instead.

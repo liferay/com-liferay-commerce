@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.wish.list.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.wish.list.model.CommerceWishList;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
@@ -34,7 +32,6 @@ import java.util.Date;
  * @author Andrea Di Giorgi
  * @generated
  */
-@ProviderType
 public class CommerceWishListCacheModel
 	implements CacheModel<CommerceWishList>, Externalizable {
 

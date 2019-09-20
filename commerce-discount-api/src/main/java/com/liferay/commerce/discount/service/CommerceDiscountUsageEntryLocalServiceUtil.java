@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.discount.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.util.tracker.ServiceTracker;
@@ -32,10 +30,9 @@ import org.osgi.util.tracker.ServiceTracker;
  * @see CommerceDiscountUsageEntryLocalService
  * @generated
  */
-@ProviderType
 public class CommerceDiscountUsageEntryLocalServiceUtil {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify this class directly. Add custom service methods to <code>com.liferay.commerce.discount.service.impl.CommerceDiscountUsageEntryLocalServiceImpl</code> and rerun ServiceBuilder to regenerate this class.

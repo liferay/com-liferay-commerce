@@ -44,7 +44,7 @@ public interface CommerceInventoryWarehouseItemModel
 	extends AuditedModel, BaseModel<CommerceInventoryWarehouseItem>,
 			ShardedModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. All methods that expect a commerce inventory warehouse item model instance should use the {@link CommerceInventoryWarehouseItem} interface instead.

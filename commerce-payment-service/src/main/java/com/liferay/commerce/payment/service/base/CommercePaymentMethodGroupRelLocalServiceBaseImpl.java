@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.payment.service.base;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
 import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelLocalService;
 import com.liferay.commerce.payment.service.persistence.CommercePaymentMethodGroupRelPersistence;
@@ -63,13 +61,12 @@ import javax.sql.DataSource;
  * @see com.liferay.commerce.payment.service.impl.CommercePaymentMethodGroupRelLocalServiceImpl
  * @generated
  */
-@ProviderType
 public abstract class CommercePaymentMethodGroupRelLocalServiceBaseImpl
 	extends BaseLocalServiceImpl
 	implements CommercePaymentMethodGroupRelLocalService,
 			   IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CommercePaymentMethodGroupRelLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelLocalServiceUtil</code>.

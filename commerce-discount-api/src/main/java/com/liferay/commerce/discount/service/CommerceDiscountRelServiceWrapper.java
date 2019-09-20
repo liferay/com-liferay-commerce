@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.discount.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceDiscountRelService
  * @generated
  */
-@ProviderType
 public class CommerceDiscountRelServiceWrapper
 	implements CommerceDiscountRelService,
 			   ServiceWrapper<CommerceDiscountRelService> {
@@ -36,6 +33,11 @@ public class CommerceDiscountRelServiceWrapper
 		_commerceDiscountRelService = commerceDiscountRelService;
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link CommerceDiscountRelServiceUtil} to access the commerce discount rel remote service. Add custom service methods to <code>com.liferay.commerce.discount.service.impl.CommerceDiscountRelServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
 	@Override
 	public com.liferay.commerce.discount.model.CommerceDiscountRel
 			addCommerceDiscountRel(

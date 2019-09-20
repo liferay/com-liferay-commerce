@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.inventory.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -36,7 +34,6 @@ import java.util.Objects;
  * @see CommerceInventoryWarehouse
  * @generated
  */
-@ProviderType
 public class CommerceInventoryWarehouseWrapper
 	implements CommerceInventoryWarehouse,
 			   ModelWrapper<CommerceInventoryWarehouse> {
@@ -500,6 +497,11 @@ public class CommerceInventoryWarehouseWrapper
 		return _commerceInventoryWarehouse.isNew();
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a commerce inventory warehouse model instance should use the <code>CommerceInventoryWarehouse</code> interface instead.
+	 */
 	@Override
 	public void persist() {
 		_commerceInventoryWarehouse.persist();

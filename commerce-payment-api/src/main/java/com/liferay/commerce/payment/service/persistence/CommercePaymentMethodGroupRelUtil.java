@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.payment.service.persistence;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -42,10 +40,9 @@ import org.osgi.util.tracker.ServiceTracker;
  * @see CommercePaymentMethodGroupRelPersistence
  * @generated
  */
-@ProviderType
 public class CommercePaymentMethodGroupRelUtil {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify this class directly. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.

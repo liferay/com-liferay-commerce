@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.notification.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceNotificationTemplateCommerceAccountGroupRelService
  * @generated
  */
-@ProviderType
 public class CommerceNotificationTemplateCommerceAccountGroupRelServiceWrapper
 	implements CommerceNotificationTemplateCommerceAccountGroupRelService,
 			   ServiceWrapper
@@ -39,6 +36,11 @@ public class CommerceNotificationTemplateCommerceAccountGroupRelServiceWrapper
 			commerceNotificationTemplateCommerceAccountGroupRelService;
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link CommerceNotificationTemplateCommerceAccountGroupRelServiceUtil} to access the commerce notification template commerce account group rel remote service. Add custom service methods to <code>com.liferay.commerce.notification.service.impl.CommerceNotificationTemplateCommerceAccountGroupRelServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
 	@Override
 	public com.liferay.commerce.notification.model.
 		CommerceNotificationTemplateCommerceAccountGroupRel

@@ -434,6 +434,18 @@ public class CommerceOrderLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.model.CommerceOrder>
+			getCommerceOrders(
+				long companyId, long groupId, long[] commerceAccountIds,
+				int[] orderStatuses, boolean excludeOrderStatus, int start,
+				int end)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getCommerceOrders(
+			companyId, groupId, commerceAccountIds, orderStatuses,
+			excludeOrderStatus, start, end);
+	}
+
+	public static java.util.List<com.liferay.commerce.model.CommerceOrder>
 		getCommerceOrdersByBillingAddress(long billingAddressId) {
 
 		return getService().getCommerceOrdersByBillingAddress(billingAddressId);
@@ -499,6 +511,16 @@ public class CommerceOrderLocalServiceUtil {
 		return getService().getCommerceOrdersCount(groupId, commerceAccountId);
 	}
 
+	public static long getCommerceOrdersCount(
+			long companyId, long groupId, long[] commerceAccountIds,
+			int[] orderStatuses, boolean excludeOrderStatus)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getCommerceOrdersCount(
+			companyId, groupId, commerceAccountIds, orderStatuses,
+			excludeOrderStatus);
+	}
+
 	public static com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery
 		getExportActionableDynamicQuery(
 			com.liferay.exportimport.kernel.lar.PortletDataContext
@@ -530,6 +552,10 @@ public class CommerceOrderLocalServiceUtil {
 		return getService().getPersistedModel(primaryKeyObj);
 	}
 
+	/**
+	 * @deprecated As of Mueller (7.2.x)
+	 */
+	@Deprecated
 	public static java.util.List<com.liferay.commerce.model.CommerceOrder>
 		getUserCommerceOrders(
 			long groupId, long userId, long commerceAccountId,
@@ -541,6 +567,10 @@ public class CommerceOrderLocalServiceUtil {
 			keywords, start, end);
 	}
 
+	/**
+	 * @deprecated As of Mueller (7.2.x)
+	 */
+	@Deprecated
 	public static int getUserCommerceOrdersCount(
 		long groupId, long userId, long commerceAccountId, Integer orderStatus,
 		boolean excludeOrderStatus, String keywords) {

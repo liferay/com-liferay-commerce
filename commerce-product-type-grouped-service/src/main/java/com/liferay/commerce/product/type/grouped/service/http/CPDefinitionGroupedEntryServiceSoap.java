@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.type.grouped.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.type.grouped.service.CPDefinitionGroupedEntryServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -61,7 +59,6 @@ import java.rmi.RemoteException;
  * @see CPDefinitionGroupedEntryServiceHttp
  * @generated
  */
-@ProviderType
 public class CPDefinitionGroupedEntryServiceSoap {
 
 	public static void addCPDefinitionGroupedEntries(

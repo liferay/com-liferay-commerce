@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.payment.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
@@ -34,7 +32,6 @@ import java.util.Date;
  * @author Luca Pellizzon
  * @generated
  */
-@ProviderType
 public class CommercePaymentMethodGroupRelCacheModel
 	implements CacheModel<CommercePaymentMethodGroupRel>, Externalizable {
 

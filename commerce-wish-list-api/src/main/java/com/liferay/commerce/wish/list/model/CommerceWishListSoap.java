@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.wish.list.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -28,7 +26,6 @@ import java.util.List;
  * @author Andrea Di Giorgi
  * @generated
  */
-@ProviderType
 public class CommerceWishListSoap implements Serializable {
 
 	public static CommerceWishListSoap toSoapModel(CommerceWishList model) {

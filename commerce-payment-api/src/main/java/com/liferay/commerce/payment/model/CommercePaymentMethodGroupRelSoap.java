@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.payment.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -28,7 +26,6 @@ import java.util.List;
  * @author Luca Pellizzon
  * @generated
  */
-@ProviderType
 public class CommercePaymentMethodGroupRelSoap implements Serializable {
 
 	public static CommercePaymentMethodGroupRelSoap toSoapModel(

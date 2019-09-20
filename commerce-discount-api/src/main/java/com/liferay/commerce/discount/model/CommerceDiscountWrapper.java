@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.discount.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.exportimport.kernel.lar.StagedModelType;
 import com.liferay.portal.kernel.model.ModelWrapper;
@@ -39,7 +37,6 @@ import java.util.Objects;
  * @see CommerceDiscount
  * @generated
  */
-@ProviderType
 public class CommerceDiscountWrapper
 	implements CommerceDiscount, ModelWrapper<CommerceDiscount> {
 
@@ -751,6 +748,11 @@ public class CommerceDiscountWrapper
 		return _commerceDiscount.isUsePercentage();
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a commerce discount model instance should use the <code>CommerceDiscount</code> interface instead.
+	 */
 	@Override
 	public void persist() {
 		_commerceDiscount.persist();

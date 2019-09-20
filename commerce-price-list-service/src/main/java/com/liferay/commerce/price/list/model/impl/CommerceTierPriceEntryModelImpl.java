@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.price.list.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.price.list.model.CommerceTierPriceEntry;
 import com.liferay.commerce.price.list.model.CommerceTierPriceEntryModel;
 import com.liferay.commerce.price.list.model.CommerceTierPriceEntrySoap;
@@ -67,12 +65,11 @@ import java.util.function.Function;
  * @generated
  */
 @JSON(strict = true)
-@ProviderType
 public class CommerceTierPriceEntryModelImpl
 	extends BaseModelImpl<CommerceTierPriceEntry>
 	implements CommerceTierPriceEntryModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce tier price entry model instance should use the <code>CommerceTierPriceEntry</code> interface instead.

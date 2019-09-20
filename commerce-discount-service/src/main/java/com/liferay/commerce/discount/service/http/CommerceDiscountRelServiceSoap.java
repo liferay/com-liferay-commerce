@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.discount.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.discount.service.CommerceDiscountRelServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -61,7 +59,6 @@ import java.rmi.RemoteException;
  * @see CommerceDiscountRelServiceHttp
  * @generated
  */
-@ProviderType
 public class CommerceDiscountRelServiceSoap {
 
 	public static com.liferay.commerce.discount.model.CommerceDiscountRelSoap

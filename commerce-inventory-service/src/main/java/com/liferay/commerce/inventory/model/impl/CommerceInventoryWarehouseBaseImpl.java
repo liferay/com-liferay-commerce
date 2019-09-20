@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.inventory.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalServiceUtil;
 
@@ -31,12 +29,11 @@ import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalSer
  * @see CommerceInventoryWarehouse
  * @generated
  */
-@ProviderType
 public abstract class CommerceInventoryWarehouseBaseImpl
 	extends CommerceInventoryWarehouseModelImpl
 	implements CommerceInventoryWarehouse {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce inventory warehouse model instance should use the <code>CommerceInventoryWarehouse</code> interface instead.

@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.notification.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.notification.model.CommerceNotificationTemplateCommerceAccountGroupRel;
 import com.liferay.commerce.notification.service.CommerceNotificationTemplateCommerceAccountGroupRelLocalServiceUtil;
 
@@ -31,13 +29,12 @@ import com.liferay.commerce.notification.service.CommerceNotificationTemplateCom
  * @see CommerceNotificationTemplateCommerceAccountGroupRel
  * @generated
  */
-@ProviderType
 public abstract class
 	CommerceNotificationTemplateCommerceAccountGroupRelBaseImpl
 		extends CommerceNotificationTemplateCommerceAccountGroupRelModelImpl
 		implements CommerceNotificationTemplateCommerceAccountGroupRel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce notification template commerce account group rel model instance should use the <code>CommerceNotificationTemplateCommerceAccountGroupRel</code> interface instead.

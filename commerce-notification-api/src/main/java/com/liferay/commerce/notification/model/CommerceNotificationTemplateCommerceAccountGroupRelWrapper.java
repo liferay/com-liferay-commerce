@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.notification.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -36,7 +34,6 @@ import java.util.Objects;
  * @see CommerceNotificationTemplateCommerceAccountGroupRel
  * @generated
  */
-@ProviderType
 public class CommerceNotificationTemplateCommerceAccountGroupRelWrapper
 	implements CommerceNotificationTemplateCommerceAccountGroupRel,
 			   ModelWrapper
@@ -314,6 +311,11 @@ public class CommerceNotificationTemplateCommerceAccountGroupRelWrapper
 		return _commerceNotificationTemplateCommerceAccountGroupRel.isNew();
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a commerce notification template commerce account group rel model instance should use the <code>CommerceNotificationTemplateCommerceAccountGroupRel</code> interface instead.
+	 */
 	@Override
 	public void persist() {
 		_commerceNotificationTemplateCommerceAccountGroupRel.persist();

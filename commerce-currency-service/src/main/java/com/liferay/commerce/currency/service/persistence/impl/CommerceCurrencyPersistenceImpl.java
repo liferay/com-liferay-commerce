@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.currency.service.persistence.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.currency.exception.NoSuchCurrencyException;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.model.impl.CommerceCurrencyImpl;
@@ -67,12 +65,11 @@ import java.util.Set;
  * @author Andrea Di Giorgi
  * @generated
  */
-@ProviderType
 public class CommerceCurrencyPersistenceImpl
 	extends BasePersistenceImpl<CommerceCurrency>
 	implements CommerceCurrencyPersistence {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Always use <code>CommerceCurrencyUtil</code> to access the commerce currency persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.

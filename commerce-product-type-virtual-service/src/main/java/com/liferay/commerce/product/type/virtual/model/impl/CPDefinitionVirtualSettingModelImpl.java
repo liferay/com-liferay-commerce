@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.type.virtual.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting;
 import com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSettingModel;
 import com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSettingSoap;
@@ -72,12 +70,11 @@ import java.util.function.Function;
  * @generated
  */
 @JSON(strict = true)
-@ProviderType
 public class CPDefinitionVirtualSettingModelImpl
 	extends BaseModelImpl<CPDefinitionVirtualSetting>
 	implements CPDefinitionVirtualSettingModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a cp definition virtual setting model instance should use the <code>CPDefinitionVirtualSetting</code> interface instead.

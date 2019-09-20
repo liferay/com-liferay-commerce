@@ -44,7 +44,7 @@ public interface CommerceInventoryBookedQuantityModel
 	extends AuditedModel, BaseModel<CommerceInventoryBookedQuantity>,
 			ShardedModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. All methods that expect a commerce inventory booked quantity model instance should use the {@link CommerceInventoryBookedQuantity} interface instead.

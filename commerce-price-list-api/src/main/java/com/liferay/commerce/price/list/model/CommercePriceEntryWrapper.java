@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.price.list.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.exportimport.kernel.lar.StagedModelType;
 import com.liferay.portal.kernel.model.ModelWrapper;
@@ -39,7 +37,6 @@ import java.util.Objects;
  * @see CommercePriceEntry
  * @generated
  */
-@ProviderType
 public class CommercePriceEntryWrapper
 	implements CommercePriceEntry, ModelWrapper<CommercePriceEntry> {
 
@@ -426,6 +423,11 @@ public class CommercePriceEntryWrapper
 		return _commercePriceEntry.isNew();
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a commerce price entry model instance should use the <code>CommercePriceEntry</code> interface instead.
+	 */
 	@Override
 	public void persist() {
 		_commercePriceEntry.persist();

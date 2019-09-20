@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.type.grouped.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.exportimport.kernel.lar.StagedModelType;
 import com.liferay.portal.kernel.model.ModelWrapper;
@@ -37,7 +35,6 @@ import java.util.Objects;
  * @see CPDefinitionGroupedEntry
  * @generated
  */
-@ProviderType
 public class CPDefinitionGroupedEntryWrapper
 	implements CPDefinitionGroupedEntry,
 			   ModelWrapper<CPDefinitionGroupedEntry> {
@@ -365,6 +362,11 @@ public class CPDefinitionGroupedEntryWrapper
 		return _cpDefinitionGroupedEntry.isNew();
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a cp definition grouped entry model instance should use the <code>CPDefinitionGroupedEntry</code> interface instead.
+	 */
 	@Override
 	public void persist() {
 		_cpDefinitionGroupedEntry.persist();

@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.tax.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.tax.service.CommerceTaxMethodServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -51,7 +49,6 @@ import com.liferay.portal.kernel.util.MethodKey;
  * @see CommerceTaxMethodServiceSoap
  * @generated
  */
-@ProviderType
 public class CommerceTaxMethodServiceHttp {
 
 	public static com.liferay.commerce.tax.model.CommerceTaxMethod

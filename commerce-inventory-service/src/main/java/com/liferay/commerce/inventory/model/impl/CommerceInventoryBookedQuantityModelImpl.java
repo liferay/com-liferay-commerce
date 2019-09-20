@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.inventory.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.inventory.model.CommerceInventoryBookedQuantity;
 import com.liferay.commerce.inventory.model.CommerceInventoryBookedQuantityModel;
 import com.liferay.commerce.inventory.model.CommerceInventoryBookedQuantitySoap;
@@ -63,12 +61,11 @@ import java.util.function.Function;
  * @generated
  */
 @JSON(strict = true)
-@ProviderType
 public class CommerceInventoryBookedQuantityModelImpl
 	extends BaseModelImpl<CommerceInventoryBookedQuantity>
 	implements CommerceInventoryBookedQuantityModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce inventory booked quantity model instance should use the <code>CommerceInventoryBookedQuantity</code> interface instead.

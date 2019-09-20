@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.inventory.service.base;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.inventory.model.CommerceInventoryBookedQuantity;
 import com.liferay.commerce.inventory.service.CommerceInventoryBookedQuantityLocalService;
 import com.liferay.commerce.inventory.service.persistence.CommerceInventoryAuditPersistence;
@@ -68,13 +66,12 @@ import javax.sql.DataSource;
  * @see com.liferay.commerce.inventory.service.impl.CommerceInventoryBookedQuantityLocalServiceImpl
  * @generated
  */
-@ProviderType
 public abstract class CommerceInventoryBookedQuantityLocalServiceBaseImpl
 	extends BaseLocalServiceImpl
 	implements CommerceInventoryBookedQuantityLocalService,
 			   IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CommerceInventoryBookedQuantityLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.inventory.service.CommerceInventoryBookedQuantityLocalServiceUtil</code>.

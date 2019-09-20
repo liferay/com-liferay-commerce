@@ -60,7 +60,7 @@ import java.util.Map;
 public interface CPDefinitionVirtualSettingLocalService
 	extends BaseLocalService, PersistedModelLocalService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CPDefinitionVirtualSettingLocalServiceUtil} to access the cp definition virtual setting local service. Add custom service methods to <code>com.liferay.commerce.product.type.virtual.service.impl.CPDefinitionVirtualSettingLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.

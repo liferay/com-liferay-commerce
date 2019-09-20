@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.notification.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.notification.model.CommerceNotificationAttachment;
 import com.liferay.commerce.notification.model.CommerceNotificationAttachmentModel;
 import com.liferay.expando.kernel.model.ExpandoBridge;
@@ -61,12 +59,11 @@ import java.util.function.Function;
  * @see CommerceNotificationAttachmentImpl
  * @generated
  */
-@ProviderType
 public class CommerceNotificationAttachmentModelImpl
 	extends BaseModelImpl<CommerceNotificationAttachment>
 	implements CommerceNotificationAttachmentModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce notification attachment model instance should use the <code>CommerceNotificationAttachment</code> interface instead.

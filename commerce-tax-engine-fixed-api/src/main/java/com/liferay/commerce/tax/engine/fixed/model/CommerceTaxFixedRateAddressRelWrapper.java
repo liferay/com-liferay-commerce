@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.tax.engine.fixed.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -36,7 +34,6 @@ import java.util.Objects;
  * @see CommerceTaxFixedRateAddressRel
  * @generated
  */
-@ProviderType
 public class CommerceTaxFixedRateAddressRelWrapper
 	implements CommerceTaxFixedRateAddressRel,
 			   ModelWrapper<CommerceTaxFixedRateAddressRel> {
@@ -388,6 +385,11 @@ public class CommerceTaxFixedRateAddressRelWrapper
 		return _commerceTaxFixedRateAddressRel.isNew();
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a commerce tax fixed rate address rel model instance should use the <code>CommerceTaxFixedRateAddressRel</code> interface instead.
+	 */
 	@Override
 	public void persist() {
 		_commerceTaxFixedRateAddressRel.persist();

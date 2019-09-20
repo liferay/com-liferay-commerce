@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.shipping.engine.fixed.service.base;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOption;
 import com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedOptionLocalService;
 import com.liferay.commerce.shipping.engine.fixed.service.persistence.CommerceShippingFixedOptionPersistence;
@@ -64,13 +62,12 @@ import javax.sql.DataSource;
  * @see com.liferay.commerce.shipping.engine.fixed.service.impl.CommerceShippingFixedOptionLocalServiceImpl
  * @generated
  */
-@ProviderType
 public abstract class CommerceShippingFixedOptionLocalServiceBaseImpl
 	extends BaseLocalServiceImpl
 	implements CommerceShippingFixedOptionLocalService,
 			   IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CommerceShippingFixedOptionLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedOptionLocalServiceUtil</code>.

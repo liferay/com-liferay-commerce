@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.currency.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.currency.service.CommerceCurrencyServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -65,7 +63,6 @@ import java.util.Map;
  * @see CommerceCurrencyServiceHttp
  * @generated
  */
-@ProviderType
 public class CommerceCurrencyServiceSoap {
 
 	public static com.liferay.commerce.currency.model.CommerceCurrencySoap

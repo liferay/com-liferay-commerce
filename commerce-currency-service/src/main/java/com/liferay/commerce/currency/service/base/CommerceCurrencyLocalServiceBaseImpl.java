@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.currency.service.base;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.currency.service.persistence.CommerceCurrencyFinder;
@@ -69,12 +67,11 @@ import javax.sql.DataSource;
  * @see com.liferay.commerce.currency.service.impl.CommerceCurrencyLocalServiceImpl
  * @generated
  */
-@ProviderType
 public abstract class CommerceCurrencyLocalServiceBaseImpl
 	extends BaseLocalServiceImpl
 	implements CommerceCurrencyLocalService, IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CommerceCurrencyLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.currency.service.CommerceCurrencyLocalServiceUtil</code>.

@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.shipping.engine.fixed.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.shipping.engine.fixed.model.CommerceShippingFixedOptionRel;
 import com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedOptionRelLocalServiceUtil;
 
@@ -31,12 +29,11 @@ import com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedO
  * @see CommerceShippingFixedOptionRel
  * @generated
  */
-@ProviderType
 public abstract class CommerceShippingFixedOptionRelBaseImpl
 	extends CommerceShippingFixedOptionRelModelImpl
 	implements CommerceShippingFixedOptionRel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce shipping fixed option rel model instance should use the <code>CommerceShippingFixedOptionRel</code> interface instead.

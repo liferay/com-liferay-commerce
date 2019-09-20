@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.wish.list.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.wish.list.model.CommerceWishList;
 import com.liferay.commerce.wish.list.model.CommerceWishListModel;
 import com.liferay.commerce.wish.list.model.CommerceWishListSoap;
@@ -65,11 +63,10 @@ import java.util.function.Function;
  * @generated
  */
 @JSON(strict = true)
-@ProviderType
 public class CommerceWishListModelImpl
 	extends BaseModelImpl<CommerceWishList> implements CommerceWishListModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce wish list model instance should use the <code>CommerceWishList</code> interface instead.

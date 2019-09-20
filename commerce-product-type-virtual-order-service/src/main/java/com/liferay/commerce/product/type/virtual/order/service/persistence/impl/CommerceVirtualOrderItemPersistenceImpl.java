@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.type.virtual.order.service.persistence.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.type.virtual.order.exception.NoSuchVirtualOrderItemException;
 import com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem;
 import com.liferay.commerce.product.type.virtual.order.model.impl.CommerceVirtualOrderItemImpl;
@@ -67,12 +65,11 @@ import java.util.Set;
  * @author Alessio Antonio Rendina
  * @generated
  */
-@ProviderType
 public class CommerceVirtualOrderItemPersistenceImpl
 	extends BasePersistenceImpl<CommerceVirtualOrderItem>
 	implements CommerceVirtualOrderItemPersistence {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Always use <code>CommerceVirtualOrderItemUtil</code> to access the commerce virtual order item persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.

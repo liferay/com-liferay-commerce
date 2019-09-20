@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.inventory.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -61,7 +59,6 @@ import java.rmi.RemoteException;
  * @see CommerceInventoryWarehouseItemServiceHttp
  * @generated
  */
-@ProviderType
 public class CommerceInventoryWarehouseItemServiceSoap {
 
 	public static

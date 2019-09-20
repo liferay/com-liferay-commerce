@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.inventory.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceInventoryReplenishmentItemService
  * @generated
  */
-@ProviderType
 public class CommerceInventoryReplenishmentItemServiceWrapper
 	implements CommerceInventoryReplenishmentItemService,
 			   ServiceWrapper<CommerceInventoryReplenishmentItemService> {

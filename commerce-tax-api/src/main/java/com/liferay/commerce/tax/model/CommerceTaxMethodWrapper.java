@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.tax.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -36,7 +34,6 @@ import java.util.Objects;
  * @see CommerceTaxMethod
  * @generated
  */
-@ProviderType
 public class CommerceTaxMethodWrapper
 	implements CommerceTaxMethod, ModelWrapper<CommerceTaxMethod> {
 
@@ -492,6 +489,11 @@ public class CommerceTaxMethodWrapper
 		return _commerceTaxMethod.isPercentage();
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a commerce tax method model instance should use the <code>CommerceTaxMethod</code> interface instead.
+	 */
 	@Override
 	public void persist() {
 		_commerceTaxMethod.persist();

@@ -49,7 +49,7 @@ public abstract class CommerceShippingFixedOptionServiceBaseImpl
 	extends BaseServiceImpl
 	implements CommerceShippingFixedOptionService, IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CommerceShippingFixedOptionService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedOptionServiceUtil</code>.

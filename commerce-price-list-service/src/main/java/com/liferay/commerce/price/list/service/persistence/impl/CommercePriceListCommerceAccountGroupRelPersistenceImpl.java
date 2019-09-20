@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.price.list.service.persistence.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.price.list.exception.NoSuchPriceListCommerceAccountGroupRelException;
 import com.liferay.commerce.price.list.model.CommercePriceListCommerceAccountGroupRel;
 import com.liferay.commerce.price.list.model.impl.CommercePriceListCommerceAccountGroupRelImpl;
@@ -67,12 +65,11 @@ import java.util.Set;
  * @author Alessio Antonio Rendina
  * @generated
  */
-@ProviderType
 public class CommercePriceListCommerceAccountGroupRelPersistenceImpl
 	extends BasePersistenceImpl<CommercePriceListCommerceAccountGroupRel>
 	implements CommercePriceListCommerceAccountGroupRelPersistence {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Always use <code>CommercePriceListCommerceAccountGroupRelUtil</code> to access the commerce price list commerce account group rel persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.

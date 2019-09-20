@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.notification.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.notification.model.CommerceNotificationTemplate;
 import com.liferay.commerce.notification.service.CommerceNotificationTemplateLocalServiceUtil;
 
@@ -31,12 +29,11 @@ import com.liferay.commerce.notification.service.CommerceNotificationTemplateLoc
  * @see CommerceNotificationTemplate
  * @generated
  */
-@ProviderType
 public abstract class CommerceNotificationTemplateBaseImpl
 	extends CommerceNotificationTemplateModelImpl
 	implements CommerceNotificationTemplate {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce notification template model instance should use the <code>CommerceNotificationTemplate</code> interface instead.

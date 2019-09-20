@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.discount.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.discount.model.CommerceDiscountUsageEntry;
 import com.liferay.commerce.discount.service.CommerceDiscountUsageEntryLocalServiceUtil;
 
@@ -31,12 +29,11 @@ import com.liferay.commerce.discount.service.CommerceDiscountUsageEntryLocalServ
  * @see CommerceDiscountUsageEntry
  * @generated
  */
-@ProviderType
 public abstract class CommerceDiscountUsageEntryBaseImpl
 	extends CommerceDiscountUsageEntryModelImpl
 	implements CommerceDiscountUsageEntry {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce discount usage entry model instance should use the <code>CommerceDiscountUsageEntry</code> interface instead.

@@ -44,7 +44,7 @@ public interface CommerceInventoryReplenishmentItemModel
 	extends AuditedModel, BaseModel<CommerceInventoryReplenishmentItem>,
 			ShardedModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. All methods that expect a commerce inventory replenishment item model instance should use the {@link CommerceInventoryReplenishmentItem} interface instead.

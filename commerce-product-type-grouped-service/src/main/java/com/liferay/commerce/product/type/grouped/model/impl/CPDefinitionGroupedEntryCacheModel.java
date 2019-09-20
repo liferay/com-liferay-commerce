@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.type.grouped.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.type.grouped.model.CPDefinitionGroupedEntry;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
@@ -34,7 +32,6 @@ import java.util.Date;
  * @author Andrea Di Giorgi
  * @generated
  */
-@ProviderType
 public class CPDefinitionGroupedEntryCacheModel
 	implements CacheModel<CPDefinitionGroupedEntry>, Externalizable {
 

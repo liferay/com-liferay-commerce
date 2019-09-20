@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.notification.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.notification.model.CommerceNotificationTemplateCommerceAccountGroupRel;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
@@ -34,7 +32,6 @@ import java.util.Date;
  * @author Alessio Antonio Rendina
  * @generated
  */
-@ProviderType
 public class CommerceNotificationTemplateCommerceAccountGroupRelCacheModel
 	implements CacheModel<CommerceNotificationTemplateCommerceAccountGroupRel>,
 			   Externalizable {

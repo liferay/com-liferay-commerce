@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.type.virtual.order.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem;
 import com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOrderItemLocalServiceUtil;
 
@@ -31,12 +29,11 @@ import com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOr
  * @see CommerceVirtualOrderItem
  * @generated
  */
-@ProviderType
 public abstract class CommerceVirtualOrderItemBaseImpl
 	extends CommerceVirtualOrderItemModelImpl
 	implements CommerceVirtualOrderItem {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce virtual order item model instance should use the <code>CommerceVirtualOrderItem</code> interface instead.

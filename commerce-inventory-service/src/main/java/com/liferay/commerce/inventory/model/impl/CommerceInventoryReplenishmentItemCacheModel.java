@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.inventory.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.inventory.model.CommerceInventoryReplenishmentItem;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
@@ -34,7 +32,6 @@ import java.util.Date;
  * @author Luca Pellizzon
  * @generated
  */
-@ProviderType
 public class CommerceInventoryReplenishmentItemCacheModel
 	implements CacheModel<CommerceInventoryReplenishmentItem>, Externalizable {
 

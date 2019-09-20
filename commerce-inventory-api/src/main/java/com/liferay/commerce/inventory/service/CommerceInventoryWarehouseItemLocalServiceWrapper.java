@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.inventory.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceInventoryWarehouseItemLocalService
  * @generated
  */
-@ProviderType
 public class CommerceInventoryWarehouseItemLocalServiceWrapper
 	implements CommerceInventoryWarehouseItemLocalService,
 			   ServiceWrapper<CommerceInventoryWarehouseItemLocalService> {

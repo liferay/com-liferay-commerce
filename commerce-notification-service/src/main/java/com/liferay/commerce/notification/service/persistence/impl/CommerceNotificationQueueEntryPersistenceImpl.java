@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.notification.service.persistence.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.notification.exception.NoSuchNotificationQueueEntryException;
 import com.liferay.commerce.notification.model.CommerceNotificationQueueEntry;
 import com.liferay.commerce.notification.model.impl.CommerceNotificationQueueEntryImpl;
@@ -66,12 +64,11 @@ import java.util.Set;
  * @author Alessio Antonio Rendina
  * @generated
  */
-@ProviderType
 public class CommerceNotificationQueueEntryPersistenceImpl
 	extends BasePersistenceImpl<CommerceNotificationQueueEntry>
 	implements CommerceNotificationQueueEntryPersistence {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Always use <code>CommerceNotificationQueueEntryUtil</code> to access the commerce notification queue entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.

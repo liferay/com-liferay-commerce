@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.discount.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceDiscountRuleService
  * @generated
  */
-@ProviderType
 public class CommerceDiscountRuleServiceWrapper
 	implements CommerceDiscountRuleService,
 			   ServiceWrapper<CommerceDiscountRuleService> {
@@ -36,6 +33,11 @@ public class CommerceDiscountRuleServiceWrapper
 		_commerceDiscountRuleService = commerceDiscountRuleService;
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link CommerceDiscountRuleServiceUtil} to access the commerce discount rule remote service. Add custom service methods to <code>com.liferay.commerce.discount.service.impl.CommerceDiscountRuleServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
 	@Override
 	public com.liferay.commerce.discount.model.CommerceDiscountRule
 			addCommerceDiscountRule(

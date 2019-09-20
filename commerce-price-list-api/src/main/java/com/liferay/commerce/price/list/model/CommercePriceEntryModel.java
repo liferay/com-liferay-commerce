@@ -45,7 +45,7 @@ import java.util.Date;
 public interface CommercePriceEntryModel
 	extends BaseModel<CommercePriceEntry>, ShardedModel, StagedAuditedModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. All methods that expect a commerce price entry model instance should use the {@link CommercePriceEntry} interface instead.

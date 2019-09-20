@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.inventory.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.inventory.model.CommerceInventoryAudit;
 import com.liferay.commerce.inventory.service.CommerceInventoryAuditLocalServiceUtil;
 
@@ -31,11 +29,10 @@ import com.liferay.commerce.inventory.service.CommerceInventoryAuditLocalService
  * @see CommerceInventoryAudit
  * @generated
  */
-@ProviderType
 public abstract class CommerceInventoryAuditBaseImpl
 	extends CommerceInventoryAuditModelImpl implements CommerceInventoryAudit {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce inventory audit model instance should use the <code>CommerceInventoryAudit</code> interface instead.

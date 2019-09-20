@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.price.list.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.price.list.model.CommerceTierPriceEntry;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
@@ -36,7 +34,6 @@ import java.util.Date;
  * @author Alessio Antonio Rendina
  * @generated
  */
-@ProviderType
 public class CommerceTierPriceEntryCacheModel
 	implements CacheModel<CommerceTierPriceEntry>, Externalizable {
 

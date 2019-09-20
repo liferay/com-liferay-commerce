@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.tax.engine.fixed.service.base;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.tax.engine.fixed.model.CommerceTaxFixedRateAddressRel;
 import com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateAddressRelLocalService;
 import com.liferay.commerce.tax.engine.fixed.service.persistence.CommerceTaxFixedRateAddressRelFinder;
@@ -64,13 +62,12 @@ import javax.sql.DataSource;
  * @see com.liferay.commerce.tax.engine.fixed.service.impl.CommerceTaxFixedRateAddressRelLocalServiceImpl
  * @generated
  */
-@ProviderType
 public abstract class CommerceTaxFixedRateAddressRelLocalServiceBaseImpl
 	extends BaseLocalServiceImpl
 	implements CommerceTaxFixedRateAddressRelLocalService,
 			   IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CommerceTaxFixedRateAddressRelLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateAddressRelLocalServiceUtil</code>.

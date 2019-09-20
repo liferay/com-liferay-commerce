@@ -51,7 +51,7 @@ public abstract class CommerceNotificationTemplateServiceBaseImpl
 	extends BaseServiceImpl
 	implements CommerceNotificationTemplateService, IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CommerceNotificationTemplateService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.notification.service.CommerceNotificationTemplateServiceUtil</code>.

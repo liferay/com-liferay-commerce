@@ -47,7 +47,7 @@ public abstract class CommerceTaxMethodServiceBaseImpl
 	extends BaseServiceImpl
 	implements CommerceTaxMethodService, IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CommerceTaxMethodService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.tax.service.CommerceTaxMethodServiceUtil</code>.

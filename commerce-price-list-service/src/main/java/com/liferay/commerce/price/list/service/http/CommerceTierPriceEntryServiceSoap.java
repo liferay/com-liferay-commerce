@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.price.list.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.price.list.service.CommerceTierPriceEntryServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -61,7 +59,6 @@ import java.rmi.RemoteException;
  * @see CommerceTierPriceEntryServiceHttp
  * @generated
  */
-@ProviderType
 public class CommerceTierPriceEntryServiceSoap {
 
 	public static

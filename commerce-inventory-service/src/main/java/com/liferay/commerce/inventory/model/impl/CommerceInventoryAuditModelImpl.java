@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.inventory.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.inventory.model.CommerceInventoryAudit;
 import com.liferay.commerce.inventory.model.CommerceInventoryAuditModel;
 import com.liferay.commerce.inventory.model.CommerceInventoryAuditSoap;
@@ -63,12 +61,11 @@ import java.util.function.Function;
  * @generated
  */
 @JSON(strict = true)
-@ProviderType
 public class CommerceInventoryAuditModelImpl
 	extends BaseModelImpl<CommerceInventoryAudit>
 	implements CommerceInventoryAuditModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce inventory audit model instance should use the <code>CommerceInventoryAudit</code> interface instead.

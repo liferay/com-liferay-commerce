@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.tax.engine.fixed.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.tax.engine.fixed.model.CommerceTaxFixedRateAddressRel;
 import com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateAddressRelLocalServiceUtil;
 
@@ -31,12 +29,11 @@ import com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateAddress
  * @see CommerceTaxFixedRateAddressRel
  * @generated
  */
-@ProviderType
 public abstract class CommerceTaxFixedRateAddressRelBaseImpl
 	extends CommerceTaxFixedRateAddressRelModelImpl
 	implements CommerceTaxFixedRateAddressRel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce tax fixed rate address rel model instance should use the <code>CommerceTaxFixedRateAddressRel</code> interface instead.

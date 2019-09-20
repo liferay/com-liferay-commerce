@@ -57,7 +57,7 @@ import java.util.List;
 )
 public interface CommerceInventoryWarehouseService extends BaseService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceInventoryWarehouseServiceUtil} to access the commerce inventory warehouse remote service. Add custom service methods to <code>com.liferay.commerce.inventory.service.impl.CommerceInventoryWarehouseServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.

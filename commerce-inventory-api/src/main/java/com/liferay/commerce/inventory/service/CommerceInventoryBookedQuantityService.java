@@ -50,7 +50,7 @@ import com.liferay.portal.kernel.transaction.Transactional;
 )
 public interface CommerceInventoryBookedQuantityService extends BaseService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceInventoryBookedQuantityServiceUtil} to access the commerce inventory booked quantity remote service. Add custom service methods to <code>com.liferay.commerce.inventory.service.impl.CommerceInventoryBookedQuantityServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.

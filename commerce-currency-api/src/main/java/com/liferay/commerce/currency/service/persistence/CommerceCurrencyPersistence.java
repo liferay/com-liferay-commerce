@@ -40,7 +40,7 @@ import java.util.Set;
 public interface CommerceCurrencyPersistence
 	extends BasePersistence<CommerceCurrency> {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceCurrencyUtil} to access the commerce currency persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.

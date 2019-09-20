@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.tax.engine.fixed.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -61,7 +59,6 @@ import java.rmi.RemoteException;
  * @see CommerceTaxFixedRateServiceHttp
  * @generated
  */
-@ProviderType
 public class CommerceTaxFixedRateServiceSoap {
 
 	public static

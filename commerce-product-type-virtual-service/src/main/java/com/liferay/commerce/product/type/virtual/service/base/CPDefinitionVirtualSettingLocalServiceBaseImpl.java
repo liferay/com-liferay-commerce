@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.type.virtual.service.base;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting;
 import com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingLocalService;
 import com.liferay.commerce.product.type.virtual.service.persistence.CPDefinitionVirtualSettingPersistence;
@@ -71,12 +69,11 @@ import javax.sql.DataSource;
  * @see com.liferay.commerce.product.type.virtual.service.impl.CPDefinitionVirtualSettingLocalServiceImpl
  * @generated
  */
-@ProviderType
 public abstract class CPDefinitionVirtualSettingLocalServiceBaseImpl
 	extends BaseLocalServiceImpl
 	implements CPDefinitionVirtualSettingLocalService, IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CPDefinitionVirtualSettingLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingLocalServiceUtil</code>.

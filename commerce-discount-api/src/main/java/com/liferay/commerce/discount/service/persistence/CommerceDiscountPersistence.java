@@ -41,7 +41,7 @@ import java.util.Set;
 public interface CommerceDiscountPersistence
 	extends BasePersistence<CommerceDiscount> {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceDiscountUtil} to access the commerce discount persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.

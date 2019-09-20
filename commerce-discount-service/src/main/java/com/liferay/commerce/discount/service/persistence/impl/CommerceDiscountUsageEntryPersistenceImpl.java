@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.discount.service.persistence.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.discount.exception.NoSuchDiscountUsageEntryException;
 import com.liferay.commerce.discount.model.CommerceDiscountUsageEntry;
 import com.liferay.commerce.discount.model.impl.CommerceDiscountUsageEntryImpl;
@@ -61,12 +59,11 @@ import java.util.Set;
  * @author Marco Leo
  * @generated
  */
-@ProviderType
 public class CommerceDiscountUsageEntryPersistenceImpl
 	extends BasePersistenceImpl<CommerceDiscountUsageEntry>
 	implements CommerceDiscountUsageEntryPersistence {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Always use <code>CommerceDiscountUsageEntryUtil</code> to access the commerce discount usage entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.

@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.shipping.engine.fixed.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceShippingFixedOptionRelLocalService
  * @generated
  */
-@ProviderType
 public class CommerceShippingFixedOptionRelLocalServiceWrapper
 	implements CommerceShippingFixedOptionRelLocalService,
 			   ServiceWrapper<CommerceShippingFixedOptionRelLocalService> {

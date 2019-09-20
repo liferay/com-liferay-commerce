@@ -43,7 +43,7 @@ import java.util.Date;
 public interface CommerceInventoryAuditModel
 	extends AuditedModel, BaseModel<CommerceInventoryAudit>, ShardedModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. All methods that expect a commerce inventory audit model instance should use the {@link CommerceInventoryAudit} interface instead.

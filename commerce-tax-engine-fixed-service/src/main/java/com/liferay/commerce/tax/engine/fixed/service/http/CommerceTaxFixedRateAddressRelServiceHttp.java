@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.tax.engine.fixed.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateAddressRelServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -51,7 +49,6 @@ import com.liferay.portal.kernel.util.MethodKey;
  * @see CommerceTaxFixedRateAddressRelServiceSoap
  * @generated
  */
-@ProviderType
 public class CommerceTaxFixedRateAddressRelServiceHttp {
 
 	public static

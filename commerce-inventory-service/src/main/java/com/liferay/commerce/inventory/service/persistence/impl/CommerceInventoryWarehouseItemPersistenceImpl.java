@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.inventory.service.persistence.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseItemException;
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem;
 import com.liferay.commerce.inventory.model.impl.CommerceInventoryWarehouseItemImpl;
@@ -66,12 +64,11 @@ import java.util.Set;
  * @author Luca Pellizzon
  * @generated
  */
-@ProviderType
 public class CommerceInventoryWarehouseItemPersistenceImpl
 	extends BasePersistenceImpl<CommerceInventoryWarehouseItem>
 	implements CommerceInventoryWarehouseItemPersistence {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Always use <code>CommerceInventoryWarehouseItemUtil</code> to access the commerce inventory warehouse item persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.

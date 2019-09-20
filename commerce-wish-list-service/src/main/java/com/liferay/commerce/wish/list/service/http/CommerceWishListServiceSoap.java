@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.wish.list.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.wish.list.service.CommerceWishListServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -61,7 +59,6 @@ import java.rmi.RemoteException;
  * @see CommerceWishListServiceHttp
  * @generated
  */
-@ProviderType
 public class CommerceWishListServiceSoap {
 
 	public static com.liferay.commerce.wish.list.model.CommerceWishListSoap

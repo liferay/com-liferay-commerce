@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.notification.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.notification.model.CommerceNotificationTemplate;
 import com.liferay.commerce.notification.model.CommerceNotificationTemplateModel;
 import com.liferay.commerce.notification.model.CommerceNotificationTemplateSoap;
@@ -73,12 +71,11 @@ import java.util.function.Function;
  * @generated
  */
 @JSON(strict = true)
-@ProviderType
 public class CommerceNotificationTemplateModelImpl
 	extends BaseModelImpl<CommerceNotificationTemplate>
 	implements CommerceNotificationTemplateModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce notification template model instance should use the <code>CommerceNotificationTemplate</code> interface instead.

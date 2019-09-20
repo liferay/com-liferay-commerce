@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.type.virtual.order.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceVirtualOrderItemLocalService
  * @generated
  */
-@ProviderType
 public class CommerceVirtualOrderItemLocalServiceWrapper
 	implements CommerceVirtualOrderItemLocalService,
 			   ServiceWrapper<CommerceVirtualOrderItemLocalService> {

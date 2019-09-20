@@ -48,7 +48,7 @@ public abstract class CommercePaymentMethodGroupRelServiceBaseImpl
 	extends BaseServiceImpl
 	implements CommercePaymentMethodGroupRelService, IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CommercePaymentMethodGroupRelService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelServiceUtil</code>.

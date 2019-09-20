@@ -40,7 +40,7 @@ import java.util.Set;
 public interface CommerceWishListItemPersistence
 	extends BasePersistence<CommerceWishListItem> {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceWishListItemUtil} to access the commerce wish list item persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.

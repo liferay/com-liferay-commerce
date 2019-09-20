@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.currency.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.model.CommerceCurrencyModel;
 import com.liferay.commerce.currency.model.CommerceCurrencySoap;
@@ -74,11 +72,10 @@ import java.util.function.Function;
  * @generated
  */
 @JSON(strict = true)
-@ProviderType
 public class CommerceCurrencyModelImpl
 	extends BaseModelImpl<CommerceCurrency> implements CommerceCurrencyModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce currency model instance should use the <code>CommerceCurrency</code> interface instead.

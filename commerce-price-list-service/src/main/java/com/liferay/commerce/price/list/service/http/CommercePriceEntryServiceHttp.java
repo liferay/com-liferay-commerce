@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.price.list.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.price.list.service.CommercePriceEntryServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -51,7 +49,6 @@ import com.liferay.portal.kernel.util.MethodKey;
  * @see CommercePriceEntryServiceSoap
  * @generated
  */
-@ProviderType
 public class CommercePriceEntryServiceHttp {
 
 	public static com.liferay.commerce.price.list.model.CommercePriceEntry
