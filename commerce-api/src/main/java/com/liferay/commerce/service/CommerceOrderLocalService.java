@@ -346,6 +346,11 @@ public interface CommerceOrderLocalService
 		long billingAddressId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceOrder> getCommerceOrdersByCommerceAccountId(
+		long commerceAccountId, int start, int end,
+		OrderByComparator<CommerceOrder> orderByComparator);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceOrder> getCommerceOrdersByShippingAddress(
 		long shippingAddressId);
 
@@ -394,6 +399,10 @@ public interface CommerceOrderLocalService
 			long companyId, long groupId, long[] commerceAccountIds,
 			int[] orderStatuses, boolean excludeOrderStatus)
 		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceOrdersCountByCommerceAccountId(
+		long commerceAccountId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
