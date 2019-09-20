@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.payment.servlet;
+package com.liferay.commerce.payment.internal.servlet;
 
 import com.liferay.commerce.constants.CommerceOrderPaymentConstants;
 import com.liferay.commerce.constants.CommercePaymentConstants;
@@ -60,7 +60,7 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true,
 	property = {
 		"osgi.http.whiteboard.context.path=/" + CommercePaymentConstants.SERVLET_PATH,
-		"osgi.http.whiteboard.servlet.name=com.liferay.commerce.payment.servlet.CommercePaymentServlet",
+		"osgi.http.whiteboard.servlet.name=com.liferay.commerce.payment.internal.servlet.CommercePaymentServlet",
 		"osgi.http.whiteboard.servlet.pattern=/" + CommercePaymentConstants.SERVLET_PATH + "/*"
 	},
 	service = Servlet.class

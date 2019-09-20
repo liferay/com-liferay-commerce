@@ -530,17 +530,17 @@
 		<finder name="CPOptionCategoryId" return-type="Collection">
 			<finder-column name="CPOptionCategoryId" />
 		</finder>
-		<finder name="C_COC" return-type="Collection">
+		<finder name="C_CSOVI" return-type="CPDefinitionSpecificationOptionValue" unique="true">
+			<finder-column name="CPDefinitionSpecificationOptionValueId" />
 			<finder-column name="CPDefinitionId" />
-			<finder-column name="CPOptionCategoryId" />
 		</finder>
 		<finder name="C_CSO" return-type="Collection">
 			<finder-column name="CPDefinitionId" />
 			<finder-column name="CPSpecificationOptionId" />
 		</finder>
-		<finder name="C_CSOVI" return-type="CPDefinitionSpecificationOptionValue" unique="true">
+		<finder name="C_COC" return-type="Collection">
 			<finder-column name="CPDefinitionId" />
-			<finder-column name="CPDefinitionSpecificationOptionValueId" />
+			<finder-column name="CPOptionCategoryId" />
 		</finder>
 
 		<!-- References -->

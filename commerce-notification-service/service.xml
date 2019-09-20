@@ -186,11 +186,11 @@
 
 		<!-- Finder methods -->
 
-		<finder name="CommerceAccountGroupId" return-type="Collection">
-			<finder-column name="commerceAccountGroupId" />
-		</finder>
 		<finder name="CommerceNotificationTemplateId" return-type="Collection">
 			<finder-column name="commerceNotificationTemplateId" />
+		</finder>
+		<finder name="CommerceAccountGroupId" return-type="Collection">
+			<finder-column name="commerceAccountGroupId" />
 		</finder>
 		<finder name="C_C" return-type="CommerceNotificationTemplateCommerceAccountGroupRel" unique="true">
 			<finder-column name="commerceNotificationTemplateId" />

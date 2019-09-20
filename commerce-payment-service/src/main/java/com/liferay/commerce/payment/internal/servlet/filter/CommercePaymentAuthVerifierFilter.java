@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.payment.servlet.filter;
+package com.liferay.commerce.payment.internal.servlet.filter;
 
 import com.liferay.commerce.constants.CommercePaymentConstants;
 import com.liferay.portal.servlet.filters.authverifier.AuthVerifierFilter;
@@ -28,7 +28,7 @@ import org.osgi.service.component.annotations.Component;
 	immediate = true,
 	property = {
 		"filter.init.auth.verifier.PortalSessionAuthVerifier.urls.includes=/" + CommercePaymentConstants.SERVLET_PATH + "/*",
-		"osgi.http.whiteboard.filter.name=com.liferay.commerce.payment.servlet.filter.CommercePaymentAuthVerifierFilter",
+		"osgi.http.whiteboard.filter.name=com.liferay.commerce.payment.internal.servlet.filter.CommercePaymentAuthVerifierFilter",
 		"osgi.http.whiteboard.servlet.pattern=/" + CommercePaymentConstants.SERVLET_PATH + "/*"
 	},
 	service = Filter.class
