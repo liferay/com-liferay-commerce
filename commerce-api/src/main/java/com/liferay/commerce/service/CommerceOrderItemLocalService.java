@@ -288,6 +288,10 @@ public interface CommerceOrderItemLocalService
 	public int getCommerceOrderItemsCount(long commerceOrderId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceOrderItemsCount(
+		long commerceOrderId, long cpInstanceId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceOrderItemsQuantity(long commerceOrderId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

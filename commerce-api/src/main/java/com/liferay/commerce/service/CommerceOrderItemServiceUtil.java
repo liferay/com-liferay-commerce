@@ -123,6 +123,14 @@ public class CommerceOrderItemServiceUtil {
 		return getService().getCommerceOrderItemsCount(commerceOrderId);
 	}
 
+	public static int getCommerceOrderItemsCount(
+			long commerceOrderId, long cpInstanceId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getCommerceOrderItemsCount(
+			commerceOrderId, cpInstanceId);
+	}
+
 	public static int getCommerceOrderItemsQuantity(long commerceOrderId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
