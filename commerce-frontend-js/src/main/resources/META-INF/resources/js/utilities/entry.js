@@ -7,6 +7,21 @@ import React from 'react';
 // 	}
 // }
 
+export function debounce(func, wait, immediate) {
+	var timeout;
+	return () => {
+		var context = this, args = arguments;
+		var later = function() {
+			timeout = null;
+			if (!immediate) func.apply(context, args);
+		};
+		var callNow = immediate && !timeout;
+		clearTimeout(timeout);
+		timeout = setTimeout(later, wait);
+		if (callNow) func.apply(context, args);
+	};
+};
+
 if(!window.Liferay) {
 	window.Liferay = {
 		Language : {
@@ -15,8 +30,7 @@ if(!window.Liferay) {
 	}
 }
 
-
-export function launcher(Component, componentId, rootId, props, portletId) {
+export function launcher(Component, componentId, rootId, props) {
 	const portletFrame = window.document.getElementById(rootId);
 
 	if(!portletFrame) {
@@ -28,14 +42,27 @@ export function launcher(Component, componentId, rootId, props, portletId) {
 		portletFrame
 	);
 
-	if (Liferay) {
+	if (
+		Liferay &&
+		Liferay.component &&
+		Liferay.on &&
+		Liferay.detach
+	) {
 		Liferay.component(componentId, componentInstance);
 		Liferay.on('beforeNavigate', destroyComponent);
 
 		function destroyComponent() {
+			try {
+				ReactDOM.unmountComponentAtNode(portletFrame);
+			} catch (e) {
+				console.error(e);
+			}
+
 			Liferay.destroyComponent(componentId);
 			Liferay.detach('beforeNavigate', destroyComponent);
 		}
+	} else {
+		console.info('Liferay env not found');
 	}
 
 	return componentInstance;

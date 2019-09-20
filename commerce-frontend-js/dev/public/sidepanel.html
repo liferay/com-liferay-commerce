@@ -26,8 +26,9 @@
 	<noscript>You need to enable JavaScript to run this app.</noscript>
 
 	<div>
-		<button onclick="window.SidePanel.open(`/sidepanel-1.html?${Math.random()}`, 'large');" class="btn btn-info" type="button">Load</button>
-		<button onclick="window.SidePanel.open();" class="btn btn-primary" type="button">Open</button>
+		<button onclick="window.SidePanel.open(`/sidepanel-1.html?${Math.random()}`);" class="btn btn-info" type="button">Load</button>
+		<button onclick="window.SidePanel.open(`/sidepanel-2.html?${Math.random()}`);" class="btn btn-info" type="button">Load</button>
+		<button onclick="window.SidePanel.open(`/sidepanel-3.html?${Math.random()}`);" class="btn btn-info" type="button">Load</button>
 		<button onclick="window.SidePanel.close();" class="btn btn-warning" type="button">Close</button>
 	</div>
 
@@ -41,6 +42,8 @@
 		<button onclick="window.SidePanel.setSize('xl');" class="btn btn-secondary" type="button">X-Large [75%]</button>
 		<button onclick="window.SidePanel.setSize('full');" class="btn btn-secondary" type="button">Full [100%]</button>
 	</div>
+
+	<div class="top-anchor"></div>
 
 	<div id="side-panel"></div>
 
