@@ -16,6 +16,7 @@ package com.liferay.commerce.inventory.service.impl;
 
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem;
 import com.liferay.commerce.inventory.service.base.CommerceInventoryWarehouseItemLocalServiceBaseImpl;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 
@@ -34,6 +35,18 @@ public class CommerceInventoryWarehouseItemLocalServiceImpl
 			int quantity)
 		throws PortalException {
 
+		return commerceInventoryWarehouseItemLocalService.
+			addCommerceInventoryWarehouseItem(
+				userId, commerceInventoryWarehouseId, StringPool.BLANK, sku,
+				quantity);
+	}
+
+	@Override
+	public CommerceInventoryWarehouseItem addCommerceInventoryWarehouseItem(
+			long userId, long commerceInventoryWarehouseId,
+			String externalReferenceCode, String sku, int quantity)
+		throws PortalException {
+
 		User user = userLocalService.getUser(userId);
 
 		long commerceInventoryWarehouseItemId = counterLocalService.increment();
@@ -47,6 +60,8 @@ public class CommerceInventoryWarehouseItemLocalServiceImpl
 		commerceInventoryWarehouseItem.setUserName(user.getFullName());
 		commerceInventoryWarehouseItem.setCommerceInventoryWarehouseId(
 			commerceInventoryWarehouseId);
+		commerceInventoryWarehouseItem.setExternalReferenceCode(
+			externalReferenceCode);
 		commerceInventoryWarehouseItem.setSku(sku);
 		commerceInventoryWarehouseItem.setQuantity(quantity);
 
@@ -68,6 +83,16 @@ public class CommerceInventoryWarehouseItemLocalServiceImpl
 
 		return commerceInventoryWarehouseItemPersistence.fetchByC_S(
 			commerceInventoryWarehouseId, sku);
+	}
+
+	@Override
+	public CommerceInventoryWarehouseItem
+			getCommerceInventoryWarehouseItemByReferenceCode(
+				long companyId, String externalReferenceCode)
+		throws PortalException {
+
+		return commerceInventoryWarehouseItemPersistence.findByC_ERC(
+			companyId, externalReferenceCode);
 	}
 
 	@Override
@@ -114,6 +139,30 @@ public class CommerceInventoryWarehouseItemLocalServiceImpl
 
 		return commerceInventoryWarehouseItemPersistence.update(
 			commerceInventoryWarehouseItem);
+	}
+
+	@Override
+	public CommerceInventoryWarehouseItem upsertCommerceInventoryWarehouseItem(
+			long companyId, long userId, long commerceInventoryWarehouseId,
+			String externalReferenceCode, String sku, int quantity)
+		throws PortalException {
+
+		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
+			commerceInventoryWarehouseItemPersistence.fetchByC_ERC(
+				companyId, sku);
+
+		if (commerceInventoryWarehouseItem == null) {
+			return commerceInventoryWarehouseItemLocalService.
+				addCommerceInventoryWarehouseItem(
+					userId, commerceInventoryWarehouseId, externalReferenceCode,
+					sku, quantity);
+		}
+
+		return commerceInventoryWarehouseItemLocalService.
+			updateCommerceInventoryWarehouseItem(
+				commerceInventoryWarehouseItem.
+					getCommerceInventoryWarehouseItemId(),
+				quantity);
 	}
 
 	@Override
