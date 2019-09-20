@@ -19,4 +19,5 @@ window.SidePanel = launcher('sidePanel', 'side-panel', {
 			pageName: 'Gallery',
 		},
 	],
+	topAnchor: document.querySelector('.top-anchor'),
 });

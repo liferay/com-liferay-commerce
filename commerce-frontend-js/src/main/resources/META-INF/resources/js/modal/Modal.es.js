@@ -66,7 +66,6 @@ const Modal = (props) => {
         } else {
             window.addEventListener(`${props.id}-open`, open);
         }
-
     }, [ props.id ] )
 
     function _handleIframeLoad(){
@@ -82,7 +81,7 @@ const Modal = (props) => {
             default:
                 break;
         }
-    }, [iframeLoadingCounter])
+    }, [ iframeLoadingCounter ])
 
     function _handleFormSubmit() {
         setSubmitActive(false);
@@ -98,6 +97,10 @@ const Modal = (props) => {
 
         const iframeDocument = iframeRef.current.contentDocument;
         const iframeWindow = iframeRef.current.contentWindow;
+
+        iframeDocument
+            .querySelector('body')
+		    .classList.add('within-commerce-iframe')
 
         if (
             (
