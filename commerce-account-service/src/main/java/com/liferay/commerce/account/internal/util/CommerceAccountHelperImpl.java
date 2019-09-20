@@ -131,13 +131,13 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 	}
 
 	@Override
-	public long[] getUserCommerceAccountIds(long userId, long groupId)
+	public long[] getUserCommerceAccountIds(long userId, long siteGroupId)
 		throws PortalException {
 
 		List<CommerceAccount> commerceAccounts =
 			_commerceAccountLocalService.getUserCommerceAccounts(
 				userId, CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID,
-				_getCommerceSiteType(groupId), StringPool.BLANK,
+				_getCommerceSiteType(siteGroupId), StringPool.BLANK,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		long[] commerceAccountIds = new long[0];
