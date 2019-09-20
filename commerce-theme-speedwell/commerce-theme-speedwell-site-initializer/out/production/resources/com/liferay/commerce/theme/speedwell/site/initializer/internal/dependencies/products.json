@@ -10,7 +10,7 @@
 		"DisplayStockQuantity": true,
 		"Height": 2,
 		"Images": [
-			"Minium_ProductImage_24.png"
+			"Speedwell_ProductImage_24.png"
 		],
 		"Length": 7,
 		"ManufacturerPartNumber": "BB98318",
@@ -59,7 +59,7 @@
 		"DisplayStockQuantity": true,
 		"Height": 2.5,
 		"Images": [
-			"Minium_ProductImage_103.png"
+			"Speedwell_ProductImage_103.png"
 		],
 		"Length": 4,
 		"MinStockQuantity": 5,
@@ -154,7 +154,7 @@
 		"DisplayStockQuantity": true,
 		"Height": 2.5,
 		"Images": [
-			"Minium_ProductImage_103.png"
+			"Speedwell_ProductImage_103.png"
 		],
 		"Length": 4,
 		"ManufacturerPartNumber": "BB98322",
@@ -247,7 +247,7 @@
 		"DisplayStockQuantity": true,
 		"Height": 8.7,
 		"Images": [
-			"Minium_ProductImage_83.png"
+			"Speedwell_ProductImage_83.png"
 		],
 		"Length": 6.2,
 		"ManufacturerPartNumber": "BB98323",
@@ -302,7 +302,7 @@
 		"DisplayStockQuantity": true,
 		"Height": 8.7,
 		"Images": [
-			"Minium_ProductImage_83.png"
+			"Speedwell_ProductImage_83.png"
 		],
 		"Length": 6.2,
 		"ManufacturerPartNumber": "BB98324",
@@ -354,7 +354,7 @@
 		"DisplayStockQuantity": true,
 		"Height": 1.7,
 		"Images": [
-			"Minium_ProductImage_30.png"
+			"Speedwell_ProductImage_30.png"
 		],
 		"Length": 10.2,
 		"ManufacturerPartNumber": "BB98325",
@@ -545,7 +545,7 @@
 		"DisplayStockQuantity": true,
 		"Height": 18,
 		"Images": [
-			"Minium_ProductImage_42.png"
+			"Speedwell_ProductImage_42.png"
 		],
 		"Length": 12,
 		"ManufacturerPartNumber": "BB98330",
@@ -597,8 +597,8 @@
 		"DisplayStockQuantity": true,
 		"Height": 3.8,
 		"Images": [
-			"Minium_ProductImage_77.png",
-			"Minium_ProductImage_105.png"
+			"Speedwell_ProductImage_77.png",
+			"Speedwell_ProductImage_105.png"
 		],
 		"Length": 2.5,
 		"ManufacturerPartNumber": "BB98331",
@@ -653,8 +653,8 @@
 		"DisplayStockQuantity": true,
 		"Height": 3.8,
 		"Images": [
-			"Minium_ProductImage_77.png",
-			"Minium_ProductImage_105.png"
+			"Speedwell_ProductImage_77.png",
+			"Speedwell_ProductImage_105.png"
 		],
 		"Length": 2.5,
 		"ManufacturerPartNumber": "BB98332",
@@ -709,8 +709,8 @@
 		"DisplayStockQuantity": true,
 		"Height": 3.8,
 		"Images": [
-			"Minium_ProductImage_77.png",
-			"Minium_ProductImage_105.png"
+			"Speedwell_ProductImage_77.png",
+			"Speedwell_ProductImage_105.png"
 		],
 		"Length": 2.5,
 		"ManufacturerPartNumber": "BB98333",
@@ -900,7 +900,7 @@
 		"DisplayStockQuantity": true,
 		"Height": 2.5,
 		"Images": [
-			"Minium_ProductImage_46.png"
+			"Speedwell_ProductImage_46.png"
 		],
 		"Length": 4,
 		"ManufacturerPartNumber": "EX938054",
@@ -945,7 +945,7 @@
 		"DisplayStockQuantity": true,
 		"Height": 2,
 		"Images": [
-			"Minium_ProductImage_33.png"
+			"Speedwell_ProductImage_33.png"
 		],
 		"Length": 7,
 		"ManufacturerPartNumber": "EX938055",
@@ -1132,7 +1132,7 @@
 		"DisplayStockQuantity": true,
 		"Height": 5.3,
 		"Images": [
-			"Minium_ProductImage_94.png"
+			"Speedwell_ProductImage_94.png"
 		],
 		"Length": 9.4,
 		"ManufacturerPartNumber": "EX938059",
@@ -1460,9 +1460,9 @@
 		],
 		"Height": 14.4,
 		"Images": [
-			"Minium_ProductImage_106.png",
-			"Minium_ProductImage_107.png",
-			"Minium_ProductImage_108.png"
+			"Speedwell_ProductImage_106.png",
+			"Speedwell_ProductImage_107.png",
+			"Speedwell_ProductImage_108.png"
 		],
 		"Length": 15.3,
 		"ManufacturerPartNumber": "TC90432",
@@ -1645,7 +1645,7 @@
 		"DisplayStockQuantity": true,
 		"Height": 2.5,
 		"Images": [
-			"Minium_ProductImage_20.png"
+			"Speedwell_ProductImage_20.png"
 		],
 		"Length": 4,
 		"ManufacturerPartNumber": "HM88896",
@@ -1732,8 +1732,8 @@
 		"DisplayStockQuantity": true,
 		"Height": 2.5,
 		"Images": [
-			"Minium_ProductImage_13.png",
-			"Minium_ProductImage_73.png"
+			"Speedwell_ProductImage_13.png",
+			"Speedwell_ProductImage_73.png"
 		],
 		"Length": 4,
 		"ManufacturerPartNumber": "HM88898",
@@ -2000,7 +2000,7 @@
 		"DisplayStockQuantity": true,
 		"Height": 5.3,
 		"Images": [
-			"Minium_ProductImage_103.png"
+			"Speedwell_ProductImage_103.png"
 		],
 		"Length": 9.4,
 		"ManufacturerPartNumber": "HM88904",
@@ -2083,7 +2083,7 @@
 		"DisplayStockQuantity": true,
 		"Height": 2.5,
 		"Images": [
-			"Minium_ProductImage_20.png"
+			"Speedwell_ProductImage_20.png"
 		],
 		"Length": 4,
 		"ManufacturerPartNumber": "TT00025",
@@ -2166,7 +2166,7 @@
 		"DisplayStockQuantity": true,
 		"Height": 2.5,
 		"Images": [
-			"Minium_ProductImage_103.png"
+			"Speedwell_ProductImage_103.png"
 		],
 		"Length": 4,
 		"ManufacturerPartNumber": "TT00027",
@@ -2383,7 +2383,7 @@
 		"DisplayStockQuantity": true,
 		"Height": 2,
 		"Images": [
-			"Minium_ProductImage_64.png"
+			"Speedwell_ProductImage_64.png"
 		],
 		"Length": 7,
 		"ManufacturerPartNumber": "TT00032",
