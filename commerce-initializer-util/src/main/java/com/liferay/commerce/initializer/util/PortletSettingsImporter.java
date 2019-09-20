@@ -218,6 +218,7 @@ public class PortletSettingsImporter {
 
 					value = group.getName(serviceContext.getLanguageId());
 				}
+
 				AssetVocabulary assetVocabulary =
 					_assetVocabularyLocalService.getGroupVocabulary(
 						assetVocabularyGroupId, value);
