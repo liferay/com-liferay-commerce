@@ -101,8 +101,8 @@ public interface CommerceOrderItemLocalService
 	 * @return the commerce order item that was removed
 	 * @throws PortalException
 	 */
-	@Indexable(type = IndexableType.DELETE)
 	@Deprecated
+	@Indexable(type = IndexableType.DELETE)
 	public CommerceOrderItem deleteCommerceOrderItem(
 			CommerceOrderItem commerceOrderItem)
 		throws PortalException;

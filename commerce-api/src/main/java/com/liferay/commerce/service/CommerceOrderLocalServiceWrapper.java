@@ -489,6 +489,17 @@ public class CommerceOrderLocalServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceOrder>
+		getCommerceOrdersByCommerceAccountId(
+			long commerceAccountId, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.liferay.commerce.model.CommerceOrder> orderByComparator) {
+
+		return _commerceOrderLocalService.getCommerceOrdersByCommerceAccountId(
+			commerceAccountId, start, end, orderByComparator);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.model.CommerceOrder>
 		getCommerceOrdersByShippingAddress(long shippingAddressId) {
 
 		return _commerceOrderLocalService.getCommerceOrdersByShippingAddress(
@@ -561,6 +572,14 @@ public class CommerceOrderLocalServiceWrapper
 		return _commerceOrderLocalService.getCommerceOrdersCount(
 			companyId, groupId, commerceAccountIds, orderStatuses,
 			excludeOrderStatus);
+	}
+
+	@Override
+	public int getCommerceOrdersCountByCommerceAccountId(
+		long commerceAccountId) {
+
+		return _commerceOrderLocalService.
+			getCommerceOrdersCountByCommerceAccountId(commerceAccountId);
 	}
 
 	@Override

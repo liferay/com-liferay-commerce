@@ -1347,8 +1347,8 @@ public class CommerceRegionPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceRegion commerceRegion : list) {
-					if ((commerceCountryId !=
-							commerceRegion.getCommerceCountryId())) {
+					if (commerceCountryId !=
+							commerceRegion.getCommerceCountryId()) {
 
 						list = null;
 

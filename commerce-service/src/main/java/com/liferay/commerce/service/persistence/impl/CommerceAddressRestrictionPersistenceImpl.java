@@ -192,9 +192,8 @@ public class CommerceAddressRestrictionPersistenceImpl
 				for (CommerceAddressRestriction commerceAddressRestriction :
 						list) {
 
-					if ((commerceCountryId !=
-							commerceAddressRestriction.
-								getCommerceCountryId())) {
+					if (commerceCountryId !=
+							commerceAddressRestriction.getCommerceCountryId()) {
 
 						list = null;
 
