@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.notification.service.base;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.notification.model.CommerceNotificationTemplateCommerceAccountGroupRel;
 import com.liferay.commerce.notification.service.CommerceNotificationTemplateCommerceAccountGroupRelLocalService;
 import com.liferay.commerce.notification.service.persistence.CommerceNotificationAttachmentPersistence;
@@ -65,14 +63,13 @@ import javax.sql.DataSource;
  * @see com.liferay.commerce.notification.service.impl.CommerceNotificationTemplateCommerceAccountGroupRelLocalServiceImpl
  * @generated
  */
-@ProviderType
 public abstract class
 	CommerceNotificationTemplateCommerceAccountGroupRelLocalServiceBaseImpl
 		extends BaseLocalServiceImpl
 		implements CommerceNotificationTemplateCommerceAccountGroupRelLocalService,
 				   IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CommerceNotificationTemplateCommerceAccountGroupRelLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.notification.service.CommerceNotificationTemplateCommerceAccountGroupRelLocalServiceUtil</code>.

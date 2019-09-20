@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.price.list.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import java.io.Serializable;
 
 import java.math.BigDecimal;
@@ -30,7 +28,6 @@ import java.util.List;
  * @author Alessio Antonio Rendina
  * @generated
  */
-@ProviderType
 public class CommercePriceEntrySoap implements Serializable {
 
 	public static CommercePriceEntrySoap toSoapModel(CommercePriceEntry model) {

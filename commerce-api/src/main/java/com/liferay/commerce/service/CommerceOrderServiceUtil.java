@@ -229,6 +229,19 @@ public class CommerceOrderServiceUtil {
 
 	public static java.util.List<com.liferay.commerce.model.CommerceOrder>
 			getPendingCommerceOrders(
+				long companyId, long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getPendingCommerceOrders(
+			companyId, groupId, start, end);
+	}
+
+	/**
+	 * @deprecated As of Mueller (7.2.x)
+	 */
+	@Deprecated
+	public static java.util.List<com.liferay.commerce.model.CommerceOrder>
+			getPendingCommerceOrders(
 				long groupId, long commerceAccountId, String keywords,
 				int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -237,6 +250,17 @@ public class CommerceOrderServiceUtil {
 			groupId, commerceAccountId, keywords, start, end);
 	}
 
+	public static long getPendingCommerceOrdersCount(
+			long companyId, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getPendingCommerceOrdersCount(companyId, groupId);
+	}
+
+	/**
+	 * @deprecated As of Mueller (7.2.x)
+	 */
+	@Deprecated
 	public static int getPendingCommerceOrdersCount(
 			long groupId, long commerceAccountId, String keywords)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -247,6 +271,19 @@ public class CommerceOrderServiceUtil {
 
 	public static java.util.List<com.liferay.commerce.model.CommerceOrder>
 			getPlacedCommerceOrders(
+				long companyId, long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getPlacedCommerceOrders(
+			companyId, groupId, start, end);
+	}
+
+	/**
+	 * @deprecated As of Mueller (7.2.x)
+	 */
+	@Deprecated
+	public static java.util.List<com.liferay.commerce.model.CommerceOrder>
+			getPlacedCommerceOrders(
 				long groupId, long commerceAccountId, String keywords,
 				int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -255,6 +292,17 @@ public class CommerceOrderServiceUtil {
 			groupId, commerceAccountId, keywords, start, end);
 	}
 
+	public static long getPlacedCommerceOrdersCount(
+			long companyId, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getPlacedCommerceOrdersCount(companyId, groupId);
+	}
+
+	/**
+	 * @deprecated As of Mueller (7.2.x)
+	 */
+	@Deprecated
 	public static int getPlacedCommerceOrdersCount(
 			long groupId, long commerceAccountId, String keywords)
 		throws com.liferay.portal.kernel.exception.PortalException {

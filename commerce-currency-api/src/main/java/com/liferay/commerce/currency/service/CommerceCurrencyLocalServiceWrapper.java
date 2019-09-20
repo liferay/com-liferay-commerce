@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.currency.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceCurrencyLocalService
  * @generated
  */
-@ProviderType
 public class CommerceCurrencyLocalServiceWrapper
 	implements CommerceCurrencyLocalService,
 			   ServiceWrapper<CommerceCurrencyLocalService> {

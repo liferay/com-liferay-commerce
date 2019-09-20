@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.inventory.service.base;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.inventory.model.CommerceInventoryReplenishmentItem;
 import com.liferay.commerce.inventory.service.CommerceInventoryReplenishmentItemLocalService;
 import com.liferay.commerce.inventory.service.persistence.CommerceInventoryAuditPersistence;
@@ -68,13 +66,12 @@ import javax.sql.DataSource;
  * @see com.liferay.commerce.inventory.service.impl.CommerceInventoryReplenishmentItemLocalServiceImpl
  * @generated
  */
-@ProviderType
 public abstract class CommerceInventoryReplenishmentItemLocalServiceBaseImpl
 	extends BaseLocalServiceImpl
 	implements CommerceInventoryReplenishmentItemLocalService,
 			   IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CommerceInventoryReplenishmentItemLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.inventory.service.CommerceInventoryReplenishmentItemLocalServiceUtil</code>.

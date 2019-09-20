@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.tax.engine.fixed.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceTaxFixedRateAddressRelLocalService
  * @generated
  */
-@ProviderType
 public class CommerceTaxFixedRateAddressRelLocalServiceWrapper
 	implements CommerceTaxFixedRateAddressRelLocalService,
 			   ServiceWrapper<CommerceTaxFixedRateAddressRelLocalService> {

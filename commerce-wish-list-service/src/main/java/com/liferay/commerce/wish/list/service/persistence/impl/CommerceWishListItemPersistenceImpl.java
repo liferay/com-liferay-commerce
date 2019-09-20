@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.wish.list.service.persistence.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.wish.list.exception.NoSuchWishListItemException;
 import com.liferay.commerce.wish.list.model.CommerceWishListItem;
 import com.liferay.commerce.wish.list.model.impl.CommerceWishListItemImpl;
@@ -64,12 +62,11 @@ import java.util.Set;
  * @author Andrea Di Giorgi
  * @generated
  */
-@ProviderType
 public class CommerceWishListItemPersistenceImpl
 	extends BasePersistenceImpl<CommerceWishListItem>
 	implements CommerceWishListItemPersistence {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Always use <code>CommerceWishListItemUtil</code> to access the commerce wish list item persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.

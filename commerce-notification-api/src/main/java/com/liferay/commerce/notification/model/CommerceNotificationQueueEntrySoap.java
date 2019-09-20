@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.notification.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -28,7 +26,6 @@ import java.util.List;
  * @author Alessio Antonio Rendina
  * @generated
  */
-@ProviderType
 public class CommerceNotificationQueueEntrySoap implements Serializable {
 
 	public static CommerceNotificationQueueEntrySoap toSoapModel(

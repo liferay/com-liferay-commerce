@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.notification.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.notification.service.CommerceNotificationQueueEntryServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -61,7 +59,6 @@ import java.rmi.RemoteException;
  * @see CommerceNotificationQueueEntryServiceHttp
  * @generated
  */
-@ProviderType
 public class CommerceNotificationQueueEntryServiceSoap {
 
 	public static void deleteCommerceNotificationQueueEntry(

@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.shipping.engine.fixed.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.shipping.engine.fixed.service.CommerceShippingFixedOptionRelServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -61,7 +59,6 @@ import java.rmi.RemoteException;
  * @see CommerceShippingFixedOptionRelServiceHttp
  * @generated
  */
-@ProviderType
 public class CommerceShippingFixedOptionRelServiceSoap {
 
 	public static com.liferay.commerce.shipping.engine.fixed.model.

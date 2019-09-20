@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.notification.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.util.tracker.ServiceTracker;
@@ -32,11 +30,10 @@ import org.osgi.util.tracker.ServiceTracker;
  * @see CommerceNotificationTemplateCommerceAccountGroupRelLocalService
  * @generated
  */
-@ProviderType
 public class
 	CommerceNotificationTemplateCommerceAccountGroupRelLocalServiceUtil {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify this class directly. Add custom service methods to <code>com.liferay.commerce.notification.service.impl.CommerceNotificationTemplateCommerceAccountGroupRelLocalServiceImpl</code> and rerun ServiceBuilder to regenerate this class.

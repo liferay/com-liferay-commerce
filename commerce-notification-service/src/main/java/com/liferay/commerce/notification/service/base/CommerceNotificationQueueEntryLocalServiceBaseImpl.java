@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.notification.service.base;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.notification.model.CommerceNotificationQueueEntry;
 import com.liferay.commerce.notification.service.CommerceNotificationQueueEntryLocalService;
 import com.liferay.commerce.notification.service.persistence.CommerceNotificationAttachmentPersistence;
@@ -65,13 +63,12 @@ import javax.sql.DataSource;
  * @see com.liferay.commerce.notification.service.impl.CommerceNotificationQueueEntryLocalServiceImpl
  * @generated
  */
-@ProviderType
 public abstract class CommerceNotificationQueueEntryLocalServiceBaseImpl
 	extends BaseLocalServiceImpl
 	implements CommerceNotificationQueueEntryLocalService,
 			   IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CommerceNotificationQueueEntryLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.notification.service.CommerceNotificationQueueEntryLocalServiceUtil</code>.

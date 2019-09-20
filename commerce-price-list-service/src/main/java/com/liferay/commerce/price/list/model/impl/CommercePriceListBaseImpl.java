@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.price.list.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalServiceUtil;
 
@@ -31,11 +29,10 @@ import com.liferay.commerce.price.list.service.CommercePriceListLocalServiceUtil
  * @see CommercePriceList
  * @generated
  */
-@ProviderType
 public abstract class CommercePriceListBaseImpl
 	extends CommercePriceListModelImpl implements CommercePriceList {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce price list model instance should use the <code>CommercePriceList</code> interface instead.

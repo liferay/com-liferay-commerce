@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.discount.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.discount.model.CommerceDiscountUsageEntry;
 import com.liferay.commerce.discount.model.CommerceDiscountUsageEntryModel;
 import com.liferay.expando.kernel.model.ExpandoBridge;
@@ -59,12 +57,11 @@ import java.util.function.Function;
  * @see CommerceDiscountUsageEntryImpl
  * @generated
  */
-@ProviderType
 public class CommerceDiscountUsageEntryModelImpl
 	extends BaseModelImpl<CommerceDiscountUsageEntry>
 	implements CommerceDiscountUsageEntryModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce discount usage entry model instance should use the <code>CommerceDiscountUsageEntry</code> interface instead.

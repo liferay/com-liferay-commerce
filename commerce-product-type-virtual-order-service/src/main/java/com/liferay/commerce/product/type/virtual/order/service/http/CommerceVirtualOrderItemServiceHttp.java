@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.type.virtual.order.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOrderItemServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -51,7 +49,6 @@ import com.liferay.portal.kernel.util.MethodKey;
  * @see CommerceVirtualOrderItemServiceSoap
  * @generated
  */
-@ProviderType
 public class CommerceVirtualOrderItemServiceHttp {
 
 	public static java.io.File getFile(

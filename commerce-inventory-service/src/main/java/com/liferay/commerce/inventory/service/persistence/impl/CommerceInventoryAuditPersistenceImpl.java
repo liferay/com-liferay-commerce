@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.inventory.service.persistence.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.inventory.exception.NoSuchInventoryAuditException;
 import com.liferay.commerce.inventory.model.CommerceInventoryAudit;
 import com.liferay.commerce.inventory.model.impl.CommerceInventoryAuditImpl;
@@ -67,12 +65,11 @@ import java.util.Set;
  * @author Luca Pellizzon
  * @generated
  */
-@ProviderType
 public class CommerceInventoryAuditPersistenceImpl
 	extends BasePersistenceImpl<CommerceInventoryAudit>
 	implements CommerceInventoryAuditPersistence {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Always use <code>CommerceInventoryAuditUtil</code> to access the commerce inventory audit persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.

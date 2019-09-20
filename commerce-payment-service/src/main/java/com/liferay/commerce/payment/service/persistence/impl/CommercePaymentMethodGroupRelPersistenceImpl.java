@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.payment.service.persistence.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.payment.exception.NoSuchPaymentMethodGroupRelException;
 import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
 import com.liferay.commerce.payment.model.impl.CommercePaymentMethodGroupRelImpl;
@@ -65,12 +63,11 @@ import java.util.Set;
  * @author Luca Pellizzon
  * @generated
  */
-@ProviderType
 public class CommercePaymentMethodGroupRelPersistenceImpl
 	extends BasePersistenceImpl<CommercePaymentMethodGroupRel>
 	implements CommercePaymentMethodGroupRelPersistence {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Always use <code>CommercePaymentMethodGroupRelUtil</code> to access the commerce payment method group rel persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.

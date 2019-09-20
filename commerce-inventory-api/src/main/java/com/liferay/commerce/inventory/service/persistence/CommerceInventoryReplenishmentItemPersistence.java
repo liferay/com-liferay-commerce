@@ -41,7 +41,7 @@ import java.util.Set;
 public interface CommerceInventoryReplenishmentItemPersistence
 	extends BasePersistence<CommerceInventoryReplenishmentItem> {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceInventoryReplenishmentItemUtil} to access the commerce inventory replenishment item persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.

@@ -40,7 +40,7 @@ import java.util.Set;
 public interface CommerceTierPriceEntryPersistence
 	extends BasePersistence<CommerceTierPriceEntry> {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceTierPriceEntryUtil} to access the commerce tier price entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.

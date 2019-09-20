@@ -40,7 +40,7 @@ import java.util.Set;
 public interface CommerceShippingFixedOptionPersistence
 	extends BasePersistence<CommerceShippingFixedOption> {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceShippingFixedOptionUtil} to access the commerce shipping fixed option persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.

@@ -40,7 +40,7 @@ import java.util.Set;
 public interface CommerceTaxMethodPersistence
 	extends BasePersistence<CommerceTaxMethod> {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceTaxMethodUtil} to access the commerce tax method persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.

@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.inventory.service.http;
 
-import aQute.bnd.annotation.ProviderType;
 
 /**
  * Provides the HTTP utility for the
@@ -43,6 +42,5 @@ import aQute.bnd.annotation.ProviderType;
  * @see CommerceInventoryReplenishmentItemServiceSoap
  * @generated
  */
-@ProviderType
 public class CommerceInventoryReplenishmentItemServiceHttp {
 }

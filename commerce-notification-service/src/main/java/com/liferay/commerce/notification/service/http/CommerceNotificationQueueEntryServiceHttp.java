@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.notification.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.notification.service.CommerceNotificationQueueEntryServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -51,7 +49,6 @@ import com.liferay.portal.kernel.util.MethodKey;
  * @see CommerceNotificationQueueEntryServiceSoap
  * @generated
  */
-@ProviderType
 public class CommerceNotificationQueueEntryServiceHttp {
 
 	public static void deleteCommerceNotificationQueueEntry(

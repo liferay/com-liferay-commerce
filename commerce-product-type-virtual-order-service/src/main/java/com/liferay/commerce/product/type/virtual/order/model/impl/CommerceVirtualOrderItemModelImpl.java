@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.type.virtual.order.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem;
 import com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItemModel;
 import com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItemSoap;
@@ -66,12 +64,11 @@ import java.util.function.Function;
  * @generated
  */
 @JSON(strict = true)
-@ProviderType
 public class CommerceVirtualOrderItemModelImpl
 	extends BaseModelImpl<CommerceVirtualOrderItem>
 	implements CommerceVirtualOrderItemModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce virtual order item model instance should use the <code>CommerceVirtualOrderItem</code> interface instead.

@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.type.virtual.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -28,7 +26,6 @@ import java.util.List;
  * @author Marco Leo
  * @generated
  */
-@ProviderType
 public class CPDefinitionVirtualSettingSoap implements Serializable {
 
 	public static CPDefinitionVirtualSettingSoap toSoapModel(

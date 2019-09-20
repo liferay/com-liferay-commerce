@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.type.virtual.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CPDefinitionVirtualSettingService
  * @generated
  */
-@ProviderType
 public class CPDefinitionVirtualSettingServiceWrapper
 	implements CPDefinitionVirtualSettingService,
 			   ServiceWrapper<CPDefinitionVirtualSettingService> {
@@ -36,6 +33,11 @@ public class CPDefinitionVirtualSettingServiceWrapper
 		_cpDefinitionVirtualSettingService = cpDefinitionVirtualSettingService;
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link CPDefinitionVirtualSettingServiceUtil} to access the cp definition virtual setting remote service. Add custom service methods to <code>com.liferay.commerce.product.type.virtual.service.impl.CPDefinitionVirtualSettingServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
 	@Override
 	public
 		com.liferay.commerce.product.type.virtual.model.

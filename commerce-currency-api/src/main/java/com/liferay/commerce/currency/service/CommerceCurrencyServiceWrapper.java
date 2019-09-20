@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.currency.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceCurrencyService
  * @generated
  */
-@ProviderType
 public class CommerceCurrencyServiceWrapper
 	implements CommerceCurrencyService,
 			   ServiceWrapper<CommerceCurrencyService> {
@@ -36,6 +33,11 @@ public class CommerceCurrencyServiceWrapper
 		_commerceCurrencyService = commerceCurrencyService;
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link CommerceCurrencyServiceUtil} to access the commerce currency remote service. Add custom service methods to <code>com.liferay.commerce.currency.service.impl.CommerceCurrencyServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
 	@Override
 	public com.liferay.commerce.currency.model.CommerceCurrency
 			addCommerceCurrency(

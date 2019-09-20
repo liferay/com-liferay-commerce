@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.type.virtual.order.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOrderItemServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -61,7 +59,6 @@ import java.rmi.RemoteException;
  * @see CommerceVirtualOrderItemServiceHttp
  * @generated
  */
-@ProviderType
 public class CommerceVirtualOrderItemServiceSoap {
 
 	public static com.liferay.commerce.product.type.virtual.order.model.

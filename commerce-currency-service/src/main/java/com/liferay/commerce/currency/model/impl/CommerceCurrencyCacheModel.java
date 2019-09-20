@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.currency.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
@@ -36,7 +34,6 @@ import java.util.Date;
  * @author Andrea Di Giorgi
  * @generated
  */
-@ProviderType
 public class CommerceCurrencyCacheModel
 	implements CacheModel<CommerceCurrency>, Externalizable {
 

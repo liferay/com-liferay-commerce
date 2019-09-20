@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.inventory.service.persistence.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.inventory.exception.NoSuchInventoryReplenishmentItemException;
 import com.liferay.commerce.inventory.model.CommerceInventoryReplenishmentItem;
 import com.liferay.commerce.inventory.model.impl.CommerceInventoryReplenishmentItemImpl;
@@ -67,12 +65,11 @@ import java.util.Set;
  * @author Luca Pellizzon
  * @generated
  */
-@ProviderType
 public class CommerceInventoryReplenishmentItemPersistenceImpl
 	extends BasePersistenceImpl<CommerceInventoryReplenishmentItem>
 	implements CommerceInventoryReplenishmentItemPersistence {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Always use <code>CommerceInventoryReplenishmentItemUtil</code> to access the commerce inventory replenishment item persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.

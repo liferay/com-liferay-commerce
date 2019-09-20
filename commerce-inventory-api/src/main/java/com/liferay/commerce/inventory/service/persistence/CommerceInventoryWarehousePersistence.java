@@ -40,7 +40,7 @@ import java.util.Set;
 public interface CommerceInventoryWarehousePersistence
 	extends BasePersistence<CommerceInventoryWarehouse> {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CommerceInventoryWarehouseUtil} to access the commerce inventory warehouse persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.

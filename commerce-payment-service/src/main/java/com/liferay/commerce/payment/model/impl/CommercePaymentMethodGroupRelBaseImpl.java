@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.payment.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
 import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelLocalServiceUtil;
 
@@ -31,12 +29,11 @@ import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelLocalSe
  * @see CommercePaymentMethodGroupRel
  * @generated
  */
-@ProviderType
 public abstract class CommercePaymentMethodGroupRelBaseImpl
 	extends CommercePaymentMethodGroupRelModelImpl
 	implements CommercePaymentMethodGroupRel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce payment method group rel model instance should use the <code>CommercePaymentMethodGroupRel</code> interface instead.

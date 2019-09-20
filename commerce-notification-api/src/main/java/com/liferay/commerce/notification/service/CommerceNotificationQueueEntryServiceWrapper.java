@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.notification.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommerceNotificationQueueEntryService
  * @generated
  */
-@ProviderType
 public class CommerceNotificationQueueEntryServiceWrapper
 	implements CommerceNotificationQueueEntryService,
 			   ServiceWrapper<CommerceNotificationQueueEntryService> {
@@ -38,6 +35,11 @@ public class CommerceNotificationQueueEntryServiceWrapper
 			commerceNotificationQueueEntryService;
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this interface directly. Always use {@link CommerceNotificationQueueEntryServiceUtil} to access the commerce notification queue entry remote service. Add custom service methods to <code>com.liferay.commerce.notification.service.impl.CommerceNotificationQueueEntryServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 */
 	@Override
 	public void deleteCommerceNotificationQueueEntry(
 			long commerceNotificationQueueEntryId)

@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.price.list.service.base;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.price.list.model.CommerceTierPriceEntry;
 import com.liferay.commerce.price.list.service.CommerceTierPriceEntryLocalService;
 import com.liferay.commerce.price.list.service.persistence.CommercePriceEntryPersistence;
@@ -74,12 +72,11 @@ import javax.sql.DataSource;
  * @see com.liferay.commerce.price.list.service.impl.CommerceTierPriceEntryLocalServiceImpl
  * @generated
  */
-@ProviderType
 public abstract class CommerceTierPriceEntryLocalServiceBaseImpl
 	extends BaseLocalServiceImpl
 	implements CommerceTierPriceEntryLocalService, IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CommerceTierPriceEntryLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.price.list.service.CommerceTierPriceEntryLocalServiceUtil</code>.

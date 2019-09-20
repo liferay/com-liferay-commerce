@@ -46,7 +46,7 @@ public interface CommerceTierPriceEntryModel
 	extends BaseModel<CommerceTierPriceEntry>, ShardedModel,
 			StagedAuditedModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. All methods that expect a commerce tier price entry model instance should use the {@link CommerceTierPriceEntry} interface instead.

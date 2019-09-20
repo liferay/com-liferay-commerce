@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.tax.engine.fixed.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.tax.engine.fixed.model.CommerceTaxFixedRate;
 import com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateLocalServiceUtil;
 
@@ -31,11 +29,10 @@ import com.liferay.commerce.tax.engine.fixed.service.CommerceTaxFixedRateLocalSe
  * @see CommerceTaxFixedRate
  * @generated
  */
-@ProviderType
 public abstract class CommerceTaxFixedRateBaseImpl
 	extends CommerceTaxFixedRateModelImpl implements CommerceTaxFixedRate {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce tax fixed rate model instance should use the <code>CommerceTaxFixedRate</code> interface instead.

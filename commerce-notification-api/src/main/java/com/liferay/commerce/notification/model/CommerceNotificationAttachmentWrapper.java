@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.notification.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.exportimport.kernel.lar.StagedModelType;
 import com.liferay.portal.kernel.model.ModelWrapper;
@@ -37,7 +35,6 @@ import java.util.Objects;
  * @see CommerceNotificationAttachment
  * @generated
  */
-@ProviderType
 public class CommerceNotificationAttachmentWrapper
 	implements CommerceNotificationAttachment,
 			   ModelWrapper<CommerceNotificationAttachment> {
@@ -348,6 +345,11 @@ public class CommerceNotificationAttachmentWrapper
 		return _commerceNotificationAttachment.isNew();
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a commerce notification attachment model instance should use the <code>CommerceNotificationAttachment</code> interface instead.
+	 */
 	@Override
 	public void persist() {
 		_commerceNotificationAttachment.persist();

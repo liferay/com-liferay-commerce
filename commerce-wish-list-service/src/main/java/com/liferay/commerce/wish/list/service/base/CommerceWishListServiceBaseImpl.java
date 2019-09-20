@@ -48,7 +48,7 @@ public abstract class CommerceWishListServiceBaseImpl
 	extends BaseServiceImpl
 	implements CommerceWishListService, IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CommerceWishListService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.wish.list.service.CommerceWishListServiceUtil</code>.

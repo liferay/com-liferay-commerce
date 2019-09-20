@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.inventory.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.inventory.model.CommerceInventoryBookedQuantity;
 import com.liferay.commerce.inventory.service.CommerceInventoryBookedQuantityLocalServiceUtil;
 
@@ -31,12 +29,11 @@ import com.liferay.commerce.inventory.service.CommerceInventoryBookedQuantityLoc
  * @see CommerceInventoryBookedQuantity
  * @generated
  */
-@ProviderType
 public abstract class CommerceInventoryBookedQuantityBaseImpl
 	extends CommerceInventoryBookedQuantityModelImpl
 	implements CommerceInventoryBookedQuantity {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce inventory booked quantity model instance should use the <code>CommerceInventoryBookedQuantity</code> interface instead.

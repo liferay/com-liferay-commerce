@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.price.list.service;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.service.ServiceWrapper;
 
 /**
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
  * @see CommercePriceListAccountRelLocalService
  * @generated
  */
-@ProviderType
 public class CommercePriceListAccountRelLocalServiceWrapper
 	implements CommercePriceListAccountRelLocalService,
 			   ServiceWrapper<CommercePriceListAccountRelLocalService> {

@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.discount.service.base;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.discount.model.CommerceDiscountRel;
 import com.liferay.commerce.discount.service.CommerceDiscountRelLocalService;
 import com.liferay.commerce.discount.service.persistence.CommerceDiscountCommerceAccountGroupRelPersistence;
@@ -66,12 +64,11 @@ import javax.sql.DataSource;
  * @see com.liferay.commerce.discount.service.impl.CommerceDiscountRelLocalServiceImpl
  * @generated
  */
-@ProviderType
 public abstract class CommerceDiscountRelLocalServiceBaseImpl
 	extends BaseLocalServiceImpl
 	implements CommerceDiscountRelLocalService, IdentifiableOSGiService {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. Use <code>CommerceDiscountRelLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.commerce.discount.service.CommerceDiscountRelLocalServiceUtil</code>.
