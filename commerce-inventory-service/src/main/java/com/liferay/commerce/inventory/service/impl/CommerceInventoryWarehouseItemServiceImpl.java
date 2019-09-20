@@ -45,6 +45,22 @@ public class CommerceInventoryWarehouseItemServiceImpl
 	}
 
 	@Override
+	public CommerceInventoryWarehouseItem addCommerceInventoryWarehouseItem(
+			long userId, long commerceInventoryWarehouseId,
+			String externalReferenceCode, String sku, int quantity)
+		throws PortalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommerceInventoryActionKeys.MANAGE_INVENTORY);
+
+		return commerceInventoryWarehouseItemLocalService.
+			addCommerceInventoryWarehouseItem(
+				userId, commerceInventoryWarehouseId, externalReferenceCode,
+				sku, quantity);
+	}
+
+	@Override
 	public void deleteCommerceInventoryWarehouseItem(
 			long commerceInventoryWarehouseItemId)
 		throws PortalException {
@@ -73,6 +89,21 @@ public class CommerceInventoryWarehouseItemServiceImpl
 	}
 
 	@Override
+	public CommerceInventoryWarehouseItem
+			fetchCommerceInventoryWarehouseItemByReferenceCode(
+				long companyId, String externalReferenceCode)
+		throws PortalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommerceInventoryActionKeys.MANAGE_INVENTORY);
+
+		return commerceInventoryWarehouseItemLocalService.
+			fetchCommerceInventoryWarehouseItemByReferenceCode(
+				companyId, externalReferenceCode);
+	}
+
+	@Override
 	public CommerceInventoryWarehouseItem getCommerceInventoryWarehouseItem(
 			long commerceInventoryWarehouseItemId)
 		throws PortalException {
@@ -84,6 +115,21 @@ public class CommerceInventoryWarehouseItemServiceImpl
 		return commerceInventoryWarehouseItemLocalService.
 			fetchCommerceInventoryWarehouseItem(
 				commerceInventoryWarehouseItemId);
+	}
+
+	@Override
+	public CommerceInventoryWarehouseItem
+			getCommerceInventoryWarehouseItemByReferenceCode(
+				long companyId, String externalReferenceCode)
+		throws PortalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommerceInventoryActionKeys.MANAGE_INVENTORY);
+
+		return commerceInventoryWarehouseItemLocalService.
+			getCommerceInventoryWarehouseItemByReferenceCode(
+				companyId, externalReferenceCode);
 	}
 
 	@Override
@@ -127,6 +173,22 @@ public class CommerceInventoryWarehouseItemServiceImpl
 		return commerceInventoryWarehouseItemLocalService.
 			updateCommerceInventoryWarehouseItem(
 				commerceInventoryWarehouseItemId, quantity);
+	}
+
+	@Override
+	public CommerceInventoryWarehouseItem upsertCommerceInventoryWarehouseItem(
+			long companyId, long userId, long commerceInventoryWarehouseId,
+			String externalReferenceCode, String sku, int quantity)
+		throws PortalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommerceInventoryActionKeys.MANAGE_INVENTORY);
+
+		return commerceInventoryWarehouseItemLocalService.
+			upsertCommerceInventoryWarehouseItem(
+				companyId, userId, commerceInventoryWarehouseId,
+				externalReferenceCode, sku, quantity);
 	}
 
 	@Override
