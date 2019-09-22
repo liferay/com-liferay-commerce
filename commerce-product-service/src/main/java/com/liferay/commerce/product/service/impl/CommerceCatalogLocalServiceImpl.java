@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.service.impl;
 
-import com.liferay.commerce.currency.model.CommerceCurrency;
-import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.product.constants.CommerceCatalogConstants;
 import com.liferay.commerce.product.exception.CommerceCatalogProductsException;
 import com.liferay.commerce.product.exception.CommerceCatalogSystemException;
@@ -51,7 +49,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.spring.aop.ServiceBeanMethodInvocation;
-import com.liferay.portal.spring.extender.service.ServiceReference;
 import com.liferay.portal.spring.transaction.TransactionAttributeAdapter;
 import com.liferay.portal.spring.transaction.TransactionAttributeBuilder;
 import com.liferay.portal.spring.transaction.TransactionExecutor;
@@ -131,16 +128,6 @@ public class CommerceCatalogLocalServiceImpl
 
 		User defaultUser = company.getDefaultUser();
 
-		String currencyCode = null;
-
-		CommerceCurrency commerceCurrency =
-			_commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
-				companyId);
-
-		if (commerceCurrency != null) {
-			currencyCode = commerceCurrency.getCode();
-		}
-
 		ServiceContext serviceContext = new ServiceContext();
 
 		serviceContext.setCompanyId(company.getCompanyId());
@@ -148,7 +135,8 @@ public class CommerceCatalogLocalServiceImpl
 		serviceContext.setUuid(PortalUUIDUtil.generate());
 
 		return commerceCatalogLocalService.addCommerceCatalog(
-			CommerceCatalogConstants.MASTER_COMMERCE_CATALOG, currencyCode,
+			CommerceCatalogConstants.MASTER_COMMERCE_CATALOG,
+			CommerceCatalogConstants.MASTER_COMMERCE_DEFAULT_CURRENCY,
 			defaultUser.getLanguageId(), true, null, serviceContext);
 	}
 
@@ -442,8 +430,5 @@ public class CommerceCatalogLocalServiceImpl
 	private static final TransactionConfig _transactionConfig =
 		TransactionConfig.Factory.create(
 			Propagation.REQUIRED, new Class<?>[] {Exception.class});
-
-	@ServiceReference(type = CommerceCurrencyLocalService.class)
-	private CommerceCurrencyLocalService _commerceCurrencyLocalService;
 
 }

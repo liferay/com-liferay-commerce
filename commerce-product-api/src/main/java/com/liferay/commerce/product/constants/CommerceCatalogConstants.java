@@ -21,4 +21,6 @@ public class CommerceCatalogConstants {
 
 	public static final String MASTER_COMMERCE_CATALOG = "Master";
 
+	public static final String MASTER_COMMERCE_DEFAULT_CURRENCY = "USD";
+
 }
