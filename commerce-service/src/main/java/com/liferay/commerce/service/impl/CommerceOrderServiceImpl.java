@@ -823,12 +823,12 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 		long[] commerceAccountIds = null;
 
 		if (!PortalPermissionUtil.contains(
-			getPermissionChecker(),
-			CommerceAccountActionKeys.MANAGE_ALL_ACCOUNTS)) {
+				getPermissionChecker(),
+				CommerceAccountActionKeys.MANAGE_ALL_ACCOUNTS)) {
 
 			commerceAccountIds =
 				_commerceAccountHelper.getUserCommerceAccountIds(
-					getUserId(), groupId);;
+					getUserId(), groupId);
 		}
 
 		return commerceAccountIds;
