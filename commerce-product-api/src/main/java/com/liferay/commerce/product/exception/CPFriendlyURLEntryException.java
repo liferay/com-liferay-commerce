@@ -14,15 +14,12 @@
 
 package com.liferay.commerce.product.exception;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * @author Marco Leo
  * @author Alessio Antonio Rendina
  */
-@ProviderType
 public class CPFriendlyURLEntryException extends PortalException {
 
 	public static final int ADJACENT_SLASHES = 3;

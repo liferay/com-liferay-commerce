@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.service.CPDefinitionLocalServiceUtil;
@@ -24,7 +22,6 @@ import com.liferay.commerce.product.service.CProductLocalServiceUtil;
 /**
  * @author Alessio Antonio Rendina
  */
-@ProviderType
 public class CPDefinitionLinkImpl extends CPDefinitionLinkBaseImpl {
 
 	public CPDefinitionLinkImpl() {

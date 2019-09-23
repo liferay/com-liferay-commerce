@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.discount.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
@@ -26,7 +24,6 @@ import java.io.IOException;
  * @author Marco Leo
  * @author Alessio Antonio Rendina
  */
-@ProviderType
 public class CommerceDiscountRuleImpl extends CommerceDiscountRuleBaseImpl {
 
 	public CommerceDiscountRuleImpl() {

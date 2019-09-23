@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.shipping.engine.fixed.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalServiceUtil;
 import com.liferay.commerce.model.CommerceCountry;
@@ -31,7 +29,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 /**
  * @author Alessio Antonio Rendina
  */
-@ProviderType
 public class CommerceShippingFixedOptionRelImpl
 	extends CommerceShippingFixedOptionRelBaseImpl {
 

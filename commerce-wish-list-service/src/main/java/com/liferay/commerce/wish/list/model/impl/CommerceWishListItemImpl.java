@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.wish.list.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CProduct;
@@ -29,7 +27,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 /**
  * @author Andrea Di Giorgi
  */
-@ProviderType
 public class CommerceWishListItemImpl extends CommerceWishListItemBaseImpl {
 
 	public CommerceWishListItemImpl() {

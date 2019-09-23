@@ -14,12 +14,9 @@
 
 package com.liferay.commerce.account.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 /**
  * @author Marco Leo
  */
-@ProviderType
 public class CommerceAccountGroupImpl extends CommerceAccountGroupBaseImpl {
 
 	public CommerceAccountGroupImpl() {

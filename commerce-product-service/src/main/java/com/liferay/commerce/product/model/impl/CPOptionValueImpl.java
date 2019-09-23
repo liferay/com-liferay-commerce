@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.service.CPOptionLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -24,7 +22,6 @@ import com.liferay.portal.kernel.exception.PortalException;
  * @author Marco Leo
  * @author Andrea Di Giorgi
  */
-@ProviderType
 public class CPOptionValueImpl extends CPOptionValueBaseImpl {
 
 	public CPOptionValueImpl() {

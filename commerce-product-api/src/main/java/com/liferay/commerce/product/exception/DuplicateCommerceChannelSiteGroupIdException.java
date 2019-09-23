@@ -14,14 +14,11 @@
 
 package com.liferay.commerce.product.exception;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * @author Alec Sloan
  */
-@ProviderType
 public class DuplicateCommerceChannelSiteGroupIdException
 	extends PortalException {
 

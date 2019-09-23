@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.constants.CPOptionCategoryConstants;
 import com.liferay.commerce.product.model.CPOptionCategory;
 import com.liferay.commerce.product.service.CPOptionCategoryLocalServiceUtil;
@@ -24,7 +22,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 /**
  * @author Andrea Di Giorgi
  */
-@ProviderType
 public class CPSpecificationOptionImpl extends CPSpecificationOptionBaseImpl {
 
 	public CPSpecificationOptionImpl() {

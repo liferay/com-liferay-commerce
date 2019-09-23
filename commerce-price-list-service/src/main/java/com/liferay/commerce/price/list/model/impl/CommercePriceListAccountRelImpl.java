@@ -14,12 +14,9 @@
 
 package com.liferay.commerce.price.list.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 /**
  * @author Ethan Bustad
  */
-@ProviderType
 public class CommercePriceListAccountRelImpl
 	extends CommercePriceListAccountRelBaseImpl {
 

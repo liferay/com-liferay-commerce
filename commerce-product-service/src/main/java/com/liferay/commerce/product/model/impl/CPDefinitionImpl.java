@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.media.CommerceMediaResolverUtil;
 import com.liferay.commerce.product.exception.CPDefinitionMetaDescriptionException;
 import com.liferay.commerce.product.exception.CPDefinitionMetaKeywordsException;
@@ -62,7 +60,6 @@ import java.util.TreeSet;
  * @author Andrea Di Giorgi
  * @author Alessio Antonio Rendina
  */
-@ProviderType
 public class CPDefinitionImpl extends CPDefinitionBaseImpl {
 
 	public static CPDefinitionMetaDescriptionException validateMetaDescription(

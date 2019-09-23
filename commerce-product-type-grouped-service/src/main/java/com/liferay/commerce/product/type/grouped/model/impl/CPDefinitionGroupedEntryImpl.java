@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.type.grouped.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.service.CPDefinitionLocalServiceUtil;
@@ -26,7 +24,6 @@ import com.liferay.portal.kernel.exception.PortalException;
  * @author Andrea Di Giorgi
  * @author Ethan Bustad
  */
-@ProviderType
 public class CPDefinitionGroupedEntryImpl
 	extends CPDefinitionGroupedEntryBaseImpl {
 

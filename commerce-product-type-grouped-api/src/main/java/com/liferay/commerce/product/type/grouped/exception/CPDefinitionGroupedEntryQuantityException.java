@@ -14,14 +14,11 @@
 
 package com.liferay.commerce.product.type.grouped.exception;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * @author Andrea Di Giorgi
  */
-@ProviderType
 public class CPDefinitionGroupedEntryQuantityException extends PortalException {
 
 	public CPDefinitionGroupedEntryQuantityException() {

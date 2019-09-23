@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.price.list.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -23,7 +21,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 /**
  * @author Alessio Antonio Rendina
  */
-@ProviderType
 public class CommercePriceListImpl extends CommercePriceListBaseImpl {
 
 	public CommercePriceListImpl() {

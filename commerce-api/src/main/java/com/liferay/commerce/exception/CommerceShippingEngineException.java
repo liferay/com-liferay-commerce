@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.exception;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.KeyValuePair;
@@ -28,7 +26,6 @@ import java.util.List;
 /**
  * @author Andrea Di Giorgi
  */
-@ProviderType
 public class CommerceShippingEngineException extends PortalException {
 
 	public CommerceShippingEngineException() {

@@ -14,14 +14,11 @@
 
 package com.liferay.commerce.product.type.virtual.order.exception;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.exception.NoSuchModelException;
 
 /**
  * @author Alessio Antonio Rendina
  */
-@ProviderType
 public class NoSuchVirtualOrderItemException extends NoSuchModelException {
 
 	public NoSuchVirtualOrderItemException() {

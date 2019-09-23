@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.asset.kernel.service.AssetCategoryLocalServiceUtil;
 import com.liferay.commerce.product.model.CPDefinition;
@@ -27,7 +25,6 @@ import com.liferay.portal.kernel.service.LayoutLocalServiceUtil;
  * @author Marco Leo
  * @author Alessio Antonio Rendina
  */
-@ProviderType
 public class CPDisplayLayoutImpl extends CPDisplayLayoutBaseImpl {
 
 	public CPDisplayLayoutImpl() {

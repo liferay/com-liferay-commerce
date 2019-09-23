@@ -14,14 +14,11 @@
 
 package com.liferay.commerce.currency.exception;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.exception.NoSuchModelException;
 
 /**
  * @author Andrea Di Giorgi
  */
-@ProviderType
 public class NoSuchCurrencyException extends NoSuchModelException {
 
 	public NoSuchCurrencyException() {

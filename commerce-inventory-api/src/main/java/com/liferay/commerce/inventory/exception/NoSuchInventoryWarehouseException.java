@@ -14,14 +14,11 @@
 
 package com.liferay.commerce.inventory.exception;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.exception.NoSuchModelException;
 
 /**
  * @author Luca Pellizzon
  */
-@ProviderType
 public class NoSuchInventoryWarehouseException extends NoSuchModelException {
 
 	public NoSuchInventoryWarehouseException() {

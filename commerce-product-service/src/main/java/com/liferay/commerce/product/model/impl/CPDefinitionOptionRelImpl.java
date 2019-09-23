@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
 import com.liferay.commerce.product.model.CPOption;
@@ -31,7 +29,6 @@ import java.util.List;
  * @author Marco Leo
  * @author Andrea Di Giorgi
  */
-@ProviderType
 public class CPDefinitionOptionRelImpl extends CPDefinitionOptionRelBaseImpl {
 
 	public CPDefinitionOptionRelImpl() {

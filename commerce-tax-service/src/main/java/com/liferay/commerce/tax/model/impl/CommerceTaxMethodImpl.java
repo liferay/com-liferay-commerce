@@ -14,12 +14,9 @@
 
 package com.liferay.commerce.tax.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 /**
  * @author Marco Leo
  */
-@ProviderType
 public class CommerceTaxMethodImpl extends CommerceTaxMethodBaseImpl {
 
 	public CommerceTaxMethodImpl() {

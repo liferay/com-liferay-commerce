@@ -14,14 +14,11 @@
 
 package com.liferay.commerce.product.exception;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.exception.NoSuchModelException;
 
 /**
  * @author Marco Leo
  */
-@ProviderType
 public class NoSuchCPInstanceException extends NoSuchModelException {
 
 	public NoSuchCPInstanceException() {

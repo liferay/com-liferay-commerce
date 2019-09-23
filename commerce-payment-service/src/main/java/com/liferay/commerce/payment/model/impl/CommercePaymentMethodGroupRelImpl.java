@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.payment.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.webserver.WebServerServletTokenUtil;
@@ -23,7 +21,6 @@ import com.liferay.portal.kernel.webserver.WebServerServletTokenUtil;
 /**
  * @author Luca Pellizzon
  */
-@ProviderType
 public class CommercePaymentMethodGroupRelImpl
 	extends CommercePaymentMethodGroupRelBaseImpl {
 

@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.exception.CPFriendlyURLEntryException;
 import com.liferay.commerce.product.model.CPFriendlyURLEntry;
 import com.liferay.petra.string.CharPool;
@@ -32,7 +30,6 @@ import java.util.Locale;
  * @author Andrea Di Giorgi
  * @author Alessio Antonio Rendina
  */
-@ProviderType
 public class CPFriendlyURLEntryImpl extends CPFriendlyURLEntryBaseImpl {
 
 	public static int validate(String urlTitle) {

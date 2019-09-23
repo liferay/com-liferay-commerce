@@ -14,14 +14,11 @@
 
 package com.liferay.commerce.exception;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * @author Andrea Di Giorgi
  */
-@ProviderType
 public class CommercePaymentEngineException extends PortalException {
 
 	public CommercePaymentEngineException() {

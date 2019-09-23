@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.currency.model.CommerceMoney;
 import com.liferay.commerce.currency.model.CommerceMoneyFactoryUtil;
 import com.liferay.commerce.model.CommerceOrder;
@@ -32,7 +30,6 @@ import com.liferay.portal.kernel.exception.PortalException;
  * @author Alessio Antonio Rendina
  * @author Andrea Di Giorgi
  */
-@ProviderType
 public class CommerceOrderItemImpl extends CommerceOrderItemBaseImpl {
 
 	public CommerceOrderItemImpl() {

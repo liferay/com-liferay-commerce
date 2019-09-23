@@ -14,12 +14,9 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 /**
  * @author Marco Leo
  */
-@ProviderType
 public class CPDefinitionLocalizationImpl
 	extends CPDefinitionLocalizationBaseImpl {
 

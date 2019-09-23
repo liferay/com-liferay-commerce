@@ -14,14 +14,11 @@
 
 package com.liferay.commerce.wish.list.exception;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * @author Andrea Di Giorgi
  */
-@ProviderType
 public class CommerceWishListNameException extends PortalException {
 
 	public CommerceWishListNameException() {

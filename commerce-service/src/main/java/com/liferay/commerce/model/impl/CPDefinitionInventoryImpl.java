@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -25,7 +23,6 @@ import java.util.Arrays;
 /**
  * @author Alessio Antonio Rendina
  */
-@ProviderType
 public class CPDefinitionInventoryImpl extends CPDefinitionInventoryBaseImpl {
 
 	public CPDefinitionInventoryImpl() {
