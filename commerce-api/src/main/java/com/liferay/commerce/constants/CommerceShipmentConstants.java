@@ -25,7 +25,7 @@ public class CommerceShipmentConstants {
 		CommerceOrderConstants.ORDER_STATUS_DISPUTED,
 		CommerceOrderConstants.ORDER_STATUS_TO_FULFILL,
 		CommerceOrderConstants.ORDER_STATUS_PARTIALLY_REFUNDED,
-		CommerceOrderConstants.ORDER_STATUS_PARTIALLY_SHIPPED,
+		CommerceOrderConstants.ORDER_STATUS_PARTIALLY_SHIPPED
 	};
 
 	public static final int SHIPMENT_STATUS_DELIVERED = 3;
