@@ -14,14 +14,31 @@
 
 package com.liferay.commerce.constants;
 
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Luca Pellizzon
  */
 public class CommerceOrderConstants {
 
 	public static final String COMMERCE_ORDER = "commerce-order";
+
+	public static final String ORDER_NOTIFICATION_AWAITING_SHIPMENT =
+		"order-awaiting-shipment";
+
+	public static final String ORDER_NOTIFICATION_COMPLETED = "order-completed";
+
+	public static final String ORDER_NOTIFICATION_PARTIALLY_SHIPPED =
+		"order-partially-shipped";
+
+	public static final String ORDER_NOTIFICATION_PLACED = "order-placed";
+
+	public static final String ORDER_NOTIFICATION_SHIPPED = "order-shipped";
+
+	public static final String ORDER_NOTIFICATION_TRANSMITTED =
+		"order-transmitted";
 
 	public static final int ORDER_STATUS_ANY = WorkflowConstants.STATUS_ANY;
 
@@ -89,6 +106,30 @@ public class CommerceOrderConstants {
 	public static final long TYPE_PK_APPROVAL = 0;
 
 	public static final long TYPE_PK_TRANSMISSION = 1;
+
+	public static String getNotificationKey(int orderStatus) {
+		if (orderStatus == CommerceOrderConstants.ORDER_STATUS_TRANSMITTED) {
+			return ORDER_NOTIFICATION_TRANSMITTED;
+		}
+		else if (orderStatus ==
+					CommerceOrderConstants.ORDER_STATUS_AWAITING_SHIPMENT) {
+
+			return ORDER_NOTIFICATION_AWAITING_SHIPMENT;
+		}
+		else if (orderStatus ==
+					CommerceOrderConstants.ORDER_STATUS_PARTIALLY_SHIPPED) {
+
+			return ORDER_NOTIFICATION_PARTIALLY_SHIPPED;
+		}
+		else if (orderStatus == CommerceOrderConstants.ORDER_STATUS_SHIPPED) {
+			return ORDER_NOTIFICATION_SHIPPED;
+		}
+		else if (orderStatus == CommerceOrderConstants.ORDER_STATUS_COMPLETED) {
+			return ORDER_NOTIFICATION_COMPLETED;
+		}
+
+		return StringPool.BLANK;
+	}
 
 	public static String getOrderStatusLabel(int orderStatus) {
 		if (orderStatus == ORDER_STATUS_ANY) {
