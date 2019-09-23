@@ -347,6 +347,11 @@ components:
                 printedNote:
                     example: Order item printed note
                     type: string
+                promoPrice:
+                    example: 101
+                    format: bigdecimal
+                    minimum: 0
+                    type: number
                 quantity:
                     example: 2
                     format: int32
