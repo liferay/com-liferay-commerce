@@ -13,8 +13,8 @@ definition {
 			userScreenName = "commerceuser");
 
 		CommerceEntry.createNewCurrenciesEntry(
-			code = "USD",
-			entryName = "US Dollar");
+			code = "NCU",
+			entryName = "New Currency");
 
 		ProductMenu.gotoPortlet(
 			category = "Commerce",
