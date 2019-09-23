@@ -14,6 +14,7 @@
 
 package com.liferay.headless.commerce.admin.order.internal.resource.v1_0;
 
+import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.context.CommerceContextFactory;
 import com.liferay.commerce.exception.NoSuchOrderException;
 import com.liferay.commerce.exception.NoSuchOrderItemException;
@@ -31,9 +32,13 @@ import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverter
 import com.liferay.headless.commerce.core.util.ExpandoUtil;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
+import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
+
+import java.math.BigDecimal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -283,6 +288,41 @@ public class OrderItemResourceImpl extends BaseOrderItemResourceImpl {
 			_serviceContextHelper.getServiceContext(
 				commerceOrderItem.getGroupId()));
 
+		// Pricing
+
+		if (PortalPermissionUtil.contains(
+				PermissionThreadLocal.getPermissionChecker(),
+				CommerceActionKeys.MANAGE_COMMERCE_ORDER_PRICES)) {
+
+			commerceOrderItem =
+				_commerceOrderItemService.updateCommerceOrderItemPrices(
+					commerceOrderItem.getCommerceOrderItemId(),
+					(BigDecimal)GetterUtil.get(
+						orderItem.getUnitPrice(),
+						commerceOrderItem.getUnitPrice()),
+					(BigDecimal)GetterUtil.get(
+						orderItem.getPromoPrice(),
+						commerceOrderItem.getPromoPrice()),
+					(BigDecimal)GetterUtil.get(
+						orderItem.getDiscountAmount(),
+						commerceOrderItem.getDiscountAmount()),
+					(BigDecimal)GetterUtil.get(
+						orderItem.getFinalPrice(),
+						commerceOrderItem.getFinalPrice()),
+					(BigDecimal)GetterUtil.get(
+						orderItem.getDiscountPercentageLevel1(),
+						commerceOrderItem.getDiscountPercentageLevel1()),
+					(BigDecimal)GetterUtil.get(
+						orderItem.getDiscountPercentageLevel2(),
+						commerceOrderItem.getDiscountPercentageLevel2()),
+					(BigDecimal)GetterUtil.get(
+						orderItem.getDiscountPercentageLevel3(),
+						commerceOrderItem.getDiscountPercentageLevel3()),
+					(BigDecimal)GetterUtil.get(
+						orderItem.getDiscountPercentageLevel4(),
+						commerceOrderItem.getDiscountPercentageLevel4()));
+		}
+
 		// Expando
 
 		Map<String, ?> customFields = orderItem.getCustomFields();
@@ -317,6 +357,41 @@ public class OrderItemResourceImpl extends BaseOrderItemResourceImpl {
 					commerceOrder.getCommerceAccountId()),
 				_serviceContextHelper.getServiceContext(
 					commerceOrder.getGroupId()));
+
+		// Pricing
+
+		if (PortalPermissionUtil.contains(
+				PermissionThreadLocal.getPermissionChecker(),
+				CommerceActionKeys.MANAGE_COMMERCE_ORDER_PRICES)) {
+
+			commerceOrderItem =
+				_commerceOrderItemService.updateCommerceOrderItemPrices(
+					commerceOrderItem.getCommerceOrderItemId(),
+					(BigDecimal)GetterUtil.get(
+						orderItem.getUnitPrice(),
+						commerceOrderItem.getUnitPrice()),
+					(BigDecimal)GetterUtil.get(
+						orderItem.getPromoPrice(),
+						commerceOrderItem.getPromoPrice()),
+					(BigDecimal)GetterUtil.get(
+						orderItem.getDiscountAmount(),
+						commerceOrderItem.getDiscountAmount()),
+					(BigDecimal)GetterUtil.get(
+						orderItem.getFinalPrice(),
+						commerceOrderItem.getFinalPrice()),
+					(BigDecimal)GetterUtil.get(
+						orderItem.getDiscountPercentageLevel1(),
+						commerceOrderItem.getDiscountPercentageLevel1()),
+					(BigDecimal)GetterUtil.get(
+						orderItem.getDiscountPercentageLevel2(),
+						commerceOrderItem.getDiscountPercentageLevel2()),
+					(BigDecimal)GetterUtil.get(
+						orderItem.getDiscountPercentageLevel3(),
+						commerceOrderItem.getDiscountPercentageLevel3()),
+					(BigDecimal)GetterUtil.get(
+						orderItem.getDiscountPercentageLevel4(),
+						commerceOrderItem.getDiscountPercentageLevel4()));
+		}
 
 		// Expando
 
