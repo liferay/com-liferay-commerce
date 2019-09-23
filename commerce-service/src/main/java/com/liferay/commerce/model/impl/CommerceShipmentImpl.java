@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountLocalServiceUtil;
 import com.liferay.commerce.model.CommerceAddress;
@@ -27,7 +25,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 /**
  * @author Alessio Antonio Rendina
  */
-@ProviderType
 public class CommerceShipmentImpl extends CommerceShipmentBaseImpl {
 
 	public CommerceShipmentImpl() {

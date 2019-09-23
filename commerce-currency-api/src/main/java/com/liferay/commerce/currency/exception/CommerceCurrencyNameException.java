@@ -14,14 +14,11 @@
 
 package com.liferay.commerce.currency.exception;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * @author Andrea Di Giorgi
  */
-@ProviderType
 public class CommerceCurrencyNameException extends PortalException {
 
 	public CommerceCurrencyNameException() {

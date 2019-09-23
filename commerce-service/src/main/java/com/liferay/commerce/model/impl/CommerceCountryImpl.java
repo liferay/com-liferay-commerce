@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.service.CommerceRegionLocalServiceUtil;
 import com.liferay.commerce.util.comparator.CommerceRegionPriorityComparator;
@@ -26,7 +24,6 @@ import java.util.List;
 /**
  * @author Alessio Antonio Rendina
  */
-@ProviderType
 public class CommerceCountryImpl extends CommerceCountryBaseImpl {
 
 	public CommerceCountryImpl() {

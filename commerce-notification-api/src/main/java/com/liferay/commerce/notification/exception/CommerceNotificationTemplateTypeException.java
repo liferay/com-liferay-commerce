@@ -14,14 +14,11 @@
 
 package com.liferay.commerce.notification.exception;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * @author Alessio Antonio Rendina
  */
-@ProviderType
 public class CommerceNotificationTemplateTypeException extends PortalException {
 
 	public CommerceNotificationTemplateTypeException() {

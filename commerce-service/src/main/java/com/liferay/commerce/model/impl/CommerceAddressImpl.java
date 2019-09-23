@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.CommerceRegion;
@@ -28,7 +26,6 @@ import java.util.Objects;
 /**
  * @author Andrea Di Giorgi
  */
-@ProviderType
 public class CommerceAddressImpl extends CommerceAddressBaseImpl {
 
 	public CommerceAddressImpl() {

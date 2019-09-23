@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.tax.engine.fixed.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.product.model.CPTaxCategory;
@@ -29,7 +27,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 /**
  * @author Alessio Antonio Rendina
  */
-@ProviderType
 public class CommerceTaxFixedRateAddressRelImpl
 	extends CommerceTaxFixedRateAddressRelBaseImpl {
 

@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.account.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -30,7 +28,6 @@ import java.util.List;
  * @author Marco Leo
  * @author Alessio Antonio Rendina
  */
-@ProviderType
 public class CommerceAccountUserRelImpl extends CommerceAccountUserRelBaseImpl {
 
 	public CommerceAccountUserRelImpl() {

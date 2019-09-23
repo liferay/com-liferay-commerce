@@ -97,8 +97,8 @@ String definitionToolbarFilterRequire = npmResolver.resolveModuleName("commerce-
 
 			<liferay-frontend:management-bar-button
 				href='<%= "javascript:" + renderResponse.getNamespace() + "deleteCPDefinitions();" %>'
-				icon='<%= "times" %>'
-				label='<%= "delete" %>'
+				icon="times"
+				label="delete"
 			/>
 		</liferay-frontend:management-bar-action-buttons>
 	</liferay-frontend:management-bar>

@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.type.virtual.order.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.service.CommerceOrderItemLocalServiceUtil;
 import com.liferay.document.library.kernel.service.DLAppLocalServiceUtil;
@@ -25,7 +23,6 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 /**
  * @author Alessio Antonio Rendina
  */
-@ProviderType
 public class CommerceVirtualOrderItemImpl
 	extends CommerceVirtualOrderItemBaseImpl {
 

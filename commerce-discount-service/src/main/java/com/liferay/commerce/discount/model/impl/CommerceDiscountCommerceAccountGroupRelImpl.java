@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.discount.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.account.model.CommerceAccountGroup;
 import com.liferay.commerce.account.service.CommerceAccountGroupLocalServiceUtil;
 import com.liferay.commerce.discount.model.CommerceDiscount;
@@ -26,7 +24,6 @@ import com.liferay.portal.kernel.exception.PortalException;
  * @author Marco Leo
  * @author Alessio Antonio Rendina
  */
-@ProviderType
 public class CommerceDiscountCommerceAccountGroupRelImpl
 	extends CommerceDiscountCommerceAccountGroupRelBaseImpl {
 

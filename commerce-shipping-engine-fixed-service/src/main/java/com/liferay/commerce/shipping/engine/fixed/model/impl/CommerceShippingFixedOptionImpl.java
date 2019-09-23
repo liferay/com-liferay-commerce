@@ -14,12 +14,9 @@
 
 package com.liferay.commerce.shipping.engine.fixed.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 /**
  * @author Alessio Antonio Rendina
  */
-@ProviderType
 public class CommerceShippingFixedOptionImpl
 	extends CommerceShippingFixedOptionBaseImpl {
 

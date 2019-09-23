@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPSubscriptionInfo;
 import com.liferay.commerce.product.model.CommerceCatalog;
@@ -28,7 +26,6 @@ import com.liferay.portal.kernel.util.UnicodeProperties;
  * @author Andrea Di Giorgi
  * @author Alessio Antonio Rendina
  */
-@ProviderType
 public class CPInstanceImpl extends CPInstanceBaseImpl {
 
 	public CPInstanceImpl() {

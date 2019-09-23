@@ -92,8 +92,7 @@ import org.osgi.service.component.annotations.Reference;
 		"javax.portlet.init-param.view-template=/search_results/view.jsp",
 		"javax.portlet.name=" + CPPortletKeys.CP_SEARCH_RESULTS,
 		"javax.portlet.resource-bundle=content.Language",
-		"javax.portlet.security-role-ref=guest,power-user,user",
-		"javax.portlet.supports.mime-type=text/html"
+		"javax.portlet.security-role-ref=guest,power-user,user"
 	},
 	service = {Portlet.class, PortletSharedSearchContributor.class}
 )

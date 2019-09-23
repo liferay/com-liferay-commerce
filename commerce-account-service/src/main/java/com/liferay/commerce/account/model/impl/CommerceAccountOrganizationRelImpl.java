@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.account.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.service.OrganizationLocalServiceUtil;
@@ -23,7 +21,6 @@ import com.liferay.portal.kernel.service.OrganizationLocalServiceUtil;
 /**
  * @author Alessio Antonio Rendina
  */
-@ProviderType
 public class CommerceAccountOrganizationRelImpl
 	extends CommerceAccountOrganizationRelBaseImpl {
 

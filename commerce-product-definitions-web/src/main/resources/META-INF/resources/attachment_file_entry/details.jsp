@@ -48,7 +48,7 @@ int type = cpAttachmentFileEntriesDisplayContext.getType();
 			<liferay-item-selector:image-selector
 				draggableImage="vertical"
 				fileEntryId="<%= fileEntryId %>"
-				itemSelectorEventName='<%= "addCPAttachmentFileEntry" %>'
+				itemSelectorEventName="addCPAttachmentFileEntry"
 				itemSelectorURL="<%= cpAttachmentFileEntriesDisplayContext.getImageItemSelectorUrl() %>"
 				maxFileSize="<%= cpAttachmentFileEntriesDisplayContext.getImageMaxSize() %>"
 				paramName="fileEntry"

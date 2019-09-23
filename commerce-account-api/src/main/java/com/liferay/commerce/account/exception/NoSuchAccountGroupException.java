@@ -14,14 +14,11 @@
 
 package com.liferay.commerce.account.exception;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.exception.NoSuchModelException;
 
 /**
  * @author Marco Leo
  */
-@ProviderType
 public class NoSuchAccountGroupException extends NoSuchModelException {
 
 	public NoSuchAccountGroupException() {

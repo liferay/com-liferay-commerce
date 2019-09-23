@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.notification.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.document.library.kernel.service.DLAppLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
@@ -23,7 +21,6 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 /**
  * @author Alessio Antonio Rendina
  */
-@ProviderType
 public class CommerceNotificationAttachmentImpl
 	extends CommerceNotificationAttachmentBaseImpl {
 

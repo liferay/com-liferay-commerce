@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountLocalServiceUtil;
@@ -44,7 +42,6 @@ import java.util.List;
  * @author Andrea Di Giorgi
  * @author Ethan Bustad
  */
-@ProviderType
 public class CommerceOrderImpl extends CommerceOrderBaseImpl {
 
 	public CommerceOrderImpl() {

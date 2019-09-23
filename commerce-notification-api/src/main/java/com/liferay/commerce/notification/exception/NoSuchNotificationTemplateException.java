@@ -14,14 +14,11 @@
 
 package com.liferay.commerce.notification.exception;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.exception.NoSuchModelException;
 
 /**
  * @author Alessio Antonio Rendina
  */
-@ProviderType
 public class NoSuchNotificationTemplateException extends NoSuchModelException {
 
 	public NoSuchNotificationTemplateException() {

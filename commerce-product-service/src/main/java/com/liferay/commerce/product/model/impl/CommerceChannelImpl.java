@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.product.service.CommerceChannelLocalServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -27,7 +25,6 @@ import com.liferay.portal.model.impl.GroupImpl;
  * @author Alec Sloan
  * @author Alessio Antonio Rendina
  */
-@ProviderType
 public class CommerceChannelImpl extends CommerceChannelBaseImpl {
 
 	public CommerceChannelImpl() {

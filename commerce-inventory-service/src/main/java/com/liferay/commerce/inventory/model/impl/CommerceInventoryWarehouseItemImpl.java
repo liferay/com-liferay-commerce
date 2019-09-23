@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.inventory.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -23,7 +21,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 /**
  * @author Luca Pellizzon
  */
-@ProviderType
 public class CommerceInventoryWarehouseItemImpl
 	extends CommerceInventoryWarehouseItemBaseImpl {
 

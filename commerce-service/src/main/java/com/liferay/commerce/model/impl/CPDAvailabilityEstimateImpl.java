@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.model.CommerceAvailabilityEstimate;
 import com.liferay.commerce.service.CommerceAvailabilityEstimateLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -23,7 +21,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 /**
  * @author Alessio Antonio Rendina
  */
-@ProviderType
 public class CPDAvailabilityEstimateImpl
 	extends CPDAvailabilityEstimateBaseImpl {
 

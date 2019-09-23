@@ -63,8 +63,7 @@ import org.osgi.service.component.annotations.Reference;
 		"javax.portlet.init-param.view-template=/cart_total/view.jsp",
 		"javax.portlet.name=" + CommercePortletKeys.COMMERCE_CART_CONTENT_TOTAL,
 		"javax.portlet.resource-bundle=content.Language",
-		"javax.portlet.security-role-ref=power-user,user",
-		"javax.portlet.supports.mime-type=text/html"
+		"javax.portlet.security-role-ref=power-user,user"
 	},
 	service = {CommerceCartContentTotalPortlet.class, Portlet.class}
 )

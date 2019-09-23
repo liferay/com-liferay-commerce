@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.product.type.virtual.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.document.library.kernel.service.DLAppLocalServiceUtil;
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.service.JournalArticleLocalServiceUtil;
@@ -26,7 +24,6 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
  * @author Marco Leo
  * @author Andrea Di Giorgi
  */
-@ProviderType
 public class CPDefinitionVirtualSettingImpl
 	extends CPDefinitionVirtualSettingBaseImpl {
 

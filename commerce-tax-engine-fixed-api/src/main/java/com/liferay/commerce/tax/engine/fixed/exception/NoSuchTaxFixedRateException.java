@@ -14,14 +14,11 @@
 
 package com.liferay.commerce.tax.engine.fixed.exception;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.portal.kernel.exception.NoSuchModelException;
 
 /**
  * @author Alessio Antonio Rendina
  */
-@ProviderType
 public class NoSuchTaxFixedRateException extends NoSuchModelException {
 
 	public NoSuchTaxFixedRateException() {

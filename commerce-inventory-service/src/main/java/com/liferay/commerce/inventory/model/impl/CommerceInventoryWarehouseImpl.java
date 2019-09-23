@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.inventory.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -26,7 +24,6 @@ import java.util.List;
  * @author Luca Pellizzon
  * @author Alessio Antonio Rendina
  */
-@ProviderType
 public class CommerceInventoryWarehouseImpl
 	extends CommerceInventoryWarehouseBaseImpl {
 

@@ -14,12 +14,9 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 /**
  * @author Ethan Bustad
  */
-@ProviderType
 public class CProductImpl extends CProductBaseImpl {
 
 	public CProductImpl() {
