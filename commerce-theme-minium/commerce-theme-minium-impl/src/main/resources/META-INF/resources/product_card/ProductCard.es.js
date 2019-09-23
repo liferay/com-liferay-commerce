@@ -4,6 +4,8 @@ import template from './ProductCard.soy';
 import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
+let notificationDidShow = false;
+
 function liferayNavigation(url) {
 	if (Liferay.SPA) {
 		Liferay.SPA.app.navigate(url);
@@ -13,7 +15,43 @@ function liferayNavigation(url) {
 	}
 }
 
+function showNotification(message, type) {
+	!notificationDidShow && AUI().use(
+		'liferay-notification',
+		() => {
+			new Liferay.Notification(
+				{
+					closeable: true,
+					delay: {
+						hide: 5000,
+						show: 0
+					},
+					duration: 500,
+					message: message,
+					render: true,
+					title: '',
+					type: type
+				}
+			);
+		}
+	);
+
+	notificationDidShow = true;
+
+	setTimeout(() => {
+		notificationDidShow = false;
+	}, 500);
+}
+
 class ProductCard extends Component {
+
+	created() {
+		window.Liferay.on('accountSelected', this._handleAccountChange, this);
+	}
+
+	detached() {
+		window.Liferay.detach('accountSelected', this._handleAccountChange, this);
+	}
 
 	_handleCardKeypress(e) {
 		if (e.key === 'Enter' && e.target === this.element) {
@@ -70,6 +108,10 @@ class ProductCard extends Component {
 			);
 	}
 
+	_handleAccountChange(e) {
+		this.accountId = e.accountId;
+	}
+
 	_handleWishListButtonClick() {
 		this._toggleFavorite();
 	}
@@ -77,6 +119,11 @@ class ProductCard extends Component {
 	_toggleFavorite() {
 		if (!this.wishlistAPI) {
 			throw new Error('No wishlist API defined.');
+		}
+
+		if (!this.accountId) {
+			showNotification(Liferay.Language.get('no-account-selected-wishlist'), 'danger');
+			throw new Error('No account selected.');
 		}
 
 		const formData = new FormData();
