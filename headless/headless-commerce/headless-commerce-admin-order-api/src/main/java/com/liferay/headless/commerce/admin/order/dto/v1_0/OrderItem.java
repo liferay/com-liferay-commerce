@@ -490,6 +490,34 @@ public class OrderItem {
 	protected String printedNote;
 
 	@Schema
+	public BigDecimal getPromoPrice() {
+		return promoPrice;
+	}
+
+	public void setPromoPrice(BigDecimal promoPrice) {
+		this.promoPrice = promoPrice;
+	}
+
+	@JsonIgnore
+	public void setPromoPrice(
+		UnsafeSupplier<BigDecimal, Exception> promoPriceUnsafeSupplier) {
+
+		try {
+			promoPrice = promoPriceUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected BigDecimal promoPrice;
+
+	@Schema
 	public Integer getQuantity() {
 		return quantity;
 	}
@@ -962,6 +990,16 @@ public class OrderItem {
 			sb.append(_escape(printedNote));
 
 			sb.append("\"");
+		}
+
+		if (promoPrice != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"promoPrice\": ");
+
+			sb.append(promoPrice);
 		}
 
 		if (quantity != null) {
