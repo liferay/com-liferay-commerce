@@ -557,6 +557,11 @@ public interface CommerceOrderLocalService
 		throws PortalException;
 
 	@Indexable(type = IndexableType.REINDEX)
+	public CommerceOrder updatePrintedNote(
+			long commerceOrderId, String printedNote)
+		throws PortalException;
+
+	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrder updatePurchaseOrderNumber(
 			long commerceOrderId, String purchaseOrderNumber)
 		throws PortalException;
