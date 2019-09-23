@@ -1,7 +1,7 @@
 {
 	"dependencies": {
 		"clay": "^2.4.1",
-		"clay-table": "^2.4.1",
+		"clay-table": "2.14.2",
 		"debounce": "^1.2.0",
 		"intersection-observer": "^0.5.1",
 		"vue": "^2.5.17"
