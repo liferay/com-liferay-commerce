@@ -25,7 +25,7 @@ public class CommerceOrderUpgradeProcess
 	public CommerceOrderUpgradeProcess() {
 		super(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
-			"externalReferenceCode", "STRING");
+			"externalReferenceCode", "VARCHAR(75)");
 	}
 
 }
