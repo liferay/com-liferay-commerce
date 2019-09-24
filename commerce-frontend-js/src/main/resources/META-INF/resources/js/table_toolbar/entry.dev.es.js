@@ -6,61 +6,61 @@ export const filters = [
 		label: 'Text test',
 		operator: 'contains',
 		slug: 'text-test',
-		value: 'Test input',
+		value: 'Test input'
 	},
 	{
 		type: 'select',
 		items: [
 			{
 				label: 'First option',
-				value: 'first-option',
+				value: 'first-option'
 			},
 			{
 				label: 'Second option',
-				value: 'second-option',
-			},
+				value: 'second-option'
+			}
 		],
 		label: 'Select test',
 		operator: 'eq',
 		slug: 'select-test',
-		value: 'second-option',
+		value: 'second-option'
 	},
 	{
 		type: 'radio',
 		items: [
 			{
 				label: 'First option',
-				value: 'first-option',
+				value: 'first-option'
 			},
 			{
 				label: 'Second option',
-				value: 'second-option',
-			},
+				value: 'second-option'
+			}
 		],
 		label: 'Radio test',
 		operator: 'eq',
-		slug: 'radio-test',
+		slug: 'radio-test'
 	},
 	{
 		type: 'checkbox',
 		items: [
 			{
 				label: 'First option',
-				value: 'first-option',
+				value: 'first-option'
 			},
 			{
 				label: 'Second option',
-				value: 'second-option',
+				value: 'second-option'
 			},
 			{
 				label: 'Third option',
-				value: 'third-option',
-			},
+				value: 'third-option'
+			}
 		],
 		label: 'Checkbox test',
 		operator: 'contains',
 		slug: 'checkbox-test',
-		value: ['first-option', 'third-option'],
+		value: ['first-option', 'third-option']
 	},
 	{
 		type: 'number',
@@ -70,7 +70,7 @@ export const filters = [
 		inputText: '$',
 		value: 123,
 		min: 20,
-		max: 200,
+		max: 200
 	},
 	{
 		type: 'date',
@@ -80,9 +80,9 @@ export const filters = [
 		value: {
 			day: 1,
 			month: 2,
-			year: 1,
-		},
-	},
+			year: 1
+		}
+	}
 ];
 
 const props = {
@@ -90,12 +90,12 @@ const props = {
 	spritemap: './icons.svg',
 	plusButton: {
 		onClick: e => console.log(e),
-		resetFiltersAfterClickAction: true,
+		resetFiltersAfterClickAction: true
 	},
 	queryEndpoint: '/toolbar-test',
 	inputSearch: {
-		name: 'main-search',
-	},
+		name: 'main-search'
+	}
 };
 
 window.tableToolbar = tableToolbarLauncher(
