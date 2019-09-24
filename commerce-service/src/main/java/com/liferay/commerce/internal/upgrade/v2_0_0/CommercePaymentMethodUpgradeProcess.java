@@ -30,7 +30,7 @@ public class CommercePaymentMethodUpgradeProcess
 		if (!hasColumn(CommerceOrderImpl.TABLE_NAME, "transactionId")) {
 			addColumn(
 				CommerceOrderImpl.class, CommerceOrderImpl.TABLE_NAME,
-				"transactionId", "STRING");
+				"transactionId", "VARCHAR(75)");
 		}
 
 		if (hasColumn(
@@ -38,7 +38,7 @@ public class CommercePaymentMethodUpgradeProcess
 
 			addColumn(
 				CommerceOrderImpl.class, CommerceOrderImpl.TABLE_NAME,
-				"commercePaymentMethodKey", "STRING");
+				"commercePaymentMethodKey", "VARCHAR(75)");
 
 			String template = StringUtil.read(
 				CommercePaymentMethodUpgradeProcess.class.getResourceAsStream(
@@ -58,7 +58,7 @@ public class CommercePaymentMethodUpgradeProcess
 			addColumn(
 				CommerceOrderPaymentImpl.class,
 				CommerceOrderPaymentImpl.TABLE_NAME, "commercePaymentMethodKey",
-				"STRING");
+				"VARCHAR(75)");
 
 			String template = StringUtil.read(
 				CommercePaymentMethodUpgradeProcess.class.getResourceAsStream(
