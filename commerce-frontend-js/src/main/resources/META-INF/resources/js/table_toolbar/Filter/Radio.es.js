@@ -1,17 +1,17 @@
 import React, {useState} from 'react'
 import { ClayRadio, ClayRadioGroup} from '@clayui/form';
-import getAppContext, { ContextProps } from '../Context';
+import getAppContext, { ContextProps } from '../Context.es';
 
 import { MultiFilterProps } from './definitions';
 
 import ClayButton from '@clayui/button';
 
-interface IProps extends MultiFilterProps {
-    panelType?: 'add' | 'edit'
-}
+// interface IProps extends MultiFilterProps {
+//     panelType?: 'add' | 'edit'
+// }
 
-const RadioFilter: React.FunctionComponent<IProps> = (props: IProps) => {
-    const { actions } : ContextProps  = getAppContext();
+const RadioFilter = (props) => {
+    const { actions } = getAppContext();
     const [ value, setValue ] = useState(props.value);
 
     return (

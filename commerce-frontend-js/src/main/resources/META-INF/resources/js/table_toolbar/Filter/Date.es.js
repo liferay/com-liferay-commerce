@@ -2,16 +2,15 @@ import React, { useState} from 'react';
 import ClayDatePicker from '@clayui/date-picker';
 import ClayButton from '@clayui/button';
 
-import getAppContext, { ContextProps } from '../Context';
+import getAppContext, { ContextProps } from '../Context.es';
 import { DateFilterProps, DateFormat } from './definitions'
-import { prettifyDateValue } from '../utils';
+import { prettifyDateValue } from '../utils/index.es';
 
-interface IProps extends DateFilterProps {
-    panelType?: 'add' | 'edit'
-}
+// interface IProps extends DateFilterProps {
+//     panelType?: 'add' | 'edit'
+// }
 
-const getDateObj = (date: Date) => {
-    debugger;
+const getDateObj = (date) => {
     return {
         year: date.getFullYear(),
         month: date.getMonth(),
@@ -19,15 +18,15 @@ const getDateObj = (date: Date) => {
     }
 }
 
-const DateFilter: React.FunctionComponent<IProps> = (props: IProps) => {
-    const { actions } : ContextProps = getAppContext();
+const DateFilter = (props) => {
+    const { actions } = getAppContext();
 
     const [ value, setValue ] = useState(props.value);
     const [ valid, setValid ] = useState(true);
     const [ inputValue, setInputValue ] = useState(prettifyDateValue(props.value));
 
-    function updateDate(selectedValue: string | Date) {
-        const newDate: Date = typeof selectedValue === 'string' 
+    function updateDate(selectedValue) {
+        const newDate = typeof selectedValue === 'string' 
             ? new Date(selectedValue) 
             : selectedValue;
         

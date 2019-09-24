@@ -1,14 +1,14 @@
 import React, { createContext, useReducer, useContext } from 'react';
-import applyMiddleware from './middleware/index';
-import reducers, { StoreProps, initialState } from './reducers';
+import applyMiddleware from './middleware/index.es';
+import reducers, { initialState } from './reducers/index.es';
 
 import { 
     actions as filtersActions
-} from './actions/filters';
+} from './actions/filters.es';
 
 import { 
     actions as appActions
-} from './actions/app';
+} from './actions/app.es';
 
 const actions = Object.assign(
 	{},
@@ -34,11 +34,7 @@ export function serializeActions(actions, dispatch) {
 	);
 }
 
-type IProps = StoreProps & {
-	children
-}
-
-export function StoreProvider({children, ...stateProps}: IProps) {
+export function StoreProvider({children, ...stateProps}) {
 	const [state, dispatch] = useReducer(
 		reducers,
 		stateProps
@@ -60,11 +56,11 @@ export const StoreConsumer = StoreContext.Consumer;
 
 const getAppContext = () => useContext(StoreContext);
 
-export interface ContextProps {
-	state: StoreProps,
-	actions: {
-		[s: string]: any 
-	}
-}
+// export interface ContextProps {
+// 	state: StoreProps,
+// 	actions: {
+// 		[s: string]: any 
+// 	}
+// }
 
 export default getAppContext;

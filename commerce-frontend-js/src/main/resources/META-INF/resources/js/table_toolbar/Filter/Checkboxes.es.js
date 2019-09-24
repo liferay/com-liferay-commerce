@@ -4,15 +4,15 @@ import ClayButton from '@clayui/button';
 
 import { CheckboxesFilterProps } from './definitions';
 
-import getAppContext, { ContextProps } from '../Context';
+import getAppContext from '../Context.es';
 
-interface IProps extends CheckboxesFilterProps {
-    panelType?: 'add' | 'edit'
-}
+// interface IProps extends CheckboxesFilterProps {
+//     panelType?: 'add' | 'edit'
+// }
 
-const CheckboxesFilter: React.FunctionComponent<IProps> = (props: IProps) => {
+const CheckboxesFilter = (props) => {
 
-    const { actions } : ContextProps = getAppContext();
+    const { actions } = getAppContext();
     const [value, setValue] = useState(props.value);
 
     function selectCheckbox(itemValue) {
@@ -35,10 +35,10 @@ const CheckboxesFilter: React.FunctionComponent<IProps> = (props: IProps) => {
         <>
             {props.items.map(
                 (item, i) => {
-                    let checked: boolean = false;
+                    let checked = false;
 
                     if (!!value) {
-                        checked = value.reduce((acc: boolean, el) => acc || el === item.value, false)
+                        checked = value.reduce((acc, el) => acc || el === item.value, false)
                     }
 
                     return (
