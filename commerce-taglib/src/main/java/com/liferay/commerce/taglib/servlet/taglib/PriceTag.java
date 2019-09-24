@@ -361,7 +361,7 @@ public class PriceTag extends IncludeTag {
 			}
 		}
 
-		if (!(_cpInstanceId > 0) && cpCatalogEntry.isIgnoreSKUCombinations()) {
+		if ((_cpInstanceId <= 0) && cpCatalogEntry.isIgnoreSKUCombinations()) {
 			CPInstanceHelper cpInstanceHelper =
 				ServletContextUtil.getCPInstanceHelper();
 
