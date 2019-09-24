@@ -5,20 +5,18 @@ import ClayTable from '@clayui/table';
 import Pagination from './pagination/index.es';
 import {showNotification} from '../utilities/index.es';
 import Summary from '../summary/Summary.es';
-import { ClayIconSpriteContext } from '@clayui/icon';
+import {ClayIconSpriteContext} from '@clayui/icon';
 import ManagementTableBar from '../table_toolbar/TableToolbar.es';
 
 function WrappingCard(props) {
 	return (
-		<div className={classNames("card", props.cardCssClass)}>
-			<div className="card-header">
-			 	{props.title}
-			</div>
-			<div className={classNames("card-body", props.bodyCssClass)}>
+		<div className={classNames('card', props.cardCssClass)}>
+			<div className="card-header">{props.title}</div>
+			<div className={classNames('card-body', props.bodyCssClass)}>
 				{props.children}
 			</div>
 		</div>
-	)
+	);
 }
 
 function BaseTable(props) {
@@ -84,13 +82,13 @@ function Table(props) {
 				{/* <ManagementTableBar />
 				<Table /> */}
 				<Pagination />
-				{
-					props.summaryName 
-					? <WrappingCard cardCssClass="mt-4" title={props.summaryName}>
+				{props.summaryName ? (
+					<WrappingCard cardCssClass="mt-4" title={props.summaryName}>
 						<Summary items={props.summaryItems} />
 					</WrappingCard>
-					: <Summary items={props.summaryItems} />
-				}
+				) : (
+					<Summary items={props.summaryItems} />
+				)}
 			</div>
 		</ClayIconSpriteContext.Provider>
 	);
@@ -111,9 +109,10 @@ Table.propTypes = {
 	// paginationSelectedEntry: PropTypes.number.isRequired,
 	// schema: PropTypes.object.isRequired,
 	// selectable: PropTypes.bool,
+
 	spritemap: PropTypes.string.isRequired,
 	summaryName: PropTypes.string,
-	summaryItems: PropTypes.array,
+	summaryItems: PropTypes.array
 	// tableName: PropTypes.string.isRequired,
 	// totalItems: PropTypes.number.isRequired,
 };
