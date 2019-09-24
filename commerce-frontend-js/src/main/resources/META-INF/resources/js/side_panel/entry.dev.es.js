@@ -8,16 +8,16 @@ window.SidePanel = launcher('sidePanel', 'side-panel', {
 	pages: [
 		{
 			url: `/index.html?${Math.random()}`,
-			pageName: 'Index',
+			pageName: 'Index'
 		},
 		{
 			url: `/addorcreate.html?${Math.random()}`,
-			pageName: 'Add or create',
+			pageName: 'Add or create'
 		},
 		{
 			url: `/gallery.html?${Math.random()}`,
-			pageName: 'Gallery',
-		},
+			pageName: 'Gallery'
+		}
 	],
-	topAnchor: document.querySelector('.top-anchor'),
+	topAnchor: document.querySelector('.top-anchor')
 });

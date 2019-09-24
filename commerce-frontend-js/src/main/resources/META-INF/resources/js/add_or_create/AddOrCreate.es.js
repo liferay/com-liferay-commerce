@@ -1,5 +1,6 @@
 import React from 'react';
 // import classnames from 'classnames';
+
 import ClayList from '@clayui/list';
 import Expose from './Expose.es';
 
@@ -11,7 +12,7 @@ function Suggestions({list, selected, action, onHover}) {
 				<ClayList.Item
 					flex
 					key={i}
-					className={selected === (i + 1) ? 'is-selected' : ''}
+					className={selected === i + 1 ? 'is-selected' : ''}
 					onMouseEnter={() => onHover(i + 1)}
 					onClick={e => action(e, i + 1)}
 					tabIndex="0"
@@ -20,8 +21,16 @@ function Suggestions({list, selected, action, onHover}) {
 						<ClayList.ItemTitle>{s.label}</ClayList.ItemTitle>
 					</ClayList.ItemField>
 					<ClayList.ItemField>
-						<button className="btn btn-monospaced btn-sm btn-primary" type="button" onClick={e => action(e, i + 1)}>
-							<svg className="lexicon-icon lexicon-icon-plus" focusable="false" role="presentation">
+						<button
+							className="btn btn-monospaced btn-sm btn-primary"
+							type="button"
+							onClick={e => action(e, i + 1)}
+						>
+							<svg
+								className="lexicon-icon lexicon-icon-plus"
+								focusable="false"
+								role="presentation"
+							>
 								<use href="./icons.svg#plus"></use>
 							</svg>
 						</button>
@@ -37,10 +46,10 @@ class AddOrCreateBase extends React.Component {
 		super(props);
 		this.state = {
 			focus: false,
-			selected: 0, 
+			selected: 0,
 			suggestions: [],
-			value: '',
-		}
+			value: ''
+		};
 		this.card = React.createRef();
 		this.input = React.createRef();
 
@@ -50,7 +59,7 @@ class AddOrCreateBase extends React.Component {
 
 	focus() {
 		this.setState({
-			focus: true,
+			focus: true
 		});
 		window.addEventListener('keydown', this.handleKeyDown);
 		this.props.onFocusIn && this.props.onFocusIn();
@@ -58,7 +67,7 @@ class AddOrCreateBase extends React.Component {
 	}
 
 	blur() {
-		this.setState({ focus: false });
+		this.setState({focus: false});
 		window.removeEventListener('keydown', this.handleKeyDown);
 	}
 
@@ -75,11 +84,14 @@ class AddOrCreateBase extends React.Component {
 	}
 
 	getSelection(step) {
-		return (this.state.suggestions.length + 1 + this.state.selected + step) % (this.state.suggestions.length + 1);
+		return (
+			(this.state.suggestions.length + 1 + this.state.selected + step) %
+			(this.state.suggestions.length + 1)
+		);
 	}
 
 	select(selected) {
-		this.setState({ selected });
+		this.setState({selected});
 	}
 
 	handleKeyDown(e) {
@@ -125,7 +137,7 @@ class AddOrCreateBase extends React.Component {
 			selected: 0,
 			focus: true,
 			suggestions: this.props.onSearch(e.target.value),
-			value: e.target.value,
+			value: e.target.value
 		});
 	}
 
@@ -133,30 +145,33 @@ class AddOrCreateBase extends React.Component {
 		if (!this.props.active) {
 			this.input.current.blur();
 		}
-		setTimeout(() => this.card.current.scrollIntoView({behavior: "smooth"}), 0);
+		setTimeout(
+			() => this.card.current.scrollIntoView({behavior: 'smooth'}),
+			0
+		);
 	}
 
 	handleFocusOut(e) {
 		this._timeoutID = setTimeout(() => {
 			this.props.onFocusOut && this.props.onFocusOut();
-    }, 0);
+		}, 0);
 	}
 
 	handleFocusIn(e) {
-    clearTimeout(this._timeoutID);
+		clearTimeout(this._timeoutID);
 	}
 
 	render() {
 		return (
 			<div
-				className={`card add-or-create ${this.state.focus ? 'has-focus' : ''}`}
+				className={`card add-or-create ${
+					this.state.focus ? 'has-focus' : ''
+				}`}
 				ref={this.card}
 				onBlur={e => this.handleFocusOut(e)}
 				onFocus={e => this.handleFocusIn(e)}
 			>
-				<div className="card-header">
-					Add new option
-				</div>
+				<div className="card-header">Add new option</div>
 				<div className="card-body">
 					<div className="input-group">
 						<div className="input-group-item">
@@ -171,34 +186,46 @@ class AddOrCreateBase extends React.Component {
 								ref={this.input}
 							/>
 							<span className="input-group-inset-item input-group-inset-item-after">
-								{this.state.value &&
+								{this.state.value && (
 									<button
 										className="btn btn-unstyled"
 										type="button"
 										onClick={e => this.empty(e)}
 									>
-										<svg className="lexicon-icon lexicon-icon-times" focusable="false" role="presentation">
+										<svg
+											className="lexicon-icon lexicon-icon-times"
+											focusable="false"
+											role="presentation"
+										>
 											<use href="./icons.svg#times" />
 										</svg>
 									</button>
-								}
+								)}
 							</span>
 						</div>
 					</div>
 				</div>
-				{this.state.value && this.props.active &&
+				{this.state.value && this.props.active && (
 					<div className="card-body">
 						<ClayList>
-							<ClayList.Header>Create new specification</ClayList.Header>
+							<ClayList.Header>
+								Create new specification
+							</ClayList.Header>
 							<ClayList.Item
 								flex
-								className={this.state.selected === 0 ? 'is-selected' : ''}
+								className={
+									this.state.selected === 0
+										? 'is-selected'
+										: ''
+								}
 								onMouseEnter={() => this.select(0)}
 								onClick={e => this.action(e, 0)}
 								tabIndex="0"
 							>
 								<ClayList.ItemField expand>
-									<ClayList.ItemTitle>{this.state.value}</ClayList.ItemTitle>
+									<ClayList.ItemTitle>
+										{this.state.value}
+									</ClayList.ItemTitle>
 								</ClayList.ItemField>
 
 								<ClayList.ItemField>
@@ -212,32 +239,31 @@ class AddOrCreateBase extends React.Component {
 								</ClayList.ItemField>
 							</ClayList.Item>
 
-							{this.state.suggestions.length ?
+							{this.state.suggestions.length ? (
 								<Suggestions
 									list={this.state.suggestions}
 									selected={this.state.selected}
 									action={this.action}
 									onHover={e => this.select(e)}
 								/>
-							: null}
+							) : null}
 						</ClayList>
 					</div>
-				}
+				)}
 			</div>
 		);
 	}
 }
 
-
 export default React.forwardRef((props, ref) => {
 	const [active, setActive] = React.useState(false);
-	
+
 	function closeAndSubmit(e) {
 		props.onSubmit(e);
-		setActive(false)
+		setActive(false);
 	}
 
-  return (
+	return (
 		<Expose active={active} onClose={() => setActive(false)}>
 			<AddOrCreateBase
 				{...props}
@@ -248,5 +274,5 @@ export default React.forwardRef((props, ref) => {
 				innerRef={ref}
 			/>
 		</Expose>
-  );
+	);
 });

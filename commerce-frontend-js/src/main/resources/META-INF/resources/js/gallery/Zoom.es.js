@@ -6,7 +6,7 @@ export default class Zoom extends React.Component {
 		super(props);
 		this.state = {
 			loading: true
-		}
+		};
 
 		this.zoom = React.createRef();
 		this.image = new Image();
@@ -16,9 +16,9 @@ export default class Zoom extends React.Component {
 
 	imageLoaded(image) {
 		return () => {
-			this.setState({ loading: false });
+			this.setState({loading: false});
 			this.zoom.current && this.zoom.current.appendChild(image);
-		}
+		};
 	}
 
 	componentWillUnmount() {

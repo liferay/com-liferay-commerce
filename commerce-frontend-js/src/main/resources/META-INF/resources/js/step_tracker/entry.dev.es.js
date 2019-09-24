@@ -7,27 +7,27 @@ launcher('step_tracker', 'step-tracker', {
 		{
 			id: 'received',
 			label: 'Received',
-			state: 'completed',
+			state: 'completed'
 		},
 		{
 			id: 'confirmed',
 			label: 'Confirmed',
-			state: 'active',
+			state: 'active'
 		},
 		{
 			id: 'trasmitted',
 			label: 'Trasmitted',
-			state: 'inactive',
+			state: 'inactive'
 		},
 		{
 			id: 'shipped',
 			label: 'Shipped',
-			state: 'inactive',
+			state: 'inactive'
 		},
 		{
 			id: 'completed',
 			label: 'Completed',
-			state: 'inactive',
-		},
-	],
+			state: 'inactive'
+		}
+	]
 });

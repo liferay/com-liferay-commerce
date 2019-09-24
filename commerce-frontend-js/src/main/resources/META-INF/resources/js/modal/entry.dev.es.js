@@ -1,13 +1,13 @@
 import React from 'react';
 
 import modalLauncher from './entry.es';
-import {launcher} from '../utilities';
+import {launcher} from '../utilities/index.es';
 
 const props = {
 	actions: [
 		{
-			definition: 'save',
-		},
+			definition: 'save'
+		}
 	],
 	spritemap: './icons.svg',
 	id: 'zeasc',
@@ -27,7 +27,7 @@ modalLauncher('modal', 'modal-root', props);
 
 launcher(
 	() => (
-		<button 
+		<button
 			className="btn btn-primary"
 			onClick={() => window.dispatchEvent(new Event('zeasc-open'))}
 		>

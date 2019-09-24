@@ -13,7 +13,7 @@
  */
 
 module.exports = {
-	check: [],
-	fix: [],
-	preset: 'liferay-npm-scripts/src/presets/standard'
+	check: ['src/main/resources/META-INF/resources/js/**/*.js'],
+	fix: ['src/main/resources/META-INF/resources/js/**/*.js'],
+	preset: 'liferay-npm-scripts/src/presets/standard',
 };
