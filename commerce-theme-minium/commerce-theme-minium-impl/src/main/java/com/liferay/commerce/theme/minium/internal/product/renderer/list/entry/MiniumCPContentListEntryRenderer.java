@@ -230,8 +230,12 @@ public class MiniumCPContentListEntryRenderer
 					(Map<String, Integer>)httpServletRequest.getAttribute(
 						"stockQuantities");
 
-				int stockQuantity = MapUtil.getInteger(
-					stockQuantities, cpSku.getSku());
+				int stockQuantity = 0;
+
+				if (MapUtil.isNotEmpty(stockQuantities)) {
+					stockQuantity = MapUtil.getInteger(
+						stockQuantities, cpSku.getSku());
+				}
 
 				String status = "inStock";
 
