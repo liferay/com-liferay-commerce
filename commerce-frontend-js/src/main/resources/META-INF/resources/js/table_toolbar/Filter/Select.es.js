@@ -1,16 +1,16 @@
 import React, {useState} from 'react';
 import ClaySelect from '@clayui/select';
-import getAppContext, { ContextProps } from '../Context';
+import getAppContext, { ContextProps } from '../Context.es';
 
 import { MultiFilterProps } from './definitions';
 import ClayButton from '@clayui/button';
 
-interface IProps extends MultiFilterProps {
-    panelType?: 'add' | 'edit'
-}
+// interface IProps extends MultiFilterProps {
+//     panelType?: 'add' | 'edit'
+// }
 
-const SelectFilter: React.FunctionComponent<IProps> = (props: IProps) => {
-    const { actions } : ContextProps = getAppContext();
+const SelectFilter = (props) => {
+    const { actions } = getAppContext();
     const [ value, setValue ] = useState(props.value);
 
     return (

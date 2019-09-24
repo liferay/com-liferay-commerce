@@ -1,29 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ClayModal, {useModal} from '@clayui/modal';
-// import { Status, Size } from '@clayui/modal/src/types';
 import ClayButton from '@clayui/button';
-
-/*
-export interface ModalProps {
-    id: string
-    url?: string,
-    spritemap?: string,
-    status?: Status,
-    size?: Size,
-    title?: string,
-    showSubmit: boolean,
-    submitLabel: string,
-    closeOnSubmit: boolean,
-    showDelete: boolean,
-    deleteLabel: string
-    showCancel: boolean,
-    cancelLabel: string
-}
-
-interface ModalState {
-    open: boolean
-}
-*/
+import PropTypes from 'prop-types';
 
 const Modal = (props) => {
 
@@ -38,7 +16,7 @@ const Modal = (props) => {
         setIframeLoadingCounter(0);
         setSubmitActive(
             typeof props.submitActiveAtLoading === 'boolean' 
-                ? props.submitActiveAtLoading 
+            ? props.submitActiveAtLoading 
                 : true
         )
     }
@@ -219,6 +197,22 @@ const Modal = (props) => {
         )
         : null
     )
+}
+
+Modal.propTypes = {
+    id: PropTypes.string.isRequired,
+    submitActiveAtLoading: PropTypes.bool,
+    portletId: PropTypes.string,
+    closeOnSubmit: PropTypes.bool,
+    spritemap: PropTypes.string,
+    size: PropTypes.string,
+    status: PropTypes.string,
+    title: PropTypes.string,
+    url: PropTypes.string.isRequired,
+    showCancel: PropTypes.bool,
+    showSubmit: PropTypes.bool,
+    submitLabel: PropTypes.string,
+    cancelLabel: PropTypes.string
 }
 
 export default Modal;
