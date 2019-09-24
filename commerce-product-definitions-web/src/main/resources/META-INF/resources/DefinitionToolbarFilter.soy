@@ -101,6 +101,7 @@
 	<label>{msg desc=""}is{/msg}</label>
 
 	<select class="filter-select form-control" id="optionValues">
+		<option value="">{msg desc=""}select-option{/msg}</option>
 		{if $optionValues}
 			{foreach $optionValue in $optionValues}
 				<option data-label="{$optionValue.label}" value="{$optionValue.term}">{$optionValue.label} ({$optionValue.frequency})</option>
@@ -118,6 +119,7 @@
 	<label>{msg desc=""}is{/msg}</label>
 
 	<select class="filter-select form-control" id="status">
+		<option value="">{msg desc=""}select-option{/msg}</option>
 		{if $terms}
 			{foreach $term in $terms}
 				<option data-label="{$term.label}" value="{$term.term}">{$term.label} ({$term.frequency})</option>
@@ -135,6 +137,7 @@
 	<label>{msg desc=""}is{/msg}</label>
 
 	<select class="filter-select form-control" id="productTypeName">
+		<option value="">{msg desc=""}select-option{/msg}</option>
 		{if $terms}
 			{foreach $term in $terms}
 				<option data-label="{$term.label}" value="{$term.term}">{$term.label} ({$term.frequency})</option>

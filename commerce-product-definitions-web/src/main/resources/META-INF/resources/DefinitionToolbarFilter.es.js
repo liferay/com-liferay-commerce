@@ -99,6 +99,11 @@ class DefinitionToolbarFilter extends Component {
 
 		if (this._currentSelection == 'optionsNames') {
 			var optionNameSelect = this.element.querySelector('#optionsNames');
+
+			if (!optionValueSelect) {
+				return;
+			}
+
 			var optionValueSelect = this.element.querySelector('#optionValues');
 
 			var optionValue = optionValueSelect.value;
@@ -123,6 +128,10 @@ class DefinitionToolbarFilter extends Component {
 			var currentSelect = this.element.querySelector('#' + this._currentSelection);
 
 			var fieldValue = currentSelect.value;
+
+			if (!fieldValue) {
+				return;
+			}
 
 			var currentOption = currentSelect.options[currentSelect.selectedIndex];
 
