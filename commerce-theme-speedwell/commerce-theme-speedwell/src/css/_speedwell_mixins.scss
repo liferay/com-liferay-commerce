@@ -1,14 +1,14 @@
 @mixin speedwellButtonEffect($primaryColor, $secondaryColor) {
   @media only screen and (min-width: 768px) {
     &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
       bottom: 0;
-      transform: scale3d(1, 0, 1);
+      content: '';
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
       transform-origin: bottom;
+      transform: scale3d(1, 0, 1);
       transition: inherit;
       z-index: -1;
     }
@@ -36,9 +36,9 @@
   }
 
   &--inactive {
-    text-decoration: line-through;
-    margin-left: 10px;
     font-size: 14px;
+    margin-left: 10px;
+    text-decoration: line-through;
 
     @media only screen and (max-width: 767px) {
       font-size: 11px;

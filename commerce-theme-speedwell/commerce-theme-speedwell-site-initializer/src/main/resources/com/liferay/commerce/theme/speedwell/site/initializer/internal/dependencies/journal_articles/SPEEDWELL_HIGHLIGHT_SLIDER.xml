@@ -3,82 +3,74 @@
 <root available-locales="en_US" default-locale="en_US">
 	<dynamic-element index-type="text" instance-id="sgad" name="Image2x9w" type="image">
 		<dynamic-element index-type="text" instance-id="mykc" name="captionImage" type="image">
-			<dynamic-content language-id="[£LOCALE£]">
-				<![CDATA[[$Slider_01_detail.jpg$]]]></dynamic-content>
+			<dynamic-content language-id="[£LOCALE£]"> <![CDATA[[$Slider_01_detail.jpg$]]]></dynamic-content>
 		</dynamic-element>
-		<dynamic-element name="captionCategory" instance-id="vnvz" type="text" index-type="keyword">
+		<dynamic-element index-type="keyword" instance-id="vnvz" name="captionCategory" type="text">
 			<dynamic-content language-id="[£LOCALE£]"><![CDATA[Wheel Rim]]></dynamic-content>
 		</dynamic-element>
-		<dynamic-element name="captionText" instance-id="uwkl" type="text" index-type="keyword">
+		<dynamic-element index-type="keyword" instance-id="uwkl" name="captionText" type="text">
 			<dynamic-content language-id="[£LOCALE£]"><![CDATA[Black Rim 19'']]></dynamic-content>
 		</dynamic-element>
-		<dynamic-element name="captionButtonLabel" instance-id="huuj" type="text" index-type="keyword">
+		<dynamic-element index-type="keyword" instance-id="huuj" name="captionButtonLabel" type="text">
 			<dynamic-content language-id="[£LOCALE£]"><![CDATA[Discover]]></dynamic-content>
 		</dynamic-element>
-		<dynamic-element name="captionButtonUrl" instance-id="whjf" type="link_to_layout" index-type="keyword">
+		<dynamic-element index-type="keyword" instance-id="whjf" name="captionButtonUrl" type="link_to_layout">
 			<dynamic-content language-id="[£LOCALE£]"><![CDATA[2@public@[£groupId£]]]></dynamic-content>
 		</dynamic-element>
-		<dynamic-content language-id="[£LOCALE£]">
-			<![CDATA[[$Slider_01.jpeg$]]]></dynamic-content>
+		<dynamic-content language-id="[£LOCALE£]"> <![CDATA[[$Slider_01.jpg$]]]></dynamic-content>
 	</dynamic-element>
-	<dynamic-element name="Image2x9w" type="image" index-type="text" instance-id="jrvy">
-		<dynamic-element name="captionImage" instance-id="lyek" type="image" index-type="text">
-			<dynamic-content language-id="[£LOCALE£]">
-				<![CDATA[[$Slider_02_detail.jpg$]]]></dynamic-content>
+	<dynamic-element index-type="text" instance-id="jrvy" name="Image2x9w" type="image">
+		<dynamic-element index-type="text" instance-id="lyek" name="captionImage" type="image">
+			<dynamic-content language-id="[£LOCALE£]"> <![CDATA[[$Slider_02_detail.jpg$]]]></dynamic-content>
 		</dynamic-element>
-		<dynamic-element name="captionCategory" instance-id="agbv" type="text" index-type="keyword">
+		<dynamic-element index-type="keyword" instance-id="agbv" name="captionCategory" type="text">
 			<dynamic-content language-id="[£LOCALE£]"><![CDATA[Wheel Rim]]></dynamic-content>
 		</dynamic-element>
-		<dynamic-element name="captionText" instance-id="toyj" type="text" index-type="keyword">
+		<dynamic-element index-type="keyword" instance-id="toyj" name="captionText" type="text">
 			<dynamic-content language-id="[£LOCALE£]"><![CDATA[Iron Blade, Black 18'']]></dynamic-content>
 		</dynamic-element>
-		<dynamic-element name="captionButtonLabel" instance-id="aemd" type="text" index-type="keyword">
+		<dynamic-element index-type="keyword" instance-id="aemd" name="captionButtonLabel" type="text">
 			<dynamic-content language-id="[£LOCALE£]"><![CDATA[Discover]]></dynamic-content>
 		</dynamic-element>
-		<dynamic-element name="captionButtonUrl" instance-id="oskg" type="link_to_layout" index-type="keyword">
+		<dynamic-element index-type="keyword" instance-id="oskg" name="captionButtonUrl" type="link_to_layout">
 			<dynamic-content language-id="[£LOCALE£]"><![CDATA[2@public@[£groupId£]]]></dynamic-content>
 		</dynamic-element>
-		<dynamic-content language-id="[£LOCALE£]">
-			<![CDATA[[$Slider_02.jpg$]]]></dynamic-content>
+		<dynamic-content language-id="[£LOCALE£]"> <![CDATA[[$Slider_02.jpg$]]]></dynamic-content>
 	</dynamic-element>
-	<dynamic-element name="Image2x9w" type="image" index-type="text" instance-id="quue">
-		<dynamic-element name="captionImage" instance-id="qydk" type="image" index-type="text">
-			<dynamic-content language-id="[£LOCALE£]">
-				<![CDATA[[$Slider_03_detail.jpeg$]]]></dynamic-content>
+	<dynamic-element index-type="text" instance-id="quue" name="Image2x9w" type="image">
+		<dynamic-element index-type="text" instance-id="qydk" name="captionImage" type="image">
+			<dynamic-content language-id="[£LOCALE£]"> <![CDATA[[$Slider_03_detail.jpg$]]]></dynamic-content>
 		</dynamic-element>
-		<dynamic-element name="captionCategory" instance-id="mopk" type="text" index-type="keyword">
+		<dynamic-element index-type="keyword" instance-id="mopk" name="captionCategory" type="text">
 			<dynamic-content language-id="[£LOCALE£]"><![CDATA[Wheel Rim]]></dynamic-content>
 		</dynamic-element>
-		<dynamic-element name="captionText" instance-id="tmey" type="text" index-type="keyword">
+		<dynamic-element index-type="keyword" instance-id="tmey" name="captionText" type="text">
 			<dynamic-content language-id="[£LOCALE£]"><![CDATA[Silver rays, Silver 18'']]></dynamic-content>
 		</dynamic-element>
-		<dynamic-element name="captionButtonLabel" instance-id="yuby" type="text" index-type="keyword">
+		<dynamic-element index-type="keyword" instance-id="yuby" name="captionButtonLabel" type="text">
 			<dynamic-content language-id="[£LOCALE£]"><![CDATA[Discover]]></dynamic-content>
 		</dynamic-element>
-		<dynamic-element name="captionButtonUrl" instance-id="yqqd" type="link_to_layout" index-type="keyword">
+		<dynamic-element index-type="keyword" instance-id="yqqd" name="captionButtonUrl" type="link_to_layout">
 			<dynamic-content language-id="[£LOCALE£]"><![CDATA[2@public@[£groupId£]]]></dynamic-content>
 		</dynamic-element>
-		<dynamic-content language-id="[£LOCALE£]">
-			<![CDATA[[$Slider_03.jpg$]]]></dynamic-content>
+		<dynamic-content language-id="[£LOCALE£]"> <![CDATA[[$Slider_03.jpg$]]]></dynamic-content>
 	</dynamic-element>
-	<dynamic-element name="Image2x9w" type="image" index-type="text" instance-id="ecec">
-		<dynamic-element name="captionImage" instance-id="nqzp" type="image" index-type="text">
-			<dynamic-content language-id="[£LOCALE£]">
-				<![CDATA[[$Slider_01_detail.jpg$]]]></dynamic-content>
+	<dynamic-element index-type="text" instance-id="ecec" name="Image2x9w" type="image">
+		<dynamic-element index-type="text" instance-id="nqzp" name="captionImage" type="image">
+			<dynamic-content language-id="[£LOCALE£]"> <![CDATA[[$Slider_01_detail.jpg$]]]></dynamic-content>
 		</dynamic-element>
-		<dynamic-element name="captionCategory" instance-id="ampz" type="text" index-type="keyword">
+		<dynamic-element index-type="keyword" instance-id="ampz" name="captionCategory" type="text">
 			<dynamic-content language-id="[£LOCALE£]"><![CDATA[Special wheel rim]]></dynamic-content>
 		</dynamic-element>
-		<dynamic-element name="captionText" instance-id="mehx" type="text" index-type="keyword">
+		<dynamic-element index-type="keyword" instance-id="mehx" name="captionText" type="text">
 			<dynamic-content language-id="[£LOCALE£]"><![CDATA[Special Matte Black, 19'' Benz]]></dynamic-content>
 		</dynamic-element>
-		<dynamic-element name="captionButtonLabel" instance-id="iknb" type="text" index-type="keyword">
+		<dynamic-element index-type="keyword" instance-id="iknb" name="captionButtonLabel" type="text">
 			<dynamic-content language-id="[£LOCALE£]"><![CDATA[Pre-order]]></dynamic-content>
 		</dynamic-element>
-		<dynamic-element name="captionButtonUrl" instance-id="geho" type="link_to_layout" index-type="keyword">
+		<dynamic-element index-type="keyword" instance-id="geho" name="captionButtonUrl" type="link_to_layout">
 			<dynamic-content language-id="[£LOCALE£]"><![CDATA[2@public@20126]]></dynamic-content>
 		</dynamic-element>
-		<dynamic-content language-id="[£LOCALE£]">
-			<![CDATA[[$Header_02.jpeg$]]]></dynamic-content>
+		<dynamic-content language-id="[£LOCALE£]"> <![CDATA[[$Header_02.jpg$]]]></dynamic-content>
 	</dynamic-element>
 </root>
