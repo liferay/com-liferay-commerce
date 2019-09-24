@@ -1,0 +1,56 @@
+.pagination-bar {
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
+  justify-content: center;
+
+  .dropdown-toggle {
+    border: 0;
+    color: $stroke;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 12px;
+
+    @media only screen and (max-width: 767px) {
+      display: none;
+    }
+  }
+
+  .pagination-results {
+    display: none;
+  }
+
+  .pagination {
+    justify-content: center;
+
+    li {
+      a {
+        background: transparent;
+        border: 0;
+        color: $stroke;
+        font-size: 12px;
+        line-height: normal;
+        margin: 0 4px;
+        padding: 8px 12px;
+        position: relative;
+        transition: all ease 150ms;
+
+        @include speedwellButtonEffect($color-bg, $stroke);
+      }
+
+      &:not(.active):not(:hover) a {
+        opacity: 0.5;
+      }
+
+      &.active a {
+        border-bottom: 2px solid currentColor;
+      }
+
+      @media only screen and (max-width: 767px) {
+        &:first-child,
+        &:last-child {
+          display: none
+        }
+      }
+    }
+  }
+}

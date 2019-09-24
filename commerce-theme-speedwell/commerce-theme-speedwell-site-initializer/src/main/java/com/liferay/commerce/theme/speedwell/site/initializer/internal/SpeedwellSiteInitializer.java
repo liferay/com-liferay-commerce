@@ -111,6 +111,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Collections;
 
 import javax.servlet.ServletContext;
 
@@ -404,12 +405,8 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 			_commerceShippingEngineRegistry.getCommerceShippingEngine(
 				shippingMethod);
 
-		Map<Locale, String> nameMap = new HashMap<>();
-		Map<Locale, String> descriptionMap = new HashMap<>();
-
-		nameMap.put(locale, commerceShippingEngine.getName(locale));
-		descriptionMap.put(
-			locale, commerceShippingEngine.getDescription(locale));
+		Map<Locale, String> nameMap = Collections.singletonMap(locale, commerceShippingEngine.getName(locale));
+		Map<Locale, String> descriptionMap = Collections.singletonMap(locale, commerceShippingEngine.getDescription(locale));
 
 		CommerceShippingMethod commerceShippingMethod =
 			_commerceShippingMethodLocalService.addCommerceShippingMethod(
@@ -432,11 +429,8 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 			BigDecimal price, ServiceContext serviceContext)
 		throws PortalException {
 
-		Map<Locale, String> nameMap = new HashMap<>();
-		Map<Locale, String> descriptionMap = new HashMap<>();
-
-		nameMap.put(serviceContext.getLocale(), name);
-		descriptionMap.put(serviceContext.getLocale(), description);
+		Map<Locale, String> nameMap = Collections.singletonMap(serviceContext.getLocale(), name);
+		Map<Locale, String> descriptionMap = Collections.singletonMap(serviceContext.getLocale(), description);
 
 		_commerceShippingFixedOptionLocalService.addCommerceShippingFixedOption(
 			commerceShippingMethodId, nameMap, descriptionMap, price, 0,
@@ -571,7 +565,7 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 		throws Exception {
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Importing asset categories...");
+			_log.info("Importing Asset Categories...");
 		}
 
 		Group group = serviceContext.getScopeGroup();
@@ -588,7 +582,7 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 			company.getGroupId(), serviceContext.getUserId(), true);
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Asset categories successfully imported");
+			_log.info("Asset Categories successfully imported");
 		}
 	}
 
@@ -664,7 +658,7 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 		throws Exception {
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Importing organizations...");
+			_log.info("Importing Organizations...");
 		}
 
 		JSONArray jsonArray = _getJSONArray("organizations.json");
@@ -683,7 +677,7 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 		throws Exception {
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Importing commerce price entries...");
+			_log.info("Importing Commerce Price Entries...");
 		}
 
 		JSONArray jsonArray = _getJSONArray("price-entries.json");
@@ -692,7 +686,7 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 			jsonArray, catalogGroupId, serviceContext.getUserId());
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Commerce price entries successfully imported");
+			_log.info("Commerce Price Entries successfully imported");
 		}
 	}
 
@@ -701,7 +695,7 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 		throws Exception {
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Importing commerce price lists...");
+			_log.info("Importing Commerce Price Lists...");
 		}
 
 		JSONArray jsonArray = _getJSONArray("price-lists.json");
@@ -711,7 +705,7 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 			serviceContext.getUserId());
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Commerce price lists successfully imported");
+			_log.info("Commerce Price Lists successfully imported");
 		}
 	}
 
@@ -762,7 +756,7 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 		throws Exception {
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Importing commerce product option categories...");
+			_log.info("Importing Commerce Product Option Categories...");
 		}
 
 		JSONArray jsonArray = _getJSONArray("option-categories.json");
@@ -772,7 +766,7 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Commerce product option categories successfully imported");
+				"Commerce Product Option Categories successfully imported");
 		}
 	}
 
@@ -791,7 +785,7 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 		throws Exception {
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Importing commerce product specification options...");
+			_log.info("Importing Commerce Product Specification Options...");
 		}
 
 		JSONArray jsonArray = _getJSONArray("specification-options.json");
@@ -801,7 +795,7 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Commerce product specification options successfully imported");
+				"Commerce Product Specification Options successfully imported");
 		}
 	}
 
@@ -933,7 +927,7 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 		throws Exception {
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Importing related products...");
+			_log.info("Importing Related Products...");
 		}
 
 		for (CPDefinition cpDefinition : cpDefinitions) {
@@ -947,7 +941,7 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 		_importRelatedProducts(jsonArray, serviceContext);
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Related products successfully imported");
+			_log.info("Related Products successfully imported");
 		}
 	}
 

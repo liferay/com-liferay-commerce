@@ -1,0 +1,43 @@
+$baseTransitions: all .1s ease;
+$inputOutline: #D0D0D0;
+
+@mixin formElement() {
+  background: transparent !important;
+  border: 0;
+  border-radius: 4px;
+  font-size: 1.3em !important;
+  position: relative;
+  z-index: 1;
+}
+
+@mixin transformButton(
+  $top, $left,
+  $marginTop, $marginLeft,
+  $width, $height,
+  $border,
+  $background
+) {
+  background: $background;
+  border: $border;
+  height: $height;
+  left: $top;
+  margin-left: $marginLeft;
+  margin-top: $marginTop;
+  top: $left;
+  width: $width;
+}
+
+@mixin constantSteps() {
+  border-radius: 22px;
+  color: $color-mood-good;
+  font-size: 1.7em;
+  line-height: 38px;
+}
+
+@mixin quantityButtonsAnimation($translateX) {
+  @if ($translateX == 'left') {
+    animation: quantityButtonsLeft .6s ease 1;
+  } @else {
+    animation: quantityButtonsRight .6s ease 1;
+  }
+}
