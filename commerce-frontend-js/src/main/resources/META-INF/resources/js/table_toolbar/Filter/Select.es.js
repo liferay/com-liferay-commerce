@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import ClaySelect from '@clayui/select';
-import getAppContext, {ContextProps} from '../Context.es';
+import getAppContext from '../Context.es';
 
-import {MultiFilterProps} from './definitions';
 import ClayButton from '@clayui/button';
 
 // interface IProps extends MultiFilterProps {
