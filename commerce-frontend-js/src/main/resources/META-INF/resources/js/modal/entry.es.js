@@ -1,5 +1,5 @@
 import Modal from './Modal.es';
-import {launcher} from '../utilities';
+import {launcher} from '../utilities/index.es';
 
 const ModalLauncher = (...data) => launcher(Modal, ...data);
 
