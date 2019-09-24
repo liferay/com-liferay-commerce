@@ -69,9 +69,9 @@ String editUserRoleId = "editUserRoles" + commerceAccountUser.getUserId();
 					eventName: 'userRoleItemSelector',
 					on: {
 						selectedItemChange: function(event) {
-						var <portlet:namespace />addUserRolesIds = [];
+							var <portlet:namespace />addUserRolesIds = [];
 
-						var selectedItems = event.newVal;
+							var selectedItems = event.newVal;
 
 							if (selectedItems) {
 								A.Array.each(
