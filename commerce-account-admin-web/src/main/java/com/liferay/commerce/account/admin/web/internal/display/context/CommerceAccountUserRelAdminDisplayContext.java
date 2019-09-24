@@ -44,7 +44,6 @@ import com.liferay.users.admin.item.selector.UserItemSelectorCriterion;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Stream;
 
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
@@ -146,18 +145,9 @@ public class CommerceAccountUserRelAdminDisplayContext
 	public String getUserRoleIds(CommerceAccountUserRel commerceAccountUserRel)
 		throws PortalException {
 
-		List<UserGroupRole> userGroupRoles =
-			commerceAccountUserRel.getUserGroupRoles();
-
-		Stream<UserGroupRole> stream = userGroupRoles.stream();
-
-		Long[] rolesArray = stream.map(
-			UserGroupRole::getRoleId
-		).toArray(
-			Long[]::new
-		);
-
-		return StringUtil.merge(rolesArray, StringPool.COMMA_AND_SPACE);
+		return ListUtil.toString(
+			commerceAccountUserRel.getUserGroupRoles(), "roleId",
+			StringPool.COMMA_AND_SPACE);
 	}
 
 	public String getUserRoleItemSelectorUrl(
@@ -185,7 +175,7 @@ public class CommerceAccountUserRelAdminDisplayContext
 
 		itemSelectorURL.setParameter(
 			"checkedRoleIds", getUserRoleIds(commerceAccountUserRel));
-		itemSelectorURL.setParameter("rowChecker", "");
+		itemSelectorURL.setParameter("rowChecker", StringPool.BLANK);
 
 		itemSelectorURL.setWindowState(LiferayWindowState.POP_UP);
 
@@ -204,15 +194,7 @@ public class CommerceAccountUserRelAdminDisplayContext
 			roles.add(userGroupRole.getRole());
 		}
 
-		Stream<Role> stream = roles.stream();
-
-		String[] rolesArray = stream.map(
-			Role::getName
-		).toArray(
-			String[]::new
-		);
-
-		return StringUtil.merge(rolesArray, StringPool.COMMA_AND_SPACE);
+		return ListUtil.toString(roles, "name", StringPool.COMMA_AND_SPACE);
 	}
 
 	protected long[] getCheckedUserIds() throws PortalException {
