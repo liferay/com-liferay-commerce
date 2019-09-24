@@ -1,4 +1,4 @@
 import AddOrCreate from './AddOrCreate.es';
-import {launcher} from '../utilities/entry';
+import {launcher} from '../utilities';
 
 export default (...data) => launcher(AddOrCreate, ...data);
