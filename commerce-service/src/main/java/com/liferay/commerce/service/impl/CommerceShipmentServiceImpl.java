@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -108,6 +109,10 @@ public class CommerceShipmentServiceImpl
 
 		List<CommerceChannel> commerceChannels =
 			_commerceChannelService.searchCommerceChannels(companyId);
+
+		if (commerceChannels.isEmpty()) {
+			return Collections.emptyList();
+		}
 
 		Stream<CommerceChannel> stream = commerceChannels.stream();
 
