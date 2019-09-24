@@ -180,6 +180,8 @@ public class CommerceAccountLocalServiceImpl
 
 		User user = userLocalService.getUser(userId);
 
+		serviceContext.setUserId(userId);
+
 		// Commerce account
 
 		CommerceAccount commerceAccount =
