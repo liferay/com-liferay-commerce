@@ -287,7 +287,7 @@ public class CommerceOrderLocalServiceImpl
 			boolean hasDiscounts = false;
 
 			if (_commerceDiscountLocalService.getCommerceDiscountsCount(
-					commerceOrder.getScopeGroupId(), couponCode) == 0) {
+					commerceOrder.getCompanyId(), couponCode) == 0) {
 
 				hasDiscounts = true;
 			}
