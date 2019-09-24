@@ -1,12 +1,10 @@
-import { actionsDefinition } from '../actions/filters'
+import { actionsDefinition } from '../actions/filters.es'
 import FilterProps from '../Filter/definitions';
 
-export type ReducerProps = Array<FilterProps>
-
-export const initialState: ReducerProps = [];
+export const initialState = [];
 
 const reducer = (
-  state: ReducerProps = initialState, action) => {
+  state = initialState, action) => {
     switch (action.type) {
       case actionsDefinition.UPDATE_FILTER_VALUE:
         return state.map(

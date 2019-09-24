@@ -1,5 +1,5 @@
-import TableToolbar from './TableToolbar.tsx';
-import {launcher} from '../utilities/entry';
+import TableToolbar from './TableToolbar.es.js';
+import {launcher} from '../utilities';
 
 const TableToolbarLauncher = (...data) => launcher(TableToolbar, ...data);
 

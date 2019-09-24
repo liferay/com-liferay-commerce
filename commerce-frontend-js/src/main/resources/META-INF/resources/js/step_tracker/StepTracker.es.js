@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import classnames from 'classnames';
 
 const stateToCssClassesMap = {
@@ -21,12 +23,25 @@ function Step(props) {
 	)
 }
 
+Step.propTypes = {
+	label: PropTypes.string.isRequired,
+	state: PropTypes.oneOf([
+		'completed',
+		'active',
+		'inactive'
+	])
+}
+
 function StepTracker(props) {
 	return (
 		<div className="step-tracker rounded">
-			{props.steps.map(step => <Step key={step.id} label={step.label} state={step.state} />)}
+			{props.steps.map(step => <Step key={step.id} {...step} />)}
 		</div>
 	);
+}
+
+StepTracker.propTypes = {
+	steps: PropTypes.array.isRequired
 }
 
 export default StepTracker;
