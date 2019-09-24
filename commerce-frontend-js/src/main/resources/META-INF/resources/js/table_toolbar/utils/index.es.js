@@ -2,28 +2,28 @@ import React from 'react';
 
 import FilterProps, {filterTypeToComponentMap, CheckboxesFilterProps, MultiFilterProps, DateFilterProps, DateTimeFilterProps, DateFormat, DateTimeFormat} from '../Filter/definitions';
 
-export const renderFilter = (item: FilterProps, panelType): any => {
-    const Filter: React.FunctionComponent<any> = filterTypeToComponentMap[item.type];
+export const renderFilter = (item, panelType) => {
+    const Filter = filterTypeToComponentMap[item.type];
     return <Filter {...item} panelType={panelType} />
 }
 
-export const prettifyCheckboxValue = (value, items): string => {
+export const prettifyCheckboxValue = (value, items) => {
     const prettifiedValue = value 
         ? value.map((v) => {
-            return items.reduce((found: string | null, item) => found || (item.value === v ? item.label : null), null)
+            return items.reduce((found, item) => found || (item.value === v ? item.label : null), null)
         }).join(', ') 
         : '';
     return prettifiedValue;
 }
 
-export const prettifySelectValue = (value, items): string => {
+export const prettifySelectValue = (value, items) => {
     const prettifiedValue = value 
-        ? items.reduce((found: string | null, item) => found || (item.value === value ? item.label : null), null)
+        ? items.reduce((found, item) => found || (item.value === value ? item.label : null), null)
         : '';
     return prettifiedValue;
 }
 
-export const prettifyDateValue = (value?: DateFormat | Date): string => {
+export const prettifyDateValue = (value) => {
     if (!value) {
         return ''
     }
@@ -39,7 +39,7 @@ export const prettifyDateValue = (value?: DateFormat | Date): string => {
     return date.toLocaleDateString();
 }
 
-export const prettifyDateTimeValue = (value?: DateTimeFormat): string => {
+export const prettifyDateTimeValue = (value) => {
     if (!value) {
         return ''
     }
@@ -58,7 +58,7 @@ export const prettifyDateTimeValue = (value?: DateTimeFormat): string => {
     return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
 }
 
-export const prettifyFilterValue = (props: FilterProps) => {
+export const prettifyFilterValue = (props) => {
 
     switch (props.type) {
         case 'checkbox':

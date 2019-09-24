@@ -6,86 +6,86 @@ export const actionsDefinition = {
     GET_DATA_REJECTED: 'getDataRejected',
     UPDATE_SEARCH_VALUE: 'updateSearchValue',
     SET_LOADING: 'setLoading',
-    SET_ERROR: 'setError'
-}
+    SET_ERROR: 'setError',
+};
 
-const updateSearchValue = dispatch => (value: string) => {
+const updateSearchValue = dispatch => (value) => {
     return dispatch(
         {
             type: actionsDefinition.UPDATE_SEARCH_VALUE,
-            payload: value
+            payload: value,
         }
     )
-} 
+};
 
-const setLoading = dispatch => (value: boolean) => {
+const setLoading = dispatch => (value) => {
     return dispatch(
         {
             type: actionsDefinition.SET_LOADING,
-            payload: value
+            payload: value,
         }
     )
-}
+};
 
-const setError = dispatch => (value: boolean) => {
+const setError = dispatch => (value) => {
     return dispatch(
         {
             type: actionsDefinition.SET_ERROR,
-            payload: value
+            payload: value,
         }
     )
-} 
+};
 
 const getQueryData = filter => ({
     field: filter.slug,
     value: filter.value,
-    operator: filter.operator
-})
+    operator: filter.operator,
+});
 
 const serializeFilter = filter => `${filter.field} ${filter.operator} ${filter.value}`;
 
-const getData = dispatch => (url: string, filters: FilterProps[]) => {
+const getData = dispatch => (url, filters) => {
     const activeFilters = filters.filter(filter => filter.value);
 
-    const prettifiedFilters = activeFilters.map(getQueryData)
+    const prettifiedFilters = activeFilters.map(getQueryData);
     const serializedFilters = prettifiedFilters.map(serializeFilter);
-    const query = serializedFilters.join(' and ')
+    const query = serializedFilters.join(' and ');
     
     dispatch(
         {
-            type: actionsDefinition.GET_DATA_PENDING
+            type: actionsDefinition.GET_DATA_PENDING,
         }
-    )
+    );
 
     return fetch(
         url + (query && `?filter=${query}`),
         {
             method: 'GET',
             headers: new Headers({
-                'Content-Type': 'application/json'
-            })
+                'Content-Type': 'application/json',
+            }),
         }
     )
         .then(
             () => {
-                dispatch({ 
+                dispatch({
                     type: actionsDefinition.GET_DATA_FULFILLED,
-                })
+                });
             }
         )
         .catch(
-            (err) => dispatch({ 
+            (err) => dispatch({
                 type: actionsDefinition.GET_DATA_REJECTED,
-                payload: err 
+                payload: err,
             })
         )
-}
+};
 
 export const actions = {
     getData,
     updateSearchValue,
     setLoading,
-    setError
-}
+    setError,
+};
 
 export default actions;

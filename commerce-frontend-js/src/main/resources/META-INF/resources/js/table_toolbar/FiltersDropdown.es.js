@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Icon from '@clayui/icon';
 import ClayDropDown from '@clayui/drop-down';
 import ClayPanel from '@clayui/panel';
-import { renderFilter } from './utils';
-import FilterProps from './Filter/definitions';
+import { renderFilter } from './utils/index.es';
 
-import getAppContext from './Context';
+import getAppContext from './Context.es';
 
-const FiltersDropdown: React.FunctionComponent = () => {
+const FiltersDropdown = () => {
     const [ active, setActive ] = useState(false);
     const [ query, setQuery ] = useState('');
     const { state } = getAppContext();
@@ -35,7 +34,14 @@ const FiltersDropdown: React.FunctionComponent = () => {
     return state.filters.length ? (
         <ClayDropDown
             trigger={
-                <a aria-expanded="false" aria-haspopup="true" className="dropdown-toggle nav-link navbar-breakpoint-d-block" data-toggle="dropdown" href="#1" role="button">
+                <a 
+                    aria-expanded="false" 
+                    aria-haspopup="true" 
+                    className="dropdown-toggle nav-link navbar-breakpoint-d-block" 
+                    data-toggle="dropdown" 
+                    href="#" 
+                    role="button"
+                >
                     <span className="navbar-text-truncate">Add filters</span>
                     <Icon symbol="caret-bottom" />
                 </a>
@@ -48,7 +54,7 @@ const FiltersDropdown: React.FunctionComponent = () => {
                 value={query}
             />
             <ClayDropDown.ItemList>
-                {visibleFilters.map((item: FilterProps, i: number) => (
+                {visibleFilters.map((item) => (
                     <ClayPanel
                         className="mb-0"
                         collapsable
