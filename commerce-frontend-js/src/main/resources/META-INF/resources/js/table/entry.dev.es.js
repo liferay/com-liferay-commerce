@@ -5,8 +5,8 @@ window.Table = launcher('table', 'table', {
 	items: [
 		{
 			id: 'asd',
-			panelLink: 'http://link-test.html',
-		},
+			panelLink: 'http://link-test.html'
+		}
 	],
 	// dataProviderKey: 'test',
 	// dataSetAPI: 'http://endpoint.html',
@@ -16,45 +16,46 @@ window.Table = launcher('table', 'table', {
 	// 		label: 10,
 	// 	},
 	// ],
+
 	summaryName: 'Table summary',
 	summaryItems: [
 		{
 			label: 'Items Subtotal',
-			value: '$ 2,208.50',
+			value: '$ 2,208.50'
 		},
 		{
 			label: 'Order Discount',
-			value: '$ 0.00',
+			value: '$ 0.00'
 		},
 		{
 			label: 'Promotion codes',
-			value: '--',
+			value: '--'
 		},
 		{
 			label: 'Estimated Tax',
-			value: '$ 0.00',
+			value: '$ 0.00'
 		},
 		{
 			label: 'Shipping & Handing',
-			value: '$ 50.00',
+			value: '$ 50.00'
 		},
 		{
 			label: 'Grand Total',
 			value: '$ 2,258.50',
-			style: 'big',
+			style: 'big'
 		},
 		{
-			style: 'divider',
+			style: 'divider'
 		},
 		{
 			label: 'Total return refounds',
 			style: 'danger',
-			value: '$ 0.00',
+			value: '$ 0.00'
 		},
 		{
 			label: 'Total appeasement refounds',
 			style: 'danger',
-			value: '$ 0.00',
-		},
-	],
+			value: '$ 0.00'
+		}
+	]
 });
