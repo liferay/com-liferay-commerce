@@ -1,27 +1,16 @@
-import React, { createContext, useReducer, useContext } from 'react';
+import React, {createContext, useReducer, useContext} from 'react';
 import applyMiddleware from './middleware/index.es';
-import reducers, { initialState } from './reducers/index.es';
+import reducers, {initialState} from './reducers/index.es';
 
-import { 
-    actions as filtersActions
-} from './actions/filters.es';
+import {actions as filtersActions} from './actions/filters.es';
 
-import { 
-    actions as appActions
-} from './actions/app.es';
+import {actions as appActions} from './actions/app.es';
 
-const actions = Object.assign(
-	{},
-	filtersActions,
-	appActions
-);
+const actions = Object.assign({}, filtersActions, appActions);
 
 export const StoreContext = createContext({
 	state: initialState,
-	actions: serializeActions(
-		actions,
-		applyMiddleware(e => e)
-	)
+	actions: serializeActions(actions, applyMiddleware(e => e))
 });
 
 export function serializeActions(actions, dispatch) {
@@ -35,10 +24,7 @@ export function serializeActions(actions, dispatch) {
 }
 
 export function StoreProvider({children, ...stateProps}) {
-	const [state, dispatch] = useReducer(
-		reducers,
-		stateProps
-	);
+	const [state, dispatch] = useReducer(reducers, stateProps);
 
 	const serializedActions = serializeActions(
 		actions,
@@ -46,7 +32,7 @@ export function StoreProvider({children, ...stateProps}) {
 	);
 
 	return (
-		<StoreContext.Provider value={{ state, actions: serializedActions }}>
+		<StoreContext.Provider value={{state, actions: serializedActions}}>
 			{children}
 		</StoreContext.Provider>
 	);
@@ -59,7 +45,7 @@ const getAppContext = () => useContext(StoreContext);
 // export interface ContextProps {
 // 	state: StoreProps,
 // 	actions: {
-// 		[s: string]: any 
+// 		[s: string]: any
 // 	}
 // }
 

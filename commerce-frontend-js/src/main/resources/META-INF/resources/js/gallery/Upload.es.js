@@ -6,17 +6,17 @@ export default class Upload extends React.Component {
 
 		this.state = {
 			hightlight: false
-		}
+		};
 
 		this.fileInputRef = React.createRef();
 
-		window.addEventListener("dragover", this.preventWindowDrop);
-		window.addEventListener("drop", this.preventWindowDrop);
+		window.addEventListener('dragover', this.preventWindowDrop);
+		window.addEventListener('drop', this.preventWindowDrop);
 	}
 
 	componentWillUnmount() {
-		window.removeEventListener("dragover", this.preventWindowDrop);
-		window.removeEventListener("drop", this.preventWindowDrop);
+		window.removeEventListener('dragover', this.preventWindowDrop);
+		window.removeEventListener('drop', this.preventWindowDrop);
 	}
 
 	preventWindowDrop(e) {
@@ -26,18 +26,18 @@ export default class Upload extends React.Component {
 
 	onDragEnter(evt) {
 		evt.preventDefault();
-		this.setState({ hightlight: true });
+		this.setState({hightlight: true});
 	}
 
 	onDragLeave() {
-		this.setState({ hightlight: false });
+		this.setState({hightlight: false});
 	}
 
 	onDrop(event) {
 		event.preventDefault();
-	
+
 		this.uploadFiles(event.dataTransfer.files);
-		this.setState({ hightlight: false });
+		this.setState({hightlight: false});
 	}
 
 	onFilesAdded(evt) {
@@ -55,10 +55,12 @@ export default class Upload extends React.Component {
 	render() {
 		return (
 			<div
-				className={`upload-image ${this.state.hightlight ? "is-dragging" : ""}`}
+				className={`upload-image ${
+					this.state.hightlight ? 'is-dragging' : ''
+				}`}
 				onDragEnter={e => this.onDragEnter(e)}
-        onDragLeave={e => this.onDragLeave(e)}
-        onDrop={e => this.onDrop(e)}
+				onDragLeave={e => this.onDragLeave(e)}
+				onDrop={e => this.onDrop(e)}
 				onClick={() => this.openFileDialog()}
 			>
 				Upload
