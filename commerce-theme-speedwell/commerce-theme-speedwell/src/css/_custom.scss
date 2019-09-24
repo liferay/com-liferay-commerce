@@ -72,21 +72,6 @@ body:not(.has-control-menu) {
 }
 
 body.has-control-menu {
-  /* .speedwell-topbar--translucent {
-    background-color: $stroke;
-    background-image: none;
-
-    .speedwell-topbar__button:hover::before {
-      background-color: $color-bg;
-      color: $stroke;
-    }
-
-    .is-open .speedwell-topbar__button {
-      background-color: $color-bg;
-      color: $stroke;
-    }
-  } */
-
   .speedwell-content {
     padding-top: $speedwell-topbar-size !important;
 

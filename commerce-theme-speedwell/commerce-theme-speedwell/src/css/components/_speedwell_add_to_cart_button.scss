@@ -1,0 +1,294 @@
+@import "add_to_cart_button/animations";
+@import "add_to_cart_button/local-mixins";
+
+.add-to-cart-button {
+  text-transform: capitalize;
+
+  &--compact {
+    ::selection {
+      background-color: #D0D0D0;
+    }
+
+    background-color: $color-theme;
+    border: 0 !important;
+    min-width: 180px;
+    position: relative;
+    transition: min-width .1s ease,
+    border .1s ease;
+
+    @media only screen and (max-width: 767px) {
+      height: 40px;
+      min-width: 135px;
+    }
+
+    &:hover {
+      background-color: $color-theme-dark;
+      cursor: pointer !important;
+      transition: $baseTransitions;
+    }
+
+    &::before {
+      background: rgba(255, 255, 255, 0);
+      border-radius: 6px;
+      border: 3px solid transparent;
+      box-sizing: border-box;
+      content: '';
+      display: block;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      transition: all .2s .5s ease;
+      width: 100%;
+    }
+
+    &--edit {
+      background-color: inherit !important;
+      box-shadow: none !important;
+      color: black;
+      cursor: default !important;
+      min-width: 100px;
+
+      &:hover {
+        min-width: 100px !important;
+        transition: none !important;
+      }
+
+      &::before {
+        @include transformButton(
+                        50%, 50%,
+                        -22px, -35px,
+                        70px, 44px,
+                        3px solid $inputOutline,
+                        rgba(255, 255, 255, 1)
+        );
+        animation: toInput .3s ease-in 1 forwards;
+        border-radius: 4px;
+        content: '';
+        display: block;
+        position: absolute;
+      }
+
+      &.with-select {
+        &::before {
+          @include transformButton(
+                          50%, 50%,
+                          -22px, -35px,
+                          70px, 44px,
+                          3px solid $inputOutline,
+                          rgba(255, 255, 255, 1)
+          );
+          animation: toSelect .3s ease-in 1 forwards;
+          border-radius: 4px;
+          content: '';
+          display: block;
+          position: absolute;
+        }
+      }
+    }
+
+    &__fwd {
+      align-items: center;
+      animation-delay: 200ms;
+      animation: confirmButton 500ms ease 1 forwards;
+      color: $color-theme;
+      cursor: pointer;
+      display: flex;
+      font-size: 26px !important;
+      height: 40px;
+      justify-content: left;
+      opacity: 0;
+      position: absolute;
+      right: -40px;
+      width: 30px;
+
+      &:hover .arrow__line {
+        transform-origin: left center;
+        transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
+        transition: transform .2s ease-in;
+      }
+
+      &:hover .arrow__tip {
+        transform: translate3d(-16px, 0px, 0);
+        transition: transform .2s ease-in;
+      }
+
+      & .arrow {
+        align-items: center;
+        display: flex;
+
+        &__line {
+          transform-origin: left center;
+          transform: scaleX(.70);
+        }
+
+        &__tip {
+          transform: translateX(-23px);
+        }
+      }
+
+      @media only screen and (max-width: 767px) {
+        display: none;
+      }
+    }
+
+    &.commerce-button--good {
+      background-color: $color-mood-good !important;
+      padding: 0;
+      transition-delay: 0ms !important;
+      transition: all .1s ease;
+
+      .added-quantity {
+        color: white;
+      }
+
+      &:hover {
+        .added-quantity {
+          color: white;
+          display: none;
+          height: inherit;
+          width: inherit;
+        }
+      }
+
+      &:hover::before {
+        align-items: center;
+        color: white;
+        content: attr(data-add-more-label);
+        display: flex;
+        justify-content: center;
+      }
+
+      &.quantity-changed {
+        transition-delay: 900ms !important;
+      }
+
+      &.quantity-changed::before {
+        animation: toConfirm 1000ms ease 1;
+      }
+    }
+
+    .commerce-quantity-selector {
+      &__input {
+        @include formElement;
+        height: 44px;
+        width: 65px;
+      }
+
+      &__select {
+        @include formElement;
+        height: 44px;
+        width: 65px;
+      }
+
+      &__btn {
+        font-size: 2em;
+        height: 40px;
+        width: 40px;
+
+        &:nth-child(1) {
+          @include quantityButtonsAnimation('left');
+          transform-origin: right center;
+          transform: translate3d(0px, 0, 0);
+        }
+
+        &:nth-child(3) {
+          @include quantityButtonsAnimation('right');
+          transform-origin: left center;
+          transform: translate3d(0px, 0, 0);
+        }
+      }
+    }
+  }
+
+  &--inline {
+    $button-height: 60px;
+
+    display: flex;
+
+    @media only screen and (max-width: 767px) {
+      bottom: 0;
+      flex-direction: column;
+      height: 170px;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+    }
+
+    .commerce-button {
+      font-size: 12px;
+      height: $button-height;
+      min-width: 160px;
+
+      @media only screen and (max-width: 767px) {
+        align-self: center;
+        bottom: 10px;
+        display: flex;
+        transition: width .2s ease-out;
+        width: 100%;
+
+        &.is-fixed {
+          border-radius: 0;
+          bottom: 0;
+          position: fixed;
+          transition: width .2s ease-out;
+          width: 100%;
+          z-index: 101;
+        }
+      }
+
+      &.commerce-button--good {
+        &:hover {
+          .added-quantity {
+            display: none;
+            height: inherit;
+            width: inherit;
+          }
+        }
+
+        &:hover::before {
+          align-items: center;
+          color: white;
+          content: attr(data-add-more-label);
+          display: flex;
+          justify-content: center;
+        }
+      }
+    }
+
+    .commerce-quantity-selector {
+      font-size: 12px;
+      margin-right: 10px;
+
+      @media only screen and (max-width: 767px) {
+        display: flex;
+      }
+
+      &__input {
+        font-size: 18px;
+        height: 60px;
+        width: 60px;
+
+        @media only screen and (max-width: 767px) {
+          margin: 12px 30px;
+          width: 100px;
+        }
+      }
+
+      &__select {
+        border-radius: 4px;
+        font-size: 1.3em;
+        height: 60px;
+        margin-right: 10px;
+        width: 80px;
+      }
+
+      &__btn {
+        font-size: 2em;
+      }
+
+      &--disabled {
+        opacity: .5;
+      }
+    }
+  }
+}
