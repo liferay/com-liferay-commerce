@@ -1,6 +1,6 @@
 import tableToolbarLauncher from './entry.es';
 
-const filters = [
+export const filters = [
 	{
 		type: 'text',
 		label: 'Text test',
@@ -89,7 +89,7 @@ const props = {
 	filters: filters,
 	spritemap: './icons.svg',
 	plusButton: {
-		onClick: (e) => console.log(e),
+		onClick: e => console.log(e),
 		resetFiltersAfterClickAction: true,
 	},
 	queryEndpoint: '/toolbar-test',
@@ -98,4 +98,8 @@ const props = {
 	},
 };
 
-window.tableToolbar = tableToolbarLauncher('tableToolbar', 'table-toolbar', props);
+window.tableToolbar = tableToolbarLauncher(
+	'tableToolbar',
+	'table-toolbar',
+	props
+);
