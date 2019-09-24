@@ -17,7 +17,9 @@
 		"@clayui/panel": "^3.0.0-milestone.3",
 		"@clayui/select": "^3.0.0-milestone.3",
 		"@clayui/shared": "^3.0.0-alpha.1",
+		"@clayui/table": "^3.0.0",
 		"classnames": "^2.2.6",
+		"prop-types": "^15.7.2",
 		"react": "^16.8.6",
 		"react-dom": "^16.8.6",
 		"redux": "^4.0.4"

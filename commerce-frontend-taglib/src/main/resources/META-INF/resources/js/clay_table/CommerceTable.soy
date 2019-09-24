@@ -67,6 +67,25 @@
 	{@param _handleItemToggled: any}
 	{@param? id: string}
 	{@param spritemap: string}
+	{@param _handleItemToggled: any}
+	{@param? id: string}
+	{@param spritemap: string}
+	{@param items: ?}
+	{@param schema: ?}
+	{@param? selectable: bool}
+	{@param showActionsMenu: bool}
+	{@param? actionsMenuVariant: string}
+
+	{call ClayTable.render}
+		{param events: ['itemToggled': $_handleItemToggled ] /}
+		{param id: $id /}
+		{param items: $items /}
+		{param schema: $schema /}
+		{param selectable: $selectable /}
+		{param showActionsMenu : $showActionsMenu /}
+		{param spritemap: $spritemap /}
+		{param actionsMenuVariant: $actionsMenuVariant /}
+	{/call}
 	{@param items: ?}
 	{@param schema: ?}
 	{@param? selectable: bool}

@@ -2,15 +2,15 @@ import React, { useState} from 'react';
 import ClayDatePicker from '@clayui/date-picker';
 import ClayButton from '@clayui/button';
 
-import getAppContext, { ContextProps } from '../Context';
+import getAppContext, { ContextProps } from '../Context.es';
 import { DateTimeFilterProps } from './definitions'
-import { prettifyDateTimeValue } from '../utils';
+import { prettifyDateTimeValue } from '../utils/index.es';
 
-interface IProps extends DateTimeFilterProps {
-    panelType?: 'add' | 'edit'
-}
+// interface IProps extends DateTimeFilterProps {
+//     panelType?: 'add' | 'edit'
+// }
 
-const getDateTimeObj = (value: Date | string) => {
+const getDateTimeObj = (value) => {
     const date = value instanceof Date 
         ? value
         : new Date (value);
@@ -25,13 +25,13 @@ const getDateTimeObj = (value: Date | string) => {
     }
 }
 
-const DateFilter: React.FunctionComponent<IProps> = (props: IProps) => {
-    const { actions } : ContextProps = getAppContext();
+const DateFilter = (props) => {
+    const { actions } = getAppContext();
 
     const [ value, setValue ] = useState(props.value);
     const [ formattedValue, setFormattedValue ] = useState(prettifyDateTimeValue(props.value));
 
-    function updateDateTime(selectedDateTime: string | Date) {
+    function updateDateTime(selectedDateTime) {
         const newValue = getDateTimeObj(selectedDateTime)
         setValue(newValue);
         setFormattedValue(prettifyDateTimeValue(newValue));

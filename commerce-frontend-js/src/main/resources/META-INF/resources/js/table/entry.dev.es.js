@@ -1,7 +1,6 @@
 import launcher from './entry.es';
-import './_step-tracker.scss';
 
-launcher('step_tracker', 'step-tracker', {
+window.Table = launcher('table', 'table', {
 	spritemap: './icons.svg',
 	steps: [
 		{

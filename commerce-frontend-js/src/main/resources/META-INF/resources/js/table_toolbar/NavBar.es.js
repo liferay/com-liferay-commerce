@@ -1,12 +1,12 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
 import Icon from '@clayui/icon';
-import FiltersDropdown from './FiltersDropdown';
+import FiltersDropdown from './FiltersDropdown.es';
 import ClayButton from '@clayui/button';
-import getAppContext, {ContextProps} from './Context';
+import getAppContext from './Context.es';
 
 
-const NavBar: FunctionComponent<any> = () => {
-    const { state, actions }: ContextProps = getAppContext();
+const NavBar = () => {
+    const { state, actions } = getAppContext();
     const [ inputSearchValue, setInputSearchValue ] = useState(state.app.inputSearch.value);
     const [ initialized, setInitialized ] = useState(false);
 
