@@ -1,8 +1,8 @@
-import React, {useState} from 'react'
-import { ClayRadio, ClayRadioGroup} from '@clayui/form';
-import getAppContext, { ContextProps } from '../Context.es';
+import React, {useState} from 'react';
+import {ClayRadio, ClayRadioGroup} from '@clayui/form';
+import getAppContext, {ContextProps} from '../Context.es';
 
-import { MultiFilterProps } from './definitions';
+import {MultiFilterProps} from './definitions';
 
 import ClayButton from '@clayui/button';
 
@@ -10,31 +10,35 @@ import ClayButton from '@clayui/button';
 //     panelType?: 'add' | 'edit'
 // }
 
-const RadioFilter = (props) => {
-    const { actions } = getAppContext();
-    const [ value, setValue ] = useState(props.value);
+const RadioFilter = props => {
+	const {actions} = getAppContext();
+	const [value, setValue] = useState(props.value);
 
-    return (
-        <>
-            <ClayRadioGroup
-                selectedValue={value || ''}
-                onSelectedValueChange={setValue}
-            >
-                {props.items.map(item => (
-                    <ClayRadio key={item.value} label={item.label} value={item.value} />
-                ))}
-            </ClayRadioGroup>
-            <div className="mt-2">
-                <ClayButton
-                    className="btn-sm"
-                    onClick={() => actions.updateFilterValue(props.slug, value)}
-                    disabled={value === props.value}
-                >
-                    {props.panelType === 'edit' ? 'Edit filter' : 'Add filter'}
-                </ClayButton>
-            </div>
-        </>
-    )
-}
+	return (
+		<>
+			<ClayRadioGroup
+				selectedValue={value || ''}
+				onSelectedValueChange={setValue}
+			>
+				{props.items.map(item => (
+					<ClayRadio
+						key={item.value}
+						label={item.label}
+						value={item.value}
+					/>
+				))}
+			</ClayRadioGroup>
+			<div className="mt-2">
+				<ClayButton
+					className="btn-sm"
+					onClick={() => actions.updateFilterValue(props.slug, value)}
+					disabled={value === props.value}
+				>
+					{props.panelType === 'edit' ? 'Edit filter' : 'Add filter'}
+				</ClayButton>
+			</div>
+		</>
+	);
+};
 
-export default RadioFilter
+export default RadioFilter;

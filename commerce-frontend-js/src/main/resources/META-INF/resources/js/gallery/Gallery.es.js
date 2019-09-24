@@ -13,39 +13,41 @@ export default class Gallery extends React.Component {
 
 		this.state = {
 			zoom: false
-		}
+		};
 	}
 
 	onClick(tabs) {
 		this.props.onImageClick && this.props.onImageClick(tabs);
-  }
+	}
 
 	onMouseEnter(image) {
 		this.setState({
 			zoom: image
-		})
+		});
 	}
 
 	onMouseLeave() {
 		this.setState({
 			zoom: false
-		})
+		});
 	}
 
 	render() {
-		return (<div className="row">
-			<div className="col-sm">
-				<Images
-					images={this.props.images}
-					onMouseEnter={this.onMouseEnter}
-					onMouseLeave={this.onMouseLeave}
-					onClick={this.onClick}
-				/>
+		return (
+			<div className="row">
+				<div className="col-sm">
+					<Images
+						images={this.props.images}
+						onMouseEnter={this.onMouseEnter}
+						onMouseLeave={this.onMouseLeave}
+						onClick={this.onClick}
+					/>
+				</div>
+				<div className="col-sm">
+					<Upload />
+					{this.state.zoom ? <Zoom image={this.state.zoom} /> : null}
+				</div>
 			</div>
-			<div className="col-sm">
-				<Upload />
-				{this.state.zoom ? <Zoom image={this.state.zoom} /> : null}
-			</div>
-		</div>);
+		);
 	}
 }

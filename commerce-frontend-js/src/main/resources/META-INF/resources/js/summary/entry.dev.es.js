@@ -1,23 +1,7 @@
 import launcher from './entry.es';
 
-window.Table = launcher('table', 'table', {
-	spritemap: './icons.svg',
+window.Summary = launcher('summary', 'summary', {
 	items: [
-		{
-			id: 'asd',
-			panelLink: 'http://link-test.html',
-		},
-	],
-	// dataProviderKey: 'test',
-	// dataSetAPI: 'http://endpoint.html',
-	// pageSize: 10,
-	// paginationEntries: [
-	// 	{
-	// 		label: 10,
-	// 	},
-	// ],
-	summaryName: 'Table summary',
-	summaryItems: [
 		{
 			label: 'Items Subtotal',
 			value: '$ 2,208.50',
