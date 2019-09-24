@@ -178,7 +178,7 @@ public class CommerceAccountsImporter {
 			commerceAccount.getCommerceAccountId(), commerceAccount.getName(),
 			StringPool.BLANK, street1, StringPool.BLANK, StringPool.BLANK, city,
 			zip, commerceRegionId, commerceCountry.getCommerceCountryId(),
-			StringPool.BLANK, true, false, serviceContext);
+			StringPool.BLANK, true, true, serviceContext);
 
 		// Add Company Logo
 
