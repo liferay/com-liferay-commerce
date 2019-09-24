@@ -121,7 +121,8 @@ public class OrderNoteResourceImpl extends BaseOrderNoteResourceImpl {
 
 		return (OrderNote)orderNoteDTOConverter.toDTO(
 			new DefaultDTOConverterContext(
-				contextAcceptLanguage.getPreferredLocale(), id));
+				contextAcceptLanguage.getPreferredLocale(),
+				GetterUtil.getLong(id)));
 	}
 
 	@Override

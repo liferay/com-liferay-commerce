@@ -161,7 +161,8 @@ public class OrderItemResourceImpl extends BaseOrderItemResourceImpl {
 
 		return (OrderItem)orderItemDTOConverter.toDTO(
 			new DefaultDTOConverterContext(
-				contextAcceptLanguage.getPreferredLocale(), id));
+				contextAcceptLanguage.getPreferredLocale(),
+				GetterUtil.getLong(id)));
 	}
 
 	@Override

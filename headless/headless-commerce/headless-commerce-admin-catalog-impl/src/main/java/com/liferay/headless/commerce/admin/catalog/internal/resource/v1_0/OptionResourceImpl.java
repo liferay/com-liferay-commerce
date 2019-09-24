@@ -86,7 +86,8 @@ public class OptionResourceImpl extends BaseOptionResourceImpl {
 
 		return (Option)optionDTOConverter.toDTO(
 			new DefaultDTOConverterContext(
-				contextAcceptLanguage.getPreferredLocale(), id));
+				contextAcceptLanguage.getPreferredLocale(),
+				GetterUtil.getLong(id)));
 	}
 
 	@Override
