@@ -80,13 +80,12 @@ public class MiniumCPContentListRenderer implements CPContentListRenderer {
 			(CPDataSourceResult)httpServletRequest.getAttribute(
 				CPWebKeys.CP_DATA_SOURCE_RESULT);
 
-		List<CPSku> cpSkus;
 		List<String> skus = new ArrayList<>();
 
 		for (CPCatalogEntry cpCatalogEntry :
 				cpDataSourceResult.getCPCatalogEntries()) {
 
-			cpSkus = cpCatalogEntry.getCPSkus();
+			List<CPSku> cpSkus = cpCatalogEntry.getCPSkus();
 
 			if (cpSkus.size() != 1) {
 				continue;
