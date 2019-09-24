@@ -47,6 +47,7 @@ import com.liferay.portal.kernel.search.generic.BooleanClauseImpl;
 import com.liferay.portal.kernel.search.generic.TermQueryImpl;
 import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.search.web.portlet.shared.search.PortletSharedSearchContributor;
@@ -60,6 +61,7 @@ import java.util.Optional;
 
 import javax.portlet.Portlet;
 import javax.portlet.PortletException;
+import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -171,8 +173,22 @@ public class CPSearchResultsPortlet
 		Optional<Integer> paginationDeltaOptional =
 			paginationDeltaParameterValueOptional.map(Integer::valueOf);
 
+		int configurationPaginationDelta =
+			cpSearchResultsPortletInstanceConfiguration.paginationDelta();
+
+		Optional<PortletPreferences> portletPreferencesOptional =
+			portletSharedSearchSettings.getPortletPreferences();
+
+		if (portletPreferencesOptional.isPresent()) {
+			PortletPreferences portletPreferences =
+				portletPreferencesOptional.get();
+
+			configurationPaginationDelta = GetterUtil.getInteger(
+				portletPreferences.getValue("paginationDelta", null));
+		}
+
 		int paginationDelta = paginationDeltaOptional.orElse(
-			cpSearchResultsPortletInstanceConfiguration.paginationDelta());
+			configurationPaginationDelta);
 
 		portletSharedSearchSettings.setPaginationDelta(paginationDelta);
 	}
