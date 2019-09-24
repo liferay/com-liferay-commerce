@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 
 import ClayDropDown from '@clayui/drop-down';
 import ClayIcon from '@clayui/icon';
-import { renderFilter, prettifyFilterValue } from '../utils';
+import { renderFilter, prettifyFilterValue } from '../utils/index.es';
 import ClayLabel from '@clayui/label';
-import getAppContext, { ContextProps } from '../Context';
+import getAppContext, { ContextProps } from '../Context.es';
 
 
-const Resume: React.FunctionComponent<any> = (props) => {
-    const { actions } : ContextProps = getAppContext();
+const Resume = (props) => {
+    const { actions } = getAppContext();
     const [open, setOpen] = useState(false);
 
     const prettifiedValue = prettifyFilterValue(props);

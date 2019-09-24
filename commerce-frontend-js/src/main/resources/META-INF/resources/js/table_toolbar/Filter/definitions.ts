@@ -1,11 +1,11 @@
 import React from 'react';
-import TextFilter from './Text';
-import NumberFilter from './Number';
-import DateFilter from './Date';
-import DateTimeFilter from './DateTime';
-import RadioFilter from './Radio';
-import SelectFilter from './Select';
-import CheckboxesFilter from './Checkboxes';
+import TextFilter from './Text.es';
+import NumberFilter from './Number.es';
+import DateFilter from './Date.es';
+import DateTimeFilter from './DateTime.es';
+import RadioFilter from './Radio.es';
+import SelectFilter from './Select.es';
+import CheckboxesFilter from './Checkboxes.es';
 
 export interface DateFormat {
     year: number,

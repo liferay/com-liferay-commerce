@@ -22,6 +22,28 @@ export function debounce(func, wait, immediate) {
 	};
 };
 
+export function showNotification(message, type, closeable = true, duration = 500) {
+	AUI().use(
+		'liferay-notification',
+		() => {
+			new Liferay.Notification(
+				{
+					closeable,
+					delay: {
+						hide: 5000,
+						show: 0
+					},
+					duration,
+					message,
+					render: true,
+					title: '',
+					type
+				}
+			);
+		}
+	);
+}
+
 if(!window.Liferay) {
 	window.Liferay = {
 		Language : {
