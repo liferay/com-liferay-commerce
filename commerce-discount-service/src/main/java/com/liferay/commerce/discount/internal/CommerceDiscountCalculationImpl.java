@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.QueryConfig;
 import com.liferay.portal.kernel.search.SearchContext;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.io.Serializable;
@@ -49,6 +50,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -197,8 +199,20 @@ public class CommerceDiscountCalculationImpl
 		CommerceCurrency commerceCurrency =
 			commerceContext.getCommerceCurrency();
 
+		String couponCode = GetterUtil.getString(
+			searchContext.getAttribute(
+				CommerceDiscountIndexer.FIELD_COUPON_CODE));
+
 		for (CommerceDiscount commerceDiscount :
 				baseModelSearchResult.getBaseModels()) {
+
+			String discountCouponCode = commerceDiscount.getCouponCode();
+
+			if ((discountCouponCode != null) &&
+				!Objects.equals(couponCode, discountCouponCode)) {
+
+				continue;
+			}
 
 			if (_isValidDiscount(commerceContext, commerceDiscount)) {
 				commerceDiscountValues.add(
