@@ -167,7 +167,8 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceShipmentsPort
 			size: "lg",
 			spritemap: "<%= themeDisplay.getPathThemeImages() + "/clay/icons.svg" %>",
 			portalWrapperId: "<portlet:namespace />side-panel-wrapper",
-			topAnchor: document.getElementById('commerce-admin-header')
+			topAnchor: document.getElementById('commerce-admin-header'),
+			onUpdate: function(e){console.log(e)}
 		}
 	);
 

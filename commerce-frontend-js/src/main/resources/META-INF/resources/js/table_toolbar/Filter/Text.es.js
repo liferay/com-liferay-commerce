@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
 import { TextFilterProps } from './definitions';
-import getAppContext, { ContextProps } from '../Context';
+import getAppContext, { ContextProps } from '../Context.es';
 
 import ClayButton from '@clayui/button';
 
-interface IProps extends TextFilterProps {
-    panelType?: 'add' | 'edit'
-}
+// interface IProps extends TextFilterProps {
+//     panelType?: 'add' | 'edit'
+// }
 
-const TextFilter: React.FunctionComponent<IProps> = (props: IProps) => {
-    const { actions } : ContextProps = getAppContext();
+const TextFilter = (props) => {
+    const { actions } = getAppContext();
     const [ value, setValue ] = useState(props.value);
 
     return (

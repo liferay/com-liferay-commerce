@@ -21,14 +21,15 @@ const getComponentPath = (component, entry) => path.join(
 // eslint-disable-next-line no-undef
 module.exports = {
 	entry: {
-		add_or_create: getComponentPath('add_or_create', 'entry.dev.es.js'),
-		assign_to: getComponentPath('assign_to', 'entry.dev.es.js'),
-		table_toolbar: getComponentPath('table_toolbar', 'entry.dev.es.tsx'),
-		gallery: getComponentPath('gallery', 'entry.dev.es.js'),
-		modal: getComponentPath('modal', 'entry.dev.es.js'),
-		side_panel: getComponentPath('side_panel', 'entry.dev.es.js'),
-		step_tracker: getComponentPath('step_tracker', 'entry.dev.es.js'),
-		utilities: getComponentPath('utilities', 'entry.js'),
+		// add_or_create: getComponentPath('add_or_create', 'entry.dev.es.js'),
+		// assign_to: getComponentPath('assign_to', 'entry.dev.es.js'),
+		// table_toolbar: getComponentPath('table_toolbar', 'entry.dev.es.js'),
+		// gallery: getComponentPath('gallery', 'entry.dev.es.js'),
+		// modal: getComponentPath('modal', 'entry.dev.es.js'),
+		// side_panel: getComponentPath('side_panel', 'entry.dev.es.js'),
+		// step_tracker: getComponentPath('step_tracker', 'entry.dev.es.js'),
+		// utilities: getComponentPath('utilities', 'index.js'),
+		table: getComponentPath('table', 'entry.dev.es.js'),
 	},
 	mode: 'development',
 	devtool: 'inline-source-map',

@@ -1,17 +1,17 @@
 import React, {useState} from 'react';
 import classNames from 'classnames';
 import { NumberFilterProps } from './definitions';
-import getAppContext, { ContextProps } from '../Context';
+import getAppContext, { ContextProps } from '../Context.es';
 
 import ClayButton from '@clayui/button';
 
-interface IProps extends NumberFilterProps {
-    panelType?: 'add' | 'edit'
-}
+// interface IProps extends NumberFilterProps {
+//     panelType?: 'add' | 'edit'
+// }
 
-const NumberFilter: React.FunctionComponent<NumberFilterProps> = (props: IProps) => {
+const NumberFilter = (props) => {
 
-    const { actions } : ContextProps = getAppContext();
+    const { actions } = getAppContext();
     const [ value, setValue ] = useState(props.value);
 
     return (

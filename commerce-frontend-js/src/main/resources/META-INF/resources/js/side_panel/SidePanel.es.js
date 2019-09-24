@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import ClayLoadingIndicator from '@clayui/loading-indicator';
 import ClayIcon from '@clayui/icon';
 import ClayButton from '@clayui/button';
-import {debounce} from '../utilities/entry';
+import {debounce} from '../utilities';
 export default class SidePanel extends React.Component {
 	constructor(props) {
 		super(props);

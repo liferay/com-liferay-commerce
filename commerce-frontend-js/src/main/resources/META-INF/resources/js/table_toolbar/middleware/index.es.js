@@ -1,5 +1,3 @@
-import { actions as appActions } from '../actions/filters';
-
 const applyMiddleware = dispatch => action => {
     // if(action.type.indexOf('Fulfilled') > -1) {
     //     appActions.setError(dispatch)(null)
@@ -12,7 +10,7 @@ const applyMiddleware = dispatch => action => {
     //     appActions.setError(dispatch)(action.payload.message)
     //     appActions.setLoading(dispatch)(false)
     // }
-    dispatch(action)
+    dispatch(action);
 }
 
-export default applyMiddleware
+export default applyMiddleware;

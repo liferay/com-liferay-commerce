@@ -1,10 +1,10 @@
-import React, { FunctionComponent } from 'react';
-import ActiveFiltersBar from './ActiveFiltersBar';
-import NavBar from './NavBar';
-import { StoreProvider } from './Context';
+import React from 'react';
+import ActiveFiltersBar from './ActiveFiltersBar.es';
+import NavBar from './NavBar.es';
+import { StoreProvider } from './Context.es';
 import { ClayIconSpriteContext } from '@clayui/icon';
 
-const TableToolbar: FunctionComponent<any> = (props) => {
+const TableToolbar = (props) => {
     const {filters, ...otherProps} = props;
 
     return (
