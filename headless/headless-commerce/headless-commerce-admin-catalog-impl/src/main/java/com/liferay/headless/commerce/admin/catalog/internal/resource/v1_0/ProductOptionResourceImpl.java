@@ -128,7 +128,8 @@ public class ProductOptionResourceImpl extends BaseProductOptionResourceImpl {
 
 		return (ProductOption)productOptionDTOConverter.toDTO(
 			new DefaultDTOConverterContext(
-				contextAcceptLanguage.getPreferredLocale(), id));
+				contextAcceptLanguage.getPreferredLocale(),
+				GetterUtil.getLong(id)));
 	}
 
 	@Override
