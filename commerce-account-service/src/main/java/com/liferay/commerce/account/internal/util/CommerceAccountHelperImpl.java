@@ -140,14 +140,8 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 				_getCommerceSiteType(siteGroupId), StringPool.BLANK,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
-		long[] commerceAccountIds = new long[0];
-
-		if (!commerceAccounts.isEmpty()) {
-			commerceAccountIds = ListUtil.toLongArray(
-				commerceAccounts, CommerceAccountModel::getCommerceAccountId);
-		}
-
-		return commerceAccountIds;
+		return ListUtil.toLongArray(
+			commerceAccounts, CommerceAccountModel::getCommerceAccountId);
 	}
 
 	@Override

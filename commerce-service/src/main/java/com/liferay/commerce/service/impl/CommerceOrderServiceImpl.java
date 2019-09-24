@@ -820,18 +820,15 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 	}
 
 	private long[] _getCommerceAccountIds(long groupId) throws PortalException {
-		long[] commerceAccountIds = null;
-
 		if (!PortalPermissionUtil.contains(
 				getPermissionChecker(),
 				CommerceAccountActionKeys.MANAGE_ALL_ACCOUNTS)) {
 
-			commerceAccountIds =
-				_commerceAccountHelper.getUserCommerceAccountIds(
-					getUserId(), groupId);
+			return _commerceAccountHelper.getUserCommerceAccountIds(
+				getUserId(), groupId);
 		}
 
-		return commerceAccountIds;
+		return null;
 	}
 
 	private static volatile ModelResourcePermission<CommerceOrder>
