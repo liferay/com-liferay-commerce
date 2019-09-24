@@ -76,7 +76,7 @@ public class CommerceTierPriceEntryTestUtil {
 	}
 
 	private static long _getGroupId(
-			long companyId, Long commercePriceEntryId,
+			long companyId, long commercePriceEntryId,
 			String priceEntryExternalReferenceCode)
 		throws PortalException {
 
