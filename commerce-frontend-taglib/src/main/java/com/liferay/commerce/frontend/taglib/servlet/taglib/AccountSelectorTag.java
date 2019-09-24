@@ -118,13 +118,8 @@ public class AccountSelectorTag extends ComponentRendererTag {
 			putValue(
 				"createNewOrderLink", _getAddCommerceOrderURL(themeDisplay));
 
-			Layout orderManagementLayout = _getOrdersLayout(
-				themeDisplay.getScopeGroupId());
-
 			putValue(
-				"viewAllOrdersLink",
-				PortalUtil.getLayoutFriendlyURL(
-					orderManagementLayout, themeDisplay));
+				"viewAllOrdersLink", _getViewCommerceOrdersURL(themeDisplay));
 		}
 		catch (PortalException pe) {
 			_log.error(pe, pe);
@@ -194,19 +189,6 @@ public class AccountSelectorTag extends ComponentRendererTag {
 		return StringPool.BLANK;
 	}
 
-	private Layout _getOrdersLayout(long groupId) throws PortalException {
-		Layout layout = null;
-
-		long plid = PortalUtil.getPlidFromPortletId(
-			groupId, CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT);
-
-		if (plid > 0) {
-			layout = LayoutLocalServiceUtil.fetchLayout(plid);
-		}
-
-		return layout;
-	}
-
 	private PortletURL _getPortletURL(
 			HttpServletRequest httpServletRequest, String portletId)
 		throws PortalException {
@@ -228,6 +210,24 @@ public class AccountSelectorTag extends ComponentRendererTag {
 		}
 
 		return portletURL;
+	}
+
+	private String _getViewCommerceOrdersURL(ThemeDisplay themeDisplay)
+		throws PortalException {
+
+		long plid = PortalUtil.getPlidFromPortletId(
+			themeDisplay.getScopeGroupId(),
+			CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT);
+
+		if (plid > 0) {
+			PortletURL portletURL = _getPortletURL(
+				themeDisplay.getRequest(),
+				CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT);
+
+			return portletURL.toString();
+		}
+
+		return StringPool.BLANK;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
