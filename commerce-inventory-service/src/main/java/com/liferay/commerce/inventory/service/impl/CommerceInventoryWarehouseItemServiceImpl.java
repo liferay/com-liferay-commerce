@@ -18,8 +18,10 @@ import com.liferay.commerce.inventory.constants.CommerceInventoryActionKeys;
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem;
 import com.liferay.commerce.inventory.service.base.CommerceInventoryWarehouseItemServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -45,19 +47,28 @@ public class CommerceInventoryWarehouseItemServiceImpl
 	}
 
 	@Override
+
 	public CommerceInventoryWarehouseItem addCommerceInventoryWarehouseItem(
 			long userId, long commerceInventoryWarehouseId,
 			String externalReferenceCode, String sku, int quantity)
 		throws PortalException {
-
+			PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommerceInventoryActionKeys.MANAGE_INVENTORY);
+			return commerceInventoryWarehouseItemLocalService.
+			addCommerceInventoryWarehouseItem(
+				userId, commerceInventoryWarehouseId, externalReferenceCode,
+				sku, quantity);
+		}
+	public int countUpdatedItemsByM(
+			long companyId, Date startDate, Date endDate)
+		throws PrincipalException {
 		PortalPermissionUtil.check(
 			getPermissionChecker(),
 			CommerceInventoryActionKeys.MANAGE_INVENTORY);
 
-		return commerceInventoryWarehouseItemLocalService.
-			addCommerceInventoryWarehouseItem(
-				userId, commerceInventoryWarehouseId, externalReferenceCode,
-				sku, quantity);
+		return commerceInventoryWarehouseItemLocalService.countUpdatedItemsByM(
+			companyId, startDate, endDate);
 	}
 
 	@Override
@@ -89,18 +100,29 @@ public class CommerceInventoryWarehouseItemServiceImpl
 	}
 
 	@Override
+<<<<<<< HEAD
 	public CommerceInventoryWarehouseItem
 			fetchCommerceInventoryWarehouseItemByReferenceCode(
 				long companyId, String externalReferenceCode)
 		throws PortalException {
+=======
+	public List<CommerceInventoryWarehouseItem> findUpdatedItemsByM(
+			long companyId, Date startDate, Date endDate, int start, int end)
+		throws PrincipalException {
+>>>>>>> COMMERCE-1835 added modifiedDate field to WarehouseItem and new end point for extracting WarehouseItem by modifiedDate range
 
 		PortalPermissionUtil.check(
 			getPermissionChecker(),
 			CommerceInventoryActionKeys.MANAGE_INVENTORY);
 
+<<<<<<< HEAD
 		return commerceInventoryWarehouseItemLocalService.
 			fetchCommerceInventoryWarehouseItemByReferenceCode(
 				companyId, externalReferenceCode);
+=======
+		return commerceInventoryWarehouseItemLocalService.findUpdatedItemsByM(
+			companyId, startDate, endDate, start, end);
+>>>>>>> COMMERCE-1835 added modifiedDate field to WarehouseItem and new end point for extracting WarehouseItem by modifiedDate range
 	}
 
 	@Override

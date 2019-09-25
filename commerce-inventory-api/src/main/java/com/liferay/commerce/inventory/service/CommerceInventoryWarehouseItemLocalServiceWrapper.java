@@ -64,6 +64,7 @@ public class CommerceInventoryWarehouseItemLocalServiceWrapper
 	}
 
 	@Override
+<<<<<<< HEAD
 	public com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
 			addCommerceInventoryWarehouseItem(
 				long userId, long commerceInventoryWarehouseId,
@@ -74,6 +75,13 @@ public class CommerceInventoryWarehouseItemLocalServiceWrapper
 			addCommerceInventoryWarehouseItem(
 				userId, commerceInventoryWarehouseId, externalReferenceCode,
 				sku, quantity);
+=======
+	public int countUpdatedItemsByM(
+		long companyId, java.util.Date startDate, java.util.Date endDate) {
+
+		return _commerceInventoryWarehouseItemLocalService.countUpdatedItemsByM(
+			companyId, startDate, endDate);
+>>>>>>> COMMERCE-1835 auto generated code (blade gw buildService)
 	}
 
 	/**
@@ -275,6 +283,17 @@ public class CommerceInventoryWarehouseItemLocalServiceWrapper
 		return _commerceInventoryWarehouseItemLocalService.
 			fetchCommerceInventoryWarehouseItemByReferenceCode(
 				companyId, externalReferenceCode);
+	}
+
+	@Override
+	public java.util.List
+		<com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem>
+			findUpdatedItemsByM(
+				long companyId, java.util.Date startDate,
+				java.util.Date endDate, int start, int end) {
+
+		return _commerceInventoryWarehouseItemLocalService.findUpdatedItemsByM(
+			companyId, startDate, endDate, start, end);
 	}
 
 	@Override

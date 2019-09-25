@@ -22,6 +22,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.util.Validator;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -76,6 +78,14 @@ public class CommerceInventoryWarehouseItemLocalServiceImpl
 	}
 
 	@Override
+	public int countUpdatedItemsByM(
+		long companyId, Date startDate, Date endDate) {
+
+		return commerceInventoryWarehouseItemFinder.countUpdatedItemsByM(
+			companyId, startDate, endDate);
+	}
+
+	@Override
 	public void deleteCommerceInventoryWarehouseItems(
 		long commerceInventoryWarehouseId) {
 
@@ -103,6 +113,13 @@ public class CommerceInventoryWarehouseItemLocalServiceImpl
 
 		return commerceInventoryWarehouseItemPersistence.findByC_ERC(
 			companyId, externalReferenceCode);
+		}
+			public List<CommerceInventoryWarehouseItem> findUpdatedItemsByM(
+		long companyId, Date startDate, Date endDate, int start, int end) {
+
+		return commerceInventoryWarehouseItemFinder.findUpdatedItemsByM(
+			companyId, startDate, endDate, start, end);
+
 	}
 
 	@Override

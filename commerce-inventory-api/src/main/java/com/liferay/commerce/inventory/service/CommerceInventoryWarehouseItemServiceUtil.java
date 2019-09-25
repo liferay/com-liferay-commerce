@@ -54,6 +54,7 @@ public class CommerceInventoryWarehouseItemServiceUtil {
 			userId, commerceInventoryWarehouseId, sku, quantity);
 	}
 
+<<<<<<< HEAD
 	public static
 		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
 				addCommerceInventoryWarehouseItem(
@@ -64,6 +65,13 @@ public class CommerceInventoryWarehouseItemServiceUtil {
 		return getService().addCommerceInventoryWarehouseItem(
 			userId, commerceInventoryWarehouseId, externalReferenceCode, sku,
 			quantity);
+=======
+	public static int countUpdatedItemsByM(
+			long companyId, java.util.Date startDate, java.util.Date endDate)
+		throws com.liferay.portal.kernel.security.auth.PrincipalException {
+
+		return getService().countUpdatedItemsByM(companyId, startDate, endDate);
+>>>>>>> COMMERCE-1835 auto generated code (blade gw buildService)
 	}
 
 	public static void deleteCommerceInventoryWarehouseItem(
@@ -82,6 +90,17 @@ public class CommerceInventoryWarehouseItemServiceUtil {
 
 		return getService().fetchCommerceInventoryWarehouseItem(
 			commerceInventoryWarehouseId, sku);
+	}
+
+	public static java.util.List
+		<com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem>
+				findUpdatedItemsByM(
+					long companyId, java.util.Date startDate,
+					java.util.Date endDate, int start, int end)
+			throws com.liferay.portal.kernel.security.auth.PrincipalException {
+
+		return getService().findUpdatedItemsByM(
+			companyId, startDate, endDate, start, end);
 	}
 
 	public static

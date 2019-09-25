@@ -24,12 +24,14 @@ import com.liferay.headless.commerce.admin.inventory.resource.v1_0.WarehouseItem
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverterContext;
+import com.liferay.headless.commerce.core.util.DateUtils;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.core.Context;
@@ -102,6 +104,43 @@ public class WarehouseItemResourceImpl extends BaseWarehouseItemResourceImpl {
 			new DefaultDTOConverterContext(
 				contextAcceptLanguage.getPreferredLocale(),
 				GetterUtil.getLong(id)));
+	}
+
+	@Override
+	public Page<WarehouseItem> getWarehouseItemsUpdatedPage(
+			Date start, Date end, Pagination pagination)
+		throws Exception {
+
+		if ((start != null) && (end != null) && (start.compareTo(end) > 0)) {
+			throw new IllegalArgumentException(
+				"End date should be after start date");
+		}
+
+		if ((start == null) && (end == null)) {
+			throw new IllegalArgumentException(
+				"At least one date should be defined");
+		}
+
+		if (start == null) {
+			start = DateUtils.addDays(end, -DateUtils.DEFAULT_INCREMENT_DAY);
+		}
+
+		if (end == null) {
+			end = DateUtils.addDays(start, DateUtils.DEFAULT_INCREMENT_DAY);
+		}
+
+		List<CommerceInventoryWarehouseItem> commerceInventoryWarehouseItems =
+			_commerceInventoryWarehouseItemService.findUpdatedItemsByM(
+				contextCompany.getCompanyId(), start, end,
+				pagination.getStartPosition(), pagination.getEndPosition());
+
+		int totalItems =
+			_commerceInventoryWarehouseItemService.countUpdatedItemsByM(
+				contextCompany.getCompanyId(), start, end);
+
+		return Page.of(
+			_toWarehouseItems(commerceInventoryWarehouseItems), pagination,
+			totalItems);
 	}
 
 	@Override

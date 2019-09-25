@@ -90,6 +90,10 @@ components:
                     format: int64
                     minimum: 0
                     type: integer
+                modifiedDate:
+                    example: 2017-07-21
+                    format: date
+                    type: string
                 quantity:
                     example: 1
                     format: int32
@@ -138,6 +142,85 @@ info:
     version: v1.0
 openapi: 3.0.0
 paths:
+    /warehouseItems/updated:
+        get:
+            operationId: getWarehouseItemsUpdatedPage
+            parameters:
+                - in: query
+                  name: end
+                  schema:
+                      description: Ending date/time of the timespan for which to retrieve the data.
+                      example: 2017-07-21
+                      format: date
+                      type: string
+                - in: query
+                  name: start
+                  schema:
+                      description: Starting date/time of the timespan for which to retrieve the data
+                      example: 2017-07-21
+                      format: date
+                      type: string
+                - in: query
+                  name: page
+                  required: false
+                  schema:
+                      type: integer
+                - in: query
+                  name: pageSize
+                  required: false
+                  schema:
+                      type: integer
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/WarehouseItem'
+                                type: array
+                        application/xml:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/WarehouseItem'
+                                type: array
+                    description: Successful operation
+                400:
+                    description: Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - CommerceOpenApiAdmin.write
+            summary: Creates or updates an Warehouse Item.
+            tags:
+                - WarehouseItem
     /warehouseItems/{id}:
         delete:
             operationId: deleteWarehouseItem

@@ -21,12 +21,14 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
 import com.liferay.portal.kernel.security.access.control.AccessControlled;
+import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.service.BaseService;
 import com.liferay.portal.kernel.spring.osgi.OSGiBeanProperties;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -64,10 +66,16 @@ public interface CommerceInventoryWarehouseItemService extends BaseService {
 			int quantity)
 		throws PortalException;
 
+<<<<<<< HEAD
 	public CommerceInventoryWarehouseItem addCommerceInventoryWarehouseItem(
 			long userId, long commerceInventoryWarehouseId,
 			String externalReferenceCode, String sku, int quantity)
 		throws PortalException;
+=======
+	public int countUpdatedItemsByM(
+			long companyId, Date startDate, Date endDate)
+		throws PrincipalException;
+>>>>>>> COMMERCE-1835 auto generated code (blade gw buildService)
 
 	public void deleteCommerceInventoryWarehouseItem(
 			long commerceInventoryWarehouseItemId)
@@ -77,6 +85,10 @@ public interface CommerceInventoryWarehouseItemService extends BaseService {
 	public CommerceInventoryWarehouseItem fetchCommerceInventoryWarehouseItem(
 			long commerceInventoryWarehouseId, String sku)
 		throws PortalException;
+
+	public List<CommerceInventoryWarehouseItem> findUpdatedItemsByM(
+			long companyId, Date startDate, Date endDate, int start, int end)
+		throws PrincipalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceInventoryWarehouseItem

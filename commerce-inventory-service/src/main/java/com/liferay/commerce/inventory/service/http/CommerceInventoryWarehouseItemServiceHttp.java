@@ -94,6 +94,7 @@ public class CommerceInventoryWarehouseItemServiceHttp {
 		}
 	}
 
+<<<<<<< HEAD
 	public static
 		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
 				addCommerceInventoryWarehouseItem(
@@ -101,16 +102,29 @@ public class CommerceInventoryWarehouseItemServiceHttp {
 					long commerceInventoryWarehouseId,
 					String externalReferenceCode, String sku, int quantity)
 			throws com.liferay.portal.kernel.exception.PortalException {
+=======
+	public static int countUpdatedItemsByM(
+			HttpPrincipal httpPrincipal, long companyId,
+			java.util.Date startDate, java.util.Date endDate)
+		throws com.liferay.portal.kernel.security.auth.PrincipalException {
+>>>>>>> COMMERCE-1835 auto generated code (blade gw buildService)
 
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceInventoryWarehouseItemServiceUtil.class,
+<<<<<<< HEAD
 				"addCommerceInventoryWarehouseItem",
 				_addCommerceInventoryWarehouseItemParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, userId, commerceInventoryWarehouseId,
 				externalReferenceCode, sku, quantity);
+=======
+				"countUpdatedItemsByM", _countUpdatedItemsByMParameterTypes1);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, companyId, startDate, endDate);
+>>>>>>> COMMERCE-1835 auto generated code (blade gw buildService)
 
 			Object returnObj = null;
 
@@ -119,18 +133,30 @@ public class CommerceInventoryWarehouseItemServiceHttp {
 			}
 			catch (Exception e) {
 				if (e instanceof
+<<<<<<< HEAD
 						com.liferay.portal.kernel.exception.PortalException) {
 
 					throw (com.liferay.portal.kernel.exception.PortalException)
 						e;
+=======
+						com.liferay.portal.kernel.security.auth.
+							PrincipalException) {
+
+					throw (com.liferay.portal.kernel.security.auth.
+						PrincipalException)e;
+>>>>>>> COMMERCE-1835 auto generated code (blade gw buildService)
 				}
 
 				throw new com.liferay.portal.kernel.exception.SystemException(
 					e);
 			}
 
+<<<<<<< HEAD
 			return (com.liferay.commerce.inventory.model.
 				CommerceInventoryWarehouseItem)returnObj;
+=======
+			return ((Integer)returnObj).intValue();
+>>>>>>> COMMERCE-1835 auto generated code (blade gw buildService)
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -209,6 +235,51 @@ public class CommerceInventoryWarehouseItemServiceHttp {
 
 			return (com.liferay.commerce.inventory.model.
 				CommerceInventoryWarehouseItem)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static java.util.List
+		<com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem>
+				findUpdatedItemsByM(
+					HttpPrincipal httpPrincipal, long companyId,
+					java.util.Date startDate, java.util.Date endDate, int start,
+					int end)
+			throws com.liferay.portal.kernel.security.auth.PrincipalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceInventoryWarehouseItemServiceUtil.class,
+				"findUpdatedItemsByM", _findUpdatedItemsByMParameterTypes4);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, companyId, startDate, endDate, start, end);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof
+						com.liferay.portal.kernel.security.auth.
+							PrincipalException) {
+
+					throw (com.liferay.portal.kernel.security.auth.
+						PrincipalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return (java.util.List
+				<com.liferay.commerce.inventory.model.
+					CommerceInventoryWarehouseItem>)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -357,7 +428,11 @@ public class CommerceInventoryWarehouseItemServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceInventoryWarehouseItemServiceUtil.class,
 				"getCommerceInventoryWarehouseItems",
+<<<<<<< HEAD
 				_getCommerceInventoryWarehouseItemsParameterTypes7);
+=======
+				_getCommerceInventoryWarehouseItemsParameterTypes6);
+>>>>>>> COMMERCE-1835 auto generated code (blade gw buildService)
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceInventoryWarehouseId, start, end);
@@ -398,7 +473,11 @@ public class CommerceInventoryWarehouseItemServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceInventoryWarehouseItemServiceUtil.class,
 				"getCommerceInventoryWarehouseItemsCount",
+<<<<<<< HEAD
 				_getCommerceInventoryWarehouseItemsCountParameterTypes8);
+=======
+				_getCommerceInventoryWarehouseItemsCountParameterTypes7);
+>>>>>>> COMMERCE-1835 auto generated code (blade gw buildService)
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceInventoryWarehouseId);
@@ -440,7 +519,11 @@ public class CommerceInventoryWarehouseItemServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceInventoryWarehouseItemServiceUtil.class,
 				"updateCommerceInventoryWarehouseItem",
+<<<<<<< HEAD
 				_updateCommerceInventoryWarehouseItemParameterTypes9);
+=======
+				_updateCommerceInventoryWarehouseItemParameterTypes8);
+>>>>>>> COMMERCE-1835 auto generated code (blade gw buildService)
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceInventoryWarehouseItemId, quantity);
@@ -483,7 +566,11 @@ public class CommerceInventoryWarehouseItemServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceInventoryWarehouseItemServiceUtil.class,
 				"upsertCommerceInventoryWarehouseItem",
+<<<<<<< HEAD
 				_upsertCommerceInventoryWarehouseItemParameterTypes10);
+=======
+				_upsertCommerceInventoryWarehouseItemParameterTypes9);
+>>>>>>> COMMERCE-1835 auto generated code (blade gw buildService)
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, userId, commerceInventoryWarehouseId, sku, quantity);
@@ -567,11 +654,16 @@ public class CommerceInventoryWarehouseItemServiceHttp {
 		_addCommerceInventoryWarehouseItemParameterTypes0 = new Class[] {
 			long.class, long.class, String.class, int.class
 		};
+	private static final Class<?>[] _countUpdatedItemsByMParameterTypes1 =
+		new Class[] {long.class, java.util.Date.class, java.util.Date.class};
 	private static final Class<?>[]
+<<<<<<< HEAD
 		_addCommerceInventoryWarehouseItemParameterTypes1 = new Class[] {
 			long.class, long.class, String.class, String.class, int.class
 		};
 	private static final Class<?>[]
+=======
+>>>>>>> COMMERCE-1835 auto generated code (blade gw buildService)
 		_deleteCommerceInventoryWarehouseItemParameterTypes2 = new Class[] {
 			long.class
 		};
@@ -579,14 +671,23 @@ public class CommerceInventoryWarehouseItemServiceHttp {
 		_fetchCommerceInventoryWarehouseItemParameterTypes3 = new Class[] {
 			long.class, String.class
 		};
+	private static final Class<?>[] _findUpdatedItemsByMParameterTypes4 =
+		new Class[] {
+			long.class, java.util.Date.class, java.util.Date.class, int.class,
+			int.class
+		};
 	private static final Class<?>[]
+<<<<<<< HEAD
 		_fetchCommerceInventoryWarehouseItemByReferenceCodeParameterTypes4 =
 			new Class[] {long.class, String.class};
 	private static final Class<?>[]
+=======
+>>>>>>> COMMERCE-1835 auto generated code (blade gw buildService)
 		_getCommerceInventoryWarehouseItemParameterTypes5 = new Class[] {
 			long.class
 		};
 	private static final Class<?>[]
+<<<<<<< HEAD
 		_getCommerceInventoryWarehouseItemByReferenceCodeParameterTypes6 =
 			new Class[] {long.class, String.class};
 	private static final Class<?>[]
@@ -603,6 +704,21 @@ public class CommerceInventoryWarehouseItemServiceHttp {
 		};
 	private static final Class<?>[]
 		_upsertCommerceInventoryWarehouseItemParameterTypes10 = new Class[] {
+=======
+		_getCommerceInventoryWarehouseItemsParameterTypes6 = new Class[] {
+			long.class, int.class, int.class
+		};
+	private static final Class<?>[]
+		_getCommerceInventoryWarehouseItemsCountParameterTypes7 = new Class[] {
+			long.class
+		};
+	private static final Class<?>[]
+		_updateCommerceInventoryWarehouseItemParameterTypes8 = new Class[] {
+			long.class, int.class
+		};
+	private static final Class<?>[]
+		_upsertCommerceInventoryWarehouseItemParameterTypes9 = new Class[] {
+>>>>>>> COMMERCE-1835 auto generated code (blade gw buildService)
 			long.class, long.class, String.class, int.class
 		};
 	private static final Class<?>[]

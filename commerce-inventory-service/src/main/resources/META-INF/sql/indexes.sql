@@ -19,4 +19,5 @@ create index IX_E4C1F39E on CIWarehouseGroupRel (groupId, primary_);
 
 create index IX_8D9FD306 on CIWarehouseItem (commerceInventoryWarehouseId, sku[$COLUMN_LENGTH:75$]);
 create index IX_8A09C40B on CIWarehouseItem (companyId, externalReferenceCode[$COLUMN_LENGTH:75$]);
+create index IX_B0070F48 on CIWarehouseItem (companyId, modifiedDate, modifiedDate);
 create index IX_97CADC57 on CIWarehouseItem (sku[$COLUMN_LENGTH:75$]);

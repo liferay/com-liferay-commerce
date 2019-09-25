@@ -88,4 +88,27 @@
 				(CIWarehouseItem.sku = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseItemFinder.countUpdatedItemsByC_M">
+		<![CDATA[
+			SELECT
+				COUNT(1) AS COUNT_VALUE
+			FROM
+				CIWarehouseItem
+			WHERE
+				(CIWarehouseItem.companyId = ?) AND
+				(CIWarehouseItem.modifiedDate BETWEEN ? AND ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseItemFinder.findUpdatedItemsByC_M">
+		<![CDATA[
+			SELECT
+				CIWarehouseItem.*
+			FROM
+				CIWarehouseItem
+			WHERE
+				(CIWarehouseItem.companyId = ?) AND
+				(CIWarehouseItem.modifiedDate BETWEEN ? AND ?)
+			ORDER BY CIWarehouseItem.sku ASC
+		]]>
+	</sql>
 </custom-sql>
