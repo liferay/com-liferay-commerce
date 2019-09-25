@@ -19,7 +19,6 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.commerce.currency.exception.NoSuchCurrencyException;
 import com.liferay.commerce.currency.model.CommerceCurrency;
-import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
 import com.liferay.commerce.price.list.exception.NoSuchPriceListException;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
@@ -75,16 +74,6 @@ public class CommercePriceListLocalServiceTest {
 
 		_group = GroupTestUtil.addGroup(
 			_company.getCompanyId(), defaultUser.getUserId(), 0);
-
-		Currency currencyGBP = Currency.getInstance(LocaleUtil.UK);
-
-		_commerceCurrencyGBP = CommerceCurrencyTestUtil.addCommerceCurrency(
-			_group.getGroupId(), currencyGBP.getCurrencyCode());
-
-		Currency currencyUSD = Currency.getInstance(LocaleUtil.US);
-
-		_commerceCurrencyUSD = CommerceCurrencyTestUtil.addCommerceCurrency(
-			_group.getGroupId(), currencyUSD.getCurrencyCode());
 	}
 
 	@Test
@@ -719,12 +708,6 @@ public class CommercePriceListLocalServiceTest {
 
 		return calendar.getTime();
 	}
-
-	@DeleteAfterTestRun
-	private CommerceCurrency _commerceCurrencyGBP;
-
-	@DeleteAfterTestRun
-	private CommerceCurrency _commerceCurrencyUSD;
 
 	@Inject
 	private CommercePriceListLocalService _commercePriceListLocalService;
