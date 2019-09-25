@@ -228,7 +228,7 @@ public class CPInstanceIndexer extends BaseIndexer<CPInstance> {
 		document.addText(Field.CONTENT, cpInstance.getSku());
 		document.addDateSortable(
 			FIELD_DISPLAY_DATE, cpInstance.getDisplayDate());
-		document.addText(FIELD_SKU, cpInstance.getSku());
+		document.addTextSortable(FIELD_SKU, cpInstance.getSku());
 		document.addKeyword(
 			FIELD_CP_DEFINITION_ID, cpInstance.getCPDefinitionId());
 		document.addKeyword(
