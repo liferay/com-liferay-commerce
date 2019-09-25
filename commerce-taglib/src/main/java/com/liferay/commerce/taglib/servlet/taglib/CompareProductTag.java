@@ -15,7 +15,6 @@
 package com.liferay.commerce.taglib.servlet.taglib;
 
 import com.liferay.commerce.product.model.CPDefinition;
-import com.liferay.commerce.product.service.CPDefinitionServiceUtil;
 import com.liferay.commerce.product.util.CPCompareUtil;
 import com.liferay.commerce.taglib.servlet.taglib.internal.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -39,9 +38,6 @@ public class CompareProductTag extends IncludeTag {
 	public int doStartTag() throws JspException {
 		try {
 			_cpDefinitionIds = CPCompareUtil.getCPDefinitionIds(request);
-
-			_cpDefinition = CPDefinitionServiceUtil.getCPDefinition(
-				_cpDefinitionId);
 
 			if (_cpDefinitionIds == null) {
 				_cpDefinitionIds = new ArrayList<>();
@@ -95,7 +91,7 @@ public class CompareProductTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-commerce:compare-product:checked", _checked);
 		request.setAttribute(
-			"liferay-commerce:compare-product:cpDefinition", _cpDefinition);
+			"liferay-commerce:compare-product:cpDefinitionId", _cpDefinitionId);
 	}
 
 	private static final String _PAGE = "/compare_product/page.jsp";
