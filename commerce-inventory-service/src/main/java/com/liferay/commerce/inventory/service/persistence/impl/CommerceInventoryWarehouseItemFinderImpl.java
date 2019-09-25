@@ -46,11 +46,11 @@ public class CommerceInventoryWarehouseItemFinderImpl
 		CommerceInventoryWarehouseItemFinder.class.getName() +
 			".countStockQuantityByC_G_S";
 
-	public static final String COUNT_UPDATED_ITEMS_BY_M =
+	public static final String COUNT_UPDATED_ITEMS_BY_C_M =
 		CommerceInventoryWarehouseItemFinder.class.getName() +
 			".countUpdatedItemsByC_M";
 
-	public static final String FIND_UPDATED_ITEMS_BY_M =
+	public static final String FIND_UPDATED_ITEMS_BY_C_M =
 		CommerceInventoryWarehouseItemFinder.class.getName() +
 			".findUpdatedItemsByC_M";
 
@@ -136,7 +136,7 @@ public class CommerceInventoryWarehouseItemFinderImpl
 	}
 
 	@Override
-	public int countUpdatedItemsByM(
+	public int countUpdatedItemsByC_M(
 		long companyId, Date startDate, Date endDate) {
 
 		Session session = null;
@@ -144,7 +144,7 @@ public class CommerceInventoryWarehouseItemFinderImpl
 		try {
 			session = openSession();
 
-			String sql = _customSQL.get(getClass(), COUNT_UPDATED_ITEMS_BY_M);
+			String sql = _customSQL.get(getClass(), COUNT_UPDATED_ITEMS_BY_C_M);
 
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
@@ -179,7 +179,7 @@ public class CommerceInventoryWarehouseItemFinderImpl
 	}
 
 	@Override
-	public List<CommerceInventoryWarehouseItem> findUpdatedItemsByM(
+	public List<CommerceInventoryWarehouseItem> findUpdatedItemsByC_M(
 		long companyId, Date startDate, Date endDate, int start, int end) {
 
 		Session session = null;
@@ -187,7 +187,7 @@ public class CommerceInventoryWarehouseItemFinderImpl
 		try {
 			session = openSession();
 
-			String sql = _customSQL.get(getClass(), FIND_UPDATED_ITEMS_BY_M);
+			String sql = _customSQL.get(getClass(), FIND_UPDATED_ITEMS_BY_C_M);
 
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
 

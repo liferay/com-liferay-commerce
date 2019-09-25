@@ -105,7 +105,7 @@ public class Query {
 	@GraphQLField
 	@GraphQLInvokeDetached
 	public Collection<WarehouseItem> getWarehouseItemsUpdatedPage(
-			@GraphQLName("start") Date start, @GraphQLName("end") Date end,
+			@GraphQLName("end") Date end, @GraphQLName("start") Date start,
 			@GraphQLName("pageSize") int pageSize,
 			@GraphQLName("page") int page)
 		throws Exception {
@@ -116,7 +116,7 @@ public class Query {
 			warehouseItemResource -> {
 				Page paginationPage =
 					warehouseItemResource.getWarehouseItemsUpdatedPage(
-						start, end, Pagination.of(pageSize, page));
+						end, start, Pagination.of(pageSize, page));
 
 				return paginationPage.getItems();
 			});

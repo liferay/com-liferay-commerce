@@ -47,28 +47,19 @@ public class CommerceInventoryWarehouseItemServiceImpl
 	}
 
 	@Override
-
 	public CommerceInventoryWarehouseItem addCommerceInventoryWarehouseItem(
 			long userId, long commerceInventoryWarehouseId,
 			String externalReferenceCode, String sku, int quantity)
 		throws PortalException {
-			PortalPermissionUtil.check(
-			getPermissionChecker(),
-			CommerceInventoryActionKeys.MANAGE_INVENTORY);
-			return commerceInventoryWarehouseItemLocalService.
-			addCommerceInventoryWarehouseItem(
-				userId, commerceInventoryWarehouseId, externalReferenceCode,
-				sku, quantity);
-		}
-	public int countUpdatedItemsByM(
-			long companyId, Date startDate, Date endDate)
-		throws PrincipalException {
+
 		PortalPermissionUtil.check(
 			getPermissionChecker(),
 			CommerceInventoryActionKeys.MANAGE_INVENTORY);
 
-		return commerceInventoryWarehouseItemLocalService.countUpdatedItemsByM(
-			companyId, startDate, endDate);
+		return commerceInventoryWarehouseItemLocalService.
+			addCommerceInventoryWarehouseItem(
+				userId, commerceInventoryWarehouseId, externalReferenceCode,
+				sku, quantity);
 	}
 
 	@Override
@@ -100,29 +91,18 @@ public class CommerceInventoryWarehouseItemServiceImpl
 	}
 
 	@Override
-<<<<<<< HEAD
 	public CommerceInventoryWarehouseItem
 			fetchCommerceInventoryWarehouseItemByReferenceCode(
 				long companyId, String externalReferenceCode)
 		throws PortalException {
-=======
-	public List<CommerceInventoryWarehouseItem> findUpdatedItemsByM(
-			long companyId, Date startDate, Date endDate, int start, int end)
-		throws PrincipalException {
->>>>>>> COMMERCE-1835 added modifiedDate field to WarehouseItem and new end point for extracting WarehouseItem by modifiedDate range
 
 		PortalPermissionUtil.check(
 			getPermissionChecker(),
 			CommerceInventoryActionKeys.MANAGE_INVENTORY);
 
-<<<<<<< HEAD
 		return commerceInventoryWarehouseItemLocalService.
 			fetchCommerceInventoryWarehouseItemByReferenceCode(
 				companyId, externalReferenceCode);
-=======
-		return commerceInventoryWarehouseItemLocalService.findUpdatedItemsByM(
-			companyId, startDate, endDate, start, end);
->>>>>>> COMMERCE-1835 added modifiedDate field to WarehouseItem and new end point for extracting WarehouseItem by modifiedDate range
 	}
 
 	@Override
@@ -181,6 +161,34 @@ public class CommerceInventoryWarehouseItemServiceImpl
 		return commerceInventoryWarehouseItemLocalService.
 			getCommerceInventoryWarehouseItemsCount(
 				commerceInventoryWarehouseId);
+	}
+
+	public int getCommerceInventoryWarehouseItemsCountByModifiedDate(
+			long companyId, Date startDate, Date endDate)
+		throws PrincipalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommerceInventoryActionKeys.MANAGE_INVENTORY);
+
+		return commerceInventoryWarehouseItemLocalService.
+			getCommerceInventoryWarehouseItemsCountByModifiedDate(
+				companyId, startDate, endDate);
+	}
+
+	public List<CommerceInventoryWarehouseItem>
+			getCommerceInventoryWarehouseItemsCountByModifiedDate(
+				long companyId, Date startDate, Date endDate, int start,
+				int end)
+		throws PrincipalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommerceInventoryActionKeys.MANAGE_INVENTORY);
+
+		return commerceInventoryWarehouseItemLocalService.
+			getCommerceInventoryWarehouseItemsByModifiedDate(
+				companyId, startDate, endDate, start, end);
 	}
 
 	@Override

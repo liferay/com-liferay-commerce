@@ -77,13 +77,10 @@ public interface CommerceInventoryWarehouseItemLocalService
 			int quantity)
 		throws PortalException;
 
-
 	public CommerceInventoryWarehouseItem addCommerceInventoryWarehouseItem(
 			long userId, long commerceInventoryWarehouseId,
 			String externalReferenceCode, String sku, int quantity)
 		throws PortalException;
-	public int countUpdatedItemsByM(
-		long companyId, Date startDate, Date endDate);
 
 	/**
 	 * Creates a new commerce inventory warehouse item with the primary key. Does not add the commerce inventory warehouse item to the database.
@@ -201,7 +198,6 @@ public interface CommerceInventoryWarehouseItemLocalService
 	public CommerceInventoryWarehouseItem fetchCommerceInventoryWarehouseItem(
 		long commerceInventoryWarehouseId, String sku);
 
-
 	/**
 	 * Returns the commerce inventory warehouse item with the matching external reference code and company.
 	 *
@@ -213,8 +209,6 @@ public interface CommerceInventoryWarehouseItemLocalService
 	public CommerceInventoryWarehouseItem
 		fetchCommerceInventoryWarehouseItemByReferenceCode(
 			long companyId, String externalReferenceCode);
-	public List<CommerceInventoryWarehouseItem> findUpdatedItemsByM(
-		long companyId, Date startDate, Date endDate, int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
@@ -257,6 +251,11 @@ public interface CommerceInventoryWarehouseItemLocalService
 		getCommerceInventoryWarehouseItems(
 			long commerceInventoryWarehouseId, int start, int end);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceInventoryWarehouseItem>
+		getCommerceInventoryWarehouseItemsByModifiedDate(
+			long companyId, Date startDate, Date endDate, int start, int end);
+
 	/**
 	 * Returns the number of commerce inventory warehouse items.
 	 *
@@ -269,6 +268,10 @@ public interface CommerceInventoryWarehouseItemLocalService
 	public int getCommerceInventoryWarehouseItemsCount(
 			long commerceInventoryWarehouseId)
 		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceInventoryWarehouseItemsCountByModifiedDate(
+		long companyId, Date startDate, Date endDate);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();

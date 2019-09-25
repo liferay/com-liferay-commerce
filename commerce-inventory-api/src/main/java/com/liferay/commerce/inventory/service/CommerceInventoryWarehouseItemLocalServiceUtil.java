@@ -66,7 +66,6 @@ public class CommerceInventoryWarehouseItemLocalServiceUtil {
 			userId, commerceInventoryWarehouseId, sku, quantity);
 	}
 
-<<<<<<< HEAD
 	public static
 		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
 				addCommerceInventoryWarehouseItem(
@@ -77,12 +76,6 @@ public class CommerceInventoryWarehouseItemLocalServiceUtil {
 		return getService().addCommerceInventoryWarehouseItem(
 			userId, commerceInventoryWarehouseId, externalReferenceCode, sku,
 			quantity);
-=======
-	public static int countUpdatedItemsByM(
-		long companyId, java.util.Date startDate, java.util.Date endDate) {
-
-		return getService().countUpdatedItemsByM(companyId, startDate, endDate);
->>>>>>> COMMERCE-1835 auto generated code (blade gw buildService)
 	}
 
 	/**
@@ -255,7 +248,6 @@ public class CommerceInventoryWarehouseItemLocalServiceUtil {
 			commerceInventoryWarehouseId, sku);
 	}
 
-<<<<<<< HEAD
 	/**
 	 * Returns the commerce inventory warehouse item with the matching external reference code and company.
 	 *
@@ -270,16 +262,6 @@ public class CommerceInventoryWarehouseItemLocalServiceUtil {
 
 		return getService().fetchCommerceInventoryWarehouseItemByReferenceCode(
 			companyId, externalReferenceCode);
-=======
-	public static java.util.List
-		<com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem>
-			findUpdatedItemsByM(
-				long companyId, java.util.Date startDate,
-				java.util.Date endDate, int start, int end) {
-
-		return getService().findUpdatedItemsByM(
-			companyId, startDate, endDate, start, end);
->>>>>>> COMMERCE-1835 auto generated code (blade gw buildService)
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery
@@ -342,6 +324,16 @@ public class CommerceInventoryWarehouseItemLocalServiceUtil {
 			commerceInventoryWarehouseId, start, end);
 	}
 
+	public static java.util.List
+		<com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem>
+			getCommerceInventoryWarehouseItemsByModifiedDate(
+				long companyId, java.util.Date startDate,
+				java.util.Date endDate, int start, int end) {
+
+		return getService().getCommerceInventoryWarehouseItemsByModifiedDate(
+			companyId, startDate, endDate, start, end);
+	}
+
 	/**
 	 * Returns the number of commerce inventory warehouse items.
 	 *
@@ -357,6 +349,14 @@ public class CommerceInventoryWarehouseItemLocalServiceUtil {
 
 		return getService().getCommerceInventoryWarehouseItemsCount(
 			commerceInventoryWarehouseId);
+	}
+
+	public static int getCommerceInventoryWarehouseItemsCountByModifiedDate(
+		long companyId, java.util.Date startDate, java.util.Date endDate) {
+
+		return getService().
+			getCommerceInventoryWarehouseItemsCountByModifiedDate(
+				companyId, startDate, endDate);
 	}
 
 	public static

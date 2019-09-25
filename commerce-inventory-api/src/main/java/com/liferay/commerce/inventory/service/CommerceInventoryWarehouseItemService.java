@@ -66,16 +66,10 @@ public interface CommerceInventoryWarehouseItemService extends BaseService {
 			int quantity)
 		throws PortalException;
 
-<<<<<<< HEAD
 	public CommerceInventoryWarehouseItem addCommerceInventoryWarehouseItem(
 			long userId, long commerceInventoryWarehouseId,
 			String externalReferenceCode, String sku, int quantity)
 		throws PortalException;
-=======
-	public int countUpdatedItemsByM(
-			long companyId, Date startDate, Date endDate)
-		throws PrincipalException;
->>>>>>> COMMERCE-1835 auto generated code (blade gw buildService)
 
 	public void deleteCommerceInventoryWarehouseItem(
 			long commerceInventoryWarehouseItemId)
@@ -85,10 +79,6 @@ public interface CommerceInventoryWarehouseItemService extends BaseService {
 	public CommerceInventoryWarehouseItem fetchCommerceInventoryWarehouseItem(
 			long commerceInventoryWarehouseId, String sku)
 		throws PortalException;
-
-	public List<CommerceInventoryWarehouseItem> findUpdatedItemsByM(
-			long companyId, Date startDate, Date endDate, int start, int end)
-		throws PrincipalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceInventoryWarehouseItem
@@ -117,6 +107,18 @@ public interface CommerceInventoryWarehouseItemService extends BaseService {
 	public int getCommerceInventoryWarehouseItemsCount(
 			long commerceInventoryWarehouseId)
 		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceInventoryWarehouseItemsCountByModifiedDate(
+			long companyId, Date startDate, Date endDate)
+		throws PrincipalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceInventoryWarehouseItem>
+			getCommerceInventoryWarehouseItemsCountByModifiedDate(
+				long companyId, Date startDate, Date endDate, int start,
+				int end)
+		throws PrincipalException;
 
 	/**
 	 * Returns the OSGi service identifier.

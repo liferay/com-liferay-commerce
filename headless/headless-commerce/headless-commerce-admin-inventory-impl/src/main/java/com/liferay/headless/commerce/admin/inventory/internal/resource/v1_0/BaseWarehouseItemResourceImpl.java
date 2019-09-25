@@ -63,8 +63,8 @@ public abstract class BaseWarehouseItemResourceImpl
 	@GET
 	@Parameters(
 		value = {
-			@Parameter(in = ParameterIn.QUERY, name = "start"),
 			@Parameter(in = ParameterIn.QUERY, name = "end"),
+			@Parameter(in = ParameterIn.QUERY, name = "start"),
 			@Parameter(in = ParameterIn.QUERY, name = "page"),
 			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
 		}
@@ -73,8 +73,8 @@ public abstract class BaseWarehouseItemResourceImpl
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "WarehouseItem")})
 	public Page<WarehouseItem> getWarehouseItemsUpdatedPage(
-			@Parameter(hidden = true) @QueryParam("start") java.util.Date start,
 			@Parameter(hidden = true) @QueryParam("end") java.util.Date end,
+			@Parameter(hidden = true) @QueryParam("start") java.util.Date start,
 			@Context Pagination pagination)
 		throws Exception {
 

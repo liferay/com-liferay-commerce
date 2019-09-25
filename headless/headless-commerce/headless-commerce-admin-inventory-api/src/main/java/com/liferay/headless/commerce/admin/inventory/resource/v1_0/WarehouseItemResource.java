@@ -37,7 +37,7 @@ import javax.ws.rs.core.Response;
 public interface WarehouseItemResource {
 
 	public Page<WarehouseItem> getWarehouseItemsUpdatedPage(
-			Date start, Date end, Pagination pagination)
+			Date end, Date start, Pagination pagination)
 		throws Exception;
 
 	public Response deleteWarehouseItem(Long id) throws Exception;
