@@ -123,17 +123,15 @@ long commerceRegionId = BeanParamUtil.getLong(currentCommerceAddress, request, "
 	Liferay.provide(
 		window,
 		'<portlet:namespace />addStreetAddress',
-		function() {
-			var A = AUI();
+		function <portlet:namespace />addStreetAddress() {
+			const A = AUI();
 
-			var addStreetFields = A.one('.add-street-fields');
+			const addStreetFields = A.one('.add-street-fields');
+			const addStreetLink = A.one('.add-street-link');
 
 			if (addStreetFields) {
 				addStreetFields.show();
 			}
-
-			var addStreetLink = A.one('.add-street-link');
-
 			if (addStreetLink) {
 				addStreetLink.hide();
 			}
@@ -144,17 +142,11 @@ long commerceRegionId = BeanParamUtil.getLong(currentCommerceAddress, request, "
 	Liferay.provide(
 		window,
 		'<portlet:namespace />clearAddressFields',
-		function() {
-			var A = AUI();
+		function <portlet:namespace />clearAddressFields() {
+			const A = AUI();
 
-			var inputs = A.all('.address-fields input');
-
-			inputs.val('');
-
-			var selects = A.all('.address-fields select');
-
-			selects.set('selectedIndex', 0);
-
+			A.all('.address-fields select').set('selectedIndex', 0);
+			A.all('.address-fields input').val('');
 			A.one('#<portlet:namespace />use-as-billing').attr('checked', true);
 		},
 		['aui-base']
@@ -163,40 +155,28 @@ long commerceRegionId = BeanParamUtil.getLong(currentCommerceAddress, request, "
 	Liferay.provide(
 		window,
 		'<portlet:namespace />selectAddress',
-		function() {
-			var A = AUI();
+		function <portlet:namespace />selectAddress() {
+			const A = AUI();
 
-			var newAddress = A.one('#<portlet:namespace />newAddress');
-			var commerceAddress = A.one('#<portlet:namespace />commerceAddress');
-			var commerceAddressParamName = A.one('#<%= renderResponse.getNamespace() + paramName %>');
-
-			var isNewAddress = 0;
+			const commerceAddress = A.one('#<portlet:namespace />commerceAddress');
+			const commerceAddressParamName = A.one('#<%= renderResponse.getNamespace() + paramName %>');
+			const newAddress = A.one('#<portlet:namespace />newAddress');
 
 			if (newAddress && commerceAddress && commerceAddressParamName) {
-				var commerceAddressVal = commerceAddress.val();
+				const commerceAddressVal = commerceAddress.val();
 
-				var disableCommerceAddressParamName = false;
-
-				if (commerceAddressVal == '0') {
-					isNewAddress = 1;
-
-					disableCommerceAddressParamName = true;
-
+				if (commerceAddressVal === '0') {
 					<portlet:namespace />clearAddressFields();
-
 					<portlet:namespace />toggleAddressFields(false);
 				}
 				else {
 					<portlet:namespace />updateAddressFields(commerceAddress.get('selectedIndex'));
-
 					Liferay.Form.get('<portlet:namespace />fm').formValidator.validate();
 				}
 
 				commerceAddressParamName.val(commerceAddressVal);
-
-				newAddress.val(isNewAddress);
-
-				Liferay.Util.toggleDisabled(commerceAddressParamName, disableCommerceAddressParamName);
+				Liferay.Util.toggleDisabled(commerceAddressParamName, commerceAddressVal === '0');
+				newAddress.val(Number(commerceAddressVal === '0'));
 			}
 		},
 		['aui-base']
@@ -205,16 +185,11 @@ long commerceRegionId = BeanParamUtil.getLong(currentCommerceAddress, request, "
 	Liferay.provide(
 		window,
 		'<portlet:namespace />toggleAddressFields',
-		function(state) {
-			var A = AUI();
+		function <portlet:namespace />toggleAddressFields(state) {
+			const A = AUI();
 
-			var inputs = A.all('.address-fields input');
-
-			Liferay.Util.toggleDisabled(inputs, state);
-
-			var selects = A.all('.address-fields select');
-
-			Liferay.Util.toggleDisabled(selects, state);
+			Liferay.Util.toggleDisabled(A.all('.address-fields input'), state);
+			Liferay.Util.toggleDisabled(A.all('.address-fields select'), state);
 		},
 		['aui-base']
 	);
@@ -222,52 +197,53 @@ long commerceRegionId = BeanParamUtil.getLong(currentCommerceAddress, request, "
 	Liferay.provide(
 		window,
 		'<portlet:namespace />updateAddressFields',
-		function(selectedVal) {
-			var A = AUI();
+		function <portlet:namespace />updateAddressFields(selectedVal) {
+			if (!selectedVal || selectedVal === '0') {
+				return;
+			}
 
-			if (selectedVal && selectedVal != '0') {
-				var commerceAddress = A.one('#<portlet:namespace />commerceAddress');
+			const A = AUI();
 
-				if (commerceAddress) {
-					var options = commerceAddress.get('options');
+			const commerceAddress = A.one('#<portlet:namespace />commerceAddress');
 
-					var selectedOption = options.item(selectedVal);
+			if (commerceAddress) {
+				<portlet:namespace />addStreetAddress();
+				<portlet:namespace />toggleAddressFields(true);
 
-					var city = A.one('#<portlet:namespace />city');
-					var commerceCountryId = A.one('#<portlet:namespace />commerceCountryId');
-					var commerceRegionId = A.one('#<portlet:namespace />commerceRegionId');
-					var name = A.one('#<portlet:namespace />name');
-					var phoneNumber = A.one('#<portlet:namespace />phoneNumber');
-					var street1 = A.one('#<portlet:namespace />street1');
-					var street2 = A.one('#<portlet:namespace />street2');
-					var street3 = A.one('#<portlet:namespace />street3');
-					var zip = A.one('#<portlet:namespace />zip');
+				const city = A.one('#<portlet:namespace />city');
+				const commerceCountryId = A.one('#<portlet:namespace />commerceCountryId');
+				const commerceRegionId = A.one('#<portlet:namespace />commerceRegionId');
+				const name = A.one('#<portlet:namespace />name');
+				const phoneNumber = A.one('#<portlet:namespace />phoneNumber');
+				const street1 = A.one('#<portlet:namespace />street1');
+				const street2 = A.one('#<portlet:namespace />street2');
+				const street3 = A.one('#<portlet:namespace />street3');
+				const zip = A.one('#<portlet:namespace />zip');
 
-					if (city && commerceCountryId && commerceRegionId && name && phoneNumber && street1 && street2 && street3 && zip) {
-						var cityVal = selectedOption.getData('city');
-						var countryVal = selectedOption.getData('country');
-						var nameVal = selectedOption.getData('name');
-						var phoneNumberVal = selectedOption.getData('phone-number');
-						var regionVal = selectedOption.getData('region');
-						var street1Val = selectedOption.getData('street-1');
-						var street2Val = selectedOption.getData('street-2');
-						var street3Val = selectedOption.getData('street-3');
-						var zipVal = selectedOption.getData('zip');
+				if (city && commerceCountryId && commerceRegionId && name && phoneNumber && street1 && street2 && street3 && zip) {
+					const originalFn = Liferay.component('<portlet:namespace />countrySelects').array[1].selectData;
+					const selectedOption = commerceAddress.get('options').item(selectedVal);
 
-						city.val(cityVal);
-						commerceCountryId.val(countryVal);
-						commerceRegionId.val(regionVal);
-						name.val(nameVal);
-						phoneNumber.val(phoneNumberVal);
-						street1.val(street1Val);
-						street2.val(street2Val);
-						street3.val(street3Val);
-						zip.val(zipVal);
+					city.val(selectedOption.getData('city'));
+					commerceCountryId.val(selectedOption.getData('country'));
+					commerceRegionId.val(selectedOption.getData('region'));
+					name.val(selectedOption.getData('name'));
+					phoneNumber.val(selectedOption.getData('phone-number'));
+					street1.val(selectedOption.getData('street-1'));
+					street2.val(selectedOption.getData('street-2'));
+					street3.val(selectedOption.getData('street-3'));
+					zip.val(selectedOption.getData('zip'));
+
+					Liferay.component('<portlet:namespace />countrySelects').array[1].selectData = function newSelectData(callback, selectKey) {
+						originalFn(
+							function newCallback(list) {
+								callback(list);
+
+								commerceRegionId.val(selectedOption.getData('region'));
+								Liferay.component('<portlet:namespace />countrySelects').array[1].selectData = originalFn;
+							}, selectKey);
 					}
-
-					<portlet:namespace />addStreetAddress();
-
-					<portlet:namespace />toggleAddressFields(true);
+					Liferay.component('<portlet:namespace />countrySelects')._callSelectData(0);
 				}
 			}
 		},
@@ -276,64 +252,67 @@ long commerceRegionId = BeanParamUtil.getLong(currentCommerceAddress, request, "
 </aui:script>
 
 <aui:script use="liferay-dynamic-select">
-	new Liferay.DynamicSelect(
-		[
-			{
-				select: '<portlet:namespace />commerceCountryId',
-				selectData: function(callback) {
-					function injectCountryPlaceholder(list) {
-						callback([
-							{
-								commerceCountryId: '0',
-								nameCurrentValue: '- <liferay-ui:message key="select-country" />'
-							},
-							...list
-						]);
-					}
+	Liferay.component(
+		'<portlet:namespace />countrySelects',
+		new Liferay.DynamicSelect(
+			[
+				{
+					select: '<portlet:namespace />commerceCountryId',
+					selectData: function(callback) {
+						function injectCountryPlaceholder(list) {
+							callback([
+								{
+									commerceCountryId: '0',
+									nameCurrentValue: '- <liferay-ui:message key="select-country" />'
+								},
+								...list
+							]);
+						}
 
-					Liferay.Service(
-						'/commerce.commercecountry/<%= baseAddressCheckoutStepDisplayContext.getCommerceCountrySelectionMethodName() %>-by-channel-id',
-						{
-							commerceChannelId: <%= commerceContext.getCommerceChannelId() %>,
-							start: -1,
-							end: -1
-						},
-						injectCountryPlaceholder
-					);
-				},
-				selectDesc: 'nameCurrentValue',
-				selectId: 'commerceCountryId',
-				selectNullable: <%= false %>,
-				selectSort: '<%= true %>',
-				selectVal: '<%= commerceCountryId %>'
-			},
-			{
-				select: '<portlet:namespace />commerceRegionId',
-				selectData: function(callback, selectKey) {
-					function injectRegionPlaceholder(list) {
-						callback([
+						Liferay.Service(
+							'/commerce.commercecountry/<%= baseAddressCheckoutStepDisplayContext.getCommerceCountrySelectionMethodName() %>-by-channel-id',
 							{
-								commerceRegionId: '0',
-								name: '- <liferay-ui:message key="select-region" />'
+								commerceChannelId: <%= commerceContext.getCommerceChannelId() %>,
+								start: -1,
+								end: -1
 							},
-							...list
-						]);
-					}
-
-					Liferay.Service(
-						'/commerce.commerceregion/get-commerce-regions',
-						{
-							commerceCountryId: Number(selectKey),
-							active: true
-						},
-						injectRegionPlaceholder
-					);
+							injectCountryPlaceholder
+						);
+					},
+					selectDesc: 'nameCurrentValue',
+					selectId: 'commerceCountryId',
+					selectNullable: <%= false %>,
+					selectSort: '<%= true %>',
+					selectVal: '<%= commerceCountryId %>'
 				},
-				selectDesc: 'name',
-				selectId: 'commerceRegionId',
-				selectNullable: <%= false %>,
-				selectVal: '<%= commerceRegionId %>'
-			}
-		]
+				{
+					select: '<portlet:namespace />commerceRegionId',
+					selectData: function(callback, selectKey) {
+						function injectRegionPlaceholder(list) {
+							callback([
+								{
+									commerceRegionId: '0',
+									name: '- <liferay-ui:message key="select-region" />'
+								},
+								...list
+							]);
+						}
+
+						Liferay.Service(
+							'/commerce.commerceregion/get-commerce-regions',
+							{
+								commerceCountryId: Number(selectKey),
+								active: true
+							},
+							injectRegionPlaceholder
+						);
+					},
+					selectDesc: 'name',
+					selectId: 'commerceRegionId',
+					selectNullable: <%= false %>,
+					selectVal: '<%= commerceRegionId %>'
+				}
+			]
+		)
 	);
 </aui:script>
