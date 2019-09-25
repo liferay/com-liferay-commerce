@@ -57,7 +57,7 @@ portletDisplay.setURLBack(shipmentsURL);
 				</div>
 			</c:when>
 			<c:otherwise>
-				<table class="table table-autofit table-sm">
+				<table class="table table-heading-nowrap table-responsive">
 					<thead>
 						<tr>
 							<th class="table-cell-content"><liferay-ui:message key="product" /></th>
@@ -67,7 +67,7 @@ portletDisplay.setURLBack(shipmentsURL);
 							for (CommerceInventoryWarehouse commerceInventoryWarehouse : commerceInventoryWarehouses) {
 							%>
 
-								<th><%= HtmlUtil.escape(commerceInventoryWarehouse.getName()) %></th>
+								<th class="table-cell-minw-150"><%= HtmlUtil.escape(commerceInventoryWarehouse.getName()) %></th>
 
 							<%
 							}
