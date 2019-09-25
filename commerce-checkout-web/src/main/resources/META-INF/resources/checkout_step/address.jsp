@@ -89,7 +89,7 @@ long commerceRegionId = BeanParamUtil.getLong(currentCommerceAddress, request, "
 	</div>
 
 	<div class="form-group-autofit">
-		<aui:input disabled="<%= commerceAddressId > 0 %>" label="" name="street1" placeholder="shipping-address" wrapperCssClass="form-group-item" />
+		<aui:input disabled="<%= commerceAddressId > 0 %>" label="" name="street1" placeholder="address" wrapperCssClass="form-group-item" />
 
 		<aui:select disabled="<%= commerceAddressId > 0 %>" label="" name="commerceCountryId" placeholder="country" title="country" wrapperCssClass="form-group-item" />
 	</div>
@@ -99,9 +99,9 @@ long commerceRegionId = BeanParamUtil.getLong(currentCommerceAddress, request, "
 	</div>
 
 	<div class="add-street-fields form-group-autofit hide">
-		<aui:input disabled="<%= commerceAddressId > 0 %>" label="" name="street2" placeholder="shipping-address-2" wrapperCssClass="form-group-item" />
+		<aui:input disabled="<%= commerceAddressId > 0 %>" label="" name="street2" placeholder="address-2" wrapperCssClass="form-group-item" />
 
-		<aui:input disabled="<%= commerceAddressId > 0 %>" label="" name="street3" placeholder="shipping-address-3" wrapperCssClass="form-group-item" />
+		<aui:input disabled="<%= commerceAddressId > 0 %>" label="" name="street3" placeholder="address-3" wrapperCssClass="form-group-item" />
 	</div>
 
 	<div class="form-group-autofit">
