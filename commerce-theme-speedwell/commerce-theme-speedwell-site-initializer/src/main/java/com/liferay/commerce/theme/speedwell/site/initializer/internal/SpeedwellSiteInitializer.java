@@ -105,13 +105,13 @@ import java.io.InputStream;
 import java.math.BigDecimal;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.Collections;
 
 import javax.servlet.ServletContext;
 
@@ -405,8 +405,10 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 			_commerceShippingEngineRegistry.getCommerceShippingEngine(
 				shippingMethod);
 
-		Map<Locale, String> nameMap = Collections.singletonMap(locale, commerceShippingEngine.getName(locale));
-		Map<Locale, String> descriptionMap = Collections.singletonMap(locale, commerceShippingEngine.getDescription(locale));
+		Map<Locale, String> nameMap = Collections.singletonMap(
+			locale, commerceShippingEngine.getName(locale));
+		Map<Locale, String> descriptionMap = Collections.singletonMap(
+			locale, commerceShippingEngine.getDescription(locale));
 
 		CommerceShippingMethod commerceShippingMethod =
 			_commerceShippingMethodLocalService.addCommerceShippingMethod(
@@ -429,8 +431,10 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 			BigDecimal price, ServiceContext serviceContext)
 		throws PortalException {
 
-		Map<Locale, String> nameMap = Collections.singletonMap(serviceContext.getLocale(), name);
-		Map<Locale, String> descriptionMap = Collections.singletonMap(serviceContext.getLocale(), description);
+		Map<Locale, String> nameMap = Collections.singletonMap(
+			serviceContext.getLocale(), name);
+		Map<Locale, String> descriptionMap = Collections.singletonMap(
+			serviceContext.getLocale(), description);
 
 		_commerceShippingFixedOptionLocalService.addCommerceShippingFixedOption(
 			commerceShippingMethodId, nameMap, descriptionMap, price, 0,

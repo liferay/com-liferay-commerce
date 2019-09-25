@@ -30,9 +30,9 @@
 
 		&.is-loading::after {
 			animation: minium-gallery-image-loading 1s infinite linear;
+			border: 5px solid transparent;
 			border-radius: 50%;
 			border-top-color: $color-theme;
-			border: 5px solid transparent;
 			content: '';
 			height: 60px;
 			left: 50%;
