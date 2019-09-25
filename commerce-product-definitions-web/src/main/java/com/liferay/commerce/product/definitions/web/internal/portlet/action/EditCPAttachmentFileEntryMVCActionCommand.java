@@ -20,7 +20,7 @@ import com.liferay.commerce.product.exception.NoSuchCPAttachmentFileEntryExcepti
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPAttachmentFileEntryService;
-import com.liferay.commerce.product.util.CPInstanceHelper;
+import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.util.DDMFormValuesHelper;
 import com.liferay.document.library.kernel.exception.NoSuchFileEntryException;
 import com.liferay.portal.kernel.portlet.PortletProvider;
@@ -228,8 +228,13 @@ public class EditCPAttachmentFileEntryMVCActionCommand
 		ddmFormValues = _ddmFormValuesHelper.cleanDDMFormValuesJSON(
 			ddmFormValues);
 
+		CPDefinition cpDefinition = _cpDefinitionService.getCPDefinition(
+			cpDefinitionId);
+
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			CPAttachmentFileEntry.class.getName(), actionRequest);
+
+		serviceContext.setScopeGroupId(cpDefinition.getGroupId());
 
 		if (cpAttachmentFileEntryId > 0) {
 			_cpAttachmentFileEntryService.updateCPAttachmentFileEntry(
@@ -257,7 +262,7 @@ public class EditCPAttachmentFileEntryMVCActionCommand
 	private CPAttachmentFileEntryService _cpAttachmentFileEntryService;
 
 	@Reference
-	private CPInstanceHelper _cpInstanceHelper;
+	private CPDefinitionService _cpDefinitionService;
 
 	@Reference
 	private DDMFormValuesHelper _ddmFormValuesHelper;
