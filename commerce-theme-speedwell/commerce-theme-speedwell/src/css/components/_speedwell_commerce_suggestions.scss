@@ -11,8 +11,8 @@
   }
 
   &.is-loading::before {
-    animation-delay: 0.4s;
     animation: shift-rightwards-suggestions 1s ease-in-out infinite;
+    animation-delay: 0.4s;
     background-color: $color-theme;
     content: '';
     display: block;

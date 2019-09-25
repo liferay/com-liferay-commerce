@@ -88,8 +88,8 @@
 
     &__fwd {
       align-items: center;
-      animation-delay: 200ms;
       animation: confirmButton 500ms ease 1 forwards;
+      animation-delay: 200ms;
       color: $color-theme;
       cursor: pointer;
       display: flex;
