@@ -14,7 +14,7 @@ const selectInput = (element) => {
 		inputBox.focus();
 		inputBox.select();
 	}
- else if (selectBox) {
+	else if (selectBox) {
 		selectBox.focus();
 	}
 };
@@ -63,7 +63,7 @@ function doFocusOut() {
 	if (tabbableElement) {
 		parentElement.focus();
 	}
- else if (parentElement) {
+	else if (parentElement) {
 
 		// IE compatibility
 
@@ -125,10 +125,10 @@ function doSubmit() {
 				this.hasQuantityChanged = true;
 				this.emit('submitQuantity', this.productId, this.quantity);
 			}
- else if (jsonresponse.errorMessages) {
+			else if (jsonresponse.errorMessages) {
 				showNotification(jsonresponse.errorMessages[0], 'danger');
 			}
- else {
+			else {
 				const validatorErrors = jsonresponse.validatorErrors;
 
 				if (validatorErrors) {
@@ -138,7 +138,7 @@ function doSubmit() {
 						}
 					);
 				}
- else {
+				else {
 					showNotification(jsonresponse.error, 'danger');
 				}
 			}
@@ -201,7 +201,7 @@ class AddToCartButton extends Component {
 		) {
 			this._enableEditMode();
 		}
- else if (!this.accountId) {
+		else if (!this.accountId) {
 			const message = Liferay.Language.get('no-account-selected');
 			const type = 'danger';
 
