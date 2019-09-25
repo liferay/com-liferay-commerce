@@ -71,8 +71,8 @@
 		position: absolute;
 		top: 9px;
 		transform: scale(0);
-		transition-delay: .2s;
 		transition: all .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		transition-delay: .2s;
 		width: 18px;
 		z-index: 10;
 
