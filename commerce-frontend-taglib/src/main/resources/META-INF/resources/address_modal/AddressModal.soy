@@ -66,7 +66,7 @@
 									for="addressType"
 									class="commerce-modal__label"
 							>
-								{msg desc="Type"}type{/msg}
+								{msg desc="Type"}type{/msg}<span class="required-mark"></span>
 							</label>
 
 							<select
@@ -126,7 +126,7 @@
 								for="add-new-address-country"
 								class="commerce-modal__label"
 							>
-								{msg desc="Country"}country{/msg}
+								{msg desc="Country"}country{/msg}<span class="required-mark"></span>
 							</label>
 
 							<select
@@ -155,7 +155,7 @@
 								for="add-new-address-country"
 								class="commerce-modal__label"
 							>
-								{msg desc="Region"}region{/msg}
+								{msg desc="Region"}region{/msg}<span class="required-mark"></span>
 							</label>
 
 							<select
@@ -233,7 +233,7 @@
 								{param label: 'Telephone' /}
 								{param value: $_formData.telephone /}
 								{param type: 'tel' /}
-								{param required: true /}
+								{param required: false /}
 								{param _handleInputKeyUp: $_handleInputBox /}
 							{/call}
 						</div>
@@ -251,11 +251,11 @@
 									class="{$addButtonClasses}"
 									data-onclick="{$_handleFormSubmit}"
 								>
-								{if isNonnull($_formData.id)}
-									{msg desc="Update"}update{/msg}
-								{else}
-									{msg desc="Create"}create{/msg}
-								{/if}
+									{if isNonnull($_formData.id)}
+										{msg desc="Update"}update{/msg}
+									{else}
+										{msg desc="Create"}create{/msg}
+									{/if}
 								</button>
 							</div>
 						</div>

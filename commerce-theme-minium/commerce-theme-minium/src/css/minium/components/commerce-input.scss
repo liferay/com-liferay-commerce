@@ -53,3 +53,11 @@
 		}
 	}
 }
+
+.required-mark {
+	color: $color-mood-bad;
+
+	&::after {
+		content: '*';
+	}
+}

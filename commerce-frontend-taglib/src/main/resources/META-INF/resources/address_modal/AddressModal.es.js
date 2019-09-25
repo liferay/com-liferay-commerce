@@ -109,8 +109,7 @@ class AddressModal extends Component {
 		this._firstFormValid = firstFormValid;
 
 		const secondFormValid = !!(
-			this._formData.referent && this._formData.referent.length &&
-			this._formData.telephone && this._formData.telephone.length
+			this._formData.referent && this._formData.referent.length
 		);
 		this._secondFormValid = secondFormValid;
 
