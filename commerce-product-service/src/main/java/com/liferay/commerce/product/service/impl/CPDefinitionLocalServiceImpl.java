@@ -167,6 +167,10 @@ public class CPDefinitionLocalServiceImpl
 				CPDefinitionExpirationDateException.class);
 		}
 
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
+
 		validate(
 			groupId, ddmStructureKey, metaTitleMap, metaDescriptionMap,
 			metaKeywordsMap, productTypeName);
@@ -696,6 +700,10 @@ public class CPDefinitionLocalServiceImpl
 	@Override
 	public CPDefinition fetchCPDefinitionByCProductExternalReferenceCode(
 		long companyId, String externalReferenceCode) {
+
+		if (Validator.isNull(externalReferenceCode)) {
+			return null;
+		}
 
 		CProduct cProduct = cProductLocalService.fetchCProductByReferenceCode(
 			companyId, externalReferenceCode);
