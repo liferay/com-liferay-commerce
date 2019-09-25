@@ -39,13 +39,11 @@ import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.util.CompanyTestUtil;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
-import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 
 import java.math.BigDecimal;
 
-import java.util.Currency;
 import java.util.List;
 
 import org.frutilla.FrutillaRule;
@@ -79,10 +77,8 @@ public class CommercePriceEntryLocalServiceTest {
 		_group = GroupTestUtil.addGroup(
 			_company.getCompanyId(), defaultUser.getUserId(), 0);
 
-		Currency currency = Currency.getInstance(LocaleUtil.US);
-
 		_commerceCurrency = CommerceCurrencyTestUtil.addCommerceCurrency(
-			_group.getGroupId(), currency.getCurrencyCode());
+			_group.getGroupId());
 	}
 
 	@Test
