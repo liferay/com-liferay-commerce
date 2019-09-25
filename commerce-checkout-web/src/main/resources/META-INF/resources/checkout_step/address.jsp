@@ -155,6 +155,8 @@ long commerceRegionId = BeanParamUtil.getLong(currentCommerceAddress, request, "
 
 			selects.set('selectedIndex', 0);
 
+			<portlet:namespace />populateRegions(0, function(){});
+
 			A.one('#<portlet:namespace />use-as-billing').attr('checked', true);
 		},
 		['aui-base']
@@ -256,7 +258,9 @@ long commerceRegionId = BeanParamUtil.getLong(currentCommerceAddress, request, "
 
 						city.val(cityVal);
 						commerceCountryId.val(countryVal);
-						commerceRegionId.val(regionVal);
+
+						<portlet:namespace />populateRegions(countryVal, function() { commerceRegionId.val(regionVal); });
+
 						name.val(nameVal);
 						phoneNumber.val(phoneNumberVal);
 						street1.val(street1Val);
@@ -273,10 +277,32 @@ long commerceRegionId = BeanParamUtil.getLong(currentCommerceAddress, request, "
 		},
 		['aui-base']
 	);
+
+	function <portlet:namespace />populateRegions(commerceCountryId, callback) {
+		Liferay.Service(
+			'/commerce.commerceregion/get-commerce-regions',
+			{
+				commerceCountryId: Number(commerceCountryId),
+				active: true
+			},
+			function(response) {
+				response.unshift(
+					{
+						commerceRegionId: '0',
+						name: '- <liferay-ui:message key="select-region" />'
+					}
+				);
+
+				AUI().State.dynamicSelect._updateSelect(1, response);
+
+				callback();
+			}
+		);
+	}
 </aui:script>
 
 <aui:script use="liferay-dynamic-select">
-	new Liferay.DynamicSelect(
+	AUI().State.dynamicSelect = new Liferay.DynamicSelect(
 		[
 			{
 				select: '<portlet:namespace />commerceCountryId',
