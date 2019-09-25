@@ -24,6 +24,7 @@ User selectedUser = commerceAccountDisplayContext.getSelectedUser();
 PortletURL portletURL = commerceAccountDisplayContext.getPortletURL();
 
 portletURL.setParameter("mvcRenderCommandName", "viewCommerceAccountUser");
+portletURL.setParameter("userId", String.valueOf(selectedUser.getUserId()));
 %>
 
 <portlet:renderURL var="editCommerceAccountURL">
