@@ -69,6 +69,10 @@ public class CommerceInventoryWarehouseLocalServiceImpl
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
 
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
+
 		validate(name, active, latitude, longitude);
 
 		long commerceInventoryWarehouseId = counterLocalService.increment();
@@ -144,6 +148,10 @@ public class CommerceInventoryWarehouseLocalServiceImpl
 	public CommerceInventoryWarehouse
 		fetchCommerceInventoryWarehouseByReferenceCode(
 			long companyId, String externalReferenceCode) {
+
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
 
 		return commerceInventoryWarehousePersistence.fetchByC_ERC(
 			companyId, externalReferenceCode);

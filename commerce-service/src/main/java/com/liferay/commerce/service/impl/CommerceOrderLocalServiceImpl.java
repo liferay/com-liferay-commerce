@@ -520,6 +520,10 @@ public class CommerceOrderLocalServiceImpl
 	public CommerceOrder fetchByExternalReferenceCode(
 		long companyId, String externalReferenceCode) {
 
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
+
 		return commerceOrderPersistence.fetchByC_ERC(
 			companyId, externalReferenceCode);
 	}
@@ -1024,6 +1028,10 @@ public class CommerceOrderLocalServiceImpl
 			total = BigDecimal.ZERO;
 		}
 
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
+
 		CommerceOrder commerceOrder = commerceOrderPersistence.findByPrimaryKey(
 			commerceOrderId);
 
@@ -1386,6 +1394,10 @@ public class CommerceOrderLocalServiceImpl
 			int orderStatus, String advanceStatus, String externalReferenceCode,
 			CommerceContext commerceContext, ServiceContext serviceContext)
 		throws PortalException {
+
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
 
 		// Update
 

@@ -46,6 +46,7 @@ import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.TransactionConfig;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.spring.aop.ServiceBeanMethodInvocation;
@@ -73,6 +74,10 @@ public class CommerceCatalogLocalServiceImpl
 		throws PortalException {
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
+
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
 
 		long commerceCatalogId = counterLocalService.increment();
 
@@ -187,6 +192,10 @@ public class CommerceCatalogLocalServiceImpl
 	@Override
 	public CommerceCatalog fetchByExternalReferenceCode(
 		long companyId, String externalReferenceCode) {
+
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
 
 		return commerceCatalogPersistence.fetchByC_ERC(
 			companyId, externalReferenceCode);

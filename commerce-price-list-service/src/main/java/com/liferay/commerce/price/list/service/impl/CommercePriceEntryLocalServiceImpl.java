@@ -104,6 +104,10 @@ public class CommercePriceEntryLocalServiceImpl
 		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
 			cpInstance.getCPDefinitionId());
 
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
+
 		return commercePriceEntryLocalService.addCommercePriceEntry(
 			cpDefinition.getCProductId(), cpInstance.getCPInstanceUuid(),
 			commercePriceListId, externalReferenceCode, price, promoPrice,
@@ -133,6 +137,10 @@ public class CommercePriceEntryLocalServiceImpl
 		User user = userLocalService.getUser(serviceContext.getUserId());
 
 		validate(commercePriceListId, cpInstanceUuid);
+
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
 
 		validateExternalReferenceCode(
 			serviceContext.getCompanyId(), externalReferenceCode);
@@ -241,6 +249,10 @@ public class CommercePriceEntryLocalServiceImpl
 	@Override
 	public CommercePriceEntry fetchByExternalReferenceCode(
 		long companyId, String externalReferenceCode) {
+
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
 
 		return commercePriceEntryPersistence.fetchByC_ERC(
 			companyId, externalReferenceCode);
@@ -500,6 +512,10 @@ public class CommercePriceEntryLocalServiceImpl
 			CommercePriceEntry commercePriceEntry, String externalReferenceCode)
 		throws PortalException {
 
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
+
 		commercePriceEntry.setExternalReferenceCode(externalReferenceCode);
 
 		return commercePriceEntryPersistence.update(commercePriceEntry);
@@ -522,6 +538,10 @@ public class CommercePriceEntryLocalServiceImpl
 
 		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
 			cpInstance.getCPDefinitionId());
+
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
 
 		return commercePriceEntryLocalService.upsertCommercePriceEntry(
 			commercePriceEntryId, cpDefinition.getCProductId(),
@@ -578,6 +598,10 @@ public class CommercePriceEntryLocalServiceImpl
 							commercePriceEntryId);
 				}
 			}
+		}
+
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
 		}
 
 		if (Validator.isNotNull(externalReferenceCode)) {

@@ -85,6 +85,10 @@ public class CommerceAccountLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
+
 		// Commerce Account
 
 		CommerceAccount commerceAccount =
@@ -124,6 +128,10 @@ public class CommerceAccountLocalServiceImpl
 
 		parentCommerceAccountId = getParentCommerceAccountId(
 			serviceContext.getCompanyId(), parentCommerceAccountId);
+
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
 
 		validate(serviceContext.getCompanyId(), 0, name, externalReferenceCode);
 
@@ -181,6 +189,10 @@ public class CommerceAccountLocalServiceImpl
 		User user = userLocalService.getUser(userId);
 
 		serviceContext.setUserId(userId);
+
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
 
 		// Commerce account
 
@@ -268,6 +280,10 @@ public class CommerceAccountLocalServiceImpl
 	@Override
 	public CommerceAccount fetchByExternalReferenceCode(
 		long companyId, String externalReferenceCode) {
+
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
 
 		return commerceAccountPersistence.fetchByC_ERC(
 			companyId, externalReferenceCode);
@@ -627,6 +643,10 @@ public class CommerceAccountLocalServiceImpl
 			boolean active, String externalReferenceCode,
 			ServiceContext serviceContext)
 		throws PortalException {
+
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
 
 		CommerceAccount commerceAccount =
 			commerceAccountPersistence.fetchByC_ERC(

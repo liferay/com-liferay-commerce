@@ -71,6 +71,10 @@ public class CommerceAccountGroupLocalServiceImpl
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
 
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
+
 		validate(companyId, 0, name, externalReferenceCode);
 
 		long commerceAccountGroupId = counterLocalService.increment();
@@ -195,6 +199,10 @@ public class CommerceAccountGroupLocalServiceImpl
 	@Override
 	public CommerceAccountGroup fetchByExternalReferenceCode(
 		long companyId, String externalReferenceCode) {
+
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
 
 		return commerceAccountGroupPersistence.fetchByC_ERC(
 			companyId, externalReferenceCode);
