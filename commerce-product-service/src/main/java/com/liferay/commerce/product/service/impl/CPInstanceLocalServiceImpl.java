@@ -136,6 +136,10 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
 
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
+
 		Date displayDate = null;
 		Date expirationDate = null;
 		Date now = new Date();
@@ -457,6 +461,10 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 	public CPInstance fetchByExternalReferenceCode(
 		long companyId, String externalReferenceCode) {
 
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
+
 		return cpInstancePersistence.fetchByC_ERC(
 			companyId, externalReferenceCode);
 	}
@@ -522,6 +530,10 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 	public CPInstance getCPInstanceByExternalReferenceCode(
 			long companyId, String externalReferenceCode)
 		throws PortalException {
+
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
 
 		return cpInstancePersistence.findByC_ERC(
 			companyId, externalReferenceCode);
@@ -946,6 +958,10 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 		throws PortalException {
 
 		CPInstance cpInstance = null;
+
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
 
 		if (Validator.isNotNull(externalReferenceCode)) {
 			cpInstance = cpInstancePersistence.fetchByC_ERC(

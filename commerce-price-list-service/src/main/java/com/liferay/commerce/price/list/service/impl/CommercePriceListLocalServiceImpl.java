@@ -118,6 +118,10 @@ public class CommercePriceListLocalServiceImpl
 
 		User user = userLocalService.getUser(userId);
 
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
+
 		validate(groupId, commerceCurrencyId, parentCommercePriceListId);
 
 		validateExternalReferenceCode(
@@ -307,6 +311,10 @@ public class CommercePriceListLocalServiceImpl
 	@Override
 	public CommercePriceList fetchByExternalReferenceCode(
 		long companyId, String externalReferenceCode) {
+
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
 
 		return commercePriceListPersistence.fetchByC_ERC(
 			companyId, externalReferenceCode);
@@ -561,6 +569,10 @@ public class CommercePriceListLocalServiceImpl
 			CommercePriceList commercePriceList, String externalReferenceCode)
 		throws PortalException {
 
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
+
 		commercePriceList.setExternalReferenceCode(externalReferenceCode);
 
 		commercePriceListPersistence.update(commercePriceList);
@@ -681,6 +693,10 @@ public class CommercePriceListLocalServiceImpl
 							commercePriceListId);
 				}
 			}
+		}
+
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
 		}
 
 		if (Validator.isNotNull(externalReferenceCode)) {

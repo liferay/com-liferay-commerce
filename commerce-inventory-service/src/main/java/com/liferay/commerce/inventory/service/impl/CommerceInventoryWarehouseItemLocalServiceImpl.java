@@ -19,6 +19,7 @@ import com.liferay.commerce.inventory.service.base.CommerceInventoryWarehouseIte
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.List;
 
@@ -48,6 +49,10 @@ public class CommerceInventoryWarehouseItemLocalServiceImpl
 		throws PortalException {
 
 		User user = userLocalService.getUser(userId);
+
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
 
 		long commerceInventoryWarehouseItemId = counterLocalService.increment();
 
@@ -90,6 +95,10 @@ public class CommerceInventoryWarehouseItemLocalServiceImpl
 			getCommerceInventoryWarehouseItemByReferenceCode(
 				long companyId, String externalReferenceCode)
 		throws PortalException {
+
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
 
 		return commerceInventoryWarehouseItemPersistence.findByC_ERC(
 			companyId, externalReferenceCode);
@@ -152,6 +161,10 @@ public class CommerceInventoryWarehouseItemLocalServiceImpl
 				companyId, sku);
 
 		if (commerceInventoryWarehouseItem == null) {
+			if (Validator.isBlank(externalReferenceCode)) {
+				externalReferenceCode = null;
+			}
+
 			return commerceInventoryWarehouseItemLocalService.
 				addCommerceInventoryWarehouseItem(
 					userId, commerceInventoryWarehouseId, externalReferenceCode,

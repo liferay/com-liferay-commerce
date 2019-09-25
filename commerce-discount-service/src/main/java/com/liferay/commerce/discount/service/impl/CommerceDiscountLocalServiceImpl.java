@@ -241,6 +241,10 @@ public class CommerceDiscountLocalServiceImpl
 	public CommerceDiscount fetchByExternalReferenceCode(
 		long companyId, String externalReferenceCode) {
 
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
+
 		return commerceDiscountPersistence.fetchByC_ERC(
 			companyId, externalReferenceCode);
 	}
@@ -465,6 +469,10 @@ public class CommerceDiscountLocalServiceImpl
 							commerceDiscountId);
 				}
 			}
+		}
+
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
 		}
 
 		if (Validator.isNotNull(externalReferenceCode)) {

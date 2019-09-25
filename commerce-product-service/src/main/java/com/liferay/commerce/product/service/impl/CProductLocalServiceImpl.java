@@ -43,6 +43,10 @@ public class CProductLocalServiceImpl extends CProductLocalServiceBaseImpl {
 
 		User user = userLocalService.getUser(userId);
 
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
+
 		validate(user.getCompanyId(), externalReferenceCode);
 
 		CProduct cProduct = cProductLocalService.createCProduct(

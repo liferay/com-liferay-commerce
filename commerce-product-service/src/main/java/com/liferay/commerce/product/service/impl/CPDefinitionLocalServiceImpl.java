@@ -1676,6 +1676,10 @@ public class CPDefinitionLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
+
 		CPDefinition cpDefinition;
 
 		CProduct cProduct = cProductLocalService.fetchCProductByReferenceCode(

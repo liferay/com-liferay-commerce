@@ -19,6 +19,7 @@ import com.liferay.commerce.account.service.base.CommerceAccountGroupCommerceAcc
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.List;
 
@@ -48,6 +49,10 @@ public class CommerceAccountGroupCommerceAccountRelLocalServiceImpl
 		throws PortalException {
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
+
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
 
 		long commerceAccountGroupCommerceAccountRelId =
 			counterLocalService.increment();

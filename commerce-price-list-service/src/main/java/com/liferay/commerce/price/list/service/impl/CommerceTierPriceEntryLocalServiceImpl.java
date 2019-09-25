@@ -93,6 +93,10 @@ public class CommerceTierPriceEntryLocalServiceImpl
 
 		validate(0, commercePriceEntryId, minQuantity);
 
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
+
 		validateExternalReferenceCode(
 			serviceContext.getCompanyId(), externalReferenceCode);
 
@@ -185,6 +189,10 @@ public class CommerceTierPriceEntryLocalServiceImpl
 	@Override
 	public CommerceTierPriceEntry fetchByExternalReferenceCode(
 		long companyId, String externalReferenceCode) {
+
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
 
 		return commerceTierPriceEntryPersistence.fetchByC_ERC(
 			companyId, externalReferenceCode);
@@ -302,6 +310,10 @@ public class CommerceTierPriceEntryLocalServiceImpl
 			String externalReferenceCode)
 		throws PortalException {
 
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
+
 		commerceTierPriceEntry.setExternalReferenceCode(externalReferenceCode);
 
 		return commerceTierPriceEntryPersistence.update(commerceTierPriceEntry);
@@ -356,6 +368,10 @@ public class CommerceTierPriceEntryLocalServiceImpl
 							commerceTierPriceEntryId);
 				}
 			}
+		}
+
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
 		}
 
 		if (Validator.isNotNull(externalReferenceCode)) {

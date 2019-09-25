@@ -66,6 +66,10 @@ public class CPOptionLocalServiceImpl extends CPOptionLocalServiceBaseImpl {
 
 		User user = userLocalService.getUser(userId);
 
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
+
 		key = FriendlyURLNormalizerUtil.normalize(key);
 
 		validate(0, user.getCompanyId(), key);
@@ -144,6 +148,10 @@ public class CPOptionLocalServiceImpl extends CPOptionLocalServiceBaseImpl {
 	public CPOption fetchByExternalReferenceCode(
 		long companyId, String externalReferenceCode) {
 
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
+
 		return cpOptionPersistence.fetchByC_ERC(
 			companyId, externalReferenceCode);
 	}
@@ -215,6 +223,10 @@ public class CPOptionLocalServiceImpl extends CPOptionLocalServiceBaseImpl {
 			String key, String externalReferenceCode,
 			ServiceContext serviceContext)
 		throws PortalException {
+
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
 
 		CPOption cpOption = cpOptionPersistence.fetchByC_ERC(
 			serviceContext.getCompanyId(), externalReferenceCode);

@@ -276,6 +276,10 @@ public class CommerceOrderItemLocalServiceImpl
 	public CommerceOrderItem fetchByExternalReferenceCode(
 		long companyId, String externalReferenceCode) {
 
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
+
 		return commerceOrderItemPersistence.fetchByC_ERC(
 			companyId, externalReferenceCode);
 	}

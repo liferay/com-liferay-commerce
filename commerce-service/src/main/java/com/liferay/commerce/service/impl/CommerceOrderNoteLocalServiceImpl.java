@@ -54,6 +54,10 @@ public class CommerceOrderNoteLocalServiceImpl
 
 		validate(content);
 
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
+
 		validateExternalReferenceCode(
 			serviceContext.getCompanyId(), externalReferenceCode);
 
@@ -85,6 +89,10 @@ public class CommerceOrderNoteLocalServiceImpl
 	@Override
 	public CommerceOrderNote fetchByExternalReferenceCode(
 		long companyId, String externalReferenceCode) {
+
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
 
 		return commerceOrderNotePersistence.fetchByC_ERC(
 			companyId, externalReferenceCode);
@@ -144,6 +152,10 @@ public class CommerceOrderNoteLocalServiceImpl
 		commerceOrderNote.setRestricted(restricted);
 
 		if (Validator.isNull(commerceOrderNote.getExternalReferenceCode())) {
+			if (Validator.isBlank(externalReferenceCode)) {
+				externalReferenceCode = null;
+			}
+
 			commerceOrderNote.setExternalReferenceCode(externalReferenceCode);
 		}
 
@@ -157,6 +169,10 @@ public class CommerceOrderNoteLocalServiceImpl
 			boolean restricted, String externalReferenceCode,
 			ServiceContext serviceContext)
 		throws PortalException {
+
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
 
 		CommerceOrderNote commerceOrderNote;
 
