@@ -87,6 +87,11 @@ public class CommerceProductUpgradeStepRegistrator
 			_SCHEMA_VERSION_1_6_0, _SCHEMA_VERSION_1_7_0,
 			new CPDefinitionFiltersUpgradeProcess());
 
+		registry.register(
+			_SCHEMA_VERSION_1_7_0, _SCHEMA_VERSION_1_8_0,
+			new com.liferay.commerce.product.internal.upgrade.v1_8_0.
+				CPAttachmentFileEntryUpgradeProcess(_classNameLocalService));
+
 		if (_log.isInfoEnabled()) {
 			_log.info("COMMERCE PRODUCT UPGRADE STEP REGISTRATOR FINISHED");
 		}
@@ -107,6 +112,8 @@ public class CommerceProductUpgradeStepRegistrator
 	private static final String _SCHEMA_VERSION_1_6_0 = "1.6.0";
 
 	private static final String _SCHEMA_VERSION_1_7_0 = "1.7.0";
+
+	private static final String _SCHEMA_VERSION_1_8_0 = "1.8.0";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceProductUpgradeStepRegistrator.class);
