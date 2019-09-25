@@ -121,23 +121,26 @@ public class CPItemSelectorViewUtil {
 	public static Sort getCPInstanceSort(
 		String orderByCol, String orderByType) {
 
-		boolean orderByAsc = false;
+		boolean reverse = true;
 
-		if (Objects.equals(orderByType, "asc")) {
-			orderByAsc = true;
+		if (orderByType.equals("asc")) {
+			reverse = false;
 		}
 
 		Sort sort = null;
 
 		if (orderByCol.equals("create-date")) {
-			sort = SortFactoryUtil.create(Field.CREATE_DATE, true);
+			sort = SortFactoryUtil.create(
+				Field.CREATE_DATE + "_sortable", reverse);
 		}
 		else if (orderByCol.equals("display-date")) {
-			sort = SortFactoryUtil.create("display-date", true);
+			sort = SortFactoryUtil.create(
+				CPInstanceIndexer.FIELD_DISPLAY_DATE + "_Number_sortable",
+				reverse);
 		}
 		else if (orderByCol.equals("sku")) {
 			sort = SortFactoryUtil.create(
-				CPInstanceIndexer.FIELD_SKU, Sort.STRING_TYPE, orderByAsc);
+				CPInstanceIndexer.FIELD_SKU + "_String_sortable", reverse);
 		}
 
 		return sort;
