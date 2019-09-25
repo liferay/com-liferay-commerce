@@ -19,98 +19,96 @@
 		</div>
 
 		<main class="speedwell-frame" id="speedwell">
-			<div id="wrapper">
-				<div class="speedwell-frame__topbar" id="banner">
-					<#include "${full_templates_path}/topbar.ftl" />
-				</div>
+			<div class="speedwell-frame__topbar">
+				<#include "${full_templates_path}/topbar.ftl" />
+			</div>
 
-				<#if speedwell_content_css_class?contains("wide")>
-				<div class="speedwell-frame speedwell-frame__content--wide" id="content">
-				<#else>
-				<div class="speedwell-frame speedwell-frame__content" id="content">
-				</#if>
-					<a name="speedwell-top"></a>
+			<#if speedwell_content_css_class?contains("wide")>
+			<div class="speedwell-frame speedwell-frame__content--wide">
+			<#else>
+			<div class="speedwell-frame speedwell-frame__content">
+			</#if>
+				<a name="speedwell-top"></a>
 
-					<div class="container-fluid ${speedwell_content_css_class}">
-						<#if selectable>
+				<div class="container-fluid ${speedwell_content_css_class}">
+					<#if selectable>
+						<@liferay_util["include"] page=content_include />
+					<#else>
+						${portletDisplay.recycle()}
+						${portletDisplay.setTitle(the_title)}
+
+						<@liferay_theme["wrap-portlet"] page="portlet.ftl">
 							<@liferay_util["include"] page=content_include />
-						<#else>
-							${portletDisplay.recycle()}
-							${portletDisplay.setTitle(the_title)}
+						</@>
+					</#if>
+				</div>
+			</div>
 
-							<@liferay_theme["wrap-portlet"] page="portlet.ftl">
-								<@liferay_util["include"] page=content_include />
-							</@>
-						</#if>
+			<footer class="speedwell-footer">
+				<!-- div class="speedwell-footer__info">
+					<div class="payment-methods">
+						<div class="payment-methods__method"><img src="${themeDisplay.getPathThemeImages()}/Visa.png" /></div>
+						<div class="payment-methods__method"><img src="${themeDisplay.getPathThemeImages()}/MasterCard.png" /></div>
+						<div class="payment-methods__method"><img src="${themeDisplay.getPathThemeImages()}/PayPal.png" /></div>
+						<div class="payment-methods__method"><img src="${themeDisplay.getPathThemeImages()}/AmericanExpress.png" /></div>
 					</div>
 				</div>
 
-				<footer class="speedwell-footer" id="footer">
-					<!-- div class="speedwell-footer__info">
-						<div class="payment-methods">
-							<div class="payment-methods__method"><img src="${themeDisplay.getPathThemeImages()}/Visa.png" /></div>
-							<div class="payment-methods__method"><img src="${themeDisplay.getPathThemeImages()}/MasterCard.png" /></div>
-							<div class="payment-methods__method"><img src="${themeDisplay.getPathThemeImages()}/PayPal.png" /></div>
-							<div class="payment-methods__method"><img src="${themeDisplay.getPathThemeImages()}/AmericanExpress.png" /></div>
-						</div>
-					</div>
-
-					<div class="speedwell-footer__menu">
-						<section>
-							<h2>COMPANY</h2>
-
-							<nav>
-								<a href="#">About us</a>
-								<a href="#">Work here</a>
-								<a href="#">Team</a>
-								<a href="#">Stories</a>
-							</nav>
-						</section>
-
-						<section>
-							<h2>Company</h2>
-
-							<nav>
-								<a href="#">About us</a>
-								<a href="#">Work here</a>
-							</nav>
-						</section>
-
-						<section>
-							<h2>Company</h2>
-
-							<nav>
-								<a href="#">About us</a>
-								<a href="#">Work here</a>
-								<a href="#">Team</a>
-								<a href="#">Stories</a>
-								<a href="#">Stories</a>
-							</nav>
-						</section>
-
-						<section>
-							<h2>Company</h2>
-
-							<p>
-								Customer service and order hotline<br>
-								+44 20 3322 9915<br>
-								Monday - Friday 7:00am - 10:00pm<br>
-								Saturday 7:00am - 5:00pm
-							</p>
-						</section>
-					</div-->
-
-					<div class="speedwell-footer__closing">
-						<img alt="${logo_description}" class="logo" src="${site_logo}" />
+				<div class="speedwell-footer__menu">
+					<section>
+						<h2>COMPANY</h2>
 
 						<nav>
-							<a href="#">Privacy Policy</a>
-							<a href="#">Terms and Conditions</a>
-							<a href="#">Legal Notice Patents</a>
+							<a href="#">About us</a>
+							<a href="#">Work here</a>
+							<a href="#">Team</a>
+							<a href="#">Stories</a>
 						</nav>
-					</div>
-				</footer>
-			</div>
+					</section>
+
+					<section>
+						<h2>Company</h2>
+
+						<nav>
+							<a href="#">About us</a>
+							<a href="#">Work here</a>
+						</nav>
+					</section>
+
+					<section>
+						<h2>Company</h2>
+
+						<nav>
+							<a href="#">About us</a>
+							<a href="#">Work here</a>
+							<a href="#">Team</a>
+							<a href="#">Stories</a>
+							<a href="#">Stories</a>
+						</nav>
+					</section>
+
+					<section>
+						<h2>Company</h2>
+
+						<p>
+							Customer service and order hotline<br>
+							+44 20 3322 9915<br>
+							Monday - Friday 7:00am - 10:00pm<br>
+							Saturday 7:00am - 5:00pm
+						</p>
+					</section>
+				</div-->
+
+				<div class="speedwell-footer__closing">
+					<img alt="${logo_description}" class="logo" src="${site_logo}" />
+
+					<nav>
+						<a href="#">Privacy Policy</a>
+						<a href="#">Terms and Conditions</a>
+						<a href="#">Legal Notice Patents</a>
+					</nav>
+				</div>
+			</footer>
 		</main>
 
 		<div class="liferay-bottom">

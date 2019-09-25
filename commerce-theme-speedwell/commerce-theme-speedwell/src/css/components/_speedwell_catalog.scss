@@ -75,11 +75,11 @@
         }
 
         .filters-icon {
-          animation-delay: .2s;
           animation: backInPlace .2s ease-out 1 forwards;
+          animation-delay: .2s;
           line-height: 72px;
-          opacity: 0;
           text-align: center;
+          opacity: 0;
 
           @keyframes backInPlace {
             to { opacity: 1; }
@@ -88,9 +88,9 @@
 
         &.is-open {
           background-color: white;
-          box-shadow: none;
           transform: scale3d(25, 25, 1);
           transition: transform .4s ease-out, background-color .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+          box-shadow: none;
 
           .filters-icon {
             display: none;
@@ -99,8 +99,8 @@
           & ~ .row #column-1 {
             opacity: 1;
             transform: translateX(0);
-            transition-delay: 300ms;
             transition: opacity .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transition-delay: 300ms;
           }
         }
       }

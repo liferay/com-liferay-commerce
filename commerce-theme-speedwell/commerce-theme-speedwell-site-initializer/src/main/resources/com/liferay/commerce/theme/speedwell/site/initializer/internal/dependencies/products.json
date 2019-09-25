@@ -8,6 +8,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED93015",
 		"Height": 2,
 		"Images": [
 			"Speedwell_ProductImage_24.png"
@@ -18,7 +19,7 @@
 		"Name": "ABS Sensor",
 		"Price": 50.00,
 		"PromoPrice": 0,
-		"Sku": "MIN93015",
+		"Sku": "SPEED93015",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -57,6 +58,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED93016",
 		"Height": 2.5,
 		"Images": [
 			"Speedwell_ProductImage_103.png"
@@ -85,7 +87,7 @@
 				"ManufacturerPartNumber": "BB98319",
 				"Price": 80.00,
 				"PromoPrice": 72.00,
-				"Sku": "MIN93016A",
+				"Sku": "SPEED93016A",
 				"Warehouse1": 100,
 				"Warehouse2": 40,
 				"Warehouse3": 100
@@ -100,7 +102,7 @@
 				"ManufacturerPartNumber": "BB98320",
 				"Price": 80.00,
 				"PromoPrice": 72.00,
-				"Sku": "MIN93016B",
+				"Sku": "SPEED93016B",
 				"Warehouse1": 100,
 				"Warehouse2": 20,
 				"Warehouse3": 60
@@ -115,7 +117,7 @@
 				"ManufacturerPartNumber": "BB98321",
 				"Price": 80.00,
 				"PromoPrice": 72.00,
-				"Sku": "MIN93016C",
+				"Sku": "SPEED93016C",
 				"Warehouse1": 100,
 				"Warehouse2": 100,
 				"Warehouse3": 40
@@ -139,6 +141,9 @@
 				"Value": "4\" x 9.5\" x 2.5\""
 			}
 		],
+		"Tags": [
+			"featured"
+		],
 		"TaxCategory": "Normal Product",
 		"Weight": 1.75,
 		"Width": 9.5
@@ -152,6 +157,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED93017",
 		"Height": 2.5,
 		"Images": [
 			"Speedwell_ProductImage_103.png"
@@ -162,7 +168,7 @@
 		"Name": "Premium Brake Fluid",
 		"Price": 100.00,
 		"PromoPrice": 90.00,
-		"Sku": "MIN93017",
+		"Sku": "SPEED93017",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -180,6 +186,9 @@
 				"Key": "dimensions",
 				"Value": "4\" x 9.5\" x 2.5\""
 			}
+		],
+		"Tags": [
+			"featured"
 		],
 		"TaxCategory": "Normal Product",
 		"Warehouse1": 60,
@@ -200,6 +209,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED93027",
 		"Height": 8.7,
 		"Length": 6.2,
 		"ManufacturerPartNumber": "BB98334",
@@ -207,7 +217,7 @@
 		"Name": "Wear Sensors",
 		"Price": 60.00,
 		"PromoPrice": 0,
-		"Sku": "MIN93027",
+		"Sku": "SPEED93027",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -245,6 +255,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED93018",
 		"Height": 8.7,
 		"Images": [
 			"Speedwell_ProductImage_83.png"
@@ -258,7 +269,7 @@
 		"RelatedProducts": [
 			"Wear Sensors"
 		],
-		"Sku": "MIN93018",
+		"Sku": "SPEED93018",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -281,6 +292,9 @@
 				"Value": "6.2\" x 2.1\" x 8.7\""
 			}
 		],
+		"Tags": [
+			"featured"
+		],
 		"TaxCategory": "Normal Product",
 		"Warehouse1": 40,
 		"Warehouse2": 40,
@@ -300,6 +314,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED93019",
 		"Height": 8.7,
 		"Images": [
 			"Speedwell_ProductImage_83.png"
@@ -313,7 +328,7 @@
 		"RelatedProducts": [
 			"Wear Sensors"
 		],
-		"Sku": "MIN93019",
+		"Sku": "SPEED93019",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -336,6 +351,9 @@
 				"Value": "6.2\" x 2.1\" x 8.7\""
 			}
 		],
+		"Tags": [
+			"featured"
+		],
 		"TaxCategory": "Normal Product",
 		"Warehouse1": 20,
 		"Warehouse2": 20,
@@ -352,6 +370,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED93020",
 		"Height": 1.7,
 		"Images": [
 			"Speedwell_ProductImage_30.png"
@@ -362,7 +381,7 @@
 		"Name": "Brake Rotors",
 		"Price": 40.00,
 		"PromoPrice": 0,
-		"Sku": "MIN93020",
+		"Sku": "SPEED93020",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -385,6 +404,9 @@
 				"Value": "10.2\" x 10.2\" x 1.7\""
 			}
 		],
+		"Tags": [
+			"featured"
+		],
 		"TaxCategory": "Normal Product",
 		"Warehouse1": 100,
 		"Warehouse2": 100,
@@ -401,6 +423,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED93021",
 		"Height": 5.3,
 		"Length": 9.4,
 		"ManufacturerPartNumber": "BB98326",
@@ -408,7 +431,7 @@
 		"Name": "Calipers",
 		"Price": 90.00,
 		"PromoPrice": 0,
-		"Sku": "MIN93021",
+		"Sku": "SPEED93021",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -447,6 +470,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED93022",
 		"Height": 18,
 		"Length": 12,
 		"MinStockQuantity": 5,
@@ -472,7 +496,7 @@
 				"ManufacturerPartNumber": "BB98327",
 				"Price": 120.00,
 				"PromoPrice": 0,
-				"Sku": "MIN93022A",
+				"Sku": "SPEED93022A",
 				"Warehouse1": 40,
 				"Warehouse2": 40,
 				"Warehouse3": 40
@@ -487,7 +511,7 @@
 				"ManufacturerPartNumber": "BB98328",
 				"Price": 120.00,
 				"PromoPrice": 0,
-				"Sku": "MIN93022B",
+				"Sku": "SPEED93022B",
 				"Warehouse1": 40,
 				"Warehouse2": 20,
 				"Warehouse3": 20
@@ -502,7 +526,7 @@
 				"ManufacturerPartNumber": "BB98329",
 				"Price": 120.00,
 				"PromoPrice": 0,
-				"Sku": "MIN93022C",
+				"Sku": "SPEED93022C",
 				"Warehouse1": 40,
 				"Warehouse2": 100,
 				"Warehouse3": 100
@@ -543,6 +567,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED93023",
 		"Height": 18,
 		"Images": [
 			"Speedwell_ProductImage_42.png"
@@ -553,7 +578,7 @@
 		"Name": "Timing Belt",
 		"Price": 600.00,
 		"PromoPrice": 0,
-		"Sku": "MIN93023",
+		"Sku": "SPEED93023",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -595,6 +620,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED93024",
 		"Height": 3.8,
 		"Images": [
 			"Speedwell_ProductImage_77.png",
@@ -609,7 +635,7 @@
 		"RelatedProducts": [
 			"Wear Sensors"
 		],
-		"Sku": "MIN93024",
+		"Sku": "SPEED93024",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -651,6 +677,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED93025",
 		"Height": 3.8,
 		"Images": [
 			"Speedwell_ProductImage_77.png",
@@ -665,7 +692,7 @@
 		"RelatedProducts": [
 			"Wear Sensors"
 		],
-		"Sku": "MIN93025",
+		"Sku": "SPEED93025",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -707,6 +734,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED93026",
 		"Height": 3.8,
 		"Images": [
 			"Speedwell_ProductImage_77.png",
@@ -721,7 +749,7 @@
 		"RelatedProducts": [
 			"Wear Sensors"
 		],
-		"Sku": "MIN93026",
+		"Sku": "SPEED93026",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -760,6 +788,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED00673",
 		"Height": 1.7,
 		"Length": 10.2,
 		"ManufacturerPartNumber": "EX938051",
@@ -767,7 +796,7 @@
 		"Name": "Bearings",
 		"Price": 70.00,
 		"PromoPrice": 0,
-		"Sku": "MIN00673",
+		"Sku": "SPEED00673",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -806,6 +835,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED00674",
 		"Height": 5.3,
 		"Length": 9.4,
 		"ManufacturerPartNumber": "EX938052",
@@ -813,7 +843,7 @@
 		"Name": "Cams",
 		"Price": 695.00,
 		"PromoPrice": 0,
-		"Sku": "MIN00674",
+		"Sku": "SPEED00674",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -852,6 +882,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED00675",
 		"Height": 18,
 		"Length": 12,
 		"ManufacturerPartNumber": "EX938053",
@@ -859,7 +890,7 @@
 		"Name": "Engine Mount",
 		"Price": 120.00,
 		"PromoPrice": 0,
-		"Sku": "MIN00675",
+		"Sku": "SPEED00675",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -898,6 +929,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED00676",
 		"Height": 2.5,
 		"Images": [
 			"Speedwell_ProductImage_46.png"
@@ -908,7 +940,7 @@
 		"Name": "Oil Filter",
 		"Price": 450.00,
 		"PromoPrice": 0,
-		"Sku": "MIN00676",
+		"Sku": "SPEED00676",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -943,6 +975,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED00677",
 		"Height": 2,
 		"Images": [
 			"Speedwell_ProductImage_33.png"
@@ -953,7 +986,7 @@
 		"Name": "Oil Pump",
 		"Price": 79.00,
 		"PromoPrice": 0,
-		"Sku": "MIN00677",
+		"Sku": "SPEED00677",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -992,6 +1025,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED00678",
 		"Height": 2.5,
 		"Length": 4,
 		"ManufacturerPartNumber": "EX938056",
@@ -999,7 +1033,7 @@
 		"Name": "Piston",
 		"Price": 14.00,
 		"PromoPrice": 0,
-		"Sku": "MIN00678",
+		"Sku": "SPEED00678",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -1038,6 +1072,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED00679",
 		"Height": 8.7,
 		"Length": 6.2,
 		"ManufacturerPartNumber": "EX938057",
@@ -1045,7 +1080,7 @@
 		"Name": "Pulley Kit",
 		"Price": 201.00,
 		"PromoPrice": 0,
-		"Sku": "MIN00679",
+		"Sku": "SPEED00679",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -1084,6 +1119,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED00680",
 		"Height": 1.7,
 		"Length": 10.2,
 		"ManufacturerPartNumber": "EX938058",
@@ -1091,7 +1127,7 @@
 		"Name": "Seal",
 		"Price": 30.00,
 		"PromoPrice": 0,
-		"Sku": "MIN00680",
+		"Sku": "SPEED00680",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -1130,6 +1166,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED00681",
 		"Height": 5.3,
 		"Images": [
 			"Speedwell_ProductImage_94.png"
@@ -1140,7 +1177,7 @@
 		"Name": "Timing Chain Tensioner",
 		"Price": 30.00,
 		"PromoPrice": 0,
-		"Sku": "MIN00681",
+		"Sku": "SPEED00681",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -1179,6 +1216,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED00682",
 		"Height": 18,
 		"Length": 12,
 		"ManufacturerPartNumber": "EX938060",
@@ -1186,7 +1224,7 @@
 		"Name": "Timing Chain",
 		"Price": 23.00,
 		"PromoPrice": 0,
-		"Sku": "MIN00682",
+		"Sku": "SPEED00682",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -1225,6 +1263,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED00683",
 		"Height": 1.7,
 		"Length": 10.2,
 		"ManufacturerPartNumber": "EX938061",
@@ -1232,7 +1271,7 @@
 		"Name": "Valve Cover Grommets",
 		"Price": 6.00,
 		"PromoPrice": 0,
-		"Sku": "MIN00683",
+		"Sku": "SPEED00683",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -1271,6 +1310,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED77822",
 		"Height": 5.3,
 		"Length": 9.4,
 		"ManufacturerPartNumber": "ES98205",
@@ -1278,7 +1318,7 @@
 		"Name": "Catalytic Converters",
 		"Price": 106.00,
 		"PromoPrice": 0,
-		"Sku": "MIN77822",
+		"Sku": "SPEED77822",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -1317,6 +1357,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED77823",
 		"Height": 18,
 		"Length": 12,
 		"ManufacturerPartNumber": "ES98206",
@@ -1324,7 +1365,7 @@
 		"Name": "Exhaust Clamps",
 		"Price": 9.00,
 		"PromoPrice": 0,
-		"Sku": "MIN77823",
+		"Sku": "SPEED77823",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -1363,6 +1404,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED77824",
 		"Height": 2.5,
 		"Length": 4,
 		"ManufacturerPartNumber": "ES98207",
@@ -1370,7 +1412,7 @@
 		"Name": "Muffler/Resonators",
 		"Price": 32.00,
 		"PromoPrice": 0,
-		"Sku": "MIN77824",
+		"Sku": "SPEED77824",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -1409,6 +1451,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED77825",
 		"Height": 2,
 		"Length": 7,
 		"ManufacturerPartNumber": "ES98208",
@@ -1416,7 +1459,7 @@
 		"Name": "Lift Support",
 		"Price": 20.00,
 		"PromoPrice": 0,
-		"Sku": "MIN77825",
+		"Sku": "SPEED77825",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -1455,6 +1498,7 @@
 		"Description": "Includes wastegate actuator. Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment.",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED19999",
 		"FilterAccountGroups": [
 			"North American Accounts"
 		],
@@ -1470,7 +1514,7 @@
 		"Name": "Turbocharger",
 		"Price": 665.00,
 		"PromoPrice": 0,
-		"Sku": "MIN19999",
+		"Sku": "SPEED19999",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -1509,6 +1553,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED38794",
 		"Height": 1.7,
 		"Length": 10.2,
 		"ManufacturerPartNumber": "HM88893",
@@ -1516,7 +1561,7 @@
 		"Name": "Ball Joints",
 		"Price": 152.00,
 		"PromoPrice": 0,
-		"Sku": "MIN38794",
+		"Sku": "SPEED38794",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -1555,6 +1600,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED38795",
 		"Height": 5.3,
 		"Length": 9.4,
 		"ManufacturerPartNumber": "HM88894",
@@ -1562,7 +1608,7 @@
 		"Name": "Bushings",
 		"Price": 18.00,
 		"PromoPrice": 0,
-		"Sku": "MIN38795",
+		"Sku": "SPEED38795",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -1601,6 +1647,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED38796",
 		"Height": 18,
 		"Length": 12,
 		"ManufacturerPartNumber": "HM88895",
@@ -1608,7 +1655,7 @@
 		"Name": "CV Axles",
 		"Price": 89.00,
 		"PromoPrice": 0,
-		"Sku": "MIN38796",
+		"Sku": "SPEED38796",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -1643,6 +1690,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED38797",
 		"Height": 2.5,
 		"Images": [
 			"Speedwell_ProductImage_20.png"
@@ -1653,7 +1701,7 @@
 		"Name": "Universal CV Boot",
 		"Price": 185.00,
 		"PromoPrice": 0,
-		"Sku": "MIN38797",
+		"Sku": "SPEED38797",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -1688,6 +1736,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED38798",
 		"Height": 2,
 		"Length": 7,
 		"ManufacturerPartNumber": "HM88897",
@@ -1695,7 +1744,7 @@
 		"Name": "Hub Bearing Assembly - Rear",
 		"Price": 175.00,
 		"PromoPrice": 0,
-		"Sku": "MIN38798",
+		"Sku": "SPEED38798",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -1730,6 +1779,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED38799",
 		"Height": 2.5,
 		"Images": [
 			"Speedwell_ProductImage_13.png",
@@ -1741,7 +1791,7 @@
 		"Name": "Coil Spring - Rear",
 		"Price": 104.00,
 		"PromoPrice": 0,
-		"Sku": "MIN38799",
+		"Sku": "SPEED38799",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -1776,6 +1826,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED38800",
 		"Height": 8.7,
 		"Length": 6.2,
 		"ManufacturerPartNumber": "HM88899",
@@ -1783,7 +1834,7 @@
 		"Name": "Power Steering Pump",
 		"Price": 160.00,
 		"PromoPrice": 0,
-		"Sku": "MIN38800",
+		"Sku": "SPEED38800",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -1822,6 +1873,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED38801",
 		"Height": 1.7,
 		"Length": 10.2,
 		"ManufacturerPartNumber": "HM88900",
@@ -1829,7 +1881,7 @@
 		"Name": "Differential Ring and Pinion - Universal",
 		"Price": 211.00,
 		"PromoPrice": 0,
-		"Sku": "MIN38801",
+		"Sku": "SPEED38801",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -1864,6 +1916,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED38802",
 		"Height": 5.3,
 		"Length": 9.4,
 		"ManufacturerPartNumber": "HM88901",
@@ -1871,7 +1924,7 @@
 		"Name": "Shock Absorber",
 		"Price": 75.00,
 		"PromoPrice": 0,
-		"Sku": "MIN38802",
+		"Sku": "SPEED38802",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -1906,6 +1959,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED38803",
 		"Height": 18,
 		"Length": 12,
 		"ManufacturerPartNumber": "HM88902",
@@ -1913,7 +1967,7 @@
 		"Name": "Shock Strut - Front",
 		"Price": 129.00,
 		"PromoPrice": 0,
-		"Sku": "MIN38803",
+		"Sku": "SPEED38803",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -1952,6 +2006,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED38804",
 		"Height": 1.7,
 		"Length": 10.2,
 		"ManufacturerPartNumber": "HM88903",
@@ -1959,7 +2014,7 @@
 		"Name": "Tie Rod End Tool",
 		"Price": 35.00,
 		"PromoPrice": 0,
-		"Sku": "MIN38804",
+		"Sku": "SPEED38804",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -1998,6 +2053,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED38805",
 		"Height": 5.3,
 		"Images": [
 			"Speedwell_ProductImage_103.png"
@@ -2008,7 +2064,7 @@
 		"Name": "Wheel Bearing Grease",
 		"Price": 54.00,
 		"PromoPrice": 0,
-		"Sku": "MIN38805",
+		"Sku": "SPEED38805",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -2039,6 +2095,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED55853",
 		"Height": 18,
 		"Length": 12,
 		"ManufacturerPartNumber": "TT00024",
@@ -2046,7 +2103,7 @@
 		"Name": "CV Axles",
 		"Price": 89.00,
 		"PromoPrice": 0,
-		"Sku": "MIN55853",
+		"Sku": "SPEED55853",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -2081,6 +2138,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED55854",
 		"Height": 2.5,
 		"Images": [
 			"Speedwell_ProductImage_20.png"
@@ -2091,7 +2149,7 @@
 		"Name": "Universal CV Boot",
 		"Price": 185.00,
 		"PromoPrice": 0,
-		"Sku": "MIN55854",
+		"Sku": "SPEED55854",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -2126,6 +2184,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED55855",
 		"Height": 2,
 		"Length": 7,
 		"ManufacturerPartNumber": "TT00026",
@@ -2133,7 +2192,7 @@
 		"Name": "Drive Shafts",
 		"Price": 396.00,
 		"PromoPrice": 0,
-		"Sku": "MIN55855",
+		"Sku": "SPEED55855",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -2164,6 +2223,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED55856",
 		"Height": 2.5,
 		"Images": [
 			"Speedwell_ProductImage_103.png"
@@ -2174,7 +2234,7 @@
 		"Name": "Transmission Fluid",
 		"Price": 42.00,
 		"PromoPrice": 0,
-		"Sku": "MIN55856",
+		"Sku": "SPEED55856",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -2205,6 +2265,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED55857",
 		"Height": 1.7,
 		"Length": 10.2,
 		"ManufacturerPartNumber": "TT00028",
@@ -2212,7 +2273,7 @@
 		"Name": "Mount",
 		"Price": 3.00,
 		"PromoPrice": 0,
-		"Sku": "MIN55857",
+		"Sku": "SPEED55857",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -2251,6 +2312,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED55858",
 		"Height": 5.3,
 		"Length": 9.4,
 		"ManufacturerPartNumber": "TT00029",
@@ -2258,7 +2320,7 @@
 		"Name": "Wheel Seal - Front",
 		"Price": 4.00,
 		"PromoPrice": 0,
-		"Sku": "MIN55858",
+		"Sku": "SPEED55858",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -2289,6 +2351,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED55859",
 		"Height": 18,
 		"Length": 12,
 		"ManufacturerPartNumber": "TT00030",
@@ -2296,7 +2359,7 @@
 		"Name": "Torque Converters",
 		"Price": 34.00,
 		"PromoPrice": 0,
-		"Sku": "MIN55859",
+		"Sku": "SPEED55859",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -2335,6 +2398,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED55860",
 		"Height": 2.5,
 		"Length": 4,
 		"ManufacturerPartNumber": "TT00031",
@@ -2342,7 +2406,7 @@
 		"Name": "Transmission Cooler Line Assembly",
 		"Price": 15.00,
 		"PromoPrice": 0,
-		"Sku": "MIN55860",
+		"Sku": "SPEED55860",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
@@ -2381,6 +2445,7 @@
 		"Description": "Product designed and manufactured to accommodate OEM applications. All products are tested and inspected in an ISO-9000 compliant environment",
 		"DisplayAvailability": true,
 		"DisplayStockQuantity": true,
+		"ExternalReferenceCode": "SPEED55861",
 		"Height": 2,
 		"Images": [
 			"Speedwell_ProductImage_64.png"
@@ -2391,7 +2456,7 @@
 		"Name": "U-Joint",
 		"Price": 24.00,
 		"PromoPrice": 0,
-		"Sku": "MIN55861",
+		"Sku": "SPEED55861",
 		"SpecificationOptions": [
 			{
 				"Key": "quantity",
