@@ -258,22 +258,20 @@ public class CPOptionValueLocalServiceImpl
 		if (Validator.isBlank(externalReferenceCode)) {
 			externalReferenceCode = null;
 		}
-
-		CPOptionValue cpOptionValue = cpOptionValuePersistence.fetchByC_ERC(
-			serviceContext.getCompanyId(), externalReferenceCode);
-
-		if (cpOptionValue == null) {
-			cpOptionValue = addCPOptionValue(
-				cpOptionId, nameMap, priority, key, externalReferenceCode,
-				serviceContext);
-		}
 		else {
-			cpOptionValue = updateCPOptionValue(
-				cpOptionValue.getCPOptionValueId(), nameMap, priority, key,
-				serviceContext);
+			CPOptionValue cpOptionValue = cpOptionValuePersistence.fetchByC_ERC(
+				serviceContext.getCompanyId(), externalReferenceCode);
+
+			if (cpOptionValue != null) {
+				return updateCPOptionValue(
+					cpOptionValue.getCPOptionValueId(), nameMap, priority, key,
+					serviceContext);
+			}
 		}
 
-		return cpOptionValue;
+		return addCPOptionValue(
+			cpOptionId, nameMap, priority, key, externalReferenceCode,
+			serviceContext);
 	}
 
 	protected SearchContext buildSearchContext(

@@ -157,26 +157,27 @@ public class CommerceInventoryWarehouseItemLocalServiceImpl
 			String externalReferenceCode, String sku, int quantity)
 		throws PortalException {
 
-		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
-			commerceInventoryWarehouseItemPersistence.fetchByC_ERC(
-				companyId, sku);
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
+		}
+		else {
+			CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
+				commerceInventoryWarehouseItemPersistence.fetchByC_ERC(
+					companyId, sku);
 
-		if (commerceInventoryWarehouseItem == null) {
-			if (Validator.isBlank(externalReferenceCode)) {
-				externalReferenceCode = null;
+			if (commerceInventoryWarehouseItem != null) {
+				return commerceInventoryWarehouseItemLocalService.
+					updateCommerceInventoryWarehouseItem(
+						commerceInventoryWarehouseItem.
+							getCommerceInventoryWarehouseItemId(),
+						quantity);
 			}
-
-			return commerceInventoryWarehouseItemLocalService.
-				addCommerceInventoryWarehouseItem(
-					userId, commerceInventoryWarehouseId, externalReferenceCode,
-					sku, quantity);
 		}
 
 		return commerceInventoryWarehouseItemLocalService.
-			updateCommerceInventoryWarehouseItem(
-				commerceInventoryWarehouseItem.
-					getCommerceInventoryWarehouseItemId(),
-				quantity);
+			addCommerceInventoryWarehouseItem(
+				userId, commerceInventoryWarehouseId, externalReferenceCode,
+				sku, quantity);
 	}
 
 	@Override

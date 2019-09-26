@@ -647,15 +647,16 @@ public class CommerceAccountLocalServiceImpl
 		if (Validator.isBlank(externalReferenceCode)) {
 			externalReferenceCode = null;
 		}
+		else {
+			CommerceAccount commerceAccount =
+				commerceAccountPersistence.fetchByC_ERC(
+					serviceContext.getCompanyId(), externalReferenceCode);
 
-		CommerceAccount commerceAccount =
-			commerceAccountPersistence.fetchByC_ERC(
-				serviceContext.getCompanyId(), externalReferenceCode);
-
-		if (commerceAccount != null) {
-			return commerceAccountLocalService.updateCommerceAccount(
-				commerceAccount.getCommerceAccountId(), name, logo, logoBytes,
-				email, taxId, active, serviceContext);
+			if (commerceAccount != null) {
+				return commerceAccountLocalService.updateCommerceAccount(
+					commerceAccount.getCommerceAccountId(), name, logo,
+					logoBytes, email, taxId, active, serviceContext);
+			}
 		}
 
 		return commerceAccountLocalService.addCommerceAccount(

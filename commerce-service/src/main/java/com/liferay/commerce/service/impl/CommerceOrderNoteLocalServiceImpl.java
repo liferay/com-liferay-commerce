@@ -173,29 +173,27 @@ public class CommerceOrderNoteLocalServiceImpl
 		if (Validator.isBlank(externalReferenceCode)) {
 			externalReferenceCode = null;
 		}
-
-		CommerceOrderNote commerceOrderNote;
-
-		if (commerceOrderNoteId > 0) {
-			commerceOrderNote = getCommerceOrderNote(commerceOrderNoteId);
-		}
 		else {
-			commerceOrderNote = commerceOrderNotePersistence.fetchByC_ERC(
-				serviceContext.getCompanyId(), externalReferenceCode);
+			CommerceOrderNote commerceOrderNote;
+
+			if (commerceOrderNoteId > 0) {
+				commerceOrderNote = getCommerceOrderNote(commerceOrderNoteId);
+			}
+			else {
+				commerceOrderNote = commerceOrderNotePersistence.fetchByC_ERC(
+					serviceContext.getCompanyId(), externalReferenceCode);
+			}
+
+			if (commerceOrderNote != null) {
+				return updateCommerceOrderNote(
+					commerceOrderNote.getCommerceOrderNoteId(), content,
+					restricted, externalReferenceCode);
+			}
 		}
 
-		if (commerceOrderNote == null) {
-			commerceOrderNote = addCommerceOrderNote(
-				commerceOrderId, content, restricted, externalReferenceCode,
-				serviceContext);
-		}
-		else {
-			commerceOrderNote = updateCommerceOrderNote(
-				commerceOrderNote.getCommerceOrderNoteId(), content, restricted,
-				externalReferenceCode);
-		}
-
-		return commerceOrderNote;
+		return addCommerceOrderNote(
+			commerceOrderId, content, restricted, externalReferenceCode,
+			serviceContext);
 	}
 
 	protected void validate(String content) throws PortalException {
