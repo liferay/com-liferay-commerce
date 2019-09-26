@@ -25,6 +25,7 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionLink;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
+import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CPDefinitionLinkService;
@@ -40,6 +41,7 @@ import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductSpecification
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductSubscriptionConfiguration;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductTaxConfiguration;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.RelatedProduct;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Sku;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterContext;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistry;
@@ -136,6 +138,7 @@ public class ProductDTOConverter implements DTOConverter {
 							dtoConverterContext);
 				shortDescription = LanguageUtils.getLanguageIdMap(
 					cpDefinition.getShortDescriptionMap());
+				skus = _getSkus(cpDefinition, dtoConverterContext);
 				subscriptionConfiguration =
 					(ProductSubscriptionConfiguration)
 						productSubscriptionConfigurationDTOConverter.toDTO(
@@ -292,6 +295,27 @@ public class ProductDTOConverter implements DTOConverter {
 		Stream<RelatedProduct> stream = relatedProducts.stream();
 
 		return stream.toArray(RelatedProduct[]::new);
+	}
+
+	private Sku[] _getSkus(
+			CPDefinition cpDefinition, DTOConverterContext dtoConverterContext)
+		throws Exception {
+
+		DTOConverter skuDTOConverter = _dtoConverterRegistry.getDTOConverter(
+			CPInstance.class.getName());
+		List<Sku> skus = new ArrayList<>();
+
+		for (CPInstance cpInstance : cpDefinition.getCPInstances()) {
+			skus.add(
+				(Sku)skuDTOConverter.toDTO(
+					new DefaultDTOConverterContext(
+						dtoConverterContext.getLocale(),
+						cpInstance.getCPInstanceId())));
+		}
+
+		Stream<Sku> stream = skus.stream();
+
+		return stream.toArray(Sku[]::new);
 	}
 
 	private String[] _getTags(CPDefinition cpDefinition) {
