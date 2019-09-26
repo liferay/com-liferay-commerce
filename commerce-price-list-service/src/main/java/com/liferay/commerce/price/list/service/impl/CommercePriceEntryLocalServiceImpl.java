@@ -603,8 +603,7 @@ public class CommercePriceEntryLocalServiceImpl
 		if (Validator.isBlank(externalReferenceCode)) {
 			externalReferenceCode = null;
 		}
-
-		if (Validator.isNotNull(externalReferenceCode)) {
+		else {
 			CommercePriceEntry commercePriceEntry =
 				commercePriceEntryPersistence.fetchByC_ERC(
 					serviceContext.getCompanyId(), externalReferenceCode);
