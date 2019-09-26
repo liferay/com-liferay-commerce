@@ -14,12 +14,12 @@
 
 package com.liferay.commerce.account.exception;
 
-import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.ModelListenerException;
 
 /**
- * @author Marco Leo
+ * @author Alec Sloan
  */
-public class CommerceAccountOrdersException extends PortalException {
+public class CommerceAccountOrdersException extends ModelListenerException {
 
 	public CommerceAccountOrdersException() {
 	}
