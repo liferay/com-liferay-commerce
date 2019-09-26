@@ -1,20 +1,19 @@
-import React from 'react';
-// import classnames from 'classnames';
-
 import ClayList from '@clayui/list';
+import React from 'react';
+
 import Expose from './Expose.es';
 
-function Suggestions({list, selected, action, onHover}) {
+function Suggestions({action, list, onHover, selected}) {
 	return (
 		<>
-			<ClayList.Header>Add an existing specification</ClayList.Header>
+			<ClayList.Header>{Liferay.language.get('add-an-existing-specification')}</ClayList.Header>
 			{list.map((s, i) => (
 				<ClayList.Item
+					className={selected === i + 1 ? 'is-selected' : ''}
 					flex
 					key={i}
-					className={selected === i + 1 ? 'is-selected' : ''}
-					onMouseEnter={() => onHover(i + 1)}
 					onClick={e => action(e, i + 1)}
+					onMouseEnter={() => onHover(i + 1)}
 					tabIndex="0"
 				>
 					<ClayList.ItemField expand>
@@ -23,8 +22,8 @@ function Suggestions({list, selected, action, onHover}) {
 					<ClayList.ItemField>
 						<button
 							className="btn btn-monospaced btn-sm btn-primary"
-							type="button"
 							onClick={e => action(e, i + 1)}
+							type="button"
 						>
 							<svg
 								className="lexicon-icon lexicon-icon-plus"
@@ -62,7 +61,9 @@ class AddOrCreateBase extends React.Component {
 			focus: true
 		});
 		window.addEventListener('keydown', this.handleKeyDown);
-		this.props.onFocusIn && this.props.onFocusIn();
+		if(this.props.onFocusIn) {
+			this.props.onFocusIn();
+		}
 		this.input.current.focus();
 	}
 
@@ -73,8 +74,8 @@ class AddOrCreateBase extends React.Component {
 
 	clear() {
 		this.setState({
-			value: '',
-			selected: 0
+			selected: 0,
+			value: ''
 		});
 	}
 
@@ -108,6 +109,7 @@ class AddOrCreateBase extends React.Component {
 				e.preventDefault();
 				this.submit();
 				break;
+			default:
 		}
 	}
 
@@ -134,8 +136,8 @@ class AddOrCreateBase extends React.Component {
 
 	onChange(e) {
 		this.setState({
-			selected: 0,
 			focus: true,
+			selected: 0,
 			suggestions: this.props.onSearch(e.target.value),
 			value: e.target.value
 		});
@@ -151,13 +153,15 @@ class AddOrCreateBase extends React.Component {
 		);
 	}
 
-	handleFocusOut(e) {
+	handleFocusOut() {
 		this._timeoutID = setTimeout(() => {
-			this.props.onFocusOut && this.props.onFocusOut();
+			if(this.props.onFocusOut) {
+				this.props.onFocusOut();
+			}
 		}, 0);
 	}
 
-	handleFocusIn(e) {
+	handleFocusIn() {
 		clearTimeout(this._timeoutID);
 	}
 
@@ -167,9 +171,9 @@ class AddOrCreateBase extends React.Component {
 				className={`card add-or-create ${
 					this.state.focus ? 'has-focus' : ''
 				}`}
-				ref={this.card}
 				onBlur={e => this.handleFocusOut(e)}
 				onFocus={e => this.handleFocusIn(e)}
+				ref={this.card}
 			>
 				<div className="card-header">Add new option</div>
 				<div className="card-body">
@@ -177,20 +181,20 @@ class AddOrCreateBase extends React.Component {
 						<div className="input-group-item">
 							<input
 								className="form-control input-group-inset input-group-inset-after"
-								placeholder="Find existing option or add a new one"
-								type="text"
-								onFocus={e => this.focus(e)}
 								onBlur={e => this.blur(e)}
 								onChange={e => this.onChange(e)}
-								value={this.state.value}
+								onFocus={e => this.focus(e)}
+								placeholder="Find existing option or add a new one"
 								ref={this.input}
+								type="text"
+								value={this.state.value}
 							/>
 							<span className="input-group-inset-item input-group-inset-item-after">
 								{this.state.value && (
 									<button
 										className="btn btn-unstyled"
-										type="button"
 										onClick={e => this.empty(e)}
+										type="button"
 									>
 										<svg
 											className="lexicon-icon lexicon-icon-times"
@@ -212,14 +216,14 @@ class AddOrCreateBase extends React.Component {
 								Create new specification
 							</ClayList.Header>
 							<ClayList.Item
-								flex
 								className={
 									this.state.selected === 0
 										? 'is-selected'
 										: ''
 								}
-								onMouseEnter={() => this.select(0)}
+								flex
 								onClick={e => this.action(e, 0)}
+								onMouseEnter={() => this.select(0)}
 								tabIndex="0"
 							>
 								<ClayList.ItemField expand>
@@ -231,20 +235,20 @@ class AddOrCreateBase extends React.Component {
 								<ClayList.ItemField>
 									<button
 										className="btn btn-link btn-sm"
-										type="button"
 										onClick={e => this.action(e, 0)}
+										type="button"
 									>
-										Create new specification
 									</button>
 								</ClayList.ItemField>
+										Create new specification
 							</ClayList.Item>
 
 							{this.state.suggestions.length ? (
 								<Suggestions
-									list={this.state.suggestions}
-									selected={this.state.selected}
 									action={this.action}
+									list={this.state.suggestions}
 									onHover={e => this.select(e)}
+									selected={this.state.selected}
 								/>
 							) : null}
 						</ClayList>
@@ -268,10 +272,10 @@ export default React.forwardRef((props, ref) => {
 			<AddOrCreateBase
 				{...props}
 				active={active}
-				onSubmit={closeAndSubmit}
+				innerRef={ref}
 				onFocusIn={() => setActive(true)}
 				onFocusOut={() => setActive(false)}
-				innerRef={ref}
+				onSubmit={closeAndSubmit}
 			/>
 		</Expose>
 	);

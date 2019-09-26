@@ -1,11 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-
 import classnames from 'classnames';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 const stateToCssClassesMap = {
-	completed: 'text-success',
 	active: 'text-primary',
+	completed: 'text-success',
 	inactive: 'text-muted'
 };
 

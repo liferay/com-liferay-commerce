@@ -41,8 +41,8 @@ window.Table = launcher('table', 'table', {
 		},
 		{
 			label: 'Grand Total',
+			style: 'big',
 			value: '$ 2,258.50',
-			style: 'big'
 		},
 		{
 			style: 'divider'
