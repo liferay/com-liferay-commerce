@@ -1,14 +1,9 @@
-import React, {useState} from 'react';
-import {ClayRadio, ClayRadioGroup} from '@clayui/form';
-import getAppContext, {ContextProps} from '../Context.es';
-
-import {MultiFilterProps} from './definitions';
-
 import ClayButton from '@clayui/button';
+import {ClayRadio, ClayRadioGroup} from '@clayui/form';
+import React, {useState} from 'react';
 
-// interface IProps extends MultiFilterProps {
-//     panelType?: 'add' | 'edit'
-// }
+import getAppContext from '../Context.es';
+import language from 'react-syntax-highlighter/languages/prism/docker';
 
 const RadioFilter = props => {
 	const {actions} = getAppContext();
@@ -17,8 +12,8 @@ const RadioFilter = props => {
 	return (
 		<>
 			<ClayRadioGroup
-				selectedValue={value || ''}
 				onSelectedValueChange={setValue}
+				selectedValue={value || ''}
 			>
 				{props.items.map(item => (
 					<ClayRadio
@@ -31,10 +26,14 @@ const RadioFilter = props => {
 			<div className="mt-2">
 				<ClayButton
 					className="btn-sm"
-					onClick={() => actions.updateFilterValue(props.slug, value)}
 					disabled={value === props.value}
+					onClick={() => actions.updateFilterValue(props.slug, value)}
 				>
-					{props.panelType === 'edit' ? 'Edit filter' : 'Add filter'}
+					{
+						props.panelType === 'edit' 
+						? Liferay.language.get('edit-filter') 
+						: Liferay.language.get('add-filter')
+					}
 				</ClayButton>
 			</div>
 		</>
