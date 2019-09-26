@@ -189,8 +189,8 @@ public class CommerceOrderPaymentPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceOrderPayment commerceOrderPayment : list) {
-					if ((commerceOrderId !=
-							commerceOrderPayment.getCommerceOrderId())) {
+					if (commerceOrderId !=
+							commerceOrderPayment.getCommerceOrderId()) {
 
 						list = null;
 

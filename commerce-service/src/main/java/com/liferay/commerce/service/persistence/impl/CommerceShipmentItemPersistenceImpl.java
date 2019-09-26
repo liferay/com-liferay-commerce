@@ -184,7 +184,7 @@ public class CommerceShipmentItemPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceShipmentItem commerceShipmentItem : list) {
-					if ((groupId != commerceShipmentItem.getGroupId())) {
+					if (groupId != commerceShipmentItem.getGroupId()) {
 						list = null;
 
 						break;
@@ -711,8 +711,8 @@ public class CommerceShipmentItemPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceShipmentItem commerceShipmentItem : list) {
-					if ((commerceShipmentId !=
-							commerceShipmentItem.getCommerceShipmentId())) {
+					if (commerceShipmentId !=
+							commerceShipmentItem.getCommerceShipmentId()) {
 
 						list = null;
 

@@ -188,7 +188,7 @@ public class CommerceShipmentPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceShipment commerceShipment : list) {
-					if ((groupId != commerceShipment.getGroupId())) {
+					if (groupId != commerceShipment.getGroupId()) {
 						list = null;
 
 						break;

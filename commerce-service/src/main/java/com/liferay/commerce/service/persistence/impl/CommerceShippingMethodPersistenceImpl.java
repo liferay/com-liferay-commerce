@@ -187,7 +187,7 @@ public class CommerceShippingMethodPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceShippingMethod commerceShippingMethod : list) {
-					if ((groupId != commerceShippingMethod.getGroupId())) {
+					if (groupId != commerceShippingMethod.getGroupId()) {
 						list = null;
 
 						break;

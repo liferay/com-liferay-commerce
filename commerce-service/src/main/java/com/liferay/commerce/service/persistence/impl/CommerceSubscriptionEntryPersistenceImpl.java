@@ -1627,9 +1627,7 @@ public class CommerceSubscriptionEntryPersistenceImpl
 				for (CommerceSubscriptionEntry commerceSubscriptionEntry :
 						list) {
 
-					if ((companyId !=
-							commerceSubscriptionEntry.getCompanyId())) {
-
+					if (companyId != commerceSubscriptionEntry.getCompanyId()) {
 						list = null;
 
 						break;
@@ -2161,9 +2159,8 @@ public class CommerceSubscriptionEntryPersistenceImpl
 				for (CommerceSubscriptionEntry commerceSubscriptionEntry :
 						list) {
 
-					if ((subscriptionStatus !=
-							commerceSubscriptionEntry.
-								getSubscriptionStatus())) {
+					if (subscriptionStatus !=
+							commerceSubscriptionEntry.getSubscriptionStatus()) {
 
 						list = null;
 

@@ -189,8 +189,8 @@ public class CommerceAddressPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceAddress commerceAddress : list) {
-					if ((commerceRegionId !=
-							commerceAddress.getCommerceRegionId())) {
+					if (commerceRegionId !=
+							commerceAddress.getCommerceRegionId()) {
 
 						list = null;
 
@@ -720,8 +720,8 @@ public class CommerceAddressPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceAddress commerceAddress : list) {
-					if ((commerceCountryId !=
-							commerceAddress.getCommerceCountryId())) {
+					if (commerceCountryId !=
+							commerceAddress.getCommerceCountryId()) {
 
 						list = null;
 
