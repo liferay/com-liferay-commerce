@@ -1,7 +1,7 @@
-import React, {Fragment, useState} from 'react';
-import ClayIcon, {ClayIconSpriteContext} from '@clayui/icon';
-import ClayDropDown, {Align} from '@clayui/drop-down';
 import ClayButton from '@clayui/button';
+import ClayDropDown, {Align} from '@clayui/drop-down';
+import ClayIcon, {ClayIconSpriteContext} from '@clayui/icon';
+import React, {useState} from 'react';
 
 export default function AssignTo(props) {
 	const [active, setActive] = useState(false);
@@ -11,6 +11,9 @@ export default function AssignTo(props) {
 			<div className="commerce-header__assign-to d-none d-xl-flex align-items-center px-3 mr-3 border-right">
 				<span className="mr-3">Assigned to:</span>
 				<ClayDropDown
+					active={active}
+					alignmentPosition={Align.BottomLeft}
+					onActiveChange={setActive}
 					trigger={
 						<ClayButton displayType="secondary">
 							Admin
@@ -19,9 +22,6 @@ export default function AssignTo(props) {
 							</span>
 						</ClayButton>
 					}
-					active={active}
-					onActiveChange={setActive}
-					alignmentPosition={Align.BottomLeft}
 				>
 					<>
 						<form>

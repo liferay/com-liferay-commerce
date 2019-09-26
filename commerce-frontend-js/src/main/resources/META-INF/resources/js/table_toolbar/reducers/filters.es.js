@@ -1,5 +1,4 @@
 import {actionsDefinition} from '../actions/filters.es';
-import FilterProps from '../Filter/definitions';
 
 export const initialState = [];
 

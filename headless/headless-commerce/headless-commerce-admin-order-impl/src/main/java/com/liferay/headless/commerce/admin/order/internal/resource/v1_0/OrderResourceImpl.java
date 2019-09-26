@@ -416,7 +416,7 @@ public class OrderResourceImpl
 				CommerceOrderConstants.PAYMENT_STATUS_PENDING),
 			GetterUtil.get(
 				order.getOrderStatus(),
-				CommerceOrderConstants.ORDER_STATUS_AWAITING_FULFILLMENT),
+				CommerceOrderConstants.ORDER_STATUS_TO_FULFILL),
 			order.getAdvanceStatus(), order.getExternalReferenceCode(),
 			_commerceContextFactory.create(
 				contextCompany.getCompanyId(), commerceChannel.getSiteGroupId(),
