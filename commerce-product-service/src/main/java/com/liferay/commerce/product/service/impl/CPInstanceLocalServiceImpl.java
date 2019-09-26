@@ -958,39 +958,33 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 			boolean neverExpire, ServiceContext serviceContext)
 		throws PortalException {
 
-		CPInstance cpInstance = null;
-
 		if (Validator.isBlank(externalReferenceCode)) {
 			externalReferenceCode = null;
 		}
-
-		if (Validator.isNotNull(externalReferenceCode)) {
-			cpInstance = cpInstancePersistence.fetchByC_ERC(
-				serviceContext.getCompanyId(), externalReferenceCode);
-		}
-
-		if (cpInstance == null) {
-			cpInstance = addCPInstance(
-				cpDefinitionId, groupId, sku, gtin, manufacturerPartNumber,
-				purchasable, json, width, height, depth, weight, price,
-				promoPrice, cost, published, externalReferenceCode,
-				displayDateMonth, displayDateDay, displayDateYear,
-				displayDateHour, displayDateMinute, expirationDateMonth,
-				expirationDateDay, expirationDateYear, expirationDateHour,
-				expirationDateMinute, neverExpire, serviceContext);
-		}
 		else {
-			cpInstance = updateCPInstance(
-				cpInstance.getCPInstanceId(), sku, gtin, manufacturerPartNumber,
-				purchasable, width, height, depth, weight, price, promoPrice,
-				cost, published, displayDateMonth, displayDateDay,
-				displayDateYear, displayDateHour, displayDateMinute,
-				expirationDateMonth, expirationDateDay, expirationDateYear,
-				expirationDateHour, expirationDateMinute, neverExpire,
-				serviceContext);
+			CPInstance cpInstance = cpInstancePersistence.fetchByC_ERC(
+				serviceContext.getCompanyId(), externalReferenceCode);
+
+			if (cpInstance != null) {
+				return updateCPInstance(
+					cpInstance.getCPInstanceId(), sku, gtin,
+					manufacturerPartNumber, purchasable, width, height, depth,
+					weight, price, promoPrice, cost, published,
+					displayDateMonth, displayDateDay, displayDateYear,
+					displayDateHour, displayDateMinute, expirationDateMonth,
+					expirationDateDay, expirationDateYear, expirationDateHour,
+					expirationDateMinute, neverExpire, serviceContext);
+			}
 		}
 
-		return cpInstance;
+		return addCPInstance(
+			cpDefinitionId, groupId, sku, gtin, manufacturerPartNumber,
+			purchasable, json, width, height, depth, weight, price, promoPrice,
+			cost, published, externalReferenceCode, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire,
+			serviceContext);
 	}
 
 	protected CPInstance addCPInstance(

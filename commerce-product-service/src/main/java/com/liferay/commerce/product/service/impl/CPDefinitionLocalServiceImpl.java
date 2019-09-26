@@ -1679,42 +1679,40 @@ public class CPDefinitionLocalServiceImpl
 		if (Validator.isBlank(externalReferenceCode)) {
 			externalReferenceCode = null;
 		}
-
-		CPDefinition cpDefinition;
-
-		CProduct cProduct = cProductLocalService.fetchCProductByReferenceCode(
-			serviceContext.getCompanyId(), externalReferenceCode);
-
-		if (cProduct == null) {
-			cpDefinition = cpDefinitionLocalService.addCPDefinition(
-				groupId, userId, nameMap, shortDescriptionMap, descriptionMap,
-				urlTitleMap, metaTitleMap, metaDescriptionMap, metaKeywordsMap,
-				productTypeName, ignoreSKUCombinations, shippable, freeShipping,
-				shipSeparately, shippingExtraPrice, width, height, depth,
-				weight, cpTaxCategoryId, taxExempt, telcoOrElectronics,
-				ddmStructureKey, published, displayDateMonth, displayDateDay,
-				displayDateYear, displayDateHour, displayDateMinute,
-				expirationDateMonth, expirationDateDay, expirationDateYear,
-				expirationDateHour, expirationDateMinute, neverExpire,
-				defaultSku, subscriptionEnabled, subscriptionLength,
-				subscriptionType, subscriptionTypeSettingsProperties,
-				maxSubscriptionCycles, externalReferenceCode, serviceContext);
-		}
 		else {
-			cpDefinition = cpDefinitionLocalService.updateCPDefinition(
-				cProduct.getPublishedCPDefinitionId(), nameMap,
-				shortDescriptionMap, descriptionMap, urlTitleMap, metaTitleMap,
-				metaDescriptionMap, metaKeywordsMap, ignoreSKUCombinations,
-				shippable, freeShipping, shipSeparately, shippingExtraPrice,
-				width, height, depth, weight, cpTaxCategoryId, taxExempt,
-				telcoOrElectronics, ddmStructureKey, published,
-				displayDateMonth, displayDateDay, displayDateYear,
-				displayDateHour, displayDateMinute, expirationDateMonth,
-				expirationDateDay, expirationDateYear, expirationDateHour,
-				expirationDateMinute, neverExpire, serviceContext);
+			CProduct cProduct =
+				cProductLocalService.fetchCProductByReferenceCode(
+					serviceContext.getCompanyId(), externalReferenceCode);
+
+			if (cProduct != null) {
+				return cpDefinitionLocalService.updateCPDefinition(
+					cProduct.getPublishedCPDefinitionId(), nameMap,
+					shortDescriptionMap, descriptionMap, urlTitleMap,
+					metaTitleMap, metaDescriptionMap, metaKeywordsMap,
+					ignoreSKUCombinations, shippable, freeShipping,
+					shipSeparately, shippingExtraPrice, width, height, depth,
+					weight, cpTaxCategoryId, taxExempt, telcoOrElectronics,
+					ddmStructureKey, published, displayDateMonth,
+					displayDateDay, displayDateYear, displayDateHour,
+					displayDateMinute, expirationDateMonth, expirationDateDay,
+					expirationDateYear, expirationDateHour,
+					expirationDateMinute, neverExpire, serviceContext);
+			}
 		}
 
-		return cpDefinition;
+		return cpDefinitionLocalService.addCPDefinition(
+			groupId, userId, nameMap, shortDescriptionMap, descriptionMap,
+			urlTitleMap, metaTitleMap, metaDescriptionMap, metaKeywordsMap,
+			productTypeName, ignoreSKUCombinations, shippable, freeShipping,
+			shipSeparately, shippingExtraPrice, width, height, depth, weight,
+			cpTaxCategoryId, taxExempt, telcoOrElectronics, ddmStructureKey,
+			published, displayDateMonth, displayDateDay, displayDateYear,
+			displayDateHour, displayDateMinute, expirationDateMonth,
+			expirationDateDay, expirationDateYear, expirationDateHour,
+			expirationDateMinute, neverExpire, defaultSku, subscriptionEnabled,
+			subscriptionLength, subscriptionType,
+			subscriptionTypeSettingsProperties, maxSubscriptionCycles,
+			externalReferenceCode, serviceContext);
 	}
 
 	protected SearchContext buildSearchContext(

@@ -227,24 +227,22 @@ public class CPOptionLocalServiceImpl extends CPOptionLocalServiceBaseImpl {
 		if (Validator.isBlank(externalReferenceCode)) {
 			externalReferenceCode = null;
 		}
-
-		CPOption cpOption = cpOptionPersistence.fetchByC_ERC(
-			serviceContext.getCompanyId(), externalReferenceCode);
-
-		if (cpOption == null) {
-			cpOption = addCPOption(
-				userId, nameMap, descriptionMap, ddmFormFieldTypeName,
-				facetable, required, skuContributor, key, externalReferenceCode,
-				serviceContext);
-		}
 		else {
-			cpOption = updateCPOption(
-				cpOption.getCPOptionId(), nameMap, descriptionMap,
-				ddmFormFieldTypeName, facetable, required, skuContributor, key,
-				serviceContext);
+			CPOption cpOption = cpOptionPersistence.fetchByC_ERC(
+				serviceContext.getCompanyId(), externalReferenceCode);
+
+			if (cpOption != null) {
+				return updateCPOption(
+					cpOption.getCPOptionId(), nameMap, descriptionMap,
+					ddmFormFieldTypeName, facetable, required, skuContributor,
+					key, serviceContext);
+			}
 		}
 
-		return cpOption;
+		return addCPOption(
+			userId, nameMap, descriptionMap, ddmFormFieldTypeName, facetable,
+			required, skuContributor, key, externalReferenceCode,
+			serviceContext);
 	}
 
 	protected SearchContext buildSearchContext(
