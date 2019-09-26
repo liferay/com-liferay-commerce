@@ -308,6 +308,10 @@
         transform: scale(1);
       }
     }
+
+    &--disabled {
+      opacity: .5;
+    }
   }
 
   .product-compare-checkbox {
