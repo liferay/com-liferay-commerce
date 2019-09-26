@@ -1,6 +1,6 @@
 import launcher from './entry.es';
 
-window.Summary = launcher('summary', 'summary', {
+launcher('summary', 'summary', {
 	items: [
 		{
 			label: 'Items Subtotal',
