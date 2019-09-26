@@ -1,15 +1,15 @@
 export const actionsDefinition = {
+	RESET_FILTERS_VALUE: 'resetFiltersValue',
 	UPDATE_FILTER_VALUE: 'updateFilterValue',
-	RESET_FILTERS_VALUE: 'resetFiltersValue'
 };
 
 const updateFilterValue = dispatch => (slug, value = null) =>
 	dispatch({
-		type: actionsDefinition.UPDATE_FILTER_VALUE,
 		payload: {
 			slug,
 			value
-		}
+		},
+		type: actionsDefinition.UPDATE_FILTER_VALUE
 	});
 
 const resetFiltersValue = dispatch => () =>
@@ -18,8 +18,8 @@ const resetFiltersValue = dispatch => () =>
 	});
 
 export const actions = {
-	updateFilterValue,
-	resetFiltersValue
+	resetFiltersValue,
+	updateFilterValue
 };
 
 export default actions;

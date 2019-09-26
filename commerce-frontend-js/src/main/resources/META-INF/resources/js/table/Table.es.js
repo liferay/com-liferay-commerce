@@ -1,12 +1,13 @@
-import React, {useState} from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import ClayTable from '@clayui/table';
-import Pagination from './pagination/index.es';
-import {showNotification} from '../utilities/index.es';
-import Summary from '../summary/Summary.es';
 import {ClayIconSpriteContext} from '@clayui/icon';
+import ClayTable from '@clayui/table';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import React, {useState} from 'react';
+
+import Summary from '../summary/Summary.es';
 import ManagementTableBar from '../table_toolbar/TableToolbar.es';
+import {showNotification} from '../utilities/index.es';
+import Pagination from './pagination/index.es';
 
 function WrappingCard(props) {
 	return (

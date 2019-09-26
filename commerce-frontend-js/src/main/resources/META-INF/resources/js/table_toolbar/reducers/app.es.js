@@ -1,18 +1,5 @@
 import {actionsDefinition} from '../actions/app.es';
 
-// export interface ReducerProps {
-//   spritemap?: string,
-//   plusButton?: {
-//     onClick: FunctionConstructor,
-//     resetFiltersAfterClickAction: boolean
-//   },
-//   queryEndpoint?: string,
-//   inputSearch: {
-//     name: string,
-//     value?: string
-//   }
-// }
-
 export const initialState = {
 	inputSearch: {
 		name: 'main-search'

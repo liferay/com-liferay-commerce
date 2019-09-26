@@ -1,14 +1,8 @@
-import React, {useState} from 'react';
-import {ClayCheckbox} from '@clayui/form';
 import ClayButton from '@clayui/button';
-
-import {CheckboxesFilterProps} from './definitions';
+import {ClayCheckbox} from '@clayui/form';
+import React, {useState} from 'react';
 
 import getAppContext from '../Context.es';
-
-// interface IProps extends CheckboxesFilterProps {
-//     panelType?: 'add' | 'edit'
-// }
 
 const CheckboxesFilter = props => {
 	const {actions} = getAppContext();
@@ -46,19 +40,23 @@ const CheckboxesFilter = props => {
 					<ClayCheckbox
 						aria-label={item.label}
 						checked={checked}
-						onChange={() => selectCheckbox(item.value)}
-						label={item.label}
 						key={i}
+						label={item.label}
+						onChange={() => selectCheckbox(item.value)}
 					/>
 				);
 			})}
 			<div className="mt-2">
 				<ClayButton
 					className="btn-sm"
-					onClick={() => actions.updateFilterValue(props.slug, value)}
 					disabled={value === props.value}
+					onClick={() => actions.updateFilterValue(props.slug, value)}
 				>
-					{props.panelType === 'edit' ? 'Edit filter' : 'Add filter'}
+					{
+						props.panelType === 'edit' 
+						? Liferay.language.get('edit-filter') 
+						: Liferay.language.get('add-filter')
+					}
 				</ClayButton>
 			</div>
 		</>

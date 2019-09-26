@@ -1,7 +1,7 @@
-import React, {useState, useRef, useEffect} from 'react';
-import ClayModal, {useModal} from '@clayui/modal';
 import ClayButton from '@clayui/button';
+import ClayModal, {useModal} from '@clayui/modal';
 import PropTypes from 'prop-types';
+import React, {useState, useRef, useEffect} from 'react';
 
 const Modal = props => {
 	const [visible, setVisible] = useState(false);
@@ -29,21 +29,21 @@ const Modal = props => {
 	const iframeRef = useRef(null);
 	const {observer, onClose} = useModal({onClose: reset});
 
-	function cleanUpListeners(e) {
-		if (e.portletId === props.portletId) {
-			Liferay.detach(`${props.id}-open`, open);
-			Liferay.detach('destroyPortlet', cleanUpListeners);
-		}
-	}
-
 	useEffect(() => {
+		function cleanUpListeners(e) {
+			if (e.portletId === props.portletId) {
+				Liferay.detach(`${props.id}-open`, open);
+				Liferay.detach('destroyPortlet', cleanUpListeners);
+			}
+		}
+
 		if (Liferay.on) {
 			Liferay.on(`${props.id}-open`, open);
 			Liferay.on('destroyPortlet', cleanUpListeners);
 		} else {
 			window.addEventListener(`${props.id}-open`, open);
 		}
-	}, [props.id]);
+	}, [props.id , props.portletId]);
 
 	function _handleIframeLoad() {
 		setIframeLoadingCounter(iframeLoadingCounter + 1);
@@ -58,6 +58,7 @@ const Modal = props => {
 			default:
 				break;
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [iframeLoadingCounter]);
 
 	function _handleFormSubmit() {
@@ -132,8 +133,8 @@ const Modal = props => {
 	return visible ? (
 		<ClayModal
 			observer={observer}
-			spritemap={props.spritemap}
 			size={props.size}
+			spritemap={props.spritemap}
 			status={props.status}
 		>
 			{props.title && <ClayModal.Header>{props.title}</ClayModal.Header>}
@@ -142,10 +143,10 @@ const Modal = props => {
 				style={{height: '450px', maxHeight: '100%'}}
 			>
 				<iframe
+					onLoad={_handleIframeLoad}
+					ref={iframeRef}
 					src={props.url}
 					title={props.title}
-					ref={iframeRef}
-					onLoad={_handleIframeLoad}
 				/>
 			</div>
 			{(props.showSubmit ||
@@ -170,8 +171,8 @@ const Modal = props => {
 								)}
 								{(props.showSubmit || props.submitLabel) && (
 									<ClayButton
-										displayType="primary"
 										disabled={!submitActive}
+										displayType="primary"
 										onClick={_submit}
 									>
 										{props.submitLabel ||
@@ -188,19 +189,19 @@ const Modal = props => {
 };
 
 Modal.propTypes = {
-	id: PropTypes.string.isRequired,
-	submitActiveAtLoading: PropTypes.bool,
-	portletId: PropTypes.string,
+	cancelLabel: PropTypes.string,
 	closeOnSubmit: PropTypes.bool,
-	spritemap: PropTypes.string,
-	size: PropTypes.string,
-	status: PropTypes.string,
-	title: PropTypes.string,
-	url: PropTypes.string.isRequired,
+	id: PropTypes.string.isRequired,
+	portletId: PropTypes.string,
 	showCancel: PropTypes.bool,
 	showSubmit: PropTypes.bool,
+	size: PropTypes.string,
+	spritemap: PropTypes.string,
+	status: PropTypes.string,
+	submitActiveAtLoading: PropTypes.bool,
 	submitLabel: PropTypes.string,
-	cancelLabel: PropTypes.string
+	title: PropTypes.string,
+	url: PropTypes.string.isRequired,
 };
 
 export default Modal;
