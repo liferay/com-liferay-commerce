@@ -1,19 +1,21 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
-export default function Expose({active, onClose, children}) {
+export default function Expose({active, children, onClose}) {
 	const [height, setHeight] = React.useState(0);
 	const content = React.useRef();
 
-	React.useEffect(() => {
+	useEffect(() => {
 		setHeight(content.current.getBoundingClientRect().height);
 	}, [content]);
 
-	React.useEffect(() => {
+	useEffect(() => {
 		const handleEscKey = e => e.key === 'Escape' && onClose();
 
-		active
-			? window.addEventListener('keydown', handleEscKey)
-			: window.removeEventListener('keydown', handleEscKey);
+		if(active) {
+			window.addEventListener('keydown', handleEscKey)
+		} else {
+			window.removeEventListener('keydown', handleEscKey);
+		}
 	}, [active, onClose]);
 
 	return (

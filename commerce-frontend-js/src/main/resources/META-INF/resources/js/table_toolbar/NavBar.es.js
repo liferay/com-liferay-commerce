@@ -1,11 +1,12 @@
-import React, {FunctionComponent, useState, useEffect} from 'react';
-import Icon from '@clayui/icon';
-import FiltersDropdown from './FiltersDropdown.es';
 import ClayButton from '@clayui/button';
+import Icon from '@clayui/icon';
+import React, {useState, useEffect} from 'react';
+
 import getAppContext from './Context.es';
+import FiltersDropdown from './FiltersDropdown.es';
 
 const NavBar = () => {
-	const {state, actions} = getAppContext();
+	const {actions, state} = getAppContext();
 	const [inputSearchValue, setInputSearchValue] = useState(
 		state.app.inputSearch.value
 	);
@@ -31,16 +32,20 @@ const NavBar = () => {
 		actions.getData(
 			state.app.queryEndpoint,
 			state.filters.concat({
-				type: 'text',
-				slug: state.app.inputSearch.name,
-				value: state.app.inputSearch.value,
+				label: '',
 				operator: 'contains',
-				label: ''
+				slug: state.app.inputSearch.name,
+				type: 'text',
+				value: state.app.inputSearch.value,
 			})
 		);
 	}, [
-		...state.filters.map(filter => filter.value),
-		state.app.inputSearch.value
+		initialized,
+		actions,
+		state.app.inputSearch.name,
+		state.app.inputSearch.value,
+		state.app.queryEndpoint,
+		state.filters
 	]);
 
 	return (
@@ -52,22 +57,22 @@ const NavBar = () => {
 				<div className="navbar-form navbar-form-autofit navbar-overlay navbar-overlay-sm-down">
 					<div className="d-inline">
 						<form
-							role="search"
 							onSubmit={e => {
 								e.preventDefault();
 								actions.updateSearchValue(inputSearchValue);
 							}}
+							role="search"
 						>
 							<div className="input-group">
 								<div className="input-group-item">
 									<input
 										className="form-control input-group-inset input-group-inset-after"
-										placeholder="Search for..."
-										type="text"
-										value={inputSearchValue || ''}
 										onChange={e =>
 											setInputSearchValue(e.target.value)
 										}
+										placeholder="Search for..."
+										type="text"
+										value={inputSearchValue || ''}
 									/>
 									<span className="input-group-inset-item input-group-inset-item-after">
 										<button

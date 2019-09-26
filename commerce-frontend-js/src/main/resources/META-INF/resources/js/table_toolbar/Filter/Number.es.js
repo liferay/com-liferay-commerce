@@ -1,13 +1,8 @@
-import React, {useState} from 'react';
-import classNames from 'classnames';
-import {NumberFilterProps} from './definitions';
-import getAppContext, {ContextProps} from '../Context.es';
-
 import ClayButton from '@clayui/button';
+import classNames from 'classnames';
+import React, {useState} from 'react';
 
-// interface IProps extends NumberFilterProps {
-//     panelType?: 'add' | 'edit'
-// }
+import getAppContext from '../Context.es';
 
 const NumberFilter = props => {
 	const {actions} = getAppContext();
@@ -24,11 +19,11 @@ const NumberFilter = props => {
 					<input
 						aria-label="Amount (to the nearest dollar)"
 						className="form-control"
-						type="number"
-						min={props.min}
 						max={props.max}
-						value={value || ''}
+						min={props.min}
 						onChange={e => setValue(e.target.value)}
+						type="number"
+						value={value || ''}
 					/>
 				</div>
 				{props.inputText && (
@@ -42,10 +37,14 @@ const NumberFilter = props => {
 			<div className="mt-2">
 				<ClayButton
 					className="btn-sm"
-					onClick={() => actions.updateFilterValue(props.slug, value)}
 					disabled={value === props.value}
+					onClick={() => actions.updateFilterValue(props.slug, value)}
 				>
-					{props.panelType === 'edit' ? 'Edit filter' : 'Add filter'}
+					{
+						props.panelType === 'edit' 
+						? Liferay.language.get('edit-filter') 
+						: Liferay.language.get('add-filter')
+					}
 				</ClayButton>
 			</div>
 		</div>

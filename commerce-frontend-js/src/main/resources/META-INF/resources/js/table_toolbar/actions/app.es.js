@@ -1,39 +1,37 @@
-import FilterProps from '../Filter/definitions';
-
 export const actionsDefinition = {
-	GET_DATA_PENDING: 'getDataPending',
 	GET_DATA_FULFILLED: 'getDataFullFilled',
+	GET_DATA_PENDING: 'getDataPending',
 	GET_DATA_REJECTED: 'getDataRejected',
-	UPDATE_SEARCH_VALUE: 'updateSearchValue',
+	SET_ERROR: 'setError',
 	SET_LOADING: 'setLoading',
-	SET_ERROR: 'setError'
+	UPDATE_SEARCH_VALUE: 'updateSearchValue'
 };
 
 const updateSearchValue = dispatch => value => {
 	return dispatch({
+		payload: value,
 		type: actionsDefinition.UPDATE_SEARCH_VALUE,
-		payload: value
 	});
 };
 
 const setLoading = dispatch => value => {
 	return dispatch({
+		payload: value,
 		type: actionsDefinition.SET_LOADING,
-		payload: value
 	});
 };
 
 const setError = dispatch => value => {
 	return dispatch({
+		payload: value,
 		type: actionsDefinition.SET_ERROR,
-		payload: value
 	});
 };
 
 const getQueryData = filter => ({
 	field: filter.slug,
+	operator: filter.operator,
 	value: filter.value,
-	operator: filter.operator
 });
 
 const serializeFilter = filter =>
@@ -51,10 +49,10 @@ const getData = dispatch => (url, filters) => {
 	});
 
 	return fetch(url + (query && `?filter=${query}`), {
-		method: 'GET',
 		headers: new Headers({
 			'Content-Type': 'application/json'
-		})
+		}),
+		method: 'GET'
 	})
 		.then(() => {
 			dispatch({
@@ -63,17 +61,17 @@ const getData = dispatch => (url, filters) => {
 		})
 		.catch(err =>
 			dispatch({
+				payload: err,
 				type: actionsDefinition.GET_DATA_REJECTED,
-				payload: err
 			})
 		);
 };
 
 export const actions = {
 	getData,
-	updateSearchValue,
+	setError,
 	setLoading,
-	setError
+	updateSearchValue
 };
 
 export default actions;

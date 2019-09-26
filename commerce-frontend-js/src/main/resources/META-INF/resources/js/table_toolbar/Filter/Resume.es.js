@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-
 import ClayDropDown from '@clayui/drop-down';
 import ClayIcon from '@clayui/icon';
-import {renderFilter, prettifyFilterValue} from '../utils/index.es';
 import ClayLabel from '@clayui/label';
-import getAppContext, {ContextProps} from '../Context.es';
+import React, {useState} from 'react';
+
+import getAppContext from '../Context.es';
+import {renderFilter, prettifyFilterValue} from '../utils/index.es';
 
 const Resume = props => {
 	const {actions} = getAppContext();
@@ -14,16 +14,18 @@ const Resume = props => {
 
 	return (
 		<ClayLabel
+			className="component-label tbar-label mr-2"
 			closeButtonProps={{
 				onClick: () => actions.updateFilterValue(props.slug, null)
 			}}
-			className="component-label tbar-label mr-2"
 		>
 			<div className="d-flex">
 				<div className="label-section mr-2">
 					{props.label} : {prettifiedValue}
 				</div>
 				<ClayDropDown
+					active={open}
+					onActiveChange={setOpen}
 					trigger={
 						<span className="label-item ml-1">
 							<button className="btn close" type="button">
@@ -31,8 +33,6 @@ const Resume = props => {
 							</button>
 						</span>
 					}
-					active={open}
-					onActiveChange={setOpen}
 				>
 					<ClayDropDown.ItemList>
 						<div className="p-3">{renderFilter(props, 'edit')}</div>

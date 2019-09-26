@@ -1,4 +1,5 @@
 import React from 'react';
+
 import TextFilter from './Text.es';
 import NumberFilter from './Number.es';
 import DateFilter from './Date.es';

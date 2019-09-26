@@ -1,7 +1,7 @@
 import React from 'react';
 
-import modalLauncher from './entry.es';
 import {launcher} from '../utilities/index.es';
+import modalLauncher from './entry.es';
 
 const props = {
 	actions: [
@@ -9,14 +9,14 @@ const props = {
 			definition: 'save'
 		}
 	],
-	spritemap: './icons.svg',
+	closeOnSubmit: true,
 	id: 'zeasc',
+	showCancel: true,
+	size: 'full-screen',
+	spritemap: './icons.svg',
+	submitLabel: 'Create',
 	title: 'Title',
 	url: 'http://localhost:9000/form.html',
-	submitLabel: 'Create',
-	showCancel: true,
-	size: 'full-scfeen',
-	closeOnSubmit: true
 };
 
 // declare global {

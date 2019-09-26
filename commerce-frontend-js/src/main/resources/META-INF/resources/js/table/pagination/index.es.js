@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
-import ClayPagination from '@clayui/pagination';
-import ClayDropDown from '@clayui/drop-down';
 import ClayButton from '@clayui/button';
+import ClayDropDown from '@clayui/drop-down';
 import ClayIcon from '@clayui/icon';
+import ClayPagination from '@clayui/pagination';
+import React, {useState} from 'react';
 
 function Pagination() {
 	const initialActivePage = 1;

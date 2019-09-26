@@ -1,20 +1,15 @@
-import React, {useState} from 'react';
-import ClayDatePicker from '@clayui/date-picker';
 import ClayButton from '@clayui/button';
+import ClayDatePicker from '@clayui/date-picker';
+import React, {useState} from 'react';
 
-import getAppContext, {ContextProps} from '../Context.es';
-import {DateFilterProps, DateFormat} from './definitions';
+import getAppContext from '../Context.es';
 import {prettifyDateValue} from '../utils/index.es';
-
-// interface IProps extends DateFilterProps {
-//     panelType?: 'add' | 'edit'
-// }
 
 const getDateObj = date => {
 	return {
-		year: date.getFullYear(),
+		day: date.getDate(),
 		month: date.getMonth(),
-		day: date.getDate()
+		year: date.getFullYear(),
 	};
 };
 
@@ -47,31 +42,29 @@ const DateFilter = props => {
 
 		setValue(newValue);
 
-		console.log(
-			`newDate: "${newDate}" - selectedValue: "${JSON.stringify(
-				selectedValue
-			)}" - valid: "${valid}" - newValue: "${JSON.stringify(newValue)}"`
-		);
 	}
 
 	return (
 		<>
 			<ClayDatePicker
-				onValueChange={updateDate}
 				dateFormat="DD.MM.YYYY"
+				onValueChange={updateDate}
 				placeholder="DD.MM.YYYY"
 				value={inputValue}
 			/>
 			<div className="mt-2">
 				<ClayButton
 					className="btn-sm"
-					onClick={() => actions.updateFilterValue(props.slug, value)}
 					disabled={
-						prettifyDateValue(value) ===
-							prettifyDateValue(props.value) || !valid
+						prettifyDateValue(value) === prettifyDateValue(props.value) || !valid
 					}
+					onClick={() => actions.updateFilterValue(props.slug, value)}
 				>
-					{props.panelType === 'edit' ? 'Edit filter' : 'Add filter'}
+					{
+						props.panelType === 'edit' 
+						? Liferay.language.get('edit-filter') 
+						: Liferay.language.get('add-filter')
+					}
 				</ClayButton>
 			</div>
 		</>
