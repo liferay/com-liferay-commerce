@@ -1585,7 +1585,7 @@ public class CPDefinitionInventoryPersistenceImpl
 			CPDefinitionInventory cpDefinitionInventory =
 				(CPDefinitionInventory)result;
 
-			if ((CPDefinitionId != cpDefinitionInventory.getCPDefinitionId())) {
+			if (CPDefinitionId != cpDefinitionInventory.getCPDefinitionId()) {
 				result = null;
 			}
 		}

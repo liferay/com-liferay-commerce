@@ -1596,7 +1596,7 @@ public class CommerceOrderPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceOrder commerceOrder : list) {
-					if ((groupId != commerceOrder.getGroupId())) {
+					if (groupId != commerceOrder.getGroupId()) {
 						list = null;
 
 						break;
@@ -2107,7 +2107,7 @@ public class CommerceOrderPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceOrder commerceOrder : list) {
-					if ((userId != commerceOrder.getUserId())) {
+					if (userId != commerceOrder.getUserId()) {
 						list = null;
 
 						break;
@@ -2624,8 +2624,8 @@ public class CommerceOrderPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceOrder commerceOrder : list) {
-					if ((billingAddressId !=
-							commerceOrder.getBillingAddressId())) {
+					if (billingAddressId !=
+							commerceOrder.getBillingAddressId()) {
 
 						list = null;
 
@@ -3152,8 +3152,8 @@ public class CommerceOrderPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceOrder commerceOrder : list) {
-					if ((shippingAddressId !=
-							commerceOrder.getShippingAddressId())) {
+					if (shippingAddressId !=
+							commerceOrder.getShippingAddressId()) {
 
 						list = null;
 

@@ -189,8 +189,8 @@ public class CommerceOrderItemPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceOrderItem commerceOrderItem : list) {
-					if ((commerceOrderId !=
-							commerceOrderItem.getCommerceOrderId())) {
+					if (commerceOrderId !=
+							commerceOrderItem.getCommerceOrderId()) {
 
 						list = null;
 
@@ -719,7 +719,7 @@ public class CommerceOrderItemPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceOrderItem commerceOrderItem : list) {
-					if ((CProductId != commerceOrderItem.getCProductId())) {
+					if (CProductId != commerceOrderItem.getCProductId()) {
 						list = null;
 
 						break;
@@ -1244,7 +1244,7 @@ public class CommerceOrderItemPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceOrderItem commerceOrderItem : list) {
-					if ((CPInstanceId != commerceOrderItem.getCPInstanceId())) {
+					if (CPInstanceId != commerceOrderItem.getCPInstanceId()) {
 						list = null;
 
 						break;

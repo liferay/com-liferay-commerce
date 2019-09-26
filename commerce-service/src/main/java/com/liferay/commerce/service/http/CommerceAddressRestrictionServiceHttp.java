@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.service.http;
 
-
 /**
  * Provides the HTTP utility for the
  * <code>com.liferay.commerce.service.CommerceAddressRestrictionServiceUtil</code> service
