@@ -91,7 +91,7 @@ public class CommerceOrderNoteLocalServiceImpl
 		long companyId, String externalReferenceCode) {
 
 		if (Validator.isBlank(externalReferenceCode)) {
-			externalReferenceCode = null;
+			return null;
 		}
 
 		return commerceOrderNotePersistence.fetchByC_ERC(
