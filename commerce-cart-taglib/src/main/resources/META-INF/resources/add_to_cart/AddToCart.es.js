@@ -11,10 +11,10 @@ class AddToCart extends Component {
 	}
 
 	/**
-     * Makes an ajax request to submit the data.
-     * @param {Event} event
-     * @protected
-     */
+	 * Makes an ajax request to submit the data.
+	 * @param {Event} event
+	 * @protected
+	 */
 
 	_addToCart() {
 		var instance = this;
@@ -47,7 +47,7 @@ class AddToCart extends Component {
 		formData.append('p_auth', Liferay.authToken);
 
 		fetch(
-			this.uri,
+			this.uri + `&p_auth=${window.Liferay.authToken}`,
 			{
 				body: formData,
 				credentials: 'include',
