@@ -471,11 +471,7 @@ public class CommerceDiscountLocalServiceImpl
 			}
 		}
 
-		if (Validator.isBlank(externalReferenceCode)) {
-			externalReferenceCode = null;
-		}
-
-		if (Validator.isNotNull(externalReferenceCode)) {
+		if (!Validator.isBlank(externalReferenceCode)) {
 			CommerceDiscount commerceDiscount =
 				commerceDiscountPersistence.fetchByC_ERC(
 					serviceContext.getCompanyId(), externalReferenceCode);
