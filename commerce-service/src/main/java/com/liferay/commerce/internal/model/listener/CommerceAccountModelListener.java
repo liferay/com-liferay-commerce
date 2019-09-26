@@ -17,9 +17,6 @@ package com.liferay.commerce.internal.model.listener;
 import com.liferay.commerce.account.exception.CommerceAccountOrdersException;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.service.CommerceOrderLocalService;
-import com.liferay.portal.kernel.exception.ModelListenerException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.BaseModelListener;
 import com.liferay.portal.kernel.model.ModelListener;
 
@@ -35,25 +32,15 @@ public class CommerceAccountModelListener
 
 	@Override
 	public void onBeforeRemove(CommerceAccount commerceAccount) {
-		try {
-			int accountOrders =
-				_commerceOrderLocalService.
-					getCommerceOrdersCountByCommerceAccountId(
-						commerceAccount.getCommerceAccountId());
+		int accountOrders =
+			_commerceOrderLocalService.
+				getCommerceOrdersCountByCommerceAccountId(
+					commerceAccount.getCommerceAccountId());
 
-			if (accountOrders > 0) {
-				throw new CommerceAccountOrdersException();
-			}
-		}
-		catch (CommerceAccountOrdersException caoe) {
-			_log.error(caoe, caoe);
-
-			throw new ModelListenerException(caoe);
+		if (accountOrders > 0) {
+			throw new CommerceAccountOrdersException();
 		}
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		CommerceAccountModelListener.class);
 
 	@Reference
 	private CommerceOrderLocalService _commerceOrderLocalService;
