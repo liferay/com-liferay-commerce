@@ -2,22 +2,22 @@ import launcher from './entry.es';
 import './_side_panel.scss';
 
 window.SidePanel = launcher('sidePanel', 'side-panel', {
-	size: 'medium',
-	visible: false,
-	spritemap: './icons.svg',
 	pages: [
 		{
-			url: `/index.html?${Math.random()}`,
-			pageName: 'Index'
+			pageName: 'Index',
+			url: `/index.html?${Math.random()}`
 		},
 		{
-			url: `/addorcreate.html?${Math.random()}`,
-			pageName: 'Add or create'
+			pageName: 'Add or create',
+			url: `/addorcreate.html?${Math.random()}`
 		},
 		{
-			url: `/gallery.html?${Math.random()}`,
-			pageName: 'Gallery'
+			pageName: 'Gallery',
+			url: `/gallery.html?${Math.random()}`
 		}
 	],
-	topAnchor: document.querySelector('.top-anchor')
+	size: 'medium',
+	spritemap: './icons.svg',
+	topAnchor: document.querySelector('.top-anchor'),
+	visible: false,
 });

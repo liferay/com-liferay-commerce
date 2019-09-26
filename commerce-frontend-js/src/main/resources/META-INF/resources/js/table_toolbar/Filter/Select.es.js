@@ -1,12 +1,8 @@
-import React, {useState} from 'react';
-import ClaySelect from '@clayui/select';
-import getAppContext from '../Context.es';
-
 import ClayButton from '@clayui/button';
+import ClaySelect from '@clayui/select';
+import React, {useState} from 'react';
 
-// interface IProps extends MultiFilterProps {
-//     panelType?: 'add' | 'edit'
-// }
+import getAppContext from '../Context.es';
 
 const SelectFilter = props => {
 	const {actions} = getAppContext();
@@ -17,8 +13,8 @@ const SelectFilter = props => {
 			<ClaySelect
 				aria-label="Select Label"
 				id="mySelectId"
-				value={value || ''}
 				onChange={e => setValue(e.target.value)}
+				value={value || ''}
 			>
 				<ClaySelect.Option label={''} value={''} />
 				{props.items.map(item => (
@@ -32,10 +28,14 @@ const SelectFilter = props => {
 			<div className="mt-2">
 				<ClayButton
 					className="btn-sm"
-					onClick={() => actions.updateFilterValue(props.slug, value)}
 					disabled={value === props.value}
+					onClick={() => actions.updateFilterValue(props.slug, value)}
 				>
-					{props.panelType === 'edit' ? 'Edit filter' : 'Add filter'}
+					{
+						props.panelType === 'edit' 
+						? Liferay.language.get('edit-filter') 
+						: Liferay.language.get('add-filter')
+					}
 				</ClayButton>
 			</div>
 		</>

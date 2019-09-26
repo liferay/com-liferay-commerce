@@ -1,8 +1,8 @@
 import assignToLauncher from './entry.es';
 
 const props = {
-	test: 'test',
-	spritemap: './icons.svg'
+	spritemap: './icons.svg',
+	test: 'test'
 };
 
 window.assignTo = assignToLauncher('assignTo', 'assign-to', props);

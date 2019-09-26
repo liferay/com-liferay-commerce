@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
-import Icon from '@clayui/icon';
 import ClayDropDown from '@clayui/drop-down';
+import Icon from '@clayui/icon';
 import ClayPanel from '@clayui/panel';
-import {renderFilter} from './utils/index.es';
+import React, {useState, useEffect} from 'react';
 
 import getAppContext from './Context.es';
+import {renderFilter} from './utils/index.es';
 
 const FiltersDropdown = () => {
 	const [active, setActive] = useState(false);
@@ -35,6 +35,8 @@ const FiltersDropdown = () => {
 
 	return state.filters.length ? (
 		<ClayDropDown
+			active={active}
+			onActiveChange={setActive}
 			trigger={
 				<a
 					aria-expanded="false"
@@ -44,12 +46,10 @@ const FiltersDropdown = () => {
 					href="#"
 					role="button"
 				>
-					<span className="navbar-text-truncate">Add filters</span>
+					<span className="navbar-text-truncate">{Liferay.language.get('add-filters')}</span>
 					<Icon symbol="caret-bottom" />
 				</a>
 			}
-			active={active}
-			onActiveChange={setActive}
 		>
 			<ClayDropDown.Search
 				onChange={e => setQuery(e.target.value)}
@@ -61,8 +61,8 @@ const FiltersDropdown = () => {
 						className="mb-0"
 						collapsable
 						displayTitle={item.label}
-						showCollapseIcon={true}
 						key={item.slug}
+						showCollapseIcon={true}
 					>
 						<ClayPanel.Body className="filter-body">
 							{renderFilter(item, 'add')}

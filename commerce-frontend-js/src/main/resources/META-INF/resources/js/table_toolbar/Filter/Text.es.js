@@ -1,13 +1,8 @@
-import React, {useState} from 'react';
-import classNames from 'classnames';
-import {TextFilterProps} from './definitions';
-import getAppContext, {ContextProps} from '../Context.es';
-
 import ClayButton from '@clayui/button';
+import classNames from 'classnames';
+import React, {useState} from 'react';
 
-// interface IProps extends TextFilterProps {
-//     panelType?: 'add' | 'edit'
-// }
+import getAppContext from '../Context.es';
 
 const TextFilter = props => {
 	const {actions} = getAppContext();
@@ -24,9 +19,9 @@ const TextFilter = props => {
 					<input
 						aria-label={props.label}
 						className="form-control"
+						onChange={e => setValue(e.target.value)}
 						type="text"
 						value={value || ''}
-						onChange={e => setValue(e.target.value)}
 					/>
 				</div>
 				{props.inputText && (
@@ -40,10 +35,14 @@ const TextFilter = props => {
 			<div className="mt-2">
 				<ClayButton
 					className="btn-sm"
-					onClick={() => actions.updateFilterValue(props.slug, value)}
 					disabled={value === props.value}
+					onClick={() => actions.updateFilterValue(props.slug, value)}
 				>
-					{props.panelType === 'edit' ? 'Edit filter' : 'Add filter'}
+					{
+						props.panelType === 'edit' 
+						? Liferay.language.get('edit-filter') 
+						: Liferay.language.get('add-filter')
+					}
 				</ClayButton>
 			</div>
 		</div>

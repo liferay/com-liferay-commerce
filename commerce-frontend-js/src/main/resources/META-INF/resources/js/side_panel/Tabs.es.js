@@ -1,8 +1,6 @@
 import React from 'react';
 
 export default function Tabs(props) {
-	console.log(props);
-
 	return (
 		<ul className="nav nav-underline" role="tablist">
 			{props.tabs.map(tab => (
@@ -14,8 +12,8 @@ export default function Tabs(props) {
 							'active'}`}
 						data-toggle="tab"
 						id="navUnderlineFieldsTab"
-						role="tab"
 						onClick={() => props.onChange(tab.url)}
+						role="tab"
 					>
 						{tab.pageName}
 					</a>

@@ -1,13 +1,11 @@
+import ClayButton from '@clayui/button';
 import React from 'react';
 
+import getAppContext from './Context.es';
 import FilterResume from './Filter/Resume.es';
-import FilterProps from './Filter/definitions';
-
-import getAppContext, {ContextProps} from './Context.es';
-import ClayButton from '@clayui/button';
 
 const ActiveFiltersBar = () => {
-	const {state, actions} = getAppContext();
+	const {actions, state} = getAppContext();
 
 	const filtersActive = state.filters.reduce(
 		(acc, filter) => (filter.value ? acc.concat(filter.slug) : acc),
@@ -41,11 +39,11 @@ const ActiveFiltersBar = () => {
 					<li className="tbar-item">
 						<div className="tbar-section">
 							<ClayButton
-								displayType="link"
 								className=" tbar-link btn-sm"
+								displayType="link"
 								onClick={actions.resetFiltersValue}
 							>
-								Reset filters
+								{Liferay.language.get('reset-filters')}
 							</ClayButton>
 						</div>
 					</li>

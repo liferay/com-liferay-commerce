@@ -1,20 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import ClayLoadingIndicator from '@clayui/loading-indicator';
-import ClayIcon from '@clayui/icon';
 import ClayButton from '@clayui/button';
+import ClayIcon from '@clayui/icon';
+import ClayLoadingIndicator from '@clayui/loading-indicator';
+import ReactDOM from 'react-dom';
+import React from 'react';
+
 import {debounce} from '../utilities/index.es';
 export default class SidePanel extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			visible: !!props.visible,
-			moving: false,
-			loading: true,
-			tabs: props.tabs,
 			currentUrl: props.currentUrl || null,
+			loading: true,
+			moving: false,
 			size: props.size || 'md',
-			topDistance: 0
+			tabs: props.tabs,
+			topDistance: 0,
+			visible: !!props.visible
 		};
 		this.selectTab = this.selectTab.bind(this);
 		this.handleContentLoaded = this.handleContentLoaded.bind(this);
@@ -39,7 +40,7 @@ export default class SidePanel extends React.Component {
 	}
 
 	updateTop() {
-		const {top, height} = this.props.topAnchor.getBoundingClientRect();
+		const {height, top} = this.props.topAnchor.getBoundingClientRect();
 
 		this.setState({
 			topDistance: top + height + 'px'
@@ -55,8 +56,8 @@ export default class SidePanel extends React.Component {
 	load(url) {
 		this.setState(
 			{
-				loading: true,
-				currentUrl: url
+				currentUrl: url,
+				loading: true
 			},
 			() => {
 				if (
@@ -94,7 +95,7 @@ export default class SidePanel extends React.Component {
 
 	toggle(status = !this.state.visible) {
 		return new Promise(resolve => {
-			this.setState({visible: status, moving: true});
+			this.setState({moving: true, visible: status});
 			this.panel.current.addEventListener(
 				'transitionend',
 				() => {
@@ -111,8 +112,8 @@ export default class SidePanel extends React.Component {
 		const currentUrl = this.state.pages.find(el => el.url === url).url;
 
 		this.setState({
+			currentUrl,
 			loading: true,
-			currentUrl
 		});
 	}
 
@@ -137,15 +138,15 @@ export default class SidePanel extends React.Component {
 		return ReactDOM.createPortal(
 			<div
 				className={`side-panel side-panel-${this.state.size} ${visibility} ${loading}`}
-				style={{top: this.state.topDistance}}
 				ref={this.panel}
+				style={{top: this.state.topDistance}}
 			>
 				<ClayButton
-					displayType="monospaced"
 					className="btn-close"
+					displayType="monospaced"
 					onClick={() => this.close()}
 				>
-					<ClayIcon symbol="times" spritemap={this.props.spritemap} />
+					<ClayIcon spritemap={this.props.spritemap} symbol="times" />
 				</ClayButton>
 
 				<div className="tab-content">
@@ -155,10 +156,10 @@ export default class SidePanel extends React.Component {
 					<div className="active fade show tab-pane" role="tabpanel">
 						{!(this.state.moving && this.state.visible) && (
 							<iframe
-								src={this.state.currentUrl}
 								frameBorder="0"
-								ref={this.iframeRef}
 								onLoad={this.handleContentLoaded}
+								ref={this.iframeRef}
+								src={this.state.currentUrl}
 							></iframe>
 						)}
 					</div>

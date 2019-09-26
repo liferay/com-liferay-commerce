@@ -2,14 +2,13 @@ import tableToolbarLauncher from './entry.es';
 
 export const filters = [
 	{
-		type: 'text',
 		label: 'Text test',
 		operator: 'contains',
 		slug: 'text-test',
+		type: 'text',
 		value: 'Test input'
 	},
 	{
-		type: 'select',
 		items: [
 			{
 				label: 'First option',
@@ -23,10 +22,10 @@ export const filters = [
 		label: 'Select test',
 		operator: 'eq',
 		slug: 'select-test',
+		type: 'select',
 		value: 'second-option'
 	},
 	{
-		type: 'radio',
 		items: [
 			{
 				label: 'First option',
@@ -39,10 +38,10 @@ export const filters = [
 		],
 		label: 'Radio test',
 		operator: 'eq',
-		slug: 'radio-test'
+		slug: 'radio-test',
+		type: 'radio'
 	},
 	{
-		type: 'checkbox',
 		items: [
 			{
 				label: 'First option',
@@ -60,23 +59,24 @@ export const filters = [
 		label: 'Checkbox test',
 		operator: 'contains',
 		slug: 'checkbox-test',
+		type: 'checkbox',
 		value: ['first-option', 'third-option']
 	},
 	{
-		type: 'number',
-		slug: 'number-test',
-		label: 'Number test',
-		operator: 'eq',
 		inputText: '$',
-		value: 123,
+		label: 'Number test',
+		max: 200,
 		min: 20,
-		max: 200
+		operator: 'eq',
+		slug: 'number-test',
+		type: 'number',
+		value: 123,
 	},
 	{
-		type: 'date',
-		slug: 'date-test',
 		label: 'Date test',
 		operator: 'eq',
+		slug: 'date-test',
+		type: 'date',
 		value: {
 			day: 1,
 			month: 2,
@@ -86,16 +86,17 @@ export const filters = [
 ];
 
 const props = {
-	filters: filters,
-	spritemap: './icons.svg',
+	filters,
+	inputSearch: {
+		name: 'main-search'
+	},
 	plusButton: {
+		// eslint-disable-next-line no-console
 		onClick: e => console.log(e),
 		resetFiltersAfterClickAction: true
 	},
 	queryEndpoint: '/toolbar-test',
-	inputSearch: {
-		name: 'main-search'
-	}
+	spritemap: './icons.svg',
 };
 
 window.tableToolbar = tableToolbarLauncher(
