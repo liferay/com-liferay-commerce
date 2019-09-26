@@ -6,9 +6,9 @@
 		&--original-price {
 			color: $color-fg-alt;
 			font-weight: normal;
-			text-decoration: line-through;
 			margin-left: 10px;
 			margin-right: 0;
+			text-decoration: line-through;
 		}
 
 		&--final-price {
@@ -36,15 +36,15 @@
 	}
 
 	&__discount-label {
-		font-weight: normal;
-		font-size: 14px;
-		color: $color-mood-bad-bg;
 		background-color: $color-mood-good;
-		padding: 6px 12px;
 		border-radius: 14px;
-		vertical-align: middle;
+		color: $color-mood-bad-bg;
 		display: inline-block;
+		font-size: 14px;
+		font-weight: normal;
 		margin-left: 20px;
 		margin-top: -4px;
+		padding: 6px 12px;
+		vertical-align: middle;
 	}
 }

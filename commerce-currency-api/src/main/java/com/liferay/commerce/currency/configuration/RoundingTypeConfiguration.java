@@ -25,7 +25,6 @@ import java.math.RoundingMode;
  * @author Alessio Antonio Rendina
  * @author Luca Pellizzon
  */
-@ProviderType
 @ExtendedObjectClassDefinition(
 	category = "pricing", scope = ExtendedObjectClassDefinition.Scope.SYSTEM
 )
@@ -33,6 +32,7 @@ import java.math.RoundingMode;
 	id = "com.liferay.commerce.currency.configuration.RoundingTypeConfiguration",
 	localization = "content/Language", name = "rounding-type-configuration-name"
 )
+@ProviderType
 public interface RoundingTypeConfiguration {
 
 	@Meta.AD(deflt = "2", name = "maximum-fraction-digits", required = false)

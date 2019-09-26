@@ -115,12 +115,12 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>additionalPriceClasses</name>
+			<name>additionalFinalPriceClasses</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>additionalFinalPriceClasses</name>
+			<name>additionalPriceClasses</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>

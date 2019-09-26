@@ -97,12 +97,6 @@ public class PriceTag extends ComponentRendererTag {
 		putValue("additionalFinalPriceClasses", additionalFinalPriceClasses);
 	}
 
-	public void setShowLabel(
-		boolean showLabel) {
-
-		putValue("showLabel", showLabel);
-	}
-
 	public void setAdditionalPriceClasses(String additionalPriceClasses) {
 		putValue("additionalPriceClasses", additionalPriceClasses);
 	}
@@ -120,6 +114,10 @@ public class PriceTag extends ComponentRendererTag {
 
 	public void setQuantity(String quantity) {
 		putValue("quantity", quantity);
+	}
+
+	public void setShowLabel(boolean showLabel) {
+		putValue("showLabel", showLabel);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(PriceTag.class);
