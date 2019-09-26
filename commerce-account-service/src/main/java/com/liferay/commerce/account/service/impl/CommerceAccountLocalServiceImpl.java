@@ -282,7 +282,7 @@ public class CommerceAccountLocalServiceImpl
 		long companyId, String externalReferenceCode) {
 
 		if (Validator.isBlank(externalReferenceCode)) {
-			externalReferenceCode = null;
+			return null;
 		}
 
 		return commerceAccountPersistence.fetchByC_ERC(

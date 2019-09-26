@@ -157,7 +157,7 @@ public class CPOptionValueLocalServiceImpl
 		long companyId, String externalReferenceCode) {
 
 		if (Validator.isBlank(externalReferenceCode)) {
-			externalReferenceCode = null;
+			return null;
 		}
 
 		return cpOptionValuePersistence.fetchByC_ERC(

@@ -18,6 +18,7 @@ import com.liferay.commerce.product.exception.CPInstanceDisplayDateException;
 import com.liferay.commerce.product.exception.CPInstanceExpirationDateException;
 import com.liferay.commerce.product.exception.CPInstanceJsonException;
 import com.liferay.commerce.product.exception.CPInstanceSkuException;
+import com.liferay.commerce.product.exception.NoSuchCPInstanceException;
 import com.liferay.commerce.product.exception.NoSuchSkuContributorCPDefinitionOptionRelException;
 import com.liferay.commerce.product.internal.util.SKUCombinationsIterator;
 import com.liferay.commerce.product.model.CPDefinition;
@@ -462,7 +463,7 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 		long companyId, String externalReferenceCode) {
 
 		if (Validator.isBlank(externalReferenceCode)) {
-			externalReferenceCode = null;
+			return null;
 		}
 
 		return cpInstancePersistence.fetchByC_ERC(
@@ -532,7 +533,7 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 		throws PortalException {
 
 		if (Validator.isBlank(externalReferenceCode)) {
-			externalReferenceCode = null;
+			throw new NoSuchCPInstanceException();
 		}
 
 		return cpInstancePersistence.findByC_ERC(

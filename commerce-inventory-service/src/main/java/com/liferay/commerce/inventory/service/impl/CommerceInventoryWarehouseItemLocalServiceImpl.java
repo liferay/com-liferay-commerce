@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.inventory.service.impl;
 
+import com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseItemException;
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem;
 import com.liferay.commerce.inventory.service.base.CommerceInventoryWarehouseItemLocalServiceBaseImpl;
 import com.liferay.petra.string.StringPool;
@@ -97,7 +98,7 @@ public class CommerceInventoryWarehouseItemLocalServiceImpl
 		throws PortalException {
 
 		if (Validator.isBlank(externalReferenceCode)) {
-			externalReferenceCode = null;
+			throw new NoSuchInventoryWarehouseItemException();
 		}
 
 		return commerceInventoryWarehouseItemPersistence.findByC_ERC(
