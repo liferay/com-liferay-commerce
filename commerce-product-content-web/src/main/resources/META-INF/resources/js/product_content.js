@@ -58,7 +58,7 @@ AUI.add(
 						var data = {};
 
 						data['_' + CP_CONTENT_WEB_PORTLET_KEY + '_ddmFormValues'] = ddmFormValues;
-						data['groupId'] = themeDisplay.getScopeGroupId();
+						data.groupId = themeDisplay.getScopeGroupId();
 
 						A.io.request(
 							portletURL.toString(),
@@ -143,7 +143,6 @@ AUI.add(
 						else {
 							ddmForm.validate(callback);
 						}
-
 					},
 					_bindUI: function() {
 						var instance = this;
@@ -191,7 +190,7 @@ AUI.add(
 						var data = {};
 
 						data[instance.get('namespace') + 'ddmFormValues'] = ddmFormValues;
-						data['groupId'] = themeDisplay.getScopeGroupId();
+						data.groupId = themeDisplay.getScopeGroupId();
 
 						A.io.request(
 							instance.get('viewAttachmentURL'),
@@ -311,7 +310,6 @@ AUI.add(
 								node.setAttribute('data-cp-instance-id', cpInstance.cpInstanceId);
 							}
 						);
-
 					},
 					_renderUI: function() {
 						var instance = this;
