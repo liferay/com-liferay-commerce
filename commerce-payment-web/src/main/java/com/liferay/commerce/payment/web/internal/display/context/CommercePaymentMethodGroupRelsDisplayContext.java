@@ -121,7 +121,8 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 		stream = _defaultCommercePaymentMethodGroupRels.stream();
 
 		_defaultCommercePaymentMethodGroupRels = stream.filter(
-			e -> !ArrayUtil.contains(array, e.getEngineKey())
+			commercePaymentMethodGroupRel -> !ArrayUtil.contains(
+				array, commercePaymentMethodGroupRel.getEngineKey())
 		).collect(
 			Collectors.toList()
 		);
@@ -198,7 +199,9 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 		}
 
 		if ((active == null) || !active) {
-			commercePaymentMethodGroupRels = addDefaultCommercePaymentMethodGroupRels(commercePaymentMethodGroupRels);
+			commercePaymentMethodGroupRels =
+				addDefaultCommercePaymentMethodGroupRels(
+					commercePaymentMethodGroupRels);
 		}
 
 		if (ListUtil.isNotEmpty(commercePaymentMethodGroupRels)) {
@@ -207,6 +210,7 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 				new CommercePaymentMethodGroupRelNameComparator(
 					themeDisplay.getLocale()));
 		}
+
 		commercePaymentMethodGroupRelsCount +=
 			commercePaymentMethodGroupRels.size();
 
