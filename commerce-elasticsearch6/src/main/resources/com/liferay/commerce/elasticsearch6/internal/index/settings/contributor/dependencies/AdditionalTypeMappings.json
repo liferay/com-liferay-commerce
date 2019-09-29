@@ -50,6 +50,10 @@
 			"store": true,
 			"type": "integer"
 		},
+		"commerceAccountId": {
+			"store": true,
+			"type": "keyword"
+		},
 		"couponCode": {
 			"store": true,
 			"type": "keyword"
