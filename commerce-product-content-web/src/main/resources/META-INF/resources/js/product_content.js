@@ -114,7 +114,7 @@ AUI.add(
 						if (value instanceof Array) {
 							arrValue = value;
 						}
- else {
+						else {
 							arrValue.push(value);
 						}
 
@@ -140,7 +140,7 @@ AUI.add(
 					if (!ddmForm) {
 						callback.call(instance, false);
 					}
- else {
+					else {
 						ddmForm.validate(callback);
 					}
 				},
