@@ -18,7 +18,9 @@ class CategorySelector extends Component {
 	 */
 
 	onEntriesChanged_() {
-		this.rule.categoryIdsTitles = this.categoriesSelector_.entries.values.map((element) => element.value);
+		this.rule.categoryIdsTitles = this.categoriesSelector_.entries.values.map(
+			element => element.value
+		);
 		this.rule.queryValues = this.categoriesSelector_.entries.keys.join(',');
 	}
 
@@ -41,7 +43,9 @@ class CategorySelector extends Component {
 					vocabularyIds: this.vocabularyIds
 				};
 
-				this.categoriesSelector_ = new Liferay.AssetTaglibCategoriesSelector(config);
+				this.categoriesSelector_ = new Liferay.AssetTaglibCategoriesSelector(
+					config
+				);
 
 				const entries = this.categoriesSelector_.entries;
 

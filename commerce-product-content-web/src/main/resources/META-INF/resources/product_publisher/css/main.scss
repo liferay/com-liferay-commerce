@@ -1,4 +1,4 @@
-@import "mixins";
+@import 'mixins';
 
 .portlet-commerce-product-publisher {
 	.timeline-item {
@@ -51,7 +51,8 @@
 			}
 		}
 
-		.categoriesselector-content, .tagselector-content {
+		.categoriesselector-content,
+		.tagselector-content {
 			.textboxlistentry-holder {
 				padding: 0 0 4px;
 
@@ -79,7 +80,8 @@
 			}
 		}
 
-		.categoriesselector-content, .tagselector-content {
+		.categoriesselector-content,
+		.tagselector-content {
 			li:not(.textboxlist-input-container) {
 				background-color: #E7F1F9;
 				border: 0;

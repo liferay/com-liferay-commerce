@@ -51,7 +51,9 @@ class TagSelector extends Component {
 					tagNames: this.rule.queryValues || ''
 				};
 
-				this.tagsSelector_ = new Liferay.AssetTaglibTagsSelector(config);
+				this.tagsSelector_ = new Liferay.AssetTaglibTagsSelector(
+					config
+				);
 
 				const entries = this.tagsSelector_.entries;
 
