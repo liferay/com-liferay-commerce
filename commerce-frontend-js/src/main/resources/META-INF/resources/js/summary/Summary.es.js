@@ -1,5 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 function SummaryItemDividerVariant() {
 	return (
@@ -64,7 +64,7 @@ function SummaryItem(props) {
 
 	let ItemVariant;
 
-	switch (props.style) {
+	switch (style) {
 		case 'big':
 			ItemVariant = SummaryItemBigVariant;
 			break;

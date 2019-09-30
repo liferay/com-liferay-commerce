@@ -42,8 +42,8 @@ const NumberFilter = props => {
 				>
 					{
 						props.panelType === 'edit' 
-						? Liferay.language.get('edit-filter') 
-						: Liferay.language.get('add-filter')
+						? Liferay.Language.get('edit-filter') 
+						: Liferay.Language.get('add-filter')
 					}
 				</ClayButton>
 			</div>
