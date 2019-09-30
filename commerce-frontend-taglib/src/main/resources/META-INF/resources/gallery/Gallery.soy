@@ -2,7 +2,11 @@
 
 {template .render}
 	{@param? fullscreen: bool }
-	{@param images: ? }
+	{@param images: list<[
+		thumbnailUrl: string,
+		title: string,
+		url: string
+	]>}
 	{@param? loading: bool }
 	{@param selected: int }
 
