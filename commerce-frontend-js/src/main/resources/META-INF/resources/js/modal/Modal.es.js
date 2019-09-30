@@ -75,9 +75,11 @@ const Modal = props => {
 		const iframeDocument = iframeRef.current.contentDocument;
 		const iframeWindow = iframeRef.current.contentWindow;
 
-		iframeDocument
-			.querySelector('body')
-			.classList.add('within-commerce-iframe');
+		if(iframeDocument) {
+			iframeDocument
+				.querySelector('body')
+				.classList.add('within-commerce-iframe');
+		}
 
 		if ((props.showSubmit || props.submitLabel) && iframeDocument) {
 			const iframeForm = iframeDocument.querySelector('form');

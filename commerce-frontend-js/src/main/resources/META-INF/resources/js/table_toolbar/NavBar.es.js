@@ -1,52 +1,11 @@
-import ClayButton from '@clayui/button';
 import Icon from '@clayui/icon';
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 
 import getAppContext from './Context.es';
 import FiltersDropdown from './FiltersDropdown.es';
 
 const NavBar = () => {
 	const {actions, state} = getAppContext();
-	const [inputSearchValue, setInputSearchValue] = useState(
-		state.app.inputSearch.value
-	);
-	const [initialized, setInitialized] = useState(false);
-
-	function handlePlusButtonClick(e) {
-		Promise.resolve(
-			state.app.plusButton && state.app.plusButton.onClick(e)
-		).then(() => {
-			if (
-				state.app.plusButton &&
-				state.app.plusButton.resetFiltersAfterClickAction
-			) {
-				actions.resetFiltersValue();
-			}
-		});
-	}
-
-	useEffect(() => {
-		if (!initialized) {
-			return setInitialized(true);
-		}
-		actions.getData(
-			state.app.queryEndpoint,
-			state.filters.concat({
-				label: '',
-				operator: 'contains',
-				slug: state.app.inputSearch.name,
-				type: 'text',
-				value: state.app.inputSearch.value,
-			})
-		);
-	}, [
-		initialized,
-		actions,
-		state.app.inputSearch.name,
-		state.app.inputSearch.value,
-		state.app.queryEndpoint,
-		state.filters
-	]);
 
 	return (
 		<nav className="management-bar management-bar-light navbar navbar-expand-md">
@@ -59,7 +18,7 @@ const NavBar = () => {
 						<form
 							onSubmit={e => {
 								e.preventDefault();
-								actions.updateSearchValue(inputSearchValue);
+								state.onFilterChange();
 							}}
 							role="search"
 						>
@@ -68,11 +27,11 @@ const NavBar = () => {
 									<input
 										className="form-control input-group-inset input-group-inset-after"
 										onChange={e =>
-											setInputSearchValue(e.target.value)
+											actions.updateInputSearchValue(e.target.value)
 										}
-										placeholder="Search for..."
+										placeholder={Liferay.Language.get('search-for')}
 										type="text"
-										value={inputSearchValue || ''}
+										value={state.inputSearch.value || ''}
 									/>
 									<span className="input-group-inset-item input-group-inset-item-after">
 										<button
@@ -94,15 +53,9 @@ const NavBar = () => {
 					</div>
 				</div>
 				<ul className="navbar-nav">
-					{state.app.plusButton && (
+					{state.actionButton && (
 						<li className="nav-item">
-							<ClayButton
-								displayType="primary"
-								monospaced
-								onClick={handlePlusButtonClick}
-							>
-								<Icon symbol="plus" />
-							</ClayButton>
+							{state.actionButton}
 						</li>
 					)}
 				</ul>

@@ -43,7 +43,7 @@ const ActiveFiltersBar = () => {
 								displayType="link"
 								onClick={actions.resetFiltersValue}
 							>
-								{Liferay.language.get('reset-filters')}
+								{Liferay.Language.get('reset-filters')}
 							</ClayButton>
 						</div>
 					</li>
