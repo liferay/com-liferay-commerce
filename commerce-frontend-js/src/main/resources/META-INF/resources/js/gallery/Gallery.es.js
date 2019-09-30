@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Images from './Images.es';
 import Upload from './Upload.es';
 import Zoom from './Zoom.es';
@@ -17,7 +18,9 @@ export default class Gallery extends React.Component {
 	}
 
 	onClick(tabs) {
-		this.props.onImageClick && this.props.onImageClick(tabs);
+		if(this.props.onImageClick) {
+			this.props.onImageClick(tabs);
+		}
 	}
 
 	onMouseEnter(image) {
@@ -38,10 +41,10 @@ export default class Gallery extends React.Component {
 				<div className="col-sm">
 					<Images
 						images={this.props.images}
+						onClick={this.onClick}
 						onMouseEnter={this.onMouseEnter}
 						onMouseLeave={this.onMouseLeave}
-						onClick={this.onClick}
-					/>
+						/>
 				</div>
 				<div className="col-sm">
 					<Upload />
