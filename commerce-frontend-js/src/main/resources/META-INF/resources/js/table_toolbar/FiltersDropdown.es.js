@@ -46,7 +46,7 @@ const FiltersDropdown = () => {
 					href="#"
 					role="button"
 				>
-					<span className="navbar-text-truncate">{Liferay.language.get('add-filters')}</span>
+					<span className="navbar-text-truncate">{Liferay.Language.get('add-filters')}</span>
 					<Icon symbol="caret-bottom" />
 				</a>
 			}
