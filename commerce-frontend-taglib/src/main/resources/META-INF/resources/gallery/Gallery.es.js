@@ -78,9 +78,15 @@ Gallery.STATE = {
 	fullscreen: {
 		value: false
 	},
-	images: {
-		value: []
-	},
+	images: Config.arrayOf(
+		Config.shapeOf(
+			{
+				thumbnailUrl: Config.string(),
+				title: Config.string(),
+				url: Config.string()
+			}
+		)
+	),
 	loaded: {
 		value: new Set()
 	},
