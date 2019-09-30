@@ -145,18 +145,22 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 
 			String fieldName = "ATTRIBUTE_" + key + "_VALUES_IDS";
 
-			optionsKeys.add(fieldName);
-
 			JSONArray valuesJSONArray = _jsonFactory.createJSONArray(
 				jsonObject.getString("value"));
 
 			String[] values = new String[valuesJSONArray.length()];
+
+			if (values.length == 0) {
+				continue;
+			}
 
 			for (int j = 0; j < valuesJSONArray.length(); j++) {
 				values[j] = valuesJSONArray.getString(j);
 			}
 
 			attributes.put(fieldName, values);
+
+			optionsKeys.add(fieldName);
 		}
 
 		attributes.put("OPTIONS", ArrayUtil.toStringArray(optionsKeys));
