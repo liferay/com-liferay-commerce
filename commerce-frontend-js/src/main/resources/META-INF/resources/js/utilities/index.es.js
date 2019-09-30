@@ -56,26 +56,32 @@ export function launcher(Component, componentId, rootId, props) {
 		throw new Error(`Component container not found: "${rootId}"`);
 	}
 
-	const componentInstance = ReactDOM.render(
-		<Component {...props} />,
+	let componentInstance = null;
+
+	ReactDOM.render(
+		Component.prototype.render
+			? <Component ref={(e) => {componentInstance = e}} {...props} />
+			: <Component {...props} />,
 		portletFrame
-	);
+	)
+
+
+	function destroyComponent() {
+		try {
+			ReactDOM.unmountComponentAtNode(portletFrame);
+		} catch (e) {
+			console.error(e);
+		}
+
+		Liferay.destroyComponent(componentId);
+		Liferay.detach('beforeNavigate', destroyComponent);
+	}
 
 	if (Liferay && Liferay.component && Liferay.on && Liferay.detach) {
 		Liferay.component(componentId, componentInstance);
 		Liferay.on('beforeNavigate', destroyComponent);
-
-		function destroyComponent() {
-			try {
-				ReactDOM.unmountComponentAtNode(portletFrame);
-			} catch (e) {
-				console.error(e);
-			}
-
-			Liferay.destroyComponent(componentId);
-			Liferay.detach('beforeNavigate', destroyComponent);
-		}
 	} else {
+		// eslint-disable-next-line no-console
 		console.info('Liferay env not found');
 	}
 

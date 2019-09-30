@@ -14,16 +14,15 @@
 
 module.exports = {
 	extends: ['liferay/react'],
+	parserOptions: {
+        ecmaVersion: 2018,
+    },
 	env: {
 		browser: true,
 		node: true
     },
 	globals: {
 		Liferay: 'readonly',
-	},
-	parserOptions: {
-        ecmaFeatures: {
-            experimentalObjectRestSpread: true
-        }
-    },
+		AUI: 'readonly'
+	}
 };
