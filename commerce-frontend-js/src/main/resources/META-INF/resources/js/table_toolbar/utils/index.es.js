@@ -1,13 +1,7 @@
 import React from 'react';
 
-import FilterProps, {
+import {
 	filterTypeToComponentMap,
-	CheckboxesFilterProps,
-	MultiFilterProps,
-	DateFilterProps,
-	DateTimeFilterProps,
-	DateFormat,
-	DateTimeFormat
 } from '../Filter/definitions';
 
 export const renderFilter = (item, panelType) => {
@@ -66,12 +60,12 @@ export const prettifyDateTimeValue = value => {
 		value instanceof Date
 			? value
 			: new Date(
-					value.year,
-					value.month,
-					value.day,
-					value.hours,
-					value.minutes,
-					value.seconds
+				value.year,
+				value.month,
+				value.day,
+				value.hours,
+				value.minutes,
+				value.seconds
 			  );
 
 	return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();

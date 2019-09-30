@@ -6,7 +6,7 @@ import Expose from './Expose.es';
 function Suggestions({action, list, onHover, selected}) {
 	return (
 		<>
-			<ClayList.Header>{Liferay.language.get('add-an-existing-specification')}</ClayList.Header>
+			<ClayList.Header>{Liferay.Language.get('add-an-existing-specification')}</ClayList.Header>
 			{list.map((s, i) => (
 				<ClayList.Item
 					className={selected === i + 1 ? 'is-selected' : ''}

@@ -1,16 +1,10 @@
 import React, {createContext, useContext, useReducer} from 'react';
 
-import {actions as appActions} from './actions/app.es';
-import {actions as filtersActions} from './actions/filters.es';
+import {actions} from './actions/index.es';
 import applyMiddleware from './middleware/index.es';
-import reducers, {initialState} from './reducers/index.es';
+import reducer, {initialState} from './reducers/index.es';
 
-const actions = { ...filtersActions, ...appActions };
-
-export const StoreContext = createContext({
-	actions: serializeActions(actions, applyMiddleware(e => e)),
-	state: initialState
-});
+export const StoreContext = createContext(null);
 
 export function serializeActions(actions, dispatch) {
 	return Object.keys(actions).reduce(
@@ -23,7 +17,11 @@ export function serializeActions(actions, dispatch) {
 }
 
 export function StoreProvider({children, ...stateProps}) {
-	const [state, dispatch] = useReducer(reducers, stateProps);
+
+	const [state, dispatch] = useReducer(reducer, {
+		...initialState,
+		...stateProps
+	});
 
 	const serializedActions = serializeActions(
 		actions,
@@ -39,7 +37,6 @@ export function StoreProvider({children, ...stateProps}) {
 
 export const StoreConsumer = StoreContext.Consumer;
 
-// eslint-disable-next-line react-hooks/rules-of-hooks
-const getAppContext = () => useContext(StoreContext);
+const useAppState = () => useContext(StoreContext);
 
-export default getAppContext;
+export default useAppState;
