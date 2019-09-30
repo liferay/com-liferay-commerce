@@ -313,9 +313,7 @@ public class ProductDTOConverter implements DTOConverter {
 						cpInstance.getCPInstanceId())));
 		}
 
-		Stream<Sku> stream = skus.stream();
-
-		return stream.toArray(Sku[]::new);
+		return skus.toArray(new Sku[0]);
 	}
 
 	private String[] _getTags(CPDefinition cpDefinition) {
