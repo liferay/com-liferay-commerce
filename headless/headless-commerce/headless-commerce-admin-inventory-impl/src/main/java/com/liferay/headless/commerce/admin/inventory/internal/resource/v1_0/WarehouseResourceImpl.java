@@ -168,7 +168,7 @@ public class WarehouseResourceImpl extends BaseWarehouseResourceImpl {
 				id),
 			warehouse);
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
