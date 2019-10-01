@@ -50,6 +50,26 @@ public class OrderPlacedCommerceNotificationTypeImpl
 	public static final String KEY = "order-placed";
 
 	@Override
+	public String getClassName(Object object) {
+		if (!(object instanceof CommerceOrder)) {
+			return null;
+		}
+
+		return CommerceOrder.class.getName();
+	}
+
+	@Override
+	public long getClassPK(Object object) {
+		if (!(object instanceof CommerceOrder)) {
+			return 0;
+		}
+
+		CommerceOrder commerceOrder = (CommerceOrder)object;
+
+		return commerceOrder.getCommerceOrderId();
+	}
+
+	@Override
 	public Map<String, String> getDefinitionTerms(Locale locale) {
 		Map<String, String> map = new HashMap<>();
 

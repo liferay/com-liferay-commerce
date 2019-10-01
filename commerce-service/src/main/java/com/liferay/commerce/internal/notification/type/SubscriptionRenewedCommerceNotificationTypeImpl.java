@@ -55,6 +55,27 @@ public class SubscriptionRenewedCommerceNotificationTypeImpl
 	public static final String KEY = "subscription-renewed";
 
 	@Override
+	public String getClassName(Object object) {
+		if (!(object instanceof CommerceSubscriptionEntry)) {
+			return null;
+		}
+
+		return CommerceSubscriptionEntry.class.getName();
+	}
+
+	@Override
+	public long getClassPK(Object object) {
+		if (!(object instanceof CommerceSubscriptionEntry)) {
+			return 0;
+		}
+
+		CommerceSubscriptionEntry commerceSubscriptionEntry =
+			(CommerceSubscriptionEntry)object;
+
+		return commerceSubscriptionEntry.getCommerceSubscriptionEntryId();
+	}
+
+	@Override
 	public Map<String, String> getDefinitionTerms(Locale locale) {
 		Map<String, String> map = new HashMap<>();
 
