@@ -144,12 +144,13 @@ public class CommercePriceListPersistenceTest {
 
 		newCommercePriceList.setModifiedDate(RandomTestUtil.nextDate());
 
-		newCommercePriceList.setCommerceCurrencyId(RandomTestUtil.nextLong());
-
 		newCommercePriceList.setParentCommercePriceListId(
 			RandomTestUtil.nextLong());
 
 		newCommercePriceList.setName(RandomTestUtil.randomString());
+
+		newCommercePriceList.setCommerceCurrencyCode(
+			RandomTestUtil.randomString());
 
 		newCommercePriceList.setPriority(RandomTestUtil.nextDouble());
 
@@ -200,14 +201,14 @@ public class CommercePriceListPersistenceTest {
 			Time.getShortTimestamp(existingCommercePriceList.getModifiedDate()),
 			Time.getShortTimestamp(newCommercePriceList.getModifiedDate()));
 		Assert.assertEquals(
-			existingCommercePriceList.getCommerceCurrencyId(),
-			newCommercePriceList.getCommerceCurrencyId());
-		Assert.assertEquals(
 			existingCommercePriceList.getParentCommercePriceListId(),
 			newCommercePriceList.getParentCommercePriceListId());
 		Assert.assertEquals(
 			existingCommercePriceList.getName(),
 			newCommercePriceList.getName());
+		Assert.assertEquals(
+			existingCommercePriceList.getCommerceCurrencyCode(),
+			newCommercePriceList.getCommerceCurrencyCode());
 		AssertUtils.assertEquals(
 			existingCommercePriceList.getPriority(),
 			newCommercePriceList.getPriority());
@@ -271,18 +272,20 @@ public class CommercePriceListPersistenceTest {
 	}
 
 	@Test
-	public void testCountByCommerceCurrencyId() throws Exception {
-		_persistence.countByCommerceCurrencyId(RandomTestUtil.nextLong());
-
-		_persistence.countByCommerceCurrencyId(0L);
-	}
-
-	@Test
 	public void testCountByParentCommercePriceListId() throws Exception {
 		_persistence.countByParentCommercePriceListId(
 			RandomTestUtil.nextLong());
 
 		_persistence.countByParentCommercePriceListId(0L);
+	}
+
+	@Test
+	public void testCountByCommerceCurrencyCode() throws Exception {
+		_persistence.countByCommerceCurrencyCode("");
+
+		_persistence.countByCommerceCurrencyCode("null");
+
+		_persistence.countByCommerceCurrencyCode((String)null);
 	}
 
 	@Test
@@ -377,11 +380,11 @@ public class CommercePriceListPersistenceTest {
 			"CommercePriceList", "uuid", true, "externalReferenceCode", true,
 			"commercePriceListId", true, "groupId", true, "companyId", true,
 			"userId", true, "userName", true, "createDate", true,
-			"modifiedDate", true, "commerceCurrencyId", true,
-			"parentCommercePriceListId", true, "name", true, "priority", true,
-			"displayDate", true, "expirationDate", true, "lastPublishDate",
-			true, "status", true, "statusByUserId", true, "statusByUserName",
-			true, "statusDate", true);
+			"modifiedDate", true, "parentCommercePriceListId", true, "name",
+			true, "commerceCurrencyCode", true, "priority", true, "displayDate",
+			true, "expirationDate", true, "lastPublishDate", true, "status",
+			true, "statusByUserId", true, "statusByUserName", true,
+			"statusDate", true);
 	}
 
 	@Test
@@ -667,12 +670,13 @@ public class CommercePriceListPersistenceTest {
 
 		commercePriceList.setModifiedDate(RandomTestUtil.nextDate());
 
-		commercePriceList.setCommerceCurrencyId(RandomTestUtil.nextLong());
-
 		commercePriceList.setParentCommercePriceListId(
 			RandomTestUtil.nextLong());
 
 		commercePriceList.setName(RandomTestUtil.randomString());
+
+		commercePriceList.setCommerceCurrencyCode(
+			RandomTestUtil.randomString());
 
 		commercePriceList.setPriority(RandomTestUtil.nextDouble());
 

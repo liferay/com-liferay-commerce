@@ -2220,7 +2220,7 @@ public class CommerceDiscountPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceDiscount commerceDiscount : list) {
-					if ((companyId != commerceDiscount.getCompanyId())) {
+					if (companyId != commerceDiscount.getCompanyId()) {
 						list = null;
 
 						break;

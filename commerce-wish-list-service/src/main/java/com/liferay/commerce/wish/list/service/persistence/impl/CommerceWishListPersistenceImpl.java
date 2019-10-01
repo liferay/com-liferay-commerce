@@ -1601,7 +1601,7 @@ public class CommerceWishListPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceWishList commerceWishList : list) {
-					if ((groupId != commerceWishList.getGroupId())) {
+					if (groupId != commerceWishList.getGroupId()) {
 						list = null;
 
 						break;
@@ -2116,7 +2116,7 @@ public class CommerceWishListPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceWishList commerceWishList : list) {
-					if ((userId != commerceWishList.getUserId())) {
+					if (userId != commerceWishList.getUserId()) {
 						list = null;
 
 						break;

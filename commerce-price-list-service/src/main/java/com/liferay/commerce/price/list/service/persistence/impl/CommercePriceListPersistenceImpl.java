@@ -1607,7 +1607,7 @@ public class CommercePriceListPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommercePriceList commercePriceList : list) {
-					if ((companyId != commercePriceList.getCompanyId())) {
+					if (companyId != commercePriceList.getCompanyId()) {
 						list = null;
 
 						break;
@@ -2025,541 +2025,6 @@ public class CommercePriceListPersistenceImpl
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 =
 		"commercePriceList.companyId = ?";
 
-	private FinderPath _finderPathWithPaginationFindByCommerceCurrencyId;
-	private FinderPath _finderPathWithoutPaginationFindByCommerceCurrencyId;
-	private FinderPath _finderPathCountByCommerceCurrencyId;
-
-	/**
-	 * Returns all the commerce price lists where commerceCurrencyId = &#63;.
-	 *
-	 * @param commerceCurrencyId the commerce currency ID
-	 * @return the matching commerce price lists
-	 */
-	@Override
-	public List<CommercePriceList> findByCommerceCurrencyId(
-		long commerceCurrencyId) {
-
-		return findByCommerceCurrencyId(
-			commerceCurrencyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-	}
-
-	/**
-	 * Returns a range of all the commerce price lists where commerceCurrencyId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param commerceCurrencyId the commerce currency ID
-	 * @param start the lower bound of the range of commerce price lists
-	 * @param end the upper bound of the range of commerce price lists (not inclusive)
-	 * @return the range of matching commerce price lists
-	 */
-	@Override
-	public List<CommercePriceList> findByCommerceCurrencyId(
-		long commerceCurrencyId, int start, int end) {
-
-		return findByCommerceCurrencyId(commerceCurrencyId, start, end, null);
-	}
-
-	/**
-	 * Returns an ordered range of all the commerce price lists where commerceCurrencyId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param commerceCurrencyId the commerce currency ID
-	 * @param start the lower bound of the range of commerce price lists
-	 * @param end the upper bound of the range of commerce price lists (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching commerce price lists
-	 */
-	@Override
-	public List<CommercePriceList> findByCommerceCurrencyId(
-		long commerceCurrencyId, int start, int end,
-		OrderByComparator<CommercePriceList> orderByComparator) {
-
-		return findByCommerceCurrencyId(
-			commerceCurrencyId, start, end, orderByComparator, true);
-	}
-
-	/**
-	 * Returns an ordered range of all the commerce price lists where commerceCurrencyId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param commerceCurrencyId the commerce currency ID
-	 * @param start the lower bound of the range of commerce price lists
-	 * @param end the upper bound of the range of commerce price lists (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param useFinderCache whether to use the finder cache
-	 * @return the ordered range of matching commerce price lists
-	 */
-	@Override
-	public List<CommercePriceList> findByCommerceCurrencyId(
-		long commerceCurrencyId, int start, int end,
-		OrderByComparator<CommercePriceList> orderByComparator,
-		boolean useFinderCache) {
-
-		boolean pagination = true;
-		FinderPath finderPath = null;
-		Object[] finderArgs = null;
-
-		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-			(orderByComparator == null)) {
-
-			pagination = false;
-
-			if (useFinderCache) {
-				finderPath =
-					_finderPathWithoutPaginationFindByCommerceCurrencyId;
-				finderArgs = new Object[] {commerceCurrencyId};
-			}
-		}
-		else if (useFinderCache) {
-			finderPath = _finderPathWithPaginationFindByCommerceCurrencyId;
-			finderArgs = new Object[] {
-				commerceCurrencyId, start, end, orderByComparator
-			};
-		}
-
-		List<CommercePriceList> list = null;
-
-		if (useFinderCache) {
-			list = (List<CommercePriceList>)finderCache.getResult(
-				finderPath, finderArgs, this);
-
-			if ((list != null) && !list.isEmpty()) {
-				for (CommercePriceList commercePriceList : list) {
-					if ((commerceCurrencyId !=
-							commercePriceList.getCommerceCurrencyId())) {
-
-						list = null;
-
-						break;
-					}
-				}
-			}
-		}
-
-		if (list == null) {
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(
-					3 + (orderByComparator.getOrderByFields().length * 2));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(_SQL_SELECT_COMMERCEPRICELIST_WHERE);
-
-			query.append(
-				_FINDER_COLUMN_COMMERCECURRENCYID_COMMERCECURRENCYID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(
-					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
-			}
-			else if (pagination) {
-				query.append(CommercePriceListModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(commerceCurrencyId);
-
-				if (!pagination) {
-					list = (List<CommercePriceList>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommercePriceList>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
-
-				cacheResult(list);
-
-				if (useFinderCache) {
-					finderCache.putResult(finderPath, finderArgs, list);
-				}
-			}
-			catch (Exception e) {
-				if (useFinderCache) {
-					finderCache.removeResult(finderPath, finderArgs);
-				}
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	/**
-	 * Returns the first commerce price list in the ordered set where commerceCurrencyId = &#63;.
-	 *
-	 * @param commerceCurrencyId the commerce currency ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching commerce price list
-	 * @throws NoSuchPriceListException if a matching commerce price list could not be found
-	 */
-	@Override
-	public CommercePriceList findByCommerceCurrencyId_First(
-			long commerceCurrencyId,
-			OrderByComparator<CommercePriceList> orderByComparator)
-		throws NoSuchPriceListException {
-
-		CommercePriceList commercePriceList = fetchByCommerceCurrencyId_First(
-			commerceCurrencyId, orderByComparator);
-
-		if (commercePriceList != null) {
-			return commercePriceList;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("commerceCurrencyId=");
-		msg.append(commerceCurrencyId);
-
-		msg.append("}");
-
-		throw new NoSuchPriceListException(msg.toString());
-	}
-
-	/**
-	 * Returns the first commerce price list in the ordered set where commerceCurrencyId = &#63;.
-	 *
-	 * @param commerceCurrencyId the commerce currency ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching commerce price list, or <code>null</code> if a matching commerce price list could not be found
-	 */
-	@Override
-	public CommercePriceList fetchByCommerceCurrencyId_First(
-		long commerceCurrencyId,
-		OrderByComparator<CommercePriceList> orderByComparator) {
-
-		List<CommercePriceList> list = findByCommerceCurrencyId(
-			commerceCurrencyId, 0, 1, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the last commerce price list in the ordered set where commerceCurrencyId = &#63;.
-	 *
-	 * @param commerceCurrencyId the commerce currency ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching commerce price list
-	 * @throws NoSuchPriceListException if a matching commerce price list could not be found
-	 */
-	@Override
-	public CommercePriceList findByCommerceCurrencyId_Last(
-			long commerceCurrencyId,
-			OrderByComparator<CommercePriceList> orderByComparator)
-		throws NoSuchPriceListException {
-
-		CommercePriceList commercePriceList = fetchByCommerceCurrencyId_Last(
-			commerceCurrencyId, orderByComparator);
-
-		if (commercePriceList != null) {
-			return commercePriceList;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("commerceCurrencyId=");
-		msg.append(commerceCurrencyId);
-
-		msg.append("}");
-
-		throw new NoSuchPriceListException(msg.toString());
-	}
-
-	/**
-	 * Returns the last commerce price list in the ordered set where commerceCurrencyId = &#63;.
-	 *
-	 * @param commerceCurrencyId the commerce currency ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching commerce price list, or <code>null</code> if a matching commerce price list could not be found
-	 */
-	@Override
-	public CommercePriceList fetchByCommerceCurrencyId_Last(
-		long commerceCurrencyId,
-		OrderByComparator<CommercePriceList> orderByComparator) {
-
-		int count = countByCommerceCurrencyId(commerceCurrencyId);
-
-		if (count == 0) {
-			return null;
-		}
-
-		List<CommercePriceList> list = findByCommerceCurrencyId(
-			commerceCurrencyId, count - 1, count, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the commerce price lists before and after the current commerce price list in the ordered set where commerceCurrencyId = &#63;.
-	 *
-	 * @param commercePriceListId the primary key of the current commerce price list
-	 * @param commerceCurrencyId the commerce currency ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next commerce price list
-	 * @throws NoSuchPriceListException if a commerce price list with the primary key could not be found
-	 */
-	@Override
-	public CommercePriceList[] findByCommerceCurrencyId_PrevAndNext(
-			long commercePriceListId, long commerceCurrencyId,
-			OrderByComparator<CommercePriceList> orderByComparator)
-		throws NoSuchPriceListException {
-
-		CommercePriceList commercePriceList = findByPrimaryKey(
-			commercePriceListId);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			CommercePriceList[] array = new CommercePriceListImpl[3];
-
-			array[0] = getByCommerceCurrencyId_PrevAndNext(
-				session, commercePriceList, commerceCurrencyId,
-				orderByComparator, true);
-
-			array[1] = commercePriceList;
-
-			array[2] = getByCommerceCurrencyId_PrevAndNext(
-				session, commercePriceList, commerceCurrencyId,
-				orderByComparator, false);
-
-			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected CommercePriceList getByCommerceCurrencyId_PrevAndNext(
-		Session session, CommercePriceList commercePriceList,
-		long commerceCurrencyId,
-		OrderByComparator<CommercePriceList> orderByComparator,
-		boolean previous) {
-
-		StringBundler query = null;
-
-		if (orderByComparator != null) {
-			query = new StringBundler(
-				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
-					(orderByComparator.getOrderByFields().length * 3));
-		}
-		else {
-			query = new StringBundler(3);
-		}
-
-		query.append(_SQL_SELECT_COMMERCEPRICELIST_WHERE);
-
-		query.append(_FINDER_COLUMN_COMMERCECURRENCYID_COMMERCECURRENCYID_2);
-
-		if (orderByComparator != null) {
-			String[] orderByConditionFields =
-				orderByComparator.getOrderByConditionFields();
-
-			if (orderByConditionFields.length > 0) {
-				query.append(WHERE_AND);
-			}
-
-			for (int i = 0; i < orderByConditionFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByConditionFields[i]);
-
-				if ((i + 1) < orderByConditionFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN_HAS_NEXT);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN);
-					}
-				}
-			}
-
-			query.append(ORDER_BY_CLAUSE);
-
-			String[] orderByFields = orderByComparator.getOrderByFields();
-
-			for (int i = 0; i < orderByFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByFields[i]);
-
-				if ((i + 1) < orderByFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC_HAS_NEXT);
-					}
-					else {
-						query.append(ORDER_BY_DESC_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC);
-					}
-					else {
-						query.append(ORDER_BY_DESC);
-					}
-				}
-			}
-		}
-		else {
-			query.append(CommercePriceListModelImpl.ORDER_BY_JPQL);
-		}
-
-		String sql = query.toString();
-
-		Query q = session.createQuery(sql);
-
-		q.setFirstResult(0);
-		q.setMaxResults(2);
-
-		QueryPos qPos = QueryPos.getInstance(q);
-
-		qPos.add(commerceCurrencyId);
-
-		if (orderByComparator != null) {
-			for (Object orderByConditionValue :
-					orderByComparator.getOrderByConditionValues(
-						commercePriceList)) {
-
-				qPos.add(orderByConditionValue);
-			}
-		}
-
-		List<CommercePriceList> list = q.list();
-
-		if (list.size() == 2) {
-			return list.get(1);
-		}
-		else {
-			return null;
-		}
-	}
-
-	/**
-	 * Removes all the commerce price lists where commerceCurrencyId = &#63; from the database.
-	 *
-	 * @param commerceCurrencyId the commerce currency ID
-	 */
-	@Override
-	public void removeByCommerceCurrencyId(long commerceCurrencyId) {
-		for (CommercePriceList commercePriceList :
-				findByCommerceCurrencyId(
-					commerceCurrencyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-					null)) {
-
-			remove(commercePriceList);
-		}
-	}
-
-	/**
-	 * Returns the number of commerce price lists where commerceCurrencyId = &#63;.
-	 *
-	 * @param commerceCurrencyId the commerce currency ID
-	 * @return the number of matching commerce price lists
-	 */
-	@Override
-	public int countByCommerceCurrencyId(long commerceCurrencyId) {
-		FinderPath finderPath = _finderPathCountByCommerceCurrencyId;
-
-		Object[] finderArgs = new Object[] {commerceCurrencyId};
-
-		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(2);
-
-			query.append(_SQL_COUNT_COMMERCEPRICELIST_WHERE);
-
-			query.append(
-				_FINDER_COLUMN_COMMERCECURRENCYID_COMMERCECURRENCYID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(commerceCurrencyId);
-
-				count = (Long)q.uniqueResult();
-
-				finderCache.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String
-		_FINDER_COLUMN_COMMERCECURRENCYID_COMMERCECURRENCYID_2 =
-			"commercePriceList.commerceCurrencyId = ?";
-
 	private FinderPath _finderPathFetchByParentCommercePriceListId;
 	private FinderPath _finderPathCountByParentCommercePriceListId;
 
@@ -2639,8 +2104,8 @@ public class CommercePriceListPersistenceImpl
 		if (result instanceof CommercePriceList) {
 			CommercePriceList commercePriceList = (CommercePriceList)result;
 
-			if ((parentCommercePriceListId !=
-					commercePriceList.getParentCommercePriceListId())) {
+			if (parentCommercePriceListId !=
+					commercePriceList.getParentCommercePriceListId()) {
 
 				result = null;
 			}
@@ -2797,6 +2262,589 @@ public class CommercePriceListPersistenceImpl
 	private static final String
 		_FINDER_COLUMN_PARENTCOMMERCEPRICELISTID_PARENTCOMMERCEPRICELISTID_2 =
 			"commercePriceList.parentCommercePriceListId = ?";
+
+	private FinderPath _finderPathWithPaginationFindByCommerceCurrencyCode;
+	private FinderPath _finderPathWithoutPaginationFindByCommerceCurrencyCode;
+	private FinderPath _finderPathCountByCommerceCurrencyCode;
+
+	/**
+	 * Returns all the commerce price lists where commerceCurrencyCode = &#63;.
+	 *
+	 * @param commerceCurrencyCode the commerce currency code
+	 * @return the matching commerce price lists
+	 */
+	@Override
+	public List<CommercePriceList> findByCommerceCurrencyCode(
+		String commerceCurrencyCode) {
+
+		return findByCommerceCurrencyCode(
+			commerceCurrencyCode, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the commerce price lists where commerceCurrencyCode = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param commerceCurrencyCode the commerce currency code
+	 * @param start the lower bound of the range of commerce price lists
+	 * @param end the upper bound of the range of commerce price lists (not inclusive)
+	 * @return the range of matching commerce price lists
+	 */
+	@Override
+	public List<CommercePriceList> findByCommerceCurrencyCode(
+		String commerceCurrencyCode, int start, int end) {
+
+		return findByCommerceCurrencyCode(
+			commerceCurrencyCode, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce price lists where commerceCurrencyCode = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param commerceCurrencyCode the commerce currency code
+	 * @param start the lower bound of the range of commerce price lists
+	 * @param end the upper bound of the range of commerce price lists (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce price lists
+	 */
+	@Override
+	public List<CommercePriceList> findByCommerceCurrencyCode(
+		String commerceCurrencyCode, int start, int end,
+		OrderByComparator<CommercePriceList> orderByComparator) {
+
+		return findByCommerceCurrencyCode(
+			commerceCurrencyCode, start, end, orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce price lists where commerceCurrencyCode = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommercePriceListModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param commerceCurrencyCode the commerce currency code
+	 * @param start the lower bound of the range of commerce price lists
+	 * @param end the upper bound of the range of commerce price lists (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching commerce price lists
+	 */
+	@Override
+	public List<CommercePriceList> findByCommerceCurrencyCode(
+		String commerceCurrencyCode, int start, int end,
+		OrderByComparator<CommercePriceList> orderByComparator,
+		boolean useFinderCache) {
+
+		commerceCurrencyCode = Objects.toString(commerceCurrencyCode, "");
+
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+			(orderByComparator == null)) {
+
+			pagination = false;
+
+			if (useFinderCache) {
+				finderPath =
+					_finderPathWithoutPaginationFindByCommerceCurrencyCode;
+				finderArgs = new Object[] {commerceCurrencyCode};
+			}
+		}
+		else if (useFinderCache) {
+			finderPath = _finderPathWithPaginationFindByCommerceCurrencyCode;
+			finderArgs = new Object[] {
+				commerceCurrencyCode, start, end, orderByComparator
+			};
+		}
+
+		List<CommercePriceList> list = null;
+
+		if (useFinderCache) {
+			list = (List<CommercePriceList>)finderCache.getResult(
+				finderPath, finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (CommercePriceList commercePriceList : list) {
+					if (!commerceCurrencyCode.equals(
+							commercePriceList.getCommerceCurrencyCode())) {
+
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_COMMERCEPRICELIST_WHERE);
+
+			boolean bindCommerceCurrencyCode = false;
+
+			if (commerceCurrencyCode.isEmpty()) {
+				query.append(
+					_FINDER_COLUMN_COMMERCECURRENCYCODE_COMMERCECURRENCYCODE_3);
+			}
+			else {
+				bindCommerceCurrencyCode = true;
+
+				query.append(
+					_FINDER_COLUMN_COMMERCECURRENCYCODE_COMMERCECURRENCYCODE_2);
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
+			}
+			else if (pagination) {
+				query.append(CommercePriceListModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindCommerceCurrencyCode) {
+					qPos.add(commerceCurrencyCode);
+				}
+
+				if (!pagination) {
+					list = (List<CommercePriceList>)QueryUtil.list(
+						q, getDialect(), start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<CommercePriceList>)QueryUtil.list(
+						q, getDialect(), start, end);
+				}
+
+				cacheResult(list);
+
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
+			}
+			catch (Exception e) {
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first commerce price list in the ordered set where commerceCurrencyCode = &#63;.
+	 *
+	 * @param commerceCurrencyCode the commerce currency code
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce price list
+	 * @throws NoSuchPriceListException if a matching commerce price list could not be found
+	 */
+	@Override
+	public CommercePriceList findByCommerceCurrencyCode_First(
+			String commerceCurrencyCode,
+			OrderByComparator<CommercePriceList> orderByComparator)
+		throws NoSuchPriceListException {
+
+		CommercePriceList commercePriceList = fetchByCommerceCurrencyCode_First(
+			commerceCurrencyCode, orderByComparator);
+
+		if (commercePriceList != null) {
+			return commercePriceList;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("commerceCurrencyCode=");
+		msg.append(commerceCurrencyCode);
+
+		msg.append("}");
+
+		throw new NoSuchPriceListException(msg.toString());
+	}
+
+	/**
+	 * Returns the first commerce price list in the ordered set where commerceCurrencyCode = &#63;.
+	 *
+	 * @param commerceCurrencyCode the commerce currency code
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce price list, or <code>null</code> if a matching commerce price list could not be found
+	 */
+	@Override
+	public CommercePriceList fetchByCommerceCurrencyCode_First(
+		String commerceCurrencyCode,
+		OrderByComparator<CommercePriceList> orderByComparator) {
+
+		List<CommercePriceList> list = findByCommerceCurrencyCode(
+			commerceCurrencyCode, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last commerce price list in the ordered set where commerceCurrencyCode = &#63;.
+	 *
+	 * @param commerceCurrencyCode the commerce currency code
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce price list
+	 * @throws NoSuchPriceListException if a matching commerce price list could not be found
+	 */
+	@Override
+	public CommercePriceList findByCommerceCurrencyCode_Last(
+			String commerceCurrencyCode,
+			OrderByComparator<CommercePriceList> orderByComparator)
+		throws NoSuchPriceListException {
+
+		CommercePriceList commercePriceList = fetchByCommerceCurrencyCode_Last(
+			commerceCurrencyCode, orderByComparator);
+
+		if (commercePriceList != null) {
+			return commercePriceList;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("commerceCurrencyCode=");
+		msg.append(commerceCurrencyCode);
+
+		msg.append("}");
+
+		throw new NoSuchPriceListException(msg.toString());
+	}
+
+	/**
+	 * Returns the last commerce price list in the ordered set where commerceCurrencyCode = &#63;.
+	 *
+	 * @param commerceCurrencyCode the commerce currency code
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce price list, or <code>null</code> if a matching commerce price list could not be found
+	 */
+	@Override
+	public CommercePriceList fetchByCommerceCurrencyCode_Last(
+		String commerceCurrencyCode,
+		OrderByComparator<CommercePriceList> orderByComparator) {
+
+		int count = countByCommerceCurrencyCode(commerceCurrencyCode);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<CommercePriceList> list = findByCommerceCurrencyCode(
+			commerceCurrencyCode, count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the commerce price lists before and after the current commerce price list in the ordered set where commerceCurrencyCode = &#63;.
+	 *
+	 * @param commercePriceListId the primary key of the current commerce price list
+	 * @param commerceCurrencyCode the commerce currency code
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce price list
+	 * @throws NoSuchPriceListException if a commerce price list with the primary key could not be found
+	 */
+	@Override
+	public CommercePriceList[] findByCommerceCurrencyCode_PrevAndNext(
+			long commercePriceListId, String commerceCurrencyCode,
+			OrderByComparator<CommercePriceList> orderByComparator)
+		throws NoSuchPriceListException {
+
+		commerceCurrencyCode = Objects.toString(commerceCurrencyCode, "");
+
+		CommercePriceList commercePriceList = findByPrimaryKey(
+			commercePriceListId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CommercePriceList[] array = new CommercePriceListImpl[3];
+
+			array[0] = getByCommerceCurrencyCode_PrevAndNext(
+				session, commercePriceList, commerceCurrencyCode,
+				orderByComparator, true);
+
+			array[1] = commercePriceList;
+
+			array[2] = getByCommerceCurrencyCode_PrevAndNext(
+				session, commercePriceList, commerceCurrencyCode,
+				orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected CommercePriceList getByCommerceCurrencyCode_PrevAndNext(
+		Session session, CommercePriceList commercePriceList,
+		String commerceCurrencyCode,
+		OrderByComparator<CommercePriceList> orderByComparator,
+		boolean previous) {
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_COMMERCEPRICELIST_WHERE);
+
+		boolean bindCommerceCurrencyCode = false;
+
+		if (commerceCurrencyCode.isEmpty()) {
+			query.append(
+				_FINDER_COLUMN_COMMERCECURRENCYCODE_COMMERCECURRENCYCODE_3);
+		}
+		else {
+			bindCommerceCurrencyCode = true;
+
+			query.append(
+				_FINDER_COLUMN_COMMERCECURRENCYCODE_COMMERCECURRENCYCODE_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(CommercePriceListModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		if (bindCommerceCurrencyCode) {
+			qPos.add(commerceCurrencyCode);
+		}
+
+		if (orderByComparator != null) {
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commercePriceList)) {
+
+				qPos.add(orderByConditionValue);
+			}
+		}
+
+		List<CommercePriceList> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the commerce price lists where commerceCurrencyCode = &#63; from the database.
+	 *
+	 * @param commerceCurrencyCode the commerce currency code
+	 */
+	@Override
+	public void removeByCommerceCurrencyCode(String commerceCurrencyCode) {
+		for (CommercePriceList commercePriceList :
+				findByCommerceCurrencyCode(
+					commerceCurrencyCode, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+					null)) {
+
+			remove(commercePriceList);
+		}
+	}
+
+	/**
+	 * Returns the number of commerce price lists where commerceCurrencyCode = &#63;.
+	 *
+	 * @param commerceCurrencyCode the commerce currency code
+	 * @return the number of matching commerce price lists
+	 */
+	@Override
+	public int countByCommerceCurrencyCode(String commerceCurrencyCode) {
+		commerceCurrencyCode = Objects.toString(commerceCurrencyCode, "");
+
+		FinderPath finderPath = _finderPathCountByCommerceCurrencyCode;
+
+		Object[] finderArgs = new Object[] {commerceCurrencyCode};
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_COMMERCEPRICELIST_WHERE);
+
+			boolean bindCommerceCurrencyCode = false;
+
+			if (commerceCurrencyCode.isEmpty()) {
+				query.append(
+					_FINDER_COLUMN_COMMERCECURRENCYCODE_COMMERCECURRENCYCODE_3);
+			}
+			else {
+				bindCommerceCurrencyCode = true;
+
+				query.append(
+					_FINDER_COLUMN_COMMERCECURRENCYCODE_COMMERCECURRENCYCODE_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindCommerceCurrencyCode) {
+					qPos.add(commerceCurrencyCode);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String
+		_FINDER_COLUMN_COMMERCECURRENCYCODE_COMMERCECURRENCYCODE_2 =
+			"commercePriceList.commerceCurrencyCode = ?";
+
+	private static final String
+		_FINDER_COLUMN_COMMERCECURRENCYCODE_COMMERCECURRENCYCODE_3 =
+			"(commercePriceList.commerceCurrencyCode IS NULL OR commercePriceList.commerceCurrencyCode = '')";
 
 	private FinderPath _finderPathWithPaginationFindByG_C;
 	private FinderPath _finderPathWithoutPaginationFindByG_C;
@@ -6805,13 +6853,13 @@ public class CommercePriceListPersistenceImpl
 				_finderPathWithoutPaginationFindByCompanyId, args);
 
 			args = new Object[] {
-				commercePriceListModelImpl.getCommerceCurrencyId()
+				commercePriceListModelImpl.getCommerceCurrencyCode()
 			};
 
 			finderCache.removeResult(
-				_finderPathCountByCommerceCurrencyId, args);
+				_finderPathCountByCommerceCurrencyCode, args);
 			finderCache.removeResult(
-				_finderPathWithoutPaginationFindByCommerceCurrencyId, args);
+				_finderPathWithoutPaginationFindByCommerceCurrencyCode, args);
 
 			args = new Object[] {
 				commercePriceListModelImpl.getGroupId(),
@@ -6899,26 +6947,28 @@ public class CommercePriceListPersistenceImpl
 			}
 
 			if ((commercePriceListModelImpl.getColumnBitmask() &
-				 _finderPathWithoutPaginationFindByCommerceCurrencyId.
+				 _finderPathWithoutPaginationFindByCommerceCurrencyCode.
 					 getColumnBitmask()) != 0) {
 
 				Object[] args = new Object[] {
-					commercePriceListModelImpl.getOriginalCommerceCurrencyId()
+					commercePriceListModelImpl.getOriginalCommerceCurrencyCode()
 				};
 
 				finderCache.removeResult(
-					_finderPathCountByCommerceCurrencyId, args);
+					_finderPathCountByCommerceCurrencyCode, args);
 				finderCache.removeResult(
-					_finderPathWithoutPaginationFindByCommerceCurrencyId, args);
+					_finderPathWithoutPaginationFindByCommerceCurrencyCode,
+					args);
 
 				args = new Object[] {
-					commercePriceListModelImpl.getCommerceCurrencyId()
+					commercePriceListModelImpl.getCommerceCurrencyCode()
 				};
 
 				finderCache.removeResult(
-					_finderPathCountByCommerceCurrencyId, args);
+					_finderPathCountByCommerceCurrencyCode, args);
 				finderCache.removeResult(
-					_finderPathWithoutPaginationFindByCommerceCurrencyId, args);
+					_finderPathWithoutPaginationFindByCommerceCurrencyCode,
+					args);
 			}
 
 			if ((commercePriceListModelImpl.getColumnBitmask() &
@@ -7520,33 +7570,6 @@ public class CommercePriceListPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCompanyId",
 			new String[] {Long.class.getName()});
 
-		_finderPathWithPaginationFindByCommerceCurrencyId = new FinderPath(
-			CommercePriceListModelImpl.ENTITY_CACHE_ENABLED,
-			CommercePriceListModelImpl.FINDER_CACHE_ENABLED,
-			CommercePriceListImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByCommerceCurrencyId",
-			new String[] {
-				Long.class.getName(), Integer.class.getName(),
-				Integer.class.getName(), OrderByComparator.class.getName()
-			});
-
-		_finderPathWithoutPaginationFindByCommerceCurrencyId = new FinderPath(
-			CommercePriceListModelImpl.ENTITY_CACHE_ENABLED,
-			CommercePriceListModelImpl.FINDER_CACHE_ENABLED,
-			CommercePriceListImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findByCommerceCurrencyId", new String[] {Long.class.getName()},
-			CommercePriceListModelImpl.COMMERCECURRENCYID_COLUMN_BITMASK |
-			CommercePriceListModelImpl.DISPLAYDATE_COLUMN_BITMASK |
-			CommercePriceListModelImpl.CREATEDATE_COLUMN_BITMASK |
-			CommercePriceListModelImpl.PRIORITY_COLUMN_BITMASK);
-
-		_finderPathCountByCommerceCurrencyId = new FinderPath(
-			CommercePriceListModelImpl.ENTITY_CACHE_ENABLED,
-			CommercePriceListModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByCommerceCurrencyId", new String[] {Long.class.getName()});
-
 		_finderPathFetchByParentCommercePriceListId = new FinderPath(
 			CommercePriceListModelImpl.ENTITY_CACHE_ENABLED,
 			CommercePriceListModelImpl.FINDER_CACHE_ENABLED,
@@ -7562,6 +7585,34 @@ public class CommercePriceListPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
 			"countByParentCommercePriceListId",
 			new String[] {Long.class.getName()});
+
+		_finderPathWithPaginationFindByCommerceCurrencyCode = new FinderPath(
+			CommercePriceListModelImpl.ENTITY_CACHE_ENABLED,
+			CommercePriceListModelImpl.FINDER_CACHE_ENABLED,
+			CommercePriceListImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByCommerceCurrencyCode",
+			new String[] {
+				String.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByCommerceCurrencyCode = new FinderPath(
+			CommercePriceListModelImpl.ENTITY_CACHE_ENABLED,
+			CommercePriceListModelImpl.FINDER_CACHE_ENABLED,
+			CommercePriceListImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findByCommerceCurrencyCode", new String[] {String.class.getName()},
+			CommercePriceListModelImpl.COMMERCECURRENCYCODE_COLUMN_BITMASK |
+			CommercePriceListModelImpl.DISPLAYDATE_COLUMN_BITMASK |
+			CommercePriceListModelImpl.CREATEDATE_COLUMN_BITMASK |
+			CommercePriceListModelImpl.PRIORITY_COLUMN_BITMASK);
+
+		_finderPathCountByCommerceCurrencyCode = new FinderPath(
+			CommercePriceListModelImpl.ENTITY_CACHE_ENABLED,
+			CommercePriceListModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByCommerceCurrencyCode",
+			new String[] {String.class.getName()});
 
 		_finderPathWithPaginationFindByG_C = new FinderPath(
 			CommercePriceListModelImpl.ENTITY_CACHE_ENABLED,

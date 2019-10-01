@@ -1346,7 +1346,7 @@ public class CommerceCurrencyPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceCurrency commerceCurrency : list) {
-					if ((companyId != commerceCurrency.getCompanyId())) {
+					if (companyId != commerceCurrency.getCompanyId()) {
 						list = null;
 
 						break;

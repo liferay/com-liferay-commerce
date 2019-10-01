@@ -189,8 +189,8 @@ public class CommerceTaxFixedRatePersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceTaxFixedRate commerceTaxFixedRate : list) {
-					if ((CPTaxCategoryId !=
-							commerceTaxFixedRate.getCPTaxCategoryId())) {
+					if (CPTaxCategoryId !=
+							commerceTaxFixedRate.getCPTaxCategoryId()) {
 
 						list = null;
 
@@ -722,8 +722,8 @@ public class CommerceTaxFixedRatePersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceTaxFixedRate commerceTaxFixedRate : list) {
-					if ((commerceTaxMethodId !=
-							commerceTaxFixedRate.getCommerceTaxMethodId())) {
+					if (commerceTaxMethodId !=
+							commerceTaxFixedRate.getCommerceTaxMethodId()) {
 
 						list = null;
 

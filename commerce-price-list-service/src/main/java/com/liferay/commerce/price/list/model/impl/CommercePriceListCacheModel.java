@@ -84,12 +84,12 @@ public class CommercePriceListCacheModel
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
-		sb.append(", commerceCurrencyId=");
-		sb.append(commerceCurrencyId);
 		sb.append(", parentCommercePriceListId=");
 		sb.append(parentCommercePriceListId);
 		sb.append(", name=");
 		sb.append(name);
+		sb.append(", commerceCurrencyCode=");
+		sb.append(commerceCurrencyCode);
 		sb.append(", priority=");
 		sb.append(priority);
 		sb.append(", displayDate=");
@@ -157,7 +157,6 @@ public class CommercePriceListCacheModel
 			commercePriceListImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
-		commercePriceListImpl.setCommerceCurrencyId(commerceCurrencyId);
 		commercePriceListImpl.setParentCommercePriceListId(
 			parentCommercePriceListId);
 
@@ -166,6 +165,13 @@ public class CommercePriceListCacheModel
 		}
 		else {
 			commercePriceListImpl.setName(name);
+		}
+
+		if (commerceCurrencyCode == null) {
+			commercePriceListImpl.setCommerceCurrencyCode("");
+		}
+		else {
+			commercePriceListImpl.setCommerceCurrencyCode(commerceCurrencyCode);
 		}
 
 		commercePriceListImpl.setPriority(priority);
@@ -229,10 +235,9 @@ public class CommercePriceListCacheModel
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 
-		commerceCurrencyId = objectInput.readLong();
-
 		parentCommercePriceListId = objectInput.readLong();
 		name = objectInput.readUTF();
+		commerceCurrencyCode = objectInput.readUTF();
 
 		priority = objectInput.readDouble();
 		displayDate = objectInput.readLong();
@@ -280,8 +285,6 @@ public class CommercePriceListCacheModel
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 
-		objectOutput.writeLong(commerceCurrencyId);
-
 		objectOutput.writeLong(parentCommercePriceListId);
 
 		if (name == null) {
@@ -289,6 +292,13 @@ public class CommercePriceListCacheModel
 		}
 		else {
 			objectOutput.writeUTF(name);
+		}
+
+		if (commerceCurrencyCode == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(commerceCurrencyCode);
 		}
 
 		objectOutput.writeDouble(priority);
@@ -319,9 +329,9 @@ public class CommercePriceListCacheModel
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
-	public long commerceCurrencyId;
 	public long parentCommercePriceListId;
 	public String name;
+	public String commerceCurrencyCode;
 	public double priority;
 	public long displayDate;
 	public long expirationDate;

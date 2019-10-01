@@ -1352,7 +1352,7 @@ public class CommercePriceEntryPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommercePriceEntry commercePriceEntry : list) {
-					if ((companyId != commercePriceEntry.getCompanyId())) {
+					if (companyId != commercePriceEntry.getCompanyId()) {
 						list = null;
 
 						break;
@@ -1880,8 +1880,8 @@ public class CommercePriceEntryPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommercePriceEntry commercePriceEntry : list) {
-					if ((commercePriceListId !=
-							commercePriceEntry.getCommercePriceListId())) {
+					if (commercePriceListId !=
+							commercePriceEntry.getCommercePriceListId()) {
 
 						list = null;
 

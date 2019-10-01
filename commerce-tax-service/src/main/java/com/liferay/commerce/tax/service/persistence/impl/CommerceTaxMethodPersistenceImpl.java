@@ -187,7 +187,7 @@ public class CommerceTaxMethodPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceTaxMethod commerceTaxMethod : list) {
-					if ((groupId != commerceTaxMethod.getGroupId())) {
+					if (groupId != commerceTaxMethod.getGroupId()) {
 						list = null;
 
 						break;

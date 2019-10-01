@@ -65,10 +65,10 @@ public class CommercePriceListWrapper
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("commerceCurrencyId", getCommerceCurrencyId());
 		attributes.put(
 			"parentCommercePriceListId", getParentCommercePriceListId());
 		attributes.put("name", getName());
+		attributes.put("commerceCurrencyCode", getCommerceCurrencyCode());
 		attributes.put("priority", getPriority());
 		attributes.put("displayDate", getDisplayDate());
 		attributes.put("expirationDate", getExpirationDate());
@@ -138,12 +138,6 @@ public class CommercePriceListWrapper
 			setModifiedDate(modifiedDate);
 		}
 
-		Long commerceCurrencyId = (Long)attributes.get("commerceCurrencyId");
-
-		if (commerceCurrencyId != null) {
-			setCommerceCurrencyId(commerceCurrencyId);
-		}
-
 		Long parentCommercePriceListId = (Long)attributes.get(
 			"parentCommercePriceListId");
 
@@ -155,6 +149,13 @@ public class CommercePriceListWrapper
 
 		if (name != null) {
 			setName(name);
+		}
+
+		String commerceCurrencyCode = (String)attributes.get(
+			"commerceCurrencyCode");
+
+		if (commerceCurrencyCode != null) {
+			setCommerceCurrencyCode(commerceCurrencyCode);
 		}
 
 		Double priority = (Double)attributes.get("priority");
@@ -226,13 +227,13 @@ public class CommercePriceListWrapper
 	}
 
 	/**
-	 * Returns the commerce currency ID of this commerce price list.
+	 * Returns the commerce currency code of this commerce price list.
 	 *
-	 * @return the commerce currency ID of this commerce price list
+	 * @return the commerce currency code of this commerce price list
 	 */
 	@Override
-	public long getCommerceCurrencyId() {
-		return _commercePriceList.getCommerceCurrencyId();
+	public String getCommerceCurrencyCode() {
+		return _commercePriceList.getCommerceCurrencyCode();
 	}
 
 	/**
@@ -581,13 +582,13 @@ public class CommercePriceListWrapper
 	}
 
 	/**
-	 * Sets the commerce currency ID of this commerce price list.
+	 * Sets the commerce currency code of this commerce price list.
 	 *
-	 * @param commerceCurrencyId the commerce currency ID of this commerce price list
+	 * @param commerceCurrencyCode the commerce currency code of this commerce price list
 	 */
 	@Override
-	public void setCommerceCurrencyId(long commerceCurrencyId) {
-		_commercePriceList.setCommerceCurrencyId(commerceCurrencyId);
+	public void setCommerceCurrencyCode(String commerceCurrencyCode) {
+		_commercePriceList.setCommerceCurrencyCode(commerceCurrencyCode);
 	}
 
 	/**
