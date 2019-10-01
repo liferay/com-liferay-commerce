@@ -227,18 +227,18 @@ public class
 	}
 
 	@Test
-	public void testCountByCommerceAccountGroupId() throws Exception {
-		_persistence.countByCommerceAccountGroupId(RandomTestUtil.nextLong());
-
-		_persistence.countByCommerceAccountGroupId(0L);
-	}
-
-	@Test
 	public void testCountByCommerceNotificationTemplateId() throws Exception {
 		_persistence.countByCommerceNotificationTemplateId(
 			RandomTestUtil.nextLong());
 
 		_persistence.countByCommerceNotificationTemplateId(0L);
+	}
+
+	@Test
+	public void testCountByCommerceAccountGroupId() throws Exception {
+		_persistence.countByCommerceAccountGroupId(RandomTestUtil.nextLong());
+
+		_persistence.countByCommerceAccountGroupId(0L);
 	}
 
 	@Test

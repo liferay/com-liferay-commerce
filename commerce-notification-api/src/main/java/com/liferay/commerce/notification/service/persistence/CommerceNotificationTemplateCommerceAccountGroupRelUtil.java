@@ -140,216 +140,6 @@ public class CommerceNotificationTemplateCommerceAccountGroupRelUtil {
 	}
 
 	/**
-	 * Returns all the commerce notification template commerce account group rels where commerceAccountGroupId = &#63;.
-	 *
-	 * @param commerceAccountGroupId the commerce account group ID
-	 * @return the matching commerce notification template commerce account group rels
-	 */
-	public static List<CommerceNotificationTemplateCommerceAccountGroupRel>
-		findByCommerceAccountGroupId(long commerceAccountGroupId) {
-
-		return getPersistence().findByCommerceAccountGroupId(
-			commerceAccountGroupId);
-	}
-
-	/**
-	 * Returns a range of all the commerce notification template commerce account group rels where commerceAccountGroupId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationTemplateCommerceAccountGroupRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param commerceAccountGroupId the commerce account group ID
-	 * @param start the lower bound of the range of commerce notification template commerce account group rels
-	 * @param end the upper bound of the range of commerce notification template commerce account group rels (not inclusive)
-	 * @return the range of matching commerce notification template commerce account group rels
-	 */
-	public static List<CommerceNotificationTemplateCommerceAccountGroupRel>
-		findByCommerceAccountGroupId(
-			long commerceAccountGroupId, int start, int end) {
-
-		return getPersistence().findByCommerceAccountGroupId(
-			commerceAccountGroupId, start, end);
-	}
-
-	/**
-	 * Returns an ordered range of all the commerce notification template commerce account group rels where commerceAccountGroupId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationTemplateCommerceAccountGroupRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param commerceAccountGroupId the commerce account group ID
-	 * @param start the lower bound of the range of commerce notification template commerce account group rels
-	 * @param end the upper bound of the range of commerce notification template commerce account group rels (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching commerce notification template commerce account group rels
-	 */
-	public static List<CommerceNotificationTemplateCommerceAccountGroupRel>
-		findByCommerceAccountGroupId(
-			long commerceAccountGroupId, int start, int end,
-			OrderByComparator
-				<CommerceNotificationTemplateCommerceAccountGroupRel>
-					orderByComparator) {
-
-		return getPersistence().findByCommerceAccountGroupId(
-			commerceAccountGroupId, start, end, orderByComparator);
-	}
-
-	/**
-	 * Returns an ordered range of all the commerce notification template commerce account group rels where commerceAccountGroupId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationTemplateCommerceAccountGroupRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param commerceAccountGroupId the commerce account group ID
-	 * @param start the lower bound of the range of commerce notification template commerce account group rels
-	 * @param end the upper bound of the range of commerce notification template commerce account group rels (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param useFinderCache whether to use the finder cache
-	 * @return the ordered range of matching commerce notification template commerce account group rels
-	 */
-	public static List<CommerceNotificationTemplateCommerceAccountGroupRel>
-		findByCommerceAccountGroupId(
-			long commerceAccountGroupId, int start, int end,
-			OrderByComparator
-				<CommerceNotificationTemplateCommerceAccountGroupRel>
-					orderByComparator,
-			boolean useFinderCache) {
-
-		return getPersistence().findByCommerceAccountGroupId(
-			commerceAccountGroupId, start, end, orderByComparator,
-			useFinderCache);
-	}
-
-	/**
-	 * Returns the first commerce notification template commerce account group rel in the ordered set where commerceAccountGroupId = &#63;.
-	 *
-	 * @param commerceAccountGroupId the commerce account group ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching commerce notification template commerce account group rel
-	 * @throws NoSuchNotificationTemplateCommerceAccountGroupRelException if a matching commerce notification template commerce account group rel could not be found
-	 */
-	public static CommerceNotificationTemplateCommerceAccountGroupRel
-			findByCommerceAccountGroupId_First(
-				long commerceAccountGroupId,
-				OrderByComparator
-					<CommerceNotificationTemplateCommerceAccountGroupRel>
-						orderByComparator)
-		throws com.liferay.commerce.notification.exception.
-			NoSuchNotificationTemplateCommerceAccountGroupRelException {
-
-		return getPersistence().findByCommerceAccountGroupId_First(
-			commerceAccountGroupId, orderByComparator);
-	}
-
-	/**
-	 * Returns the first commerce notification template commerce account group rel in the ordered set where commerceAccountGroupId = &#63;.
-	 *
-	 * @param commerceAccountGroupId the commerce account group ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching commerce notification template commerce account group rel, or <code>null</code> if a matching commerce notification template commerce account group rel could not be found
-	 */
-	public static CommerceNotificationTemplateCommerceAccountGroupRel
-		fetchByCommerceAccountGroupId_First(
-			long commerceAccountGroupId,
-			OrderByComparator
-				<CommerceNotificationTemplateCommerceAccountGroupRel>
-					orderByComparator) {
-
-		return getPersistence().fetchByCommerceAccountGroupId_First(
-			commerceAccountGroupId, orderByComparator);
-	}
-
-	/**
-	 * Returns the last commerce notification template commerce account group rel in the ordered set where commerceAccountGroupId = &#63;.
-	 *
-	 * @param commerceAccountGroupId the commerce account group ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching commerce notification template commerce account group rel
-	 * @throws NoSuchNotificationTemplateCommerceAccountGroupRelException if a matching commerce notification template commerce account group rel could not be found
-	 */
-	public static CommerceNotificationTemplateCommerceAccountGroupRel
-			findByCommerceAccountGroupId_Last(
-				long commerceAccountGroupId,
-				OrderByComparator
-					<CommerceNotificationTemplateCommerceAccountGroupRel>
-						orderByComparator)
-		throws com.liferay.commerce.notification.exception.
-			NoSuchNotificationTemplateCommerceAccountGroupRelException {
-
-		return getPersistence().findByCommerceAccountGroupId_Last(
-			commerceAccountGroupId, orderByComparator);
-	}
-
-	/**
-	 * Returns the last commerce notification template commerce account group rel in the ordered set where commerceAccountGroupId = &#63;.
-	 *
-	 * @param commerceAccountGroupId the commerce account group ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching commerce notification template commerce account group rel, or <code>null</code> if a matching commerce notification template commerce account group rel could not be found
-	 */
-	public static CommerceNotificationTemplateCommerceAccountGroupRel
-		fetchByCommerceAccountGroupId_Last(
-			long commerceAccountGroupId,
-			OrderByComparator
-				<CommerceNotificationTemplateCommerceAccountGroupRel>
-					orderByComparator) {
-
-		return getPersistence().fetchByCommerceAccountGroupId_Last(
-			commerceAccountGroupId, orderByComparator);
-	}
-
-	/**
-	 * Returns the commerce notification template commerce account group rels before and after the current commerce notification template commerce account group rel in the ordered set where commerceAccountGroupId = &#63;.
-	 *
-	 * @param commerceNotificationTemplateCommerceAccountGroupRelId the primary key of the current commerce notification template commerce account group rel
-	 * @param commerceAccountGroupId the commerce account group ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next commerce notification template commerce account group rel
-	 * @throws NoSuchNotificationTemplateCommerceAccountGroupRelException if a commerce notification template commerce account group rel with the primary key could not be found
-	 */
-	public static CommerceNotificationTemplateCommerceAccountGroupRel[]
-			findByCommerceAccountGroupId_PrevAndNext(
-				long commerceNotificationTemplateCommerceAccountGroupRelId,
-				long commerceAccountGroupId,
-				OrderByComparator
-					<CommerceNotificationTemplateCommerceAccountGroupRel>
-						orderByComparator)
-		throws com.liferay.commerce.notification.exception.
-			NoSuchNotificationTemplateCommerceAccountGroupRelException {
-
-		return getPersistence().findByCommerceAccountGroupId_PrevAndNext(
-			commerceNotificationTemplateCommerceAccountGroupRelId,
-			commerceAccountGroupId, orderByComparator);
-	}
-
-	/**
-	 * Removes all the commerce notification template commerce account group rels where commerceAccountGroupId = &#63; from the database.
-	 *
-	 * @param commerceAccountGroupId the commerce account group ID
-	 */
-	public static void removeByCommerceAccountGroupId(
-		long commerceAccountGroupId) {
-
-		getPersistence().removeByCommerceAccountGroupId(commerceAccountGroupId);
-	}
-
-	/**
-	 * Returns the number of commerce notification template commerce account group rels where commerceAccountGroupId = &#63;.
-	 *
-	 * @param commerceAccountGroupId the commerce account group ID
-	 * @return the number of matching commerce notification template commerce account group rels
-	 */
-	public static int countByCommerceAccountGroupId(
-		long commerceAccountGroupId) {
-
-		return getPersistence().countByCommerceAccountGroupId(
-			commerceAccountGroupId);
-	}
-
-	/**
 	 * Returns all the commerce notification template commerce account group rels where commerceNotificationTemplateId = &#63;.
 	 *
 	 * @param commerceNotificationTemplateId the commerce notification template ID
@@ -560,6 +350,216 @@ public class CommerceNotificationTemplateCommerceAccountGroupRelUtil {
 
 		return getPersistence().countByCommerceNotificationTemplateId(
 			commerceNotificationTemplateId);
+	}
+
+	/**
+	 * Returns all the commerce notification template commerce account group rels where commerceAccountGroupId = &#63;.
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @return the matching commerce notification template commerce account group rels
+	 */
+	public static List<CommerceNotificationTemplateCommerceAccountGroupRel>
+		findByCommerceAccountGroupId(long commerceAccountGroupId) {
+
+		return getPersistence().findByCommerceAccountGroupId(
+			commerceAccountGroupId);
+	}
+
+	/**
+	 * Returns a range of all the commerce notification template commerce account group rels where commerceAccountGroupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationTemplateCommerceAccountGroupRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param start the lower bound of the range of commerce notification template commerce account group rels
+	 * @param end the upper bound of the range of commerce notification template commerce account group rels (not inclusive)
+	 * @return the range of matching commerce notification template commerce account group rels
+	 */
+	public static List<CommerceNotificationTemplateCommerceAccountGroupRel>
+		findByCommerceAccountGroupId(
+			long commerceAccountGroupId, int start, int end) {
+
+		return getPersistence().findByCommerceAccountGroupId(
+			commerceAccountGroupId, start, end);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce notification template commerce account group rels where commerceAccountGroupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationTemplateCommerceAccountGroupRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param start the lower bound of the range of commerce notification template commerce account group rels
+	 * @param end the upper bound of the range of commerce notification template commerce account group rels (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce notification template commerce account group rels
+	 */
+	public static List<CommerceNotificationTemplateCommerceAccountGroupRel>
+		findByCommerceAccountGroupId(
+			long commerceAccountGroupId, int start, int end,
+			OrderByComparator
+				<CommerceNotificationTemplateCommerceAccountGroupRel>
+					orderByComparator) {
+
+		return getPersistence().findByCommerceAccountGroupId(
+			commerceAccountGroupId, start, end, orderByComparator);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce notification template commerce account group rels where commerceAccountGroupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationTemplateCommerceAccountGroupRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param start the lower bound of the range of commerce notification template commerce account group rels
+	 * @param end the upper bound of the range of commerce notification template commerce account group rels (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching commerce notification template commerce account group rels
+	 */
+	public static List<CommerceNotificationTemplateCommerceAccountGroupRel>
+		findByCommerceAccountGroupId(
+			long commerceAccountGroupId, int start, int end,
+			OrderByComparator
+				<CommerceNotificationTemplateCommerceAccountGroupRel>
+					orderByComparator,
+			boolean useFinderCache) {
+
+		return getPersistence().findByCommerceAccountGroupId(
+			commerceAccountGroupId, start, end, orderByComparator,
+			useFinderCache);
+	}
+
+	/**
+	 * Returns the first commerce notification template commerce account group rel in the ordered set where commerceAccountGroupId = &#63;.
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce notification template commerce account group rel
+	 * @throws NoSuchNotificationTemplateCommerceAccountGroupRelException if a matching commerce notification template commerce account group rel could not be found
+	 */
+	public static CommerceNotificationTemplateCommerceAccountGroupRel
+			findByCommerceAccountGroupId_First(
+				long commerceAccountGroupId,
+				OrderByComparator
+					<CommerceNotificationTemplateCommerceAccountGroupRel>
+						orderByComparator)
+		throws com.liferay.commerce.notification.exception.
+			NoSuchNotificationTemplateCommerceAccountGroupRelException {
+
+		return getPersistence().findByCommerceAccountGroupId_First(
+			commerceAccountGroupId, orderByComparator);
+	}
+
+	/**
+	 * Returns the first commerce notification template commerce account group rel in the ordered set where commerceAccountGroupId = &#63;.
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce notification template commerce account group rel, or <code>null</code> if a matching commerce notification template commerce account group rel could not be found
+	 */
+	public static CommerceNotificationTemplateCommerceAccountGroupRel
+		fetchByCommerceAccountGroupId_First(
+			long commerceAccountGroupId,
+			OrderByComparator
+				<CommerceNotificationTemplateCommerceAccountGroupRel>
+					orderByComparator) {
+
+		return getPersistence().fetchByCommerceAccountGroupId_First(
+			commerceAccountGroupId, orderByComparator);
+	}
+
+	/**
+	 * Returns the last commerce notification template commerce account group rel in the ordered set where commerceAccountGroupId = &#63;.
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce notification template commerce account group rel
+	 * @throws NoSuchNotificationTemplateCommerceAccountGroupRelException if a matching commerce notification template commerce account group rel could not be found
+	 */
+	public static CommerceNotificationTemplateCommerceAccountGroupRel
+			findByCommerceAccountGroupId_Last(
+				long commerceAccountGroupId,
+				OrderByComparator
+					<CommerceNotificationTemplateCommerceAccountGroupRel>
+						orderByComparator)
+		throws com.liferay.commerce.notification.exception.
+			NoSuchNotificationTemplateCommerceAccountGroupRelException {
+
+		return getPersistence().findByCommerceAccountGroupId_Last(
+			commerceAccountGroupId, orderByComparator);
+	}
+
+	/**
+	 * Returns the last commerce notification template commerce account group rel in the ordered set where commerceAccountGroupId = &#63;.
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce notification template commerce account group rel, or <code>null</code> if a matching commerce notification template commerce account group rel could not be found
+	 */
+	public static CommerceNotificationTemplateCommerceAccountGroupRel
+		fetchByCommerceAccountGroupId_Last(
+			long commerceAccountGroupId,
+			OrderByComparator
+				<CommerceNotificationTemplateCommerceAccountGroupRel>
+					orderByComparator) {
+
+		return getPersistence().fetchByCommerceAccountGroupId_Last(
+			commerceAccountGroupId, orderByComparator);
+	}
+
+	/**
+	 * Returns the commerce notification template commerce account group rels before and after the current commerce notification template commerce account group rel in the ordered set where commerceAccountGroupId = &#63;.
+	 *
+	 * @param commerceNotificationTemplateCommerceAccountGroupRelId the primary key of the current commerce notification template commerce account group rel
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce notification template commerce account group rel
+	 * @throws NoSuchNotificationTemplateCommerceAccountGroupRelException if a commerce notification template commerce account group rel with the primary key could not be found
+	 */
+	public static CommerceNotificationTemplateCommerceAccountGroupRel[]
+			findByCommerceAccountGroupId_PrevAndNext(
+				long commerceNotificationTemplateCommerceAccountGroupRelId,
+				long commerceAccountGroupId,
+				OrderByComparator
+					<CommerceNotificationTemplateCommerceAccountGroupRel>
+						orderByComparator)
+		throws com.liferay.commerce.notification.exception.
+			NoSuchNotificationTemplateCommerceAccountGroupRelException {
+
+		return getPersistence().findByCommerceAccountGroupId_PrevAndNext(
+			commerceNotificationTemplateCommerceAccountGroupRelId,
+			commerceAccountGroupId, orderByComparator);
+	}
+
+	/**
+	 * Removes all the commerce notification template commerce account group rels where commerceAccountGroupId = &#63; from the database.
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 */
+	public static void removeByCommerceAccountGroupId(
+		long commerceAccountGroupId) {
+
+		getPersistence().removeByCommerceAccountGroupId(commerceAccountGroupId);
+	}
+
+	/**
+	 * Returns the number of commerce notification template commerce account group rels where commerceAccountGroupId = &#63;.
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @return the number of matching commerce notification template commerce account group rels
+	 */
+	public static int countByCommerceAccountGroupId(
+		long commerceAccountGroupId) {
+
+		return getPersistence().countByCommerceAccountGroupId(
+			commerceAccountGroupId);
 	}
 
 	/**

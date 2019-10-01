@@ -32,6 +32,8 @@ create table CommerceNotificationQueueEntry (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
+	classNameId LONG,
+	classPK LONG,
 	commerceNotificationTemplateId LONG,
 	from_ VARCHAR(75) null,
 	fromName VARCHAR(75) null,
