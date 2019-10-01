@@ -1,7 +1,7 @@
 import assignToLauncher from './entry.es';
 
 const props = {
-	spritemap: './icons.svg',
+	spritemap: './assets/icons.svg',
 	test: 'test'
 };
 
