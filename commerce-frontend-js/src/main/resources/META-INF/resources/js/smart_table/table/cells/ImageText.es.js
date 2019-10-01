@@ -7,7 +7,7 @@ function ImageText(props) {
         <div className="row">
             {props.data.thumbnail && (
                 <div className="col-auto">
-                    <ClaySticker className="sticker-user-icon" size="xl">
+                    <ClaySticker size="xl">
                         <div className="sticker-overlay">
                             <img 
                                 alt={props.value} 
