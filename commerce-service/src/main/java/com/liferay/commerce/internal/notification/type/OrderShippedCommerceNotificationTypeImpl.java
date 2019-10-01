@@ -16,6 +16,7 @@ package com.liferay.commerce.internal.notification.type;
 
 import com.liferay.commerce.constants.CommerceDefinitionTermConstants;
 import com.liferay.commerce.constants.CommerceOrderConstants;
+import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.notification.type.CommerceNotificationType;
 import com.liferay.commerce.order.CommerceDefinitionTermContributor;
 import com.liferay.commerce.order.CommerceOrderDefinitionTermContributorRegistry;
@@ -45,6 +46,26 @@ import org.osgi.service.component.annotations.Reference;
 )
 public class OrderShippedCommerceNotificationTypeImpl
 	implements CommerceNotificationType {
+
+	@Override
+	public String getClassName(Object object) {
+		if (!(object instanceof CommerceOrder)) {
+			return null;
+		}
+
+		return CommerceOrder.class.getName();
+	}
+
+	@Override
+	public long getClassPK(Object object) {
+		if (!(object instanceof CommerceOrder)) {
+			return 0;
+		}
+
+		CommerceOrder commerceOrder = (CommerceOrder)object;
+
+		return commerceOrder.getCommerceOrderId();
+	}
 
 	@Override
 	public Map<String, String> getDefinitionTerms(Locale locale) {
