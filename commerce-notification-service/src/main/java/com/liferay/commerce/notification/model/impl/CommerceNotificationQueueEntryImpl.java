@@ -16,6 +16,13 @@ package com.liferay.commerce.notification.model.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.commerce.notification.model.CommerceNotificationTemplate;
+import com.liferay.commerce.notification.service.CommerceNotificationTemplateLocalServiceUtil;
+import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.UserLocalServiceUtil;
+
 /**
  * @author Alessio Antonio Rendina
  */
@@ -24,6 +31,25 @@ public class CommerceNotificationQueueEntryImpl
 	extends CommerceNotificationQueueEntryBaseImpl {
 
 	public CommerceNotificationQueueEntryImpl() {
+	}
+
+	@Override
+	public String getCommerceNotificationTemplateType() throws PortalException {
+		if (getCommerceNotificationTemplateId() == 0) {
+			return StringPool.BLANK;
+		}
+
+		CommerceNotificationTemplate commerceNotificationTemplate =
+			CommerceNotificationTemplateLocalServiceUtil.
+				getCommerceNotificationTemplate(
+					getCommerceNotificationTemplateId());
+
+		return commerceNotificationTemplate.getType();
+	}
+
+	@Override
+	public User getUser() throws PortalException {
+		return UserLocalServiceUtil.getUser(getUserId());
 	}
 
 }
