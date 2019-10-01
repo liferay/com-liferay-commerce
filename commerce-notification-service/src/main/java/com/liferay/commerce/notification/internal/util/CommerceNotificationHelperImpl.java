@@ -185,6 +185,8 @@ public class CommerceNotificationHelperImpl
 		_commerceNotificationQueueEntryLocalService.
 			addCommerceNotificationQueueEntry(
 				user.getUserId(), groupId,
+				commerceNotificationType.getClassName(object),
+				commerceNotificationType.getClassPK(object),
 				commerceNotificationTemplate.
 					getCommerceNotificationTemplateId(),
 				commerceNotificationTemplate.getFrom(), fromName,
