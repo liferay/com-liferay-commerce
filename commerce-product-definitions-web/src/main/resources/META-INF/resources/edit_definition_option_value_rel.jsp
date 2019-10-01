@@ -60,20 +60,26 @@ long cpDefinitionId = cpDefinitionOptionValueRelDisplayContext.getCPDefinitionId
 		</aui:fieldset>
 
 		<c:if test="<%= cpDefinitionOptionValueRel == null %>">
-			<aui:script sandbox="<%= true %>">
-				var form = $(document.<portlet:namespace />cpDefinitionOptionValueRelfm);
+			<aui:script require="frontend-js-web/liferay/debounce/debounce.es as debounceModule">
+				function slugify(string) {
+					return string.toLowerCase().replace(/[^a-z1-9]+/g, '-');
+				}
 
-				var keyInput = form.fm('key');
-				var nameInput = form.fm('name');
+				const form = document.getElementById('<portlet:namespace />cpDefinitionOptionValueRelfm');
 
-				var onNameInput = _.debounce(
-					function(event) {
-						keyInput.val(nameInput.val());
-					},
-					200
+				const keyInput = form.querySelector('#<portlet:namespace />key');
+				const nameInput = form.querySelector('#<portlet:namespace />name');
+
+				const debounce = debounceModule.default;
+
+				var handleOnNameInput = function(event) {
+					keyInput.value = slugify(event.target.value);
+				};
+
+				nameInput.addEventListener(
+					'input',
+					debounce(handleOnNameInput, 200)
 				);
-
-				nameInput.on('input', onNameInput);
 			</aui:script>
 		</c:if>
 	</div>
