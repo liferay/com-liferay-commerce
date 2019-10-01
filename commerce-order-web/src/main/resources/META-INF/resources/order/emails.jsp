@@ -22,95 +22,131 @@ CommerceOrderEditDisplayContext commerceOrderEditDisplayContext = (CommerceOrder
 
 <commerce-ui:panel
 	bodyClasses="p-0"
-	title="emails"
+	title='<%= LanguageUtil.get(request, "emails") %>'
 >
-	<div class="list-group list-group-no-bordered mb-0 text-body">
+	<liferay-ui:search-container
+		id="commerceNotificationQueueEntries"
+		searchContainer="<%= commerceOrderEditDisplayContext.getCommerceNotificationQueueEntriesSearchContainer() %>"
+	>
+		<liferay-ui:search-container-row
+			className="com.liferay.commerce.notification.model.CommerceNotificationQueueEntry"
+			escapedModel="<%= true %>"
+			keyProperty="commerceNotificationQueueEntryId"
+			modelVar="commerceNotificationQueueEntry"
+		>
 
-		<%
-		for (CommerceOrderNote commerceOrderNote : commerceOrderEditDisplayContext.getCommerceOrderNotes()) {
-		%>
+			<%
+			PortletURL rowURL = renderResponse.createRenderURL();
 
-			<div class="list-group-item">
-				<div class="row">
+			rowURL.setParameter("mvcRenderCommandName", "viewCommerceNotificationQueueEntry");
+			rowURL.setParameter("redirect", currentURL);
+			rowURL.setParameter("commerceOrderId", String.valueOf(commerceOrderEditDisplayContext.getCommerceOrderId()));
+			rowURL.setParameter("commerceNotificationQueueEntryId", String.valueOf(commerceNotificationQueueEntry.getCommerceNotificationQueueEntryId()));
+			rowURL.setWindowState(LiferayWindowState.POP_UP);
+			%>
+
+			<liferay-ui:search-container-column-image
+				src="<%= commerceOrderEditDisplayContext.getUserPortraitSrc(commerceNotificationQueueEntry.getUser()) %>"
+			/>
+
+			<liferay-ui:search-container-column-text
+				colspan="<%= 2 %>"
+			>
+				<h5 class="mb-0"><%= commerceNotificationQueueEntry.getFromName() %></h5>
+
+				<small><%= commerceNotificationQueueEntry.getFrom() %></small>
+
+				<%
+				Map<String, String> data = new HashMap<>();
+
+				data.put("panel-url", rowURL.toString());
+				data.put("target", renderResponse.getNamespace() + "sidePanel");
+				%>
+
+				<h4>
+					<clay:link
+						data="<%= data %>"
+						href="<%= rowURL.toString() %>"
+						label="<%= HtmlUtil.escape(commerceNotificationQueueEntry.getSubject()) %>"
+					/>
+				</h4>
+
+				<div>
+					<%= HtmlUtil.escape(commerceNotificationQueueEntry.getBody()) %>
+				</div>
+			</liferay-ui:search-container-column-text>
+
+			<liferay-ui:search-container-column-text>
+				<div class="mb-3 row">
 					<div class="col-auto">
-						<liferay-ui:user-portrait
-							cssClass="user-icon-lg"
-							userId="<%= commerceOrderNote.getUserId() %>"
-							userName="<%= commerceOrderNote.getUserName() %>"
+						<clay:label
+							label="<%= commerceNotificationQueueEntry.getCommerceNotificationTemplateType() %>"
+							style="success"
 						/>
 					</div>
 
-					<div class="col">
-						<div class="mb-3 row">
-							<div class="col">
-								<h5 class="mb-0">Author name</h5>
+					<div class="col-auto">
 
-								<small>author@email.com</small>
-							</div>
+						<%
+						Date sentDate = commerceNotificationQueueEntry.getSentDate();
 
-							<div class="col-auto">
-								<clay:label
-									label="Order Placed"
-									style="success"
-								/>
-							</div>
+						String sentDateDescription = StringPool.BLANK;
 
-							<div class="col-auto">
-								<small>6:15pm</small>
-							</div>
-						</div>
+						if (sentDate != null) {
+							sentDateDescription = LanguageUtil.getTimeDescription(request, System.currentTimeMillis() - sentDate.getTime(), true);
+						}
+						%>
 
-						<div class="row">
-							<div class="col">
-								<h4>
-									Lorem ipsum dolor
-								</h4>
-
-								<div>
-									Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
-								</div>
-							</div>
-
-							<div class="align-items-center col-auto d-flex">
-								<liferay-ui:icon-menu
-									direction="left"
-									icon="<%= StringPool.BLANK %>"
-									markupView="lexicon"
-									message="<%= StringPool.BLANK %>"
-									showWhenSingleIcon="<%= true %>"
-									triggerCssClass="btn btn-unstyled component-action text-secondary"
-								>
-									<portlet:renderURL var="editURL">
-										<portlet:param name="mvcRenderCommandName" value="editCommerceOrderNote" />
-										<portlet:param name="redirect" value="#" />
-										<portlet:param name="commerceOrderNoteId" value="<%= String.valueOf(commerceOrderNote.getCommerceOrderNoteId()) %>" />
-									</portlet:renderURL>
-
-									<liferay-ui:icon
-										message="edit"
-										url="<%= editURL %>"
-									/>
-
-									<portlet:actionURL name="editCommerceOrderNote" var="deleteURL">
-										<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-										<portlet:param name="redirect" value="#" />
-										<portlet:param name="commerceOrderNoteId" value="<%= String.valueOf(commerceOrderNote.getCommerceOrderNoteId()) %>" />
-									</portlet:actionURL>
-
-									<liferay-ui:icon-delete
-										label="<%= true %>"
-										url="<%= deleteURL %>"
-									/>
-								</liferay-ui:icon-menu>
-							</div>
-						</div>
+						<small><%= sentDateDescription %></small>
 					</div>
 				</div>
-			</div>
+			</liferay-ui:search-container-column-text>
+		</liferay-ui:search-container-row>
 
-		<%
-		}
-		%>
-
-	</div>
+		<liferay-ui:search-iterator
+			displayStyle="descriptive"
+			markupView="lexicon"
+		/>
+	</liferay-ui:search-container>
 </commerce-ui:panel>
+
+<div id="<portlet:namespace />side-panel-root"></div>
+<div id="<portlet:namespace />side-panel-wrapper"></div>
+
+<aui:script require="commerce-frontend-js/js/side_panel/entry.es as SidePanel">
+	new SidePanel.default(
+		"<portlet:namespace />sidePanel",
+		"<portlet:namespace />side-panel-root",
+		{
+			size: "lg",
+			spritemap: "<%= themeDisplay.getPathThemeImages() + "/clay/icons.svg" %>",
+			portalWrapperId: "<portlet:namespace />side-panel-wrapper",
+			topAnchor: document.getElementById('commerce-admin-header')
+		}
+	);
+
+	Promise.all(
+		[
+			Liferay.componentReady('<portlet:namespace />commerceNotificationQueueEntries'),
+			Liferay.componentReady('<portlet:namespace />sidePanel')
+		]
+	).then(function(
+		[
+			table,
+			panel
+		]
+		) {
+			document.getElementById('<portlet:namespace />commerceNotificationQueueEntries')
+				.addEventListener(
+					'click',
+					function(e) {
+						e.preventDefault();
+
+						if (e.target.dataset.target === '<portlet:namespace />sidePanel') {
+							panel.open(e.target.dataset.panelUrl);
+						}
+					}
+				)
+		}
+	)
+</aui:script>
