@@ -176,7 +176,7 @@ public class CPSearchResultsPortlet
 			cpSearchResultsPortletInstanceConfiguration.paginationDelta();
 
 		Optional<PortletPreferences> portletPreferencesOptional =
-			portletSharedSearchSettings.getPortletPreferences();
+			portletSharedSearchSettings.getPortletPreferences71();
 
 		if (portletPreferencesOptional.isPresent()) {
 			PortletPreferences portletPreferences =
