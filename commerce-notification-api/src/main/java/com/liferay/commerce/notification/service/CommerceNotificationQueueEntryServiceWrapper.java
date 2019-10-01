@@ -66,11 +66,49 @@ public class CommerceNotificationQueueEntryServiceWrapper
 	}
 
 	@Override
+	public java.util.List
+		<com.liferay.commerce.notification.model.CommerceNotificationQueueEntry>
+				getCommerceNotificationQueueEntries(
+					long groupId, String className, long classPK, boolean sent,
+					int start, int end,
+					com.liferay.portal.kernel.util.OrderByComparator
+						<com.liferay.commerce.notification.model.
+							CommerceNotificationQueueEntry> orderByComparator)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceNotificationQueueEntryService.
+			getCommerceNotificationQueueEntries(
+				groupId, className, classPK, sent, start, end,
+				orderByComparator);
+	}
+
+	@Override
 	public int getCommerceNotificationQueueEntriesCount(long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _commerceNotificationQueueEntryService.
 			getCommerceNotificationQueueEntriesCount(groupId);
+	}
+
+	@Override
+	public int getCommerceNotificationQueueEntriesCount(
+			long groupId, String className, long classPK, boolean sent)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceNotificationQueueEntryService.
+			getCommerceNotificationQueueEntriesCount(
+				groupId, className, classPK, sent);
+	}
+
+	@Override
+	public
+		com.liferay.commerce.notification.model.CommerceNotificationQueueEntry
+				getCommerceNotificationQueueEntry(
+					long commerceNotificationQueueEntryId)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceNotificationQueueEntryService.
+			getCommerceNotificationQueueEntry(commerceNotificationQueueEntryId);
 	}
 
 	/**

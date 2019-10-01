@@ -55,6 +55,7 @@ public class CommerceNotificationQueueEntryLocalServiceUtil {
 			commerceNotificationQueueEntry);
 	}
 
+	@Deprecated
 	public static
 		com.liferay.commerce.notification.model.CommerceNotificationQueueEntry
 				addCommerceNotificationQueueEntry(
@@ -67,6 +68,20 @@ public class CommerceNotificationQueueEntryLocalServiceUtil {
 		return getService().addCommerceNotificationQueueEntry(
 			userId, groupId, commerceNotificationTemplateId, from, fromName, to,
 			toName, cc, bcc, subject, body, priority);
+	}
+
+	public static
+		com.liferay.commerce.notification.model.CommerceNotificationQueueEntry
+				addCommerceNotificationQueueEntry(
+					long userId, long groupId, String className, long classPK,
+					long commerceNotificationTemplateId, String from,
+					String fromName, String to, String toName, String cc,
+					String bcc, String subject, String body, double priority)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().addCommerceNotificationQueueEntry(
+			userId, groupId, className, classPK, commerceNotificationTemplateId,
+			from, fromName, to, toName, cc, bcc, subject, body, priority);
 	}
 
 	/**
@@ -290,6 +305,19 @@ public class CommerceNotificationQueueEntryLocalServiceUtil {
 			groupId, start, end, orderByComparator);
 	}
 
+	public static java.util.List
+		<com.liferay.commerce.notification.model.CommerceNotificationQueueEntry>
+			getCommerceNotificationQueueEntries(
+				long groupId, String className, long classPK, boolean sent,
+				int start, int end,
+				com.liferay.portal.kernel.util.OrderByComparator
+					<com.liferay.commerce.notification.model.
+						CommerceNotificationQueueEntry> orderByComparator) {
+
+		return getService().getCommerceNotificationQueueEntries(
+			groupId, className, classPK, sent, start, end, orderByComparator);
+	}
+
 	/**
 	 * Returns the number of commerce notification queue entries.
 	 *
@@ -301,6 +329,13 @@ public class CommerceNotificationQueueEntryLocalServiceUtil {
 
 	public static int getCommerceNotificationQueueEntriesCount(long groupId) {
 		return getService().getCommerceNotificationQueueEntriesCount(groupId);
+	}
+
+	public static int getCommerceNotificationQueueEntriesCount(
+		long groupId, String className, long classPK, boolean sent) {
+
+		return getService().getCommerceNotificationQueueEntriesCount(
+			groupId, className, classPK, sent);
 	}
 
 	/**

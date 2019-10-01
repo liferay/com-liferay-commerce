@@ -106,6 +106,37 @@ public class CommerceNotificationQueueEntryServiceSoap {
 		}
 	}
 
+	public static
+		com.liferay.commerce.notification.model.
+			CommerceNotificationQueueEntrySoap[]
+					getCommerceNotificationQueueEntries(
+						long groupId, String className, long classPK,
+						boolean sent, int start, int end,
+						com.liferay.portal.kernel.util.OrderByComparator
+							<com.liferay.commerce.notification.model.
+								CommerceNotificationQueueEntry>
+									orderByComparator)
+				throws RemoteException {
+
+		try {
+			java.util.List
+				<com.liferay.commerce.notification.model.
+					CommerceNotificationQueueEntry> returnValue =
+						CommerceNotificationQueueEntryServiceUtil.
+							getCommerceNotificationQueueEntries(
+								groupId, className, classPK, sent, start, end,
+								orderByComparator);
+
+			return com.liferay.commerce.notification.model.
+				CommerceNotificationQueueEntrySoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static int getCommerceNotificationQueueEntriesCount(long groupId)
 		throws RemoteException {
 
@@ -115,6 +146,49 @@ public class CommerceNotificationQueueEntryServiceSoap {
 					getCommerceNotificationQueueEntriesCount(groupId);
 
 			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getCommerceNotificationQueueEntriesCount(
+			long groupId, String className, long classPK, boolean sent)
+		throws RemoteException {
+
+		try {
+			int returnValue =
+				CommerceNotificationQueueEntryServiceUtil.
+					getCommerceNotificationQueueEntriesCount(
+						groupId, className, classPK, sent);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static
+		com.liferay.commerce.notification.model.
+			CommerceNotificationQueueEntrySoap
+					getCommerceNotificationQueueEntry(
+						long commerceNotificationQueueEntryId)
+				throws RemoteException {
+
+		try {
+			com.liferay.commerce.notification.model.
+				CommerceNotificationQueueEntry returnValue =
+					CommerceNotificationQueueEntryServiceUtil.
+						getCommerceNotificationQueueEntry(
+							commerceNotificationQueueEntryId);
+
+			return com.liferay.commerce.notification.model.
+				CommerceNotificationQueueEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

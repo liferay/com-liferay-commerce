@@ -67,6 +67,8 @@ public class CommerceNotificationQueueEntryWrapper
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("classNameId", getClassNameId());
+		attributes.put("classPK", getClassPK());
 		attributes.put(
 			"commerceNotificationTemplateId",
 			getCommerceNotificationTemplateId());
@@ -129,6 +131,18 @@ public class CommerceNotificationQueueEntryWrapper
 
 		if (modifiedDate != null) {
 			setModifiedDate(modifiedDate);
+		}
+
+		Long classNameId = (Long)attributes.get("classNameId");
+
+		if (classNameId != null) {
+			setClassNameId(classNameId);
+		}
+
+		Long classPK = (Long)attributes.get("classPK");
+
+		if (classPK != null) {
+			setClassPK(classPK);
 		}
 
 		Long commerceNotificationTemplateId = (Long)attributes.get(
@@ -251,6 +265,36 @@ public class CommerceNotificationQueueEntryWrapper
 	}
 
 	/**
+	 * Returns the fully qualified class name of this commerce notification queue entry.
+	 *
+	 * @return the fully qualified class name of this commerce notification queue entry
+	 */
+	@Override
+	public String getClassName() {
+		return _commerceNotificationQueueEntry.getClassName();
+	}
+
+	/**
+	 * Returns the class name ID of this commerce notification queue entry.
+	 *
+	 * @return the class name ID of this commerce notification queue entry
+	 */
+	@Override
+	public long getClassNameId() {
+		return _commerceNotificationQueueEntry.getClassNameId();
+	}
+
+	/**
+	 * Returns the class pk of this commerce notification queue entry.
+	 *
+	 * @return the class pk of this commerce notification queue entry
+	 */
+	@Override
+	public long getClassPK() {
+		return _commerceNotificationQueueEntry.getClassPK();
+	}
+
+	/**
 	 * Returns the commerce notification queue entry ID of this commerce notification queue entry.
 	 *
 	 * @return the commerce notification queue entry ID of this commerce notification queue entry
@@ -270,6 +314,14 @@ public class CommerceNotificationQueueEntryWrapper
 	public long getCommerceNotificationTemplateId() {
 		return _commerceNotificationQueueEntry.
 			getCommerceNotificationTemplateId();
+	}
+
+	@Override
+	public String getCommerceNotificationTemplateType()
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceNotificationQueueEntry.
+			getCommerceNotificationTemplateType();
 	}
 
 	/**
@@ -412,6 +464,13 @@ public class CommerceNotificationQueueEntryWrapper
 		return _commerceNotificationQueueEntry.getToName();
 	}
 
+	@Override
+	public com.liferay.portal.kernel.model.User getUser()
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceNotificationQueueEntry.getUser();
+	}
+
 	/**
 	 * Returns the user ID of this commerce notification queue entry.
 	 *
@@ -515,6 +574,31 @@ public class CommerceNotificationQueueEntryWrapper
 	@Override
 	public void setCc(String cc) {
 		_commerceNotificationQueueEntry.setCc(cc);
+	}
+
+	@Override
+	public void setClassName(String className) {
+		_commerceNotificationQueueEntry.setClassName(className);
+	}
+
+	/**
+	 * Sets the class name ID of this commerce notification queue entry.
+	 *
+	 * @param classNameId the class name ID of this commerce notification queue entry
+	 */
+	@Override
+	public void setClassNameId(long classNameId) {
+		_commerceNotificationQueueEntry.setClassNameId(classNameId);
+	}
+
+	/**
+	 * Sets the class pk of this commerce notification queue entry.
+	 *
+	 * @param classPK the class pk of this commerce notification queue entry
+	 */
+	@Override
+	public void setClassPK(long classPK) {
+		_commerceNotificationQueueEntry.setClassPK(classPK);
 	}
 
 	/**

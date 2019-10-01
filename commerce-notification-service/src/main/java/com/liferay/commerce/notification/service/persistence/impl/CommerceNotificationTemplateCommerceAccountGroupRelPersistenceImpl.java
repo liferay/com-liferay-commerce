@@ -205,9 +205,9 @@ public class CommerceNotificationTemplateCommerceAccountGroupRelPersistenceImpl
 						commerceNotificationTemplateCommerceAccountGroupRel :
 							list) {
 
-					if ((commerceAccountGroupId !=
+					if (commerceAccountGroupId !=
 							commerceNotificationTemplateCommerceAccountGroupRel.
-								getCommerceAccountGroupId())) {
+								getCommerceAccountGroupId()) {
 
 						list = null;
 
@@ -805,9 +805,9 @@ public class CommerceNotificationTemplateCommerceAccountGroupRelPersistenceImpl
 						commerceNotificationTemplateCommerceAccountGroupRel :
 							list) {
 
-					if ((commerceNotificationTemplateId !=
+					if (commerceNotificationTemplateId !=
 							commerceNotificationTemplateCommerceAccountGroupRel.
-								getCommerceNotificationTemplateId())) {
+								getCommerceNotificationTemplateId()) {
 
 						list = null;
 

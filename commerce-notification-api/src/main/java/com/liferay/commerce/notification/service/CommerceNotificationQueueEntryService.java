@@ -73,7 +73,26 @@ public interface CommerceNotificationQueueEntryService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceNotificationQueueEntry>
+			getCommerceNotificationQueueEntries(
+				long groupId, String className, long classPK, boolean sent,
+				int start, int end,
+				OrderByComparator<CommerceNotificationQueueEntry>
+					orderByComparator)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceNotificationQueueEntriesCount(long groupId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceNotificationQueueEntriesCount(
+			long groupId, String className, long classPK, boolean sent)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceNotificationQueueEntry getCommerceNotificationQueueEntry(
+			long commerceNotificationQueueEntryId)
 		throws PortalException;
 
 	/**

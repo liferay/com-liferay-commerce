@@ -74,11 +74,19 @@ public interface CommerceNotificationQueueEntryLocalService
 	public CommerceNotificationQueueEntry addCommerceNotificationQueueEntry(
 		CommerceNotificationQueueEntry commerceNotificationQueueEntry);
 
-	@Indexable(type = IndexableType.REINDEX)
+	@Deprecated
 	public CommerceNotificationQueueEntry addCommerceNotificationQueueEntry(
 			long userId, long groupId, long commerceNotificationTemplateId,
 			String from, String fromName, String to, String toName, String cc,
 			String bcc, String subject, String body, double priority)
+		throws PortalException;
+
+	@Indexable(type = IndexableType.REINDEX)
+	public CommerceNotificationQueueEntry addCommerceNotificationQueueEntry(
+			long userId, long groupId, String className, long classPK,
+			long commerceNotificationTemplateId, String from, String fromName,
+			String to, String toName, String cc, String bcc, String subject,
+			String body, double priority)
 		throws PortalException;
 
 	/**
@@ -230,6 +238,14 @@ public interface CommerceNotificationQueueEntryLocalService
 			OrderByComparator<CommerceNotificationQueueEntry>
 				orderByComparator);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceNotificationQueueEntry>
+		getCommerceNotificationQueueEntries(
+			long groupId, String className, long classPK, boolean sent,
+			int start, int end,
+			OrderByComparator<CommerceNotificationQueueEntry>
+				orderByComparator);
+
 	/**
 	 * Returns the number of commerce notification queue entries.
 	 *
@@ -240,6 +256,10 @@ public interface CommerceNotificationQueueEntryLocalService
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceNotificationQueueEntriesCount(long groupId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceNotificationQueueEntriesCount(
+		long groupId, String className, long classPK, boolean sent);
 
 	/**
 	 * Returns the commerce notification queue entry with the primary key.

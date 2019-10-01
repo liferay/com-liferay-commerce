@@ -190,8 +190,8 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 				for (CommerceNotificationQueueEntry
 						commerceNotificationQueueEntry : list) {
 
-					if ((groupId !=
-							commerceNotificationQueueEntry.getGroupId())) {
+					if (groupId !=
+							commerceNotificationQueueEntry.getGroupId()) {
 
 						list = null;
 
@@ -737,9 +737,9 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 				for (CommerceNotificationQueueEntry
 						commerceNotificationQueueEntry : list) {
 
-					if ((commerceNotificationTemplateId !=
+					if (commerceNotificationTemplateId !=
 							commerceNotificationQueueEntry.
-								getCommerceNotificationTemplateId())) {
+								getCommerceNotificationTemplateId()) {
 
 						list = null;
 
@@ -1295,7 +1295,7 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 				for (CommerceNotificationQueueEntry
 						commerceNotificationQueueEntry : list) {
 
-					if ((sent != commerceNotificationQueueEntry.isSent())) {
+					if (sent != commerceNotificationQueueEntry.isSent()) {
 						list = null;
 
 						break;
@@ -1810,9 +1810,9 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 				for (CommerceNotificationQueueEntry
 						commerceNotificationQueueEntry : list) {
 
-					if ((sentDate.getTime() <=
+					if (sentDate.getTime() <=
 							commerceNotificationQueueEntry.
-								getSentDate().getTime())) {
+								getSentDate().getTime()) {
 
 						list = null;
 
@@ -2272,6 +2272,660 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 	private static final String _FINDER_COLUMN_LTS_SENTDATE_2 =
 		"commerceNotificationQueueEntry.sentDate < ?";
 
+	private FinderPath _finderPathWithPaginationFindByG_C_C_S;
+	private FinderPath _finderPathWithoutPaginationFindByG_C_C_S;
+	private FinderPath _finderPathCountByG_C_C_S;
+
+	/**
+	 * Returns all the commerce notification queue entries where groupId = &#63; and classNameId = &#63; and classPK = &#63; and sent = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param sent the sent
+	 * @return the matching commerce notification queue entries
+	 */
+	@Override
+	public List<CommerceNotificationQueueEntry> findByG_C_C_S(
+		long groupId, long classNameId, long classPK, boolean sent) {
+
+		return findByG_C_C_S(
+			groupId, classNameId, classPK, sent, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the commerce notification queue entries where groupId = &#63; and classNameId = &#63; and classPK = &#63; and sent = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationQueueEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param sent the sent
+	 * @param start the lower bound of the range of commerce notification queue entries
+	 * @param end the upper bound of the range of commerce notification queue entries (not inclusive)
+	 * @return the range of matching commerce notification queue entries
+	 */
+	@Override
+	public List<CommerceNotificationQueueEntry> findByG_C_C_S(
+		long groupId, long classNameId, long classPK, boolean sent, int start,
+		int end) {
+
+		return findByG_C_C_S(
+			groupId, classNameId, classPK, sent, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce notification queue entries where groupId = &#63; and classNameId = &#63; and classPK = &#63; and sent = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationQueueEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param sent the sent
+	 * @param start the lower bound of the range of commerce notification queue entries
+	 * @param end the upper bound of the range of commerce notification queue entries (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce notification queue entries
+	 */
+	@Override
+	public List<CommerceNotificationQueueEntry> findByG_C_C_S(
+		long groupId, long classNameId, long classPK, boolean sent, int start,
+		int end,
+		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator) {
+
+		return findByG_C_C_S(
+			groupId, classNameId, classPK, sent, start, end, orderByComparator,
+			true);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce notification queue entries where groupId = &#63; and classNameId = &#63; and classPK = &#63; and sent = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationQueueEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param sent the sent
+	 * @param start the lower bound of the range of commerce notification queue entries
+	 * @param end the upper bound of the range of commerce notification queue entries (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching commerce notification queue entries
+	 */
+	@Override
+	public List<CommerceNotificationQueueEntry> findByG_C_C_S(
+		long groupId, long classNameId, long classPK, boolean sent, int start,
+		int end,
+		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator,
+		boolean useFinderCache) {
+
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+			(orderByComparator == null)) {
+
+			pagination = false;
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByG_C_C_S;
+				finderArgs = new Object[] {groupId, classNameId, classPK, sent};
+			}
+		}
+		else if (useFinderCache) {
+			finderPath = _finderPathWithPaginationFindByG_C_C_S;
+			finderArgs = new Object[] {
+				groupId, classNameId, classPK, sent, start, end,
+				orderByComparator
+			};
+		}
+
+		List<CommerceNotificationQueueEntry> list = null;
+
+		if (useFinderCache) {
+			list = (List<CommerceNotificationQueueEntry>)finderCache.getResult(
+				finderPath, finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (CommerceNotificationQueueEntry
+						commerceNotificationQueueEntry : list) {
+
+					if ((groupId !=
+							commerceNotificationQueueEntry.getGroupId()) ||
+						(classNameId !=
+							commerceNotificationQueueEntry.getClassNameId()) ||
+						(classPK !=
+							commerceNotificationQueueEntry.getClassPK()) ||
+						(sent != commerceNotificationQueueEntry.isSent())) {
+
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(
+					6 + (orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(6);
+			}
+
+			query.append(_SQL_SELECT_COMMERCENOTIFICATIONQUEUEENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_G_C_C_S_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_C_C_S_CLASSNAMEID_2);
+
+			query.append(_FINDER_COLUMN_G_C_C_S_CLASSPK_2);
+
+			query.append(_FINDER_COLUMN_G_C_C_S_SENT_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
+			}
+			else if (pagination) {
+				query.append(
+					CommerceNotificationQueueEntryModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(classNameId);
+
+				qPos.add(classPK);
+
+				qPos.add(sent);
+
+				if (!pagination) {
+					list = (List<CommerceNotificationQueueEntry>)QueryUtil.list(
+						q, getDialect(), start, end, false);
+
+					Collections.sort(list);
+
+					list = Collections.unmodifiableList(list);
+				}
+				else {
+					list = (List<CommerceNotificationQueueEntry>)QueryUtil.list(
+						q, getDialect(), start, end);
+				}
+
+				cacheResult(list);
+
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
+			}
+			catch (Exception e) {
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first commerce notification queue entry in the ordered set where groupId = &#63; and classNameId = &#63; and classPK = &#63; and sent = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param sent the sent
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce notification queue entry
+	 * @throws NoSuchNotificationQueueEntryException if a matching commerce notification queue entry could not be found
+	 */
+	@Override
+	public CommerceNotificationQueueEntry findByG_C_C_S_First(
+			long groupId, long classNameId, long classPK, boolean sent,
+			OrderByComparator<CommerceNotificationQueueEntry> orderByComparator)
+		throws NoSuchNotificationQueueEntryException {
+
+		CommerceNotificationQueueEntry commerceNotificationQueueEntry =
+			fetchByG_C_C_S_First(
+				groupId, classNameId, classPK, sent, orderByComparator);
+
+		if (commerceNotificationQueueEntry != null) {
+			return commerceNotificationQueueEntry;
+		}
+
+		StringBundler msg = new StringBundler(10);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("groupId=");
+		msg.append(groupId);
+
+		msg.append(", classNameId=");
+		msg.append(classNameId);
+
+		msg.append(", classPK=");
+		msg.append(classPK);
+
+		msg.append(", sent=");
+		msg.append(sent);
+
+		msg.append("}");
+
+		throw new NoSuchNotificationQueueEntryException(msg.toString());
+	}
+
+	/**
+	 * Returns the first commerce notification queue entry in the ordered set where groupId = &#63; and classNameId = &#63; and classPK = &#63; and sent = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param sent the sent
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce notification queue entry, or <code>null</code> if a matching commerce notification queue entry could not be found
+	 */
+	@Override
+	public CommerceNotificationQueueEntry fetchByG_C_C_S_First(
+		long groupId, long classNameId, long classPK, boolean sent,
+		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator) {
+
+		List<CommerceNotificationQueueEntry> list = findByG_C_C_S(
+			groupId, classNameId, classPK, sent, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last commerce notification queue entry in the ordered set where groupId = &#63; and classNameId = &#63; and classPK = &#63; and sent = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param sent the sent
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce notification queue entry
+	 * @throws NoSuchNotificationQueueEntryException if a matching commerce notification queue entry could not be found
+	 */
+	@Override
+	public CommerceNotificationQueueEntry findByG_C_C_S_Last(
+			long groupId, long classNameId, long classPK, boolean sent,
+			OrderByComparator<CommerceNotificationQueueEntry> orderByComparator)
+		throws NoSuchNotificationQueueEntryException {
+
+		CommerceNotificationQueueEntry commerceNotificationQueueEntry =
+			fetchByG_C_C_S_Last(
+				groupId, classNameId, classPK, sent, orderByComparator);
+
+		if (commerceNotificationQueueEntry != null) {
+			return commerceNotificationQueueEntry;
+		}
+
+		StringBundler msg = new StringBundler(10);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("groupId=");
+		msg.append(groupId);
+
+		msg.append(", classNameId=");
+		msg.append(classNameId);
+
+		msg.append(", classPK=");
+		msg.append(classPK);
+
+		msg.append(", sent=");
+		msg.append(sent);
+
+		msg.append("}");
+
+		throw new NoSuchNotificationQueueEntryException(msg.toString());
+	}
+
+	/**
+	 * Returns the last commerce notification queue entry in the ordered set where groupId = &#63; and classNameId = &#63; and classPK = &#63; and sent = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param sent the sent
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce notification queue entry, or <code>null</code> if a matching commerce notification queue entry could not be found
+	 */
+	@Override
+	public CommerceNotificationQueueEntry fetchByG_C_C_S_Last(
+		long groupId, long classNameId, long classPK, boolean sent,
+		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator) {
+
+		int count = countByG_C_C_S(groupId, classNameId, classPK, sent);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<CommerceNotificationQueueEntry> list = findByG_C_C_S(
+			groupId, classNameId, classPK, sent, count - 1, count,
+			orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the commerce notification queue entries before and after the current commerce notification queue entry in the ordered set where groupId = &#63; and classNameId = &#63; and classPK = &#63; and sent = &#63;.
+	 *
+	 * @param commerceNotificationQueueEntryId the primary key of the current commerce notification queue entry
+	 * @param groupId the group ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param sent the sent
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce notification queue entry
+	 * @throws NoSuchNotificationQueueEntryException if a commerce notification queue entry with the primary key could not be found
+	 */
+	@Override
+	public CommerceNotificationQueueEntry[] findByG_C_C_S_PrevAndNext(
+			long commerceNotificationQueueEntryId, long groupId,
+			long classNameId, long classPK, boolean sent,
+			OrderByComparator<CommerceNotificationQueueEntry> orderByComparator)
+		throws NoSuchNotificationQueueEntryException {
+
+		CommerceNotificationQueueEntry commerceNotificationQueueEntry =
+			findByPrimaryKey(commerceNotificationQueueEntryId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CommerceNotificationQueueEntry[] array =
+				new CommerceNotificationQueueEntryImpl[3];
+
+			array[0] = getByG_C_C_S_PrevAndNext(
+				session, commerceNotificationQueueEntry, groupId, classNameId,
+				classPK, sent, orderByComparator, true);
+
+			array[1] = commerceNotificationQueueEntry;
+
+			array[2] = getByG_C_C_S_PrevAndNext(
+				session, commerceNotificationQueueEntry, groupId, classNameId,
+				classPK, sent, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected CommerceNotificationQueueEntry getByG_C_C_S_PrevAndNext(
+		Session session,
+		CommerceNotificationQueueEntry commerceNotificationQueueEntry,
+		long groupId, long classNameId, long classPK, boolean sent,
+		OrderByComparator<CommerceNotificationQueueEntry> orderByComparator,
+		boolean previous) {
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(
+				7 + (orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(6);
+		}
+
+		query.append(_SQL_SELECT_COMMERCENOTIFICATIONQUEUEENTRY_WHERE);
+
+		query.append(_FINDER_COLUMN_G_C_C_S_GROUPID_2);
+
+		query.append(_FINDER_COLUMN_G_C_C_S_CLASSNAMEID_2);
+
+		query.append(_FINDER_COLUMN_G_C_C_S_CLASSPK_2);
+
+		query.append(_FINDER_COLUMN_G_C_C_S_SENT_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(CommerceNotificationQueueEntryModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		qPos.add(classNameId);
+
+		qPos.add(classPK);
+
+		qPos.add(sent);
+
+		if (orderByComparator != null) {
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceNotificationQueueEntry)) {
+
+				qPos.add(orderByConditionValue);
+			}
+		}
+
+		List<CommerceNotificationQueueEntry> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the commerce notification queue entries where groupId = &#63; and classNameId = &#63; and classPK = &#63; and sent = &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param sent the sent
+	 */
+	@Override
+	public void removeByG_C_C_S(
+		long groupId, long classNameId, long classPK, boolean sent) {
+
+		for (CommerceNotificationQueueEntry commerceNotificationQueueEntry :
+				findByG_C_C_S(
+					groupId, classNameId, classPK, sent, QueryUtil.ALL_POS,
+					QueryUtil.ALL_POS, null)) {
+
+			remove(commerceNotificationQueueEntry);
+		}
+	}
+
+	/**
+	 * Returns the number of commerce notification queue entries where groupId = &#63; and classNameId = &#63; and classPK = &#63; and sent = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param sent the sent
+	 * @return the number of matching commerce notification queue entries
+	 */
+	@Override
+	public int countByG_C_C_S(
+		long groupId, long classNameId, long classPK, boolean sent) {
+
+		FinderPath finderPath = _finderPathCountByG_C_C_S;
+
+		Object[] finderArgs = new Object[] {
+			groupId, classNameId, classPK, sent
+		};
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(5);
+
+			query.append(_SQL_COUNT_COMMERCENOTIFICATIONQUEUEENTRY_WHERE);
+
+			query.append(_FINDER_COLUMN_G_C_C_S_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_C_C_S_CLASSNAMEID_2);
+
+			query.append(_FINDER_COLUMN_G_C_C_S_CLASSPK_2);
+
+			query.append(_FINDER_COLUMN_G_C_C_S_SENT_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(classNameId);
+
+				qPos.add(classPK);
+
+				qPos.add(sent);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_G_C_C_S_GROUPID_2 =
+		"commerceNotificationQueueEntry.groupId = ? AND ";
+
+	private static final String _FINDER_COLUMN_G_C_C_S_CLASSNAMEID_2 =
+		"commerceNotificationQueueEntry.classNameId = ? AND ";
+
+	private static final String _FINDER_COLUMN_G_C_C_S_CLASSPK_2 =
+		"commerceNotificationQueueEntry.classPK = ? AND ";
+
+	private static final String _FINDER_COLUMN_G_C_C_S_SENT_2 =
+		"commerceNotificationQueueEntry.sent = ?";
+
 	public CommerceNotificationQueueEntryPersistenceImpl() {
 		setModelClass(CommerceNotificationQueueEntry.class);
 
@@ -2621,6 +3275,17 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 			finderCache.removeResult(
 				_finderPathWithoutPaginationFindBySent, args);
 
+			args = new Object[] {
+				commerceNotificationQueueEntryModelImpl.getGroupId(),
+				commerceNotificationQueueEntryModelImpl.getClassNameId(),
+				commerceNotificationQueueEntryModelImpl.getClassPK(),
+				commerceNotificationQueueEntryModelImpl.isSent()
+			};
+
+			finderCache.removeResult(_finderPathCountByG_C_C_S, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByG_C_C_S, args);
+
 			finderCache.removeResult(_finderPathCountAll, FINDER_ARGS_EMPTY);
 			finderCache.removeResult(
 				_finderPathWithoutPaginationFindAll, FINDER_ARGS_EMPTY);
@@ -2693,6 +3358,36 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 				finderCache.removeResult(_finderPathCountBySent, args);
 				finderCache.removeResult(
 					_finderPathWithoutPaginationFindBySent, args);
+			}
+
+			if ((commerceNotificationQueueEntryModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByG_C_C_S.
+					 getColumnBitmask()) != 0) {
+
+				Object[] args = new Object[] {
+					commerceNotificationQueueEntryModelImpl.
+						getOriginalGroupId(),
+					commerceNotificationQueueEntryModelImpl.
+						getOriginalClassNameId(),
+					commerceNotificationQueueEntryModelImpl.
+						getOriginalClassPK(),
+					commerceNotificationQueueEntryModelImpl.getOriginalSent()
+				};
+
+				finderCache.removeResult(_finderPathCountByG_C_C_S, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByG_C_C_S, args);
+
+				args = new Object[] {
+					commerceNotificationQueueEntryModelImpl.getGroupId(),
+					commerceNotificationQueueEntryModelImpl.getClassNameId(),
+					commerceNotificationQueueEntryModelImpl.getClassPK(),
+					commerceNotificationQueueEntryModelImpl.isSent()
+				};
+
+				finderCache.removeResult(_finderPathCountByG_C_C_S, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByG_C_C_S, args);
 			}
 		}
 
@@ -3266,6 +3961,43 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 			CommerceNotificationQueueEntryModelImpl.FINDER_CACHE_ENABLED,
 			Long.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "countByLtS",
 			new String[] {Date.class.getName()});
+
+		_finderPathWithPaginationFindByG_C_C_S = new FinderPath(
+			CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceNotificationQueueEntryModelImpl.FINDER_CACHE_ENABLED,
+			CommerceNotificationQueueEntryImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByG_C_C_S",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Long.class.getName(), Boolean.class.getName(),
+				Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByG_C_C_S = new FinderPath(
+			CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceNotificationQueueEntryModelImpl.FINDER_CACHE_ENABLED,
+			CommerceNotificationQueueEntryImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_C_C_S",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Long.class.getName(), Boolean.class.getName()
+			},
+			CommerceNotificationQueueEntryModelImpl.GROUPID_COLUMN_BITMASK |
+			CommerceNotificationQueueEntryModelImpl.CLASSNAMEID_COLUMN_BITMASK |
+			CommerceNotificationQueueEntryModelImpl.CLASSPK_COLUMN_BITMASK |
+			CommerceNotificationQueueEntryModelImpl.SENT_COLUMN_BITMASK |
+			CommerceNotificationQueueEntryModelImpl.PRIORITY_COLUMN_BITMASK);
+
+		_finderPathCountByG_C_C_S = new FinderPath(
+			CommerceNotificationQueueEntryModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceNotificationQueueEntryModelImpl.FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByG_C_C_S",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Long.class.getName(), Boolean.class.getName()
+			});
 	}
 
 	public void destroy() {

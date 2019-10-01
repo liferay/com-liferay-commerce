@@ -64,4 +64,10 @@ public interface CommerceNotificationQueueEntry
 
 			};
 
+	public String getCommerceNotificationTemplateType()
+		throws com.liferay.portal.kernel.exception.PortalException;
+
+	public com.liferay.portal.kernel.model.User getUser()
+		throws com.liferay.portal.kernel.exception.PortalException;
+
 }

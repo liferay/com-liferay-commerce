@@ -29,8 +29,10 @@ import com.liferay.portal.kernel.model.impl.BaseModelImpl;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
@@ -76,7 +78,8 @@ public class CommerceNotificationQueueEntryModelImpl
 		{"CNotificationQueueEntryId", Types.BIGINT}, {"groupId", Types.BIGINT},
 		{"companyId", Types.BIGINT}, {"userId", Types.BIGINT},
 		{"userName", Types.VARCHAR}, {"createDate", Types.TIMESTAMP},
-		{"modifiedDate", Types.TIMESTAMP},
+		{"modifiedDate", Types.TIMESTAMP}, {"classNameId", Types.BIGINT},
+		{"classPK", Types.BIGINT},
 		{"commerceNotificationTemplateId", Types.BIGINT},
 		{"from_", Types.VARCHAR}, {"fromName", Types.VARCHAR},
 		{"to_", Types.VARCHAR}, {"toName", Types.VARCHAR},
@@ -97,6 +100,8 @@ public class CommerceNotificationQueueEntryModelImpl
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
+		TABLE_COLUMNS_MAP.put("classNameId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("classPK", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("commerceNotificationTemplateId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("from_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("fromName", Types.VARCHAR);
@@ -112,7 +117,7 @@ public class CommerceNotificationQueueEntryModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CommerceNotificationQueueEntry (CNotificationQueueEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceNotificationTemplateId LONG,from_ VARCHAR(75) null,fromName VARCHAR(75) null,to_ VARCHAR(75) null,toName VARCHAR(75) null,cc VARCHAR(255) null,bcc VARCHAR(255) null,subject VARCHAR(255) null,body TEXT null,priority DOUBLE,sent BOOLEAN,sentDate DATE null)";
+		"create table CommerceNotificationQueueEntry (CNotificationQueueEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,commerceNotificationTemplateId LONG,from_ VARCHAR(75) null,fromName VARCHAR(75) null,to_ VARCHAR(75) null,toName VARCHAR(75) null,cc VARCHAR(255) null,bcc VARCHAR(255) null,subject VARCHAR(255) null,body TEXT null,priority DOUBLE,sent BOOLEAN,sentDate DATE null)";
 
 	public static final String TABLE_SQL_DROP =
 		"drop table CommerceNotificationQueueEntry";
@@ -144,15 +149,19 @@ public class CommerceNotificationQueueEntryModelImpl
 			"value.object.column.bitmask.enabled.com.liferay.commerce.notification.model.CommerceNotificationQueueEntry"),
 		true);
 
-	public static final long COMMERCENOTIFICATIONTEMPLATEID_COLUMN_BITMASK = 1L;
+	public static final long CLASSNAMEID_COLUMN_BITMASK = 1L;
 
-	public static final long GROUPID_COLUMN_BITMASK = 2L;
+	public static final long CLASSPK_COLUMN_BITMASK = 2L;
 
-	public static final long SENT_COLUMN_BITMASK = 4L;
+	public static final long COMMERCENOTIFICATIONTEMPLATEID_COLUMN_BITMASK = 4L;
 
-	public static final long SENTDATE_COLUMN_BITMASK = 8L;
+	public static final long GROUPID_COLUMN_BITMASK = 8L;
 
-	public static final long PRIORITY_COLUMN_BITMASK = 16L;
+	public static final long SENT_COLUMN_BITMASK = 16L;
+
+	public static final long SENTDATE_COLUMN_BITMASK = 32L;
+
+	public static final long PRIORITY_COLUMN_BITMASK = 64L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -178,6 +187,8 @@ public class CommerceNotificationQueueEntryModelImpl
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setClassNameId(soapModel.getClassNameId());
+		model.setClassPK(soapModel.getClassPK());
 		model.setCommerceNotificationTemplateId(
 			soapModel.getCommerceNotificationTemplateId());
 		model.setFrom(soapModel.getFrom());
@@ -549,6 +560,61 @@ public class CommerceNotificationQueueEntryModelImpl
 
 					commerceNotificationQueueEntry.setModifiedDate(
 						(Date)modifiedDate);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"classNameId",
+			new Function<CommerceNotificationQueueEntry, Object>() {
+
+				@Override
+				public Object apply(
+					CommerceNotificationQueueEntry
+						commerceNotificationQueueEntry) {
+
+					return commerceNotificationQueueEntry.getClassNameId();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"classNameId",
+			new BiConsumer<CommerceNotificationQueueEntry, Object>() {
+
+				@Override
+				public void accept(
+					CommerceNotificationQueueEntry
+						commerceNotificationQueueEntry,
+					Object classNameId) {
+
+					commerceNotificationQueueEntry.setClassNameId(
+						(Long)classNameId);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"classPK",
+			new Function<CommerceNotificationQueueEntry, Object>() {
+
+				@Override
+				public Object apply(
+					CommerceNotificationQueueEntry
+						commerceNotificationQueueEntry) {
+
+					return commerceNotificationQueueEntry.getClassPK();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"classPK",
+			new BiConsumer<CommerceNotificationQueueEntry, Object>() {
+
+				@Override
+				public void accept(
+					CommerceNotificationQueueEntry
+						commerceNotificationQueueEntry,
+					Object classPK) {
+
+					commerceNotificationQueueEntry.setClassPK((Long)classPK);
 				}
 
 			});
@@ -1006,6 +1072,72 @@ public class CommerceNotificationQueueEntryModelImpl
 		_modifiedDate = modifiedDate;
 	}
 
+	@Override
+	public String getClassName() {
+		if (getClassNameId() <= 0) {
+			return "";
+		}
+
+		return PortalUtil.getClassName(getClassNameId());
+	}
+
+	@Override
+	public void setClassName(String className) {
+		long classNameId = 0;
+
+		if (Validator.isNotNull(className)) {
+			classNameId = PortalUtil.getClassNameId(className);
+		}
+
+		setClassNameId(classNameId);
+	}
+
+	@JSON
+	@Override
+	public long getClassNameId() {
+		return _classNameId;
+	}
+
+	@Override
+	public void setClassNameId(long classNameId) {
+		_columnBitmask |= CLASSNAMEID_COLUMN_BITMASK;
+
+		if (!_setOriginalClassNameId) {
+			_setOriginalClassNameId = true;
+
+			_originalClassNameId = _classNameId;
+		}
+
+		_classNameId = classNameId;
+	}
+
+	public long getOriginalClassNameId() {
+		return _originalClassNameId;
+	}
+
+	@JSON
+	@Override
+	public long getClassPK() {
+		return _classPK;
+	}
+
+	@Override
+	public void setClassPK(long classPK) {
+		_columnBitmask |= CLASSPK_COLUMN_BITMASK;
+
+		if (!_setOriginalClassPK) {
+			_setOriginalClassPK = true;
+
+			_originalClassPK = _classPK;
+		}
+
+		_classPK = classPK;
+	}
+
+	public long getOriginalClassPK() {
+		return _originalClassPK;
+	}
+
 	@JSON
 	@Override
 	public long getCommerceNotificationTemplateId() {
@@ -1269,6 +1401,8 @@ public class CommerceNotificationQueueEntryModelImpl
 		commerceNotificationQueueEntryImpl.setUserName(getUserName());
 		commerceNotificationQueueEntryImpl.setCreateDate(getCreateDate());
 		commerceNotificationQueueEntryImpl.setModifiedDate(getModifiedDate());
+		commerceNotificationQueueEntryImpl.setClassNameId(getClassNameId());
+		commerceNotificationQueueEntryImpl.setClassPK(getClassPK());
 		commerceNotificationQueueEntryImpl.setCommerceNotificationTemplateId(
 			getCommerceNotificationTemplateId());
 		commerceNotificationQueueEntryImpl.setFrom(getFrom());
@@ -1363,6 +1497,16 @@ public class CommerceNotificationQueueEntryModelImpl
 
 		commerceNotificationQueueEntryModelImpl._setModifiedDate = false;
 
+		commerceNotificationQueueEntryModelImpl._originalClassNameId =
+			commerceNotificationQueueEntryModelImpl._classNameId;
+
+		commerceNotificationQueueEntryModelImpl._setOriginalClassNameId = false;
+
+		commerceNotificationQueueEntryModelImpl._originalClassPK =
+			commerceNotificationQueueEntryModelImpl._classPK;
+
+		commerceNotificationQueueEntryModelImpl._setOriginalClassPK = false;
+
 		commerceNotificationQueueEntryModelImpl.
 			_originalCommerceNotificationTemplateId =
 				commerceNotificationQueueEntryModelImpl.
@@ -1427,6 +1571,10 @@ public class CommerceNotificationQueueEntryModelImpl
 			commerceNotificationQueueEntryCacheModel.modifiedDate =
 				Long.MIN_VALUE;
 		}
+
+		commerceNotificationQueueEntryCacheModel.classNameId = getClassNameId();
+
+		commerceNotificationQueueEntryCacheModel.classPK = getClassPK();
 
 		commerceNotificationQueueEntryCacheModel.
 			commerceNotificationTemplateId =
@@ -1599,6 +1747,12 @@ public class CommerceNotificationQueueEntryModelImpl
 	private Date _createDate;
 	private Date _modifiedDate;
 	private boolean _setModifiedDate;
+	private long _classNameId;
+	private long _originalClassNameId;
+	private boolean _setOriginalClassNameId;
+	private long _classPK;
+	private long _originalClassPK;
+	private boolean _setOriginalClassPK;
 	private long _commerceNotificationTemplateId;
 	private long _originalCommerceNotificationTemplateId;
 	private boolean _setOriginalCommerceNotificationTemplateId;
