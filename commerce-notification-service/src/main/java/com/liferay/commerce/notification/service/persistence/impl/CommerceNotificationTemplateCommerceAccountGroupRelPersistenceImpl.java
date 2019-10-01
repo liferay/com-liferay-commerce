@@ -84,600 +84,6 @@ public class CommerceNotificationTemplateCommerceAccountGroupRelPersistenceImpl
 	private FinderPath _finderPathWithPaginationFindAll;
 	private FinderPath _finderPathWithoutPaginationFindAll;
 	private FinderPath _finderPathCountAll;
-	private FinderPath _finderPathWithPaginationFindByCommerceAccountGroupId;
-	private FinderPath _finderPathWithoutPaginationFindByCommerceAccountGroupId;
-	private FinderPath _finderPathCountByCommerceAccountGroupId;
-
-	/**
-	 * Returns all the commerce notification template commerce account group rels where commerceAccountGroupId = &#63;.
-	 *
-	 * @param commerceAccountGroupId the commerce account group ID
-	 * @return the matching commerce notification template commerce account group rels
-	 */
-	@Override
-	public List<CommerceNotificationTemplateCommerceAccountGroupRel>
-		findByCommerceAccountGroupId(long commerceAccountGroupId) {
-
-		return findByCommerceAccountGroupId(
-			commerceAccountGroupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-	}
-
-	/**
-	 * Returns a range of all the commerce notification template commerce account group rels where commerceAccountGroupId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationTemplateCommerceAccountGroupRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param commerceAccountGroupId the commerce account group ID
-	 * @param start the lower bound of the range of commerce notification template commerce account group rels
-	 * @param end the upper bound of the range of commerce notification template commerce account group rels (not inclusive)
-	 * @return the range of matching commerce notification template commerce account group rels
-	 */
-	@Override
-	public List<CommerceNotificationTemplateCommerceAccountGroupRel>
-		findByCommerceAccountGroupId(
-			long commerceAccountGroupId, int start, int end) {
-
-		return findByCommerceAccountGroupId(
-			commerceAccountGroupId, start, end, null);
-	}
-
-	/**
-	 * Returns an ordered range of all the commerce notification template commerce account group rels where commerceAccountGroupId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationTemplateCommerceAccountGroupRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param commerceAccountGroupId the commerce account group ID
-	 * @param start the lower bound of the range of commerce notification template commerce account group rels
-	 * @param end the upper bound of the range of commerce notification template commerce account group rels (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching commerce notification template commerce account group rels
-	 */
-	@Override
-	public List<CommerceNotificationTemplateCommerceAccountGroupRel>
-		findByCommerceAccountGroupId(
-			long commerceAccountGroupId, int start, int end,
-			OrderByComparator
-				<CommerceNotificationTemplateCommerceAccountGroupRel>
-					orderByComparator) {
-
-		return findByCommerceAccountGroupId(
-			commerceAccountGroupId, start, end, orderByComparator, true);
-	}
-
-	/**
-	 * Returns an ordered range of all the commerce notification template commerce account group rels where commerceAccountGroupId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationTemplateCommerceAccountGroupRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param commerceAccountGroupId the commerce account group ID
-	 * @param start the lower bound of the range of commerce notification template commerce account group rels
-	 * @param end the upper bound of the range of commerce notification template commerce account group rels (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @param useFinderCache whether to use the finder cache
-	 * @return the ordered range of matching commerce notification template commerce account group rels
-	 */
-	@Override
-	public List<CommerceNotificationTemplateCommerceAccountGroupRel>
-		findByCommerceAccountGroupId(
-			long commerceAccountGroupId, int start, int end,
-			OrderByComparator
-				<CommerceNotificationTemplateCommerceAccountGroupRel>
-					orderByComparator,
-			boolean useFinderCache) {
-
-		boolean pagination = true;
-		FinderPath finderPath = null;
-		Object[] finderArgs = null;
-
-		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-			(orderByComparator == null)) {
-
-			pagination = false;
-
-			if (useFinderCache) {
-				finderPath =
-					_finderPathWithoutPaginationFindByCommerceAccountGroupId;
-				finderArgs = new Object[] {commerceAccountGroupId};
-			}
-		}
-		else if (useFinderCache) {
-			finderPath = _finderPathWithPaginationFindByCommerceAccountGroupId;
-			finderArgs = new Object[] {
-				commerceAccountGroupId, start, end, orderByComparator
-			};
-		}
-
-		List<CommerceNotificationTemplateCommerceAccountGroupRel> list = null;
-
-		if (useFinderCache) {
-			list =
-				(List<CommerceNotificationTemplateCommerceAccountGroupRel>)
-					finderCache.getResult(finderPath, finderArgs, this);
-
-			if ((list != null) && !list.isEmpty()) {
-				for (CommerceNotificationTemplateCommerceAccountGroupRel
-						commerceNotificationTemplateCommerceAccountGroupRel :
-							list) {
-
-					if ((commerceAccountGroupId !=
-							commerceNotificationTemplateCommerceAccountGroupRel.
-								getCommerceAccountGroupId())) {
-
-						list = null;
-
-						break;
-					}
-				}
-			}
-		}
-
-		if (list == null) {
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(
-					3 + (orderByComparator.getOrderByFields().length * 2));
-			}
-			else {
-				query = new StringBundler(3);
-			}
-
-			query.append(
-				_SQL_SELECT_COMMERCENOTIFICATIONTEMPLATECOMMERCEACCOUNTGROUPREL_WHERE);
-
-			query.append(
-				_FINDER_COLUMN_COMMERCEACCOUNTGROUPID_COMMERCEACCOUNTGROUPID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(
-					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
-			}
-			else if (pagination) {
-				query.append(
-					CommerceNotificationTemplateCommerceAccountGroupRelModelImpl.ORDER_BY_JPQL);
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(commerceAccountGroupId);
-
-				if (!pagination) {
-					list =
-						(List
-							<CommerceNotificationTemplateCommerceAccountGroupRel>)
-								QueryUtil.list(
-									q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list =
-						(List
-							<CommerceNotificationTemplateCommerceAccountGroupRel>)
-								QueryUtil.list(q, getDialect(), start, end);
-				}
-
-				cacheResult(list);
-
-				if (useFinderCache) {
-					finderCache.putResult(finderPath, finderArgs, list);
-				}
-			}
-			catch (Exception e) {
-				if (useFinderCache) {
-					finderCache.removeResult(finderPath, finderArgs);
-				}
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	/**
-	 * Returns the first commerce notification template commerce account group rel in the ordered set where commerceAccountGroupId = &#63;.
-	 *
-	 * @param commerceAccountGroupId the commerce account group ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching commerce notification template commerce account group rel
-	 * @throws NoSuchNotificationTemplateCommerceAccountGroupRelException if a matching commerce notification template commerce account group rel could not be found
-	 */
-	@Override
-	public CommerceNotificationTemplateCommerceAccountGroupRel
-			findByCommerceAccountGroupId_First(
-				long commerceAccountGroupId,
-				OrderByComparator
-					<CommerceNotificationTemplateCommerceAccountGroupRel>
-						orderByComparator)
-		throws NoSuchNotificationTemplateCommerceAccountGroupRelException {
-
-		CommerceNotificationTemplateCommerceAccountGroupRel
-			commerceNotificationTemplateCommerceAccountGroupRel =
-				fetchByCommerceAccountGroupId_First(
-					commerceAccountGroupId, orderByComparator);
-
-		if (commerceNotificationTemplateCommerceAccountGroupRel != null) {
-			return commerceNotificationTemplateCommerceAccountGroupRel;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("commerceAccountGroupId=");
-		msg.append(commerceAccountGroupId);
-
-		msg.append("}");
-
-		throw new NoSuchNotificationTemplateCommerceAccountGroupRelException(
-			msg.toString());
-	}
-
-	/**
-	 * Returns the first commerce notification template commerce account group rel in the ordered set where commerceAccountGroupId = &#63;.
-	 *
-	 * @param commerceAccountGroupId the commerce account group ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching commerce notification template commerce account group rel, or <code>null</code> if a matching commerce notification template commerce account group rel could not be found
-	 */
-	@Override
-	public CommerceNotificationTemplateCommerceAccountGroupRel
-		fetchByCommerceAccountGroupId_First(
-			long commerceAccountGroupId,
-			OrderByComparator
-				<CommerceNotificationTemplateCommerceAccountGroupRel>
-					orderByComparator) {
-
-		List<CommerceNotificationTemplateCommerceAccountGroupRel> list =
-			findByCommerceAccountGroupId(
-				commerceAccountGroupId, 0, 1, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the last commerce notification template commerce account group rel in the ordered set where commerceAccountGroupId = &#63;.
-	 *
-	 * @param commerceAccountGroupId the commerce account group ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching commerce notification template commerce account group rel
-	 * @throws NoSuchNotificationTemplateCommerceAccountGroupRelException if a matching commerce notification template commerce account group rel could not be found
-	 */
-	@Override
-	public CommerceNotificationTemplateCommerceAccountGroupRel
-			findByCommerceAccountGroupId_Last(
-				long commerceAccountGroupId,
-				OrderByComparator
-					<CommerceNotificationTemplateCommerceAccountGroupRel>
-						orderByComparator)
-		throws NoSuchNotificationTemplateCommerceAccountGroupRelException {
-
-		CommerceNotificationTemplateCommerceAccountGroupRel
-			commerceNotificationTemplateCommerceAccountGroupRel =
-				fetchByCommerceAccountGroupId_Last(
-					commerceAccountGroupId, orderByComparator);
-
-		if (commerceNotificationTemplateCommerceAccountGroupRel != null) {
-			return commerceNotificationTemplateCommerceAccountGroupRel;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("commerceAccountGroupId=");
-		msg.append(commerceAccountGroupId);
-
-		msg.append("}");
-
-		throw new NoSuchNotificationTemplateCommerceAccountGroupRelException(
-			msg.toString());
-	}
-
-	/**
-	 * Returns the last commerce notification template commerce account group rel in the ordered set where commerceAccountGroupId = &#63;.
-	 *
-	 * @param commerceAccountGroupId the commerce account group ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching commerce notification template commerce account group rel, or <code>null</code> if a matching commerce notification template commerce account group rel could not be found
-	 */
-	@Override
-	public CommerceNotificationTemplateCommerceAccountGroupRel
-		fetchByCommerceAccountGroupId_Last(
-			long commerceAccountGroupId,
-			OrderByComparator
-				<CommerceNotificationTemplateCommerceAccountGroupRel>
-					orderByComparator) {
-
-		int count = countByCommerceAccountGroupId(commerceAccountGroupId);
-
-		if (count == 0) {
-			return null;
-		}
-
-		List<CommerceNotificationTemplateCommerceAccountGroupRel> list =
-			findByCommerceAccountGroupId(
-				commerceAccountGroupId, count - 1, count, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the commerce notification template commerce account group rels before and after the current commerce notification template commerce account group rel in the ordered set where commerceAccountGroupId = &#63;.
-	 *
-	 * @param commerceNotificationTemplateCommerceAccountGroupRelId the primary key of the current commerce notification template commerce account group rel
-	 * @param commerceAccountGroupId the commerce account group ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next commerce notification template commerce account group rel
-	 * @throws NoSuchNotificationTemplateCommerceAccountGroupRelException if a commerce notification template commerce account group rel with the primary key could not be found
-	 */
-	@Override
-	public CommerceNotificationTemplateCommerceAccountGroupRel[]
-			findByCommerceAccountGroupId_PrevAndNext(
-				long commerceNotificationTemplateCommerceAccountGroupRelId,
-				long commerceAccountGroupId,
-				OrderByComparator
-					<CommerceNotificationTemplateCommerceAccountGroupRel>
-						orderByComparator)
-		throws NoSuchNotificationTemplateCommerceAccountGroupRelException {
-
-		CommerceNotificationTemplateCommerceAccountGroupRel
-			commerceNotificationTemplateCommerceAccountGroupRel =
-				findByPrimaryKey(
-					commerceNotificationTemplateCommerceAccountGroupRelId);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			CommerceNotificationTemplateCommerceAccountGroupRel[] array =
-				new CommerceNotificationTemplateCommerceAccountGroupRelImpl[3];
-
-			array[0] = getByCommerceAccountGroupId_PrevAndNext(
-				session, commerceNotificationTemplateCommerceAccountGroupRel,
-				commerceAccountGroupId, orderByComparator, true);
-
-			array[1] = commerceNotificationTemplateCommerceAccountGroupRel;
-
-			array[2] = getByCommerceAccountGroupId_PrevAndNext(
-				session, commerceNotificationTemplateCommerceAccountGroupRel,
-				commerceAccountGroupId, orderByComparator, false);
-
-			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected CommerceNotificationTemplateCommerceAccountGroupRel
-		getByCommerceAccountGroupId_PrevAndNext(
-			Session session,
-			CommerceNotificationTemplateCommerceAccountGroupRel
-				commerceNotificationTemplateCommerceAccountGroupRel,
-			long commerceAccountGroupId,
-			OrderByComparator
-				<CommerceNotificationTemplateCommerceAccountGroupRel>
-					orderByComparator,
-			boolean previous) {
-
-		StringBundler query = null;
-
-		if (orderByComparator != null) {
-			query = new StringBundler(
-				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
-					(orderByComparator.getOrderByFields().length * 3));
-		}
-		else {
-			query = new StringBundler(3);
-		}
-
-		query.append(
-			_SQL_SELECT_COMMERCENOTIFICATIONTEMPLATECOMMERCEACCOUNTGROUPREL_WHERE);
-
-		query.append(
-			_FINDER_COLUMN_COMMERCEACCOUNTGROUPID_COMMERCEACCOUNTGROUPID_2);
-
-		if (orderByComparator != null) {
-			String[] orderByConditionFields =
-				orderByComparator.getOrderByConditionFields();
-
-			if (orderByConditionFields.length > 0) {
-				query.append(WHERE_AND);
-			}
-
-			for (int i = 0; i < orderByConditionFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByConditionFields[i]);
-
-				if ((i + 1) < orderByConditionFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN_HAS_NEXT);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN);
-					}
-				}
-			}
-
-			query.append(ORDER_BY_CLAUSE);
-
-			String[] orderByFields = orderByComparator.getOrderByFields();
-
-			for (int i = 0; i < orderByFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByFields[i]);
-
-				if ((i + 1) < orderByFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC_HAS_NEXT);
-					}
-					else {
-						query.append(ORDER_BY_DESC_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC);
-					}
-					else {
-						query.append(ORDER_BY_DESC);
-					}
-				}
-			}
-		}
-		else {
-			query.append(
-				CommerceNotificationTemplateCommerceAccountGroupRelModelImpl.
-					ORDER_BY_JPQL);
-		}
-
-		String sql = query.toString();
-
-		Query q = session.createQuery(sql);
-
-		q.setFirstResult(0);
-		q.setMaxResults(2);
-
-		QueryPos qPos = QueryPos.getInstance(q);
-
-		qPos.add(commerceAccountGroupId);
-
-		if (orderByComparator != null) {
-			for (Object orderByConditionValue :
-					orderByComparator.getOrderByConditionValues(
-						commerceNotificationTemplateCommerceAccountGroupRel)) {
-
-				qPos.add(orderByConditionValue);
-			}
-		}
-
-		List<CommerceNotificationTemplateCommerceAccountGroupRel> list =
-			q.list();
-
-		if (list.size() == 2) {
-			return list.get(1);
-		}
-		else {
-			return null;
-		}
-	}
-
-	/**
-	 * Removes all the commerce notification template commerce account group rels where commerceAccountGroupId = &#63; from the database.
-	 *
-	 * @param commerceAccountGroupId the commerce account group ID
-	 */
-	@Override
-	public void removeByCommerceAccountGroupId(long commerceAccountGroupId) {
-		for (CommerceNotificationTemplateCommerceAccountGroupRel
-				commerceNotificationTemplateCommerceAccountGroupRel :
-					findByCommerceAccountGroupId(
-						commerceAccountGroupId, QueryUtil.ALL_POS,
-						QueryUtil.ALL_POS, null)) {
-
-			remove(commerceNotificationTemplateCommerceAccountGroupRel);
-		}
-	}
-
-	/**
-	 * Returns the number of commerce notification template commerce account group rels where commerceAccountGroupId = &#63;.
-	 *
-	 * @param commerceAccountGroupId the commerce account group ID
-	 * @return the number of matching commerce notification template commerce account group rels
-	 */
-	@Override
-	public int countByCommerceAccountGroupId(long commerceAccountGroupId) {
-		FinderPath finderPath = _finderPathCountByCommerceAccountGroupId;
-
-		Object[] finderArgs = new Object[] {commerceAccountGroupId};
-
-		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(2);
-
-			query.append(
-				_SQL_COUNT_COMMERCENOTIFICATIONTEMPLATECOMMERCEACCOUNTGROUPREL_WHERE);
-
-			query.append(
-				_FINDER_COLUMN_COMMERCEACCOUNTGROUPID_COMMERCEACCOUNTGROUPID_2);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(commerceAccountGroupId);
-
-				count = (Long)q.uniqueResult();
-
-				finderCache.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String
-		_FINDER_COLUMN_COMMERCEACCOUNTGROUPID_COMMERCEACCOUNTGROUPID_2 =
-			"commerceNotificationTemplateCommerceAccountGroupRel.commerceAccountGroupId = ?";
-
 	private FinderPath
 		_finderPathWithPaginationFindByCommerceNotificationTemplateId;
 	private FinderPath
@@ -770,14 +176,11 @@ public class CommerceNotificationTemplateCommerceAccountGroupRelPersistenceImpl
 					orderByComparator,
 			boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath =
@@ -805,9 +208,9 @@ public class CommerceNotificationTemplateCommerceAccountGroupRelPersistenceImpl
 						commerceNotificationTemplateCommerceAccountGroupRel :
 							list) {
 
-					if ((commerceNotificationTemplateId !=
+					if (commerceNotificationTemplateId !=
 							commerceNotificationTemplateCommerceAccountGroupRel.
-								getCommerceNotificationTemplateId())) {
+								getCommerceNotificationTemplateId()) {
 
 						list = null;
 
@@ -838,7 +241,7 @@ public class CommerceNotificationTemplateCommerceAccountGroupRelPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(
 					CommerceNotificationTemplateCommerceAccountGroupRelModelImpl.ORDER_BY_JPQL);
 			}
@@ -856,23 +259,9 @@ public class CommerceNotificationTemplateCommerceAccountGroupRelPersistenceImpl
 
 				qPos.add(commerceNotificationTemplateId);
 
-				if (!pagination) {
-					list =
-						(List
-							<CommerceNotificationTemplateCommerceAccountGroupRel>)
-								QueryUtil.list(
-									q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list =
-						(List
-							<CommerceNotificationTemplateCommerceAccountGroupRel>)
-								QueryUtil.list(q, getDialect(), start, end);
-				}
+				list =
+					(List<CommerceNotificationTemplateCommerceAccountGroupRel>)
+						QueryUtil.list(q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -1284,6 +673,583 @@ public class CommerceNotificationTemplateCommerceAccountGroupRelPersistenceImpl
 	private static final String
 		_FINDER_COLUMN_COMMERCENOTIFICATIONTEMPLATEID_COMMERCENOTIFICATIONTEMPLATEID_2 =
 			"commerceNotificationTemplateCommerceAccountGroupRel.commerceNotificationTemplateId = ?";
+
+	private FinderPath _finderPathWithPaginationFindByCommerceAccountGroupId;
+	private FinderPath _finderPathWithoutPaginationFindByCommerceAccountGroupId;
+	private FinderPath _finderPathCountByCommerceAccountGroupId;
+
+	/**
+	 * Returns all the commerce notification template commerce account group rels where commerceAccountGroupId = &#63;.
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @return the matching commerce notification template commerce account group rels
+	 */
+	@Override
+	public List<CommerceNotificationTemplateCommerceAccountGroupRel>
+		findByCommerceAccountGroupId(long commerceAccountGroupId) {
+
+		return findByCommerceAccountGroupId(
+			commerceAccountGroupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the commerce notification template commerce account group rels where commerceAccountGroupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationTemplateCommerceAccountGroupRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param start the lower bound of the range of commerce notification template commerce account group rels
+	 * @param end the upper bound of the range of commerce notification template commerce account group rels (not inclusive)
+	 * @return the range of matching commerce notification template commerce account group rels
+	 */
+	@Override
+	public List<CommerceNotificationTemplateCommerceAccountGroupRel>
+		findByCommerceAccountGroupId(
+			long commerceAccountGroupId, int start, int end) {
+
+		return findByCommerceAccountGroupId(
+			commerceAccountGroupId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce notification template commerce account group rels where commerceAccountGroupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationTemplateCommerceAccountGroupRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param start the lower bound of the range of commerce notification template commerce account group rels
+	 * @param end the upper bound of the range of commerce notification template commerce account group rels (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce notification template commerce account group rels
+	 */
+	@Override
+	public List<CommerceNotificationTemplateCommerceAccountGroupRel>
+		findByCommerceAccountGroupId(
+			long commerceAccountGroupId, int start, int end,
+			OrderByComparator
+				<CommerceNotificationTemplateCommerceAccountGroupRel>
+					orderByComparator) {
+
+		return findByCommerceAccountGroupId(
+			commerceAccountGroupId, start, end, orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce notification template commerce account group rels where commerceAccountGroupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationTemplateCommerceAccountGroupRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param start the lower bound of the range of commerce notification template commerce account group rels
+	 * @param end the upper bound of the range of commerce notification template commerce account group rels (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching commerce notification template commerce account group rels
+	 */
+	@Override
+	public List<CommerceNotificationTemplateCommerceAccountGroupRel>
+		findByCommerceAccountGroupId(
+			long commerceAccountGroupId, int start, int end,
+			OrderByComparator
+				<CommerceNotificationTemplateCommerceAccountGroupRel>
+					orderByComparator,
+			boolean useFinderCache) {
+
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+			(orderByComparator == null)) {
+
+			if (useFinderCache) {
+				finderPath =
+					_finderPathWithoutPaginationFindByCommerceAccountGroupId;
+				finderArgs = new Object[] {commerceAccountGroupId};
+			}
+		}
+		else if (useFinderCache) {
+			finderPath = _finderPathWithPaginationFindByCommerceAccountGroupId;
+			finderArgs = new Object[] {
+				commerceAccountGroupId, start, end, orderByComparator
+			};
+		}
+
+		List<CommerceNotificationTemplateCommerceAccountGroupRel> list = null;
+
+		if (useFinderCache) {
+			list =
+				(List<CommerceNotificationTemplateCommerceAccountGroupRel>)
+					finderCache.getResult(finderPath, finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (CommerceNotificationTemplateCommerceAccountGroupRel
+						commerceNotificationTemplateCommerceAccountGroupRel :
+							list) {
+
+					if (commerceAccountGroupId !=
+							commerceNotificationTemplateCommerceAccountGroupRel.
+								getCommerceAccountGroupId()) {
+
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(
+				_SQL_SELECT_COMMERCENOTIFICATIONTEMPLATECOMMERCEACCOUNTGROUPREL_WHERE);
+
+			query.append(
+				_FINDER_COLUMN_COMMERCEACCOUNTGROUPID_COMMERCEACCOUNTGROUPID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
+			}
+			else {
+				query.append(
+					CommerceNotificationTemplateCommerceAccountGroupRelModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(commerceAccountGroupId);
+
+				list =
+					(List<CommerceNotificationTemplateCommerceAccountGroupRel>)
+						QueryUtil.list(q, getDialect(), start, end);
+
+				cacheResult(list);
+
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
+			}
+			catch (Exception e) {
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first commerce notification template commerce account group rel in the ordered set where commerceAccountGroupId = &#63;.
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce notification template commerce account group rel
+	 * @throws NoSuchNotificationTemplateCommerceAccountGroupRelException if a matching commerce notification template commerce account group rel could not be found
+	 */
+	@Override
+	public CommerceNotificationTemplateCommerceAccountGroupRel
+			findByCommerceAccountGroupId_First(
+				long commerceAccountGroupId,
+				OrderByComparator
+					<CommerceNotificationTemplateCommerceAccountGroupRel>
+						orderByComparator)
+		throws NoSuchNotificationTemplateCommerceAccountGroupRelException {
+
+		CommerceNotificationTemplateCommerceAccountGroupRel
+			commerceNotificationTemplateCommerceAccountGroupRel =
+				fetchByCommerceAccountGroupId_First(
+					commerceAccountGroupId, orderByComparator);
+
+		if (commerceNotificationTemplateCommerceAccountGroupRel != null) {
+			return commerceNotificationTemplateCommerceAccountGroupRel;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("commerceAccountGroupId=");
+		msg.append(commerceAccountGroupId);
+
+		msg.append("}");
+
+		throw new NoSuchNotificationTemplateCommerceAccountGroupRelException(
+			msg.toString());
+	}
+
+	/**
+	 * Returns the first commerce notification template commerce account group rel in the ordered set where commerceAccountGroupId = &#63;.
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce notification template commerce account group rel, or <code>null</code> if a matching commerce notification template commerce account group rel could not be found
+	 */
+	@Override
+	public CommerceNotificationTemplateCommerceAccountGroupRel
+		fetchByCommerceAccountGroupId_First(
+			long commerceAccountGroupId,
+			OrderByComparator
+				<CommerceNotificationTemplateCommerceAccountGroupRel>
+					orderByComparator) {
+
+		List<CommerceNotificationTemplateCommerceAccountGroupRel> list =
+			findByCommerceAccountGroupId(
+				commerceAccountGroupId, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last commerce notification template commerce account group rel in the ordered set where commerceAccountGroupId = &#63;.
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce notification template commerce account group rel
+	 * @throws NoSuchNotificationTemplateCommerceAccountGroupRelException if a matching commerce notification template commerce account group rel could not be found
+	 */
+	@Override
+	public CommerceNotificationTemplateCommerceAccountGroupRel
+			findByCommerceAccountGroupId_Last(
+				long commerceAccountGroupId,
+				OrderByComparator
+					<CommerceNotificationTemplateCommerceAccountGroupRel>
+						orderByComparator)
+		throws NoSuchNotificationTemplateCommerceAccountGroupRelException {
+
+		CommerceNotificationTemplateCommerceAccountGroupRel
+			commerceNotificationTemplateCommerceAccountGroupRel =
+				fetchByCommerceAccountGroupId_Last(
+					commerceAccountGroupId, orderByComparator);
+
+		if (commerceNotificationTemplateCommerceAccountGroupRel != null) {
+			return commerceNotificationTemplateCommerceAccountGroupRel;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("commerceAccountGroupId=");
+		msg.append(commerceAccountGroupId);
+
+		msg.append("}");
+
+		throw new NoSuchNotificationTemplateCommerceAccountGroupRelException(
+			msg.toString());
+	}
+
+	/**
+	 * Returns the last commerce notification template commerce account group rel in the ordered set where commerceAccountGroupId = &#63;.
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce notification template commerce account group rel, or <code>null</code> if a matching commerce notification template commerce account group rel could not be found
+	 */
+	@Override
+	public CommerceNotificationTemplateCommerceAccountGroupRel
+		fetchByCommerceAccountGroupId_Last(
+			long commerceAccountGroupId,
+			OrderByComparator
+				<CommerceNotificationTemplateCommerceAccountGroupRel>
+					orderByComparator) {
+
+		int count = countByCommerceAccountGroupId(commerceAccountGroupId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<CommerceNotificationTemplateCommerceAccountGroupRel> list =
+			findByCommerceAccountGroupId(
+				commerceAccountGroupId, count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the commerce notification template commerce account group rels before and after the current commerce notification template commerce account group rel in the ordered set where commerceAccountGroupId = &#63;.
+	 *
+	 * @param commerceNotificationTemplateCommerceAccountGroupRelId the primary key of the current commerce notification template commerce account group rel
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce notification template commerce account group rel
+	 * @throws NoSuchNotificationTemplateCommerceAccountGroupRelException if a commerce notification template commerce account group rel with the primary key could not be found
+	 */
+	@Override
+	public CommerceNotificationTemplateCommerceAccountGroupRel[]
+			findByCommerceAccountGroupId_PrevAndNext(
+				long commerceNotificationTemplateCommerceAccountGroupRelId,
+				long commerceAccountGroupId,
+				OrderByComparator
+					<CommerceNotificationTemplateCommerceAccountGroupRel>
+						orderByComparator)
+		throws NoSuchNotificationTemplateCommerceAccountGroupRelException {
+
+		CommerceNotificationTemplateCommerceAccountGroupRel
+			commerceNotificationTemplateCommerceAccountGroupRel =
+				findByPrimaryKey(
+					commerceNotificationTemplateCommerceAccountGroupRelId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CommerceNotificationTemplateCommerceAccountGroupRel[] array =
+				new CommerceNotificationTemplateCommerceAccountGroupRelImpl[3];
+
+			array[0] = getByCommerceAccountGroupId_PrevAndNext(
+				session, commerceNotificationTemplateCommerceAccountGroupRel,
+				commerceAccountGroupId, orderByComparator, true);
+
+			array[1] = commerceNotificationTemplateCommerceAccountGroupRel;
+
+			array[2] = getByCommerceAccountGroupId_PrevAndNext(
+				session, commerceNotificationTemplateCommerceAccountGroupRel,
+				commerceAccountGroupId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected CommerceNotificationTemplateCommerceAccountGroupRel
+		getByCommerceAccountGroupId_PrevAndNext(
+			Session session,
+			CommerceNotificationTemplateCommerceAccountGroupRel
+				commerceNotificationTemplateCommerceAccountGroupRel,
+			long commerceAccountGroupId,
+			OrderByComparator
+				<CommerceNotificationTemplateCommerceAccountGroupRel>
+					orderByComparator,
+			boolean previous) {
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(
+			_SQL_SELECT_COMMERCENOTIFICATIONTEMPLATECOMMERCEACCOUNTGROUPREL_WHERE);
+
+		query.append(
+			_FINDER_COLUMN_COMMERCEACCOUNTGROUPID_COMMERCEACCOUNTGROUPID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(
+				CommerceNotificationTemplateCommerceAccountGroupRelModelImpl.
+					ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(commerceAccountGroupId);
+
+		if (orderByComparator != null) {
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceNotificationTemplateCommerceAccountGroupRel)) {
+
+				qPos.add(orderByConditionValue);
+			}
+		}
+
+		List<CommerceNotificationTemplateCommerceAccountGroupRel> list =
+			q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the commerce notification template commerce account group rels where commerceAccountGroupId = &#63; from the database.
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 */
+	@Override
+	public void removeByCommerceAccountGroupId(long commerceAccountGroupId) {
+		for (CommerceNotificationTemplateCommerceAccountGroupRel
+				commerceNotificationTemplateCommerceAccountGroupRel :
+					findByCommerceAccountGroupId(
+						commerceAccountGroupId, QueryUtil.ALL_POS,
+						QueryUtil.ALL_POS, null)) {
+
+			remove(commerceNotificationTemplateCommerceAccountGroupRel);
+		}
+	}
+
+	/**
+	 * Returns the number of commerce notification template commerce account group rels where commerceAccountGroupId = &#63;.
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @return the number of matching commerce notification template commerce account group rels
+	 */
+	@Override
+	public int countByCommerceAccountGroupId(long commerceAccountGroupId) {
+		FinderPath finderPath = _finderPathCountByCommerceAccountGroupId;
+
+		Object[] finderArgs = new Object[] {commerceAccountGroupId};
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(
+				_SQL_COUNT_COMMERCENOTIFICATIONTEMPLATECOMMERCEACCOUNTGROUPREL_WHERE);
+
+			query.append(
+				_FINDER_COLUMN_COMMERCEACCOUNTGROUPID_COMMERCEACCOUNTGROUPID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(commerceAccountGroupId);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String
+		_FINDER_COLUMN_COMMERCEACCOUNTGROUPID_COMMERCEACCOUNTGROUPID_2 =
+			"commerceNotificationTemplateCommerceAccountGroupRel.commerceAccountGroupId = ?";
 
 	private FinderPath _finderPathFetchByC_C;
 	private FinderPath _finderPathCountByC_C;
@@ -1986,16 +1952,6 @@ public class CommerceNotificationTemplateCommerceAccountGroupRelPersistenceImpl
 		else if (isNew) {
 			Object[] args = new Object[] {
 				commerceNotificationTemplateCommerceAccountGroupRelModelImpl.
-					getCommerceAccountGroupId()
-			};
-
-			finderCache.removeResult(
-				_finderPathCountByCommerceAccountGroupId, args);
-			finderCache.removeResult(
-				_finderPathWithoutPaginationFindByCommerceAccountGroupId, args);
-
-			args = new Object[] {
-				commerceNotificationTemplateCommerceAccountGroupRelModelImpl.
 					getCommerceNotificationTemplateId()
 			};
 
@@ -2005,39 +1961,21 @@ public class CommerceNotificationTemplateCommerceAccountGroupRelPersistenceImpl
 				_finderPathWithoutPaginationFindByCommerceNotificationTemplateId,
 				args);
 
+			args = new Object[] {
+				commerceNotificationTemplateCommerceAccountGroupRelModelImpl.
+					getCommerceAccountGroupId()
+			};
+
+			finderCache.removeResult(
+				_finderPathCountByCommerceAccountGroupId, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByCommerceAccountGroupId, args);
+
 			finderCache.removeResult(_finderPathCountAll, FINDER_ARGS_EMPTY);
 			finderCache.removeResult(
 				_finderPathWithoutPaginationFindAll, FINDER_ARGS_EMPTY);
 		}
 		else {
-			if ((commerceNotificationTemplateCommerceAccountGroupRelModelImpl.
-					getColumnBitmask() &
-				 _finderPathWithoutPaginationFindByCommerceAccountGroupId.
-					 getColumnBitmask()) != 0) {
-
-				Object[] args = new Object[] {
-					commerceNotificationTemplateCommerceAccountGroupRelModelImpl.
-						getOriginalCommerceAccountGroupId()
-				};
-
-				finderCache.removeResult(
-					_finderPathCountByCommerceAccountGroupId, args);
-				finderCache.removeResult(
-					_finderPathWithoutPaginationFindByCommerceAccountGroupId,
-					args);
-
-				args = new Object[] {
-					commerceNotificationTemplateCommerceAccountGroupRelModelImpl.
-						getCommerceAccountGroupId()
-				};
-
-				finderCache.removeResult(
-					_finderPathCountByCommerceAccountGroupId, args);
-				finderCache.removeResult(
-					_finderPathWithoutPaginationFindByCommerceAccountGroupId,
-					args);
-			}
-
 			if ((commerceNotificationTemplateCommerceAccountGroupRelModelImpl.
 					getColumnBitmask() &
 				 _finderPathWithoutPaginationFindByCommerceNotificationTemplateId.
@@ -2063,6 +2001,34 @@ public class CommerceNotificationTemplateCommerceAccountGroupRelPersistenceImpl
 					_finderPathCountByCommerceNotificationTemplateId, args);
 				finderCache.removeResult(
 					_finderPathWithoutPaginationFindByCommerceNotificationTemplateId,
+					args);
+			}
+
+			if ((commerceNotificationTemplateCommerceAccountGroupRelModelImpl.
+					getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByCommerceAccountGroupId.
+					 getColumnBitmask()) != 0) {
+
+				Object[] args = new Object[] {
+					commerceNotificationTemplateCommerceAccountGroupRelModelImpl.
+						getOriginalCommerceAccountGroupId()
+				};
+
+				finderCache.removeResult(
+					_finderPathCountByCommerceAccountGroupId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceAccountGroupId,
+					args);
+
+				args = new Object[] {
+					commerceNotificationTemplateCommerceAccountGroupRelModelImpl.
+						getCommerceAccountGroupId()
+				};
+
+				finderCache.removeResult(
+					_finderPathCountByCommerceAccountGroupId, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByCommerceAccountGroupId,
 					args);
 			}
 		}
@@ -2409,14 +2375,11 @@ public class CommerceNotificationTemplateCommerceAccountGroupRelPersistenceImpl
 			orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindAll;
@@ -2456,10 +2419,8 @@ public class CommerceNotificationTemplateCommerceAccountGroupRelPersistenceImpl
 				sql =
 					_SQL_SELECT_COMMERCENOTIFICATIONTEMPLATECOMMERCEACCOUNTGROUPREL;
 
-				if (pagination) {
-					sql = sql.concat(
-						CommerceNotificationTemplateCommerceAccountGroupRelModelImpl.ORDER_BY_JPQL);
-				}
+				sql = sql.concat(
+					CommerceNotificationTemplateCommerceAccountGroupRelModelImpl.ORDER_BY_JPQL);
 			}
 
 			Session session = null;
@@ -2469,23 +2430,9 @@ public class CommerceNotificationTemplateCommerceAccountGroupRelPersistenceImpl
 
 				Query q = session.createQuery(sql);
 
-				if (!pagination) {
-					list =
-						(List
-							<CommerceNotificationTemplateCommerceAccountGroupRel>)
-								QueryUtil.list(
-									q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list =
-						(List
-							<CommerceNotificationTemplateCommerceAccountGroupRel>)
-								QueryUtil.list(q, getDialect(), start, end);
-				}
+				list =
+					(List<CommerceNotificationTemplateCommerceAccountGroupRel>)
+						QueryUtil.list(q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -2600,43 +2547,6 @@ public class CommerceNotificationTemplateCommerceAccountGroupRelPersistenceImpl
 			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
 			new String[0]);
 
-		_finderPathWithPaginationFindByCommerceAccountGroupId = new FinderPath(
-			CommerceNotificationTemplateCommerceAccountGroupRelModelImpl.
-				ENTITY_CACHE_ENABLED,
-			CommerceNotificationTemplateCommerceAccountGroupRelModelImpl.
-				FINDER_CACHE_ENABLED,
-			CommerceNotificationTemplateCommerceAccountGroupRelImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByCommerceAccountGroupId",
-			new String[] {
-				Long.class.getName(), Integer.class.getName(),
-				Integer.class.getName(), OrderByComparator.class.getName()
-			});
-
-		_finderPathWithoutPaginationFindByCommerceAccountGroupId =
-			new FinderPath(
-				CommerceNotificationTemplateCommerceAccountGroupRelModelImpl.
-					ENTITY_CACHE_ENABLED,
-				CommerceNotificationTemplateCommerceAccountGroupRelModelImpl.
-					FINDER_CACHE_ENABLED,
-				CommerceNotificationTemplateCommerceAccountGroupRelImpl.class,
-				FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-				"findByCommerceAccountGroupId",
-				new String[] {Long.class.getName()},
-				CommerceNotificationTemplateCommerceAccountGroupRelModelImpl.
-					COMMERCEACCOUNTGROUPID_COLUMN_BITMASK |
-				CommerceNotificationTemplateCommerceAccountGroupRelModelImpl.
-					CREATEDATE_COLUMN_BITMASK);
-
-		_finderPathCountByCommerceAccountGroupId = new FinderPath(
-			CommerceNotificationTemplateCommerceAccountGroupRelModelImpl.
-				ENTITY_CACHE_ENABLED,
-			CommerceNotificationTemplateCommerceAccountGroupRelModelImpl.
-				FINDER_CACHE_ENABLED,
-			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByCommerceAccountGroupId",
-			new String[] {Long.class.getName()});
-
 		_finderPathWithPaginationFindByCommerceNotificationTemplateId =
 			new FinderPath(
 				CommerceNotificationTemplateCommerceAccountGroupRelModelImpl.
@@ -2673,6 +2583,43 @@ public class CommerceNotificationTemplateCommerceAccountGroupRelPersistenceImpl
 				FINDER_CACHE_ENABLED,
 			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
 			"countByCommerceNotificationTemplateId",
+			new String[] {Long.class.getName()});
+
+		_finderPathWithPaginationFindByCommerceAccountGroupId = new FinderPath(
+			CommerceNotificationTemplateCommerceAccountGroupRelModelImpl.
+				ENTITY_CACHE_ENABLED,
+			CommerceNotificationTemplateCommerceAccountGroupRelModelImpl.
+				FINDER_CACHE_ENABLED,
+			CommerceNotificationTemplateCommerceAccountGroupRelImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByCommerceAccountGroupId",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByCommerceAccountGroupId =
+			new FinderPath(
+				CommerceNotificationTemplateCommerceAccountGroupRelModelImpl.
+					ENTITY_CACHE_ENABLED,
+				CommerceNotificationTemplateCommerceAccountGroupRelModelImpl.
+					FINDER_CACHE_ENABLED,
+				CommerceNotificationTemplateCommerceAccountGroupRelImpl.class,
+				FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+				"findByCommerceAccountGroupId",
+				new String[] {Long.class.getName()},
+				CommerceNotificationTemplateCommerceAccountGroupRelModelImpl.
+					COMMERCEACCOUNTGROUPID_COLUMN_BITMASK |
+				CommerceNotificationTemplateCommerceAccountGroupRelModelImpl.
+					CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByCommerceAccountGroupId = new FinderPath(
+			CommerceNotificationTemplateCommerceAccountGroupRelModelImpl.
+				ENTITY_CACHE_ENABLED,
+			CommerceNotificationTemplateCommerceAccountGroupRelModelImpl.
+				FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByCommerceAccountGroupId",
 			new String[] {Long.class.getName()});
 
 		_finderPathFetchByC_C = new FinderPath(

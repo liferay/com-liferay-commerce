@@ -66,7 +66,7 @@ public class CommerceNotificationQueueEntryCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(39);
+		StringBundler sb = new StringBundler(43);
 
 		sb.append("{commerceNotificationQueueEntryId=");
 		sb.append(commerceNotificationQueueEntryId);
@@ -82,6 +82,10 @@ public class CommerceNotificationQueueEntryCacheModel
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
+		sb.append(", classNameId=");
+		sb.append(classNameId);
+		sb.append(", classPK=");
+		sb.append(classPK);
 		sb.append(", commerceNotificationTemplateId=");
 		sb.append(commerceNotificationTemplateId);
 		sb.append(", from=");
@@ -145,6 +149,8 @@ public class CommerceNotificationQueueEntryCacheModel
 				new Date(modifiedDate));
 		}
 
+		commerceNotificationQueueEntryImpl.setClassNameId(classNameId);
+		commerceNotificationQueueEntryImpl.setClassPK(classPK);
 		commerceNotificationQueueEntryImpl.setCommerceNotificationTemplateId(
 			commerceNotificationTemplateId);
 
@@ -232,6 +238,10 @@ public class CommerceNotificationQueueEntryCacheModel
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 
+		classNameId = objectInput.readLong();
+
+		classPK = objectInput.readLong();
+
 		commerceNotificationTemplateId = objectInput.readLong();
 		from = objectInput.readUTF();
 		fromName = objectInput.readUTF();
@@ -267,6 +277,10 @@ public class CommerceNotificationQueueEntryCacheModel
 
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
+
+		objectOutput.writeLong(classNameId);
+
+		objectOutput.writeLong(classPK);
 
 		objectOutput.writeLong(commerceNotificationTemplateId);
 
@@ -339,6 +353,8 @@ public class CommerceNotificationQueueEntryCacheModel
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
+	public long classNameId;
+	public long classPK;
 	public long commerceNotificationTemplateId;
 	public String from;
 	public String fromName;
