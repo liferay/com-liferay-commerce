@@ -53,6 +53,10 @@ public class CommerceNotificationQueueEntryLocalServiceWrapper
 			addCommerceNotificationQueueEntry(commerceNotificationQueueEntry);
 	}
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), this method will be replaced
+	 */
+	@Deprecated
 	@Override
 	public
 		com.liferay.commerce.notification.model.CommerceNotificationQueueEntry
@@ -67,6 +71,23 @@ public class CommerceNotificationQueueEntryLocalServiceWrapper
 			addCommerceNotificationQueueEntry(
 				userId, groupId, commerceNotificationTemplateId, from, fromName,
 				to, toName, cc, bcc, subject, body, priority);
+	}
+
+	@Override
+	public
+		com.liferay.commerce.notification.model.CommerceNotificationQueueEntry
+				addCommerceNotificationQueueEntry(
+					long userId, long groupId, String className, long classPK,
+					long commerceNotificationTemplateId, String from,
+					String fromName, String to, String toName, String cc,
+					String bcc, String subject, String body, double priority)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceNotificationQueueEntryLocalService.
+			addCommerceNotificationQueueEntry(
+				userId, groupId, className, classPK,
+				commerceNotificationTemplateId, from, fromName, to, toName, cc,
+				bcc, subject, body, priority);
 	}
 
 	/**
@@ -320,6 +341,22 @@ public class CommerceNotificationQueueEntryLocalServiceWrapper
 				groupId, start, end, orderByComparator);
 	}
 
+	@Override
+	public java.util.List
+		<com.liferay.commerce.notification.model.CommerceNotificationQueueEntry>
+			getCommerceNotificationQueueEntries(
+				long groupId, String className, long classPK, boolean sent,
+				int start, int end,
+				com.liferay.portal.kernel.util.OrderByComparator
+					<com.liferay.commerce.notification.model.
+						CommerceNotificationQueueEntry> orderByComparator) {
+
+		return _commerceNotificationQueueEntryLocalService.
+			getCommerceNotificationQueueEntries(
+				groupId, className, classPK, sent, start, end,
+				orderByComparator);
+	}
+
 	/**
 	 * Returns the number of commerce notification queue entries.
 	 *
@@ -335,6 +372,15 @@ public class CommerceNotificationQueueEntryLocalServiceWrapper
 	public int getCommerceNotificationQueueEntriesCount(long groupId) {
 		return _commerceNotificationQueueEntryLocalService.
 			getCommerceNotificationQueueEntriesCount(groupId);
+	}
+
+	@Override
+	public int getCommerceNotificationQueueEntriesCount(
+		long groupId, String className, long classPK, boolean sent) {
+
+		return _commerceNotificationQueueEntryLocalService.
+			getCommerceNotificationQueueEntriesCount(
+				groupId, className, classPK, sent);
 	}
 
 	/**

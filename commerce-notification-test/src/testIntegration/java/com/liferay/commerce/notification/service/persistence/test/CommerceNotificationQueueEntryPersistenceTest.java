@@ -145,6 +145,11 @@ public class CommerceNotificationQueueEntryPersistenceTest {
 		newCommerceNotificationQueueEntry.setModifiedDate(
 			RandomTestUtil.nextDate());
 
+		newCommerceNotificationQueueEntry.setClassNameId(
+			RandomTestUtil.nextLong());
+
+		newCommerceNotificationQueueEntry.setClassPK(RandomTestUtil.nextLong());
+
 		newCommerceNotificationQueueEntry.setCommerceNotificationTemplateId(
 			RandomTestUtil.nextLong());
 
@@ -212,6 +217,12 @@ public class CommerceNotificationQueueEntryPersistenceTest {
 				existingCommerceNotificationQueueEntry.getModifiedDate()),
 			Time.getShortTimestamp(
 				newCommerceNotificationQueueEntry.getModifiedDate()));
+		Assert.assertEquals(
+			existingCommerceNotificationQueueEntry.getClassNameId(),
+			newCommerceNotificationQueueEntry.getClassNameId());
+		Assert.assertEquals(
+			existingCommerceNotificationQueueEntry.getClassPK(),
+			newCommerceNotificationQueueEntry.getClassPK());
 		Assert.assertEquals(
 			existingCommerceNotificationQueueEntry.
 				getCommerceNotificationTemplateId(),
@@ -284,6 +295,15 @@ public class CommerceNotificationQueueEntryPersistenceTest {
 	}
 
 	@Test
+	public void testCountByG_C_C_S() throws Exception {
+		_persistence.countByG_C_C_S(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong(),
+			RandomTestUtil.nextLong(), RandomTestUtil.randomBoolean());
+
+		_persistence.countByG_C_C_S(0L, 0L, 0L, RandomTestUtil.randomBoolean());
+	}
+
+	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		CommerceNotificationQueueEntry newCommerceNotificationQueueEntry =
 			addCommerceNotificationQueueEntry();
@@ -317,10 +337,10 @@ public class CommerceNotificationQueueEntryPersistenceTest {
 			"CommerceNotificationQueueEntry",
 			"commerceNotificationQueueEntryId", true, "groupId", true,
 			"companyId", true, "userId", true, "userName", true, "createDate",
-			true, "modifiedDate", true, "commerceNotificationTemplateId", true,
-			"from", true, "fromName", true, "to", true, "toName", true, "cc",
-			true, "bcc", true, "subject", true, "priority", true, "sent", true,
-			"sentDate", true);
+			true, "modifiedDate", true, "classNameId", true, "classPK", true,
+			"commerceNotificationTemplateId", true, "from", true, "fromName",
+			true, "to", true, "toName", true, "cc", true, "bcc", true,
+			"subject", true, "priority", true, "sent", true, "sentDate", true);
 	}
 
 	@Test
@@ -593,6 +613,11 @@ public class CommerceNotificationQueueEntryPersistenceTest {
 
 		commerceNotificationQueueEntry.setModifiedDate(
 			RandomTestUtil.nextDate());
+
+		commerceNotificationQueueEntry.setClassNameId(
+			RandomTestUtil.nextLong());
+
+		commerceNotificationQueueEntry.setClassPK(RandomTestUtil.nextLong());
 
 		commerceNotificationQueueEntry.setCommerceNotificationTemplateId(
 			RandomTestUtil.nextLong());
