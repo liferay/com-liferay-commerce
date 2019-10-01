@@ -69,6 +69,26 @@ public class CommerceNotificationQueueEntryServiceImpl
 	}
 
 	@Override
+	public List<CommerceNotificationQueueEntry>
+			getCommerceNotificationQueueEntries(
+				long groupId, String className, long classPK, boolean sent,
+				int start, int end,
+				OrderByComparator<CommerceNotificationQueueEntry>
+					orderByComparator)
+		throws PortalException {
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), groupId,
+			CommerceNotificationActionKeys.
+				VIEW_COMMERCE_NOTIFICATION_QUEUE_ENTRIES);
+
+		return commerceNotificationQueueEntryLocalService.
+			getCommerceNotificationQueueEntries(
+				groupId, className, classPK, sent, start, end,
+				orderByComparator);
+	}
+
+	@Override
 	public int getCommerceNotificationQueueEntriesCount(long groupId)
 		throws PortalException {
 
@@ -79,6 +99,39 @@ public class CommerceNotificationQueueEntryServiceImpl
 
 		return commerceNotificationQueueEntryLocalService.
 			getCommerceNotificationQueueEntriesCount(groupId);
+	}
+
+	@Override
+	public int getCommerceNotificationQueueEntriesCount(
+			long groupId, String className, long classPK, boolean sent)
+		throws PortalException {
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), groupId,
+			CommerceNotificationActionKeys.
+				VIEW_COMMERCE_NOTIFICATION_QUEUE_ENTRIES);
+
+		return commerceNotificationQueueEntryLocalService.
+			getCommerceNotificationQueueEntriesCount(
+				groupId, className, classPK, sent);
+	}
+
+	@Override
+	public CommerceNotificationQueueEntry getCommerceNotificationQueueEntry(
+			long commerceNotificationQueueEntryId)
+		throws PortalException {
+
+		CommerceNotificationQueueEntry commerceNotificationQueueEntry =
+			commerceNotificationQueueEntryLocalService.
+				getCommerceNotificationQueueEntry(
+					commerceNotificationQueueEntryId);
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), commerceNotificationQueueEntry.getGroupId(),
+			CommerceNotificationActionKeys.
+				VIEW_COMMERCE_NOTIFICATION_QUEUE_ENTRIES);
+
+		return commerceNotificationQueueEntry;
 	}
 
 	@Override

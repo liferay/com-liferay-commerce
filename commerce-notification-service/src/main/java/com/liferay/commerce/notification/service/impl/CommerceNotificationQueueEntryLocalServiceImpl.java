@@ -45,7 +45,7 @@ import javax.mail.internet.InternetAddress;
 public class CommerceNotificationQueueEntryLocalServiceImpl
 	extends CommerceNotificationQueueEntryLocalServiceBaseImpl {
 
-	@Indexable(type = IndexableType.REINDEX)
+	@Deprecated
 	@Override
 	public CommerceNotificationQueueEntry addCommerceNotificationQueueEntry(
 			long userId, long groupId, long commerceNotificationTemplateId,
@@ -65,6 +65,47 @@ public class CommerceNotificationQueueEntryLocalServiceImpl
 		commerceNotificationQueueEntry.setCompanyId(user.getCompanyId());
 		commerceNotificationQueueEntry.setUserId(user.getUserId());
 		commerceNotificationQueueEntry.setUserName(user.getFullName());
+		commerceNotificationQueueEntry.setCommerceNotificationTemplateId(
+			commerceNotificationTemplateId);
+		commerceNotificationQueueEntry.setFrom(from);
+		commerceNotificationQueueEntry.setFromName(fromName);
+		commerceNotificationQueueEntry.setTo(to);
+		commerceNotificationQueueEntry.setToName(toName);
+		commerceNotificationQueueEntry.setCc(cc);
+		commerceNotificationQueueEntry.setBcc(bcc);
+		commerceNotificationQueueEntry.setSubject(subject);
+		commerceNotificationQueueEntry.setBody(body);
+		commerceNotificationQueueEntry.setPriority(priority);
+
+		commerceNotificationQueueEntryPersistence.update(
+			commerceNotificationQueueEntry);
+
+		return commerceNotificationQueueEntry;
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CommerceNotificationQueueEntry addCommerceNotificationQueueEntry(
+			long userId, long groupId, String className, long classPK,
+			long commerceNotificationTemplateId, String from, String fromName,
+			String to, String toName, String cc, String bcc, String subject,
+			String body, double priority)
+		throws PortalException {
+
+		User user = userLocalService.getUser(userId);
+
+		long commerceNotificationQueueEntryId = counterLocalService.increment();
+
+		CommerceNotificationQueueEntry commerceNotificationQueueEntry =
+			commerceNotificationQueueEntryPersistence.create(
+				commerceNotificationQueueEntryId);
+
+		commerceNotificationQueueEntry.setGroupId(groupId);
+		commerceNotificationQueueEntry.setCompanyId(user.getCompanyId());
+		commerceNotificationQueueEntry.setUserId(user.getUserId());
+		commerceNotificationQueueEntry.setUserName(user.getFullName());
+		commerceNotificationQueueEntry.setClassName(className);
+		commerceNotificationQueueEntry.setClassPK(classPK);
 		commerceNotificationQueueEntry.setCommerceNotificationTemplateId(
 			commerceNotificationTemplateId);
 		commerceNotificationQueueEntry.setFrom(from);
@@ -157,9 +198,33 @@ public class CommerceNotificationQueueEntryLocalServiceImpl
 	}
 
 	@Override
+	public List<CommerceNotificationQueueEntry>
+		getCommerceNotificationQueueEntries(
+			long groupId, String className, long classPK, boolean sent,
+			int start, int end,
+			OrderByComparator<CommerceNotificationQueueEntry>
+				orderByComparator) {
+
+		long classNameId = classNameLocalService.getClassNameId(className);
+
+		return commerceNotificationQueueEntryPersistence.findByG_C_C_S(
+			groupId, classNameId, classPK, sent, start, end, orderByComparator);
+	}
+
+	@Override
 	public int getCommerceNotificationQueueEntriesCount(long groupId) {
 		return commerceNotificationQueueEntryPersistence.countByGroupId(
 			groupId);
+	}
+
+	@Override
+	public int getCommerceNotificationQueueEntriesCount(
+		long groupId, String className, long classPK, boolean sent) {
+
+		long classNameId = classNameLocalService.getClassNameId(className);
+
+		return commerceNotificationQueueEntryPersistence.countByG_C_C_S(
+			groupId, classNameId, classPK, sent);
 	}
 
 	@Override
