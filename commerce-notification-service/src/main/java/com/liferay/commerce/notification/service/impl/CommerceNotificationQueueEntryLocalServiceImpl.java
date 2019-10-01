@@ -46,6 +46,9 @@ import javax.mail.internet.InternetAddress;
 public class CommerceNotificationQueueEntryLocalServiceImpl
 	extends CommerceNotificationQueueEntryLocalServiceBaseImpl {
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), this method will be replaced
+	 */
 	@Deprecated
 	@Override
 	public CommerceNotificationQueueEntry addCommerceNotificationQueueEntry(
