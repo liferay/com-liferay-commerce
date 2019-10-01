@@ -192,7 +192,7 @@ public class CommerceAccountPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceAccount commerceAccount : list) {
-					if ((companyId != commerceAccount.getCompanyId())) {
+					if (companyId != commerceAccount.getCompanyId()) {
 						list = null;
 
 						break;

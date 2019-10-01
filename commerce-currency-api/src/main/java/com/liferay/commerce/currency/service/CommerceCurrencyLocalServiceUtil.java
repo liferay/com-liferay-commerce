@@ -216,6 +216,12 @@ public class CommerceCurrencyLocalServiceUtil {
 		return getService().fetchCommerceCurrency(commerceCurrencyId);
 	}
 
+	public static com.liferay.commerce.currency.model.CommerceCurrency
+		fetchCommerceCurrency(long companyId, String code) {
+
+		return getService().fetchCommerceCurrency(companyId, code);
+	}
+
 	/**
 	 * Returns the commerce currency with the matching UUID and company.
 	 *

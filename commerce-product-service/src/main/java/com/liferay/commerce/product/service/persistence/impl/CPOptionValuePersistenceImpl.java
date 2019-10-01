@@ -1343,7 +1343,7 @@ public class CPOptionValuePersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPOptionValue cpOptionValue : list) {
-					if ((companyId != cpOptionValue.getCompanyId())) {
+					if (companyId != cpOptionValue.getCompanyId()) {
 						list = null;
 
 						break;
@@ -1860,7 +1860,7 @@ public class CPOptionValuePersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPOptionValue cpOptionValue : list) {
-					if ((CPOptionId != cpOptionValue.getCPOptionId())) {
+					if (CPOptionId != cpOptionValue.getCPOptionId()) {
 						list = null;
 
 						break;

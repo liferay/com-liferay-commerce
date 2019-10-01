@@ -475,8 +475,9 @@ public class CommerceInventoryWarehouseItemServiceHttp {
 	public static
 		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
 				upsertCommerceInventoryWarehouseItem(
-					HttpPrincipal httpPrincipal, long userId,
-					long commerceInventoryWarehouseId, String sku, int quantity)
+					HttpPrincipal httpPrincipal, long companyId, long userId,
+					long commerceInventoryWarehouseId,
+					String externalReferenceCode, String sku, int quantity)
 			throws com.liferay.portal.kernel.exception.PortalException {
 
 		try {
@@ -486,7 +487,8 @@ public class CommerceInventoryWarehouseItemServiceHttp {
 				_upsertCommerceInventoryWarehouseItemParameterTypes10);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, userId, commerceInventoryWarehouseId, sku, quantity);
+				methodKey, companyId, userId, commerceInventoryWarehouseId,
+				externalReferenceCode, sku, quantity);
 
 			Object returnObj = null;
 
@@ -518,9 +520,8 @@ public class CommerceInventoryWarehouseItemServiceHttp {
 	public static
 		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
 				upsertCommerceInventoryWarehouseItem(
-					HttpPrincipal httpPrincipal, long companyId, long userId,
-					long commerceInventoryWarehouseId,
-					String externalReferenceCode, String sku, int quantity)
+					HttpPrincipal httpPrincipal, long userId,
+					long commerceInventoryWarehouseId, String sku, int quantity)
 			throws com.liferay.portal.kernel.exception.PortalException {
 
 		try {
@@ -530,8 +531,7 @@ public class CommerceInventoryWarehouseItemServiceHttp {
 				_upsertCommerceInventoryWarehouseItemParameterTypes11);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, companyId, userId, commerceInventoryWarehouseId,
-				externalReferenceCode, sku, quantity);
+				methodKey, userId, commerceInventoryWarehouseId, sku, quantity);
 
 			Object returnObj = null;
 
@@ -603,12 +603,12 @@ public class CommerceInventoryWarehouseItemServiceHttp {
 		};
 	private static final Class<?>[]
 		_upsertCommerceInventoryWarehouseItemParameterTypes10 = new Class[] {
-			long.class, long.class, String.class, int.class
+			long.class, long.class, long.class, String.class, String.class,
+			int.class
 		};
 	private static final Class<?>[]
 		_upsertCommerceInventoryWarehouseItemParameterTypes11 = new Class[] {
-			long.class, long.class, long.class, String.class, String.class,
-			int.class
+			long.class, long.class, String.class, int.class
 		};
 
 }

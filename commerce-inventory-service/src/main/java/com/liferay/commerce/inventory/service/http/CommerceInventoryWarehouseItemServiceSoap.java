@@ -289,8 +289,9 @@ public class CommerceInventoryWarehouseItemServiceSoap {
 	public static
 		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItemSoap
 				upsertCommerceInventoryWarehouseItem(
-					long userId, long commerceInventoryWarehouseId, String sku,
-					int quantity)
+					long companyId, long userId,
+					long commerceInventoryWarehouseId,
+					String externalReferenceCode, String sku, int quantity)
 			throws RemoteException {
 
 		try {
@@ -298,8 +299,8 @@ public class CommerceInventoryWarehouseItemServiceSoap {
 				returnValue =
 					CommerceInventoryWarehouseItemServiceUtil.
 						upsertCommerceInventoryWarehouseItem(
-							userId, commerceInventoryWarehouseId, sku,
-							quantity);
+							companyId, userId, commerceInventoryWarehouseId,
+							externalReferenceCode, sku, quantity);
 
 			return com.liferay.commerce.inventory.model.
 				CommerceInventoryWarehouseItemSoap.toSoapModel(returnValue);
@@ -314,9 +315,8 @@ public class CommerceInventoryWarehouseItemServiceSoap {
 	public static
 		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItemSoap
 				upsertCommerceInventoryWarehouseItem(
-					long companyId, long userId,
-					long commerceInventoryWarehouseId,
-					String externalReferenceCode, String sku, int quantity)
+					long userId, long commerceInventoryWarehouseId, String sku,
+					int quantity)
 			throws RemoteException {
 
 		try {
@@ -324,8 +324,8 @@ public class CommerceInventoryWarehouseItemServiceSoap {
 				returnValue =
 					CommerceInventoryWarehouseItemServiceUtil.
 						upsertCommerceInventoryWarehouseItem(
-							companyId, userId, commerceInventoryWarehouseId,
-							externalReferenceCode, sku, quantity);
+							userId, commerceInventoryWarehouseId, sku,
+							quantity);
 
 			return com.liferay.commerce.inventory.model.
 				CommerceInventoryWarehouseItemSoap.toSoapModel(returnValue);

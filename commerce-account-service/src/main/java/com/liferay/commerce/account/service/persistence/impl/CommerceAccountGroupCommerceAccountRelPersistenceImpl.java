@@ -203,9 +203,9 @@ public class CommerceAccountGroupCommerceAccountRelPersistenceImpl
 				for (CommerceAccountGroupCommerceAccountRel
 						commerceAccountGroupCommerceAccountRel : list) {
 
-					if ((commerceAccountGroupId !=
+					if (commerceAccountGroupId !=
 							commerceAccountGroupCommerceAccountRel.
-								getCommerceAccountGroupId())) {
+								getCommerceAccountGroupId()) {
 
 						list = null;
 
@@ -776,9 +776,9 @@ public class CommerceAccountGroupCommerceAccountRelPersistenceImpl
 				for (CommerceAccountGroupCommerceAccountRel
 						commerceAccountGroupCommerceAccountRel : list) {
 
-					if ((commerceAccountId !=
+					if (commerceAccountId !=
 							commerceAccountGroupCommerceAccountRel.
-								getCommerceAccountId())) {
+								getCommerceAccountId()) {
 
 						list = null;
 

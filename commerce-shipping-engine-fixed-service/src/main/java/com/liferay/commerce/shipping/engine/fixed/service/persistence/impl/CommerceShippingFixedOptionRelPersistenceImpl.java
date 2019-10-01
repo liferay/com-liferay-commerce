@@ -198,9 +198,9 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 				for (CommerceShippingFixedOptionRel
 						commerceShippingFixedOptionRel : list) {
 
-					if ((commerceShippingMethodId !=
+					if (commerceShippingMethodId !=
 							commerceShippingFixedOptionRel.
-								getCommerceShippingMethodId())) {
+								getCommerceShippingMethodId()) {
 
 						list = null;
 
@@ -760,9 +760,9 @@ public class CommerceShippingFixedOptionRelPersistenceImpl
 				for (CommerceShippingFixedOptionRel
 						commerceShippingFixedOptionRel : list) {
 
-					if ((commerceShippingFixedOptionId !=
+					if (commerceShippingFixedOptionId !=
 							commerceShippingFixedOptionRel.
-								getCommerceShippingFixedOptionId())) {
+								getCommerceShippingFixedOptionId()) {
 
 						list = null;
 

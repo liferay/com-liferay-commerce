@@ -1591,7 +1591,7 @@ public class CPDefinitionPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPDefinition cpDefinition : list) {
-					if ((groupId != cpDefinition.getGroupId())) {
+					if (groupId != cpDefinition.getGroupId()) {
 						list = null;
 
 						break;
@@ -2106,7 +2106,7 @@ public class CPDefinitionPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPDefinition cpDefinition : list) {
-					if ((companyId != cpDefinition.getCompanyId())) {
+					if (companyId != cpDefinition.getCompanyId()) {
 						list = null;
 
 						break;
@@ -2622,9 +2622,7 @@ public class CPDefinitionPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPDefinition cpDefinition : list) {
-					if ((CPTaxCategoryId !=
-							cpDefinition.getCPTaxCategoryId())) {
-
+					if (CPTaxCategoryId != cpDefinition.getCPTaxCategoryId()) {
 						list = null;
 
 						break;

@@ -84,8 +84,8 @@ public class CommercePriceListCacheModel
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
-		sb.append(", commerceCurrencyId=");
-		sb.append(commerceCurrencyId);
+		sb.append(", commerceCurrencyCode=");
+		sb.append(commerceCurrencyCode);
 		sb.append(", parentCommercePriceListId=");
 		sb.append(parentCommercePriceListId);
 		sb.append(", name=");
@@ -157,7 +157,13 @@ public class CommercePriceListCacheModel
 			commercePriceListImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
-		commercePriceListImpl.setCommerceCurrencyId(commerceCurrencyId);
+		if (commerceCurrencyCode == null) {
+			commercePriceListImpl.setCommerceCurrencyCode("");
+		}
+		else {
+			commercePriceListImpl.setCommerceCurrencyCode(commerceCurrencyCode);
+		}
+
 		commercePriceListImpl.setParentCommercePriceListId(
 			parentCommercePriceListId);
 
@@ -228,8 +234,7 @@ public class CommercePriceListCacheModel
 		userName = objectInput.readUTF();
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
-
-		commerceCurrencyId = objectInput.readLong();
+		commerceCurrencyCode = objectInput.readUTF();
 
 		parentCommercePriceListId = objectInput.readLong();
 		name = objectInput.readUTF();
@@ -280,7 +285,12 @@ public class CommercePriceListCacheModel
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 
-		objectOutput.writeLong(commerceCurrencyId);
+		if (commerceCurrencyCode == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(commerceCurrencyCode);
+		}
 
 		objectOutput.writeLong(parentCommercePriceListId);
 
@@ -319,7 +329,7 @@ public class CommercePriceListCacheModel
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
-	public long commerceCurrencyId;
+	public String commerceCurrencyCode;
 	public long parentCommercePriceListId;
 	public String name;
 	public double priority;

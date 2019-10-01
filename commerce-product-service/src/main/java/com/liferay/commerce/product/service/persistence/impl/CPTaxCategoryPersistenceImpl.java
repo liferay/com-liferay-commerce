@@ -186,7 +186,7 @@ public class CPTaxCategoryPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPTaxCategory cpTaxCategory : list) {
-					if ((companyId != cpTaxCategory.getCompanyId())) {
+					if (companyId != cpTaxCategory.getCompanyId()) {
 						list = null;
 
 						break;

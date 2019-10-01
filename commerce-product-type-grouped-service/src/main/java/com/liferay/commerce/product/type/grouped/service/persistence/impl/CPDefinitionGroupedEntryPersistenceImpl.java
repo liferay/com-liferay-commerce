@@ -1624,8 +1624,8 @@ public class CPDefinitionGroupedEntryPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPDefinitionGroupedEntry cpDefinitionGroupedEntry : list) {
-					if ((CPDefinitionId !=
-							cpDefinitionGroupedEntry.getCPDefinitionId())) {
+					if (CPDefinitionId !=
+							cpDefinitionGroupedEntry.getCPDefinitionId()) {
 
 						list = null;
 

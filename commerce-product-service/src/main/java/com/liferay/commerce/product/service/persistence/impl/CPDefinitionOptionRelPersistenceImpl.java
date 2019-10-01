@@ -1612,7 +1612,7 @@ public class CPDefinitionOptionRelPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPDefinitionOptionRel cpDefinitionOptionRel : list) {
-					if ((groupId != cpDefinitionOptionRel.getGroupId())) {
+					if (groupId != cpDefinitionOptionRel.getGroupId()) {
 						list = null;
 
 						break;
@@ -2137,7 +2137,7 @@ public class CPDefinitionOptionRelPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPDefinitionOptionRel cpDefinitionOptionRel : list) {
-					if ((companyId != cpDefinitionOptionRel.getCompanyId())) {
+					if (companyId != cpDefinitionOptionRel.getCompanyId()) {
 						list = null;
 
 						break;
@@ -2665,8 +2665,8 @@ public class CPDefinitionOptionRelPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPDefinitionOptionRel cpDefinitionOptionRel : list) {
-					if ((CPDefinitionId !=
-							cpDefinitionOptionRel.getCPDefinitionId())) {
+					if (CPDefinitionId !=
+							cpDefinitionOptionRel.getCPDefinitionId()) {
 
 						list = null;
 

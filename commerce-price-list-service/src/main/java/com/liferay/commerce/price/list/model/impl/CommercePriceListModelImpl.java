@@ -80,7 +80,8 @@ public class CommercePriceListModelImpl
 		{"commercePriceListId", Types.BIGINT}, {"groupId", Types.BIGINT},
 		{"companyId", Types.BIGINT}, {"userId", Types.BIGINT},
 		{"userName", Types.VARCHAR}, {"createDate", Types.TIMESTAMP},
-		{"modifiedDate", Types.TIMESTAMP}, {"commerceCurrencyId", Types.BIGINT},
+		{"modifiedDate", Types.TIMESTAMP},
+		{"commerceCurrencyCode", Types.VARCHAR},
 		{"parentCommercePriceListId", Types.BIGINT}, {"name", Types.VARCHAR},
 		{"priority", Types.DOUBLE}, {"displayDate", Types.TIMESTAMP},
 		{"expirationDate", Types.TIMESTAMP},
@@ -102,7 +103,7 @@ public class CommercePriceListModelImpl
 		TABLE_COLUMNS_MAP.put("userName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
-		TABLE_COLUMNS_MAP.put("commerceCurrencyId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("commerceCurrencyCode", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("parentCommercePriceListId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("name", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("priority", Types.DOUBLE);
@@ -116,7 +117,7 @@ public class CommercePriceListModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CommercePriceList (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,commercePriceListId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceCurrencyId LONG,parentCommercePriceListId LONG,name VARCHAR(75) null,priority DOUBLE,displayDate DATE null,expirationDate DATE null,lastPublishDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+		"create table CommercePriceList (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,commercePriceListId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceCurrencyCode VARCHAR(75) null,parentCommercePriceListId LONG,name VARCHAR(75) null,priority DOUBLE,displayDate DATE null,expirationDate DATE null,lastPublishDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 
 	public static final String TABLE_SQL_DROP = "drop table CommercePriceList";
 
@@ -147,7 +148,7 @@ public class CommercePriceListModelImpl
 			"value.object.column.bitmask.enabled.com.liferay.commerce.price.list.model.CommercePriceList"),
 		true);
 
-	public static final long COMMERCECURRENCYID_COLUMN_BITMASK = 1L;
+	public static final long COMMERCECURRENCYCODE_COLUMN_BITMASK = 1L;
 
 	public static final long COMPANYID_COLUMN_BITMASK = 2L;
 
@@ -189,7 +190,7 @@ public class CommercePriceListModelImpl
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
-		model.setCommerceCurrencyId(soapModel.getCommerceCurrencyId());
+		model.setCommerceCurrencyCode(soapModel.getCommerceCurrencyCode());
 		model.setParentCommercePriceListId(
 			soapModel.getParentCommercePriceListId());
 		model.setName(soapModel.getName());
@@ -563,26 +564,26 @@ public class CommercePriceListModelImpl
 
 			});
 		attributeGetterFunctions.put(
-			"commerceCurrencyId",
+			"commerceCurrencyCode",
 			new Function<CommercePriceList, Object>() {
 
 				@Override
 				public Object apply(CommercePriceList commercePriceList) {
-					return commercePriceList.getCommerceCurrencyId();
+					return commercePriceList.getCommerceCurrencyCode();
 				}
 
 			});
 		attributeSetterBiConsumers.put(
-			"commerceCurrencyId",
+			"commerceCurrencyCode",
 			new BiConsumer<CommercePriceList, Object>() {
 
 				@Override
 				public void accept(
 					CommercePriceList commercePriceList,
-					Object commerceCurrencyId) {
+					Object commerceCurrencyCode) {
 
-					commercePriceList.setCommerceCurrencyId(
-						(Long)commerceCurrencyId);
+					commercePriceList.setCommerceCurrencyCode(
+						(String)commerceCurrencyCode);
 				}
 
 			});
@@ -1004,25 +1005,28 @@ public class CommercePriceListModelImpl
 
 	@JSON
 	@Override
-	public long getCommerceCurrencyId() {
-		return _commerceCurrencyId;
+	public String getCommerceCurrencyCode() {
+		if (_commerceCurrencyCode == null) {
+			return "";
+		}
+		else {
+			return _commerceCurrencyCode;
+		}
 	}
 
 	@Override
-	public void setCommerceCurrencyId(long commerceCurrencyId) {
-		_columnBitmask |= COMMERCECURRENCYID_COLUMN_BITMASK;
+	public void setCommerceCurrencyCode(String commerceCurrencyCode) {
+		_columnBitmask |= COMMERCECURRENCYCODE_COLUMN_BITMASK;
 
-		if (!_setOriginalCommerceCurrencyId) {
-			_setOriginalCommerceCurrencyId = true;
-
-			_originalCommerceCurrencyId = _commerceCurrencyId;
+		if (_originalCommerceCurrencyCode == null) {
+			_originalCommerceCurrencyCode = _commerceCurrencyCode;
 		}
 
-		_commerceCurrencyId = commerceCurrencyId;
+		_commerceCurrencyCode = commerceCurrencyCode;
 	}
 
-	public long getOriginalCommerceCurrencyId() {
-		return _originalCommerceCurrencyId;
+	public String getOriginalCommerceCurrencyCode() {
+		return GetterUtil.getString(_originalCommerceCurrencyCode);
 	}
 
 	@JSON
@@ -1330,7 +1334,8 @@ public class CommercePriceListModelImpl
 		commercePriceListImpl.setUserName(getUserName());
 		commercePriceListImpl.setCreateDate(getCreateDate());
 		commercePriceListImpl.setModifiedDate(getModifiedDate());
-		commercePriceListImpl.setCommerceCurrencyId(getCommerceCurrencyId());
+		commercePriceListImpl.setCommerceCurrencyCode(
+			getCommerceCurrencyCode());
 		commercePriceListImpl.setParentCommercePriceListId(
 			getParentCommercePriceListId());
 		commercePriceListImpl.setName(getName());
@@ -1448,10 +1453,8 @@ public class CommercePriceListModelImpl
 
 		commercePriceListModelImpl._setModifiedDate = false;
 
-		commercePriceListModelImpl._originalCommerceCurrencyId =
-			commercePriceListModelImpl._commerceCurrencyId;
-
-		commercePriceListModelImpl._setOriginalCommerceCurrencyId = false;
+		commercePriceListModelImpl._originalCommerceCurrencyCode =
+			commercePriceListModelImpl._commerceCurrencyCode;
 
 		commercePriceListModelImpl._originalParentCommercePriceListId =
 			commercePriceListModelImpl._parentCommercePriceListId;
@@ -1530,8 +1533,17 @@ public class CommercePriceListModelImpl
 			commercePriceListCacheModel.modifiedDate = Long.MIN_VALUE;
 		}
 
-		commercePriceListCacheModel.commerceCurrencyId =
-			getCommerceCurrencyId();
+		commercePriceListCacheModel.commerceCurrencyCode =
+			getCommerceCurrencyCode();
+
+		String commerceCurrencyCode =
+			commercePriceListCacheModel.commerceCurrencyCode;
+
+		if ((commerceCurrencyCode != null) &&
+			(commerceCurrencyCode.length() == 0)) {
+
+			commercePriceListCacheModel.commerceCurrencyCode = null;
+		}
 
 		commercePriceListCacheModel.parentCommercePriceListId =
 			getParentCommercePriceListId();
@@ -1685,9 +1697,8 @@ public class CommercePriceListModelImpl
 	private Date _createDate;
 	private Date _modifiedDate;
 	private boolean _setModifiedDate;
-	private long _commerceCurrencyId;
-	private long _originalCommerceCurrencyId;
-	private boolean _setOriginalCommerceCurrencyId;
+	private String _commerceCurrencyCode;
+	private String _originalCommerceCurrencyCode;
 	private long _parentCommercePriceListId;
 	private long _originalParentCommercePriceListId;
 	private boolean _setOriginalParentCommercePriceListId;

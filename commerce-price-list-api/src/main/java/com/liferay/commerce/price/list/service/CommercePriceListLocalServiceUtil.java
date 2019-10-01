@@ -54,7 +54,7 @@ public class CommercePriceListLocalServiceUtil {
 
 	public static com.liferay.commerce.price.list.model.CommercePriceList
 			addCommercePriceList(
-				long groupId, long userId, long commerceCurrencyId,
+				long groupId, long userId, String commerceCurrencyCode,
 				long parentCommercePriceListId, String name, double priority,
 				int displayDateMonth, int displayDateDay, int displayDateYear,
 				int displayDateHour, int displayDateMinute,
@@ -65,7 +65,7 @@ public class CommercePriceListLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().addCommercePriceList(
-			groupId, userId, commerceCurrencyId, parentCommercePriceListId,
+			groupId, userId, commerceCurrencyCode, parentCommercePriceListId,
 			name, priority, displayDateMonth, displayDateDay, displayDateYear,
 			displayDateHour, displayDateMinute, expirationDateMonth,
 			expirationDateDay, expirationDateYear, expirationDateHour,
@@ -74,7 +74,7 @@ public class CommercePriceListLocalServiceUtil {
 
 	public static com.liferay.commerce.price.list.model.CommercePriceList
 			addCommercePriceList(
-				long groupId, long userId, long commerceCurrencyId,
+				long groupId, long userId, String commerceCurrencyCode,
 				long parentCommercePriceListId, String name, double priority,
 				int displayDateMonth, int displayDateDay, int displayDateYear,
 				int displayDateHour, int displayDateMinute,
@@ -86,7 +86,7 @@ public class CommercePriceListLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().addCommercePriceList(
-			groupId, userId, commerceCurrencyId, parentCommercePriceListId,
+			groupId, userId, commerceCurrencyCode, parentCommercePriceListId,
 			name, priority, displayDateMonth, displayDateDay, displayDateYear,
 			displayDateHour, displayDateMinute, expirationDateMonth,
 			expirationDateDay, expirationDateYear, expirationDateHour,
@@ -96,17 +96,18 @@ public class CommercePriceListLocalServiceUtil {
 
 	public static com.liferay.commerce.price.list.model.CommercePriceList
 			addCommercePriceList(
-				long groupId, long userId, long commerceCurrencyId, String name,
-				double priority, int displayDateMonth, int displayDateDay,
-				int displayDateYear, int displayDateHour, int displayDateMinute,
-				int expirationDateMonth, int expirationDateDay,
-				int expirationDateYear, int expirationDateHour,
-				int expirationDateMinute, boolean neverExpire,
+				long groupId, long userId, String commerceCurrencyCode,
+				String name, double priority, int displayDateMonth,
+				int displayDateDay, int displayDateYear, int displayDateHour,
+				int displayDateMinute, int expirationDateMonth,
+				int expirationDateDay, int expirationDateYear,
+				int expirationDateHour, int expirationDateMinute,
+				boolean neverExpire,
 				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().addCommercePriceList(
-			groupId, userId, commerceCurrencyId, name, priority,
+			groupId, userId, commerceCurrencyCode, name, priority,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, expirationDateMonth, expirationDateDay,
 			expirationDateYear, expirationDateHour, expirationDateMinute,
@@ -115,18 +116,18 @@ public class CommercePriceListLocalServiceUtil {
 
 	public static com.liferay.commerce.price.list.model.CommercePriceList
 			addCommercePriceList(
-				long groupId, long userId, long commerceCurrencyId, String name,
-				double priority, int displayDateMonth, int displayDateDay,
-				int displayDateYear, int displayDateHour, int displayDateMinute,
-				int expirationDateMonth, int expirationDateDay,
-				int expirationDateYear, int expirationDateHour,
-				int expirationDateMinute, String externalReferenceCode,
-				boolean neverExpire,
+				long groupId, long userId, String commerceCurrencyCode,
+				String name, double priority, int displayDateMonth,
+				int displayDateDay, int displayDateYear, int displayDateHour,
+				int displayDateMinute, int expirationDateMonth,
+				int expirationDateDay, int expirationDateYear,
+				int expirationDateHour, int expirationDateMinute,
+				String externalReferenceCode, boolean neverExpire,
 				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().addCommercePriceList(
-			groupId, userId, commerceCurrencyId, name, priority,
+			groupId, userId, commerceCurrencyCode, name, priority,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, expirationDateMonth, expirationDateDay,
 			expirationDateYear, expirationDateHour, expirationDateMinute,
@@ -541,7 +542,7 @@ public class CommercePriceListLocalServiceUtil {
 
 	public static com.liferay.commerce.price.list.model.CommercePriceList
 			updateCommercePriceList(
-				long commercePriceListId, long commerceCurrencyId,
+				long commercePriceListId, String commerceCurrencyCode,
 				long parentCommercePriceListId, String name, double priority,
 				int displayDateMonth, int displayDateDay, int displayDateYear,
 				int displayDateHour, int displayDateMinute,
@@ -552,26 +553,28 @@ public class CommercePriceListLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().updateCommercePriceList(
-			commercePriceListId, commerceCurrencyId, parentCommercePriceListId,
-			name, priority, displayDateMonth, displayDateDay, displayDateYear,
-			displayDateHour, displayDateMinute, expirationDateMonth,
-			expirationDateDay, expirationDateYear, expirationDateHour,
-			expirationDateMinute, neverExpire, serviceContext);
+			commercePriceListId, commerceCurrencyCode,
+			parentCommercePriceListId, name, priority, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire,
+			serviceContext);
 	}
 
 	public static com.liferay.commerce.price.list.model.CommercePriceList
 			updateCommercePriceList(
-				long commercePriceListId, long commerceCurrencyId, String name,
-				double priority, int displayDateMonth, int displayDateDay,
-				int displayDateYear, int displayDateHour, int displayDateMinute,
-				int expirationDateMonth, int expirationDateDay,
-				int expirationDateYear, int expirationDateHour,
-				int expirationDateMinute, boolean neverExpire,
+				long commercePriceListId, String commerceCurrencyCode,
+				String name, double priority, int displayDateMonth,
+				int displayDateDay, int displayDateYear, int displayDateHour,
+				int displayDateMinute, int expirationDateMonth,
+				int expirationDateDay, int expirationDateYear,
+				int expirationDateHour, int expirationDateMinute,
+				boolean neverExpire,
 				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().updateCommercePriceList(
-			commercePriceListId, commerceCurrencyId, name, priority,
+			commercePriceListId, commerceCurrencyCode, name, priority,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, expirationDateMonth, expirationDateDay,
 			expirationDateYear, expirationDateHour, expirationDateMinute,
@@ -579,10 +582,10 @@ public class CommercePriceListLocalServiceUtil {
 	}
 
 	public static void updateCommercePriceListCurrencies(
-			long commerceCurrencyId)
+			String commerceCurrencyCOde)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		getService().updateCommercePriceListCurrencies(commerceCurrencyId);
+		getService().updateCommercePriceListCurrencies(commerceCurrencyCOde);
 	}
 
 	public static com.liferay.commerce.price.list.model.CommercePriceList
@@ -614,7 +617,7 @@ public class CommercePriceListLocalServiceUtil {
 	 *
 	 * @param commercePriceListId - <b>Only</b> used when updating an entity;
 	 the matching one will be updated
-	 * @param commerceCurrencyId
+	 * @param commerceCurrencyCode
 	 * @param parentCommercePriceListId
 	 * @param name
 	 * @param priority
@@ -640,7 +643,7 @@ public class CommercePriceListLocalServiceUtil {
 	public static com.liferay.commerce.price.list.model.CommercePriceList
 			upsertCommercePriceList(
 				long groupId, long userId, long commercePriceListId,
-				long commerceCurrencyId, long parentCommercePriceListId,
+				String commerceCurrencyCode, long parentCommercePriceListId,
 				String name, double priority, int displayDateMonth,
 				int displayDateDay, int displayDateYear, int displayDateHour,
 				int displayDateMinute, int expirationDateMonth,
@@ -651,7 +654,7 @@ public class CommercePriceListLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().upsertCommercePriceList(
-			groupId, userId, commercePriceListId, commerceCurrencyId,
+			groupId, userId, commercePriceListId, commerceCurrencyCode,
 			parentCommercePriceListId, name, priority, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
@@ -662,7 +665,7 @@ public class CommercePriceListLocalServiceUtil {
 	public static com.liferay.commerce.price.list.model.CommercePriceList
 			upsertCommercePriceList(
 				long groupId, long userId, long commercePriceListId,
-				long commerceCurrencyId, String name, double priority,
+				String commerceCurrencyCode, String name, double priority,
 				int displayDateMonth, int displayDateDay, int displayDateYear,
 				int displayDateHour, int displayDateMinute,
 				int expirationDateMonth, int expirationDateDay,
@@ -673,7 +676,7 @@ public class CommercePriceListLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().upsertCommercePriceList(
-			groupId, userId, commercePriceListId, commerceCurrencyId, name,
+			groupId, userId, commercePriceListId, commerceCurrencyCode, name,
 			priority, displayDateMonth, displayDateDay, displayDateYear,
 			displayDateHour, displayDateMinute, expirationDateMonth,
 			expirationDateDay, expirationDateYear, expirationDateHour,

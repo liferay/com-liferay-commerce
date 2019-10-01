@@ -65,7 +65,7 @@ public class CommercePriceListWrapper
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("commerceCurrencyId", getCommerceCurrencyId());
+		attributes.put("commerceCurrencyCode", getCommerceCurrencyCode());
 		attributes.put(
 			"parentCommercePriceListId", getParentCommercePriceListId());
 		attributes.put("name", getName());
@@ -138,10 +138,11 @@ public class CommercePriceListWrapper
 			setModifiedDate(modifiedDate);
 		}
 
-		Long commerceCurrencyId = (Long)attributes.get("commerceCurrencyId");
+		String commerceCurrencyCode = (String)attributes.get(
+			"commerceCurrencyCode");
 
-		if (commerceCurrencyId != null) {
-			setCommerceCurrencyId(commerceCurrencyId);
+		if (commerceCurrencyCode != null) {
+			setCommerceCurrencyCode(commerceCurrencyCode);
 		}
 
 		Long parentCommercePriceListId = (Long)attributes.get(
@@ -226,13 +227,13 @@ public class CommercePriceListWrapper
 	}
 
 	/**
-	 * Returns the commerce currency ID of this commerce price list.
+	 * Returns the commerce currency code of this commerce price list.
 	 *
-	 * @return the commerce currency ID of this commerce price list
+	 * @return the commerce currency code of this commerce price list
 	 */
 	@Override
-	public long getCommerceCurrencyId() {
-		return _commercePriceList.getCommerceCurrencyId();
+	public String getCommerceCurrencyCode() {
+		return _commercePriceList.getCommerceCurrencyCode();
 	}
 
 	/**
@@ -581,13 +582,13 @@ public class CommercePriceListWrapper
 	}
 
 	/**
-	 * Sets the commerce currency ID of this commerce price list.
+	 * Sets the commerce currency code of this commerce price list.
 	 *
-	 * @param commerceCurrencyId the commerce currency ID of this commerce price list
+	 * @param commerceCurrencyCode the commerce currency code of this commerce price list
 	 */
 	@Override
-	public void setCommerceCurrencyId(long commerceCurrencyId) {
-		_commercePriceList.setCommerceCurrencyId(commerceCurrencyId);
+	public void setCommerceCurrencyCode(String commerceCurrencyCode) {
+		_commercePriceList.setCommerceCurrencyCode(commerceCurrencyCode);
 	}
 
 	/**
