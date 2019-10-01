@@ -1,4 +1,4 @@
 Bundle-Name: Liferay Commerce Checkout Web
 Bundle-SymbolicName: com.liferay.commerce.checkout.web
-Bundle-Version: 2.0.3
+Bundle-Version: 2.0.4
 -dsannotations-options: inherit
