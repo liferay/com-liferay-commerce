@@ -27,6 +27,10 @@ import java.util.Map;
 @ProviderType
 public interface CommerceNotificationType {
 
+	public String getClassName(Object object);
+
+	public long getClassPK(Object object);
+
 	public Map<String, String> getDefinitionTerms(Locale locale);
 
 	public String getFilledTerm(String term, Object object, Locale locale)
