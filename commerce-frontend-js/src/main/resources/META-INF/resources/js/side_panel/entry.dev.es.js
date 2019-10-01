@@ -17,7 +17,7 @@ window.SidePanel = launcher('sidePanel', 'side-panel', {
 		}
 	],
 	size: 'medium',
-	spritemap: './icons.svg',
+	spritemap: './assets/icons.svg',
 	topAnchor: document.querySelector('.top-anchor'),
 	visible: false,
 });
