@@ -194,9 +194,9 @@ public class CommerceTaxFixedRateAddressRelPersistenceImpl
 				for (CommerceTaxFixedRateAddressRel
 						commerceTaxFixedRateAddressRel : list) {
 
-					if ((commerceTaxMethodId !=
+					if (commerceTaxMethodId !=
 							commerceTaxFixedRateAddressRel.
-								getCommerceTaxMethodId())) {
+								getCommerceTaxMethodId()) {
 
 						list = null;
 
@@ -739,9 +739,9 @@ public class CommerceTaxFixedRateAddressRelPersistenceImpl
 				for (CommerceTaxFixedRateAddressRel
 						commerceTaxFixedRateAddressRel : list) {
 
-					if ((CPTaxCategoryId !=
+					if (CPTaxCategoryId !=
 							commerceTaxFixedRateAddressRel.
-								getCPTaxCategoryId())) {
+								getCPTaxCategoryId()) {
 
 						list = null;
 

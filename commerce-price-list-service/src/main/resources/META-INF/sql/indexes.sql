@@ -10,7 +10,7 @@ create unique index IX_2D76B43E on CommercePriceEntry (commercePriceListId, CPIn
 create index IX_B058565F on CommercePriceEntry (companyId, externalReferenceCode[$COLUMN_LENGTH:75$]);
 create index IX_1578F03E on CommercePriceEntry (uuid_[$COLUMN_LENGTH:75$], companyId);
 
-create index IX_473B4D8D on CommercePriceList (commerceCurrencyId);
+create index IX_5C1781DF on CommercePriceList (commerceCurrencyCode[$COLUMN_LENGTH:75$]);
 create index IX_328B5D27 on CommercePriceList (companyId, externalReferenceCode[$COLUMN_LENGTH:75$]);
 create index IX_31913054 on CommercePriceList (displayDate, status);
 create index IX_B61658B6 on CommercePriceList (groupId, companyId, status);
