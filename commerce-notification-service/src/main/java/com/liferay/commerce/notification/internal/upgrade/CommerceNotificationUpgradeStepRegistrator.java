@@ -14,7 +14,8 @@
 
 package com.liferay.commerce.notification.internal.upgrade;
 
-import com.liferay.commerce.notification.internal.upgrade.v2_0_0.AccountGroupRelUpgradeProcess;
+import com.liferay.commerce.notification.internal.upgrade.v2_0_0.CommerceNotificationTemplateAccountGroupRelUpgradeProcess;
+import com.liferay.commerce.notification.internal.upgrade.v2_1_0.CommerceNotificationQueueEntryUpgradeProcess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.DummyUpgradeProcess;
@@ -24,6 +25,7 @@ import org.osgi.service.component.annotations.Component;
 
 /**
  * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 @Component(immediate = true, service = UpgradeStepRegistrator.class)
 public class CommerceNotificationUpgradeStepRegistrator
@@ -41,7 +43,11 @@ public class CommerceNotificationUpgradeStepRegistrator
 
 		registry.register(
 			_SCHEMA_VERSION_1_1_0, _SCHEMA_VERSION_2_0_0,
-			new AccountGroupRelUpgradeProcess());
+			new CommerceNotificationTemplateAccountGroupRelUpgradeProcess());
+
+		registry.register(
+			_SCHEMA_VERSION_2_0_0, _SCHEMA_VERSION_2_1_0,
+			new CommerceNotificationQueueEntryUpgradeProcess());
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
@@ -54,6 +60,8 @@ public class CommerceNotificationUpgradeStepRegistrator
 	private static final String _SCHEMA_VERSION_1_1_0 = "1.1.0";
 
 	private static final String _SCHEMA_VERSION_2_0_0 = "2.0.0";
+
+	private static final String _SCHEMA_VERSION_2_1_0 = "2.1.0";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceNotificationUpgradeStepRegistrator.class);

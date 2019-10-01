@@ -20,7 +20,8 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 /**
  * @author Marco Leo
  */
-public class AccountGroupRelUpgradeProcess extends UpgradeProcess {
+public class CommerceNotificationTemplateAccountGroupRelUpgradeProcess
+	extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
