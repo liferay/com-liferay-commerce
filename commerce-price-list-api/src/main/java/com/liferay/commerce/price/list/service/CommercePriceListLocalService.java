@@ -83,7 +83,7 @@ public interface CommercePriceListLocalService
 		CommercePriceList commercePriceList);
 
 	public CommercePriceList addCommercePriceList(
-			long groupId, long userId, long commerceCurrencyId,
+			long groupId, long userId, String commerceCurrencyCode,
 			long parentCommercePriceListId, String name, double priority,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute, int expirationDateMonth,
@@ -94,7 +94,7 @@ public interface CommercePriceListLocalService
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CommercePriceList addCommercePriceList(
-			long groupId, long userId, long commerceCurrencyId,
+			long groupId, long userId, String commerceCurrencyCode,
 			long parentCommercePriceListId, String name, double priority,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute, int expirationDateMonth,
@@ -105,7 +105,7 @@ public interface CommercePriceListLocalService
 		throws PortalException;
 
 	public CommercePriceList addCommercePriceList(
-			long groupId, long userId, long commerceCurrencyId, String name,
+			long groupId, long userId, String commerceCurrencyCode, String name,
 			double priority, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
 			int expirationDateMonth, int expirationDateDay,
@@ -115,7 +115,7 @@ public interface CommercePriceListLocalService
 		throws PortalException;
 
 	public CommercePriceList addCommercePriceList(
-			long groupId, long userId, long commerceCurrencyId, String name,
+			long groupId, long userId, String commerceCurrencyCode, String name,
 			double priority, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
 			int expirationDateMonth, int expirationDateDay,
@@ -403,7 +403,7 @@ public interface CommercePriceListLocalService
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CommercePriceList updateCommercePriceList(
-			long commercePriceListId, long commerceCurrencyId,
+			long commercePriceListId, String commerceCurrencyCode,
 			long parentCommercePriceListId, String name, double priority,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute, int expirationDateMonth,
@@ -413,7 +413,7 @@ public interface CommercePriceListLocalService
 		throws PortalException;
 
 	public CommercePriceList updateCommercePriceList(
-			long commercePriceListId, long commerceCurrencyId, String name,
+			long commercePriceListId, String commerceCurrencyCode, String name,
 			double priority, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
 			int expirationDateMonth, int expirationDateDay,
@@ -422,7 +422,7 @@ public interface CommercePriceListLocalService
 			ServiceContext serviceContext)
 		throws PortalException;
 
-	public void updateCommercePriceListCurrencies(long commerceCurrencyId)
+	public void updateCommercePriceListCurrencies(String commerceCurrencyCOde)
 		throws PortalException;
 
 	@Indexable(type = IndexableType.REINDEX)
@@ -443,7 +443,7 @@ public interface CommercePriceListLocalService
 	 *
 	 * @param commercePriceListId - <b>Only</b> used when updating an entity;
 	 the matching one will be updated
-	 * @param commerceCurrencyId
+	 * @param commerceCurrencyCode
 	 * @param parentCommercePriceListId
 	 * @param name
 	 * @param priority
@@ -469,7 +469,7 @@ public interface CommercePriceListLocalService
 	@Indexable(type = IndexableType.REINDEX)
 	public CommercePriceList upsertCommercePriceList(
 			long groupId, long userId, long commercePriceListId,
-			long commerceCurrencyId, long parentCommercePriceListId,
+			String commerceCurrencyCode, long parentCommercePriceListId,
 			String name, double priority, int displayDateMonth,
 			int displayDateDay, int displayDateYear, int displayDateHour,
 			int displayDateMinute, int expirationDateMonth,
@@ -481,7 +481,7 @@ public interface CommercePriceListLocalService
 
 	public CommercePriceList upsertCommercePriceList(
 			long groupId, long userId, long commercePriceListId,
-			long commerceCurrencyId, String name, double priority,
+			String commerceCurrencyCode, String name, double priority,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,

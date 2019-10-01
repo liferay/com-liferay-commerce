@@ -1584,7 +1584,7 @@ public class CProductPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CProduct cProduct : list) {
-					if ((groupId != cProduct.getGroupId())) {
+					if (groupId != cProduct.getGroupId()) {
 						list = null;
 
 						break;

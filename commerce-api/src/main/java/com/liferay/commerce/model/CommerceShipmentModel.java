@@ -278,20 +278,6 @@ public interface CommerceShipmentModel
 	public void setTrackingNumber(String trackingNumber);
 
 	/**
-	 * Returns the status of this commerce shipment.
-	 *
-	 * @return the status of this commerce shipment
-	 */
-	public int getStatus();
-
-	/**
-	 * Sets the status of this commerce shipment.
-	 *
-	 * @param status the status of this commerce shipment
-	 */
-	public void setStatus(int status);
-
-	/**
 	 * Returns the shipping date of this commerce shipment.
 	 *
 	 * @return the shipping date of this commerce shipment
@@ -318,6 +304,20 @@ public interface CommerceShipmentModel
 	 * @param expectedDate the expected date of this commerce shipment
 	 */
 	public void setExpectedDate(Date expectedDate);
+
+	/**
+	 * Returns the status of this commerce shipment.
+	 *
+	 * @return the status of this commerce shipment
+	 */
+	public int getStatus();
+
+	/**
+	 * Sets the status of this commerce shipment.
+	 *
+	 * @param status the status of this commerce shipment
+	 */
+	public void setStatus(int status);
 
 	@Override
 	public boolean isNew();

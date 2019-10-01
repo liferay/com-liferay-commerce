@@ -190,7 +190,7 @@ public class CommerceCatalogPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceCatalog commerceCatalog : list) {
-					if ((companyId != commerceCatalog.getCompanyId())) {
+					if (companyId != commerceCatalog.getCompanyId()) {
 						list = null;
 
 						break;

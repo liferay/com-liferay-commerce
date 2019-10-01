@@ -1359,7 +1359,7 @@ public class CommerceTierPriceEntryPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceTierPriceEntry commerceTierPriceEntry : list) {
-					if ((companyId != commerceTierPriceEntry.getCompanyId())) {
+					if (companyId != commerceTierPriceEntry.getCompanyId()) {
 						list = null;
 
 						break;
@@ -1889,8 +1889,8 @@ public class CommerceTierPriceEntryPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceTierPriceEntry commerceTierPriceEntry : list) {
-					if ((commercePriceEntryId !=
-							commerceTierPriceEntry.getCommercePriceEntryId())) {
+					if (commercePriceEntryId !=
+							commerceTierPriceEntry.getCommercePriceEntryId()) {
 
 						list = null;
 

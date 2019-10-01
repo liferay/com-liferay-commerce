@@ -187,8 +187,8 @@ public class CPDefinitionLocalizationPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPDefinitionLocalization cpDefinitionLocalization : list) {
-					if ((CPDefinitionId !=
-							cpDefinitionLocalization.getCPDefinitionId())) {
+					if (CPDefinitionId !=
+							cpDefinitionLocalization.getCPDefinitionId()) {
 
 						list = null;
 

@@ -230,6 +230,14 @@ public class CommerceCurrencyLocalServiceWrapper
 			commerceCurrencyId);
 	}
 
+	@Override
+	public com.liferay.commerce.currency.model.CommerceCurrency
+		fetchCommerceCurrency(long companyId, String code) {
+
+		return _commerceCurrencyLocalService.fetchCommerceCurrency(
+			companyId, code);
+	}
+
 	/**
 	 * Returns the commerce currency with the matching UUID and company.
 	 *

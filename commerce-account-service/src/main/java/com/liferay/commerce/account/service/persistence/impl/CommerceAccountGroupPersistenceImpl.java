@@ -201,8 +201,8 @@ public class CommerceAccountGroupPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceAccountGroup commerceAccountGroup : list) {
-					if ((commerceAccountGroupId !=
-							commerceAccountGroup.getCommerceAccountGroupId())) {
+					if (commerceAccountGroupId !=
+							commerceAccountGroup.getCommerceAccountGroupId()) {
 
 						list = null;
 
@@ -1280,7 +1280,7 @@ public class CommerceAccountGroupPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceAccountGroup commerceAccountGroup : list) {
-					if ((companyId != commerceAccountGroup.getCompanyId())) {
+					if (companyId != commerceAccountGroup.getCompanyId()) {
 						list = null;
 
 						break;

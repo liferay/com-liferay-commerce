@@ -192,7 +192,7 @@ public class CommerceChannelPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceChannel commerceChannel : list) {
-					if ((companyId != commerceChannel.getCompanyId())) {
+					if (companyId != commerceChannel.getCompanyId()) {
 						list = null;
 
 						break;
@@ -1058,7 +1058,7 @@ public class CommerceChannelPersistenceImpl
 		if (result instanceof CommerceChannel) {
 			CommerceChannel commerceChannel = (CommerceChannel)result;
 
-			if ((siteGroupId != commerceChannel.getSiteGroupId())) {
+			if (siteGroupId != commerceChannel.getSiteGroupId()) {
 				result = null;
 			}
 		}

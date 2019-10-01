@@ -1602,8 +1602,8 @@ public class CPDefinitionLinkPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPDefinitionLink cpDefinitionLink : list) {
-					if ((CPDefinitionId !=
-							cpDefinitionLink.getCPDefinitionId())) {
+					if (CPDefinitionId !=
+							cpDefinitionLink.getCPDefinitionId()) {
 
 						list = null;
 
@@ -2130,7 +2130,7 @@ public class CPDefinitionLinkPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPDefinitionLink cpDefinitionLink : list) {
-					if ((CProductId != cpDefinitionLink.getCProductId())) {
+					if (CProductId != cpDefinitionLink.getCProductId()) {
 						list = null;
 
 						break;

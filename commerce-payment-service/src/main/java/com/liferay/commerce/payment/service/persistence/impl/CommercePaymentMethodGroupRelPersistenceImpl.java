@@ -189,9 +189,7 @@ public class CommercePaymentMethodGroupRelPersistenceImpl
 				for (CommercePaymentMethodGroupRel
 						commercePaymentMethodGroupRel : list) {
 
-					if ((groupId !=
-							commercePaymentMethodGroupRel.getGroupId())) {
-
+					if (groupId != commercePaymentMethodGroupRel.getGroupId()) {
 						list = null;
 
 						break;

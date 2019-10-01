@@ -198,6 +198,9 @@ public interface CommerceCurrencyLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceCurrency fetchCommerceCurrency(long commerceCurrencyId);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceCurrency fetchCommerceCurrency(long companyId, String code);
+
 	/**
 	 * Returns the commerce currency with the matching UUID and company.
 	 *

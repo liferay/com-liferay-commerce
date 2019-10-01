@@ -1654,9 +1654,9 @@ public class CommerceNotificationAttachmentPersistenceImpl
 				for (CommerceNotificationAttachment
 						commerceNotificationAttachment : list) {
 
-					if ((commerceNotificationQueueEntryId !=
+					if (commerceNotificationQueueEntryId !=
 							commerceNotificationAttachment.
-								getCommerceNotificationQueueEntryId())) {
+								getCommerceNotificationQueueEntryId()) {
 
 						list = null;
 
