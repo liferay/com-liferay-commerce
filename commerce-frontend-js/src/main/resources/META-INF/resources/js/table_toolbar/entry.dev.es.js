@@ -96,7 +96,7 @@ const props = {
 		resetFiltersAfterClickAction: true
 	},
 	queryEndpoint: '/toolbar-test',
-	spritemap: './icons.svg',
+	spritemap: './assets/icons.svg',
 };
 
 window.tableToolbar = tableToolbarLauncher(

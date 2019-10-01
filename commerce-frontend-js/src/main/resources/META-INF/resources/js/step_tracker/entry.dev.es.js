@@ -3,7 +3,7 @@ import launcher from './entry.es';
 import './_step-tracker.scss';
 
 launcher('step_tracker', 'step-tracker', {
-	spritemap: './icons.svg',
+	spritemap: './assets/icons.svg',
 	steps: [
 		{
 			id: 'received',

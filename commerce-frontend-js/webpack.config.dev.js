@@ -25,12 +25,17 @@ module.exports = {
 		},
 		compress: false,
 		contentBase: './dev/public',
-		disableHostCheck: true,
-		historyApiFallback: true,
-		hot: true,
+		// disableHostCheck: true,
+		// historyApiFallback: true,
+		// hot: true,
 		open: true,
 		openPage: 'table.html',
 		port: 9000,
+		proxy: {
+			'/o': {
+				target: 'http://localhost:8080/'
+			}
+		},
 		publicPath: '/',
 		// filename: path.join(outputPath, '/bundle.js'),
 	},

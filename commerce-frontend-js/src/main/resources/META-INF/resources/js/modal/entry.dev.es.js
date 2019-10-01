@@ -13,7 +13,7 @@ const props = {
 	id: 'zeasc',
 	showCancel: true,
 	size: 'full-screen',
-	spritemap: './icons.svg',
+	spritemap: './assets/icons.svg',
 	submitLabel: 'Create',
 	title: 'Title',
 	url: 'http://localhost:9000/form.html',
