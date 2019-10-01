@@ -86,10 +86,9 @@ class ProductCard extends Component {
 		formData.append('productId', this.productId);
 		formData.append('skuId', this.skuId ? this.skuId : 0);
 		formData.append('options', '[]');
-		formData.append('p_auth', Liferay.authToken);
 
 		fetch(
-			this.wishlistAPI,
+			this.wishlistAPI + `?p_auth=${window.Liferay.authToken}`,
 			{
 				body: formData,
 				method: 'POST'
