@@ -28,4 +28,13 @@ public interface CommerceInventoryWarehouseItemFinder {
 	public int countStockQuantityByC_G_S(
 		long companyId, long channelGroupId, String sku);
 
+	public int countUpdatedItemsByC_M(
+		long companyId, java.util.Date startDate, java.util.Date endDate);
+
+	public java.util.List
+		<com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem>
+			findUpdatedItemsByC_M(
+				long companyId, java.util.Date startDate,
+				java.util.Date endDate, int start, int end);
+
 }
