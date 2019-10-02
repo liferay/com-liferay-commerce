@@ -344,6 +344,18 @@ public class CommerceInventoryWarehouseItemLocalServiceWrapper
 				commerceInventoryWarehouseId, start, end);
 	}
 
+	@Override
+	public java.util.List
+		<com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem>
+			getCommerceInventoryWarehouseItemsByModifiedDate(
+				long companyId, java.util.Date startDate,
+				java.util.Date endDate, int start, int end) {
+
+		return _commerceInventoryWarehouseItemLocalService.
+			getCommerceInventoryWarehouseItemsByModifiedDate(
+				companyId, startDate, endDate, start, end);
+	}
+
 	/**
 	 * Returns the number of commerce inventory warehouse items.
 	 *
@@ -363,6 +375,15 @@ public class CommerceInventoryWarehouseItemLocalServiceWrapper
 		return _commerceInventoryWarehouseItemLocalService.
 			getCommerceInventoryWarehouseItemsCount(
 				commerceInventoryWarehouseId);
+	}
+
+	@Override
+	public int getCommerceInventoryWarehouseItemsCountByModifiedDate(
+		long companyId, java.util.Date startDate, java.util.Date endDate) {
+
+		return _commerceInventoryWarehouseItemLocalService.
+			getCommerceInventoryWarehouseItemsCountByModifiedDate(
+				companyId, startDate, endDate);
 	}
 
 	@Override

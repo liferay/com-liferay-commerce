@@ -183,19 +183,19 @@ public class CommerceInventoryAuditPersistenceTest {
 	}
 
 	@Test
+	public void testCountByLtCreateDate() throws Exception {
+		_persistence.countByLtCreateDate(RandomTestUtil.nextDate());
+
+		_persistence.countByLtCreateDate(RandomTestUtil.nextDate());
+	}
+
+	@Test
 	public void testCountBySku() throws Exception {
 		_persistence.countBySku("");
 
 		_persistence.countBySku("null");
 
 		_persistence.countBySku((String)null);
-	}
-
-	@Test
-	public void testCountByLtCreateDate() throws Exception {
-		_persistence.countByLtCreateDate(RandomTestUtil.nextDate());
-
-		_persistence.countByLtCreateDate(RandomTestUtil.nextDate());
 	}
 
 	@Test

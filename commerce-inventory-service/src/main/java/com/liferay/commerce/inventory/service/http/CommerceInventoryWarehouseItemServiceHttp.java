@@ -429,6 +429,93 @@ public class CommerceInventoryWarehouseItemServiceHttp {
 		}
 	}
 
+	public static int getCommerceInventoryWarehouseItemsCountByModifiedDate(
+			HttpPrincipal httpPrincipal, long companyId,
+			java.util.Date startDate, java.util.Date endDate)
+		throws com.liferay.portal.kernel.security.auth.PrincipalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceInventoryWarehouseItemServiceUtil.class,
+				"getCommerceInventoryWarehouseItemsCountByModifiedDate",
+				_getCommerceInventoryWarehouseItemsCountByModifiedDateParameterTypes9);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, companyId, startDate, endDate);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof
+						com.liferay.portal.kernel.security.auth.
+							PrincipalException) {
+
+					throw (com.liferay.portal.kernel.security.auth.
+						PrincipalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static java.util.List
+		<com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem>
+				getCommerceInventoryWarehouseItemsCountByModifiedDate(
+					HttpPrincipal httpPrincipal, long companyId,
+					java.util.Date startDate, java.util.Date endDate, int start,
+					int end)
+			throws com.liferay.portal.kernel.security.auth.PrincipalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceInventoryWarehouseItemServiceUtil.class,
+				"getCommerceInventoryWarehouseItemsCountByModifiedDate",
+				_getCommerceInventoryWarehouseItemsCountByModifiedDateParameterTypes10);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, companyId, startDate, endDate, start, end);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof
+						com.liferay.portal.kernel.security.auth.
+							PrincipalException) {
+
+					throw (com.liferay.portal.kernel.security.auth.
+						PrincipalException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return (java.util.List
+				<com.liferay.commerce.inventory.model.
+					CommerceInventoryWarehouseItem>)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static
 		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
 				updateCommerceInventoryWarehouseItem(
@@ -440,53 +527,10 @@ public class CommerceInventoryWarehouseItemServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceInventoryWarehouseItemServiceUtil.class,
 				"updateCommerceInventoryWarehouseItem",
-				_updateCommerceInventoryWarehouseItemParameterTypes9);
+				_updateCommerceInventoryWarehouseItemParameterTypes11);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceInventoryWarehouseItemId, quantity);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof
-						com.liferay.portal.kernel.exception.PortalException) {
-
-					throw (com.liferay.portal.kernel.exception.PortalException)
-						e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(
-					e);
-			}
-
-			return (com.liferay.commerce.inventory.model.
-				CommerceInventoryWarehouseItem)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static
-		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
-				upsertCommerceInventoryWarehouseItem(
-					HttpPrincipal httpPrincipal, long userId,
-					long commerceInventoryWarehouseId, String sku, int quantity)
-			throws com.liferay.portal.kernel.exception.PortalException {
-
-		try {
-			MethodKey methodKey = new MethodKey(
-				CommerceInventoryWarehouseItemServiceUtil.class,
-				"upsertCommerceInventoryWarehouseItem",
-				_upsertCommerceInventoryWarehouseItemParameterTypes10);
-
-			MethodHandler methodHandler = new MethodHandler(
-				methodKey, userId, commerceInventoryWarehouseId, sku, quantity);
 
 			Object returnObj = null;
 
@@ -527,11 +571,54 @@ public class CommerceInventoryWarehouseItemServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceInventoryWarehouseItemServiceUtil.class,
 				"upsertCommerceInventoryWarehouseItem",
-				_upsertCommerceInventoryWarehouseItemParameterTypes11);
+				_upsertCommerceInventoryWarehouseItemParameterTypes12);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, companyId, userId, commerceInventoryWarehouseId,
 				externalReferenceCode, sku, quantity);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return (com.liferay.commerce.inventory.model.
+				CommerceInventoryWarehouseItem)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static
+		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem
+				upsertCommerceInventoryWarehouseItem(
+					HttpPrincipal httpPrincipal, long userId,
+					long commerceInventoryWarehouseId, String sku, int quantity)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceInventoryWarehouseItemServiceUtil.class,
+				"upsertCommerceInventoryWarehouseItem",
+				_upsertCommerceInventoryWarehouseItemParameterTypes13);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, userId, commerceInventoryWarehouseId, sku, quantity);
 
 			Object returnObj = null;
 
@@ -598,17 +685,28 @@ public class CommerceInventoryWarehouseItemServiceHttp {
 			long.class
 		};
 	private static final Class<?>[]
-		_updateCommerceInventoryWarehouseItemParameterTypes9 = new Class[] {
+		_getCommerceInventoryWarehouseItemsCountByModifiedDateParameterTypes9 =
+			new Class[] {
+				long.class, java.util.Date.class, java.util.Date.class
+			};
+	private static final Class<?>[]
+		_getCommerceInventoryWarehouseItemsCountByModifiedDateParameterTypes10 =
+			new Class[] {
+				long.class, java.util.Date.class, java.util.Date.class,
+				int.class, int.class
+			};
+	private static final Class<?>[]
+		_updateCommerceInventoryWarehouseItemParameterTypes11 = new Class[] {
 			long.class, int.class
 		};
 	private static final Class<?>[]
-		_upsertCommerceInventoryWarehouseItemParameterTypes10 = new Class[] {
-			long.class, long.class, String.class, int.class
-		};
-	private static final Class<?>[]
-		_upsertCommerceInventoryWarehouseItemParameterTypes11 = new Class[] {
+		_upsertCommerceInventoryWarehouseItemParameterTypes12 = new Class[] {
 			long.class, long.class, long.class, String.class, String.class,
 			int.class
+		};
+	private static final Class<?>[]
+		_upsertCommerceInventoryWarehouseItemParameterTypes13 = new Class[] {
+			long.class, long.class, String.class, int.class
 		};
 
 }

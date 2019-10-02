@@ -132,6 +132,27 @@ public class CommerceInventoryWarehouseItemServiceUtil {
 			commerceInventoryWarehouseId);
 	}
 
+	public static int getCommerceInventoryWarehouseItemsCountByModifiedDate(
+			long companyId, java.util.Date startDate, java.util.Date endDate)
+		throws com.liferay.portal.kernel.security.auth.PrincipalException {
+
+		return getService().
+			getCommerceInventoryWarehouseItemsCountByModifiedDate(
+				companyId, startDate, endDate);
+	}
+
+	public static java.util.List
+		<com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem>
+				getCommerceInventoryWarehouseItemsCountByModifiedDate(
+					long companyId, java.util.Date startDate,
+					java.util.Date endDate, int start, int end)
+			throws com.liferay.portal.kernel.security.auth.PrincipalException {
+
+		return getService().
+			getCommerceInventoryWarehouseItemsCountByModifiedDate(
+				companyId, startDate, endDate, start, end);
+	}
+
 	/**
 	 * Returns the OSGi service identifier.
 	 *
