@@ -33,12 +33,16 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.vulcan.fields.NestedField;
+import com.liferay.portal.vulcan.fields.NestedFieldId;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import javax.validation.constraints.NotNull;
 
 import javax.ws.rs.core.Response;
 
@@ -116,16 +120,18 @@ public class SkuResourceImpl extends BaseSkuResourceImpl {
 		return Page.of(_toSKUs(cpInstances), pagination, totalItems);
 	}
 
+	@NestedField("skus")
 	@Override
-	public Page<Sku> getProductIdSkusPage(Long id, Pagination pagination)
+	public Page<Sku> getProductIdSkusPage(
+			@NestedFieldId(value = "productId") @NotNull Long id,
+			Pagination pagination)
 		throws Exception {
 
 		CPDefinition cpDefinition =
 			_cpDefinitionService.fetchCPDefinitionByCProductId(id);
 
 		if (cpDefinition == null) {
-			throw new NoSuchCPDefinitionException(
-				"Unable to find Product with ID: " + id);
+			return super.getProductIdSkusPage(id, pagination);
 		}
 
 		List<CPInstance> cpInstances =
@@ -225,7 +231,7 @@ public class SkuResourceImpl extends BaseSkuResourceImpl {
 	}
 
 	@Override
-	public Sku postProductIdSku(Long id, Sku sku) throws Exception {
+	public Sku postProductIdSku(@NotNull Long id, Sku sku) throws Exception {
 		CPDefinition cpDefinition =
 			_cpDefinitionService.fetchCPDefinitionByCProductId(id);
 

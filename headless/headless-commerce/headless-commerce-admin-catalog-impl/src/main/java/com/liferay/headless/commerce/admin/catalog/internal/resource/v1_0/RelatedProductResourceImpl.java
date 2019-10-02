@@ -28,6 +28,8 @@ import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverter
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.vulcan.fields.NestedField;
+import com.liferay.portal.vulcan.fields.NestedFieldId;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
@@ -79,9 +81,11 @@ public class RelatedProductResourceImpl extends BaseRelatedProductResourceImpl {
 		return _getRelatedProductPage(cpDefinition, type, pagination);
 	}
 
+	@NestedField("relatedProducts")
 	@Override
 	public Page<RelatedProduct> getProductIdRelatedProductsPage(
-			Long id, String type, Pagination pagination)
+			@NestedFieldId(value = "productId") Long id, String type,
+			Pagination pagination)
 		throws Exception {
 
 		CPDefinition cpDefinition =
