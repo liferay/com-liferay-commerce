@@ -90,6 +90,9 @@ components:
                     format: int64
                     minimum: 0
                     type: integer
+                modifiedDate:
+                    format: date
+                    type: string
                 quantity:
                     example: 1
                     format: int32
@@ -134,10 +137,105 @@ info:
         email: team-commerce@liferay.com
         name: Commerce Team
     description: Liferay Commerce Admin Inventory API
+    license:
+        name: GNU Lesser General Public License 2.1
+        url: https://www.gnu.org/licenses/lgpl-2.1.html
     title: Liferay Commerce Admin Inventory API
     version: v1.0
 openapi: 3.0.0
 paths:
+    /warehouseItems/updated:
+        get:
+            operationId: getWarehouseItemsUpdatedPage
+            parameters:
+                - in: query
+                  explode: true
+                  name: end
+                  required: false
+                  schema:
+                      description: Ending date/time of the timespan for which to retrieve the
+                          data.
+                      format: date
+                      type: string
+                  style: form
+                - in: query
+                  explode: true
+                  name: start
+                  required: false
+                  schema:
+                      description: Starting date/time of the timespan for which to retrieve the
+                          data
+                      format: date
+                      type: string
+                  style: form
+                - in: query
+                  explode: true
+                  name: page
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+                - in: query
+                  explode: true
+                  name: pageSize
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/WarehouseItem'
+                                type: array
+                        application/xml:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/WarehouseItem'
+                                type: array
+                    description: Successful operation
+                400:
+                    description: Invalid input. Happens if the search parameters are not passed
+                        or if the end date is prior to start date
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description: Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - CommerceOpenApiAdmin.write
+            summary: Retrieves the list of WarehouseItem that have been updated (added or
+                changed) within the given timespan for the specified. If only one parameter
+                is used for searching items a default timespan of 30 days is used.
+            tags:
+                - WarehouseItem
     /warehouseItems/{id}:
         delete:
             operationId: deleteWarehouseItem

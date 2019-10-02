@@ -14,6 +14,7 @@
 
 package com.liferay.headless.commerce.admin.inventory.internal.resource.v1_0;
 
+import com.liferay.commerce.inventory.exception.CommerceInventoryInvalidDateException;
 import com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseException;
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem;
@@ -31,6 +32,8 @@ import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.core.Context;
@@ -106,6 +109,45 @@ public class WarehouseItemResourceImpl extends BaseWarehouseItemResourceImpl {
 	}
 
 	@NestedField("items")
+	@Override
+	public Page<WarehouseItem> getWarehouseItemsUpdatedPage(
+			Date end, Date start, Pagination pagination)
+		throws Exception {
+
+		if ((start != null) && (end != null) && (start.compareTo(end) > 0)) {
+			throw new CommerceInventoryInvalidDateException(
+				"End date should be after start date");
+		}
+
+		if ((start == null) && (end == null)) {
+			throw new CommerceInventoryInvalidDateException(
+				"At least one date should be defined");
+		}
+
+		if (start == null) {
+			start = _addDaysToDate(end, -_DEFAULT_INCREMENT_DAYS);
+		}
+
+		if (end == null) {
+			end = _addDaysToDate(start, _DEFAULT_INCREMENT_DAYS);
+		}
+
+		List<CommerceInventoryWarehouseItem> commerceInventoryWarehouseItems =
+			_commerceInventoryWarehouseItemService.
+				getCommerceInventoryWarehouseItemsCountByModifiedDate(
+					contextCompany.getCompanyId(), start, end,
+					pagination.getStartPosition(), pagination.getEndPosition());
+
+		int totalItems =
+			_commerceInventoryWarehouseItemService.
+				getCommerceInventoryWarehouseItemsCountByModifiedDate(
+					contextCompany.getCompanyId(), start, end);
+
+		return Page.of(
+			_toWarehouseItems(commerceInventoryWarehouseItems), pagination,
+			totalItems);
+	}
+
 	@Override
 	public Page<WarehouseItem> getWarehousIdWarehouseItemsPage(
 			Long id, Pagination pagination)
@@ -195,6 +237,16 @@ public class WarehouseItemResourceImpl extends BaseWarehouseItemResourceImpl {
 					getCommerceInventoryWarehouseItemId()));
 	}
 
+	private Date _addDaysToDate(Date date, int increment) {
+		Calendar cal = Calendar.getInstance();
+
+		cal.setTime(date);
+
+		cal.add(Calendar.DATE, increment);
+
+		return cal.getTime();
+	}
+
 	private List<WarehouseItem> _toWarehouseItems(
 			List<CommerceInventoryWarehouseItem>
 				commerceInventoryWarehouseItems)
@@ -219,6 +271,8 @@ public class WarehouseItemResourceImpl extends BaseWarehouseItemResourceImpl {
 
 		return warehouseItems;
 	}
+
+	private static final int _DEFAULT_INCREMENT_DAYS = 30;
 
 	@Reference
 	private CommerceInventoryWarehouseItemService
