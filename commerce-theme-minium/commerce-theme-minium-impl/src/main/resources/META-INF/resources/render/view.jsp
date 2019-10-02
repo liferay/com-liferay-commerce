@@ -90,7 +90,7 @@ String galleryId = PortalUtil.generateRandomKey(request, "gallery");
 					AUI().use(
 						'liferay-portlet-url', function(A) {
 						Liferay.on(
-							'<%= cpDefinitionId %>DDMForm:render', function() {
+							'ProductOptions<%= cpDefinitionId %>DDMForm:render', function() {
 								function ddmFormChange(valueChangeEvent) {
 									checkCPInstance();
 								}
@@ -212,7 +212,7 @@ String galleryId = PortalUtil.generateRandomKey(request, "gallery");
 								}
 
 								const cpDefinitionId = <%= cpDefinitionId %>;
-								const form = Liferay.component('<%= cpDefinitionId %>DDMForm');
+								const form = Liferay.component('ProductOptions<%= cpDefinitionId %>DDMForm');
 								const AddToCartButton = Liferay.component('<%= addToCartId %>');
 								AddToCartButton.disabled = true;
 								const ProductGallery = Liferay.component('<%= galleryId %>');

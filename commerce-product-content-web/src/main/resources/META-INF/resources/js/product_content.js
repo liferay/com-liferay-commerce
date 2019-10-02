@@ -92,7 +92,7 @@ AUI.add(
 
 					var cpDefinitionId = instance.get('cpDefinitionId');
 
-					var ddmForm = Liferay.component(cpDefinitionId + 'DDMForm');
+					var ddmForm = Liferay.component('ProductOptions' + cpDefinitionId + 'DDMForm');
 
 					if (!ddmForm) {
 						return [];
@@ -135,7 +135,7 @@ AUI.add(
 
 					var cpDefinitionId = instance.get('cpDefinitionId');
 
-					var ddmForm = Liferay.component(cpDefinitionId + 'DDMForm');
+					var ddmForm = Liferay.component('ProductOptions' + cpDefinitionId + 'DDMForm');
 
 					if (!ddmForm) {
 						callback.call(instance, false);
@@ -151,7 +151,7 @@ AUI.add(
 
 					var cpDefinitionId = instance.get('cpDefinitionId');
 
-					var form = Liferay.component(cpDefinitionId + 'DDMForm');
+					var form = Liferay.component('ProductOptions' + cpDefinitionId + 'DDMForm');
 
 					if (form) {
 						form.after(
@@ -163,7 +163,7 @@ AUI.add(
 
 					eventHandles.push(
 						Liferay.on(
-							cpDefinitionId + STR_DDM_FORM_EVENT,
+							'ProductOptions' + cpDefinitionId + STR_DDM_FORM_EVENT,
 							instance._ddmFormRender,
 							instance
 						)
