@@ -55,37 +55,6 @@ public abstract class BaseProductSubscriptionConfigurationResourceImpl
 
 	@Override
 	@GET
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/products/{id}/subscriptionConfiguration/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "ProductSubscriptionConfiguration")})
-	public ProductSubscriptionConfiguration
-			getProductIdSubscriptionConfiguration(
-				@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
-		throws Exception {
-
-		return new ProductSubscriptionConfiguration();
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@PATCH
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/products/{id}/subscriptionConfiguration/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "ProductSubscriptionConfiguration")})
-	public Response patchProductIdSubscriptionConfiguration(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			ProductSubscriptionConfiguration productSubscriptionConfiguration)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
 	@Parameters(
 		value = {
 			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
@@ -126,6 +95,37 @@ public abstract class BaseProductSubscriptionConfigurationResourceImpl
 					externalReferenceCode,
 				ProductSubscriptionConfiguration
 					productSubscriptionConfiguration)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/products/{id}/subscriptionConfiguration/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "ProductSubscriptionConfiguration")})
+	public ProductSubscriptionConfiguration
+			getProductIdSubscriptionConfiguration(
+				@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
+		throws Exception {
+
+		return new ProductSubscriptionConfiguration();
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@PATCH
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/products/{id}/subscriptionConfiguration/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "ProductSubscriptionConfiguration")})
+	public Response patchProductIdSubscriptionConfiguration(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			ProductSubscriptionConfiguration productSubscriptionConfiguration)
 		throws Exception {
 
 		Response.ResponseBuilder responseBuilder = Response.ok();

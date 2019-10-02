@@ -33,15 +33,6 @@ import javax.ws.rs.core.Response;
 public interface ProductSubscriptionConfigurationResource {
 
 	public ProductSubscriptionConfiguration
-			getProductIdSubscriptionConfiguration(Long id)
-		throws Exception;
-
-	public Response patchProductIdSubscriptionConfiguration(
-			Long id,
-			ProductSubscriptionConfiguration productSubscriptionConfiguration)
-		throws Exception;
-
-	public ProductSubscriptionConfiguration
 			getProductByExternalReferenceCodeSubscriptionConfiguration(
 				String externalReferenceCode)
 		throws Exception;
@@ -51,6 +42,15 @@ public interface ProductSubscriptionConfigurationResource {
 				String externalReferenceCode,
 				ProductSubscriptionConfiguration
 					productSubscriptionConfiguration)
+		throws Exception;
+
+	public ProductSubscriptionConfiguration
+			getProductIdSubscriptionConfiguration(Long id)
+		throws Exception;
+
+	public Response patchProductIdSubscriptionConfiguration(
+			Long id,
+			ProductSubscriptionConfiguration productSubscriptionConfiguration)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

@@ -32,13 +32,6 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface ProductConfigurationResource {
 
-	public ProductConfiguration getProductIdConfiguration(Long id)
-		throws Exception;
-
-	public Response patchProductIdConfiguration(
-			Long id, ProductConfiguration productConfiguration)
-		throws Exception;
-
 	public ProductConfiguration getProductByExternalReferenceCodeConfiguration(
 			String externalReferenceCode)
 		throws Exception;
@@ -46,6 +39,13 @@ public interface ProductConfigurationResource {
 	public Response patchProductByExternalReferenceCodeConfiguration(
 			String externalReferenceCode,
 			ProductConfiguration productConfiguration)
+		throws Exception;
+
+	public ProductConfiguration getProductIdConfiguration(Long id)
+		throws Exception;
+
+	public Response patchProductIdConfiguration(
+			Long id, ProductConfiguration productConfiguration)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);
