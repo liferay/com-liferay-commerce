@@ -45,6 +45,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -57,6 +58,28 @@ import javax.ws.rs.core.UriInfo;
 @Path("/v1.0")
 public abstract class BaseWarehouseItemResourceImpl
 	implements WarehouseItemResource {
+
+	@Override
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.QUERY, name = "end"),
+			@Parameter(in = ParameterIn.QUERY, name = "start"),
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/warehouseItems/updated")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "WarehouseItem")})
+	public Page<WarehouseItem> getWarehouseItemsUpdatedPage(
+			@Parameter(hidden = true) @QueryParam("end") java.util.Date end,
+			@Parameter(hidden = true) @QueryParam("start") java.util.Date start,
+			@Context Pagination pagination)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
 
 	@Override
 	@DELETE
