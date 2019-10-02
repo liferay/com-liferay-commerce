@@ -229,9 +229,9 @@ public class CommerceShipmentLocalServiceImpl
 
 		commerceShipment.setCarrier(carrier);
 		commerceShipment.setTrackingNumber(trackingNumber);
-		commerceShipment.setStatus(status);
 		commerceShipment.setShippingDate(shippingDate);
 		commerceShipment.setExpectedDate(expectedDate);
+		commerceShipment.setStatus(status);
 
 		commerceShipmentPersistence.update(commerceShipment);
 
