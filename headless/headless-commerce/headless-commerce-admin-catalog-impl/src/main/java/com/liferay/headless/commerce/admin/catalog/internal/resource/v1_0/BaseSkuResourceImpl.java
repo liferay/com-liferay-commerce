@@ -58,48 +58,79 @@ import javax.ws.rs.core.UriInfo;
 public abstract class BaseSkuResourceImpl implements SkuResource {
 
 	@Override
-	@DELETE
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/skus/{id}")
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode"),
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/products/by-externalReferenceCode/{externalReferenceCode}/skus/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Sku")})
-	public Response deleteSku(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
+	public Page<Sku> getProductByExternalReferenceCodeSkusPage(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode,
+			@Context Pagination pagination)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return Page.of(Collections.emptyList());
 	}
 
 	@Override
-	@GET
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/skus/{id}")
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
+		}
+	)
+	@Path("/products/by-externalReferenceCode/{externalReferenceCode}/skus/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Sku")})
-	public Sku getSku(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
+	public Sku postProductByExternalReferenceCodeSku(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode,
+			Sku sku)
 		throws Exception {
 
 		return new Sku();
 	}
 
 	@Override
-	@Consumes({"application/json", "application/xml"})
-	@PATCH
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/skus/{id}")
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "id"),
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/products/{id}/skus/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Sku")})
-	public Response patchSku(
+	public Page<Sku> getProductIdSkusPage(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			@Context Pagination pagination)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/products/{id}/skus/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Sku")})
+	public Sku postProductIdSku(
 			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
 			Sku sku)
 		throws Exception {
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+		return new Sku();
 	}
 
 	@Override
@@ -163,79 +194,48 @@ public abstract class BaseSkuResourceImpl implements SkuResource {
 	}
 
 	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.PATH, name = "id"),
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/products/{id}/skus/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Sku")})
-	public Page<Sku> getProductIdSkusPage(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			@Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
+	@DELETE
 	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/products/{id}/skus/")
+	@Path("/skus/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Sku")})
-	public Sku postProductIdSku(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			Sku sku)
+	public Response deleteSku(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
 		throws Exception {
 
-		return new Sku();
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
 	}
 
 	@Override
 	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode"),
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/products/by-externalReferenceCode/{externalReferenceCode}/skus/")
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/skus/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Sku")})
-	public Page<Sku> getProductByExternalReferenceCodeSkusPage(
-			@NotNull @Parameter(hidden = true)
-			@PathParam("externalReferenceCode") String externalReferenceCode,
-			@Context Pagination pagination)
+	public Sku getSku(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
 		throws Exception {
 
-		return Page.of(Collections.emptyList());
+		return new Sku();
 	}
 
 	@Override
 	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
-		}
-	)
-	@Path("/products/by-externalReferenceCode/{externalReferenceCode}/skus/")
+	@PATCH
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/skus/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Sku")})
-	public Sku postProductByExternalReferenceCodeSku(
-			@NotNull @Parameter(hidden = true)
-			@PathParam("externalReferenceCode") String externalReferenceCode,
+	public Response patchSku(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
 			Sku sku)
 		throws Exception {
 
-		return new Sku();
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
 	}
 
 	public void setContextCompany(Company contextCompany) {

@@ -32,13 +32,6 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface ProductTaxConfigurationResource {
 
-	public ProductTaxConfiguration getProductIdTaxConfiguration(Long id)
-		throws Exception;
-
-	public Response patchProductIdTaxConfiguration(
-			Long id, ProductTaxConfiguration productTaxConfiguration)
-		throws Exception;
-
 	public ProductTaxConfiguration
 			getProductByExternalReferenceCodeTaxConfiguration(
 				String externalReferenceCode)
@@ -47,6 +40,13 @@ public interface ProductTaxConfigurationResource {
 	public Response patchProductByExternalReferenceCodeTaxConfiguration(
 			String externalReferenceCode,
 			ProductTaxConfiguration productTaxConfiguration)
+		throws Exception;
+
+	public ProductTaxConfiguration getProductIdTaxConfiguration(Long id)
+		throws Exception;
+
+	public Response patchProductIdTaxConfiguration(
+			Long id, ProductTaxConfiguration productTaxConfiguration)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);
