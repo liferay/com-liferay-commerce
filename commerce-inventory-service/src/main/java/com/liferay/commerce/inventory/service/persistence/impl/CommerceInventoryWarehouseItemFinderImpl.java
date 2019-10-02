@@ -14,16 +14,21 @@
 
 package com.liferay.commerce.inventory.service.persistence.impl;
 
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem;
+import com.liferay.commerce.inventory.model.impl.CommerceInventoryWarehouseItemImpl;
 import com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseItemFinder;
 import com.liferay.portal.dao.orm.custom.sql.CustomSQL;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
+import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * @author Luca Pellizzon
@@ -40,6 +45,14 @@ public class CommerceInventoryWarehouseItemFinderImpl
 	public static final String COUNT_STOCK_QUANTITY_BY_C_G_S =
 		CommerceInventoryWarehouseItemFinder.class.getName() +
 			".countStockQuantityByC_G_S";
+
+	public static final String COUNT_UPDATED_ITEMS_BY_C_M =
+		CommerceInventoryWarehouseItemFinder.class.getName() +
+			".countUpdatedItemsByC_M";
+
+	public static final String FIND_UPDATED_ITEMS_BY_C_M =
+		CommerceInventoryWarehouseItemFinder.class.getName() +
+			".findUpdatedItemsByC_M";
 
 	@Override
 	public int countStockQuantityByC_S(long companyId, String sku) {
@@ -113,6 +126,83 @@ public class CommerceInventoryWarehouseItemFinderImpl
 			}
 
 			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	@Override
+	public int countUpdatedItemsByC_M(
+		long companyId, Date startDate, Date endDate) {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = _customSQL.get(getClass(), COUNT_UPDATED_ITEMS_BY_C_M);
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+			qPos.add(startDate);
+			qPos.add(endDate);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			int count = 0;
+
+			Iterator<Long> itr = q.iterate();
+
+			while (itr.hasNext()) {
+				Long l = itr.next();
+
+				if (l != null) {
+					count += l.intValue();
+				}
+			}
+
+			return count;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	@Override
+	public List<CommerceInventoryWarehouseItem> findUpdatedItemsByC_M(
+		long companyId, Date startDate, Date endDate, int start, int end) {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = _customSQL.get(getClass(), FIND_UPDATED_ITEMS_BY_C_M);
+
+			SQLQuery q = session.createSynchronizedSQLQuery(sql);
+
+			q.addEntity(
+				CommerceInventoryWarehouseItemImpl.TABLE_NAME,
+				CommerceInventoryWarehouseItemImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+			qPos.add(startDate);
+			qPos.add(endDate);
+
+			return (List<CommerceInventoryWarehouseItem>)QueryUtil.list(
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
