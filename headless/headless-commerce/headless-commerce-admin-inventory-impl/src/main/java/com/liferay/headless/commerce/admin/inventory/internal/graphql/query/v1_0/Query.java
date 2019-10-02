@@ -30,6 +30,7 @@ import graphql.annotations.annotationTypes.GraphQLInvokeDetached;
 import graphql.annotations.annotationTypes.GraphQLName;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.annotation.Generated;
 
@@ -99,6 +100,26 @@ public class Query {
 			_warehouseResourceComponentServiceObjects,
 			this::_populateResourceContext,
 			warehouseResource -> warehouseResource.getWarehousId(id));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Collection<WarehouseItem> getWarehouseItemsUpdatedPage(
+			@GraphQLName("end") Date end, @GraphQLName("start") Date start,
+			@GraphQLName("pageSize") int pageSize,
+			@GraphQLName("page") int page)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_warehouseItemResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			warehouseItemResource -> {
+				Page paginationPage =
+					warehouseItemResource.getWarehouseItemsUpdatedPage(
+						end, start, Pagination.of(pageSize, page));
+
+				return paginationPage.getItems();
+			});
 	}
 
 	@GraphQLField
