@@ -14,14 +14,14 @@
 
 package com.liferay.headless.commerce.admin.inventory.internal.jaxrs.exception.mapper;
 
+import com.liferay.commerce.inventory.exception.CommerceInventoryInvalidDateException;
+import com.liferay.headless.commerce.core.exception.mapper.BaseExceptionMapper;
+
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 import org.osgi.service.component.annotations.Component;
-
-import com.liferay.commerce.inventory.exception.CommerceInventoryInvalidDateException;
-import com.liferay.headless.commerce.core.exception.mapper.BaseExceptionMapper;
 
 /**
  * @author Alessio Antonio Rendina
@@ -37,8 +37,7 @@ import com.liferay.headless.commerce.core.exception.mapper.BaseExceptionMapper;
 )
 @Provider
 public class CommerceInventoryInvalidDateExceptionMapper
-	extends BaseExceptionMapper
-		<CommerceInventoryInvalidDateException> {
+	extends BaseExceptionMapper<CommerceInventoryInvalidDateException> {
 
 	@Override
 	public String getErrorDescription() {
