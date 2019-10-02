@@ -846,7 +846,8 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 		DDMFormRenderingContext ddmFormRenderingContext =
 			new DDMFormRenderingContext();
 
-		ddmFormRenderingContext.setContainerId(String.valueOf(cpDefinitionId));
+		ddmFormRenderingContext.setContainerId(
+			"ProductOptions" + String.valueOf(cpDefinitionId));
 		ddmFormRenderingContext.setHttpServletRequest(httpServletRequest);
 		ddmFormRenderingContext.setHttpServletResponse(httpServletResponse);
 		ddmFormRenderingContext.setLocale(locale);
