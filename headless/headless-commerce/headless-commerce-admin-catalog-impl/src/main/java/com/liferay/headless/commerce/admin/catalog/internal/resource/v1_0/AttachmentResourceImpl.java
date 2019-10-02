@@ -36,6 +36,8 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.vulcan.fields.NestedField;
+import com.liferay.portal.vulcan.fields.NestedFieldId;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 import com.liferay.upload.UniqueFileNameProvider;
@@ -171,9 +173,10 @@ public class AttachmentResourceImpl extends BaseAttachmentResourceImpl {
 			pagination);
 	}
 
+	@NestedField("attachments")
 	@Override
 	public Page<Attachment> getProductIdAttachmentsPage(
-			Long id, Pagination pagination)
+			@NestedFieldId(value = "productId") Long id, Pagination pagination)
 		throws Exception {
 
 		CPDefinition cpDefinition =
@@ -189,9 +192,10 @@ public class AttachmentResourceImpl extends BaseAttachmentResourceImpl {
 			pagination);
 	}
 
+	@NestedField("images")
 	@Override
 	public Page<Attachment> getProductIdImagesPage(
-			Long id, Pagination pagination)
+			@NestedFieldId(value = "productId") Long id, Pagination pagination)
 		throws Exception {
 
 		CPDefinition cpDefinition =
