@@ -34,12 +34,11 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface ProductOptionResource {
 
-	public Page<ProductOption> getProductIdProductOptionsPage(
-			Long id, Pagination pagination)
-		throws Exception;
+	public Response deleteProductOption(Long id) throws Exception;
 
-	public Page<ProductOption> postProductIdProductOptionsPage(
-			Long id, ProductOption[] productOptions)
+	public ProductOption getProductOption(Long id) throws Exception;
+
+	public Response patchProductOption(Long id, ProductOption productOption)
 		throws Exception;
 
 	public Page<ProductOption>
@@ -52,11 +51,12 @@ public interface ProductOptionResource {
 				String externalReferenceCode, ProductOption[] productOptions)
 		throws Exception;
 
-	public Response deleteProductOption(Long id) throws Exception;
+	public Page<ProductOption> getProductIdProductOptionsPage(
+			Long id, Pagination pagination)
+		throws Exception;
 
-	public ProductOption getProductOption(Long id) throws Exception;
-
-	public Response patchProductOption(Long id, ProductOption productOption)
+	public Page<ProductOption> postProductIdProductOptionsPage(
+			Long id, ProductOption[] productOptions)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

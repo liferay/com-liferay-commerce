@@ -34,13 +34,6 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface AttachmentResource {
 
-	public Response deleteAttachment(Long id) throws Exception;
-
-	public Attachment getAttachment(Long id) throws Exception;
-
-	public Response patchAttachment(Long id, Attachment attachment)
-		throws Exception;
-
 	public Response deleteAttachmentByExternalReferenceCode(
 			String externalReferenceCode)
 		throws Exception;
@@ -53,11 +46,11 @@ public interface AttachmentResource {
 			String externalReferenceCode, Attachment attachment)
 		throws Exception;
 
-	public Page<Attachment> getProductIdAttachmentsPage(
-			Long id, Pagination pagination)
-		throws Exception;
+	public Response deleteAttachment(Long id) throws Exception;
 
-	public Attachment postProductIdAttachment(Long id, Attachment attachment)
+	public Attachment getAttachment(Long id) throws Exception;
+
+	public Response patchAttachment(Long id, Attachment attachment)
 		throws Exception;
 
 	public Page<Attachment> getProductByExternalReferenceCodeAttachmentsPage(
@@ -68,19 +61,26 @@ public interface AttachmentResource {
 			String externalReferenceCode, Attachment attachment)
 		throws Exception;
 
-	public Page<Attachment> getProductIdImagesPage(
-			Long id, Pagination pagination)
-		throws Exception;
-
-	public Attachment postProductIdImage(Long id, Attachment attachment)
-		throws Exception;
-
 	public Page<Attachment> getProductByExternalReferenceCodeImagesPage(
 			String externalReferenceCode, Pagination pagination)
 		throws Exception;
 
 	public Attachment postProductByExternalReferenceCodeImage(
 			String externalReferenceCode, Attachment attachment)
+		throws Exception;
+
+	public Page<Attachment> getProductIdAttachmentsPage(
+			Long id, Pagination pagination)
+		throws Exception;
+
+	public Attachment postProductIdAttachment(Long id, Attachment attachment)
+		throws Exception;
+
+	public Page<Attachment> getProductIdImagesPage(
+			Long id, Pagination pagination)
+		throws Exception;
+
+	public Attachment postProductIdImage(Long id, Attachment attachment)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

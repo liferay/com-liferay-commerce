@@ -34,17 +34,17 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface OptionCategoryResource {
 
+	public Page<OptionCategory> getOptionCategoriesPage(Pagination pagination)
+		throws Exception;
+
+	public OptionCategory postOptionCategory(OptionCategory optionCategory)
+		throws Exception;
+
 	public Response deleteOptionCategory(Long id) throws Exception;
 
 	public OptionCategory getOptionCategory(Long id) throws Exception;
 
 	public Response patchOptionCategory(Long id, OptionCategory optionCategory)
-		throws Exception;
-
-	public Page<OptionCategory> getOptionCategoriesPage(Pagination pagination)
-		throws Exception;
-
-	public OptionCategory postOptionCategory(OptionCategory optionCategory)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);
