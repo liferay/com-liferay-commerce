@@ -7,7 +7,7 @@ function Link(props) {
             data-target={props.target}
             href={props.href || '#'}
         >
-            {props.content}
+            {props.value}
         </ClayLink>
     )
 }

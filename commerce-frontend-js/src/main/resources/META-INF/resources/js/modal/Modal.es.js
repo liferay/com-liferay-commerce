@@ -4,14 +4,19 @@ import PropTypes from 'prop-types';
 import React, {useState, useRef, useEffect} from 'react';
 
 const Modal = props => {
-	const [visible, setVisible] = useState(false);
+	const [visible, setVisible] = useState(props.visible || false);
 
 	function open() {
 		setVisible(true);
 	}
 
 	function reset() {
-		setVisible(false);
+		if(props.onClose) {
+			props.onClose();
+		}
+		if(typeof props.visible === 'undefined') {
+			setVisible(false);
+		}
 		setIframeLoadingCounter(0);
 		setSubmitActive(
 			typeof props.submitActiveAtLoading === 'boolean'
@@ -30,6 +35,14 @@ const Modal = props => {
 	const {observer, onClose} = useModal({onClose: reset});
 
 	useEffect(() => {
+		setVisible(props.visible);
+	}, [props.visible]);
+
+	useEffect(() => {
+		if(!props.id) {
+			return;
+		}
+
 		function cleanUpListeners(e) {
 			if (e.portletId === props.portletId) {
 				Liferay.detach(`${props.id}-open`, open);
@@ -193,7 +206,8 @@ const Modal = props => {
 Modal.propTypes = {
 	cancelLabel: PropTypes.string,
 	closeOnSubmit: PropTypes.bool,
-	id: PropTypes.string.isRequired,
+	id: PropTypes.string,
+	onClose: PropTypes.func,
 	portletId: PropTypes.string,
 	showCancel: PropTypes.bool,
 	showSubmit: PropTypes.bool,
@@ -203,7 +217,12 @@ Modal.propTypes = {
 	submitActiveAtLoading: PropTypes.bool,
 	submitLabel: PropTypes.string,
 	title: PropTypes.string,
-	url: PropTypes.string.isRequired,
+	url: PropTypes.string,
 };
+
+Modal.defaultProps = {
+	showCancel: false,
+	showSubmit: false,
+}
 
 export default Modal;

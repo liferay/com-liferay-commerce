@@ -15,8 +15,6 @@
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
 import com.liferay.commerce.frontend.ClayTable;
-import com.liferay.commerce.frontend.ClayTableContextContributor;
-import com.liferay.commerce.frontend.ClayTableContextContributorRegistry;
 import com.liferay.commerce.frontend.ClayTableDataJSONBuilder;
 import com.liferay.commerce.frontend.ClayTableRegistry;
 import com.liferay.commerce.frontend.ClayTableSerializer;
@@ -26,11 +24,8 @@ import com.liferay.commerce.frontend.Filter;
 import com.liferay.commerce.frontend.FilterFactory;
 import com.liferay.commerce.frontend.FilterFactoryRegistry;
 import com.liferay.commerce.frontend.PaginationImpl;
-import com.liferay.commerce.frontend.taglib.internal.js.loader.modules.extender.npm.NPMResolverProvider;
 import com.liferay.commerce.frontend.taglib.internal.model.ClayPaginationEntry;
 import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
-import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
-import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
@@ -40,37 +35,35 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.taglib.util.IncludeTag;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Stream;
 
 import javax.portlet.PortletURL;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
 /**
  * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
+<<<<<<< HEAD:commerce-frontend-taglib/src/main/java/com/liferay/commerce/frontend/taglib/servlet/taglib/TableTag.java
 public class TableTag extends ComponentRendererTag {
+=======
+public class CommerceTableTag extends IncludeTag {
+>>>>>>> c668d9e4b... COMMERCE-609 Refactor commerce table tag:commerce-frontend-taglib/src/main/java/com/liferay/commerce/frontend/taglib/servlet/taglib/CommerceTableTag.java
 
 	@Override
-	public int doStartTag() {
-		Map<String, Object> context = getContext();
-
-		String dataProviderKey = GetterUtil.getString(
-			context.get("dataProviderKey"));
-
-		String tableName = GetterUtil.getString(context.get("tableName"));
-
+	public int doStartTag() throws JspException {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -79,11 +72,9 @@ public class TableTag extends ComponentRendererTag {
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
 		try {
-			_setTableContext(tableName);
-			_setItems(dataProviderKey);
+			_setTableContext();
+			_setItems();
 			_setPagination();
-
-			setComponentId(tableName + "CommerceTable");
 
 			StringBundler sb = new StringBundler(11);
 
@@ -91,71 +82,50 @@ public class TableTag extends ComponentRendererTag {
 			sb.append("/o/commerce-ui/commerce-data-set/");
 			sb.append(themeDisplay.getScopeGroupId());
 			sb.append(StringPool.FORWARD_SLASH);
-			sb.append(tableName);
+			sb.append(_tableName);
 			sb.append(StringPool.FORWARD_SLASH);
-			sb.append(dataProviderKey);
+			sb.append(_dataProviderKey);
 			sb.append("?plid=");
 			sb.append(layout.getPlid());
 			sb.append("&portletId=");
 			sb.append(portletDisplay.getId());
 
-			putValue("dataSetAPI", sb.toString());
+			_dataSetAPI = sb.toString();
 
-			putValue(
-				"spritemap",
-				themeDisplay.getPathThemeImages() + "/lexicon/icons.svg");
+			_spritemap =
+				themeDisplay.getPathThemeImages() + "/lexicon/icons.svg";
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
 
-		setTemplateNamespace("CommerceTable.render");
-
 		return super.doStartTag();
 	}
 
-	@Override
-	public String getModule() {
-		NPMResolver npmResolver = NPMResolverProvider.getNPMResolver();
-
-		if (npmResolver == null) {
-			return StringPool.BLANK;
-		}
-
-		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/js/clay_table/CommerceTable.es");
-	}
-
-	public void setDataProviderKey(String dataProviderKey) {
-		putValue("dataProviderKey", dataProviderKey);
-	}
-
 	public void setDeltaParam(String deltaParam) {
-		putValue("deltaParam", deltaParam);
+		_deltaParam = deltaParam;
 	}
 
 	public void setDisableAJAX(boolean disableAJAX) {
-		putValue("disableAJAX", disableAJAX);
+		_disableAJAX = disableAJAX;
 	}
 
 	public void setFilter(Filter filter) {
-		putValue("filter", filter);
+		_filter = filter;
 	}
 
 	public void setItemPerPage(int itemPerPage) {
-		putValue("itemPerPage", itemPerPage);
+		_itemPerPage = itemPerPage;
 	}
 
 	public void setNamespace(String namespace) {
-		putValue("namespace", namespace);
+		_namespace = namespace;
 	}
 
 	@Override
 	public void setPageContext(PageContext pageContext) {
 		_clayTableDataJSONBuilder =
 			ServletContextUtil.getClayTableDataJSONBuilder();
-		_clayTableContextContributorRegistry =
-			ServletContextUtil.getClayTableContextContributorRegistry();
 		_clayTableRegistry = ServletContextUtil.getClayTableRegistry();
 		_clayTableSerializer = ServletContextUtil.getClayTableSerializer();
 		_commerceDataProviderRegistry =
@@ -166,24 +136,46 @@ public class TableTag extends ComponentRendererTag {
 	}
 
 	public void setPageNumber(int pageNumber) {
-		putValue("pageNumber", pageNumber);
+		_pageNumber = pageNumber;
 	}
 
 	public void setPortletURL(PortletURL portletURL) {
-		putValue("portletURL", portletURL);
+		_portletURL = portletURL;
 	}
 
 	public void setTableName(String tableName) {
-		putValue("tableName", tableName);
+		_tableName = tableName;
 	}
 
-	protected List<ClayPaginationEntry> getClayPaginationEntries(
-		PortletURL portletURL, String namespace, String deltaParam) {
+	@Override
+	protected void cleanUp() {
+		super.cleanUp();
 
-		String portletURLString = portletURL.toString();
+		_clayTableContext = null;
+		_dataProviderKey = null;
+		_dataSetAPI = null;
+		_deltaParam = null;
+		_disableAJAX = false;
+		_filter = null;
+		_id = null;
+		_itemPerPage = 0;
+		_items = null;
+		_namespace = null;
+		_pageNumber = 0;
+		_paginationEntries = null;
+		_paginationSelectedEntry = 0;
+		_portletURL = null;
+		_showPagination = false;
+		_spritemap = null;
+		_tableName = null;
+		_totalItems = 0;
+	}
+
+	protected List<ClayPaginationEntry> getClayPaginationEntries() {
+		String portletURLString = _portletURL.toString();
 
 		portletURLString = HttpUtil.removeParameter(
-			portletURLString, namespace + deltaParam);
+			portletURLString, _namespace + _deltaParam);
 
 		List<ClayPaginationEntry> clayPaginationEntries = new ArrayList<>();
 
@@ -193,7 +185,7 @@ public class TableTag extends ComponentRendererTag {
 			}
 
 			String curDeltaURL = HttpUtil.addParameter(
-				portletURLString, namespace + deltaParam, curDelta);
+				portletURLString, _namespace + _deltaParam, curDelta);
 
 			clayPaginationEntries.add(
 				new ClayPaginationEntry(curDeltaURL, curDelta));
@@ -213,132 +205,125 @@ public class TableTag extends ComponentRendererTag {
 		return 5;
 	}
 
-	private void _setItems(String dataProviderKey) throws Exception {
-		Map<String, Object> context = getContext();
+	@Override
+	protected String getPage() {
+		return _PAGE;
+	}
 
-		int pageNumber = GetterUtil.getInteger(context.get("pageNumber"));
+	@Override
+	protected void setAttributes(HttpServletRequest httpServletRequest) {
+		request.setAttribute(
+			"liferay-commerce:table:clayTableContext", _clayTableContext);
+		request.setAttribute(
+			"liferay-commerce:table:dataProviderKey", _dataProviderKey);
+		request.setAttribute("liferay-commerce:table:dataSetAPI", _dataSetAPI);
+		request.setAttribute("liferay-commerce:table:deltaParam", _deltaParam);
+		request.setAttribute(
+			"liferay-commerce:table:disableAJAX", _disableAJAX);
+		request.setAttribute("liferay-commerce:table:filter", _filter);
+		request.setAttribute(
+			"liferay-commerce:table:itemPerPage", _itemPerPage);
+		request.setAttribute("liferay-commerce:table:items", _items);
+		request.setAttribute("liferay-commerce:table:namespace", _namespace);
+		request.setAttribute("liferay-commerce:table:pageNumber", _pageNumber);
+		request.setAttribute(
+			"liferay-commerce:table:paginationEntries", _paginationEntries);
+		request.setAttribute(
+			"liferay-commerce:table:paginationSelectedEntry",
+			_paginationSelectedEntry);
+		request.setAttribute("liferay-commerce:table:portletURL", _portletURL);
+		request.setAttribute(
+			"liferay-commerce:table:showPagination", _showPagination);
+		request.setAttribute("liferay-commerce:table:spritemap", _spritemap);
+		request.setAttribute("liferay-commerce:table:tableName", _tableName);
+		request.setAttribute("liferay-commerce:table:totalItems", _totalItems);
+	}
 
-		putValue("currentPage", pageNumber);
-
+	private void _setItems() throws Exception {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String tableName = GetterUtil.getString(context.get("tableName"));
-
 		CommerceDataSetDataProvider commerceDataSetDataProvider =
 			_commerceDataProviderRegistry.getCommerceDataProvider(
-				dataProviderKey);
+				_dataProviderKey);
 
-		Filter filter = (Filter)context.get("filter");
-
-		if (filter == null) {
+		if (_filter == null) {
 			FilterFactory filterFactory =
-				_filterFactoryRegistry.getFilterFactory(dataProviderKey);
+				_filterFactoryRegistry.getFilterFactory(_dataProviderKey);
 
-			filter = filterFactory.create(request);
+			_filter = filterFactory.create(request);
 		}
-
-		putValue("filters", filter);
-
-		int itemPerPage = GetterUtil.getInteger(context.get("itemPerPage"));
 
 		List<Object> items = commerceDataSetDataProvider.getItems(
-			request, filter, new PaginationImpl(itemPerPage, pageNumber), null);
+			request, _filter, new PaginationImpl(_itemPerPage, _pageNumber),
+			null);
 
 		String json = _clayTableDataJSONBuilder.build(
-			themeDisplay.getScopeGroupId(), tableName, items, request);
+			themeDisplay.getScopeGroupId(), _tableName, items, request);
 
-		putValue("items", JSONFactoryUtil.looseDeserialize(json));
+		_items = JSONFactoryUtil.looseDeserialize(json);
 
-		putValue("pageSize", itemPerPage);
+		_totalItems = commerceDataSetDataProvider.countItems(request, _filter);
 
-		int totalItems = commerceDataSetDataProvider.countItems(
-			request, filter);
-
-		putValue("totalItems", totalItems);
-
-		if (totalItems > getMinPageSize()) {
-			putValue("showPagination", true);
+		if (_totalItems > getMinPageSize()) {
+			_showPagination = true;
 		}
 		else {
-			putValue("showPagination", false);
+			_showPagination = false;
 		}
 	}
 
 	private void _setPagination() {
-		Map<String, Object> context = getContext();
+		_paginationEntries = getClayPaginationEntries();
 
-		PortletURL portletURL = (PortletURL)context.get("portletURL");
-		String namespace = GetterUtil.getString(context.get("namespace"));
-		String deltaParam = GetterUtil.getString(
-			context.get("deltaParam"), SearchContainer.DEFAULT_DELTA_PARAM);
-
-		List<ClayPaginationEntry> clayPaginationEntries =
-			getClayPaginationEntries(portletURL, namespace, deltaParam);
-
-		putValue("paginationEntries", clayPaginationEntries);
-
-		Stream<ClayPaginationEntry> stream = clayPaginationEntries.stream();
-
-		int itemPerPage = GetterUtil.getInteger(context.get("itemPerPage"));
+		Stream<ClayPaginationEntry> stream = _paginationEntries.stream();
 
 		ClayPaginationEntry clayPaginationEntry = stream.filter(
-			entry -> entry.getLabel() == itemPerPage
+			entry -> entry.getLabel() == _itemPerPage
 		).findAny(
 		).orElse(
 			null
 		);
 
-		int paginationSelectedEntry = clayPaginationEntries.indexOf(
+		_paginationSelectedEntry = _paginationEntries.indexOf(
 			clayPaginationEntry);
-
-		putValue("paginationSelectedEntry", paginationSelectedEntry);
 	}
 
-	private void _setTableContext(String tableName) {
-		ClayTable clayTable = _clayTableRegistry.getClayTable(tableName);
+	private void _setTableContext() {
+		ClayTable clayTable = _clayTableRegistry.getClayTable(_tableName);
 
-		Map<String, Object> clayTableContext = _clayTableSerializer.serialize(
-			clayTable);
+		_clayTableContext = _clayTableSerializer.serialize(clayTable);
 
-		for (Map.Entry<String, Object> entry : clayTableContext.entrySet()) {
-			putValue(entry.getKey(), entry.getValue());
-		}
-
-		putValue("id", clayTable.getId());
-
-		Set<String> dependencies = new HashSet<>();
-
-		List<ClayTableContextContributor> clayTablePostProcessors =
-			_clayTableContextContributorRegistry.
-				getClayTableContextContributors(tableName);
-
-		for (ClayTableContextContributor clayTableContextContributor :
-				clayTablePostProcessors) {
-
-			clayTableContextContributor.contribute(
-				clayTable, getContext(), request);
-
-			Set<String> contextContributorDependencies =
-				clayTableContextContributor.getDependencies(clayTable, request);
-
-			if (contextContributorDependencies != null) {
-				dependencies.addAll(contextContributorDependencies);
-			}
-		}
-
-		setDependencies(dependencies);
+		_id = clayTable.getId() + "CommerceTable";
 	}
+
+	private static final String _PAGE = "/table/page.jsp";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		TableTag.class);
 
-	private ClayTableContextContributorRegistry
-		_clayTableContextContributorRegistry;
+	private Map<String, Object> _clayTableContext;
 	private ClayTableDataJSONBuilder _clayTableDataJSONBuilder;
 	private ClayTableRegistry _clayTableRegistry;
 	private ClayTableSerializer _clayTableSerializer;
 	private CommerceDataProviderRegistry _commerceDataProviderRegistry;
+	private String _dataProviderKey;
+	private String _dataSetAPI;
+	private String _deltaParam;
+	private boolean _disableAJAX;
+	private Filter _filter;
 	private FilterFactoryRegistry _filterFactoryRegistry;
+	private String _id;
+	private int _itemPerPage;
+	private Object _items;
+	private String _namespace;
+	private int _pageNumber;
+	private List<ClayPaginationEntry> _paginationEntries;
+	private int _paginationSelectedEntry;
+	private PortletURL _portletURL;
+	private boolean _showPagination;
+	private String _spritemap;
+	private String _tableName;
+	private int _totalItems;
 
 }

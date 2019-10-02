@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import React, { useState, useRef } from 'react';
 
 import Summary from '../summary/Summary.es';
+import SmartTableContext from './SmartTableContext.es';
 import ManagementBar from './management_bar/index.es';
 import Pagination from './pagination/index.es';
 import Table from './table/Table.es';
-import SmartTableContext from './SmartTableContext.es';
 
 function WrappingCard(props) {
 	return (
@@ -39,7 +39,7 @@ function WrappingCard(props) {
 function SmartTable(props) {
 	const [selectedItemsId, setselectedItemsId] = useState([]);
 
-	const formRef = useRef(null)
+	const formRef = useRef(null);
 
 	const selectItems = (checked, val = null) => {
 		if(!val) {
@@ -55,6 +55,10 @@ function SmartTable(props) {
 				setselectedItemsId(selectedItemsId.filter(el => el !== val))
 			}
 		}
+	}
+
+	function loadData() {
+		console.log('reloading')
 	}
 
 	const managementBar = (
@@ -83,7 +87,7 @@ function SmartTable(props) {
 	)
 
 	return (
-		<SmartTableContext.Provider value={{formRef}}>
+		<SmartTableContext.Provider value={{formRef, loadData}}>
 			<ClayIconSpriteContext.Provider value={props.spritemap}>
 				<div
 					className={classNames(

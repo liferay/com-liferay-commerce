@@ -9,15 +9,13 @@ export default class SidePanel extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			currentUrl: props.currentUrl || null,
+			currentUrl: props.url || null,
 			loading: true,
 			moving: false,
 			size: props.size || 'md',
-			tabs: props.tabs,
 			topDistance: 0,
 			visible: !!props.visible
 		};
-		this.selectTab = this.selectTab.bind(this);
 		this.handleContentLoaded = this.handleContentLoaded.bind(this);
 		this.close = this.close.bind(this);
 		this.updateTop = this.updateTop.bind(this);
@@ -39,17 +37,21 @@ export default class SidePanel extends React.Component {
 		}
 	}
 
+	componentWillReceiveProps(props) {
+		if(
+			props.url !== this.state.currentUrl ||
+			!!this.state.visible
+		) {
+			this.open(props.url);
+		}
+		return null;
+	}
+
 	updateTop() {
 		const {height, top} = this.props.topAnchor.getBoundingClientRect();
 
 		this.setState({
 			topDistance: top + height + 'px'
-		});
-	}
-
-	setTabs(tabs = []) {
-		this.setState({
-			tabs
 		});
 	}
 
@@ -108,24 +110,25 @@ export default class SidePanel extends React.Component {
 		});
 	}
 
-	selectTab(url) {
-		const currentUrl = this.state.pages.find(el => el.url === url).url;
-
-		this.setState({
-			currentUrl,
-			loading: true,
-		});
-	}
-
 	handleContentLoaded() {
 		this.setState({
 			loading: false
 		});
+	
 		const iframeBody = this.iframeRef.current.contentDocument.querySelector(
 			'body'
 		);
 
 		iframeBody.classList.add('within-commerce-iframe');
+
+		const submitButton = iframeBody.querySelector('[type="submit"]');
+		if(submitButton) {
+			submitButton.addEventListener('click', () => {
+				if(this.props.onSubmit) {
+					this.props.onSubmit();
+				}
+			})
+		}
 	}
 
 	render() {

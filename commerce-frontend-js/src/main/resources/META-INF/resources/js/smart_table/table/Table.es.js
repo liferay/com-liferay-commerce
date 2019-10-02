@@ -1,14 +1,19 @@
 import ClayTable from '@clayui/table';
-import React from 'react';
+import React, { useState } from 'react';
 
+import Modal from '../../modal/Modal.es';
+import SidePanel from '../../side_panel/SidePanel.es';
 import SmartTableContext from '../SmartTableContext.es';
 import EmptyResultMessage from './EmptyResultMessage.es';
+import TableContext from './TableContext.es';
 import Checkbox from './cells/Checkbox.es';
 import Default from './cells/Default.es';
 import Dropdown from './cells/Dropdown.es';
 import ImageText from './cells/ImageText.es';
 import Link from './cells/Link.es';
+import ModalLink from './cells/ModalLink.es';
 import Price from './cells/Price.es';
+import SidePanelLink from './cells/SidePanelLink.es';
 
 function TableCell(props) {
 	const {template, ...otherProps} = props
@@ -28,7 +33,9 @@ const idToCellTemplateMapping = {
 	dropdown: Dropdown,
 	imageTitle: ImageText,
 	link: Link,
+	modalLink: ModalLink,
 	price: Price,
+	sidePanelLink: SidePanelLink,
 }
 
 function getCustomTemplate(id, customTemplates = {}) {
@@ -50,86 +57,109 @@ function areAllElementsSelected(selectedItemsId, allItems) {
 function Table(props) {
 	const showActionItems = !!(props.items.find(el => el.actionItems));
 	const allElementsSelected = areAllElementsSelected(props.selectedItemsId, props.items);
+	const containsSidePanel = props.schema.fields.find(field => field.contentRenderer === "sidePanelLink");
+	const containsModal = props.schema.fields.find(field => field.contentRenderer === "modalLink");
+	
+	const [ modalProps, setModalProps ] = useState({});
+	const [ sidePanelProps, setSidePanelProps ] = useState({});
 
 	return (
 		<SmartTableContext.Consumer>
 			{
 				({formRef}) => (
-					<form ref={formRef}>
-						<ClayTable borderless>
-							<ClayTable.Head >
-								<ClayTable.Row>
-									{props.selectable && (
-										<ClayTable.Cell 
-											headingCell 
-										>
-											{props.items.length ? (
-												<Checkbox 
-													checked={allElementsSelected}
-													indeterminate={props.selectedItemsId.length && !allElementsSelected}
-													onSelect={props.onSelect}
-													value={null}
-												/>
-											) : null}
-										</ClayTable.Cell>
-									)}
-									{props.schema.fields.map((field) => (
-										<ClayTable.Cell 
-											className="table-cell-expand-smaller"
-											headingCell 
-											headingTitle
-											key={field.fieldName}
-										>
-											{field.label}
-										</ClayTable.Cell>
-									))}
-									{showActionItems && (
-										<ClayTable.Cell 
-											headingCell 
-										/>
-									)}
-								</ClayTable.Row>
-							</ClayTable.Head>
-							<ClayTable.Body>
-								{
-									props.items.map((item) => (
-										<ClayTable.Row key={item.id}>
-											{props.selectable && (
-												<TableCell 
-													checked={!!props.selectedItemsId.find(el => el === item.id)}
-													onSelect={props.onSelect}
-													template="checkbox"
-													name="selectedIds"
-													value={item.id}
-												/>
-											)}
-											{
-												props.schema.fields.map((field) => {
-													const fieldName = field.fieldName;
-													const { [fieldName]: value, ...otherProps } = item;
-													return (
-														<TableCell 
-															data={otherProps}
-															key={field.fieldName}
-															template={field.contentRenderer}
-															value={value} 
-														/>
-													)
-												})
-											}
-											{showActionItems && (
-												<TableCell 
-													template="dropdown"
-													value={item.actionItems}
-												/>
-											)}
-										</ClayTable.Row>
-									))
-								}
-							</ClayTable.Body>
-						</ClayTable>
-						{ !props.items.length && <EmptyResultMessage />}
-					</form>
+					<TableContext.Provider value={{
+						modalProps,
+						setModalProps,
+						setSidePanelProps,
+						sidePanelProps
+					}}>
+						{containsModal && (
+							<Modal
+								{...modalProps}
+							/>
+						)}
+						{containsSidePanel && (
+							<SidePanel
+								{...sidePanelProps}
+							/>
+						)}
+						<form ref={formRef}>
+							<ClayTable borderless>
+								<ClayTable.Head >
+									<ClayTable.Row>
+										{props.selectable && (
+											<ClayTable.Cell 
+												headingCell 
+											>
+												{props.items.length ? (
+													<Checkbox 
+														checked={allElementsSelected}
+														indeterminate={props.selectedItemsId.length && !allElementsSelected}
+														onSelect={props.onSelect}
+														value={null}
+													/>
+												) : null}
+											</ClayTable.Cell>
+										)}
+										{props.schema.fields.map((field) => (
+											<ClayTable.Cell 
+												className="table-cell-expand-smaller"
+												headingCell 
+												headingTitle
+												key={field.fieldName}
+											>
+												{field.label}
+											</ClayTable.Cell>
+										))}
+										{showActionItems && (
+											<ClayTable.Cell 
+												headingCell 
+											/>
+										)}
+									</ClayTable.Row>
+								</ClayTable.Head>
+								<ClayTable.Body>
+									{
+										props.items.map((item) => (
+											<ClayTable.Row key={item.id}>
+												{props.selectable && (
+													<TableCell 
+														checked={!!props.selectedItemsId.find(el => el === item.id)}
+														name="selectedIds"
+														onSelect={props.onSelect}
+														template="checkbox"
+														value={item.id}
+													/>
+												)}
+												{
+													props.schema.fields.map((field) => {
+														const fieldName = field.fieldName;
+														const { [fieldName]: value, ...otherProps } = item;
+														return (
+															<TableCell 
+																data={otherProps}
+																fieldName={field.fieldName}
+																key={field.fieldName}
+																template={field.contentRenderer}
+																value={value}
+															/>
+														)
+													})
+												}
+												{showActionItems && (
+													<TableCell 
+														template="dropdown"
+														value={item.actionItems}
+													/>
+												)}
+											</ClayTable.Row>
+										))
+									}
+								</ClayTable.Body>
+							</ClayTable>
+							{ !props.items.length && <EmptyResultMessage /> }
+						</form>
+					</TableContext.Provider>
 				)
 			}
 		</SmartTableContext.Consumer>
