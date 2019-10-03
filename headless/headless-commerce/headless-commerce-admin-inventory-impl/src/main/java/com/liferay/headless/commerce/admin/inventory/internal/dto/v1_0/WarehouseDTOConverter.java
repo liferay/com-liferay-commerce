@@ -45,6 +45,7 @@ public class WarehouseDTOConverter implements DTOConverter {
 		return Warehouse.class.getSimpleName();
 	}
 
+	@Override
 	public Warehouse toDTO(DTOConverterContext dtoConverterContext)
 		throws Exception {
 
@@ -64,8 +65,6 @@ public class WarehouseDTOConverter implements DTOConverter {
 				id =
 					commerceInventoryWarehouse.
 						getCommerceInventoryWarehouseId();
-				items = _getItems(
-					commerceInventoryWarehouse, dtoConverterContext);
 				latitude = commerceInventoryWarehouse.getLatitude();
 				longitude = commerceInventoryWarehouse.getLongitude();
 				name = commerceInventoryWarehouse.getName();
