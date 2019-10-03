@@ -52,13 +52,13 @@ const NavBar = () => {
 						</form>
 					</div>
 				</div>
-				<ul className="navbar-nav">
+				{/* <ul className="navbar-nav">
 					{state.actionButton && (
 						<li className="nav-item">
 							{state.actionButton}
 						</li>
 					)}
-				</ul>
+				</ul> */}
 			</div>
 		</nav>
 	);

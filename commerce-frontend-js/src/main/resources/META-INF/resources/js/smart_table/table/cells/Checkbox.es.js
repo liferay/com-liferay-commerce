@@ -6,7 +6,8 @@ function Checkbox(props) {
         <ClayCheckbox
             checked={props.checked}
             indeterminate={props.indeterminate}
-            onChange={() => props.onSelect(props.value, !props.checked)}
+            onChange={() => props.onSelect(!props.checked, props.value)}
+            value={props.value}
         />
     )
 }

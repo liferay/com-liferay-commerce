@@ -1,6 +1,22 @@
 import launcher from './entry.es';
 
 window.Table = launcher('table', 'table', {
+
+	apiUrl: '/o/headless-commerce-admin-order/v1.0/orders/37174/orderItems',
+	bulkActions: [
+		{
+			action: 'edit',
+			icon: 'plus',
+			label: 'Add',
+		},
+		{
+			action: 'delete',
+			icon: 'trash',
+			label: 'Delete',
+		},
+	],
+	currentPage: 1,
+	fetchAtLoading: true,
 	filters: [
 		{
 			label: 'Text test',
@@ -386,6 +402,9 @@ window.Table = launcher('table', 'table', {
 			unitPrice: 396
 		}
 	],
+	pageSize: 5,
+	paginationEntries: [{href:"http://localhost:8080/group/test-1/pending-orders?p_p_id=com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet_delta=5",label:5},{href:"http://localhost:8080/group/test-1/pending-orders?p_p_id=com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet_delta=10",label:10},{href:"http://localhost:8080/group/test-1/pending-orders?p_p_id=com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet_delta=20",label:20},{href:"http://localhost:8080/group/test-1/pending-orders?p_p_id=com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet_delta=30",label:30},{href:"http://localhost:8080/group/test-1/pending-orders?p_p_id=com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet_delta=50",label:50},{href:"http://localhost:8080/group/test-1/pending-orders?p_p_id=com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet_delta=75",label:75}],
+	paginationSelectedEntry: 0,
 	schema: {fields:[
 		{
 			fieldName:"sku",
@@ -419,6 +438,8 @@ window.Table = launcher('table', 'table', {
 			sortable:false
 		}
 	]},
+	selectable: true,
+	showPagination: true,
 	spritemap: './assets/icons.svg',
 	summaryItems: [
 		{
@@ -460,14 +481,6 @@ window.Table = launcher('table', 'table', {
 			value: '$ 0.00'
 		}
 	],
-	apiUrl: '/o/headless-commerce-admin-order/v1.0/orders/37174/orderItems',
-	currentPage: 1,
-	fetchAtLoading: true,
-	pageSize: 5,
-	paginationEntries: [{href:"http://localhost:8080/group/test-1/pending-orders?p_p_id=com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet_delta=5",label:5},{href:"http://localhost:8080/group/test-1/pending-orders?p_p_id=com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet_delta=10",label:10},{href:"http://localhost:8080/group/test-1/pending-orders?p_p_id=com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet_delta=20",label:20},{href:"http://localhost:8080/group/test-1/pending-orders?p_p_id=com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet_delta=30",label:30},{href:"http://localhost:8080/group/test-1/pending-orders?p_p_id=com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet_delta=50",label:50},{href:"http://localhost:8080/group/test-1/pending-orders?p_p_id=com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet_delta=75",label:75}],
-	paginationSelectedEntry: 0,
-	selectable: true,
-	showPagination: true,
 	summaryName: 'Table summary',
 	// tableName: 'Orders',
 	totalItems: 4,

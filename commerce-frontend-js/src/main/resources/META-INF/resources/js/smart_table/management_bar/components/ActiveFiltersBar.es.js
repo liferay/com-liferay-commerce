@@ -2,9 +2,9 @@ import ClayButton from '@clayui/button';
 import React from 'react';
 
 import getAppContext from './Context.es';
-import FilterResume from './Filter/Resume.es';
+import FilterResume from './filters/Resume.es';
 
-const ActiveFiltersBar = () => {
+const ActiveFiltersBar = (props) => {
 	const {actions, state} = getAppContext();
 
 	const filtersActive = state.filters.reduce(
@@ -13,10 +13,9 @@ const ActiveFiltersBar = () => {
 	);
 
 	return filtersActive.length ? (
-		<nav className="tbar tbar-inline-md-down subnav-tbar subnav-tbar-primary subnav-tbar-light pt-3 pb-3 border-top">
-			<div className="container-fluid container-fluid-max-xl">
+		<nav className="subnav-tbar subnav-tbar-primary subnav-tbar-light p-3 border-top">
 				<ul className="tbar-nav">
-					<li className="tbar-item tbar-item-expand">
+					<li className="p-0 tbar-item tbar-item-expand">
 						<div className="tbar-section">
 							{filtersActive.map((slug, i) => {
 								const filter = state.filters.reduce(
@@ -32,7 +31,7 @@ const ActiveFiltersBar = () => {
 									);
 								}
 
-								return <FilterResume key={i} {...filter} />;
+								return <FilterResume key={filter.slug} {...filter} disabled={props.disabled}/>;
 							})}
 						</div>
 					</li>
@@ -40,6 +39,7 @@ const ActiveFiltersBar = () => {
 						<div className="tbar-section">
 							<ClayButton
 								className=" tbar-link btn-sm"
+								disabled={props.disabled}
 								displayType="link"
 								onClick={actions.resetFiltersValue}
 							>
@@ -48,7 +48,6 @@ const ActiveFiltersBar = () => {
 						</div>
 					</li>
 				</ul>
-			</div>
 		</nav>
 	) : null;
 };

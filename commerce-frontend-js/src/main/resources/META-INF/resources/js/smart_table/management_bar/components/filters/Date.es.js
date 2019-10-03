@@ -2,8 +2,8 @@ import ClayButton from '@clayui/button';
 import ClayDatePicker from '@clayui/date-picker';
 import React, {useState} from 'react';
 
+import {prettifyDateValue} from '../../utils/index.es';
 import getAppContext from '../Context.es';
-import {prettifyDateValue} from '../utils/index.es';
 
 const getDateObj = date => {
 	return {

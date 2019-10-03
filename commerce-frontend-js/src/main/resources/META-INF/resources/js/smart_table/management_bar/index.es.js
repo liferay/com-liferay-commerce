@@ -1,12 +1,12 @@
-import {ClayIconSpriteContext} from '@clayui/icon';
 import PropTypes from 'prop-types';
 import React, {useEffect, useState} from 'react';
 
-import ActiveFiltersBar from './ActiveFiltersBar.es';
-import useAppState, {StoreProvider} from './Context.es';
-import NavBar from './NavBar.es';
+import ActiveFiltersBar from './components/ActiveFiltersBar.es';
+import useAppState, {StoreProvider} from './components/Context.es';
+import NavBar from './components/NavBar.es';
+import BulkActions from './components/BulkActions.es';
 
-const TableToolbar = () => {
+const ManagementBar = (props) => {
 	const {state} = useAppState();
 	const [initialized, setInitialized] = useState(false);
 
@@ -14,7 +14,7 @@ const TableToolbar = () => {
 		if (!initialized) {
 			return setInitialized(true);
 		}
-		if(state.onFilterChange) {
+		if(props.onFilterChange) {
 			const serializedFilters = state.filters.concat({
 				label: '',
 				operator: 'contains',
@@ -22,28 +22,35 @@ const TableToolbar = () => {
 				type: 'text',
 				value: state.inputSearch.value,
 			});
-			state.onFilterChange(serializedFilters);
+			props.onFilterChange(serializedFilters);
 		}
-	}, [
-		initialized,
-		state.inputSearch.value,
-		state,
-	]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [initialized, state.inputSearch.value, state]);
 
 	return (
 		<>
-			<NavBar />
-			<ActiveFiltersBar />
+			{props.selectedItemsId.length ? (
+				<BulkActions 
+					bulkActions={props.bulkActions}
+					selectAllItems={props.selectAllItems}
+					selectedItemsId={props.selectedItemsId}
+					totalItemsCount={props.totalItemsCount}
+				/>
+			) : (
+				<NavBar />
+			)}
+			<ActiveFiltersBar
+				disabled={!!props.selectedItemsId.length}
+			/>
 		</>
 	)
 }
 
-const TableToolbarWrapper = props => {
+const Wrapper = props => {
+	const {filters, ...otherProps } = props;
 	return (
-		<StoreProvider {...props}>
-			<ClayIconSpriteContext.Provider value={props.spritemap}>
-				<TableToolbar />
-			</ClayIconSpriteContext.Provider>
+		<StoreProvider filters={filters}>
+			<ManagementBar {...otherProps} />
 		</StoreProvider>
 	);
 };
@@ -71,7 +78,7 @@ const baseValues = {
 	slug: PropTypes.string
 }
 
-TableToolbarWrapper.propTypes = {
+Wrapper.propTypes = {
 	filters: PropTypes.arrayOf(
 		PropTypes.oneOfType([
 			PropTypes.shape({
@@ -130,7 +137,6 @@ TableToolbarWrapper.propTypes = {
 		])
 	),
 	onFilterChange: PropTypes.func.isRequired,
-	spritemap: PropTypes.string.isRequired,
 }
 
-export default TableToolbarWrapper;
+export default Wrapper;

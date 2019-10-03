@@ -3,8 +3,8 @@ import Icon from '@clayui/icon';
 import ClayPanel from '@clayui/panel';
 import React, {useState, useEffect} from 'react';
 
+import {renderFilter} from '../utils/index.es';
 import getAppContext from './Context.es';
-import {renderFilter} from './utils/index.es';
 
 const FiltersDropdown = () => {
 	const [active, setActive] = useState(false);
@@ -38,38 +38,48 @@ const FiltersDropdown = () => {
 			active={active}
 			onActiveChange={setActive}
 			trigger={
-				<a
+				<button
 					aria-expanded="false"
 					aria-haspopup="true"
-					className="dropdown-toggle nav-link navbar-breakpoint-d-block"
+					className="btn btn-unstyled dropdown-toggle p-2 text-secondary"
 					data-toggle="dropdown"
-					href="#"
-					role="button"
 				>
 					<span className="navbar-text-truncate">{Liferay.Language.get('add-filters')}</span>
-					<Icon symbol="caret-bottom" />
-				</a>
+					{
+						active ? (
+							<Icon className="ml-2" symbol="caret-top" />
+						) : (
+							<Icon className="ml-2" symbol="caret-bottom" />
+						)
+					}
+				</button>
 			}
 		>
-			<ClayDropDown.Search
-				onChange={e => setQuery(e.target.value)}
-				value={query}
-			/>
-			<ClayDropDown.ItemList>
-				{visibleFilters.map(item => (
-					<ClayPanel
-						className="mb-0"
-						collapsable
-						displayTitle={item.label}
-						key={item.slug}
-						showCollapseIcon={true}
-					>
-						<ClayPanel.Body className="filter-body">
-							{renderFilter(item, 'add')}
-						</ClayPanel.Body>
-					</ClayPanel>
-				))}
-			</ClayDropDown.ItemList>
+			{visibleFilters.length ? (
+				<>
+					<ClayDropDown.Search
+						onChange={e => setQuery(e.target.value)}
+						value={query}
+					/>
+					<ClayDropDown.ItemList>
+						{visibleFilters.map(item => (
+							<ClayPanel
+								className="mb-0"
+								collapsable
+								displayTitle={item.label}
+								key={item.slug}
+								showCollapseIcon={true}
+							>
+								<ClayPanel.Body className="filter-body">
+									{renderFilter(item, 'add')}
+								</ClayPanel.Body>
+							</ClayPanel>
+						))}
+					</ClayDropDown.ItemList>
+				</>
+			) : (
+				<div className="px-3 py-2 text-muted">{Liferay.Language.get('no-filters-available')}</div>
+			)}
 		</ClayDropDown>
 	) : null;
 };

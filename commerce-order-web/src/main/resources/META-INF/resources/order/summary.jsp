@@ -437,9 +437,9 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 		/>
 
 		<commerce-ui:panel
-			headerActionId="order-summary-modal"
+				headerActionTarget="order-summary-modal"
 			headerActionLabel='<%= LanguageUtil.get(request, "edit") %>'
-			headerActionUrl="<%= editOrderSummaryURL %>"
+			headerActionUrl="#"
 			title='<%= LanguageUtil.get(request, "order-summary") %>'
 		>
 			<commerce-ui:summary-table

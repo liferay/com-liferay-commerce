@@ -1,4 +1,4 @@
 import {launcher} from '../utilities/index.es';
-import Wrapper from './Wrapper.es';
+import SmartTable from './SmartTable.es';
 
-export default (...data) => launcher(Wrapper, ...data);
+export default (...data) => launcher(SmartTable, ...data);

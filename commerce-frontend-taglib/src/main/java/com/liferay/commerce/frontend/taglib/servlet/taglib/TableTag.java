@@ -60,7 +60,7 @@ import javax.servlet.jsp.PageContext;
 /**
  * @author Marco Leo
  */
-public class CommerceTableTag extends ComponentRendererTag {
+public class TableTag extends ComponentRendererTag {
 
 	@Override
 	public int doStartTag() {
@@ -331,7 +331,7 @@ public class CommerceTableTag extends ComponentRendererTag {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		CommerceTableTag.class);
+		TableTag.class);
 
 	private ClayTableContextContributorRegistry
 		_clayTableContextContributorRegistry;

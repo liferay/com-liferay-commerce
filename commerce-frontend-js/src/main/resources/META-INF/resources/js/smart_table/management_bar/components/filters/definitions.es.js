@@ -1,13 +1,4 @@
-import React from 'react';
-
-import TextFilter from './Text.es';
-import NumberFilter from './Number.es';
-import DateFilter from './Date.es';
-import DateTimeFilter from './DateTime.es';
-import RadioFilter from './Radio.es';
-import SelectFilter from './Select.es';
-import CheckboxesFilter from './Checkboxes.es';
-
+/*
 export interface DateFormat {
 	year: number,
 	month: number,
@@ -102,13 +93,4 @@ export type FilterProps =
 	MultiFilterProps
 
 export default FilterProps;
-
-export const filterTypeToComponentMap = {
-	'text' : TextFilter,
-	'number' : NumberFilter,
-	'date' : DateFilter,
-	'date-time' : DateTimeFilter,
-	'radio' : RadioFilter,
-	'select' : SelectFilter,
-	'checkbox' : CheckboxesFilter
-}
+*/

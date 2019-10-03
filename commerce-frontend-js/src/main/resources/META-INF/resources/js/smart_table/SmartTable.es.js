@@ -1,14 +1,12 @@
-import ClayButton from '@clayui/button';
-import ClayIcon, {ClayIconSpriteContext} from '@clayui/icon';
+import {ClayIconSpriteContext} from '@clayui/icon';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
-import BulkActions from './bulk_actions/index.es';
 import Summary from '../summary/Summary.es';
-import ManagementTableBar from '../table_toolbar/TableToolbar.es';
+import ManagementBar from './management_bar/index.es';
 import Pagination from './pagination/index.es';
-import Table from './table/index.es';
+import Table from './table/Table.es';
 
 function WrappingCard(props) {
 	return (
@@ -37,9 +35,10 @@ function WrappingCard(props) {
 // 	return endpoint;
 // }
 
-function Wrapper(props) {
+function SmartTable(props) {
 	const [selectedItemsId, setselectedItemsId] = useState([]);
-	const selectItems = (val, checked) => {
+
+	const selectItems = (checked, val = null) => {
 		if(!val) {
 			if(checked) {
 				setselectedItemsId(props.items.map(el => el.id))
@@ -55,20 +54,19 @@ function Wrapper(props) {
 		}
 	}
 
-	const managementTableBar = (
-		<ManagementTableBar 
-			actionButton={(
-				<ClayButton
-					displayType="primary"
-					monospaced
-					onClick={() => console.log('clicked')}
-				>
-					<ClayIcon symbol="plus" />
-				</ClayButton>
-			)}
+	const managementBar = (
+		<ManagementBar 
+			actionButton={{
+				icon: 'plus',
+				label: 'Add',
+				onClick: () => {}
+			}}
+			bulkActions={props.bulkActions}
 			filters={props.filters}
-			onFilterChange={console.log}
-			spritemap={props.spritemap}
+			onFilterChange={() => {}}
+			selectAllItems={() => selectItems(true)}
+			selectedItemsId={selectedItemsId}
+			totalItemsCount={props.items.length}
 		/>
 	)
 	const table = (
@@ -79,15 +77,6 @@ function Wrapper(props) {
 			selectable={props.selectable}
 			selectedItemsId={selectedItemsId}
 		/>
-	)
-	const bulkActions = (
-		selectedItemsId.length ? (
-			<BulkActions 
-				selectAllItems={() => selectItems(null, true)}
-				selectedItemsCount={selectedItemsId.length}
-				totalItemsCount={props.items.length}
-			/>
-		) : null
 	)
 
 	return (
@@ -103,18 +92,15 @@ function Wrapper(props) {
 						bodyCssClass="p-0"
 						title={props.tableName}
 					>
-						{managementTableBar}
-						<div className="border-bottom" />
-						{bulkActions}
+						{managementBar}
 						{table}
 					</WrappingCard>
 				) : (
 					<>
 						<WrappingCard bodyCssClass="p-0">
-							{managementTableBar}
+							{managementBar}
 						</WrappingCard>
 						<WrappingCard bodyCssClass="p-0" className="mt-4">
-							{bulkActions}
 							{table}
 						</WrappingCard>
 					</>
@@ -145,7 +131,7 @@ function Wrapper(props) {
 	);
 }
 
-Wrapper.propTypes = {
+SmartTable.propTypes = {
 	currentPage: PropTypes.number.isRequired,
 	// dataProviderKey: PropTypes.string.isRequired,
 	// dataSetAPI: PropTypes.string.isRequired,
@@ -169,8 +155,8 @@ Wrapper.propTypes = {
 	// totalItems: PropTypes.number.isRequired,
 };
 
-Wrapper.defaultProps = {
+SmartTable.defaultProps = {
 	currentPage: 1,
 };
 
-export default Wrapper;
+export default SmartTable;

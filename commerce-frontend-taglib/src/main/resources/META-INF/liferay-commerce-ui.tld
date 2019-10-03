@@ -393,7 +393,7 @@
 	</tag>
 	<tag>
 		<name>table</name>
-		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.CommerceTableTag</tag-class>
+		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.TableTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>dataProviderKey</name>

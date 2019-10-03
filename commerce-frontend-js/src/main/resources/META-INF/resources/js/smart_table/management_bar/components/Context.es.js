@@ -1,8 +1,8 @@
 import React, {createContext, useContext, useReducer} from 'react';
 
-import {actions} from './actions/index.es';
-import applyMiddleware from './middleware/index.es';
-import reducer, {initialState} from './reducers/index.es';
+import {actions} from '../actions/index.es';
+import applyMiddleware from '../middleware/index.es';
+import reducer, {initialState} from '../reducers/index.es';
 
 export const StoreContext = createContext(null);
 
@@ -17,7 +17,6 @@ export function serializeActions(actions, dispatch) {
 }
 
 export function StoreProvider({children, ...stateProps}) {
-
 	const [state, dispatch] = useReducer(reducer, {
 		...initialState,
 		...stateProps
