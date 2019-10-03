@@ -34,12 +34,10 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface WarehouseResource {
 
-	public Response deleteWarehousId(Long id) throws Exception;
-
-	public Warehouse getWarehousId(Long id) throws Exception;
-
-	public Response patchWarehousId(Long id, Warehouse warehouse)
+	public Page<Warehouse> getWarehousesPage(Pagination pagination)
 		throws Exception;
+
+	public Warehouse postWarehous(Warehouse warehouse) throws Exception;
 
 	public Response deleteWarehousByExternalReferenceCode(
 			String externalReferenceCode)
@@ -53,10 +51,12 @@ public interface WarehouseResource {
 			String externalReferenceCode, Warehouse warehouse)
 		throws Exception;
 
-	public Page<Warehouse> getWarehousesPage(Pagination pagination)
-		throws Exception;
+	public Response deleteWarehousId(Long id) throws Exception;
 
-	public Warehouse postWarehous(Warehouse warehouse) throws Exception;
+	public Warehouse getWarehousId(Long id) throws Exception;
+
+	public Response patchWarehousId(Long id, Warehouse warehouse)
+		throws Exception;
 
 	public void setContextCompany(Company contextCompany);
 
