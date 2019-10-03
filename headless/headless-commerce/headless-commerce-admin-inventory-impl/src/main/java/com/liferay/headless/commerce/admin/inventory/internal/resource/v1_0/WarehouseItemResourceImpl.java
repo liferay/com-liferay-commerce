@@ -26,6 +26,7 @@ import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistr
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverterContext;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.vulcan.fields.NestedField;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
@@ -104,6 +105,7 @@ public class WarehouseItemResourceImpl extends BaseWarehouseItemResourceImpl {
 				GetterUtil.getLong(id)));
 	}
 
+	@NestedField("items")
 	@Override
 	public Page<WarehouseItem> getWarehousIdWarehouseItemsPage(
 			Long id, Pagination pagination)
