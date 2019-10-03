@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.UserGroupRoleLocalService;
 import com.liferay.portal.kernel.service.UserLocalService;
+import com.liferay.portal.vulcan.fields.NestedField;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
@@ -162,6 +163,7 @@ public class AccountMemberResourceImpl extends BaseAccountMemberResourceImpl {
 				new CommerceAccountUserRelPK(id, userId)));
 	}
 
+	@NestedField("users")
 	@Override
 	public Page<AccountMember> getAccountIdAccountMembersPage(
 			Long id, Pagination pagination)

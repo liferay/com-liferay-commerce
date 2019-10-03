@@ -32,6 +32,7 @@ import com.liferay.headless.commerce.core.util.ServiceContextHelper;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.vulcan.fields.NestedField;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
@@ -70,6 +71,7 @@ public class AccountAddressResourceImpl extends BaseAccountAddressResourceImpl {
 		return _getAccountAddressesPage(commerceAccount, pagination);
 	}
 
+	@NestedField("addresses")
 	@Override
 	public Page<AccountAddress> getAccountIdAccountAddressesPage(
 			Long id, Pagination pagination)
