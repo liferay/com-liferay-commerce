@@ -28,6 +28,7 @@ import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistr
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverterContext;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
 import com.liferay.portal.kernel.service.OrganizationLocalService;
+import com.liferay.portal.vulcan.fields.NestedField;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
@@ -167,6 +168,7 @@ public class AccountOrganizationResourceImpl
 				new CommerceAccountOrganizationRelPK(id, organizationId)));
 	}
 
+	@NestedField("organizations")
 	@Override
 	public Page<AccountOrganization> getAccountIdAccountOrganizationsPage(
 			Long id, Pagination pagination)
