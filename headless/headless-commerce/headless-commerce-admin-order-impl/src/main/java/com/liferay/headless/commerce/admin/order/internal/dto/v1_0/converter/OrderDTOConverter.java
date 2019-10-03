@@ -76,7 +76,7 @@ public class OrderDTOConverter implements DTOConverter {
 				customFields = expandoBridge.getAttributes();
 				externalReferenceCode =
 					commerceOrder.getExternalReferenceCode();
-				id = commerceOrder.getCommerceAccountId();
+				id = commerceOrder.getCommerceOrderId();
 				lastPriceUpdateDate = commerceOrder.getLastPriceUpdateDate();
 				modifiedDate = commerceOrder.getModifiedDate();
 				orderStatus = commerceOrder.getOrderStatus();
