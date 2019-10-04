@@ -3,9 +3,6 @@
 <suppressions>
 	<checkstyle>
 		<suppress checks="ChainingCheck" files="commerce-frontend-impl/src/main/java/com/liferay/commerce/frontend/internal/account/CommerceAccountResource\.java" />
-		<suppress checks="PersistenceCallCheck" files="commerce-account-service/src/main/java/com/liferay/commerce/account/service/impl/CommerceAccountLocalServiceImpl\.java" />
-		<suppress checks="PersistenceCallCheck" files="commerce-product-service/src/main/java/com/liferay/commerce/product/service/impl/CommerceCatalogLocalServiceImpl\.java" />
-		<suppress checks="PersistenceCallCheck" files="commerce-product-service/src/main/java/com/liferay/commerce/product/service/impl/CommerceChannelLocalServiceImpl\.java" />
 		<suppress checks="VariableDeclarationAsUsedCheck" files=".*" />
 	</checkstyle>
 	<source-check>
