@@ -90,29 +90,6 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Account getAccount(@GraphQLName("id") Long id) throws Exception {
-		return _applyComponentServiceObjects(
-			_accountResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			accountResource -> accountResource.getAccount(id));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public Account getAccountByExternalReferenceCode(
-			@GraphQLName("externalReferenceCode") String externalReferenceCode)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_accountResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			accountResource ->
-				accountResource.getAccountByExternalReferenceCode(
-					externalReferenceCode));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
 	public Collection<Account> getAccountsPage(
 			@GraphQLName("pageSize") int pageSize,
 			@GraphQLName("page") int page)
@@ -131,27 +108,68 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public AccountGroup getAccountGroup(@GraphQLName("id") Long id)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_accountGroupResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			accountGroupResource -> accountGroupResource.getAccountGroup(id));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public AccountGroup getAccountGroupByExternalReferenceCode(
+	public Account getAccountByExternalReferenceCode(
 			@GraphQLName("externalReferenceCode") String externalReferenceCode)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
-			_accountGroupResourceComponentServiceObjects,
+			_accountResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			accountGroupResource ->
-				accountGroupResource.getAccountGroupByExternalReferenceCode(
+			accountResource ->
+				accountResource.getAccountByExternalReferenceCode(
 					externalReferenceCode));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Account getAccount(@GraphQLName("id") Long id) throws Exception {
+		return _applyComponentServiceObjects(
+			_accountResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountResource -> accountResource.getAccount(id));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Collection<AccountAddress>
+			getAccountByExternalReferenceCodeAccountAddressesPage(
+				@GraphQLName("externalReferenceCode") String
+					externalReferenceCode,
+				@GraphQLName("pageSize") int pageSize,
+				@GraphQLName("page") int page)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountAddressResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountAddressResource -> {
+				Page paginationPage =
+					accountAddressResource.
+						getAccountByExternalReferenceCodeAccountAddressesPage(
+							externalReferenceCode,
+							Pagination.of(pageSize, page));
+
+				return paginationPage.getItems();
+			});
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Collection<AccountAddress> getAccountIdAccountAddressesPage(
+			@GraphQLName("id") Long id, @GraphQLName("pageSize") int pageSize,
+			@GraphQLName("page") int page)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountAddressResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountAddressResource -> {
+				Page paginationPage =
+					accountAddressResource.getAccountIdAccountAddressesPage(
+						id, Pagination.of(pageSize, page));
+
+				return paginationPage.getItems();
+			});
 	}
 
 	@GraphQLField
@@ -170,6 +188,71 @@ public class Query {
 
 				return paginationPage.getItems();
 			});
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public AccountGroup getAccountGroupByExternalReferenceCode(
+			@GraphQLName("externalReferenceCode") String externalReferenceCode)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountGroupResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountGroupResource ->
+				accountGroupResource.getAccountGroupByExternalReferenceCode(
+					externalReferenceCode));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public AccountGroup getAccountGroup(@GraphQLName("id") Long id)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountGroupResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountGroupResource -> accountGroupResource.getAccountGroup(id));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Collection<AccountMember>
+			getAccountByExternalReferenceCodeAccountMembersPage(
+				@GraphQLName("externalReferenceCode") String
+					externalReferenceCode,
+				@GraphQLName("pageSize") int pageSize,
+				@GraphQLName("page") int page)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountMemberResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountMemberResource -> {
+				Page paginationPage =
+					accountMemberResource.
+						getAccountByExternalReferenceCodeAccountMembersPage(
+							externalReferenceCode,
+							Pagination.of(pageSize, page));
+
+				return paginationPage.getItems();
+			});
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public AccountMember getAccountByExternalReferenceCodeAccountMember(
+			@GraphQLName("externalReferenceCode") String externalReferenceCode,
+			@GraphQLName("userId") Long userId)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountMemberResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountMemberResource ->
+				accountMemberResource.
+					getAccountByExternalReferenceCodeAccountMember(
+						externalReferenceCode, userId));
 	}
 
 	@GraphQLField
@@ -206,24 +289,8 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public AccountMember getAccountByExternalReferenceCodeAccountMember(
-			@GraphQLName("externalReferenceCode") String externalReferenceCode,
-			@GraphQLName("userId") Long userId)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_accountMemberResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			accountMemberResource ->
-				accountMemberResource.
-					getAccountByExternalReferenceCodeAccountMember(
-						externalReferenceCode, userId));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public Collection<AccountMember>
-			getAccountByExternalReferenceCodeAccountMembersPage(
+	public Collection<AccountOrganization>
+			getAccountByExternalReferenceCodeAccountOrganizationsPage(
 				@GraphQLName("externalReferenceCode") String
 					externalReferenceCode,
 				@GraphQLName("pageSize") int pageSize,
@@ -231,17 +298,35 @@ public class Query {
 		throws Exception {
 
 		return _applyComponentServiceObjects(
-			_accountMemberResourceComponentServiceObjects,
+			_accountOrganizationResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			accountMemberResource -> {
+			accountOrganizationResource -> {
 				Page paginationPage =
-					accountMemberResource.
-						getAccountByExternalReferenceCodeAccountMembersPage(
+					accountOrganizationResource.
+						getAccountByExternalReferenceCodeAccountOrganizationsPage(
 							externalReferenceCode,
 							Pagination.of(pageSize, page));
 
 				return paginationPage.getItems();
 			});
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public AccountOrganization
+			getAccountByExternalReferenceCodeAccountOrganization(
+				@GraphQLName("externalReferenceCode") String
+					externalReferenceCode,
+				@GraphQLName("organizationId") Long organizationId)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountOrganizationResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountOrganizationResource ->
+				accountOrganizationResource.
+					getAccountByExternalReferenceCodeAccountOrganization(
+						externalReferenceCode, organizationId));
 	}
 
 	@GraphQLField
@@ -277,91 +362,6 @@ public class Query {
 			accountOrganizationResource ->
 				accountOrganizationResource.getAccountIdAccountOrganization(
 					id, organizationId));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public AccountOrganization
-			getAccountByExternalReferenceCodeAccountOrganization(
-				@GraphQLName("externalReferenceCode") String
-					externalReferenceCode,
-				@GraphQLName("organizationId") Long organizationId)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_accountOrganizationResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			accountOrganizationResource ->
-				accountOrganizationResource.
-					getAccountByExternalReferenceCodeAccountOrganization(
-						externalReferenceCode, organizationId));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public Collection<AccountOrganization>
-			getAccountByExternalReferenceCodeAccountOrganizationsPage(
-				@GraphQLName("externalReferenceCode") String
-					externalReferenceCode,
-				@GraphQLName("pageSize") int pageSize,
-				@GraphQLName("page") int page)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_accountOrganizationResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			accountOrganizationResource -> {
-				Page paginationPage =
-					accountOrganizationResource.
-						getAccountByExternalReferenceCodeAccountOrganizationsPage(
-							externalReferenceCode,
-							Pagination.of(pageSize, page));
-
-				return paginationPage.getItems();
-			});
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public Collection<AccountAddress> getAccountIdAccountAddressesPage(
-			@GraphQLName("id") Long id, @GraphQLName("pageSize") int pageSize,
-			@GraphQLName("page") int page)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_accountAddressResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			accountAddressResource -> {
-				Page paginationPage =
-					accountAddressResource.getAccountIdAccountAddressesPage(
-						id, Pagination.of(pageSize, page));
-
-				return paginationPage.getItems();
-			});
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public Collection<AccountAddress>
-			getAccountByExternalReferenceCodeAccountAddressesPage(
-				@GraphQLName("externalReferenceCode") String
-					externalReferenceCode,
-				@GraphQLName("pageSize") int pageSize,
-				@GraphQLName("page") int page)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_accountAddressResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			accountAddressResource -> {
-				Page paginationPage =
-					accountAddressResource.
-						getAccountByExternalReferenceCodeAccountAddressesPage(
-							externalReferenceCode,
-							Pagination.of(pageSize, page));
-
-				return paginationPage.getItems();
-			});
 	}
 
 	private <T, R, E1 extends Throwable, E2 extends Throwable> R
