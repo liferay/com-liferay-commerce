@@ -505,6 +505,11 @@ paths:
             operationId: getWarehousesPage
             parameters:
                 - in: query
+                  name: filter
+                  required: false
+                  schema:
+                      type: string
+                - in: query
                   name: page
                   required: false
                   schema:
@@ -514,6 +519,11 @@ paths:
                   required: false
                   schema:
                       type: integer
+                - in: query
+                  name: sort
+                  required: false
+                  schema:
+                      type: string
             responses:
                 200:
                     content:
