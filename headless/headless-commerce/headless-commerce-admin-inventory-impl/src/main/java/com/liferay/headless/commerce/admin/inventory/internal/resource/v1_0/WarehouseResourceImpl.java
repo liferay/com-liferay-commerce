@@ -20,21 +20,30 @@ import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemServ
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseService;
 import com.liferay.headless.commerce.admin.inventory.dto.v1_0.Warehouse;
 import com.liferay.headless.commerce.admin.inventory.dto.v1_0.WarehouseItem;
+import com.liferay.headless.commerce.admin.inventory.internal.odata.entity.v1_0.WarehouseEntityModel;
 import com.liferay.headless.commerce.admin.inventory.resource.v1_0.WarehouseResource;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverterContext;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.search.filter.Filter;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.odata.entity.EntityModel;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
+import com.liferay.portal.vulcan.resource.EntityModelResource;
+import com.liferay.portal.vulcan.util.SearchUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
@@ -48,7 +57,8 @@ import org.osgi.service.component.annotations.ServiceScope;
 	properties = "OSGI-INF/liferay/rest/v1_0/warehouse.properties",
 	scope = ServiceScope.PROTOTYPE, service = WarehouseResource.class
 )
-public class WarehouseResourceImpl extends BaseWarehouseResourceImpl {
+public class WarehouseResourceImpl
+	extends BaseWarehouseResourceImpl implements EntityModelResource {
 
 	@Override
 	public Response deleteWarehousByExternalReferenceCode(
@@ -83,6 +93,13 @@ public class WarehouseResourceImpl extends BaseWarehouseResourceImpl {
 	}
 
 	@Override
+	public EntityModel getEntityModel(MultivaluedMap multivaluedMap)
+		throws Exception {
+
+		return _entityModel;
+	}
+
+	@Override
 	public Warehouse getWarehousByExternalReferenceCode(
 			String externalReferenceCode)
 		throws Exception {
@@ -108,21 +125,24 @@ public class WarehouseResourceImpl extends BaseWarehouseResourceImpl {
 	}
 
 	@Override
-	public Page<Warehouse> getWarehousesPage(Pagination pagination)
+	public Page<Warehouse> getWarehousesPage(
+			Filter filter, Pagination pagination, Sort[] sorts)
 		throws Exception {
 
-		List<CommerceInventoryWarehouse> commerceInventoryWarehouses =
-			_commerceInventoryWarehouseService.getCommerceInventoryWarehouses(
-				contextCompany.getCompanyId(), pagination.getStartPosition(),
-				pagination.getEndPosition(), null);
-
-		int totalItems =
-			_commerceInventoryWarehouseService.
-				getCommerceInventoryWarehousesCount(
-					contextCompany.getCompanyId());
-
-		return Page.of(
-			_toWarehouses(commerceInventoryWarehouses), pagination, totalItems);
+		return SearchUtil.search(
+			booleanQuery -> booleanQuery.getPreBooleanFilter(), filter,
+			CommerceInventoryWarehouse.class, StringPool.BLANK, pagination,
+			queryConfig -> queryConfig.setSelectedFieldNames(
+				Field.ENTRY_CLASS_PK),
+			searchContext -> {
+				searchContext.setCompanyId(contextCompany.getCompanyId());
+			},
+			document -> _toWarehouse(
+				_commerceInventoryWarehouseService.
+					getCommerceInventoryWarehouse(
+						GetterUtil.getLong(
+							document.get(Field.ENTRY_CLASS_PK)))),
+			sorts);
 	}
 
 	@Override
@@ -203,6 +223,20 @@ public class WarehouseResourceImpl extends BaseWarehouseResourceImpl {
 		// Update nested resources
 
 		_updateNestedResources(warehouse, commerceInventoryWarehouse);
+
+		DTOConverter warehouseDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				CommerceInventoryWarehouse.class.getName());
+
+		return (Warehouse)warehouseDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(),
+				commerceInventoryWarehouse.getCommerceInventoryWarehouseId()));
+	}
+
+	private Warehouse _toWarehouse(
+			CommerceInventoryWarehouse commerceInventoryWarehouse)
+		throws Exception {
 
 		DTOConverter warehouseDTOConverter =
 			_dtoConverterRegistry.getDTOConverter(
@@ -306,6 +340,8 @@ public class WarehouseResourceImpl extends BaseWarehouseResourceImpl {
 
 		return commerceInventoryWarehouse;
 	}
+
+	private static final EntityModel _entityModel = new WarehouseEntityModel();
 
 	@Reference
 	private CommerceInventoryWarehouseItemService
