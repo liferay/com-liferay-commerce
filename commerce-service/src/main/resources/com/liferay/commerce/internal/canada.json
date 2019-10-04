@@ -1,0 +1,67 @@
+[
+    {
+        "priority": 1, 
+        "code": "AB", 
+        "name": "Alberta"
+    }, 
+    {
+        "priority": 2, 
+        "code": "BC", 
+        "name": "British Columbia"
+    }, 
+    {
+        "priority": 3, 
+        "code": "MB", 
+        "name": "Manitoba"
+    }, 
+    {
+        "priority": 4, 
+        "code": "NB", 
+        "name": "New Brunswick"
+    }, 
+    {
+        "priority": 5, 
+        "code": "NL", 
+        "name": "Newfoundland and Labrador"
+    }, 
+    {
+        "priority": 6, 
+        "code": "NT", 
+        "name": "Northwest Territories"
+    }, 
+    {
+        "priority": 7, 
+        "code": "NS", 
+        "name": "Nova Scotia"
+    }, 
+    {
+        "priority": 8, 
+        "code": "NU", 
+        "name": "Nunavut"
+    }, 
+    {
+        "priority": 9, 
+        "code": "ON", 
+        "name": "Ontario"
+    }, 
+    {
+        "priority": 10, 
+        "code": "PE", 
+        "name": "Prince Edward Island"
+    }, 
+    {
+        "priority": 11, 
+        "code": "QC", 
+        "name": "Quebec"
+    }, 
+    {
+        "priority": 12, 
+        "code": "SK", 
+        "name": "Saskatchewan"
+    }, 
+    {
+        "priority": 13, 
+        "code": "YT", 
+        "name": "Yukon"
+    }
+]

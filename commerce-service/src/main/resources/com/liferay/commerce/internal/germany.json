@@ -1,0 +1,82 @@
+[
+    {
+        "priority": 1, 
+        "code": "BW", 
+        "name": "Baden-Wurttemberg"
+    }, 
+    {
+        "priority": 2, 
+        "code": "BY", 
+        "name": "Bayern"
+    }, 
+    {
+        "priority": 3, 
+        "code": "BE", 
+        "name": "Berlin"
+    }, 
+    {
+        "priority": 4, 
+        "code": "BB", 
+        "name": "Brandenburg"
+    }, 
+    {
+        "priority": 5, 
+        "code": "HB", 
+        "name": "Bremen"
+    }, 
+    {
+        "priority": 6, 
+        "code": "HH", 
+        "name": "Hamburg"
+    }, 
+    {
+        "priority": 7, 
+        "code": "HE", 
+        "name": "Hessen"
+    }, 
+    {
+        "priority": 8, 
+        "code": "MV", 
+        "name": "Mecklenburg-Vorpommern"
+    }, 
+    {
+        "priority": 9, 
+        "code": "NI", 
+        "name": "Niedersachsen"
+    }, 
+    {
+        "priority": 10, 
+        "code": "NW", 
+        "name": "Nordrhein-Westfalen"
+    }, 
+    {
+        "priority": 11, 
+        "code": "RP", 
+        "name": "Rheinland-Pfalz"
+    }, 
+    {
+        "priority": 12, 
+        "code": "SL", 
+        "name": "Saarland"
+    }, 
+    {
+        "priority": 13, 
+        "code": "SN", 
+        "name": "Sachsen"
+    }, 
+    {
+        "priority": 14, 
+        "code": "ST", 
+        "name": "Sachsen-Anhalt"
+    }, 
+    {
+        "priority": 15, 
+        "code": "SH", 
+        "name": "Schleswig-Holstein"
+    }, 
+    {
+        "priority": 16, 
+        "code": "TH", 
+        "name": "Thuringen"
+    }
+]
