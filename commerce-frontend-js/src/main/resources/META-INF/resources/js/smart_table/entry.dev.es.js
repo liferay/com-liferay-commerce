@@ -1,18 +1,18 @@
 import launcher from './entry.es';
 
 window.Table = launcher('table', 'table', {
-
 	apiUrl: '/o/headless-commerce-admin-order/v1.0/orders/37174/orderItems',
 	bulkActions: [
 		{
-			action: 'edit',
+			action: '/edit',
 			icon: 'plus',
 			label: 'Add',
 		},
 		{
-			action: 'delete',
+			action: '/delete',
 			icon: 'trash',
 			label: 'Delete',
+			method: 'delete',
 		},
 	],
 	currentPage: 1,
@@ -101,6 +101,7 @@ window.Table = launcher('table', 'table', {
 			}
 		}
 	],
+	id: "tableTest",
 	items: [
 		{
 			bookedQuantityId: 0,
@@ -111,9 +112,7 @@ window.Table = launcher('table', 'table', {
 			discountPercentageLevel4: 0,
 			finalPrice: 200,
 			id: 37175,
-			name: {
-				en: "ABS Sensor"
-			},
+			name: "ABS Sensor",
 			orderId: 37174,
 			quantity: 4,
 			shippedQuantity: 0,
@@ -134,9 +133,7 @@ window.Table = launcher('table', 'table', {
 			discountPercentageLevel4: 0,
 			finalPrice: 304,
 			id: 37176,
-			name: {
-				en: "Ball Joints"
-			},
+			name: "Ball Joints",
 			orderId: 37174,
 			quantity: 2,
 			shippedQuantity: 0,
@@ -157,9 +154,7 @@ window.Table = launcher('table', 'table', {
 			discountPercentageLevel4: 0,
 			finalPrice: 70,
 			id: 37177,
-			name: {
-				en: "Bearings"
-			},
+			name: "Bearings",
 			orderId: 37174,
 			quantity: 1,
 			shippedQuantity: 0,
@@ -180,9 +175,7 @@ window.Table = launcher('table', 'table', {
 			discountPercentageLevel4: 0,
 			finalPrice: 37.8,
 			id: 37178,
-			name: {
-				en: "Brake Pads"
-			},
+			name: "Brake Pads",
 			orderId: 37174,
 			quantity: 2,
 			shippedQuantity: 0,
@@ -203,9 +196,7 @@ window.Table = launcher('table', 'table', {
 			discountPercentageLevel4: 0,
 			finalPrice: 400,
 			id: 37197,
-			name: {
-				en: "Brake Rotors"
-			},
+			name: "Brake Rotors",
 			orderId: 37174,
 			quantity: 10,
 			shippedQuantity: 0,
@@ -226,9 +217,7 @@ window.Table = launcher('table', 'table', {
 			discountPercentageLevel4: 0,
 			finalPrice: 36,
 			id: 37198,
-			name: {
-				en: "Bushings"
-			},
+			name: "Bushings",
 			orderId: 37174,
 			quantity: 2,
 			shippedQuantity: 0,
@@ -249,9 +238,7 @@ window.Table = launcher('table', 'table', {
 			discountPercentageLevel4: 0,
 			finalPrice: 90,
 			id: 37199,
-			name: {
-				en: "Calipers"
-			},
+			name: "Calipers",
 			orderId: 37174,
 			quantity: 1,
 			shippedQuantity: 0,
@@ -272,9 +259,7 @@ window.Table = launcher('table', 'table', {
 			discountPercentageLevel4: 0,
 			finalPrice: 4170,
 			id: 37200,
-			name: {
-				en: "Cams"
-			},
+			name: "Cams",
 			orderId: 37174,
 			quantity: 6,
 			shippedQuantity: 0,
@@ -295,9 +280,7 @@ window.Table = launcher('table', 'table', {
 			discountPercentageLevel4: 0,
 			finalPrice: 624,
 			id: 37201,
-			name: {
-				en: "Coil Spring - Rear"
-			},
+			name: "Coil Spring - Rear",
 			orderId: 37174,
 			quantity: 6,
 			shippedQuantity: 0,
@@ -318,9 +301,7 @@ window.Table = launcher('table', 'table', {
 			discountPercentageLevel4: 0,
 			finalPrice: 623,
 			id: 37202,
-			name: {
-				en: "CV Axles"
-			},
+			name: "CV Axles",
 			orderId: 37174,
 			quantity: 7,
 			shippedQuantity: 0,
@@ -341,9 +322,7 @@ window.Table = launcher('table', 'table', {
 			discountPercentageLevel4: 0,
 			finalPrice: 1068,
 			id: 37203,
-			name: {
-				en: "CV Axles"
-			},
+			name: "CV Axles",
 			orderId: 37174,
 			quantity: 12,
 			shippedQuantity: 0,
@@ -364,9 +343,7 @@ window.Table = launcher('table', 'table', {
 			discountPercentageLevel4: 0,
 			finalPrice: 10550,
 			id: 37204,
-			name: {
-				en: "Differential Ring and Pinion - Universal"
-			},
+			name: "Differential Ring and Pinion - Universal",
 			orderId: 37174,
 			quantity: 50,
 			shippedQuantity: 0,
@@ -387,9 +364,7 @@ window.Table = launcher('table', 'table', {
 			discountPercentageLevel4: 0,
 			finalPrice: 396,
 			id: 37205,
-			name: {
-				en: "Drive Shafts"
-			},
+			name: "Drive Shafts",
 			orderId: 37174,
 			quantity: 1,
 			shippedQuantity: 0,

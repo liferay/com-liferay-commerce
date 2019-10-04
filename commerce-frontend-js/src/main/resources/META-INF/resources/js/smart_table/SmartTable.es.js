@@ -1,12 +1,13 @@
 import {ClayIconSpriteContext} from '@clayui/icon';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 import Summary from '../summary/Summary.es';
 import ManagementBar from './management_bar/index.es';
 import Pagination from './pagination/index.es';
 import Table from './table/Table.es';
+import SmartTableContext from './SmartTableContext.es';
 
 function WrappingCard(props) {
 	return (
@@ -37,6 +38,8 @@ function WrappingCard(props) {
 
 function SmartTable(props) {
 	const [selectedItemsId, setselectedItemsId] = useState([]);
+
+	const formRef = useRef(null)
 
 	const selectItems = (checked, val = null) => {
 		if(!val) {
@@ -80,79 +83,80 @@ function SmartTable(props) {
 	)
 
 	return (
-		<ClayIconSpriteContext.Provider value={props.spritemap}>
-			<div
-				className={classNames(
-					'commerce-table-wrapper',
-					props.wrapperCssClasses
-				)}
-			>
-				{props.tableName ? (
-					<WrappingCard 
-						bodyCssClass="p-0"
-						title={props.tableName}
-					>
-						{managementBar}
-						{table}
-					</WrappingCard>
-				) : (
-					<>
-						<WrappingCard bodyCssClass="p-0">
+		<SmartTableContext.Provider value={{formRef}}>
+			<ClayIconSpriteContext.Provider value={props.spritemap}>
+				<div
+					className={classNames(
+						'commerce-table-wrapper',
+						props.wrapperCssClasses
+					)}
+				>
+					{props.tableName ? (
+						<WrappingCard 
+							bodyCssClass="p-0"
+							title={props.tableName}
+						>
 							{managementBar}
-						</WrappingCard>
-						<WrappingCard bodyCssClass="p-0" className="mt-4">
 							{table}
 						</WrappingCard>
-					</>
-				)}
+					) : (
+						<>
+							<WrappingCard bodyCssClass="p-0">
+								{managementBar}
+							</WrappingCard>
+							<WrappingCard bodyCssClass="p-0" className="mt-4">
+								{table}
+							</WrappingCard>
+						</>
+					)}
 
-				{props.showPagination && (
-					<Pagination 
-						currentPage={props.currentPage}
-						pageSize={props.pageSize}
-						paginationEntries={props.paginationEntries}
-						paginationSelectedEntry={props.paginationSelectedEntry}
-						totalItems={props.totalItems}
-					/>
-				)}
+					{props.showPagination && (
+						<Pagination 
+							currentPage={props.currentPage}
+							pageSize={props.pageSize}
+							paginationEntries={props.paginationEntries}
+							paginationSelectedEntry={props.paginationSelectedEntry}
+							totalItems={props.totalItems}
+						/>
+					)}
 
-				{props.summaryName ? (
-					<WrappingCard 
-						className="mt-4" 
-						title={props.summaryName}
-					>
+					{props.summaryName ? (
+						<WrappingCard 
+							className="mt-4" 
+							title={props.summaryName}
+						>
+							<Summary items={props.summaryItems} />
+						</WrappingCard>
+					) : (
 						<Summary items={props.summaryItems} />
-					</WrappingCard>
-				) : (
-					<Summary items={props.summaryItems} />
-				)}
-			</div>
-		</ClayIconSpriteContext.Provider>
+					)}
+				</div>
+			</ClayIconSpriteContext.Provider>
+		</SmartTableContext.Provider>
 	);
 }
 
 SmartTable.propTypes = {
+	bulkActions: PropTypes.array,
 	currentPage: PropTypes.number.isRequired,
 	// dataProviderKey: PropTypes.string.isRequired,
 	// dataSetAPI: PropTypes.string.isRequired,
 	// disableAJAX: PropTypes.bool,
 	filters: PropTypes.array,
-	// id: PropTypes.string,
+	id: PropTypes.string.isRequired,
 	items: PropTypes.array.isRequired,
 	pageSize: PropTypes.number.isRequired,
-	// paginationBaseHref: PropTypes.string,
 	paginationEntries: PropTypes.array.isRequired,
 	paginationSelectedEntry: PropTypes.number.isRequired,
 	schema: PropTypes.object.isRequired,
+	selectable: PropTypes.bool,
 	showPagination: PropTypes.bool,
-	// selectable: PropTypes.bool,
 	spritemap: PropTypes.string.isRequired,
 	summaryItems: PropTypes.array,
 	summaryName: PropTypes.string,
 	tableName: PropTypes.string,
 	totalItems: PropTypes.number,
 	wrapperCssClasses: PropTypes.string,
-	// totalItems: PropTypes.number.isRequired,
 };
 
 SmartTable.defaultProps = {

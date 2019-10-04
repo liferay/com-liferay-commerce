@@ -1,18 +1,24 @@
 import ClayIcon from '@clayui/icon';
 import ClayLink from '@clayui/link';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 import React from 'react';
-import TableContext from '../../table/TableContext.es';
+import TableContext from '../../SmartTableContext.es';
 
-function submit(action, form) {
-    console.log(action,form)
-    debugger;
+function submit(action, method = 'get', form) {
+    if(!form.current) {
+        return;
+    }
+
+    form.current.action = action;
+    form.current.method = method;
+    form.current.submit();
 }
 
 function BulkActions(props) {
     return (
         <TableContext.Consumer>
-            {value => (
+            {({formRef}) => (
                 <nav 
                     className="management-bar-primary navbar navbar-expand-md pb-2 pt-2 subnav-tbar"
                 >
@@ -42,7 +48,7 @@ function BulkActions(props) {
                                     <button 
                                         className={classNames('btn btn-monospaced btn-link', i > 0 && 'ml-1')} 
                                         key={actionDefinition.label}
-                                        onClick={() => submit(actionDefinition.action, value)}
+                                        onClick={() => submit(actionDefinition.action, actionDefinition.method, formRef)}
                                     >
                                         <ClayIcon symbol={actionDefinition.icon} />
                                     </button>
@@ -54,6 +60,17 @@ function BulkActions(props) {
             )}
         </TableContext.Consumer>
     )
+}
+
+BulkActions.propTypes = {
+    selectedItemsId: PropTypes.array.isRequired,
+    totalItemsCount: PropTypes.number.isRequired,
+    bulkActions: PropTypes.arrayOf(PropTypes.shape({
+        action: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired,
+        icon: PropTypes.string.isRequired,
+        method: PropTypes.string,
+    }))
 }
 
 export default BulkActions;

@@ -13,41 +13,44 @@ const Resume = props => {
 
 	const prettifiedValue = prettifyFilterValue(props);
 
-	return (
+	const label = (
 		<ClayLabel
-			className={classNames("resume component-label tbar-label mr-2", props.disabled && 'text-muted')}
+			className={classNames(
+				"resume component-label tbar-label mr-2 btn p-1",
+				props.disabled && 'text-muted',
+				open && 'border-primary'
+			)}
 			closeButtonProps={{
 				disabled: props.disabled,
 				onClick: () => actions.updateFilterValue(props.slug, null)
 			}}
+			role="button"
 		>
 			<div className="d-flex">
-				<div className="label-section mr-2">
-					{props.label} : {prettifiedValue}
+				<ClayIcon className="mr-2" symbol={open ? 'caret-top' : 'caret-bottom'} />
+				<div className="label-section">
+					{props.label}: {prettifiedValue}
 				</div>
-				<span className="label-item label-item-after ml-1">
-					<ClayDropDown
-						active={open}
-						className="d-inline-flex"
-						onActiveChange={setOpen}
-						trigger={
-							<button 
-								className="close"
-								disabled={props.disabled}
-								type="button"
-							>
-								<ClayIcon symbol="caret-bottom" />
-							</button>
-						}
-					>
-						<ClayDropDown.ItemList>
-							<div className="p-3">{renderFilter(props, 'edit')}</div>
-						</ClayDropDown.ItemList>
-					</ClayDropDown>
-				</span>
 			</div>
 		</ClayLabel>
 	);
+
+	const dropDown = (
+		<ClayDropDown
+			active={open}
+			className="d-inline-flex"
+			onActiveChange={setOpen}
+			trigger={
+				label
+			}
+		>
+			<ClayDropDown.ItemList>
+				<div className="p-3">{renderFilter(props, 'edit')}</div>
+			</ClayDropDown.ItemList>
+		</ClayDropDown>
+	)
+
+	return dropDown;
 };
 
 export default Resume;
