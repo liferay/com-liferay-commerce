@@ -32,18 +32,18 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface BillingAddressResource {
 
-	public BillingAddress getOrderIdBillingAddress(Long id) throws Exception;
-
-	public Response patchOrderIdBillingAddress(
-			Long id, BillingAddress billingAddress)
-		throws Exception;
-
 	public BillingAddress getOrderByExternalReferenceCodeBillingAddress(
 			String externalReferenceCode)
 		throws Exception;
 
 	public Response patchOrderByExternalReferenceCodeBillingAddress(
 			String externalReferenceCode, BillingAddress billingAddress)
+		throws Exception;
+
+	public BillingAddress getOrderIdBillingAddress(Long id) throws Exception;
+
+	public Response patchOrderIdBillingAddress(
+			Long id, BillingAddress billingAddress)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);
