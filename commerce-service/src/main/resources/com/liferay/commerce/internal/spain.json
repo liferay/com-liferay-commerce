@@ -1,0 +1,337 @@
+[
+    {
+        "priority": 1, 
+        "code": "AB", 
+        "name": "Albacete"
+    }, 
+    {
+        "priority": 2, 
+        "code": "A", 
+        "name": "Alicante"
+    }, 
+    {
+        "priority": 3, 
+        "code": "AL", 
+        "name": "Almería"
+    }, 
+    {
+        "priority": 4, 
+        "code": "AN", 
+        "name": "Andalucía"
+    }, 
+    {
+        "priority": 5, 
+        "code": "VI", 
+        "name": "Araba/Álava"
+    }, 
+    {
+        "priority": 6, 
+        "code": "AR", 
+        "name": "Aragón"
+    }, 
+    {
+        "priority": 7, 
+        "code": "O", 
+        "name": "Asturias"
+    }, 
+    {
+        "priority": 8, 
+        "code": "AS", 
+        "name": "Asturias, Principado de"
+    }, 
+    {
+        "priority": 9, 
+        "code": "AV", 
+        "name": "Ávila"
+    }, 
+    {
+        "priority": 10, 
+        "code": "BA", 
+        "name": "Badajoz"
+    }, 
+    {
+        "priority": 11, 
+        "code": "B", 
+        "name": "Barcelona"
+    }, 
+    {
+        "priority": 12, 
+        "code": "PM", 
+        "name": "Balears"
+    }, 
+    {
+        "priority": 13, 
+        "code": "BI", 
+        "name": "Bizkaia"
+    }, 
+    {
+        "priority": 14, 
+        "code": "BU", 
+        "name": "Burgos"
+    }, 
+    {
+        "priority": 15, 
+        "code": "CN", 
+        "name": "Canarias"
+    }, 
+    {
+        "priority": 16, 
+        "code": "CC", 
+        "name": "Cáceres"
+    }, 
+    {
+        "priority": 17, 
+        "code": "CA", 
+        "name": "Cádiz"
+    }, 
+    {
+        "priority": 18, 
+        "code": "CB", 
+        "name": "Cantabria"
+    }, 
+    {
+        "priority": 19, 
+        "code": "CS", 
+        "name": "Castellón"
+    }, 
+    {
+        "priority": 20, 
+        "code": "CL", 
+        "name": "Castilla y León"
+    }, 
+    {
+        "priority": 21, 
+        "code": "CM", 
+        "name": "Castilla-La Mancha"
+    }, 
+    {
+        "priority": 22, 
+        "code": "CT", 
+        "name": "Catalunya"
+    }, 
+    {
+        "priority": 23, 
+        "code": "CE", 
+        "name": "Ceuta"
+    }, 
+    {
+        "priority": 24, 
+        "code": "CR", 
+        "name": "Ciudad Real"
+    }, 
+    {
+        "priority": 25, 
+        "code": "CO", 
+        "name": "Córdoba"
+    }, 
+    {
+        "priority": 26, 
+        "code": "C", 
+        "name": "A Coruña"
+    }, 
+    {
+        "priority": 27, 
+        "code": "CU", 
+        "name": "Cuenca"
+    }, 
+    {
+        "priority": 28, 
+        "code": "EX", 
+        "name": "Extremadura"
+    }, 
+    {
+        "priority": 29, 
+        "code": "GA", 
+        "name": "Galicia"
+    }, 
+    {
+        "priority": 30, 
+        "code": "SS", 
+        "name": "Gipuzkoa"
+    }, 
+    {
+        "priority": 31, 
+        "code": "GI", 
+        "name": "Girona"
+    }, 
+    {
+        "priority": 32, 
+        "code": "GR", 
+        "name": "Granada"
+    }, 
+    {
+        "priority": 33, 
+        "code": "GU", 
+        "name": "Guadalajara"
+    }, 
+    {
+        "priority": 34, 
+        "code": "H", 
+        "name": "Huelva"
+    }, 
+    {
+        "priority": 35, 
+        "code": "HU", 
+        "name": "Huesca"
+    }, 
+    {
+        "priority": 36, 
+        "code": "IB", 
+        "name": "Illes Balears"
+    }, 
+    {
+        "priority": 37, 
+        "code": "J", 
+        "name": "Jaén"
+    }, 
+    {
+        "priority": 38, 
+        "code": "LE", 
+        "name": "León"
+    }, 
+    {
+        "priority": 39, 
+        "code": "L", 
+        "name": "Lleida"
+    }, 
+    {
+        "priority": 40, 
+        "code": "LU", 
+        "name": "Lugo"
+    }, 
+    {
+        "priority": 41, 
+        "code": "RI", 
+        "name": "La Rioja"
+    }, 
+    {
+        "priority": 42, 
+        "code": "GC", 
+        "name": "Las Palmas"
+    }, 
+    {
+        "priority": 43, 
+        "code": "M", 
+        "name": "Madrid"
+    }, 
+    {
+        "priority": 44, 
+        "code": "MD", 
+        "name": "Madrid, Comunidad de"
+    }, 
+    {
+        "priority": 45, 
+        "code": "MA", 
+        "name": "Málaga"
+    }, 
+    {
+        "priority": 46, 
+        "code": "ML", 
+        "name": "Melilla"
+    }, 
+    {
+        "priority": 47, 
+        "code": "MU", 
+        "name": "Murcia"
+    }, 
+    {
+        "priority": 48, 
+        "code": "MC", 
+        "name": "Murcia, Región de"
+    }, 
+    {
+        "priority": 49, 
+        "code": "NA", 
+        "name": "Navarra"
+    }, 
+    {
+        "priority": 50, 
+        "code": "NC", 
+        "name": "Navarra, Comunidad Foral de"
+    }, 
+    {
+        "priority": 51, 
+        "code": "OR", 
+        "name": "Ourense"
+    }, 
+    {
+        "priority": 52, 
+        "code": "P", 
+        "name": "Palencia"
+    }, 
+    {
+        "priority": 53, 
+        "code": "PO", 
+        "name": "Pontevedra"
+    }, 
+    {
+        "priority": 54, 
+        "code": "PV", 
+        "name": "Pais Vasco"
+    }, 
+    {
+        "priority": 55, 
+        "code": "SA", 
+        "name": "Salamanca"
+    }, 
+    {
+        "priority": 56, 
+        "code": "TF", 
+        "name": "Santa Cruz de Tenerife"
+    }, 
+    {
+        "priority": 57, 
+        "code": "SG", 
+        "name": "Segovia"
+    }, 
+    {
+        "priority": 58, 
+        "code": "SE", 
+        "name": "Sevilla"
+    }, 
+    {
+        "priority": 59, 
+        "code": "SO", 
+        "name": "Soria"
+    }, 
+    {
+        "priority": 60, 
+        "code": "T", 
+        "name": "Tarragona"
+    }, 
+    {
+        "priority": 61, 
+        "code": "TE", 
+        "name": "Teruel"
+    }, 
+    {
+        "priority": 62, 
+        "code": "TO", 
+        "name": "Toledo"
+    }, 
+    {
+        "priority": 63, 
+        "code": "V", 
+        "name": "Valencia"
+    }, 
+    {
+        "priority": 64, 
+        "code": "VC", 
+        "name": "Valenciana, Comunidad"
+    }, 
+    {
+        "priority": 65, 
+        "code": "VA", 
+        "name": "Valladolid"
+    }, 
+    {
+        "priority": 66, 
+        "code": "ZA", 
+        "name": "Zamora"
+    }, 
+    {
+        "priority": 67, 
+        "code": "Z", 
+        "name": "Zaragoza"
+    }
+]

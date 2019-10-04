@@ -1,0 +1,137 @@
+[
+    {
+        "priority": 1, 
+        "code": "AC", 
+        "name": "Acre"
+    }, 
+    {
+        "priority": 2, 
+        "code": "AL", 
+        "name": "Alagoas"
+    }, 
+    {
+        "priority": 3, 
+        "code": "AP", 
+        "name": "Amapá"
+    }, 
+    {
+        "priority": 4, 
+        "code": "AM", 
+        "name": "Amazonas"
+    }, 
+    {
+        "priority": 5, 
+        "code": "BA", 
+        "name": "Bahia"
+    }, 
+    {
+        "priority": 6, 
+        "code": "CE", 
+        "name": "Ceará"
+    }, 
+    {
+        "priority": 7, 
+        "code": "DF", 
+        "name": "Distrito Federal"
+    }, 
+    {
+        "priority": 8, 
+        "code": "ES", 
+        "name": "Espírito Santo"
+    }, 
+    {
+        "priority": 9, 
+        "code": "GO", 
+        "name": "Goiás"
+    }, 
+    {
+        "priority": 10, 
+        "code": "MA", 
+        "name": "Maranhão"
+    }, 
+    {
+        "priority": 11, 
+        "code": "MT", 
+        "name": "Mato Grosso"
+    }, 
+    {
+        "priority": 12, 
+        "code": "MS", 
+        "name": "Mato Grosso do Sul"
+    }, 
+    {
+        "priority": 13, 
+        "code": "MG", 
+        "name": "Minas Gerais"
+    }, 
+    {
+        "priority": 14, 
+        "code": "PA", 
+        "name": "Pará"
+    }, 
+    {
+        "priority": 15, 
+        "code": "PB", 
+        "name": "Paraíba"
+    }, 
+    {
+        "priority": 16, 
+        "code": "PR", 
+        "name": "Paraná"
+    }, 
+    {
+        "priority": 17, 
+        "code": "PE", 
+        "name": "Pernambuco"
+    }, 
+    {
+        "priority": 18, 
+        "code": "PI", 
+        "name": "Piauí"
+    }, 
+    {
+        "priority": 19, 
+        "code": "RJ", 
+        "name": "Rio de Janeiro"
+    }, 
+    {
+        "priority": 20, 
+        "code": "RN", 
+        "name": "Rio Grande do Norte"
+    }, 
+    {
+        "priority": 21, 
+        "code": "RS", 
+        "name": "Rio Grande do Sul"
+    }, 
+    {
+        "priority": 22, 
+        "code": "RO", 
+        "name": "Rondônia"
+    }, 
+    {
+        "priority": 23, 
+        "code": "RR", 
+        "name": "Roraima"
+    }, 
+    {
+        "priority": 24, 
+        "code": "SC", 
+        "name": "Santa Catarina"
+    }, 
+    {
+        "priority": 25, 
+        "code": "SP", 
+        "name": "São Paulo"
+    }, 
+    {
+        "priority": 26, 
+        "code": "SE", 
+        "name": "Sergipe"
+    }, 
+    {
+        "priority": 27, 
+        "code": "TO", 
+        "name": "Tocantins"
+    }
+]

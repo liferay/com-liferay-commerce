@@ -1,0 +1,217 @@
+[
+    {
+        "priority": 1, 
+        "code": "BK", 
+        "name": "Bács-Kiskun"
+    }, 
+    {
+        "priority": 2, 
+        "code": "BA", 
+        "name": "Baranya"
+    }, 
+    {
+        "priority": 3, 
+        "code": "BE", 
+        "name": "Békés"
+    }, 
+    {
+        "priority": 4, 
+        "code": "BC", 
+        "name": "Békéscsaba"
+    }, 
+    {
+        "priority": 5, 
+        "code": "BZ", 
+        "name": "Borsod-Abauj-Zemplen"
+    }, 
+    {
+        "priority": 6, 
+        "code": "BU", 
+        "name": "Budapest"
+    }, 
+    {
+        "priority": 7, 
+        "code": "CS", 
+        "name": "Csongrád"
+    }, 
+    {
+        "priority": 8, 
+        "code": "DE", 
+        "name": "Debrecen"
+    }, 
+    {
+        "priority": 9, 
+        "code": "DU", 
+        "name": "Dunaújváros"
+    }, 
+    {
+        "priority": 10, 
+        "code": "EG", 
+        "name": "Eger"
+    }, 
+    {
+        "priority": 11, 
+        "code": "ER", 
+        "name": "Érd"
+    }, 
+    {
+        "priority": 12, 
+        "code": "FE", 
+        "name": "Fejér"
+    }, 
+    {
+        "priority": 13, 
+        "code": "GY", 
+        "name": "Győr"
+    }, 
+    {
+        "priority": 14, 
+        "code": "GS", 
+        "name": "Győr-Moson-Sopron"
+    }, 
+    {
+        "priority": 15, 
+        "code": "HB", 
+        "name": "Hajdú-Bihar"
+    }, 
+    {
+        "priority": 16, 
+        "code": "HE", 
+        "name": "Heves"
+    }, 
+    {
+        "priority": 17, 
+        "code": "HV", 
+        "name": "Hódmezővásárhely"
+    }, 
+    {
+        "priority": 18, 
+        "code": "N", 
+        "name": "Jász-Nagykun-Szolnok"
+    }, 
+    {
+        "priority": 19, 
+        "code": "KV", 
+        "name": "Kaposvár"
+    }, 
+    {
+        "priority": 20, 
+        "code": "KM", 
+        "name": "Kecskemét"
+    }, 
+    {
+        "priority": 21, 
+        "code": "KE", 
+        "name": "Komárom-Esztergom"
+    }, 
+    {
+        "priority": 22, 
+        "code": "MI", 
+        "name": "Miskolc"
+    }, 
+    {
+        "priority": 23, 
+        "code": "NK", 
+        "name": "Nagykanizsa"
+    }, 
+    {
+        "priority": 24, 
+        "code": "NO", 
+        "name": "Nógrád"
+    }, 
+    {
+        "priority": 25, 
+        "code": "NY", 
+        "name": "Nyíregyháza"
+    }, 
+    {
+        "priority": 26, 
+        "code": "PS", 
+        "name": "Pécs"
+    }, 
+    {
+        "priority": 27, 
+        "code": "PE", 
+        "name": "Pest"
+    }, 
+    {
+        "priority": 28, 
+        "code": "ST", 
+        "name": "Salgótarján"
+    }, 
+    {
+        "priority": 29, 
+        "code": "SO", 
+        "name": "Somogy"
+    }, 
+    {
+        "priority": 30, 
+        "code": "SN", 
+        "name": "Sopron"
+    }, 
+    {
+        "priority": 31, 
+        "code": "SZ", 
+        "name": "Szabolcs-á-Bereg"
+    }, 
+    {
+        "priority": 32, 
+        "code": "SD", 
+        "name": "Szeged"
+    }, 
+    {
+        "priority": 33, 
+        "code": "SF", 
+        "name": "Székesfehérvár"
+    }, 
+    {
+        "priority": 34, 
+        "code": "SS", 
+        "name": "Szekszárd"
+    }, 
+    {
+        "priority": 35, 
+        "code": "SK", 
+        "name": "Szolnok"
+    }, 
+    {
+        "priority": 36, 
+        "code": "SH", 
+        "name": "Szombathely"
+    }, 
+    {
+        "priority": 37, 
+        "code": "TB", 
+        "name": "Tatabánya"
+    }, 
+    {
+        "priority": 38, 
+        "code": "TO", 
+        "name": "Tolna"
+    }, 
+    {
+        "priority": 39, 
+        "code": "VA", 
+        "name": "Vas"
+    }, 
+    {
+        "priority": 40, 
+        "code": "VE", 
+        "name": "Veszprém"
+    }, 
+    {
+        "priority": 41, 
+        "code": "VM", 
+        "name": "Veszprém (City)"
+    }, 
+    {
+        "priority": 42, 
+        "code": "ZA", 
+        "name": "Zala"
+    }, 
+    {
+        "priority": 43, 
+        "code": "ZE", 
+        "name": "Zalaegerszeg"
+    }
+]

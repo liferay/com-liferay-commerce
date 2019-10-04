@@ -1,0 +1,97 @@
+[
+    {
+        "priority": 1, 
+        "code": "01", 
+        "name": "Ahvenanmaan maakunta"
+    },
+    {
+        "priority": 2, 
+        "code": "02", 
+        "name": "Etela-Karjala"
+    }, 
+    {
+        "priority": 3, 
+        "code": "03", 
+        "name": "Etela-Pohjanmaa"
+    }, 
+    {
+        "priority": 4, 
+        "code": "04", 
+        "name": "Etela-Savo"
+    }, 
+    {
+        "priority": 5, 
+        "code": "05", 
+        "name": "Kainuu"
+    }, 
+    {
+        "priority": 6, 
+        "code": "06", 
+        "name": "Kanta-Hame"
+    }, 
+    {
+        "priority": 7, 
+        "code": "07", 
+        "name": "Keski-Pohjanmaa"
+    }, 
+    {
+        "priority": 8, 
+        "code": "08", 
+        "name": "Keski-Suomi"
+    }, 
+    {
+        "priority": 9, 
+        "code": "09", 
+        "name": "Kymenlaakso"
+    }, 
+    {
+        "priority": 10, 
+        "code": "10", 
+        "name": "Lappi"
+    }, 
+    {
+        "priority": 11, 
+        "code": "11", 
+        "name": "Paijat-Hame"
+    }, 
+    {
+        "priority": 12, 
+        "code": "12", 
+        "name": "Pirkanmaa"
+    }, 
+    {
+        "priority": 13, 
+        "code": "13", 
+        "name": "Pohjanmaa"
+    }, 
+    {
+        "priority": 14, 
+        "code": "14", 
+        "name": "Pohjois-Karjala"
+    }, 
+    {
+        "priority": 15, 
+        "code": "15", 
+        "name": "Pohjois-Pohjanmaa"
+    }, 
+    {
+        "priority": 16, 
+        "code": "16", 
+        "name": "Pohjois-Savo"
+    }, 
+    {
+        "priority": 17, 
+        "code": "17", 
+        "name": "Satakunta"
+    }, 
+    {
+        "priority": 18, 
+        "code": "18", 
+        "name": "Uusimaa"
+    }, 
+    {
+        "priority": 19, 
+        "code": "19", 
+        "name": "Varsinais-Suomi"
+    }
+]

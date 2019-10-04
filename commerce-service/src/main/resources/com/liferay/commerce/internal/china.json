@@ -1,0 +1,172 @@
+[
+    {
+        "priority": 1, 
+        "code": "AH", 
+        "name": "Anhui"
+    }, 
+    {
+        "priority": 2, 
+        "code": "BJ", 
+        "name": "Beijing"
+    }, 
+    {
+        "priority": 3, 
+        "code": "CQ", 
+        "name": "Chongqing"
+    }, 
+    {
+        "priority": 4, 
+        "code": "FJ", 
+        "name": "Fujian"
+    }, 
+    {
+        "priority": 5, 
+        "code": "GS", 
+        "name": "Gansu"
+    }, 
+    {
+        "priority": 6, 
+        "code": "GD", 
+        "name": "Guangdong"
+    }, 
+    {
+        "priority": 7, 
+        "code": "GX", 
+        "name": "Guangxi"
+    }, 
+    {
+        "priority": 8, 
+        "code": "GZ", 
+        "name": "Guizhou"
+    }, 
+    {
+        "priority": 9, 
+        "code": "HI", 
+        "name": "Hainan"
+    }, 
+    {
+        "priority": 10, 
+        "code": "HE", 
+        "name": "Hebei"
+    }, 
+    {
+        "priority": 11, 
+        "code": "HL", 
+        "name": "Heilongjiang"
+    }, 
+    {
+        "priority": 12, 
+        "code": "HA", 
+        "name": "Henan"
+    }, 
+    {
+        "priority": 13, 
+        "code": "HK", 
+        "name": "Hong Kong"
+    }, 
+    {
+        "priority": 14, 
+        "code": "HB", 
+        "name": "Hubei"
+    }, 
+    {
+        "priority": 15, 
+        "code": "HN", 
+        "name": "Hunan"
+    }, 
+    {
+        "priority": 16, 
+        "code": "NM", 
+        "name": "Nei Mongol"
+    }, 
+    {
+        "priority": 17, 
+        "code": "JS", 
+        "name": "Jiangsu"
+    }, 
+    {
+        "priority": 18, 
+        "code": "JX", 
+        "name": "Jiangxi"
+    }, 
+    {
+        "priority": 19, 
+        "code": "JL", 
+        "name": "Jilin"
+    }, 
+    {
+        "priority": 20, 
+        "code": "LN", 
+        "name": "Liaoning"
+    }, 
+    {
+        "priority": 21, 
+        "code": "MO", 
+        "name": "Macau"
+    }, 
+    {
+        "priority": 22, 
+        "code": "NX", 
+        "name": "Ningxia"
+    }, 
+    {
+        "priority": 23, 
+        "code": "QH", 
+        "name": "Qinghai"
+    }, 
+    {
+        "priority": 24, 
+        "code": "SN", 
+        "name": "Shaanxi"
+    }, 
+    {
+        "priority": 25, 
+        "code": "SD", 
+        "name": "Shandong"
+    }, 
+    {
+        "priority": 26, 
+        "code": "SH", 
+        "name": "Shanghai"
+    }, 
+    {
+        "priority": 27, 
+        "code": "SX", 
+        "name": "Shanxi"
+    }, 
+    {
+        "priority": 28, 
+        "code": "SC", 
+        "name": "Sichuan"
+    }, 
+    {
+        "priority": 29, 
+        "code": "TJ", 
+        "name": "Tianjin"
+    }, 
+    {
+        "priority": 30, 
+        "code": "TW", 
+        "name": "Taiwan"
+    }, 
+    {
+        "priority": 31, 
+        "code": "XJ", 
+        "name": "Xinjiang"
+    }, 
+    {
+        "priority": 32, 
+        "code": "XZ", 
+        "name": "Xizang"
+    }, 
+    {
+        "priority": 33, 
+        "code": "YN", 
+        "name": "Yunnan"
+    }, 
+    {
+        "priority": 33, 
+        "code": "ZJ", 
+        "name": "Zhejiang"
+    }
+]
