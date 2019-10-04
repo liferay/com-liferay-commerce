@@ -34,11 +34,10 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface AccountGroupResource {
 
-	public Response deleteAccountGroup(Long id) throws Exception;
+	public Page<AccountGroup> getAccountGroupsPage(Pagination pagination)
+		throws Exception;
 
-	public AccountGroup getAccountGroup(Long id) throws Exception;
-
-	public Response patchAccountGroup(Long id, AccountGroup accountGroup)
+	public AccountGroup postAccountGroup(AccountGroup accountGroup)
 		throws Exception;
 
 	public Response deleteAccountGroupByExternalReferenceCode(
@@ -53,10 +52,11 @@ public interface AccountGroupResource {
 			String externalReferenceCode, AccountGroup accountGroup)
 		throws Exception;
 
-	public Page<AccountGroup> getAccountGroupsPage(Pagination pagination)
-		throws Exception;
+	public Response deleteAccountGroup(Long id) throws Exception;
 
-	public AccountGroup postAccountGroup(AccountGroup accountGroup)
+	public AccountGroup getAccountGroup(Long id) throws Exception;
+
+	public Response patchAccountGroup(Long id, AccountGroup accountGroup)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

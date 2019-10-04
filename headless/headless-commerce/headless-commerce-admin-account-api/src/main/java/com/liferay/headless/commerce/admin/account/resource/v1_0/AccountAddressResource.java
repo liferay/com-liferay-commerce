@@ -36,14 +36,6 @@ public interface AccountAddressResource {
 
 	public Response deleteAccountAddress(Long id) throws Exception;
 
-	public Page<AccountAddress> getAccountIdAccountAddressesPage(
-			Long id, Pagination pagination)
-		throws Exception;
-
-	public AccountAddress postAccountIdAccountAddress(
-			Long id, AccountAddress accountAddress)
-		throws Exception;
-
 	public Page<AccountAddress>
 			getAccountByExternalReferenceCodeAccountAddressesPage(
 				String externalReferenceCode, Pagination pagination)
@@ -51,6 +43,14 @@ public interface AccountAddressResource {
 
 	public AccountAddress postAccountByExternalReferenceCodeAccountAddress(
 			String externalReferenceCode, AccountAddress accountAddress)
+		throws Exception;
+
+	public Page<AccountAddress> getAccountIdAccountAddressesPage(
+			Long id, Pagination pagination)
+		throws Exception;
+
+	public AccountAddress postAccountIdAccountAddress(
+			Long id, AccountAddress accountAddress)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

@@ -62,6 +62,125 @@ public abstract class BaseAccountMemberResourceImpl
 	@GET
 	@Parameters(
 		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode"),
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path(
+		"/accounts/by-externalReferenceCode/{externalReferenceCode}/accountMembers/"
+	)
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "AccountMember")})
+	public Page<AccountMember>
+			getAccountByExternalReferenceCodeAccountMembersPage(
+				@NotNull @Parameter(hidden = true)
+				@PathParam("externalReferenceCode") String
+					externalReferenceCode,
+				@Context Pagination pagination)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
+		}
+	)
+	@Path(
+		"/accounts/by-externalReferenceCode/{externalReferenceCode}/accountMembers/"
+	)
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "AccountMember")})
+	public AccountMember postAccountByExternalReferenceCodeAccountMember(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode,
+			AccountMember accountMember)
+		throws Exception {
+
+		return new AccountMember();
+	}
+
+	@Override
+	@DELETE
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode"),
+			@Parameter(in = ParameterIn.PATH, name = "userId")
+		}
+	)
+	@Path(
+		"/accounts/by-externalReferenceCode/{externalReferenceCode}/accountMembers/{userId}"
+	)
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "AccountMember")})
+	public Response deleteAccountByExternalReferenceCodeAccountMember(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode,
+			@NotNull @Parameter(hidden = true) @PathParam("userId") Long userId)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode"),
+			@Parameter(in = ParameterIn.PATH, name = "userId")
+		}
+	)
+	@Path(
+		"/accounts/by-externalReferenceCode/{externalReferenceCode}/accountMembers/{userId}"
+	)
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "AccountMember")})
+	public AccountMember getAccountByExternalReferenceCodeAccountMember(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode,
+			@NotNull @Parameter(hidden = true) @PathParam("userId") Long userId)
+		throws Exception {
+
+		return new AccountMember();
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@PATCH
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode"),
+			@Parameter(in = ParameterIn.PATH, name = "userId")
+		}
+	)
+	@Path(
+		"/accounts/by-externalReferenceCode/{externalReferenceCode}/accountMembers/{userId}"
+	)
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "AccountMember")})
+	public Response patchAccountByExternalReferenceCodeAccountMember(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode,
+			@NotNull @Parameter(hidden = true) @PathParam("userId") Long userId,
+			AccountMember accountMember)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
+	@Parameters(
+		value = {
 			@Parameter(in = ParameterIn.PATH, name = "id"),
 			@Parameter(in = ParameterIn.QUERY, name = "page"),
 			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
@@ -154,125 +273,6 @@ public abstract class BaseAccountMemberResourceImpl
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
-	}
-
-	@Override
-	@DELETE
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode"),
-			@Parameter(in = ParameterIn.PATH, name = "userId")
-		}
-	)
-	@Path(
-		"/accounts/by-externalReferenceCode/{externalReferenceCode}/accountMembers/{userId}"
-	)
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "AccountMember")})
-	public Response deleteAccountByExternalReferenceCodeAccountMember(
-			@NotNull @Parameter(hidden = true)
-			@PathParam("externalReferenceCode") String externalReferenceCode,
-			@NotNull @Parameter(hidden = true) @PathParam("userId") Long userId)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode"),
-			@Parameter(in = ParameterIn.PATH, name = "userId")
-		}
-	)
-	@Path(
-		"/accounts/by-externalReferenceCode/{externalReferenceCode}/accountMembers/{userId}"
-	)
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "AccountMember")})
-	public AccountMember getAccountByExternalReferenceCodeAccountMember(
-			@NotNull @Parameter(hidden = true)
-			@PathParam("externalReferenceCode") String externalReferenceCode,
-			@NotNull @Parameter(hidden = true) @PathParam("userId") Long userId)
-		throws Exception {
-
-		return new AccountMember();
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@PATCH
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode"),
-			@Parameter(in = ParameterIn.PATH, name = "userId")
-		}
-	)
-	@Path(
-		"/accounts/by-externalReferenceCode/{externalReferenceCode}/accountMembers/{userId}"
-	)
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "AccountMember")})
-	public Response patchAccountByExternalReferenceCodeAccountMember(
-			@NotNull @Parameter(hidden = true)
-			@PathParam("externalReferenceCode") String externalReferenceCode,
-			@NotNull @Parameter(hidden = true) @PathParam("userId") Long userId,
-			AccountMember accountMember)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode"),
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path(
-		"/accounts/by-externalReferenceCode/{externalReferenceCode}/accountMembers/"
-	)
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "AccountMember")})
-	public Page<AccountMember>
-			getAccountByExternalReferenceCodeAccountMembersPage(
-				@NotNull @Parameter(hidden = true)
-				@PathParam("externalReferenceCode") String
-					externalReferenceCode,
-				@Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
-		}
-	)
-	@Path(
-		"/accounts/by-externalReferenceCode/{externalReferenceCode}/accountMembers/"
-	)
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "AccountMember")})
-	public AccountMember postAccountByExternalReferenceCodeAccountMember(
-			@NotNull @Parameter(hidden = true)
-			@PathParam("externalReferenceCode") String externalReferenceCode,
-			AccountMember accountMember)
-		throws Exception {
-
-		return new AccountMember();
 	}
 
 	public void setContextCompany(Company contextCompany) {

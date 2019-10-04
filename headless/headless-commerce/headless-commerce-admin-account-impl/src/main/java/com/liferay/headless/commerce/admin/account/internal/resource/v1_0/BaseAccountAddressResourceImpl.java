@@ -76,41 +76,6 @@ public abstract class BaseAccountAddressResourceImpl
 	@GET
 	@Parameters(
 		value = {
-			@Parameter(in = ParameterIn.PATH, name = "id"),
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/accounts/{id}/accountAddresses/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "AccountAddress")})
-	public Page<AccountAddress> getAccountIdAccountAddressesPage(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			@Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/accounts/{id}/accountAddresses/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "AccountAddress")})
-	public AccountAddress postAccountIdAccountAddress(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			AccountAddress accountAddress)
-		throws Exception {
-
-		return new AccountAddress();
-	}
-
-	@Override
-	@GET
-	@Parameters(
-		value = {
 			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode"),
 			@Parameter(in = ParameterIn.QUERY, name = "page"),
 			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
@@ -148,6 +113,41 @@ public abstract class BaseAccountAddressResourceImpl
 	public AccountAddress postAccountByExternalReferenceCodeAccountAddress(
 			@NotNull @Parameter(hidden = true)
 			@PathParam("externalReferenceCode") String externalReferenceCode,
+			AccountAddress accountAddress)
+		throws Exception {
+
+		return new AccountAddress();
+	}
+
+	@Override
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "id"),
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/accounts/{id}/accountAddresses/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "AccountAddress")})
+	public Page<AccountAddress> getAccountIdAccountAddressesPage(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			@Context Pagination pagination)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/accounts/{id}/accountAddresses/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "AccountAddress")})
+	public AccountAddress postAccountIdAccountAddress(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
 			AccountAddress accountAddress)
 		throws Exception {
 
