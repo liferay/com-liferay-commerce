@@ -30,26 +30,24 @@ import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.model.CommerceShipment;
 import com.liferay.commerce.notification.model.CommerceNotificationQueueEntry;
 import com.liferay.commerce.notification.model.CommerceNotificationTemplate;
+import com.liferay.commerce.notification.service.CommerceNotificationQueueEntryLocalService;
 import com.liferay.commerce.notification.service.CommerceNotificationTemplateService;
 import com.liferay.commerce.order.web.internal.display.context.util.CommerceOrderRequestHelper;
-import com.liferay.commerce.order.web.internal.search.CommerceOrderItemSearch;
-import com.liferay.commerce.order.web.internal.search.CommerceOrderItemSearchTerms;
+import com.liferay.commerce.order.web.internal.frontend.OrderItemFilterImpl;
 import com.liferay.commerce.order.web.internal.servlet.taglib.ui.CommerceOrderScreenNavigationConstants;
 import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
 import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelService;
 import com.liferay.commerce.price.CommerceOrderPrice;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
-import com.liferay.commerce.price.CommerceProductPrice;
-import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.item.selector.criterion.CPInstanceItemSelectorCriterion;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
+import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceOrderNoteService;
 import com.liferay.commerce.service.CommerceOrderPaymentLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.commerce.service.CommerceShipmentService;
-import com.liferay.commerce.util.CommerceUtil;
 import com.liferay.frontend.taglib.clay.servlet.taglib.util.DropdownItem;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorReturnType;
@@ -58,17 +56,18 @@ import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
-import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.portlet.PortletProvider;
+import com.liferay.portal.kernel.portlet.PortletProviderUtil;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
-import com.liferay.portal.kernel.search.BaseModelSearchResult;
-import com.liferay.portal.kernel.search.Sort;
-import com.liferay.portal.kernel.search.SortFactoryUtil;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
@@ -86,6 +85,7 @@ import java.util.List;
 
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
+import javax.portlet.WindowStateException;
 
 /**
  * @author Andrea Di Giorgi
@@ -96,9 +96,12 @@ import javax.portlet.RenderRequest;
 public class CommerceOrderEditDisplayContext {
 
 	public CommerceOrderEditDisplayContext(
+			CommerceAddressService commerceAddressService,
 			CommerceChannelLocalService commerceChannelLocalService,
 			CommerceNotificationTemplateService
 				commerceNotificationTemplateService,
+			CommerceNotificationQueueEntryLocalService
+				commerceNotificationQueueEntryLocalService,
 			CommerceOrderService commerceOrderService,
 			CommerceOrderItemService commerceOrderItemService,
 			CommerceOrderNoteService commerceOrderNoteService,
@@ -106,15 +109,17 @@ public class CommerceOrderEditDisplayContext {
 			CommercePaymentMethodGroupRelService
 				commercePaymentMethodGroupRelService,
 			CommerceOrderPriceCalculation commerceOrderPriceCalculation,
-			CommerceProductPriceCalculation commerceProductPriceCalculation,
 			CommerceShipmentService commerceShipmentService,
 			ItemSelector itemSelector, RenderRequest renderRequest,
 			UserLocalService userLocalService)
 		throws PortalException {
 
+		_commerceAddressService = commerceAddressService;
 		_commerceChannelLocalService = commerceChannelLocalService;
 		_commerceNotificationTemplateService =
 			commerceNotificationTemplateService;
+		_commerceNotificationQueueEntryLocalService =
+			commerceNotificationQueueEntryLocalService;
 		_commerceOrderService = commerceOrderService;
 		_commerceOrderItemService = commerceOrderItemService;
 		_commerceOrderNoteService = commerceOrderNoteService;
@@ -122,7 +127,6 @@ public class CommerceOrderEditDisplayContext {
 		_commercePaymentMethodGroupRelService =
 			commercePaymentMethodGroupRelService;
 		_commerceOrderPriceCalculation = commerceOrderPriceCalculation;
-		_commerceProductPriceCalculation = commerceProductPriceCalculation;
 		_commerceShipmentService = commerceShipmentService;
 		_itemSelector = itemSelector;
 		_userLocalService = userLocalService;
@@ -182,6 +186,107 @@ public class CommerceOrderEditDisplayContext {
 		}
 
 		return sb.toString();
+	}
+
+	public List<CommerceAddress> getCommerceAddresses() throws PortalException {
+		if (_commerceOrder == null) {
+			return Collections.emptyList();
+		}
+
+		return _commerceAddressService.getCommerceAddresses(
+			CommerceAccount.class.getName(),
+			_commerceOrder.getCommerceAccountId(), QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	public PortletURL getCommerceNotificationQueueEntriesPortletURL() {
+		LiferayPortletResponse liferayPortletResponse =
+			_commerceOrderRequestHelper.getLiferayPortletResponse();
+
+		PortletURL portletURL = liferayPortletResponse.createRenderURL();
+
+		portletURL.setParameter("mvcRenderCommandName", "editCommerceOrder");
+		portletURL.setParameter(
+			"commerceOrderId", String.valueOf(getCommerceOrderId()));
+		portletURL.setParameter(
+			"screenNavigationCategoryKey",
+			CommerceOrderScreenNavigationConstants.
+				CATEGORY_KEY_COMMERCE_ORDER_EMAILS);
+
+		String redirect = ParamUtil.getString(
+			_commerceOrderRequestHelper.getRequest(), "redirect");
+
+		if (Validator.isNotNull(redirect)) {
+			portletURL.setParameter("redirect", redirect);
+		}
+
+		return portletURL;
+	}
+
+	public SearchContainer<CommerceNotificationQueueEntry>
+			getCommerceNotificationQueueEntriesSearchContainer()
+		throws PortalException {
+
+		if (_notificationSearchContainer != null) {
+			return _notificationSearchContainer;
+		}
+
+		_notificationSearchContainer = new SearchContainer<>(
+			_commerceOrderRequestHelper.getLiferayPortletRequest(),
+			getCommerceNotificationQueueEntriesPortletURL(), null,
+			"there-are-no-emails");
+
+		CommerceChannel commerceChannel =
+			_commerceChannelLocalService.getCommerceChannelByOrderGroupId(
+				_commerceOrder.getGroupId());
+
+		int total =
+			_commerceNotificationQueueEntryLocalService.
+				getCommerceNotificationQueueEntriesCount(
+					commerceChannel.getSiteGroupId(),
+					CommerceOrder.class.getName(), getCommerceOrderId(), true);
+
+		_notificationSearchContainer.setTotal(total);
+
+		List<CommerceNotificationQueueEntry> results =
+			_commerceNotificationQueueEntryLocalService.
+				getCommerceNotificationQueueEntries(
+					commerceChannel.getSiteGroupId(),
+					CommerceOrder.class.getName(), getCommerceOrderId(), true,
+					_notificationSearchContainer.getStart(),
+					_notificationSearchContainer.getEnd(), null);
+
+		_notificationSearchContainer.setResults(results);
+
+		return _notificationSearchContainer;
+	}
+
+	public CommerceNotificationQueueEntry getCommerceNotificationQueueEntry()
+		throws PortalException {
+
+		long commerceNotificationQueueEntryId = ParamUtil.getLong(
+			_commerceOrderRequestHelper.getRequest(),
+			"commerceNotificationQueueEntryId");
+
+		if (commerceNotificationQueueEntryId > 0) {
+			return _commerceNotificationQueueEntryLocalService.
+				getCommerceNotificationQueueEntry(
+					commerceNotificationQueueEntryId);
+		}
+
+		return null;
+	}
+
+	public long getCommerceNotificationQueueEntryId() throws PortalException {
+		CommerceNotificationQueueEntry commerceNotificationQueueEntry =
+			getCommerceNotificationQueueEntry();
+
+		if (commerceNotificationQueueEntry == null) {
+			return 0;
+		}
+
+		return commerceNotificationQueueEntry.
+			getCommerceNotificationQueueEntryId();
 	}
 
 	public String getCommerceNotificationTemplateType() throws PortalException {
@@ -255,53 +360,6 @@ public class CommerceOrderEditDisplayContext {
 		}
 
 		return portletURL;
-	}
-
-	public SearchContainer<CommerceOrderItem>
-			getCommerceOrderItemsSearchContainer()
-		throws PortalException {
-
-		if (_itemSearchContainer != null) {
-			return _itemSearchContainer;
-		}
-
-		_itemSearchContainer = new CommerceOrderItemSearch(
-			_commerceOrderRequestHelper.getLiferayPortletRequest(),
-			getCommerceOrderItemsPortletURL());
-
-		_itemSearchContainer.setRowChecker(
-			new EmptyOnClickRowChecker(
-				_commerceOrderRequestHelper.getLiferayPortletResponse()));
-
-		CommerceOrderItemSearchTerms commerceOrderItemSearchTerms =
-			(CommerceOrderItemSearchTerms)_itemSearchContainer.getSearchTerms();
-
-		BaseModelSearchResult<CommerceOrderItem> baseModelSearchResult = null;
-
-		Sort sort = SortFactoryUtil.getSort(
-			CommerceOrderItem.class, _itemSearchContainer.getOrderByCol(),
-			_itemSearchContainer.getOrderByType());
-
-		if (commerceOrderItemSearchTerms.isAdvancedSearch()) {
-			baseModelSearchResult = _commerceOrderItemService.search(
-				getCommerceOrderId(), commerceOrderItemSearchTerms.getSku(),
-				commerceOrderItemSearchTerms.getName(),
-				commerceOrderItemSearchTerms.isAndOperator(),
-				_itemSearchContainer.getStart(), _itemSearchContainer.getEnd(),
-				sort);
-		}
-		else {
-			baseModelSearchResult = _commerceOrderItemService.search(
-				getCommerceOrderId(),
-				commerceOrderItemSearchTerms.getKeywords(),
-				_itemSearchContainer.getStart(), _itemSearchContainer.getEnd(),
-				sort);
-		}
-
-		_itemSearchContainer.setTotal(baseModelSearchResult.getLength());
-		_itemSearchContainer.setResults(baseModelSearchResult.getBaseModels());
-
-		return _itemSearchContainer;
 	}
 
 	public List<CommerceOrderNote> getCommerceOrderNotes()
@@ -428,16 +486,6 @@ public class CommerceOrderEditDisplayContext {
 			getCommercePaymentMethodGroupRels(commerceChannel.getSiteGroupId());
 	}
 
-	public CommerceProductPrice getCommerceProductPrice(
-			CommerceOrderItem commerceOrderItem)
-		throws PortalException {
-
-		return _commerceProductPriceCalculation.getCommerceProductPrice(
-			commerceOrderItem.getCPInstanceId(),
-			commerceOrderItem.getQuantity(),
-			_commerceOrderRequestHelper.getCommerceContext());
-	}
-
 	public CommerceShipment getCommerceShipment() throws PortalException {
 		if (_commerceShipment != null) {
 			return _commerceShipment;
@@ -452,6 +500,34 @@ public class CommerceOrderEditDisplayContext {
 		}
 
 		return _commerceShipment;
+	}
+
+	public PortletURL getCommerceShipmentEditURL() throws PortalException {
+		PortletURL portletURL = PortletProviderUtil.getPortletURL(
+			_commerceOrderRequestHelper.getRequest(),
+			CommerceShipment.class.getName(), PortletProvider.Action.MANAGE);
+
+		portletURL.setParameter(
+			"mvcRenderCommandName", "viewCommerceShipmentDetail");
+		portletURL.setParameter(
+			"redirect", _commerceOrderRequestHelper.getCurrentURL());
+
+		CommerceShipment commerceShipment = getCommerceShipment();
+
+		if (commerceShipment != null) {
+			portletURL.setParameter(
+				"commerceShipmentId",
+				String.valueOf(commerceShipment.getCommerceShipmentId()));
+		}
+
+		try {
+			portletURL.setWindowState(LiferayWindowState.POP_UP);
+		}
+		catch (WindowStateException wse) {
+			_log.error(wse, wse);
+		}
+
+		return portletURL;
 	}
 
 	public PortletURL getCommerceShipmentsPortletURL() {
@@ -476,46 +552,6 @@ public class CommerceOrderEditDisplayContext {
 		}
 
 		return portletURL;
-	}
-
-	public SearchContainer<CommerceShipment>
-			getCommerceShipmentsSearchContainer()
-		throws PortalException {
-
-		if (_shipmentSearchContainer != null) {
-			return _shipmentSearchContainer;
-		}
-
-		_shipmentSearchContainer = new SearchContainer<>(
-			_commerceOrderRequestHelper.getLiferayPortletRequest(),
-			getCommerceShipmentsPortletURL(), null, "there-are-no-shipments");
-
-		_shipmentSearchContainer.setOrderByCol(getOrderByCol());
-		_shipmentSearchContainer.setOrderByComparator(
-			CommerceUtil.getCommerceShipmentOrderByComparator(
-				getOrderByCol(), getOrderByType()));
-		_shipmentSearchContainer.setOrderByType(getOrderByType());
-
-		_shipmentSearchContainer.setRowChecker(
-			new EmptyOnClickRowChecker(
-				_commerceOrderRequestHelper.getLiferayPortletResponse()));
-
-		int total = _commerceShipmentService.getCommerceShipmentsCount(
-			_commerceOrderRequestHelper.getCompanyId(),
-			_commerceOrder.getShippingAddressId());
-
-		_shipmentSearchContainer.setTotal(total);
-
-		List<CommerceShipment> results =
-			_commerceShipmentService.getCommerceShipments(
-				_commerceOrderRequestHelper.getCompanyId(),
-				_commerceOrder.getShippingAddressId(),
-				_shipmentSearchContainer.getStart(),
-				_shipmentSearchContainer.getEnd(), null);
-
-		_shipmentSearchContainer.setResults(results);
-
-		return _shipmentSearchContainer;
 	}
 
 	public String getDescriptiveCommerceAddress(CommerceAddress commerceAddress)
@@ -625,6 +661,28 @@ public class CommerceOrderEditDisplayContext {
 		return ParamUtil.getString(
 			_commerceOrderRequestHelper.getLiferayPortletRequest(),
 			"orderByType", "desc");
+	}
+
+	public OrderItemFilterImpl getOrderItemFilter() throws PortalException {
+		OrderItemFilterImpl orderItemFilter = new OrderItemFilterImpl();
+
+		orderItemFilter.setAdvancedSearch(
+			ParamUtil.getBoolean(
+				_commerceOrderRequestHelper.getRequest(), "advancedSearch"));
+		orderItemFilter.setAndOperator(
+			ParamUtil.getBoolean(
+				_commerceOrderRequestHelper.getRequest(), "andOperator", true));
+		orderItemFilter.setKeywords(
+			ParamUtil.getString(
+				_commerceOrderRequestHelper.getRequest(), "keywords"));
+		orderItemFilter.setName(
+			ParamUtil.getString(
+				_commerceOrderRequestHelper.getRequest(), "name"));
+		orderItemFilter.setSku(
+			ParamUtil.getString(
+				_commerceOrderRequestHelper.getRequest(), "sku"));
+
+		return orderItemFilter;
 	}
 
 	public List<StepModel> getOrderSteps() throws PortalException {
@@ -870,7 +928,29 @@ public class CommerceOrderEditDisplayContext {
 		return summary;
 	}
 
+	public String getUserPortraitSrc(User user) {
+		StringBundler sb = new StringBundler(5);
+
+		ThemeDisplay themeDisplay =
+			_commerceOrderRequestHelper.getThemeDisplay();
+
+		sb.append(themeDisplay.getPathImage());
+
+		sb.append("/user_portrait?screenName=");
+		sb.append(user.getScreenName());
+		sb.append("&amp;companyId=");
+		sb.append(user.getCompanyId());
+
+		return sb.toString();
+	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceOrderEditDisplayContext.class);
+
+	private final CommerceAddressService _commerceAddressService;
 	private final CommerceChannelLocalService _commerceChannelLocalService;
+	private final CommerceNotificationQueueEntryLocalService
+		_commerceNotificationQueueEntryLocalService;
 	private final CommerceNotificationTemplateService
 		_commerceNotificationTemplateService;
 	private final CommerceOrder _commerceOrder;
@@ -885,14 +965,12 @@ public class CommerceOrderEditDisplayContext {
 	private final CommerceOrderService _commerceOrderService;
 	private final CommercePaymentMethodGroupRelService
 		_commercePaymentMethodGroupRelService;
-	private final CommerceProductPriceCalculation
-		_commerceProductPriceCalculation;
 	private CommerceShipment _commerceShipment;
 	private final CommerceShipmentService _commerceShipmentService;
-	private SearchContainer<CommerceOrderItem> _itemSearchContainer;
 	private final ItemSelector _itemSelector;
+	private SearchContainer<CommerceNotificationQueueEntry>
+		_notificationSearchContainer;
 	private SearchContainer<CommerceOrderPayment> _paymentSearchContainer;
-	private SearchContainer<CommerceShipment> _shipmentSearchContainer;
 	private final UserLocalService _userLocalService;
 
 }
