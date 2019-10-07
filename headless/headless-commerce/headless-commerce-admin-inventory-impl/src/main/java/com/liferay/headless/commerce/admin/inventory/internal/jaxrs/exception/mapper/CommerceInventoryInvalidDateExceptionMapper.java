@@ -24,8 +24,7 @@ import javax.ws.rs.ext.Provider;
 import org.osgi.service.component.annotations.Component;
 
 /**
- * @author Alessio Antonio Rendina
- * @author Zoltán Takács
+ * @author Andrea Sbarra
  */
 @Component(
 	property = {
@@ -41,12 +40,12 @@ public class CommerceInventoryInvalidDateExceptionMapper
 
 	@Override
 	public String getErrorDescription() {
-		return "Unable to find SKU contributor option";
+		return "Unable to find warehouse items";
 	}
 
 	@Override
 	public Response.Status getStatus() {
-		return Response.Status.NOT_FOUND;
+		return Response.Status.BAD_REQUEST;
 	}
 
 }

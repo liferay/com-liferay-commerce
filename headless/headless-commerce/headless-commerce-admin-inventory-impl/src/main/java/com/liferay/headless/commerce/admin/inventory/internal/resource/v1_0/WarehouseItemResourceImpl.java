@@ -108,7 +108,6 @@ public class WarehouseItemResourceImpl extends BaseWarehouseItemResourceImpl {
 				GetterUtil.getLong(id)));
 	}
 
-	@NestedField("items")
 	@Override
 	public Page<WarehouseItem> getWarehouseItemsUpdatedPage(
 			Date end, Date start, Pagination pagination)
@@ -148,6 +147,7 @@ public class WarehouseItemResourceImpl extends BaseWarehouseItemResourceImpl {
 			totalItems);
 	}
 
+	@NestedField("items")
 	@Override
 	public Page<WarehouseItem> getWarehousIdWarehouseItemsPage(
 			Long id, Pagination pagination)
