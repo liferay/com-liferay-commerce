@@ -47,12 +47,13 @@ page import="com.liferay.commerce.model.CommerceOrderItem" %><%@
 page import="com.liferay.commerce.model.CommerceOrderNote" %><%@
 page import="com.liferay.commerce.model.CommerceOrderPayment" %><%@
 page import="com.liferay.commerce.model.CommerceShipment" %><%@
-page import="com.liferay.commerce.notification.model.CommerceNotificationQueueEntry" %><%@
 page import="com.liferay.commerce.order.web.internal.display.context.CommerceOrderEditDisplayContext" %><%@
 page import="com.liferay.commerce.order.web.internal.display.context.CommerceOrderListDisplayContext" %><%@
 page import="com.liferay.commerce.order.web.internal.display.context.CommerceOrderNoteEditDisplayContext" %><%@
 page import="com.liferay.commerce.order.web.internal.display.context.CommerceOrderSettingsDisplayContext" %><%@
 page import="com.liferay.commerce.order.web.internal.frontend.CommerceOrderItemClayTable" %><%@
+page import="com.liferay.commerce.order.web.internal.frontend.CommerceShipmentClayTable" %><%@
+page import="com.liferay.commerce.order.web.internal.frontend.CommerceShipmentItemClayTable" %><%@
 page import="com.liferay.commerce.order.web.internal.search.CommerceOrderDisplayTerms" %><%@
 page import="com.liferay.commerce.order.web.internal.search.CommerceOrderItemDisplayTerms" %><%@
 page import="com.liferay.commerce.order.web.internal.servlet.taglib.ui.CommerceOrderFormNavigatorConstants" %><%@
@@ -81,9 +82,7 @@ page import="com.liferay.portal.kernel.workflow.WorkflowDefinition" %>
 <%@ page import="java.text.Format" %>
 
 <%@ page import="java.util.Date" %><%@
-page import="java.util.HashMap" %><%@
-page import="java.util.List" %><%@
-page import="java.util.Map" %>
+page import="java.util.List" %>
 
 <%@ page import="javax.portlet.PortletURL" %>
 
