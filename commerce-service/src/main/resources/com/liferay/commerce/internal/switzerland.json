@@ -1,132 +1,132 @@
 [
-    {
-        "priority": 1, 
-        "code": "AG", 
-        "name": "Aargau"
-    }, 
-    {
-        "priority": 2, 
-        "code": "AR", 
-        "name": "Appenzell Ausserrhoden"
-    }, 
-    {
-        "priority": 3, 
-        "code": "AI", 
-        "name": "Appenzell Innerhoden"
-    }, 
-    {
-        "priority": 4, 
-        "code": "BL", 
-        "name": "Basel-Landschaft"
-    }, 
-    {
-        "priority": 5, 
-        "code": "BS", 
-        "name": "Basel-Stadt"
-    }, 
-    {
-        "priority": 6, 
-        "code": "BE", 
-        "name": "Bern"
-    }, 
-    {
-        "priority": 7, 
-        "code": "FR", 
-        "name": "Fribourg"
-    }, 
-    {
-        "priority": 8, 
-        "code": "GE", 
-        "name": "Genève"
-    }, 
-    {
-        "priority": 9, 
-        "code": "GL", 
-        "name": "Glarus"
-    }, 
-    {
-        "priority": 10, 
-        "code": "GR", 
-        "name": "Graubünden"
-    }, 
-    {
-        "priority": 11, 
-        "code": "JU", 
-        "name": "Jura"
-    }, 
-    {
-        "priority": 12, 
-        "code": "LU", 
-        "name": "Luzern"
-    }, 
-    {
-        "priority": 13, 
-        "code": "NE", 
-        "name": "Neuchâtel"
-    }, 
-    {
-        "priority": 14, 
-        "code": "NW", 
-        "name": "Nidwalden"
-    }, 
-    {
-        "priority": 15, 
-        "code": "OW", 
-        "name": "Obwalden"
-    }, 
-    {
-        "priority": 16, 
-        "code": "SG", 
-        "name": "Sankt Gallen"
-    }, 
-    {
-        "priority": 17, 
-        "code": "SH", 
-        "name": "Schaffhausen"
-    }, 
-    {
-        "priority": 18, 
-        "code": "SZ", 
-        "name": "Schwyz"
-    }, 
-    {
-        "priority": 19, 
-        "code": "SO", 
-        "name": "Solothurn"
-    }, 
-    {
-        "priority": 20, 
-        "code": "TG", 
-        "name": "Thurgau"
-    }, 
-    {
-        "priority": 21, 
-        "code": "TI", 
-        "name": "Ticino"
-    }, 
-    {
-        "priority": 22, 
-        "code": "UR", 
-        "name": "Uri"
-    }, 
-    {
-        "priority": 23, 
-        "code": "VS", 
-        "name": "Valais"
-    }, 
-    {
-        "priority": 24, 
-        "code": "VD", 
-        "name": "Vaud"
-    }, 
-    {
-        "priority": 25, 
-        "code": "ZG", 
-        "name": "Zug"
-    }, 
-    {
-        "priority": 26, 
-        "code": "ZH", 
-        "name": "Zürich"
-    }
+	{
+		"code": "AG",
+		"name": "Aargau",
+		"priority": 1
+	},
+	{
+		"code": "AR",
+		"name": "Appenzell Ausserrhoden",
+		"priority": 2
+	},
+	{
+		"code": "AI",
+		"name": "Appenzell Innerhoden",
+		"priority": 3
+	},
+	{
+		"code": "BL",
+		"name": "Basel-Landschaft",
+		"priority": 4
+	},
+	{
+		"code": "BS",
+		"name": "Basel-Stadt",
+		"priority": 5
+	},
+	{
+		"code": "BE",
+		"name": "Bern",
+		"priority": 6
+	},
+	{
+		"code": "FR",
+		"name": "Fribourg",
+		"priority": 7
+	},
+	{
+		"code": "GE",
+		"name": "Genève",
+		"priority": 8
+	},
+	{
+		"code": "GL",
+		"name": "Glarus",
+		"priority": 9
+	},
+	{
+		"code": "GR",
+		"name": "Graubünden",
+		"priority": 10
+	},
+	{
+		"code": "JU",
+		"name": "Jura",
+		"priority": 11
+	},
+	{
+		"code": "LU",
+		"name": "Luzern",
+		"priority": 12
+	},
+	{
+		"code": "NE",
+		"name": "Neuchâtel",
+		"priority": 13
+	},
+	{
+		"code": "NW",
+		"name": "Nidwalden",
+		"priority": 14
+	},
+	{
+		"code": "OW",
+		"name": "Obwalden",
+		"priority": 15
+	},
+	{
+		"code": "SG",
+		"name": "Sankt Gallen",
+		"priority": 16
+	},
+	{
+		"code": "SH",
+		"name": "Schaffhausen",
+		"priority": 17
+	},
+	{
+		"code": "SZ",
+		"name": "Schwyz",
+		"priority": 18
+	},
+	{
+		"code": "SO",
+		"name": "Solothurn",
+		"priority": 19
+	},
+	{
+		"code": "TG",
+		"name": "Thurgau",
+		"priority": 20
+	},
+	{
+		"code": "TI",
+		"name": "Ticino",
+		"priority": 21
+	},
+	{
+		"code": "UR",
+		"name": "Uri",
+		"priority": 22
+	},
+	{
+		"code": "VS",
+		"name": "Valais",
+		"priority": 23
+	},
+	{
+		"code": "VD",
+		"name": "Vaud",
+		"priority": 24
+	},
+	{
+		"code": "ZG",
+		"name": "Zug",
+		"priority": 25
+	},
+	{
+		"code": "ZH",
+		"name": "Zürich",
+		"priority": 26
+	}
 ]

@@ -36,7 +36,8 @@ import org.osgi.service.component.annotations.Reference;
 	property = "commerce.region.starter.key=" + NetherlandsCommerceRegionsStarter.NETHERLANDS_NUMERIC_ISO_CODE,
 	service = CommerceRegionsStarter.class
 )
-public class NetherlandsCommerceRegionsStarter implements CommerceRegionsStarter {
+public class NetherlandsCommerceRegionsStarter
+	implements CommerceRegionsStarter {
 
 	public static final int NETHERLANDS_NUMERIC_ISO_CODE = 528;
 

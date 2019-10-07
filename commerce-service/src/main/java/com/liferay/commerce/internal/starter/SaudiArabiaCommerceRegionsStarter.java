@@ -36,7 +36,8 @@ import org.osgi.service.component.annotations.Reference;
 	property = "commerce.region.starter.key=" + SaudiArabiaCommerceRegionsStarter.SAUDI_ARABIA_NUMERIC_ISO_CODE,
 	service = CommerceRegionsStarter.class
 )
-public class SaudiArabiaCommerceRegionsStarter implements CommerceRegionsStarter {
+public class SaudiArabiaCommerceRegionsStarter
+	implements CommerceRegionsStarter {
 
 	public static final int SAUDI_ARABIA_NUMERIC_ISO_CODE = 682;
 
