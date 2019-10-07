@@ -62,6 +62,7 @@ create index IX_42E5F6EF on CommerceShippingMethod (groupId, active_);
 create unique index IX_C4557F93 on CommerceShippingMethod (groupId, engineKey[$COLUMN_LENGTH:75$]);
 
 create unique index IX_BE881965 on CommerceSubscriptionEntry (CPInstanceUuid[$COLUMN_LENGTH:75$], CProductId, commerceOrderItemId);
+create unique index IX_D7D137B1 on CommerceSubscriptionEntry (commerceOrderItemId);
 create index IX_43E6F382 on CommerceSubscriptionEntry (companyId, userId);
 create index IX_B99DE058 on CommerceSubscriptionEntry (groupId, companyId, userId);
 create index IX_6D080A04 on CommerceSubscriptionEntry (groupId, userId);
