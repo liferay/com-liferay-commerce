@@ -34,6 +34,7 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.ArrayList;
@@ -76,8 +77,25 @@ public class CPCompareContentMiniDisplayContext {
 			portletDisplay.getPortletInstanceConfiguration(
 				CPCompareContentMiniPortletInstanceConfiguration.class);
 
-		_cpDefinitionIds = new ArrayList<>(
-			CPCompareHelperUtil.getCPDefinitionIds(httpServletRequest));
+		CommerceContext commerceContext =
+			(CommerceContext)httpServletRequest.getAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT);
+
+		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
+
+		if (commerceAccount != null) {
+			HttpServletRequest originalHttpServletRequest =
+				PortalUtil.getOriginalServletRequest(httpServletRequest);
+
+			_cpDefinitionIds = new ArrayList<>(
+				CPCompareHelperUtil.getCPDefinitionIds(
+					commerceContext.getCommerceChannelGroupId(),
+					commerceAccount.getCommerceAccountId(),
+					originalHttpServletRequest.getSession()));
+		}
+		else {
+			_cpDefinitionIds = new ArrayList<>();
+		}
 	}
 
 	public Map<String, String> getCPContentListEntryRendererKeys() {
