@@ -15,7 +15,7 @@
 package com.liferay.commerce.product.content.web.internal.portlet.action;
 
 import com.liferay.commerce.product.constants.CPPortletKeys;
-import com.liferay.commerce.product.util.CPCompareUtil;
+import com.liferay.commerce.product.util.CPCompareHelperUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.util.Portal;
@@ -45,7 +45,7 @@ public class ClearCompareProductsMVCActionCommand extends BaseMVCActionCommand {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		CPCompareUtil.setCPDefinitionIds(
+		CPCompareHelperUtil.setCPDefinitionIds(
 			_portal.getHttpServletRequest(actionRequest), null);
 
 		hideDefaultErrorMessage(actionRequest);

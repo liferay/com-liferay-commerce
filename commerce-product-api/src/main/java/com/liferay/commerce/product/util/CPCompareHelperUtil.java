@@ -28,7 +28,7 @@ import org.osgi.util.tracker.ServiceTracker;
  * @author Alessio Antonio Rendina
  * @author Alec Sloan
  */
-public class CPCompareUtil {
+public class CPCompareHelperUtil {
 
 	public static void addCompareProduct(
 			long groupId, long commerceAccountId, long cpDefinitionId,
@@ -73,7 +73,7 @@ public class CPCompareUtil {
 
 	private static final ServiceTracker<?, CPCompareHelper> _serviceTracker =
 		ServiceTrackerFactory.open(
-			FrameworkUtil.getBundle(CPCompareUtil.class),
+			FrameworkUtil.getBundle(CPCompareHelperUtil.class),
 			CPCompareHelper.class);
 
 }
