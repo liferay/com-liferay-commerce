@@ -36,7 +36,8 @@ import org.osgi.service.component.annotations.Reference;
 	property = "commerce.region.starter.key=" + UnitedKingdomCommerceRegionsStarter.UNITED_KINGDOM_NUMERIC_ISO_CODE,
 	service = CommerceRegionsStarter.class
 )
-public class UnitedKingdomCommerceRegionsStarter implements CommerceRegionsStarter {
+public class UnitedKingdomCommerceRegionsStarter
+	implements CommerceRegionsStarter {
 
 	public static final int UNITED_KINGDOM_NUMERIC_ISO_CODE = 826;
 
@@ -50,7 +51,8 @@ public class UnitedKingdomCommerceRegionsStarter implements CommerceRegionsStart
 	public JSONArray getCommerceRegionsJSONArray() throws Exception {
 		Class<?> clazz = getClass();
 
-		String layoutsPath = "com/liferay/commerce/internal/united-kingdom.json";
+		String layoutsPath =
+			"com/liferay/commerce/internal/united-kingdom.json";
 
 		String regionsJSON = StringUtil.read(
 			clazz.getClassLoader(), layoutsPath, false);

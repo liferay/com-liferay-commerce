@@ -1,7 +1,7 @@
 [
-    {
-        "priority": 1, 
-        "code": "CW", 
-        "name": "Curacao"
-    }
+	{
+		"code": "CW",
+		"name": "Curacao",
+		"priority": 1
+	}
 ]

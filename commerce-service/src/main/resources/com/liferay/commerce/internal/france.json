@@ -1,67 +1,67 @@
 [
-    {
-        "priority": 1, 
-        "code": "ARA", 
-        "name": "Auvergne-Rhône-Alpes"
-    }, 
-    {
-        "priority": 2, 
-        "code": "BFC", 
-        "name": "Bourgogne-Franche-Comté"
-    }, 
-    {
-        "priority": 3, 
-        "code": "BRE", 
-        "name": "Bretagne"
-    }, 
-    {
-        "priority": 4, 
-        "code": "CVL", 
-        "name": "Centre-Val de Loire"
-    }, 
-    {
-        "priority": 5, 
-        "code": "COR", 
-        "name": "Corse"
-    }, 
-    {
-        "priority": 6, 
-        "code": "GES", 
-        "name": "Grand Est"
-    }, 
-    {
-        "priority": 7, 
-        "code": "HDF", 
-        "name": "Hauts-de-France"
-    }, 
-    {
-        "priority": 8, 
-        "code": "IDF", 
-        "name": "Île-de-France"
-    }, 
-    {
-        "priority": 9, 
-        "code": "NOR", 
-        "name": "Normandie"
-    }, 
-    {
-        "priority": 10, 
-        "code": "NAQ", 
-        "name": "Nouvelle-Aquitaine"
-    }, 
-    {
-        "priority": 11, 
-        "code": "OCC", 
-        "name": "Occitanie"
-    }, 
-    {
-        "priority": 12, 
-        "code": "PDL", 
-        "name": "Pays de la Loire"
-    }, 
-    {
-        "priority": 13, 
-        "code": "PAC", 
-        "name": "Provence-Alpes-Cote d'Azur"
-    }
+	{
+		"code": "ARA",
+		"name": "Auvergne-Rhône-Alpes",
+		"priority": 1
+	},
+	{
+		"code": "BFC",
+		"name": "Bourgogne-Franche-Comté",
+		"priority": 2
+	},
+	{
+		"code": "BRE",
+		"name": "Bretagne",
+		"priority": 3
+	},
+	{
+		"code": "CVL",
+		"name": "Centre-Val de Loire",
+		"priority": 4
+	},
+	{
+		"code": "COR",
+		"name": "Corse",
+		"priority": 5
+	},
+	{
+		"code": "GES",
+		"name": "Grand Est",
+		"priority": 6
+	},
+	{
+		"code": "HDF",
+		"name": "Hauts-de-France",
+		"priority": 7
+	},
+	{
+		"code": "IDF",
+		"name": "Île-de-France",
+		"priority": 8
+	},
+	{
+		"code": "NOR",
+		"name": "Normandie",
+		"priority": 9
+	},
+	{
+		"code": "NAQ",
+		"name": "Nouvelle-Aquitaine",
+		"priority": 10
+	},
+	{
+		"code": "OCC",
+		"name": "Occitanie",
+		"priority": 11
+	},
+	{
+		"code": "PDL",
+		"name": "Pays de la Loire",
+		"priority": 12
+	},
+	{
+		"code": "PAC",
+		"name": "Provence-Alpes-Cote d'Azur",
+		"priority": 13
+	}
 ]
