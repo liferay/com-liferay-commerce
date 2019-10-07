@@ -14,13 +14,11 @@
 
 package com.liferay.commerce.product.internal.util;
 
-import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.util.CPCompareHelper;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 
 import java.util.ArrayList;
@@ -56,23 +54,20 @@ public class CPCompareHelperImpl implements CPCompareHelper {
 			long groupId, long commerceAccountId, HttpSession httpSession)
 		throws PortalException {
 
-		long[] cpDefinitionIds = GetterUtil.getLongValues(
-			httpSession.getAttribute(_getSessionAttributeKey(groupId)));
+		List<Long> cpDefinitionIds = (List<Long>)httpSession.getAttribute(
+			_getSessionAttributeKey(groupId));
 
 		if (cpDefinitionIds == null) {
 			return new ArrayList<>();
 		}
-
-		CommerceAccount commerceAccount =
-			_commerceAccountService.getCommerceAccount(commerceAccountId);
 
 		List<Long> activeCPDefinitionIds = new ArrayList<>();
 
 		for (long cpDefinitionId : cpDefinitionIds) {
 			CPCatalogEntry cpCatalogEntry =
 				_cpDefinitionHelper.getCPCatalogEntry(
-					commerceAccount.getCommerceAccountId(), groupId,
-					cpDefinitionId, LocaleUtil.getDefault());
+					commerceAccountId, groupId, cpDefinitionId,
+					LocaleUtil.getDefault());
 
 			if (cpCatalogEntry != null) {
 				activeCPDefinitionIds.add(cpDefinitionId);
@@ -90,7 +85,7 @@ public class CPCompareHelperImpl implements CPCompareHelper {
 		throws PortalException {
 
 		List<Long> cpDefinitionIds = getCPDefinitionIds(
-			commerceAccountId, groupId, httpSession);
+			groupId, commerceAccountId, httpSession);
 
 		if (cpDefinitionIds.contains(cpDefinitionId)) {
 			cpDefinitionIds.remove(cpDefinitionId);

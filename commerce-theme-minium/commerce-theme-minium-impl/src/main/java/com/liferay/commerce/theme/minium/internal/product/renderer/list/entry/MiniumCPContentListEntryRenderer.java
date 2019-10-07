@@ -130,6 +130,8 @@ public class MiniumCPContentListEntryRenderer
 
 		Map<String, Object> context = new HashMap<>();
 
+		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
+
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
 		String portletName = portletDisplay.getPortletName();
@@ -154,8 +156,18 @@ public class MiniumCPContentListEntryRenderer
 				editCompareProductActionURL.toString());
 		}
 		else {
+			long commerceAccountId = 0;
+
+			if (commerceAccount != null) {
+				commerceAccountId = commerceAccount.getCommerceAccountId();
+			}
+
+			HttpServletRequest originalHttpServletRequest =
+				_portal.getOriginalServletRequest(httpServletRequest);
+
 			List<Long> cpDefinitionIds = CPCompareHelperUtil.getCPDefinitionIds(
-				httpServletRequest);
+				commerceContext.getCommerceChannelGroupId(), commerceAccountId,
+				originalHttpServletRequest.getSession());
 
 			JSONObject jsonObject = _jsonFactory.createJSONObject();
 
@@ -171,8 +183,6 @@ public class MiniumCPContentListEntryRenderer
 		}
 
 		context.put("orderQuantity", 0);
-
-		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
 
 		if (commerceAccount != null) {
 			context.put("accountId", commerceAccount.getCommerceAccountId());

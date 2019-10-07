@@ -115,8 +115,12 @@ public class MiniumCPCompareListRenderer implements CPContentListRenderer {
 		int limit = cpCompareContentHelper.getProductsLimit(
 			themeDisplay.getPortletDisplay());
 
+		HttpServletRequest originalHttpServletRequest =
+			_portal.getOriginalServletRequest(httpServletRequest);
+
 		List<Long> cpDefinitionIds = CPCompareHelperUtil.getCPDefinitionIds(
-			httpServletRequest);
+			commerceContext.getCommerceChannelGroupId(), commerceAccountId,
+			originalHttpServletRequest.getSession());
 
 		List<ProductCompareModel> products = new ArrayList<>();
 
