@@ -8,6 +8,7 @@ import template from './CommerceTable.soy';
 
 import './CommerceTableExtensions.es';
 import './ModalLinkCellTemplate.es';
+import '../subscription_info/SubscriptionInfo.es';
 
 class CommerceTable extends Component {
 

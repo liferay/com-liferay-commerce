@@ -197,3 +197,51 @@
 		{/if}
 	</td>
 {/deltemplate}
+
+{deltemplate ClayTable.Cell variant="'commerceTableCellSidePanelLink'"}
+	{@param fieldSchema: ?}
+	{@param item: ?}
+	{@param value: ?}
+	{@param? _handleCellContentClick: any}
+	{@param? spritemap: string}
+
+	<td class="side-panel-link">
+		<a data-panel-url="{$item.panelUrl}" data-target="{$item.panelTarget}" href="{$item.panelUrl}">
+			{$value}
+		</a>
+	</td>
+{/deltemplate}
+
+{deltemplate ClayTable.Cell variant="'commerceTableCellStatus'"}
+	{@param fieldSchema: ?}
+	{@param item: ?}
+	{@param value: ?}
+	{@param? _handleCellContentClick: any}
+	{@param? spritemap: string}
+
+	<td>
+		{call ClayLabel.render}
+			{param label: $item.statusLabel /}
+			{param style: $item.statusStyle /}
+		{/call}
+	</td>
+{/deltemplate}
+
+{deltemplate ClayTable.Cell variant="'commerceTableCellSubscription'"}
+	{@param fieldSchema: ?}
+	{@param item: ?}
+	{@param value: ?}
+	{@param? _handleCellContentClick: any}
+	{@param? spritemap: string}
+
+	<td>
+		<span class="commerce-value">
+			{$value}
+		</span>
+
+		{call SubscriptionInfo.render}
+			{param durationPeriod: $item.subscriptionDuration /}
+			{param subscriptionPeriod: $item.subscriptionPeriod /}
+		{/call}
+	</td>
+{/deltemplate}
