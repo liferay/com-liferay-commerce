@@ -283,6 +283,23 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>order-subscription-info</name>
+		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.OrderSubscriptionInfoTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>commerceOrderItemId</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>long</type>
+		</attribute>
+		<attribute>
+			<name>showDuration</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+	</tag>
+	<tag>
 		<name>panel</name>
 		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.PanelTag</tag-class>
 		<body-content>JSP</body-content>
@@ -360,6 +377,23 @@
 			<name>quantity</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<name>product-subscription-info</name>
+		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.ProductSubscriptionInfoTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>CPInstanceId</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>long</type>
+		</attribute>
+		<attribute>
+			<name>showDuration</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
 		</attribute>
 	</tag>
 	<tag>
