@@ -55,6 +55,8 @@ page import="com.liferay.commerce.order.web.internal.display.context.CommerceOrd
 page import="com.liferay.commerce.order.web.internal.display.context.CommerceOrderNoteEditDisplayContext" %><%@
 page import="com.liferay.commerce.order.web.internal.display.context.CommerceOrderSettingsDisplayContext" %><%@
 page import="com.liferay.commerce.order.web.internal.frontend.CommerceOrderItemClayTable" %><%@
+page import="com.liferay.commerce.order.web.internal.frontend.CommerceShipmentClayTable" %><%@
+page import="com.liferay.commerce.order.web.internal.frontend.CommerceShipmentItemClayTable" %><%@
 page import="com.liferay.commerce.order.web.internal.search.CommerceOrderDisplayTerms" %><%@
 page import="com.liferay.commerce.order.web.internal.search.CommerceOrderItemDisplayTerms" %><%@
 page import="com.liferay.commerce.order.web.internal.security.permission.resource.CommerceOrderPermission" %><%@
@@ -84,9 +86,7 @@ page import="com.liferay.portal.kernel.workflow.WorkflowDefinition" %>
 <%@ page import="java.text.Format" %>
 
 <%@ page import="java.util.Date" %><%@
-page import="java.util.HashMap" %><%@
-page import="java.util.List" %><%@
-page import="java.util.Map" %>
+page import="java.util.List" %>
 
 <%@ page import="javax.portlet.PortletURL" %>
 
