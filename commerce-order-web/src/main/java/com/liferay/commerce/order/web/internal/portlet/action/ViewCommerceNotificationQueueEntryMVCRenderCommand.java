@@ -16,7 +16,7 @@ package com.liferay.commerce.order.web.internal.portlet.action;
 
 import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.exception.NoSuchOrderException;
-import com.liferay.commerce.notification.service.CommerceNotificationQueueEntryService;
+import com.liferay.commerce.notification.service.CommerceNotificationQueueEntryLocalService;
 import com.liferay.commerce.notification.service.CommerceNotificationTemplateService;
 import com.liferay.commerce.order.web.internal.display.context.CommerceOrderEditDisplayContext;
 import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelService;
@@ -64,13 +64,14 @@ public class ViewCommerceNotificationQueueEntryMVCRenderCommand
 		try {
 			CommerceOrderEditDisplayContext commerceOrderEditDisplayContext =
 				new CommerceOrderEditDisplayContext(
-					_commerceChannelLocalService,
-					_commerceNotificationTemplateService, _commerceOrderService,
-					_commerceOrderItemService, _commerceOrderNoteService,
+					_commerceAddressService, _commerceChannelLocalService,
+					_commerceNotificationTemplateService,
+					_commerceNotificationQueueEntryLocalService,
+					_commerceOrderService, _commerceOrderItemService,
+					_commerceOrderNoteService,
 					_commerceOrderPaymentLocalService,
 					_commercePaymentMethodGroupRelService,
-					_commerceOrderPriceCalculation,
-					_commerceProductPriceCalculation, _commerceShipmentService,
+					_commerceOrderPriceCalculation, _commerceShipmentService,
 					_itemSelector, renderRequest, _userLocalService);
 
 			renderRequest.setAttribute(
@@ -99,8 +100,8 @@ public class ViewCommerceNotificationQueueEntryMVCRenderCommand
 	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
-	private CommerceNotificationQueueEntryService
-		_commerceNotificationQueueEntryService;
+	private CommerceNotificationQueueEntryLocalService
+		_commerceNotificationQueueEntryLocalService;
 
 	@Reference
 	private CommerceNotificationTemplateService
