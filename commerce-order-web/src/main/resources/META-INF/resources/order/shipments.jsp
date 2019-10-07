@@ -19,40 +19,44 @@
 <%
 CommerceOrderEditDisplayContext commerceOrderEditDisplayContext = (CommerceOrderEditDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
-SearchContainer<CommerceShipment> commerceShipmentsSearchContainer = commerceOrderEditDisplayContext.getCommerceShipmentsSearchContainer();
 PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceShipmentsPortletURL();
 %>
 
+<liferay-portlet:renderURL var="editCommerceShipmentURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+	<portlet:param name="mvcRenderCommandName" value="editCommerceShipment" />
+	<portlet:param name="commerceOrderId" value="<%= String.valueOf(commerceOrderEditDisplayContext.getCommerceOrderId()) %>" />
+</liferay-portlet:renderURL>
+
+<commerce-ui:modal
+	closeOnSubmit="<%= true %>"
+	id="add-shipment-modal"
+	showCancel="<%= true %>"
+	showSubmit="<%= true %>"
+	size="lg"
+	title='<%= LanguageUtil.get(request, "create-new-shipment") %>'
+	url="<%= editCommerceShipmentURL %>"
+/>
+
 <liferay-frontend:management-bar
-	includeCheckBox="<%= true %>"
 	searchContainerId="commerceShipments"
 >
 	<liferay-frontend:management-bar-filters>
 		<liferay-frontend:management-bar-sort
-			orderByCol="<%= commerceShipmentsSearchContainer.getOrderByCol() %>"
-			orderByType="<%= commerceShipmentsSearchContainer.getOrderByType() %>"
+			orderByCol="<%= commerceOrderEditDisplayContext.getOrderByCol() %>"
+			orderByType="<%= commerceOrderEditDisplayContext.getOrderByType() %>"
 			orderColumns='<%= new String[] {"create-date"} %>'
 			portletURL="<%= portletURL %>"
 		/>
 	</liferay-frontend:management-bar-filters>
 
 	<liferay-frontend:management-bar-buttons>
-		<portlet:actionURL name="editCommerceShipment" var="addCommerceShipmentURL" />
-
-		<aui:form action="<%= addCommerceShipmentURL %>" cssClass="hide" name="addCommerceShipmentFm">
-			<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
-			<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-			<aui:input name="commerceOrderId" type="hidden" value="<%= commerceOrderEditDisplayContext.getCommerceOrderId() %>" />
-			<aui:input name="cpInstanceIds" type="hidden" value="" />
-		</aui:form>
-
 		<liferay-frontend:add-menu
 			inline="<%= true %>"
 		>
 			<liferay-frontend:add-menu-item
 				id="addCommerceShipment"
 				title='<%= LanguageUtil.get(request, "add-shipment") %>'
-				url="javascript:;"
+				url="<%= editCommerceShipmentURL %>"
 			/>
 		</liferay-frontend:add-menu>
 	</liferay-frontend:management-bar-buttons>
@@ -66,82 +70,14 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceShipmentsPort
 	</liferay-frontend:management-bar-action-buttons>
 </liferay-frontend:management-bar>
 
-<liferay-ui:search-container
-	id="commerceShipments"
-	searchContainer="<%= commerceShipmentsSearchContainer %>"
->
-	<liferay-ui:search-container-row
-		className="com.liferay.commerce.model.CommerceShipment"
-		escapedModel="<%= true %>"
-		keyProperty="commerceShipmentId"
-		modelVar="commerceShipment"
-	>
-
-		<%
-		PortletURL rowURL = renderResponse.createRenderURL();
-
-		rowURL.setParameter("mvcRenderCommandName", "editCommerceOrderShipment");
-		rowURL.setParameter("redirect", currentURL);
-		rowURL.setParameter("commerceOrderId", String.valueOf(commerceOrderEditDisplayContext.getCommerceOrderId()));
-		rowURL.setParameter("commerceShipmentId", String.valueOf(commerceShipment.getCommerceShipmentId()));
-		rowURL.setWindowState(LiferayWindowState.POP_UP);
-		%>
-
-		<liferay-ui:search-container-column-text
-			cssClass="important table-cell-content"
-			name="shipment-id"
-		>
-
-			<%
-			Map<String, String> dataAttributes = new HashMap<>();
-
-			dataAttributes.put("panel-url", rowURL.toString());
-			dataAttributes.put("target", renderResponse.getNamespace() + "sidePanel");
-			%>
-
-			<clay:link
-				data="<%= dataAttributes %>"
-				href="<%= rowURL.toString() %>"
-				label="<%= String.valueOf(commerceShipment.getCommerceShipmentId()) %>"
-			/>
-		</liferay-ui:search-container-column-text>
-
-		<liferay-ui:search-container-column-text
-			cssClass="table-cell-content"
-			name="address"
-			value="<%= commerceOrderEditDisplayContext.getDescriptiveCommerceAddress(commerceShipment.fetchCommerceAddress()) %>"
-		/>
-
-		<liferay-ui:search-container-column-date
-			cssClass="table-cell-content"
-			name="create-date"
-			property="createDate"
-		/>
-
-		<liferay-ui:search-container-column-text
-			name="status"
-		>
-			<clay:label
-				label="<%= LanguageUtil.get(request, CommerceShipmentConstants.getShipmentStatusLabel(commerceShipment.getStatus())) %>"
-				style="<%= CommerceShipmentConstants.getShipmentLabelStyle(commerceShipment.getStatus()) %>"
-			/>
-		</liferay-ui:search-container-column-text>
-
-		<liferay-ui:search-container-column-text
-			name="tracking"
-			property="trackingNumber"
-		/>
-
-		<liferay-ui:search-container-column-jsp
-			cssClass="entry-action-column"
-			path="/order/shipment_action.jsp"
-		/>
-	</liferay-ui:search-container-row>
-
-	<liferay-ui:search-iterator
-		markupView="lexicon"
-	/>
-</liferay-ui:search-container>
+<commerce-ui:table
+	dataProviderKey="<%= CommerceShipmentClayTable.NAME %>"
+	itemPerPage="<%= 5 %>"
+	namespace="<%= renderResponse.getNamespace() %>"
+	pageNumber="<%= 1 %>"
+	portletURL="<%= portletURL %>"
+	tableName="<%= CommerceShipmentClayTable.NAME %>"
+/>
 
 <aui:script>
 	function <portlet:namespace />deleteCommerceShipments() {
@@ -169,13 +105,13 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceShipmentsPort
 			spritemap: "<%= themeDisplay.getPathThemeImages() + "/clay/icons.svg" %>",
 			portalWrapperId: "<portlet:namespace />side-panel-wrapper",
 			topAnchor: document.getElementById('commerce-admin-header'),
-			onUpdate: function(e){}
+			onUpdate: function(e){console.log(e)}
 		}
 	);
 
 	Promise.all(
 		[
-			Liferay.componentReady('<portlet:namespace />commerceShipments'),
+			Liferay.componentReady('commerceShipmentsCommerceTable'),
 			Liferay.componentReady('<portlet:namespace />sidePanel')
 		]
 	).then(function(
@@ -184,7 +120,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceShipmentsPort
 			panel
 		]
 	) {
-		document.getElementById('<portlet:namespace />commerceShipments')
+		document.getElementById('commerceShipmentsCommerceTable')
 			.addEventListener(
 				'click',
 				function(e) {
