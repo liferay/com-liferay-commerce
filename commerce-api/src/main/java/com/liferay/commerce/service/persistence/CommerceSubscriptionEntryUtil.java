@@ -726,6 +726,70 @@ public class CommerceSubscriptionEntryUtil {
 	}
 
 	/**
+	 * Returns the commerce subscription entry where commerceOrderItemId = &#63; or throws a <code>NoSuchSubscriptionEntryException</code> if it could not be found.
+	 *
+	 * @param commerceOrderItemId the commerce order item ID
+	 * @return the matching commerce subscription entry
+	 * @throws NoSuchSubscriptionEntryException if a matching commerce subscription entry could not be found
+	 */
+	public static CommerceSubscriptionEntry findByCommerceOrderItemId(
+			long commerceOrderItemId)
+		throws com.liferay.commerce.exception.NoSuchSubscriptionEntryException {
+
+		return getPersistence().findByCommerceOrderItemId(commerceOrderItemId);
+	}
+
+	/**
+	 * Returns the commerce subscription entry where commerceOrderItemId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param commerceOrderItemId the commerce order item ID
+	 * @return the matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
+	 */
+	public static CommerceSubscriptionEntry fetchByCommerceOrderItemId(
+		long commerceOrderItemId) {
+
+		return getPersistence().fetchByCommerceOrderItemId(commerceOrderItemId);
+	}
+
+	/**
+	 * Returns the commerce subscription entry where commerceOrderItemId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param commerceOrderItemId the commerce order item ID
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
+	 */
+	public static CommerceSubscriptionEntry fetchByCommerceOrderItemId(
+		long commerceOrderItemId, boolean useFinderCache) {
+
+		return getPersistence().fetchByCommerceOrderItemId(
+			commerceOrderItemId, useFinderCache);
+	}
+
+	/**
+	 * Removes the commerce subscription entry where commerceOrderItemId = &#63; from the database.
+	 *
+	 * @param commerceOrderItemId the commerce order item ID
+	 * @return the commerce subscription entry that was removed
+	 */
+	public static CommerceSubscriptionEntry removeByCommerceOrderItemId(
+			long commerceOrderItemId)
+		throws com.liferay.commerce.exception.NoSuchSubscriptionEntryException {
+
+		return getPersistence().removeByCommerceOrderItemId(
+			commerceOrderItemId);
+	}
+
+	/**
+	 * Returns the number of commerce subscription entries where commerceOrderItemId = &#63;.
+	 *
+	 * @param commerceOrderItemId the commerce order item ID
+	 * @return the number of matching commerce subscription entries
+	 */
+	public static int countByCommerceOrderItemId(long commerceOrderItemId) {
+		return getPersistence().countByCommerceOrderItemId(commerceOrderItemId);
+	}
+
+	/**
 	 * Returns all the commerce subscription entries where subscriptionStatus = &#63;.
 	 *
 	 * @param subscriptionStatus the subscription status
