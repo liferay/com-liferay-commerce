@@ -14,102 +14,66 @@
 
 package com.liferay.commerce.product.util;
 
-import com.liferay.commerce.product.model.CPDefinition;
-import com.liferay.commerce.product.service.CPDefinitionLocalServiceUtil;
+import com.liferay.osgi.util.ServiceTrackerFactory;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.util.PortalUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import org.osgi.framework.FrameworkUtil;
+import org.osgi.util.tracker.ServiceTracker;
 
 /**
  * @author Alessio Antonio Rendina
+ * @author Alec Sloan
  */
 public class CPCompareUtil {
 
 	public static void addCompareProduct(
-			HttpServletRequest httpServletRequest, long cpDefinitionId)
+			long groupId, long commerceAccountId, long cpDefinitionId,
+			HttpSession httpSession)
 		throws PortalException {
 
-		List<Long> cpDefinitionIds = getCPDefinitionIds(httpServletRequest);
+		CPCompareHelper cpCompareHelper = _serviceTracker.getService();
 
-		if (!cpDefinitionIds.contains(cpDefinitionId)) {
-			cpDefinitionIds.add(cpDefinitionId);
-		}
-
-		setCPDefinitionIds(httpServletRequest, cpDefinitionIds);
+		cpCompareHelper.addCompareProduct(
+			groupId, commerceAccountId, cpDefinitionId, httpSession);
 	}
 
 	public static List<Long> getCPDefinitionIds(
-			HttpServletRequest httpServletRequest)
+			long groupId, long commerceAccountId, HttpSession httpSession)
 		throws PortalException {
 
-		HttpServletRequest originalServletRequest =
-			PortalUtil.getOriginalServletRequest(httpServletRequest);
+		CPCompareHelper cpCompareHelper = _serviceTracker.getService();
 
-		HttpSession httpSession = originalHttpServletRequest.getSession();
-
-		List<Long> cpDefinitionIds = (List<Long>)httpSession.getAttribute(
-			_getSessionAttributeKey(httpServletRequest));
-
-		if (cpDefinitionIds == null) {
-			return new ArrayList<>();
-		}
-
-		List<Long> activeCPDefinitionIds = new ArrayList<>();
-
-		for (long cpDefinitionId : cpDefinitionIds) {
-			CPDefinition cpDefinition =
-				CPDefinitionLocalServiceUtil.fetchCPDefinition(cpDefinitionId);
-
-			if ((cpDefinition != null) && cpDefinition.isApproved()) {
-				activeCPDefinitionIds.add(cpDefinitionId);
-			}
-		}
-
-		setCPDefinitionIds(httpServletRequest, activeCPDefinitionIds);
-
-		return activeCPDefinitionIds;
+		return cpCompareHelper.getCPDefinitionIds(
+			groupId, commerceAccountId, httpSession);
 	}
 
 	public static void removeCompareProduct(
-			HttpServletRequest httpServletRequest, long cpDefinitionId)
+			long groupId, long commerceAccountId, long cpDefinitionId,
+			HttpSession httpSession)
 		throws PortalException {
 
-		List<Long> cpDefinitionIds = getCPDefinitionIds(httpServletRequest);
+		CPCompareHelper cpCompareHelper = _serviceTracker.getService();
 
-		if (cpDefinitionIds.contains(cpDefinitionId)) {
-			cpDefinitionIds.remove(cpDefinitionId);
-		}
-
-		setCPDefinitionIds(httpServletRequest, cpDefinitionIds);
+		cpCompareHelper.removeCompareProduct(
+			groupId, commerceAccountId, cpDefinitionId, httpSession);
 	}
 
 	public static void setCPDefinitionIds(
-			HttpServletRequest httpServletRequest, List<Long> cpDefinitionIds)
-		throws PortalException {
+		long groupId, List<Long> cpDefinitionIds, HttpSession httpSession) {
 
-		httpServletRequest = PortalUtil.getOriginalServletRequest(
-			httpServletRequest);
+		CPCompareHelper cpCompareHelper = _serviceTracker.getService();
 
-		HttpSession httpSession = httpServletRequest.getSession();
-
-		httpSession.setAttribute(
-			_getSessionAttributeKey(httpServletRequest), cpDefinitionIds);
+		cpCompareHelper.setCPDefinitionIds(
+			groupId, cpDefinitionIds, httpSession);
 	}
 
-	private static String _getSessionAttributeKey(
-			HttpServletRequest httpServletRequest)
-		throws PortalException {
-
-		return _SESSION_COMPARE_CP_DEFINITION_IDS +
-			PortalUtil.getScopeGroupId(httpServletRequest);
-	}
-
-	private static final String _SESSION_COMPARE_CP_DEFINITION_IDS =
-		"LIFERAY_SHARED_CP_DEFINITION_IDS_";
+	private static final ServiceTracker<?, CPCompareHelper> _serviceTracker =
+		ServiceTrackerFactory.open(
+			FrameworkUtil.getBundle(CPCompareUtil.class),
+			CPCompareHelper.class);
 
 }
