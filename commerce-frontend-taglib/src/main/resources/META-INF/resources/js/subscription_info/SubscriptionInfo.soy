@@ -1,0 +1,17 @@
+{namespace SubscriptionInfo}
+
+/**
+ * This renders the component's whole content.
+ */
+{template .render}
+	{@param? durationPeriod: string}
+	{@param? subscriptionPeriod: string}
+
+	{if isNonnull($subscriptionPeriod) or not $subscriptionPeriod}
+		<span class="product-subscription-period">({$durationPeriod})</span>
+	{/if}
+
+	{if isNonnull($durationPeriod) or not $durationPeriod}
+		<span class="product-subscription-duration"> {$durationPeriod}</span>
+	{/if}
+{/template}
