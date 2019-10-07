@@ -36,7 +36,8 @@ import org.osgi.service.component.annotations.Reference;
 	property = "commerce.region.starter.key=" + SwitzerlandCommerceRegionsStarter.SWITZERLAND_NUMERIC_ISO_CODE,
 	service = CommerceRegionsStarter.class
 )
-public class SwitzerlandCommerceRegionsStarter implements CommerceRegionsStarter {
+public class SwitzerlandCommerceRegionsStarter
+	implements CommerceRegionsStarter {
 
 	public static final int SWITZERLAND_NUMERIC_ISO_CODE = 756;
 
