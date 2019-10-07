@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.service.ClassNameLocalService;
 import com.liferay.portal.kernel.service.EmailAddressLocalService;
 import com.liferay.portal.kernel.service.OrganizationLocalService;
 import com.liferay.portal.kernel.service.UserLocalService;
+import com.liferay.portal.kernel.upgrade.DummyUpgradeProcess;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
 
 import org.osgi.service.component.annotations.Component;
@@ -125,6 +126,10 @@ public class CommerceUpgradeStepRegistrator implements UpgradeStepRegistrator {
 			new com.liferay.commerce.internal.upgrade.v4_1_0.
 				CommerceCountryUpgradeProcess());
 
+		registry.register(
+			_SCHEMA_VERSION_4_1_0, _SCHEMA_VERSION_4_2_0,
+			new DummyUpgradeProcess());
+
 		if (_log.isInfoEnabled()) {
 			_log.info("COMMERCE UPGRADE STEP REGISTRATOR FINISHED");
 		}
@@ -151,6 +156,8 @@ public class CommerceUpgradeStepRegistrator implements UpgradeStepRegistrator {
 	private static final String _SCHEMA_VERSION_4_0_0 = "4.0.0";
 
 	private static final String _SCHEMA_VERSION_4_1_0 = "4.1.0";
+
+	private static final String _SCHEMA_VERSION_4_2_0 = "4.2.0";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceUpgradeStepRegistrator.class);
