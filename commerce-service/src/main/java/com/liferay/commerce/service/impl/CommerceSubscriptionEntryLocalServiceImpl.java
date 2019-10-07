@@ -73,6 +73,64 @@ import java.util.Map;
 public class CommerceSubscriptionEntryLocalServiceImpl
 	extends CommerceSubscriptionEntryLocalServiceBaseImpl {
 
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CommerceSubscriptionEntry addCommerceSubscriptionEntry(
+			long userId, long groupId, long commerceOrderItemId, int length,
+			String subscriptionType, long maxSubscriptionCycles,
+			UnicodeProperties subscriptionTypeSettingsProperties)
+		throws PortalException {
+
+		User user = userLocalService.getUser(userId);
+
+		CPSubscriptionType cpSubscriptionType =
+			_cpSubscriptionTypeRegistry.getCPSubscriptionType(subscriptionType);
+
+		validateCPSubscriptionType(cpSubscriptionType);
+
+		long commerceSubscriptionEntryId = counterLocalService.increment();
+
+		CommerceSubscriptionEntry commerceSubscriptionEntry =
+			commerceSubscriptionEntryPersistence.create(
+				commerceSubscriptionEntryId);
+
+		commerceSubscriptionEntry.setUuid(PortalUUIDUtil.generate());
+		commerceSubscriptionEntry.setGroupId(groupId);
+		commerceSubscriptionEntry.setCompanyId(user.getCompanyId());
+		commerceSubscriptionEntry.setUserId(user.getUserId());
+		commerceSubscriptionEntry.setUserName(user.getFullName());
+
+		commerceSubscriptionEntry.setCommerceOrderItemId(commerceOrderItemId);
+		commerceSubscriptionEntry.setSubscriptionLength(length);
+		commerceSubscriptionEntry.setSubscriptionType(subscriptionType);
+		commerceSubscriptionEntry.setCurrentCycle(1);
+		commerceSubscriptionEntry.setMaxSubscriptionCycles(
+			maxSubscriptionCycles);
+		commerceSubscriptionEntry.setSubscriptionTypeSettingsProperties(
+			subscriptionTypeSettingsProperties);
+		commerceSubscriptionEntry.setSubscriptionStatus(
+			CommerceSubscriptionEntryConstants.SUBSCRIPTION_STATUS_ACTIVE);
+		commerceSubscriptionEntry.setLastIterationDate(new Date());
+
+		Date subscriptionNextIterationDate =
+			cpSubscriptionType.getSubscriptionNextIterationDate(
+				user.getTimeZone(), length, subscriptionTypeSettingsProperties,
+				null);
+
+		commerceSubscriptionEntry.setNextIterationDate(
+			subscriptionNextIterationDate);
+
+		Date subscriptionStartDate =
+			cpSubscriptionType.getSubscriptionStartDate(
+				user.getTimeZone(), subscriptionTypeSettingsProperties);
+
+		commerceSubscriptionEntry.setStartDate(subscriptionStartDate);
+
+		commerceSubscriptionEntryPersistence.update(commerceSubscriptionEntry);
+
+		return commerceSubscriptionEntry;
+	}
+
 	/**
 	 * @deprecated As of Mueller (7.2.x), pass userId and groupId
 	 */
@@ -95,7 +153,11 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 			commerceOrderItemId);
 	}
 
-	@Indexable(type = IndexableType.REINDEX)
+	/**
+	 * @deprecated As of Mueller (7.2.x), pass subscription info instead of
+	 * cpInstanceUuid and cProductId
+	 */
+	@Deprecated
 	@Override
 	public CommerceSubscriptionEntry addCommerceSubscriptionEntry(
 			long userId, long groupId, String cpInstanceUuid, long cProductId,
@@ -187,12 +249,24 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 			cpInstanceUuid, cProductId, commerceOrderItemId);
 	}
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), fetch by commerceOrderItemId instead
+	 */
+	@Deprecated
 	@Override
 	public CommerceSubscriptionEntry fetchCommerceSubscriptionEntries(
 		String cpInstanceUuid, long cProductId, long commerceOrderItemId) {
 
 		return commerceSubscriptionEntryPersistence.fetchByC_C_C(
 			cpInstanceUuid, cProductId, commerceOrderItemId);
+	}
+
+	@Override
+	public CommerceSubscriptionEntry fetchCommerceSubscriptionEntry(
+		long commerceOrderItemId) {
+
+		return commerceSubscriptionEntryPersistence.fetchByCommerceOrderItemId(
+			commerceOrderItemId);
 	}
 
 	@Override
