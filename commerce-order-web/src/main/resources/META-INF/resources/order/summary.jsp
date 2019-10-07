@@ -20,7 +20,6 @@
 CommerceOrderEditDisplayContext commerceOrderEditDisplayContext = (CommerceOrderEditDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
 CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder();
-SearchContainer<CommerceOrderItem> commerceOrderItemsSearchContainer = commerceOrderEditDisplayContext.getCommerceOrderItemsSearchContainer();
 PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPortletURL();
 %>
 
@@ -109,7 +108,6 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 	<div class="col-12">
 		<commerce-ui:panel
 			elementClasses="flex-fill"
-			headerActionUrl="<%= editBillingAddressURL %>"
 			title='<%= LanguageUtil.get(request, "info") %>'
 		>
 			<div class="row vertically-divided">
@@ -244,14 +242,13 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 			title='<%= LanguageUtil.get(request, "items") %>'
 		>
 			<liferay-frontend:management-bar
-				includeCheckBox="<%= true %>"
 				searchContainerId="commerceOrderItems"
 			>
 				<liferay-frontend:management-bar-filters>
 					<liferay-frontend:management-bar-sort
-						orderByCol="<%= commerceOrderItemsSearchContainer.getOrderByCol() %>"
-						orderByType="<%= commerceOrderItemsSearchContainer.getOrderByType() %>"
-						orderColumns="<%= commerceOrderItemsSearchContainer.getOrderableHeaders() %>"
+						orderByCol="<%= commerceOrderEditDisplayContext.getOrderByCol() %>"
+						orderByType="<%= commerceOrderEditDisplayContext.getOrderByType() %>"
+						orderColumns='<%= new String[] {"create-date"} %>'
 						portletURL="<%= portletURL %>"
 					/>
 
@@ -297,126 +294,15 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 				</liferay-frontend:management-bar-action-buttons>
 			</liferay-frontend:management-bar>
 
-			<div class="container-fluid-1280">
-				<liferay-ui:search-container
-					id="commerceOrderItems"
-					searchContainer="<%= commerceOrderItemsSearchContainer %>"
-				>
-					<liferay-ui:search-container-row
-						className="com.liferay.commerce.model.CommerceOrderItem"
-						escapedModel="<%= true %>"
-						keyProperty="commerceOrderItemId"
-						modelVar="commerceOrderItem"
-					>
-
-						<%
-						PortletURL rowURL = renderResponse.createRenderURL();
-
-						rowURL.setParameter("mvcRenderCommandName", "editCommerceOrderItem");
-						rowURL.setParameter("redirect", currentURL);
-						rowURL.setParameter("commerceOrderId", String.valueOf(commerceOrderItem.getCommerceOrderId()));
-						rowURL.setParameter("commerceOrderItemId", String.valueOf(commerceOrderItem.getCommerceOrderItemId()));
-
-						CommerceOrder curCommerceOrder = commerceOrderItem.getCommerceOrder();
-						%>
-
-						<liferay-ui:search-container-column-text
-							cssClass="important table-cell-content"
-							href="<%= rowURL %>"
-							property="sku"
-						/>
-
-						<liferay-ui:search-container-column-text
-							cssClass="table-cell-content"
-							name="name"
-							value="<%= commerceOrderItem.getName(locale) %>"
-						/>
-
-						<%
-						CommerceProductPrice commerceProductPrice = commerceOrderEditDisplayContext.getCommerceProductPrice(commerceOrderItem);
-						%>
-
-						<liferay-ui:search-container-column-text
-							cssClass="table-cell-content"
-							name="price"
-						>
-							<c:if test="<%= commerceProductPrice != null %>">
-
-								<%
-								CommerceMoney unitPrice = commerceProductPrice.getUnitPrice();
-								%>
-
-								<div class="value-section">
-									<span class="commerce-value">
-										<%= HtmlUtil.escape(unitPrice.format(locale)) %>
-									</span>
-									<span class="commerce-subscription-info">
-										<liferay-commerce:subscription-info
-											commerceOrderItemId="<%= curCommerceOrder.isOpen() ? 0 : commerceOrderItem.getCommerceOrderItemId() %>"
-											CPInstanceId="<%= commerceOrderItem.getCPInstanceId() %>"
-											showDuration="<%= false %>"
-										/>
-									</span>
-								</div>
-							</c:if>
-						</liferay-ui:search-container-column-text>
-
-						<liferay-ui:search-container-column-text
-							name="discount"
-						>
-							<c:if test="<%= commerceProductPrice != null %>">
-
-								<%
-								CommerceDiscountValue commerceDiscountValue = commerceProductPrice.getDiscountValue();
-								%>
-
-								<c:if test="<%= commerceDiscountValue != null %>">
-
-									<%
-									CommerceMoney discountAmount = commerceDiscountValue.getDiscountAmount();
-									%>
-
-									<div class="value-section">
-										<span class="commerce-value">
-											<%= HtmlUtil.escape(discountAmount.format(locale)) %>
-										</span>
-									</div>
-								</c:if>
-							</c:if>
-						</liferay-ui:search-container-column-text>
-
-						<liferay-ui:search-container-column-text
-							property="quantity"
-						/>
-
-						<liferay-ui:search-container-column-text
-							name="total"
-						>
-							<c:if test="<%= commerceProductPrice != null %>">
-
-								<%
-								CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
-								%>
-
-								<div class="value-section">
-									<span class="commerce-value">
-										<%= HtmlUtil.escape(finalPrice.format(locale)) %>
-									</span>
-								</div>
-							</c:if>
-						</liferay-ui:search-container-column-text>
-
-						<liferay-ui:search-container-column-jsp
-							cssClass="entry-action-column"
-							path="/order/item_action.jsp"
-						/>
-					</liferay-ui:search-container-row>
-
-					<liferay-ui:search-iterator
-						markupView="lexicon"
-					/>
-				</liferay-ui:search-container>
-			</div>
+			<commerce-ui:table
+				dataProviderKey="<%= CommerceOrderItemClayTable.NAME %>"
+				filter="<%= commerceOrderEditDisplayContext.getOrderItemFilter() %>"
+				itemPerPage="<%= 5 %>"
+				namespace="<%= renderResponse.getNamespace() %>"
+				pageNumber="<%= 1 %>"
+				portletURL="<%= commerceOrderEditDisplayContext.getCommerceOrderItemsPortletURL() %>"
+				tableName="<%= CommerceOrderItemClayTable.NAME %>"
+			/>
 		</commerce-ui:panel>
 	</div>
 
@@ -439,6 +325,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 		<commerce-ui:panel
 			headerActionId="order-summary-modal"
 			headerActionLabel='<%= LanguageUtil.get(request, "edit") %>'
+			headerActionTarget="order-summary-modal"
 			headerActionUrl="<%= editOrderSummaryURL %>"
 			title='<%= LanguageUtil.get(request, "order-summary") %>'
 		>
@@ -493,4 +380,45 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 			itemSelectorDialog.open();
 		}
 	);
+</aui:script>
+
+<div id="<portlet:namespace />side-panel-root"></div>
+<div id="<portlet:namespace />side-panel-wrapper"></div>
+
+<aui:script require="commerce-frontend-js/js/side_panel/entry.es as SidePanel">
+	new SidePanel.default(
+		"<portlet:namespace />sidePanel",
+		"<portlet:namespace />side-panel-root",
+		{
+			portalWrapperId: "<portlet:namespace />side-panel-wrapper",
+			size: "lg",
+			spritemap: "<%= themeDisplay.getPathThemeImages() + "/clay/icons.svg" %>",
+			topAnchor: document.getElementById('commerce-admin-header')
+		}
+	);
+
+	Promise.all(
+		[
+			Liferay.componentReady('commerceOrderItemsCommerceTable'),
+			Liferay.componentReady('<portlet:namespace />sidePanel')
+		]
+	).then(function(
+		[
+			table,
+			panel
+		]
+		) {
+			document.getElementById('commerceOrderItemsCommerceTable')
+				.addEventListener(
+					'click',
+					function(e) {
+						e.preventDefault();
+
+						if (e.target.dataset.target === '<portlet:namespace />sidePanel') {
+							panel.open(e.target.dataset.panelUrl);
+						}
+					}
+				)
+		}
+	)
 </aui:script>
