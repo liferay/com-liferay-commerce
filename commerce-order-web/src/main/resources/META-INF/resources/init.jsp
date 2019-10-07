@@ -20,7 +20,6 @@
 
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %><%@
 taglib uri="http://liferay.com/tld/clay" prefix="clay" %><%@
-taglib uri="http://liferay.com/tld/commerce" prefix="liferay-commerce" %><%@
 taglib uri="http://liferay.com/tld/commerce-ui" prefix="commerce-ui" %><%@
 taglib uri="http://liferay.com/tld/expando" prefix="liferay-expando" %><%@
 taglib uri="http://liferay.com/tld/frontend" prefix="liferay-frontend" %><%@
@@ -37,7 +36,6 @@ page import="com.liferay.commerce.constants.CommerceWebKeys" %><%@
 page import="com.liferay.commerce.context.CommerceContext" %><%@
 page import="com.liferay.commerce.currency.model.CommerceCurrency" %><%@
 page import="com.liferay.commerce.currency.model.CommerceMoney" %><%@
-page import="com.liferay.commerce.discount.CommerceDiscountValue" %><%@
 page import="com.liferay.commerce.exception.CommerceOrderBillingAddressException" %><%@
 page import="com.liferay.commerce.exception.CommerceOrderNoteContentException" %><%@
 page import="com.liferay.commerce.exception.CommerceOrderPaymentMethodException" %><%@
@@ -56,13 +54,13 @@ page import="com.liferay.commerce.order.web.internal.display.context.CommerceOrd
 page import="com.liferay.commerce.order.web.internal.display.context.CommerceOrderListDisplayContext" %><%@
 page import="com.liferay.commerce.order.web.internal.display.context.CommerceOrderNoteEditDisplayContext" %><%@
 page import="com.liferay.commerce.order.web.internal.display.context.CommerceOrderSettingsDisplayContext" %><%@
+page import="com.liferay.commerce.order.web.internal.frontend.CommerceOrderItemClayTable" %><%@
 page import="com.liferay.commerce.order.web.internal.search.CommerceOrderDisplayTerms" %><%@
 page import="com.liferay.commerce.order.web.internal.search.CommerceOrderItemDisplayTerms" %><%@
 page import="com.liferay.commerce.order.web.internal.security.permission.resource.CommerceOrderPermission" %><%@
 page import="com.liferay.commerce.order.web.internal.servlet.taglib.ui.CommerceOrderFormNavigatorConstants" %><%@
 page import="com.liferay.commerce.order.web.internal.servlet.taglib.ui.CommerceOrderScreenNavigationConstants" %><%@
 page import="com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel" %><%@
-page import="com.liferay.commerce.price.CommerceProductPrice" %><%@
 page import="com.liferay.commerce.product.model.CommerceChannel" %><%@
 page import="com.liferay.petra.string.StringPool" %><%@
 page import="com.liferay.portal.kernel.bean.BeanParamUtil" %><%@
