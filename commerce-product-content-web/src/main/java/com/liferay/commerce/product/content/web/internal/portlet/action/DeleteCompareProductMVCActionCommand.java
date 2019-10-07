@@ -15,7 +15,7 @@
 package com.liferay.commerce.product.content.web.internal.portlet.action;
 
 import com.liferay.commerce.product.constants.CPPortletKeys;
-import com.liferay.commerce.product.util.CPCompareUtil;
+import com.liferay.commerce.product.util.CPCompareHelperUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -54,7 +54,7 @@ public class DeleteCompareProductMVCActionCommand extends BaseMVCActionCommand {
 		long cpDefinitionId = ParamUtil.getLong(
 			actionRequest, "cpDefinitionId");
 
-		CPCompareUtil.removeCompareProduct(httpServletRequest, cpDefinitionId);
+		CPCompareHelperUtil.removeCompareProduct(httpServletRequest, cpDefinitionId);
 
 		hideDefaultErrorMessage(actionRequest);
 		hideDefaultSuccessMessage(actionRequest);

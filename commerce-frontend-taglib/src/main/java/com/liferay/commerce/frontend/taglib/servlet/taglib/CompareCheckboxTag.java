@@ -17,7 +17,7 @@ package com.liferay.commerce.frontend.taglib.servlet.taglib;
 import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionLocalServiceUtil;
-import com.liferay.commerce.product.util.CPCompareUtil;
+import com.liferay.commerce.product.util.CPCompareHelperUtil;
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
 import com.liferay.petra.string.StringPool;
@@ -50,7 +50,7 @@ public class CompareCheckboxTag extends ComponentRendererTag {
 
 			putValue("pictureUrl", cpDefinition.getDefaultImageThumbnailSrc());
 
-			List<Long> cpDefinitionIds = CPCompareUtil.getCPDefinitionIds(
+			List<Long> cpDefinitionIds = CPCompareHelperUtil.getCPDefinitionIds(
 				request);
 
 			putValue("inCompare", cpDefinitionIds.contains(cpDefinitionId));

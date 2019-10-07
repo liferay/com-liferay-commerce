@@ -28,7 +28,7 @@ import com.liferay.commerce.product.data.source.CPDataSourceResult;
 import com.liferay.commerce.product.display.context.util.CPRequestHelper;
 import com.liferay.commerce.product.type.CPType;
 import com.liferay.commerce.product.type.CPTypeServicesTracker;
-import com.liferay.commerce.product.util.CPCompareUtil;
+import com.liferay.commerce.product.util.CPCompareHelperUtil;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -76,7 +76,7 @@ public class CPCompareContentDisplayContext {
 			portletDisplay.getPortletInstanceConfiguration(
 				CPCompareContentPortletInstanceConfiguration.class);
 
-		_cpDefinitionIds = CPCompareUtil.getCPDefinitionIds(httpServletRequest);
+		_cpDefinitionIds = CPCompareHelperUtil.getCPDefinitionIds(httpServletRequest);
 	}
 
 	public Map<String, String> getCPContentListEntryRendererKeys() {

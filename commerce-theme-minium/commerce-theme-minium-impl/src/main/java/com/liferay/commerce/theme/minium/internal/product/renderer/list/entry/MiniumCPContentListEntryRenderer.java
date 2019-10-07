@@ -30,7 +30,7 @@ import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.content.constants.CPContentWebKeys;
 import com.liferay.commerce.product.content.render.list.entry.CPContentListEntryRenderer;
 import com.liferay.commerce.product.content.util.CPContentHelper;
-import com.liferay.commerce.product.util.CPCompareUtil;
+import com.liferay.commerce.product.util.CPCompareHelperUtil;
 import com.liferay.commerce.service.CommerceOrderItemLocalService;
 import com.liferay.commerce.wish.list.model.CommerceWishList;
 import com.liferay.commerce.wish.list.service.CommerceWishListItemService;
@@ -154,7 +154,7 @@ public class MiniumCPContentListEntryRenderer
 				editCompareProductActionURL.toString());
 		}
 		else {
-			List<Long> cpDefinitionIds = CPCompareUtil.getCPDefinitionIds(
+			List<Long> cpDefinitionIds = CPCompareHelperUtil.getCPDefinitionIds(
 				httpServletRequest);
 
 			JSONObject jsonObject = _jsonFactory.createJSONObject();

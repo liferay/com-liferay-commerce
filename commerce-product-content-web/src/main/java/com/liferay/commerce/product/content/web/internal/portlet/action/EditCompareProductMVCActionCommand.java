@@ -15,7 +15,7 @@
 package com.liferay.commerce.product.content.web.internal.portlet.action;
 
 import com.liferay.commerce.product.constants.CPPortletKeys;
-import com.liferay.commerce.product.util.CPCompareUtil;
+import com.liferay.commerce.product.util.CPCompareHelperUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -59,10 +59,10 @@ public class EditCompareProductMVCActionCommand extends BaseMVCActionCommand {
 		boolean compare = ParamUtil.getBoolean(actionRequest, compareParam);
 
 		if (compare) {
-			CPCompareUtil.addCompareProduct(httpServletRequest, cpDefinitionId);
+			CPCompareHelperUtil.addCompareProduct(httpServletRequest, cpDefinitionId);
 		}
 		else {
-			CPCompareUtil.removeCompareProduct(
+			CPCompareHelperUtil.removeCompareProduct(
 				httpServletRequest, cpDefinitionId);
 		}
 
