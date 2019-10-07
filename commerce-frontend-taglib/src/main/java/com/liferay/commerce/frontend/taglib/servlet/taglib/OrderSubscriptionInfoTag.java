@@ -12,8 +12,9 @@
  * details.
  */
 
-package com.liferay.commerce.taglib.servlet.taglib;
+package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
+import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.product.model.CPInstance;
@@ -23,8 +24,8 @@ import com.liferay.commerce.product.util.CPSubscriptionType;
 import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
 import com.liferay.commerce.service.CommerceOrderItemLocalServiceUtil;
 import com.liferay.commerce.service.CommerceSubscriptionEntryLocalServiceUtil;
-import com.liferay.commerce.taglib.servlet.taglib.internal.servlet.ServletContextUtil;
-import com.liferay.petra.string.CharPool;
+import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
+import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -32,37 +33,33 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.TextFormatter;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.taglib.util.IncludeTag;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
 /**
  * @author Alessio Antonio Rendina
  */
-public class SubscriptionInfoTag extends IncludeTag {
+public class OrderSubscriptionInfoTag extends ComponentRendererTag {
 
 	@Override
-	public int doStartTag() throws JspException {
+	public int doStartTag() {
 		try {
 			CommerceOrderItem commerceOrderItem =
-				CommerceOrderItemLocalServiceUtil.fetchCommerceOrderItem(
+				CommerceOrderItemLocalServiceUtil.getCommerceOrderItem(
 					_commerceOrderItemId);
 
 			CPInstance cpInstance = CPInstanceServiceUtil.fetchCPInstance(
-				_cpInstanceId);
+				commerceOrderItem.getCPInstanceId());
 
 			CommerceSubscriptionEntry commerceSubscriptionEntry = null;
 
 			try {
 				commerceSubscriptionEntry =
 					CommerceSubscriptionEntryLocalServiceUtil.
-						fetchCommerceSubscriptionEntries(
-							cpInstance.getCPInstanceUuid(),
-							commerceOrderItem.getCProductId(),
-							_commerceOrderItemId);
+						fetchCommerceSubscriptionEntry(_commerceOrderItemId);
 			}
 			catch (Exception e) {
 				if (_log.isDebugEnabled()) {
@@ -127,6 +124,26 @@ public class SubscriptionInfoTag extends IncludeTag {
 			return SKIP_BODY;
 		}
 
+		String durationPeriod = StringPool.BLANK;
+		String subscriptionPeriod = StringPool.BLANK;
+
+		if (_showDuration && (_duration > 0)) {
+			durationPeriod = LanguageUtil.format(
+				request, "duration-x-x",
+				new Object[] {_duration, _durationPeriodKey});
+		}
+
+		if ((_length > 0) && Validator.isNotNull(_subscriptionPeriodKey)) {
+			subscriptionPeriod = LanguageUtil.format(
+				request, "every-x-x",
+				new Object[] {_length, _subscriptionPeriodKey});
+		}
+
+		putValue("durationPeriod", durationPeriod);
+		putValue("subscriptionPeriod", subscriptionPeriod);
+
+		setTemplateNamespace("SubscriptionInfo.render");
+
 		return super.doStartTag();
 	}
 
@@ -134,8 +151,17 @@ public class SubscriptionInfoTag extends IncludeTag {
 		return _commerceOrderItemId;
 	}
 
-	public long getCPInstanceId() {
-		return _cpInstanceId;
+	@Override
+	public String getModule() {
+		NPMResolver npmResolver = ServletContextUtil.getNPMResolver();
+
+		if (npmResolver == null) {
+			return StringPool.BLANK;
+		}
+
+		return npmResolver.resolveModuleName(
+			"commerce-frontend-taglib/js/subscription_info" +
+				"/SubscriptionInfo.es");
 	}
 
 	public boolean isShowDuration() {
@@ -144,10 +170,6 @@ public class SubscriptionInfoTag extends IncludeTag {
 
 	public void setCommerceOrderItemId(long commerceOrderItemId) {
 		_commerceOrderItemId = commerceOrderItemId;
-	}
-
-	public void setCPInstanceId(long cpInstanceId) {
-		_cpInstanceId = cpInstanceId;
 	}
 
 	@Override
@@ -168,33 +190,11 @@ public class SubscriptionInfoTag extends IncludeTag {
 		super.cleanUp();
 
 		_commerceOrderItemId = 0;
-		_cpInstanceId = 0;
 		_duration = 0;
 		_durationPeriodKey = null;
 		_length = 0;
 		_showDuration = true;
 		_subscriptionPeriodKey = null;
-	}
-
-	@Override
-	protected String getPage() {
-		return _PAGE;
-	}
-
-	@Override
-	protected void setAttributes(HttpServletRequest httpServletRequest) {
-		request.setAttribute(
-			"liferay-commerce:subscription-info:duration", _duration);
-		request.setAttribute(
-			"liferay-commerce:subscription-info:durationPeriodKey",
-			_durationPeriodKey);
-		request.setAttribute(
-			"liferay-commerce:subscription-info:length", _length);
-		request.setAttribute(
-			"liferay-commerce:subscription-info:showDuration", _showDuration);
-		request.setAttribute(
-			"liferay-commerce:subscription-info:subscriptionPeriodKey",
-			_subscriptionPeriodKey);
 	}
 
 	protected CPSubscriptionTypeRegistry cpSubscriptionTypeRegistry;
@@ -203,19 +203,16 @@ public class SubscriptionInfoTag extends IncludeTag {
 		if (plural) {
 			return LanguageUtil.get(
 				request,
-				StringUtil.toLowerCase(period) + CharPool.LOWER_CASE_S);
+				TextFormatter.formatPlural(StringUtil.toLowerCase(period)));
 		}
 
-		return period;
+		return LanguageUtil.get(request, period);
 	}
 
-	private static final String _PAGE = "/subscription_info/page.jsp";
-
 	private static final Log _log = LogFactoryUtil.getLog(
-		SubscriptionInfoTag.class);
+		OrderSubscriptionInfoTag.class);
 
 	private long _commerceOrderItemId;
-	private long _cpInstanceId;
 	private long _duration;
 	private String _durationPeriodKey;
 	private long _length;

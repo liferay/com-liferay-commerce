@@ -19,12 +19,10 @@ import com.liferay.application.list.PanelCategoryRegistry;
 import com.liferay.commerce.currency.util.CommercePriceFormatter;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHelper;
-import com.liferay.commerce.order.CommerceOrderValidatorRegistry;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.product.util.CPInstanceHelper;
-import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 
@@ -44,75 +42,63 @@ import org.osgi.service.component.annotations.Reference;
 public class ServletContextUtil {
 
 	public static final CommerceOrderHelper getCommerceOrderHelper() {
-		return _servletContextUtil._getCommerceOrderHelper();
+		return _instance._getCommerceOrderHelper();
 	}
 
 	public static final ModelResourcePermission<CommerceOrder>
 		getCommerceOrderModelResourcePermission() {
 
-		return _servletContextUtil._getCommerceOrderModelResourcePermission();
-	}
-
-	public static final CommerceOrderValidatorRegistry
-		getCommerceOrderValidatorRegistry() {
-
-		return _servletContextUtil._getCommerceOrderValidatorRegistry();
+		return _instance._getCommerceOrderModelResourcePermission();
 	}
 
 	public static final CommerceProductPriceCalculation
 		getCommercePriceCalculation() {
 
-		return _servletContextUtil._getCommercePriceCalculation();
+		return _instance._getCommercePriceCalculation();
 	}
 
 	public static final CommercePriceFormatter getCommercePriceFormatter() {
-		return _servletContextUtil._getCommercePriceFormatter();
+		return _instance._getCommercePriceFormatter();
 	}
 
 	public static final CommercePriceListLocalService
 		getCommercePriceListLocalService() {
 
-		return _servletContextUtil._getCommercePriceListLocalService();
+		return _instance._getCommercePriceListLocalService();
 	}
 
 	public static final ConfigurationProvider getConfigurationProvider() {
-		return _servletContextUtil._getConfigurationProvider();
+		return _instance._getConfigurationProvider();
 	}
 
 	public static final CPDefinitionHelper getCPDefinitionHelper() {
-		return _servletContextUtil._getCPDefinitionHelper();
+		return _instance._getCPDefinitionHelper();
 	}
 
 	public static final CPInstanceHelper getCPInstanceHelper() {
-		return _servletContextUtil._getCPInstanceHelper();
-	}
-
-	public static final CPSubscriptionTypeRegistry
-		getCPSubscriptionTypeRegistry() {
-
-		return _servletContextUtil._getCPSubscriptionTypeRegistry();
+		return _instance._getCPInstanceHelper();
 	}
 
 	public static final PanelAppRegistry getPanelAppRegistry() {
-		return _servletContextUtil._getPanelAppRegistry();
+		return _instance._getPanelAppRegistry();
 	}
 
 	public static final PanelCategoryRegistry getPanelCategoryRegistry() {
-		return _servletContextUtil._getPanelCategoryRegistry();
+		return _instance._getPanelCategoryRegistry();
 	}
 
 	public static final ServletContext getServletContext() {
-		return _servletContextUtil._getServletContext();
+		return _instance._getServletContext();
 	}
 
 	@Activate
 	protected void activate() {
-		_servletContextUtil = this;
+		_instance = this;
 	}
 
 	@Deactivate
 	protected void deactivate() {
-		_servletContextUtil = null;
+		_instance = null;
 	}
 
 	@Reference(unbind = "-")
@@ -132,13 +118,6 @@ public class ServletContextUtil {
 
 		_commerceOrderModelResourcePermission =
 			commerceOrderModelResourcePermission;
-	}
-
-	@Reference(unbind = "-")
-	protected void setCommerceOrderValidatorRegistry(
-		CommerceOrderValidatorRegistry commerceOrderValidatorRegistry) {
-
-		_commerceOrderValidatorRegistry = commerceOrderValidatorRegistry;
 	}
 
 	@Reference(unbind = "-")
@@ -182,13 +161,6 @@ public class ServletContextUtil {
 	}
 
 	@Reference(unbind = "-")
-	protected void setCPSubscriptionTypeRegistry(
-		CPSubscriptionTypeRegistry cpSubscriptionTypeRegistry) {
-
-		_cpSubscriptionTypeRegistry = cpSubscriptionTypeRegistry;
-	}
-
-	@Reference(unbind = "-")
 	protected void setPanelAppRegistry(PanelAppRegistry panelAppRegistry) {
 		_panelAppRegistry = panelAppRegistry;
 	}
@@ -218,12 +190,6 @@ public class ServletContextUtil {
 		return _commerceOrderModelResourcePermission;
 	}
 
-	private CommerceOrderValidatorRegistry
-		_getCommerceOrderValidatorRegistry() {
-
-		return _commerceOrderValidatorRegistry;
-	}
-
 	private CommerceProductPriceCalculation _getCommercePriceCalculation() {
 		return _commerceProductPriceCalculation;
 	}
@@ -248,10 +214,6 @@ public class ServletContextUtil {
 		return _cpInstanceHelper;
 	}
 
-	private CPSubscriptionTypeRegistry _getCPSubscriptionTypeRegistry() {
-		return _cpSubscriptionTypeRegistry;
-	}
-
 	private PanelAppRegistry _getPanelAppRegistry() {
 		return _panelAppRegistry;
 	}
@@ -264,19 +226,17 @@ public class ServletContextUtil {
 		return _servletContext;
 	}
 
-	private static ServletContextUtil _servletContextUtil;
+	private static ServletContextUtil _instance;
 
 	private CommerceOrderHelper _commerceOrderHelper;
 	private ModelResourcePermission<CommerceOrder>
 		_commerceOrderModelResourcePermission;
-	private CommerceOrderValidatorRegistry _commerceOrderValidatorRegistry;
 	private CommercePriceFormatter _commercePriceFormatter;
 	private CommercePriceListLocalService _commercePriceListLocalService;
 	private CommerceProductPriceCalculation _commerceProductPriceCalculation;
 	private ConfigurationProvider _configurationProvider;
 	private CPDefinitionHelper _cpDefinitionHelper;
 	private CPInstanceHelper _cpInstanceHelper;
-	private CPSubscriptionTypeRegistry _cpSubscriptionTypeRegistry;
 	private PanelAppRegistry _panelAppRegistry;
 	private PanelCategoryRegistry _panelCategoryRegistry;
 	private ServletContext _servletContext;
