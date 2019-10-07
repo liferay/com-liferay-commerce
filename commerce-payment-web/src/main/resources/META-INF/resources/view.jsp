@@ -79,7 +79,7 @@ CommercePaymentMethodGroupRelsDisplayContext commercePaymentMethodGroupRelsDispl
 			>
 
 				<%
-				String thumbnailSrc = commercePaymentMethodGroupRel.getImageURL(themeDisplay);
+				String thumbnailSrc = commercePaymentMethodGroupRel.getImageURL(themeDisplay.getPathImage());
 				%>
 
 				<c:choose>
