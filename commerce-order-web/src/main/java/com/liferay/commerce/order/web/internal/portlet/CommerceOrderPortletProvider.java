@@ -58,6 +58,12 @@ public class CommerceOrderPortletProvider
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
+		if (group == null) {
+			return _portal.getControlPanelPortletURL(
+				httpServletRequest, group, getPortletName(), 0, 0,
+				PortletRequest.RENDER_PHASE);
+		}
+
 		long plid = _portal.getPlidFromPortletId(
 			group.getGroupId(), getPortletName());
 
