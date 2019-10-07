@@ -18,8 +18,11 @@ import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.model.CommerceShipment;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.service.CommerceOrderService;
+import com.liferay.commerce.service.CommerceShipmentService;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.PortletURLFactory;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
@@ -58,6 +61,19 @@ import org.osgi.service.component.annotations.Reference;
 	service = MVCActionCommand.class
 )
 public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
+
+	protected void addShipment(ActionRequest actionRequest)
+		throws PortalException {
+
+		long commerceOrderId = ParamUtil.getLong(
+			actionRequest, "commerceOrderId");
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			CommerceShipment.class.getName(), actionRequest);
+
+		_commerceShipmentService.addCommerceShipment(
+			commerceOrderId, serviceContext);
+	}
 
 	protected void approveCommerceOrder(long commerceOrderId) throws Exception {
 		_commerceOrderService.approveCommerceOrder(commerceOrderId);
@@ -133,6 +149,9 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 		}
 		else if (cmd.equals("requestedDeliveryDate")) {
 			updateRequestedDeliveryDate(actionRequest);
+		}
+		else if (cmd.equals("shipment")) {
+			addShipment(actionRequest);
 		}
 		else if (cmd.equals("shippingAddress")) {
 			updateShippingAddress(actionRequest);
@@ -435,6 +454,9 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 
 	@Reference
 	private CommerceOrderService _commerceOrderService;
+
+	@Reference
+	private CommerceShipmentService _commerceShipmentService;
 
 	@Reference
 	private Portal _portal;
