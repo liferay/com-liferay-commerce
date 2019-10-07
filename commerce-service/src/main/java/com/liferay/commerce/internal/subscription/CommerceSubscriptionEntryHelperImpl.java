@@ -21,8 +21,7 @@ import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.payment.engine.CommerceSubscriptionEngine;
 import com.liferay.commerce.product.model.CPInstance;
-import com.liferay.commerce.product.model.CProduct;
-import com.liferay.commerce.product.service.CommerceChannelLocalService;
+import com.liferay.commerce.product.model.CPSubscriptionInfo;
 import com.liferay.commerce.service.CommerceOrderItemLocalService;
 import com.liferay.commerce.service.CommerceSubscriptionEntryLocalService;
 import com.liferay.commerce.subscription.CommerceSubscriptionEntryHelper;
@@ -57,12 +56,21 @@ public class CommerceSubscriptionEntryHelperImpl
 			CPInstance cpInstance = commerceOrderItem.getCPInstance();
 
 			if (_isNewSubscription(commerceOrderItem)) {
-				_commerceSubscriptionEntryLocalService.
-					addCommerceSubscriptionEntry(
-						commerceAccount.getUserId(), commerceOrder.getGroupId(),
-						cpInstance.getCPInstanceUuid(),
-						commerceOrderItem.getCProductId(),
-						commerceOrderItem.getCommerceOrderItemId());
+				CPSubscriptionInfo cpSubscriptionInfo =
+					cpInstance.getCPSubscriptionInfo();
+
+				if (cpSubscriptionInfo != null) {
+					_commerceSubscriptionEntryLocalService.
+						addCommerceSubscriptionEntry(
+							commerceAccount.getUserId(),
+							commerceOrder.getGroupId(),
+							commerceOrderItem.getCommerceOrderItemId(),
+							cpSubscriptionInfo.getSubscriptionLength(),
+							cpSubscriptionInfo.getSubscriptionType(),
+							cpSubscriptionInfo.getMaxSubscriptionCycles(),
+							cpSubscriptionInfo.
+								getSubscriptionTypeSettingsProperties());
+				}
 			}
 		}
 	}
@@ -117,17 +125,10 @@ public class CommerceSubscriptionEntryHelperImpl
 		}
 	}
 
-	private boolean _isNewSubscription(CommerceOrderItem commerceOrderItem)
-		throws PortalException {
-
-		CPInstance cpInstance = commerceOrderItem.getCPInstance();
-
-		CProduct cProduct = commerceOrderItem.getCProduct();
-
+	private boolean _isNewSubscription(CommerceOrderItem commerceOrderItem) {
 		CommerceSubscriptionEntry commerceSubscriptionEntry =
 			_commerceSubscriptionEntryLocalService.
-				fetchCommerceSubscriptionEntries(
-					cpInstance.getCPInstanceUuid(), cProduct.getCProductId(),
+				fetchCommerceSubscriptionEntry(
 					commerceOrderItem.getCommerceOrderItemId());
 
 		if (commerceSubscriptionEntry != null) {
@@ -136,9 +137,6 @@ public class CommerceSubscriptionEntryHelperImpl
 
 		return true;
 	}
-
-	@Reference
-	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private CommerceOrderItemLocalService _commerceOrderItemLocalService;
