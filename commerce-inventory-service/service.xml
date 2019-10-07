@@ -182,11 +182,11 @@
 
 		<!-- Finder methods -->
 
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
 		<finder name="CommerceInventoryWarehouseId" return-type="Collection">
 			<finder-column name="commerceInventoryWarehouseId" />
-		</finder>
-		<finder name="Sku" return-type="Collection">
-			<finder-column name="sku"></finder-column>
 		</finder>
 		<finder name="C_S" return-type="CommerceInventoryWarehouseItem">
 			<finder-column name="commerceInventoryWarehouseId" />
