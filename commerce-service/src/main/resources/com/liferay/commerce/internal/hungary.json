@@ -1,217 +1,217 @@
 [
-    {
-        "priority": 1, 
-        "code": "BK", 
-        "name": "Bács-Kiskun"
-    }, 
-    {
-        "priority": 2, 
-        "code": "BA", 
-        "name": "Baranya"
-    }, 
-    {
-        "priority": 3, 
-        "code": "BE", 
-        "name": "Békés"
-    }, 
-    {
-        "priority": 4, 
-        "code": "BC", 
-        "name": "Békéscsaba"
-    }, 
-    {
-        "priority": 5, 
-        "code": "BZ", 
-        "name": "Borsod-Abauj-Zemplen"
-    }, 
-    {
-        "priority": 6, 
-        "code": "BU", 
-        "name": "Budapest"
-    }, 
-    {
-        "priority": 7, 
-        "code": "CS", 
-        "name": "Csongrád"
-    }, 
-    {
-        "priority": 8, 
-        "code": "DE", 
-        "name": "Debrecen"
-    }, 
-    {
-        "priority": 9, 
-        "code": "DU", 
-        "name": "Dunaújváros"
-    }, 
-    {
-        "priority": 10, 
-        "code": "EG", 
-        "name": "Eger"
-    }, 
-    {
-        "priority": 11, 
-        "code": "ER", 
-        "name": "Érd"
-    }, 
-    {
-        "priority": 12, 
-        "code": "FE", 
-        "name": "Fejér"
-    }, 
-    {
-        "priority": 13, 
-        "code": "GY", 
-        "name": "Győr"
-    }, 
-    {
-        "priority": 14, 
-        "code": "GS", 
-        "name": "Győr-Moson-Sopron"
-    }, 
-    {
-        "priority": 15, 
-        "code": "HB", 
-        "name": "Hajdú-Bihar"
-    }, 
-    {
-        "priority": 16, 
-        "code": "HE", 
-        "name": "Heves"
-    }, 
-    {
-        "priority": 17, 
-        "code": "HV", 
-        "name": "Hódmezővásárhely"
-    }, 
-    {
-        "priority": 18, 
-        "code": "N", 
-        "name": "Jász-Nagykun-Szolnok"
-    }, 
-    {
-        "priority": 19, 
-        "code": "KV", 
-        "name": "Kaposvár"
-    }, 
-    {
-        "priority": 20, 
-        "code": "KM", 
-        "name": "Kecskemét"
-    }, 
-    {
-        "priority": 21, 
-        "code": "KE", 
-        "name": "Komárom-Esztergom"
-    }, 
-    {
-        "priority": 22, 
-        "code": "MI", 
-        "name": "Miskolc"
-    }, 
-    {
-        "priority": 23, 
-        "code": "NK", 
-        "name": "Nagykanizsa"
-    }, 
-    {
-        "priority": 24, 
-        "code": "NO", 
-        "name": "Nógrád"
-    }, 
-    {
-        "priority": 25, 
-        "code": "NY", 
-        "name": "Nyíregyháza"
-    }, 
-    {
-        "priority": 26, 
-        "code": "PS", 
-        "name": "Pécs"
-    }, 
-    {
-        "priority": 27, 
-        "code": "PE", 
-        "name": "Pest"
-    }, 
-    {
-        "priority": 28, 
-        "code": "ST", 
-        "name": "Salgótarján"
-    }, 
-    {
-        "priority": 29, 
-        "code": "SO", 
-        "name": "Somogy"
-    }, 
-    {
-        "priority": 30, 
-        "code": "SN", 
-        "name": "Sopron"
-    }, 
-    {
-        "priority": 31, 
-        "code": "SZ", 
-        "name": "Szabolcs-á-Bereg"
-    }, 
-    {
-        "priority": 32, 
-        "code": "SD", 
-        "name": "Szeged"
-    }, 
-    {
-        "priority": 33, 
-        "code": "SF", 
-        "name": "Székesfehérvár"
-    }, 
-    {
-        "priority": 34, 
-        "code": "SS", 
-        "name": "Szekszárd"
-    }, 
-    {
-        "priority": 35, 
-        "code": "SK", 
-        "name": "Szolnok"
-    }, 
-    {
-        "priority": 36, 
-        "code": "SH", 
-        "name": "Szombathely"
-    }, 
-    {
-        "priority": 37, 
-        "code": "TB", 
-        "name": "Tatabánya"
-    }, 
-    {
-        "priority": 38, 
-        "code": "TO", 
-        "name": "Tolna"
-    }, 
-    {
-        "priority": 39, 
-        "code": "VA", 
-        "name": "Vas"
-    }, 
-    {
-        "priority": 40, 
-        "code": "VE", 
-        "name": "Veszprém"
-    }, 
-    {
-        "priority": 41, 
-        "code": "VM", 
-        "name": "Veszprém (City)"
-    }, 
-    {
-        "priority": 42, 
-        "code": "ZA", 
-        "name": "Zala"
-    }, 
-    {
-        "priority": 43, 
-        "code": "ZE", 
-        "name": "Zalaegerszeg"
-    }
+	{
+		"code": "BK",
+		"name": "Bács-Kiskun",
+		"priority": 1
+	},
+	{
+		"code": "BA",
+		"name": "Baranya",
+		"priority": 2
+	},
+	{
+		"code": "BE",
+		"name": "Békés",
+		"priority": 3
+	},
+	{
+		"code": "BC",
+		"name": "Békéscsaba",
+		"priority": 4
+	},
+	{
+		"code": "BZ",
+		"name": "Borsod-Abauj-Zemplen",
+		"priority": 5
+	},
+	{
+		"code": "BU",
+		"name": "Budapest",
+		"priority": 6
+	},
+	{
+		"code": "CS",
+		"name": "Csongrád",
+		"priority": 7
+	},
+	{
+		"code": "DE",
+		"name": "Debrecen",
+		"priority": 8
+	},
+	{
+		"code": "DU",
+		"name": "Dunaújváros",
+		"priority": 9
+	},
+	{
+		"code": "EG",
+		"name": "Eger",
+		"priority": 10
+	},
+	{
+		"code": "ER",
+		"name": "Érd",
+		"priority": 11
+	},
+	{
+		"code": "FE",
+		"name": "Fejér",
+		"priority": 12
+	},
+	{
+		"code": "GY",
+		"name": "Győr",
+		"priority": 13
+	},
+	{
+		"code": "GS",
+		"name": "Győr-Moson-Sopron",
+		"priority": 14
+	},
+	{
+		"code": "HB",
+		"name": "Hajdú-Bihar",
+		"priority": 15
+	},
+	{
+		"code": "HE",
+		"name": "Heves",
+		"priority": 16
+	},
+	{
+		"code": "HV",
+		"name": "Hódmezővásárhely",
+		"priority": 17
+	},
+	{
+		"code": "N",
+		"name": "Jász-Nagykun-Szolnok",
+		"priority": 18
+	},
+	{
+		"code": "KV",
+		"name": "Kaposvár",
+		"priority": 19
+	},
+	{
+		"code": "KM",
+		"name": "Kecskemét",
+		"priority": 20
+	},
+	{
+		"code": "KE",
+		"name": "Komárom-Esztergom",
+		"priority": 21
+	},
+	{
+		"code": "MI",
+		"name": "Miskolc",
+		"priority": 22
+	},
+	{
+		"code": "NK",
+		"name": "Nagykanizsa",
+		"priority": 23
+	},
+	{
+		"code": "NO",
+		"name": "Nógrád",
+		"priority": 24
+	},
+	{
+		"code": "NY",
+		"name": "Nyíregyháza",
+		"priority": 25
+	},
+	{
+		"code": "PS",
+		"name": "Pécs",
+		"priority": 26
+	},
+	{
+		"code": "PE",
+		"name": "Pest",
+		"priority": 27
+	},
+	{
+		"code": "ST",
+		"name": "Salgótarján",
+		"priority": 28
+	},
+	{
+		"code": "SO",
+		"name": "Somogy",
+		"priority": 29
+	},
+	{
+		"code": "SN",
+		"name": "Sopron",
+		"priority": 30
+	},
+	{
+		"code": "SZ",
+		"name": "Szabolcs-á-Bereg",
+		"priority": 31
+	},
+	{
+		"code": "SD",
+		"name": "Szeged",
+		"priority": 32
+	},
+	{
+		"code": "SF",
+		"name": "Székesfehérvár",
+		"priority": 33
+	},
+	{
+		"code": "SS",
+		"name": "Szekszárd",
+		"priority": 34
+	},
+	{
+		"code": "SK",
+		"name": "Szolnok",
+		"priority": 35
+	},
+	{
+		"code": "SH",
+		"name": "Szombathely",
+		"priority": 36
+	},
+	{
+		"code": "TB",
+		"name": "Tatabánya",
+		"priority": 37
+	},
+	{
+		"code": "TO",
+		"name": "Tolna",
+		"priority": 38
+	},
+	{
+		"code": "VA",
+		"name": "Vas",
+		"priority": 39
+	},
+	{
+		"code": "VE",
+		"name": "Veszprém",
+		"priority": 40
+	},
+	{
+		"code": "VM",
+		"name": "Veszprém (City)",
+		"priority": 41
+	},
+	{
+		"code": "ZA",
+		"name": "Zala",
+		"priority": 42
+	},
+	{
+		"code": "ZE",
+		"name": "Zalaegerszeg",
+		"priority": 43
+	}
 ]
