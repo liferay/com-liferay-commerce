@@ -713,6 +713,9 @@
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
+		<finder name="CommerceOrderItemId" return-type="CommerceSubscriptionEntry" unique="true">
+			<finder-column name="commerceOrderItemId" />
+		</finder>
 		<finder name="SubscriptionStatus" return-type="Collection">
 			<finder-column name="subscriptionStatus" />
 		</finder>
