@@ -24,7 +24,7 @@ import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.content.constants.CPContentWebKeys;
 import com.liferay.commerce.product.content.render.list.CPContentListRenderer;
 import com.liferay.commerce.product.content.util.CPCompareContentHelper;
-import com.liferay.commerce.product.util.CPCompareUtil;
+import com.liferay.commerce.product.util.CPCompareHelperUtil;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.theme.minium.internal.product.model.ProductCompareModel;
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
@@ -115,7 +115,7 @@ public class MiniumCPCompareListRenderer implements CPContentListRenderer {
 		int limit = cpCompareContentHelper.getProductsLimit(
 			themeDisplay.getPortletDisplay());
 
-		List<Long> cpDefinitionIds = CPCompareUtil.getCPDefinitionIds(
+		List<Long> cpDefinitionIds = CPCompareHelperUtil.getCPDefinitionIds(
 			httpServletRequest);
 
 		List<ProductCompareModel> products = new ArrayList<>();
