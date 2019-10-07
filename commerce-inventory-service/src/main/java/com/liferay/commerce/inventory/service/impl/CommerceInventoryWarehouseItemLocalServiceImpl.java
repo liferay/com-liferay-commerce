@@ -116,6 +116,15 @@ public class CommerceInventoryWarehouseItemLocalServiceImpl
 				commerceInventoryWarehouseId, start, end);
 	}
 
+	@Override
+	public List<CommerceInventoryWarehouseItem>
+		getCommerceInventoryWarehouseItemsByCompanyId(
+			long companyId, int start, int end) {
+
+		return commerceInventoryWarehouseItemPersistence.findByCompanyId(
+			companyId, start, end);
+	}
+
 	public List<CommerceInventoryWarehouseItem>
 		getCommerceInventoryWarehouseItemsByModifiedDate(
 			long companyId, Date startDate, Date endDate, int start, int end) {
@@ -126,11 +135,18 @@ public class CommerceInventoryWarehouseItemLocalServiceImpl
 
 	@Override
 	public int getCommerceInventoryWarehouseItemsCount(
-			long commerceInventoryWarehouseId)
-		throws PortalException {
+		long commerceInventoryWarehouseId) {
 
 		return commerceInventoryWarehouseItemPersistence.
 			countByCommerceInventoryWarehouseId(commerceInventoryWarehouseId);
+	}
+
+	@Override
+	public int getCommerceInventoryWarehouseItemsCountByCompanyId(
+		long companyId) {
+
+		return commerceInventoryWarehouseItemPersistence.countByCompanyId(
+			companyId);
 	}
 
 	@Override
