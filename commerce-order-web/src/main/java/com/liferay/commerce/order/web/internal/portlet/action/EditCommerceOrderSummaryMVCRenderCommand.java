@@ -16,11 +16,12 @@ package com.liferay.commerce.order.web.internal.portlet.action;
 
 import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.exception.NoSuchOrderException;
+import com.liferay.commerce.notification.service.CommerceNotificationQueueEntryService;
 import com.liferay.commerce.order.web.internal.display.context.CommerceOrderEditDisplayContext;
 import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelService;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
-import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
+import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceOrderNoteService;
 import com.liferay.commerce.service.CommerceOrderPaymentLocalService;
@@ -60,12 +61,13 @@ public class EditCommerceOrderSummaryMVCRenderCommand
 		try {
 			CommerceOrderEditDisplayContext commerceOrderEditDisplayContext =
 				new CommerceOrderEditDisplayContext(
-					_commerceChannelLocalService, _commerceOrderService,
-					_commerceOrderItemService, _commerceOrderNoteService,
+					_commerceAddressService, _commerceChannelLocalService,
+					_commerceNotificationQueueEntryService,
+					_commerceOrderService, _commerceOrderItemService,
+					_commerceOrderNoteService,
 					_commerceOrderPaymentLocalService,
 					_commercePaymentMethodGroupRelService,
-					_commerceOrderPriceCalculation,
-					_commerceProductPriceCalculation, _commerceShipmentService,
+					_commerceOrderPriceCalculation, _commerceShipmentService,
 					_itemSelector, renderRequest);
 
 			renderRequest.setAttribute(
@@ -88,7 +90,14 @@ public class EditCommerceOrderSummaryMVCRenderCommand
 	}
 
 	@Reference
+	private CommerceAddressService _commerceAddressService;
+
+	@Reference
 	private CommerceChannelLocalService _commerceChannelLocalService;
+
+	@Reference
+	private CommerceNotificationQueueEntryService
+		_commerceNotificationQueueEntryService;
 
 	@Reference
 	private CommerceOrderItemService _commerceOrderItemService;
@@ -108,9 +117,6 @@ public class EditCommerceOrderSummaryMVCRenderCommand
 	@Reference
 	private CommercePaymentMethodGroupRelService
 		_commercePaymentMethodGroupRelService;
-
-	@Reference
-	private CommerceProductPriceCalculation _commerceProductPriceCalculation;
 
 	@Reference
 	private CommerceShipmentService _commerceShipmentService;
