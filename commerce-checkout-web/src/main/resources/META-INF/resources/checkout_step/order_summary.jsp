@@ -182,8 +182,8 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 
 									<c:if test="<%= Validator.isNotNull(cpInstance.getCPSubscriptionInfo()) %>">
 										<span class="commerce-subscription-info">
-											<liferay-commerce:subscription-info
-												CPInstanceId="<%= commerceOrderItem.getCPInstanceId() %>"
+											<commerce-ui:order-subscription-info
+												commerceOrderItemId="<%= commerceOrderItem.getCommerceOrderItemId() %>"
 												showDuration="<%= false %>"
 											/>
 										</span>
