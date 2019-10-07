@@ -160,14 +160,11 @@ public class CommerceOrderPaymentPersistenceImpl
 		OrderByComparator<CommerceOrderPayment> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindByCommerceOrderId;
@@ -219,7 +216,7 @@ public class CommerceOrderPaymentPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(CommerceOrderPaymentModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -236,18 +233,8 @@ public class CommerceOrderPaymentPersistenceImpl
 
 				qPos.add(commerceOrderId);
 
-				if (!pagination) {
-					list = (List<CommerceOrderPayment>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceOrderPayment>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommerceOrderPayment>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -1210,14 +1197,11 @@ public class CommerceOrderPaymentPersistenceImpl
 		OrderByComparator<CommerceOrderPayment> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindAll;
@@ -1254,10 +1238,7 @@ public class CommerceOrderPaymentPersistenceImpl
 			else {
 				sql = _SQL_SELECT_COMMERCEORDERPAYMENT;
 
-				if (pagination) {
-					sql = sql.concat(
-						CommerceOrderPaymentModelImpl.ORDER_BY_JPQL);
-				}
+				sql = sql.concat(CommerceOrderPaymentModelImpl.ORDER_BY_JPQL);
 			}
 
 			Session session = null;
@@ -1267,18 +1248,8 @@ public class CommerceOrderPaymentPersistenceImpl
 
 				Query q = session.createQuery(sql);
 
-				if (!pagination) {
-					list = (List<CommerceOrderPayment>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceOrderPayment>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommerceOrderPayment>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 

@@ -160,14 +160,11 @@ public class CommerceOrderNotePersistenceImpl
 		OrderByComparator<CommerceOrderNote> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindByCommerceOrderId;
@@ -219,7 +216,7 @@ public class CommerceOrderNotePersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(CommerceOrderNoteModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -236,18 +233,8 @@ public class CommerceOrderNotePersistenceImpl
 
 				qPos.add(commerceOrderId);
 
-				if (!pagination) {
-					list = (List<CommerceOrderNote>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceOrderNote>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommerceOrderNote>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -697,14 +684,11 @@ public class CommerceOrderNotePersistenceImpl
 		OrderByComparator<CommerceOrderNote> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindByC_R;
@@ -759,7 +743,7 @@ public class CommerceOrderNotePersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(CommerceOrderNoteModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -778,18 +762,8 @@ public class CommerceOrderNotePersistenceImpl
 
 				qPos.add(restricted);
 
-				if (!pagination) {
-					list = (List<CommerceOrderNote>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceOrderNote>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommerceOrderNote>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -2132,14 +2106,11 @@ public class CommerceOrderNotePersistenceImpl
 		OrderByComparator<CommerceOrderNote> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindAll;
@@ -2176,9 +2147,7 @@ public class CommerceOrderNotePersistenceImpl
 			else {
 				sql = _SQL_SELECT_COMMERCEORDERNOTE;
 
-				if (pagination) {
-					sql = sql.concat(CommerceOrderNoteModelImpl.ORDER_BY_JPQL);
-				}
+				sql = sql.concat(CommerceOrderNoteModelImpl.ORDER_BY_JPQL);
 			}
 
 			Session session = null;
@@ -2188,18 +2157,8 @@ public class CommerceOrderNotePersistenceImpl
 
 				Query q = session.createQuery(sql);
 
-				if (!pagination) {
-					list = (List<CommerceOrderNote>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceOrderNote>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommerceOrderNote>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 

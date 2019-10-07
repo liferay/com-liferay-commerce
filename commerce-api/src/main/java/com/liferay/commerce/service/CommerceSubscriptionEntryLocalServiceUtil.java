@@ -53,6 +53,21 @@ public class CommerceSubscriptionEntryLocalServiceUtil {
 			commerceSubscriptionEntry);
 	}
 
+	public static com.liferay.commerce.model.CommerceSubscriptionEntry
+			addCommerceSubscriptionEntry(
+				long userId, long groupId, long commerceOrderItemId,
+				int subscriptionLength, String subscriptionType,
+				long maxSubscriptionCycles,
+				com.liferay.portal.kernel.util.UnicodeProperties
+					subscriptionTypeSettingsProperties)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().addCommerceSubscriptionEntry(
+			userId, groupId, commerceOrderItemId, subscriptionLength,
+			subscriptionType, maxSubscriptionCycles,
+			subscriptionTypeSettingsProperties);
+	}
+
 	/**
 	 * @deprecated As of Mueller (7.2.x), pass userId and groupId
 	 */
@@ -67,6 +82,11 @@ public class CommerceSubscriptionEntryLocalServiceUtil {
 			cpInstanceId, commerceOrderItemId, serviceContext);
 	}
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), pass subscription info instead of
+	 cpInstanceUuid and cProductId
+	 */
+	@Deprecated
 	public static com.liferay.commerce.model.CommerceSubscriptionEntry
 			addCommerceSubscriptionEntry(
 				long userId, long groupId, String cpInstanceUuid,
@@ -231,6 +251,10 @@ public class CommerceSubscriptionEntryLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery, projection);
 	}
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), fetch by commerceOrderItemId instead
+	 */
+	@Deprecated
 	public static com.liferay.commerce.model.CommerceSubscriptionEntry
 		fetchCommerceSubscriptionEntries(
 			String cpInstanceUuid, long cProductId, long commerceOrderItemId) {
