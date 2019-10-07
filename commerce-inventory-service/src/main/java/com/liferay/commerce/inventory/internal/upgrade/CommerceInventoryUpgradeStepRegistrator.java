@@ -17,12 +17,14 @@ package com.liferay.commerce.inventory.internal.upgrade;
 import com.liferay.commerce.inventory.internal.upgrade.v1_1_0.CommerceInventoryWarehouseItemUpgradeProcess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.upgrade.DummyUpgradeProcess;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
 
 import org.osgi.service.component.annotations.Component;
 
 /**
  * @author Luca Pellizzon
+ * @author Alessio Antonio Rendina
  */
 @Component(immediate = true, service = UpgradeStepRegistrator.class)
 public class CommerceInventoryUpgradeStepRegistrator
@@ -38,6 +40,10 @@ public class CommerceInventoryUpgradeStepRegistrator
 			_SCHEMA_VERSION_1_0_0, _SCHEMA_VERSION_1_1_0,
 			new CommerceInventoryWarehouseItemUpgradeProcess());
 
+		registry.register(
+			_SCHEMA_VERSION_1_1_0, _SCHEMA_VERSION_1_2_0,
+			new DummyUpgradeProcess());
+
 		if (_log.isInfoEnabled()) {
 			_log.info("COMMERCE INVENTORY UPGRADE STEP REGISTRATOR FINISHED");
 		}
@@ -46,6 +52,8 @@ public class CommerceInventoryUpgradeStepRegistrator
 	private static final String _SCHEMA_VERSION_1_0_0 = "1.0.0";
 
 	private static final String _SCHEMA_VERSION_1_1_0 = "1.1.0";
+
+	private static final String _SCHEMA_VERSION_1_2_0 = "1.2.0";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceInventoryUpgradeStepRegistrator.class);
