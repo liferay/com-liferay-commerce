@@ -44,6 +44,7 @@ CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder()
 			elementClasses="flex-fill"
 			headerActionId="order-payment-method-modal"
 			headerActionLabel='<%= LanguageUtil.get(request, Validator.isNull(commerceOrder.getCommercePaymentMethodKey()) ? "add" : "edit") %>'
+			headerActionTarget="order-payment-method-modal"
 			headerActionUrl="<%= editOrderPaymentMethodURL %>"
 			title='<%= LanguageUtil.get(request, "payment-method") %>'
 		>
