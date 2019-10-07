@@ -27,8 +27,6 @@ create unique index IX_415D595A on CommerceCountry (companyId, twoLettersISOCode
 create index IX_91EA24D5 on CommerceCountry (uuid_[$COLUMN_LENGTH:75$], companyId);
 
 create index IX_12131FC1 on CommerceOrder (billingAddressId);
-create index IX_7DD246EA on CommerceOrder (commerceAccountId, groupId, orderStatus);
-create index IX_81097E4C on CommerceOrder (commerceAccountId, orderStatus);
 create index IX_48EEEDEE on CommerceOrder (companyId, externalReferenceCode[$COLUMN_LENGTH:75$]);
 create index IX_4F4CAEE4 on CommerceOrder (groupId, commerceAccountId, orderStatus);
 create index IX_67E0AF05 on CommerceOrder (groupId, userId, orderStatus);
@@ -62,9 +60,9 @@ create index IX_42E5F6EF on CommerceShippingMethod (groupId, active_);
 create unique index IX_C4557F93 on CommerceShippingMethod (groupId, engineKey[$COLUMN_LENGTH:75$]);
 
 create unique index IX_BE881965 on CommerceSubscriptionEntry (CPInstanceUuid[$COLUMN_LENGTH:75$], CProductId, commerceOrderItemId);
+create unique index IX_D7D137B1 on CommerceSubscriptionEntry (commerceOrderItemId);
 create index IX_43E6F382 on CommerceSubscriptionEntry (companyId, userId);
 create index IX_B99DE058 on CommerceSubscriptionEntry (groupId, companyId, userId);
-create index IX_6D080A04 on CommerceSubscriptionEntry (groupId, userId);
 create index IX_B496E103 on CommerceSubscriptionEntry (subscriptionStatus);
 create index IX_4363DED4 on CommerceSubscriptionEntry (uuid_[$COLUMN_LENGTH:75$], companyId);
 create unique index IX_943E0A56 on CommerceSubscriptionEntry (uuid_[$COLUMN_LENGTH:75$], groupId);

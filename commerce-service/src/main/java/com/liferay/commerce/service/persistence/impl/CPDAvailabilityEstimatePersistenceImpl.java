@@ -1371,9 +1371,9 @@ public class CPDAvailabilityEstimatePersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPDAvailabilityEstimate cpdAvailabilityEstimate : list) {
-					if ((commerceAvailabilityEstimateId !=
+					if (commerceAvailabilityEstimateId !=
 							cpdAvailabilityEstimate.
-								getCommerceAvailabilityEstimateId())) {
+								getCommerceAvailabilityEstimateId()) {
 
 						list = null;
 
@@ -1890,7 +1890,7 @@ public class CPDAvailabilityEstimatePersistenceImpl
 			CPDAvailabilityEstimate cpdAvailabilityEstimate =
 				(CPDAvailabilityEstimate)result;
 
-			if ((CProductId != cpdAvailabilityEstimate.getCProductId())) {
+			if (CProductId != cpdAvailabilityEstimate.getCProductId()) {
 				result = null;
 			}
 		}

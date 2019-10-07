@@ -78,6 +78,13 @@ public interface CommerceSubscriptionEntryLocalService
 	public CommerceSubscriptionEntry addCommerceSubscriptionEntry(
 		CommerceSubscriptionEntry commerceSubscriptionEntry);
 
+	@Indexable(type = IndexableType.REINDEX)
+	public CommerceSubscriptionEntry addCommerceSubscriptionEntry(
+			long userId, long groupId, long commerceOrderItemId, int length,
+			String subscriptionType, long maxSubscriptionCycles,
+			UnicodeProperties subscriptionTypeSettingsProperties)
+		throws PortalException;
+
 	/**
 	 * @deprecated As of Mueller (7.2.x), pass userId and groupId
 	 */
@@ -87,7 +94,11 @@ public interface CommerceSubscriptionEntryLocalService
 			ServiceContext serviceContext)
 		throws PortalException;
 
-	@Indexable(type = IndexableType.REINDEX)
+	/**
+	 * @deprecated As of Mueller (7.2.x), pass subscription info instead of
+	 cpInstanceUuid and cProductId
+	 */
+	@Deprecated
 	public CommerceSubscriptionEntry addCommerceSubscriptionEntry(
 			long userId, long groupId, String cpInstanceUuid, long cProductId,
 			long commerceOrderItemId)
@@ -207,6 +218,10 @@ public interface CommerceSubscriptionEntryLocalService
 	public long dynamicQueryCount(
 		DynamicQuery dynamicQuery, Projection projection);
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), fetch by commerceOrderItemId instead
+	 */
+	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceSubscriptionEntry fetchCommerceSubscriptionEntries(
 		String cpInstanceUuid, long cProductId, long commerceOrderItemId);

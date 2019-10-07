@@ -189,8 +189,8 @@ public class CommerceOrderNotePersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceOrderNote commerceOrderNote : list) {
-					if ((commerceOrderId !=
-							commerceOrderNote.getCommerceOrderId())) {
+					if (commerceOrderId !=
+							commerceOrderNote.getCommerceOrderId()) {
 
 						list = null;
 

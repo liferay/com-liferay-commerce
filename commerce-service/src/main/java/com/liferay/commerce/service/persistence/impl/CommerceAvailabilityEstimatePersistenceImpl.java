@@ -1371,8 +1371,8 @@ public class CommerceAvailabilityEstimatePersistenceImpl
 				for (CommerceAvailabilityEstimate commerceAvailabilityEstimate :
 						list) {
 
-					if ((companyId !=
-							commerceAvailabilityEstimate.getCompanyId())) {
+					if (companyId !=
+							commerceAvailabilityEstimate.getCompanyId()) {
 
 						list = null;
 

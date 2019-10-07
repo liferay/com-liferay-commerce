@@ -1344,7 +1344,7 @@ public class CommerceCountryPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceCountry commerceCountry : list) {
-					if ((companyId != commerceCountry.getCompanyId())) {
+					if (companyId != commerceCountry.getCompanyId()) {
 						list = null;
 
 						break;

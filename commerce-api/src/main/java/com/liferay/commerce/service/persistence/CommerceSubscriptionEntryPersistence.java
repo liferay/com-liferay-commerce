@@ -686,6 +686,54 @@ public interface CommerceSubscriptionEntryPersistence
 	public int countBySubscriptionStatus(int subscriptionStatus);
 
 	/**
+	 * Returns the commerce subscription entry where commerceOrderItemId = &#63; or throws a <code>NoSuchSubscriptionEntryException</code> if it could not be found.
+	 *
+	 * @param commerceOrderItemId the commerce order item ID
+	 * @return the matching commerce subscription entry
+	 * @throws NoSuchSubscriptionEntryException if a matching commerce subscription entry could not be found
+	 */
+	public CommerceSubscriptionEntry findByCommerceOrderItemId(
+			long commerceOrderItemId)
+		throws NoSuchSubscriptionEntryException;
+
+	/**
+	 * Returns the commerce subscription entry where commerceOrderItemId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param commerceOrderItemId the commerce order item ID
+	 * @return the matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
+	 */
+	public CommerceSubscriptionEntry fetchByCommerceOrderItemId(
+		long commerceOrderItemId);
+
+	/**
+	 * Returns the commerce subscription entry where commerceOrderItemId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param commerceOrderItemId the commerce order item ID
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
+	 */
+	public CommerceSubscriptionEntry fetchByCommerceOrderItemId(
+		long commerceOrderItemId, boolean useFinderCache);
+
+	/**
+	 * Removes the commerce subscription entry where commerceOrderItemId = &#63; from the database.
+	 *
+	 * @param commerceOrderItemId the commerce order item ID
+	 * @return the commerce subscription entry that was removed
+	 */
+	public CommerceSubscriptionEntry removeByCommerceOrderItemId(
+			long commerceOrderItemId)
+		throws NoSuchSubscriptionEntryException;
+
+	/**
+	 * Returns the number of commerce subscription entries where commerceOrderItemId = &#63;.
+	 *
+	 * @param commerceOrderItemId the commerce order item ID
+	 * @return the number of matching commerce subscription entries
+	 */
+	public int countByCommerceOrderItemId(long commerceOrderItemId);
+
+	/**
 	 * Returns all the commerce subscription entries where companyId = &#63; and userId = &#63;.
 	 *
 	 * @param companyId the company ID
