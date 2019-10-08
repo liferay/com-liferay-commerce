@@ -15,9 +15,9 @@
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
 import com.liferay.commerce.frontend.ClayTable;
-import com.liferay.commerce.frontend.ClayTableContextContributor;
 import com.liferay.commerce.frontend.ClayTableContextContributorRegistry;
 import com.liferay.commerce.frontend.ClayTableDataJSONBuilder;
+import com.liferay.commerce.frontend.ClayTableHttpContextContributor;
 import com.liferay.commerce.frontend.ClayTableRegistry;
 import com.liferay.commerce.frontend.ClayTableSerializer;
 import com.liferay.commerce.frontend.CommerceDataProviderRegistry;
@@ -308,11 +308,11 @@ public class CommerceTableTag extends ComponentRendererTag {
 
 		Set<String> dependencies = new HashSet<>();
 
-		List<ClayTableContextContributor> clayTablePostProcessors =
+		List<ClayTableHttpContextContributor> clayTablePostProcessors =
 			_clayTableContextContributorRegistry.
 				getClayTableContextContributors(tableName);
 
-		for (ClayTableContextContributor clayTableContextContributor :
+		for (ClayTableHttpContextContributor clayTableContextContributor :
 				clayTablePostProcessors) {
 
 			clayTableContextContributor.contribute(

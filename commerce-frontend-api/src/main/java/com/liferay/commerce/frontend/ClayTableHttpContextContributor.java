@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author Marco Leo
  */
 @ProviderType
-public interface ClayTableContextContributor {
+public interface ClayTableHttpContextContributor {
 
 	public void contribute(
 		ClayTable clayTable, Map<String, Object> context,
