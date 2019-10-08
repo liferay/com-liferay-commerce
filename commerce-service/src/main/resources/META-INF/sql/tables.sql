@@ -118,7 +118,7 @@ create table CommerceOrder (
 	createDate DATE null,
 	modifiedDate DATE null,
 	commerceAccountId LONG,
-	commerceCurrencyId LONG,
+	commerceCurrencyCode VARCHAR(75) null,
 	billingAddressId LONG,
 	shippingAddressId LONG,
 	commercePaymentMethodKey VARCHAR(75) null,
@@ -249,9 +249,9 @@ create table CommerceShipment (
 	shippingOptionName VARCHAR(75) null,
 	carrier VARCHAR(75) null,
 	trackingNumber VARCHAR(75) null,
-	status INTEGER,
 	shippingDate DATE null,
-	expectedDate DATE null
+	expectedDate DATE null,
+	status INTEGER
 );
 
 create table CommerceShipmentItem (

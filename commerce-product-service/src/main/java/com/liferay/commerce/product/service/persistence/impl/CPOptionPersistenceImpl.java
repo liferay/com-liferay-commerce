@@ -2187,7 +2187,7 @@ public class CPOptionPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPOption cpOption : list) {
-					if ((companyId != cpOption.getCompanyId())) {
+					if (companyId != cpOption.getCompanyId()) {
 						list = null;
 
 						break;

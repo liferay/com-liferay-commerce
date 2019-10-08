@@ -192,9 +192,9 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 				for (CommerceAccountOrganizationRel
 						commerceAccountOrganizationRel : list) {
 
-					if ((commerceAccountId !=
+					if (commerceAccountId !=
 							commerceAccountOrganizationRel.
-								getCommerceAccountId())) {
+								getCommerceAccountId()) {
 
 						list = null;
 
@@ -732,9 +732,9 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 				for (CommerceAccountOrganizationRel
 						commerceAccountOrganizationRel : list) {
 
-					if ((organizationId !=
+					if (organizationId !=
 							commerceAccountOrganizationRel.
-								getOrganizationId())) {
+								getOrganizationId()) {
 
 						list = null;
 

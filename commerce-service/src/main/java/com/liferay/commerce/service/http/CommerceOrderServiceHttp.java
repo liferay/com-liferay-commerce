@@ -52,8 +52,8 @@ import com.liferay.portal.kernel.util.MethodKey;
 public class CommerceOrderServiceHttp {
 
 	public static com.liferay.commerce.model.CommerceOrder addCommerceOrder(
-			HttpPrincipal httpPrincipal, long userId, long groupId,
-			long commerceAccountId, long commerceCurrencyId)
+			HttpPrincipal httpPrincipal, long groupId, long commerceAccountId,
+			long shippingAddressId, String purchaseOrderNumber)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		try {
@@ -62,8 +62,8 @@ public class CommerceOrderServiceHttp {
 				_addCommerceOrderParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, userId, groupId, commerceAccountId,
-				commerceCurrencyId);
+				methodKey, groupId, commerceAccountId, shippingAddressId,
+				purchaseOrderNumber);
 
 			Object returnObj = null;
 
@@ -92,9 +92,8 @@ public class CommerceOrderServiceHttp {
 	}
 
 	public static com.liferay.commerce.model.CommerceOrder addCommerceOrder(
-			HttpPrincipal httpPrincipal, long groupId, long commerceAccountId,
-			long commerceCurrencyId, long shippingAddressId,
-			String purchaseOrderNumber)
+			HttpPrincipal httpPrincipal, long userId, long groupId,
+			String commerceCurrencyCode, long commerceAccountId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		try {
@@ -103,8 +102,8 @@ public class CommerceOrderServiceHttp {
 				_addCommerceOrderParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, groupId, commerceAccountId, commerceCurrencyId,
-				shippingAddressId, purchaseOrderNumber);
+				methodKey, userId, groupId, commerceCurrencyCode,
+				commerceAccountId);
 
 			Object returnObj = null;
 
@@ -134,7 +133,8 @@ public class CommerceOrderServiceHttp {
 
 	public static com.liferay.commerce.model.CommerceOrder addCommerceOrder(
 			HttpPrincipal httpPrincipal, long groupId, long commerceAccountId,
-			long shippingAddressId, String purchaseOrderNumber)
+			String commerceCurrencyCode, long shippingAddressId,
+			String purchaseOrderNumber)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		try {
@@ -143,8 +143,8 @@ public class CommerceOrderServiceHttp {
 				_addCommerceOrderParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, groupId, commerceAccountId, shippingAddressId,
-				purchaseOrderNumber);
+				methodKey, groupId, commerceAccountId, commerceCurrencyCode,
+				shippingAddressId, purchaseOrderNumber);
 
 			Object returnObj = null;
 
@@ -1929,7 +1929,7 @@ public class CommerceOrderServiceHttp {
 
 	public static com.liferay.commerce.model.CommerceOrder upsertCommerceOrder(
 			HttpPrincipal httpPrincipal, long userId, long groupId,
-			long commerceAccountId, long commerceCurrencyId,
+			long commerceAccountId, String commerceCurrencyCode,
 			long billingAddressId, long shippingAddressId,
 			String commercePaymentMethodKey, long commerceShippingMethodId,
 			String shippingOptionName, String purchaseOrderNumber,
@@ -1947,7 +1947,7 @@ public class CommerceOrderServiceHttp {
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, userId, groupId, commerceAccountId,
-				commerceCurrencyId, billingAddressId, shippingAddressId,
+				commerceCurrencyCode, billingAddressId, shippingAddressId,
 				commercePaymentMethodKey, commerceShippingMethodId,
 				shippingOptionName, purchaseOrderNumber, subtotal,
 				shippingAmount, total, paymentStatus, orderStatus,
@@ -1984,13 +1984,13 @@ public class CommerceOrderServiceHttp {
 		CommerceOrderServiceHttp.class);
 
 	private static final Class<?>[] _addCommerceOrderParameterTypes0 =
-		new Class[] {long.class, long.class, long.class, long.class};
-	private static final Class<?>[] _addCommerceOrderParameterTypes1 =
-		new Class[] {
-			long.class, long.class, long.class, long.class, String.class
-		};
-	private static final Class<?>[] _addCommerceOrderParameterTypes2 =
 		new Class[] {long.class, long.class, long.class, String.class};
+	private static final Class<?>[] _addCommerceOrderParameterTypes1 =
+		new Class[] {long.class, long.class, String.class, long.class};
+	private static final Class<?>[] _addCommerceOrderParameterTypes2 =
+		new Class[] {
+			long.class, long.class, String.class, long.class, String.class
+		};
 	private static final Class<?>[] _applyCouponCodeParameterTypes3 =
 		new Class[] {
 			long.class, String.class,
@@ -2152,7 +2152,7 @@ public class CommerceOrderServiceHttp {
 	};
 	private static final Class<?>[] _upsertCommerceOrderParameterTypes46 =
 		new Class[] {
-			long.class, long.class, long.class, long.class, long.class,
+			long.class, long.class, long.class, String.class, long.class,
 			long.class, String.class, long.class, String.class, String.class,
 			java.math.BigDecimal.class, java.math.BigDecimal.class,
 			java.math.BigDecimal.class, int.class, int.class, String.class,

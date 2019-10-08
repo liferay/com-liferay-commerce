@@ -190,8 +190,8 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 				for (CommerceNotificationQueueEntry
 						commerceNotificationQueueEntry : list) {
 
-					if ((groupId !=
-							commerceNotificationQueueEntry.getGroupId())) {
+					if (groupId !=
+							commerceNotificationQueueEntry.getGroupId()) {
 
 						list = null;
 
@@ -737,9 +737,9 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 				for (CommerceNotificationQueueEntry
 						commerceNotificationQueueEntry : list) {
 
-					if ((commerceNotificationTemplateId !=
+					if (commerceNotificationTemplateId !=
 							commerceNotificationQueueEntry.
-								getCommerceNotificationTemplateId())) {
+								getCommerceNotificationTemplateId()) {
 
 						list = null;
 
@@ -1295,7 +1295,7 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 				for (CommerceNotificationQueueEntry
 						commerceNotificationQueueEntry : list) {
 
-					if ((sent != commerceNotificationQueueEntry.isSent())) {
+					if (sent != commerceNotificationQueueEntry.isSent()) {
 						list = null;
 
 						break;
@@ -1810,9 +1810,9 @@ public class CommerceNotificationQueueEntryPersistenceImpl
 				for (CommerceNotificationQueueEntry
 						commerceNotificationQueueEntry : list) {
 
-					if ((sentDate.getTime() <=
+					if (sentDate.getTime() <=
 							commerceNotificationQueueEntry.
-								getSentDate().getTime())) {
+								getSentDate().getTime()) {
 
 						list = null;
 

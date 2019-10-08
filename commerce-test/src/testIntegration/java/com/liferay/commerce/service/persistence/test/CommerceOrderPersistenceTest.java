@@ -145,7 +145,7 @@ public class CommerceOrderPersistenceTest {
 
 		newCommerceOrder.setCommerceAccountId(RandomTestUtil.nextLong());
 
-		newCommerceOrder.setCommerceCurrencyId(RandomTestUtil.nextLong());
+		newCommerceOrder.setCommerceCurrencyCode(RandomTestUtil.randomString());
 
 		newCommerceOrder.setBillingAddressId(RandomTestUtil.nextLong());
 
@@ -273,8 +273,8 @@ public class CommerceOrderPersistenceTest {
 			existingCommerceOrder.getCommerceAccountId(),
 			newCommerceOrder.getCommerceAccountId());
 		Assert.assertEquals(
-			existingCommerceOrder.getCommerceCurrencyId(),
-			newCommerceOrder.getCommerceCurrencyId());
+			existingCommerceOrder.getCommerceCurrencyCode(),
+			newCommerceOrder.getCommerceCurrencyCode());
 		Assert.assertEquals(
 			existingCommerceOrder.getBillingAddressId(),
 			newCommerceOrder.getBillingAddressId());
@@ -524,7 +524,7 @@ public class CommerceOrderPersistenceTest {
 			"commerceOrderId", true, "groupId", true, "companyId", true,
 			"userId", true, "userName", true, "createDate", true,
 			"modifiedDate", true, "commerceAccountId", true,
-			"commerceCurrencyId", true, "billingAddressId", true,
+			"commerceCurrencyCode", true, "billingAddressId", true,
 			"shippingAddressId", true, "commercePaymentMethodKey", true,
 			"commerceShippingMethodId", true, "shippingOptionName", true,
 			"purchaseOrderNumber", true, "couponCode", true,
@@ -816,7 +816,7 @@ public class CommerceOrderPersistenceTest {
 
 		commerceOrder.setCommerceAccountId(RandomTestUtil.nextLong());
 
-		commerceOrder.setCommerceCurrencyId(RandomTestUtil.nextLong());
+		commerceOrder.setCommerceCurrencyCode(RandomTestUtil.randomString());
 
 		commerceOrder.setBillingAddressId(RandomTestUtil.nextLong());
 

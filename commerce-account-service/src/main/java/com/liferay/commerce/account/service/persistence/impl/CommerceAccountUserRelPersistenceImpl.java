@@ -190,8 +190,8 @@ public class CommerceAccountUserRelPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceAccountUserRel commerceAccountUserRel : list) {
-					if ((commerceAccountId !=
-							commerceAccountUserRel.getCommerceAccountId())) {
+					if (commerceAccountId !=
+							commerceAccountUserRel.getCommerceAccountId()) {
 
 						list = null;
 
@@ -726,9 +726,8 @@ public class CommerceAccountUserRelPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceAccountUserRel commerceAccountUserRel : list) {
-					if ((commerceAccountUserId !=
-							commerceAccountUserRel.
-								getCommerceAccountUserId())) {
+					if (commerceAccountUserId !=
+							commerceAccountUserRel.getCommerceAccountUserId()) {
 
 						list = null;
 

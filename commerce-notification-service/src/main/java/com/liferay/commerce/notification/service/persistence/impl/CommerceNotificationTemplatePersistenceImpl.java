@@ -1633,9 +1633,7 @@ public class CommerceNotificationTemplatePersistenceImpl
 				for (CommerceNotificationTemplate commerceNotificationTemplate :
 						list) {
 
-					if ((groupId !=
-							commerceNotificationTemplate.getGroupId())) {
-
+					if (groupId != commerceNotificationTemplate.getGroupId()) {
 						list = null;
 
 						break;

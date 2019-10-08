@@ -1595,8 +1595,8 @@ public class CommerceVirtualOrderItemPersistenceImpl
 			CommerceVirtualOrderItem commerceVirtualOrderItem =
 				(CommerceVirtualOrderItem)result;
 
-			if ((commerceOrderItemId !=
-					commerceVirtualOrderItem.getCommerceOrderItemId())) {
+			if (commerceOrderItemId !=
+					commerceVirtualOrderItem.getCommerceOrderItemId()) {
 
 				result = null;
 			}

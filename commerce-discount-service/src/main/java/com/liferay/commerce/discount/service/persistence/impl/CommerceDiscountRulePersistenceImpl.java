@@ -192,8 +192,8 @@ public class CommerceDiscountRulePersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceDiscountRule commerceDiscountRule : list) {
-					if ((commerceDiscountId !=
-							commerceDiscountRule.getCommerceDiscountId())) {
+					if (commerceDiscountId !=
+							commerceDiscountRule.getCommerceDiscountId()) {
 
 						list = null;
 
