@@ -39,12 +39,12 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	immediate = true,
 	property = {
-		"commerce.notification.type.key=" + CommerceOrderConstants.ORDER_NOTIFICATION_TRANSMITTED,
+		"commerce.notification.type.key=" + CommerceOrderConstants.ORDER_NOTIFICATION_FULFILLED,
 		"commerce.notification.type.order:Integer=40"
 	},
 	service = CommerceNotificationType.class
 )
-public class OrderTransmittedCommerceNotificationTypeImpl
+public class OrderFulfilledCommerceNotificationTypeImpl
 	implements CommerceNotificationType {
 
 	@Override
@@ -101,7 +101,7 @@ public class OrderTransmittedCommerceNotificationTypeImpl
 
 	@Override
 	public String getKey() {
-		return CommerceOrderConstants.ORDER_NOTIFICATION_TRANSMITTED;
+		return CommerceOrderConstants.ORDER_NOTIFICATION_FULFILLED;
 	}
 
 	@Override
@@ -111,7 +111,7 @@ public class OrderTransmittedCommerceNotificationTypeImpl
 
 		return LanguageUtil.get(
 			resourceBundle,
-			CommerceOrderConstants.ORDER_NOTIFICATION_TRANSMITTED);
+			CommerceOrderConstants.ORDER_NOTIFICATION_FULFILLED);
 	}
 
 	@Reference

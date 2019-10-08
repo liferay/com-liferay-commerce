@@ -30,15 +30,14 @@ public class CommerceOrderConstants {
 
 	public static final String ORDER_NOTIFICATION_COMPLETED = "order-completed";
 
+	public static final String ORDER_NOTIFICATION_FULFILLED = "order-fulfilled";
+
 	public static final String ORDER_NOTIFICATION_PARTIALLY_SHIPPED =
 		"order-partially-shipped";
 
 	public static final String ORDER_NOTIFICATION_PLACED = "order-placed";
 
 	public static final String ORDER_NOTIFICATION_SHIPPED = "order-shipped";
-
-	public static final String ORDER_NOTIFICATION_TRANSMITTED =
-		"order-transmitted";
 
 	public static final int ORDER_STATUS_ANY = WorkflowConstants.STATUS_ANY;
 
@@ -103,11 +102,12 @@ public class CommerceOrderConstants {
 	public static final long TYPE_PK_FULFILLMENT = 1;
 
 	public static String getNotificationKey(int orderStatus) {
-		if (orderStatus == CommerceOrderConstants.ORDER_STATUS_TRANSMITTED) {
-			return ORDER_NOTIFICATION_TRANSMITTED;
+		if (orderStatus == CommerceOrderConstants.ORDER_STATUS_FULFILLED) {
+			return ORDER_NOTIFICATION_FULFILLED;
 		}
-		else if (orderStatus ==
-					CommerceOrderConstants.ORDER_STATUS_AWAITING_SHIPMENT) {
+		else if (orderStatus == CommerceOrderConstants.ORDER_STATUS_FULFILLED) {
+
+			//TODO check correct status
 
 			return ORDER_NOTIFICATION_AWAITING_SHIPMENT;
 		}
