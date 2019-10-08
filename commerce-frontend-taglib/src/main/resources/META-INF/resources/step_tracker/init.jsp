@@ -28,5 +28,10 @@ page import="com.liferay.portal.kernel.util.PortalUtil" %>
 <liferay-theme:defineObjects />
 
 <%
-String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_step_tracker") + StringPool.UNDERLINE;
+
+    String spritemap = (String)request.getAttribute("liferay-commerce:step-tracker:spritemap");
+    List<StepModel> steps = (List<StepModel>)request.getAttribute("liferay-commerce:step-tracker:steps");
+    JSONSerializer jsonSerializer = JSONFactoryUtil.createJSONSerializer();
+    String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_step_tracker") + StringPool.UNDERLINE;
+    String stepTrackerId = randomNamespace + "step-tracker-id";
 %>

@@ -16,49 +16,31 @@
 
 <%@ include file="/table/init.jsp" %>
 
-<%
-String containerId = randomNamespace + "modal-root";
-%>
+<div class="table-root" id="<%= containerId %>"></div>
 
-<div class="modal-root" id="<%= randomNamespace %>"></div>
+<aui:script require="commerce-frontend-js/js/smart_table/entry.es as SmartTable">
 
-<aui:script require="commerce-frontend-js/js/table/entry.es as Table">
-	new Table.default(
-		"<%= containerId %>",
-		"<%= randomNamespace %>",
-		{
-			id: "<%= id %>",
-			portletId: "<%= portletDisplay.getRootPortletId() %>",
-			url: "<%= url %>",
-			size: "<%= size %>",
-			title: "<%= title %>",
-			spritemap: "<%= spritemap %>",
-			showSubmit: <%= showSubmit %>,
-			submitLabel: "<%= submitLabel %>",
-			closeOnSubmit: <%= closeOnSubmit %>,
-			submitAvailableAtLoading: <%= submitAvailableAtLoading %>,
-			showDelete: <%= showDelete %>,
-			deleteLabel: "<%= deleteLabel %>",
-			showCancel: <%= showCancel %>,
-			cancelLabel: "<%= cancelLabel %>"
-		}
-	);
-
-	<c:if test="<%= Validator.isNotNull(id) %>">
-		const modalTriggers = document.querySelectorAll('[data-target="<%= id %>"]')
-
-		if (modalTriggers.length) {
-			modalTriggers.forEach(
-				function(trigger) {
-					trigger.addEventListener(
-						'click',
-						function(e) {
-							e.preventDefault();
-							Liferay.fire("<%= id %>-open");
-						}
-					)
-				}
-			);
-		}
-	</c:if>
+    new SmartTable.default(
+        "<%= containerId %>",
+        "<%= containerId %>",
+        {
+            clayTableContext : <%= jsonSerializer.serializeDeep(clayTableContext) %>,
+            dataProviderKey : "<%= dataProviderKey %>",
+            dataSetAPI : "<%= dataSetAPI %>",
+            deltaParam : "<%= deltaParam %>",
+            disableAJAX : <%= disableAJAX %>,
+            filter : <%= jsonSerializer.serializeDeep(filter) %>,
+            itemPerPage : <%= itemPerPage %>,
+            items : <%= jsonSerializer.serializeDeep(items) %>,
+            namespace : "<%= namespace %>",
+            pageNumber : <%= pageNumber %>,
+            paginationEntries : <%= jsonSerializer.serializeDeep(paginationEntries) %>,
+            paginationSelectedEntry : <%= paginationSelectedEntry %>,
+            portletURL : "<%= portletURL %>",
+            showPagination : <%= showPagination %>,
+            spritemap : "<%= spritemap %>",
+            tableName : "<%= tableName %>",
+            totalItems : <%= totalItems %>,
+        }
+    );
 </aui:script>

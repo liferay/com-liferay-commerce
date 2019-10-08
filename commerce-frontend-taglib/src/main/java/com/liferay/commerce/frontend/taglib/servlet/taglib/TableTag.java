@@ -56,11 +56,7 @@ import javax.servlet.jsp.PageContext;
  * @author Marco Leo
  * @author Alessio Antonio Rendina
  */
-<<<<<<< HEAD:commerce-frontend-taglib/src/main/java/com/liferay/commerce/frontend/taglib/servlet/taglib/TableTag.java
-public class TableTag extends ComponentRendererTag {
-=======
-public class CommerceTableTag extends IncludeTag {
->>>>>>> c668d9e4b... COMMERCE-609 Refactor commerce table tag:commerce-frontend-taglib/src/main/java/com/liferay/commerce/frontend/taglib/servlet/taglib/CommerceTableTag.java
+public class TableTag extends IncludeTag {
 
 	@Override
 	public int doStartTag() throws JspException {

@@ -16,12 +16,6 @@
 
 <%@ include file="/step_tracker/init.jsp" %>
 
-<%
-String spritemap = (String)request.getAttribute("liferay-commerce:step-tracker:spritemap");
-List<StepModel> steps = (List<StepModel>)request.getAttribute("liferay-commerce:step-tracker:steps");
-String stepTrackerId = randomNamespace + "step-tracker-id";
-JSONSerializer jsonSerializer = JSONFactoryUtil.createJSONSerializer();
-%>
 
 <div class="step-tracker-root" id="<%= stepTrackerId %>"></div>
 
