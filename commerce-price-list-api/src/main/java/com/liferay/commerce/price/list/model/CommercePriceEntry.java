@@ -67,11 +67,11 @@ public interface CommercePriceEntry
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public com.liferay.commerce.currency.model.CommerceMoney getPriceMoney(
-			long commerceCurrencyId)
+			long companyId, String commerceCurrencyCode)
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 	public com.liferay.commerce.currency.model.CommerceMoney getPromoPriceMoney(
-			long commerceCurrencyId)
+			long companyId, String commerceCurrencyCode)
 		throws com.liferay.portal.kernel.exception.PortalException;
 
 }

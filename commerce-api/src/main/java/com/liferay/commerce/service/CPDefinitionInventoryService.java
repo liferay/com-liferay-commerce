@@ -81,7 +81,6 @@ public interface CPDefinitionInventoryService extends BaseService {
 	 * @param allowedOrderQuantities
 	 * @param multipleOrderQuantity
 	 * @param serviceContext
-	 * @return
 	 * @throws PortalException
 	 * @deprecated As of Mueller (7.2.x), see {@link
 	 #addCPDefinitionInventory(long, String, String, boolean,
@@ -136,7 +135,6 @@ public interface CPDefinitionInventoryService extends BaseService {
 	 * @param allowedOrderQuantities
 	 * @param multipleOrderQuantity
 	 * @param serviceContext
-	 * @return
 	 * @throws PortalException
 	 * @deprecated As of Mueller (7.2.x), see {@link
 	 #updateCPDefinitionInventory(long, long, String, String,

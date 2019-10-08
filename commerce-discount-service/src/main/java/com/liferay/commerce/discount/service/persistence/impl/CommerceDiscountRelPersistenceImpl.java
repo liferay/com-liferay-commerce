@@ -190,8 +190,8 @@ public class CommerceDiscountRelPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceDiscountRel commerceDiscountRel : list) {
-					if ((commerceDiscountId !=
-							commerceDiscountRel.getCommerceDiscountId())) {
+					if (commerceDiscountId !=
+							commerceDiscountRel.getCommerceDiscountId()) {
 
 						list = null;
 

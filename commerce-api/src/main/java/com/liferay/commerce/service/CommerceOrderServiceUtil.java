@@ -44,31 +44,31 @@ public class CommerceOrderServiceUtil {
 	 * Never modify or reference this interface directly. Always use {@link CommerceOrderServiceUtil} to access the commerce order remote service. Add custom service methods to <code>com.liferay.commerce.service.impl.CommerceOrderServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public static com.liferay.commerce.model.CommerceOrder addCommerceOrder(
-			long userId, long groupId, long commerceAccountId,
-			long commerceCurrencyId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-
-		return getService().addCommerceOrder(
-			userId, groupId, commerceAccountId, commerceCurrencyId);
-	}
-
-	public static com.liferay.commerce.model.CommerceOrder addCommerceOrder(
-			long groupId, long commerceAccountId, long commerceCurrencyId,
-			long shippingAddressId, String purchaseOrderNumber)
-		throws com.liferay.portal.kernel.exception.PortalException {
-
-		return getService().addCommerceOrder(
-			groupId, commerceAccountId, commerceCurrencyId, shippingAddressId,
-			purchaseOrderNumber);
-	}
-
-	public static com.liferay.commerce.model.CommerceOrder addCommerceOrder(
 			long groupId, long commerceAccountId, long shippingAddressId,
 			String purchaseOrderNumber)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().addCommerceOrder(
 			groupId, commerceAccountId, shippingAddressId, purchaseOrderNumber);
+	}
+
+	public static com.liferay.commerce.model.CommerceOrder addCommerceOrder(
+			long userId, long groupId, String commerceCurrencyCode,
+			long commerceAccountId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().addCommerceOrder(
+			userId, groupId, commerceCurrencyCode, commerceAccountId);
+	}
+
+	public static com.liferay.commerce.model.CommerceOrder addCommerceOrder(
+			long groupId, long commerceAccountId, String commerceCurrencyCode,
+			long shippingAddressId, String purchaseOrderNumber)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().addCommerceOrder(
+			groupId, commerceAccountId, commerceCurrencyCode, shippingAddressId,
+			purchaseOrderNumber);
 	}
 
 	public static com.liferay.commerce.model.CommerceOrder applyCouponCode(
@@ -543,7 +543,7 @@ public class CommerceOrderServiceUtil {
 
 	public static com.liferay.commerce.model.CommerceOrder upsertCommerceOrder(
 			long userId, long groupId, long commerceAccountId,
-			long commerceCurrencyId, long billingAddressId,
+			String commerceCurrencyCode, long billingAddressId,
 			long shippingAddressId, String commercePaymentMethodKey,
 			long commerceShippingMethodId, String shippingOptionName,
 			String purchaseOrderNumber, java.math.BigDecimal subtotal,
@@ -555,7 +555,7 @@ public class CommerceOrderServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().upsertCommerceOrder(
-			userId, groupId, commerceAccountId, commerceCurrencyId,
+			userId, groupId, commerceAccountId, commerceCurrencyCode,
 			billingAddressId, shippingAddressId, commercePaymentMethodKey,
 			commerceShippingMethodId, shippingOptionName, purchaseOrderNumber,
 			subtotal, shippingAmount, total, paymentStatus, orderStatus,

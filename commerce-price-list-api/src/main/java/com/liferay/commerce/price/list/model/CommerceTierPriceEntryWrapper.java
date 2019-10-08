@@ -277,10 +277,11 @@ public class CommerceTierPriceEntryWrapper
 
 	@Override
 	public com.liferay.commerce.currency.model.CommerceMoney getPriceMoney(
-			long commerceCurrencyId)
+			long companyId, String commerceCurrencyCode)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return _commerceTierPriceEntry.getPriceMoney(commerceCurrencyId);
+		return _commerceTierPriceEntry.getPriceMoney(
+			companyId, commerceCurrencyCode);
 	}
 
 	/**
@@ -310,10 +311,11 @@ public class CommerceTierPriceEntryWrapper
 
 	@Override
 	public com.liferay.commerce.currency.model.CommerceMoney getPromoPriceMoney(
-			long commerceCurrencyId)
+			long companyId, String commerceCurrencyCode)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return _commerceTierPriceEntry.getPromoPriceMoney(commerceCurrencyId);
+		return _commerceTierPriceEntry.getPromoPriceMoney(
+			companyId, commerceCurrencyCode);
 	}
 
 	/**

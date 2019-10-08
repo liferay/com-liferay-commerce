@@ -86,8 +86,8 @@ public class CommerceOrderCacheModel
 		sb.append(modifiedDate);
 		sb.append(", commerceAccountId=");
 		sb.append(commerceAccountId);
-		sb.append(", commerceCurrencyId=");
-		sb.append(commerceCurrencyId);
+		sb.append(", commerceCurrencyCode=");
+		sb.append(commerceCurrencyCode);
 		sb.append(", billingAddressId=");
 		sb.append(billingAddressId);
 		sb.append(", shippingAddressId=");
@@ -216,7 +216,14 @@ public class CommerceOrderCacheModel
 		}
 
 		commerceOrderImpl.setCommerceAccountId(commerceAccountId);
-		commerceOrderImpl.setCommerceCurrencyId(commerceCurrencyId);
+
+		if (commerceCurrencyCode == null) {
+			commerceOrderImpl.setCommerceCurrencyCode("");
+		}
+		else {
+			commerceOrderImpl.setCommerceCurrencyCode(commerceCurrencyCode);
+		}
+
 		commerceOrderImpl.setBillingAddressId(billingAddressId);
 		commerceOrderImpl.setShippingAddressId(shippingAddressId);
 
@@ -373,8 +380,7 @@ public class CommerceOrderCacheModel
 		modifiedDate = objectInput.readLong();
 
 		commerceAccountId = objectInput.readLong();
-
-		commerceCurrencyId = objectInput.readLong();
+		commerceCurrencyCode = objectInput.readUTF();
 
 		billingAddressId = objectInput.readLong();
 
@@ -460,7 +466,12 @@ public class CommerceOrderCacheModel
 
 		objectOutput.writeLong(commerceAccountId);
 
-		objectOutput.writeLong(commerceCurrencyId);
+		if (commerceCurrencyCode == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(commerceCurrencyCode);
+		}
 
 		objectOutput.writeLong(billingAddressId);
 
@@ -571,7 +582,7 @@ public class CommerceOrderCacheModel
 	public long createDate;
 	public long modifiedDate;
 	public long commerceAccountId;
-	public long commerceCurrencyId;
+	public String commerceCurrencyCode;
 	public long billingAddressId;
 	public long shippingAddressId;
 	public String commercePaymentMethodKey;

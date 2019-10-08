@@ -357,9 +357,9 @@ public class CommerceTierPriceEntryModelImpl
 				@Override
 				public void accept(
 					CommerceTierPriceEntry commerceTierPriceEntry,
-					Object uuid) {
+					Object uuidObject) {
 
-					commerceTierPriceEntry.setUuid((String)uuid);
+					commerceTierPriceEntry.setUuid((String)uuidObject);
 				}
 
 			});
@@ -382,10 +382,10 @@ public class CommerceTierPriceEntryModelImpl
 				@Override
 				public void accept(
 					CommerceTierPriceEntry commerceTierPriceEntry,
-					Object externalReferenceCode) {
+					Object externalReferenceCodeObject) {
 
 					commerceTierPriceEntry.setExternalReferenceCode(
-						(String)externalReferenceCode);
+						(String)externalReferenceCodeObject);
 				}
 
 			});
@@ -408,10 +408,10 @@ public class CommerceTierPriceEntryModelImpl
 				@Override
 				public void accept(
 					CommerceTierPriceEntry commerceTierPriceEntry,
-					Object commerceTierPriceEntryId) {
+					Object commerceTierPriceEntryIdObject) {
 
 					commerceTierPriceEntry.setCommerceTierPriceEntryId(
-						(Long)commerceTierPriceEntryId);
+						(Long)commerceTierPriceEntryIdObject);
 				}
 
 			});
@@ -434,9 +434,9 @@ public class CommerceTierPriceEntryModelImpl
 				@Override
 				public void accept(
 					CommerceTierPriceEntry commerceTierPriceEntry,
-					Object companyId) {
+					Object companyIdObject) {
 
-					commerceTierPriceEntry.setCompanyId((Long)companyId);
+					commerceTierPriceEntry.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -459,9 +459,9 @@ public class CommerceTierPriceEntryModelImpl
 				@Override
 				public void accept(
 					CommerceTierPriceEntry commerceTierPriceEntry,
-					Object userId) {
+					Object userIdObject) {
 
-					commerceTierPriceEntry.setUserId((Long)userId);
+					commerceTierPriceEntry.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -484,9 +484,9 @@ public class CommerceTierPriceEntryModelImpl
 				@Override
 				public void accept(
 					CommerceTierPriceEntry commerceTierPriceEntry,
-					Object userName) {
+					Object userNameObject) {
 
-					commerceTierPriceEntry.setUserName((String)userName);
+					commerceTierPriceEntry.setUserName((String)userNameObject);
 				}
 
 			});
@@ -509,9 +509,10 @@ public class CommerceTierPriceEntryModelImpl
 				@Override
 				public void accept(
 					CommerceTierPriceEntry commerceTierPriceEntry,
-					Object createDate) {
+					Object createDateObject) {
 
-					commerceTierPriceEntry.setCreateDate((Date)createDate);
+					commerceTierPriceEntry.setCreateDate(
+						(Date)createDateObject);
 				}
 
 			});
@@ -534,9 +535,10 @@ public class CommerceTierPriceEntryModelImpl
 				@Override
 				public void accept(
 					CommerceTierPriceEntry commerceTierPriceEntry,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
-					commerceTierPriceEntry.setModifiedDate((Date)modifiedDate);
+					commerceTierPriceEntry.setModifiedDate(
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -559,10 +561,10 @@ public class CommerceTierPriceEntryModelImpl
 				@Override
 				public void accept(
 					CommerceTierPriceEntry commerceTierPriceEntry,
-					Object commercePriceEntryId) {
+					Object commercePriceEntryIdObject) {
 
 					commerceTierPriceEntry.setCommercePriceEntryId(
-						(Long)commercePriceEntryId);
+						(Long)commercePriceEntryIdObject);
 				}
 
 			});
@@ -585,9 +587,9 @@ public class CommerceTierPriceEntryModelImpl
 				@Override
 				public void accept(
 					CommerceTierPriceEntry commerceTierPriceEntry,
-					Object price) {
+					Object priceObject) {
 
-					commerceTierPriceEntry.setPrice((BigDecimal)price);
+					commerceTierPriceEntry.setPrice((BigDecimal)priceObject);
 				}
 
 			});
@@ -610,10 +612,10 @@ public class CommerceTierPriceEntryModelImpl
 				@Override
 				public void accept(
 					CommerceTierPriceEntry commerceTierPriceEntry,
-					Object promoPrice) {
+					Object promoPriceObject) {
 
 					commerceTierPriceEntry.setPromoPrice(
-						(BigDecimal)promoPrice);
+						(BigDecimal)promoPriceObject);
 				}
 
 			});
@@ -636,9 +638,10 @@ public class CommerceTierPriceEntryModelImpl
 				@Override
 				public void accept(
 					CommerceTierPriceEntry commerceTierPriceEntry,
-					Object minQuantity) {
+					Object minQuantityObject) {
 
-					commerceTierPriceEntry.setMinQuantity((Integer)minQuantity);
+					commerceTierPriceEntry.setMinQuantity(
+						(Integer)minQuantityObject);
 				}
 
 			});
@@ -661,10 +664,10 @@ public class CommerceTierPriceEntryModelImpl
 				@Override
 				public void accept(
 					CommerceTierPriceEntry commerceTierPriceEntry,
-					Object lastPublishDate) {
+					Object lastPublishDateObject) {
 
 					commerceTierPriceEntry.setLastPublishDate(
-						(Date)lastPublishDate);
+						(Date)lastPublishDateObject);
 				}
 
 			});

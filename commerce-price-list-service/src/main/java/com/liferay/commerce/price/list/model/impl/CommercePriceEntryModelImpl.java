@@ -356,9 +356,9 @@ public class CommercePriceEntryModelImpl
 
 				@Override
 				public void accept(
-					CommercePriceEntry commercePriceEntry, Object uuid) {
+					CommercePriceEntry commercePriceEntry, Object uuidObject) {
 
-					commercePriceEntry.setUuid((String)uuid);
+					commercePriceEntry.setUuid((String)uuidObject);
 				}
 
 			});
@@ -379,10 +379,10 @@ public class CommercePriceEntryModelImpl
 				@Override
 				public void accept(
 					CommercePriceEntry commercePriceEntry,
-					Object externalReferenceCode) {
+					Object externalReferenceCodeObject) {
 
 					commercePriceEntry.setExternalReferenceCode(
-						(String)externalReferenceCode);
+						(String)externalReferenceCodeObject);
 				}
 
 			});
@@ -403,10 +403,10 @@ public class CommercePriceEntryModelImpl
 				@Override
 				public void accept(
 					CommercePriceEntry commercePriceEntry,
-					Object commercePriceEntryId) {
+					Object commercePriceEntryIdObject) {
 
 					commercePriceEntry.setCommercePriceEntryId(
-						(Long)commercePriceEntryId);
+						(Long)commercePriceEntryIdObject);
 				}
 
 			});
@@ -426,9 +426,10 @@ public class CommercePriceEntryModelImpl
 
 				@Override
 				public void accept(
-					CommercePriceEntry commercePriceEntry, Object companyId) {
+					CommercePriceEntry commercePriceEntry,
+					Object companyIdObject) {
 
-					commercePriceEntry.setCompanyId((Long)companyId);
+					commercePriceEntry.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -448,9 +449,10 @@ public class CommercePriceEntryModelImpl
 
 				@Override
 				public void accept(
-					CommercePriceEntry commercePriceEntry, Object userId) {
+					CommercePriceEntry commercePriceEntry,
+					Object userIdObject) {
 
-					commercePriceEntry.setUserId((Long)userId);
+					commercePriceEntry.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -470,9 +472,10 @@ public class CommercePriceEntryModelImpl
 
 				@Override
 				public void accept(
-					CommercePriceEntry commercePriceEntry, Object userName) {
+					CommercePriceEntry commercePriceEntry,
+					Object userNameObject) {
 
-					commercePriceEntry.setUserName((String)userName);
+					commercePriceEntry.setUserName((String)userNameObject);
 				}
 
 			});
@@ -492,9 +495,10 @@ public class CommercePriceEntryModelImpl
 
 				@Override
 				public void accept(
-					CommercePriceEntry commercePriceEntry, Object createDate) {
+					CommercePriceEntry commercePriceEntry,
+					Object createDateObject) {
 
-					commercePriceEntry.setCreateDate((Date)createDate);
+					commercePriceEntry.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -515,9 +519,10 @@ public class CommercePriceEntryModelImpl
 				@Override
 				public void accept(
 					CommercePriceEntry commercePriceEntry,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
-					commercePriceEntry.setModifiedDate((Date)modifiedDate);
+					commercePriceEntry.setModifiedDate(
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -538,10 +543,10 @@ public class CommercePriceEntryModelImpl
 				@Override
 				public void accept(
 					CommercePriceEntry commercePriceEntry,
-					Object commercePriceListId) {
+					Object commercePriceListIdObject) {
 
 					commercePriceEntry.setCommercePriceListId(
-						(Long)commercePriceListId);
+						(Long)commercePriceListIdObject);
 				}
 
 			});
@@ -562,10 +567,10 @@ public class CommercePriceEntryModelImpl
 				@Override
 				public void accept(
 					CommercePriceEntry commercePriceEntry,
-					Object CPInstanceUuid) {
+					Object CPInstanceUuidObject) {
 
 					commercePriceEntry.setCPInstanceUuid(
-						(String)CPInstanceUuid);
+						(String)CPInstanceUuidObject);
 				}
 
 			});
@@ -585,9 +590,10 @@ public class CommercePriceEntryModelImpl
 
 				@Override
 				public void accept(
-					CommercePriceEntry commercePriceEntry, Object CProductId) {
+					CommercePriceEntry commercePriceEntry,
+					Object CProductIdObject) {
 
-					commercePriceEntry.setCProductId((Long)CProductId);
+					commercePriceEntry.setCProductId((Long)CProductIdObject);
 				}
 
 			});
@@ -607,9 +613,9 @@ public class CommercePriceEntryModelImpl
 
 				@Override
 				public void accept(
-					CommercePriceEntry commercePriceEntry, Object price) {
+					CommercePriceEntry commercePriceEntry, Object priceObject) {
 
-					commercePriceEntry.setPrice((BigDecimal)price);
+					commercePriceEntry.setPrice((BigDecimal)priceObject);
 				}
 
 			});
@@ -629,9 +635,11 @@ public class CommercePriceEntryModelImpl
 
 				@Override
 				public void accept(
-					CommercePriceEntry commercePriceEntry, Object promoPrice) {
+					CommercePriceEntry commercePriceEntry,
+					Object promoPriceObject) {
 
-					commercePriceEntry.setPromoPrice((BigDecimal)promoPrice);
+					commercePriceEntry.setPromoPrice(
+						(BigDecimal)promoPriceObject);
 				}
 
 			});
@@ -652,9 +660,10 @@ public class CommercePriceEntryModelImpl
 				@Override
 				public void accept(
 					CommercePriceEntry commercePriceEntry,
-					Object hasTierPrice) {
+					Object hasTierPriceObject) {
 
-					commercePriceEntry.setHasTierPrice((Boolean)hasTierPrice);
+					commercePriceEntry.setHasTierPrice(
+						(Boolean)hasTierPriceObject);
 				}
 
 			});
@@ -675,10 +684,10 @@ public class CommercePriceEntryModelImpl
 				@Override
 				public void accept(
 					CommercePriceEntry commercePriceEntry,
-					Object lastPublishDate) {
+					Object lastPublishDateObject) {
 
 					commercePriceEntry.setLastPublishDate(
-						(Date)lastPublishDate);
+						(Date)lastPublishDateObject);
 				}
 
 			});

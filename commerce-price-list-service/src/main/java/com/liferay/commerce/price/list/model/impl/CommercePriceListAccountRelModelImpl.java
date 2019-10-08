@@ -355,9 +355,9 @@ public class CommercePriceListAccountRelModelImpl
 				@Override
 				public void accept(
 					CommercePriceListAccountRel commercePriceListAccountRel,
-					Object uuid) {
+					Object uuidObject) {
 
-					commercePriceListAccountRel.setUuid((String)uuid);
+					commercePriceListAccountRel.setUuid((String)uuidObject);
 				}
 
 			});
@@ -381,11 +381,11 @@ public class CommercePriceListAccountRelModelImpl
 				@Override
 				public void accept(
 					CommercePriceListAccountRel commercePriceListAccountRel,
-					Object commercePriceListAccountRelId) {
+					Object commercePriceListAccountRelIdObject) {
 
 					commercePriceListAccountRel.
 						setCommercePriceListAccountRelId(
-							(Long)commercePriceListAccountRelId);
+							(Long)commercePriceListAccountRelIdObject);
 				}
 
 			});
@@ -408,9 +408,10 @@ public class CommercePriceListAccountRelModelImpl
 				@Override
 				public void accept(
 					CommercePriceListAccountRel commercePriceListAccountRel,
-					Object companyId) {
+					Object companyIdObject) {
 
-					commercePriceListAccountRel.setCompanyId((Long)companyId);
+					commercePriceListAccountRel.setCompanyId(
+						(Long)companyIdObject);
 				}
 
 			});
@@ -433,9 +434,9 @@ public class CommercePriceListAccountRelModelImpl
 				@Override
 				public void accept(
 					CommercePriceListAccountRel commercePriceListAccountRel,
-					Object userId) {
+					Object userIdObject) {
 
-					commercePriceListAccountRel.setUserId((Long)userId);
+					commercePriceListAccountRel.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -458,9 +459,10 @@ public class CommercePriceListAccountRelModelImpl
 				@Override
 				public void accept(
 					CommercePriceListAccountRel commercePriceListAccountRel,
-					Object userName) {
+					Object userNameObject) {
 
-					commercePriceListAccountRel.setUserName((String)userName);
+					commercePriceListAccountRel.setUserName(
+						(String)userNameObject);
 				}
 
 			});
@@ -483,9 +485,10 @@ public class CommercePriceListAccountRelModelImpl
 				@Override
 				public void accept(
 					CommercePriceListAccountRel commercePriceListAccountRel,
-					Object createDate) {
+					Object createDateObject) {
 
-					commercePriceListAccountRel.setCreateDate((Date)createDate);
+					commercePriceListAccountRel.setCreateDate(
+						(Date)createDateObject);
 				}
 
 			});
@@ -508,10 +511,10 @@ public class CommercePriceListAccountRelModelImpl
 				@Override
 				public void accept(
 					CommercePriceListAccountRel commercePriceListAccountRel,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
 					commercePriceListAccountRel.setModifiedDate(
-						(Date)modifiedDate);
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -534,10 +537,10 @@ public class CommercePriceListAccountRelModelImpl
 				@Override
 				public void accept(
 					CommercePriceListAccountRel commercePriceListAccountRel,
-					Object commerceAccountId) {
+					Object commerceAccountIdObject) {
 
 					commercePriceListAccountRel.setCommerceAccountId(
-						(Long)commerceAccountId);
+						(Long)commerceAccountIdObject);
 				}
 
 			});
@@ -560,10 +563,10 @@ public class CommercePriceListAccountRelModelImpl
 				@Override
 				public void accept(
 					CommercePriceListAccountRel commercePriceListAccountRel,
-					Object commercePriceListId) {
+					Object commercePriceListIdObject) {
 
 					commercePriceListAccountRel.setCommercePriceListId(
-						(Long)commercePriceListId);
+						(Long)commercePriceListIdObject);
 				}
 
 			});
@@ -586,9 +589,9 @@ public class CommercePriceListAccountRelModelImpl
 				@Override
 				public void accept(
 					CommercePriceListAccountRel commercePriceListAccountRel,
-					Object order) {
+					Object orderObject) {
 
-					commercePriceListAccountRel.setOrder((Integer)order);
+					commercePriceListAccountRel.setOrder((Integer)orderObject);
 				}
 
 			});
@@ -611,10 +614,10 @@ public class CommercePriceListAccountRelModelImpl
 				@Override
 				public void accept(
 					CommercePriceListAccountRel commercePriceListAccountRel,
-					Object lastPublishDate) {
+					Object lastPublishDateObject) {
 
 					commercePriceListAccountRel.setLastPublishDate(
-						(Date)lastPublishDate);
+						(Date)lastPublishDateObject);
 				}
 
 			});

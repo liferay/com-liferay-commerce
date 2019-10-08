@@ -60,16 +60,26 @@ public class CommerceOrderLocalServiceUtil {
 
 	public static com.liferay.commerce.model.CommerceOrder addCommerceOrder(
 			long userId, long groupId, long commerceAccountId,
-			long commerceCurrencyId)
+			long shippingAddressId, String purchaseOrderNumber)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().addCommerceOrder(
-			userId, groupId, commerceAccountId, commerceCurrencyId);
+			userId, groupId, commerceAccountId, shippingAddressId,
+			purchaseOrderNumber);
 	}
 
 	public static com.liferay.commerce.model.CommerceOrder addCommerceOrder(
 			long userId, long groupId, long commerceAccountId,
-			long commerceCurrencyId, long billingAddressId,
+			String commerceCurrencyCode)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().addCommerceOrder(
+			userId, groupId, commerceAccountId, commerceCurrencyCode);
+	}
+
+	public static com.liferay.commerce.model.CommerceOrder addCommerceOrder(
+			long userId, long groupId, long commerceAccountId,
+			String commerceCurrencyCode, long billingAddressId,
 			long shippingAddressId, String commercePaymentMethodKey,
 			long commerceShippingMethodId, String shippingOptionName,
 			String purchaseOrderNumber, java.math.BigDecimal subtotal,
@@ -79,7 +89,7 @@ public class CommerceOrderLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().addCommerceOrder(
-			userId, groupId, commerceAccountId, commerceCurrencyId,
+			userId, groupId, commerceAccountId, commerceCurrencyCode,
 			billingAddressId, shippingAddressId, commercePaymentMethodKey,
 			commerceShippingMethodId, shippingOptionName, purchaseOrderNumber,
 			subtotal, shippingAmount, total, paymentStatus, orderStatus,
@@ -88,23 +98,13 @@ public class CommerceOrderLocalServiceUtil {
 
 	public static com.liferay.commerce.model.CommerceOrder addCommerceOrder(
 			long userId, long groupId, long commerceAccountId,
-			long commerceCurrencyId, long shippingAddressId,
+			String commerceCurrencyCode, long shippingAddressId,
 			String purchaseOrderNumber)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().addCommerceOrder(
-			userId, groupId, commerceAccountId, commerceCurrencyId,
+			userId, groupId, commerceAccountId, commerceCurrencyCode,
 			shippingAddressId, purchaseOrderNumber);
-	}
-
-	public static com.liferay.commerce.model.CommerceOrder addCommerceOrder(
-			long userId, long groupId, long commerceAccountId,
-			long shippingAddressId, String purchaseOrderNumber)
-		throws com.liferay.portal.kernel.exception.PortalException {
-
-		return getService().addCommerceOrder(
-			userId, groupId, commerceAccountId, shippingAddressId,
-			purchaseOrderNumber);
 	}
 
 	public static com.liferay.commerce.model.CommerceOrder applyCouponCode(
@@ -900,7 +900,7 @@ public class CommerceOrderLocalServiceUtil {
 
 	public static com.liferay.commerce.model.CommerceOrder upsertCommerceOrder(
 			long userId, long groupId, long commerceAccountId,
-			long commerceCurrencyId, long billingAddressId,
+			String commerceCurrencyCode, long billingAddressId,
 			long shippingAddressId, String commercePaymentMethodKey,
 			long commerceShippingMethodId, String shippingOptionName,
 			String purchaseOrderNumber, java.math.BigDecimal subtotal,
@@ -912,7 +912,7 @@ public class CommerceOrderLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().upsertCommerceOrder(
-			userId, groupId, commerceAccountId, commerceCurrencyId,
+			userId, groupId, commerceAccountId, commerceCurrencyCode,
 			billingAddressId, shippingAddressId, commercePaymentMethodKey,
 			commerceShippingMethodId, shippingOptionName, purchaseOrderNumber,
 			subtotal, shippingAmount, total, paymentStatus, orderStatus,

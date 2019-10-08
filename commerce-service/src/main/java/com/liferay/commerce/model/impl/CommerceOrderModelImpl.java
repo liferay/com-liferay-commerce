@@ -83,7 +83,7 @@ public class CommerceOrderModelImpl
 		{"companyId", Types.BIGINT}, {"userId", Types.BIGINT},
 		{"userName", Types.VARCHAR}, {"createDate", Types.TIMESTAMP},
 		{"modifiedDate", Types.TIMESTAMP}, {"commerceAccountId", Types.BIGINT},
-		{"commerceCurrencyId", Types.BIGINT},
+		{"commerceCurrencyCode", Types.VARCHAR},
 		{"billingAddressId", Types.BIGINT}, {"shippingAddressId", Types.BIGINT},
 		{"commercePaymentMethodKey", Types.VARCHAR},
 		{"transactionId", Types.CLOB},
@@ -131,7 +131,7 @@ public class CommerceOrderModelImpl
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("commerceAccountId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("commerceCurrencyId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("commerceCurrencyCode", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("billingAddressId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("shippingAddressId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("commercePaymentMethodKey", Types.VARCHAR);
@@ -174,7 +174,7 @@ public class CommerceOrderModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CommerceOrder (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,commerceOrderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceAccountId LONG,commerceCurrencyId LONG,billingAddressId LONG,shippingAddressId LONG,commercePaymentMethodKey VARCHAR(75) null,transactionId TEXT null,commerceShippingMethodId LONG,shippingOptionName VARCHAR(255) null,purchaseOrderNumber VARCHAR(75) null,couponCode VARCHAR(75) null,lastPriceUpdateDate DATE null,subtotal DECIMAL(30, 16) null,subtotalDiscountAmount DECIMAL(30, 16) null,subtotalDiscountPercentLevel1 DECIMAL(30, 16) null,subtotalDiscountPercentLevel2 DECIMAL(30, 16) null,subtotalDiscountPercentLevel3 DECIMAL(30, 16) null,subtotalDiscountPercentLevel4 DECIMAL(30, 16) null,shippingAmount DECIMAL(30, 16) null,shippingDiscountAmount DECIMAL(30, 16) null,shippingDiscountPercentLevel1 DECIMAL(30, 16) null,shippingDiscountPercentLevel2 DECIMAL(30, 16) null,shippingDiscountPercentLevel3 DECIMAL(30, 16) null,shippingDiscountPercentLevel4 DECIMAL(30, 16) null,taxAmount DECIMAL(30, 16) null,total DECIMAL(30, 16) null,totalDiscountAmount DECIMAL(30, 16) null,totalDiscountPercentageLevel1 DECIMAL(30, 16) null,totalDiscountPercentageLevel2 DECIMAL(30, 16) null,totalDiscountPercentageLevel3 DECIMAL(30, 16) null,totalDiscountPercentageLevel4 DECIMAL(30, 16) null,advanceStatus VARCHAR(75) null,paymentStatus INTEGER,orderDate DATE null,orderStatus INTEGER,printedNote STRING null,requestedDeliveryDate DATE null,manuallyAdjusted BOOLEAN,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+		"create table CommerceOrder (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,commerceOrderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceAccountId LONG,commerceCurrencyCode VARCHAR(75) null,billingAddressId LONG,shippingAddressId LONG,commercePaymentMethodKey VARCHAR(75) null,transactionId TEXT null,commerceShippingMethodId LONG,shippingOptionName VARCHAR(255) null,purchaseOrderNumber VARCHAR(75) null,couponCode VARCHAR(75) null,lastPriceUpdateDate DATE null,subtotal DECIMAL(30, 16) null,subtotalDiscountAmount DECIMAL(30, 16) null,subtotalDiscountPercentLevel1 DECIMAL(30, 16) null,subtotalDiscountPercentLevel2 DECIMAL(30, 16) null,subtotalDiscountPercentLevel3 DECIMAL(30, 16) null,subtotalDiscountPercentLevel4 DECIMAL(30, 16) null,shippingAmount DECIMAL(30, 16) null,shippingDiscountAmount DECIMAL(30, 16) null,shippingDiscountPercentLevel1 DECIMAL(30, 16) null,shippingDiscountPercentLevel2 DECIMAL(30, 16) null,shippingDiscountPercentLevel3 DECIMAL(30, 16) null,shippingDiscountPercentLevel4 DECIMAL(30, 16) null,taxAmount DECIMAL(30, 16) null,total DECIMAL(30, 16) null,totalDiscountAmount DECIMAL(30, 16) null,totalDiscountPercentageLevel1 DECIMAL(30, 16) null,totalDiscountPercentageLevel2 DECIMAL(30, 16) null,totalDiscountPercentageLevel3 DECIMAL(30, 16) null,totalDiscountPercentageLevel4 DECIMAL(30, 16) null,advanceStatus VARCHAR(75) null,paymentStatus INTEGER,orderDate DATE null,orderStatus INTEGER,printedNote STRING null,requestedDeliveryDate DATE null,manuallyAdjusted BOOLEAN,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 
 	public static final String TABLE_SQL_DROP = "drop table CommerceOrder";
 
@@ -248,7 +248,7 @@ public class CommerceOrderModelImpl
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setCommerceAccountId(soapModel.getCommerceAccountId());
-		model.setCommerceCurrencyId(soapModel.getCommerceCurrencyId());
+		model.setCommerceCurrencyCode(soapModel.getCommerceCurrencyCode());
 		model.setBillingAddressId(soapModel.getBillingAddressId());
 		model.setShippingAddressId(soapModel.getShippingAddressId());
 		model.setCommercePaymentMethodKey(
@@ -682,26 +682,26 @@ public class CommerceOrderModelImpl
 
 			});
 		attributeGetterFunctions.put(
-			"commerceCurrencyId",
+			"commerceCurrencyCode",
 			new Function<CommerceOrder, Object>() {
 
 				@Override
 				public Object apply(CommerceOrder commerceOrder) {
-					return commerceOrder.getCommerceCurrencyId();
+					return commerceOrder.getCommerceCurrencyCode();
 				}
 
 			});
 		attributeSetterBiConsumers.put(
-			"commerceCurrencyId",
+			"commerceCurrencyCode",
 			new BiConsumer<CommerceOrder, Object>() {
 
 				@Override
 				public void accept(
 					CommerceOrder commerceOrder,
-					Object commerceCurrencyIdObject) {
+					Object commerceCurrencyCodeObject) {
 
-					commerceOrder.setCommerceCurrencyId(
-						(Long)commerceCurrencyIdObject);
+					commerceOrder.setCommerceCurrencyCode(
+						(String)commerceCurrencyCodeObject);
 				}
 
 			});
@@ -1849,13 +1849,18 @@ public class CommerceOrderModelImpl
 
 	@JSON
 	@Override
-	public long getCommerceCurrencyId() {
-		return _commerceCurrencyId;
+	public String getCommerceCurrencyCode() {
+		if (_commerceCurrencyCode == null) {
+			return "";
+		}
+		else {
+			return _commerceCurrencyCode;
+		}
 	}
 
 	@Override
-	public void setCommerceCurrencyId(long commerceCurrencyId) {
-		_commerceCurrencyId = commerceCurrencyId;
+	public void setCommerceCurrencyCode(String commerceCurrencyCode) {
+		_commerceCurrencyCode = commerceCurrencyCode;
 	}
 
 	@JSON
@@ -2541,7 +2546,7 @@ public class CommerceOrderModelImpl
 		commerceOrderImpl.setCreateDate(getCreateDate());
 		commerceOrderImpl.setModifiedDate(getModifiedDate());
 		commerceOrderImpl.setCommerceAccountId(getCommerceAccountId());
-		commerceOrderImpl.setCommerceCurrencyId(getCommerceCurrencyId());
+		commerceOrderImpl.setCommerceCurrencyCode(getCommerceCurrencyCode());
 		commerceOrderImpl.setBillingAddressId(getBillingAddressId());
 		commerceOrderImpl.setShippingAddressId(getShippingAddressId());
 		commerceOrderImpl.setCommercePaymentMethodKey(
@@ -2766,7 +2771,17 @@ public class CommerceOrderModelImpl
 
 		commerceOrderCacheModel.commerceAccountId = getCommerceAccountId();
 
-		commerceOrderCacheModel.commerceCurrencyId = getCommerceCurrencyId();
+		commerceOrderCacheModel.commerceCurrencyCode =
+			getCommerceCurrencyCode();
+
+		String commerceCurrencyCode =
+			commerceOrderCacheModel.commerceCurrencyCode;
+
+		if ((commerceCurrencyCode != null) &&
+			(commerceCurrencyCode.length() == 0)) {
+
+			commerceOrderCacheModel.commerceCurrencyCode = null;
+		}
 
 		commerceOrderCacheModel.billingAddressId = getBillingAddressId();
 
@@ -3043,7 +3058,7 @@ public class CommerceOrderModelImpl
 	private long _commerceAccountId;
 	private long _originalCommerceAccountId;
 	private boolean _setOriginalCommerceAccountId;
-	private long _commerceCurrencyId;
+	private String _commerceCurrencyCode;
 	private long _billingAddressId;
 	private long _originalBillingAddressId;
 	private boolean _setOriginalBillingAddressId;
