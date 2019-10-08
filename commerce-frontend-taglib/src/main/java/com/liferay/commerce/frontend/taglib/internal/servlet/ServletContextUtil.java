@@ -74,12 +74,12 @@ public class ServletContextUtil {
 		return _instance._getFilterFactoryRegistry();
 	}
 
-	public static final ProductHelper getProductHelper() {
-		return _instance._getProductHelper();
-	}
-
 	public static final NPMResolver getNPMResolver() {
 		return _instance._getNPMResolver();
+	}
+
+	public static final ProductHelper getProductHelper() {
+		return _instance._getProductHelper();
 	}
 
 	public static final ServletContext getServletContext() {
@@ -150,13 +150,13 @@ public class ServletContextUtil {
 		_filterFactoryRegistry = filterFactoryRegistry;
 	}
 
+	protected void setNPMResolver(NPMResolver npmResolver) {
+		_npmResolver = npmResolver;
+	}
+
 	@Reference(unbind = "-")
 	protected void setProductHelper(ProductHelper productHelper) {
 		_productHelper = productHelper;
-	}
-
-	protected void setNPMResolver(NPMResolver npmResolver) {
-		_npmResolver = npmResolver;
 	}
 
 	@Reference(
@@ -201,12 +201,12 @@ public class ServletContextUtil {
 		return _filterFactoryRegistry;
 	}
 
-	private ProductHelper _getProductHelper() {
-		return _productHelper;
-	}
-
 	private NPMResolver _getNPMResolver() {
 		return _npmResolver;
+	}
+
+	private ProductHelper _getProductHelper() {
+		return _productHelper;
 	}
 
 	private ServletContext _getServletContext() {
@@ -224,8 +224,8 @@ public class ServletContextUtil {
 	private CommerceOrderHttpHelper _commerceOrderHttpHelper;
 	private CPContentHelper _cpContentHelper;
 	private FilterFactoryRegistry _filterFactoryRegistry;
-	private ProductHelper _productHelper;
 	private NPMResolver _npmResolver;
+	private ProductHelper _productHelper;
 	private ServletContext _servletContext;
 
 }

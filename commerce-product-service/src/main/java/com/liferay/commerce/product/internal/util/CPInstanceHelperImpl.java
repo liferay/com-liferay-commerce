@@ -141,10 +141,6 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-			String key = jsonObject.getString("key");
-
-			String fieldName = "ATTRIBUTE_" + key + "_VALUES_IDS";
-
 			JSONArray valuesJSONArray = _jsonFactory.createJSONArray(
 				jsonObject.getString("value"));
 
@@ -157,6 +153,10 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 			for (int j = 0; j < valuesJSONArray.length(); j++) {
 				values[j] = valuesJSONArray.getString(j);
 			}
+
+			String key = jsonObject.getString("key");
+
+			String fieldName = "ATTRIBUTE_" + key + "_VALUES_IDS";
 
 			attributes.put(fieldName, values);
 

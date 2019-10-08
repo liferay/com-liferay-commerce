@@ -45,7 +45,6 @@ import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.osgi.service.component.annotations.Component;
@@ -148,12 +147,10 @@ public class CommerceCheckoutPortlet extends MVCPortlet {
 	protected String getOrderDetailsURL(PortletRequest portletRequest)
 		throws PortalException {
 
-		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
-			portletRequest);
-
 		PortletURL portletURL =
 			_commerceOrderHttpHelper.getCommerceCartPortletURL(
-				httpServletRequest, getCommerceOrder(portletRequest));
+				_portal.getHttpServletRequest(portletRequest),
+				getCommerceOrder(portletRequest));
 
 		if (portletURL == null) {
 			return StringPool.BLANK;
