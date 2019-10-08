@@ -23,6 +23,7 @@ import com.liferay.commerce.frontend.FilterFactoryRegistry;
 import com.liferay.commerce.frontend.util.ProductHelper;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.product.content.util.CPContentHelper;
+import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 
 import javax.servlet.ServletContext;
 
@@ -75,6 +76,10 @@ public class ServletContextUtil {
 
 	public static final ProductHelper getProductHelper() {
 		return _instance._getProductHelper();
+	}
+
+	public static final NPMResolver getNPMResolver() {
+		return _instance._getNPMResolver();
 	}
 
 	public static final ServletContext getServletContext() {
@@ -150,6 +155,10 @@ public class ServletContextUtil {
 		_productHelper = productHelper;
 	}
 
+	protected void setNPMResolver(NPMResolver npmResolver) {
+		_npmResolver = npmResolver;
+	}
+
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.frontend.taglib)",
 		unbind = "-"
@@ -196,6 +205,10 @@ public class ServletContextUtil {
 		return _productHelper;
 	}
 
+	private NPMResolver _getNPMResolver() {
+		return _npmResolver;
+	}
+
 	private ServletContext _getServletContext() {
 		return _servletContext;
 	}
@@ -212,6 +225,7 @@ public class ServletContextUtil {
 	private CPContentHelper _cpContentHelper;
 	private FilterFactoryRegistry _filterFactoryRegistry;
 	private ProductHelper _productHelper;
+	private NPMResolver _npmResolver;
 	private ServletContext _servletContext;
 
 }

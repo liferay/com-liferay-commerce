@@ -16,8 +16,8 @@ package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountServiceUtil;
-import com.liferay.commerce.frontend.taglib.internal.js.loader.modules.extender.npm.NPMResolverProvider;
 import com.liferay.commerce.frontend.taglib.internal.model.AccountRole;
+import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
 import com.liferay.petra.string.StringPool;
@@ -105,7 +105,7 @@ public class UserRolesModalTag extends ComponentRendererTag {
 
 	@Override
 	public String getModule() {
-		NPMResolver npmResolver = NPMResolverProvider.getNPMResolver();
+		NPMResolver npmResolver = ServletContextUtil.getNPMResolver();
 
 		if (npmResolver == null) {
 			return StringPool.BLANK;
