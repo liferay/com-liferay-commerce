@@ -21,6 +21,7 @@ import com.liferay.commerce.frontend.ClayTableSerializer;
 import com.liferay.commerce.frontend.CommerceDataProviderRegistry;
 import com.liferay.commerce.frontend.FilterFactoryRegistry;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
+import com.liferay.commerce.product.content.util.CPContentHelper;
 
 import javax.servlet.ServletContext;
 
@@ -61,6 +62,10 @@ public class ServletContextUtil {
 
 	public static final CommerceOrderHttpHelper getCommerceOrderHttpHelper() {
 		return _instance._getCommerceOrderHttpHelper();
+	}
+
+	public static final CPContentHelper getCPContentHelper() {
+		return _instance._getCPContentHelper();
 	}
 
 	public static final FilterFactoryRegistry getFilterFactoryRegistry() {
@@ -124,6 +129,11 @@ public class ServletContextUtil {
 	}
 
 	@Reference(unbind = "-")
+	protected void setCPContentHelper(CPContentHelper cpContentHelper) {
+		_cpContentHelper = cpContentHelper;
+	}
+
+	@Reference(unbind = "-")
 	protected void setFilterFactoryRegistry(
 		FilterFactoryRegistry filterFactoryRegistry) {
 
@@ -164,6 +174,10 @@ public class ServletContextUtil {
 		return _commerceOrderHttpHelper;
 	}
 
+	private CPContentHelper _getCPContentHelper() {
+		return _cpContentHelper;
+	}
+
 	private FilterFactoryRegistry _getFilterFactoryRegistry() {
 		return _filterFactoryRegistry;
 	}
@@ -181,6 +195,7 @@ public class ServletContextUtil {
 	private ClayTableSerializer _clayTableSerializer;
 	private CommerceDataProviderRegistry _commerceDataProviderRegistry;
 	private CommerceOrderHttpHelper _commerceOrderHttpHelper;
+	private CPContentHelper _cpContentHelper;
 	private FilterFactoryRegistry _filterFactoryRegistry;
 	private ServletContext _servletContext;
 
