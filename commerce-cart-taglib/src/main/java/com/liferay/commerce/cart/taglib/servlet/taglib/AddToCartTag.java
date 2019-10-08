@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.cart.taglib.servlet.taglib;
 
-import com.liferay.commerce.cart.taglib.servlet.taglib.internal.js.loader.modules.extender.npm.NPMResolverProvider;
+import com.liferay.commerce.cart.taglib.servlet.taglib.internal.servlet.ServletContextUtil;
 import com.liferay.commerce.constants.CPDefinitionInventoryConstants;
 import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.model.CPDefinitionInventory;
@@ -95,7 +95,7 @@ public class AddToCartTag extends ComponentRendererTag {
 
 	@Override
 	public String getModule() {
-		NPMResolver npmResolver = NPMResolverProvider.getNPMResolver();
+		NPMResolver npmResolver = ServletContextUtil.getNPMResolver();
 
 		if (npmResolver == null) {
 			return StringPool.BLANK;
