@@ -69,9 +69,9 @@ public class CommerceShipmentWrapper
 		attributes.put("shippingOptionName", getShippingOptionName());
 		attributes.put("carrier", getCarrier());
 		attributes.put("trackingNumber", getTrackingNumber());
-		attributes.put("status", getStatus());
 		attributes.put("shippingDate", getShippingDate());
 		attributes.put("expectedDate", getExpectedDate());
+		attributes.put("status", getStatus());
 
 		return attributes;
 	}
@@ -158,12 +158,6 @@ public class CommerceShipmentWrapper
 			setTrackingNumber(trackingNumber);
 		}
 
-		Integer status = (Integer)attributes.get("status");
-
-		if (status != null) {
-			setStatus(status);
-		}
-
 		Date shippingDate = (Date)attributes.get("shippingDate");
 
 		if (shippingDate != null) {
@@ -174,6 +168,12 @@ public class CommerceShipmentWrapper
 
 		if (expectedDate != null) {
 			setExpectedDate(expectedDate);
+		}
+
+		Integer status = (Integer)attributes.get("status");
+
+		if (status != null) {
+			setStatus(status);
 		}
 	}
 

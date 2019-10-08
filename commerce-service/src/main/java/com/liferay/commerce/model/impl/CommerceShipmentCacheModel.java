@@ -92,12 +92,12 @@ public class CommerceShipmentCacheModel
 		sb.append(carrier);
 		sb.append(", trackingNumber=");
 		sb.append(trackingNumber);
-		sb.append(", status=");
-		sb.append(status);
 		sb.append(", shippingDate=");
 		sb.append(shippingDate);
 		sb.append(", expectedDate=");
 		sb.append(expectedDate);
+		sb.append(", status=");
+		sb.append(status);
 		sb.append("}");
 
 		return sb.toString();
@@ -159,8 +159,6 @@ public class CommerceShipmentCacheModel
 			commerceShipmentImpl.setTrackingNumber(trackingNumber);
 		}
 
-		commerceShipmentImpl.setStatus(status);
-
 		if (shippingDate == Long.MIN_VALUE) {
 			commerceShipmentImpl.setShippingDate(null);
 		}
@@ -174,6 +172,8 @@ public class CommerceShipmentCacheModel
 		else {
 			commerceShipmentImpl.setExpectedDate(new Date(expectedDate));
 		}
+
+		commerceShipmentImpl.setStatus(status);
 
 		commerceShipmentImpl.resetOriginalValues();
 
@@ -201,10 +201,10 @@ public class CommerceShipmentCacheModel
 		shippingOptionName = objectInput.readUTF();
 		carrier = objectInput.readUTF();
 		trackingNumber = objectInput.readUTF();
-
-		status = objectInput.readInt();
 		shippingDate = objectInput.readLong();
 		expectedDate = objectInput.readLong();
+
+		status = objectInput.readInt();
 	}
 
 	@Override
@@ -254,9 +254,10 @@ public class CommerceShipmentCacheModel
 			objectOutput.writeUTF(trackingNumber);
 		}
 
-		objectOutput.writeInt(status);
 		objectOutput.writeLong(shippingDate);
 		objectOutput.writeLong(expectedDate);
+
+		objectOutput.writeInt(status);
 	}
 
 	public long commerceShipmentId;
@@ -272,8 +273,8 @@ public class CommerceShipmentCacheModel
 	public String shippingOptionName;
 	public String carrier;
 	public String trackingNumber;
-	public int status;
 	public long shippingDate;
 	public long expectedDate;
+	public int status;
 
 }

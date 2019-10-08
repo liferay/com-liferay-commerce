@@ -45,9 +45,9 @@ public class CommerceShipmentSoap implements Serializable {
 		soapModel.setShippingOptionName(model.getShippingOptionName());
 		soapModel.setCarrier(model.getCarrier());
 		soapModel.setTrackingNumber(model.getTrackingNumber());
-		soapModel.setStatus(model.getStatus());
 		soapModel.setShippingDate(model.getShippingDate());
 		soapModel.setExpectedDate(model.getExpectedDate());
+		soapModel.setStatus(model.getStatus());
 
 		return soapModel;
 	}
@@ -213,14 +213,6 @@ public class CommerceShipmentSoap implements Serializable {
 		_trackingNumber = trackingNumber;
 	}
 
-	public int getStatus() {
-		return _status;
-	}
-
-	public void setStatus(int status) {
-		_status = status;
-	}
-
 	public Date getShippingDate() {
 		return _shippingDate;
 	}
@@ -237,6 +229,14 @@ public class CommerceShipmentSoap implements Serializable {
 		_expectedDate = expectedDate;
 	}
 
+	public int getStatus() {
+		return _status;
+	}
+
+	public void setStatus(int status) {
+		_status = status;
+	}
+
 	private long _commerceShipmentId;
 	private long _groupId;
 	private long _companyId;
@@ -250,8 +250,8 @@ public class CommerceShipmentSoap implements Serializable {
 	private String _shippingOptionName;
 	private String _carrier;
 	private String _trackingNumber;
-	private int _status;
 	private Date _shippingDate;
 	private Date _expectedDate;
+	private int _status;
 
 }

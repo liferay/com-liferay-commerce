@@ -148,11 +148,11 @@ public class CommerceShipmentPersistenceTest {
 
 		newCommerceShipment.setTrackingNumber(RandomTestUtil.randomString());
 
-		newCommerceShipment.setStatus(RandomTestUtil.nextInt());
-
 		newCommerceShipment.setShippingDate(RandomTestUtil.nextDate());
 
 		newCommerceShipment.setExpectedDate(RandomTestUtil.nextDate());
+
+		newCommerceShipment.setStatus(RandomTestUtil.nextInt());
 
 		_commerceShipments.add(_persistence.update(newCommerceShipment));
 
@@ -199,14 +199,14 @@ public class CommerceShipmentPersistenceTest {
 			existingCommerceShipment.getTrackingNumber(),
 			newCommerceShipment.getTrackingNumber());
 		Assert.assertEquals(
-			existingCommerceShipment.getStatus(),
-			newCommerceShipment.getStatus());
-		Assert.assertEquals(
 			Time.getShortTimestamp(existingCommerceShipment.getShippingDate()),
 			Time.getShortTimestamp(newCommerceShipment.getShippingDate()));
 		Assert.assertEquals(
 			Time.getShortTimestamp(existingCommerceShipment.getExpectedDate()),
 			Time.getShortTimestamp(newCommerceShipment.getExpectedDate()));
+		Assert.assertEquals(
+			existingCommerceShipment.getStatus(),
+			newCommerceShipment.getStatus());
 	}
 
 	@Test
@@ -267,7 +267,7 @@ public class CommerceShipmentPersistenceTest {
 			true, "modifiedDate", true, "commerceAccountId", true,
 			"commerceAddressId", true, "commerceShippingMethodId", true,
 			"shippingOptionName", true, "carrier", true, "trackingNumber", true,
-			"status", true, "shippingDate", true, "expectedDate", true);
+			"shippingDate", true, "expectedDate", true, "status", true);
 	}
 
 	@Test
@@ -516,11 +516,11 @@ public class CommerceShipmentPersistenceTest {
 
 		commerceShipment.setTrackingNumber(RandomTestUtil.randomString());
 
-		commerceShipment.setStatus(RandomTestUtil.nextInt());
-
 		commerceShipment.setShippingDate(RandomTestUtil.nextDate());
 
 		commerceShipment.setExpectedDate(RandomTestUtil.nextDate());
+
+		commerceShipment.setStatus(RandomTestUtil.nextInt());
 
 		_commerceShipments.add(_persistence.update(commerceShipment));
 

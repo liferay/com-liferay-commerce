@@ -251,9 +251,9 @@
 		<field name="shippingOptionName" type="String" />
 		<field name="carrier" type="String" />
 		<field name="trackingNumber" type="String" />
-		<field name="status" type="int" />
 		<field name="shippingDate" type="Date" />
 		<field name="expectedDate" type="Date" />
+		<field name="status" type="int" />
 	</model>
 	<model name="com.liferay.commerce.model.CommerceShipmentItem">
 		<field name="commerceShipmentItemId" type="long" />

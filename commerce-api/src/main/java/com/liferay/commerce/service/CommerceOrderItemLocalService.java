@@ -381,6 +381,10 @@ public interface CommerceOrderItemLocalService
 			BigDecimal discountPercentageLevel4)
 		throws PortalException;
 
+	public CommerceOrderItem updateCommerceOrderItemUnitPrice(
+			long commerceOrderItemId, BigDecimal unitPrice)
+		throws PortalException;
+
 	public CommerceOrderItem upsertCommerceOrderItem(
 			long commerceOrderId, long cpInstanceId, int quantity,
 			int shippedQuantity, String json, CommerceContext commerceContext,
