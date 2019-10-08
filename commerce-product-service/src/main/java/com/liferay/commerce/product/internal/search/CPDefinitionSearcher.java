@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.filter.BooleanFilter;
 import com.liferay.portal.kernel.search.filter.TermsFilter;
-import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -79,11 +78,8 @@ public class CPDefinitionSearcher extends BaseSearcher {
 			return;
 		}
 
-		PermissionChecker permissionChecker =
-			PermissionThreadLocal.getPermissionChecker();
-
 		long[] filteredAllCategoryIds = AssetUtil.filterCategoryIds(
-			permissionChecker, allCategoryIds);
+			PermissionThreadLocal.getPermissionChecker(), allCategoryIds);
 
 		if (allCategoryIds.length != filteredAllCategoryIds.length) {
 			addImpossibleTerm(queryBooleanFilter, Field.ASSET_CATEGORY_IDS);
@@ -165,11 +161,8 @@ public class CPDefinitionSearcher extends BaseSearcher {
 			return;
 		}
 
-		PermissionChecker permissionChecker =
-			PermissionThreadLocal.getPermissionChecker();
-
 		long[] filteredAnyCategoryIds = AssetUtil.filterCategoryIds(
-			permissionChecker, anyCategoryIds);
+			PermissionThreadLocal.getPermissionChecker(), anyCategoryIds);
 
 		if (filteredAnyCategoryIds.length == 0) {
 			addImpossibleTerm(queryBooleanFilter, Field.ASSET_CATEGORY_IDS);

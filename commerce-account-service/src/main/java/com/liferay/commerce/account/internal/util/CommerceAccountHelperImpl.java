@@ -119,7 +119,7 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 				currentCommerceAccountId);
 		}
 
-		if (commerceAccount == null || !commerceAccount.isActive()) {
+		if ((commerceAccount == null) || !commerceAccount.isActive()) {
 			commerceAccount = _getSingleCommerceAccount(
 				groupId, httpServletRequest);
 

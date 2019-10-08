@@ -554,15 +554,13 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 	}
 
 	private JSONArray _getJSONArray(String name) throws Exception {
-		String json = _speedwellDependencyResolver.getJSON(name);
-
-		return _jsonFactory.createJSONArray(json);
+		return _jsonFactory.createJSONArray(
+			_speedwellDependencyResolver.getJSON(name));
 	}
 
 	private JSONObject _getJSONObject(String name) throws Exception {
-		String json = _speedwellDependencyResolver.getJSON(name);
-
-		return _jsonFactory.createJSONObject(json);
+		return _jsonFactory.createJSONObject(
+			_speedwellDependencyResolver.getJSON(name));
 	}
 
 	private void _importAssetCategories(ServiceContext serviceContext)
@@ -909,16 +907,16 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject productJSONObject = jsonArray.getJSONObject(i);
 
-			String name = productJSONObject.getString("Name");
-
-			CPDefinition cpDefinition = getCPDefinitionByName(name);
-
 			JSONArray relatedProducts = productJSONObject.getJSONArray(
 				"RelatedProducts");
 
 			if (relatedProducts == null) {
 				continue;
 			}
+
+			String name = productJSONObject.getString("Name");
+
+			CPDefinition cpDefinition = getCPDefinitionByName(name);
 
 			_cpDefinitionLinkLocalService.updateCPDefinitionLinkCProductIds(
 				cpDefinition.getCPDefinitionId(),
