@@ -20,6 +20,7 @@ import com.liferay.commerce.frontend.ClayTableRegistry;
 import com.liferay.commerce.frontend.ClayTableSerializer;
 import com.liferay.commerce.frontend.CommerceDataProviderRegistry;
 import com.liferay.commerce.frontend.FilterFactoryRegistry;
+import com.liferay.commerce.frontend.util.ProductHelper;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.product.content.util.CPContentHelper;
 
@@ -70,6 +71,10 @@ public class ServletContextUtil {
 
 	public static final FilterFactoryRegistry getFilterFactoryRegistry() {
 		return _instance._getFilterFactoryRegistry();
+	}
+
+	public static final ProductHelper getProductHelper() {
+		return _instance._getProductHelper();
 	}
 
 	public static final ServletContext getServletContext() {
@@ -140,6 +145,11 @@ public class ServletContextUtil {
 		_filterFactoryRegistry = filterFactoryRegistry;
 	}
 
+	@Reference(unbind = "-")
+	protected void setProductHelper(ProductHelper productHelper) {
+		_productHelper = productHelper;
+	}
+
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.frontend.taglib)",
 		unbind = "-"
@@ -182,6 +192,10 @@ public class ServletContextUtil {
 		return _filterFactoryRegistry;
 	}
 
+	private ProductHelper _getProductHelper() {
+		return _productHelper;
+	}
+
 	private ServletContext _getServletContext() {
 		return _servletContext;
 	}
@@ -197,6 +211,7 @@ public class ServletContextUtil {
 	private CommerceOrderHttpHelper _commerceOrderHttpHelper;
 	private CPContentHelper _cpContentHelper;
 	private FilterFactoryRegistry _filterFactoryRegistry;
+	private ProductHelper _productHelper;
 	private ServletContext _servletContext;
 
 }

@@ -18,7 +18,7 @@ import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.frontend.taglib.internal.js.loader.modules.extender.npm.NPMResolverProvider;
-import com.liferay.commerce.frontend.taglib.internal.util.ProductHelperProvider;
+import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
 import com.liferay.commerce.frontend.util.ProductHelper;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
@@ -119,7 +119,7 @@ public class AddToCartTag extends ComponentRendererTag {
 	public void setPageContext(PageContext pageContext) {
 		super.setPageContext(pageContext);
 
-		_productHelper = ProductHelperProvider.getProductHelper();
+		_productHelper = ServletContextUtil.getProductHelper();
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(AddToCartTag.class);
