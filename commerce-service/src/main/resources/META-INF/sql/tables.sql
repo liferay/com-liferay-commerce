@@ -249,9 +249,9 @@ create table CommerceShipment (
 	shippingOptionName VARCHAR(75) null,
 	carrier VARCHAR(75) null,
 	trackingNumber VARCHAR(75) null,
-	status INTEGER,
 	shippingDate DATE null,
-	expectedDate DATE null
+	expectedDate DATE null,
+	status INTEGER
 );
 
 create table CommerceShipmentItem (
