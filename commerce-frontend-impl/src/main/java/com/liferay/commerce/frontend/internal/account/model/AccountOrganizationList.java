@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.frontend.internal.account.model;
 
+import com.liferay.portal.kernel.util.ArrayUtil;
+
 import java.util.List;
 
 /**
@@ -30,7 +32,7 @@ public class AccountOrganizationList {
 	}
 
 	public AccountOrganizationList(String[] errorMessages) {
-		_errorMessages = errorMessages.clone();
+		_errorMessages = ArrayUtil.clone(errorMessages);
 		_success = false;
 	}
 
@@ -39,7 +41,7 @@ public class AccountOrganizationList {
 	}
 
 	public String[] getErrorMessages() {
-		return _errorMessages.clone();
+		return ArrayUtil.clone(_errorMessages);
 	}
 
 	public List<AccountOrganization> getOrganizations() {
@@ -55,7 +57,7 @@ public class AccountOrganizationList {
 	}
 
 	public void setErrorMessages(String[] errorMessages) {
-		_errorMessages = errorMessages.clone();
+		_errorMessages = ArrayUtil.clone(errorMessages);
 	}
 
 	public void setOrganizations(List<AccountOrganization> organizations) {

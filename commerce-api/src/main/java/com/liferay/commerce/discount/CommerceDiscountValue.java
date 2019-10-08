@@ -15,6 +15,7 @@
 package com.liferay.commerce.discount;
 
 import com.liferay.commerce.currency.model.CommerceMoney;
+import com.liferay.portal.kernel.util.ArrayUtil;
 
 import java.math.BigDecimal;
 
@@ -31,7 +32,7 @@ public class CommerceDiscountValue {
 		_id = id;
 		_discountAmount = discountAmount;
 		_discountPercentage = discountPercentage;
-		_percentages = percentages.clone();
+		_percentages = ArrayUtil.clone(percentages);
 	}
 
 	public CommerceMoney getDiscountAmount() {
@@ -47,7 +48,7 @@ public class CommerceDiscountValue {
 	}
 
 	public BigDecimal[] getPercentages() {
-		return _percentages.clone();
+		return ArrayUtil.clone(_percentages);
 	}
 
 	private final CommerceMoney _discountAmount;
