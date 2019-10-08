@@ -45,14 +45,13 @@ import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermi
 import com.liferay.portal.kernel.service.UserGroupRoleLocalService;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 import javax.portlet.PortletURL;
 
@@ -206,7 +205,7 @@ public class CommerceAccountUserClayTable
 		return true;
 	}
 
-	protected String[] getUserRoles(User user, long groupId)
+	protected String getUserRoles(User user, long groupId)
 		throws PortalException {
 
 		List<Role> roles = new ArrayList<>();
@@ -219,15 +218,8 @@ public class CommerceAccountUserClayTable
 			roles.add(userGroupRole.getRole());
 		}
 
-		Stream<Role> stream = roles.stream();
-
-		String[] rolesArray = stream.map(
-			Role::getName
-		).toArray(
-			String[]::new
-		);
-
-		return StringUtil.merge(rolesArray, StringPool.COMMA_AND_SPACE);
+		return ListUtil.toString(
+			roles, Role.NAME_ACCESSOR, StringPool.COMMA_AND_SPACE);
 	}
 
 	private String _getAccountUserViewDetailURL(
