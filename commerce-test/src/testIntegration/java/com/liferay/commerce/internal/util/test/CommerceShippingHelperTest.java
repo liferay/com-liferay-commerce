@@ -77,7 +77,7 @@ public class CommerceShippingHelperTest {
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
-			_group.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId());
+			_group.getGroupId(), 0, commerceCurrency.getCode());
 
 		CPInstance cpInstance1 = CPTestUtil.addCPInstance(_group.getGroupId());
 		CPInstance cpInstance2 = CPTestUtil.addCPInstance(_group.getGroupId());
@@ -133,7 +133,7 @@ public class CommerceShippingHelperTest {
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
-			_group.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId());
+			_group.getGroupId(), 0, commerceCurrency.getCode());
 
 		CPInstance cpInstance1 = CPTestUtil.addCPInstance(_group.getGroupId());
 		CPInstance cpInstance2 = CPTestUtil.addCPInstance(_group.getGroupId());

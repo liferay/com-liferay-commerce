@@ -404,8 +404,7 @@ public class OrderResourceImpl
 
 		CommerceOrder commerceOrder = _commerceOrderService.upsertCommerceOrder(
 			_user.getUserId(), commerceChannel.getGroupId(),
-			commerceAccount.getCommerceAccountId(),
-			commerceCurrency.getCommerceCurrencyId(),
+			commerceAccount.getCommerceAccountId(), commerceCurrency.getCode(),
 			GetterUtil.get(order.getBillingAddressId(), 0L),
 			GetterUtil.get(order.getShippingAddressId(), 0L),
 			order.getPaymentMethod(), commerceShippingMethodId,

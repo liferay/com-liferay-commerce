@@ -22,6 +22,7 @@ import com.liferay.commerce.product.test.util.CPTestUtil;
 import com.liferay.commerce.service.CommerceOrderLocalServiceUtil;
 import com.liferay.commerce.subscription.CommerceSubscriptionEntryHelper;
 import com.liferay.commerce.test.util.CommerceTestUtil;
+import com.liferay.petra.string.StringPool;
 
 /**
  * @author Alessio Antonio Rendina
@@ -47,7 +48,7 @@ public class CommerceSubscriptionEntryTestUtil {
 			cpInstance.getCPDefinition());
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
-			groupId, userId, 0);
+			groupId, userId, StringPool.BLANK);
 
 		CommerceAddress commerceAddress =
 			CommerceTestUtil.addUserCommerceAddress(groupId, userId);

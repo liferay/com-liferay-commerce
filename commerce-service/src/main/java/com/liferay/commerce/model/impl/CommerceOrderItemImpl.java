@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.model.impl;
 
+import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.model.CommerceMoney;
 import com.liferay.commerce.currency.model.CommerceMoneyFactoryUtil;
 import com.liferay.commerce.model.CommerceOrder;
@@ -69,32 +70,40 @@ public class CommerceOrderItemImpl extends CommerceOrderItemBaseImpl {
 	public CommerceMoney getDiscountAmountMoney() throws PortalException {
 		CommerceOrder commerceOrder = getCommerceOrder();
 
+		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
+
 		return CommerceMoneyFactoryUtil.create(
-			commerceOrder.getCommerceCurrencyId(), getDiscountAmount());
+			commerceCurrency.getCommerceCurrencyId(), getDiscountAmount());
 	}
 
 	@Override
 	public CommerceMoney getFinalPriceMoney() throws PortalException {
 		CommerceOrder commerceOrder = getCommerceOrder();
 
+		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
+
 		return CommerceMoneyFactoryUtil.create(
-			commerceOrder.getCommerceCurrencyId(), getFinalPrice());
+			commerceCurrency.getCommerceCurrencyId(), getFinalPrice());
 	}
 
 	@Override
 	public CommerceMoney getPromoPriceMoney() throws PortalException {
 		CommerceOrder commerceOrder = getCommerceOrder();
 
+		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
+
 		return CommerceMoneyFactoryUtil.create(
-			commerceOrder.getCommerceCurrencyId(), getPromoPrice());
+			commerceCurrency.getCommerceCurrencyId(), getPromoPrice());
 	}
 
 	@Override
 	public CommerceMoney getUnitPriceMoney() throws PortalException {
 		CommerceOrder commerceOrder = getCommerceOrder();
 
+		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
+
 		return CommerceMoneyFactoryUtil.create(
-			commerceOrder.getCommerceCurrencyId(), getUnitPrice());
+			commerceCurrency.getCommerceCurrencyId(), getUnitPrice());
 	}
 
 }

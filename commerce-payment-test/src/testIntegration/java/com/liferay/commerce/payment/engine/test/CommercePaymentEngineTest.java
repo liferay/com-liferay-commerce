@@ -111,7 +111,7 @@ public class CommercePaymentEngineTest {
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
 			_group.getGroupId(), _user.getUserId(),
-			_commerceCurrency.getCommerceCurrencyId());
+			_commerceCurrency.getCode());
 
 		commerceOrder.setCommercePaymentMethodKey(
 			TestCommercePaymentMethod.KEY);
@@ -175,7 +175,7 @@ public class CommercePaymentEngineTest {
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
 			_group.getGroupId(), _user.getUserId(),
-			_commerceCurrency.getCommerceCurrencyId());
+			_commerceCurrency.getCode());
 
 		commerceOrder.setCommercePaymentMethodKey(
 			TestCommercePaymentMethod.KEY);
