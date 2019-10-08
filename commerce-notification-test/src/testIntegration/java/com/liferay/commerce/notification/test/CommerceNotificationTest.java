@@ -124,7 +124,7 @@ public class CommerceNotificationTest {
 		_commerceOrder = CommerceTestUtil.addB2BCommerceOrder(
 			_group.getGroupId(), _user.getUserId(),
 			_commerceAccount.getCommerceAccountId(),
-			_commerceCurrency.getCommerceCurrencyId());
+			_commerceCurrency.getCode());
 
 		_commerceNotificationHelper.sendNotifications(
 			_group.getGroupId(), _user.getUserId(),
@@ -156,7 +156,7 @@ public class CommerceNotificationTest {
 
 		_commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
 			_group.getGroupId(), _user.getUserId(),
-			_commerceCurrency.getCommerceCurrencyId());
+			_commerceCurrency.getCode());
 
 		_commerceNotificationHelper.sendNotifications(
 			_group.getGroupId(), _user.getUserId(),
@@ -194,7 +194,7 @@ public class CommerceNotificationTest {
 		_commerceOrder = CommerceTestUtil.addB2BCommerceOrder(
 			_group.getGroupId(), _user.getUserId(),
 			_commerceAccount.getCommerceAccountId(),
-			_commerceCurrency.getCommerceCurrencyId());
+			_commerceCurrency.getCode());
 
 		_commerceNotificationHelper.sendNotifications(
 			_group.getGroupId(), _user.getUserId(),
@@ -226,7 +226,7 @@ public class CommerceNotificationTest {
 
 		_commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
 			_group.getGroupId(), _user.getUserId(),
-			_commerceCurrency.getCommerceCurrencyId());
+			_commerceCurrency.getCode());
 
 		_commerceNotificationHelper.sendNotifications(
 			_group.getGroupId(), _user.getUserId(),

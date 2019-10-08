@@ -29,7 +29,8 @@ public interface CommerceMoneyFactory {
 	public CommerceMoney create(
 		CommerceCurrency commerceCurrency, BigDecimal price);
 
-	public CommerceMoney create(long commerceCurrencyId, BigDecimal price)
+	public CommerceMoney create(
+			long companyId, String commerceCurrencyCode, BigDecimal price)
 		throws PortalException;
 
 }

@@ -49,12 +49,13 @@ public class CommerceMoneyFactoryImpl implements CommerceMoneyFactory {
 	}
 
 	@Override
-	public CommerceMoney create(long commerceCurrencyId, BigDecimal price)
+	public CommerceMoney create(
+			long companyId, String commerceCurrencyCode, BigDecimal price)
 		throws PortalException {
 
 		return create(
 			_commerceCurrencyLocalService.getCommerceCurrency(
-				commerceCurrencyId),
+				companyId, commerceCurrencyCode),
 			price);
 	}
 

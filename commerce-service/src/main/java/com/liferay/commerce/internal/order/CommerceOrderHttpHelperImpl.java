@@ -76,13 +76,13 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 
 		CommerceOrder commerceOrder = null;
 
-		long commerceCurrencyId = 0;
+		String commerceCurrencyCode = null;
 
 		CommerceCurrency commerceCurrency =
 			commerceContext.getCommerceCurrency();
 
 		if (commerceCurrency != null) {
-			commerceCurrencyId = commerceCurrency.getCommerceCurrencyId();
+			commerceCurrencyCode = commerceCurrency.getCode();
 		}
 
 		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
@@ -94,7 +94,7 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 		if (commerceAccount != null) {
 			commerceOrder = _commerceOrderService.addCommerceOrder(
 				themeDisplay.getUserId(), commerceChannelGroupId,
-				commerceAccount.getCommerceAccountId(), commerceCurrencyId);
+				commerceAccount.getCommerceAccountId(), commerceCurrencyCode);
 		}
 
 		setCurrentCommerceOrder(httpServletRequest, commerceOrder);

@@ -141,7 +141,7 @@ public class CommerceOrderGenerator {
 				_commerceChannelLocalService.
 					getCommerceChannelGroupIdBySiteGroupId(groupId),
 				commerceAccountUserRel.getCommerceAccountId(),
-				commerceCurrency.getCommerceCurrencyId());
+				commerceCurrency.getCode());
 
 		// Commerce order items
 

@@ -35,18 +35,21 @@ public class CommerceTierPriceEntryImpl extends CommerceTierPriceEntryBaseImpl {
 	}
 
 	@Override
-	public CommerceMoney getPriceMoney(long commerceCurrencyId)
-		throws PortalException {
-
-		return CommerceMoneyFactoryUtil.create(commerceCurrencyId, getPrice());
-	}
-
-	@Override
-	public CommerceMoney getPromoPriceMoney(long commerceCurrencyId)
+	public CommerceMoney getPriceMoney(
+			long companyId, String commerceCurrencyCode)
 		throws PortalException {
 
 		return CommerceMoneyFactoryUtil.create(
-			commerceCurrencyId, getPromoPrice());
+			companyId, commerceCurrencyCode, getPrice());
+	}
+
+	@Override
+	public CommerceMoney getPromoPriceMoney(
+			long companyId, String commerceCurrencyCode)
+		throws PortalException {
+
+		return CommerceMoneyFactoryUtil.create(
+			companyId, commerceCurrencyCode, getPromoPrice());
 	}
 
 }

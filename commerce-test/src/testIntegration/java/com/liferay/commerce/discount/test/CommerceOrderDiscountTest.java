@@ -84,11 +84,9 @@ public class CommerceOrderDiscountTest {
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
-			_group.getGroupId(), _user.getUserId(),
-			commerceCurrency.getCommerceCurrencyId());
+			_group.getGroupId(), _user.getUserId(), commerceCurrency.getCode());
 
-		commerceOrder.setCommerceCurrencyId(
-			commerceCurrency.getCommerceCurrencyId());
+		commerceOrder.setCommerceCurrencyCode(commerceCurrency.getCode());
 
 		_commerceOrderLocalService.updateCommerceOrder(commerceOrder);
 
@@ -183,11 +181,9 @@ public class CommerceOrderDiscountTest {
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
-			_group.getGroupId(), _user.getUserId(),
-			commerceCurrency.getCommerceCurrencyId());
+			_group.getGroupId(), _user.getUserId(), commerceCurrency.getCode());
 
-		commerceOrder.setCommerceCurrencyId(
-			commerceCurrency.getCommerceCurrencyId());
+		commerceOrder.setCommerceCurrencyCode(commerceCurrency.getCode());
 
 		_commerceOrderLocalService.updateCommerceOrder(commerceOrder);
 

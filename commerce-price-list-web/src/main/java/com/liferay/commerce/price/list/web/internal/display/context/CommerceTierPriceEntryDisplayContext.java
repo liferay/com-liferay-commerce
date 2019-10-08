@@ -123,8 +123,11 @@ public class CommerceTierPriceEntryDisplayContext
 
 		CommercePriceList commercePriceList = getCommercePriceList();
 
+		CommerceCurrency commerceCurrency =
+			commercePriceList.getCommerceCurrency();
+
 		CommerceMoney priceCommerceMoney = commerceTierPriceEntry.getPriceMoney(
-			commercePriceList.getCommerceCurrencyId());
+			commercePriceList.getCompanyId(), commerceCurrency.getCode());
 
 		return priceCommerceMoney.format(_cpRequestHelper.getLocale());
 	}

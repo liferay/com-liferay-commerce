@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.price.list.web.internal.display.context;
 
+import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.model.CommerceMoney;
 import com.liferay.commerce.item.selector.criterion.CommerceProductInstanceItemSelectorCriterion;
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
@@ -94,8 +95,11 @@ public class CommercePriceEntryDisplayContext
 		CommercePriceList commercePriceList =
 			commercePriceEntry.getCommercePriceList();
 
+		CommerceCurrency commerceCurrency =
+			commercePriceList.getCommerceCurrency();
+
 		CommerceMoney priceCommerceMoney = commercePriceEntry.getPriceMoney(
-			commercePriceList.getCommerceCurrencyId());
+			commercePriceList.getCompanyId(), commerceCurrency.getCode());
 
 		return priceCommerceMoney.format(
 			PortalUtil.getLocale(httpServletRequest));

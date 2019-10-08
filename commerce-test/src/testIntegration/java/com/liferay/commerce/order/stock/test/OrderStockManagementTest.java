@@ -87,7 +87,7 @@ public class OrderStockManagementTest {
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
-			_group.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId());
+			_group.getGroupId(), 0, commerceCurrency.getCode());
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
@@ -126,7 +126,7 @@ public class OrderStockManagementTest {
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
-			_group.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId());
+			_group.getGroupId(), 0, commerceCurrency.getCode());
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
@@ -193,7 +193,7 @@ public class OrderStockManagementTest {
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
-			_group.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId());
+			_group.getGroupId(), 0, commerceCurrency.getCode());
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
@@ -233,7 +233,7 @@ public class OrderStockManagementTest {
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
-			_group.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId());
+			_group.getGroupId(), 0, commerceCurrency.getCode());
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
@@ -262,7 +262,7 @@ public class OrderStockManagementTest {
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
-			_group.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId());
+			_group.getGroupId(), 0, commerceCurrency.getCode());
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 
@@ -299,10 +299,10 @@ public class OrderStockManagementTest {
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceOrder commerceOrder1 = CommerceTestUtil.addB2CCommerceOrder(
-			_group.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId());
+			_group.getGroupId(), 0, commerceCurrency.getCode());
 
 		CommerceOrder commerceOrder2 = CommerceTestUtil.addB2CCommerceOrder(
-			_group.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId());
+			_group.getGroupId(), 0, commerceCurrency.getCode());
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
 

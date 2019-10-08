@@ -30,10 +30,11 @@ public class CommerceMoneyFactoryUtil {
 	}
 
 	public static CommerceMoney create(
-			long commerceCurrencyId, BigDecimal price)
+			long companyId, String commerceCurrencyCode, BigDecimal price)
 		throws PortalException {
 
-		return _commerceMoneyFactory.create(commerceCurrencyId, price);
+		return _commerceMoneyFactory.create(
+			companyId, commerceCurrencyCode, price);
 	}
 
 	public static void setCommerceMoneyFactory(
