@@ -124,12 +124,30 @@ public class CommerceInventoryWarehouseItemServiceUtil {
 			commerceInventoryWarehouseId, start, end);
 	}
 
+	public static java.util.List
+		<com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem>
+				getCommerceInventoryWarehouseItemsByCompanyId(
+					long companyId, int start, int end)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getCommerceInventoryWarehouseItemsByCompanyId(
+			companyId, start, end);
+	}
+
 	public static int getCommerceInventoryWarehouseItemsCount(
 			long commerceInventoryWarehouseId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().getCommerceInventoryWarehouseItemsCount(
 			commerceInventoryWarehouseId);
+	}
+
+	public static int getCommerceInventoryWarehouseItemsCountByCompanyId(
+			long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getCommerceInventoryWarehouseItemsCountByCompanyId(
+			companyId);
 	}
 
 	public static int getCommerceInventoryWarehouseItemsCountByModifiedDate(

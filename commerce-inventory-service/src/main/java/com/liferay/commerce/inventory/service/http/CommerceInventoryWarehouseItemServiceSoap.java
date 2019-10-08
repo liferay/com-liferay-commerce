@@ -244,6 +244,50 @@ public class CommerceInventoryWarehouseItemServiceSoap {
 		}
 	}
 
+	public static
+		com.liferay.commerce.inventory.model.
+			CommerceInventoryWarehouseItemSoap[]
+					getCommerceInventoryWarehouseItemsByCompanyId(
+						long companyId, int start, int end)
+				throws RemoteException {
+
+		try {
+			java.util.List
+				<com.liferay.commerce.inventory.model.
+					CommerceInventoryWarehouseItem> returnValue =
+						CommerceInventoryWarehouseItemServiceUtil.
+							getCommerceInventoryWarehouseItemsByCompanyId(
+								companyId, start, end);
+
+			return com.liferay.commerce.inventory.model.
+				CommerceInventoryWarehouseItemSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getCommerceInventoryWarehouseItemsCountByCompanyId(
+			long companyId)
+		throws RemoteException {
+
+		try {
+			int returnValue =
+				CommerceInventoryWarehouseItemServiceUtil.
+					getCommerceInventoryWarehouseItemsCountByCompanyId(
+						companyId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static int getCommerceInventoryWarehouseItemsCount(
 			long commerceInventoryWarehouseId)
 		throws RemoteException {

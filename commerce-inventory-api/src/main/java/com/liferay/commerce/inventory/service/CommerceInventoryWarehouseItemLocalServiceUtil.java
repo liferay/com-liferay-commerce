@@ -326,6 +326,15 @@ public class CommerceInventoryWarehouseItemLocalServiceUtil {
 
 	public static java.util.List
 		<com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem>
+			getCommerceInventoryWarehouseItemsByCompanyId(
+				long companyId, int start, int end) {
+
+		return getService().getCommerceInventoryWarehouseItemsByCompanyId(
+			companyId, start, end);
+	}
+
+	public static java.util.List
+		<com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem>
 			getCommerceInventoryWarehouseItemsByModifiedDate(
 				long companyId, java.util.Date startDate,
 				java.util.Date endDate, int start, int end) {
@@ -344,11 +353,17 @@ public class CommerceInventoryWarehouseItemLocalServiceUtil {
 	}
 
 	public static int getCommerceInventoryWarehouseItemsCount(
-			long commerceInventoryWarehouseId)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		long commerceInventoryWarehouseId) {
 
 		return getService().getCommerceInventoryWarehouseItemsCount(
 			commerceInventoryWarehouseId);
+	}
+
+	public static int getCommerceInventoryWarehouseItemsCountByCompanyId(
+		long companyId) {
+
+		return getService().getCommerceInventoryWarehouseItemsCountByCompanyId(
+			companyId);
 	}
 
 	public static int getCommerceInventoryWarehouseItemsCountByModifiedDate(
