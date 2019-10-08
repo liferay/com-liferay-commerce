@@ -191,9 +191,9 @@ public class CommerceAccountGroupRelPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceAccountGroupRel commerceAccountGroupRel : list) {
-					if ((commerceAccountGroupId !=
+					if (commerceAccountGroupId !=
 							commerceAccountGroupRel.
-								getCommerceAccountGroupId())) {
+								getCommerceAccountGroupId()) {
 
 						list = null;
 

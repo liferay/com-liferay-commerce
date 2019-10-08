@@ -2232,7 +2232,7 @@ public class CPSpecificationOptionPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPSpecificationOption cpSpecificationOption : list) {
-					if ((companyId != cpSpecificationOption.getCompanyId())) {
+					if (companyId != cpSpecificationOption.getCompanyId()) {
 						list = null;
 
 						break;
@@ -3145,8 +3145,8 @@ public class CPSpecificationOptionPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPSpecificationOption cpSpecificationOption : list) {
-					if ((CPOptionCategoryId !=
-							cpSpecificationOption.getCPOptionCategoryId())) {
+					if (CPOptionCategoryId !=
+							cpSpecificationOption.getCPOptionCategoryId()) {
 
 						list = null;
 

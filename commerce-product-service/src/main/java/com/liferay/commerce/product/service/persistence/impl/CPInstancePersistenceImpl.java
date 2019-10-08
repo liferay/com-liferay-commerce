@@ -1589,7 +1589,7 @@ public class CPInstancePersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPInstance cpInstance : list) {
-					if ((groupId != cpInstance.getGroupId())) {
+					if (groupId != cpInstance.getGroupId()) {
 						list = null;
 
 						break;
@@ -2102,7 +2102,7 @@ public class CPInstancePersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPInstance cpInstance : list) {
-					if ((companyId != cpInstance.getCompanyId())) {
+					if (companyId != cpInstance.getCompanyId()) {
 						list = null;
 
 						break;
@@ -2618,7 +2618,7 @@ public class CPInstancePersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPInstance cpInstance : list) {
-					if ((CPDefinitionId != cpInstance.getCPDefinitionId())) {
+					if (CPDefinitionId != cpInstance.getCPDefinitionId()) {
 						list = null;
 
 						break;

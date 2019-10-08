@@ -190,8 +190,8 @@ public class CommerceChannelRelPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceChannelRel commerceChannelRel : list) {
-					if ((commerceChannelId !=
-							commerceChannelRel.getCommerceChannelId())) {
+					if (commerceChannelId !=
+							commerceChannelRel.getCommerceChannelId()) {
 
 						list = null;
 

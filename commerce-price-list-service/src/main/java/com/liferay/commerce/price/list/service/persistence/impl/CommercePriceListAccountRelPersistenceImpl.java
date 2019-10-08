@@ -1375,9 +1375,9 @@ public class CommercePriceListAccountRelPersistenceImpl
 				for (CommercePriceListAccountRel commercePriceListAccountRel :
 						list) {
 
-					if ((commercePriceListId !=
+					if (commercePriceListId !=
 							commercePriceListAccountRel.
-								getCommercePriceListId())) {
+								getCommercePriceListId()) {
 
 						list = null;
 

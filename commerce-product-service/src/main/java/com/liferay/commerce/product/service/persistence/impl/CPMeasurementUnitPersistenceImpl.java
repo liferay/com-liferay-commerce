@@ -1603,7 +1603,7 @@ public class CPMeasurementUnitPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPMeasurementUnit cpMeasurementUnit : list) {
-					if ((companyId != cpMeasurementUnit.getCompanyId())) {
+					if (companyId != cpMeasurementUnit.getCompanyId()) {
 						list = null;
 
 						break;

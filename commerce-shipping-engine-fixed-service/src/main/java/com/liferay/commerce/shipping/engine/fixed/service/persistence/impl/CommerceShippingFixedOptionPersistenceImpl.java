@@ -196,9 +196,9 @@ public class CommerceShippingFixedOptionPersistenceImpl
 				for (CommerceShippingFixedOption commerceShippingFixedOption :
 						list) {
 
-					if ((commerceShippingMethodId !=
+					if (commerceShippingMethodId !=
 							commerceShippingFixedOption.
-								getCommerceShippingMethodId())) {
+								getCommerceShippingMethodId()) {
 
 						list = null;
 

@@ -192,8 +192,8 @@ public class CommerceWishListItemPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceWishListItem commerceWishListItem : list) {
-					if ((commerceWishListId !=
-							commerceWishListItem.getCommerceWishListId())) {
+					if (commerceWishListId !=
+							commerceWishListItem.getCommerceWishListId()) {
 
 						list = null;
 
@@ -1299,7 +1299,7 @@ public class CommerceWishListItemPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceWishListItem commerceWishListItem : list) {
-					if ((CProductId != commerceWishListItem.getCProductId())) {
+					if (CProductId != commerceWishListItem.getCProductId()) {
 						list = null;
 
 						break;

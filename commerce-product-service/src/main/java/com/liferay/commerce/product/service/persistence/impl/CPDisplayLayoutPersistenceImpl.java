@@ -1597,7 +1597,7 @@ public class CPDisplayLayoutPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPDisplayLayout cpDisplayLayout : list) {
-					if ((groupId != cpDisplayLayout.getGroupId())) {
+					if (groupId != cpDisplayLayout.getGroupId()) {
 						list = null;
 
 						break;
