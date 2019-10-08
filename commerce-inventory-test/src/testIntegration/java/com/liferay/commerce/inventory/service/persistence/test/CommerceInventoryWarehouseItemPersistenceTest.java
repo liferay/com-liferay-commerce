@@ -208,20 +208,18 @@ public class CommerceInventoryWarehouseItemPersistenceTest {
 	}
 
 	@Test
+	public void testCountByCompanyId() throws Exception {
+		_persistence.countByCompanyId(RandomTestUtil.nextLong());
+
+		_persistence.countByCompanyId(0L);
+	}
+
+	@Test
 	public void testCountByCommerceInventoryWarehouseId() throws Exception {
 		_persistence.countByCommerceInventoryWarehouseId(
 			RandomTestUtil.nextLong());
 
 		_persistence.countByCommerceInventoryWarehouseId(0L);
-	}
-
-	@Test
-	public void testCountBySku() throws Exception {
-		_persistence.countBySku("");
-
-		_persistence.countBySku("null");
-
-		_persistence.countBySku((String)null);
 	}
 
 	@Test

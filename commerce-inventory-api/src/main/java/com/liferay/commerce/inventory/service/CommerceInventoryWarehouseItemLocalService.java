@@ -253,6 +253,11 @@ public interface CommerceInventoryWarehouseItemLocalService
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceInventoryWarehouseItem>
+		getCommerceInventoryWarehouseItemsByCompanyId(
+			long companyId, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceInventoryWarehouseItem>
 		getCommerceInventoryWarehouseItemsByModifiedDate(
 			long companyId, Date startDate, Date endDate, int start, int end);
 
@@ -266,8 +271,11 @@ public interface CommerceInventoryWarehouseItemLocalService
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceInventoryWarehouseItemsCount(
-			long commerceInventoryWarehouseId)
-		throws PortalException;
+		long commerceInventoryWarehouseId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceInventoryWarehouseItemsCountByCompanyId(
+		long companyId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceInventoryWarehouseItemsCountByModifiedDate(
