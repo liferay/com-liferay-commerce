@@ -201,7 +201,9 @@ public class CommerceOrderLocalServiceImpl
 
 		validateGuestOrders();
 
-		if (Validator.isNull(commerceCurrencyCode)) {
+		if (Validator.isNull(commerceCurrencyCode) ||
+			Validator.isBlank(commerceCurrencyCode)) {
+
 			CommerceCurrency commerceCurrency =
 				_commerceCurrencyLocalService.fetchPrimaryCommerceCurrency(
 					serviceContext.getCompanyId());

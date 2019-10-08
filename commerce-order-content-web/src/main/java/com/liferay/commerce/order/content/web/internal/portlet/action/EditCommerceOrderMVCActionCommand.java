@@ -83,13 +83,13 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 			throw new NoSuchAccountException();
 		}
 
-		long commerceCurrencyId = 0;
+		String commerceCurrencyCode = null;
 
 		CommerceCurrency commerceCurrency =
 			commerceContext.getCommerceCurrency();
 
 		if (commerceCurrency != null) {
-			commerceCurrencyId = commerceCurrency.getCommerceCurrencyId();
+			commerceCurrencyCode = commerceCurrency.getCode();
 		}
 
 		long commerceChannelGroupId =
@@ -98,7 +98,7 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 
 		return _commerceOrderService.addCommerceOrder(
 			commerceChannelGroupId, commerceAccount.getCommerceAccountId(),
-			commerceCurrencyId, 0, StringPool.BLANK);
+			commerceCurrencyCode, 0, StringPool.BLANK);
 	}
 
 	protected void approveCommerceOrder(long commerceOrderId) throws Exception {

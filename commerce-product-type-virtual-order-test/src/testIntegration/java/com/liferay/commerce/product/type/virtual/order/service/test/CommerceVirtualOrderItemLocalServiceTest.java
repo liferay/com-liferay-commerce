@@ -30,6 +30,7 @@ import com.liferay.commerce.product.type.virtual.test.util.VirtualCPTypeTestUtil
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.subscription.CommerceSubscriptionEntryHelper;
 import com.liferay.commerce.test.util.CommerceTestUtil;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
@@ -96,7 +97,7 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 		CommerceTestUtil.addBackOrderCPDefinitionInventory(cpDefinition);
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
-			_group.getGroupId(), _user.getUserId(), 0);
+			_group.getGroupId(), _user.getUserId(), StringPool.BLANK);
 
 		for (CPInstance cpInstance : cpDefinition.getCPInstances()) {
 			CommerceTestUtil.addCommerceOrderItem(
@@ -160,7 +161,7 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 		CommerceTestUtil.addBackOrderCPDefinitionInventory(cpDefinition);
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
-			_group.getGroupId(), _user.getUserId(), 0);
+			_group.getGroupId(), _user.getUserId(), StringPool.BLANK);
 
 		int subscriptionLength = 1;
 

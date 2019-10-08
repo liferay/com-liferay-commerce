@@ -97,7 +97,7 @@ public class CommerceOrderItemIndexerTest {
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
-			_group.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId());
+			_group.getGroupId(), 0, commerceCurrency.getCode());
 
 		for (int i = 0; i < count; i++) {
 			CPInstance cpInstance = CPTestUtil.addCPInstance(

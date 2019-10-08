@@ -86,7 +86,7 @@ public class CommerceOrderImpl extends CommerceOrderBaseImpl {
 	@Override
 	public CommerceCurrency getCommerceCurrency() throws PortalException {
 		return CommerceCurrencyLocalServiceUtil.getCommerceCurrency(
-			getCommerceCurrencyId());
+			getCompanyId(), getCommerceCurrencyCode());
 	}
 
 	@Override
@@ -146,20 +146,26 @@ public class CommerceOrderImpl extends CommerceOrderBaseImpl {
 
 	@Override
 	public CommerceMoney getShippingMoney() throws PortalException {
+		CommerceCurrency commerceCurrency = getCommerceCurrency();
+
 		return CommerceMoneyFactoryUtil.create(
-			getCommerceCurrencyId(), getShippingAmount());
+			commerceCurrency.getCommerceCurrencyId(), getShippingAmount());
 	}
 
 	@Override
 	public CommerceMoney getSubtotalMoney() throws PortalException {
+		CommerceCurrency commerceCurrency = getCommerceCurrency();
+
 		return CommerceMoneyFactoryUtil.create(
-			getCommerceCurrencyId(), getSubtotal());
+			commerceCurrency.getCommerceCurrencyId(), getSubtotal());
 	}
 
 	@Override
 	public CommerceMoney getTotalMoney() throws PortalException {
+		CommerceCurrency commerceCurrency = getCommerceCurrency();
+
 		return CommerceMoneyFactoryUtil.create(
-			getCommerceCurrencyId(), getTotal());
+			commerceCurrency.getCommerceCurrencyId(), getTotal());
 	}
 
 	@Override

@@ -32,6 +32,7 @@ import com.liferay.commerce.subscription.CommerceSubscriptionEntryHelper;
 import com.liferay.commerce.subscription.test.util.CommerceSubscriptionEntryTestUtil;
 import com.liferay.commerce.test.util.CommerceTestUtil;
 import com.liferay.commerce.util.comparator.CommerceSubscriptionEntryCreateDateComparator;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
@@ -230,7 +231,7 @@ public class CommerceSubscriptionEntryTest {
 		CPTestUtil.buildCPInstances(cpDefinition);
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
-			groupId, _user.getUserId(), 0);
+			groupId, _user.getUserId(), StringPool.BLANK);
 
 		List<CPInstance> cpInstances =
 			_cpInstanceLocalService.getCPDefinitionInstances(

@@ -61,7 +61,7 @@ import java.util.Collections;
 public class CommerceTestUtil {
 
 	public static CommerceOrder addB2CCommerceOrder(
-			long groupId, long userId, long commerceCurrencyId)
+			long groupId, long userId, String commerceCurrencyCode)
 		throws Exception {
 
 		ServiceContext serviceContext =
@@ -71,11 +71,11 @@ public class CommerceTestUtil {
 			userId = serviceContext.getUserId();
 		}
 
-		if (commerceCurrencyId == 0) {
+		if (commerceCurrencyCode.isEmpty()) {
 			CommerceCurrency commerceCurrency =
 				CommerceCurrencyTestUtil.addCommerceCurrency(groupId);
 
-			commerceCurrencyId = commerceCurrency.getCommerceCurrencyId();
+			commerceCurrencyCode = commerceCurrency.getCode();
 		}
 
 		CommerceAccount commerceAccount =
@@ -88,7 +88,7 @@ public class CommerceTestUtil {
 
 		return CommerceOrderLocalServiceUtil.addCommerceOrder(
 			userId, commerceChannelGroupId,
-			commerceAccount.getCommerceAccountId(), commerceCurrencyId);
+			commerceAccount.getCommerceAccountId(), commerceCurrencyCode);
 	}
 
 	public static CPDefinitionInventory addBackOrderCPDefinitionInventory(
@@ -174,8 +174,7 @@ public class CommerceTestUtil {
 				CommerceCurrencyTestUtil.addCommerceCurrency(
 					commerceOrder.getGroupId());
 
-			commerceOrder.setCommerceCurrencyId(
-				commerceCurrency.getCommerceCurrencyId());
+			commerceOrder.setCommerceCurrencyCode(commerceCurrency.getCode());
 
 			CommerceOrderLocalServiceUtil.updateCommerceOrder(commerceOrder);
 		}
