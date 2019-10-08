@@ -1,10 +1,10 @@
 Bundle-Name: Liferay Commerce Service
 Bundle-SymbolicName: com.liferay.commerce.service
-Bundle-Version: 5.3.0
+Bundle-Version: 6.0.0
 Export-Package:\
 	com.liferay.commerce.configuration,\
 	com.liferay.commerce.configuration.definition,\
 	com.liferay.commerce.model.impl
-Liferay-Require-SchemaVersion: 4.4.0
+Liferay-Require-SchemaVersion: 5.0.0
 Liferay-Service: true
 -dsannotations-options: inherit
