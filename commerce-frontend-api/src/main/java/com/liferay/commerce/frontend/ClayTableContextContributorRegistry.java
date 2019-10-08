@@ -24,7 +24,7 @@ import java.util.List;
 @ProviderType
 public interface ClayTableContextContributorRegistry {
 
-	public List<ClayTableContextContributor> getClayTableContextContributors(
-		String key);
+	public List<ClayTableHttpContextContributor>
+		getClayTableContextContributors(String key);
 
 }

@@ -15,7 +15,7 @@
 package com.liferay.commerce.theme.minium.internal.table.contributor;
 
 import com.liferay.commerce.frontend.ClayTable;
-import com.liferay.commerce.frontend.ClayTableContextContributor;
+import com.liferay.commerce.frontend.ClayTableHttpContextContributor;
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -40,10 +40,10 @@ import org.osgi.service.component.annotations.Reference;
 		"commerce.table.name=commerceAccounts",
 		"commerce.table.name=commerceAccountUsers"
 	},
-	service = ClayTableContextContributor.class
+	service = ClayTableHttpContextContributor.class
 )
 public class CommerceAccountClayTableContextContributor
-	implements ClayTableContextContributor {
+	implements ClayTableHttpContextContributor {
 
 	@Override
 	public void contribute(

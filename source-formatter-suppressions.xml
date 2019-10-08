@@ -24,7 +24,6 @@
 		<suppress checks="JavaAPISignatureCheck" files="commerce-api/src/main/java/com/liferay/commerce/starter/CommerceRegionsStarter\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-api/src/main/java/com/liferay/commerce/util/CommerceCheckoutStep\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-api/src/main/java/com/liferay/commerce/util/CommerceCheckoutStepServicesTracker\.java" />
-		<suppress checks="JavaAPISignatureCheck" files="commerce-frontend-api/src/main/java/com/liferay/commerce/frontend/ClayTableContextContributor\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-frontend-api/src/main/java/com/liferay/commerce/frontend/ClayTableDataJSONBuilder\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-frontend-api/src/main/java/com/liferay/commerce/frontend/CommerceDataSetDataProvider\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-frontend-api/src/main/java/com/liferay/commerce/frontend/FilterFactory\.java" />

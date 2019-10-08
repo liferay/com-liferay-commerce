@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.frontend.internal.clay.table.comparator;
 
-import com.liferay.commerce.frontend.ClayTableContextContributor;
+import com.liferay.commerce.frontend.ClayTableHttpContextContributor;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerCustomizerFactory.ServiceWrapper;
 import com.liferay.portal.kernel.util.MapUtil;
 
@@ -26,7 +26,7 @@ import java.util.Comparator;
  * @author Marco Leo
  */
 public class ClayTableContextContributorOrderComparator
-	implements Comparator<ServiceWrapper<ClayTableContextContributor>>,
+	implements Comparator<ServiceWrapper<ClayTableHttpContextContributor>>,
 			   Serializable {
 
 	public ClayTableContextContributorOrderComparator() {
@@ -39,8 +39,8 @@ public class ClayTableContextContributorOrderComparator
 
 	@Override
 	public int compare(
-		ServiceWrapper<ClayTableContextContributor> serviceWrapper1,
-		ServiceWrapper<ClayTableContextContributor> serviceWrapper2) {
+		ServiceWrapper<ClayTableHttpContextContributor> serviceWrapper1,
+		ServiceWrapper<ClayTableHttpContextContributor> serviceWrapper2) {
 
 		int displayOrder1 = MapUtil.getInteger(
 			serviceWrapper1.getProperties(),
