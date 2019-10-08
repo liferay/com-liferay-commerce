@@ -33,8 +33,6 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
-import java.util.List;
-
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
@@ -77,11 +75,9 @@ public class EditCPDefinitionLinkMVCActionCommand extends BaseMVCActionCommand {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			CPDefinitionLink.class.getName(), actionRequest);
 
-		List<CPDefinitionLink> cpDefinitionLinks =
-			_cpDefinitionLinkService.getCPDefinitionLinks(cpDefinitionId);
-
 		long[] cProductIds = ListUtil.toLongArray(
-			cpDefinitionLinks, CPDefinitionLinkModel::getCProductId);
+			_cpDefinitionLinkService.getCPDefinitionLinks(cpDefinitionId),
+			CPDefinitionLinkModel::getCProductId);
 
 		for (long curCPDefinitionId : cpDefinitionIds2) {
 			CPDefinition cpDefinition = _cpDefinitionService.getCPDefinition(
