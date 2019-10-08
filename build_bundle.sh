@@ -1,6 +1,8 @@
 #!/bin/bash
 
 function date {
+	LC_ALL=en_US.UTF-8
+
 	if [ -z ${1+x} ] || [ -z ${2+x} ]
 	then
 		if [ "$(uname)" == "Darwin" ]
