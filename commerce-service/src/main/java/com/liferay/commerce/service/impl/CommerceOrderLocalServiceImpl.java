@@ -948,7 +948,7 @@ public class CommerceOrderLocalServiceImpl
 		int previousOrderStatus = commerceOrder.getOrderStatus();
 
 		commerceOrder.setOrderStatus(
-			CommerceOrderConstants.ORDER_STATUS_TO_TRANSMIT);
+			CommerceOrderConstants.ORDER_STATUS_TO_FULFILL);
 		commerceOrder.setStatus(WorkflowConstants.STATUS_PENDING);
 
 		commerceOrderPersistence.update(commerceOrder);
@@ -1694,38 +1694,6 @@ public class CommerceOrderLocalServiceImpl
 				}
 
 			});
-	}
-
-	protected CommerceOrder setCommerceOrderToTransmit(
-			long userId, CommerceOrder commerceOrder)
-		throws PortalException {
-
-		// Commerce order
-
-		int previousOrderStatus = commerceOrder.getOrderStatus();
-
-		commerceOrder.setOrderStatus(
-			CommerceOrderConstants.ORDER_STATUS_TO_FULFILL);
-		commerceOrder.setStatus(WorkflowConstants.STATUS_PENDING);
-
-		commerceOrderPersistence.update(commerceOrder);
-
-		// Messaging
-
-		sendOrderStatusMessage(
-			commerceOrder.getCommerceOrderId(), commerceOrder.getOrderStatus(),
-			previousOrderStatus);
-
-		// Workflow
-
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setScopeGroupId(commerceOrder.getGroupId());
-		serviceContext.setUserId(userId);
-		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
-
-		return startWorkflowInstance(
-			serviceContext.getUserId(), commerceOrder, serviceContext);
 	}
 
 	protected CommerceOrder startWorkflowInstance(
