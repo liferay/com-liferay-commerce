@@ -4,7 +4,8 @@ import ClayLabel from '@clayui/label';
 import classNames from 'classnames';
 import React, {useState} from 'react';
 
-import {renderFilter, prettifyFilterValue} from '../../utils/index.es';
+import {prettifyFilterValue} from '../../utils/dates.es';
+import {renderFilter} from '../../utils/index.es';
 import getAppContext from '../Context.es';
 
 const Resume = props => {
@@ -17,7 +18,7 @@ const Resume = props => {
 		<ClayLabel
 			className={classNames(
 				"resume component-label tbar-label mr-2 btn p-1",
-				props.disabled && 'text-muted',
+				props.disabled && 'disabled',
 				open && 'border-primary'
 			)}
 			closeButtonProps={{
@@ -49,8 +50,8 @@ const Resume = props => {
 			</ClayDropDown.ItemList>
 		</ClayDropDown>
 	)
-
-	return dropDown;
+	
+	return props.disabled ? label : dropDown;
 };
 
 export default Resume;

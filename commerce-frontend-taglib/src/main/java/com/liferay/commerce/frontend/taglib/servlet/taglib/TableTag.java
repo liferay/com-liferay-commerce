@@ -98,6 +98,10 @@ public class TableTag extends IncludeTag {
 		return super.doStartTag();
 	}
 
+	public void setDataProviderKey(String dataProviderKey) {
+		_dataProviderKey = dataProviderKey;
+	}
+
 	public void setDeltaParam(String deltaParam) {
 		_deltaParam = deltaParam;
 	}
@@ -129,6 +133,8 @@ public class TableTag extends IncludeTag {
 		_filterFactoryRegistry = ServletContextUtil.getFilterFactoryRegistry();
 
 		super.setPageContext(pageContext);
+
+		servletContext = ServletContextUtil.getServletContext();
 	}
 
 	public void setPageNumber(int pageNumber) {

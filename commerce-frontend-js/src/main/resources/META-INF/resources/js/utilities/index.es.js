@@ -45,7 +45,21 @@ if (!window.Liferay) {
 	window.Liferay = {
 		Language: {
 			get: v => v
-		}
+		},
+		detach: (name, fn) => {
+			window.removeEventListener(name, fn);
+		},
+		fire: (name, payload) => {
+			const e = new CustomEvent(name, {
+				detail: payload
+			})
+			window.dispatchEvent(e);
+		},
+		on: (name, fn) => {
+			window.addEventListener(name, (e) => {
+				fn({...e, ...e.detail})
+			});
+		},
 	};
 }
 
@@ -64,7 +78,6 @@ export function launcher(Component, componentId, rootId, props) {
 			: <Component {...props} />,
 		portletFrame
 	)
-
 
 	function destroyComponent() {
 		try {

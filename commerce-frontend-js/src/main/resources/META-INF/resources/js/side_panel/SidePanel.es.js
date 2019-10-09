@@ -4,6 +4,7 @@ import ClayLoadingIndicator from '@clayui/loading-indicator';
 import ReactDOM from 'react-dom';
 import React from 'react';
 
+import {OPEN_SIDE_PANEL} from '../utilities/eventsDefinitions.es';
 import {debounce} from '../utilities/index.es';
 export default class SidePanel extends React.Component {
 	constructor(props) {
@@ -18,6 +19,7 @@ export default class SidePanel extends React.Component {
 		};
 		this.handleContentLoaded = this.handleContentLoaded.bind(this);
 		this.close = this.close.bind(this);
+		this.handlePanelOpenEvent = this.handlePanelOpenEvent.bind(this);
 		this.updateTop = this.updateTop.bind(this);
 		this.debouncedUpdateTop = debounce(this.updateTop, 250);
 		this.panel = React.createRef();
@@ -29,22 +31,32 @@ export default class SidePanel extends React.Component {
 			window.addEventListener('resize', this.debouncedUpdateTop);
 			this.updateTop();
 		}
+		if(Liferay) {
+			Liferay.on(OPEN_SIDE_PANEL, this.handlePanelOpenEvent);
+		}
+	}
+	
+	handlePanelOpenEvent(e) {
+		if(e.id !== this.props.id) {
+			return;
+		}
+
+		this.open(e.options.url);
+
+		if(e.options.onAfterSubmit) {
+			this.setState({
+				onAfterSubmit: e.options.onAfterSubmit
+			})
+		}
 	}
 
 	componentWillUnmount() {
 		if (this.props.topAnchor) {
 			window.removeEventListener('resize', this.debouncedUpdateTop);
 		}
-	}
-
-	componentWillReceiveProps(props) {
-		if(
-			props.url !== this.state.currentUrl ||
-			!!this.state.visible
-		) {
-			this.open(props.url);
+		if(Liferay) {
+			Liferay.detach(OPEN_SIDE_PANEL, this.handlePanelOpenEvent);
 		}
-		return null;
 	}
 
 	updateTop() {
@@ -77,12 +89,15 @@ export default class SidePanel extends React.Component {
 	}
 
 	open(url = this.state.currentUrl) {
-		if (!this.state.visible) {
-			this.toggle(true).then(() => {
-				this.load(url);
-			});
-		} else {
-			this.load(url);
+		switch (true) {
+			case !this.state.visible:
+				return this.toggle(true).then(() => {
+					this.load(url);
+				});
+			case url !== this.state.currentUrl:
+				return this.load(url);
+			default:
+				break;
 		}
 	}
 

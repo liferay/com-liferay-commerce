@@ -65,3 +65,15 @@
     display: none;
   }
 }
+
+.modal-lg, .modal-xl {
+  max-width: 800px;
+}
+
+@media (min-width: 576px) {
+  .modal {
+    .modal-dialog {
+      display: block;
+    }
+  }
+}

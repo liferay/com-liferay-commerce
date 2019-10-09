@@ -2,7 +2,7 @@ import ClayButton from '@clayui/button';
 import ClayDatePicker from '@clayui/date-picker';
 import React, {useState} from 'react';
 
-import {prettifyDateTimeValue} from '../../utils/index.es';
+import {prettifyDateTimeValue} from '../../utils/dates.es';
 import getAppContext from '../Context.es';
 
 const getDateTimeObj = value => {

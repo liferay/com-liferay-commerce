@@ -22,7 +22,7 @@ String containerId = randomNamespace + "modal-root";
 
 <div class="modal-root" id="<%= randomNamespace %>"></div>
 
-<aui:script require="commerce-frontend-js/js/modal/entry.es as Modal">
+<aui:script require="commerce-frontend-js/js/modal/entry.es as Modal, commerce-frontend-js/js/utilities/eventsDefinitions.es as eventsDefinitions">
 	new Modal.default(
 		"<%= containerId %>",
 		"<%= randomNamespace %>",
@@ -54,7 +54,12 @@ String containerId = randomNamespace + "modal-root";
 						'click',
 						function(e) {
 							e.preventDefault();
-							Liferay.fire("<%= id %>-open");
+							Liferay.fire(
+								eventsDefinitions.OPEN_MODAL,
+								{
+									id: "<%= id %>"
+								}
+							);
 						}
 					)
 				}

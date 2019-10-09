@@ -19,28 +19,29 @@
 <div class="table-root" id="<%= containerId %>"></div>
 
 <aui:script require="commerce-frontend-js/js/smart_table/entry.es as SmartTable">
-
     new SmartTable.default(
         "<%= containerId %>",
         "<%= containerId %>",
-        {
-            clayTableContext : <%= jsonSerializer.serializeDeep(clayTableContext) %>,
-            dataProviderKey : "<%= dataProviderKey %>",
-            dataSetAPI : "<%= dataSetAPI %>",
-            deltaParam : "<%= deltaParam %>",
-            disableAJAX : <%= disableAJAX %>,
-            filter : <%= jsonSerializer.serializeDeep(filter) %>,
-            itemPerPage : <%= itemPerPage %>,
-            items : <%= jsonSerializer.serializeDeep(items) %>,
-            namespace : "<%= namespace %>",
-            pageNumber : <%= pageNumber %>,
-            paginationEntries : <%= jsonSerializer.serializeDeep(paginationEntries) %>,
-            paginationSelectedEntry : <%= paginationSelectedEntry %>,
-            portletURL : "<%= portletURL %>",
-            showPagination : <%= showPagination %>,
-            spritemap : "<%= spritemap %>",
-            tableName : "<%= tableName %>",
-            totalItems : <%= totalItems %>,
-        }
+        Object.assign(
+            <%= jsonSerializer.serializeDeep(clayTableContext) %>,
+            {
+                dataProviderKey : "<%= dataProviderKey %>",
+                dataSetAPI : "<%= dataSetAPI %>",
+                deltaParam : "<%= deltaParam %>",
+                disableAJAX : <%= disableAJAX %>,
+                filter : <%= jsonSerializer.serializeDeep(filter) %>,
+                itemPerPage : <%= itemPerPage %>,
+                items : <%= jsonSerializer.serializeDeep(items) %>,
+                namespace : "<%= namespace %>",
+                pageNumber : <%= pageNumber %>,
+                paginationEntries : <%= jsonSerializer.serializeDeep(paginationEntries) %>,
+                paginationSelectedEntry : <%= paginationSelectedEntry %>,
+                portletURL : "<%= portletURL %>",
+                showPagination : <%= showPagination %>,
+                spritemap : "<%= spritemap %>",
+                tableName : "<%= tableName %>",
+                totalItems : <%= totalItems %>,
+            }
+        )
     );
 </aui:script>

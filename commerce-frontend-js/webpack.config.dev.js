@@ -45,7 +45,7 @@ module.exports = {
 		// assign_to: getComponentPath('assign_to', 'entry.dev.es.js'),
 		// gallery: getComponentPath('gallery', 'entry.dev.es.js'),
 		// modal: getComponentPath('modal', 'entry.dev.es.js'),
-		// side_panel: getComponentPath('side_panel', 'entry.dev.es.js'),
+		sidePanel: getComponentPath('side_panel', 'entry.dev.es.js'),
 		// step_tracker: getComponentPath('step_tracker', 'entry.dev.es.js'),
 		table: getComponentPath('smart_table', 'entry.dev.es.js'),
 		// table_toolbar: getComponentPath('table_toolbar', 'entry.dev.es.js'),

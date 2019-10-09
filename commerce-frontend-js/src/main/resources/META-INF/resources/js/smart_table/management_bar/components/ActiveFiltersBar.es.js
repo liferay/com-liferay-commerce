@@ -17,7 +17,7 @@ const ActiveFiltersBar = (props) => {
 				<ul className="tbar-nav">
 					<li className="p-0 tbar-item tbar-item-expand">
 						<div className="tbar-section">
-							{filtersActive.map((slug, i) => {
+							{filtersActive.map((slug) => {
 								const filter = state.filters.reduce(
 									(found, filter) =>
 										found ||
@@ -31,7 +31,13 @@ const ActiveFiltersBar = (props) => {
 									);
 								}
 
-								return <FilterResume key={filter.slug} {...filter} disabled={props.disabled}/>;
+								return (
+									<FilterResume 
+										disabled={props.disabled}
+										key={filter.slug}
+										{...filter}
+									/>
+								);
 							})}
 						</div>
 					</li>

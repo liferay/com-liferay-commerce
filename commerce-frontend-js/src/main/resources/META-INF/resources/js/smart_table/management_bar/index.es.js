@@ -2,9 +2,9 @@ import PropTypes from 'prop-types';
 import React, {useEffect, useState} from 'react';
 
 import ActiveFiltersBar from './components/ActiveFiltersBar.es';
+import BulkActions from './components/BulkActions.es';
 import useAppState, {StoreProvider} from './components/Context.es';
 import NavBar from './components/NavBar.es';
-import BulkActions from './components/BulkActions.es';
 
 const ManagementBar = (props) => {
 	const {state} = useAppState();
@@ -137,6 +137,10 @@ Wrapper.propTypes = {
 		])
 	),
 	onFilterChange: PropTypes.func.isRequired,
+}
+
+Wrapper.defaultProps = {
+	filters: []
 }
 
 export default Wrapper;

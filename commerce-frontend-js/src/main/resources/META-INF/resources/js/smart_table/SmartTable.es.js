@@ -3,24 +3,10 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useState, useRef } from 'react';
 
-import Summary from '../summary/Summary.es';
 import SmartTableContext from './SmartTableContext.es';
 import ManagementBar from './management_bar/index.es';
 import Pagination from './pagination/index.es';
 import Table from './table/Table.es';
-
-function WrappingCard(props) {
-	return (
-		<div className={classNames('card', props.className)}>
-			{props.title && (
-				<div className="card-header">{props.title}</div>
-			)}
-			<div className={classNames('card-body', props.bodyCssClass)}>
-				{props.children}
-			</div>
-		</div>
-	);
-}
 
 // function getApiEndpoint(dataSetAPI, pageSize, currentPage = 1, filters = []) {
 // 	const formattedFilters = Object.keys(filters)
@@ -76,6 +62,7 @@ function SmartTable(props) {
 			totalItemsCount={props.items.length}
 		/>
 	)
+
 	const table = (
 		<Table
 			items={props.items}
@@ -87,33 +74,28 @@ function SmartTable(props) {
 	)
 
 	return (
-		<SmartTableContext.Provider value={{formRef, loadData}}>
+		<SmartTableContext.Provider 
+			value={{
+				formRef,
+				loadData,
+				sidePanelId: props.sidePanelId
+			}}
+		>
 			<ClayIconSpriteContext.Provider value={props.spritemap}>
 				<div
 					className={classNames(
-						'commerce-table-wrapper',
+						'smart-table-wrapper',
 						props.wrapperCssClasses
 					)}
 				>
-					{props.tableName ? (
-						<WrappingCard 
-							bodyCssClass="p-0"
-							title={props.tableName}
-						>
-							{managementBar}
-							{table}
-						</WrappingCard>
-					) : (
-						<>
-							<WrappingCard bodyCssClass="p-0">
-								{managementBar}
-							</WrappingCard>
-							<WrappingCard bodyCssClass="p-0" className="mt-4">
-								{table}
-							</WrappingCard>
-						</>
-					)}
-
+					<div className={classNames(props.managementBarWrapperCssClasses)}>
+						{managementBar}
+					</div>
+					<div className={classNames(props.tableWrapperCssClasses)}>
+						{table}
+					</div>
+				</div>
+				<div className={classNames(props.paginationWrapperCssClasses)}>
 					{props.showPagination && (
 						<Pagination 
 							currentPage={props.currentPage}
@@ -122,17 +104,6 @@ function SmartTable(props) {
 							paginationSelectedEntry={props.paginationSelectedEntry}
 							totalItems={props.totalItems}
 						/>
-					)}
-
-					{props.summaryName ? (
-						<WrappingCard 
-							className="mt-4" 
-							title={props.summaryName}
-						>
-							<Summary items={props.summaryItems} />
-						</WrappingCard>
-					) : (
-						<Summary items={props.summaryItems} />
 					)}
 				</div>
 			</ClayIconSpriteContext.Provider>
@@ -149,22 +120,25 @@ SmartTable.propTypes = {
 	filters: PropTypes.array,
 	id: PropTypes.string.isRequired,
 	items: PropTypes.array.isRequired,
+	managementBarWrapperCssClasses: PropTypes.string,
 	pageSize: PropTypes.number.isRequired,
 	paginationEntries: PropTypes.array.isRequired,
 	paginationSelectedEntry: PropTypes.number.isRequired,
 	schema: PropTypes.object.isRequired,
 	selectable: PropTypes.bool,
 	showPagination: PropTypes.bool,
+	sidePanelId: PropTypes.string,
 	spritemap: PropTypes.string.isRequired,
-	summaryItems: PropTypes.array,
-	summaryName: PropTypes.string,
-	tableName: PropTypes.string,
+	tableTitle: PropTypes.string,
+	tableWrapperCssClasses: PropTypes.string,
 	totalItems: PropTypes.number,
+	wrapTableIntoCard: PropTypes.bool,
 	wrapperCssClasses: PropTypes.string,
 };
 
 SmartTable.defaultProps = {
 	currentPage: 1,
+	showPagination: true
 };
 
 export default SmartTable;

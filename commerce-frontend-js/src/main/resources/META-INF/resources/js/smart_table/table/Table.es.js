@@ -1,8 +1,8 @@
 import ClayTable from '@clayui/table';
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
 import Modal from '../../modal/Modal.es';
-import SidePanel from '../../side_panel/SidePanel.es';
 import SmartTableContext from '../SmartTableContext.es';
 import EmptyResultMessage from './EmptyResultMessage.es';
 import TableContext from './TableContext.es';
@@ -57,7 +57,6 @@ function areAllElementsSelected(selectedItemsId, allItems) {
 function Table(props) {
 	const showActionItems = !!(props.items.find(el => el.actionItems));
 	const allElementsSelected = areAllElementsSelected(props.selectedItemsId, props.items);
-	const containsSidePanel = props.schema.fields.find(field => field.contentRenderer === "sidePanelLink");
 	const containsModal = props.schema.fields.find(field => field.contentRenderer === "modalLink");
 	
 	const [ modalProps, setModalProps ] = useState({});
@@ -66,7 +65,7 @@ function Table(props) {
 	return (
 		<SmartTableContext.Consumer>
 			{
-				({formRef}) => (
+				({formRef, loadData}) => (
 					<TableContext.Provider value={{
 						modalProps,
 						setModalProps,
@@ -75,12 +74,8 @@ function Table(props) {
 					}}>
 						{containsModal && (
 							<Modal
+								onSubmit={loadData}
 								{...modalProps}
-							/>
-						)}
-						{containsSidePanel && (
-							<SidePanel
-								{...sidePanelProps}
 							/>
 						)}
 						<form ref={formRef}>
@@ -164,6 +159,13 @@ function Table(props) {
 			}
 		</SmartTableContext.Consumer>
 	)
+}
+
+Table.propTypes = {
+	items: PropTypes.array.isRequired,
+	schema: PropTypes.shape({
+		fields: PropTypes.array.isRequired
+	}).isRequired
 }
 
 export default Table;

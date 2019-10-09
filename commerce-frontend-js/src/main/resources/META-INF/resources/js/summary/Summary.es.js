@@ -97,7 +97,11 @@ function Summary(props) {
 }
 
 Summary.propTypes = {
-	items: PropTypes.array
+	items: PropTypes.array.isRequired
 };
+
+Summary.defaultProps = {
+	items: []
+}
 
 export default Summary;

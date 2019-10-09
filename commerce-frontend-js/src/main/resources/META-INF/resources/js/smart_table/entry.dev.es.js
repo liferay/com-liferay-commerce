@@ -462,83 +462,44 @@ window.Table = launcher('table', 'table', {
 	paginationSelectedEntry: 0,
 	schema: {
 		fields:[
-		{
-			contentRenderer:"sidePanelLink",
-			fieldName:"sku",
-			label:"sku",
-			sortable:false
-		},
-		{
-			contentRenderer:"modalLink",
-			fieldName:"name",
-			label:"name",
-			sortable:false
-		},
-		{
-			fieldName:"unitPrice",
-			label:"price",
-			sortable:false
-		},
-		{
-			fieldName:"discountAmount",
-			label:"discount",
-			sortable:false
-		},
-		{
-			fieldName:"quantity",
-			label:"quantity",
-			sortable:false
-		},
-		{
-			fieldName:"finalPrice",
-			label:"total",
-			sortable:false
-		}
-	]},
+			{
+				contentRenderer:"sidePanelLink",
+				fieldName:"sku",
+				label:"sku",
+				sortable:false
+			},
+			{
+				contentRenderer:"modalLink",
+				fieldName:"name",
+				label:"name",
+				sortable:false
+			},
+			{
+				fieldName:"unitPrice",
+				label:"price",
+				sortable:false
+			},
+			{
+				fieldName:"discountAmount",
+				label:"discount",
+				sortable:false
+			},
+			{
+				fieldName:"quantity",
+				label:"quantity",
+				sortable:false
+			},
+			{
+				fieldName:"finalPrice",
+				label:"total",
+				sortable:false
+			}
+		]
+	},
 	selectable: true,
 	showPagination: true,
+	sidePanelId: 'sidePanelTestId',
 	spritemap: './assets/icons.svg',
-	summaryItems: [
-		{
-			label: 'Items Subtotal',
-			value: '$ 2,208.50'
-		},
-		{
-			label: 'Order Discount',
-			value: '$ 0.00'
-		},
-		{
-			label: 'Promotion codes',
-			value: '--'
-		},
-		{
-			label: 'Estimated Tax',
-			value: '$ 0.00'
-		},
-		{
-			label: 'Shipping & Handing',
-			value: '$ 50.00'
-		},
-		{
-			label: 'Grand Total',
-			style: 'big',
-			value: '$ 2,258.50',
-		},
-		{
-			style: 'divider'
-		},
-		{
-			label: 'Total return refounds',
-			style: 'danger',
-			value: '$ 0.00'
-		},
-		{
-			label: 'Total appeasement refounds',
-			style: 'danger',
-			value: '$ 0.00'
-		}
-	],
-	summaryName: 'Table summary',
-	// tableName: 'Orders',
+	tableTitle: 'Orders',
 	totalItems: 4,
 });
