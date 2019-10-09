@@ -39,6 +39,7 @@ import com.liferay.headless.commerce.admin.account.dto.v1_0.Account;
 import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountAddress;
 import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountMember;
 import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountOrganization;
+import com.liferay.headless.commerce.admin.account.internal.odata.entity.v1_0.AccountEntityModel;
 import com.liferay.headless.commerce.admin.account.internal.util.v1_0.AccountMemberUtil;
 import com.liferay.headless.commerce.admin.account.internal.util.v1_0.AccountOrganizationUtil;
 import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountResource;
@@ -47,27 +48,34 @@ import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistr
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverterContext;
 import com.liferay.headless.commerce.core.util.ExpandoUtil;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.search.filter.Filter;
 import com.liferay.portal.kernel.service.OrganizationLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.odata.entity.EntityModel;
 import com.liferay.portal.vulcan.multipart.MultipartBody;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
+import com.liferay.portal.vulcan.resource.EntityModelResource;
+import com.liferay.portal.vulcan.util.SearchUtil;
 
 import java.io.IOException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.validation.constraints.NotNull;
 
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
@@ -81,7 +89,8 @@ import org.osgi.service.component.annotations.ServiceScope;
 	properties = "OSGI-INF/liferay/rest/v1_0/account.properties",
 	scope = ServiceScope.PROTOTYPE, service = AccountResource.class
 )
-public class AccountResourceImpl extends BaseAccountResourceImpl {
+public class AccountResourceImpl
+	extends BaseAccountResourceImpl implements EntityModelResource {
 
 	@Override
 	public Response deleteAccount(Long id) throws Exception {
@@ -153,22 +162,29 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 	}
 
 	@Override
-	public Page<Account> getAccountsPage(Pagination pagination)
+	public Page<Account> getAccountsPage(
+			Filter filter, Pagination pagination, Sort[] sorts)
 		throws Exception {
 
-		List<CommerceAccount> commerceAccounts =
-			_commerceAccountService.getUserCommerceAccounts(
-				_user.getUserId(),
-				CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID,
-				CommerceAccountConstants.SITE_TYPE_B2C_B2B, null,
-				pagination.getStartPosition(), pagination.getEndPosition());
+		return SearchUtil.search(
+			booleanQuery -> booleanQuery.getPreBooleanFilter(), filter,
+			CommerceAccount.class, StringPool.BLANK, pagination,
+			queryConfig -> queryConfig.setSelectedFieldNames(
+				Field.ENTRY_CLASS_PK),
+			searchContext -> {
+				searchContext.setCompanyId(contextCompany.getCompanyId());
+			},
+			document -> _toAccount(
+				_commerceAccountService.getCommerceAccount(
+					GetterUtil.getLong(document.get(Field.ENTRY_CLASS_PK)))),
+			sorts);
+	}
 
-		int totalItems = _commerceAccountService.getUserCommerceAccountsCount(
-			_user.getUserId(),
-			CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID,
-			CommerceAccountConstants.SITE_TYPE_B2C_B2B, null);
+	@Override
+	public EntityModel getEntityModel(MultivaluedMap multivaluedMap)
+		throws Exception {
 
-		return Page.of(_toAccounts(commerceAccounts), pagination, totalItems);
+		return _entityModel;
 	}
 
 	@Override
@@ -371,24 +387,17 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 		return commerceAccount.getEmail();
 	}
 
-	private List<Account> _toAccounts(List<CommerceAccount> commerceAccounts)
+	private Account _toAccount(CommerceAccount commerceAccount)
 		throws Exception {
-
-		List<Account> accounts = new ArrayList<>();
 
 		DTOConverter accountDTOConverter =
 			_dtoConverterRegistry.getDTOConverter(
 				CommerceAccount.class.getName());
 
-		for (CommerceAccount commerceAccount : commerceAccounts) {
-			accounts.add(
-				(Account)accountDTOConverter.toDTO(
-					new DefaultDTOConverterContext(
-						contextAcceptLanguage.getPreferredLocale(),
-						commerceAccount.getCommerceAccountId())));
-		}
-
-		return accounts;
+		return (Account)accountDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(),
+				commerceAccount.getCommerceAccountId()));
 	}
 
 	private CommerceAccount _updateAccount(Long id, Account account)
@@ -527,6 +536,8 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 
 		return commerceAccount;
 	}
+
+	private static final EntityModel _entityModel = new AccountEntityModel();
 
 	@Reference
 	private CommerceAccountGroupCommerceAccountRelService
