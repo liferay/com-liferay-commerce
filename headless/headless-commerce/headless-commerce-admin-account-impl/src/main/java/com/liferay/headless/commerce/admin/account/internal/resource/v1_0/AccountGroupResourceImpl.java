@@ -18,21 +18,28 @@ import com.liferay.commerce.account.exception.NoSuchAccountGroupException;
 import com.liferay.commerce.account.model.CommerceAccountGroup;
 import com.liferay.commerce.account.service.CommerceAccountGroupService;
 import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountGroup;
+import com.liferay.headless.commerce.admin.account.internal.odata.entity.v1_0.AccountGroupEntityModel;
 import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountGroupResource;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverterContext;
 import com.liferay.headless.commerce.core.util.ExpandoUtil;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
+import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.search.filter.Filter;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.odata.entity.EntityModel;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
+import com.liferay.portal.vulcan.resource.EntityModelResource;
+import com.liferay.portal.vulcan.util.SearchUtil;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
@@ -46,7 +53,8 @@ import org.osgi.service.component.annotations.ServiceScope;
 	properties = "OSGI-INF/liferay/rest/v1_0/account-group.properties",
 	scope = ServiceScope.PROTOTYPE, service = AccountGroupResource.class
 )
-public class AccountGroupResourceImpl extends BaseAccountGroupResourceImpl {
+public class AccountGroupResourceImpl
+	extends BaseAccountGroupResourceImpl implements EntityModelResource {
 
 	@Override
 	public Response deleteAccountGroup(Long id) throws Exception {
@@ -118,20 +126,37 @@ public class AccountGroupResourceImpl extends BaseAccountGroupResourceImpl {
 	}
 
 	@Override
-	public Page<AccountGroup> getAccountGroupsPage(Pagination pagination)
+	public Page<AccountGroup> getAccountGroupsPage(
+			Filter filter, Pagination pagination, Sort[] sorts)
 		throws Exception {
 
-		List<CommerceAccountGroup> commerceAccountGroups =
-			_commerceAccountGroupService.getCommerceAccountGroups(
-				contextCompany.getCompanyId(), pagination.getStartPosition(),
-				pagination.getEndPosition(), null);
+		return SearchUtil.search(
+			booleanQuery -> booleanQuery.getPreBooleanFilter(), filter,
+			CommerceAccountGroup.class, StringPool.BLANK, pagination,
+			queryConfig -> queryConfig.setSelectedFieldNames(
+				Field.ENTRY_CLASS_PK),
+			searchContext -> {
+				searchContext.setCompanyId(contextCompany.getCompanyId());
 
-		int totalItems =
-			_commerceAccountGroupService.getCommerceAccountGroupsCount(
-				contextCompany.getCompanyId());
+				//					long[] commerceChannelGroupIds = _getCommerceChannelGroupIds();
+				//
+				//					if ((commerceChannelGroupIds != null) &&
+				//						(commerceChannelGroupIds.length > 0)) {
+				//
+				//						searchContext.setGroupIds(commerceChannelGroupIds);
+				//					}
+			},
+			document -> _toAccountGroup(
+				_commerceAccountGroupService.getCommerceAccountGroup(
+					GetterUtil.getLong(document.get(Field.ENTRY_CLASS_PK)))),
+			sorts);
+	}
 
-		return Page.of(
-			_toAccountGroups(commerceAccountGroups), pagination, totalItems);
+	@Override
+	public EntityModel getEntityModel(MultivaluedMap multivaluedMap)
+		throws Exception {
+
+		return _entityModel;
 	}
 
 	@Override
@@ -229,27 +254,18 @@ public class AccountGroupResourceImpl extends BaseAccountGroupResourceImpl {
 				commerceAccountGroup.getCommerceAccountGroupId()));
 	}
 
-	private List<AccountGroup> _toAccountGroups(
-			List<CommerceAccountGroup> commerceAccountGroups)
+	private AccountGroup _toAccountGroup(
+			CommerceAccountGroup commerceAccountGroup)
 		throws Exception {
-
-		List<AccountGroup> accountGroups = new ArrayList<>();
 
 		DTOConverter accountGroupDTOConverter =
 			_dtoConverterRegistry.getDTOConverter(
 				CommerceAccountGroup.class.getName());
 
-		for (CommerceAccountGroup commerceAccountGroup :
-				commerceAccountGroups) {
-
-			accountGroups.add(
-				(AccountGroup)accountGroupDTOConverter.toDTO(
-					new DefaultDTOConverterContext(
-						contextAcceptLanguage.getPreferredLocale(),
-						commerceAccountGroup.getCommerceAccountGroupId())));
-		}
-
-		return accountGroups;
+		return (AccountGroup)accountGroupDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(),
+				commerceAccountGroup.getCommerceAccountGroupId()));
 	}
 
 	@Reference
@@ -257,6 +273,8 @@ public class AccountGroupResourceImpl extends BaseAccountGroupResourceImpl {
 
 	@Reference
 	private DTOConverterRegistry _dtoConverterRegistry;
+
+	private final EntityModel _entityModel = new AccountGroupEntityModel();
 
 	@Reference
 	private ServiceContextHelper _serviceContextHelper;

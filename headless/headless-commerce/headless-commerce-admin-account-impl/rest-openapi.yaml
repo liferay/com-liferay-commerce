@@ -512,6 +512,11 @@ paths:
             operationId: getAccountGroupsPage
             parameters:
                 - in: query
+                  name: filter
+                  required: false
+                  schema:
+                      type: string
+                - in: query
                   explode: true
                   name: page
                   required: false
@@ -525,6 +530,11 @@ paths:
                   schema:
                       type: integer
                   style: form
+                - in: query
+                  name: sort
+                  required: false
+                  schema:
+                      type: string
             responses:
                 200:
                     content:
@@ -1155,6 +1165,11 @@ paths:
             operationId: getAccountsPage
             parameters:
                 - in: query
+                  name: filter
+                  required: false
+                  schema:
+                      type: string
+                - in: query
                   explode: true
                   name: page
                   required: false
@@ -1168,6 +1183,11 @@ paths:
                   schema:
                       type: integer
                   style: form
+                - in: query
+                  name: sort
+                  required: false
+                  schema:
+                      type: string
             responses:
                 200:
                     content:
