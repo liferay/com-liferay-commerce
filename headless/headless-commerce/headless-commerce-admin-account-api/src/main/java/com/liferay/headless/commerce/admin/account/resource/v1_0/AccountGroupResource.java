@@ -16,6 +16,8 @@ package com.liferay.headless.commerce.admin.account.resource.v1_0;
 
 import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountGroup;
 import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.search.filter.Filter;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
@@ -34,7 +36,8 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface AccountGroupResource {
 
-	public Page<AccountGroup> getAccountGroupsPage(Pagination pagination)
+	public Page<AccountGroup> getAccountGroupsPage(
+			Filter filter, Pagination pagination, Sort[] sorts)
 		throws Exception;
 
 	public AccountGroup postAccountGroup(AccountGroup accountGroup)
