@@ -263,6 +263,11 @@ public class CPAssetCategoriesNavigationDisplayContext {
 
 		AssetCategory assetCategory = getParentCategory();
 
+		if (assetCategory == null) {
+			assetCategory = (AssetCategory)_httpServletRequest.getAttribute(
+				WebKeys.ASSET_CATEGORY);
+		}
+
 		if (assetCategory != null) {
 			categoryId = assetCategory.getCategoryId();
 		}
