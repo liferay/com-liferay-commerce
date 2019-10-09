@@ -14,6 +14,12 @@
 
 package com.liferay.headless.commerce.admin.account.internal.graphql.query.v1_0;
 
+import java.util.Collection;
+
+import javax.annotation.Generated;
+
+import org.osgi.service.component.ComponentServiceObjects;
+
 import com.liferay.headless.commerce.admin.account.dto.v1_0.Account;
 import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountAddress;
 import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountGroup;
@@ -26,6 +32,8 @@ import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountOrganiza
 import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountResource;
 import com.liferay.petra.function.UnsafeConsumer;
 import com.liferay.petra.function.UnsafeFunction;
+import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.search.filter.Filter;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.CompanyLocalServiceUtil;
 import com.liferay.portal.vulcan.pagination.Page;
@@ -34,12 +42,6 @@ import com.liferay.portal.vulcan.pagination.Pagination;
 import graphql.annotations.annotationTypes.GraphQLField;
 import graphql.annotations.annotationTypes.GraphQLInvokeDetached;
 import graphql.annotations.annotationTypes.GraphQLName;
-
-import java.util.Collection;
-
-import javax.annotation.Generated;
-
-import org.osgi.service.component.ComponentServiceObjects;
 
 /**
  * @author Alessio Antonio Rendina
@@ -91,8 +93,9 @@ public class Query {
 	@GraphQLField
 	@GraphQLInvokeDetached
 	public Collection<Account> getAccountsPage(
+			@GraphQLName("filter") Filter filter,
 			@GraphQLName("pageSize") int pageSize,
-			@GraphQLName("page") int page)
+			@GraphQLName("page") int page, @GraphQLName("sorts") Sort[] sorts)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
@@ -100,7 +103,7 @@ public class Query {
 			this::_populateResourceContext,
 			accountResource -> {
 				Page paginationPage = accountResource.getAccountsPage(
-					Pagination.of(pageSize, page));
+					filter, Pagination.of(pageSize, page), sorts);
 
 				return paginationPage.getItems();
 			});
@@ -175,8 +178,9 @@ public class Query {
 	@GraphQLField
 	@GraphQLInvokeDetached
 	public Collection<AccountGroup> getAccountGroupsPage(
+			@GraphQLName("filter") Filter filter,
 			@GraphQLName("pageSize") int pageSize,
-			@GraphQLName("page") int page)
+			@GraphQLName("page") int page, @GraphQLName("sorts") Sort[] sorts)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
@@ -184,7 +188,7 @@ public class Query {
 			this::_populateResourceContext,
 			accountGroupResource -> {
 				Page paginationPage = accountGroupResource.getAccountGroupsPage(
-					Pagination.of(pageSize, page));
+					filter, Pagination.of(pageSize, page), sorts);
 
 				return paginationPage.getItems();
 			});
