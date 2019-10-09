@@ -6,62 +6,62 @@
 	},
 	{
 		"code": "11",
-		"name": "Al Bahah",
+		"name": "Al Bāḩah",
 		"priority": 2
-	},
-	{
-		"code": "08",
-		"name": "Al Hudud ash Shamaliyah",
-		"priority": 3
 	},
 	{
 		"code": "12",
 		"name": "Al Jawf",
-		"priority": 4
+		"priority": 3
 	},
 	{
 		"code": "03",
-		"name": "Al Madinah al Munawwarah",
-		"priority": 5
+		"name": "Al Madīnah al Munawwarah",
+		"priority": 4
 	},
 	{
 		"code": "05",
-		"name": "Al Qasim",
+		"name": "Al Qaşīm",
+		"priority": 5
+	},
+	{
+		"code": "08",
+		"name": "Al Ḩudūd ash Shamālīyah",
 		"priority": 6
 	},
 	{
 		"code": "01",
-		"name": "Ar Riyad",
+		"name": "Ar Riyāḑ",
 		"priority": 7
 	},
 	{
 		"code": "04",
-		"name": "Ash Sharqiyah",
+		"name": "Ash Sharqīyah",
 		"priority": 8
 	},
 	{
-		"code": "06",
-		"name": "Ha'il",
-		"priority": 9
-	},
-	{
 		"code": "09",
-		"name": "Jazan",
-		"priority": 10
+		"name": "Jāzān",
+		"priority": 9
 	},
 	{
 		"code": "02",
 		"name": "Makkah al Mukarramah",
-		"priority": 11
+		"priority": 10
 	},
 	{
 		"code": "10",
-		"name": "Najran",
-		"priority": 12
+		"name": "Najrān",
+		"priority": 11
 	},
 	{
 		"code": "07",
-		"name": "Tabuk",
+		"name": "Tabūk",
+		"priority": 12
+	},
+	{
+		"code": "06",
+		"name": "Ḩā'il",
 		"priority": 13
 	}
 ]

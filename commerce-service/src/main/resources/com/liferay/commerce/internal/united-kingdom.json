@@ -116,7 +116,7 @@
 	},
 	{
 		"code": "BGE",
-		"name": "Bridgend [Pen-y-bont ar Ogwr GB-POG]",
+		"name": "Bridgend",
 		"priority": 24
 	},
 	{
@@ -146,7 +146,7 @@
 	},
 	{
 		"code": "CAY",
-		"name": "Caerphilly [Caerffili GB-CAF]",
+		"name": "Caerphilly",
 		"priority": 30
 	},
 	{
@@ -166,12 +166,12 @@
 	},
 	{
 		"code": "CRF",
-		"name": "Cardiff [Caerdydd GB-CRD]",
+		"name": "Cardiff",
 		"priority": 34
 	},
 	{
 		"code": "CMN",
-		"name": "Carmarthenshire [Sir Gaerfyrddin GB-GFY]",
+		"name": "Carmarthenshire",
 		"priority": 35
 	},
 	{
@@ -186,7 +186,7 @@
 	},
 	{
 		"code": "CGN",
-		"name": "Ceredigion [Sir Ceredigion]",
+		"name": "Ceredigion",
 		"priority": 38
 	},
 	{
@@ -236,7 +236,7 @@
 	},
 	{
 		"code": "DEN",
-		"name": "Denbighshire [Sir Ddinbych GB-DDB]",
+		"name": "Denbighshire",
 		"priority": 48
 	},
 	{
@@ -361,7 +361,7 @@
 	},
 	{
 		"code": "FLN",
-		"name": "Flintshire [Sir y Fflint GB-FFL]",
+		"name": "Flintshire",
 		"priority": 73
 	},
 	{
@@ -461,7 +461,7 @@
 	},
 	{
 		"code": "AGY",
-		"name": "Isle of Anglesey [Sir Ynys Môn GB-YNM]",
+		"name": "Isle of Anglesey",
 		"priority": 93
 	},
 	{
@@ -576,7 +576,7 @@
 	},
 	{
 		"code": "MTY",
-		"name": "Merthyr Tydfil [Merthyr Tudful GB-MTU]",
+		"name": "Merthyr Tydfil",
 		"priority": 116
 	},
 	{
@@ -611,7 +611,7 @@
 	},
 	{
 		"code": "MON",
-		"name": "Monmouthshire [Sir Fynwy GB-FYN]",
+		"name": "Monmouthshire",
 		"priority": 123
 	},
 	{
@@ -621,7 +621,7 @@
 	},
 	{
 		"code": "NTL",
-		"name": "Neath Port Talbot [Castell-nedd Port Talbot GB-CTL]",
+		"name": "Neath Port Talbot",
 		"priority": 125
 	},
 	{
@@ -636,7 +636,7 @@
 	},
 	{
 		"code": "NWP",
-		"name": "Newport [Casnewydd GB-CNW]",
+		"name": "Newport",
 		"priority": 128
 	},
 	{
@@ -726,7 +726,7 @@
 	},
 	{
 		"code": "PEM",
-		"name": "Pembrokeshire [Sir Benfro GB-BNF]",
+		"name": "Pembrokeshire",
 		"priority": 146
 	},
 	{
@@ -781,7 +781,7 @@
 	},
 	{
 		"code": "RCT",
-		"name": "Rhondda, Cynon, Taff [Rhondda, Cynon,Taf]",
+		"name": "Rhondda, Cynon, Taff",
 		"priority": 157
 	},
 	{
@@ -941,7 +941,7 @@
 	},
 	{
 		"code": "SWA",
-		"name": "Swansea [Abertawe GB-ATA]",
+		"name": "Swansea",
 		"priority": 189
 	},
 	{
@@ -986,7 +986,7 @@
 	},
 	{
 		"code": "VGL",
-		"name": "Vale of Glamorgan, The [Bro Morgannwg GB-BMG]",
+		"name": "Vale of Glamorgan, The",
 		"priority": 198
 	},
 	{
@@ -1081,7 +1081,7 @@
 	},
 	{
 		"code": "WRX",
-		"name": "Wrexham [Wrecsam GB-WRC]",
+		"name": "Wrexham",
 		"priority": 217
 	},
 	{
