@@ -10,54 +10,49 @@
 		"priority": 2
 	},
 	{
-		"code": "BB",
-		"name": "Kepulauan Bangka Belitung",
-		"priority": 3
-	},
-	{
 		"code": "BT",
 		"name": "Banten",
-		"priority": 4
+		"priority": 3
 	},
 	{
 		"code": "BE",
 		"name": "Bengkulu",
-		"priority": 5
+		"priority": 4
 	},
 	{
 		"code": "GO",
 		"name": "Gorontalo",
-		"priority": 6
+		"priority": 5
 	},
 	{
 		"code": "JK",
 		"name": "Jakarta Raya",
-		"priority": 7
+		"priority": 6
 	},
 	{
 		"code": "JA",
 		"name": "Jambi",
-		"priority": 8
+		"priority": 7
 	},
 	{
 		"code": "JB",
 		"name": "Jawa Barat",
-		"priority": 9
+		"priority": 8
 	},
 	{
 		"code": "JT",
 		"name": "Jawa Tengah",
-		"priority": 10
+		"priority": 9
 	},
 	{
 		"code": "JI",
 		"name": "Jawa Timur",
-		"priority": 11
+		"priority": 10
 	},
 	{
 		"code": "JW",
 		"name": "Jawa",
-		"priority": 12
+		"priority": 11
 	},
 	{
 		"code": "KB",
@@ -85,93 +80,98 @@
 		"priority": 16
 	},
 	{
+		"code": "BB",
+		"name": "Kepulauan Bangka Belitung",
+		"priority": 17
+	},
+	{
 		"code": "KR",
 		"name": "Kepulauan Riau",
-		"priority": 17
+		"priority": 18
 	},
 	{
 		"code": "LA",
 		"name": "Lampung",
-		"priority": 18
+		"priority": 19
 	},
 	{
 		"code": "MA",
 		"name": "Maluku",
-		"priority": 19
+		"priority": 20
 	},
 	{
 		"code": "MU",
 		"name": "Maluku Utara",
-		"priority": 20
+		"priority": 21
 	},
 	{
 		"code": "NB",
 		"name": "Nusa Tenggara Barat",
-		"priority": 21
+		"priority": 22
 	},
 	{
 		"code": "NT",
 		"name": "Nusa Tenggara Timur",
-		"priority": 22
+		"priority": 23
 	},
 	{
 		"code": "PA",
 		"name": "Papua",
-		"priority": 23
+		"priority": 24
 	},
 	{
 		"code": "PB",
 		"name": "Papua Barat",
-		"priority": 24
+		"priority": 25
 	},
 	{
 		"code": "RI",
 		"name": "Riau",
-		"priority": 25
-	},
-	{
-		"code": "SN",
-		"name": "Sulawesi Selatan",
 		"priority": 26
-	},
-	{
-		"code": "ST",
-		"name": "Sulawesi Tengah",
-		"priority": 27
-	},
-	{
-		"code": "SG",
-		"name": "Sulawesi Tenggara",
-		"priority": 28
-	},
-	{
-		"code": "SA",
-		"name": "Sulawesi Utara",
-		"priority": 29
-	},
-	{
-		"code": "SB",
-		"name": "Sumatera Barat",
-		"priority": 30
-	},
-	{
-		"code": "SS",
-		"name": "Sumatera Selatan",
-		"priority": 31
-	},
-	{
-		"code": "SU",
-		"name": "Sumatera Utara",
-		"priority": 32
-	},
-	{
-		"code": "YO",
-		"name": "Yogyakarta",
-		"priority": 33
 	},
 	{
 		"code": "SR",
 		"name": "Sulawesi Barat",
+		"priority": 27
+	},
+	{
+		"code": "SN",
+		"name": "Sulawesi Selatan",
+		"priority": 28
+	},
+	{
+		"code": "ST",
+		"name": "Sulawesi Tengah",
+		"priority": 29
+	},
+	{
+		"code": "SG",
+		"name": "Sulawesi Tenggara",
+		"priority": 30
+	},
+	{
+		"code": "SA",
+		"name": "Sulawesi Utara",
+		"priority": 31
+	},
+	{
+		"code": "SB",
+		"name": "Sumatera Barat",
+		"priority": 32
+	},
+	{
+		"code": "SS",
+		"name": "Sumatera Selatan",
+		"priority": 33
+	},
+	{
+		"code": "SU",
+		"name": "Sumatera Utara",
 		"priority": 34
+	},
+	{
+		"code": "YO",
+		"name": "Yogyakarta",
+		"priority": 35
 	}
 ]
