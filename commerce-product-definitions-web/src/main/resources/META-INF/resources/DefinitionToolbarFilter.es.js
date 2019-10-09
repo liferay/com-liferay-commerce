@@ -21,7 +21,7 @@ class DefinitionToolbarFilter extends Component {
 
 	rendered() {
 		AUI().use(
-			'liferay-asset-taglib-categories-selector',
+			'liferay-commerce-frontend-asset-categories-selector',
 			function(A) {
 				var categoryBox = this.element.querySelector('#assetCategoriesSelector');
 
@@ -100,11 +100,11 @@ class DefinitionToolbarFilter extends Component {
 		if (this._currentSelection == 'optionsNames') {
 			var optionNameSelect = this.element.querySelector('#optionsNames');
 
+			var optionValueSelect = this.element.querySelector('#optionValues');
+
 			if (!optionValueSelect) {
 				return;
 			}
-
-			var optionValueSelect = this.element.querySelector('#optionValues');
 
 			var optionValue = optionValueSelect.value;
 
