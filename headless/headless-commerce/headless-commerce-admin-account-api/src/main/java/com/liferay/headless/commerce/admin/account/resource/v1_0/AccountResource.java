@@ -14,15 +14,16 @@
 
 package com.liferay.headless.commerce.admin.account.resource.v1_0;
 
+import javax.annotation.Generated;
+import javax.ws.rs.core.Response;
+
 import com.liferay.headless.commerce.admin.account.dto.v1_0.Account;
 import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.search.filter.Filter;
 import com.liferay.portal.vulcan.multipart.MultipartBody;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
-
-import javax.annotation.Generated;
-
-import javax.ws.rs.core.Response;
 
 /**
  * To access this resource, run:
@@ -39,7 +40,8 @@ public interface AccountResource {
 			String externalReferenceCode, Account account)
 		throws Exception;
 
-	public Page<Account> getAccountsPage(Pagination pagination)
+	public Page<Account> getAccountsPage(
+			Filter filter, Pagination pagination, Sort[] sorts)
 		throws Exception;
 
 	public Account postAccount(Account account) throws Exception;
