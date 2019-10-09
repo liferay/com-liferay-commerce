@@ -6,17 +6,17 @@
 	},
 	{
 		"code": "02",
-		"name": "Etela-Karjala",
+		"name": "Etelä-Karjala",
 		"priority": 2
 	},
 	{
 		"code": "03",
-		"name": "Etela-Pohjanmaa",
+		"name": "Etelä-Pohjanmaa",
 		"priority": 3
 	},
 	{
 		"code": "04",
-		"name": "Etela-Savo",
+		"name": "Etelä-Savo",
 		"priority": 4
 	},
 	{
@@ -26,7 +26,7 @@
 	},
 	{
 		"code": "06",
-		"name": "Kanta-Hame",
+		"name": "Kanta-Häme",
 		"priority": 6
 	},
 	{
@@ -51,32 +51,32 @@
 	},
 	{
 		"code": "11",
-		"name": "Paijat-Hame",
+		"name": "Pirkanmaa",
 		"priority": 11
 	},
 	{
 		"code": "12",
-		"name": "Pirkanmaa",
+		"name": "Pohjanmaa",
 		"priority": 12
 	},
 	{
 		"code": "13",
-		"name": "Pohjanmaa",
+		"name": "Pohjois-Karjala",
 		"priority": 13
 	},
 	{
 		"code": "14",
-		"name": "Pohjois-Karjala",
+		"name": "Pohjois-Pohjanmaa",
 		"priority": 14
 	},
 	{
 		"code": "15",
-		"name": "Pohjois-Pohjanmaa",
+		"name": "Pohjois-Savo",
 		"priority": 15
 	},
 	{
 		"code": "16",
-		"name": "Pohjois-Savo",
+		"name": "Päijät-Häme",
 		"priority": 16
 	},
 	{

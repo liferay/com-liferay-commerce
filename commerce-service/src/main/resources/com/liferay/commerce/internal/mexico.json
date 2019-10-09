@@ -20,18 +20,18 @@
 		"priority": 4
 	},
 	{
-		"code": "DIF",
-		"name": "Ciudad de México",
-		"priority": 5
-	},
-	{
 		"code": "CHP",
 		"name": "Chiapas",
-		"priority": 6
+		"priority": 5
 	},
 	{
 		"code": "CHH",
 		"name": "Chihuahua",
+		"priority": 6
+	},
+	{
+		"code": "DIF",
+		"name": "Ciudad de México",
 		"priority": 7
 	},
 	{
@@ -50,38 +50,38 @@
 		"priority": 10
 	},
 	{
-		"code": "MEX",
-		"name": "Estado de México",
-		"priority": 11
-	},
-	{
 		"code": "GUA",
 		"name": "Guanajuato",
-		"priority": 12
+		"priority": 11
 	},
 	{
 		"code": "GRO",
 		"name": "Guerrero",
-		"priority": 13
+		"priority": 12
 	},
 	{
 		"code": "HID",
 		"name": "Hidalgo",
-		"priority": 14
+		"priority": 13
 	},
 	{
 		"code": "JAL",
 		"name": "Jalisco",
-		"priority": 15
+		"priority": 14
 	},
 	{
 		"code": "MIC",
 		"name": "Michoacán de Ocampo",
-		"priority": 16
+		"priority": 15
 	},
 	{
 		"code": "MOR",
 		"name": "Morelos",
+		"priority": 16
+	},
+	{
+		"code": "MEX",
+		"name": "México",
 		"priority": 17
 	},
 	{
@@ -106,7 +106,7 @@
 	},
 	{
 		"code": "QUE",
-		"name": "Querétaro de Arteaga",
+		"name": "Querétaro",
 		"priority": 22
 	},
 	{

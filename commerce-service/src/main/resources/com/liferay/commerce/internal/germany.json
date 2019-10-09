@@ -1,7 +1,7 @@
 [
 	{
 		"code": "BW",
-		"name": "Baden-Wurttemberg",
+		"name": "Baden-Württemberg",
 		"priority": 1
 	},
 	{
@@ -76,7 +76,7 @@
 	},
 	{
 		"code": "TH",
-		"name": "Thuringen",
+		"name": "Thüringen",
 		"priority": 16
 	}
 ]

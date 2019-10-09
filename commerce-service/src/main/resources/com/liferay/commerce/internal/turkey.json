@@ -15,43 +15,43 @@
 		"priority": 3
 	},
 	{
-		"code": "04",
-		"name": "Agri",
-		"priority": 4
-	},
-	{
 		"code": "68",
 		"name": "Aksaray",
-		"priority": 5
+		"priority": 4
 	},
 	{
 		"code": "05",
 		"name": "Amasya",
-		"priority": 6
+		"priority": 5
 	},
 	{
 		"code": "06",
 		"name": "Ankara",
-		"priority": 7
+		"priority": 6
 	},
 	{
 		"code": "07",
 		"name": "Antalya",
-		"priority": 8
+		"priority": 7
 	},
 	{
 		"code": "75",
 		"name": "Ardahan",
-		"priority": 9
+		"priority": 8
 	},
 	{
 		"code": "08",
 		"name": "Artvin",
-		"priority": 10
+		"priority": 9
 	},
 	{
 		"code": "09",
 		"name": "Aydin",
+		"priority": 10
+	},
+	{
+		"code": "04",
+		"name": "Ağrı",
 		"priority": 11
 	},
 	{
@@ -81,7 +81,7 @@
 	},
 	{
 		"code": "12",
-		"name": "Bingol",
+		"name": "Bingöl",
 		"priority": 17
 	},
 	{
@@ -105,303 +105,303 @@
 		"priority": 21
 	},
 	{
-		"code": "17",
-		"name": "Canakkale",
-		"priority": 22
-	},
-	{
-		"code": "18",
-		"name": "Cankiri",
-		"priority": 23
-	},
-	{
-		"code": "19",
-		"name": "Corum",
-		"priority": 24
-	},
-	{
 		"code": "20",
 		"name": "Denizli",
-		"priority": 25
+		"priority": 22
 	},
 	{
 		"code": "21",
 		"name": "Diyarbakir",
-		"priority": 26
+		"priority": 23
 	},
 	{
 		"code": "81",
 		"name": "Duzce",
-		"priority": 27
+		"priority": 24
 	},
 	{
 		"code": "22",
 		"name": "Edirne",
-		"priority": 28
+		"priority": 25
 	},
 	{
 		"code": "23",
-		"name": "Elazig",
-		"priority": 29
+		"name": "Elazığ",
+		"priority": 26
 	},
 	{
 		"code": "24",
 		"name": "Erzincan",
-		"priority": 30
+		"priority": 27
 	},
 	{
 		"code": "25",
 		"name": "Erzurum",
-		"priority": 31
+		"priority": 28
 	},
 	{
 		"code": "26",
-		"name": "Eskisehir",
-		"priority": 32
+		"name": "Eskişehir",
+		"priority": 29
 	},
 	{
 		"code": "27",
 		"name": "Gaziantep",
-		"priority": 33
+		"priority": 30
 	},
 	{
 		"code": "28",
 		"name": "Giresun",
-		"priority": 34
+		"priority": 31
 	},
 	{
 		"code": "29",
-		"name": "Gumushane",
-		"priority": 35
+		"name": "Gümüşhane",
+		"priority": 32
 	},
 	{
 		"code": "30",
-		"name": "Hakkari",
-		"priority": 36
+		"name": "Hakkâri",
+		"priority": 33
 	},
 	{
 		"code": "31",
 		"name": "Hatay",
-		"priority": 37
-	},
-	{
-		"code": "76",
-		"name": "Igdir",
-		"priority": 38
+		"priority": 34
 	},
 	{
 		"code": "32",
 		"name": "Isparta",
-		"priority": 39
+		"priority": 35
+	},
+	{
+		"code": "76",
+		"name": "Iğdır",
+		"priority": 36
 	},
 	{
 		"code": "34",
 		"name": "Istanbul",
-		"priority": 40
+		"priority": 37
 	},
 	{
 		"code": "35",
 		"name": "Izmir",
-		"priority": 41
+		"priority": 38
 	},
 	{
 		"code": "46",
 		"name": "Kahramanmaras",
-		"priority": 42
+		"priority": 39
 	},
 	{
 		"code": "78",
-		"name": "Karabuk",
-		"priority": 43
+		"name": "Karabük",
+		"priority": 40
 	},
 	{
 		"code": "70",
 		"name": "Karaman",
-		"priority": 44
+		"priority": 41
 	},
 	{
 		"code": "36",
 		"name": "Kars",
-		"priority": 45
+		"priority": 42
 	},
 	{
 		"code": "37",
 		"name": "Kastamonu",
-		"priority": 46
+		"priority": 43
 	},
 	{
 		"code": "38",
 		"name": "Kayseri",
-		"priority": 47
+		"priority": 44
 	},
 	{
 		"code": "79",
 		"name": "Kilis",
-		"priority": 48
+		"priority": 45
 	},
 	{
 		"code": "71",
 		"name": "Kirikkale",
-		"priority": 49
+		"priority": 46
 	},
 	{
 		"code": "39",
 		"name": "Kirklareli",
-		"priority": 50
+		"priority": 47
 	},
 	{
 		"code": "40",
 		"name": "Kirsehir",
-		"priority": 51
+		"priority": 48
 	},
 	{
 		"code": "41",
 		"name": "Kocaeli",
-		"priority": 52
+		"priority": 49
 	},
 	{
 		"code": "42",
 		"name": "Konya",
-		"priority": 53
+		"priority": 50
 	},
 	{
 		"code": "43",
-		"name": "Kutahya",
-		"priority": 54
+		"name": "Kütahya",
+		"priority": 51
 	},
 	{
 		"code": "44",
 		"name": "Malatya",
-		"priority": 55
+		"priority": 52
 	},
 	{
 		"code": "45",
 		"name": "Manisa",
-		"priority": 56
+		"priority": 53
 	},
 	{
 		"code": "47",
 		"name": "Mardin",
-		"priority": 57
+		"priority": 54
 	},
 	{
 		"code": "33",
 		"name": "Mersin",
-		"priority": 58
+		"priority": 55
 	},
 	{
 		"code": "48",
-		"name": "Mugla",
-		"priority": 59
+		"name": "Muğla",
+		"priority": 56
 	},
 	{
 		"code": "49",
-		"name": "Mus",
-		"priority": 60
+		"name": "Muş",
+		"priority": 57
 	},
 	{
 		"code": "50",
-		"name": "Nevsehir",
-		"priority": 61
+		"name": "Nevşehir",
+		"priority": 58
 	},
 	{
 		"code": "51",
-		"name": "Nigde",
-		"priority": 62
+		"name": "Niğde",
+		"priority": 59
 	},
 	{
 		"code": "52",
 		"name": "Ordu",
-		"priority": 63
+		"priority": 60
 	},
 	{
 		"code": "80",
 		"name": "Osmaniye",
-		"priority": 64
+		"priority": 61
 	},
 	{
 		"code": "53",
 		"name": "Rize",
-		"priority": 65
+		"priority": 62
 	},
 	{
 		"code": "54",
 		"name": "Sakarya",
-		"priority": 66
+		"priority": 63
 	},
 	{
 		"code": "55",
 		"name": "Samsun",
-		"priority": 67
-	},
-	{
-		"code": "63",
-		"name": "Sanliurfa",
-		"priority": 68
-	},
-	{
-		"code": "56",
-		"name": "Siirt",
-		"priority": 69
+		"priority": 64
 	},
 	{
 		"code": "57",
 		"name": "Sinop",
-		"priority": 70
+		"priority": 65
 	},
 	{
 		"code": "73",
 		"name": "Sirnak",
-		"priority": 71
+		"priority": 66
 	},
 	{
 		"code": "58",
 		"name": "Sivas",
-		"priority": 72
+		"priority": 67
 	},
 	{
 		"code": "59",
-		"name": "Tekirdag",
-		"priority": 73
+		"name": "Tekirdağ",
+		"priority": 68
 	},
 	{
 		"code": "60",
 		"name": "Tokat",
-		"priority": 74
+		"priority": 69
 	},
 	{
 		"code": "61",
 		"name": "Trabzon",
-		"priority": 75
+		"priority": 70
 	},
 	{
 		"code": "62",
 		"name": "Tunceli",
-		"priority": 76
+		"priority": 71
 	},
 	{
 		"code": "64",
-		"name": "Usak",
-		"priority": 77
+		"name": "Uşak",
+		"priority": 72
 	},
 	{
 		"code": "65",
 		"name": "Van",
-		"priority": 78
+		"priority": 73
 	},
 	{
 		"code": "77",
 		"name": "Yalova",
-		"priority": 79
+		"priority": 74
 	},
 	{
 		"code": "66",
 		"name": "Yozgat",
-		"priority": 80
+		"priority": 75
 	},
 	{
 		"code": "67",
 		"name": "Zonguldak",
+		"priority": 76
+	},
+	{
+		"code": "17",
+		"name": "Çanakkale",
+		"priority": 77
+	},
+	{
+		"code": "18",
+		"name": "Çankiri",
+		"priority": 78
+	},
+	{
+		"code": "19",
+		"name": "Çorum",
+		"priority": 79
+	},
+	{
+		"code": "63",
+		"name": "Şanlıurfa",
+		"priority": 80
+	},
+	{
+		"code": "56",
+		"name": "Şiirt",
 		"priority": 81
 	}
 ]

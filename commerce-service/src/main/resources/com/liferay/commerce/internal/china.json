@@ -1,62 +1,62 @@
 [
 	{
 		"code": "AH",
-		"name": "Anhui",
+		"name": "Anhui Sheng",
 		"priority": 1
 	},
 	{
 		"code": "BJ",
-		"name": "Beijing",
+		"name": "Beijing Shi",
 		"priority": 2
 	},
 	{
 		"code": "CQ",
-		"name": "Chongqing",
+		"name": "Chongqing Shi",
 		"priority": 3
 	},
 	{
 		"code": "FJ",
-		"name": "Fujian",
+		"name": "Fujian Sheng",
 		"priority": 4
 	},
 	{
 		"code": "GS",
-		"name": "Gansu",
+		"name": "Gansu Sheng",
 		"priority": 5
 	},
 	{
 		"code": "GD",
-		"name": "Guangdong",
+		"name": "Guangdong Sheng",
 		"priority": 6
 	},
 	{
 		"code": "GX",
-		"name": "Guangxi",
+		"name": "Guangxi Zhuangzu Zizhiqu",
 		"priority": 7
 	},
 	{
 		"code": "GZ",
-		"name": "Guizhou",
+		"name": "Guizhou Sheng",
 		"priority": 8
 	},
 	{
 		"code": "HI",
-		"name": "Hainan",
+		"name": "Hainan Sheng",
 		"priority": 9
 	},
 	{
 		"code": "HE",
-		"name": "Hebei",
+		"name": "Hebei Sheng",
 		"priority": 10
 	},
 	{
 		"code": "HL",
-		"name": "Heilongjiang",
+		"name": "Heilongjiang Sheng",
 		"priority": 11
 	},
 	{
 		"code": "HA",
-		"name": "Henan",
+		"name": "Henan Sheng",
 		"priority": 12
 	},
 	{
@@ -66,107 +66,92 @@
 	},
 	{
 		"code": "HB",
-		"name": "Hubei",
+		"name": "Hubei Sheng",
 		"priority": 14
 	},
 	{
 		"code": "HN",
-		"name": "Hunan",
+		"name": "Hunan Sheng",
 		"priority": 15
 	},
 	{
-		"code": "NM",
-		"name": "Nei Mongol",
+		"code": "JS",
+		"name": "Jiangsu Sheng",
 		"priority": 16
 	},
 	{
-		"code": "JS",
-		"name": "Jiangsu",
+		"code": "JX",
+		"name": "Jiangxi Sheng",
 		"priority": 17
 	},
 	{
-		"code": "JX",
-		"name": "Jiangxi",
+		"code": "JL",
+		"name": "Jilin Sheng",
 		"priority": 18
 	},
 	{
-		"code": "JL",
-		"name": "Jilin",
+		"code": "LN",
+		"name": "Liaoning Sheng",
 		"priority": 19
 	},
 	{
-		"code": "LN",
-		"name": "Liaoning",
+		"code": "NM",
+		"name": "Nei Mongol Zizhiqu",
 		"priority": 20
 	},
 	{
-		"code": "MO",
-		"name": "Macau",
+		"code": "NX",
+		"name": "Ningxia Sheng",
 		"priority": 21
 	},
 	{
-		"code": "NX",
-		"name": "Ningxia",
+		"code": "SN",
+		"name": "Shaanxi Sheng",
 		"priority": 22
 	},
 	{
-		"code": "QH",
-		"name": "Qinghai",
+		"code": "SD",
+		"name": "Shandong Sheng",
 		"priority": 23
 	},
 	{
-		"code": "SN",
-		"name": "Shaanxi",
+		"code": "SH",
+		"name": "Shanghai Sheng",
 		"priority": 24
 	},
 	{
-		"code": "SD",
-		"name": "Shandong",
+		"code": "SX",
+		"name": "Shanxi Sheng",
 		"priority": 25
 	},
 	{
-		"code": "SH",
-		"name": "Shanghai",
+		"code": "SC",
+		"name": "Sichuan Sheng",
 		"priority": 26
 	},
 	{
-		"code": "SX",
-		"name": "Shanxi",
+		"code": "TJ",
+		"name": "Tianjin Shi",
 		"priority": 27
 	},
 	{
-		"code": "SC",
-		"name": "Sichuan",
+		"code": "XJ",
+		"name": "Xinjiang Uygur Zizhiqu",
 		"priority": 28
 	},
 	{
-		"code": "TJ",
-		"name": "Tianjin",
+		"code": "XZ",
+		"name": "Xizang Zizhiqu",
 		"priority": 29
 	},
 	{
-		"code": "TW",
-		"name": "Taiwan",
+		"code": "YN",
+		"name": "Yunnan Sheng",
 		"priority": 30
 	},
 	{
-		"code": "XJ",
-		"name": "Xinjiang",
-		"priority": 31
-	},
-	{
-		"code": "XZ",
-		"name": "Xizang",
-		"priority": 32
-	},
-	{
-		"code": "YN",
-		"name": "Yunnan",
-		"priority": 33
-	},
-	{
 		"code": "ZJ",
-		"name": "Zhejiang",
-		"priority": 33
+		"name": "Zhejiang Sheng",
+		"priority": 31
 	}
 ]

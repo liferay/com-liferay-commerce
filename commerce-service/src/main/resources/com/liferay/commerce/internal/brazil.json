@@ -65,8 +65,8 @@
 		"priority": 13
 	},
 	{
-		"code": "PA",
-		"name": "Pará",
+		"code": "PR",
+		"name": "Paraná",
 		"priority": 14
 	},
 	{
@@ -75,8 +75,8 @@
 		"priority": 15
 	},
 	{
-		"code": "PR",
-		"name": "Paraná",
+		"code": "PA",
+		"name": "Pará",
 		"priority": 16
 	},
 	{
@@ -120,13 +120,13 @@
 		"priority": 24
 	},
 	{
-		"code": "SP",
-		"name": "São Paulo",
+		"code": "SE",
+		"name": "Sergipe",
 		"priority": 25
 	},
 	{
-		"code": "SE",
-		"name": "Sergipe",
+		"code": "SP",
+		"name": "São Paulo",
 		"priority": 26
 	},
 	{

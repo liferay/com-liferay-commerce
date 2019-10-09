@@ -31,7 +31,7 @@
 	},
 	{
 		"code": "FR",
-		"name": "Fribourg",
+		"name": "Freiburg",
 		"priority": 7
 	},
 	{
@@ -110,13 +110,13 @@
 		"priority": 22
 	},
 	{
-		"code": "VS",
-		"name": "Valais",
+		"code": "VD",
+		"name": "Vaud",
 		"priority": 23
 	},
 	{
-		"code": "VD",
-		"name": "Vaud",
+		"code": "VS",
+		"name": "Wallis",
 		"priority": 24
 	},
 	{

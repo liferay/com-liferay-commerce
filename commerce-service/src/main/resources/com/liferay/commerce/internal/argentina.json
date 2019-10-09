@@ -5,33 +5,33 @@
 		"priority": 1
 	},
 	{
-		"code": "C",
-		"name": "Ciudad Autonoma de Buenos Aires",
-		"priority": 2
-	},
-	{
 		"code": "K",
 		"name": "Catamarca",
-		"priority": 3
+		"priority": 2
 	},
 	{
 		"code": "H",
 		"name": "Chaco",
-		"priority": 4
+		"priority": 3
 	},
 	{
 		"code": "U",
 		"name": "Chubut",
-		"priority": 5
+		"priority": 4
 	},
 	{
-		"code": "X",
-		"name": "Córdoba",
-		"priority": 6
+		"code": "C",
+		"name": "Ciudad Autonoma de Buenos Aires",
+		"priority": 5
 	},
 	{
 		"code": "W",
 		"name": "Corrientes",
+		"priority": 6
+	},
+	{
+		"code": "X",
+		"name": "Córdoba",
 		"priority": 7
 	},
 	{
