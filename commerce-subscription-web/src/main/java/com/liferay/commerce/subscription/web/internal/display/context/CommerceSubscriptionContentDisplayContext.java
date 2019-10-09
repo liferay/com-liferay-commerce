@@ -16,6 +16,7 @@ package com.liferay.commerce.subscription.web.internal.display.context;
 
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.service.CommerceSubscriptionEntryService;
@@ -48,12 +49,14 @@ import javax.servlet.http.HttpServletRequest;
 public class CommerceSubscriptionContentDisplayContext {
 
 	public CommerceSubscriptionContentDisplayContext(
+		CommerceChannelLocalService commerceChannelLocalService,
 		CPDefinitionHelper cpDefinitionHelper,
 		CPInstanceHelper cpInstanceHelper,
 		CommerceSubscriptionEntryService commerceSubscriptionEntryService,
 		ConfigurationProvider configurationProvider,
 		HttpServletRequest httpServletRequest) {
 
+		_commerceChannelLocalService = commerceChannelLocalService;
 		_cpDefinitionHelper = cpDefinitionHelper;
 		_cpInstanceHelper = cpInstanceHelper;
 		_commerceSubscriptionEntryService = commerceSubscriptionEntryService;
@@ -154,10 +157,13 @@ public class CommerceSubscriptionContentDisplayContext {
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator =
 			new CommerceSubscriptionEntryCreateDateComparator();
 
+		long groupId =
+			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
+				_cpRequestHelper.getScopeGroupId());
+
 		List<CommerceSubscriptionEntry> subscriptionEntries =
 			_commerceSubscriptionEntryService.getCommerceSubscriptionEntries(
-				_cpRequestHelper.getCompanyId(),
-				_cpRequestHelper.getChannelGroupId(),
+				_cpRequestHelper.getCompanyId(), groupId,
 				_cpRequestHelper.getUserId(), _searchContainer.getStart(),
 				_searchContainer.getEnd(), orderByComparator);
 
@@ -166,8 +172,7 @@ public class CommerceSubscriptionContentDisplayContext {
 		int subscriptionEntriesCount =
 			_commerceSubscriptionEntryService.
 				getCommerceSubscriptionEntriesCount(
-					_cpRequestHelper.getCompanyId(),
-					_cpRequestHelper.getChannelGroupId(),
+					_cpRequestHelper.getCompanyId(), groupId,
 					_cpRequestHelper.getUserId());
 
 		_searchContainer.setTotal(subscriptionEntriesCount);
@@ -175,6 +180,7 @@ public class CommerceSubscriptionContentDisplayContext {
 		return _searchContainer;
 	}
 
+	private final CommerceChannelLocalService _commerceChannelLocalService;
 	private final CommerceSubscriptionEntryService
 		_commerceSubscriptionEntryService;
 	private final ConfigurationProvider _configurationProvider;

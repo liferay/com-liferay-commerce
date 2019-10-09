@@ -15,6 +15,7 @@
 package com.liferay.commerce.subscription.web.internal.portlet;
 
 import com.liferay.commerce.product.constants.CPPortletKeys;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.service.CommerceSubscriptionEntryService;
@@ -73,9 +74,9 @@ public class CommerceSubscriptionContentPortlet extends MVCPortlet {
 		CommerceSubscriptionContentDisplayContext
 			commerceSubscriptionContentDisplayContext =
 				new CommerceSubscriptionContentDisplayContext(
-					_cpDefinitionHelper, _cpInstanceHelper,
-					_commerceSubscriptionEntryService, _configurationProvider,
-					httpServletRequest);
+					_commerceChannelLocalService, _cpDefinitionHelper,
+					_cpInstanceHelper, _commerceSubscriptionEntryService,
+					_configurationProvider, httpServletRequest);
 
 		httpServletRequest.setAttribute(
 			WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -83,6 +84,9 @@ public class CommerceSubscriptionContentPortlet extends MVCPortlet {
 
 		super.render(renderRequest, renderResponse);
 	}
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private CommerceSubscriptionEntryService _commerceSubscriptionEntryService;
