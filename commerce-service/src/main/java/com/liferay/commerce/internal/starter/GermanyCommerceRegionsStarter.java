@@ -14,16 +14,11 @@
 
 package com.liferay.commerce.internal.starter;
 
-import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.service.CommerceCountryLocalService;
 import com.liferay.commerce.service.CommerceRegionLocalService;
 import com.liferay.commerce.starter.CommerceRegionsStarter;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactory;
-import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.StringUtil;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -36,51 +31,21 @@ import org.osgi.service.component.annotations.Reference;
 	property = "commerce.region.starter.key=" + GermanyCommerceRegionsStarter.GERMANY_NUMERIC_ISO_CODE,
 	service = CommerceRegionsStarter.class
 )
-public class GermanyCommerceRegionsStarter implements CommerceRegionsStarter {
+public class GermanyCommerceRegionsStarter
+	extends CommerceRegionsStarterBase implements CommerceRegionsStarter {
 
 	public static final int GERMANY_NUMERIC_ISO_CODE = 276;
 
-	public CommerceCountry getCommerceCountry(long companyId)
-		throws PortalException {
-
-		return _commerceCountryLocalService.fetchCommerceCountry(
-			companyId, GERMANY_NUMERIC_ISO_CODE);
-	}
-
-	public JSONArray getCommerceRegionsJSONArray() throws Exception {
-		Class<?> clazz = getClass();
-
-		String layoutsPath = "com/liferay/commerce/internal/germany.json";
-
-		String regionsJSON = StringUtil.read(
-			clazz.getClassLoader(), layoutsPath, false);
-
-		return _jsonFactory.createJSONArray(regionsJSON);
-	}
-
 	@Override
 	public void start(ServiceContext serviceContext) throws Exception {
-		CommerceCountry commerceCountry = getCommerceCountry(
-			serviceContext.getCompanyId());
-
-		if (commerceCountry == null) {
-			return;
-		}
-
-		JSONArray jsonArray = getCommerceRegionsJSONArray();
-
-		for (int i = 0; i < jsonArray.length(); i++) {
-			JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-			String code = jsonObject.getString("code");
-			String name = jsonObject.getString("name");
-			double priority = jsonObject.getDouble("priority");
-
-			_commerceRegionLocalService.addCommerceRegion(
-				commerceCountry.getCommerceCountryId(), name, code, priority,
-				true, serviceContext);
-		}
+		start(
+			_commerceCountryLocalService, _commerceRegionLocalService,
+			_jsonFactory, serviceContext, GERMANY_NUMERIC_ISO_CODE,
+			layoutsPath);
 	}
+
+	private static final String layoutsPath =
+		"com/liferay/commerce/internal/germany.json";
 
 	@Reference
 	private CommerceCountryLocalService _commerceCountryLocalService;
