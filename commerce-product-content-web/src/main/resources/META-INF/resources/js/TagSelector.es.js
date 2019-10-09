@@ -6,7 +6,7 @@ import templates from './TagSelector.soy';
 
 /**
  * TagSelector is a temporary Component wrapping the existing
- * AUI module liferay-asset-taglib-tags-selector
+ * AUI module liferay-commerce-frontend-asset-tag-selector
  */
 
 class TagSelector extends Component {
@@ -38,7 +38,7 @@ class TagSelector extends Component {
 		this.element.addEventListener('click', this.focusTagInput_.bind(this));
 
 		AUI().use(
-			'liferay-asset-taglib-tags-selector',
+			'liferay-commerce-frontend-asset-tag-selector',
 			function(A) {
 				const config = {
 					allowAddEntry: true,
