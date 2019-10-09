@@ -1,4 +1,0 @@
-Bundle-Name: Liferay Commerce Theme Minium Login Web Fragment
-Bundle-SymbolicName: com.liferay.commerce.theme.minium.login.web.fragment
-Bundle-Version: 1.0.3
-Fragment-Host: com.liferay.login.web
