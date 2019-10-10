@@ -60,7 +60,7 @@ long cpDefinitionId = cpDefinitionOptionValueRelDisplayContext.getCPDefinitionId
 		</aui:fieldset>
 
 		<c:if test="<%= cpDefinitionOptionValueRel == null %>">
-			<aui:script require="frontend-js-web/liferay/debounce/debounce.es as debounceModule">
+			<aui:script require="commerce-frontend-js/js/utilities/index.es as utilities">
 				function slugify(string) {
 					return string.toLowerCase().replace(/[^a-z1-9]+/g, '-');
 				}
@@ -70,10 +70,10 @@ long cpDefinitionId = cpDefinitionOptionValueRelDisplayContext.getCPDefinitionId
 				const keyInput = form.querySelector('#<portlet:namespace />key');
 				const nameInput = form.querySelector('#<portlet:namespace />name');
 
-				const debounce = debounceModule.default;
+				const debounce = utilities.debounce;
 
-				var handleOnNameInput = function(event) {
-					keyInput.value = slugify(event.target.value);
+				var handleOnNameInput = function() {
+					keyInput.value = slugify(nameInput.value);
 				};
 
 				nameInput.addEventListener(
