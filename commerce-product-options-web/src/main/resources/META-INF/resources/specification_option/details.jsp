@@ -60,16 +60,16 @@ List<CPOptionCategory> cpOptionCategories = cpSpecificationOptionDisplayContext.
 </aui:fieldset>
 
 <c:if test="<%= cpSpecificationOption == null %>">
-	<aui:script require="frontend-js-web/liferay/debounce/debounce.es as debounceModule">
+	<aui:script require="commerce-frontend-js/js/utilities/index.es as utilities">
 		const form = document.getElementById('<portlet:namespace />fm');
 
 		const keyInput = form.querySelector('#<portlet:namespace />key');
 		const titleInput = form.querySelector('#<portlet:namespace />title');
 
-		const debounce = debounceModule.default;
+		const debounce = utilities.debounce;
 
-		var handleOnTitleInput = function(event) {
-			keyInput.value = event.target.value;
+		var handleOnTitleInput = function() {
+			keyInput.value = titleInput.value;
 		};
 
 		titleInput.addEventListener(

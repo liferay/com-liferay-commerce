@@ -210,27 +210,29 @@ if ((cpDefinition != null) && (cpDefinition.getExpirationDate() != null)) {
 </aui:script>
 
 <c:if test="<%= cpDefinition == null %>">
-	<aui:script sandbox="<%= true %>" use="aui-base">
+	<aui:script require="commerce-frontend-js/js/utilities/index.es as utilities">
 		function slugify(string) {
 			return string.toLowerCase().replace(/[^a-z1-9]+/g, '-');
 		}
 
-		var form = $(document.<portlet:namespace />fm);
+		const form = document.getElementById('<portlet:namespace />fm');
 
-		var nameInput = form.fm('nameMapAsXML');
-		var urlInput = form.fm('urlTitleMapAsXML');
-		var urlTitleInputLocalized = Liferay.component('<portlet:namespace />urlTitleMapAsXML');
+		const nameInput = form.querySelector('#<portlet:namespace />nameMapAsXML');
+		const urlInput = form.querySelector('#<portlet:namespace />urlTitleMapAsXML');
+		const urlTitleInputLocalized = form.querySelector('#<portlet:namespace />urlTitleMapAsXML');
 
-		var onNameInput = _.debounce(
-			function(event) {
-				var slug = slugify(nameInput.val());
-				urlInput.val(slug);
+		const debounce = utilities.debounce;
 
-				urlTitleInputLocalized.updateInputLanguage(slug);
-			},
-			200
+		var handleOnNameInput = function() {
+			var slug = slugify(nameInput.val());
+			urlInput.val(slug);
+
+			urlTitleInputLocalized.updateInputLanguage(slug);
+		};
+
+		nameInput.addEventListener(
+			'input',
+			debounce(handleOnNameInput, 200)
 		);
-
-		nameInput.on('input', onNameInput);
 	</aui:script>
 </c:if>
