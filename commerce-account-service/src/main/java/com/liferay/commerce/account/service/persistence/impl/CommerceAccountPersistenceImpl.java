@@ -163,14 +163,11 @@ public class CommerceAccountPersistenceImpl
 		OrderByComparator<CommerceAccount> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindByCompanyId;
@@ -192,7 +189,7 @@ public class CommerceAccountPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceAccount commerceAccount : list) {
-					if ((companyId != commerceAccount.getCompanyId())) {
+					if (companyId != commerceAccount.getCompanyId()) {
 						list = null;
 
 						break;
@@ -220,7 +217,7 @@ public class CommerceAccountPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(CommerceAccountModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -237,18 +234,8 @@ public class CommerceAccountPersistenceImpl
 
 				qPos.add(companyId);
 
-				if (!pagination) {
-					list = (List<CommerceAccount>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceAccount>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommerceAccount>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -1064,14 +1051,11 @@ public class CommerceAccountPersistenceImpl
 		OrderByComparator<CommerceAccount> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindByU_T;
@@ -1125,7 +1109,7 @@ public class CommerceAccountPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(CommerceAccountModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -1144,18 +1128,8 @@ public class CommerceAccountPersistenceImpl
 
 				qPos.add(type);
 
-				if (!pagination) {
-					list = (List<CommerceAccount>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceAccount>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommerceAccount>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -2905,14 +2879,11 @@ public class CommerceAccountPersistenceImpl
 		OrderByComparator<CommerceAccount> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindAll;
@@ -2949,9 +2920,7 @@ public class CommerceAccountPersistenceImpl
 			else {
 				sql = _SQL_SELECT_COMMERCEACCOUNT;
 
-				if (pagination) {
-					sql = sql.concat(CommerceAccountModelImpl.ORDER_BY_JPQL);
-				}
+				sql = sql.concat(CommerceAccountModelImpl.ORDER_BY_JPQL);
 			}
 
 			Session session = null;
@@ -2961,18 +2930,8 @@ public class CommerceAccountPersistenceImpl
 
 				Query q = session.createQuery(sql);
 
-				if (!pagination) {
-					list = (List<CommerceAccount>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceAccount>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommerceAccount>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 

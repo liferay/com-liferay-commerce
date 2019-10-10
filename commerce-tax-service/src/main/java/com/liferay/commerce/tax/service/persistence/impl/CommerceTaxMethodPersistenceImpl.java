@@ -160,14 +160,11 @@ public class CommerceTaxMethodPersistenceImpl
 		OrderByComparator<CommerceTaxMethod> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindByGroupId;
@@ -187,7 +184,7 @@ public class CommerceTaxMethodPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceTaxMethod commerceTaxMethod : list) {
-					if ((groupId != commerceTaxMethod.getGroupId())) {
+					if (groupId != commerceTaxMethod.getGroupId()) {
 						list = null;
 
 						break;
@@ -215,7 +212,7 @@ public class CommerceTaxMethodPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(CommerceTaxMethodModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -232,18 +229,8 @@ public class CommerceTaxMethodPersistenceImpl
 
 				qPos.add(groupId);
 
-				if (!pagination) {
-					list = (List<CommerceTaxMethod>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceTaxMethod>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommerceTaxMethod>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -936,14 +923,11 @@ public class CommerceTaxMethodPersistenceImpl
 		OrderByComparator<CommerceTaxMethod> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindByG_A;
@@ -997,7 +981,7 @@ public class CommerceTaxMethodPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(CommerceTaxMethodModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -1016,18 +1000,8 @@ public class CommerceTaxMethodPersistenceImpl
 
 				qPos.add(active);
 
-				if (!pagination) {
-					list = (List<CommerceTaxMethod>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceTaxMethod>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommerceTaxMethod>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -2102,14 +2076,11 @@ public class CommerceTaxMethodPersistenceImpl
 		OrderByComparator<CommerceTaxMethod> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindAll;
@@ -2146,9 +2117,7 @@ public class CommerceTaxMethodPersistenceImpl
 			else {
 				sql = _SQL_SELECT_COMMERCETAXMETHOD;
 
-				if (pagination) {
-					sql = sql.concat(CommerceTaxMethodModelImpl.ORDER_BY_JPQL);
-				}
+				sql = sql.concat(CommerceTaxMethodModelImpl.ORDER_BY_JPQL);
 			}
 
 			Session session = null;
@@ -2158,18 +2127,8 @@ public class CommerceTaxMethodPersistenceImpl
 
 				Query q = session.createQuery(sql);
 
-				if (!pagination) {
-					list = (List<CommerceTaxMethod>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceTaxMethod>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommerceTaxMethod>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 

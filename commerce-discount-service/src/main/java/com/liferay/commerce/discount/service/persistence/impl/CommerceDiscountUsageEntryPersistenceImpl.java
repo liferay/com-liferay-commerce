@@ -671,14 +671,11 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 		OrderByComparator<CommerceDiscountUsageEntry> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindAll;
@@ -715,10 +712,8 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 			else {
 				sql = _SQL_SELECT_COMMERCEDISCOUNTUSAGEENTRY;
 
-				if (pagination) {
-					sql = sql.concat(
-						CommerceDiscountUsageEntryModelImpl.ORDER_BY_JPQL);
-				}
+				sql = sql.concat(
+					CommerceDiscountUsageEntryModelImpl.ORDER_BY_JPQL);
 			}
 
 			Session session = null;
@@ -728,18 +723,8 @@ public class CommerceDiscountUsageEntryPersistenceImpl
 
 				Query q = session.createQuery(sql);
 
-				if (!pagination) {
-					list = (List<CommerceDiscountUsageEntry>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceDiscountUsageEntry>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommerceDiscountUsageEntry>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 

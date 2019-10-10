@@ -162,14 +162,11 @@ public class CPOptionPersistenceImpl
 
 		uuid = Objects.toString(uuid, "");
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindByUuid;
@@ -226,7 +223,7 @@ public class CPOptionPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(CPOptionModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -245,18 +242,8 @@ public class CPOptionPersistenceImpl
 					qPos.add(uuid);
 				}
 
-				if (!pagination) {
-					list = (List<CPOption>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CPOption>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CPOption>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -1134,14 +1121,11 @@ public class CPOptionPersistenceImpl
 
 		uuid = Objects.toString(uuid, "");
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindByUuid_C;
@@ -1204,7 +1188,7 @@ public class CPOptionPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(CPOptionModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -1225,18 +1209,8 @@ public class CPOptionPersistenceImpl
 
 				qPos.add(companyId);
 
-				if (!pagination) {
-					list = (List<CPOption>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CPOption>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CPOption>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -2158,14 +2132,11 @@ public class CPOptionPersistenceImpl
 		long companyId, int start, int end,
 		OrderByComparator<CPOption> orderByComparator, boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindByCompanyId;
@@ -2187,7 +2158,7 @@ public class CPOptionPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CPOption cpOption : list) {
-					if ((companyId != cpOption.getCompanyId())) {
+					if (companyId != cpOption.getCompanyId()) {
 						list = null;
 
 						break;
@@ -2215,7 +2186,7 @@ public class CPOptionPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(CPOptionModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -2232,18 +2203,8 @@ public class CPOptionPersistenceImpl
 
 				qPos.add(companyId);
 
-				if (!pagination) {
-					list = (List<CPOption>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CPOption>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CPOption>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -4229,14 +4190,11 @@ public class CPOptionPersistenceImpl
 		int start, int end, OrderByComparator<CPOption> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindAll;
@@ -4273,9 +4231,7 @@ public class CPOptionPersistenceImpl
 			else {
 				sql = _SQL_SELECT_CPOPTION;
 
-				if (pagination) {
-					sql = sql.concat(CPOptionModelImpl.ORDER_BY_JPQL);
-				}
+				sql = sql.concat(CPOptionModelImpl.ORDER_BY_JPQL);
 			}
 
 			Session session = null;
@@ -4285,18 +4241,8 @@ public class CPOptionPersistenceImpl
 
 				Query q = session.createQuery(sql);
 
-				if (!pagination) {
-					list = (List<CPOption>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CPOption>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CPOption>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 

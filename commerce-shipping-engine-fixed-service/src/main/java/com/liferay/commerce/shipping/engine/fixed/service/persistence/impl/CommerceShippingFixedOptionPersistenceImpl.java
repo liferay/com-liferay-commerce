@@ -163,14 +163,11 @@ public class CommerceShippingFixedOptionPersistenceImpl
 		OrderByComparator<CommerceShippingFixedOption> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath =
@@ -196,9 +193,9 @@ public class CommerceShippingFixedOptionPersistenceImpl
 				for (CommerceShippingFixedOption commerceShippingFixedOption :
 						list) {
 
-					if ((commerceShippingMethodId !=
+					if (commerceShippingMethodId !=
 							commerceShippingFixedOption.
-								getCommerceShippingMethodId())) {
+								getCommerceShippingMethodId()) {
 
 						list = null;
 
@@ -228,7 +225,7 @@ public class CommerceShippingFixedOptionPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(
 					CommerceShippingFixedOptionModelImpl.ORDER_BY_JPQL);
 			}
@@ -246,18 +243,8 @@ public class CommerceShippingFixedOptionPersistenceImpl
 
 				qPos.add(commerceShippingMethodId);
 
-				if (!pagination) {
-					list = (List<CommerceShippingFixedOption>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceShippingFixedOption>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommerceShippingFixedOption>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -1272,14 +1259,11 @@ public class CommerceShippingFixedOptionPersistenceImpl
 		OrderByComparator<CommerceShippingFixedOption> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindAll;
@@ -1316,10 +1300,8 @@ public class CommerceShippingFixedOptionPersistenceImpl
 			else {
 				sql = _SQL_SELECT_COMMERCESHIPPINGFIXEDOPTION;
 
-				if (pagination) {
-					sql = sql.concat(
-						CommerceShippingFixedOptionModelImpl.ORDER_BY_JPQL);
-				}
+				sql = sql.concat(
+					CommerceShippingFixedOptionModelImpl.ORDER_BY_JPQL);
 			}
 
 			Session session = null;
@@ -1329,18 +1311,8 @@ public class CommerceShippingFixedOptionPersistenceImpl
 
 				Query q = session.createQuery(sql);
 
-				if (!pagination) {
-					list = (List<CommerceShippingFixedOption>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceShippingFixedOption>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommerceShippingFixedOption>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 

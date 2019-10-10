@@ -162,14 +162,11 @@ public class CommerceTaxFixedRateAddressRelPersistenceImpl
 		OrderByComparator<CommerceTaxFixedRateAddressRel> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath =
@@ -194,9 +191,9 @@ public class CommerceTaxFixedRateAddressRelPersistenceImpl
 				for (CommerceTaxFixedRateAddressRel
 						commerceTaxFixedRateAddressRel : list) {
 
-					if ((commerceTaxMethodId !=
+					if (commerceTaxMethodId !=
 							commerceTaxFixedRateAddressRel.
-								getCommerceTaxMethodId())) {
+								getCommerceTaxMethodId()) {
 
 						list = null;
 
@@ -226,7 +223,7 @@ public class CommerceTaxFixedRateAddressRelPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(
 					CommerceTaxFixedRateAddressRelModelImpl.ORDER_BY_JPQL);
 			}
@@ -244,18 +241,8 @@ public class CommerceTaxFixedRateAddressRelPersistenceImpl
 
 				qPos.add(commerceTaxMethodId);
 
-				if (!pagination) {
-					list = (List<CommerceTaxFixedRateAddressRel>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceTaxFixedRateAddressRel>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommerceTaxFixedRateAddressRel>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -708,14 +695,11 @@ public class CommerceTaxFixedRateAddressRelPersistenceImpl
 		OrderByComparator<CommerceTaxFixedRateAddressRel> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindByCPTaxCategoryId;
@@ -739,9 +723,9 @@ public class CommerceTaxFixedRateAddressRelPersistenceImpl
 				for (CommerceTaxFixedRateAddressRel
 						commerceTaxFixedRateAddressRel : list) {
 
-					if ((CPTaxCategoryId !=
+					if (CPTaxCategoryId !=
 							commerceTaxFixedRateAddressRel.
-								getCPTaxCategoryId())) {
+								getCPTaxCategoryId()) {
 
 						list = null;
 
@@ -770,7 +754,7 @@ public class CommerceTaxFixedRateAddressRelPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(
 					CommerceTaxFixedRateAddressRelModelImpl.ORDER_BY_JPQL);
 			}
@@ -788,18 +772,8 @@ public class CommerceTaxFixedRateAddressRelPersistenceImpl
 
 				qPos.add(CPTaxCategoryId);
 
-				if (!pagination) {
-					list = (List<CommerceTaxFixedRateAddressRel>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceTaxFixedRateAddressRel>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommerceTaxFixedRateAddressRel>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -1859,14 +1833,11 @@ public class CommerceTaxFixedRateAddressRelPersistenceImpl
 		OrderByComparator<CommerceTaxFixedRateAddressRel> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindAll;
@@ -1903,10 +1874,8 @@ public class CommerceTaxFixedRateAddressRelPersistenceImpl
 			else {
 				sql = _SQL_SELECT_COMMERCETAXFIXEDRATEADDRESSREL;
 
-				if (pagination) {
-					sql = sql.concat(
-						CommerceTaxFixedRateAddressRelModelImpl.ORDER_BY_JPQL);
-				}
+				sql = sql.concat(
+					CommerceTaxFixedRateAddressRelModelImpl.ORDER_BY_JPQL);
 			}
 
 			Session session = null;
@@ -1916,18 +1885,8 @@ public class CommerceTaxFixedRateAddressRelPersistenceImpl
 
 				Query q = session.createQuery(sql);
 
-				if (!pagination) {
-					list = (List<CommerceTaxFixedRateAddressRel>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceTaxFixedRateAddressRel>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommerceTaxFixedRateAddressRel>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 

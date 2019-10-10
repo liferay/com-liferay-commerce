@@ -160,14 +160,11 @@ public class CommerceChannelRelPersistenceImpl
 		OrderByComparator<CommerceChannelRel> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath =
@@ -190,8 +187,8 @@ public class CommerceChannelRelPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceChannelRel commerceChannelRel : list) {
-					if ((commerceChannelId !=
-							commerceChannelRel.getCommerceChannelId())) {
+					if (commerceChannelId !=
+							commerceChannelRel.getCommerceChannelId()) {
 
 						list = null;
 
@@ -220,7 +217,7 @@ public class CommerceChannelRelPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(CommerceChannelRelModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -237,18 +234,8 @@ public class CommerceChannelRelPersistenceImpl
 
 				qPos.add(commerceChannelId);
 
-				if (!pagination) {
-					list = (List<CommerceChannelRel>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceChannelRel>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommerceChannelRel>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -695,14 +682,11 @@ public class CommerceChannelRelPersistenceImpl
 		OrderByComparator<CommerceChannelRel> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindByC_C;
@@ -756,7 +740,7 @@ public class CommerceChannelRelPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(CommerceChannelRelModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -775,18 +759,8 @@ public class CommerceChannelRelPersistenceImpl
 
 				qPos.add(classPK);
 
-				if (!pagination) {
-					list = (List<CommerceChannelRel>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceChannelRel>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommerceChannelRel>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -2116,14 +2090,11 @@ public class CommerceChannelRelPersistenceImpl
 		OrderByComparator<CommerceChannelRel> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindAll;
@@ -2160,9 +2131,7 @@ public class CommerceChannelRelPersistenceImpl
 			else {
 				sql = _SQL_SELECT_COMMERCECHANNELREL;
 
-				if (pagination) {
-					sql = sql.concat(CommerceChannelRelModelImpl.ORDER_BY_JPQL);
-				}
+				sql = sql.concat(CommerceChannelRelModelImpl.ORDER_BY_JPQL);
 			}
 
 			Session session = null;
@@ -2172,18 +2141,8 @@ public class CommerceChannelRelPersistenceImpl
 
 				Query q = session.createQuery(sql);
 
-				if (!pagination) {
-					list = (List<CommerceChannelRel>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceChannelRel>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommerceChannelRel>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 

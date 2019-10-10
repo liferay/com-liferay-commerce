@@ -160,14 +160,11 @@ public class CommercePaymentMethodGroupRelPersistenceImpl
 		OrderByComparator<CommercePaymentMethodGroupRel> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindByGroupId;
@@ -189,9 +186,7 @@ public class CommercePaymentMethodGroupRelPersistenceImpl
 				for (CommercePaymentMethodGroupRel
 						commercePaymentMethodGroupRel : list) {
 
-					if ((groupId !=
-							commercePaymentMethodGroupRel.getGroupId())) {
-
+					if (groupId != commercePaymentMethodGroupRel.getGroupId()) {
 						list = null;
 
 						break;
@@ -219,7 +214,7 @@ public class CommercePaymentMethodGroupRelPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(
 					CommercePaymentMethodGroupRelModelImpl.ORDER_BY_JPQL);
 			}
@@ -237,18 +232,8 @@ public class CommercePaymentMethodGroupRelPersistenceImpl
 
 				qPos.add(groupId);
 
-				if (!pagination) {
-					list = (List<CommercePaymentMethodGroupRel>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommercePaymentMethodGroupRel>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommercePaymentMethodGroupRel>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -959,14 +944,11 @@ public class CommercePaymentMethodGroupRelPersistenceImpl
 		OrderByComparator<CommercePaymentMethodGroupRel> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindByG_A;
@@ -1023,7 +1005,7 @@ public class CommercePaymentMethodGroupRelPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(
 					CommercePaymentMethodGroupRelModelImpl.ORDER_BY_JPQL);
 			}
@@ -1043,18 +1025,8 @@ public class CommercePaymentMethodGroupRelPersistenceImpl
 
 				qPos.add(active);
 
-				if (!pagination) {
-					list = (List<CommercePaymentMethodGroupRel>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommercePaymentMethodGroupRel>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommercePaymentMethodGroupRel>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -2192,14 +2164,11 @@ public class CommercePaymentMethodGroupRelPersistenceImpl
 		OrderByComparator<CommercePaymentMethodGroupRel> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindAll;
@@ -2236,10 +2205,8 @@ public class CommercePaymentMethodGroupRelPersistenceImpl
 			else {
 				sql = _SQL_SELECT_COMMERCEPAYMENTMETHODGROUPREL;
 
-				if (pagination) {
-					sql = sql.concat(
-						CommercePaymentMethodGroupRelModelImpl.ORDER_BY_JPQL);
-				}
+				sql = sql.concat(
+					CommercePaymentMethodGroupRelModelImpl.ORDER_BY_JPQL);
 			}
 
 			Session session = null;
@@ -2249,18 +2216,8 @@ public class CommercePaymentMethodGroupRelPersistenceImpl
 
 				Query q = session.createQuery(sql);
 
-				if (!pagination) {
-					list = (List<CommercePaymentMethodGroupRel>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommercePaymentMethodGroupRel>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommercePaymentMethodGroupRel>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 

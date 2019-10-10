@@ -165,14 +165,11 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 
 		uuid = Objects.toString(uuid, "");
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindByUuid;
@@ -235,7 +232,7 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(
 					CPDefinitionSpecificationOptionValueModelImpl.
 						ORDER_BY_JPQL);
@@ -256,20 +253,9 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 					qPos.add(uuid);
 				}
 
-				if (!pagination) {
-					list =
-						(List<CPDefinitionSpecificationOptionValue>)
-							QueryUtil.list(q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list =
-						(List<CPDefinitionSpecificationOptionValue>)
-							QueryUtil.list(q, getDialect(), start, end);
-				}
+				list =
+					(List<CPDefinitionSpecificationOptionValue>)QueryUtil.list(
+						q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -1033,14 +1019,11 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 
 		uuid = Objects.toString(uuid, "");
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindByUuid_C;
@@ -1110,7 +1093,7 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(
 					CPDefinitionSpecificationOptionValueModelImpl.
 						ORDER_BY_JPQL);
@@ -1133,20 +1116,9 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 
 				qPos.add(companyId);
 
-				if (!pagination) {
-					list =
-						(List<CPDefinitionSpecificationOptionValue>)
-							QueryUtil.list(q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list =
-						(List<CPDefinitionSpecificationOptionValue>)
-							QueryUtil.list(q, getDialect(), start, end);
-				}
+				list =
+					(List<CPDefinitionSpecificationOptionValue>)QueryUtil.list(
+						q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -1661,14 +1633,11 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 			orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindByGroupId;
@@ -1691,9 +1660,8 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 				for (CPDefinitionSpecificationOptionValue
 						cpDefinitionSpecificationOptionValue : list) {
 
-					if ((groupId !=
-							cpDefinitionSpecificationOptionValue.
-								getGroupId())) {
+					if (groupId !=
+							cpDefinitionSpecificationOptionValue.getGroupId()) {
 
 						list = null;
 
@@ -1723,7 +1691,7 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(
 					CPDefinitionSpecificationOptionValueModelImpl.
 						ORDER_BY_JPQL);
@@ -1742,20 +1710,9 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 
 				qPos.add(groupId);
 
-				if (!pagination) {
-					list =
-						(List<CPDefinitionSpecificationOptionValue>)
-							QueryUtil.list(q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list =
-						(List<CPDefinitionSpecificationOptionValue>)
-							QueryUtil.list(q, getDialect(), start, end);
-				}
+				list =
+					(List<CPDefinitionSpecificationOptionValue>)QueryUtil.list(
+						q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -2216,14 +2173,11 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 			orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindByCPDefinitionId;
@@ -2248,9 +2202,9 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 				for (CPDefinitionSpecificationOptionValue
 						cpDefinitionSpecificationOptionValue : list) {
 
-					if ((CPDefinitionId !=
+					if (CPDefinitionId !=
 							cpDefinitionSpecificationOptionValue.
-								getCPDefinitionId())) {
+								getCPDefinitionId()) {
 
 						list = null;
 
@@ -2280,7 +2234,7 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(
 					CPDefinitionSpecificationOptionValueModelImpl.
 						ORDER_BY_JPQL);
@@ -2299,20 +2253,9 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 
 				qPos.add(CPDefinitionId);
 
-				if (!pagination) {
-					list =
-						(List<CPDefinitionSpecificationOptionValue>)
-							QueryUtil.list(q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list =
-						(List<CPDefinitionSpecificationOptionValue>)
-							QueryUtil.list(q, getDialect(), start, end);
-				}
+				list =
+					(List<CPDefinitionSpecificationOptionValue>)QueryUtil.list(
+						q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -2783,14 +2726,11 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 				orderByComparator,
 			boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath =
@@ -2816,9 +2756,9 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 				for (CPDefinitionSpecificationOptionValue
 						cpDefinitionSpecificationOptionValue : list) {
 
-					if ((CPSpecificationOptionId !=
+					if (CPSpecificationOptionId !=
 							cpDefinitionSpecificationOptionValue.
-								getCPSpecificationOptionId())) {
+								getCPSpecificationOptionId()) {
 
 						list = null;
 
@@ -2849,7 +2789,7 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(
 					CPDefinitionSpecificationOptionValueModelImpl.
 						ORDER_BY_JPQL);
@@ -2868,20 +2808,9 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 
 				qPos.add(CPSpecificationOptionId);
 
-				if (!pagination) {
-					list =
-						(List<CPDefinitionSpecificationOptionValue>)
-							QueryUtil.list(q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list =
-						(List<CPDefinitionSpecificationOptionValue>)
-							QueryUtil.list(q, getDialect(), start, end);
-				}
+				list =
+					(List<CPDefinitionSpecificationOptionValue>)QueryUtil.list(
+						q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -3357,14 +3286,11 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 			orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath =
@@ -3390,9 +3316,9 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 				for (CPDefinitionSpecificationOptionValue
 						cpDefinitionSpecificationOptionValue : list) {
 
-					if ((CPOptionCategoryId !=
+					if (CPOptionCategoryId !=
 							cpDefinitionSpecificationOptionValue.
-								getCPOptionCategoryId())) {
+								getCPOptionCategoryId()) {
 
 						list = null;
 
@@ -3423,7 +3349,7 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(
 					CPDefinitionSpecificationOptionValueModelImpl.
 						ORDER_BY_JPQL);
@@ -3442,20 +3368,9 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 
 				qPos.add(CPOptionCategoryId);
 
-				if (!pagination) {
-					list =
-						(List<CPDefinitionSpecificationOptionValue>)
-							QueryUtil.list(q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list =
-						(List<CPDefinitionSpecificationOptionValue>)
-							QueryUtil.list(q, getDialect(), start, end);
-				}
+				list =
+					(List<CPDefinitionSpecificationOptionValue>)QueryUtil.list(
+						q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -3845,169 +3760,118 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 		_FINDER_COLUMN_CPOPTIONCATEGORYID_CPOPTIONCATEGORYID_2 =
 			"cpDefinitionSpecificationOptionValue.CPOptionCategoryId = ?";
 
-	private FinderPath _finderPathWithPaginationFindByC_COC;
-	private FinderPath _finderPathWithoutPaginationFindByC_COC;
-	private FinderPath _finderPathCountByC_COC;
+	private FinderPath _finderPathFetchByC_CSOVI;
+	private FinderPath _finderPathCountByC_CSOVI;
 
 	/**
-	 * Returns all the cp definition specification option values where CPDefinitionId = &#63; and CPOptionCategoryId = &#63;.
+	 * Returns the cp definition specification option value where CPDefinitionSpecificationOptionValueId = &#63; and CPDefinitionId = &#63; or throws a <code>NoSuchCPDefinitionSpecificationOptionValueException</code> if it could not be found.
 	 *
+	 * @param CPDefinitionSpecificationOptionValueId the cp definition specification option value ID
 	 * @param CPDefinitionId the cp definition ID
-	 * @param CPOptionCategoryId the cp option category ID
-	 * @return the matching cp definition specification option values
+	 * @return the matching cp definition specification option value
+	 * @throws NoSuchCPDefinitionSpecificationOptionValueException if a matching cp definition specification option value could not be found
 	 */
 	@Override
-	public List<CPDefinitionSpecificationOptionValue> findByC_COC(
-		long CPDefinitionId, long CPOptionCategoryId) {
+	public CPDefinitionSpecificationOptionValue findByC_CSOVI(
+			long CPDefinitionSpecificationOptionValueId, long CPDefinitionId)
+		throws NoSuchCPDefinitionSpecificationOptionValueException {
 
-		return findByC_COC(
-			CPDefinitionId, CPOptionCategoryId, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
+		CPDefinitionSpecificationOptionValue
+			cpDefinitionSpecificationOptionValue = fetchByC_CSOVI(
+				CPDefinitionSpecificationOptionValueId, CPDefinitionId);
+
+		if (cpDefinitionSpecificationOptionValue == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("CPDefinitionSpecificationOptionValueId=");
+			msg.append(CPDefinitionSpecificationOptionValueId);
+
+			msg.append(", CPDefinitionId=");
+			msg.append(CPDefinitionId);
+
+			msg.append("}");
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
+			}
+
+			throw new NoSuchCPDefinitionSpecificationOptionValueException(
+				msg.toString());
+		}
+
+		return cpDefinitionSpecificationOptionValue;
 	}
 
 	/**
-	 * Returns a range of all the cp definition specification option values where CPDefinitionId = &#63; and CPOptionCategoryId = &#63;.
+	 * Returns the cp definition specification option value where CPDefinitionSpecificationOptionValueId = &#63; and CPDefinitionId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPDefinitionSpecificationOptionValueModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
+	 * @param CPDefinitionSpecificationOptionValueId the cp definition specification option value ID
 	 * @param CPDefinitionId the cp definition ID
-	 * @param CPOptionCategoryId the cp option category ID
-	 * @param start the lower bound of the range of cp definition specification option values
-	 * @param end the upper bound of the range of cp definition specification option values (not inclusive)
-	 * @return the range of matching cp definition specification option values
+	 * @return the matching cp definition specification option value, or <code>null</code> if a matching cp definition specification option value could not be found
 	 */
 	@Override
-	public List<CPDefinitionSpecificationOptionValue> findByC_COC(
-		long CPDefinitionId, long CPOptionCategoryId, int start, int end) {
+	public CPDefinitionSpecificationOptionValue fetchByC_CSOVI(
+		long CPDefinitionSpecificationOptionValueId, long CPDefinitionId) {
 
-		return findByC_COC(
-			CPDefinitionId, CPOptionCategoryId, start, end, null);
+		return fetchByC_CSOVI(
+			CPDefinitionSpecificationOptionValueId, CPDefinitionId, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the cp definition specification option values where CPDefinitionId = &#63; and CPOptionCategoryId = &#63;.
+	 * Returns the cp definition specification option value where CPDefinitionSpecificationOptionValueId = &#63; and CPDefinitionId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPDefinitionSpecificationOptionValueModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
+	 * @param CPDefinitionSpecificationOptionValueId the cp definition specification option value ID
 	 * @param CPDefinitionId the cp definition ID
-	 * @param CPOptionCategoryId the cp option category ID
-	 * @param start the lower bound of the range of cp definition specification option values
-	 * @param end the upper bound of the range of cp definition specification option values (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching cp definition specification option values
-	 */
-	@Override
-	public List<CPDefinitionSpecificationOptionValue> findByC_COC(
-		long CPDefinitionId, long CPOptionCategoryId, int start, int end,
-		OrderByComparator<CPDefinitionSpecificationOptionValue>
-			orderByComparator) {
-
-		return findByC_COC(
-			CPDefinitionId, CPOptionCategoryId, start, end, orderByComparator,
-			true);
-	}
-
-	/**
-	 * Returns an ordered range of all the cp definition specification option values where CPDefinitionId = &#63; and CPOptionCategoryId = &#63;.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPDefinitionSpecificationOptionValueModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	 * </p>
-	 *
-	 * @param CPDefinitionId the cp definition ID
-	 * @param CPOptionCategoryId the cp option category ID
-	 * @param start the lower bound of the range of cp definition specification option values
-	 * @param end the upper bound of the range of cp definition specification option values (not inclusive)
-	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @param useFinderCache whether to use the finder cache
-	 * @return the ordered range of matching cp definition specification option values
+	 * @return the matching cp definition specification option value, or <code>null</code> if a matching cp definition specification option value could not be found
 	 */
 	@Override
-	public List<CPDefinitionSpecificationOptionValue> findByC_COC(
-		long CPDefinitionId, long CPOptionCategoryId, int start, int end,
-		OrderByComparator<CPDefinitionSpecificationOptionValue>
-			orderByComparator,
+	public CPDefinitionSpecificationOptionValue fetchByC_CSOVI(
+		long CPDefinitionSpecificationOptionValueId, long CPDefinitionId,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
-		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
-		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
-			(orderByComparator == null)) {
-
-			pagination = false;
-
-			if (useFinderCache) {
-				finderPath = _finderPathWithoutPaginationFindByC_COC;
-				finderArgs = new Object[] {CPDefinitionId, CPOptionCategoryId};
-			}
-		}
-		else if (useFinderCache) {
-			finderPath = _finderPathWithPaginationFindByC_COC;
+		if (useFinderCache) {
 			finderArgs = new Object[] {
-				CPDefinitionId, CPOptionCategoryId, start, end,
-				orderByComparator
+				CPDefinitionSpecificationOptionValueId, CPDefinitionId
 			};
 		}
 
-		List<CPDefinitionSpecificationOptionValue> list = null;
+		Object result = null;
 
 		if (useFinderCache) {
-			list =
-				(List<CPDefinitionSpecificationOptionValue>)
-					finderCache.getResult(finderPath, finderArgs, this);
+			result = finderCache.getResult(
+				_finderPathFetchByC_CSOVI, finderArgs, this);
+		}
 
-			if ((list != null) && !list.isEmpty()) {
-				for (CPDefinitionSpecificationOptionValue
-						cpDefinitionSpecificationOptionValue : list) {
+		if (result instanceof CPDefinitionSpecificationOptionValue) {
+			CPDefinitionSpecificationOptionValue
+				cpDefinitionSpecificationOptionValue =
+					(CPDefinitionSpecificationOptionValue)result;
 
-					if ((CPDefinitionId !=
-							cpDefinitionSpecificationOptionValue.
-								getCPDefinitionId()) ||
-						(CPOptionCategoryId !=
-							cpDefinitionSpecificationOptionValue.
-								getCPOptionCategoryId())) {
+			if ((CPDefinitionSpecificationOptionValueId !=
+					cpDefinitionSpecificationOptionValue.
+						getCPDefinitionSpecificationOptionValueId()) ||
+				(CPDefinitionId !=
+					cpDefinitionSpecificationOptionValue.getCPDefinitionId())) {
 
-						list = null;
-
-						break;
-					}
-				}
+				result = null;
 			}
 		}
 
-		if (list == null) {
-			StringBundler query = null;
-
-			if (orderByComparator != null) {
-				query = new StringBundler(
-					4 + (orderByComparator.getOrderByFields().length * 2));
-			}
-			else {
-				query = new StringBundler(4);
-			}
+		if (result == null) {
+			StringBundler query = new StringBundler(4);
 
 			query.append(
 				_SQL_SELECT_CPDEFINITIONSPECIFICATIONOPTIONVALUE_WHERE);
 
-			query.append(_FINDER_COLUMN_C_COC_CPDEFINITIONID_2);
+			query.append(
+				_FINDER_COLUMN_C_CSOVI_CPDEFINITIONSPECIFICATIONOPTIONVALUEID_2);
 
-			query.append(_FINDER_COLUMN_C_COC_CPOPTIONCATEGORYID_2);
-
-			if (orderByComparator != null) {
-				appendOrderByComparator(
-					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
-			}
-			else if (pagination) {
-				query.append(
-					CPDefinitionSpecificationOptionValueModelImpl.
-						ORDER_BY_JPQL);
-			}
+			query.append(_FINDER_COLUMN_C_CSOVI_CPDEFINITIONID_2);
 
 			String sql = query.toString();
 
@@ -4020,34 +3884,31 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
+				qPos.add(CPDefinitionSpecificationOptionValueId);
+
 				qPos.add(CPDefinitionId);
 
-				qPos.add(CPOptionCategoryId);
+				List<CPDefinitionSpecificationOptionValue> list = q.list();
 
-				if (!pagination) {
-					list =
-						(List<CPDefinitionSpecificationOptionValue>)
-							QueryUtil.list(q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
+				if (list.isEmpty()) {
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByC_CSOVI, finderArgs, list);
+					}
 				}
 				else {
-					list =
-						(List<CPDefinitionSpecificationOptionValue>)
-							QueryUtil.list(q, getDialect(), start, end);
-				}
+					CPDefinitionSpecificationOptionValue
+						cpDefinitionSpecificationOptionValue = list.get(0);
 
-				cacheResult(list);
+					result = cpDefinitionSpecificationOptionValue;
 
-				if (useFinderCache) {
-					finderCache.putResult(finderPath, finderArgs, list);
+					cacheResult(cpDefinitionSpecificationOptionValue);
 				}
 			}
 			catch (Exception e) {
 				if (useFinderCache) {
-					finderCache.removeResult(finderPath, finderArgs);
+					finderCache.removeResult(
+						_finderPathFetchByC_CSOVI, finderArgs);
 				}
 
 				throw processException(e);
@@ -4057,343 +3918,49 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 			}
 		}
 
-		return list;
-	}
-
-	/**
-	 * Returns the first cp definition specification option value in the ordered set where CPDefinitionId = &#63; and CPOptionCategoryId = &#63;.
-	 *
-	 * @param CPDefinitionId the cp definition ID
-	 * @param CPOptionCategoryId the cp option category ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching cp definition specification option value
-	 * @throws NoSuchCPDefinitionSpecificationOptionValueException if a matching cp definition specification option value could not be found
-	 */
-	@Override
-	public CPDefinitionSpecificationOptionValue findByC_COC_First(
-			long CPDefinitionId, long CPOptionCategoryId,
-			OrderByComparator<CPDefinitionSpecificationOptionValue>
-				orderByComparator)
-		throws NoSuchCPDefinitionSpecificationOptionValueException {
-
-		CPDefinitionSpecificationOptionValue
-			cpDefinitionSpecificationOptionValue = fetchByC_COC_First(
-				CPDefinitionId, CPOptionCategoryId, orderByComparator);
-
-		if (cpDefinitionSpecificationOptionValue != null) {
-			return cpDefinitionSpecificationOptionValue;
-		}
-
-		StringBundler msg = new StringBundler(6);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("CPDefinitionId=");
-		msg.append(CPDefinitionId);
-
-		msg.append(", CPOptionCategoryId=");
-		msg.append(CPOptionCategoryId);
-
-		msg.append("}");
-
-		throw new NoSuchCPDefinitionSpecificationOptionValueException(
-			msg.toString());
-	}
-
-	/**
-	 * Returns the first cp definition specification option value in the ordered set where CPDefinitionId = &#63; and CPOptionCategoryId = &#63;.
-	 *
-	 * @param CPDefinitionId the cp definition ID
-	 * @param CPOptionCategoryId the cp option category ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching cp definition specification option value, or <code>null</code> if a matching cp definition specification option value could not be found
-	 */
-	@Override
-	public CPDefinitionSpecificationOptionValue fetchByC_COC_First(
-		long CPDefinitionId, long CPOptionCategoryId,
-		OrderByComparator<CPDefinitionSpecificationOptionValue>
-			orderByComparator) {
-
-		List<CPDefinitionSpecificationOptionValue> list = findByC_COC(
-			CPDefinitionId, CPOptionCategoryId, 0, 1, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the last cp definition specification option value in the ordered set where CPDefinitionId = &#63; and CPOptionCategoryId = &#63;.
-	 *
-	 * @param CPDefinitionId the cp definition ID
-	 * @param CPOptionCategoryId the cp option category ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching cp definition specification option value
-	 * @throws NoSuchCPDefinitionSpecificationOptionValueException if a matching cp definition specification option value could not be found
-	 */
-	@Override
-	public CPDefinitionSpecificationOptionValue findByC_COC_Last(
-			long CPDefinitionId, long CPOptionCategoryId,
-			OrderByComparator<CPDefinitionSpecificationOptionValue>
-				orderByComparator)
-		throws NoSuchCPDefinitionSpecificationOptionValueException {
-
-		CPDefinitionSpecificationOptionValue
-			cpDefinitionSpecificationOptionValue = fetchByC_COC_Last(
-				CPDefinitionId, CPOptionCategoryId, orderByComparator);
-
-		if (cpDefinitionSpecificationOptionValue != null) {
-			return cpDefinitionSpecificationOptionValue;
-		}
-
-		StringBundler msg = new StringBundler(6);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("CPDefinitionId=");
-		msg.append(CPDefinitionId);
-
-		msg.append(", CPOptionCategoryId=");
-		msg.append(CPOptionCategoryId);
-
-		msg.append("}");
-
-		throw new NoSuchCPDefinitionSpecificationOptionValueException(
-			msg.toString());
-	}
-
-	/**
-	 * Returns the last cp definition specification option value in the ordered set where CPDefinitionId = &#63; and CPOptionCategoryId = &#63;.
-	 *
-	 * @param CPDefinitionId the cp definition ID
-	 * @param CPOptionCategoryId the cp option category ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching cp definition specification option value, or <code>null</code> if a matching cp definition specification option value could not be found
-	 */
-	@Override
-	public CPDefinitionSpecificationOptionValue fetchByC_COC_Last(
-		long CPDefinitionId, long CPOptionCategoryId,
-		OrderByComparator<CPDefinitionSpecificationOptionValue>
-			orderByComparator) {
-
-		int count = countByC_COC(CPDefinitionId, CPOptionCategoryId);
-
-		if (count == 0) {
+		if (result instanceof List<?>) {
 			return null;
 		}
-
-		List<CPDefinitionSpecificationOptionValue> list = findByC_COC(
-			CPDefinitionId, CPOptionCategoryId, count - 1, count,
-			orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
+		else {
+			return (CPDefinitionSpecificationOptionValue)result;
 		}
-
-		return null;
 	}
 
 	/**
-	 * Returns the cp definition specification option values before and after the current cp definition specification option value in the ordered set where CPDefinitionId = &#63; and CPOptionCategoryId = &#63;.
+	 * Removes the cp definition specification option value where CPDefinitionSpecificationOptionValueId = &#63; and CPDefinitionId = &#63; from the database.
 	 *
-	 * @param CPDefinitionSpecificationOptionValueId the primary key of the current cp definition specification option value
+	 * @param CPDefinitionSpecificationOptionValueId the cp definition specification option value ID
 	 * @param CPDefinitionId the cp definition ID
-	 * @param CPOptionCategoryId the cp option category ID
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next cp definition specification option value
-	 * @throws NoSuchCPDefinitionSpecificationOptionValueException if a cp definition specification option value with the primary key could not be found
+	 * @return the cp definition specification option value that was removed
 	 */
 	@Override
-	public CPDefinitionSpecificationOptionValue[] findByC_COC_PrevAndNext(
-			long CPDefinitionSpecificationOptionValueId, long CPDefinitionId,
-			long CPOptionCategoryId,
-			OrderByComparator<CPDefinitionSpecificationOptionValue>
-				orderByComparator)
+	public CPDefinitionSpecificationOptionValue removeByC_CSOVI(
+			long CPDefinitionSpecificationOptionValueId, long CPDefinitionId)
 		throws NoSuchCPDefinitionSpecificationOptionValueException {
 
 		CPDefinitionSpecificationOptionValue
-			cpDefinitionSpecificationOptionValue = findByPrimaryKey(
-				CPDefinitionSpecificationOptionValueId);
+			cpDefinitionSpecificationOptionValue = findByC_CSOVI(
+				CPDefinitionSpecificationOptionValueId, CPDefinitionId);
 
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			CPDefinitionSpecificationOptionValue[] array =
-				new CPDefinitionSpecificationOptionValueImpl[3];
-
-			array[0] = getByC_COC_PrevAndNext(
-				session, cpDefinitionSpecificationOptionValue, CPDefinitionId,
-				CPOptionCategoryId, orderByComparator, true);
-
-			array[1] = cpDefinitionSpecificationOptionValue;
-
-			array[2] = getByC_COC_PrevAndNext(
-				session, cpDefinitionSpecificationOptionValue, CPDefinitionId,
-				CPOptionCategoryId, orderByComparator, false);
-
-			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected CPDefinitionSpecificationOptionValue getByC_COC_PrevAndNext(
-		Session session,
-		CPDefinitionSpecificationOptionValue
-			cpDefinitionSpecificationOptionValue,
-		long CPDefinitionId, long CPOptionCategoryId,
-		OrderByComparator<CPDefinitionSpecificationOptionValue>
-			orderByComparator,
-		boolean previous) {
-
-		StringBundler query = null;
-
-		if (orderByComparator != null) {
-			query = new StringBundler(
-				5 + (orderByComparator.getOrderByConditionFields().length * 3) +
-					(orderByComparator.getOrderByFields().length * 3));
-		}
-		else {
-			query = new StringBundler(4);
-		}
-
-		query.append(_SQL_SELECT_CPDEFINITIONSPECIFICATIONOPTIONVALUE_WHERE);
-
-		query.append(_FINDER_COLUMN_C_COC_CPDEFINITIONID_2);
-
-		query.append(_FINDER_COLUMN_C_COC_CPOPTIONCATEGORYID_2);
-
-		if (orderByComparator != null) {
-			String[] orderByConditionFields =
-				orderByComparator.getOrderByConditionFields();
-
-			if (orderByConditionFields.length > 0) {
-				query.append(WHERE_AND);
-			}
-
-			for (int i = 0; i < orderByConditionFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByConditionFields[i]);
-
-				if ((i + 1) < orderByConditionFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN_HAS_NEXT);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(WHERE_GREATER_THAN);
-					}
-					else {
-						query.append(WHERE_LESSER_THAN);
-					}
-				}
-			}
-
-			query.append(ORDER_BY_CLAUSE);
-
-			String[] orderByFields = orderByComparator.getOrderByFields();
-
-			for (int i = 0; i < orderByFields.length; i++) {
-				query.append(_ORDER_BY_ENTITY_ALIAS);
-				query.append(orderByFields[i]);
-
-				if ((i + 1) < orderByFields.length) {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC_HAS_NEXT);
-					}
-					else {
-						query.append(ORDER_BY_DESC_HAS_NEXT);
-					}
-				}
-				else {
-					if (orderByComparator.isAscending() ^ previous) {
-						query.append(ORDER_BY_ASC);
-					}
-					else {
-						query.append(ORDER_BY_DESC);
-					}
-				}
-			}
-		}
-		else {
-			query.append(
-				CPDefinitionSpecificationOptionValueModelImpl.ORDER_BY_JPQL);
-		}
-
-		String sql = query.toString();
-
-		Query q = session.createQuery(sql);
-
-		q.setFirstResult(0);
-		q.setMaxResults(2);
-
-		QueryPos qPos = QueryPos.getInstance(q);
-
-		qPos.add(CPDefinitionId);
-
-		qPos.add(CPOptionCategoryId);
-
-		if (orderByComparator != null) {
-			for (Object orderByConditionValue :
-					orderByComparator.getOrderByConditionValues(
-						cpDefinitionSpecificationOptionValue)) {
-
-				qPos.add(orderByConditionValue);
-			}
-		}
-
-		List<CPDefinitionSpecificationOptionValue> list = q.list();
-
-		if (list.size() == 2) {
-			return list.get(1);
-		}
-		else {
-			return null;
-		}
+		return remove(cpDefinitionSpecificationOptionValue);
 	}
 
 	/**
-	 * Removes all the cp definition specification option values where CPDefinitionId = &#63; and CPOptionCategoryId = &#63; from the database.
+	 * Returns the number of cp definition specification option values where CPDefinitionSpecificationOptionValueId = &#63; and CPDefinitionId = &#63;.
 	 *
+	 * @param CPDefinitionSpecificationOptionValueId the cp definition specification option value ID
 	 * @param CPDefinitionId the cp definition ID
-	 * @param CPOptionCategoryId the cp option category ID
-	 */
-	@Override
-	public void removeByC_COC(long CPDefinitionId, long CPOptionCategoryId) {
-		for (CPDefinitionSpecificationOptionValue
-				cpDefinitionSpecificationOptionValue :
-					findByC_COC(
-						CPDefinitionId, CPOptionCategoryId, QueryUtil.ALL_POS,
-						QueryUtil.ALL_POS, null)) {
-
-			remove(cpDefinitionSpecificationOptionValue);
-		}
-	}
-
-	/**
-	 * Returns the number of cp definition specification option values where CPDefinitionId = &#63; and CPOptionCategoryId = &#63;.
-	 *
-	 * @param CPDefinitionId the cp definition ID
-	 * @param CPOptionCategoryId the cp option category ID
 	 * @return the number of matching cp definition specification option values
 	 */
 	@Override
-	public int countByC_COC(long CPDefinitionId, long CPOptionCategoryId) {
-		FinderPath finderPath = _finderPathCountByC_COC;
+	public int countByC_CSOVI(
+		long CPDefinitionSpecificationOptionValueId, long CPDefinitionId) {
 
-		Object[] finderArgs = new Object[] {CPDefinitionId, CPOptionCategoryId};
+		FinderPath finderPath = _finderPathCountByC_CSOVI;
+
+		Object[] finderArgs = new Object[] {
+			CPDefinitionSpecificationOptionValueId, CPDefinitionId
+		};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -4402,9 +3969,10 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 
 			query.append(_SQL_COUNT_CPDEFINITIONSPECIFICATIONOPTIONVALUE_WHERE);
 
-			query.append(_FINDER_COLUMN_C_COC_CPDEFINITIONID_2);
+			query.append(
+				_FINDER_COLUMN_C_CSOVI_CPDEFINITIONSPECIFICATIONOPTIONVALUEID_2);
 
-			query.append(_FINDER_COLUMN_C_COC_CPOPTIONCATEGORYID_2);
+			query.append(_FINDER_COLUMN_C_CSOVI_CPDEFINITIONID_2);
 
 			String sql = query.toString();
 
@@ -4417,9 +3985,9 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(CPDefinitionId);
+				qPos.add(CPDefinitionSpecificationOptionValueId);
 
-				qPos.add(CPOptionCategoryId);
+				qPos.add(CPDefinitionId);
 
 				count = (Long)q.uniqueResult();
 
@@ -4438,11 +4006,12 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_C_COC_CPDEFINITIONID_2 =
-		"cpDefinitionSpecificationOptionValue.CPDefinitionId = ? AND ";
+	private static final String
+		_FINDER_COLUMN_C_CSOVI_CPDEFINITIONSPECIFICATIONOPTIONVALUEID_2 =
+			"cpDefinitionSpecificationOptionValue.CPDefinitionSpecificationOptionValueId = ? AND ";
 
-	private static final String _FINDER_COLUMN_C_COC_CPOPTIONCATEGORYID_2 =
-		"cpDefinitionSpecificationOptionValue.CPOptionCategoryId = ?";
+	private static final String _FINDER_COLUMN_C_CSOVI_CPDEFINITIONID_2 =
+		"cpDefinitionSpecificationOptionValue.CPDefinitionId = ?";
 
 	private FinderPath _finderPathWithPaginationFindByC_CSO;
 	private FinderPath _finderPathWithoutPaginationFindByC_CSO;
@@ -4532,14 +4101,11 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 			orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindByC_CSO;
@@ -4604,7 +4170,7 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(
 					CPDefinitionSpecificationOptionValueModelImpl.
 						ORDER_BY_JPQL);
@@ -4625,20 +4191,9 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 
 				qPos.add(CPSpecificationOptionId);
 
-				if (!pagination) {
-					list =
-						(List<CPDefinitionSpecificationOptionValue>)
-							QueryUtil.list(q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list =
-						(List<CPDefinitionSpecificationOptionValue>)
-							QueryUtil.list(q, getDialect(), start, end);
-				}
+				list =
+					(List<CPDefinitionSpecificationOptionValue>)QueryUtil.list(
+						q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -5049,118 +4604,166 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 	private static final String _FINDER_COLUMN_C_CSO_CPSPECIFICATIONOPTIONID_2 =
 		"cpDefinitionSpecificationOptionValue.CPSpecificationOptionId = ?";
 
-	private FinderPath _finderPathFetchByC_CSOVI;
-	private FinderPath _finderPathCountByC_CSOVI;
+	private FinderPath _finderPathWithPaginationFindByC_COC;
+	private FinderPath _finderPathWithoutPaginationFindByC_COC;
+	private FinderPath _finderPathCountByC_COC;
 
 	/**
-	 * Returns the cp definition specification option value where CPDefinitionId = &#63; and CPDefinitionSpecificationOptionValueId = &#63; or throws a <code>NoSuchCPDefinitionSpecificationOptionValueException</code> if it could not be found.
+	 * Returns all the cp definition specification option values where CPDefinitionId = &#63; and CPOptionCategoryId = &#63;.
 	 *
 	 * @param CPDefinitionId the cp definition ID
-	 * @param CPDefinitionSpecificationOptionValueId the cp definition specification option value ID
-	 * @return the matching cp definition specification option value
-	 * @throws NoSuchCPDefinitionSpecificationOptionValueException if a matching cp definition specification option value could not be found
+	 * @param CPOptionCategoryId the cp option category ID
+	 * @return the matching cp definition specification option values
 	 */
 	@Override
-	public CPDefinitionSpecificationOptionValue findByC_CSOVI(
-			long CPDefinitionId, long CPDefinitionSpecificationOptionValueId)
-		throws NoSuchCPDefinitionSpecificationOptionValueException {
+	public List<CPDefinitionSpecificationOptionValue> findByC_COC(
+		long CPDefinitionId, long CPOptionCategoryId) {
 
-		CPDefinitionSpecificationOptionValue
-			cpDefinitionSpecificationOptionValue = fetchByC_CSOVI(
-				CPDefinitionId, CPDefinitionSpecificationOptionValueId);
-
-		if (cpDefinitionSpecificationOptionValue == null) {
-			StringBundler msg = new StringBundler(6);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("CPDefinitionId=");
-			msg.append(CPDefinitionId);
-
-			msg.append(", CPDefinitionSpecificationOptionValueId=");
-			msg.append(CPDefinitionSpecificationOptionValueId);
-
-			msg.append("}");
-
-			if (_log.isDebugEnabled()) {
-				_log.debug(msg.toString());
-			}
-
-			throw new NoSuchCPDefinitionSpecificationOptionValueException(
-				msg.toString());
-		}
-
-		return cpDefinitionSpecificationOptionValue;
+		return findByC_COC(
+			CPDefinitionId, CPOptionCategoryId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns the cp definition specification option value where CPDefinitionId = &#63; and CPDefinitionSpecificationOptionValueId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns a range of all the cp definition specification option values where CPDefinitionId = &#63; and CPOptionCategoryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPDefinitionSpecificationOptionValueModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
 	 *
 	 * @param CPDefinitionId the cp definition ID
-	 * @param CPDefinitionSpecificationOptionValueId the cp definition specification option value ID
-	 * @return the matching cp definition specification option value, or <code>null</code> if a matching cp definition specification option value could not be found
+	 * @param CPOptionCategoryId the cp option category ID
+	 * @param start the lower bound of the range of cp definition specification option values
+	 * @param end the upper bound of the range of cp definition specification option values (not inclusive)
+	 * @return the range of matching cp definition specification option values
 	 */
 	@Override
-	public CPDefinitionSpecificationOptionValue fetchByC_CSOVI(
-		long CPDefinitionId, long CPDefinitionSpecificationOptionValueId) {
+	public List<CPDefinitionSpecificationOptionValue> findByC_COC(
+		long CPDefinitionId, long CPOptionCategoryId, int start, int end) {
 
-		return fetchByC_CSOVI(
-			CPDefinitionId, CPDefinitionSpecificationOptionValueId, true);
+		return findByC_COC(
+			CPDefinitionId, CPOptionCategoryId, start, end, null);
 	}
 
 	/**
-	 * Returns the cp definition specification option value where CPDefinitionId = &#63; and CPDefinitionSpecificationOptionValueId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns an ordered range of all the cp definition specification option values where CPDefinitionId = &#63; and CPOptionCategoryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPDefinitionSpecificationOptionValueModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
 	 *
 	 * @param CPDefinitionId the cp definition ID
-	 * @param CPDefinitionSpecificationOptionValueId the cp definition specification option value ID
+	 * @param CPOptionCategoryId the cp option category ID
+	 * @param start the lower bound of the range of cp definition specification option values
+	 * @param end the upper bound of the range of cp definition specification option values (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching cp definition specification option values
+	 */
+	@Override
+	public List<CPDefinitionSpecificationOptionValue> findByC_COC(
+		long CPDefinitionId, long CPOptionCategoryId, int start, int end,
+		OrderByComparator<CPDefinitionSpecificationOptionValue>
+			orderByComparator) {
+
+		return findByC_COC(
+			CPDefinitionId, CPOptionCategoryId, start, end, orderByComparator,
+			true);
+	}
+
+	/**
+	 * Returns an ordered range of all the cp definition specification option values where CPDefinitionId = &#63; and CPOptionCategoryId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CPDefinitionSpecificationOptionValueModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param CPDefinitionId the cp definition ID
+	 * @param CPOptionCategoryId the cp option category ID
+	 * @param start the lower bound of the range of cp definition specification option values
+	 * @param end the upper bound of the range of cp definition specification option values (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @param useFinderCache whether to use the finder cache
-	 * @return the matching cp definition specification option value, or <code>null</code> if a matching cp definition specification option value could not be found
+	 * @return the ordered range of matching cp definition specification option values
 	 */
 	@Override
-	public CPDefinitionSpecificationOptionValue fetchByC_CSOVI(
-		long CPDefinitionId, long CPDefinitionSpecificationOptionValueId,
+	public List<CPDefinitionSpecificationOptionValue> findByC_COC(
+		long CPDefinitionId, long CPOptionCategoryId, int start, int end,
+		OrderByComparator<CPDefinitionSpecificationOptionValue>
+			orderByComparator,
 		boolean useFinderCache) {
 
+		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
-		if (useFinderCache) {
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+			(orderByComparator == null)) {
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByC_COC;
+				finderArgs = new Object[] {CPDefinitionId, CPOptionCategoryId};
+			}
+		}
+		else if (useFinderCache) {
+			finderPath = _finderPathWithPaginationFindByC_COC;
 			finderArgs = new Object[] {
-				CPDefinitionId, CPDefinitionSpecificationOptionValueId
+				CPDefinitionId, CPOptionCategoryId, start, end,
+				orderByComparator
 			};
 		}
 
-		Object result = null;
+		List<CPDefinitionSpecificationOptionValue> list = null;
 
 		if (useFinderCache) {
-			result = finderCache.getResult(
-				_finderPathFetchByC_CSOVI, finderArgs, this);
-		}
+			list =
+				(List<CPDefinitionSpecificationOptionValue>)
+					finderCache.getResult(finderPath, finderArgs, this);
 
-		if (result instanceof CPDefinitionSpecificationOptionValue) {
-			CPDefinitionSpecificationOptionValue
-				cpDefinitionSpecificationOptionValue =
-					(CPDefinitionSpecificationOptionValue)result;
+			if ((list != null) && !list.isEmpty()) {
+				for (CPDefinitionSpecificationOptionValue
+						cpDefinitionSpecificationOptionValue : list) {
 
-			if ((CPDefinitionId !=
-					cpDefinitionSpecificationOptionValue.getCPDefinitionId()) ||
-				(CPDefinitionSpecificationOptionValueId !=
-					cpDefinitionSpecificationOptionValue.
-						getCPDefinitionSpecificationOptionValueId())) {
+					if ((CPDefinitionId !=
+							cpDefinitionSpecificationOptionValue.
+								getCPDefinitionId()) ||
+						(CPOptionCategoryId !=
+							cpDefinitionSpecificationOptionValue.
+								getCPOptionCategoryId())) {
 
-				result = null;
+						list = null;
+
+						break;
+					}
+				}
 			}
 		}
 
-		if (result == null) {
-			StringBundler query = new StringBundler(4);
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(
+					4 + (orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(4);
+			}
 
 			query.append(
 				_SQL_SELECT_CPDEFINITIONSPECIFICATIONOPTIONVALUE_WHERE);
 
-			query.append(_FINDER_COLUMN_C_CSOVI_CPDEFINITIONID_2);
+			query.append(_FINDER_COLUMN_C_COC_CPDEFINITIONID_2);
 
-			query.append(
-				_FINDER_COLUMN_C_CSOVI_CPDEFINITIONSPECIFICATIONOPTIONVALUEID_2);
+			query.append(_FINDER_COLUMN_C_COC_CPOPTIONCATEGORYID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
+			}
+			else {
+				query.append(
+					CPDefinitionSpecificationOptionValueModelImpl.
+						ORDER_BY_JPQL);
+			}
 
 			String sql = query.toString();
 
@@ -5175,29 +4778,21 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 
 				qPos.add(CPDefinitionId);
 
-				qPos.add(CPDefinitionSpecificationOptionValueId);
+				qPos.add(CPOptionCategoryId);
 
-				List<CPDefinitionSpecificationOptionValue> list = q.list();
+				list =
+					(List<CPDefinitionSpecificationOptionValue>)QueryUtil.list(
+						q, getDialect(), start, end);
 
-				if (list.isEmpty()) {
-					if (useFinderCache) {
-						finderCache.putResult(
-							_finderPathFetchByC_CSOVI, finderArgs, list);
-					}
-				}
-				else {
-					CPDefinitionSpecificationOptionValue
-						cpDefinitionSpecificationOptionValue = list.get(0);
+				cacheResult(list);
 
-					result = cpDefinitionSpecificationOptionValue;
-
-					cacheResult(cpDefinitionSpecificationOptionValue);
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
 				}
 			}
 			catch (Exception e) {
 				if (useFinderCache) {
-					finderCache.removeResult(
-						_finderPathFetchByC_CSOVI, finderArgs);
+					finderCache.removeResult(finderPath, finderArgs);
 				}
 
 				throw processException(e);
@@ -5207,49 +4802,343 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 			}
 		}
 
-		if (result instanceof List<?>) {
-			return null;
-		}
-		else {
-			return (CPDefinitionSpecificationOptionValue)result;
-		}
+		return list;
 	}
 
 	/**
-	 * Removes the cp definition specification option value where CPDefinitionId = &#63; and CPDefinitionSpecificationOptionValueId = &#63; from the database.
+	 * Returns the first cp definition specification option value in the ordered set where CPDefinitionId = &#63; and CPOptionCategoryId = &#63;.
 	 *
 	 * @param CPDefinitionId the cp definition ID
-	 * @param CPDefinitionSpecificationOptionValueId the cp definition specification option value ID
-	 * @return the cp definition specification option value that was removed
+	 * @param CPOptionCategoryId the cp option category ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching cp definition specification option value
+	 * @throws NoSuchCPDefinitionSpecificationOptionValueException if a matching cp definition specification option value could not be found
 	 */
 	@Override
-	public CPDefinitionSpecificationOptionValue removeByC_CSOVI(
-			long CPDefinitionId, long CPDefinitionSpecificationOptionValueId)
+	public CPDefinitionSpecificationOptionValue findByC_COC_First(
+			long CPDefinitionId, long CPOptionCategoryId,
+			OrderByComparator<CPDefinitionSpecificationOptionValue>
+				orderByComparator)
 		throws NoSuchCPDefinitionSpecificationOptionValueException {
 
 		CPDefinitionSpecificationOptionValue
-			cpDefinitionSpecificationOptionValue = findByC_CSOVI(
-				CPDefinitionId, CPDefinitionSpecificationOptionValueId);
+			cpDefinitionSpecificationOptionValue = fetchByC_COC_First(
+				CPDefinitionId, CPOptionCategoryId, orderByComparator);
 
-		return remove(cpDefinitionSpecificationOptionValue);
+		if (cpDefinitionSpecificationOptionValue != null) {
+			return cpDefinitionSpecificationOptionValue;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("CPDefinitionId=");
+		msg.append(CPDefinitionId);
+
+		msg.append(", CPOptionCategoryId=");
+		msg.append(CPOptionCategoryId);
+
+		msg.append("}");
+
+		throw new NoSuchCPDefinitionSpecificationOptionValueException(
+			msg.toString());
 	}
 
 	/**
-	 * Returns the number of cp definition specification option values where CPDefinitionId = &#63; and CPDefinitionSpecificationOptionValueId = &#63;.
+	 * Returns the first cp definition specification option value in the ordered set where CPDefinitionId = &#63; and CPOptionCategoryId = &#63;.
 	 *
 	 * @param CPDefinitionId the cp definition ID
-	 * @param CPDefinitionSpecificationOptionValueId the cp definition specification option value ID
+	 * @param CPOptionCategoryId the cp option category ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching cp definition specification option value, or <code>null</code> if a matching cp definition specification option value could not be found
+	 */
+	@Override
+	public CPDefinitionSpecificationOptionValue fetchByC_COC_First(
+		long CPDefinitionId, long CPOptionCategoryId,
+		OrderByComparator<CPDefinitionSpecificationOptionValue>
+			orderByComparator) {
+
+		List<CPDefinitionSpecificationOptionValue> list = findByC_COC(
+			CPDefinitionId, CPOptionCategoryId, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last cp definition specification option value in the ordered set where CPDefinitionId = &#63; and CPOptionCategoryId = &#63;.
+	 *
+	 * @param CPDefinitionId the cp definition ID
+	 * @param CPOptionCategoryId the cp option category ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching cp definition specification option value
+	 * @throws NoSuchCPDefinitionSpecificationOptionValueException if a matching cp definition specification option value could not be found
+	 */
+	@Override
+	public CPDefinitionSpecificationOptionValue findByC_COC_Last(
+			long CPDefinitionId, long CPOptionCategoryId,
+			OrderByComparator<CPDefinitionSpecificationOptionValue>
+				orderByComparator)
+		throws NoSuchCPDefinitionSpecificationOptionValueException {
+
+		CPDefinitionSpecificationOptionValue
+			cpDefinitionSpecificationOptionValue = fetchByC_COC_Last(
+				CPDefinitionId, CPOptionCategoryId, orderByComparator);
+
+		if (cpDefinitionSpecificationOptionValue != null) {
+			return cpDefinitionSpecificationOptionValue;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("CPDefinitionId=");
+		msg.append(CPDefinitionId);
+
+		msg.append(", CPOptionCategoryId=");
+		msg.append(CPOptionCategoryId);
+
+		msg.append("}");
+
+		throw new NoSuchCPDefinitionSpecificationOptionValueException(
+			msg.toString());
+	}
+
+	/**
+	 * Returns the last cp definition specification option value in the ordered set where CPDefinitionId = &#63; and CPOptionCategoryId = &#63;.
+	 *
+	 * @param CPDefinitionId the cp definition ID
+	 * @param CPOptionCategoryId the cp option category ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching cp definition specification option value, or <code>null</code> if a matching cp definition specification option value could not be found
+	 */
+	@Override
+	public CPDefinitionSpecificationOptionValue fetchByC_COC_Last(
+		long CPDefinitionId, long CPOptionCategoryId,
+		OrderByComparator<CPDefinitionSpecificationOptionValue>
+			orderByComparator) {
+
+		int count = countByC_COC(CPDefinitionId, CPOptionCategoryId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<CPDefinitionSpecificationOptionValue> list = findByC_COC(
+			CPDefinitionId, CPOptionCategoryId, count - 1, count,
+			orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the cp definition specification option values before and after the current cp definition specification option value in the ordered set where CPDefinitionId = &#63; and CPOptionCategoryId = &#63;.
+	 *
+	 * @param CPDefinitionSpecificationOptionValueId the primary key of the current cp definition specification option value
+	 * @param CPDefinitionId the cp definition ID
+	 * @param CPOptionCategoryId the cp option category ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next cp definition specification option value
+	 * @throws NoSuchCPDefinitionSpecificationOptionValueException if a cp definition specification option value with the primary key could not be found
+	 */
+	@Override
+	public CPDefinitionSpecificationOptionValue[] findByC_COC_PrevAndNext(
+			long CPDefinitionSpecificationOptionValueId, long CPDefinitionId,
+			long CPOptionCategoryId,
+			OrderByComparator<CPDefinitionSpecificationOptionValue>
+				orderByComparator)
+		throws NoSuchCPDefinitionSpecificationOptionValueException {
+
+		CPDefinitionSpecificationOptionValue
+			cpDefinitionSpecificationOptionValue = findByPrimaryKey(
+				CPDefinitionSpecificationOptionValueId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CPDefinitionSpecificationOptionValue[] array =
+				new CPDefinitionSpecificationOptionValueImpl[3];
+
+			array[0] = getByC_COC_PrevAndNext(
+				session, cpDefinitionSpecificationOptionValue, CPDefinitionId,
+				CPOptionCategoryId, orderByComparator, true);
+
+			array[1] = cpDefinitionSpecificationOptionValue;
+
+			array[2] = getByC_COC_PrevAndNext(
+				session, cpDefinitionSpecificationOptionValue, CPDefinitionId,
+				CPOptionCategoryId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected CPDefinitionSpecificationOptionValue getByC_COC_PrevAndNext(
+		Session session,
+		CPDefinitionSpecificationOptionValue
+			cpDefinitionSpecificationOptionValue,
+		long CPDefinitionId, long CPOptionCategoryId,
+		OrderByComparator<CPDefinitionSpecificationOptionValue>
+			orderByComparator,
+		boolean previous) {
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(
+				5 + (orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(4);
+		}
+
+		query.append(_SQL_SELECT_CPDEFINITIONSPECIFICATIONOPTIONVALUE_WHERE);
+
+		query.append(_FINDER_COLUMN_C_COC_CPDEFINITIONID_2);
+
+		query.append(_FINDER_COLUMN_C_COC_CPOPTIONCATEGORYID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(
+				CPDefinitionSpecificationOptionValueModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(CPDefinitionId);
+
+		qPos.add(CPOptionCategoryId);
+
+		if (orderByComparator != null) {
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						cpDefinitionSpecificationOptionValue)) {
+
+				qPos.add(orderByConditionValue);
+			}
+		}
+
+		List<CPDefinitionSpecificationOptionValue> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the cp definition specification option values where CPDefinitionId = &#63; and CPOptionCategoryId = &#63; from the database.
+	 *
+	 * @param CPDefinitionId the cp definition ID
+	 * @param CPOptionCategoryId the cp option category ID
+	 */
+	@Override
+	public void removeByC_COC(long CPDefinitionId, long CPOptionCategoryId) {
+		for (CPDefinitionSpecificationOptionValue
+				cpDefinitionSpecificationOptionValue :
+					findByC_COC(
+						CPDefinitionId, CPOptionCategoryId, QueryUtil.ALL_POS,
+						QueryUtil.ALL_POS, null)) {
+
+			remove(cpDefinitionSpecificationOptionValue);
+		}
+	}
+
+	/**
+	 * Returns the number of cp definition specification option values where CPDefinitionId = &#63; and CPOptionCategoryId = &#63;.
+	 *
+	 * @param CPDefinitionId the cp definition ID
+	 * @param CPOptionCategoryId the cp option category ID
 	 * @return the number of matching cp definition specification option values
 	 */
 	@Override
-	public int countByC_CSOVI(
-		long CPDefinitionId, long CPDefinitionSpecificationOptionValueId) {
+	public int countByC_COC(long CPDefinitionId, long CPOptionCategoryId) {
+		FinderPath finderPath = _finderPathCountByC_COC;
 
-		FinderPath finderPath = _finderPathCountByC_CSOVI;
-
-		Object[] finderArgs = new Object[] {
-			CPDefinitionId, CPDefinitionSpecificationOptionValueId
-		};
+		Object[] finderArgs = new Object[] {CPDefinitionId, CPOptionCategoryId};
 
 		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
 
@@ -5258,10 +5147,9 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 
 			query.append(_SQL_COUNT_CPDEFINITIONSPECIFICATIONOPTIONVALUE_WHERE);
 
-			query.append(_FINDER_COLUMN_C_CSOVI_CPDEFINITIONID_2);
+			query.append(_FINDER_COLUMN_C_COC_CPDEFINITIONID_2);
 
-			query.append(
-				_FINDER_COLUMN_C_CSOVI_CPDEFINITIONSPECIFICATIONOPTIONVALUEID_2);
+			query.append(_FINDER_COLUMN_C_COC_CPOPTIONCATEGORYID_2);
 
 			String sql = query.toString();
 
@@ -5276,7 +5164,7 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 
 				qPos.add(CPDefinitionId);
 
-				qPos.add(CPDefinitionSpecificationOptionValueId);
+				qPos.add(CPOptionCategoryId);
 
 				count = (Long)q.uniqueResult();
 
@@ -5295,12 +5183,11 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_C_CSOVI_CPDEFINITIONID_2 =
+	private static final String _FINDER_COLUMN_C_COC_CPDEFINITIONID_2 =
 		"cpDefinitionSpecificationOptionValue.CPDefinitionId = ? AND ";
 
-	private static final String
-		_FINDER_COLUMN_C_CSOVI_CPDEFINITIONSPECIFICATIONOPTIONVALUEID_2 =
-			"cpDefinitionSpecificationOptionValue.CPDefinitionSpecificationOptionValueId = ?";
+	private static final String _FINDER_COLUMN_C_COC_CPOPTIONCATEGORYID_2 =
+		"cpDefinitionSpecificationOptionValue.CPOptionCategoryId = ?";
 
 	public CPDefinitionSpecificationOptionValuePersistenceImpl() {
 		setModelClass(CPDefinitionSpecificationOptionValue.class);
@@ -5354,9 +5241,9 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 		finderCache.putResult(
 			_finderPathFetchByC_CSOVI,
 			new Object[] {
-				cpDefinitionSpecificationOptionValue.getCPDefinitionId(),
 				cpDefinitionSpecificationOptionValue.
-					getCPDefinitionSpecificationOptionValueId()
+					getCPDefinitionSpecificationOptionValueId(),
+				cpDefinitionSpecificationOptionValue.getCPDefinitionId()
 			},
 			cpDefinitionSpecificationOptionValue);
 
@@ -5475,9 +5362,9 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 			cpDefinitionSpecificationOptionValueModelImpl, false);
 
 		args = new Object[] {
-			cpDefinitionSpecificationOptionValueModelImpl.getCPDefinitionId(),
 			cpDefinitionSpecificationOptionValueModelImpl.
-				getCPDefinitionSpecificationOptionValueId()
+				getCPDefinitionSpecificationOptionValueId(),
+			cpDefinitionSpecificationOptionValueModelImpl.getCPDefinitionId()
 		};
 
 		finderCache.putResult(
@@ -5518,9 +5405,9 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 		if (clearCurrent) {
 			Object[] args = new Object[] {
 				cpDefinitionSpecificationOptionValueModelImpl.
-					getCPDefinitionId(),
+					getCPDefinitionSpecificationOptionValueId(),
 				cpDefinitionSpecificationOptionValueModelImpl.
-					getCPDefinitionSpecificationOptionValueId()
+					getCPDefinitionId()
 			};
 
 			finderCache.removeResult(_finderPathCountByC_CSOVI, args);
@@ -5532,9 +5419,9 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 
 			Object[] args = new Object[] {
 				cpDefinitionSpecificationOptionValueModelImpl.
-					getOriginalCPDefinitionId(),
+					getOriginalCPDefinitionSpecificationOptionValueId(),
 				cpDefinitionSpecificationOptionValueModelImpl.
-					getOriginalCPDefinitionSpecificationOptionValueId()
+					getOriginalCPDefinitionId()
 			};
 
 			finderCache.removeResult(_finderPathCountByC_CSOVI, args);
@@ -5823,23 +5710,23 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 				cpDefinitionSpecificationOptionValueModelImpl.
 					getCPDefinitionId(),
 				cpDefinitionSpecificationOptionValueModelImpl.
-					getCPOptionCategoryId()
-			};
-
-			finderCache.removeResult(_finderPathCountByC_COC, args);
-			finderCache.removeResult(
-				_finderPathWithoutPaginationFindByC_COC, args);
-
-			args = new Object[] {
-				cpDefinitionSpecificationOptionValueModelImpl.
-					getCPDefinitionId(),
-				cpDefinitionSpecificationOptionValueModelImpl.
 					getCPSpecificationOptionId()
 			};
 
 			finderCache.removeResult(_finderPathCountByC_CSO, args);
 			finderCache.removeResult(
 				_finderPathWithoutPaginationFindByC_CSO, args);
+
+			args = new Object[] {
+				cpDefinitionSpecificationOptionValueModelImpl.
+					getCPDefinitionId(),
+				cpDefinitionSpecificationOptionValueModelImpl.
+					getCPOptionCategoryId()
+			};
+
+			finderCache.removeResult(_finderPathCountByC_COC, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByC_COC, args);
 
 			finderCache.removeResult(_finderPathCountAll, FINDER_ARGS_EMPTY);
 			finderCache.removeResult(
@@ -6000,34 +5887,6 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 
 			if ((cpDefinitionSpecificationOptionValueModelImpl.
 					getColumnBitmask() &
-				 _finderPathWithoutPaginationFindByC_COC.getColumnBitmask()) !=
-					 0) {
-
-				Object[] args = new Object[] {
-					cpDefinitionSpecificationOptionValueModelImpl.
-						getOriginalCPDefinitionId(),
-					cpDefinitionSpecificationOptionValueModelImpl.
-						getOriginalCPOptionCategoryId()
-				};
-
-				finderCache.removeResult(_finderPathCountByC_COC, args);
-				finderCache.removeResult(
-					_finderPathWithoutPaginationFindByC_COC, args);
-
-				args = new Object[] {
-					cpDefinitionSpecificationOptionValueModelImpl.
-						getCPDefinitionId(),
-					cpDefinitionSpecificationOptionValueModelImpl.
-						getCPOptionCategoryId()
-				};
-
-				finderCache.removeResult(_finderPathCountByC_COC, args);
-				finderCache.removeResult(
-					_finderPathWithoutPaginationFindByC_COC, args);
-			}
-
-			if ((cpDefinitionSpecificationOptionValueModelImpl.
-					getColumnBitmask() &
 				 _finderPathWithoutPaginationFindByC_CSO.getColumnBitmask()) !=
 					 0) {
 
@@ -6052,6 +5911,34 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 				finderCache.removeResult(_finderPathCountByC_CSO, args);
 				finderCache.removeResult(
 					_finderPathWithoutPaginationFindByC_CSO, args);
+			}
+
+			if ((cpDefinitionSpecificationOptionValueModelImpl.
+					getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByC_COC.getColumnBitmask()) !=
+					 0) {
+
+				Object[] args = new Object[] {
+					cpDefinitionSpecificationOptionValueModelImpl.
+						getOriginalCPDefinitionId(),
+					cpDefinitionSpecificationOptionValueModelImpl.
+						getOriginalCPOptionCategoryId()
+				};
+
+				finderCache.removeResult(_finderPathCountByC_COC, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByC_COC, args);
+
+				args = new Object[] {
+					cpDefinitionSpecificationOptionValueModelImpl.
+						getCPDefinitionId(),
+					cpDefinitionSpecificationOptionValueModelImpl.
+						getCPOptionCategoryId()
+				};
+
+				finderCache.removeResult(_finderPathCountByC_COC, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByC_COC, args);
 			}
 		}
 
@@ -6369,14 +6256,11 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 			orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindAll;
@@ -6414,11 +6298,9 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 			else {
 				sql = _SQL_SELECT_CPDEFINITIONSPECIFICATIONOPTIONVALUE;
 
-				if (pagination) {
-					sql = sql.concat(
-						CPDefinitionSpecificationOptionValueModelImpl.
-							ORDER_BY_JPQL);
-				}
+				sql = sql.concat(
+					CPDefinitionSpecificationOptionValueModelImpl.
+						ORDER_BY_JPQL);
 			}
 
 			Session session = null;
@@ -6428,20 +6310,9 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 
 				Query q = session.createQuery(sql);
 
-				if (!pagination) {
-					list =
-						(List<CPDefinitionSpecificationOptionValue>)
-							QueryUtil.list(q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list =
-						(List<CPDefinitionSpecificationOptionValue>)
-							QueryUtil.list(q, getDialect(), start, end);
-				}
+				list =
+					(List<CPDefinitionSpecificationOptionValue>)QueryUtil.list(
+						q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -6735,35 +6606,22 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
 			"countByCPOptionCategoryId", new String[] {Long.class.getName()});
 
-		_finderPathWithPaginationFindByC_COC = new FinderPath(
+		_finderPathFetchByC_CSOVI = new FinderPath(
 			CPDefinitionSpecificationOptionValueModelImpl.ENTITY_CACHE_ENABLED,
 			CPDefinitionSpecificationOptionValueModelImpl.FINDER_CACHE_ENABLED,
 			CPDefinitionSpecificationOptionValueImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByC_COC",
-			new String[] {
-				Long.class.getName(), Long.class.getName(),
-				Integer.class.getName(), Integer.class.getName(),
-				OrderByComparator.class.getName()
-			});
-
-		_finderPathWithoutPaginationFindByC_COC = new FinderPath(
-			CPDefinitionSpecificationOptionValueModelImpl.ENTITY_CACHE_ENABLED,
-			CPDefinitionSpecificationOptionValueModelImpl.FINDER_CACHE_ENABLED,
-			CPDefinitionSpecificationOptionValueImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByC_COC",
+			FINDER_CLASS_NAME_ENTITY, "fetchByC_CSOVI",
 			new String[] {Long.class.getName(), Long.class.getName()},
 			CPDefinitionSpecificationOptionValueModelImpl.
-				CPDEFINITIONID_COLUMN_BITMASK |
+				CPDEFINITIONSPECIFICATIONOPTIONVALUEID_COLUMN_BITMASK |
 			CPDefinitionSpecificationOptionValueModelImpl.
-				CPOPTIONCATEGORYID_COLUMN_BITMASK |
-			CPDefinitionSpecificationOptionValueModelImpl.
-				PRIORITY_COLUMN_BITMASK);
+				CPDEFINITIONID_COLUMN_BITMASK);
 
-		_finderPathCountByC_COC = new FinderPath(
+		_finderPathCountByC_CSOVI = new FinderPath(
 			CPDefinitionSpecificationOptionValueModelImpl.ENTITY_CACHE_ENABLED,
 			CPDefinitionSpecificationOptionValueModelImpl.FINDER_CACHE_ENABLED,
 			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByC_COC",
+			"countByC_CSOVI",
 			new String[] {Long.class.getName(), Long.class.getName()});
 
 		_finderPathWithPaginationFindByC_CSO = new FinderPath(
@@ -6797,22 +6655,35 @@ public class CPDefinitionSpecificationOptionValuePersistenceImpl
 			"countByC_CSO",
 			new String[] {Long.class.getName(), Long.class.getName()});
 
-		_finderPathFetchByC_CSOVI = new FinderPath(
+		_finderPathWithPaginationFindByC_COC = new FinderPath(
 			CPDefinitionSpecificationOptionValueModelImpl.ENTITY_CACHE_ENABLED,
 			CPDefinitionSpecificationOptionValueModelImpl.FINDER_CACHE_ENABLED,
 			CPDefinitionSpecificationOptionValueImpl.class,
-			FINDER_CLASS_NAME_ENTITY, "fetchByC_CSOVI",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByC_COC",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByC_COC = new FinderPath(
+			CPDefinitionSpecificationOptionValueModelImpl.ENTITY_CACHE_ENABLED,
+			CPDefinitionSpecificationOptionValueModelImpl.FINDER_CACHE_ENABLED,
+			CPDefinitionSpecificationOptionValueImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByC_COC",
 			new String[] {Long.class.getName(), Long.class.getName()},
 			CPDefinitionSpecificationOptionValueModelImpl.
 				CPDEFINITIONID_COLUMN_BITMASK |
 			CPDefinitionSpecificationOptionValueModelImpl.
-				CPDEFINITIONSPECIFICATIONOPTIONVALUEID_COLUMN_BITMASK);
+				CPOPTIONCATEGORYID_COLUMN_BITMASK |
+			CPDefinitionSpecificationOptionValueModelImpl.
+				PRIORITY_COLUMN_BITMASK);
 
-		_finderPathCountByC_CSOVI = new FinderPath(
+		_finderPathCountByC_COC = new FinderPath(
 			CPDefinitionSpecificationOptionValueModelImpl.ENTITY_CACHE_ENABLED,
 			CPDefinitionSpecificationOptionValueModelImpl.FINDER_CACHE_ENABLED,
 			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByC_CSOVI",
+			"countByC_COC",
 			new String[] {Long.class.getName(), Long.class.getName()});
 	}
 

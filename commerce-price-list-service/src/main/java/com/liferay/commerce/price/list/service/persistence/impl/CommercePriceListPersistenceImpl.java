@@ -166,14 +166,11 @@ public class CommercePriceListPersistenceImpl
 
 		uuid = Objects.toString(uuid, "");
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindByUuid;
@@ -230,7 +227,7 @@ public class CommercePriceListPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(CommercePriceListModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -249,18 +246,8 @@ public class CommercePriceListPersistenceImpl
 					qPos.add(uuid);
 				}
 
-				if (!pagination) {
-					list = (List<CommercePriceList>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommercePriceList>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommercePriceList>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -983,14 +970,11 @@ public class CommercePriceListPersistenceImpl
 
 		uuid = Objects.toString(uuid, "");
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindByUuid_C;
@@ -1053,7 +1037,7 @@ public class CommercePriceListPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(CommercePriceListModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -1074,18 +1058,8 @@ public class CommercePriceListPersistenceImpl
 
 				qPos.add(companyId);
 
-				if (!pagination) {
-					list = (List<CommercePriceList>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommercePriceList>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommercePriceList>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -1578,14 +1552,11 @@ public class CommercePriceListPersistenceImpl
 		OrderByComparator<CommercePriceList> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindByCompanyId;
@@ -1607,7 +1578,7 @@ public class CommercePriceListPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommercePriceList commercePriceList : list) {
-					if ((companyId != commercePriceList.getCompanyId())) {
+					if (companyId != commercePriceList.getCompanyId()) {
 						list = null;
 
 						break;
@@ -1635,7 +1606,7 @@ public class CommercePriceListPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(CommercePriceListModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -1652,18 +1623,8 @@ public class CommercePriceListPersistenceImpl
 
 				qPos.add(companyId);
 
-				if (!pagination) {
-					list = (List<CommercePriceList>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommercePriceList>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommercePriceList>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -2104,14 +2065,11 @@ public class CommercePriceListPersistenceImpl
 		OrderByComparator<CommercePriceList> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath =
@@ -2134,8 +2092,8 @@ public class CommercePriceListPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommercePriceList commercePriceList : list) {
-					if ((commerceCurrencyId !=
-							commercePriceList.getCommerceCurrencyId())) {
+					if (commerceCurrencyId !=
+							commercePriceList.getCommerceCurrencyId()) {
 
 						list = null;
 
@@ -2165,7 +2123,7 @@ public class CommercePriceListPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(CommercePriceListModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -2182,18 +2140,8 @@ public class CommercePriceListPersistenceImpl
 
 				qPos.add(commerceCurrencyId);
 
-				if (!pagination) {
-					list = (List<CommercePriceList>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommercePriceList>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommercePriceList>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -2639,8 +2587,8 @@ public class CommercePriceListPersistenceImpl
 		if (result instanceof CommercePriceList) {
 			CommercePriceList commercePriceList = (CommercePriceList)result;
 
-			if ((parentCommercePriceListId !=
-					commercePriceList.getParentCommercePriceListId())) {
+			if (parentCommercePriceListId !=
+					commercePriceList.getParentCommercePriceListId()) {
 
 				result = null;
 			}
@@ -2880,14 +2828,11 @@ public class CommercePriceListPersistenceImpl
 		OrderByComparator<CommercePriceList> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindByG_C;
@@ -2941,7 +2886,7 @@ public class CommercePriceListPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(CommercePriceListModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -2960,18 +2905,8 @@ public class CommercePriceListPersistenceImpl
 
 				qPos.add(companyId);
 
-				if (!pagination) {
-					list = (List<CommercePriceList>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommercePriceList>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommercePriceList>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -3375,13 +3310,10 @@ public class CommercePriceListPersistenceImpl
 				groupIds[0], companyId, start, end, orderByComparator);
 		}
 
-		boolean pagination = true;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderArgs = new Object[] {
@@ -3445,7 +3377,7 @@ public class CommercePriceListPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(CommercePriceListModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -3462,18 +3394,8 @@ public class CommercePriceListPersistenceImpl
 
 				qPos.add(companyId);
 
-				if (!pagination) {
-					list = (List<CommercePriceList>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommercePriceList>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommercePriceList>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -3742,7 +3664,6 @@ public class CommercePriceListPersistenceImpl
 		OrderByComparator<CommercePriceList> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
@@ -3801,7 +3722,7 @@ public class CommercePriceListPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(CommercePriceListModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -3822,18 +3743,8 @@ public class CommercePriceListPersistenceImpl
 
 				qPos.add(status);
 
-				if (!pagination) {
-					list = (List<CommercePriceList>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommercePriceList>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommercePriceList>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -4335,14 +4246,11 @@ public class CommercePriceListPersistenceImpl
 		OrderByComparator<CommercePriceList> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindByG_C_S;
@@ -4399,7 +4307,7 @@ public class CommercePriceListPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(CommercePriceListModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -4420,18 +4328,8 @@ public class CommercePriceListPersistenceImpl
 
 				qPos.add(status);
 
-				if (!pagination) {
-					list = (List<CommercePriceList>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommercePriceList>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommercePriceList>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -4858,13 +4756,10 @@ public class CommercePriceListPersistenceImpl
 				groupIds[0], companyId, status, start, end, orderByComparator);
 		}
 
-		boolean pagination = true;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderArgs = new Object[] {
@@ -4931,7 +4826,7 @@ public class CommercePriceListPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(CommercePriceListModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -4950,18 +4845,8 @@ public class CommercePriceListPersistenceImpl
 
 				qPos.add(status);
 
-				if (!pagination) {
-					list = (List<CommercePriceList>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommercePriceList>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommercePriceList>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -5251,7 +5136,6 @@ public class CommercePriceListPersistenceImpl
 		OrderByComparator<CommercePriceList> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
@@ -5303,7 +5187,7 @@ public class CommercePriceListPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(CommercePriceListModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -5324,18 +5208,8 @@ public class CommercePriceListPersistenceImpl
 
 				qPos.add(status);
 
-				if (!pagination) {
-					list = (List<CommercePriceList>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommercePriceList>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommercePriceList>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -5762,13 +5636,10 @@ public class CommercePriceListPersistenceImpl
 				groupIds[0], companyId, status, start, end, orderByComparator);
 		}
 
-		boolean pagination = true;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderArgs = new Object[] {
@@ -5835,7 +5706,7 @@ public class CommercePriceListPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(CommercePriceListModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -5854,18 +5725,8 @@ public class CommercePriceListPersistenceImpl
 
 				qPos.add(status);
 
-				if (!pagination) {
-					list = (List<CommercePriceList>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommercePriceList>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommercePriceList>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -7251,14 +7112,11 @@ public class CommercePriceListPersistenceImpl
 		OrderByComparator<CommercePriceList> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindAll;
@@ -7295,9 +7153,7 @@ public class CommercePriceListPersistenceImpl
 			else {
 				sql = _SQL_SELECT_COMMERCEPRICELIST;
 
-				if (pagination) {
-					sql = sql.concat(CommercePriceListModelImpl.ORDER_BY_JPQL);
-				}
+				sql = sql.concat(CommercePriceListModelImpl.ORDER_BY_JPQL);
 			}
 
 			Session session = null;
@@ -7307,18 +7163,8 @@ public class CommercePriceListPersistenceImpl
 
 				Query q = session.createQuery(sql);
 
-				if (!pagination) {
-					list = (List<CommercePriceList>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommercePriceList>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommercePriceList>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 

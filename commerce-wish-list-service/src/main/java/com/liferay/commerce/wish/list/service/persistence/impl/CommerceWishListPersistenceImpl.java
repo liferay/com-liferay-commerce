@@ -163,14 +163,11 @@ public class CommerceWishListPersistenceImpl
 
 		uuid = Objects.toString(uuid, "");
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindByUuid;
@@ -227,7 +224,7 @@ public class CommerceWishListPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(CommerceWishListModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -246,18 +243,8 @@ public class CommerceWishListPersistenceImpl
 					qPos.add(uuid);
 				}
 
-				if (!pagination) {
-					list = (List<CommerceWishList>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceWishList>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommerceWishList>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -979,14 +966,11 @@ public class CommerceWishListPersistenceImpl
 
 		uuid = Objects.toString(uuid, "");
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindByUuid_C;
@@ -1049,7 +1033,7 @@ public class CommerceWishListPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(CommerceWishListModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -1070,18 +1054,8 @@ public class CommerceWishListPersistenceImpl
 
 				qPos.add(companyId);
 
-				if (!pagination) {
-					list = (List<CommerceWishList>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceWishList>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommerceWishList>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -1574,14 +1548,11 @@ public class CommerceWishListPersistenceImpl
 		OrderByComparator<CommerceWishList> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindByGroupId;
@@ -1601,7 +1572,7 @@ public class CommerceWishListPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceWishList commerceWishList : list) {
-					if ((groupId != commerceWishList.getGroupId())) {
+					if (groupId != commerceWishList.getGroupId()) {
 						list = null;
 
 						break;
@@ -1629,7 +1600,7 @@ public class CommerceWishListPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(CommerceWishListModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -1646,18 +1617,8 @@ public class CommerceWishListPersistenceImpl
 
 				qPos.add(groupId);
 
-				if (!pagination) {
-					list = (List<CommerceWishList>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceWishList>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommerceWishList>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -2089,14 +2050,11 @@ public class CommerceWishListPersistenceImpl
 		OrderByComparator<CommerceWishList> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindByUserId;
@@ -2116,7 +2074,7 @@ public class CommerceWishListPersistenceImpl
 
 			if ((list != null) && !list.isEmpty()) {
 				for (CommerceWishList commerceWishList : list) {
-					if ((userId != commerceWishList.getUserId())) {
+					if (userId != commerceWishList.getUserId()) {
 						list = null;
 
 						break;
@@ -2144,7 +2102,7 @@ public class CommerceWishListPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(CommerceWishListModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -2161,18 +2119,8 @@ public class CommerceWishListPersistenceImpl
 
 				qPos.add(userId);
 
-				if (!pagination) {
-					list = (List<CommerceWishList>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceWishList>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommerceWishList>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -2609,14 +2557,11 @@ public class CommerceWishListPersistenceImpl
 		OrderByComparator<CommerceWishList> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindByG_U;
@@ -2670,7 +2615,7 @@ public class CommerceWishListPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(CommerceWishListModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -2689,18 +2634,8 @@ public class CommerceWishListPersistenceImpl
 
 				qPos.add(userId);
 
-				if (!pagination) {
-					list = (List<CommerceWishList>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceWishList>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommerceWishList>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -3168,7 +3103,6 @@ public class CommerceWishListPersistenceImpl
 		OrderByComparator<CommerceWishList> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
@@ -3227,7 +3161,7 @@ public class CommerceWishListPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(CommerceWishListModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -3248,18 +3182,8 @@ public class CommerceWishListPersistenceImpl
 					qPos.add(new Timestamp(createDate.getTime()));
 				}
 
-				if (!pagination) {
-					list = (List<CommerceWishList>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceWishList>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommerceWishList>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -3762,14 +3686,11 @@ public class CommerceWishListPersistenceImpl
 		OrderByComparator<CommerceWishList> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindByG_U_D;
@@ -3827,7 +3748,7 @@ public class CommerceWishListPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(CommerceWishListModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -3848,18 +3769,8 @@ public class CommerceWishListPersistenceImpl
 
 				qPos.add(defaultWishList);
 
-				if (!pagination) {
-					list = (List<CommerceWishList>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceWishList>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommerceWishList>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -5085,14 +4996,11 @@ public class CommerceWishListPersistenceImpl
 		OrderByComparator<CommerceWishList> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindAll;
@@ -5129,9 +5037,7 @@ public class CommerceWishListPersistenceImpl
 			else {
 				sql = _SQL_SELECT_COMMERCEWISHLIST;
 
-				if (pagination) {
-					sql = sql.concat(CommerceWishListModelImpl.ORDER_BY_JPQL);
-				}
+				sql = sql.concat(CommerceWishListModelImpl.ORDER_BY_JPQL);
 			}
 
 			Session session = null;
@@ -5141,18 +5047,8 @@ public class CommerceWishListPersistenceImpl
 
 				Query q = session.createQuery(sql);
 
-				if (!pagination) {
-					list = (List<CommerceWishList>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceWishList>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommerceWishList>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
