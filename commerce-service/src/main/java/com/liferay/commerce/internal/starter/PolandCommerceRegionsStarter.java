@@ -14,14 +14,9 @@
 
 package com.liferay.commerce.internal.starter;
 
-import com.liferay.commerce.service.CommerceCountryLocalService;
-import com.liferay.commerce.service.CommerceRegionLocalService;
 import com.liferay.commerce.starter.CommerceRegionsStarter;
-import com.liferay.portal.kernel.json.JSONFactory;
-import com.liferay.portal.kernel.service.ServiceContext;
 
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Riccardo Alberti
@@ -36,23 +31,16 @@ public class PolandCommerceRegionsStarter extends BaseCommerceRegionsStarter {
 	public static final int POLAND_NUMERIC_ISO_CODE = 616;
 
 	@Override
-	public void start(ServiceContext serviceContext) throws Exception {
-		start(
-			_commerceCountryLocalService, _commerceRegionLocalService,
-			_jsonFactory, serviceContext, POLAND_NUMERIC_ISO_CODE,
-			_LAYOUTS_PATH);
+	protected int getCountryIsoCode() {
+		return POLAND_NUMERIC_ISO_CODE;
 	}
 
-	private static final String _LAYOUTS_PATH =
+	@Override
+	protected String getFilePath() {
+		return _FILEPATH;
+	}
+
+	private static final String _FILEPATH =
 		"com/liferay/commerce/internal/poland.json";
-
-	@Reference
-	private CommerceCountryLocalService _commerceCountryLocalService;
-
-	@Reference
-	private CommerceRegionLocalService _commerceRegionLocalService;
-
-	@Reference
-	private JSONFactory _jsonFactory;
 
 }

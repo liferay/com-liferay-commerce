@@ -18,12 +18,13 @@ import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.service.CommerceCountryLocalService;
 import com.liferay.commerce.service.CommerceRegionLocalService;
 import com.liferay.commerce.starter.CommerceRegionsStarter;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.StringUtil;
+
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Riccardo Alberti
@@ -31,62 +32,46 @@ import com.liferay.portal.kernel.util.StringUtil;
 public abstract class BaseCommerceRegionsStarter
 	implements CommerceRegionsStarter {
 
-	protected void start(
-			CommerceCountryLocalService commerceCountryLocalService,
-			CommerceRegionLocalService commerceRegionLocalService,
-			JSONFactory jsonFactory, ServiceContext serviceContext, int isoCode,
-			String layoutsPath)
-		throws Exception {
-
-		_init(
-			commerceCountryLocalService, commerceRegionLocalService,
-			jsonFactory);
-
-		CommerceCountry commerceCountry = _getCommerceCountry(
-			serviceContext.getCompanyId(), isoCode);
+	@Override
+	public void start(ServiceContext serviceContext) throws Exception {
+		CommerceCountry commerceCountry =
+			commerceCountryLocalService.fetchCommerceCountry(
+				serviceContext.getCompanyId(), getCountryIsoCode());
 
 		if (commerceCountry == null) {
 			return;
 		}
 
-		_parseAndAddCommerceRegions(
-			commerceCountry, serviceContext, layoutsPath);
+		_importCommerceRegions(commerceCountry, serviceContext);
 	}
 
-	private CommerceCountry _getCommerceCountry(long companyId, int isoCode)
-		throws PortalException {
+	protected abstract int getCountryIsoCode();
 
-		return _commerceCountryLocalService.fetchCommerceCountry(
-			companyId, isoCode);
-	}
+	protected abstract String getFilePath();
 
-	private JSONArray _getCommerceRegionsJSONArray(String layoutsPath)
-		throws Exception {
+	@Reference
+	protected CommerceCountryLocalService commerceCountryLocalService;
 
+	@Reference
+	protected CommerceRegionLocalService commerceRegionLocalService;
+
+	@Reference
+	protected JSONFactory jsonFactory;
+
+	private JSONArray _getCommerceRegionsJSONArray() throws Exception {
 		Class<?> clazz = getClass();
 
 		String regionsJSON = StringUtil.read(
-			clazz.getClassLoader(), layoutsPath, false);
+			clazz.getClassLoader(), getFilePath(), false);
 
-		return _jsonFactory.createJSONArray(regionsJSON);
+		return jsonFactory.createJSONArray(regionsJSON);
 	}
 
-	private void _init(
-		CommerceCountryLocalService commerceCountryLocalService,
-		CommerceRegionLocalService commerceRegionLocalService,
-		JSONFactory jsonFactory) {
-
-		_commerceCountryLocalService = commerceCountryLocalService;
-		_commerceRegionLocalService = commerceRegionLocalService;
-		_jsonFactory = jsonFactory;
-	}
-
-	private void _parseAndAddCommerceRegions(
-			CommerceCountry commerceCountry, ServiceContext serviceContext,
-			String layoutsPath)
+	private void _importCommerceRegions(
+			CommerceCountry commerceCountry, ServiceContext serviceContext)
 		throws Exception {
 
-		JSONArray jsonArray = _getCommerceRegionsJSONArray(layoutsPath);
+		JSONArray jsonArray = _getCommerceRegionsJSONArray();
 
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -95,14 +80,10 @@ public abstract class BaseCommerceRegionsStarter
 			String name = jsonObject.getString("name");
 			double priority = jsonObject.getDouble("priority");
 
-			_commerceRegionLocalService.addCommerceRegion(
+			commerceRegionLocalService.addCommerceRegion(
 				commerceCountry.getCommerceCountryId(), name, code, priority,
 				true, serviceContext);
 		}
 	}
-
-	private CommerceCountryLocalService _commerceCountryLocalService;
-	private CommerceRegionLocalService _commerceRegionLocalService;
-	private JSONFactory _jsonFactory;
 
 }
