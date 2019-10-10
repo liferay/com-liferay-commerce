@@ -31,8 +31,7 @@ import org.osgi.service.component.annotations.Reference;
 	property = "commerce.region.starter.key=" + HungaryCommerceRegionsStarter.HUNGARY_NUMERIC_ISO_CODE,
 	service = CommerceRegionsStarter.class
 )
-public class HungaryCommerceRegionsStarter
-	extends CommerceRegionsStarterBase implements CommerceRegionsStarter {
+public class HungaryCommerceRegionsStarter extends BaseCommerceRegionsStarter {
 
 	public static final int HUNGARY_NUMERIC_ISO_CODE = 348;
 
@@ -41,10 +40,10 @@ public class HungaryCommerceRegionsStarter
 		start(
 			_commerceCountryLocalService, _commerceRegionLocalService,
 			_jsonFactory, serviceContext, HUNGARY_NUMERIC_ISO_CODE,
-			layoutsPath);
+			_LAYOUTS_PATH);
 	}
 
-	private static final String layoutsPath =
+	private static final String _LAYOUTS_PATH =
 		"com/liferay/commerce/internal/hungary.json";
 
 	@Reference
