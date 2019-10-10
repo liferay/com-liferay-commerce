@@ -31,8 +31,7 @@ import org.osgi.service.component.annotations.Reference;
 	property = "commerce.region.starter.key=" + GermanyCommerceRegionsStarter.GERMANY_NUMERIC_ISO_CODE,
 	service = CommerceRegionsStarter.class
 )
-public class GermanyCommerceRegionsStarter
-	extends CommerceRegionsStarterBase implements CommerceRegionsStarter {
+public class GermanyCommerceRegionsStarter extends BaseCommerceRegionsStarter {
 
 	public static final int GERMANY_NUMERIC_ISO_CODE = 276;
 
@@ -41,10 +40,10 @@ public class GermanyCommerceRegionsStarter
 		start(
 			_commerceCountryLocalService, _commerceRegionLocalService,
 			_jsonFactory, serviceContext, GERMANY_NUMERIC_ISO_CODE,
-			layoutsPath);
+			_LAYOUTS_PATH);
 	}
 
-	private static final String layoutsPath =
+	private static final String _LAYOUTS_PATH =
 		"com/liferay/commerce/internal/germany.json";
 
 	@Reference

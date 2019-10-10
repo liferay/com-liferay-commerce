@@ -31,8 +31,7 @@ import org.osgi.service.component.annotations.Reference;
 	property = "commerce.region.starter.key=" + FinlandCommerceRegionsStarter.FINLAND_NUMERIC_ISO_CODE,
 	service = CommerceRegionsStarter.class
 )
-public class FinlandCommerceRegionsStarter
-	extends CommerceRegionsStarterBase implements CommerceRegionsStarter {
+public class FinlandCommerceRegionsStarter extends BaseCommerceRegionsStarter {
 
 	public static final int FINLAND_NUMERIC_ISO_CODE = 246;
 
@@ -41,10 +40,10 @@ public class FinlandCommerceRegionsStarter
 		start(
 			_commerceCountryLocalService, _commerceRegionLocalService,
 			_jsonFactory, serviceContext, FINLAND_NUMERIC_ISO_CODE,
-			layoutsPath);
+			_LAYOUTS_PATH);
 	}
 
-	private static final String layoutsPath =
+	private static final String _LAYOUTS_PATH =
 		"com/liferay/commerce/internal/finland.json";
 
 	@Reference

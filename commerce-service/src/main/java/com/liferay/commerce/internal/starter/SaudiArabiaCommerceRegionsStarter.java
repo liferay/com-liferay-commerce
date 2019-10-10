@@ -32,7 +32,7 @@ import org.osgi.service.component.annotations.Reference;
 	service = CommerceRegionsStarter.class
 )
 public class SaudiArabiaCommerceRegionsStarter
-	extends CommerceRegionsStarterBase implements CommerceRegionsStarter {
+	extends BaseCommerceRegionsStarter {
 
 	public static final int SAUDI_ARABIA_NUMERIC_ISO_CODE = 682;
 
@@ -41,10 +41,10 @@ public class SaudiArabiaCommerceRegionsStarter
 		start(
 			_commerceCountryLocalService, _commerceRegionLocalService,
 			_jsonFactory, serviceContext, SAUDI_ARABIA_NUMERIC_ISO_CODE,
-			layoutsPath);
+			_LAYOUTS_PATH);
 	}
 
-	private static final String layoutsPath =
+	private static final String _LAYOUTS_PATH =
 		"com/liferay/commerce/internal/saudi-arabia.json";
 
 	@Reference

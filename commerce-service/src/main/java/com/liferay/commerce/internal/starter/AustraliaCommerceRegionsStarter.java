@@ -32,7 +32,7 @@ import org.osgi.service.component.annotations.Reference;
 	service = CommerceRegionsStarter.class
 )
 public class AustraliaCommerceRegionsStarter
-	extends CommerceRegionsStarterBase implements CommerceRegionsStarter {
+	extends BaseCommerceRegionsStarter {
 
 	public static final int AUSTRALIA_NUMERIC_ISO_CODE = 36;
 
@@ -41,10 +41,10 @@ public class AustraliaCommerceRegionsStarter
 		start(
 			_commerceCountryLocalService, _commerceRegionLocalService,
 			_jsonFactory, serviceContext, AUSTRALIA_NUMERIC_ISO_CODE,
-			layoutsPath);
+			_LAYOUTS_PATH);
 	}
 
-	private static final String layoutsPath =
+	private static final String _LAYOUTS_PATH =
 		"com/liferay/commerce/internal/australia.json";
 
 	@Reference
