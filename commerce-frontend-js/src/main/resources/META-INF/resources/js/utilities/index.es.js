@@ -108,3 +108,9 @@ export function launcher(Component, componentId, rootId, props) {
 
 	return componentInstance;
 }
+
+export default {
+	debounce,
+	launcher,
+	showNotification
+};

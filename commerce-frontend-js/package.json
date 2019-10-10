@@ -42,7 +42,7 @@
 		"jest-dom": "^3.0.0",
 		"liferay-frontend-common-css": "^1.0.4",
 		"liferay-lang-key-dev-loader": "^1.0.3",
-		"liferay-npm-scripts": "^10.1.4",
+		"liferay-npm-scripts": "^9.4.0",
 		"node-sass": "^4.11.0",
 		"react-testing-library": "^5.3.2",
 		"sass-loader": "^7.1.0",
