@@ -28,6 +28,9 @@ import com.liferay.commerce.model.CommerceOrderNote;
 import com.liferay.commerce.model.CommerceOrderPayment;
 import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.model.CommerceShipment;
+import com.liferay.commerce.notification.model.CommerceNotificationQueueEntry;
+import com.liferay.commerce.notification.model.CommerceNotificationTemplate;
+import com.liferay.commerce.notification.service.CommerceNotificationTemplateService;
 import com.liferay.commerce.order.web.internal.display.context.util.CommerceOrderRequestHelper;
 import com.liferay.commerce.order.web.internal.search.CommerceOrderItemSearch;
 import com.liferay.commerce.order.web.internal.search.CommerceOrderItemSearchTerms;
@@ -59,12 +62,14 @@ import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.search.SortFactoryUtil;
+import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -92,6 +97,8 @@ public class CommerceOrderEditDisplayContext {
 
 	public CommerceOrderEditDisplayContext(
 			CommerceChannelLocalService commerceChannelLocalService,
+			CommerceNotificationTemplateService
+				commerceNotificationTemplateService,
 			CommerceOrderService commerceOrderService,
 			CommerceOrderItemService commerceOrderItemService,
 			CommerceOrderNoteService commerceOrderNoteService,
@@ -101,10 +108,13 @@ public class CommerceOrderEditDisplayContext {
 			CommerceOrderPriceCalculation commerceOrderPriceCalculation,
 			CommerceProductPriceCalculation commerceProductPriceCalculation,
 			CommerceShipmentService commerceShipmentService,
-			ItemSelector itemSelector, RenderRequest renderRequest)
+			ItemSelector itemSelector, RenderRequest renderRequest,
+			UserLocalService userLocalService)
 		throws PortalException {
 
 		_commerceChannelLocalService = commerceChannelLocalService;
+		_commerceNotificationTemplateService =
+			commerceNotificationTemplateService;
 		_commerceOrderService = commerceOrderService;
 		_commerceOrderItemService = commerceOrderItemService;
 		_commerceOrderNoteService = commerceOrderNoteService;
@@ -115,6 +125,7 @@ public class CommerceOrderEditDisplayContext {
 		_commerceProductPriceCalculation = commerceProductPriceCalculation;
 		_commerceShipmentService = commerceShipmentService;
 		_itemSelector = itemSelector;
+		_userLocalService = userLocalService;
 
 		long commerceOrderId = ParamUtil.getLong(
 			renderRequest, "commerceOrderId");
@@ -171,6 +182,19 @@ public class CommerceOrderEditDisplayContext {
 		}
 
 		return sb.toString();
+	}
+
+	public String getCommerceNotificationTemplateType() throws PortalException {
+		CommerceNotificationQueueEntry commerceNotificationQueueEntry =
+			getCommerceNotificationQueueEntry();
+
+		CommerceNotificationTemplate commerceNotificationTemplate =
+			_commerceNotificationTemplateService.
+				getCommerceNotificationTemplate(
+					commerceNotificationQueueEntry.
+						getCommerceNotificationTemplateId());
+
+		return commerceNotificationTemplate.getType();
 	}
 
 	public CommerceOrder getCommerceOrder() {
@@ -583,6 +607,14 @@ public class CommerceOrderEditDisplayContext {
 		return itemSelectorURL.toString();
 	}
 
+	public User getNotificationUser(
+			CommerceNotificationQueueEntry commerceNotificationQueueEntry)
+		throws PortalException {
+
+		return _userLocalService.fetchUser(
+			commerceNotificationQueueEntry.getUserId());
+	}
+
 	public String getOrderByCol() {
 		return ParamUtil.getString(
 			_commerceOrderRequestHelper.getLiferayPortletRequest(),
@@ -839,6 +871,8 @@ public class CommerceOrderEditDisplayContext {
 	}
 
 	private final CommerceChannelLocalService _commerceChannelLocalService;
+	private final CommerceNotificationTemplateService
+		_commerceNotificationTemplateService;
 	private final CommerceOrder _commerceOrder;
 	private final Format _commerceOrderDateFormatDateTime;
 	private CommerceOrderItem _commerceOrderItem;
@@ -859,5 +893,6 @@ public class CommerceOrderEditDisplayContext {
 	private final ItemSelector _itemSelector;
 	private SearchContainer<CommerceOrderPayment> _paymentSearchContainer;
 	private SearchContainer<CommerceShipment> _shipmentSearchContainer;
+	private final UserLocalService _userLocalService;
 
 }
