@@ -186,10 +186,9 @@ public class CommerceNotificationQueueEntryLocalServiceImpl
 			OrderByComparator<CommerceNotificationQueueEntry>
 				orderByComparator) {
 
-		long classNameId = classNameLocalService.getClassNameId(className);
-
 		return commerceNotificationQueueEntryPersistence.findByG_C_C_S(
-			groupId, classNameId, classPK, sent, start, end, orderByComparator);
+			groupId, classNameLocalService.getClassNameId(className), classPK,
+			sent, start, end, orderByComparator);
 	}
 
 	@Override
@@ -202,10 +201,9 @@ public class CommerceNotificationQueueEntryLocalServiceImpl
 	public int getCommerceNotificationQueueEntriesCount(
 		long groupId, String className, long classPK, boolean sent) {
 
-		long classNameId = classNameLocalService.getClassNameId(className);
-
 		return commerceNotificationQueueEntryPersistence.countByG_C_C_S(
-			groupId, classNameId, classPK, sent);
+			groupId, classNameLocalService.getClassNameId(className), classPK,
+			sent);
 	}
 
 	@Override
