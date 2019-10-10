@@ -31,8 +31,7 @@ import org.osgi.service.component.annotations.Reference;
 	property = "commerce.region.starter.key=" + CuracaoCommerceRegionsStarter.CURACAO_NUMERIC_ISO_CODE,
 	service = CommerceRegionsStarter.class
 )
-public class CuracaoCommerceRegionsStarter
-	extends CommerceRegionsStarterBase implements CommerceRegionsStarter {
+public class CuracaoCommerceRegionsStarter extends BaseCommerceRegionsStarter {
 
 	public static final int CURACAO_NUMERIC_ISO_CODE = 531;
 
@@ -41,10 +40,10 @@ public class CuracaoCommerceRegionsStarter
 		start(
 			_commerceCountryLocalService, _commerceRegionLocalService,
 			_jsonFactory, serviceContext, CURACAO_NUMERIC_ISO_CODE,
-			layoutsPath);
+			_LAYOUTS_PATH);
 	}
 
-	private static final String layoutsPath =
+	private static final String _LAYOUTS_PATH =
 		"com/liferay/commerce/internal/curacao.json";
 
 	@Reference
