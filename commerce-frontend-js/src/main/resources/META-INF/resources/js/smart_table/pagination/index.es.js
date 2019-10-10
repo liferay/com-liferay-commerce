@@ -15,21 +15,20 @@ function Pagination(props) {
 				items={props.paginationEntries}
 				trigger={
 					<ClayButton displayType="unstyled">
-					{perPage} {Liferay.Language.get('items-per-page')}
-		
-					<ClayIcon symbol="caret-double-l" />
+						{perPage} {Liferay.Language.get('items-per-page')}
+						<ClayIcon symbol="caret-double-l" />
 					</ClayButton>
 				}
 			/>
-	
+
 			<ClayPaginationBar.Results />
-	
+
 			<ClayPaginationWithBasicItems
 				activePage={props.activePage}
 				onPageChange={props.onPageChange}
 				totalPages={props.totalItems}
 			/>
-	  	</ClayPaginationBar>
+		</ClayPaginationBar>
 	);
 }
 
@@ -41,13 +40,13 @@ Pagination.propTypes = {
 		PropTypes.shape({
 			label: PropTypes.oneOfType([
 				PropTypes.string.isRequired,
-				PropTypes.number.isRequired,
+				PropTypes.number.isRequired
 			]),
 			onClick: PropTypes.func
-		}).isRequired,
+		}).isRequired
 	),
 	paginationSelectedEntry: PropTypes.number.isRequired,
-	totalItems: PropTypes.number.isRequired,
-}
+	totalItems: PropTypes.number.isRequired
+};
 
 export default Pagination;
