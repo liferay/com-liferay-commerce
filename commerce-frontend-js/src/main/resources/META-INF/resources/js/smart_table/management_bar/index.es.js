@@ -6,7 +6,7 @@ import BulkActions from './components/BulkActions.es';
 import useAppState, {StoreProvider} from './components/Context.es';
 import NavBar from './components/NavBar.es';
 
-const ManagementBar = (props) => {
+const ManagementBar = props => {
 	const {state} = useAppState();
 	const [initialized, setInitialized] = useState(false);
 
@@ -14,23 +14,23 @@ const ManagementBar = (props) => {
 		if (!initialized) {
 			return setInitialized(true);
 		}
-		if(props.onFilterChange) {
+		if (props.onFilterChange) {
 			const serializedFilters = state.filters.concat({
 				label: '',
 				operator: 'contains',
 				slug: 'keyword',
 				type: 'text',
-				value: state.inputSearch.value,
+				value: state.inputSearch.value
 			});
 			props.onFilterChange(serializedFilters);
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [initialized, state.inputSearch.value, state]);
 
 	return (
 		<>
 			{props.selectedItemsId.length ? (
-				<BulkActions 
+				<BulkActions
 					bulkActions={props.bulkActions}
 					selectAllItems={props.selectAllItems}
 					selectedItemsId={props.selectedItemsId}
@@ -39,15 +39,13 @@ const ManagementBar = (props) => {
 			) : (
 				<NavBar />
 			)}
-			<ActiveFiltersBar
-				disabled={!!props.selectedItemsId.length}
-			/>
+			<ActiveFiltersBar disabled={!!props.selectedItemsId.length} />
 		</>
-	)
-}
+	);
+};
 
 const Wrapper = props => {
-	const {filters, ...otherProps } = props;
+	const {filters, ...otherProps} = props;
 	return (
 		<StoreProvider filters={filters}>
 			<ManagementBar {...otherProps} />
@@ -76,7 +74,7 @@ const baseValues = {
 		'isnotempty'
 	]),
 	slug: PropTypes.string
-}
+};
 
 Wrapper.propTypes = {
 	filters: PropTypes.arrayOf(
@@ -97,50 +95,50 @@ Wrapper.propTypes = {
 			}),
 			PropTypes.shape({
 				...baseValues,
-				items: PropTypes.arrayOf(PropTypes.shape({
-					label: PropTypes.string,
-					value: PropTypes.oneOfType([
-						PropTypes.string,
-						PropTypes.number
-					]),
-				})),
+				items: PropTypes.arrayOf(
+					PropTypes.shape({
+						label: PropTypes.string,
+						value: PropTypes.oneOfType([
+							PropTypes.string,
+							PropTypes.number
+						])
+					})
+				),
 				type: PropTypes.oneOf(['checkbox']).isRequired,
-				value: PropTypes.arrayOf(PropTypes.oneOfType([
-					PropTypes.string,
-					PropTypes.number
-				]))
+				value: PropTypes.arrayOf(
+					PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+				)
 			}),
 			PropTypes.shape({
 				...baseValues,
-				items: PropTypes.arrayOf(PropTypes.shape({
-					label: PropTypes.string,
-					value: PropTypes.oneOfType([
-						PropTypes.string,
-						PropTypes.number
-					]),
-				})),
+				items: PropTypes.arrayOf(
+					PropTypes.shape({
+						label: PropTypes.string,
+						value: PropTypes.oneOfType([
+							PropTypes.string,
+							PropTypes.number
+						])
+					})
+				),
 				type: PropTypes.oneOf(['select', 'radio']).isRequired,
-				value: PropTypes.oneOfType([
-					PropTypes.string,
-					PropTypes.number
-				])
+				value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 			}),
 			PropTypes.shape({
 				...baseValues,
 				type: PropTypes.oneOf(['date']).isRequired,
 				value: PropTypes.shape({
-					day: PropTypes.number,	
-					month: PropTypes.number,	
-					year: PropTypes.number,	
+					day: PropTypes.number,
+					month: PropTypes.number,
+					year: PropTypes.number
 				})
-			}),
+			})
 		])
 	),
-	onFilterChange: PropTypes.func.isRequired,
-}
+	onFilterChange: PropTypes.func.isRequired
+};
 
 Wrapper.defaultProps = {
 	filters: []
-}
+};
 
 export default Wrapper;

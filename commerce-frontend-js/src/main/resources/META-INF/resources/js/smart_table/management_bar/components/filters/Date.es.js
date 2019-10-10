@@ -9,7 +9,7 @@ const getDateObj = date => {
 	return {
 		day: date.getDate(),
 		month: date.getMonth(),
-		year: date.getFullYear(),
+		year: date.getFullYear()
 	};
 };
 
@@ -41,7 +41,6 @@ const DateFilter = props => {
 		);
 
 		setValue(newValue);
-
 	}
 
 	return (
@@ -56,15 +55,14 @@ const DateFilter = props => {
 				<ClayButton
 					className="btn-sm"
 					disabled={
-						prettifyDateValue(value) === prettifyDateValue(props.value) || !valid
+						prettifyDateValue(value) ===
+							prettifyDateValue(props.value) || !valid
 					}
 					onClick={() => actions.updateFilterValue(props.slug, value)}
 				>
-					{
-						props.panelType === 'edit' 
-						? Liferay.Language.get('edit-filter') 
-						: Liferay.Language.get('add-filter')
-					}
+					{props.panelType === 'edit'
+						? Liferay.Language.get('edit-filter')
+						: Liferay.Language.get('add-filter')}
 				</ClayButton>
 			</div>
 		</>

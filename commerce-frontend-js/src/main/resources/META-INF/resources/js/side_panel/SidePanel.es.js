@@ -31,22 +31,22 @@ export default class SidePanel extends React.Component {
 			window.addEventListener('resize', this.debouncedUpdateTop);
 			this.updateTop();
 		}
-		if(Liferay) {
+		if (Liferay) {
 			Liferay.on(OPEN_SIDE_PANEL, this.handlePanelOpenEvent);
 		}
 	}
-	
+
 	handlePanelOpenEvent(e) {
-		if(e.id !== this.props.id) {
-			return;
+		if (e.id !== this.props.id) {
+			return this.close();
 		}
 
 		this.open(e.options.url);
 
-		if(e.options.onAfterSubmit) {
+		if (e.options.onAfterSubmit) {
 			this.setState({
 				onAfterSubmit: e.options.onAfterSubmit
-			})
+			});
 		}
 	}
 
@@ -54,7 +54,7 @@ export default class SidePanel extends React.Component {
 		if (this.props.topAnchor) {
 			window.removeEventListener('resize', this.debouncedUpdateTop);
 		}
-		if(Liferay) {
+		if (Liferay) {
 			Liferay.detach(OPEN_SIDE_PANEL, this.handlePanelOpenEvent);
 		}
 	}
@@ -129,7 +129,7 @@ export default class SidePanel extends React.Component {
 		this.setState({
 			loading: false
 		});
-	
+
 		const iframeBody = this.iframeRef.current.contentDocument.querySelector(
 			'body'
 		);
@@ -137,12 +137,12 @@ export default class SidePanel extends React.Component {
 		iframeBody.classList.add('within-commerce-iframe');
 
 		const submitButton = iframeBody.querySelector('[type="submit"]');
-		if(submitButton) {
+		if (submitButton) {
 			submitButton.addEventListener('click', () => {
-				if(this.props.onSubmit) {
+				if (this.props.onSubmit) {
 					this.props.onSubmit();
 				}
-			})
+			});
 		}
 	}
 

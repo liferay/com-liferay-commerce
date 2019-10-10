@@ -2,7 +2,6 @@ import launcher from './entry.es';
 import './_gallery.scss';
 
 window.Gallery = launcher('gallery', 'gallery', {
-	onImageClick: console.log,
 	images: [
 		'#1abc9c',
 		'#2ecc71',
@@ -16,5 +15,6 @@ window.Gallery = launcher('gallery', 'gallery', {
 	].map(c => ({
 		id: c.slice(1),
 		url: `https://via.placeholder.com/200/${c.slice(1)}?text=%20`
-	}))
+	})),
+	onImageClick: () => {}
 });

@@ -7,17 +7,14 @@ export default class Images extends React.Component {
 			<div className={`commerce-gallery`}>
 				{this.props.images.map(img => (
 					<img
-						src={img.url}
-						key={img.url}
 						alt={img.url}
-						onMouseEnter={() => this.props.onMouseEnter(img.url)}
-						onMouseLeave={() => this.props.onMouseLeave(img.url)}
+						key={img.url}
 						onClick={() =>
 							this.props.onClick([
 								{
-									url: `/iframe.html?${Math.random()}`,
 									pageName: 'Edit',
-									slug: 'edit'
+									slug: 'edit',
+									url: `/iframe.html?${Math.random()}`
 								}
 								// {
 								// 	url: `/api/fake-img/${encodeURIComponent(img.url)}`,
@@ -26,6 +23,9 @@ export default class Images extends React.Component {
 								// },
 							])
 						}
+						onMouseEnter={() => this.props.onMouseEnter(img.url)}
+						onMouseLeave={() => this.props.onMouseLeave(img.url)}
+						src={img.url}
 					/>
 				))}
 			</div>

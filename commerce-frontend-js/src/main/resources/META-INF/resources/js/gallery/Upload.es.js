@@ -36,7 +36,7 @@ export default class Upload extends React.Component {
 	onDrop(event) {
 		event.preventDefault();
 
-		this.uploadFiles(event.dataTransfer.files);
+		// this.uploadFiles(event.dataTransfer.files);
 		this.setState({hightlight: false});
 	}
 
@@ -44,9 +44,9 @@ export default class Upload extends React.Component {
 		this.uploadFiles(evt.target.files);
 	}
 
-	uploadFiles(files) {
-		console.log(files);
-	}
+	// uploadFiles(files) {
+	// 	console.log(files);
+	// }
 
 	openFileDialog() {
 		this.fileInputRef.current.click();
@@ -58,18 +58,18 @@ export default class Upload extends React.Component {
 				className={`upload-image ${
 					this.state.hightlight ? 'is-dragging' : ''
 				}`}
+				onClick={() => this.openFileDialog()}
 				onDragEnter={e => this.onDragEnter(e)}
 				onDragLeave={e => this.onDragLeave(e)}
 				onDrop={e => this.onDrop(e)}
-				onClick={() => this.openFileDialog()}
 			>
 				Upload
 				<input
-					ref={this.fileInputRef}
 					className="file-input"
-					type="file"
 					multiple
 					onChange={e => this.onFilesAdded(e)}
+					ref={this.fileInputRef}
+					type="file"
 				/>
 			</div>
 		);

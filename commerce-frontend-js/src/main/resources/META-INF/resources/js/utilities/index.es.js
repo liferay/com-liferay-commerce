@@ -10,7 +10,7 @@ export function debounce(func, wait, immediate) {
 		function later() {
 			timeout = null;
 			if (!immediate) func.apply(context, args);
-		};
+		}
 		const callNow = immediate && !timeout;
 
 		clearTimeout(timeout);
@@ -52,14 +52,14 @@ if (!window.Liferay) {
 		fire: (name, payload) => {
 			const e = new CustomEvent(name, {
 				detail: payload
-			})
+			});
 			window.dispatchEvent(e);
 		},
 		on: (name, fn) => {
-			window.addEventListener(name, (e) => {
-				fn({...e, ...e.detail})
+			window.addEventListener(name, e => {
+				fn({...e, ...e.detail});
 			});
-		},
+		}
 	};
 }
 
@@ -72,12 +72,20 @@ export function launcher(Component, componentId, rootId, props) {
 
 	let componentInstance = null;
 
+	// eslint-disable-next-line
 	ReactDOM.render(
-		Component.prototype.render
-			? <Component ref={(e) => {componentInstance = e}} {...props} />
-			: <Component {...props} />,
+		Component.prototype.render ? (
+			<Component
+				ref={e => {
+					componentInstance = e;
+				}}
+				{...props}
+			/>
+		) : (
+			<Component {...props} />
+		),
 		portletFrame
-	)
+	);
 
 	function destroyComponent() {
 		try {

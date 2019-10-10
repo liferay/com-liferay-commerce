@@ -9,14 +9,14 @@ import SelectFilter from '../components/filters/Select.es';
 import TextFilter from '../components/filters/Text.es';
 
 export const filterSlugToComponentMap = {
-	checkbox : CheckboxesFilter,
-	date : DateFilter,
-	'date-time' : DateTimeFilter,
-	number : NumberFilter,
-	radio : RadioFilter,
-	select : SelectFilter,
-	text : TextFilter,
-}
+	checkbox: CheckboxesFilter,
+	date: DateFilter,
+	'date-time': DateTimeFilter,
+	number: NumberFilter,
+	radio: RadioFilter,
+	select: SelectFilter,
+	text: TextFilter
+};
 
 export const renderFilter = (item, panelType) => {
 	const Filter = filterSlugToComponentMap[item.type];

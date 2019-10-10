@@ -7,7 +7,7 @@ export const initialState = {
 		placeholder: Liferay.Language.get('search-item'),
 		value: ''
 	},
-	onFilterChange: null,
+	onFilterChange: null
 };
 
 const reducer = (state = initialState, action) => {

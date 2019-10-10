@@ -1,4 +1,3 @@
-
 export const prettifyCheckboxValue = (value, items) => {
 	const prettifiedValue = value
 		? value
@@ -49,12 +48,12 @@ export const prettifyDateTimeValue = value => {
 		value instanceof Date
 			? value
 			: new Date(
-				value.year,
-				value.month,
-				value.day,
-				value.hours,
-				value.minutes,
-				value.seconds
+					value.year,
+					value.month,
+					value.day,
+					value.hours,
+					value.minutes,
+					value.seconds
 			  );
 
 	return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();

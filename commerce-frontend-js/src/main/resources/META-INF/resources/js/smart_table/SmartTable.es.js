@@ -1,7 +1,7 @@
 import {ClayIconSpriteContext} from '@clayui/icon';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useState, useRef } from 'react';
+import React, {useState, useRef} from 'react';
 
 import SmartTableContext from './SmartTableContext.es';
 import ManagementBar from './management_bar/index.es';
@@ -28,27 +28,27 @@ function SmartTable(props) {
 	const formRef = useRef(null);
 
 	const selectItems = (checked, val = null) => {
-		if(!val) {
-			if(checked) {
-				setselectedItemsId(props.items.map(el => el.id))
+		if (!val) {
+			if (checked) {
+				setselectedItemsId(props.items.map(el => el.id));
 			} else {
-				setselectedItemsId([])
+				setselectedItemsId([]);
 			}
 		} else {
-			if(checked) {
-				setselectedItemsId(selectedItemsId.concat(val))
+			if (checked) {
+				setselectedItemsId(selectedItemsId.concat(val));
 			} else {
-				setselectedItemsId(selectedItemsId.filter(el => el !== val))
+				setselectedItemsId(selectedItemsId.filter(el => el !== val));
 			}
 		}
-	}
+	};
 
 	function loadData() {
-		console.log('reloading')
+		return;
 	}
 
 	const managementBar = (
-		<ManagementBar 
+		<ManagementBar
 			actionButton={{
 				icon: 'plus',
 				label: 'Add',
@@ -61,7 +61,7 @@ function SmartTable(props) {
 			selectedItemsId={selectedItemsId}
 			totalItemsCount={props.items.length}
 		/>
-	)
+	);
 
 	const table = (
 		<Table
@@ -71,10 +71,10 @@ function SmartTable(props) {
 			selectable={props.selectable}
 			selectedItemsId={selectedItemsId}
 		/>
-	)
+	);
 
 	return (
-		<SmartTableContext.Provider 
+		<SmartTableContext.Provider
 			value={{
 				formRef,
 				loadData,
@@ -88,7 +88,11 @@ function SmartTable(props) {
 						props.wrapperCssClasses
 					)}
 				>
-					<div className={classNames(props.managementBarWrapperCssClasses)}>
+					<div
+						className={classNames(
+							props.managementBarWrapperCssClasses
+						)}
+					>
 						{managementBar}
 					</div>
 					<div className={classNames(props.tableWrapperCssClasses)}>
@@ -97,11 +101,16 @@ function SmartTable(props) {
 				</div>
 				<div className={classNames(props.paginationWrapperCssClasses)}>
 					{props.showPagination && (
-						<Pagination 
+						<Pagination
 							currentPage={props.currentPage}
+							onDeltaChange={() => {}}
+							onEntryChange={() => {}}
+							onPageChange={() => {}}
 							pageSize={props.pageSize}
 							paginationEntries={props.paginationEntries}
-							paginationSelectedEntry={props.paginationSelectedEntry}
+							paginationSelectedEntry={
+								props.paginationSelectedEntry
+							}
 							totalItems={props.totalItems}
 						/>
 					)}
@@ -133,7 +142,7 @@ SmartTable.propTypes = {
 	tableWrapperCssClasses: PropTypes.string,
 	totalItems: PropTypes.number,
 	wrapTableIntoCard: PropTypes.bool,
-	wrapperCssClasses: PropTypes.string,
+	wrapperCssClasses: PropTypes.string
 };
 
 SmartTable.defaultProps = {

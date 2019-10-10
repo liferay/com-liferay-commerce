@@ -17,7 +17,7 @@ const Resume = props => {
 	const label = (
 		<ClayLabel
 			className={classNames(
-				"resume component-label tbar-label mr-2 btn p-1",
+				'resume component-label tbar-label mr-2 btn p-1',
 				props.disabled && 'disabled',
 				open && 'border-primary'
 			)}
@@ -28,7 +28,10 @@ const Resume = props => {
 			role="button"
 		>
 			<div className="d-flex">
-				<ClayIcon className="mr-2" symbol={open ? 'caret-top' : 'caret-bottom'} />
+				<ClayIcon
+					className="mr-2"
+					symbol={open ? 'caret-top' : 'caret-bottom'}
+				/>
 				<div className="label-section">
 					{props.label}: {prettifiedValue}
 				</div>
@@ -41,16 +44,14 @@ const Resume = props => {
 			active={open}
 			className="d-inline-flex"
 			onActiveChange={setOpen}
-			trigger={
-				label
-			}
+			trigger={label}
 		>
 			<ClayDropDown.ItemList>
 				<div className="p-3">{renderFilter(props, 'edit')}</div>
 			</ClayDropDown.ItemList>
 		</ClayDropDown>
-	)
-	
+	);
+
 	return props.disabled ? label : dropDown;
 };
 

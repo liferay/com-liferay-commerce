@@ -36,8 +36,8 @@ export function StoreProvider({children, ...stateProps}) {
 
 export const StoreConsumer = StoreContext.Consumer;
 
-export function useAppState(){
+export function useAppState() {
 	return useContext(StoreContext);
-} 
+}
 
 export default useAppState;

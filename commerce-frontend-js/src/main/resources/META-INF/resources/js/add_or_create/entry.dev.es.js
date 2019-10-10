@@ -9,5 +9,5 @@ window.AddOrCreate = launcher('addOrCreate', 'add-or-create', {
 			label: `Suggestion ${value} ${i}`
 		})),
 	// eslint-disable-next-line no-console
-	onSubmit: console.log,
+	onSubmit: console.log
 });

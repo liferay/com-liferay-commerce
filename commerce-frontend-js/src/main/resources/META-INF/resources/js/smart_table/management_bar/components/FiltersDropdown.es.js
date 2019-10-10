@@ -44,14 +44,14 @@ const FiltersDropdown = () => {
 					className="btn btn-unstyled dropdown-toggle p-2 text-secondary"
 					data-toggle="dropdown"
 				>
-					<span className="navbar-text-truncate">{Liferay.Language.get('add-filters')}</span>
-					{
-						active ? (
-							<Icon className="ml-2" symbol="caret-top" />
-						) : (
-							<Icon className="ml-2" symbol="caret-bottom" />
-						)
-					}
+					<span className="navbar-text-truncate">
+						{Liferay.Language.get('add-filters')}
+					</span>
+					{active ? (
+						<Icon className="ml-2" symbol="caret-top" />
+					) : (
+						<Icon className="ml-2" symbol="caret-bottom" />
+					)}
 				</button>
 			}
 		>
@@ -78,7 +78,9 @@ const FiltersDropdown = () => {
 					</ClayDropDown.ItemList>
 				</>
 			) : (
-				<div className="px-3 py-2 text-muted">{Liferay.Language.get('no-filters-available')}</div>
+				<div className="px-3 py-2 text-muted">
+					{Liferay.Language.get('no-filters-available')}
+				</div>
 			)}
 		</ClayDropDown>
 	) : null;

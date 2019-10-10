@@ -11,10 +11,10 @@ const Modal = props => {
 	}
 
 	function reset() {
-		if(props.onClose) {
+		if (props.onClose) {
 			props.onClose();
 		}
-		if(typeof props.visible === 'undefined') {
+		if (typeof props.visible === 'undefined') {
 			setVisible(false);
 		}
 		setIframeLoadingCounter(0);
@@ -39,7 +39,7 @@ const Modal = props => {
 	}, [props.visible]);
 
 	useEffect(() => {
-		if(!props.id) {
+		if (!props.id) {
 			return;
 		}
 
@@ -56,7 +56,7 @@ const Modal = props => {
 		} else {
 			window.addEventListener(`${props.id}-open`, open);
 		}
-	}, [props.id , props.portletId]);
+	}, [props.id, props.portletId]);
 
 	function _handleIframeLoad() {
 		setIframeLoadingCounter(iframeLoadingCounter + 1);
@@ -71,7 +71,7 @@ const Modal = props => {
 			default:
 				break;
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [iframeLoadingCounter]);
 
 	function _handleFormSubmit() {
@@ -88,7 +88,7 @@ const Modal = props => {
 		const iframeDocument = iframeRef.current.contentDocument;
 		const iframeWindow = iframeRef.current.contentWindow;
 
-		if(iframeDocument) {
+		if (iframeDocument) {
 			iframeDocument
 				.querySelector('body')
 				.classList.add('within-commerce-iframe');
@@ -217,12 +217,12 @@ Modal.propTypes = {
 	submitActiveAtLoading: PropTypes.bool,
 	submitLabel: PropTypes.string,
 	title: PropTypes.string,
-	url: PropTypes.string,
+	url: PropTypes.string
 };
 
 Modal.defaultProps = {
 	showCancel: false,
-	showSubmit: false,
-}
+	showSubmit: false
+};
 
 export default Modal;

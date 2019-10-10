@@ -1,5 +1,4 @@
 import React from 'react';
-// import './zoom.scss';
 
 export default class Zoom extends React.Component {
 	constructor(props) {
@@ -17,7 +16,9 @@ export default class Zoom extends React.Component {
 	imageLoaded(image) {
 		return () => {
 			this.setState({loading: false});
-			this.zoom.current && this.zoom.current.appendChild(image);
+			if (this.zoom.current) {
+				this.zoom.current.appendChild(image);
+			}
 		};
 	}
 

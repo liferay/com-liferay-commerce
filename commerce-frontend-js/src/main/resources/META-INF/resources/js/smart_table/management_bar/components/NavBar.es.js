@@ -27,9 +27,13 @@ const NavBar = () => {
 									<input
 										className="form-control input-group-inset input-group-inset-after"
 										onChange={e =>
-											actions.updateInputSearchValue(e.target.value)
+											actions.updateInputSearchValue(
+												e.target.value
+											)
 										}
-										placeholder={Liferay.Language.get('search-for')}
+										placeholder={Liferay.Language.get(
+											'search-for'
+										)}
 										type="text"
 										value={state.inputSearch.value || ''}
 									/>

@@ -6,7 +6,9 @@ import Expose from './Expose.es';
 function Suggestions({action, list, onHover, selected}) {
 	return (
 		<>
-			<ClayList.Header>{Liferay.Language.get('add-an-existing-specification')}</ClayList.Header>
+			<ClayList.Header>
+				{Liferay.Language.get('add-an-existing-specification')}
+			</ClayList.Header>
 			{list.map((s, i) => (
 				<ClayList.Item
 					className={selected === i + 1 ? 'is-selected' : ''}
@@ -61,7 +63,7 @@ class AddOrCreateBase extends React.Component {
 			focus: true
 		});
 		window.addEventListener('keydown', this.handleKeyDown);
-		if(this.props.onFocusIn) {
+		if (this.props.onFocusIn) {
 			this.props.onFocusIn();
 		}
 		this.input.current.focus();
@@ -155,7 +157,7 @@ class AddOrCreateBase extends React.Component {
 
 	handleFocusOut() {
 		this._timeoutID = setTimeout(() => {
-			if(this.props.onFocusOut) {
+			if (this.props.onFocusOut) {
 				this.props.onFocusOut();
 			}
 		}, 0);
@@ -231,16 +233,14 @@ class AddOrCreateBase extends React.Component {
 										{this.state.value}
 									</ClayList.ItemTitle>
 								</ClayList.ItemField>
-
 								<ClayList.ItemField>
 									<button
 										className="btn btn-link btn-sm"
 										onClick={e => this.action(e, 0)}
 										type="button"
-									>
-									</button>
+									></button>
 								</ClayList.ItemField>
-										Create new specification
+								Create new specification
 							</ClayList.Item>
 
 							{this.state.suggestions.length ? (

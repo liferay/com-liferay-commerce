@@ -1,9 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 function Default(props) {
-    return (
-        <>{props.value}</>
-    )
+	return <>{props.value}</>;
 }
 
 export default Default;

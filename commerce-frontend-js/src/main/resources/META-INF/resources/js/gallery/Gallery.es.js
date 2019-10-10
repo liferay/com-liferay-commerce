@@ -18,7 +18,7 @@ export default class Gallery extends React.Component {
 	}
 
 	onClick(tabs) {
-		if(this.props.onImageClick) {
+		if (this.props.onImageClick) {
 			this.props.onImageClick(tabs);
 		}
 	}
@@ -44,7 +44,7 @@ export default class Gallery extends React.Component {
 						onClick={this.onClick}
 						onMouseEnter={this.onMouseEnter}
 						onMouseLeave={this.onMouseLeave}
-						/>
+					/>
 				</div>
 				<div className="col-sm">
 					<Upload />

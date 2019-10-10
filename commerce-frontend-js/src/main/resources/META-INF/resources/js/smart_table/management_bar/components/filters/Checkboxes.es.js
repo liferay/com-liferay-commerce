@@ -52,11 +52,9 @@ const CheckboxesFilter = props => {
 					disabled={value === props.value}
 					onClick={() => actions.updateFilterValue(props.slug, value)}
 				>
-					{
-						props.panelType === 'edit' 
-							? Liferay.Language.get('edit-filter') 
-							: Liferay.Language.get('add-filter')
-					}
+					{props.panelType === 'edit'
+						? Liferay.Language.get('edit-filter')
+						: Liferay.Language.get('add-filter')}
 				</ClayButton>
 			</div>
 		</>

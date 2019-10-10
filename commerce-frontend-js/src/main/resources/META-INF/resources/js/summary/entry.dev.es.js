@@ -24,8 +24,8 @@ launcher('summary', 'summary', {
 		},
 		{
 			label: 'Grand Total',
-			value: '$ 2,258.50',
-			style: 'big'
+			style: 'big',
+			value: '$ 2,258.50'
 		},
 		{
 			style: 'divider'

@@ -102,6 +102,6 @@ Summary.propTypes = {
 
 Summary.defaultProps = {
 	items: []
-}
+};
 
 export default Summary;

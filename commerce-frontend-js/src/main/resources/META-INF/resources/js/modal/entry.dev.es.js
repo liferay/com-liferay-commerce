@@ -16,12 +16,8 @@ const props = {
 	spritemap: './assets/icons.svg',
 	submitLabel: 'Create',
 	title: 'Title',
-	url: 'http://localhost:9000/form.html',
+	url: 'http://localhost:9000/form.html'
 };
-
-// declare global {
-//     interface Window { modal: any; }
-// }
 
 modalLauncher('modal', 'modal-root', props);
 

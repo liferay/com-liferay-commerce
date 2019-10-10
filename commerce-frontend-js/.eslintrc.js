@@ -15,12 +15,12 @@
 module.exports = {
 	extends: ['liferay/react'],
 	parserOptions: {
-        ecmaVersion: 2018,
-    },
+		ecmaVersion: 2018
+	},
 	env: {
 		browser: true,
 		node: true
-    },
+	},
 	globals: {
 		Liferay: 'readonly',
 		AUI: 'readonly'

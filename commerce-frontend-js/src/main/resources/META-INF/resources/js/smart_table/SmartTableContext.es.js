@@ -1,9 +1,9 @@
 import React from 'react';
 
 const SmartTableContext = React.createContext({
-    formRef: null,
-    loadData: () => {},
-    sidePanelId: null
+	formRef: null,
+	loadData: () => {},
+	sidePanelId: null
 });
 
-export default SmartTableContext
+export default SmartTableContext;
