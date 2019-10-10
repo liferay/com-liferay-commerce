@@ -16,6 +16,7 @@ package com.liferay.commerce.order.web.internal.portlet.action;
 
 import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.exception.NoSuchOrderException;
+import com.liferay.commerce.notification.service.CommerceNotificationTemplateService;
 import com.liferay.commerce.order.web.internal.display.context.CommerceOrderEditDisplayContext;
 import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelService;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
@@ -29,6 +30,7 @@ import com.liferay.commerce.service.CommerceShipmentService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
+import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -60,13 +62,14 @@ public class EditCommerceOrderRequestedDeliveryDateMVCRenderCommand
 		try {
 			CommerceOrderEditDisplayContext commerceOrderEditDisplayContext =
 				new CommerceOrderEditDisplayContext(
-					_commerceChannelLocalService, _commerceOrderService,
+					_commerceChannelLocalService,
+					_commerceNotificationTemplateService, _commerceOrderService,
 					_commerceOrderItemService, _commerceOrderNoteService,
 					_commerceOrderPaymentLocalService,
 					_commercePaymentMethodGroupRelService,
 					_commerceOrderPriceCalculation,
 					_commerceProductPriceCalculation, _commerceShipmentService,
-					_itemSelector, renderRequest);
+					_itemSelector, renderRequest, _userLocalService);
 
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -89,6 +92,10 @@ public class EditCommerceOrderRequestedDeliveryDateMVCRenderCommand
 
 	@Reference
 	private CommerceChannelLocalService _commerceChannelLocalService;
+
+	@Reference
+	private CommerceNotificationTemplateService
+		_commerceNotificationTemplateService;
 
 	@Reference
 	private CommerceOrderItemService _commerceOrderItemService;
@@ -117,5 +124,8 @@ public class EditCommerceOrderRequestedDeliveryDateMVCRenderCommand
 
 	@Reference
 	private ItemSelector _itemSelector;
+
+	@Reference
+	private UserLocalService _userLocalService;
 
 }
