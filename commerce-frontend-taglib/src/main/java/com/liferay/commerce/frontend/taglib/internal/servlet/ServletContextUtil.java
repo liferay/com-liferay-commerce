@@ -150,6 +150,7 @@ public class ServletContextUtil {
 		_filterFactoryRegistry = filterFactoryRegistry;
 	}
 
+	@Reference(unbind = "-")
 	protected void setNPMResolver(NPMResolver npmResolver) {
 		_npmResolver = npmResolver;
 	}
