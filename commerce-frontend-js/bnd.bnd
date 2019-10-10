@@ -1,0 +1,6 @@
+Bundle-Name: Liferay Commerce Frontend Js
+Bundle-SymbolicName: com.liferay.commerce.frontend.js
+Bundle-Version: 1.0.0
+Export-Package: com.liferay.commerce.frontend.js.servlet.taglib
+Liferay-JS-Submodules-Bridge: commerce-frontend-js
+Web-ContextPath: /commerce-frontend-js
