@@ -20,8 +20,8 @@ import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.permission.CommerceProductViewPermission;
-import com.liferay.commerce.product.util.CPContentContributor;
-import com.liferay.commerce.product.util.CPContentContributorRegistry;
+import com.liferay.commerce.product.util.CPHttpContentContributor;
+import com.liferay.commerce.product.util.CPHttpContentContributorRegistry;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -108,15 +108,17 @@ public class CheckCPInstanceMVCActionCommand extends BaseMVCActionCommand {
 
 				jsonObject.put("sku", cpInstance.getSku());
 
-				List<CPContentContributor> cpContentContributors =
-					_cpContentContributorRegistry.getCPContentContributors();
+				List<CPHttpContentContributor> cpHttpContentContributors =
+					_cpHttpContentContributorRegistry.
+						getCPHttpContentContributors();
 
-				for (CPContentContributor cpContentContributor :
-						cpContentContributors) {
+				for (CPHttpContentContributor cpHttpContentContributor :
+						cpHttpContentContributors) {
 
-					JSONObject valueJSONObject = cpContentContributor.getValue(
-						cpInstance,
-						_portal.getHttpServletRequest(actionRequest));
+					JSONObject valueJSONObject =
+						cpHttpContentContributor.getValue(
+							cpInstance,
+							_portal.getHttpServletRequest(actionRequest));
 
 					Iterator<String> iterator = valueJSONObject.keys();
 
@@ -166,7 +168,7 @@ public class CheckCPInstanceMVCActionCommand extends BaseMVCActionCommand {
 	private CommerceProductViewPermission _commerceProductViewPermission;
 
 	@Reference
-	private CPContentContributorRegistry _cpContentContributorRegistry;
+	private CPHttpContentContributorRegistry _cpHttpContentContributorRegistry;
 
 	@Reference
 	private CPInstanceHelper _cpInstanceHelper;

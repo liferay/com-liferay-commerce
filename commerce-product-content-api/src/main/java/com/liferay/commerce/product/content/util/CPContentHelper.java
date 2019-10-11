@@ -65,10 +65,6 @@ public interface CPContentHelper {
 			HttpServletRequest httpServletRequest)
 		throws PortalException;
 
-	public Object getCPContentContributorValue(
-			String contributorKey, HttpServletRequest httpServletRequest)
-		throws Exception;
-
 	public String getCPContentRendererKey(
 		String type, RenderRequest renderRequest);
 
@@ -77,6 +73,10 @@ public interface CPContentHelper {
 	public List<CPDefinitionSpecificationOptionValue>
 			getCPDefinitionSpecificationOptionValues(long cpDefinitionId)
 		throws PortalException;
+
+	public Object getCPHttpContentContributorValue(
+			String contributorKey, HttpServletRequest httpServletRequest)
+		throws Exception;
 
 	public List<CPOptionCategory> getCPOptionCategories(long companyId);
 

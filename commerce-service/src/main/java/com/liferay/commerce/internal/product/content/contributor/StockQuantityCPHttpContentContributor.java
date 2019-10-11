@@ -18,11 +18,11 @@ import com.liferay.commerce.inventory.CPDefinitionInventoryEngine;
 import com.liferay.commerce.inventory.CPDefinitionInventoryEngineRegistry;
 import com.liferay.commerce.inventory.engine.CommerceInventoryEngine;
 import com.liferay.commerce.model.CPDefinitionInventory;
-import com.liferay.commerce.product.constants.CPContentContributorConstants;
+import com.liferay.commerce.product.constants.CPHttpContentContributorConstants;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
-import com.liferay.commerce.product.util.CPContentContributor;
+import com.liferay.commerce.product.util.CPHttpContentContributor;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONFactory;
@@ -43,14 +43,15 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(
 	immediate = true,
-	property = "commerce.product.content.contributor.name=" + CPContentContributorConstants.AVAILABILITY_NAME,
-	service = CPContentContributor.class
+	property = "commerce.product.content.contributor.name=" + CPHttpContentContributorConstants.STOCK_QUANTITY_NAME,
+	service = CPHttpContentContributor.class
 )
-public class AvailabilityCPContentContributor implements CPContentContributor {
+public class StockQuantityCPHttpContentContributor
+	implements CPHttpContentContributor {
 
 	@Override
 	public String getName() {
-		return CPContentContributorConstants.AVAILABILITY_NAME;
+		return CPHttpContentContributorConstants.STOCK_QUANTITY_NAME;
 	}
 
 	@Override
@@ -72,10 +73,6 @@ public class AvailabilityCPContentContributor implements CPContentContributor {
 			return jsonObject;
 		}
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)httpServletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
 		CPDefinitionInventory cpDefinitionInventory =
 			_cpDefinitionInventoryLocalService.
 				fetchCPDefinitionInventoryByCPDefinitionId(
@@ -85,34 +82,21 @@ public class AvailabilityCPContentContributor implements CPContentContributor {
 			_cpDefinitionInventoryEngineRegistry.getCPDefinitionInventoryEngine(
 				cpDefinitionInventory);
 
-		boolean displayAvailability =
-			cpDefinitionInventoryEngine.isDisplayAvailability(cpInstance);
+		boolean displayStockQuantity =
+			cpDefinitionInventoryEngine.isDisplayStockQuantity(cpInstance);
 
-		boolean available = false;
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
-		if (_commerceInventoryEngine.getStockQuantity(
-				cpInstance.getCompanyId(), commerceChannel.getGroupId(),
-				cpInstance.getSku()) >
-					cpDefinitionInventoryEngine.getMinStockQuantity(
-						cpInstance)) {
-
-			available = true;
-		}
-
-		if (displayAvailability && available) {
+		if (displayStockQuantity) {
 			jsonObject.put(
-				CPContentContributorConstants.AVAILABILITY_NAME,
-				LanguageUtil.get(
-					themeDisplay.getLocale(),
-					CPContentContributorConstants.AVAILABLE));
-		}
-
-		if (displayAvailability && !available) {
-			jsonObject.put(
-				CPContentContributorConstants.AVAILABILITY_NAME,
-				LanguageUtil.get(
-					themeDisplay.getLocale(),
-					CPContentContributorConstants.UNAVAILABLE));
+				CPHttpContentContributorConstants.STOCK_QUANTITY_NAME,
+				LanguageUtil.format(
+					themeDisplay.getLocale(), "stock-quantity-x",
+					_commerceInventoryEngine.getStockQuantity(
+						cpInstance.getCompanyId(), commerceChannel.getGroupId(),
+						cpInstance.getSku())));
 		}
 
 		return jsonObject;

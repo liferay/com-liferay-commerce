@@ -12,28 +12,17 @@
  * details.
  */
 
-package com.liferay.commerce.product.constants;
+package com.liferay.commerce.product.util;
+
+import java.util.List;
 
 /**
  * @author Alessio Antonio Rendina
  */
-public class CPContentContributorConstants {
+public interface CPHttpContentContributorRegistry {
 
-	public static final String AVAILABILITY_ESTIMATE_NAME =
-		"availabilityEstimate";
+	public CPHttpContentContributor getCPHttpContentContributor(String key);
 
-	public static final String AVAILABILITY_NAME = "availability";
-
-	public static final String AVAILABLE = "available";
-
-	public static final String PRICE = "price";
-
-	public static final String PROMO_PRICE = "promoPrice";
-
-	public static final String STOCK_QUANTITY_NAME = "stockQuantity";
-
-	public static final String SUBSCRIPTION_INFO = "subscriptionInfo";
-
-	public static final String UNAVAILABLE = "unavailable";
+	public List<CPHttpContentContributor> getCPHttpContentContributors();
 
 }

@@ -41,19 +41,6 @@ import org.osgi.service.component.annotations.Reference;
 public class CPDataSourceRegistryImpl implements CPDataSourceRegistry {
 
 	@Override
-	public List<CPHttpDataSource> getCPHttpDataSources() {
-		List<CPHttpDataSource> cpHttpDataSources = new ArrayList<>();
-
-		for (CPHttpDataSource cpHttpDataSource : _serviceTrackerList) {
-			if (Validator.isNotNull(cpHttpDataSource.getName())) {
-				cpHttpDataSources.add(cpHttpDataSource);
-			}
-		}
-
-		return Collections.unmodifiableList(cpHttpDataSources);
-	}
-
-	@Override
 	public CPHttpDataSource getCPHttpDataSource(String key) {
 		if (Validator.isNull(key)) {
 			return null;
@@ -75,6 +62,19 @@ public class CPDataSourceRegistryImpl implements CPDataSourceRegistry {
 		}
 
 		return null;
+	}
+
+	@Override
+	public List<CPHttpDataSource> getCPHttpDataSources() {
+		List<CPHttpDataSource> cpHttpDataSources = new ArrayList<>();
+
+		for (CPHttpDataSource cpHttpDataSource : _serviceTrackerList) {
+			if (Validator.isNotNull(cpHttpDataSource.getName())) {
+				cpHttpDataSources.add(cpHttpDataSource);
+			}
+		}
+
+		return Collections.unmodifiableList(cpHttpDataSources);
 	}
 
 	@Activate

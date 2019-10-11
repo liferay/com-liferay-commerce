@@ -14,12 +14,12 @@
 
 package com.liferay.commerce.internal.product.content.contributor;
 
-import com.liferay.commerce.product.constants.CPContentContributorConstants;
+import com.liferay.commerce.product.constants.CPHttpContentContributorConstants;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPSubscriptionInfo;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
-import com.liferay.commerce.product.util.CPContentContributor;
+import com.liferay.commerce.product.util.CPHttpContentContributor;
 import com.liferay.commerce.product.util.CPSubscriptionType;
 import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
 import com.liferay.petra.string.CharPool;
@@ -42,15 +42,15 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(
 	immediate = true,
-	property = "commerce.product.content.contributor.name=" + CPContentContributorConstants.SUBSCRIPTION_INFO,
-	service = CPContentContributor.class
+	property = "commerce.product.content.contributor.name=" + CPHttpContentContributorConstants.SUBSCRIPTION_INFO,
+	service = CPHttpContentContributor.class
 )
-public class SubscriptionInfoCPContentContributor
-	implements CPContentContributor {
+public class SubscriptionInfoCPHttpContentContributor
+	implements CPHttpContentContributor {
 
 	@Override
 	public String getName() {
-		return CPContentContributorConstants.SUBSCRIPTION_INFO;
+		return CPHttpContentContributorConstants.SUBSCRIPTION_INFO;
 	}
 
 	@Override
@@ -76,7 +76,8 @@ public class SubscriptionInfoCPContentContributor
 			cpInstance.getCPSubscriptionInfo(), httpServletRequest);
 
 		jsonObject.put(
-			CPContentContributorConstants.SUBSCRIPTION_INFO, subscriptionInfo);
+			CPHttpContentContributorConstants.SUBSCRIPTION_INFO,
+			subscriptionInfo);
 
 		return jsonObject;
 	}

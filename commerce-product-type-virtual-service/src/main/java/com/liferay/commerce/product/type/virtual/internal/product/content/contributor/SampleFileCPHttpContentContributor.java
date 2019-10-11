@@ -19,7 +19,7 @@ import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting;
 import com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingLocalService;
 import com.liferay.commerce.product.type.virtual.util.VirtualCPTypeHelper;
-import com.liferay.commerce.product.util.CPContentContributor;
+import com.liferay.commerce.product.util.CPHttpContentContributor;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -40,10 +40,11 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(
 	immediate = true,
-	property = "commerce.product.content.contributor.name=" + SampleFileCPContentContributor.NAME,
-	service = CPContentContributor.class
+	property = "commerce.product.content.contributor.name=" + SampleFileCPHttpContentContributor.NAME,
+	service = CPHttpContentContributor.class
 )
-public class SampleFileCPContentContributor implements CPContentContributor {
+public class SampleFileCPHttpContentContributor
+	implements CPHttpContentContributor {
 
 	public static final String NAME = "sampleFile";
 

@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author Marco Leo
  * @author Alessio Antonio Rendina
  */
-public interface CPContentContributor {
+public interface CPHttpContentContributor {
 
 	public String getName();
 

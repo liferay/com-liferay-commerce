@@ -21,8 +21,8 @@ import java.util.List;
  */
 public interface CPDataSourceRegistry {
 
-	public List<CPHttpDataSource> getCPHttpDataSources();
-
 	public CPHttpDataSource getCPHttpDataSource(String key);
+
+	public List<CPHttpDataSource> getCPHttpDataSources();
 
 }

@@ -14,25 +14,26 @@
 
 package com.liferay.commerce.internal.product.content.contributor;
 
+import com.liferay.commerce.constants.CommerceWebKeys;
+import com.liferay.commerce.context.CommerceContext;
+import com.liferay.commerce.currency.model.CommerceMoney;
 import com.liferay.commerce.inventory.CPDefinitionInventoryEngine;
 import com.liferay.commerce.inventory.CPDefinitionInventoryEngineRegistry;
-import com.liferay.commerce.inventory.engine.CommerceInventoryEngine;
 import com.liferay.commerce.model.CPDefinitionInventory;
-import com.liferay.commerce.product.constants.CPContentContributorConstants;
+import com.liferay.commerce.price.CommerceProductPrice;
+import com.liferay.commerce.price.CommerceProductPriceCalculation;
+import com.liferay.commerce.product.constants.CPHttpContentContributorConstants;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
-import com.liferay.commerce.product.util.CPContentContributor;
+import com.liferay.commerce.product.util.CPHttpContentContributor;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalService;
-import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Portal;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.util.WebKeys;
+
+import java.math.BigDecimal;
 
 import java.util.Locale;
 
@@ -43,19 +44,17 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Marco Leo
- * @author Alessio Antonio Rendina
  */
 @Component(
 	immediate = true,
-	property = "commerce.product.content.contributor.name=" + CPContentContributorConstants.AVAILABILITY_ESTIMATE_NAME,
-	service = CPContentContributor.class
+	property = "commerce.product.content.contributor.name=" + CPHttpContentContributorConstants.PRICE,
+	service = CPHttpContentContributor.class
 )
-public class AvailabilityEstimateCPContentContributor
-	implements CPContentContributor {
+public class PriceCPHttpContentContributor implements CPHttpContentContributor {
 
 	@Override
 	public String getName() {
-		return CPContentContributorConstants.AVAILABILITY_ESTIMATE_NAME;
+		return CPHttpContentContributorConstants.PRICE;
 	}
 
 	@Override
@@ -77,10 +76,6 @@ public class AvailabilityEstimateCPContentContributor
 			return jsonObject;
 		}
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)httpServletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
 		CPDefinitionInventory cpDefinitionInventory =
 			_cpDefinitionInventoryLocalService.
 				fetchCPDefinitionInventoryByCPDefinitionId(
@@ -90,45 +85,48 @@ public class AvailabilityEstimateCPContentContributor
 			_cpDefinitionInventoryEngineRegistry.getCPDefinitionInventoryEngine(
 				cpDefinitionInventory);
 
-		boolean available = false;
+		CommerceContext commerceContext =
+			(CommerceContext)httpServletRequest.getAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT);
 
-		if (_commerceInventoryEngine.getStockQuantity(
-				cpInstance.getCompanyId(), commerceChannel.getGroupId(),
-				cpInstance.getSku()) >
-					cpDefinitionInventoryEngine.getMinStockQuantity(
-						cpInstance)) {
+		CommerceProductPrice commerceProductPrice =
+			_commerceProductPriceCalculation.getCommerceProductPrice(
+				cpInstance.getCPInstanceId(),
+				cpDefinitionInventoryEngine.getMinOrderQuantity(cpInstance),
+				commerceContext);
 
-			available = true;
-		}
+		CommerceMoney unitPriceMoney = commerceProductPrice.getUnitPrice();
 
-		if (!available) {
+		if (unitPriceMoney != null) {
+			Locale locale = _portal.getLocale(httpServletRequest);
+
 			jsonObject.put(
-				CPContentContributorConstants.AVAILABILITY_ESTIMATE_NAME,
-				getAvailabilityEstimateLabel(
-					themeDisplay.getLocale(),
-					cpDefinitionInventoryEngine.getAvailabilityEstimate(
-						cpInstance, themeDisplay.getLocale())));
+				CPHttpContentContributorConstants.PRICE,
+				unitPriceMoney.format(locale));
+
+			CommerceMoney promoPriceMoney =
+				commerceProductPrice.getUnitPromoPrice();
+
+			BigDecimal promoPrice = promoPriceMoney.getPrice();
+
+			if ((promoPriceMoney != null) &&
+				(promoPrice.compareTo(BigDecimal.ZERO) > 0) &&
+				(promoPrice.compareTo(unitPriceMoney.getPrice()) <= 0)) {
+
+				jsonObject.put(
+					CPHttpContentContributorConstants.PROMO_PRICE,
+					promoPriceMoney.format(locale));
+			}
 		}
 
 		return jsonObject;
-	}
-
-	protected String getAvailabilityEstimateLabel(
-		Locale locale, String availabilityEstimate) {
-
-		if (Validator.isNull(availabilityEstimate)) {
-			return StringPool.BLANK;
-		}
-
-		return LanguageUtil.format(
-			locale, "product-will-be-available-in-x", availabilityEstimate);
 	}
 
 	@Reference
 	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
-	private CommerceInventoryEngine _commerceInventoryEngine;
+	private CommerceProductPriceCalculation _commerceProductPriceCalculation;
 
 	@Reference
 	private CPDefinitionInventoryEngineRegistry

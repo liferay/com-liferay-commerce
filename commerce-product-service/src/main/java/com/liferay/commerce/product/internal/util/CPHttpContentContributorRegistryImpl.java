@@ -14,8 +14,8 @@
 
 package com.liferay.commerce.product.internal.util;
 
-import com.liferay.commerce.product.util.CPContentContributor;
-import com.liferay.commerce.product.util.CPContentContributorRegistry;
+import com.liferay.commerce.product.util.CPHttpContentContributor;
+import com.liferay.commerce.product.util.CPHttpContentContributorRegistry;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerCustomizerFactory;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerCustomizerFactory.ServiceWrapper;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMap;
@@ -37,21 +37,21 @@ import org.osgi.service.component.annotations.Deactivate;
 /**
  * @author Alessio Antonio Rendina
  */
-@Component(immediate = true, service = CPContentContributorRegistry.class)
-public class CPContentContributorRegistryImpl
-	implements CPContentContributorRegistry {
+@Component(immediate = true, service = CPHttpContentContributorRegistry.class)
+public class CPHttpContentContributorRegistryImpl
+	implements CPHttpContentContributorRegistry {
 
 	@Override
-	public CPContentContributor getCPContentContributor(String key) {
+	public CPHttpContentContributor getCPHttpContentContributor(String key) {
 		if (Validator.isNull(key)) {
 			return null;
 		}
 
-		ServiceWrapper<CPContentContributor>
-			cpContentContributorServiceWrapper = _serviceTrackerMap.getService(
-				key);
+		ServiceWrapper<CPHttpContentContributor>
+			cpHttpContentContributorServiceWrapper =
+				_serviceTrackerMap.getService(key);
 
-		if (cpContentContributorServiceWrapper == null) {
+		if (cpHttpContentContributorServiceWrapper == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"No commerce product content contributor registered with " +
@@ -61,35 +61,36 @@ public class CPContentContributorRegistryImpl
 			return null;
 		}
 
-		return cpContentContributorServiceWrapper.getService();
+		return cpHttpContentContributorServiceWrapper.getService();
 	}
 
 	@Override
-	public List<CPContentContributor> getCPContentContributors() {
-		List<CPContentContributor> cpContentContributors = new ArrayList<>();
+	public List<CPHttpContentContributor> getCPHttpContentContributors() {
+		List<CPHttpContentContributor> cpHttpContentContributors =
+			new ArrayList<>();
 
-		List<ServiceWrapper<CPContentContributor>>
-			cpContentContributorServiceWrappers = ListUtil.fromCollection(
+		List<ServiceWrapper<CPHttpContentContributor>>
+			cpHttpContentContributorServiceWrappers = ListUtil.fromCollection(
 				_serviceTrackerMap.values());
 
-		for (ServiceWrapper<CPContentContributor>
-				cpContentContributorServiceWrapper :
-					cpContentContributorServiceWrappers) {
+		for (ServiceWrapper<CPHttpContentContributor>
+				cpHttpContentContributorServiceWrapper :
+					cpHttpContentContributorServiceWrappers) {
 
-			cpContentContributors.add(
-				cpContentContributorServiceWrapper.getService());
+			cpHttpContentContributors.add(
+				cpHttpContentContributorServiceWrapper.getService());
 		}
 
-		return Collections.unmodifiableList(cpContentContributors);
+		return Collections.unmodifiableList(cpHttpContentContributors);
 	}
 
 	@Activate
 	protected void activate(BundleContext bundleContext) {
 		_serviceTrackerMap = ServiceTrackerMapFactory.openSingleValueMap(
-			bundleContext, CPContentContributor.class,
+			bundleContext, CPHttpContentContributor.class,
 			"commerce.product.content.contributor.name",
 			ServiceTrackerCustomizerFactory.
-				<CPContentContributor>serviceWrapper(bundleContext));
+				<CPHttpContentContributor>serviceWrapper(bundleContext));
 	}
 
 	@Deactivate
@@ -98,9 +99,9 @@ public class CPContentContributorRegistryImpl
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		CPContentContributorRegistryImpl.class);
+		CPHttpContentContributorRegistryImpl.class);
 
-	private ServiceTrackerMap<String, ServiceWrapper<CPContentContributor>>
+	private ServiceTrackerMap<String, ServiceWrapper<CPHttpContentContributor>>
 		_serviceTrackerMap;
 
 }

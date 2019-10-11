@@ -22,7 +22,7 @@ import com.liferay.commerce.media.CommerceMediaResolver;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.catalog.CPMedia;
 import com.liferay.commerce.product.catalog.CPSku;
-import com.liferay.commerce.product.constants.CPContentContributorConstants;
+import com.liferay.commerce.product.constants.CPHttpContentContributorConstants;
 import com.liferay.commerce.product.constants.CPOptionCategoryConstants;
 import com.liferay.commerce.product.constants.CPWebKeys;
 import com.liferay.commerce.product.content.render.CPContentRenderer;
@@ -41,9 +41,9 @@ import com.liferay.commerce.product.service.CPOptionCategoryLocalService;
 import com.liferay.commerce.product.service.CProductLocalService;
 import com.liferay.commerce.product.type.CPType;
 import com.liferay.commerce.product.type.CPTypeServicesTracker;
-import com.liferay.commerce.product.util.CPContentContributor;
-import com.liferay.commerce.product.util.CPContentContributorRegistry;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.product.util.CPHttpContentContributor;
+import com.liferay.commerce.product.util.CPHttpContentContributorRegistry;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -89,8 +89,8 @@ public class CPContentHelperImpl implements CPContentHelper {
 		throws Exception {
 
 		JSONObject availabilityEstimate =
-			(JSONObject)getCPContentContributorValue(
-				CPContentContributorConstants.AVAILABILITY_ESTIMATE_NAME,
+			(JSONObject)getCPHttpContentContributorValue(
+				CPHttpContentContributorConstants.AVAILABILITY_ESTIMATE_NAME,
 				httpServletRequest);
 
 		if (availabilityEstimate == null) {
@@ -98,15 +98,15 @@ public class CPContentHelperImpl implements CPContentHelper {
 		}
 
 		return availabilityEstimate.getString(
-			CPContentContributorConstants.AVAILABILITY_ESTIMATE_NAME);
+			CPHttpContentContributorConstants.AVAILABILITY_ESTIMATE_NAME);
 	}
 
 	@Override
 	public String getAvailabilityLabel(HttpServletRequest httpServletRequest)
 		throws Exception {
 
-		JSONObject availability = (JSONObject)getCPContentContributorValue(
-			CPContentContributorConstants.AVAILABILITY_NAME,
+		JSONObject availability = (JSONObject)getCPHttpContentContributorValue(
+			CPHttpContentContributorConstants.AVAILABILITY_NAME,
 			httpServletRequest);
 
 		if (availability == null) {
@@ -114,7 +114,7 @@ public class CPContentHelperImpl implements CPContentHelper {
 		}
 
 		return availability.getString(
-			CPContentContributorConstants.AVAILABILITY_NAME);
+			CPHttpContentContributorConstants.AVAILABILITY_NAME);
 	}
 
 	@Override
@@ -200,23 +200,6 @@ public class CPContentHelperImpl implements CPContentHelper {
 	}
 
 	@Override
-	public Object getCPContentContributorValue(
-			String contributorKey, HttpServletRequest httpServletRequest)
-		throws Exception {
-
-		CPContentContributor cpContentContributor =
-			_cpContentContributorRegistry.getCPContentContributor(
-				contributorKey);
-
-		if (cpContentContributor == null) {
-			return null;
-		}
-
-		return cpContentContributor.getValue(
-			getDefaultCPInstance(httpServletRequest), httpServletRequest);
-	}
-
-	@Override
 	public String getCPContentRendererKey(
 		String type, RenderRequest renderRequest) {
 
@@ -259,6 +242,23 @@ public class CPContentHelperImpl implements CPContentHelper {
 			getCPDefinitionSpecificationOptionValues(
 				cpDefinitionId,
 				CPOptionCategoryConstants.DEFAULT_CP_OPTION_CATEGORY_ID);
+	}
+
+	@Override
+	public Object getCPHttpContentContributorValue(
+			String contributorKey, HttpServletRequest httpServletRequest)
+		throws Exception {
+
+		CPHttpContentContributor cpHttpContentContributor =
+			_cpHttpContentContributorRegistry.getCPHttpContentContributor(
+				contributorKey);
+
+		if (cpHttpContentContributor == null) {
+			return null;
+		}
+
+		return cpHttpContentContributor.getValue(
+			getDefaultCPInstance(httpServletRequest), httpServletRequest);
 	}
 
 	@Override
@@ -367,8 +367,8 @@ public class CPContentHelperImpl implements CPContentHelper {
 	public String getStockQuantityLabel(HttpServletRequest httpServletRequest)
 		throws Exception {
 
-		JSONObject stockQuantity = (JSONObject)getCPContentContributorValue(
-			CPContentContributorConstants.STOCK_QUANTITY_NAME,
+		JSONObject stockQuantity = (JSONObject)getCPHttpContentContributorValue(
+			CPHttpContentContributorConstants.STOCK_QUANTITY_NAME,
 			httpServletRequest);
 
 		if (stockQuantity == null) {
@@ -376,7 +376,7 @@ public class CPContentHelperImpl implements CPContentHelper {
 		}
 
 		return stockQuantity.getString(
-			CPContentContributorConstants.STOCK_QUANTITY_NAME);
+			CPHttpContentContributorConstants.STOCK_QUANTITY_NAME);
 	}
 
 	@Override
@@ -384,16 +384,17 @@ public class CPContentHelperImpl implements CPContentHelper {
 			HttpServletRequest httpServletRequest)
 		throws Exception {
 
-		JSONObject subscriptionInfo = (JSONObject)getCPContentContributorValue(
-			CPContentContributorConstants.SUBSCRIPTION_INFO,
-			httpServletRequest);
+		JSONObject subscriptionInfo =
+			(JSONObject)getCPHttpContentContributorValue(
+				CPHttpContentContributorConstants.SUBSCRIPTION_INFO,
+				httpServletRequest);
 
 		if (subscriptionInfo == null) {
 			return StringPool.BLANK;
 		}
 
 		return subscriptionInfo.getString(
-			CPContentContributorConstants.SUBSCRIPTION_INFO);
+			CPHttpContentContributorConstants.SUBSCRIPTION_INFO);
 	}
 
 	@Override
@@ -495,13 +496,13 @@ public class CPContentHelperImpl implements CPContentHelper {
 		_cpCatalogEntrySpecificationOptionValueLocalService;
 
 	@Reference
-	private CPContentContributorRegistry _cpContentContributorRegistry;
-
-	@Reference
 	private CPContentRendererRegistry _cpContentRendererRegistry;
 
 	@Reference
 	private CPDefinitionHelper _cpDefinitionHelper;
+
+	@Reference
+	private CPHttpContentContributorRegistry _cpHttpContentContributorRegistry;
 
 	@Reference
 	private CPInstanceHelper _cpInstanceHelper;

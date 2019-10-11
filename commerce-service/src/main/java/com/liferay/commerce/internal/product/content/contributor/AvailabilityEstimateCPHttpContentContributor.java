@@ -18,19 +18,23 @@ import com.liferay.commerce.inventory.CPDefinitionInventoryEngine;
 import com.liferay.commerce.inventory.CPDefinitionInventoryEngineRegistry;
 import com.liferay.commerce.inventory.engine.CommerceInventoryEngine;
 import com.liferay.commerce.model.CPDefinitionInventory;
-import com.liferay.commerce.product.constants.CPContentContributorConstants;
+import com.liferay.commerce.product.constants.CPHttpContentContributorConstants;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
-import com.liferay.commerce.product.util.CPContentContributor;
+import com.liferay.commerce.product.util.CPHttpContentContributor;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalService;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Portal;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
+
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -43,14 +47,15 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(
 	immediate = true,
-	property = "commerce.product.content.contributor.name=" + CPContentContributorConstants.STOCK_QUANTITY_NAME,
-	service = CPContentContributor.class
+	property = "commerce.product.content.contributor.name=" + CPHttpContentContributorConstants.AVAILABILITY_ESTIMATE_NAME,
+	service = CPHttpContentContributor.class
 )
-public class StockQuantityCPContentContributor implements CPContentContributor {
+public class AvailabilityEstimateCPHttpContentContributor
+	implements CPHttpContentContributor {
 
 	@Override
 	public String getName() {
-		return CPContentContributorConstants.STOCK_QUANTITY_NAME;
+		return CPHttpContentContributorConstants.AVAILABILITY_ESTIMATE_NAME;
 	}
 
 	@Override
@@ -72,6 +77,10 @@ public class StockQuantityCPContentContributor implements CPContentContributor {
 			return jsonObject;
 		}
 
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
 		CPDefinitionInventory cpDefinitionInventory =
 			_cpDefinitionInventoryLocalService.
 				fetchCPDefinitionInventoryByCPDefinitionId(
@@ -81,24 +90,38 @@ public class StockQuantityCPContentContributor implements CPContentContributor {
 			_cpDefinitionInventoryEngineRegistry.getCPDefinitionInventoryEngine(
 				cpDefinitionInventory);
 
-		boolean displayStockQuantity =
-			cpDefinitionInventoryEngine.isDisplayStockQuantity(cpInstance);
+		boolean available = false;
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)httpServletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
+		if (_commerceInventoryEngine.getStockQuantity(
+				cpInstance.getCompanyId(), commerceChannel.getGroupId(),
+				cpInstance.getSku()) >
+					cpDefinitionInventoryEngine.getMinStockQuantity(
+						cpInstance)) {
 
-		if (displayStockQuantity) {
+			available = true;
+		}
+
+		if (!available) {
 			jsonObject.put(
-				CPContentContributorConstants.STOCK_QUANTITY_NAME,
-				LanguageUtil.format(
-					themeDisplay.getLocale(), "stock-quantity-x",
-					_commerceInventoryEngine.getStockQuantity(
-						cpInstance.getCompanyId(), commerceChannel.getGroupId(),
-						cpInstance.getSku())));
+				CPHttpContentContributorConstants.AVAILABILITY_ESTIMATE_NAME,
+				getAvailabilityEstimateLabel(
+					themeDisplay.getLocale(),
+					cpDefinitionInventoryEngine.getAvailabilityEstimate(
+						cpInstance, themeDisplay.getLocale())));
 		}
 
 		return jsonObject;
+	}
+
+	protected String getAvailabilityEstimateLabel(
+		Locale locale, String availabilityEstimate) {
+
+		if (Validator.isNull(availabilityEstimate)) {
+			return StringPool.BLANK;
+		}
+
+		return LanguageUtil.format(
+			locale, "product-will-be-available-in-x", availabilityEstimate);
 	}
 
 	@Reference
