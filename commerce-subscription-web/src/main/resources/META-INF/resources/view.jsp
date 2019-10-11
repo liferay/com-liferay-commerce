@@ -121,9 +121,8 @@ boolean hasManageCommerceSubscriptionEntryPermission = commerceSubscriptionEntry
 					<liferay-ui:search-container-column-text
 						name="subscription-info"
 					>
-						<liferay-commerce:subscription-info
+						<commerce-ui:order-subscription-info
 							commerceOrderItemId="<%= commerceOrderItem.getCommerceOrderItemId() %>"
-							CPInstanceId="<%= commerceSubscriptionEntry.getCPInstanceId() %>"
 							showDuration="<%= false %>"
 						/>
 					</liferay-ui:search-container-column-text>
