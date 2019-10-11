@@ -17,7 +17,6 @@ package com.liferay.commerce.product.type.virtual.order.content.web.internal.por
 import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.product.type.virtual.order.constants.CommerceVirtualOrderPortletKeys;
 import com.liferay.commerce.product.type.virtual.order.content.web.internal.display.context.CommerceVirtualOrderItemContentDisplayContext;
-import com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem;
 import com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOrderItemLocalService;
 import com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
@@ -26,7 +25,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
-import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -79,8 +77,7 @@ public class CommerceVirtualOrderItemContentPortlet extends MVCPortlet {
 						_commerceVirtualOrderItemLocalService,
 						_cpDefinitionHelper, _commerceAccountHelper,
 						_cpDefinitionVirtualSettingService, _cpInstanceHelper,
-						_portal.getHttpServletRequest(renderRequest),
-						_modelResourcePermission);
+						_portal.getHttpServletRequest(renderRequest));
 
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -112,12 +109,6 @@ public class CommerceVirtualOrderItemContentPortlet extends MVCPortlet {
 
 	@Reference
 	private CPInstanceHelper _cpInstanceHelper;
-
-	@Reference(
-		target = "(model.class.name=com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem)"
-	)
-	private ModelResourcePermission<CommerceVirtualOrderItem>
-		_modelResourcePermission;
 
 	@Reference
 	private Portal _portal;
