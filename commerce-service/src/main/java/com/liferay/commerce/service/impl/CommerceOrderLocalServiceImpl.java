@@ -548,7 +548,7 @@ public class CommerceOrderLocalServiceImpl
 		throws PortalException {
 
 		if (commerceOrderId <= 0) {
-			return ArrayUtil.clone(AVAILABLE_ORDER_STATUSES);
+			return AVAILABLE_ORDER_STATUSES.clone();
 		}
 
 		CommerceOrder commerceOrder = commerceOrderPersistence.findByPrimaryKey(
@@ -558,7 +558,7 @@ public class CommerceOrderLocalServiceImpl
 			ArrayUtil.contains(
 				AVAILABLE_ORDER_STATUSES, commerceOrder.getOrderStatus())) {
 
-			return ArrayUtil.clone(AVAILABLE_ORDER_STATUSES);
+			return AVAILABLE_ORDER_STATUSES.clone();
 		}
 
 		return new int[] {commerceOrder.getOrderStatus()};

@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.frontend.internal.account.model;
 
-import com.liferay.portal.kernel.util.ArrayUtil;
-
 /**
  * @author Alessio Antonio Rendina
  */
@@ -29,7 +27,7 @@ public class Account {
 	}
 
 	public Account(String[] errorMessages) {
-		_errorMessages = ArrayUtil.clone(errorMessages);
+		_errorMessages = errorMessages.clone();
 		_success = false;
 	}
 
@@ -38,7 +36,7 @@ public class Account {
 	}
 
 	public String[] getErrorMessages() {
-		return ArrayUtil.clone(_errorMessages);
+		return _errorMessages.clone();
 	}
 
 	public String getName() {
@@ -54,7 +52,7 @@ public class Account {
 	}
 
 	public void setErrorMessages(String[] errorMessages) {
-		_errorMessages = ArrayUtil.clone(errorMessages);
+		_errorMessages = errorMessages.clone();
 	}
 
 	public void setSuccess(boolean success) {
