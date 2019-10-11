@@ -16,14 +16,12 @@ package com.liferay.commerce.starter;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.portal.kernel.service.ServiceContext;
-
 /**
  * @author Marco Leo
  */
 @ProviderType
 public interface CommerceRegionsStarter {
 
-	public void start(ServiceContext serviceContext) throws Exception;
+	public void start(long userId) throws Exception;
 
 }
