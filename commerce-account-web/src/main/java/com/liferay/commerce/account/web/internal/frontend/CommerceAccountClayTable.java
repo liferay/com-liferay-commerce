@@ -103,7 +103,7 @@ public class CommerceAccountClayTable
 				account.getAccountId(), httpServletRequest);
 
 			ClayTableAction clayTableViewAction = new ClayTableAction(
-				viewURL, StringPool.BLANK,
+				StringPool.BLANK, viewURL, StringPool.BLANK,
 				LanguageUtil.get(httpServletRequest, "view"), false, false);
 
 			clayTableActions.add(clayTableViewAction);

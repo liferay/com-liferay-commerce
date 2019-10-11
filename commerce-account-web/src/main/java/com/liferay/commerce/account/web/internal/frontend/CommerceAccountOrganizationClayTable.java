@@ -101,7 +101,7 @@ public class CommerceAccountOrganizationClayTable
 			sb.append(StringPool.SEMICOLON);
 
 			ClayTableAction deleteClayTableAction = new ClayTableAction(
-				sb.toString(), StringPool.BLANK,
+				StringPool.BLANK, sb.toString(), StringPool.BLANK,
 				LanguageUtil.get(httpServletRequest, "delete"), false, false);
 
 			clayTableActions.add(deleteClayTableAction);
