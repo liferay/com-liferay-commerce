@@ -28,7 +28,7 @@ public class AccountUserList {
 	}
 
 	public AccountUserList(String[] errorMessages) {
-		_errorMessages = errorMessages.clone();
+		_errorMessages = errorMessages;
 		_success = false;
 	}
 
@@ -37,7 +37,7 @@ public class AccountUserList {
 	}
 
 	public String[] getErrorMessages() {
-		return _errorMessages.clone();
+		return _errorMessages;
 	}
 
 	public boolean getSuccess() {
@@ -53,7 +53,7 @@ public class AccountUserList {
 	}
 
 	public void setErrorMessages(String[] errorMessages) {
-		_errorMessages = errorMessages.clone();
+		_errorMessages = errorMessages;
 	}
 
 	public void setSuccess(boolean success) {
