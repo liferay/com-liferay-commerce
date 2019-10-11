@@ -17,8 +17,6 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CPDefinitionSpecificationOptionValueDisplayContext cpDefinitionSpecificationOptionValueDisplayContext = (CPDefinitionSpecificationOptionValueDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
-
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 CPDefinitionSpecificationOptionValue cpDefinitionSpecificationOptionValue = null;
@@ -38,7 +36,7 @@ else {
 	message="<%= StringPool.BLANK %>"
 	showWhenSingleIcon="<%= true %>"
 >
-	<c:if test="<%= cpDefinitionSpecificationOptionValueDisplayContext.hasPermission(cpDefinitionSpecificationOptionValueDisplayContext.getCommerceCatalog(), ActionKeys.UPDATE) %>">
+	<c:if test="<%= CommerceCatalogPermission.contains(permissionChecker, cpDefinitionSpecificationOptionValue.getCPDefinition(), ActionKeys.UPDATE) %>">
 		<portlet:renderURL var="editURL">
 			<portlet:param name="mvcRenderCommandName" value="editProductDefinitionSpecificationOptionValue" />
 			<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpDefinitionSpecificationOptionValue.getCPDefinitionId()) %>" />

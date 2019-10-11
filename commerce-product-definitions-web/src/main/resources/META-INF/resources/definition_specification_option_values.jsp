@@ -25,7 +25,7 @@ SearchContainer<CPDefinitionSpecificationOptionValue> cpDefinitionSpecificationO
 PortletURL portletURL = cpDefinitionSpecificationOptionValueDisplayContext.getPortletURL();
 %>
 
-<c:if test="<%= cpDefinitionSpecificationOptionValueDisplayContext.hasPermission(cpDefinition.getCommerceCatalog(), ActionKeys.VIEW) %>">
+<c:if test="<%= CommerceCatalogPermission.contains(permissionChecker, cpDefinition, ActionKeys.VIEW) %>">
 	<liferay-frontend:management-bar
 		includeCheckBox="<%= true %>"
 		searchContainerId="cpDefinitionSpecificationOptionValues"
@@ -53,7 +53,7 @@ PortletURL portletURL = cpDefinitionSpecificationOptionValueDisplayContext.getPo
 				<aui:input name="cpSpecificationOptionIds" type="hidden" value="" />
 			</aui:form>
 
-			<c:if test="<%= cpDefinitionSpecificationOptionValueDisplayContext.hasPermission(cpDefinition.getCommerceCatalog(), ActionKeys.UPDATE) %>">
+			<c:if test="<%= CommerceCatalogPermission.contains(permissionChecker, cpDefinition, ActionKeys.UPDATE) %>">
 				<liferay-frontend:add-menu
 					inline="<%= true %>"
 				>

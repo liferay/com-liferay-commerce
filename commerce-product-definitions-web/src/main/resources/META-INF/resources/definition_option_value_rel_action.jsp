@@ -33,7 +33,7 @@ else {
 }
 %>
 
-<c:if test="<%= cpDefinitionSpecificationOptionValueDisplayContext.hasPermission(cpDefinition.getCommerceCatalog(), ActionKeys.UPDATE) %>">
+<c:if test="<%= CommerceCatalogPermission.contains(permissionChecker, cpDefinition, ActionKeys.UPDATE) %>">
 	<liferay-ui:icon-menu
 		direction="left-side"
 		icon="<%= StringPool.BLANK %>"
