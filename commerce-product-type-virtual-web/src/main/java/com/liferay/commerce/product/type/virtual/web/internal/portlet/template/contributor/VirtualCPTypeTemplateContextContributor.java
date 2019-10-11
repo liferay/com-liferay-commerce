@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.product.type.virtual.web.internal.portlet.template.contributor;
 
-import com.liferay.commerce.product.type.virtual.util.VirtualCPTypeHelper;
+import com.liferay.commerce.product.type.virtual.util.VirtualCPTypeHttpHelper;
 import com.liferay.portal.kernel.template.TemplateContextContributor;
 
 import java.util.Map;
@@ -40,10 +40,10 @@ public class VirtualCPTypeTemplateContextContributor
 		Map<String, Object> contextObjects,
 		HttpServletRequest httpServletRequest) {
 
-		contextObjects.put("virtualCPTypeHelper", _virtualCPTypeHelper);
+		contextObjects.put("virtualCPTypeHttpHelper", _virtualCPTypeHttpHelper);
 	}
 
 	@Reference
-	private VirtualCPTypeHelper _virtualCPTypeHelper;
+	private VirtualCPTypeHttpHelper _virtualCPTypeHttpHelper;
 
 }

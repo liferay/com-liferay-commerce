@@ -18,7 +18,7 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting;
 import com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingLocalService;
-import com.liferay.commerce.product.type.virtual.util.VirtualCPTypeHelper;
+import com.liferay.commerce.product.type.virtual.util.VirtualCPTypeHttpHelper;
 import com.liferay.document.library.kernel.service.DLAppService;
 import com.liferay.document.library.kernel.util.DLUtil;
 import com.liferay.petra.string.StringPool;
@@ -32,8 +32,8 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Alessio Antonio Rendina
  */
-@Component(immediate = true, service = VirtualCPTypeHelper.class)
-public class VirtualCPTypeHelperImpl implements VirtualCPTypeHelper {
+@Component(immediate = true, service = VirtualCPTypeHttpHelper.class)
+public class VirtualCPTypeHttpHelperImpl implements VirtualCPTypeHttpHelper {
 
 	@Override
 	public CPDefinitionVirtualSetting getCPDefinitionVirtualSetting(

@@ -17,7 +17,7 @@
 <%@ include file="/init.jsp" %>
 
 <%
-VirtualCPTypeHelper virtualCPTypeHelper = (VirtualCPTypeHelper)request.getAttribute("virtualCPTypeHelper");
+VirtualCPTypeHttpHelper virtualCPTypeHttpHelper = (VirtualCPTypeHttpHelper)request.getAttribute("virtualCPTypeHttpHelper");
 
 CPContentHelper cpContentHelper = (CPContentHelper)request.getAttribute(CPContentWebKeys.CP_CONTENT_HELPER);
 
@@ -32,7 +32,7 @@ if (cpSku != null) {
 	cpInstanceId = cpSku.getCPInstanceId();
 }
 
-String sampleURL = virtualCPTypeHelper.getSampleURL(cpDefinitionId, cpInstanceId, themeDisplay);
+String sampleURL = virtualCPTypeHttpHelper.getSampleURL(cpDefinitionId, cpInstanceId, themeDisplay);
 %>
 
 <div class="container-fluid product-detail" id="<portlet:namespace /><%= cpDefinitionId %>ProductContent">

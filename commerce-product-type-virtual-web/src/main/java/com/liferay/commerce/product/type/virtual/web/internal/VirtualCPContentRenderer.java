@@ -17,7 +17,7 @@ package com.liferay.commerce.product.type.virtual.web.internal;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.content.render.CPContentRenderer;
 import com.liferay.commerce.product.type.virtual.constants.VirtualCPTypeConstants;
-import com.liferay.commerce.product.type.virtual.util.VirtualCPTypeHelper;
+import com.liferay.commerce.product.type.virtual.util.VirtualCPTypeHttpHelper;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
@@ -70,7 +70,7 @@ public class VirtualCPContentRenderer implements CPContentRenderer {
 		throws Exception {
 
 		httpServletRequest.setAttribute(
-			"virtualCPTypeHelper", _virtualCPTypeHelper);
+			"virtualCPTypeHttpHelper", _virtualCPTypeHttpHelper);
 
 		_jspRenderer.renderJSP(
 			_servletContext, httpServletRequest, httpServletResponse,
@@ -86,6 +86,6 @@ public class VirtualCPContentRenderer implements CPContentRenderer {
 	private ServletContext _servletContext;
 
 	@Reference
-	private VirtualCPTypeHelper _virtualCPTypeHelper;
+	private VirtualCPTypeHttpHelper _virtualCPTypeHttpHelper;
 
 }

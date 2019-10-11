@@ -18,7 +18,7 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting;
 import com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingLocalService;
-import com.liferay.commerce.product.type.virtual.util.VirtualCPTypeHelper;
+import com.liferay.commerce.product.type.virtual.util.VirtualCPTypeHttpHelper;
 import com.liferay.commerce.product.util.CPHttpContentContributor;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
@@ -89,7 +89,7 @@ public class SampleFileCPHttpContentContributor
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		String sampleURL = _virtualCPTypeHelper.getSampleURL(
+		String sampleURL = _virtualCPTypeHttpHelper.getSampleURL(
 			cpInstance.getCPDefinitionId(), cpInstance.getCPInstanceId(),
 			themeDisplay);
 
@@ -129,6 +129,6 @@ public class SampleFileCPHttpContentContributor
 	private JSONFactory _jsonFactory;
 
 	@Reference
-	private VirtualCPTypeHelper _virtualCPTypeHelper;
+	private VirtualCPTypeHttpHelper _virtualCPTypeHttpHelper;
 
 }

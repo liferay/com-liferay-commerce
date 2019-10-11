@@ -24,7 +24,7 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
  * @author Alessio Antonio Rendina
  */
 @ProviderType
-public interface VirtualCPTypeHelper {
+public interface VirtualCPTypeHttpHelper {
 
 	public CPDefinitionVirtualSetting getCPDefinitionVirtualSetting(
 			long cpDefinitionId, long cpInstanceId)
