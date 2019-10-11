@@ -219,7 +219,7 @@ if ((cpDefinition != null) && (cpDefinition.getExpirationDate() != null)) {
 
 		const nameInput = form.querySelector('#<portlet:namespace />nameMapAsXML');
 		const urlInput = form.querySelector('#<portlet:namespace />urlTitleMapAsXML');
-		const urlTitleInputLocalized = form.querySelector('#<portlet:namespace />urlTitleMapAsXML');
+		const urlTitleInputLocalized = Liferay.component('<portlet:namespace />urlTitleMapAsXML');
 
 		const debounce = utilities.debounce;
 
