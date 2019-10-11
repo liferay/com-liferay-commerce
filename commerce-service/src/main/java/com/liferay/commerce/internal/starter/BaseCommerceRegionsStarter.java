@@ -21,7 +21,9 @@ import com.liferay.commerce.starter.CommerceRegionsStarter;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import org.osgi.service.component.annotations.Reference;
@@ -34,17 +36,19 @@ public abstract class BaseCommerceRegionsStarter
 
 	@Override
 	public void start(long userId) throws Exception {
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setUserId(userId);
+		User user = _userLocalService.getUser(userId);
 
 		CommerceCountry commerceCountry =
-			commerceCountryLocalService.fetchCommerceCountry(
-				serviceContext.getCompanyId(), getCountryIsoCode());
+			_commerceCountryLocalService.fetchCommerceCountry(
+				user.getCompanyId(), getCountryIsoCode());
 
 		if (commerceCountry == null) {
 			return;
 		}
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setUserId(userId);
 
 		_importCommerceRegions(commerceCountry, serviceContext);
 	}
@@ -53,22 +57,13 @@ public abstract class BaseCommerceRegionsStarter
 
 	protected abstract String getFilePath();
 
-	@Reference
-	protected CommerceCountryLocalService commerceCountryLocalService;
-
-	@Reference
-	protected CommerceRegionLocalService commerceRegionLocalService;
-
-	@Reference
-	protected JSONFactory jsonFactory;
-
 	private JSONArray _getCommerceRegionsJSONArray() throws Exception {
 		Class<?> clazz = getClass();
 
 		String regionsJSON = StringUtil.read(
 			clazz.getClassLoader(), getFilePath(), false);
 
-		return jsonFactory.createJSONArray(regionsJSON);
+		return _jsonFactory.createJSONArray(regionsJSON);
 	}
 
 	private void _importCommerceRegions(
@@ -84,10 +79,22 @@ public abstract class BaseCommerceRegionsStarter
 			String name = jsonObject.getString("name");
 			double priority = jsonObject.getDouble("priority");
 
-			commerceRegionLocalService.addCommerceRegion(
+			_commerceRegionLocalService.addCommerceRegion(
 				commerceCountry.getCommerceCountryId(), name, code, priority,
 				true, serviceContext);
 		}
 	}
+
+	@Reference
+	private CommerceCountryLocalService _commerceCountryLocalService;
+
+	@Reference
+	private CommerceRegionLocalService _commerceRegionLocalService;
+
+	@Reference
+	private JSONFactory _jsonFactory;
+
+	@Reference
+	private UserLocalService _userLocalService;
 
 }
