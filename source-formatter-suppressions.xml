@@ -1,9 +1,6 @@
 <?xml version="1.0"?>
 
 <suppressions>
-	<checkstyle>
-		<suppress checks="ChainingCheck" files="commerce-frontend-impl/src/main/java/com/liferay/commerce/frontend/internal/account/CommerceAccountResource\.java" />
-	</checkstyle>
 	<source-check>
 		<suppress checks="BNDExportsCheck" files="commerce-application-list/bnd\.bnd" />
 		<suppress checks="BNDExportsCheck" files="commerce-initializer-util/bnd\.bnd" />
@@ -35,7 +32,6 @@
 		<suppress checks="JavaAPISignatureCheck" files="commerce-frontend-impl/src/main/java/com/liferay/commerce/frontend/internal/search/util/CommerceSearchUtil\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-frontend-impl/src/main/java/com/liferay/commerce/frontend/internal/wishlist/CommerceWishListResource\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-health-status-api/src/main/java/com/liferay/commerce/health/status/CommerceHealthStatus\.java" />>
-		<suppress checks="JavaAPISignatureCheck" files="commerce-organization-api/src/main/java/com/liferay/commerce/organization/util/CommerceOrganizationHelper\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-payment-api/src/main/java/com/liferay/commerce/payment/util/CommercePaymentUtils\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-product-api/src/main/java/com/liferay/commerce/product/importer/CPFileImporter\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-theme-minium/commerce-theme-minium-site-initializer/src/main/java/com/liferay/commerce/theme/minium/site/initializer/internal/MiniumLayoutsInitializer\.java" />
@@ -65,7 +61,6 @@
 		<suppress checks="JavaInternalPackageCheck" files="commerce-product-service/.*" />
 		<suppress checks="JavaInternalPackageCheck" files="commerce-service/.*" />
 		<suppress checks="JSONPackageJSONDependencyVersionCheck" files=".*" />
-		<suppress checks="JSPLanguageKeysCheck" files="commerce-theme-minium/commerce-theme-minium-login-web-fragment/src/main/resources/META-INF/resources/login\.jsp" />
 		<suppress checks="XMLServiceEntityNameCheck" files="commerce-account-service/service\.xml" />
 		<suppress checks="XMLServiceEntityNameCheck" files="commerce-currency-service/service\.xml" />
 		<suppress checks="XMLServiceEntityNameCheck" files="commerce-discount-service/service\.xml" />
