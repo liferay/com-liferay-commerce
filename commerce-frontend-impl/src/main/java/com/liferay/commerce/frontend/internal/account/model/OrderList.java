@@ -28,7 +28,7 @@ public class OrderList {
 	}
 
 	public OrderList(String[] errorMessages) {
-		_errorMessages = errorMessages.clone();
+		_errorMessages = errorMessages;
 		_success = false;
 	}
 
@@ -37,7 +37,7 @@ public class OrderList {
 	}
 
 	public String[] getErrorMessages() {
-		return _errorMessages.clone();
+		return _errorMessages;
 	}
 
 	public List<Order> getOrders() {
@@ -53,7 +53,7 @@ public class OrderList {
 	}
 
 	public void setErrorMessages(String[] errorMessages) {
-		_errorMessages = errorMessages.clone();
+		_errorMessages = errorMessages;
 	}
 
 	public void setOrders(List<Order> orders) {

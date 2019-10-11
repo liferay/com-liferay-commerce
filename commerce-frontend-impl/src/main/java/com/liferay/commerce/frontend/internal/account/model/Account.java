@@ -27,7 +27,7 @@ public class Account {
 	}
 
 	public Account(String[] errorMessages) {
-		_errorMessages = errorMessages.clone();
+		_errorMessages = errorMessages;
 		_success = false;
 	}
 
@@ -36,7 +36,7 @@ public class Account {
 	}
 
 	public String[] getErrorMessages() {
-		return _errorMessages.clone();
+		return _errorMessages;
 	}
 
 	public String getName() {
@@ -52,7 +52,7 @@ public class Account {
 	}
 
 	public void setErrorMessages(String[] errorMessages) {
-		_errorMessages = errorMessages.clone();
+		_errorMessages = errorMessages;
 	}
 
 	public void setSuccess(boolean success) {
