@@ -310,7 +310,7 @@ public class CommerceCountryLocalServiceImpl
 						String.valueOf(numericISOCode));
 
 				if (commerceRegionsStarter != null) {
-					commerceRegionsStarter.start(serviceContext);
+					commerceRegionsStarter.start(serviceContext.getUserId());
 				}
 			}
 		}
