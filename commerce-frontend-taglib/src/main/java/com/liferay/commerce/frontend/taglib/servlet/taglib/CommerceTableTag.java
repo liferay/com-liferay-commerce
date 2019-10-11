@@ -15,9 +15,9 @@
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
 import com.liferay.commerce.frontend.ClayTable;
-import com.liferay.commerce.frontend.ClayTableContextContributor;
 import com.liferay.commerce.frontend.ClayTableContextContributorRegistry;
 import com.liferay.commerce.frontend.ClayTableDataJSONBuilder;
+import com.liferay.commerce.frontend.ClayTableHttpContextContributor;
 import com.liferay.commerce.frontend.ClayTableRegistry;
 import com.liferay.commerce.frontend.ClayTableSerializer;
 import com.liferay.commerce.frontend.CommerceDataProviderRegistry;
@@ -26,7 +26,6 @@ import com.liferay.commerce.frontend.Filter;
 import com.liferay.commerce.frontend.FilterFactory;
 import com.liferay.commerce.frontend.FilterFactoryRegistry;
 import com.liferay.commerce.frontend.PaginationImpl;
-import com.liferay.commerce.frontend.taglib.internal.js.loader.modules.extender.npm.NPMResolverProvider;
 import com.liferay.commerce.frontend.taglib.internal.model.ClayPaginationEntry;
 import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
@@ -116,7 +115,7 @@ public class CommerceTableTag extends ComponentRendererTag {
 
 	@Override
 	public String getModule() {
-		NPMResolver npmResolver = NPMResolverProvider.getNPMResolver();
+		NPMResolver npmResolver = ServletContextUtil.getNPMResolver();
 
 		if (npmResolver == null) {
 			return StringPool.BLANK;
@@ -309,11 +308,11 @@ public class CommerceTableTag extends ComponentRendererTag {
 
 		Set<String> dependencies = new HashSet<>();
 
-		List<ClayTableContextContributor> clayTablePostProcessors =
+		List<ClayTableHttpContextContributor> clayTablePostProcessors =
 			_clayTableContextContributorRegistry.
 				getClayTableContextContributors(tableName);
 
-		for (ClayTableContextContributor clayTableContextContributor :
+		for (ClayTableHttpContextContributor clayTableContextContributor :
 				clayTablePostProcessors) {
 
 			clayTableContextContributor.contribute(

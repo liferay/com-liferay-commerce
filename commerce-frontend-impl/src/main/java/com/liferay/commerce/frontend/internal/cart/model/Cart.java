@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.frontend.internal.cart.model;
 
+import com.liferay.portal.kernel.util.ArrayUtil;
+
 import java.util.List;
 
 /**
@@ -33,7 +35,7 @@ public class Cart {
 	}
 
 	public Cart(String[] errorMessages) {
-		_errorMessages = errorMessages;
+		_errorMessages = ArrayUtil.clone(errorMessages);
 		_success = false;
 	}
 
@@ -42,7 +44,7 @@ public class Cart {
 	}
 
 	public String[] getErrorMessages() {
-		return _errorMessages;
+		return ArrayUtil.clone(_errorMessages);
 	}
 
 	public long getOrderId() {
@@ -62,7 +64,7 @@ public class Cart {
 	}
 
 	public void setErrorMessages(String[] errorMessages) {
-		_errorMessages = errorMessages;
+		_errorMessages = ArrayUtil.clone(errorMessages);
 	}
 
 	public void setSuccess(boolean success) {

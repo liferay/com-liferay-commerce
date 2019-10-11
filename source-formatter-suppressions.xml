@@ -3,10 +3,6 @@
 <suppressions>
 	<checkstyle>
 		<suppress checks="ChainingCheck" files="commerce-frontend-impl/src/main/java/com/liferay/commerce/frontend/internal/account/CommerceAccountResource\.java" />
-		<suppress checks="PersistenceCallCheck" files="commerce-account-service/src/main/java/com/liferay/commerce/account/service/impl/CommerceAccountLocalServiceImpl\.java" />
-		<suppress checks="PersistenceCallCheck" files="commerce-product-service/src/main/java/com/liferay/commerce/product/service/impl/CommerceCatalogLocalServiceImpl\.java" />
-		<suppress checks="PersistenceCallCheck" files="commerce-product-service/src/main/java/com/liferay/commerce/product/service/impl/CommerceChannelLocalServiceImpl\.java" />
-		<suppress checks="VariableDeclarationAsUsedCheck" files=".*" />
 	</checkstyle>
 	<source-check>
 		<suppress checks="BNDExportsCheck" files="commerce-application-list/bnd\.bnd" />
@@ -28,7 +24,6 @@
 		<suppress checks="JavaAPISignatureCheck" files="commerce-api/src/main/java/com/liferay/commerce/starter/CommerceRegionsStarter\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-api/src/main/java/com/liferay/commerce/util/CommerceCheckoutStep\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-api/src/main/java/com/liferay/commerce/util/CommerceCheckoutStepServicesTracker\.java" />
-		<suppress checks="JavaAPISignatureCheck" files="commerce-frontend-api/src/main/java/com/liferay/commerce/frontend/ClayTableContextContributor\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-frontend-api/src/main/java/com/liferay/commerce/frontend/ClayTableDataJSONBuilder\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-frontend-api/src/main/java/com/liferay/commerce/frontend/CommerceDataSetDataProvider\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-frontend-api/src/main/java/com/liferay/commerce/frontend/FilterFactory\.java" />
@@ -48,7 +43,6 @@
 		<suppress checks="JavaAPISignatureCheck" files="commerce-payment-api/src/main/java/com/liferay/commerce/payment/util/CommercePaymentUtils\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-product-api/src/main/java/com/liferay/commerce/product/data/source/CPDataSource\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-product-api/src/main/java/com/liferay/commerce/product/importer/CPFileImporter\.java" />
-		<suppress checks="JavaAPISignatureCheck" files="commerce-product-api/src/main/java/com/liferay/commerce/product/util/CPCompareUtil\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-product-api/src/main/java/com/liferay/commerce/product/util/CPContentContributor\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-product-api/src/main/java/com/liferay/commerce/product/util/CPDefinitionHelper\.java" />
 		<suppress checks="JavaAPISignatureCheck" files="commerce-product-content-api/src/main/java/com/liferay/commerce/product/content/util/CPCompareContentHelper\.java" />
@@ -80,9 +74,10 @@
 		<suppress checks="JavaConfigurationCategoryCheck" files=".*" />
 		<suppress checks="JavaInternalPackageCheck" files="commerce-product-service/.*" />
 		<suppress checks="JavaInternalPackageCheck" files="commerce-service/.*" />
-		<suppress checks="JavaModuleServiceProxyFactoryCheck" files="commerce-account-service/src/main/java/com/liferay/commerce/account/service/impl/CommerceAccountLocalServiceImpl\.java" />
 		<suppress checks="JSONPackageJSONDependencyVersionCheck" files=".*" />
 		<suppress checks="JSPLanguageKeysCheck" files="commerce-theme-minium/commerce-theme-minium-login-web-fragment/src/main/resources/META-INF/resources/login\.jsp" />
+		<suppress checks="PropertiesLiferayPluginPackageLiferayVersionsCheck" files="commerce-theme-minium/commerce-theme-minium/src/WEB-INF/liferay-plugin-package\.properties" />
+		<suppress checks="PropertiesLiferayPluginPackageLiferayVersionsCheck" files="commerce-theme-speedwell/commerce-theme-speedwell/src/WEB-INF/liferay-plugin-package\.properties" />
 		<suppress checks="XMLServiceEntityNameCheck" files="commerce-account-service/service\.xml" />
 		<suppress checks="XMLServiceEntityNameCheck" files="commerce-currency-service/service\.xml" />
 		<suppress checks="XMLServiceEntityNameCheck" files="commerce-discount-service/service\.xml" />

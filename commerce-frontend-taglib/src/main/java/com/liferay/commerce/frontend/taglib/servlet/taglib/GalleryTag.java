@@ -14,8 +14,7 @@
 
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
-import com.liferay.commerce.frontend.taglib.internal.js.loader.modules.extender.npm.NPMResolverProvider;
-import com.liferay.commerce.frontend.taglib.internal.util.CPContentHelperProvider;
+import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
 import com.liferay.commerce.product.catalog.CPMedia;
 import com.liferay.commerce.product.content.util.CPContentHelper;
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
@@ -74,7 +73,7 @@ public class GalleryTag extends ComponentRendererTag {
 
 	@Override
 	public String getModule() {
-		NPMResolver npmResolver = NPMResolverProvider.getNPMResolver();
+		NPMResolver npmResolver = ServletContextUtil.getNPMResolver();
 
 		if (npmResolver == null) {
 			return StringPool.BLANK;
@@ -96,7 +95,7 @@ public class GalleryTag extends ComponentRendererTag {
 	public void setPageContext(PageContext pageContext) {
 		super.setPageContext(pageContext);
 
-		_cpContentHelper = CPContentHelperProvider.getCPContentHelper();
+		_cpContentHelper = ServletContextUtil.getCPContentHelper();
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(GalleryTag.class);

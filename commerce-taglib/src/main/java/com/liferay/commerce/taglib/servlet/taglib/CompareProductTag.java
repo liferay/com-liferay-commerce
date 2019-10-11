@@ -14,12 +14,16 @@
 
 package com.liferay.commerce.taglib.servlet.taglib;
 
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.constants.CommerceWebKeys;
+import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.product.model.CPDefinition;
-import com.liferay.commerce.product.util.CPCompareUtil;
+import com.liferay.commerce.product.util.CPCompareHelperUtil;
 import com.liferay.commerce.taglib.servlet.taglib.internal.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.taglib.util.IncludeTag;
 
 import java.util.ArrayList;
@@ -37,7 +41,20 @@ public class CompareProductTag extends IncludeTag {
 	@Override
 	public int doStartTag() throws JspException {
 		try {
-			_cpDefinitionIds = CPCompareUtil.getCPDefinitionIds(request);
+			CommerceContext commerceContext =
+				(CommerceContext)request.getAttribute(
+					CommerceWebKeys.COMMERCE_CONTEXT);
+
+			CommerceAccount commerceAccount =
+				commerceContext.getCommerceAccount();
+
+			HttpServletRequest originalHttpServletRequest =
+				PortalUtil.getOriginalServletRequest(request);
+
+			_cpDefinitionIds = CPCompareHelperUtil.getCPDefinitionIds(
+				commerceContext.getCommerceChannelGroupId(),
+				commerceAccount.getCommerceAccountId(),
+				originalHttpServletRequest.getSession());
 
 			if (_cpDefinitionIds == null) {
 				_cpDefinitionIds = new ArrayList<>();

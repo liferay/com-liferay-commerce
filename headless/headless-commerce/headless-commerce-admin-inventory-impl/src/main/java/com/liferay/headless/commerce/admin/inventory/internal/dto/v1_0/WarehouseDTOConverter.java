@@ -15,18 +15,11 @@
 package com.liferay.headless.commerce.admin.inventory.internal.dto.v1_0;
 
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
-import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseService;
 import com.liferay.headless.commerce.admin.inventory.dto.v1_0.Warehouse;
-import com.liferay.headless.commerce.admin.inventory.dto.v1_0.WarehouseItem;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterContext;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistry;
-import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverterContext;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Stream;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -45,6 +38,7 @@ public class WarehouseDTOConverter implements DTOConverter {
 		return Warehouse.class.getSimpleName();
 	}
 
+	@Override
 	public Warehouse toDTO(DTOConverterContext dtoConverterContext)
 		throws Exception {
 
@@ -64,8 +58,6 @@ public class WarehouseDTOConverter implements DTOConverter {
 				id =
 					commerceInventoryWarehouse.
 						getCommerceInventoryWarehouseId();
-				items = _getItems(
-					commerceInventoryWarehouse, dtoConverterContext);
 				latitude = commerceInventoryWarehouse.getLatitude();
 				longitude = commerceInventoryWarehouse.getLongitude();
 				name = commerceInventoryWarehouse.getName();
@@ -78,34 +70,6 @@ public class WarehouseDTOConverter implements DTOConverter {
 				zip = commerceInventoryWarehouse.getZip();
 			}
 		};
-	}
-
-	private WarehouseItem[] _getItems(
-			CommerceInventoryWarehouse commerceInventoryWarehouse,
-			DTOConverterContext dtoConverterContext)
-		throws Exception {
-
-		List<WarehouseItem> warehouseItems = new ArrayList<>();
-
-		DTOConverter warehouseItemDTOConverter =
-			_dtoConverterRegistry.getDTOConverter(
-				CommerceInventoryWarehouseItem.class.getName());
-
-		for (CommerceInventoryWarehouseItem commerceInventoryWarehouseItem :
-				commerceInventoryWarehouse.
-					getCommerceInventoryWarehouseItems()) {
-
-			warehouseItems.add(
-				(WarehouseItem)warehouseItemDTOConverter.toDTO(
-					new DefaultDTOConverterContext(
-						dtoConverterContext.getLocale(),
-						commerceInventoryWarehouseItem.
-							getCommerceInventoryWarehouseItemId())));
-		}
-
-		Stream<WarehouseItem> stream = warehouseItems.stream();
-
-		return stream.toArray(WarehouseItem[]::new);
 	}
 
 	@Reference

@@ -169,15 +169,15 @@ public class CPInstanceDisplayContext
 		List<ManagementBarFilterItem> managementBarFilterItems =
 			super.getManagementBarStatusFilterItems();
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)httpServletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
 		CPDefinition cpDefinition = getCPDefinition();
 
 		if (cpDefinition == null) {
 			return managementBarFilterItems;
 		}
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 		int workflowDefinitionLinksCount =
 			WorkflowDefinitionLinkLocalServiceUtil.

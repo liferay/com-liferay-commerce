@@ -14,13 +14,15 @@
 
 package com.liferay.commerce.frontend.model;
 
+import com.liferay.portal.kernel.util.ArrayUtil;
+
 /**
  * @author Marco Leo
  */
 public class ProductSettingsModel {
 
 	public int[] getAllowedQuantities() {
-		return _allowedQuantities;
+		return ArrayUtil.clone(_allowedQuantities);
 	}
 
 	public int getLowStockQuantity() {
@@ -44,7 +46,7 @@ public class ProductSettingsModel {
 	}
 
 	public void setAllowedQuantities(int[] allowedQuantities) {
-		_allowedQuantities = allowedQuantities;
+		_allowedQuantities = ArrayUtil.clone(allowedQuantities);
 	}
 
 	public void setLowStockQuantity(int lowStockQuantity) {

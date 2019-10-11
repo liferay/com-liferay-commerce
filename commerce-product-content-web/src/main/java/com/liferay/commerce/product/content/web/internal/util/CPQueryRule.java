@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.product.content.web.internal.util;
 
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.HashUtil;
 
 import java.util.Objects;
@@ -29,7 +30,7 @@ public class CPQueryRule {
 		_contains = contains;
 		_andOperator = andOperator;
 		_name = name;
-		_values = values;
+		_values = ArrayUtil.clone(values);
 	}
 
 	@Override
@@ -59,7 +60,7 @@ public class CPQueryRule {
 	}
 
 	public String[] getValues() {
-		return _values;
+		return ArrayUtil.clone(_values);
 	}
 
 	@Override
@@ -92,7 +93,7 @@ public class CPQueryRule {
 	}
 
 	public void setValues(String[] values) {
-		_values = values;
+		_values = ArrayUtil.clone(values);
 	}
 
 	private boolean _andOperator;

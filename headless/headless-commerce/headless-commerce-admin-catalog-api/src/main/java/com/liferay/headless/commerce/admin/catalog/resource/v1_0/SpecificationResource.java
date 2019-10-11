@@ -34,17 +34,17 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface SpecificationResource {
 
+	public Page<Specification> getSpecificationsPage(Pagination pagination)
+		throws Exception;
+
+	public Specification postSpecification(Specification specification)
+		throws Exception;
+
 	public Response deleteSpecification(Long id) throws Exception;
 
 	public Specification getSpecification(Long id) throws Exception;
 
 	public Response patchSpecification(Long id, Specification specification)
-		throws Exception;
-
-	public Page<Specification> getSpecificationsPage(Pagination pagination)
-		throws Exception;
-
-	public Specification postSpecification(Specification specification)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);

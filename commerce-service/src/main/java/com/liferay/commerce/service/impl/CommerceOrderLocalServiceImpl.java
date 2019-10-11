@@ -548,7 +548,7 @@ public class CommerceOrderLocalServiceImpl
 		throws PortalException {
 
 		if (commerceOrderId <= 0) {
-			return AVAILABLE_ORDER_STATUSES;
+			return ArrayUtil.clone(AVAILABLE_ORDER_STATUSES);
 		}
 
 		CommerceOrder commerceOrder = commerceOrderPersistence.findByPrimaryKey(
@@ -558,7 +558,7 @@ public class CommerceOrderLocalServiceImpl
 			ArrayUtil.contains(
 				AVAILABLE_ORDER_STATUSES, commerceOrder.getOrderStatus())) {
 
-			return AVAILABLE_ORDER_STATUSES;
+			return ArrayUtil.clone(AVAILABLE_ORDER_STATUSES);
 		}
 
 		return new int[] {commerceOrder.getOrderStatus()};
@@ -1567,11 +1567,9 @@ public class CommerceOrderLocalServiceImpl
 			return commerceAddress;
 		}
 
-		long companyId = serviceContext.getCompanyId();
-
 		List<CommerceAddress> commerceAddresses =
 			commerceAddressLocalService.getCommerceAddressesByCompanyId(
-				companyId, CommerceAccount.class.getName(),
+				serviceContext.getCompanyId(), CommerceAccount.class.getName(),
 				commerceOrder.getCommerceAccountId());
 
 		for (CommerceAddress newCommerceAddress : commerceAddresses) {

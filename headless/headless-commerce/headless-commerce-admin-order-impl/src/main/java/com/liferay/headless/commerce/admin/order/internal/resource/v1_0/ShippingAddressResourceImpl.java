@@ -26,6 +26,7 @@ import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverterContext;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
+import com.liferay.portal.vulcan.fields.NestedField;
 
 import javax.ws.rs.core.Response;
 
@@ -71,6 +72,7 @@ public class ShippingAddressResourceImpl
 				commerceAddress.getCommerceAddressId()));
 	}
 
+	@NestedField("shippingAddress")
 	@Override
 	public ShippingAddress getOrderIdShippingAddress(Long id) throws Exception {
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(

@@ -14,8 +14,8 @@
 
 package com.liferay.commerce.frontend.internal.clay.table;
 
-import com.liferay.commerce.frontend.ClayTableContextContributor;
 import com.liferay.commerce.frontend.ClayTableContextContributorRegistry;
+import com.liferay.commerce.frontend.ClayTableHttpContextContributor;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerCustomizerFactory;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerCustomizerFactory.ServiceWrapper;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMap;
@@ -43,10 +43,10 @@ public class ClayTableContextContributorRegistryImpl
 	implements ClayTableContextContributorRegistry {
 
 	@Override
-	public List<ClayTableContextContributor> getClayTableContextContributors(
-		String key) {
+	public List<ClayTableHttpContextContributor>
+		getClayTableContextContributors(String key) {
 
-		List<ServiceWrapper<ClayTableContextContributor>>
+		List<ServiceWrapper<ClayTableHttpContextContributor>>
 			clayTableContextContributorServiceWrappers =
 				ListUtil.fromCollection(_serviceTrackerMap.getService(key));
 
@@ -60,27 +60,27 @@ public class ClayTableContextContributorRegistryImpl
 			return Collections.emptyList();
 		}
 
-		List<ClayTableContextContributor> clayTableContextContributors =
+		List<ClayTableHttpContextContributor> clayTableHttpContextContributors =
 			new ArrayList<>();
 
-		for (ServiceWrapper<ClayTableContextContributor>
+		for (ServiceWrapper<ClayTableHttpContextContributor>
 				tableActionProviderServiceWrapper :
 					clayTableContextContributorServiceWrappers) {
 
-			clayTableContextContributors.add(
+			clayTableHttpContextContributors.add(
 				tableActionProviderServiceWrapper.getService());
 		}
 
-		return clayTableContextContributors;
+		return clayTableHttpContextContributors;
 	}
 
 	@Activate
 	protected void activate(BundleContext bundleContext) {
 		_serviceTrackerMap = ServiceTrackerMapFactory.openMultiValueMap(
-			bundleContext, ClayTableContextContributor.class,
+			bundleContext, ClayTableHttpContextContributor.class,
 			"commerce.table.name",
 			ServiceTrackerCustomizerFactory.
-				<ClayTableContextContributor>serviceWrapper(bundleContext));
+				<ClayTableHttpContextContributor>serviceWrapper(bundleContext));
 	}
 
 	@Deactivate
@@ -92,7 +92,7 @@ public class ClayTableContextContributorRegistryImpl
 		ClayTableContextContributorRegistryImpl.class);
 
 	private ServiceTrackerMap
-		<String, List<ServiceWrapper<ClayTableContextContributor>>>
+		<String, List<ServiceWrapper<ClayTableHttpContextContributor>>>
 			_serviceTrackerMap;
 
 }

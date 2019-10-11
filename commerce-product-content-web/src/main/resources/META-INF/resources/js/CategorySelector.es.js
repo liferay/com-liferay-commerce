@@ -6,9 +6,8 @@ import templates from './CategorySelector.soy';
 
 /**
  * CategorySelector is a temporary Component wrapping the existing
- * AUI module liferay-asset-taglib-categories-selector
+ * AUI module liferay-commerce-frontend-asset-categories-selector
  */
-
 class CategorySelector extends Component {
 
 	/**
@@ -30,7 +29,7 @@ class CategorySelector extends Component {
 
 	rendered() {
 		AUI().use(
-			'liferay-asset-taglib-categories-selector',
+			'liferay-commerce-frontend-asset-categories-selector',
 			function(A) {
 				const config = {
 					categoryIds: this.rule.queryValues || '',

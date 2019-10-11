@@ -124,12 +124,51 @@ public class CommerceInventoryWarehouseItemServiceUtil {
 			commerceInventoryWarehouseId, start, end);
 	}
 
+	public static java.util.List
+		<com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem>
+				getCommerceInventoryWarehouseItemsByCompanyId(
+					long companyId, int start, int end)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getCommerceInventoryWarehouseItemsByCompanyId(
+			companyId, start, end);
+	}
+
 	public static int getCommerceInventoryWarehouseItemsCount(
 			long commerceInventoryWarehouseId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().getCommerceInventoryWarehouseItemsCount(
 			commerceInventoryWarehouseId);
+	}
+
+	public static int getCommerceInventoryWarehouseItemsCountByCompanyId(
+			long companyId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getCommerceInventoryWarehouseItemsCountByCompanyId(
+			companyId);
+	}
+
+	public static int getCommerceInventoryWarehouseItemsCountByModifiedDate(
+			long companyId, java.util.Date startDate, java.util.Date endDate)
+		throws com.liferay.portal.kernel.security.auth.PrincipalException {
+
+		return getService().
+			getCommerceInventoryWarehouseItemsCountByModifiedDate(
+				companyId, startDate, endDate);
+	}
+
+	public static java.util.List
+		<com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem>
+				getCommerceInventoryWarehouseItemsCountByModifiedDate(
+					long companyId, java.util.Date startDate,
+					java.util.Date endDate, int start, int end)
+			throws com.liferay.portal.kernel.security.auth.PrincipalException {
+
+		return getService().
+			getCommerceInventoryWarehouseItemsCountByModifiedDate(
+				companyId, startDate, endDate, start, end);
 	}
 
 	/**

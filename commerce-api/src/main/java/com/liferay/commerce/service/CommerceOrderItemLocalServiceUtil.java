@@ -520,6 +520,15 @@ public class CommerceOrderItemLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.model.CommerceOrderItem
+			updateCommerceOrderItemUnitPrice(
+				long commerceOrderItemId, java.math.BigDecimal unitPrice)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().updateCommerceOrderItemUnitPrice(
+			commerceOrderItemId, unitPrice);
+	}
+
+	public static com.liferay.commerce.model.CommerceOrderItem
 			upsertCommerceOrderItem(
 				long commerceOrderId, long cpInstanceId, int quantity,
 				int shippedQuantity, String json,

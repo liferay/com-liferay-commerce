@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.io.Serializable;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -250,6 +251,16 @@ public interface CommerceInventoryWarehouseItemLocalService
 		getCommerceInventoryWarehouseItems(
 			long commerceInventoryWarehouseId, int start, int end);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceInventoryWarehouseItem>
+		getCommerceInventoryWarehouseItemsByCompanyId(
+			long companyId, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceInventoryWarehouseItem>
+		getCommerceInventoryWarehouseItemsByModifiedDate(
+			long companyId, Date startDate, Date endDate, int start, int end);
+
 	/**
 	 * Returns the number of commerce inventory warehouse items.
 	 *
@@ -260,8 +271,15 @@ public interface CommerceInventoryWarehouseItemLocalService
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceInventoryWarehouseItemsCount(
-			long commerceInventoryWarehouseId)
-		throws PortalException;
+		long commerceInventoryWarehouseId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceInventoryWarehouseItemsCountByCompanyId(
+		long companyId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceInventoryWarehouseItemsCountByModifiedDate(
+		long companyId, Date startDate, Date endDate);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();

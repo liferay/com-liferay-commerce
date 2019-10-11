@@ -19,7 +19,9 @@ import com.liferay.portal.kernel.template.Template;
 import com.liferay.portal.kernel.template.TemplateConstants;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateManager;
-import com.liferay.portal.template.soy.utils.SoyTemplateResourcesProvider;
+import com.liferay.portal.kernel.template.TemplateResource;
+import com.liferay.portal.template.soy.SoyTemplateResourceFactory;
+import com.liferay.portal.template.soy.util.SoyTemplateResourcesProvider;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -94,9 +96,15 @@ public class SoyRendererImpl implements SoyRenderer {
 					"' template manager");
 		}
 
-		return _templateManager.getTemplate(
-			_soyTemplateResourcesProvider.getAllTemplateResources(), false);
+		TemplateResource soyTemplateResource =
+			_soyTemplateResourceFactory.createSoyTemplateResource(
+				_soyTemplateResourcesProvider.getAllTemplateResources());
+
+		return _templateManager.getTemplate(soyTemplateResource, false);
 	}
+
+	@Reference
+	private SoyTemplateResourceFactory _soyTemplateResourceFactory;
 
 	@Reference
 	private SoyTemplateResourcesProvider _soyTemplateResourcesProvider;

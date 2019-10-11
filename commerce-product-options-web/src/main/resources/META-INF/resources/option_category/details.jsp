@@ -40,19 +40,21 @@ CPOptionCategory cpOptionCategory = (CPOptionCategory)request.getAttribute(CPWeb
 </aui:fieldset>
 
 <c:if test="<%= cpOptionCategory == null %>">
-	<aui:script sandbox="<%= true %>">
-		var form = $(document.<portlet:namespace />fm);
+	<aui:script require="commerce-frontend-js/js/utilities/index.es as utilities">
+		const form = document.getElementById('<portlet:namespace />fm');
 
-		var keyInput = form.fm('key');
-		var titleInput = form.fm('title');
+		const keyInput = form.querySelector('#<portlet:namespace />key');
+		const titleInput = form.querySelector('#<portlet:namespace />title');
 
-		var onTitleInput = _.debounce(
-			function(event) {
-				keyInput.val(titleInput.val());
-			},
-			200
+		const debounce = utilities.debounce;
+
+		var handleOnTitleInput = function() {
+			keyInput.value = titleInput.value;
+		};
+
+		titleInput.addEventListener(
+			'input',
+			debounce(handleOnTitleInput, 200)
 		);
-
-		titleInput.on('input', onTitleInput);
 	</aui:script>
 </c:if>

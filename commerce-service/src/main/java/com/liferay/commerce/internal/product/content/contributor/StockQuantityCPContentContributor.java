@@ -58,10 +58,6 @@ public class StockQuantityCPContentContributor implements CPContentContributor {
 			CPInstance cpInstance, HttpServletRequest httpServletRequest)
 		throws PortalException {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)httpServletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
 		JSONObject jsonObject = _jsonFactory.createJSONObject();
 
 		if (cpInstance == null) {
@@ -87,6 +83,10 @@ public class StockQuantityCPContentContributor implements CPContentContributor {
 
 		boolean displayStockQuantity =
 			cpDefinitionInventoryEngine.isDisplayStockQuantity(cpInstance);
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 		if (displayStockQuantity) {
 			jsonObject.put(

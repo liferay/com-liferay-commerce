@@ -78,13 +78,13 @@ public class OpenAPIResourceImpl {
 		{
 			add(BillingAddressResourceImpl.class);
 
-			add(ShippingAddressResourceImpl.class);
-
 			add(OrderResourceImpl.class);
 
 			add(OrderItemResourceImpl.class);
 
 			add(OrderNoteResourceImpl.class);
+
+			add(ShippingAddressResourceImpl.class);
 
 			add(OpenAPIResourceImpl.class);
 		}

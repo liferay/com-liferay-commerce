@@ -14,8 +14,11 @@
 
 package com.liferay.commerce.product.content.web.internal.portlet.action;
 
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.constants.CommerceWebKeys;
+import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.product.constants.CPPortletKeys;
-import com.liferay.commerce.product.util.CPCompareUtil;
+import com.liferay.commerce.product.util.CPCompareHelper;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -26,6 +29,7 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -56,14 +60,34 @@ public class EditCompareProductMVCActionCommand extends BaseMVCActionCommand {
 
 		String compareParam = cpDefinitionId + "Compare";
 
+		CommerceContext commerceContext =
+			(CommerceContext)httpServletRequest.getAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT);
+
+		long groupId = commerceContext.getCommerceChannelGroupId();
+
+		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
+
+		long commerceAccountId = 0;
+
+		if (commerceAccount != null) {
+			commerceAccountId = commerceAccount.getCommerceAccountId();
+		}
+
+		HttpServletRequest originalHttpServletRequest =
+			_portal.getOriginalServletRequest(httpServletRequest);
+
+		HttpSession httpSession = originalHttpServletRequest.getSession();
+
 		boolean compare = ParamUtil.getBoolean(actionRequest, compareParam);
 
 		if (compare) {
-			CPCompareUtil.addCompareProduct(httpServletRequest, cpDefinitionId);
+			_cpCompareHelper.addCompareProduct(
+				groupId, commerceAccountId, cpDefinitionId, httpSession);
 		}
 		else {
-			CPCompareUtil.removeCompareProduct(
-				httpServletRequest, cpDefinitionId);
+			_cpCompareHelper.removeCompareProduct(
+				groupId, commerceAccountId, cpDefinitionId, httpSession);
 		}
 
 		String redirect = ParamUtil.getString(actionRequest, "redirect");
@@ -72,6 +96,9 @@ public class EditCompareProductMVCActionCommand extends BaseMVCActionCommand {
 			actionResponse.sendRedirect(redirect);
 		}
 	}
+
+	@Reference
+	private CPCompareHelper _cpCompareHelper;
 
 	@Reference
 	private Portal _portal;

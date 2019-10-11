@@ -20,7 +20,10 @@ import com.liferay.commerce.frontend.ClayTableRegistry;
 import com.liferay.commerce.frontend.ClayTableSerializer;
 import com.liferay.commerce.frontend.CommerceDataProviderRegistry;
 import com.liferay.commerce.frontend.FilterFactoryRegistry;
+import com.liferay.commerce.frontend.util.ProductHelper;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
+import com.liferay.commerce.product.content.util.CPContentHelper;
+import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 
 import javax.servlet.ServletContext;
 
@@ -63,8 +66,20 @@ public class ServletContextUtil {
 		return _instance._getCommerceOrderHttpHelper();
 	}
 
+	public static final CPContentHelper getCPContentHelper() {
+		return _instance._getCPContentHelper();
+	}
+
 	public static final FilterFactoryRegistry getFilterFactoryRegistry() {
 		return _instance._getFilterFactoryRegistry();
+	}
+
+	public static final NPMResolver getNPMResolver() {
+		return _instance._getNPMResolver();
+	}
+
+	public static final ProductHelper getProductHelper() {
+		return _instance._getProductHelper();
 	}
 
 	public static final ServletContext getServletContext() {
@@ -124,10 +139,25 @@ public class ServletContextUtil {
 	}
 
 	@Reference(unbind = "-")
+	protected void setCPContentHelper(CPContentHelper cpContentHelper) {
+		_cpContentHelper = cpContentHelper;
+	}
+
+	@Reference(unbind = "-")
 	protected void setFilterFactoryRegistry(
 		FilterFactoryRegistry filterFactoryRegistry) {
 
 		_filterFactoryRegistry = filterFactoryRegistry;
+	}
+
+	@Reference(unbind = "-")
+	protected void setNPMResolver(NPMResolver npmResolver) {
+		_npmResolver = npmResolver;
+	}
+
+	@Reference(unbind = "-")
+	protected void setProductHelper(ProductHelper productHelper) {
+		_productHelper = productHelper;
 	}
 
 	@Reference(
@@ -164,8 +194,20 @@ public class ServletContextUtil {
 		return _commerceOrderHttpHelper;
 	}
 
+	private CPContentHelper _getCPContentHelper() {
+		return _cpContentHelper;
+	}
+
 	private FilterFactoryRegistry _getFilterFactoryRegistry() {
 		return _filterFactoryRegistry;
+	}
+
+	private NPMResolver _getNPMResolver() {
+		return _npmResolver;
+	}
+
+	private ProductHelper _getProductHelper() {
+		return _productHelper;
 	}
 
 	private ServletContext _getServletContext() {
@@ -181,7 +223,10 @@ public class ServletContextUtil {
 	private ClayTableSerializer _clayTableSerializer;
 	private CommerceDataProviderRegistry _commerceDataProviderRegistry;
 	private CommerceOrderHttpHelper _commerceOrderHttpHelper;
+	private CPContentHelper _cpContentHelper;
 	private FilterFactoryRegistry _filterFactoryRegistry;
+	private NPMResolver _npmResolver;
+	private ProductHelper _productHelper;
 	private ServletContext _servletContext;
 
 }

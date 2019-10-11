@@ -32,7 +32,6 @@ import com.liferay.commerce.initializer.util.CommercePriceListsImporter;
 import com.liferay.commerce.initializer.util.CommerceUsersImporter;
 import com.liferay.commerce.initializer.util.DDMFormImporter;
 import com.liferay.commerce.initializer.util.DLImporter;
-import com.liferay.commerce.initializer.util.JournalArticleImporter;
 import com.liferay.commerce.initializer.util.KBArticleImporter;
 import com.liferay.commerce.initializer.util.OrganizationImporter;
 import com.liferay.commerce.initializer.util.PortletSettingsImporter;
@@ -177,6 +176,8 @@ public class MiniumSiteInitializer implements SiteInitializer {
 
 			_cpFileImporter.updateLookAndFeel(
 				_MINIUM_THEME_ID, true, serviceContext);
+			_cpFileImporter.updateLookAndFeel(
+				_MINIUM_THEME_ID, false, serviceContext);
 
 			updateLogo(serviceContext);
 
@@ -485,6 +486,7 @@ public class MiniumSiteInitializer implements SiteInitializer {
 		File file = FileUtil.createTempFile(inputStream);
 
 		_cpFileImporter.updateLogo(file, true, true, serviceContext);
+		_cpFileImporter.updateLogo(file, false, true, serviceContext);
 	}
 
 	protected void updateThemeSetting(
@@ -826,12 +828,12 @@ public class MiniumSiteInitializer implements SiteInitializer {
 
 		JSONArray jsonArray = _getJSONArray("journal-articles.json");
 
-		_journalArticleImporter.importJournalArticles(
+		_cpFileImporter.createJournalArticles(
 			jsonArray,
 			_siteInitializerDependencyResolver.getDocumentsClassLoader(),
 			_siteInitializerDependencyResolver.getDependenciesPath() +
 				"journal_articles/",
-			serviceContext.getScopeGroupId(), serviceContext.getUserId());
+			serviceContext);
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Journal Articles successfully imported");
@@ -888,16 +890,16 @@ public class MiniumSiteInitializer implements SiteInitializer {
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject productJSONObject = jsonArray.getJSONObject(i);
 
-			String name = productJSONObject.getString("Name");
-
-			CPDefinition cpDefinition = getCPDefinitionByName(name);
-
 			JSONArray relatedProducts = productJSONObject.getJSONArray(
 				"RelatedProducts");
 
 			if (relatedProducts == null) {
 				continue;
 			}
+
+			String name = productJSONObject.getString("Name");
+
+			CPDefinition cpDefinition = getCPDefinitionByName(name);
 
 			_cpDefinitionLinkLocalService.updateCPDefinitionLinkCProductIds(
 				cpDefinition.getCPDefinitionId(),
@@ -1038,9 +1040,6 @@ public class MiniumSiteInitializer implements SiteInitializer {
 
 	@Reference
 	private GroupLocalService _groupLocalService;
-
-	@Reference
-	private JournalArticleImporter _journalArticleImporter;
 
 	@Reference
 	private JSONFactory _jsonFactory;

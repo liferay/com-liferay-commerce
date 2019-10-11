@@ -28,12 +28,13 @@ import com.liferay.commerce.product.data.source.CPDataSourceResult;
 import com.liferay.commerce.product.display.context.util.CPRequestHelper;
 import com.liferay.commerce.product.type.CPType;
 import com.liferay.commerce.product.type.CPTypeServicesTracker;
-import com.liferay.commerce.product.util.CPCompareUtil;
+import com.liferay.commerce.product.util.CPCompareHelperUtil;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.ArrayList;
@@ -76,8 +77,25 @@ public class CPCompareContentMiniDisplayContext {
 			portletDisplay.getPortletInstanceConfiguration(
 				CPCompareContentMiniPortletInstanceConfiguration.class);
 
-		_cpDefinitionIds = new ArrayList<>(
-			CPCompareUtil.getCPDefinitionIds(httpServletRequest));
+		CommerceContext commerceContext =
+			(CommerceContext)httpServletRequest.getAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT);
+
+		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
+
+		if (commerceAccount != null) {
+			HttpServletRequest originalHttpServletRequest =
+				PortalUtil.getOriginalServletRequest(httpServletRequest);
+
+			_cpDefinitionIds = new ArrayList<>(
+				CPCompareHelperUtil.getCPDefinitionIds(
+					commerceContext.getCommerceChannelGroupId(),
+					commerceAccount.getCommerceAccountId(),
+					originalHttpServletRequest.getSession()));
+		}
+		else {
+			_cpDefinitionIds = new ArrayList<>();
+		}
 	}
 
 	public Map<String, String> getCPContentListEntryRendererKeys() {

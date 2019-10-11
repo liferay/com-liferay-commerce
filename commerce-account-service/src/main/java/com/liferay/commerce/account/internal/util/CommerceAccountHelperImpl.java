@@ -114,17 +114,18 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 		long currentCommerceAccountId = SessionParamUtil.getLong(
 			httpServletRequest, curGroupCommerceAccountIdKey);
 
-		if (currentCommerceAccountId == 0) {
+		if (currentCommerceAccountId > 0) {
+			commerceAccount = _commerceAccountService.fetchCommerceAccount(
+				currentCommerceAccountId);
+		}
+
+		if ((commerceAccount == null) || !commerceAccount.isActive()) {
 			commerceAccount = _getSingleCommerceAccount(
 				groupId, httpServletRequest);
 
 			if (commerceAccount == null) {
 				setCurrentCommerceAccount(httpServletRequest, groupId, -1);
 			}
-		}
-		else if (currentCommerceAccountId > 0) {
-			commerceAccount = _commerceAccountService.fetchCommerceAccount(
-				currentCommerceAccountId);
 		}
 
 		return commerceAccount;

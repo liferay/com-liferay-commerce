@@ -30,6 +30,7 @@ import graphql.annotations.annotationTypes.GraphQLInvokeDetached;
 import graphql.annotations.annotationTypes.GraphQLName;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.annotation.Generated;
 
@@ -60,31 +61,6 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Warehouse getWarehousId(@GraphQLName("id") Long id)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_warehouseResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			warehouseResource -> warehouseResource.getWarehousId(id));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
-	public Warehouse getWarehousByExternalReferenceCode(
-			@GraphQLName("externalReferenceCode") String externalReferenceCode)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_warehouseResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			warehouseResource ->
-				warehouseResource.getWarehousByExternalReferenceCode(
-					externalReferenceCode));
-	}
-
-	@GraphQLField
-	@GraphQLInvokeDetached
 	public Collection<Warehouse> getWarehousesPage(
 			@GraphQLName("pageSize") int pageSize,
 			@GraphQLName("page") int page)
@@ -103,8 +79,34 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public Collection<WarehouseItem> getWarehousIdWarehouseItemsPage(
-			@GraphQLName("id") Long id, @GraphQLName("pageSize") int pageSize,
+	public Warehouse getWarehousByExternalReferenceCode(
+			@GraphQLName("externalReferenceCode") String externalReferenceCode)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_warehouseResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			warehouseResource ->
+				warehouseResource.getWarehousByExternalReferenceCode(
+					externalReferenceCode));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Warehouse getWarehousId(@GraphQLName("id") Long id)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_warehouseResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			warehouseResource -> warehouseResource.getWarehousId(id));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Collection<WarehouseItem> getWarehouseItemsUpdatedPage(
+			@GraphQLName("end") Date end, @GraphQLName("start") Date start,
+			@GraphQLName("pageSize") int pageSize,
 			@GraphQLName("page") int page)
 		throws Exception {
 
@@ -113,11 +115,23 @@ public class Query {
 			this::_populateResourceContext,
 			warehouseItemResource -> {
 				Page paginationPage =
-					warehouseItemResource.getWarehousIdWarehouseItemsPage(
-						id, Pagination.of(pageSize, page));
+					warehouseItemResource.getWarehouseItemsUpdatedPage(
+						end, start, Pagination.of(pageSize, page));
 
 				return paginationPage.getItems();
 			});
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public WarehouseItem getWarehouseItem(@GraphQLName("id") Long id)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_warehouseItemResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			warehouseItemResource -> warehouseItemResource.getWarehouseItem(
+				id));
 	}
 
 	@GraphQLField
@@ -146,14 +160,21 @@ public class Query {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
-	public WarehouseItem getWarehouseItem(@GraphQLName("id") Long id)
+	public Collection<WarehouseItem> getWarehousIdWarehouseItemsPage(
+			@GraphQLName("id") Long id, @GraphQLName("pageSize") int pageSize,
+			@GraphQLName("page") int page)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
 			_warehouseItemResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			warehouseItemResource -> warehouseItemResource.getWarehouseItem(
-				id));
+			warehouseItemResource -> {
+				Page paginationPage =
+					warehouseItemResource.getWarehousIdWarehouseItemsPage(
+						id, Pagination.of(pageSize, page));
+
+				return paginationPage.getItems();
+			});
 	}
 
 	private <T, R, E1 extends Throwable, E2 extends Throwable> R

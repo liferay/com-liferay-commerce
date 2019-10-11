@@ -18,7 +18,6 @@ import com.liferay.commerce.product.exception.DuplicateCommerceChannelSiteGroupI
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.base.CommerceChannelLocalServiceBaseImpl;
 import com.liferay.petra.string.StringPool;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
@@ -38,17 +37,10 @@ import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.service.persistence.GroupPersistence;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
-import com.liferay.portal.kernel.transaction.Propagation;
-import com.liferay.portal.kernel.transaction.TransactionConfig;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.spring.aop.ServiceBeanMethodInvocation;
-import com.liferay.portal.spring.transaction.TransactionAttributeAdapter;
-import com.liferay.portal.spring.transaction.TransactionAttributeBuilder;
-import com.liferay.portal.spring.transaction.TransactionExecutor;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -190,47 +182,14 @@ public class CommerceChannelLocalServiceImpl
 		long classNameId = classNameLocalService.getClassNameId(
 			CommerceChannel.class.getName());
 
-		// TODO: Replace with a direct call to
-		// groupLocalService.fetchGroup(long, long, long).
+		Group group = groupLocalService.fetchGroup(
+			commerceChannel.getCompanyId(), classNameId, commerceChannelId);
 
-		try {
-			TransactionExecutor transactionExecutor =
-				(TransactionExecutor)PortalBeanLocatorUtil.locate(
-					"transactionExecutor");
-
-			ServiceBeanMethodInvocation serviceBeanMethodInvocation =
-				new ServiceBeanMethodInvocation(
-					groupPersistence,
-					GroupPersistence.class.getMethod(
-						"findByC_C_C", long.class, long.class, long.class),
-					new Object[] {
-						commerceChannel.getCompanyId(), classNameId,
-						commerceChannelId
-					});
-
-			serviceBeanMethodInvocation.setMethodInterceptors(
-				Collections.emptyList());
-
-			return (Group)transactionExecutor.execute(
-				new TransactionAttributeAdapter(
-					TransactionAttributeBuilder.build(
-						true, _transactionConfig.getIsolation(),
-						_transactionConfig.getPropagation(),
-						_transactionConfig.isReadOnly(),
-						_transactionConfig.getTimeout(),
-						_transactionConfig.getRollbackForClasses(),
-						_transactionConfig.getRollbackForClassNames(),
-						_transactionConfig.getNoRollbackForClasses(),
-						_transactionConfig.getNoRollbackForClassNames())),
-				serviceBeanMethodInvocation);
+		if (group != null) {
+			return group;
 		}
-		catch (Throwable t) {
-			if (t instanceof PortalException) {
-				throw (PortalException)t;
-			}
 
-			throw new PortalException(t);
-		}
+		throw new PortalException();
 	}
 
 	@Override
@@ -400,9 +359,5 @@ public class CommerceChannelLocalServiceImpl
 	private static final String[] _SELECTED_FIELD_NAMES = {
 		Field.ENTRY_CLASS_PK, Field.COMPANY_ID
 	};
-
-	private static final TransactionConfig _transactionConfig =
-		TransactionConfig.Factory.create(
-			Propagation.REQUIRED, new Class<?>[] {Exception.class});
 
 }

@@ -20,7 +20,6 @@ import com.liferay.commerce.product.exception.CommerceCatalogSystemException;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.base.CommerceCatalogLocalServiceBaseImpl;
 import com.liferay.petra.string.StringPool;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Company;
@@ -41,21 +40,13 @@ import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.service.persistence.GroupPersistence;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
-import com.liferay.portal.kernel.transaction.Propagation;
-import com.liferay.portal.kernel.transaction.TransactionConfig;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
-import com.liferay.portal.spring.aop.ServiceBeanMethodInvocation;
-import com.liferay.portal.spring.transaction.TransactionAttributeAdapter;
-import com.liferay.portal.spring.transaction.TransactionAttributeBuilder;
-import com.liferay.portal.spring.transaction.TransactionExecutor;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -99,8 +90,8 @@ public class CommerceCatalogLocalServiceImpl
 		groupLocalService.addGroup(
 			user.getUserId(), GroupConstants.DEFAULT_PARENT_GROUP_ID,
 			CommerceCatalog.class.getName(), commerceCatalogId,
-			GroupConstants.DEFAULT_LIVE_GROUP_ID, name, null,
-			GroupConstants.TYPE_SITE_PRIVATE, false,
+			GroupConstants.DEFAULT_LIVE_GROUP_ID, getLocalizationMap(name),
+			null, GroupConstants.TYPE_SITE_PRIVATE, false,
 			GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, null, false, true,
 			null);
 
@@ -225,47 +216,14 @@ public class CommerceCatalogLocalServiceImpl
 		long classNameId = classNameLocalService.getClassNameId(
 			CommerceCatalog.class.getName());
 
-		// TODO: Replace with a direct call to
-		// groupLocalService.fetchGroup(long, long, long).
+		Group group = groupLocalService.fetchGroup(
+			commerceCatalog.getCompanyId(), classNameId, commerceCatalogId);
 
-		try {
-			TransactionExecutor transactionExecutor =
-				(TransactionExecutor)PortalBeanLocatorUtil.locate(
-					"transactionExecutor");
-
-			ServiceBeanMethodInvocation serviceBeanMethodInvocation =
-				new ServiceBeanMethodInvocation(
-					groupPersistence,
-					GroupPersistence.class.getMethod(
-						"findByC_C_C", long.class, long.class, long.class),
-					new Object[] {
-						commerceCatalog.getCompanyId(), classNameId,
-						commerceCatalogId
-					});
-
-			serviceBeanMethodInvocation.setMethodInterceptors(
-				Collections.emptyList());
-
-			return (Group)transactionExecutor.execute(
-				new TransactionAttributeAdapter(
-					TransactionAttributeBuilder.build(
-						true, _transactionConfig.getIsolation(),
-						_transactionConfig.getPropagation(),
-						_transactionConfig.isReadOnly(),
-						_transactionConfig.getTimeout(),
-						_transactionConfig.getRollbackForClasses(),
-						_transactionConfig.getRollbackForClassNames(),
-						_transactionConfig.getNoRollbackForClasses(),
-						_transactionConfig.getNoRollbackForClassNames())),
-				serviceBeanMethodInvocation);
+		if (group != null) {
+			return group;
 		}
-		catch (Throwable t) {
-			if (t instanceof PortalException) {
-				throw (PortalException)t;
-			}
 
-			throw new PortalException(t);
-		}
+		throw new PortalException();
 	}
 
 	@Override
@@ -435,9 +393,5 @@ public class CommerceCatalogLocalServiceImpl
 	private static final String[] _SELECTED_FIELD_NAMES = {
 		Field.ENTRY_CLASS_PK, Field.COMPANY_ID
 	};
-
-	private static final TransactionConfig _transactionConfig =
-		TransactionConfig.Factory.create(
-			Propagation.REQUIRED, new Class<?>[] {Exception.class});
 
 }

@@ -151,12 +151,6 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 			throw new NoSuchAccountException();
 		}
 
-		if (commerceAccount == null) {
-			throw new PrincipalException.MustHavePermission(
-				getPermissionChecker(), CommerceAccount.class.getName(),
-				commerceAccountId, ActionKeys.VIEW);
-		}
-
 		return commerceAccount;
 	}
 
@@ -218,8 +212,14 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 			String keywords, int start, int end)
 		throws PortalException {
 
+		Boolean active = true;
+
+		if (hasManageCommerceAccountPermissions()) {
+			active = null;
+		}
+
 		return commerceAccountService.getUserCommerceAccounts(
-			userId, parentCommerceAccountId, commerceSiteType, keywords, true,
+			userId, parentCommerceAccountId, commerceSiteType, keywords, active,
 			start, end);
 	}
 
@@ -229,8 +229,15 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 			String keywords)
 		throws PortalException {
 
+		Boolean active = true;
+
+		if (hasManageCommerceAccountPermissions()) {
+			active = null;
+		}
+
 		return commerceAccountService.getUserCommerceAccountsCount(
-			userId, parentCommerceAccountId, commerceSiteType, keywords, true);
+			userId, parentCommerceAccountId, commerceSiteType, keywords,
+			active);
 	}
 
 	@Override
@@ -361,6 +368,14 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 		return commerceAccountLocalService.upsertCommerceAccount(
 			name, parentCommerceAccountId, logo, logoBytes, email, taxId, type,
 			active, externalReferenceCode, serviceContext);
+	}
+
+	protected boolean hasManageCommerceAccountPermissions()
+		throws PortalException {
+
+		return PortalPermissionUtil.contains(
+			getPermissionChecker(),
+			CommerceAccountActionKeys.MANAGE_AVAILABLE_ACCOUNTS);
 	}
 
 	private boolean _isAccountCompanyAdministrator() throws PortalException {

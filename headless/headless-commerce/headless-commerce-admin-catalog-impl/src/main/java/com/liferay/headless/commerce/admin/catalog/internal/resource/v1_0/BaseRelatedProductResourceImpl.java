@@ -59,71 +59,6 @@ public abstract class BaseRelatedProductResourceImpl
 	implements RelatedProductResource {
 
 	@Override
-	@DELETE
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/relatedProducts/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "RelatedProduct")})
-	public Response deleteRelatedProduct(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/relatedProducts/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "RelatedProduct")})
-	public RelatedProduct getRelatedProduct(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
-		throws Exception {
-
-		return new RelatedProduct();
-	}
-
-	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.PATH, name = "id"),
-			@Parameter(in = ParameterIn.QUERY, name = "type"),
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/products/{id}/relatedProducts/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "RelatedProduct")})
-	public Page<RelatedProduct> getProductIdRelatedProductsPage(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			@Parameter(hidden = true) @QueryParam("type") String type,
-			@Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/products/{id}/relatedProducts/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "RelatedProduct")})
-	public RelatedProduct postProductIdRelatedProduct(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			RelatedProduct relatedProduct)
-		throws Exception {
-
-		return new RelatedProduct();
-	}
-
-	@Override
 	@GET
 	@Parameters(
 		value = {
@@ -167,6 +102,71 @@ public abstract class BaseRelatedProductResourceImpl
 			@NotNull @Parameter(hidden = true)
 			@PathParam("externalReferenceCode") String externalReferenceCode,
 			RelatedProduct relatedProduct)
+		throws Exception {
+
+		return new RelatedProduct();
+	}
+
+	@Override
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "id"),
+			@Parameter(in = ParameterIn.QUERY, name = "type"),
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/products/{id}/relatedProducts/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "RelatedProduct")})
+	public Page<RelatedProduct> getProductIdRelatedProductsPage(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			@Parameter(hidden = true) @QueryParam("type") String type,
+			@Context Pagination pagination)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/products/{id}/relatedProducts/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "RelatedProduct")})
+	public RelatedProduct postProductIdRelatedProduct(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			RelatedProduct relatedProduct)
+		throws Exception {
+
+		return new RelatedProduct();
+	}
+
+	@Override
+	@DELETE
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/relatedProducts/{id}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "RelatedProduct")})
+	public Response deleteRelatedProduct(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/relatedProducts/{id}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "RelatedProduct")})
+	public RelatedProduct getRelatedProduct(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
 		throws Exception {
 
 		return new RelatedProduct();

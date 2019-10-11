@@ -639,6 +639,189 @@ public interface CommerceNotificationQueueEntryPersistence
 	public int countByLtS(Date sentDate);
 
 	/**
+	 * Returns all the commerce notification queue entries where groupId = &#63; and classNameId = &#63; and classPK = &#63; and sent = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param sent the sent
+	 * @return the matching commerce notification queue entries
+	 */
+	public java.util.List<CommerceNotificationQueueEntry> findByG_C_C_S(
+		long groupId, long classNameId, long classPK, boolean sent);
+
+	/**
+	 * Returns a range of all the commerce notification queue entries where groupId = &#63; and classNameId = &#63; and classPK = &#63; and sent = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationQueueEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param sent the sent
+	 * @param start the lower bound of the range of commerce notification queue entries
+	 * @param end the upper bound of the range of commerce notification queue entries (not inclusive)
+	 * @return the range of matching commerce notification queue entries
+	 */
+	public java.util.List<CommerceNotificationQueueEntry> findByG_C_C_S(
+		long groupId, long classNameId, long classPK, boolean sent, int start,
+		int end);
+
+	/**
+	 * Returns an ordered range of all the commerce notification queue entries where groupId = &#63; and classNameId = &#63; and classPK = &#63; and sent = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationQueueEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param sent the sent
+	 * @param start the lower bound of the range of commerce notification queue entries
+	 * @param end the upper bound of the range of commerce notification queue entries (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce notification queue entries
+	 */
+	public java.util.List<CommerceNotificationQueueEntry> findByG_C_C_S(
+		long groupId, long classNameId, long classPK, boolean sent, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator
+			<CommerceNotificationQueueEntry> orderByComparator);
+
+	/**
+	 * Returns an ordered range of all the commerce notification queue entries where groupId = &#63; and classNameId = &#63; and classPK = &#63; and sent = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceNotificationQueueEntryModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param sent the sent
+	 * @param start the lower bound of the range of commerce notification queue entries
+	 * @param end the upper bound of the range of commerce notification queue entries (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching commerce notification queue entries
+	 */
+	public java.util.List<CommerceNotificationQueueEntry> findByG_C_C_S(
+		long groupId, long classNameId, long classPK, boolean sent, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator
+			<CommerceNotificationQueueEntry> orderByComparator,
+		boolean useFinderCache);
+
+	/**
+	 * Returns the first commerce notification queue entry in the ordered set where groupId = &#63; and classNameId = &#63; and classPK = &#63; and sent = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param sent the sent
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce notification queue entry
+	 * @throws NoSuchNotificationQueueEntryException if a matching commerce notification queue entry could not be found
+	 */
+	public CommerceNotificationQueueEntry findByG_C_C_S_First(
+			long groupId, long classNameId, long classPK, boolean sent,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<CommerceNotificationQueueEntry> orderByComparator)
+		throws NoSuchNotificationQueueEntryException;
+
+	/**
+	 * Returns the first commerce notification queue entry in the ordered set where groupId = &#63; and classNameId = &#63; and classPK = &#63; and sent = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param sent the sent
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce notification queue entry, or <code>null</code> if a matching commerce notification queue entry could not be found
+	 */
+	public CommerceNotificationQueueEntry fetchByG_C_C_S_First(
+		long groupId, long classNameId, long classPK, boolean sent,
+		com.liferay.portal.kernel.util.OrderByComparator
+			<CommerceNotificationQueueEntry> orderByComparator);
+
+	/**
+	 * Returns the last commerce notification queue entry in the ordered set where groupId = &#63; and classNameId = &#63; and classPK = &#63; and sent = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param sent the sent
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce notification queue entry
+	 * @throws NoSuchNotificationQueueEntryException if a matching commerce notification queue entry could not be found
+	 */
+	public CommerceNotificationQueueEntry findByG_C_C_S_Last(
+			long groupId, long classNameId, long classPK, boolean sent,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<CommerceNotificationQueueEntry> orderByComparator)
+		throws NoSuchNotificationQueueEntryException;
+
+	/**
+	 * Returns the last commerce notification queue entry in the ordered set where groupId = &#63; and classNameId = &#63; and classPK = &#63; and sent = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param sent the sent
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce notification queue entry, or <code>null</code> if a matching commerce notification queue entry could not be found
+	 */
+	public CommerceNotificationQueueEntry fetchByG_C_C_S_Last(
+		long groupId, long classNameId, long classPK, boolean sent,
+		com.liferay.portal.kernel.util.OrderByComparator
+			<CommerceNotificationQueueEntry> orderByComparator);
+
+	/**
+	 * Returns the commerce notification queue entries before and after the current commerce notification queue entry in the ordered set where groupId = &#63; and classNameId = &#63; and classPK = &#63; and sent = &#63;.
+	 *
+	 * @param commerceNotificationQueueEntryId the primary key of the current commerce notification queue entry
+	 * @param groupId the group ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param sent the sent
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce notification queue entry
+	 * @throws NoSuchNotificationQueueEntryException if a commerce notification queue entry with the primary key could not be found
+	 */
+	public CommerceNotificationQueueEntry[] findByG_C_C_S_PrevAndNext(
+			long commerceNotificationQueueEntryId, long groupId,
+			long classNameId, long classPK, boolean sent,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<CommerceNotificationQueueEntry> orderByComparator)
+		throws NoSuchNotificationQueueEntryException;
+
+	/**
+	 * Removes all the commerce notification queue entries where groupId = &#63; and classNameId = &#63; and classPK = &#63; and sent = &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param sent the sent
+	 */
+	public void removeByG_C_C_S(
+		long groupId, long classNameId, long classPK, boolean sent);
+
+	/**
+	 * Returns the number of commerce notification queue entries where groupId = &#63; and classNameId = &#63; and classPK = &#63; and sent = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param classNameId the class name ID
+	 * @param classPK the class pk
+	 * @param sent the sent
+	 * @return the number of matching commerce notification queue entries
+	 */
+	public int countByG_C_C_S(
+		long groupId, long classNameId, long classPK, boolean sent);
+
+	/**
 	 * Caches the commerce notification queue entry in the entity cache if it is enabled.
 	 *
 	 * @param commerceNotificationQueueEntry the commerce notification queue entry

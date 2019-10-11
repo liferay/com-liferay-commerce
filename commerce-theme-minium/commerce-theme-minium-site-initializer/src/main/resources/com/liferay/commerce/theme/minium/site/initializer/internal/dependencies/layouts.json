@@ -136,19 +136,6 @@
 	{
 		"hidden": true,
 		"layoutTemplateId": "1_column",
-		"name": "User Management",
-		"portlets": [
-			{
-				"layoutColumnId": "column-1",
-				"layoutColumnPos": 0,
-				"portletName": "com_liferay_commerce_user_web_internal_portlet_CommerceUserPortlet"
-			}
-		],
-		"privateLayout": true
-	},
-	{
-		"hidden": true,
-		"layoutTemplateId": "1_column",
 		"name": "Compare",
 		"portlets": [
 			{
@@ -242,5 +229,28 @@
 			}
 		],
 		"privateLayout": true
+	},
+	{
+		"hidden": true,
+		"layoutTemplateId": "2_columns_ii",
+		"name": "Login",
+		"portlets": [
+			{
+				"layoutColumnId": "column-1",
+				"layoutColumnPos": 0,
+				"portletName": "com_liferay_login_web_portlet_LoginPortlet"
+			},
+			{
+				"layoutColumnId": "column-2",
+				"layoutColumnPos": 0,
+				"portletName": "com_liferay_journal_content_web_portlet_JournalContentPortlet",
+				"portletPreferences": {
+					"articleId": "LOGIN_SPLASH",
+					"ddmStructureKey": "login-splash-structure",
+					"ddmTemplateKey": "LOGIN_SPLASH"
+				}
+			}
+		],
+		"privateLayout": false
 	}
 ]

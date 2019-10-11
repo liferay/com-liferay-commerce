@@ -98,6 +98,20 @@
 	</td>
 {/deltemplate}
 
+{deltemplate ClayTable.Cell variant="'commerceTableCellActive'"}
+	{@param fieldSchema: ?}
+	{@param item: ?}
+	{@param value: ?}
+	{@param? _handleCellContentClick: any}
+	{@param? spritemap: string}
+
+	<td>
+		<span class="commerce-dot commerce-dot--big commerce-dot--{if $item.active}good{else}bad{/if}">
+			{$item.statusLabel}
+		</span>
+	</td>
+{/deltemplate}
+
 {deltemplate ClayTable.Cell variant="'commerceTableCellImageName'"}
 	{@param fieldSchema: ?}
 	{@param item: ?}

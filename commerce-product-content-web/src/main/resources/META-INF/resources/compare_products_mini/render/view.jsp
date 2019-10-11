@@ -22,7 +22,15 @@ CPDataSourceResult cpDataSourceResult = (CPDataSourceResult)request.getAttribute
 
 List<CPCatalogEntry> cpCatalogEntries = cpDataSourceResult.getCPCatalogEntries();
 
-List<Long> cpDefinitionIds = CPCompareUtil.getCPDefinitionIds(request);
+CommerceContext commerceContext = (CommerceContext)request.getAttribute(CommerceWebKeys.COMMERCE_CONTEXT);
+
+CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
+
+long commerceAccountId = GetterUtil.getLong(commerceAccount.getCommerceAccountId());
+
+HttpServletRequest originalHttpServletRequest = PortalUtil.getOriginalServletRequest(request);
+
+List<Long> cpDefinitionIds = CPCompareHelperUtil.getCPDefinitionIds(commerceContext.getCommerceChannelGroupId(), commerceAccountId, originalHttpServletRequest.getSession());
 %>
 
 <c:if test="<%= !cpCatalogEntries.isEmpty() %>">

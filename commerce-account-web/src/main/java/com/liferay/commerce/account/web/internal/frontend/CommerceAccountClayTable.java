@@ -15,6 +15,7 @@
 package com.liferay.commerce.account.web.internal.frontend;
 
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
+import com.liferay.commerce.account.constants.CommerceAccountPortletKeys;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.account.web.internal.model.Account;
@@ -39,10 +40,12 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.PortletProvider;
 import com.liferay.portal.kernel.portlet.PortletProviderUtil;
 import com.liferay.portal.kernel.portlet.PortletQName;
+import com.liferay.portal.kernel.portlet.PortletURLFactory;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.webserver.WebServerServletTokenUtil;
@@ -50,6 +53,8 @@ import com.liferay.portal.kernel.webserver.WebServerServletTokenUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.portlet.ActionRequest;
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
@@ -97,11 +102,32 @@ public class CommerceAccountClayTable
 			String viewURL = _getAccountViewDetailURL(
 				account.getAccountId(), httpServletRequest);
 
-			ClayTableAction clayTableAction = new ClayTableAction(
+			ClayTableAction clayTableViewAction = new ClayTableAction(
 				viewURL, StringPool.BLANK,
 				LanguageUtil.get(httpServletRequest, "view"), false, false);
 
-			clayTableActions.add(clayTableAction);
+			clayTableActions.add(clayTableViewAction);
+		}
+
+		if (_modelResourcePermission.contains(
+				themeDisplay.getPermissionChecker(), account.getAccountId(),
+				ActionKeys.UPDATE)) {
+
+			String setActiveURL = _getAccountSetActiveURL(
+				account.getAccountId(), httpServletRequest);
+
+			ClayTableAction clayTableSetActiveAction = new ClayTableAction(
+				"commerce-button--good", setActiveURL, StringPool.BLANK,
+				LanguageUtil.get(httpServletRequest, "activate"), false, false);
+
+			if (account.getActive()) {
+				clayTableSetActiveAction = new ClayTableAction(
+					"commerce-button--bad", setActiveURL, StringPool.BLANK,
+					LanguageUtil.get(httpServletRequest, "deactivate"), false,
+					false);
+			}
+
+			clayTableActions.add(clayTableSetActiveAction);
 		}
 
 		return clayTableActions;
@@ -142,6 +168,11 @@ public class CommerceAccountClayTable
 		clayTableSchemaBuilder.addField("email", "email");
 
 		clayTableSchemaBuilder.addField("address", "address");
+
+		ClayTableSchemaField statusField = clayTableSchemaBuilder.addField(
+			"active", "status");
+
+		statusField.setContentRenderer("commerceTableCellActive");
 
 		return clayTableSchemaBuilder.build();
 	}
@@ -194,11 +225,19 @@ public class CommerceAccountClayTable
 						commerceAccount.getLogoId()));
 			}
 
+			String statusLabel = "inactive";
+
+			if (commerceAccount.isActive()) {
+				statusLabel = "active";
+			}
+
 			accounts.add(
 				new Account(
 					commerceAccount.getCommerceAccountId(),
-					commerceAccount.getName(), commerceAccount.getEmail(),
+					commerceAccount.isActive(), commerceAccount.getName(),
+					commerceAccount.getEmail(),
 					_getDefaultBillingCommerceAddress(commerceAccount),
+					LanguageUtil.get(httpServletRequest, statusLabel),
 					thumbnailSB.toString(),
 					_getAccountViewDetailURL(
 						commerceAccount.getCommerceAccountId(),
@@ -213,9 +252,41 @@ public class CommerceAccountClayTable
 		return true;
 	}
 
+	private String _getAccountSetActiveURL(
+			long commerceAccountId, HttpServletRequest httpServletRequest)
+		throws PortalException {
+
+		PortletURL activateURL = _portletURLFactory.create(
+			httpServletRequest, CommerceAccountPortletKeys.COMMERCE_ACCOUNT,
+			PortletRequest.ACTION_PHASE);
+
+		activateURL.setParameter(
+			ActionRequest.ACTION_NAME, "editCommerceAccount");
+		activateURL.setParameter(Constants.CMD, "setActive");
+		activateURL.setParameter(
+			"commerceAccountId", String.valueOf(commerceAccountId));
+
+		String redirect = _portal.getCurrentURL(httpServletRequest);
+
+		activateURL.setParameter("redirect", redirect);
+
+		return activateURL.toString();
+	}
+
 	private String _getAccountViewDetailURL(
 			long commerceAccountId, HttpServletRequest httpServletRequest)
 		throws PortalException {
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)httpServletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+		if (!_modelResourcePermission.contains(
+				themeDisplay.getPermissionChecker(), commerceAccountId,
+				ActionKeys.VIEW)) {
+
+			return StringPool.BLANK;
+		}
 
 		PortletURL viewURL = PortletProviderUtil.getPortletURL(
 			httpServletRequest, CommerceAccount.class.getName(),
@@ -277,5 +348,8 @@ public class CommerceAccountClayTable
 
 	@Reference
 	private Portal _portal;
+
+	@Reference
+	private PortletURLFactory _portletURLFactory;
 
 }

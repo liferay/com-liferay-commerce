@@ -34,11 +34,18 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface SkuResource {
 
-	public Response deleteSku(Long id) throws Exception;
+	public Page<Sku> getProductByExternalReferenceCodeSkusPage(
+			String externalReferenceCode, Pagination pagination)
+		throws Exception;
 
-	public Sku getSku(Long id) throws Exception;
+	public Sku postProductByExternalReferenceCodeSku(
+			String externalReferenceCode, Sku sku)
+		throws Exception;
 
-	public Response patchSku(Long id, Sku sku) throws Exception;
+	public Page<Sku> getProductIdSkusPage(Long id, Pagination pagination)
+		throws Exception;
+
+	public Sku postProductIdSku(Long id, Sku sku) throws Exception;
 
 	public Response deleteSkuByExternalReferenceCode(
 			String externalReferenceCode)
@@ -51,18 +58,11 @@ public interface SkuResource {
 			String externalReferenceCode, Sku sku)
 		throws Exception;
 
-	public Page<Sku> getProductIdSkusPage(Long id, Pagination pagination)
-		throws Exception;
+	public Response deleteSku(Long id) throws Exception;
 
-	public Sku postProductIdSku(Long id, Sku sku) throws Exception;
+	public Sku getSku(Long id) throws Exception;
 
-	public Page<Sku> getProductByExternalReferenceCodeSkusPage(
-			String externalReferenceCode, Pagination pagination)
-		throws Exception;
-
-	public Sku postProductByExternalReferenceCodeSku(
-			String externalReferenceCode, Sku sku)
-		throws Exception;
+	public Response patchSku(Long id, Sku sku) throws Exception;
 
 	public void setContextCompany(Company contextCompany);
 

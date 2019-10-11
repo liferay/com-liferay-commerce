@@ -64,6 +64,7 @@ OrdersTable.STATE = {
 			}
 		)
 	),
+	showBack: Config.bool().value(true),
 	spritemap: Config.string().required(),
 	viewAllOrdersLink: Config.string()
 };
