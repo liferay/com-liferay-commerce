@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.PortalPreferences;
 import com.liferay.portal.kernel.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -180,22 +179,6 @@ public abstract class BaseCPDefinitionsDisplayContext {
 		CPInstance cpInstance = cpInstances.get(0);
 
 		return cpInstance.getSku();
-	}
-
-	public boolean hasPermission(
-			CommerceCatalog commerceCatalog, String actionId)
-		throws PortalException {
-
-		ModelResourcePermission<CommerceCatalog>
-			commerceCatalogModelResourcePermission =
-				actionHelper.getCommerceCatalogModelResourcePermission();
-
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)httpServletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
-		return commerceCatalogModelResourcePermission.contains(
-			themeDisplay.getPermissionChecker(), commerceCatalog, actionId);
 	}
 
 	protected final ActionHelper actionHelper;

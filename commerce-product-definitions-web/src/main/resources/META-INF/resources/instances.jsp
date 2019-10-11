@@ -27,7 +27,7 @@ PortletURL portletURL = cpInstanceDisplayContext.getPortletURL();
 String displayStyle = cpInstanceDisplayContext.getDisplayStyle();
 %>
 
-<c:if test="<%= cpInstanceDisplayContext.hasPermission(cpDefinition.getCommerceCatalog(), ActionKeys.VIEW) %>">
+<c:if test="<%= CommerceCatalogPermission.contains(permissionChecker, cpDefinition, ActionKeys.VIEW) %>">
 	<liferay-frontend:management-bar
 		includeCheckBox="<%= true %>"
 		searchContainerId="cpInstances"
@@ -51,7 +51,7 @@ String displayStyle = cpInstanceDisplayContext.getDisplayStyle();
 				<portlet:param name="cpDefinitionId" value="<%= String.valueOf(cpDefinitionId) %>" />
 			</liferay-portlet:renderURL>
 
-			<c:if test="<%= cpInstanceDisplayContext.hasPermission(cpDefinition.getCommerceCatalog(), ActionKeys.UPDATE) %>">
+			<c:if test="<%= CommerceCatalogPermission.contains(permissionChecker, cpDefinition, ActionKeys.UPDATE) %>">
 				<liferay-frontend:add-menu
 					inline="<%= true %>"
 				>
