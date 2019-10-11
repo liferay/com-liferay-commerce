@@ -126,7 +126,8 @@ public class CommerceWishListServiceImpl
 			checkManagePermission(groupId);
 		}
 
-		return commerceWishListLocalService.getCommerceWishListsCount(groupId);
+		return commerceWishListLocalService.getCommerceWishListsCount(
+			groupId, userId);
 	}
 
 	@Override
