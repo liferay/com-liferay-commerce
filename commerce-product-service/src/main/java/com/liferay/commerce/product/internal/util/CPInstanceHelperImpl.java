@@ -16,7 +16,7 @@ package com.liferay.commerce.product.internal.util;
 
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
-import com.liferay.commerce.media.CommerceMediaResolver;
+import com.liferay.commerce.media.CommerceHttpMediaResolver;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.catalog.CPSku;
 import com.liferay.commerce.product.internal.catalog.CPSkuImpl;
@@ -453,7 +453,7 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 		CPAttachmentFileEntry cpAttachmentFileEntry =
 			cpAttachmentFileEntries.get(0);
 
-		return _commerceMediaResolver.getThumbnailUrl(
+		return _commerceHttpMediaResolver.getThumbnailUrl(
 			cpAttachmentFileEntry.getCPAttachmentFileEntryId());
 	}
 
@@ -872,7 +872,7 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 	private CommerceAccountHelper _commerceAccountHelper;
 
 	@Reference
-	private CommerceMediaResolver _commerceMediaResolver;
+	private CommerceHttpMediaResolver _commerceHttpMediaResolver;
 
 	@Reference
 	private CPAttachmentFileEntryLocalService

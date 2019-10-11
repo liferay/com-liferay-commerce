@@ -18,7 +18,7 @@ import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.asset.kernel.model.AssetVocabulary;
 import com.liferay.asset.kernel.service.AssetCategoryService;
 import com.liferay.asset.kernel.service.AssetVocabularyService;
-import com.liferay.commerce.media.CommerceMediaResolver;
+import com.liferay.commerce.media.CommerceHttpMediaResolver;
 import com.liferay.commerce.product.asset.categories.navigation.web.internal.configuration.CPAssetCategoriesNavigationPortletInstanceConfiguration;
 import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
@@ -55,7 +55,7 @@ public class CPAssetCategoriesNavigationDisplayContext {
 			HttpServletRequest httpServletRequest,
 			AssetCategoryService assetCategoryService,
 			AssetVocabularyService assetVocabularyService,
-			CommerceMediaResolver commerceMediaResolver,
+			CommerceHttpMediaResolver commerceHttpMediaResolver,
 			CPAttachmentFileEntryService cpAttachmentFileEntryService,
 			CPFriendlyURLEntryLocalService cpFriendlyURLEntryLocalService,
 			Portal portal)
@@ -64,7 +64,7 @@ public class CPAssetCategoriesNavigationDisplayContext {
 		_httpServletRequest = httpServletRequest;
 		_assetCategoryService = assetCategoryService;
 		_assetVocabularyService = assetVocabularyService;
-		_commerceMediaResolver = commerceMediaResolver;
+		_commerceHttpMediaResolver = commerceHttpMediaResolver;
 		_cpAttachmentFileEntryService = cpAttachmentFileEntryService;
 		_cpFriendlyURLEntryLocalService = cpFriendlyURLEntryLocalService;
 		_portal = portal;
@@ -177,7 +177,7 @@ public class CPAssetCategoriesNavigationDisplayContext {
 			return null;
 		}
 
-		return _commerceMediaResolver.getUrl(
+		return _commerceHttpMediaResolver.getUrl(
 			cpAttachmentFileEntry.getCPAttachmentFileEntryId());
 	}
 
@@ -372,7 +372,7 @@ public class CPAssetCategoriesNavigationDisplayContext {
 	private List<AssetVocabulary> _assetVocabularies;
 	private AssetVocabulary _assetVocabulary;
 	private final AssetVocabularyService _assetVocabularyService;
-	private final CommerceMediaResolver _commerceMediaResolver;
+	private final CommerceHttpMediaResolver _commerceHttpMediaResolver;
 	private final CPAssetCategoriesNavigationPortletInstanceConfiguration
 		_cpAssetCategoriesNavigationPortletInstanceConfiguration;
 	private final CPAttachmentFileEntryService _cpAttachmentFileEntryService;

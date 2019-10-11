@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.product.content.web.internal.util;
 
-import com.liferay.commerce.media.CommerceMediaResolverUtil;
+import com.liferay.commerce.media.CommerceHttpMediaResolverUtil;
 import com.liferay.commerce.product.catalog.CPMedia;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.document.library.kernel.util.DLUtil;
@@ -35,14 +35,14 @@ public class CPMediaImpl implements CPMedia {
 
 		FileEntry fileEntry = cpAttachmentFileEntry.getFileEntry();
 
-		_downloadUrl = CommerceMediaResolverUtil.getDownloadUrl(
+		_downloadUrl = CommerceHttpMediaResolverUtil.getDownloadUrl(
 			cpAttachmentFileEntry.getCPAttachmentFileEntryId());
 		_id = cpAttachmentFileEntry.getCPAttachmentFileEntryId();
 		_mimeType = fileEntry.getMimeType();
-		_url = CommerceMediaResolverUtil.getUrl(
+		_url = CommerceHttpMediaResolverUtil.getUrl(
 			cpAttachmentFileEntry.getCPAttachmentFileEntryId());
 		_title = cpAttachmentFileEntry.getTitle(themeDisplay.getLanguageId());
-		_thumbnailUrl = CommerceMediaResolverUtil.getThumbnailUrl(
+		_thumbnailUrl = CommerceHttpMediaResolverUtil.getThumbnailUrl(
 			cpAttachmentFileEntry.getCPAttachmentFileEntryId());
 	}
 

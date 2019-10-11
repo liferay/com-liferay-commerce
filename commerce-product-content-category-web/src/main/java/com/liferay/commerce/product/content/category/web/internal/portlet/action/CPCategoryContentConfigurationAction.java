@@ -15,7 +15,7 @@
 package com.liferay.commerce.product.content.category.web.internal.portlet.action;
 
 import com.liferay.asset.kernel.service.AssetCategoryService;
-import com.liferay.commerce.media.CommerceMediaResolver;
+import com.liferay.commerce.media.CommerceHttpMediaResolver;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.content.category.web.internal.display.context.CPCategoryContentDisplayContext;
 import com.liferay.commerce.product.service.CPAttachmentFileEntryService;
@@ -49,7 +49,7 @@ public class CPCategoryContentConfigurationAction
 			CPCategoryContentDisplayContext cpCategoryContentDisplayContext =
 				new CPCategoryContentDisplayContext(
 					httpServletRequest, _assetCategoryService,
-					_commerceMediaResolver, _cpAttachmentFileEntryService,
+					_commerceHttpMediaResolver, _cpAttachmentFileEntryService,
 					_portal);
 
 			httpServletRequest.setAttribute(
@@ -79,7 +79,7 @@ public class CPCategoryContentConfigurationAction
 	private AssetCategoryService _assetCategoryService;
 
 	@Reference
-	private CommerceMediaResolver _commerceMediaResolver;
+	private CommerceHttpMediaResolver _commerceHttpMediaResolver;
 
 	@Reference
 	private CPAttachmentFileEntryService _cpAttachmentFileEntryService;

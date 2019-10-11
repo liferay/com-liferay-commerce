@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.media.internal.servlet;
 
-import com.liferay.commerce.media.CommerceMediaResolver;
+import com.liferay.commerce.media.CommerceHttpMediaResolver;
 import com.liferay.commerce.media.constants.CommerceMediaConstants;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -96,7 +96,7 @@ public class CommerceMediaServlet extends HttpServlet {
 			contentDisposition = HttpHeaders.CONTENT_DISPOSITION_ATTACHMENT;
 		}
 
-		_commerceMediaResolver.sendMediaBytes(
+		_commerceHttpMediaResolver.sendMediaBytes(
 			httpServletRequest, httpServletResponse, contentDisposition);
 	}
 
@@ -104,7 +104,7 @@ public class CommerceMediaServlet extends HttpServlet {
 		CommerceMediaServlet.class);
 
 	@Reference
-	private CommerceMediaResolver _commerceMediaResolver;
+	private CommerceHttpMediaResolver _commerceHttpMediaResolver;
 
 	@Reference
 	private Portal _portal;

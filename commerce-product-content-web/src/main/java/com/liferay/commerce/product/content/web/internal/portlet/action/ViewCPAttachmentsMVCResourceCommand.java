@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.product.content.web.internal.portlet.action;
 
-import com.liferay.commerce.media.CommerceMediaResolver;
+import com.liferay.commerce.media.CommerceHttpMediaResolver;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
@@ -82,8 +82,9 @@ public class ViewCPAttachmentsMVCResourceCommand
 					"cpAttachmentFileEntryId",
 					cpAttachmentFileEntry.getCPAttachmentFileEntryId());
 
-				String attachmentURL = _commerceMediaResolver.getDownloadUrl(
-					cpAttachmentFileEntry.getCPAttachmentFileEntryId());
+				String attachmentURL =
+					_commerceHttpMediaResolver.getDownloadUrl(
+						cpAttachmentFileEntry.getCPAttachmentFileEntryId());
 
 				jsonObject.put("url", attachmentURL);
 
@@ -102,7 +103,7 @@ public class ViewCPAttachmentsMVCResourceCommand
 		ViewCPAttachmentsMVCResourceCommand.class);
 
 	@Reference
-	private CommerceMediaResolver _commerceMediaResolver;
+	private CommerceHttpMediaResolver _commerceHttpMediaResolver;
 
 	@Reference
 	private CPInstanceHelper _cpInstanceHelper;

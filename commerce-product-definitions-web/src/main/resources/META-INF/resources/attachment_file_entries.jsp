@@ -152,7 +152,7 @@ PortletURL portletURL = cpAttachmentFileEntriesDisplayContext.getPortletURL();
 
 								FileEntry fileEntry = cpAttachmentFileEntry.getFileEntry();
 
-								String thumbnailSrc = CommerceMediaResolverUtil.getThumbnailUrl(cpAttachmentFileEntry.getCPAttachmentFileEntryId());
+								String thumbnailSrc = CommerceHttpMediaResolverUtil.getThumbnailUrl(cpAttachmentFileEntry.getCPAttachmentFileEntryId());
 								%>
 
 								<c:choose>

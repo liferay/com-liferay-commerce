@@ -16,7 +16,7 @@ package com.liferay.commerce.product.search;
 
 import com.liferay.commerce.account.model.CommerceAccountGroupRel;
 import com.liferay.commerce.account.service.CommerceAccountGroupRelService;
-import com.liferay.commerce.media.CommerceMediaResolver;
+import com.liferay.commerce.media.CommerceHttpMediaResolver;
 import com.liferay.commerce.product.links.CPDefinitionLinkTypeRegistry;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPDefinition;
@@ -682,12 +682,12 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 
 			document.addKeyword(
 				FIELD_DEFAULT_IMAGE_FILE_URL,
-				_commerceMediaResolver.getDefaultUrl(company.getGroupId()));
+				_commerceHttpMediaResolver.getDefaultUrl(company.getGroupId()));
 		}
 		else {
 			document.addKeyword(
 				FIELD_DEFAULT_IMAGE_FILE_URL,
-				_commerceMediaResolver.getUrl(
+				_commerceHttpMediaResolver.getUrl(
 					cpAttachmentFileEntryId, false, false, false));
 		}
 
@@ -804,7 +804,7 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 	private CommerceChannelRelLocalService _commerceChannelRelLocalService;
 
 	@Reference
-	private CommerceMediaResolver _commerceMediaResolver;
+	private CommerceHttpMediaResolver _commerceHttpMediaResolver;
 
 	@Reference
 	private CompanyLocalService _companyLocalService;

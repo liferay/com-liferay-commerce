@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Alessio Antonio Rendina
  */
 @ProviderType
-public interface CommerceMediaResolver {
+public interface CommerceHttpMediaResolver {
 
 	public String getDefaultUrl(long groupId);
 

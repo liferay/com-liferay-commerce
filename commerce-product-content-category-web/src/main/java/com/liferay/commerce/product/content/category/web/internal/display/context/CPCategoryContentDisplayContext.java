@@ -16,7 +16,7 @@ package com.liferay.commerce.product.content.category.web.internal.display.conte
 
 import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.asset.kernel.service.AssetCategoryService;
-import com.liferay.commerce.media.CommerceMediaResolver;
+import com.liferay.commerce.media.CommerceHttpMediaResolver;
 import com.liferay.commerce.product.content.category.web.internal.configuration.CPCategoryContentPortletInstanceConfiguration;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
@@ -42,14 +42,14 @@ public class CPCategoryContentDisplayContext {
 	public CPCategoryContentDisplayContext(
 			HttpServletRequest httpServletRequest,
 			AssetCategoryService assetCategoryService,
-			CommerceMediaResolver commerceMediaResolver,
+			CommerceHttpMediaResolver commerceHttpMediaResolver,
 			CPAttachmentFileEntryService cpAttachmentFileEntryService,
 			Portal portal)
 		throws ConfigurationException {
 
 		_httpServletRequest = httpServletRequest;
 		_assetCategoryService = assetCategoryService;
-		_commerceMediaResolver = commerceMediaResolver;
+		_commerceHttpMediaResolver = commerceHttpMediaResolver;
 		_cpAttachmentFileEntryService = cpAttachmentFileEntryService;
 		_portal = portal;
 
@@ -106,7 +106,7 @@ public class CPCategoryContentDisplayContext {
 			return null;
 		}
 
-		return _commerceMediaResolver.getUrl(
+		return _commerceHttpMediaResolver.getUrl(
 			cpAttachmentFileEntry.getCPAttachmentFileEntryId());
 	}
 
@@ -141,7 +141,7 @@ public class CPCategoryContentDisplayContext {
 
 	private AssetCategory _assetCategory;
 	private final AssetCategoryService _assetCategoryService;
-	private final CommerceMediaResolver _commerceMediaResolver;
+	private final CommerceHttpMediaResolver _commerceHttpMediaResolver;
 	private final CPAttachmentFileEntryService _cpAttachmentFileEntryService;
 	private final CPCategoryContentPortletInstanceConfiguration
 		_cpCategoryContentPortletInstanceConfiguration;

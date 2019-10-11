@@ -29,7 +29,7 @@ taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 
 <%@ page import="com.liferay.asset.kernel.model.AssetCategory" %><%@
 page import="com.liferay.commerce.admin.constants.CommerceAdminWebKeys" %><%@
-page import="com.liferay.commerce.media.CommerceMediaResolverUtil" %><%@
+page import="com.liferay.commerce.media.CommerceHttpMediaResolverUtil" %><%@
 page import="com.liferay.commerce.product.asset.categories.web.internal.admin.CategoryDisplayLayoutsCommerceAdminModule" %><%@
 page import="com.liferay.commerce.product.asset.categories.web.internal.display.context.CategoryCPAttachmentFileEntriesDisplayContext" %><%@
 page import="com.liferay.commerce.product.asset.categories.web.internal.display.context.CategoryCPDisplayLayoutDisplayContext" %><%@

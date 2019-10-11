@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.product.model.impl;
 
-import com.liferay.commerce.media.CommerceMediaResolverUtil;
+import com.liferay.commerce.media.CommerceHttpMediaResolverUtil;
 import com.liferay.commerce.product.exception.CPDefinitionMetaDescriptionException;
 import com.liferay.commerce.product.exception.CPDefinitionMetaKeywordsException;
 import com.liferay.commerce.product.exception.CPDefinitionMetaTitleException;
@@ -225,11 +225,11 @@ public class CPDefinitionImpl extends CPDefinitionBaseImpl {
 			Company company = CompanyLocalServiceUtil.getCompany(
 				getCompanyId());
 
-			return CommerceMediaResolverUtil.getDefaultUrl(
+			return CommerceHttpMediaResolverUtil.getDefaultUrl(
 				company.getGroupId());
 		}
 
-		return CommerceMediaResolverUtil.getUrl(
+		return CommerceHttpMediaResolverUtil.getUrl(
 			cpAttachmentFileEntry.getCPAttachmentFileEntryId());
 	}
 
@@ -242,11 +242,11 @@ public class CPDefinitionImpl extends CPDefinitionBaseImpl {
 			Company company = CompanyLocalServiceUtil.getCompany(
 				getCompanyId());
 
-			return CommerceMediaResolverUtil.getDefaultUrl(
+			return CommerceHttpMediaResolverUtil.getDefaultUrl(
 				company.getGroupId());
 		}
 
-		return CommerceMediaResolverUtil.getThumbnailUrl(
+		return CommerceHttpMediaResolverUtil.getThumbnailUrl(
 			cpAttachmentFileEntry.getCPAttachmentFileEntryId());
 	}
 

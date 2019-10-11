@@ -16,7 +16,7 @@ package com.liferay.commerce.media.internal;
 
 import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.asset.kernel.service.AssetCategoryLocalService;
-import com.liferay.commerce.media.CommerceMediaResolver;
+import com.liferay.commerce.media.CommerceHttpMediaResolver;
 import com.liferay.commerce.media.constants.CommerceMediaConstants;
 import com.liferay.commerce.media.internal.configuration.CommerceMediaDefaultImageConfiguration;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
@@ -72,8 +72,9 @@ import org.osgi.service.component.annotations.Reference;
  * @author Alec Sloan
  * @author Alessio Antonio Rendina
  */
-@Component(service = CommerceMediaResolver.class)
-public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
+@Component(service = CommerceHttpMediaResolver.class)
+public class DefaultCommerceHttpMediaResolver
+	implements CommerceHttpMediaResolver {
 
 	@Override
 	public String getDefaultUrl(long groupId) {
@@ -396,7 +397,7 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		DefaultCommerceMediaResolver.class);
+		DefaultCommerceHttpMediaResolver.class);
 
 	@Reference
 	private AssetCategoryLocalService _assetCategoryLocalService;
