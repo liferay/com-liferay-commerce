@@ -17,8 +17,6 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CPSpecificationOptionDisplayContext cpSpecificationOptionDisplayContext = (CPSpecificationOptionDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
-
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 CPSpecificationOption cpSpecificationOption = null;
@@ -38,7 +36,7 @@ else {
 	message="<%= StringPool.BLANK %>"
 	showWhenSingleIcon="<%= true %>"
 >
-	<c:if test="<%= cpSpecificationOptionDisplayContext.hasPermission(cpSpecificationOption, ActionKeys.UPDATE) %>">
+	<c:if test="<%= CPSpecificationOptionPermission.contains(permissionChecker, cpSpecificationOption, ActionKeys.UPDATE) %>">
 		<portlet:renderURL var="editURL">
 			<portlet:param name="mvcRenderCommandName" value="editProductSpecificationOption" />
 			<portlet:param name="cpSpecificationOptionId" value="<%= String.valueOf(cpSpecificationOption.getCPSpecificationOptionId()) %>" />
@@ -50,7 +48,7 @@ else {
 		/>
 	</c:if>
 
-	<c:if test="<%= cpSpecificationOptionDisplayContext.hasPermission(cpSpecificationOption, ActionKeys.DELETE) %>">
+	<c:if test="<%= CPSpecificationOptionPermission.contains(permissionChecker, cpSpecificationOption, ActionKeys.DELETE) %>">
 		<portlet:actionURL name="editProductSpecificationOption" var="deleteURL">
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -62,7 +60,7 @@ else {
 		/>
 	</c:if>
 
-	<c:if test="<%= cpSpecificationOptionDisplayContext.hasPermission(cpSpecificationOption, ActionKeys.PERMISSIONS) %>">
+	<c:if test="<%= CPSpecificationOptionPermission.contains(permissionChecker, cpSpecificationOption, ActionKeys.PERMISSIONS) %>">
 		<liferay-security:permissionsURL
 			modelResource="<%= CPSpecificationOption.class.getName() %>"
 			modelResourceDescription="<%= cpSpecificationOption.getTitle(locale) %>"
