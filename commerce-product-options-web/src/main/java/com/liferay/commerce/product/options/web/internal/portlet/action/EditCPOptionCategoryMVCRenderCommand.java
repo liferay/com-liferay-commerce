@@ -23,7 +23,6 @@ import com.liferay.commerce.product.service.CPOptionCategoryService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
-import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
@@ -58,7 +57,7 @@ public class EditCPOptionCategoryMVCRenderCommand implements MVCRenderCommand {
 			CPOptionCategoryDisplayContext cpOptionCategoryDisplayContext =
 				new CPOptionCategoryDisplayContext(
 					_actionHelper, _portal.getHttpServletRequest(renderRequest),
-					_cpOptionCategoryService, _modelResourcePermission);
+					_cpOptionCategoryService);
 
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -104,11 +103,6 @@ public class EditCPOptionCategoryMVCRenderCommand implements MVCRenderCommand {
 
 	@Reference
 	private CPOptionCategoryService _cpOptionCategoryService;
-
-	@Reference(
-		target = "(model.class.name=com.liferay.commerce.product.model.CPOptionCategory)"
-	)
-	private ModelResourcePermission<CPOptionCategory> _modelResourcePermission;
 
 	@Reference
 	private Portal _portal;
