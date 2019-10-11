@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
-import com.liferay.portal.kernel.util.ArrayUtil;
 
 /**
  * @author Marco Leo
@@ -85,7 +84,7 @@ public class CommerceContextImpl implements CommerceContext {
 	@Override
 	public long[] getCommerceAccountGroupIds() throws PortalException {
 		if (_commerceAccountGroupIds != null) {
-			return ArrayUtil.clone(_commerceAccountGroupIds);
+			return _commerceAccountGroupIds.clone();
 		}
 
 		CommerceAccount commerceAccount = getCommerceAccount();
@@ -98,7 +97,7 @@ public class CommerceContextImpl implements CommerceContext {
 			_commerceAccountHelper.getCommerceAccountGroupIds(
 				commerceAccount.getCommerceAccountId());
 
-		return ArrayUtil.clone(_commerceAccountGroupIds);
+		return _commerceAccountGroupIds.clone();
 	}
 
 	@Override

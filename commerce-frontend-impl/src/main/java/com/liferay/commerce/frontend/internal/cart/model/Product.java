@@ -16,7 +16,6 @@ package com.liferay.commerce.frontend.internal.cart.model;
 
 import com.liferay.commerce.frontend.model.PriceModel;
 import com.liferay.commerce.frontend.model.ProductSettingsModel;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.KeyValuePair;
 
 import java.util.List;
@@ -38,11 +37,11 @@ public class Product {
 		_thumbnail = thumbnail;
 		_prices = prices;
 		_settings = settings;
-		_errorMessages = ArrayUtil.clone(errorMessages);
+		_errorMessages = errorMessages.clone();
 	}
 
 	public String[] getErrorMessages() {
-		return ArrayUtil.clone(_errorMessages);
+		return _errorMessages.clone();
 	}
 
 	public long getId() {
@@ -78,7 +77,7 @@ public class Product {
 	}
 
 	public void setErrorMessages(String[] errorMessages) {
-		_errorMessages = ArrayUtil.clone(errorMessages);
+		_errorMessages = errorMessages.clone();
 	}
 
 	public void setId(long id) {
