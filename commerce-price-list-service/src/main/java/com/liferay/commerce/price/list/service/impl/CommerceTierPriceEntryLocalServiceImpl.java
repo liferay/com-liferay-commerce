@@ -105,7 +105,6 @@ public class CommerceTierPriceEntryLocalServiceImpl
 		CommerceTierPriceEntry commerceTierPriceEntry =
 			commerceTierPriceEntryPersistence.create(commerceTierPriceEntryId);
 
-		commerceTierPriceEntry.setUuid(serviceContext.getUuid());
 		commerceTierPriceEntry.setCompanyId(user.getCompanyId());
 		commerceTierPriceEntry.setUserId(user.getUserId());
 		commerceTierPriceEntry.setUserName(user.getFullName());

@@ -176,7 +176,6 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 			cpDefinitionId = newCPDefinition.getCPDefinitionId();
 		}
 
-		cpInstance.setUuid(serviceContext.getUuid());
 		cpInstance.setGroupId(groupId);
 		cpInstance.setCompanyId(user.getCompanyId());
 		cpInstance.setUserId(user.getUserId());
@@ -805,10 +804,6 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 				cpInstance.getCPInstanceUuid());
 		}
 
-		Date now = new Date();
-
-		cpInstance.setModifiedDate(serviceContext.getModifiedDate(now));
-
 		cpInstance.setPrice(price);
 		cpInstance.setPromoPrice(promoPrice);
 		cpInstance.setCost(cost);
@@ -836,10 +831,6 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 				newCPDefinition.getCPDefinitionId(),
 				cpInstance.getCPInstanceUuid());
 		}
-
-		Date now = new Date();
-
-		cpInstance.setModifiedDate(serviceContext.getModifiedDate(now));
 
 		cpInstance.setWidth(width);
 		cpInstance.setHeight(height);
@@ -879,8 +870,6 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 		}
 
 		Date modifiedDate = serviceContext.getModifiedDate(now);
-
-		cpInstance.setModifiedDate(modifiedDate);
 
 		if (status == WorkflowConstants.STATUS_APPROVED) {
 			Date expirationDate = cpInstance.getExpirationDate();
@@ -928,10 +917,6 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 				newCPDefinition.getCPDefinitionId(),
 				cpInstance.getCPInstanceUuid());
 		}
-
-		Date now = new Date();
-
-		cpInstance.setModifiedDate(serviceContext.getModifiedDate(now));
 
 		cpInstance.setOverrideSubscriptionInfo(overrideSubscriptionInfo);
 		cpInstance.setSubscriptionEnabled(subscriptionEnabled);

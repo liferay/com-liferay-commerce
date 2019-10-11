@@ -148,7 +148,6 @@ public class CPAttachmentFileEntryLocalServiceImpl
 			classPK = newCPDefinition.getCPDefinitionId();
 		}
 
-		cpAttachmentFileEntry.setUuid(serviceContext.getUuid());
 		cpAttachmentFileEntry.setGroupId(groupId);
 		cpAttachmentFileEntry.setCompanyId(user.getCompanyId());
 		cpAttachmentFileEntry.setUserId(user.getUserId());
@@ -512,8 +511,6 @@ public class CPAttachmentFileEntryLocalServiceImpl
 		}
 
 		Date modifiedDate = serviceContext.getModifiedDate(now);
-
-		cpAttachmentFileEntry.setModifiedDate(modifiedDate);
 
 		if (status == WorkflowConstants.STATUS_APPROVED) {
 			Date expirationDate = cpAttachmentFileEntry.getExpirationDate();

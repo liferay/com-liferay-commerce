@@ -148,7 +148,6 @@ public class CommercePriceListLocalServiceImpl
 		CommercePriceList commercePriceList =
 			commercePriceListPersistence.create(commercePriceListId);
 
-		commercePriceList.setUuid(serviceContext.getUuid());
 		commercePriceList.setGroupId(groupId);
 		commercePriceList.setCompanyId(user.getCompanyId());
 		commercePriceList.setUserId(user.getUserId());
@@ -604,8 +603,6 @@ public class CommercePriceListLocalServiceImpl
 		}
 
 		Date modifiedDate = serviceContext.getModifiedDate(now);
-
-		commercePriceList.setModifiedDate(modifiedDate);
 
 		if (status == WorkflowConstants.STATUS_APPROVED) {
 			Date expirationDate = commercePriceList.getExpirationDate();
