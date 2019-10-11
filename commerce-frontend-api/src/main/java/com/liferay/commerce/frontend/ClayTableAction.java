@@ -14,20 +14,10 @@
 
 package com.liferay.commerce.frontend;
 
-import com.liferay.petra.string.StringPool;
-
 /**
  * @author Marco Leo
  */
 public class ClayTableAction {
-
-	public ClayTableAction(
-		String href, String icon, String label, boolean quickAction,
-		boolean separator) {
-
-		new ClayTableAction(
-			StringPool.BLANK, href, icon, label, quickAction, separator);
-	}
 
 	public ClayTableAction(
 		String cssClasses, String href, String icon, String label,
@@ -93,7 +83,7 @@ public class ClayTableAction {
 		_separator = separator;
 	}
 
-	private String _cssClasses;
+	private final String _cssClasses;
 	private String _href;
 	private String _icon;
 	private String _label;

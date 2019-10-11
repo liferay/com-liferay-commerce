@@ -103,7 +103,7 @@ public class CommerceAccountAddressClayTable
 		sb.append(StringPool.SEMICOLON);
 
 		ClayTableAction deleteClayTableAction = new ClayTableAction(
-			sb.toString(), StringPool.BLANK,
+			StringPool.BLANK, sb.toString(), StringPool.BLANK,
 			LanguageUtil.get(httpServletRequest, "delete"), false, false);
 
 		clayTableActions.add(deleteClayTableAction);
@@ -111,7 +111,7 @@ public class CommerceAccountAddressClayTable
 		sb.setStringAt("javascript:editCommerceAddress", 0);
 
 		ClayTableAction editClayTableAction = new ClayTableAction(
-			sb.toString(), StringPool.BLANK,
+			StringPool.BLANK, sb.toString(), StringPool.BLANK,
 			LanguageUtil.get(httpServletRequest, "edit"), false, false);
 
 		clayTableActions.add(editClayTableAction);
