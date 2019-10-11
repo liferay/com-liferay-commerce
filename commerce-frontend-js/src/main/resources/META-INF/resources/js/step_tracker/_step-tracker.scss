@@ -1,0 +1,35 @@
+.step-tracker {
+  display: table;
+  width: 100%;
+  overflow: hidden;
+
+  .step {
+    display: table-cell;
+    text-align: center;
+    background: currentColor;
+    padding: 8px;
+    position: relative;
+
+    &:not(:first-child) {
+      clip-path: polygon(calc(100% + 26px) 0%, calc(100% + 26px) 100%, 4px 100%, 26px 50%, 4px 0);
+    }
+
+    &:not(:last-child) {
+      &::after {
+        content: '';
+        background-color: currentColor;
+        position: absolute;
+        top: 0;
+        left: 100%;
+        width: 22px;
+        height: 100%;
+        z-index: 0;
+        clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+      }
+    }
+
+    .step-label {
+      color: white;
+    }
+  }
+}
