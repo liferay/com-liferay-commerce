@@ -3316,19 +3316,25 @@ paths:
             operationId: getPriceListsPage
             parameters:
                 - in: query
-                  explode: true
+                  name: filter
+                  required: false
+                  schema:
+                      type: string
+                - in: query
                   name: page
                   required: false
                   schema:
                       type: integer
-                  style: form
                 - in: query
-                  explode: true
                   name: pageSize
                   required: false
                   schema:
                       type: integer
-                  style: form
+                - in: query
+                  name: sort
+                  required: false
+                  schema:
+                      type: string
             responses:
                 200:
                     content:
