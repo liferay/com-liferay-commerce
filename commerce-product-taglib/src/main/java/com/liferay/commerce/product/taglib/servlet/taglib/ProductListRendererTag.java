@@ -16,7 +16,7 @@ package com.liferay.commerce.product.taglib.servlet.taglib;
 
 import com.liferay.commerce.product.content.render.list.CPContentListRenderer;
 import com.liferay.commerce.product.content.render.list.CPContentListRendererRegistry;
-import com.liferay.commerce.product.content.util.CPContentHelper;
+import com.liferay.commerce.product.content.util.CPHttpContentHelper;
 import com.liferay.commerce.product.data.source.CPDataSourceResult;
 import com.liferay.commerce.product.taglib.servlet.taglib.internal.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -73,7 +73,7 @@ public class ProductListRendererTag extends IncludeTag {
 	public void setPageContext(PageContext pageContext) {
 		super.setPageContext(pageContext);
 
-		cpContentHelper = ServletContextUtil.getCPContentHelper();
+		cpHttpContentHelper = ServletContextUtil.getCPHttpContentHelper();
 		cpContentListRendererRegistry =
 			ServletContextUtil.getCPContentListRendererRegistry();
 		servletContext = ServletContextUtil.getServletContext();
@@ -97,9 +97,6 @@ public class ProductListRendererTag extends IncludeTag {
 	@Override
 	protected void setAttributes(HttpServletRequest httpServletRequest) {
 		request.setAttribute(
-			"liferay-commerce-product:product-list-renderer:cpContentHelper",
-			cpContentHelper);
-		request.setAttribute(
 			"liferay-commerce-product:product-list-renderer:" +
 				"cpContentListRenderer",
 			_cpContentListRenderer);
@@ -107,12 +104,16 @@ public class ProductListRendererTag extends IncludeTag {
 			"liferay-commerce-product:product-list-renderer:cpDataSourceResult",
 			_cpDataSourceResult);
 		request.setAttribute(
+			"liferay-commerce-product:product-list-renderer:" +
+				"cpHttpContentHelper",
+			cpHttpContentHelper);
+		request.setAttribute(
 			"liferay-commerce-product:product-list-renderer:entryKeys",
 			_entryKeys);
 	}
 
-	protected CPContentHelper cpContentHelper;
 	protected CPContentListRendererRegistry cpContentListRendererRegistry;
+	protected CPHttpContentHelper cpHttpContentHelper;
 
 	private static final String _PAGE = "/product_list_renderer/page.jsp";
 

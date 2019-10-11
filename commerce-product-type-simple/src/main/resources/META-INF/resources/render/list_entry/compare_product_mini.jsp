@@ -18,9 +18,9 @@
 
 <%
 CPCompareHttpContentHelper cpCompareHttpContentHelper = (CPCompareHttpContentHelper)request.getAttribute(CPContentWebKeys.CP_COMPARE_CONTENT_HELPER);
-CPContentHelper cpContentHelper = (CPContentHelper)request.getAttribute(CPContentWebKeys.CP_CONTENT_HELPER);
+CPHttpContentHelper cpHttpContentHelper = (CPHttpContentHelper)request.getAttribute(CPContentWebKeys.CP_CONTENT_HELPER);
 
-CPCatalogEntry cpCatalogEntry = cpContentHelper.getCPCatalogEntry(request);
+CPCatalogEntry cpCatalogEntry = cpHttpContentHelper.getCPCatalogEntry(request);
 %>
 
 <div class="autofit-row autofit-row-end">
@@ -35,7 +35,7 @@ CPCatalogEntry cpCatalogEntry = cpContentHelper.getCPCatalogEntry(request);
 				/>
 			</div>
 
-			<a class="aspect-ratio" href="<%= cpContentHelper.getFriendlyURL(cpCatalogEntry, themeDisplay) %>">
+			<a class="aspect-ratio" href="<%= cpHttpContentHelper.getFriendlyURL(cpCatalogEntry, themeDisplay) %>">
 
 				<%
 				String img = cpCatalogEntry.getDefaultImageFileUrl();
@@ -49,7 +49,7 @@ CPCatalogEntry cpCatalogEntry = cpContentHelper.getCPCatalogEntry(request);
 	</div>
 
 	<div class="autofit-col autofit-col-expand">
-		<a class="compare-link" href="<%= cpContentHelper.getFriendlyURL(cpCatalogEntry, themeDisplay) %>">
+		<a class="compare-link" href="<%= cpHttpContentHelper.getFriendlyURL(cpCatalogEntry, themeDisplay) %>">
 			<%= HtmlUtil.escape(cpCatalogEntry.getName()) %>
 		</a>
 	</div>

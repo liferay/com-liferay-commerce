@@ -27,7 +27,7 @@ import com.liferay.commerce.product.constants.CPOptionCategoryConstants;
 import com.liferay.commerce.product.constants.CPWebKeys;
 import com.liferay.commerce.product.content.render.CPContentRenderer;
 import com.liferay.commerce.product.content.render.CPContentRendererRegistry;
-import com.liferay.commerce.product.content.util.CPContentHelper;
+import com.liferay.commerce.product.content.util.CPHttpContentHelper;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.model.CPAttachmentFileEntryConstants;
 import com.liferay.commerce.product.model.CPDefinition;
@@ -80,8 +80,8 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Alessio Antonio Rendina
  */
-@Component(immediate = true, service = CPContentHelper.class)
-public class CPContentHelperImpl implements CPContentHelper {
+@Component(immediate = true, service = CPHttpContentHelper.class)
+public class CPHttpContentHelperImpl implements CPHttpContentHelper {
 
 	@Override
 	public String getAvailabilityEstimateLabel(
@@ -479,7 +479,7 @@ public class CPContentHelperImpl implements CPContentHelper {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		CPContentHelperImpl.class);
+		CPHttpContentHelperImpl.class);
 
 	@Reference
 	private CommerceCatalogDefaultImage _catalogCommerceMediaDefaultImage;

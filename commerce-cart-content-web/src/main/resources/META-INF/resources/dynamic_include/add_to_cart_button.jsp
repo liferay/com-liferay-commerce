@@ -17,9 +17,9 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CPContentHelper cpContentHelper = (CPContentHelper)request.getAttribute(CPContentWebKeys.CP_CONTENT_HELPER);
-CPCatalogEntry cpCatalogEntry = cpContentHelper.getCPCatalogEntry(request);
-CPInstance cpInstance = cpContentHelper.getDefaultCPInstance(request);
+CPHttpContentHelper cpHttpContentHelper = (CPHttpContentHelper)request.getAttribute(CPContentWebKeys.CP_CONTENT_HELPER);
+CPCatalogEntry cpCatalogEntry = cpHttpContentHelper.getCPCatalogEntry(request);
+CPInstance cpInstance = cpHttpContentHelper.getDefaultCPInstance(request);
 
 long cpInstanceId = 0;
 

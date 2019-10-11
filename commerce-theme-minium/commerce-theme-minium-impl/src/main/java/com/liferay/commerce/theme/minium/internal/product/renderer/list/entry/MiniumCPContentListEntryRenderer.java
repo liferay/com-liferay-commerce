@@ -29,7 +29,7 @@ import com.liferay.commerce.product.catalog.CPSku;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.content.constants.CPContentWebKeys;
 import com.liferay.commerce.product.content.render.list.entry.CPContentListEntryRenderer;
-import com.liferay.commerce.product.content.util.CPContentHelper;
+import com.liferay.commerce.product.content.util.CPHttpContentHelper;
 import com.liferay.commerce.product.util.CPCompareHelperUtil;
 import com.liferay.commerce.service.CommerceOrderItemLocalService;
 import com.liferay.commerce.wish.list.model.CommerceWishList;
@@ -109,11 +109,11 @@ public class MiniumCPContentListEntryRenderer
 			(CommerceContext)httpServletRequest.getAttribute(
 				CommerceWebKeys.COMMERCE_CONTEXT);
 
-		CPContentHelper cpContentHelper =
-			(CPContentHelper)httpServletRequest.getAttribute(
+		CPHttpContentHelper cpHttpContentHelper =
+			(CPHttpContentHelper)httpServletRequest.getAttribute(
 				CPContentWebKeys.CP_CONTENT_HELPER);
 
-		CPCatalogEntry cpCatalogEntry = cpContentHelper.getCPCatalogEntry(
+		CPCatalogEntry cpCatalogEntry = cpHttpContentHelper.getCPCatalogEntry(
 			httpServletRequest);
 
 		List<CPSku> cpSkus = cpCatalogEntry.getCPSkus();
@@ -204,7 +204,7 @@ public class MiniumCPContentListEntryRenderer
 		context.put("description", cpCatalogEntry.getShortDescription());
 		context.put(
 			"detailsLink",
-			cpContentHelper.getFriendlyURL(cpCatalogEntry, themeDisplay));
+			cpHttpContentHelper.getFriendlyURL(cpCatalogEntry, themeDisplay));
 		context.put("name", cpCatalogEntry.getName());
 		context.put("pictureUrl", cpCatalogEntry.getDefaultImageFileUrl());
 		context.put("productId", cpCatalogEntry.getCPDefinitionId());

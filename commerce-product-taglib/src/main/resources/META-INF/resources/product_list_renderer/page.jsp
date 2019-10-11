@@ -17,12 +17,12 @@
 <%@ include file="/product_list_renderer/init.jsp" %>
 
 <%
-CPContentHelper cpContentHelper = (CPContentHelper)request.getAttribute("liferay-commerce-product:product-list-renderer:cpContentHelper");
+CPHttpContentHelper cpHttpContentHelper = (CPHttpContentHelper)request.getAttribute("liferay-commerce-product:product-list-renderer:cpHttpContentHelper");
 CPContentListRenderer cpContentListRenderer = (CPContentListRenderer)request.getAttribute("liferay-commerce-product:product-list-renderer:cpContentListRenderer");
 CPDataSourceResult cpDataSourceResult = (CPDataSourceResult)request.getAttribute("liferay-commerce-product:product-list-renderer:cpDataSourceResult");
 Map<String, String> entryKeys = (Map<String, String>)request.getAttribute("liferay-commerce-product:product-list-renderer:entryKeys");
 
-request.setAttribute(CPContentWebKeys.CP_CONTENT_HELPER, cpContentHelper);
+request.setAttribute(CPContentWebKeys.CP_CONTENT_HELPER, cpHttpContentHelper);
 request.setAttribute(CPContentWebKeys.CP_CONTENT_LIST_ENTRY_RENDERER_KEYS, entryKeys);
 request.setAttribute(CPWebKeys.CP_DATA_SOURCE_RESULT, cpDataSourceResult);
 

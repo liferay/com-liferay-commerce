@@ -16,7 +16,7 @@ package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
 import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
 import com.liferay.commerce.product.catalog.CPMedia;
-import com.liferay.commerce.product.content.util.CPContentHelper;
+import com.liferay.commerce.product.content.util.CPHttpContentHelper;
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
 import com.liferay.petra.string.StringPool;
@@ -52,7 +52,7 @@ public class GalleryTag extends ComponentRendererTag {
 		List<CPMedia> productImages = Collections.emptyList();
 
 		try {
-			productImages = _cpContentHelper.getImages(
+			productImages = _cpHttpContentHelper.getImages(
 				cpDefinitionId, themeDisplay);
 		}
 		catch (PortalException pe) {
@@ -95,11 +95,11 @@ public class GalleryTag extends ComponentRendererTag {
 	public void setPageContext(PageContext pageContext) {
 		super.setPageContext(pageContext);
 
-		_cpContentHelper = ServletContextUtil.getCPContentHelper();
+		_cpHttpContentHelper = ServletContextUtil.getCPHttpContentHelper();
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(GalleryTag.class);
 
-	private CPContentHelper _cpContentHelper;
+	private CPHttpContentHelper _cpHttpContentHelper;
 
 }

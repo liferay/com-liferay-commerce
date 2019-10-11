@@ -18,10 +18,10 @@
 
 <%
 CPCompareHttpContentHelper cpCompareHttpContentHelper = (CPCompareHttpContentHelper)request.getAttribute(CPContentWebKeys.CP_COMPARE_CONTENT_HELPER);
-CPContentHelper cpContentHelper = (CPContentHelper)request.getAttribute(CPContentWebKeys.CP_CONTENT_HELPER);
+CPHttpContentHelper cpHttpContentHelper = (CPHttpContentHelper)request.getAttribute(CPContentWebKeys.CP_CONTENT_HELPER);
 
-CPCatalogEntry cpCatalogEntry = cpContentHelper.getCPCatalogEntry(request);
-CPSku cpSku = cpContentHelper.getDefaultCPSku(cpCatalogEntry);
+CPCatalogEntry cpCatalogEntry = cpHttpContentHelper.getCPCatalogEntry(request);
+CPSku cpSku = cpHttpContentHelper.getDefaultCPSku(cpCatalogEntry);
 %>
 
 <div class="card">
@@ -36,7 +36,7 @@ CPSku cpSku = cpContentHelper.getDefaultCPSku(cpCatalogEntry);
 		</div>
 	</div>
 
-	<a class="product-image-container" href="<%= cpContentHelper.getFriendlyURL(cpCatalogEntry, themeDisplay) %>">
+	<a class="product-image-container" href="<%= cpHttpContentHelper.getFriendlyURL(cpCatalogEntry, themeDisplay) %>">
 
 		<%
 		String img = cpCatalogEntry.getDefaultImageFileUrl();
@@ -49,7 +49,7 @@ CPSku cpSku = cpContentHelper.getDefaultCPSku(cpCatalogEntry);
 
 	<div class="card-section-expand">
 		<div class="card-title">
-			<a href="<%= cpContentHelper.getFriendlyURL(cpCatalogEntry, themeDisplay) %>">
+			<a href="<%= cpHttpContentHelper.getFriendlyURL(cpCatalogEntry, themeDisplay) %>">
 				<%= HtmlUtil.escape(cpCatalogEntry.getName()) %>
 			</a>
 		</div>

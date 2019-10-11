@@ -17,14 +17,14 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CPContentHelper cpContentHelper = (CPContentHelper)request.getAttribute(CPContentWebKeys.CP_CONTENT_HELPER);
+CPHttpContentHelper cpHttpContentHelper = (CPHttpContentHelper)request.getAttribute(CPContentWebKeys.CP_CONTENT_HELPER);
 
-CPCatalogEntry cpCatalogEntry = cpContentHelper.getCPCatalogEntry(request);
+CPCatalogEntry cpCatalogEntry = cpHttpContentHelper.getCPCatalogEntry(request);
 %>
 
 <div class="col-md-4">
 	<div class="card">
-		<a class="aspect-ratio" href="<%= cpContentHelper.getFriendlyURL(cpCatalogEntry, themeDisplay) %>">
+		<a class="aspect-ratio" href="<%= cpHttpContentHelper.getFriendlyURL(cpCatalogEntry, themeDisplay) %>">
 
 			<%
 			String img = cpCatalogEntry.getDefaultImageFileUrl();
@@ -37,7 +37,7 @@ CPCatalogEntry cpCatalogEntry = cpContentHelper.getCPCatalogEntry(request);
 
 		<div class="card-row card-row-padded card-row-valign-top">
 			<div class="card-col-content">
-				<a class="truncate-text" href="<%= cpContentHelper.getFriendlyURL(cpCatalogEntry, themeDisplay) %>">
+				<a class="truncate-text" href="<%= cpHttpContentHelper.getFriendlyURL(cpCatalogEntry, themeDisplay) %>">
 					<%= HtmlUtil.escape(cpCatalogEntry.getName()) %>
 				</a>
 			</div>

@@ -17,10 +17,10 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CPContentHelper cpContentHelper = (CPContentHelper)request.getAttribute(CPContentWebKeys.CP_CONTENT_HELPER);
+CPHttpContentHelper cpHttpContentHelper = (CPHttpContentHelper)request.getAttribute(CPContentWebKeys.CP_CONTENT_HELPER);
 
-CPCatalogEntry cpCatalogEntry = cpContentHelper.getCPCatalogEntry(request);
-CPSku cpSku = cpContentHelper.getDefaultCPSku(cpCatalogEntry);
+CPCatalogEntry cpCatalogEntry = cpHttpContentHelper.getCPCatalogEntry(request);
+CPSku cpSku = cpHttpContentHelper.getDefaultCPSku(cpCatalogEntry);
 
 long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 %>
@@ -34,7 +34,7 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 						<div id="<portlet:namespace />thumbs-container">
 
 							<%
-							for (CPMedia cpMedia : cpContentHelper.getImages(cpDefinitionId, themeDisplay)) {
+							for (CPMedia cpMedia : cpHttpContentHelper.getImages(cpDefinitionId, themeDisplay)) {
 							%>
 
 								<div class="card thumb" data-url="<%= cpMedia.getUrl() %>">
@@ -67,11 +67,11 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 
 						<div class="subscription-info"><liferay-commerce:subscription-info CPInstanceId="<%= cpSku.getCPInstanceId() %>" /></div>
 
-						<div class="availability"><%= cpContentHelper.getAvailabilityLabel(request) %></div>
+						<div class="availability"><%= cpHttpContentHelper.getAvailabilityLabel(request) %></div>
 
-						<div class="availabilityEstimate"><%= cpContentHelper.getAvailabilityEstimateLabel(request) %></div>
+						<div class="availabilityEstimate"><%= cpHttpContentHelper.getAvailabilityEstimateLabel(request) %></div>
 
-						<div class="stockQuantity"><%= cpContentHelper.getStockQuantityLabel(request) %></div>
+						<div class="stockQuantity"><%= cpHttpContentHelper.getStockQuantityLabel(request) %></div>
 					</c:when>
 					<c:otherwise>
 						<h4 class="sku" data-text-cp-instance-sku=""></h4>
@@ -91,7 +91,7 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 				<div class="row">
 					<div class="col-md-12">
 						<div class="options">
-							<%= cpContentHelper.renderOptions(renderRequest, renderResponse) %>
+							<%= cpHttpContentHelper.renderOptions(renderRequest, renderResponse) %>
 						</div>
 					</div>
 				</div>
@@ -112,9 +112,9 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 	</div>
 
 	<%
-	List<CPDefinitionSpecificationOptionValue> cpDefinitionSpecificationOptionValues = cpContentHelper.getCPDefinitionSpecificationOptionValues(cpDefinitionId);
-	List<CPOptionCategory> cpOptionCategories = cpContentHelper.getCPOptionCategories(company.getCompanyId());
-	List<CPMedia> cpMediaEntries = cpContentHelper.getCPAttachmentFileEntries(cpDefinitionId, themeDisplay);
+	List<CPDefinitionSpecificationOptionValue> cpDefinitionSpecificationOptionValues = cpHttpContentHelper.getCPDefinitionSpecificationOptionValues(cpDefinitionId);
+	List<CPOptionCategory> cpOptionCategories = cpHttpContentHelper.getCPOptionCategories(company.getCompanyId());
+	List<CPMedia> cpMediaEntries = cpHttpContentHelper.getCPAttachmentFileEntries(cpDefinitionId, themeDisplay);
 	%>
 
 	<div class="row">
@@ -127,7 +127,7 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 						</a>
 					</li>
 
-					<c:if test="<%= cpContentHelper.hasCPDefinitionSpecificationOptionValues(cpDefinitionId) %>">
+					<c:if test="<%= cpHttpContentHelper.hasCPDefinitionSpecificationOptionValues(cpDefinitionId) %>">
 						<li class="nav-item" role="presentation">
 							<a aria-controls="<portlet:namespace />specification" aria-expanded="false" class="nav-link" data-toggle="tab" href="#<portlet:namespace />specification" role="tab">
 								<%= LanguageUtil.get(resourceBundle, "specifications") %>
@@ -149,7 +149,7 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 						<p><%= cpCatalogEntry.getDescription() %></p>
 					</div>
 
-					<c:if test="<%= cpContentHelper.hasCPDefinitionSpecificationOptionValues(cpDefinitionId) %>">
+					<c:if test="<%= cpHttpContentHelper.hasCPDefinitionSpecificationOptionValues(cpDefinitionId) %>">
 						<div class="tab-pane" id="<portlet:namespace />specification">
 							<c:if test="<%= !cpDefinitionSpecificationOptionValues.isEmpty() %>">
 								<div class="table-responsive">
@@ -175,7 +175,7 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 
 							<%
 							for (CPOptionCategory cpOptionCategory : cpOptionCategories) {
-								List<CPDefinitionSpecificationOptionValue> categorizedCPDefinitionSpecificationOptionValues = cpContentHelper.getCategorizedCPDefinitionSpecificationOptionValues(cpDefinitionId, cpOptionCategory.getCPOptionCategoryId());
+								List<CPDefinitionSpecificationOptionValue> categorizedCPDefinitionSpecificationOptionValues = cpHttpContentHelper.getCategorizedCPDefinitionSpecificationOptionValues(cpDefinitionId, cpOptionCategory.getCPOptionCategoryId());
 							%>
 
 								<c:if test="<%= !categorizedCPDefinitionSpecificationOptionValues.isEmpty() %>">
@@ -264,7 +264,7 @@ long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 			namespace: '<portlet:namespace />',
 			productContentSelector: '#<portlet:namespace /><%= cpDefinitionId %>ProductContent',
 			thumbsContainerSelector : '#<portlet:namespace />thumbs-container',
-			viewAttachmentURL: '<%= String.valueOf(cpContentHelper.getViewAttachmentURL(liferayPortletRequest, liferayPortletResponse)) %>'
+			viewAttachmentURL: '<%= String.valueOf(cpHttpContentHelper.getViewAttachmentURL(liferayPortletRequest, liferayPortletResponse)) %>'
 		}
 	);
 

@@ -43,7 +43,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Alessio Antonio Rendina
  */
 @ProviderType
-public interface CPContentHelper {
+public interface CPHttpContentHelper {
 
 	public String getAvailabilityEstimateLabel(
 			HttpServletRequest httpServletRequest)

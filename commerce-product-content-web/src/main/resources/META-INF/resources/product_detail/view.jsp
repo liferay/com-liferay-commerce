@@ -18,15 +18,15 @@
 
 <%
 CPContentConfigurationDisplayContext cpContentConfigurationDisplayContext = (CPContentConfigurationDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
-CPContentHelper cpContentHelper = (CPContentHelper)request.getAttribute(CPContentWebKeys.CP_CONTENT_HELPER);
+CPHttpContentHelper cpHttpContentHelper = (CPHttpContentHelper)request.getAttribute(CPContentWebKeys.CP_CONTENT_HELPER);
 
 Map<String, Object> contextObjects = new HashMap<>();
 
-contextObjects.put("cpContentHelper", cpContentHelper);
+contextObjects.put("cpHttpContentHelper", cpHttpContentHelper);
 
-CPCatalogEntry cpCatalogEntry = cpContentHelper.getCPCatalogEntry(request);
+CPCatalogEntry cpCatalogEntry = cpHttpContentHelper.getCPCatalogEntry(request);
 
-CPInstance cpInstance = cpContentHelper.getDefaultCPInstance(request);
+CPInstance cpInstance = cpHttpContentHelper.getDefaultCPInstance(request);
 
 request.setAttribute("cpCatalogEntry", cpCatalogEntry);
 request.setAttribute("cpInstance", cpInstance);
@@ -54,7 +54,7 @@ request.setAttribute("cpInstance", cpInstance);
 			<c:otherwise>
 
 				<%
-				cpContentHelper.renderCPType(request, response);
+				cpHttpContentHelper.renderCPType(request, response);
 				%>
 
 			</c:otherwise>

@@ -17,10 +17,10 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CPContentHelper cpContentHelper = (CPContentHelper)request.getAttribute(CPContentWebKeys.CP_CONTENT_HELPER);
+CPHttpContentHelper cpHttpContentHelper = (CPHttpContentHelper)request.getAttribute(CPContentWebKeys.CP_CONTENT_HELPER);
 
-CPCatalogEntry cpCatalogEntry = cpContentHelper.getCPCatalogEntry(request);
-CPSku cpSku = cpContentHelper.getDefaultCPSku(cpCatalogEntry);
+CPCatalogEntry cpCatalogEntry = cpHttpContentHelper.getCPCatalogEntry(request);
+CPSku cpSku = cpHttpContentHelper.getDefaultCPSku(cpCatalogEntry);
 
 long cpDefinitionId = cpCatalogEntry.getCPDefinitionId();
 
@@ -57,11 +57,11 @@ String galleryId = PortalUtil.generateRandomKey(request, "gallery");
 
 				<c:choose>
 					<c:when test="<%= cpSku != null %>">
-						<div class="availability"><%= cpContentHelper.getAvailabilityLabel(request) %></div>
+						<div class="availability"><%= cpHttpContentHelper.getAvailabilityLabel(request) %></div>
 
-						<div class="availabilityEstimate"><%= cpContentHelper.getAvailabilityEstimateLabel(request) %></div>
+						<div class="availabilityEstimate"><%= cpHttpContentHelper.getAvailabilityEstimateLabel(request) %></div>
 
-						<div class="stockQuantity"><%= cpContentHelper.getStockQuantityLabel(request) %></div>
+						<div class="stockQuantity"><%= cpHttpContentHelper.getStockQuantityLabel(request) %></div>
 					</c:when>
 					<c:otherwise>
 						<div class="availability" data-text-cp-instance-availability></div>
@@ -84,7 +84,7 @@ String galleryId = PortalUtil.generateRandomKey(request, "gallery");
 			</h4>
 
 			<div class="product-detail-options">
-				<%= cpContentHelper.renderOptions(renderRequest, renderResponse) %>
+				<%= cpHttpContentHelper.renderOptions(renderRequest, renderResponse) %>
 
 				<script>
 					AUI().use(
@@ -170,7 +170,7 @@ String galleryId = PortalUtil.generateRandomKey(request, "gallery");
 											formData.append('groupId', themeDisplay.getScopeGroupId());
 
 											fetch(
-												'<%= String.valueOf(cpContentHelper.getViewAttachmentURL(liferayPortletRequest, liferayPortletResponse)) %>',
+												'<%= String.valueOf(cpHttpContentHelper.getViewAttachmentURL(liferayPortletRequest, liferayPortletResponse)) %>',
 												{
 													body: formData,
 													credentials: 'include',
@@ -258,12 +258,12 @@ String galleryId = PortalUtil.generateRandomKey(request, "gallery");
 </div>
 
 <%
-List<CPDefinitionSpecificationOptionValue> cpDefinitionSpecificationOptionValues = cpContentHelper.getCPDefinitionSpecificationOptionValues(cpDefinitionId);
-List<CPOptionCategory> cpOptionCategories = cpContentHelper.getCPOptionCategories(company.getCompanyId());
-List<CPMedia> cpAttachmentFileEntries = cpContentHelper.getCPAttachmentFileEntries(cpDefinitionId, themeDisplay);
+List<CPDefinitionSpecificationOptionValue> cpDefinitionSpecificationOptionValues = cpHttpContentHelper.getCPDefinitionSpecificationOptionValues(cpDefinitionId);
+List<CPOptionCategory> cpOptionCategories = cpHttpContentHelper.getCPOptionCategories(company.getCompanyId());
+List<CPMedia> cpAttachmentFileEntries = cpHttpContentHelper.getCPAttachmentFileEntries(cpDefinitionId, themeDisplay);
 %>
 
-<c:if test="<%= cpContentHelper.hasCPDefinitionSpecificationOptionValues(cpDefinitionId) %>">
+<c:if test="<%= cpHttpContentHelper.hasCPDefinitionSpecificationOptionValues(cpDefinitionId) %>">
 	<div class="row">
 		<div class="col">
 			<div class="commerce-panel">
@@ -289,7 +289,7 @@ List<CPMedia> cpAttachmentFileEntries = cpContentHelper.getCPAttachmentFileEntri
 
 						<%
 						for (CPOptionCategory cpOptionCategory : cpOptionCategories) {
-							List<CPDefinitionSpecificationOptionValue> categorizedCPDefinitionSpecificationOptionValues = cpContentHelper.getCategorizedCPDefinitionSpecificationOptionValues(cpDefinitionId, cpOptionCategory.getCPOptionCategoryId());
+							List<CPDefinitionSpecificationOptionValue> categorizedCPDefinitionSpecificationOptionValues = cpHttpContentHelper.getCategorizedCPDefinitionSpecificationOptionValues(cpDefinitionId, cpOptionCategory.getCPOptionCategoryId());
 						%>
 
 							<c:if test="<%= !categorizedCPDefinitionSpecificationOptionValues.isEmpty() %>">

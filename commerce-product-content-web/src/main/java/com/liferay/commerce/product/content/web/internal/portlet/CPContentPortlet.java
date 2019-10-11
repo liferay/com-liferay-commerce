@@ -16,7 +16,7 @@ package com.liferay.commerce.product.content.web.internal.portlet;
 
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.content.constants.CPContentWebKeys;
-import com.liferay.commerce.product.content.util.CPContentHelper;
+import com.liferay.commerce.product.content.util.CPHttpContentHelper;
 import com.liferay.commerce.product.content.web.internal.display.context.CPContentConfigurationDisplayContext;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -81,7 +81,7 @@ public class CPContentPortlet extends MVCPortlet {
 		}
 
 		renderRequest.setAttribute(
-			CPContentWebKeys.CP_CONTENT_HELPER, _cpContentHelper);
+			CPContentWebKeys.CP_CONTENT_HELPER, _cpHttpContentHelper);
 
 		super.render(renderRequest, renderResponse);
 	}
@@ -90,7 +90,7 @@ public class CPContentPortlet extends MVCPortlet {
 		CPContentPortlet.class);
 
 	@Reference
-	private CPContentHelper _cpContentHelper;
+	private CPHttpContentHelper _cpHttpContentHelper;
 
 	@Reference
 	private Portal _portal;

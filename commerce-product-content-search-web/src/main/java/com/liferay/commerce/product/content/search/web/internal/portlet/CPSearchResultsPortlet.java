@@ -23,7 +23,7 @@ import com.liferay.commerce.product.content.render.list.CPContentListRendererReg
 import com.liferay.commerce.product.content.render.list.entry.CPContentListEntryRendererRegistry;
 import com.liferay.commerce.product.content.search.web.internal.configuration.CPSearchResultsPortletInstanceConfiguration;
 import com.liferay.commerce.product.content.search.web.internal.display.context.CPSearchResultsDisplayContext;
-import com.liferay.commerce.product.content.util.CPContentHelper;
+import com.liferay.commerce.product.content.util.CPHttpContentHelper;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.search.CPDefinitionIndexer;
@@ -134,7 +134,7 @@ public class CPSearchResultsPortlet
 				WebKeys.PORTLET_DISPLAY_CONTEXT, cpSearchResultsDisplayContext);
 
 			renderRequest.setAttribute(
-				CPContentWebKeys.CP_CONTENT_HELPER, _cpContentHelper);
+				CPContentWebKeys.CP_CONTENT_HELPER, _cpHttpContentHelper);
 		}
 		catch (ConfigurationException ce) {
 			_log.error(ce, ce);
@@ -287,9 +287,6 @@ public class CPSearchResultsPortlet
 	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
-	private CPContentHelper _cpContentHelper;
-
-	@Reference
 	private CPContentListEntryRendererRegistry
 		_cpContentListEntryRendererRegistry;
 
@@ -298,6 +295,9 @@ public class CPSearchResultsPortlet
 
 	@Reference
 	private CPDefinitionHttpHelper _cpDefinitionHttpHelper;
+
+	@Reference
+	private CPHttpContentHelper _cpHttpContentHelper;
 
 	@Reference
 	private CPTypeServicesTracker _cpTypeServicesTracker;

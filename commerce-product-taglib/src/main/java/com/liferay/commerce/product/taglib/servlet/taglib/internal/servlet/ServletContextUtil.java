@@ -16,7 +16,7 @@ package com.liferay.commerce.product.taglib.servlet.taglib.internal.servlet;
 
 import com.liferay.commerce.product.content.render.list.CPContentListRendererRegistry;
 import com.liferay.commerce.product.content.render.list.entry.CPContentListEntryRendererRegistry;
-import com.liferay.commerce.product.content.util.CPContentHelper;
+import com.liferay.commerce.product.content.util.CPHttpContentHelper;
 
 import javax.servlet.ServletContext;
 
@@ -31,10 +31,6 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true, service = ServletContextUtil.class)
 public class ServletContextUtil {
 
-	public static final CPContentHelper getCPContentHelper() {
-		return _instance._getCPContentHelper();
-	}
-
 	public static final CPContentListEntryRendererRegistry
 		getCPContentListEntryRendererRegistry() {
 
@@ -45,6 +41,10 @@ public class ServletContextUtil {
 		getCPContentListRendererRegistry() {
 
 		return _instance._getCPContentListRendererRegistry();
+	}
+
+	public static final CPHttpContentHelper getCPHttpContentHelper() {
+		return _instance._getCPHttpContentHelper();
 	}
 
 	public static final ServletContext getServletContext() {
@@ -62,11 +62,6 @@ public class ServletContextUtil {
 	}
 
 	@Reference(unbind = "-")
-	protected void setCPContentHelper(CPContentHelper cpContentHelper) {
-		_cpContentHelper = cpContentHelper;
-	}
-
-	@Reference(unbind = "-")
 	protected void setCPContentListEntryRendererRegistry(
 		CPContentListEntryRendererRegistry cpContentListEntryRendererRegistry) {
 
@@ -81,16 +76,19 @@ public class ServletContextUtil {
 		_cpContentListRendererRegistry = cpContentListRendererRegistry;
 	}
 
+	@Reference(unbind = "-")
+	protected void setCPHttpContentHelper(
+		CPHttpContentHelper cpHttpContentHelper) {
+
+		_cpHttpContentHelper = cpHttpContentHelper;
+	}
+
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.product.taglib)",
 		unbind = "-"
 	)
 	protected void setServletContext(ServletContext servletContext) {
 		_servletContext = servletContext;
-	}
-
-	private CPContentHelper _getCPContentHelper() {
-		return _cpContentHelper;
 	}
 
 	private CPContentListEntryRendererRegistry
@@ -103,16 +101,20 @@ public class ServletContextUtil {
 		return _cpContentListRendererRegistry;
 	}
 
+	private CPHttpContentHelper _getCPHttpContentHelper() {
+		return _cpHttpContentHelper;
+	}
+
 	private ServletContext _getServletContext() {
 		return _servletContext;
 	}
 
 	private static ServletContextUtil _instance;
 
-	private CPContentHelper _cpContentHelper;
 	private CPContentListEntryRendererRegistry
 		_cpContentListEntryRendererRegistry;
 	private CPContentListRendererRegistry _cpContentListRendererRegistry;
+	private CPHttpContentHelper _cpHttpContentHelper;
 	private ServletContext _servletContext;
 
 }

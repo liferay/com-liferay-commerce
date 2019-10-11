@@ -17,7 +17,7 @@ package com.liferay.commerce.product.content.web.internal.render.list;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.content.constants.CPContentWebKeys;
 import com.liferay.commerce.product.content.render.list.CPContentListRenderer;
-import com.liferay.commerce.product.content.util.CPContentHelper;
+import com.liferay.commerce.product.content.util.CPHttpContentHelper;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
@@ -66,7 +66,7 @@ public class ProductPublisherCPContentListRenderer
 		throws Exception {
 
 		httpServletRequest.setAttribute(
-			CPContentWebKeys.CP_CONTENT_HELPER, _cpContentHelper);
+			CPContentWebKeys.CP_CONTENT_HELPER, _cpHttpContentHelper);
 
 		_jspRenderer.renderJSP(
 			httpServletRequest, httpServletResponse,
@@ -74,7 +74,7 @@ public class ProductPublisherCPContentListRenderer
 	}
 
 	@Reference
-	private CPContentHelper _cpContentHelper;
+	private CPHttpContentHelper _cpHttpContentHelper;
 
 	@Reference
 	private JSPRenderer _jspRenderer;

@@ -17,14 +17,14 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CPContentHelper cpContentHelper = (CPContentHelper)request.getAttribute(CPContentWebKeys.CP_CONTENT_HELPER);
+CPHttpContentHelper cpHttpContentHelper = (CPHttpContentHelper)request.getAttribute(CPContentWebKeys.CP_CONTENT_HELPER);
 %>
 
 <div id="<portlet:namespace/>configuration-tabs">
 	<ul class="nav nav-tabs">
 
 		<%
-		for (CPType cpType : cpContentHelper.getCPTypes()) {
+		for (CPType cpType : cpHttpContentHelper.getCPTypes()) {
 		%>
 
 			<li>
@@ -40,7 +40,7 @@ CPContentHelper cpContentHelper = (CPContentHelper)request.getAttribute(CPConten
 	<div class="tab-content">
 
 		<%
-		for (CPType cpType : cpContentHelper.getCPTypes()) {
+		for (CPType cpType : cpHttpContentHelper.getCPTypes()) {
 		%>
 
 			<div id="<%= HtmlUtil.escape(cpType.getName()) %>">
@@ -48,13 +48,13 @@ CPContentHelper cpContentHelper = (CPContentHelper)request.getAttribute(CPConten
 					<aui:select label='<%= HtmlUtil.escape(cpType.getLabel(locale) + StringPool.SPACE + LanguageUtil.get(request, "cp-type-renderer-key")) %>' name='<%= "preferences--" + cpType.getName() + "--cpTypeRendererKey--" %>'>
 
 						<%
-						List<CPContentRenderer> cpContentRenderers = cpContentHelper.getCPContentRenderers(cpType.getName());
+						List<CPContentRenderer> cpContentRenderers = cpHttpContentHelper.getCPContentRenderers(cpType.getName());
 
 						for (CPContentRenderer cpContentRenderer : cpContentRenderers) {
 							String key = cpContentRenderer.getKey();
 						%>
 
-							<aui:option label="<%= HtmlUtil.escape(cpContentRenderer.getLabel(locale)) %>" selected="<%= key.equals(cpContentHelper.getCPContentRendererKey(cpType.getName(), renderRequest)) %>" value="<%= key %>" />
+							<aui:option label="<%= HtmlUtil.escape(cpContentRenderer.getLabel(locale)) %>" selected="<%= key.equals(cpHttpContentHelper.getCPContentRendererKey(cpType.getName(), renderRequest)) %>" value="<%= key %>" />
 
 						<%
 						}

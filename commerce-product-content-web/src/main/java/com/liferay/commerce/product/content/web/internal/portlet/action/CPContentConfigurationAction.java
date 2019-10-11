@@ -16,7 +16,7 @@ package com.liferay.commerce.product.content.web.internal.portlet.action;
 
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.content.constants.CPContentWebKeys;
-import com.liferay.commerce.product.content.util.CPContentHelper;
+import com.liferay.commerce.product.content.util.CPHttpContentHelper;
 import com.liferay.commerce.product.content.web.internal.display.context.CPContentConfigurationDisplayContext;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -59,7 +59,7 @@ public class CPContentConfigurationAction extends DefaultConfigurationAction {
 		}
 
 		httpServletRequest.setAttribute(
-			CPContentWebKeys.CP_CONTENT_HELPER, _cpContentHelper);
+			CPContentWebKeys.CP_CONTENT_HELPER, _cpHttpContentHelper);
 
 		return "/product_detail/configuration.jsp";
 	}
@@ -77,6 +77,6 @@ public class CPContentConfigurationAction extends DefaultConfigurationAction {
 		CPContentConfigurationAction.class);
 
 	@Reference
-	private CPContentHelper _cpContentHelper;
+	private CPHttpContentHelper _cpHttpContentHelper;
 
 }
