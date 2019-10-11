@@ -597,8 +597,6 @@ public class CommerceAccountLocalServiceImpl
 
 		Date modifiedDate = serviceContext.getModifiedDate(now);
 
-		commerceAccount.setModifiedDate(modifiedDate);
-
 		if (status == WorkflowConstants.STATUS_APPROVED) {
 			Date expirationDate = commerceAccount.getExpirationDate();
 

@@ -92,7 +92,6 @@ public class CommerceVirtualOrderItemLocalServiceImpl
 			commerceVirtualOrderItemPersistence.create(
 				commerceVirtualOrderItemId);
 
-		commerceVirtualOrderItem.setUuid(serviceContext.getUuid());
 		commerceVirtualOrderItem.setGroupId(groupId);
 		commerceVirtualOrderItem.setCompanyId(user.getCompanyId());
 		commerceVirtualOrderItem.setUserId(user.getUserId());

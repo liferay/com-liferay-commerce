@@ -47,7 +47,6 @@ public class CommerceAvailabilityEstimateLocalServiceImpl
 			commerceAvailabilityEstimatePersistence.create(
 				commerceAvailabilityEstimateId);
 
-		commerceAvailabilityEstimate.setUuid(serviceContext.getUuid());
 		commerceAvailabilityEstimate.setCompanyId(user.getCompanyId());
 		commerceAvailabilityEstimate.setUserId(user.getUserId());
 		commerceAvailabilityEstimate.setUserName(user.getFullName());

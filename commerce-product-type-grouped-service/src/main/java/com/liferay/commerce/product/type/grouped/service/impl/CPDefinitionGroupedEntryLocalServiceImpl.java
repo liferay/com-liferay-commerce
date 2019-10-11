@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -120,7 +119,6 @@ public class CPDefinitionGroupedEntryLocalServiceImpl
 				cpDefinitionId);
 		}
 
-		cpDefinitionGroupedEntry.setUuid(serviceContext.getUuid());
 		cpDefinitionGroupedEntry.setGroupId(cpDefinition.getGroupId());
 		cpDefinitionGroupedEntry.setCompanyId(user.getCompanyId());
 		cpDefinitionGroupedEntry.setUserId(user.getUserId());
@@ -153,7 +151,7 @@ public class CPDefinitionGroupedEntryLocalServiceImpl
 			newCPDefinitionGroupedEntry.setUuid(PortalUUIDUtil.generate());
 			newCPDefinitionGroupedEntry.setCPDefinitionGroupedEntryId(
 				counterLocalService.increment());
-			newCPDefinitionGroupedEntry.setModifiedDate(new Date());
+
 			newCPDefinitionGroupedEntry.setCPDefinitionId(newCPDefinitionId);
 
 			cpDefinitionGroupedEntryLocalService.addCPDefinitionGroupedEntry(

@@ -61,7 +61,6 @@ public class CommerceWishListLocalServiceImpl
 		CommerceWishList commerceWishList = commerceWishListPersistence.create(
 			commerceWishListId);
 
-		commerceWishList.setUuid(serviceContext.getUuid());
 		commerceWishList.setGroupId(groupId);
 		commerceWishList.setCompanyId(user.getCompanyId());
 		commerceWishList.setUserId(user.getUserId());

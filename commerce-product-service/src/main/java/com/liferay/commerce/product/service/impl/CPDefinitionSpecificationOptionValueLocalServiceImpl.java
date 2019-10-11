@@ -64,7 +64,6 @@ public class CPDefinitionSpecificationOptionValueLocalServiceImpl
 			cpDefinitionId = cpDefinition.getCPDefinitionId();
 		}
 
-		cpDefinitionSpecificationOptionValue.setUuid(serviceContext.getUuid());
 		cpDefinitionSpecificationOptionValue.setGroupId(
 			cpDefinition.getGroupId());
 		cpDefinitionSpecificationOptionValue.setCompanyId(user.getCompanyId());

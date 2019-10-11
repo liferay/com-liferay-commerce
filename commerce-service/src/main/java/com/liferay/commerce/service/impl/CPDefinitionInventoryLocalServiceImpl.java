@@ -29,8 +29,6 @@ import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
-import java.util.Date;
-
 /**
  * @author Alessio Antonio Rendina
  * @author Alec Sloan
@@ -68,8 +66,6 @@ public class CPDefinitionInventoryLocalServiceImpl
 			cpDefinition = _cpDefinitionLocalService.copyCPDefinition(
 				cpDefinitionId);
 		}
-
-		cpDefinitionInventory.setUuid(serviceContext.getUuid());
 
 		cpDefinitionInventory.setGroupId(cpDefinition.getGroupId());
 
@@ -150,7 +146,7 @@ public class CPDefinitionInventoryLocalServiceImpl
 			newCPDefinitionInventory.setUuid(PortalUUIDUtil.generate());
 			newCPDefinitionInventory.setCPDefinitionInventoryId(
 				counterLocalService.increment());
-			newCPDefinitionInventory.setModifiedDate(new Date());
+
 			newCPDefinitionInventory.setCPDefinitionId(newCPDefinitionId);
 
 			cpDefinitionInventoryLocalService.addCPDefinitionInventory(

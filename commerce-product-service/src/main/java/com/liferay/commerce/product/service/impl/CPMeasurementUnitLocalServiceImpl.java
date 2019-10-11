@@ -59,7 +59,6 @@ public class CPMeasurementUnitLocalServiceImpl
 		CPMeasurementUnit cpMeasurementUnit =
 			cpMeasurementUnitPersistence.create(cpMeasurementUnitId);
 
-		cpMeasurementUnit.setUuid(serviceContext.getUuid());
 		cpMeasurementUnit.setGroupId(serviceContext.getScopeGroupId());
 		cpMeasurementUnit.setCompanyId(user.getCompanyId());
 		cpMeasurementUnit.setUserId(user.getUserId());

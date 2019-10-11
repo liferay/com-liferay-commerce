@@ -93,7 +93,6 @@ public class CommerceCountryLocalServiceImpl
 		CommerceCountry commerceCountry = commerceCountryPersistence.create(
 			commerceCountryId);
 
-		commerceCountry.setUuid(serviceContext.getUuid());
 		commerceCountry.setCompanyId(user.getCompanyId());
 		commerceCountry.setUserId(user.getUserId());
 		commerceCountry.setUserName(user.getFullName());

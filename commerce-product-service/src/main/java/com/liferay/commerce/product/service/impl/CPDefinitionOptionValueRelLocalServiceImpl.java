@@ -121,7 +121,6 @@ public class CPDefinitionOptionValueRelLocalServiceImpl
 				cpDefinitionOptionRel.getCPDefinitionOptionRelId();
 		}
 
-		cpDefinitionOptionValueRel.setUuid(serviceContext.getUuid());
 		cpDefinitionOptionValueRel.setGroupId(groupId);
 		cpDefinitionOptionValueRel.setCompanyId(user.getCompanyId());
 		cpDefinitionOptionValueRel.setUserId(user.getUserId());

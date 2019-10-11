@@ -189,7 +189,6 @@ public class CPDAvailabilityEstimateLocalServiceImpl
 			cpdAvailabilityEstimatePersistence.create(
 				cpdAvailabilityEstimateId);
 
-		cpdAvailabilityEstimate.setUuid(serviceContext.getUuid());
 		cpdAvailabilityEstimate.setCompanyId(user.getCompanyId());
 		cpdAvailabilityEstimate.setUserId(user.getUserId());
 		cpdAvailabilityEstimate.setUserName(user.getFullName());

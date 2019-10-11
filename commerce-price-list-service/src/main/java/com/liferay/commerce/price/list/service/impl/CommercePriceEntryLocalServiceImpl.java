@@ -150,7 +150,6 @@ public class CommercePriceEntryLocalServiceImpl
 		CommercePriceEntry commercePriceEntry =
 			commercePriceEntryPersistence.create(commercePriceEntryId);
 
-		commercePriceEntry.setUuid(serviceContext.getUuid());
 		commercePriceEntry.setCompanyId(user.getCompanyId());
 		commercePriceEntry.setUserId(user.getUserId());
 		commercePriceEntry.setUserName(user.getFullName());
