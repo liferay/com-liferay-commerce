@@ -31,6 +31,7 @@ import com.liferay.headless.commerce.admin.pricing.dto.v1_0.PriceEntry;
 import com.liferay.headless.commerce.admin.pricing.dto.v1_0.PriceList;
 import com.liferay.headless.commerce.admin.pricing.dto.v1_0.PriceListAccountGroup;
 import com.liferay.headless.commerce.admin.pricing.dto.v1_0.TierPrice;
+import com.liferay.headless.commerce.admin.pricing.internal.odata.entity.v1_0.PriceListEntityModel;
 import com.liferay.headless.commerce.admin.pricing.internal.util.v1_0.PriceEntryUtil;
 import com.liferay.headless.commerce.admin.pricing.internal.util.v1_0.PriceListAccountGroupUtil;
 import com.liferay.headless.commerce.admin.pricing.internal.util.v1_0.TierPriceUtil;
@@ -41,20 +42,25 @@ import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverter
 import com.liferay.headless.commerce.core.util.DateConfig;
 import com.liferay.headless.commerce.core.util.ExpandoUtil;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.search.filter.Filter;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.odata.entity.EntityModel;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
+import com.liferay.portal.vulcan.resource.EntityModelResource;
+import com.liferay.portal.vulcan.util.SearchUtil;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Map;
 
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
@@ -69,7 +75,8 @@ import org.osgi.service.component.annotations.ServiceScope;
 	properties = "OSGI-INF/liferay/rest/v1_0/price-list.properties",
 	scope = ServiceScope.PROTOTYPE, service = PriceListResource.class
 )
-public class PriceListResourceImpl extends BasePriceListResourceImpl {
+public class PriceListResourceImpl
+	extends BasePriceListResourceImpl implements EntityModelResource {
 
 	@Override
 	public Response deletePriceList(Long id) throws Exception {
@@ -101,6 +108,13 @@ public class PriceListResourceImpl extends BasePriceListResourceImpl {
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
+	}
+
+	@Override
+	public EntityModel getEntityModel(MultivaluedMap multivaluedMap)
+		throws Exception {
+
+		return _entityModel;
 	}
 
 	@Override
@@ -141,21 +155,21 @@ public class PriceListResourceImpl extends BasePriceListResourceImpl {
 	}
 
 	@Override
-	public Page<PriceList> getPriceListsPage(Pagination pagination)
+	public Page<PriceList> getPriceListsPage(
+			Filter filter, Pagination pagination, Sort[] sorts)
 		throws Exception {
 
-		List<CommercePriceList> commercePriceLists =
-			_commercePriceListService.getCommercePriceLists(
-				contextCompany.getCompanyId(),
-				WorkflowConstants.STATUS_APPROVED,
-				pagination.getStartPosition(), pagination.getEndPosition(),
-				null);
-
-		int totalItems = _commercePriceListService.getCommercePriceListsCount(
-			contextCompany.getCompanyId(), WorkflowConstants.STATUS_APPROVED);
-
-		return Page.of(
-			_toPriceLists(commercePriceLists), pagination, totalItems);
+		return SearchUtil.search(
+			booleanQuery -> booleanQuery.getPreBooleanFilter(), filter,
+			CommercePriceList.class, StringPool.BLANK, pagination,
+			queryConfig -> queryConfig.setSelectedFieldNames(
+				Field.ENTRY_CLASS_PK),
+			searchContext -> searchContext.setCompanyId(
+				contextCompany.getCompanyId()),
+			document -> _toPriceList(
+				_commercePriceListService.getCommercePriceList(
+					GetterUtil.getLong(document.get(Field.ENTRY_CLASS_PK)))),
+			sorts);
 	}
 
 	@Override
@@ -206,25 +220,17 @@ public class PriceListResourceImpl extends BasePriceListResourceImpl {
 				commercePriceList.getCommercePriceListId()));
 	}
 
-	private List<PriceList> _toPriceLists(
-			List<CommercePriceList> commercePriceLists)
+	private PriceList _toPriceList(CommercePriceList commercePriceList)
 		throws Exception {
-
-		List<PriceList> priceLists = new ArrayList<>();
 
 		DTOConverter priceListDTOConverter =
 			_dtoConverterRegistry.getDTOConverter(
 				CommercePriceList.class.getName());
 
-		for (CommercePriceList commercePriceList : commercePriceLists) {
-			priceLists.add(
-				(PriceList)priceListDTOConverter.toDTO(
-					new DefaultDTOConverterContext(
-						contextAcceptLanguage.getPreferredLocale(),
-						commercePriceList.getCommercePriceListId())));
-		}
-
-		return priceLists;
+		return (PriceList)priceListDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(),
+				commercePriceList.getCommercePriceListId()));
 	}
 
 	private CommercePriceList _updateNestedResources(
@@ -400,6 +406,8 @@ public class PriceListResourceImpl extends BasePriceListResourceImpl {
 
 		return commercePriceList;
 	}
+
+	private static final EntityModel _entityModel = new PriceListEntityModel();
 
 	@Reference
 	private CommerceAccountGroupService _commerceAccountGroupService;
