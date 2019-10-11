@@ -19,10 +19,6 @@ package com.liferay.commerce.frontend.model;
  */
 public class ProductSettingsModel {
 
-	public int[] getAllowedQuantities() {
-		return _allowedQuantities.clone();
-	}
-
 	public int getLowStockQuantity() {
 		return _lowStockQuantity;
 	}
@@ -41,10 +37,6 @@ public class ProductSettingsModel {
 
 	public boolean isShowAvailabilityDot() {
 		return _showAvailabilityDot;
-	}
-
-	public void setAllowedQuantities(int[] allowedQuantities) {
-		_allowedQuantities = allowedQuantities.clone();
 	}
 
 	public void setLowStockQuantity(int lowStockQuantity) {
@@ -67,7 +59,6 @@ public class ProductSettingsModel {
 		_showAvailabilityDot = showAvailabilityDot;
 	}
 
-	private int[] _allowedQuantities;
 	private int _lowStockQuantity;
 	private int _maxQuantity;
 	private int _minQuantity;
