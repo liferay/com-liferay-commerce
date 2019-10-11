@@ -132,7 +132,7 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 
 						<c:if test="<%= Validator.isNotNull(cpInstance.getCPSubscriptionInfo()) %>">
 							<div class="list-group-subtitle">
-								<liferay-commerce:subscription-info
+								<commerce-ui:product-subscription-info
 									CPInstanceId="<%= commerceOrderItem.getCPInstanceId() %>"
 									showDuration="<%= false %>"
 								/>
