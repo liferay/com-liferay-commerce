@@ -80,10 +80,10 @@ boolean hasCustomAttributesAvailable = CustomAttributesUtil.hasCustomAttributes(
 					return string.toLowerCase().replace(/[^a-z1-9]+/g, '-');
 				}
 
-				const form = document.getElementById('<portlet:namespace />fm');
+				const form = document.getElementById('<portlet:namespace />optionValueFm');
 
 				const keyInput = form.querySelector('#<portlet:namespace />key');
-				const nameInput = form.querySelector('#<portlet:namespace />name');
+				const nameInput = form.querySelector('#<portlet:namespace />optionValueName');
 
 				const debounce = utilities.debounce;
 
