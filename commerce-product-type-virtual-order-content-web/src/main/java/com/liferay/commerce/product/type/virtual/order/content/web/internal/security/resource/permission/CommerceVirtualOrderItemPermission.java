@@ -28,7 +28,7 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true, service = CommerceVirtualOrderItemPermission.class)
 public class CommerceVirtualOrderItemPermission {
 
-	public boolean contains(
+	public static boolean contains(
 			PermissionChecker permissionChecker,
 			CommerceVirtualOrderItem commerceVirtualOrderItem, String actionId)
 		throws PortalException {
@@ -37,7 +37,7 @@ public class CommerceVirtualOrderItemPermission {
 			permissionChecker, commerceVirtualOrderItem, actionId);
 	}
 
-	public boolean contains(
+	public static boolean contains(
 			PermissionChecker permissionChecker,
 			long commerceVirtualOrderItemId, String actionId)
 		throws PortalException {
@@ -58,7 +58,7 @@ public class CommerceVirtualOrderItemPermission {
 			modelResourcePermission;
 	}
 
-	private ModelResourcePermission<CommerceVirtualOrderItem>
+	private static ModelResourcePermission<CommerceVirtualOrderItem>
 		_commerceVirtualOrderItemModelResourcePermission;
 
 }

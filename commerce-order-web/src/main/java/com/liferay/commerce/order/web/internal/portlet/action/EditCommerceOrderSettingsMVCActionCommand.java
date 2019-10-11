@@ -133,10 +133,10 @@ public class EditCommerceOrderSettingsMVCActionCommand
 			0, workflowDefinitionOVPs);
 	}
 
+	private static PortletResourcePermission _portletResourcePermission;
+
 	@Reference
 	private CommerceChannelLocalService _commerceChannelLocalService;
-
-	private PortletResourcePermission _portletResourcePermission;
 
 	@Reference
 	private WorkflowDefinitionLinkLocalService
