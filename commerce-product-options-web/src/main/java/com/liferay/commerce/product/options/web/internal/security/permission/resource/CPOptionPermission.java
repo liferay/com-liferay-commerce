@@ -28,7 +28,7 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true, service = {})
 public class CPOptionPermission {
 
-	public boolean contains(
+	public static boolean contains(
 			PermissionChecker permissionChecker, CPOption cpOption,
 			String actionId)
 		throws PortalException {
@@ -37,7 +37,7 @@ public class CPOptionPermission {
 			permissionChecker, cpOption, actionId);
 	}
 
-	public boolean contains(
+	public static boolean contains(
 			PermissionChecker permissionChecker, long cpOptionId,
 			String actionId)
 		throws PortalException {
@@ -56,6 +56,7 @@ public class CPOptionPermission {
 		_cpOptionModelResourcePermission = modelResourcePermission;
 	}
 
-	private ModelResourcePermission<CPOption> _cpOptionModelResourcePermission;
+	private static ModelResourcePermission<CPOption>
+		_cpOptionModelResourcePermission;
 
 }
