@@ -171,7 +171,7 @@ productSkusURL.setParameter("screenNavigationCategoryKey", cpInstanceDisplayCont
 	function <portlet:namespace />saveInstance(forceDisable) {
 		var form = AUI.$(document.<portlet:namespace />fm);
 
-		var ddmForm = Liferay.component("<%= cpDefinition.getCPDefinitionId() %>DDMForm");
+		var ddmForm = Liferay.component("ProductOptions<%= cpDefinition.getCPDefinitionId() %>DDMForm");
 
 		if (ddmForm) {
 			var fields = ddmForm.getImmediateFields();

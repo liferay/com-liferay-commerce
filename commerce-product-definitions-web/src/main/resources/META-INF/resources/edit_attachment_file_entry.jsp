@@ -134,7 +134,7 @@ PortalUtil.addPortletBreadcrumbEntry(request, title, StringPool.BLANK, data);
 	function <portlet:namespace />saveAttachmentFileEntry(forceDisable) {
 		var form = AUI.$(document.<portlet:namespace />fm);
 
-		var ddmForm = Liferay.component("<%= cpDefinitionId %>DDMForm");
+		var ddmForm = Liferay.component("ProductOptions<%= cpDefinitionId %>DDMForm");
 
 		if (ddmForm) {
 			var fields = ddmForm.getImmediateFields();
