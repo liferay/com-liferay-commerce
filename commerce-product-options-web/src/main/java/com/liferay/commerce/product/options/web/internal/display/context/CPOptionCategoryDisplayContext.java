@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
-import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,8 +34,7 @@ public class CPOptionCategoryDisplayContext
 
 	public CPOptionCategoryDisplayContext(
 			ActionHelper actionHelper, HttpServletRequest httpServletRequest,
-			CPOptionCategoryService cpOptionCategoryService,
-			ModelResourcePermission<CPOptionCategory> modelResourcePermission)
+			CPOptionCategoryService cpOptionCategoryService)
 		throws PortalException {
 
 		super(
@@ -46,7 +44,6 @@ public class CPOptionCategoryDisplayContext
 		setDefaultOrderByCol("priority");
 
 		_cpOptionCategoryService = cpOptionCategoryService;
-		_cpOptionCategoryModelResourcePermission = modelResourcePermission;
 	}
 
 	@Override
@@ -89,16 +86,6 @@ public class CPOptionCategoryDisplayContext
 		return searchContainer;
 	}
 
-	public boolean hasPermission(
-			CPOptionCategory cpOptionCategory, String actionId)
-		throws PortalException {
-
-		return _cpOptionCategoryModelResourcePermission.contains(
-			cpRequestHelper.getPermissionChecker(), cpOptionCategory, actionId);
-	}
-
-	private final ModelResourcePermission<CPOptionCategory>
-		_cpOptionCategoryModelResourcePermission;
 	private final CPOptionCategoryService _cpOptionCategoryService;
 
 }
