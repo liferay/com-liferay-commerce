@@ -20,6 +20,8 @@ import com.liferay.headless.commerce.admin.inventory.resource.v1_0.WarehouseItem
 import com.liferay.headless.commerce.admin.inventory.resource.v1_0.WarehouseResource;
 import com.liferay.petra.function.UnsafeConsumer;
 import com.liferay.petra.function.UnsafeFunction;
+import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.search.filter.Filter;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.CompanyLocalServiceUtil;
 import com.liferay.portal.vulcan.pagination.Page;
@@ -62,8 +64,9 @@ public class Query {
 	@GraphQLField
 	@GraphQLInvokeDetached
 	public Collection<Warehouse> getWarehousesPage(
+			@GraphQLName("filter") Filter filter,
 			@GraphQLName("pageSize") int pageSize,
-			@GraphQLName("page") int page)
+			@GraphQLName("page") int page, @GraphQLName("sorts") Sort[] sorts)
 		throws Exception {
 
 		return _applyComponentServiceObjects(
@@ -71,7 +74,7 @@ public class Query {
 			this::_populateResourceContext,
 			warehouseResource -> {
 				Page paginationPage = warehouseResource.getWarehousesPage(
-					Pagination.of(pageSize, page));
+					filter, Pagination.of(pageSize, page), sorts);
 
 				return paginationPage.getItems();
 			});

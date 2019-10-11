@@ -16,6 +16,8 @@ package com.liferay.headless.commerce.admin.inventory.resource.v1_0;
 
 import com.liferay.headless.commerce.admin.inventory.dto.v1_0.Warehouse;
 import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.search.filter.Filter;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
@@ -34,7 +36,8 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface WarehouseResource {
 
-	public Page<Warehouse> getWarehousesPage(Pagination pagination)
+	public Page<Warehouse> getWarehousesPage(
+			Filter filter, Pagination pagination, Sort[] sorts)
 		throws Exception;
 
 	public Warehouse postWarehous(Warehouse warehouse) throws Exception;
