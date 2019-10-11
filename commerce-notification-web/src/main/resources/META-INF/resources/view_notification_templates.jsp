@@ -102,7 +102,7 @@ portletURL.setParameter("notificationNavigationItem", notificationNavigationItem
 			modelVar="commerceNotificationTemplate"
 		>
 			<c:choose>
-				<c:when test="<%= commerceNotificationTemplatesDisplayContext.hasPermission(commerceNotificationTemplate, ActionKeys.UPDATE) %>">
+				<c:when test="<%= CommerceNotificationTemplatePermission.contains(permissionChecker, commerceNotificationTemplate, ActionKeys.UPDATE) %>">
 
 					<%
 					PortletURL rowURL = renderResponse.createRenderURL();

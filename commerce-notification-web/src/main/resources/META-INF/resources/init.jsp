@@ -41,6 +41,7 @@ page import="com.liferay.commerce.notification.type.CommerceNotificationType" %>
 page import="com.liferay.commerce.notification.web.internal.admin.NotificationsCommerceAdminModule" %><%@
 page import="com.liferay.commerce.notification.web.internal.display.context.CommerceNotificationQueueEntriesDisplayContext" %><%@
 page import="com.liferay.commerce.notification.web.internal.display.context.CommerceNotificationTemplatesDisplayContext" %><%@
+page import="com.liferay.commerce.notification.web.internal.security.permission.resource.CommerceNotificationTemplatePermission" %><%@
 page import="com.liferay.commerce.notification.web.internal.servlet.taglib.ui.CommerceNotificationTemplateFormNavigatorConstants" %><%@
 page import="com.liferay.frontend.taglib.clay.servlet.taglib.util.NavigationItem" %><%@
 page import="com.liferay.petra.string.StringPool" %><%@

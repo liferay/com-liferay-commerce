@@ -22,7 +22,6 @@ import com.liferay.commerce.notification.service.CommerceNotificationTemplateCom
 import com.liferay.commerce.notification.service.CommerceNotificationTemplateService;
 import com.liferay.commerce.notification.type.CommerceNotificationTypeRegistry;
 import com.liferay.commerce.notification.web.internal.display.context.CommerceNotificationTemplatesDisplayContext;
-import com.liferay.commerce.notification.web.internal.security.permission.resource.CommerceNotificationTemplatePermission;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderConstants;
@@ -77,7 +76,6 @@ public class ViewCommerceNotificationTemplatesMVCRenderCommand
 					new CommerceNotificationTemplatesDisplayContext(
 						_commerceNotificationTemplateService,
 						_commerceNotificationTemplateCommerceAccountGroupRelService,
-						_commerceNotificationTemplatePermission,
 						_commerceNotificationTypeRegistry,
 						_commerceAccountGroupService, httpServletRequest,
 						_itemSelector, _portletResourcePermission);
@@ -110,10 +108,6 @@ public class ViewCommerceNotificationTemplatesMVCRenderCommand
 	@Reference
 	private CommerceNotificationTemplateCommerceAccountGroupRelService
 		_commerceNotificationTemplateCommerceAccountGroupRelService;
-
-	@Reference
-	private CommerceNotificationTemplatePermission
-		_commerceNotificationTemplatePermission;
 
 	@Reference
 	private CommerceNotificationTemplateService
