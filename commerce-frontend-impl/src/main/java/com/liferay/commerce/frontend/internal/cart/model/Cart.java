@@ -33,7 +33,7 @@ public class Cart {
 	}
 
 	public Cart(String[] errorMessages) {
-		_errorMessages = errorMessages.clone();
+		_errorMessages = errorMessages;
 		_success = false;
 	}
 
@@ -42,7 +42,7 @@ public class Cart {
 	}
 
 	public String[] getErrorMessages() {
-		return _errorMessages.clone();
+		return _errorMessages;
 	}
 
 	public long getOrderId() {
@@ -62,7 +62,7 @@ public class Cart {
 	}
 
 	public void setErrorMessages(String[] errorMessages) {
-		_errorMessages = errorMessages.clone();
+		_errorMessages = errorMessages;
 	}
 
 	public void setSuccess(boolean success) {
