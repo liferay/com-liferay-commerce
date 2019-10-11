@@ -104,7 +104,7 @@ public class CommerceAccountUserClayTable
 				member.getMemberId(), httpServletRequest);
 
 			ClayTableAction viewClayTableAction = new ClayTableAction(
-				viewURL, StringPool.BLANK,
+				StringPool.BLANK, viewURL, StringPool.BLANK,
 				LanguageUtil.get(httpServletRequest, "view"), false, false);
 
 			clayTableActions.add(viewClayTableAction);
@@ -123,7 +123,7 @@ public class CommerceAccountUserClayTable
 				sb.append(StringPool.SEMICOLON);
 
 				ClayTableAction removeClayTableAction = new ClayTableAction(
-					sb.toString(), StringPool.BLANK,
+					StringPool.BLANK, sb.toString(), StringPool.BLANK,
 					LanguageUtil.get(httpServletRequest, "remove"), false,
 					false);
 

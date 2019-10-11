@@ -88,7 +88,7 @@ public class CommercePendingOrderClayTable
 				order.getOrderId(), themeDisplay);
 
 			ClayTableAction clayTableAction = new ClayTableAction(
-				editURL, StringPool.BLANK,
+				StringPool.BLANK, editURL, StringPool.BLANK,
 				LanguageUtil.get(httpServletRequest, "view"), false, false);
 
 			clayTableActions.add(clayTableAction);

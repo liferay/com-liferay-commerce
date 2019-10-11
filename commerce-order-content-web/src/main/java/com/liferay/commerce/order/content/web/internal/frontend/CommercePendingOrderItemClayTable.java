@@ -107,6 +107,7 @@ public class CommercePendingOrderItemClayTable
 			commerceOrder.isOpen()) {
 
 			ClayTableAction clayTableAction = new ClayTableAction(
+				StringPool.BLANK,
 				_getDeleteCommerceOrderItemURL(
 					orderItem.getOrderItemId(), themeDisplay),
 				StringPool.BLANK,
