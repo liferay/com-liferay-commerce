@@ -33,7 +33,11 @@ public abstract class BaseCommerceRegionsStarter
 	implements CommerceRegionsStarter {
 
 	@Override
-	public void start(ServiceContext serviceContext) throws Exception {
+	public void start(long userId) throws Exception {
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setUserId(userId);
+
 		CommerceCountry commerceCountry =
 			commerceCountryLocalService.fetchCommerceCountry(
 				serviceContext.getCompanyId(), getCountryIsoCode());
