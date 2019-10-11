@@ -160,7 +160,7 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 
 							<%= HtmlUtil.escape(finalPriceMoney.format(locale)) %>
 
-							<liferay-commerce:subscription-info
+							<commerce-ui:product-subscription-info
 								CPInstanceId="<%= commerceOrderItem.getCPInstanceId() %>"
 								showDuration="<%= false %>"
 							/>
