@@ -224,8 +224,8 @@ if ((cpDefinition != null) && (cpDefinition.getExpirationDate() != null)) {
 		const debounce = utilities.debounce;
 
 		var handleOnNameInput = function() {
-			var slug = slugify(nameInput.val());
-			urlInput.val(slug);
+			var slug = slugify(nameInput.value);
+			urlInput.value = slug;
 
 			urlTitleInputLocalized.updateInputLanguage(slug);
 		};
