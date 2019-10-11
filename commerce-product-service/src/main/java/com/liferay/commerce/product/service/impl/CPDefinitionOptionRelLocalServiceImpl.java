@@ -119,7 +119,6 @@ public class CPDefinitionOptionRelLocalServiceImpl
 
 		validate(cpDefinitionId, cpOption.getKey());
 
-		cpDefinitionOptionRel.setUuid(serviceContext.getUuid());
 		cpDefinitionOptionRel.setGroupId(groupId);
 		cpDefinitionOptionRel.setCompanyId(user.getCompanyId());
 		cpDefinitionOptionRel.setUserId(user.getUserId());

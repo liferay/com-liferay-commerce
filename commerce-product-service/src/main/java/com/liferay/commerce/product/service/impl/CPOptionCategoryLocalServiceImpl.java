@@ -78,7 +78,6 @@ public class CPOptionCategoryLocalServiceImpl
 		CPOptionCategory cpOptionCategory = cpOptionCategoryPersistence.create(
 			cpOptionCategoryId);
 
-		cpOptionCategory.setUuid(serviceContext.getUuid());
 		cpOptionCategory.setCompanyId(user.getCompanyId());
 		cpOptionCategory.setUserId(user.getUserId());
 		cpOptionCategory.setUserName(user.getFullName());

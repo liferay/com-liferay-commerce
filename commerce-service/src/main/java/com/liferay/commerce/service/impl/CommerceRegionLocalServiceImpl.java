@@ -55,7 +55,6 @@ public class CommerceRegionLocalServiceImpl
 		CommerceRegion commerceRegion = commerceRegionPersistence.create(
 			commerceRegionId);
 
-		commerceRegion.setUuid(serviceContext.getUuid());
 		commerceRegion.setCompanyId(user.getCompanyId());
 		commerceRegion.setUserId(user.getUserId());
 		commerceRegion.setUserName(user.getFullName());

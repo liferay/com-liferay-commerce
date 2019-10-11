@@ -77,7 +77,6 @@ public class CPSpecificationOptionLocalServiceImpl
 		CPSpecificationOption cpSpecificationOption =
 			cpSpecificationOptionPersistence.create(cpSpecificationOptionId);
 
-		cpSpecificationOption.setUuid(serviceContext.getUuid());
 		cpSpecificationOption.setCompanyId(user.getCompanyId());
 		cpSpecificationOption.setUserId(user.getUserId());
 		cpSpecificationOption.setUserName(user.getFullName());

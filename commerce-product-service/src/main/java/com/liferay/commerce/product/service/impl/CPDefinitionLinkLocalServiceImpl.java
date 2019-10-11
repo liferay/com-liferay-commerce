@@ -80,7 +80,6 @@ public class CPDefinitionLinkLocalServiceImpl
 		CPDefinitionLink cpDefinitionLink = cpDefinitionLinkPersistence.create(
 			cpDefinitionLinkId);
 
-		cpDefinitionLink.setUuid(serviceContext.getUuid());
 		cpDefinitionLink.setGroupId(cpDefinition.getGroupId());
 		cpDefinitionLink.setCompanyId(user.getCompanyId());
 		cpDefinitionLink.setUserId(user.getUserId());

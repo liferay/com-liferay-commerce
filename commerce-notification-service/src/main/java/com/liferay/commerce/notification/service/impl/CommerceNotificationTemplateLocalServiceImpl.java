@@ -62,7 +62,6 @@ public class CommerceNotificationTemplateLocalServiceImpl
 			commerceNotificationTemplatePersistence.create(
 				commerceNotificationTemplateId);
 
-		commerceNotificationTemplate.setUuid(serviceContext.getUuid());
 		commerceNotificationTemplate.setGroupId(groupId);
 		commerceNotificationTemplate.setCompanyId(user.getCompanyId());
 		commerceNotificationTemplate.setUserId(user.getUserId());

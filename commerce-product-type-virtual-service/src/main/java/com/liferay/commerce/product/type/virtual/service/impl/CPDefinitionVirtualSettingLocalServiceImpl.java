@@ -41,7 +41,6 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.util.Collections;
-import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
 
@@ -139,7 +138,6 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 			}
 		}
 
-		cpDefinitionVirtualSetting.setUuid(serviceContext.getUuid());
 		cpDefinitionVirtualSetting.setGroupId(groupId);
 		cpDefinitionVirtualSetting.setCompanyId(user.getCompanyId());
 		cpDefinitionVirtualSetting.setUserId(user.getUserId());
@@ -203,7 +201,7 @@ public class CPDefinitionVirtualSettingLocalServiceImpl
 			newCPDefinitionVirtualSetting.setUuid(PortalUUIDUtil.generate());
 			newCPDefinitionVirtualSetting.setCPDefinitionVirtualSettingId(
 				counterLocalService.increment());
-			newCPDefinitionVirtualSetting.setModifiedDate(new Date());
+
 			newCPDefinitionVirtualSetting.setClassPK(newCPDefinitionId);
 
 			cpDefinitionVirtualSettingLocalService.

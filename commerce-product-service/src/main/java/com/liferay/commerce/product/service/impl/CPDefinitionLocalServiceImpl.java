@@ -183,7 +183,6 @@ public class CPDefinitionLocalServiceImpl
 		CProduct cProduct = cProductLocalService.addCProduct(
 			groupId, userId, externalReferenceCode, new ServiceContext());
 
-		cpDefinition.setUuid(serviceContext.getUuid());
 		cpDefinition.setGroupId(groupId);
 		cpDefinition.setCompanyId(user.getCompanyId());
 		cpDefinition.setUserId(user.getUserId());
@@ -318,8 +317,6 @@ public class CPDefinitionLocalServiceImpl
 
 		newCPDefinition.setCPDefinitionId(newCPDefinitionId);
 
-		newCPDefinition.setModifiedDate(new Date());
-
 		newCPDefinition.setVersion(
 			cProductLocalService.increment(
 				originalCPDefinition.getCProductId()));
@@ -338,7 +335,7 @@ public class CPDefinitionLocalServiceImpl
 			AssetEntry newAssetEntry = (AssetEntry)assetEntry.clone();
 
 			newAssetEntry.setEntryId(counterLocalService.increment());
-			newAssetEntry.setModifiedDate(new Date());
+
 			newAssetEntry.setClassPK(newCPDefinitionId);
 
 			assetEntryLocalService.updateAssetEntry(newAssetEntry);
@@ -379,7 +376,7 @@ public class CPDefinitionLocalServiceImpl
 			newCPAttachmentFileEntry.setUuid(PortalUUIDUtil.generate());
 			newCPAttachmentFileEntry.setCPAttachmentFileEntryId(
 				counterLocalService.increment());
-			newCPAttachmentFileEntry.setModifiedDate(new Date());
+
 			newCPAttachmentFileEntry.setClassPK(newCPDefinitionId);
 
 			cpAttachmentFileEntryPersistence.update(newCPAttachmentFileEntry);
@@ -397,7 +394,7 @@ public class CPDefinitionLocalServiceImpl
 			newCPDefinitionLink.setUuid(PortalUUIDUtil.generate());
 			newCPDefinitionLink.setCPDefinitionLinkId(
 				counterLocalService.increment());
-			newCPDefinitionLink.setModifiedDate(new Date());
+
 			newCPDefinitionLink.setCPDefinitionId(newCPDefinitionId);
 
 			cpDefinitionLinkPersistence.update(newCPDefinitionLink);
@@ -422,7 +419,6 @@ public class CPDefinitionLocalServiceImpl
 			newCPDefinitionOptionRel.setCPDefinitionOptionRelId(
 				newCPDefinitionOptionRelId);
 
-			newCPDefinitionOptionRel.setModifiedDate(new Date());
 			newCPDefinitionOptionRel.setCPDefinitionId(newCPDefinitionId);
 
 			cpDefinitionOptionRelPersistence.update(newCPDefinitionOptionRel);
@@ -445,7 +441,7 @@ public class CPDefinitionLocalServiceImpl
 					PortalUUIDUtil.generate());
 				newCPDefinitionOptionValueRel.setCPDefinitionOptionValueRelId(
 					counterLocalService.increment());
-				newCPDefinitionOptionValueRel.setModifiedDate(new Date());
+
 				newCPDefinitionOptionValueRel.setCPDefinitionOptionRelId(
 					newCPDefinitionOptionRelId);
 
@@ -475,7 +471,7 @@ public class CPDefinitionLocalServiceImpl
 			newCPDefinitionSpecificationOptionValue.
 				setCPDefinitionSpecificationOptionValueId(
 					counterLocalService.increment());
-			newCPDefinitionSpecificationOptionValue.setModifiedDate(new Date());
+
 			newCPDefinitionSpecificationOptionValue.setCPDefinitionId(
 				newCPDefinitionId);
 
@@ -495,7 +491,7 @@ public class CPDefinitionLocalServiceImpl
 			newCPDisplayLayout.setUuid(PortalUUIDUtil.generate());
 			newCPDisplayLayout.setCPDisplayLayoutId(
 				counterLocalService.increment());
-			newCPDisplayLayout.setModifiedDate(new Date());
+
 			newCPDisplayLayout.setClassPK(newCPDefinitionId);
 
 			cpDisplayLayoutPersistence.update(newCPDisplayLayout);
@@ -511,7 +507,7 @@ public class CPDefinitionLocalServiceImpl
 
 			newCPInstance.setUuid(PortalUUIDUtil.generate());
 			newCPInstance.setCPInstanceId(counterLocalService.increment());
-			newCPInstance.setModifiedDate(new Date());
+
 			newCPInstance.setCPDefinitionId(newCPDefinitionId);
 
 			cpInstancePersistence.update(newCPInstance);
@@ -1505,10 +1501,6 @@ public class CPDefinitionLocalServiceImpl
 				cpDefinitionId);
 		}
 
-		Date now = new Date();
-
-		cpDefinition.setModifiedDate(serviceContext.getModifiedDate(now));
-
 		cpDefinition.setShippable(shippable);
 		cpDefinition.setFreeShipping(freeShipping);
 		cpDefinition.setShipSeparately(shipSeparately);
@@ -1545,8 +1537,6 @@ public class CPDefinitionLocalServiceImpl
 		}
 
 		Date modifiedDate = serviceContext.getModifiedDate(now);
-
-		cpDefinition.setModifiedDate(modifiedDate);
 
 		if (status == WorkflowConstants.STATUS_APPROVED) {
 			Date expirationDate = cpDefinition.getExpirationDate();
@@ -1612,10 +1602,6 @@ public class CPDefinitionLocalServiceImpl
 			cpDefinition = cpDefinitionLocalService.copyCPDefinition(
 				cpDefinitionId);
 		}
-
-		Date now = new Date();
-
-		cpDefinition.setModifiedDate(serviceContext.getModifiedDate(now));
 
 		cpDefinition.setSubscriptionEnabled(subscriptionEnabled);
 		cpDefinition.setSubscriptionLength(subscriptionLength);
