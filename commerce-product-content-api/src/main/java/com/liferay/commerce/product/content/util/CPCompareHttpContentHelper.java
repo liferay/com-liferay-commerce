@@ -35,7 +35,7 @@ import javax.portlet.RenderResponse;
  * @author Alessio Antonio Rendina
  */
 @ProviderType
-public interface CPCompareContentHelper {
+public interface CPCompareHttpContentHelper {
 
 	public Set<CPSpecificationOption> getCategorizedCPSpecificationOptions(
 			CPDataSourceResult cpDataSourceResult)

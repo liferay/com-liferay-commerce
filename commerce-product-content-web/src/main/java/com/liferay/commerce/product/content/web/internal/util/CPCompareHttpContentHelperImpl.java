@@ -16,7 +16,7 @@ package com.liferay.commerce.product.content.web.internal.util;
 
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.constants.CPPortletKeys;
-import com.liferay.commerce.product.content.util.CPCompareContentHelper;
+import com.liferay.commerce.product.content.util.CPCompareHttpContentHelper;
 import com.liferay.commerce.product.content.web.internal.configuration.CPCompareContentMiniPortletInstanceConfiguration;
 import com.liferay.commerce.product.content.web.internal.configuration.CPCompareContentPortletInstanceConfiguration;
 import com.liferay.commerce.product.data.source.CPDataSourceResult;
@@ -64,8 +64,9 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Alessio Antonio Rendina
  */
-@Component(immediate = true, service = CPCompareContentHelper.class)
-public class CPCompareContentHelperImpl implements CPCompareContentHelper {
+@Component(immediate = true, service = CPCompareHttpContentHelper.class)
+public class CPCompareHttpContentHelperImpl
+	implements CPCompareHttpContentHelper {
 
 	@Override
 	public Set<CPSpecificationOption> getCategorizedCPSpecificationOptions(

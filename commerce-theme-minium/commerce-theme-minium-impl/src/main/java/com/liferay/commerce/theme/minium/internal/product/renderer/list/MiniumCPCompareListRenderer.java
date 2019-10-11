@@ -23,7 +23,7 @@ import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.content.constants.CPContentWebKeys;
 import com.liferay.commerce.product.content.render.list.CPContentListRenderer;
-import com.liferay.commerce.product.content.util.CPCompareContentHelper;
+import com.liferay.commerce.product.content.util.CPCompareHttpContentHelper;
 import com.liferay.commerce.product.util.CPCompareHelperUtil;
 import com.liferay.commerce.product.util.CPDefinitionHttpHelper;
 import com.liferay.commerce.theme.minium.internal.product.model.ProductCompareModel;
@@ -96,8 +96,8 @@ public class MiniumCPCompareListRenderer implements CPContentListRenderer {
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		CPCompareContentHelper cpCompareContentHelper =
-			(CPCompareContentHelper)httpServletRequest.getAttribute(
+		CPCompareHttpContentHelper cpCompareHttpContentHelper =
+			(CPCompareHttpContentHelper)httpServletRequest.getAttribute(
 				CPContentWebKeys.CP_COMPARE_CONTENT_HELPER);
 
 		CommerceContext commerceContext =
@@ -112,7 +112,7 @@ public class MiniumCPCompareListRenderer implements CPContentListRenderer {
 			commerceAccountId = commerceAccount.getCommerceAccountId();
 		}
 
-		int limit = cpCompareContentHelper.getProductsLimit(
+		int limit = cpCompareHttpContentHelper.getProductsLimit(
 			themeDisplay.getPortletDisplay());
 
 		HttpServletRequest originalHttpServletRequest =
@@ -170,7 +170,7 @@ public class MiniumCPCompareListRenderer implements CPContentListRenderer {
 
 		context.put(
 			"compareProductsURL",
-			cpCompareContentHelper.getCompareProductsURL(themeDisplay));
+			cpCompareHttpContentHelper.getCompareProductsURL(themeDisplay));
 
 		context.put(
 			"portletNamespace",

@@ -17,15 +17,15 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CPCompareContentHelper cpCompareContentHelper = (CPCompareContentHelper)request.getAttribute(CPContentWebKeys.CP_COMPARE_CONTENT_HELPER);
+CPCompareHttpContentHelper cpCompareHttpContentHelper = (CPCompareHttpContentHelper)request.getAttribute(CPContentWebKeys.CP_COMPARE_CONTENT_HELPER);
 CPDataSourceResult cpDataSourceResult = (CPDataSourceResult)request.getAttribute(CPWebKeys.CP_DATA_SOURCE_RESULT);
 
 List<CPCatalogEntry> cpCatalogEntries = cpDataSourceResult.getCPCatalogEntries();
 
-Set<String> cpDefinitionOptionRelTitles = cpCompareContentHelper.getCPDefinitionOptionRelNames(cpDataSourceResult, locale);
-Set<CPSpecificationOption> cpSpecificationOptions = cpCompareContentHelper.getCPSpecificationOptions(cpDataSourceResult);
-Set<CPSpecificationOption> categorizedCPSpecificationOptions = cpCompareContentHelper.getCategorizedCPSpecificationOptions(cpDataSourceResult);
-List<CPOptionCategory> cpOptionCategories = cpCompareContentHelper.getCPOptionCategories(company.getCompanyId());
+Set<String> cpDefinitionOptionRelTitles = cpCompareHttpContentHelper.getCPDefinitionOptionRelNames(cpDataSourceResult, locale);
+Set<CPSpecificationOption> cpSpecificationOptions = cpCompareHttpContentHelper.getCPSpecificationOptions(cpDataSourceResult);
+Set<CPSpecificationOption> categorizedCPSpecificationOptions = cpCompareHttpContentHelper.getCategorizedCPSpecificationOptions(cpDataSourceResult);
+List<CPOptionCategory> cpOptionCategories = cpCompareHttpContentHelper.getCPOptionCategories(company.getCompanyId());
 %>
 
 <c:if test="<%= !cpCatalogEntries.isEmpty() %>">
@@ -73,7 +73,7 @@ List<CPOptionCategory> cpOptionCategories = cpCompareContentHelper.getCPOptionCa
 						%>
 
 							<td class="commerce-compare-table__value">
-								<%= HtmlUtil.escape(cpCompareContentHelper.getCPDefinitionOptionValueRels(cpCatalogEntry, cpDefinitionOptionRelTitle, locale)) %>
+								<%= HtmlUtil.escape(cpCompareHttpContentHelper.getCPDefinitionOptionValueRels(cpCatalogEntry, cpDefinitionOptionRelTitle, locale)) %>
 							</td>
 
 						<%
@@ -97,7 +97,7 @@ List<CPOptionCategory> cpOptionCategories = cpCompareContentHelper.getCPOptionCa
 			</tr>
 
 			<%
-			String dimensionCPMeasurementUnitName = cpCompareContentHelper.getDimensionCPMeasurementUnitName(company.getCompanyId(), locale);
+			String dimensionCPMeasurementUnitName = cpCompareHttpContentHelper.getDimensionCPMeasurementUnitName(company.getCompanyId(), locale);
 
 			if (Validator.isNotNull(dimensionCPMeasurementUnitName)) {
 				dimensionCPMeasurementUnitName = StringPool.OPEN_PARENTHESIS + dimensionCPMeasurementUnitName + StringPool.CLOSE_PARENTHESIS;
@@ -164,7 +164,7 @@ List<CPOptionCategory> cpOptionCategories = cpCompareContentHelper.getCPOptionCa
 						%>
 
 							<td class="commerce-compare-table__value">
-								<%= HtmlUtil.escape(cpCompareContentHelper.getCPDefinitionSpecificationOptionValue(cpCatalogEntry.getCPDefinitionId(), cpSpecificationOption.getCPSpecificationOptionId(), locale)) %>
+								<%= HtmlUtil.escape(cpCompareHttpContentHelper.getCPDefinitionSpecificationOptionValue(cpCatalogEntry.getCPDefinitionId(), cpSpecificationOption.getCPSpecificationOptionId(), locale)) %>
 							</td>
 
 						<%
@@ -183,7 +183,7 @@ List<CPOptionCategory> cpOptionCategories = cpCompareContentHelper.getCPOptionCa
 			for (CPOptionCategory cpOptionCategory : cpOptionCategories) {
 			%>
 
-				<c:if test="<%= cpCompareContentHelper.hasCategorizedCPDefinitionSpecificationOptionValues(cpDataSourceResult, cpOptionCategory.getCPOptionCategoryId()) %>">
+				<c:if test="<%= cpCompareHttpContentHelper.hasCategorizedCPDefinitionSpecificationOptionValues(cpDataSourceResult, cpOptionCategory.getCPOptionCategoryId()) %>">
 					<tr class="commerce-compare-table__separator">
 						<td colspan="<%= cpCatalogEntries.size() + 1 %>">
 							<span class="commerce-compare-table__title">
@@ -209,7 +209,7 @@ List<CPOptionCategory> cpOptionCategories = cpCompareContentHelper.getCPOptionCa
 							%>
 
 								<td class="commerce-compare-table__value">
-									<%= HtmlUtil.escape(cpCompareContentHelper.getCPDefinitionSpecificationOptionValue(cpCatalogEntry.getCPDefinitionId(), cpSpecificationOption.getCPSpecificationOptionId(), locale)) %>
+									<%= HtmlUtil.escape(cpCompareHttpContentHelper.getCPDefinitionSpecificationOptionValue(cpCatalogEntry.getCPDefinitionId(), cpSpecificationOption.getCPSpecificationOptionId(), locale)) %>
 								</td>
 
 							<%

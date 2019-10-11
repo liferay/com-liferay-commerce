@@ -17,7 +17,7 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CPCompareContentHelper cpCompareContentHelper = (CPCompareContentHelper)request.getAttribute(CPContentWebKeys.CP_COMPARE_CONTENT_HELPER);
+CPCompareHttpContentHelper cpCompareHttpContentHelper = (CPCompareHttpContentHelper)request.getAttribute(CPContentWebKeys.CP_COMPARE_CONTENT_HELPER);
 CPDataSourceResult cpDataSourceResult = (CPDataSourceResult)request.getAttribute(CPWebKeys.CP_DATA_SOURCE_RESULT);
 
 List<CPCatalogEntry> cpCatalogEntries = cpDataSourceResult.getCPCatalogEntries();
@@ -59,7 +59,7 @@ List<Long> cpDefinitionIds = CPCompareHelperUtil.getCPDefinitionIds(commerceCont
 
 				<%
 				for (CPCatalogEntry cpCatalogEntry : cpCatalogEntries) {
-					request.setAttribute("cpContentListRenderer-deleteCompareProductURL", cpCompareContentHelper.getDeleteCompareProductURL(cpCatalogEntry.getCPDefinitionId(), renderRequest, renderResponse));
+					request.setAttribute("cpContentListRenderer-deleteCompareProductURL", cpCompareHttpContentHelper.getDeleteCompareProductURL(cpCatalogEntry.getCPDefinitionId(), renderRequest, renderResponse));
 				%>
 
 					<li class="card-page-item">
@@ -73,10 +73,10 @@ List<Long> cpDefinitionIds = CPCompareHelperUtil.getCPDefinitionIds(commerceCont
 				%>
 
 				<li class="card-page-item card-page-item-shrink">
-					<a class="btn btn-link" href="<%= HtmlUtil.escape(cpCompareContentHelper.getClearCompareProductsURL(renderRequest, renderResponse)) %>"><liferay-ui:message key="clear-all" /></a>
+					<a class="btn btn-link" href="<%= HtmlUtil.escape(cpCompareHttpContentHelper.getClearCompareProductsURL(renderRequest, renderResponse)) %>"><liferay-ui:message key="clear-all" /></a>
 				</li>
 				<li class="card-page-item card-page-item-shrink">
-					<aui:button cssClass="btn-primary" href="<%= HtmlUtil.escape(cpCompareContentHelper.getCompareProductsURL(themeDisplay)) %>" value="compare" />
+					<aui:button cssClass="btn-primary" href="<%= HtmlUtil.escape(cpCompareHttpContentHelper.getCompareProductsURL(themeDisplay)) %>" value="compare" />
 				</li>
 			</ul>
 		</div>
