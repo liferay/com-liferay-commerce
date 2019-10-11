@@ -27,11 +27,11 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.service.ResourceActionLocalService;
 import com.liferay.portal.kernel.service.ResourcePermissionLocalService;
 import com.liferay.portal.kernel.service.RoleLocalService;
-import com.liferay.portal.kernel.service.ServiceContext;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import org.osgi.service.component.annotations.Component;
@@ -46,53 +46,32 @@ public class CommerceAccountRoleHelperImpl
 	implements CommerceAccountRoleHelper {
 
 	@Override
-	public void checkCommerceAccountRoles(ServiceContext serviceContext)
+	public void checkCommerceAccountRoles(
+			long companyId, long userId, Locale locale)
 		throws PortalException {
 
 		_checkRole(
-			CommerceAccountConstants.ACCOUNT_ADMINISTRATOR_ROLE_NAME,
-			serviceContext);
+			CommerceAccountConstants.ACCOUNT_ADMINISTRATOR_ROLE_NAME, companyId,
+			userId, locale);
 	}
 
-	private void _checkRole(String name, ServiceContext serviceContext)
+	private void _checkRole(
+			String name, long companyId, long userId, Locale locale)
 		throws PortalException {
 
-		Role role = _roleLocalService.fetchRole(
-			serviceContext.getCompanyId(), name);
+		Role role = _roleLocalService.fetchRole(companyId, name);
 
 		if (role == null) {
 			role = _roleLocalService.addRole(
-				serviceContext.getUserId(), null, 0, name,
-				Collections.singletonMap(serviceContext.getLocale(), name),
+				userId, null, 0, name, Collections.singletonMap(locale, name),
 				Collections.emptyMap(), RoleConstants.TYPE_SITE,
-				StringPool.BLANK, serviceContext);
+				StringPool.BLANK, null);
 		}
 
-		_setRolePermissions(role, serviceContext);
+		_setRolePermissions(role);
 	}
 
-	private void _setRolePermissions(
-			Role role, Map<String, String[]> resourceActionIds,
-			ServiceContext serviceContext)
-		throws PortalException {
-
-		for (Map.Entry<String, String[]> entry : resourceActionIds.entrySet()) {
-			_resourceActionLocalService.checkResourceActions(
-				entry.getKey(), Arrays.asList(entry.getValue()));
-
-			for (String actionId : entry.getValue()) {
-				_resourcePermissionLocalService.addResourcePermission(
-					serviceContext.getCompanyId(), entry.getKey(),
-					ResourceConstants.SCOPE_GROUP_TEMPLATE,
-					String.valueOf(GroupConstants.DEFAULT_PARENT_GROUP_ID),
-					role.getRoleId(), actionId);
-			}
-		}
-	}
-
-	private void _setRolePermissions(Role role, ServiceContext serviceContext)
-		throws PortalException {
-
+	private void _setRolePermissions(Role role) throws PortalException {
 		Map<String, String[]> resourceActionIds = new HashMap<>();
 
 		String name = role.getName();
@@ -119,7 +98,25 @@ public class CommerceAccountRoleHelperImpl
 				});
 		}
 
-		_setRolePermissions(role, resourceActionIds, serviceContext);
+		_setRolePermissions(role, resourceActionIds, role.getCompanyId());
+	}
+
+	private void _setRolePermissions(
+			Role role, Map<String, String[]> resourceActionIds, long companyId)
+		throws PortalException {
+
+		for (Map.Entry<String, String[]> entry : resourceActionIds.entrySet()) {
+			_resourceActionLocalService.checkResourceActions(
+				entry.getKey(), Arrays.asList(entry.getValue()));
+
+			for (String actionId : entry.getValue()) {
+				_resourcePermissionLocalService.addResourcePermission(
+					companyId, entry.getKey(),
+					ResourceConstants.SCOPE_GROUP_TEMPLATE,
+					String.valueOf(GroupConstants.DEFAULT_PARENT_GROUP_ID),
+					role.getRoleId(), actionId);
+			}
+		}
 	}
 
 	@Reference

@@ -17,7 +17,8 @@ package com.liferay.commerce.account.util;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.service.ServiceContext;
+
+import java.util.Locale;
 
 /**
  * @author Marco Leo
@@ -26,7 +27,8 @@ import com.liferay.portal.kernel.service.ServiceContext;
 @ProviderType
 public interface CommerceAccountRoleHelper {
 
-	public void checkCommerceAccountRoles(ServiceContext serviceContext)
+	public void checkCommerceAccountRoles(
+			long companyId, long userId, Locale locale)
 		throws PortalException;
 
 }

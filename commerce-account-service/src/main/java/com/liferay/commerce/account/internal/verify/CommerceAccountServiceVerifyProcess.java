@@ -75,7 +75,8 @@ public class CommerceAccountServiceVerifyProcess extends VerifyProcess {
 				serviceContext.setUuid(PortalUUIDUtil.generate());
 
 				_commerceAccountRoleHelper.checkCommerceAccountRoles(
-					serviceContext);
+					serviceContext.getCompanyId(), serviceContext.getUserId(),
+					serviceContext.getLocale());
 			}
 		}
 	}

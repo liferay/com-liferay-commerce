@@ -101,7 +101,9 @@ public class CommerceAccountLocalServiceImpl
 
 		// Check commerce account roles
 
-		_commerceAccountRoleHelper.checkCommerceAccountRoles(serviceContext);
+		_commerceAccountRoleHelper.checkCommerceAccountRoles(
+			serviceContext.getCompanyId(), serviceContext.getUserId(),
+			serviceContext.getLocale());
 
 		Role role = roleLocalService.getRole(
 			serviceContext.getCompanyId(),

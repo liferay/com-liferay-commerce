@@ -138,7 +138,8 @@ public class AccountsCommerceHealthStatus implements CommerceHealthStatus {
 		@Override
 		public Object call() throws Exception {
 			_commerceAccountRoleHelper.checkCommerceAccountRoles(
-				_serviceContext);
+				_serviceContext.getCompanyId(), _serviceContext.getUserId(),
+				_serviceContext.getLocale());
 
 			return null;
 		}
