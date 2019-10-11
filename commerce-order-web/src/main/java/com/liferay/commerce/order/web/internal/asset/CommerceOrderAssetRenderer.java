@@ -55,12 +55,10 @@ public class CommerceOrderAssetRenderer
 
 	public CommerceOrderAssetRenderer(
 		CommerceChannelLocalService commerceChannelLocalService,
-		CommerceOrder commerceOrder,
-		CommerceOrderPermission commerceOrderPermission) {
+		CommerceOrder commerceOrder) {
 
 		_commerceChannelLocalService = commerceChannelLocalService;
 		_commerceOrder = commerceOrder;
-		_commerceOrderPermission = commerceOrderPermission;
 	}
 
 	@Override
@@ -176,7 +174,7 @@ public class CommerceOrderAssetRenderer
 	public boolean hasEditPermission(PermissionChecker permissionChecker)
 		throws PortalException {
 
-		return _commerceOrderPermission.contains(
+		return CommerceOrderPermission.contains(
 			permissionChecker, _commerceOrder, ActionKeys.UPDATE);
 	}
 
@@ -184,7 +182,7 @@ public class CommerceOrderAssetRenderer
 	public boolean hasViewPermission(PermissionChecker permissionChecker)
 		throws PortalException {
 
-		return _commerceOrderPermission.contains(
+		return CommerceOrderPermission.contains(
 			permissionChecker, _commerceOrder, ActionKeys.VIEW);
 	}
 
@@ -207,6 +205,5 @@ public class CommerceOrderAssetRenderer
 
 	private final CommerceChannelLocalService _commerceChannelLocalService;
 	private final CommerceOrder _commerceOrder;
-	private final CommerceOrderPermission _commerceOrderPermission;
 
 }
