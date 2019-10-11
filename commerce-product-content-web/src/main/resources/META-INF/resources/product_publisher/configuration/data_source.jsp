@@ -24,11 +24,11 @@ CPPublisherConfigurationDisplayContext cpPublisherConfigurationDisplayContext = 
 	<aui:select name="preferences--dataSource--" showEmptyOption="<%= true %>">
 
 		<%
-		for (CPDataSource cpDataSource : cpPublisherConfigurationDisplayContext.getCPDataSources()) {
+		for (CPHttpDataSource cpHttpDataSource : cpPublisherConfigurationDisplayContext.getCPHttpDataSources()) {
 			String selectedDataSource = cpPublisherConfigurationDisplayContext.getDataSource();
 		%>
 
-			<aui:option label="<%= HtmlUtil.escape(cpDataSource.getLabel(locale)) %>" selected="<%= selectedDataSource.equals(cpDataSource.getName()) %>" value="<%= cpDataSource.getName() %>" />
+			<aui:option label="<%= HtmlUtil.escape(cpHttpDataSource.getLabel(locale)) %>" selected="<%= selectedDataSource.equals(cpHttpDataSource.getName()) %>" value="<%= cpHttpDataSource.getName() %>" />
 
 		<%
 		}

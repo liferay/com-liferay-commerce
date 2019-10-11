@@ -16,16 +16,17 @@ package com.liferay.commerce.product.internal.data.source;
 
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.catalog.CPQuery;
+import com.liferay.commerce.product.configuration.CPDefinitionLinkTypeConfiguration;
 import com.liferay.commerce.product.constants.CPWebKeys;
-import com.liferay.commerce.product.data.source.CPDataSource;
 import com.liferay.commerce.product.data.source.CPDataSourceResult;
+import com.liferay.commerce.product.data.source.CPHttpDataSource;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.petra.string.StringPool;
-import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.util.Portal;
-import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.io.Serializable;
@@ -35,14 +36,36 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.ResourceBundle;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.osgi.service.component.annotations.Activate;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Modified;
+import org.osgi.service.component.annotations.Reference;
+
 /**
- * @author Ethan Bustad
+ * @author Marco Leo
  */
-public abstract class BaseCPDataSourceAssetEntryImpl implements CPDataSource {
+@Component(
+	configurationPid = "com.liferay.commerce.product.configuration.CPDefinitionLinkTypeConfiguration",
+	immediate = true,
+	property = "commerce.product.data.source.name=definitionLinkDataSource",
+	service = CPHttpDataSource.class
+)
+public class CPHttpDataSourceDefinitionLinkTypeImpl
+	implements CPHttpDataSource {
+
+	@Override
+	public String getLabel(Locale locale) {
+		return LanguageUtil.get(locale, "product-relations") +
+			StringPool.SPACE + _cpDefinitionLinkTypeConfiguration.type();
+	}
+
+	@Override
+	public String getName() {
+		return _cpDefinitionLinkTypeConfiguration.type();
+	}
 
 	@Override
 	public CPDataSourceResult getResult(
@@ -57,13 +80,15 @@ public abstract class BaseCPDataSourceAssetEntryImpl implements CPDataSource {
 			return new CPDataSourceResult(new ArrayList<>(), 0);
 		}
 
-		long groupId = portal.getScopeGroupId(httpServletRequest);
-
 		SearchContext searchContext = new SearchContext();
 
 		Map<String, Serializable> attributes = new HashMap<>();
 
 		attributes.put(Field.STATUS, WorkflowConstants.STATUS_APPROVED);
+		attributes.put(
+			"definitionLinkCPDefinitionId", cpCatalogEntry.getCPDefinitionId());
+		attributes.put(
+			"definitionLinkType", _cpDefinitionLinkTypeConfiguration.type());
 		attributes.put(
 			"excludedCPDefinitionId", cpCatalogEntry.getCPDefinitionId());
 
@@ -75,25 +100,30 @@ public abstract class BaseCPDataSourceAssetEntryImpl implements CPDataSource {
 
 		searchContext.setAttributes(attributes);
 
-		searchContext.setCompanyId(portal.getCompanyId(httpServletRequest));
+		searchContext.setCompanyId(_portal.getCompanyId(httpServletRequest));
 
 		searchContext.setKeywords(StringPool.STAR);
 
-		CPQuery cpQuery = getCPQuery(cpCatalogEntry.getCPDefinitionId());
-
-		return cpDefinitionHelper.search(
-			groupId, searchContext, cpQuery, start, end);
+		return _cpDefinitionHelper.search(
+			_portal.getScopeGroupId(httpServletRequest), searchContext,
+			new CPQuery(), start, end);
 	}
 
-	protected abstract CPQuery getCPQuery(long cpDefinitionId)
-		throws PortalException;
-
-	protected ResourceBundle getResourceBundle(Locale locale) {
-		return ResourceBundleUtil.getBundle(
-			"content.Language", locale, getClass());
+	@Activate
+	@Modified
+	protected void activate(Map<String, Object> properties) {
+		_cpDefinitionLinkTypeConfiguration =
+			ConfigurableUtil.createConfigurable(
+				CPDefinitionLinkTypeConfiguration.class, properties);
 	}
 
-	protected CPDefinitionHelper cpDefinitionHelper;
-	protected Portal portal;
+	@Reference
+	private CPDefinitionHelper _cpDefinitionHelper;
+
+	private volatile CPDefinitionLinkTypeConfiguration
+		_cpDefinitionLinkTypeConfiguration;
+
+	@Reference
+	private Portal _portal;
 
 }

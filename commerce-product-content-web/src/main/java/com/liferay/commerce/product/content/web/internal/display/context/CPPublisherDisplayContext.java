@@ -19,9 +19,9 @@ import com.liferay.commerce.product.catalog.CPQuery;
 import com.liferay.commerce.product.content.render.list.CPContentListRendererRegistry;
 import com.liferay.commerce.product.content.render.list.entry.CPContentListEntryRendererRegistry;
 import com.liferay.commerce.product.content.web.internal.util.CPPublisherWebHelper;
-import com.liferay.commerce.product.data.source.CPDataSource;
 import com.liferay.commerce.product.data.source.CPDataSourceRegistry;
 import com.liferay.commerce.product.data.source.CPDataSourceResult;
+import com.liferay.commerce.product.data.source.CPHttpDataSource;
 import com.liferay.commerce.product.type.CPType;
 import com.liferay.commerce.product.type.CPTypeServicesTracker;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
@@ -93,15 +93,15 @@ public class CPPublisherDisplayContext extends BaseCPPublisherDisplayContext {
 		else if (isSelectionStyleDataSource()) {
 			String dataSourceName = getDataSource();
 
-			CPDataSource cpDataSource = _cpDataSourceRegistry.getCPDataSource(
-				dataSourceName);
+			CPHttpDataSource cpHttpDataSource =
+				_cpDataSourceRegistry.getCPHttpDataSource(dataSourceName);
 
-			if (cpDataSource == null) {
+			if (cpHttpDataSource == null) {
 				cpDataSourceResult = new CPDataSourceResult(
 					new ArrayList<>(), 0);
 			}
 			else {
-				cpDataSourceResult = cpDataSource.getResult(
+				cpDataSourceResult = cpHttpDataSource.getResult(
 					cpContentRequestHelper.getRequest(),
 					_searchContainer.getStart(), _searchContainer.getEnd());
 			}

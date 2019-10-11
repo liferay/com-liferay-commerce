@@ -14,8 +14,8 @@
 
 package com.liferay.commerce.product.internal.data.source;
 
-import com.liferay.commerce.product.data.source.CPDataSource;
 import com.liferay.commerce.product.data.source.CPDataSourceRegistry;
+import com.liferay.commerce.product.data.source.CPHttpDataSource;
 import com.liferay.osgi.service.tracker.collections.list.ServiceTrackerList;
 import com.liferay.osgi.service.tracker.collections.list.ServiceTrackerListFactory;
 import com.liferay.portal.kernel.log.Log;
@@ -41,18 +41,31 @@ import org.osgi.service.component.annotations.Reference;
 public class CPDataSourceRegistryImpl implements CPDataSourceRegistry {
 
 	@Override
-	public CPDataSource getCPDataSource(String key) {
+	public List<CPHttpDataSource> getCPHttpDataSources() {
+		List<CPHttpDataSource> cpHttpDataSources = new ArrayList<>();
+
+		for (CPHttpDataSource cpHttpDataSource : _serviceTrackerList) {
+			if (Validator.isNotNull(cpHttpDataSource.getName())) {
+				cpHttpDataSources.add(cpHttpDataSource);
+			}
+		}
+
+		return Collections.unmodifiableList(cpHttpDataSources);
+	}
+
+	@Override
+	public CPHttpDataSource getCPHttpDataSource(String key) {
 		if (Validator.isNull(key)) {
 			return null;
 		}
 
-		Iterator<CPDataSource> iterator = _serviceTrackerList.iterator();
+		Iterator<CPHttpDataSource> iterator = _serviceTrackerList.iterator();
 
 		while (iterator.hasNext()) {
-			CPDataSource cpDataSource = iterator.next();
+			CPHttpDataSource cpHttpDataSource = iterator.next();
 
-			if (key.equals(cpDataSource.getName())) {
-				return cpDataSource;
+			if (key.equals(cpHttpDataSource.getName())) {
+				return cpHttpDataSource;
 			}
 		}
 
@@ -64,23 +77,10 @@ public class CPDataSourceRegistryImpl implements CPDataSourceRegistry {
 		return null;
 	}
 
-	@Override
-	public List<CPDataSource> getCPDataSources() {
-		List<CPDataSource> cpDataSources = new ArrayList<>();
-
-		for (CPDataSource cpDataSource : _serviceTrackerList) {
-			if (Validator.isNotNull(cpDataSource.getName())) {
-				cpDataSources.add(cpDataSource);
-			}
-		}
-
-		return Collections.unmodifiableList(cpDataSources);
-	}
-
 	@Activate
 	protected void activate(BundleContext bundleContext) {
 		_serviceTrackerList = ServiceTrackerListFactory.open(
-			bundleContext, CPDataSource.class);
+			bundleContext, CPHttpDataSource.class);
 	}
 
 	@Deactivate
@@ -94,6 +94,7 @@ public class CPDataSourceRegistryImpl implements CPDataSourceRegistry {
 	@Reference
 	private Portal _portal;
 
-	private ServiceTrackerList<CPDataSource, CPDataSource> _serviceTrackerList;
+	private ServiceTrackerList<CPHttpDataSource, CPHttpDataSource>
+		_serviceTrackerList;
 
 }

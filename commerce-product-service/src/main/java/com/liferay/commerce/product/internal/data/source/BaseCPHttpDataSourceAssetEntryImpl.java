@@ -16,17 +16,16 @@ package com.liferay.commerce.product.internal.data.source;
 
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.catalog.CPQuery;
-import com.liferay.commerce.product.configuration.CPDefinitionLinkTypeConfiguration;
 import com.liferay.commerce.product.constants.CPWebKeys;
-import com.liferay.commerce.product.data.source.CPDataSource;
 import com.liferay.commerce.product.data.source.CPDataSourceResult;
+import com.liferay.commerce.product.data.source.CPHttpDataSource;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.petra.string.StringPool;
-import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
-import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.util.Portal;
+import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.io.Serializable;
@@ -36,35 +35,15 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.osgi.service.component.annotations.Activate;
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Modified;
-import org.osgi.service.component.annotations.Reference;
-
 /**
- * @author Marco Leo
+ * @author Ethan Bustad
  */
-@Component(
-	configurationPid = "com.liferay.commerce.product.configuration.CPDefinitionLinkTypeConfiguration",
-	immediate = true,
-	property = "commerce.product.data.source.name=definitionLinkDataSource",
-	service = CPDataSource.class
-)
-public class CPDataSourceDefinitionLinkTypeImpl implements CPDataSource {
-
-	@Override
-	public String getLabel(Locale locale) {
-		return LanguageUtil.get(locale, "product-relations") +
-			StringPool.SPACE + _cpDefinitionLinkTypeConfiguration.type();
-	}
-
-	@Override
-	public String getName() {
-		return _cpDefinitionLinkTypeConfiguration.type();
-	}
+public abstract class BaseCPHttpDataSourceAssetEntryImpl
+	implements CPHttpDataSource {
 
 	@Override
 	public CPDataSourceResult getResult(
@@ -79,15 +58,13 @@ public class CPDataSourceDefinitionLinkTypeImpl implements CPDataSource {
 			return new CPDataSourceResult(new ArrayList<>(), 0);
 		}
 
+		long groupId = portal.getScopeGroupId(httpServletRequest);
+
 		SearchContext searchContext = new SearchContext();
 
 		Map<String, Serializable> attributes = new HashMap<>();
 
 		attributes.put(Field.STATUS, WorkflowConstants.STATUS_APPROVED);
-		attributes.put(
-			"definitionLinkCPDefinitionId", cpCatalogEntry.getCPDefinitionId());
-		attributes.put(
-			"definitionLinkType", _cpDefinitionLinkTypeConfiguration.type());
 		attributes.put(
 			"excludedCPDefinitionId", cpCatalogEntry.getCPDefinitionId());
 
@@ -99,30 +76,25 @@ public class CPDataSourceDefinitionLinkTypeImpl implements CPDataSource {
 
 		searchContext.setAttributes(attributes);
 
-		searchContext.setCompanyId(_portal.getCompanyId(httpServletRequest));
+		searchContext.setCompanyId(portal.getCompanyId(httpServletRequest));
 
 		searchContext.setKeywords(StringPool.STAR);
 
-		return _cpDefinitionHelper.search(
-			_portal.getScopeGroupId(httpServletRequest), searchContext,
-			new CPQuery(), start, end);
+		CPQuery cpQuery = getCPQuery(cpCatalogEntry.getCPDefinitionId());
+
+		return cpDefinitionHelper.search(
+			groupId, searchContext, cpQuery, start, end);
 	}
 
-	@Activate
-	@Modified
-	protected void activate(Map<String, Object> properties) {
-		_cpDefinitionLinkTypeConfiguration =
-			ConfigurableUtil.createConfigurable(
-				CPDefinitionLinkTypeConfiguration.class, properties);
+	protected abstract CPQuery getCPQuery(long cpDefinitionId)
+		throws PortalException;
+
+	protected ResourceBundle getResourceBundle(Locale locale) {
+		return ResourceBundleUtil.getBundle(
+			"content.Language", locale, getClass());
 	}
 
-	@Reference
-	private CPDefinitionHelper _cpDefinitionHelper;
-
-	private volatile CPDefinitionLinkTypeConfiguration
-		_cpDefinitionLinkTypeConfiguration;
-
-	@Reference
-	private Portal _portal;
+	protected CPDefinitionHelper cpDefinitionHelper;
+	protected Portal portal;
 
 }

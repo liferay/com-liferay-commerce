@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author Marco Leo
  */
 @ProviderType
-public interface CPDataSource {
+public interface CPHttpDataSource {
 
 	public String getLabel(Locale locale);
 

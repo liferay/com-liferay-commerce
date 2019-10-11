@@ -18,7 +18,7 @@ import com.liferay.asset.kernel.model.AssetEntry;
 import com.liferay.asset.kernel.model.AssetTag;
 import com.liferay.asset.kernel.service.AssetEntryLocalService;
 import com.liferay.commerce.product.catalog.CPQuery;
-import com.liferay.commerce.product.data.source.CPDataSource;
+import com.liferay.commerce.product.data.source.CPHttpDataSource;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -36,11 +36,11 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(
 	immediate = true,
-	property = "commerce.product.data.source.name=" + CPDataSourceAssetCategoriesAndTagsImpl.NAME,
-	service = CPDataSource.class
+	property = "commerce.product.data.source.name=" + CPHttpDataSourceAssetCategoriesAndTagsImpl.NAME,
+	service = CPHttpDataSource.class
 )
-public class CPDataSourceAssetCategoriesAndTagsImpl
-	extends BaseCPDataSourceAssetEntryImpl {
+public class CPHttpDataSourceAssetCategoriesAndTagsImpl
+	extends BaseCPHttpDataSourceAssetEntryImpl {
 
 	public static final String NAME = "assetCategoriesAndTagsDataSource";
 
