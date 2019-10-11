@@ -9,7 +9,7 @@ const Modal = props => {
 	const [visible, setVisible] = useState(props.visible || false);
 
 	function handleOpenEvent(data) {
-		if(props.id === data.id) {
+		if (props.id === data.id) {
 			setVisible(true);
 		}
 	}
@@ -58,7 +58,7 @@ const Modal = props => {
 			Liferay.on(OPEN, handleOpenEvent);
 			Liferay.on('destroyPortlet', cleanUpListeners);
 		}
-	}, [props.id, props.portletId]);
+	}, [handleOpenEvent, props.id, props.portletId]);
 
 	function _handleIframeLoad() {
 		setIframeLoadingCounter(iframeLoadingCounter + 1);
