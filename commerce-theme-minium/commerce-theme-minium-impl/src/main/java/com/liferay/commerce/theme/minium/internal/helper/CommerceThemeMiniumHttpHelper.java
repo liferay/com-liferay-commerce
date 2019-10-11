@@ -18,7 +18,7 @@ import com.liferay.application.list.PanelAppRegistry;
 import com.liferay.application.list.PanelCategoryRegistry;
 import com.liferay.application.list.constants.PanelCategoryKeys;
 import com.liferay.application.list.display.context.logic.PanelCategoryHelper;
-import com.liferay.commerce.account.util.CommerceAccountHelper;
+import com.liferay.commerce.account.util.CommerceAccountHttpHelper;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.UserNotificationEvent;
@@ -47,7 +47,7 @@ public class CommerceThemeMiniumHttpHelper {
 			HttpServletRequest httpServletRequest)
 		throws PortalException {
 
-		return _commerceAccountHelper.getAccountManagementPortletURL(
+		return _commerceAccountHttpHelper.getAccountManagementPortletURL(
 			httpServletRequest);
 	}
 
@@ -78,7 +78,7 @@ public class CommerceThemeMiniumHttpHelper {
 	}
 
 	@Reference
-	private CommerceAccountHelper _commerceAccountHelper;
+	private CommerceAccountHttpHelper _commerceAccountHttpHelper;
 
 	@Reference
 	private PanelAppRegistry _panelAppRegistry;

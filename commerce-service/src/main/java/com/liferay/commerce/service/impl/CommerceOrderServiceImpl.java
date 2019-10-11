@@ -17,7 +17,7 @@ package com.liferay.commerce.service.impl;
 import com.liferay.commerce.account.constants.CommerceAccountActionKeys;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountLocalService;
-import com.liferay.commerce.account.util.CommerceAccountHelper;
+import com.liferay.commerce.account.util.CommerceAccountHttpHelper;
 import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.constants.CommerceOrderActionKeys;
 import com.liferay.commerce.constants.CommerceOrderConstants;
@@ -824,7 +824,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 				getPermissionChecker(),
 				CommerceAccountActionKeys.MANAGE_ALL_ACCOUNTS)) {
 
-			return _commerceAccountHelper.getUserCommerceAccountIds(
+			return _commerceAccountHttpHelper.getUserCommerceAccountIds(
 				getUserId(), groupId);
 		}
 
@@ -842,8 +842,8 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 				CommerceOrderServiceImpl.class, "_portletResourcePermission",
 				CommerceOrderConstants.RESOURCE_NAME);
 
-	@ServiceReference(type = CommerceAccountHelper.class)
-	private CommerceAccountHelper _commerceAccountHelper;
+	@ServiceReference(type = CommerceAccountHttpHelper.class)
+	private CommerceAccountHttpHelper _commerceAccountHttpHelper;
 
 	@ServiceReference(type = CommerceAccountLocalService.class)
 	private CommerceAccountLocalService _commerceAccountLocalService;

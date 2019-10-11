@@ -15,7 +15,7 @@
 package com.liferay.commerce.product.internal.util;
 
 import com.liferay.commerce.account.model.CommerceAccount;
-import com.liferay.commerce.account.util.CommerceAccountHelper;
+import com.liferay.commerce.account.util.CommerceAccountHttpHelper;
 import com.liferay.commerce.media.CommerceHttpMediaResolver;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.catalog.CPSku;
@@ -595,7 +595,7 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 		Locale locale = _portal.getLocale(renderRequest);
 
 		CommerceAccount commerceAccount =
-			_commerceAccountHelper.getCurrentCommerceAccount(
+			_commerceAccountHttpHelper.getCurrentCommerceAccount(
 				_portal.getHttpServletRequest(renderRequest));
 
 		long commerceAccountId = 0;
@@ -869,7 +869,7 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 	}
 
 	@Reference
-	private CommerceAccountHelper _commerceAccountHelper;
+	private CommerceAccountHttpHelper _commerceAccountHttpHelper;
 
 	@Reference
 	private CommerceHttpMediaResolver _commerceHttpMediaResolver;

@@ -15,7 +15,7 @@
 package com.liferay.commerce.product.type.virtual.order.content.web.internal.display.context;
 
 import com.liferay.commerce.account.model.CommerceAccount;
-import com.liferay.commerce.account.util.CommerceAccountHelper;
+import com.liferay.commerce.account.util.CommerceAccountHttpHelper;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
@@ -59,7 +59,7 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 			CommerceVirtualOrderItemLocalService
 				commerceVirtualOrderItemLocalService,
 			CPDefinitionHelper cpDefinitionHelper,
-			CommerceAccountHelper commerceAccountHelper,
+			CommerceAccountHttpHelper commerceAccountHttpHelper,
 			CPDefinitionVirtualSettingService cpDefinitionVirtualSettingService,
 			CPInstanceHelper cpInstanceHelper,
 			HttpServletRequest httpServletRequest)
@@ -68,11 +68,11 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 		_commerceVirtualOrderItemLocalService =
 			commerceVirtualOrderItemLocalService;
 		_cpDefinitionHelper = cpDefinitionHelper;
-		_commerceAccountHelper = commerceAccountHelper;
+		_commerceAccountHttpHelper = commerceAccountHttpHelper;
 		_cpDefinitionVirtualSettingService = cpDefinitionVirtualSettingService;
 		_cpInstanceHelper = cpInstanceHelper;
 
-		_commerceAccount = commerceAccountHelper.getCurrentCommerceAccount(
+		_commerceAccount = commerceAccountHttpHelper.getCurrentCommerceAccount(
 			httpServletRequest);
 
 		_commerceVirtualOrderItemContentRequestHelper =
@@ -319,7 +319,7 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 
 	private JournalArticleDisplay _articleDisplay;
 	private final CommerceAccount _commerceAccount;
-	private final CommerceAccountHelper _commerceAccountHelper;
+	private final CommerceAccountHttpHelper _commerceAccountHttpHelper;
 	private final CommerceVirtualOrderItemContentPortletInstanceConfiguration
 		_commerceVirtualOrderItemContentPortletInstanceConfiguration;
 	private final CommerceVirtualOrderItemContentRequestHelper

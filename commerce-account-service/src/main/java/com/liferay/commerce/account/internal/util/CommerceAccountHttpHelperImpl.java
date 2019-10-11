@@ -23,7 +23,7 @@ import com.liferay.commerce.account.model.CommerceAccountModel;
 import com.liferay.commerce.account.service.CommerceAccountGroupLocalService;
 import com.liferay.commerce.account.service.CommerceAccountLocalService;
 import com.liferay.commerce.account.service.CommerceAccountService;
-import com.liferay.commerce.account.util.CommerceAccountHelper;
+import com.liferay.commerce.account.util.CommerceAccountHttpHelper;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -52,8 +52,9 @@ import org.osgi.service.component.annotations.Reference;
  * @author Marco Leo
  * @author Alessio Antonio Rendina
  */
-@Component(immediate = true, service = CommerceAccountHelper.class)
-public class CommerceAccountHelperImpl implements CommerceAccountHelper {
+@Component(immediate = true, service = CommerceAccountHttpHelper.class)
+public class CommerceAccountHttpHelperImpl
+	implements CommerceAccountHttpHelper {
 
 	@Override
 	public String getAccountManagementPortletURL(

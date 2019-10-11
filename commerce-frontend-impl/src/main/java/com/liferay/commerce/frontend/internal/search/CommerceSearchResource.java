@@ -20,7 +20,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
-import com.liferay.commerce.account.util.CommerceAccountHelper;
+import com.liferay.commerce.account.util.CommerceAccountHttpHelper;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.context.CommerceContextFactory;
 import com.liferay.commerce.frontend.internal.account.CommerceAccountResource;
@@ -110,7 +110,7 @@ public class CommerceSearchResource {
 			themeDisplay.setLayoutSet(layout.getLayoutSet());
 
 			CommerceAccount commerceAccount =
-				_commerceAccountHelper.getCurrentCommerceAccount(
+				_commerceAccountHttpHelper.getCurrentCommerceAccount(
 					themeDisplay.getScopeGroupId(), httpServletRequest);
 
 			List<SearchItemModel> searchItemModels = new ArrayList<>();
@@ -394,7 +394,7 @@ public class CommerceSearchResource {
 		CommerceSearchResource.class);
 
 	@Reference
-	private CommerceAccountHelper _commerceAccountHelper;
+	private CommerceAccountHttpHelper _commerceAccountHttpHelper;
 
 	@Reference
 	private CommerceAccountResource _commerceAccountResource;

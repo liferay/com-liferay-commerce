@@ -17,7 +17,7 @@ package com.liferay.commerce.product.definitions.web.internal.portlet;
 import com.liferay.asset.kernel.model.AssetTag;
 import com.liferay.asset.kernel.service.AssetTagLocalService;
 import com.liferay.commerce.account.model.CommerceAccount;
-import com.liferay.commerce.account.util.CommerceAccountHelper;
+import com.liferay.commerce.account.util.CommerceAccountHttpHelper;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.constants.CPPortletKeys;
@@ -276,7 +276,7 @@ public class ProductFriendlyURLResolver implements FriendlyURLResolver {
 		// Passing the groupId is mandatory here. See COMMERCE-728.
 
 		CommerceAccount commerceAccount =
-			_commerceAccountHelper.getCurrentCommerceAccount(
+			_commerceAccountHttpHelper.getCurrentCommerceAccount(
 				groupId, httpServletRequest);
 
 		long commerceAccountId = 0;
@@ -292,7 +292,7 @@ public class ProductFriendlyURLResolver implements FriendlyURLResolver {
 	private AssetTagLocalService _assetTagLocalService;
 
 	@Reference
-	private CommerceAccountHelper _commerceAccountHelper;
+	private CommerceAccountHttpHelper _commerceAccountHttpHelper;
 
 	@Reference
 	private CPDefinitionHelper _cpDefinitionHelper;

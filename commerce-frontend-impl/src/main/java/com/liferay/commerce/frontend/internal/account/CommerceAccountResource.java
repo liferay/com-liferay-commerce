@@ -22,7 +22,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
-import com.liferay.commerce.account.util.CommerceAccountHelper;
+import com.liferay.commerce.account.util.CommerceAccountHttpHelper;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.context.CommerceContextFactory;
 import com.liferay.commerce.frontend.internal.account.model.Account;
@@ -248,7 +248,7 @@ public class CommerceAccountResource {
 		@Context HttpServletRequest httpServletRequest) {
 
 		try {
-			_commerceAccountHelper.setCurrentCommerceAccount(
+			_commerceAccountHttpHelper.setCurrentCommerceAccount(
 				httpServletRequest, groupId, accountId);
 		}
 		catch (Exception e) {
@@ -463,7 +463,7 @@ public class CommerceAccountResource {
 		CommerceAccountResource.class);
 
 	@Reference
-	private CommerceAccountHelper _commerceAccountHelper;
+	private CommerceAccountHttpHelper _commerceAccountHttpHelper;
 
 	@Reference
 	private CommerceAccountService _commerceAccountService;

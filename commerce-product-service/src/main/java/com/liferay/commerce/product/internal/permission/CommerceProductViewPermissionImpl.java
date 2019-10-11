@@ -16,7 +16,7 @@ package com.liferay.commerce.product.internal.permission;
 
 import com.liferay.commerce.account.model.CommerceAccountGroupRel;
 import com.liferay.commerce.account.service.CommerceAccountGroupRelService;
-import com.liferay.commerce.account.util.CommerceAccountHelper;
+import com.liferay.commerce.account.util.CommerceAccountHttpHelper;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.model.CommerceChannel;
@@ -142,7 +142,7 @@ public class CommerceProductViewPermissionImpl
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
 		long[] comerceAccountGroupIds =
-			_commerceAccountHelper.getCommerceAccountGroupIds(
+			_commerceAccountHttpHelper.getCommerceAccountGroupIds(
 				commerceAccountId);
 
 		for (CommerceAccountGroupRel commerceAccountGroupRel :
@@ -215,7 +215,7 @@ public class CommerceProductViewPermissionImpl
 	private CommerceAccountGroupRelService _commerceAccountGroupRelService;
 
 	@Reference
-	private CommerceAccountHelper _commerceAccountHelper;
+	private CommerceAccountHttpHelper _commerceAccountHttpHelper;
 
 	@Reference
 	private CommerceCatalogPermission _commerceCatalogPermission;

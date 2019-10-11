@@ -17,7 +17,7 @@ package com.liferay.commerce.internal.context;
 import com.liferay.commerce.account.configuration.CommerceAccountGroupServiceConfiguration;
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
-import com.liferay.commerce.account.util.CommerceAccountHelper;
+import com.liferay.commerce.account.util.CommerceAccountHttpHelper;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
@@ -42,14 +42,14 @@ public class CommerceContextHttpImpl implements CommerceContext {
 
 	public CommerceContextHttpImpl(
 		HttpServletRequest httpServletRequest,
-		CommerceAccountHelper commerceAccountHelper,
+		CommerceAccountHttpHelper commerceAccountHttpHelper,
 		CommerceChannelLocalService commerceChannelLocalService,
 		CommerceCurrencyLocalService commerceCurrencyLocalService,
 		CommerceOrderHttpHelper commerceOrderHttpHelper,
 		ConfigurationProvider configurationProvider, Portal portal) {
 
 		_httpServletRequest = httpServletRequest;
-		_commerceAccountHelper = commerceAccountHelper;
+		_commerceAccountHttpHelper = commerceAccountHttpHelper;
 		_commerceChannelLocalService = commerceChannelLocalService;
 		_commerceCurrencyLocalService = commerceCurrencyLocalService;
 		_commerceOrderHttpHelper = commerceOrderHttpHelper;
@@ -74,7 +74,7 @@ public class CommerceContextHttpImpl implements CommerceContext {
 			return _commerceAccount;
 		}
 
-		_commerceAccount = _commerceAccountHelper.getCurrentCommerceAccount(
+		_commerceAccount = _commerceAccountHttpHelper.getCurrentCommerceAccount(
 			_httpServletRequest);
 
 		return _commerceAccount;
@@ -93,7 +93,7 @@ public class CommerceContextHttpImpl implements CommerceContext {
 		}
 
 		_commerceAccountGroupIds =
-			_commerceAccountHelper.getCommerceAccountGroupIds(
+			_commerceAccountHttpHelper.getCommerceAccountGroupIds(
 				commerceAccount.getCommerceAccountId());
 
 		return _commerceAccountGroupIds.clone();
@@ -176,7 +176,7 @@ public class CommerceContextHttpImpl implements CommerceContext {
 	private long[] _commerceAccountGroupIds;
 	private CommerceAccountGroupServiceConfiguration
 		_commerceAccountGroupServiceConfiguration;
-	private final CommerceAccountHelper _commerceAccountHelper;
+	private final CommerceAccountHttpHelper _commerceAccountHttpHelper;
 	private final CommerceChannelLocalService _commerceChannelLocalService;
 	private CommerceCurrency _commerceCurrency;
 	private final CommerceCurrencyLocalService _commerceCurrencyLocalService;

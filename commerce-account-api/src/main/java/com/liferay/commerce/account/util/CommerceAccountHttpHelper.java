@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author Alessio Antonio Rendina
  */
 @ProviderType
-public interface CommerceAccountHelper {
+public interface CommerceAccountHttpHelper {
 
 	public String getAccountManagementPortletURL(
 			HttpServletRequest httpServletRequest)

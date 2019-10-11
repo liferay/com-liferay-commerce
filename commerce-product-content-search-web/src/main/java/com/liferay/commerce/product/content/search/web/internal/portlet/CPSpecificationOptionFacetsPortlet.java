@@ -16,7 +16,7 @@ package com.liferay.commerce.product.content.search.web.internal.portlet;
 
 import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.commerce.account.model.CommerceAccount;
-import com.liferay.commerce.account.util.CommerceAccountHelper;
+import com.liferay.commerce.account.util.CommerceAccountHttpHelper;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.content.search.web.internal.display.context.CPSpecificationOptionFacetsDisplayContext;
 import com.liferay.commerce.product.content.search.web.internal.util.CPSpecificationOptionFacetsUtil;
@@ -201,12 +201,12 @@ public class CPSpecificationOptionFacetsPortlet
 		}
 
 		CommerceAccount commerceAccount =
-			_commerceAccountHelper.getCurrentCommerceAccount(
+			_commerceAccountHttpHelper.getCurrentCommerceAccount(
 				_portal.getHttpServletRequest(renderRequest));
 
 		if (commerceAccount != null) {
 			long[] commerceAccountGroupIds =
-				_commerceAccountHelper.getCommerceAccountGroupIds(
+				_commerceAccountHttpHelper.getCommerceAccountGroupIds(
 					commerceAccount.getCommerceAccountId());
 
 			searchContext.setAttribute(
@@ -286,7 +286,7 @@ public class CPSpecificationOptionFacetsPortlet
 		CPSpecificationOptionFacetsPortlet.class);
 
 	@Reference
-	private CommerceAccountHelper _commerceAccountHelper;
+	private CommerceAccountHttpHelper _commerceAccountHttpHelper;
 
 	@Reference
 	private CommerceChannelLocalService _commerceChannelLocalService;

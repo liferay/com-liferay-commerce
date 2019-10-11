@@ -18,7 +18,7 @@ import com.liferay.commerce.account.configuration.CommerceAccountGroupServiceCon
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
-import com.liferay.commerce.account.util.CommerceAccountHelper;
+import com.liferay.commerce.account.util.CommerceAccountHttpHelper;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
@@ -40,7 +40,7 @@ public class CommerceContextImpl implements CommerceContext {
 
 	public CommerceContextImpl(
 		long companyId, long groupId, long orderId, long commerceAccountId,
-		CommerceAccountHelper commerceAccountHelper,
+		CommerceAccountHttpHelper commerceAccountHttpHelper,
 		CommerceAccountService commerceAccountService,
 		CommerceChannelLocalService commerceChannelLocalService,
 		CommerceCurrencyLocalService commerceCurrencyLocalService,
@@ -51,7 +51,7 @@ public class CommerceContextImpl implements CommerceContext {
 		_groupId = groupId;
 		_orderId = orderId;
 		_commerceAccountId = commerceAccountId;
-		_commerceAccountHelper = commerceAccountHelper;
+		_commerceAccountHttpHelper = commerceAccountHttpHelper;
 		_commerceAccountService = commerceAccountService;
 		_commerceChannelLocalService = commerceChannelLocalService;
 		_commerceCurrencyLocalService = commerceCurrencyLocalService;
@@ -94,7 +94,7 @@ public class CommerceContextImpl implements CommerceContext {
 		}
 
 		_commerceAccountGroupIds =
-			_commerceAccountHelper.getCommerceAccountGroupIds(
+			_commerceAccountHttpHelper.getCommerceAccountGroupIds(
 				commerceAccount.getCommerceAccountId());
 
 		return _commerceAccountGroupIds.clone();
@@ -175,7 +175,7 @@ public class CommerceContextImpl implements CommerceContext {
 	private long[] _commerceAccountGroupIds;
 	private CommerceAccountGroupServiceConfiguration
 		_commerceAccountGroupServiceConfiguration;
-	private final CommerceAccountHelper _commerceAccountHelper;
+	private final CommerceAccountHttpHelper _commerceAccountHttpHelper;
 	private final long _commerceAccountId;
 	private final CommerceAccountService _commerceAccountService;
 	private final CommerceChannelLocalService _commerceChannelLocalService;

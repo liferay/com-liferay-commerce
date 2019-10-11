@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.account.internal.theme.contributor;
 
-import com.liferay.commerce.account.util.CommerceAccountHelper;
+import com.liferay.commerce.account.util.CommerceAccountHttpHelper;
 import com.liferay.portal.kernel.template.TemplateContextContributor;
 
 import java.util.Map;
@@ -40,10 +40,11 @@ public class CommerceAccountTemplateContextContributor
 		Map<String, Object> contextObjects,
 		HttpServletRequest httpServletRequest) {
 
-		contextObjects.put("commerceAccountHelper", _commerceAccountHelper);
+		contextObjects.put(
+			"commerceAccountHttpHelper", _commerceAccountHttpHelper);
 	}
 
 	@Reference
-	private CommerceAccountHelper _commerceAccountHelper;
+	private CommerceAccountHttpHelper _commerceAccountHttpHelper;
 
 }

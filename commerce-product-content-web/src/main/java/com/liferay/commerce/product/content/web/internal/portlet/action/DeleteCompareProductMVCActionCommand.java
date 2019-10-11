@@ -15,7 +15,7 @@
 package com.liferay.commerce.product.content.web.internal.portlet.action;
 
 import com.liferay.commerce.account.model.CommerceAccount;
-import com.liferay.commerce.account.util.CommerceAccountHelper;
+import com.liferay.commerce.account.util.CommerceAccountHttpHelper;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.product.util.CPCompareHelperUtil;
@@ -58,7 +58,7 @@ public class DeleteCompareProductMVCActionCommand extends BaseMVCActionCommand {
 			actionRequest, "cpDefinitionId");
 
 		CommerceAccount commerceAccount =
-			_commerceAccountHelper.getCurrentCommerceAccount(
+			_commerceAccountHttpHelper.getCurrentCommerceAccount(
 				httpServletRequest);
 
 		long commerceAccountId = 0;
@@ -81,7 +81,7 @@ public class DeleteCompareProductMVCActionCommand extends BaseMVCActionCommand {
 	}
 
 	@Reference
-	private CommerceAccountHelper _commerceAccountHelper;
+	private CommerceAccountHttpHelper _commerceAccountHttpHelper;
 
 	@Reference
 	private CommerceChannelLocalService _commerceChannelLocalService;
