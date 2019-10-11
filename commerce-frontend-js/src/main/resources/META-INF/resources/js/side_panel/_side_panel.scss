@@ -1,0 +1,81 @@
+.side-panel {
+  box-shadow: -10px 20px 30px rgba(39, 40, 51, 0.15);
+  background-color: #F1F2F5;
+  position: fixed;
+  opacity: 1;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  transition: transform ease 500ms, box-shadow ease 500ms, opacity ease 500ms;
+  will-change: transform, box-shadow, opacity;
+  z-index: 989;
+
+  .btn-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+  }
+
+  &.is-hidden {
+    transform: translateX(100%);
+    box-shadow: 0 0 0 rgba(39, 40, 51, 0.15);
+    opacity: .8;
+  }
+
+  &-xs { width: 25%; }
+  &-sm { width: 33%; }
+  &-md { width: 50%; }
+  &-lg { width: 66%; }
+  &-xl { width: 75%; }
+  &-full { width: 100%; }
+
+  .tab-content,
+  .tab-pane {
+    height: 100%;
+    position: relative;
+  }
+
+  .nav {
+    border-bottom: 1px solid #DDDEE7;
+  }
+
+  .loader {
+    align-items: center;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 10;
+  }
+    
+  &:not(.is-loading) .loader {
+    transition: all ease 200ms;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  iframe {
+    height: 100%;
+    width: 100%;
+  }
+
+  &.is-loading iframe {
+    display: none;
+  }
+}
+
+.side-panel-header {
+  padding-right: 42px;
+  background-color: white;
+  position: sticky;
+  top: 0;
+
+  .nav-link {
+    line-height: 21px;
+  }
+}
