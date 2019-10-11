@@ -33,7 +33,7 @@ import com.liferay.commerce.product.service.CPFriendlyURLEntryLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.service.CProductLocalService;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.product.util.CPDefinitionHttpHelper;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -67,8 +67,8 @@ import org.osgi.service.component.annotations.Reference;
  * @author Marco Leo
  * @author Andrea Di Giorgi
  */
-@Component(immediate = true, service = CPDefinitionHelper.class)
-public class CPDefinitionHelperImpl implements CPDefinitionHelper {
+@Component(immediate = true, service = CPDefinitionHttpHelper.class)
+public class CPDefinitionHttpHelperImpl implements CPDefinitionHttpHelper {
 
 	@Override
 	public CPCatalogEntry getCPCatalogEntry(Document document, Locale locale) {
@@ -307,7 +307,7 @@ public class CPDefinitionHelperImpl implements CPDefinitionHelper {
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		CPDefinitionHelperImpl.class);
+		CPDefinitionHttpHelperImpl.class);
 
 	@Reference
 	private CommerceChannelLocalService _commerceChannelLocalService;

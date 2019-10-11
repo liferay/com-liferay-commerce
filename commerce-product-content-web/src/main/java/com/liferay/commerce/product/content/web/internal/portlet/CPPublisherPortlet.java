@@ -22,7 +22,7 @@ import com.liferay.commerce.product.content.web.internal.util.CPPublisherWebHelp
 import com.liferay.commerce.product.data.source.CPDataSourceRegistry;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.type.CPTypeServicesTracker;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.product.util.CPDefinitionHttpHelper;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -77,7 +77,7 @@ public class CPPublisherPortlet extends MVCPortlet {
 				new CPPublisherDisplayContext(
 					_cpContentListEntryRendererRegistry,
 					_cpContentListRendererRegistry, _cpDataSourceRegistry,
-					_cpDefinitionHelper, _cpPublisherWebHelper,
+					_cpDefinitionHttpHelper, _cpPublisherWebHelper,
 					_cpTypeServicesTracker,
 					_portal.getHttpServletRequest(renderRequest));
 
@@ -105,7 +105,7 @@ public class CPPublisherPortlet extends MVCPortlet {
 	private CPDataSourceRegistry _cpDataSourceRegistry;
 
 	@Reference
-	private CPDefinitionHelper _cpDefinitionHelper;
+	private CPDefinitionHttpHelper _cpDefinitionHttpHelper;
 
 	@Reference
 	private CPDefinitionService _cpDefinitionService;

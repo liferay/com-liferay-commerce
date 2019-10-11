@@ -21,7 +21,7 @@ import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.constants.CPWebKeys;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CommerceCatalog;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.product.util.CPDefinitionHttpHelper;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.Group;
@@ -57,11 +57,12 @@ public class CPDefinitionAssetRenderer
 	extends BaseJSPAssetRenderer<CPDefinition> {
 
 	public CPDefinitionAssetRenderer(
-		CPDefinition cpDefinition, CPDefinitionHelper cpDefinitionHelper,
+		CPDefinition cpDefinition,
+		CPDefinitionHttpHelper cpDefinitionHttpHelper,
 		ModelResourcePermission<CommerceCatalog> modelResourcePermission) {
 
 		_cpDefinition = cpDefinition;
-		_cpDefinitionHelper = cpDefinitionHelper;
+		_cpDefinitionHttpHelper = cpDefinitionHttpHelper;
 		_modelResourcePermission = modelResourcePermission;
 	}
 
@@ -191,7 +192,7 @@ public class CPDefinitionAssetRenderer
 				(ThemeDisplay)liferayPortletRequest.getAttribute(
 					WebKeys.THEME_DISPLAY);
 
-			return _cpDefinitionHelper.getFriendlyURL(
+			return _cpDefinitionHttpHelper.getFriendlyURL(
 				_cpDefinition.getCPDefinitionId(), themeDisplay);
 		}
 		catch (Exception e) {
@@ -249,7 +250,7 @@ public class CPDefinitionAssetRenderer
 	}
 
 	private final CPDefinition _cpDefinition;
-	private final CPDefinitionHelper _cpDefinitionHelper;
+	private final CPDefinitionHttpHelper _cpDefinitionHttpHelper;
 	private final ModelResourcePermission<CommerceCatalog>
 		_modelResourcePermission;
 

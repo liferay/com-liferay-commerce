@@ -41,7 +41,7 @@ import com.liferay.commerce.product.data.source.CPDataSourceResult;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.product.util.CPDefinitionHttpHelper;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalService;
 import com.liferay.commerce.service.CommerceAddressLocalService;
 import com.liferay.commerce.service.CommerceOrderItemLocalService;
@@ -306,7 +306,7 @@ public class CommerceOrderGenerator {
 
 		// Commerce products
 
-		CPDataSourceResult cpDataSourceResult = _cpDefinitionHelper.search(
+		CPDataSourceResult cpDataSourceResult = _cpDefinitionHttpHelper.search(
 			groupId, searchContext, new CPQuery(), 0, 1);
 
 		if (cpDataSourceResult.getLength() <= 0) {
@@ -331,7 +331,7 @@ public class CommerceOrderGenerator {
 				max = _randomInt(1, 20);
 			}
 
-			cpDataSourceResult = _cpDefinitionHelper.search(
+			cpDataSourceResult = _cpDefinitionHttpHelper.search(
 				groupId, searchContext, new CPQuery(), min, max);
 
 			_generateCommerceOrder(
@@ -529,7 +529,7 @@ public class CommerceOrderGenerator {
 	private ConfigurationProvider _configurationProvider;
 
 	@Reference
-	private CPDefinitionHelper _cpDefinitionHelper;
+	private CPDefinitionHttpHelper _cpDefinitionHttpHelper;
 
 	@Reference
 	private CPDefinitionInventoryEngineRegistry

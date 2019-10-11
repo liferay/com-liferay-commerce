@@ -17,7 +17,7 @@ package com.liferay.commerce.wish.list.web.internal.display.context;
 import com.liferay.commerce.currency.model.CommerceMoney;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.model.CPInstance;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.product.util.CPDefinitionHttpHelper;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.wish.list.constants.CommerceWishListActionKeys;
 import com.liferay.commerce.wish.list.constants.CommerceWishListPortletKeys;
@@ -65,7 +65,7 @@ public class CommerceWishListDisplayContext {
 		CommerceWishListHttpHelper commerceWishListHttpHelper,
 		CommerceWishListItemService commerceWishListItemService,
 		CommerceWishListService commerceWishListService,
-		CPDefinitionHelper cpDefinitionHelper,
+		CPDefinitionHttpHelper cpDefinitionHttpHelper,
 		CPInstanceHelper cpInstanceHelper,
 		HttpServletRequest httpServletRequest,
 		PortletResourcePermission portletResourcePermission) {
@@ -74,7 +74,7 @@ public class CommerceWishListDisplayContext {
 		_commerceWishListHttpHelper = commerceWishListHttpHelper;
 		_commerceWishListItemService = commerceWishListItemService;
 		_commerceWishListService = commerceWishListService;
-		_cpDefinitionHelper = cpDefinitionHelper;
+		_cpDefinitionHttpHelper = cpDefinitionHttpHelper;
 		_cpInstanceHelper = cpInstanceHelper;
 		_portletResourcePermission = portletResourcePermission;
 
@@ -228,7 +228,8 @@ public class CommerceWishListDisplayContext {
 			long cpDefinitionId, ThemeDisplay themeDisplay)
 		throws PortalException {
 
-		return _cpDefinitionHelper.getFriendlyURL(cpDefinitionId, themeDisplay);
+		return _cpDefinitionHttpHelper.getFriendlyURL(
+			cpDefinitionId, themeDisplay);
 	}
 
 	public PortletURL getPortletURL() {
@@ -423,7 +424,7 @@ public class CommerceWishListDisplayContext {
 		_commerceWishListItemsSearchContainer;
 	private final CommerceWishListRequestHelper _commerceWishListRequestHelper;
 	private final CommerceWishListService _commerceWishListService;
-	private final CPDefinitionHelper _cpDefinitionHelper;
+	private final CPDefinitionHttpHelper _cpDefinitionHttpHelper;
 	private final CPInstanceHelper _cpInstanceHelper;
 	private final PortalPreferences _portalPreferences;
 	private final PortletResourcePermission _portletResourcePermission;

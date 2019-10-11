@@ -22,7 +22,7 @@ import com.liferay.commerce.product.data.source.CPDataSourceResult;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.test.util.CPTestUtil;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.product.util.CPDefinitionHttpHelper;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
@@ -55,7 +55,7 @@ import org.junit.runner.RunWith;
  */
 @Ignore
 @RunWith(Arquillian.class)
-public class CPDefinitionHelperTest {
+public class CPDefinitionHttpHelperTest {
 
 	@ClassRule
 	@Rule
@@ -115,7 +115,7 @@ public class CPDefinitionHelperTest {
 
 		cpQuery.setAllCategoryIds(new long[] {assetCategory.getCategoryId()});
 
-		CPDataSourceResult cpDataSourceResult = _cpDefinitionHelper.search(
+		CPDataSourceResult cpDataSourceResult = _cpDefinitionHttpHelper.search(
 			_group.getGroupId(), searchContext, cpQuery, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS);
 
@@ -168,7 +168,7 @@ public class CPDefinitionHelperTest {
 
 		CPQuery cpQuery = new CPQuery();
 
-		CPDataSourceResult cpDataSourceResult = _cpDefinitionHelper.search(
+		CPDataSourceResult cpDataSourceResult = _cpDefinitionHttpHelper.search(
 			_group.getGroupId(), searchContext, cpQuery, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS);
 
@@ -205,7 +205,7 @@ public class CPDefinitionHelperTest {
 
 		CPQuery cpQuery = new CPQuery();
 
-		CPDataSourceResult cpDataSourceResult = _cpDefinitionHelper.search(
+		CPDataSourceResult cpDataSourceResult = _cpDefinitionHttpHelper.search(
 			_group.getGroupId(), searchContext, cpQuery, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS);
 
@@ -247,7 +247,7 @@ public class CPDefinitionHelperTest {
 	private static final int _CP_INSTANCES_COUNT = 10;
 
 	@Inject
-	private CPDefinitionHelper _cpDefinitionHelper;
+	private CPDefinitionHttpHelper _cpDefinitionHttpHelper;
 
 	@DeleteAfterTestRun
 	private Group _group;

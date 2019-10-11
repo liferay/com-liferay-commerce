@@ -26,7 +26,7 @@ import com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrde
 import com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOrderItemLocalService;
 import com.liferay.commerce.product.type.virtual.order.util.comparator.CommerceVirtualOrderItemCreateDateComparator;
 import com.liferay.commerce.product.type.virtual.service.CPDefinitionVirtualSettingService;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.product.util.CPDefinitionHttpHelper;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.model.JournalArticleDisplay;
@@ -58,7 +58,7 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 	public CommerceVirtualOrderItemContentDisplayContext(
 			CommerceVirtualOrderItemLocalService
 				commerceVirtualOrderItemLocalService,
-			CPDefinitionHelper cpDefinitionHelper,
+			CPDefinitionHttpHelper cpDefinitionHttpHelper,
 			CommerceAccountHttpHelper commerceAccountHttpHelper,
 			CPDefinitionVirtualSettingService cpDefinitionVirtualSettingService,
 			CPInstanceHelper cpInstanceHelper,
@@ -67,7 +67,7 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 
 		_commerceVirtualOrderItemLocalService =
 			commerceVirtualOrderItemLocalService;
-		_cpDefinitionHelper = cpDefinitionHelper;
+		_cpDefinitionHttpHelper = cpDefinitionHttpHelper;
 		_commerceAccountHttpHelper = commerceAccountHttpHelper;
 		_cpDefinitionVirtualSettingService = cpDefinitionVirtualSettingService;
 		_cpInstanceHelper = cpInstanceHelper;
@@ -136,7 +136,8 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 			long cpDefinitionId, ThemeDisplay themeDisplay)
 		throws PortalException {
 
-		return _cpDefinitionHelper.getFriendlyURL(cpDefinitionId, themeDisplay);
+		return _cpDefinitionHttpHelper.getFriendlyURL(
+			cpDefinitionId, themeDisplay);
 	}
 
 	public CPDefinitionVirtualSetting getCPDefinitionVirtualSetting(
@@ -326,7 +327,7 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 		_commerceVirtualOrderItemContentRequestHelper;
 	private final CommerceVirtualOrderItemLocalService
 		_commerceVirtualOrderItemLocalService;
-	private final CPDefinitionHelper _cpDefinitionHelper;
+	private final CPDefinitionHttpHelper _cpDefinitionHttpHelper;
 	private final CPDefinitionVirtualSettingService
 		_cpDefinitionVirtualSettingService;
 	private final CPInstanceHelper _cpInstanceHelper;

@@ -21,7 +21,7 @@ import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.order.CommerceOrderValidatorRegistry;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.product.util.CPDefinitionHttpHelper;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.petra.string.StringPool;
@@ -51,7 +51,7 @@ public class CommerceCartContentMiniDisplayContext
 			CommerceOrderPriceCalculation commerceOrderPriceCalculation,
 			CommerceOrderValidatorRegistry commerceOrderValidatorRegistry,
 			CommerceProductPriceCalculation commerceProductPriceCalculation,
-			CPDefinitionHelper cpDefinitionHelper,
+			CPDefinitionHttpHelper cpDefinitionHttpHelper,
 			CPInstanceHelper cpInstanceHelper,
 			ModelResourcePermission<CommerceOrder>
 				commerceOrderModelResourcePermission,
@@ -61,7 +61,7 @@ public class CommerceCartContentMiniDisplayContext
 		super(
 			httpServletRequest, commerceOrderItemService,
 			commerceOrderPriceCalculation, commerceOrderValidatorRegistry,
-			commerceProductPriceCalculation, cpDefinitionHelper,
+			commerceProductPriceCalculation, cpDefinitionHttpHelper,
 			cpInstanceHelper, commerceOrderModelResourcePermission,
 			commerceProductPortletResourcePermission);
 

@@ -17,7 +17,7 @@ package com.liferay.commerce.product.internal.util;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.util.CPCompareHelper;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.product.util.CPDefinitionHttpHelper;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.LocaleUtil;
 
@@ -65,7 +65,7 @@ public class CPCompareHelperImpl implements CPCompareHelper {
 
 		for (long cpDefinitionId : cpDefinitionIds) {
 			CPCatalogEntry cpCatalogEntry =
-				_cpDefinitionHelper.getCPCatalogEntry(
+				_cpDefinitionHttpHelper.getCPCatalogEntry(
 					commerceAccountId, groupId, cpDefinitionId,
 					LocaleUtil.getDefault());
 
@@ -109,6 +109,6 @@ public class CPCompareHelperImpl implements CPCompareHelper {
 	private CommerceAccountService _commerceAccountService;
 
 	@Reference
-	private CPDefinitionHelper _cpDefinitionHelper;
+	private CPDefinitionHttpHelper _cpDefinitionHttpHelper;
 
 }

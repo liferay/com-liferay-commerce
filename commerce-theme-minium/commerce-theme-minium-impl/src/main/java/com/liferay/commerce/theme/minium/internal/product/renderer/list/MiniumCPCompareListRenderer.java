@@ -25,7 +25,7 @@ import com.liferay.commerce.product.content.constants.CPContentWebKeys;
 import com.liferay.commerce.product.content.render.list.CPContentListRenderer;
 import com.liferay.commerce.product.content.util.CPCompareContentHelper;
 import com.liferay.commerce.product.util.CPCompareHelperUtil;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.product.util.CPDefinitionHttpHelper;
 import com.liferay.commerce.theme.minium.internal.product.model.ProductCompareModel;
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
@@ -126,7 +126,7 @@ public class MiniumCPCompareListRenderer implements CPContentListRenderer {
 
 		for (Long cpDefinitionId : cpDefinitionIds) {
 			CPCatalogEntry cpCatalogEntry =
-				_cpDefinitionHelper.getCPCatalogEntry(
+				_cpDefinitionHttpHelper.getCPCatalogEntry(
 					commerceAccountId,
 					commerceContext.getCommerceChannelGroupId(), cpDefinitionId,
 					themeDisplay.getLocale());
@@ -187,7 +187,7 @@ public class MiniumCPCompareListRenderer implements CPContentListRenderer {
 	}
 
 	@Reference
-	private CPDefinitionHelper _cpDefinitionHelper;
+	private CPDefinitionHttpHelper _cpDefinitionHttpHelper;
 
 	@Reference
 	private JSPRenderer _jspRenderer;

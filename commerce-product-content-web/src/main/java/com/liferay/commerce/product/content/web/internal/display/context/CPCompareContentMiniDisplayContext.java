@@ -29,7 +29,7 @@ import com.liferay.commerce.product.display.context.util.CPRequestHelper;
 import com.liferay.commerce.product.type.CPType;
 import com.liferay.commerce.product.type.CPTypeServicesTracker;
 import com.liferay.commerce.product.util.CPCompareHelperUtil;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.product.util.CPDefinitionHttpHelper;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.theme.PortletDisplay;
@@ -56,7 +56,7 @@ public class CPCompareContentMiniDisplayContext {
 			CPContentListEntryRendererRegistry
 				cpContentListEntryRendererRegistry,
 			CPContentListRendererRegistry cpContentListRendererRegistry,
-			CPDefinitionHelper cpDefinitionHelper,
+			CPDefinitionHttpHelper cpDefinitionHttpHelper,
 			CPTypeServicesTracker cpTypeServicesTracker,
 			HttpServletRequest httpServletRequest)
 		throws PortalException {
@@ -64,7 +64,7 @@ public class CPCompareContentMiniDisplayContext {
 		_cpContentListEntryRendererRegistry =
 			cpContentListEntryRendererRegistry;
 		_cpContentListRendererRegistry = cpContentListRendererRegistry;
-		_cpDefinitionHelper = cpDefinitionHelper;
+		_cpDefinitionHttpHelper = cpDefinitionHttpHelper;
 		_cpTypeServicesTracker = cpTypeServicesTracker;
 
 		_cpRequestHelper = new CPRequestHelper(httpServletRequest);
@@ -172,7 +172,7 @@ public class CPCompareContentMiniDisplayContext {
 
 		for (Long cpDefinitionId : _cpDefinitionIds) {
 			cpCatalogEntries.add(
-				_cpDefinitionHelper.getCPCatalogEntry(
+				_cpDefinitionHttpHelper.getCPCatalogEntry(
 					commerceAccountId,
 					commerceContext.getCommerceChannelGroupId(), cpDefinitionId,
 					_cpRequestHelper.getLocale()));
@@ -263,7 +263,7 @@ public class CPCompareContentMiniDisplayContext {
 	private final CPContentListEntryRendererRegistry
 		_cpContentListEntryRendererRegistry;
 	private final CPContentListRendererRegistry _cpContentListRendererRegistry;
-	private final CPDefinitionHelper _cpDefinitionHelper;
+	private final CPDefinitionHttpHelper _cpDefinitionHttpHelper;
 	private final List<Long> _cpDefinitionIds;
 	private final CPRequestHelper _cpRequestHelper;
 	private final CPTypeServicesTracker _cpTypeServicesTracker;

@@ -17,7 +17,7 @@ package com.liferay.commerce.subscription.web.internal.display.context;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.product.display.context.util.CPRequestHelper;
 import com.liferay.commerce.product.model.CPInstance;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.product.util.CPDefinitionHttpHelper;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.service.CommerceSubscriptionEntryService;
 import com.liferay.commerce.subscription.web.internal.display.context.util.CommerceSubscriptionDisplayContextHelper;
@@ -48,13 +48,13 @@ import javax.servlet.http.HttpServletRequest;
 public class CommerceSubscriptionContentDisplayContext {
 
 	public CommerceSubscriptionContentDisplayContext(
-		CPDefinitionHelper cpDefinitionHelper,
+		CPDefinitionHttpHelper cpDefinitionHttpHelper,
 		CPInstanceHelper cpInstanceHelper,
 		CommerceSubscriptionEntryService commerceSubscriptionEntryService,
 		ConfigurationProvider configurationProvider,
 		HttpServletRequest httpServletRequest) {
 
-		_cpDefinitionHelper = cpDefinitionHelper;
+		_cpDefinitionHttpHelper = cpDefinitionHttpHelper;
 		_cpInstanceHelper = cpInstanceHelper;
 		_commerceSubscriptionEntryService = commerceSubscriptionEntryService;
 		_configurationProvider = configurationProvider;
@@ -91,7 +91,7 @@ public class CommerceSubscriptionContentDisplayContext {
 			ThemeDisplay themeDisplay)
 		throws PortalException {
 
-		return _cpDefinitionHelper.getFriendlyURL(
+		return _cpDefinitionHttpHelper.getFriendlyURL(
 			commerceSubscriptionEntry.getCPDefinitionId(), themeDisplay);
 	}
 
@@ -177,7 +177,7 @@ public class CommerceSubscriptionContentDisplayContext {
 	private final CommerceSubscriptionEntryService
 		_commerceSubscriptionEntryService;
 	private final ConfigurationProvider _configurationProvider;
-	private final CPDefinitionHelper _cpDefinitionHelper;
+	private final CPDefinitionHttpHelper _cpDefinitionHttpHelper;
 	private final CPInstanceHelper _cpInstanceHelper;
 	private final CPRequestHelper _cpRequestHelper;
 	private SearchContainer<CommerceSubscriptionEntry> _searchContainer;

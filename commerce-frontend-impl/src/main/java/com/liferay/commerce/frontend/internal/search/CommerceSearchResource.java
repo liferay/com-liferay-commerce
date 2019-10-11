@@ -40,7 +40,7 @@ import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.product.util.CPDefinitionHttpHelper;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -309,7 +309,7 @@ public class CommerceSearchResource {
 		cpQuery.setOrderByType1("ASC");
 		cpQuery.setOrderByType2("DESC");
 
-		CPDataSourceResult cpDataSourceResult = _cpDefinitionHelper.search(
+		CPDataSourceResult cpDataSourceResult = _cpDefinitionHttpHelper.search(
 			groupId, searchContext, cpQuery, 0, 5);
 
 		if (cpDataSourceResult.getLength() > 0) {
@@ -375,7 +375,7 @@ public class CommerceSearchResource {
 
 		searchItemModel.setImage(cpCatalogEntry.getDefaultImageFileUrl());
 
-		String url = _cpDefinitionHelper.getFriendlyURL(
+		String url = _cpDefinitionHttpHelper.getFriendlyURL(
 			cpCatalogEntry.getCPDefinitionId(), themeDisplay);
 
 		searchItemModel.setUrl(url);
@@ -421,7 +421,7 @@ public class CommerceSearchResource {
 	private CommerceSearchUtil _commerceSearchUtil;
 
 	@Reference
-	private CPDefinitionHelper _cpDefinitionHelper;
+	private CPDefinitionHttpHelper _cpDefinitionHttpHelper;
 
 	@Reference
 	private Http _http;

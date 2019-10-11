@@ -28,7 +28,7 @@ import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPFriendlyURLEntryLocalService;
 import com.liferay.commerce.product.service.CProductLocalService;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.product.util.CPDefinitionHttpHelper;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -116,9 +116,10 @@ public class ProductFriendlyURLResolver implements FriendlyURLResolver {
 		CProduct cProduct = _cProductLocalService.getCProduct(
 			cpFriendlyURLEntry.getClassPK());
 
-		CPCatalogEntry cpCatalogEntry = _cpDefinitionHelper.getCPCatalogEntry(
-			_getCommerceAccountId(groupId, httpServletRequest), groupId,
-			cProduct.getPublishedCPDefinitionId(), locale);
+		CPCatalogEntry cpCatalogEntry =
+			_cpDefinitionHttpHelper.getCPCatalogEntry(
+				_getCommerceAccountId(groupId, httpServletRequest), groupId,
+				cProduct.getPublishedCPDefinitionId(), locale);
 
 		Layout layout = getProductLayout(
 			groupId, privateLayout, cpCatalogEntry.getCPDefinitionId());
@@ -295,7 +296,7 @@ public class ProductFriendlyURLResolver implements FriendlyURLResolver {
 	private CommerceAccountHttpHelper _commerceAccountHttpHelper;
 
 	@Reference
-	private CPDefinitionHelper _cpDefinitionHelper;
+	private CPDefinitionHttpHelper _cpDefinitionHttpHelper;
 
 	@Reference
 	private CPDefinitionLocalService _cpDefinitionLocalService;

@@ -25,7 +25,7 @@ import com.liferay.commerce.product.data.source.CPDataSourceResult;
 import com.liferay.commerce.product.display.context.util.CPRequestHelper;
 import com.liferay.commerce.product.type.CPType;
 import com.liferay.commerce.product.type.CPTypeServicesTracker;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.product.util.CPDefinitionHttpHelper;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.search.DisplayTerms;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
@@ -61,7 +61,7 @@ public class CPSearchResultsDisplayContext {
 			CPContentListEntryRendererRegistry
 				cpContentListEntryRendererRegistry,
 			CPContentListRendererRegistry cpContentListRendererRegistry,
-			CPDefinitionHelper cpDefinitionHelper,
+			CPDefinitionHttpHelper cpDefinitionHttpHelper,
 			CPTypeServicesTracker cpTypeServicesTracker,
 			HttpServletRequest httpServletRequest,
 			PortletSharedSearchResponse portletSharedSearchResponse)
@@ -70,7 +70,7 @@ public class CPSearchResultsDisplayContext {
 		_cpContentListEntryRendererRegistry =
 			cpContentListEntryRendererRegistry;
 		_cpContentListRendererRegistry = cpContentListRendererRegistry;
-		_cpDefinitionHelper = cpDefinitionHelper;
+		_cpDefinitionHttpHelper = cpDefinitionHttpHelper;
 		_cpTypeServicesTracker = cpTypeServicesTracker;
 		_httpServletRequest = httpServletRequest;
 		_portletSharedSearchResponse = portletSharedSearchResponse;
@@ -286,7 +286,7 @@ public class CPSearchResultsDisplayContext {
 
 		for (Document document : documents) {
 			cpCatalogEntries.add(
-				_cpDefinitionHelper.getCPCatalogEntry(
+				_cpDefinitionHttpHelper.getCPCatalogEntry(
 					document, _cpRequestHelper.getLocale()));
 		}
 
@@ -317,7 +317,7 @@ public class CPSearchResultsDisplayContext {
 	private final CPContentListEntryRendererRegistry
 		_cpContentListEntryRendererRegistry;
 	private final CPContentListRendererRegistry _cpContentListRendererRegistry;
-	private final CPDefinitionHelper _cpDefinitionHelper;
+	private final CPDefinitionHttpHelper _cpDefinitionHttpHelper;
 	private final CPRequestHelper _cpRequestHelper;
 	private final CPSearchResultsPortletInstanceConfiguration
 		_cpSearchResultsPortletInstanceConfiguration;

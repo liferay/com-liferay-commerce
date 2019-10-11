@@ -41,7 +41,7 @@ import com.liferay.commerce.product.service.CPOptionCategoryLocalService;
 import com.liferay.commerce.product.service.CProductLocalService;
 import com.liferay.commerce.product.type.CPType;
 import com.liferay.commerce.product.type.CPTypeServicesTracker;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.product.util.CPDefinitionHttpHelper;
 import com.liferay.commerce.product.util.CPHttpContentContributor;
 import com.liferay.commerce.product.util.CPHttpContentContributorRegistry;
 import com.liferay.commerce.product.util.CPInstanceHelper;
@@ -185,7 +185,7 @@ public class CPContentHelperImpl implements CPContentHelper {
 					return null;
 				}
 
-				cpCatalogEntry = _cpDefinitionHelper.getCPCatalogEntry(
+				cpCatalogEntry = _cpDefinitionHttpHelper.getCPCatalogEntry(
 					commerceAccountId,
 					commerceContext.getCommerceChannelGroupId(),
 					cProduct.getPublishedCPDefinitionId(),
@@ -313,7 +313,7 @@ public class CPContentHelperImpl implements CPContentHelper {
 			CPCatalogEntry cpCatalogEntry, ThemeDisplay themeDisplay)
 		throws PortalException {
 
-		return _cpDefinitionHelper.getFriendlyURL(
+		return _cpDefinitionHttpHelper.getFriendlyURL(
 			cpCatalogEntry.getCPDefinitionId(), themeDisplay);
 	}
 
@@ -499,7 +499,7 @@ public class CPContentHelperImpl implements CPContentHelper {
 	private CPContentRendererRegistry _cpContentRendererRegistry;
 
 	@Reference
-	private CPDefinitionHelper _cpDefinitionHelper;
+	private CPDefinitionHttpHelper _cpDefinitionHttpHelper;
 
 	@Reference
 	private CPHttpContentContributorRegistry _cpHttpContentContributorRegistry;

@@ -29,7 +29,7 @@ import com.liferay.commerce.price.CommerceProductPrice;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.model.CPInstance;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.product.util.CPDefinitionHttpHelper;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.service.CPDefinitionInventoryLocalServiceUtil;
 import com.liferay.commerce.taglib.servlet.taglib.internal.servlet.ServletContextUtil;
@@ -154,7 +154,7 @@ public class PriceTag extends IncludeTag {
 		commerceProductPriceCalculation =
 			ServletContextUtil.getCommercePriceCalculation();
 		configurationProvider = ServletContextUtil.getConfigurationProvider();
-		cpDefinitionHelper = ServletContextUtil.getCPDefinitionHelper();
+		cpDefinitionHttpHelper = ServletContextUtil.getCPDefinitionHttpHelper();
 		cpInstanceHelper = ServletContextUtil.getCPInstanceHelper();
 		servletContext = ServletContextUtil.getServletContext();
 	}
@@ -342,10 +342,11 @@ public class PriceTag extends IncludeTag {
 	protected void setProductInfo() throws Exception {
 		CommerceAccount commerceAccount = _commerceContext.getCommerceAccount();
 
-		CPCatalogEntry cpCatalogEntry = cpDefinitionHelper.getCPCatalogEntry(
-			commerceAccount.getCommerceAccountId(),
-			_commerceContext.getSiteGroupId(), _cpDefinitionId,
-			_themeDisplay.getLocale());
+		CPCatalogEntry cpCatalogEntry =
+			cpDefinitionHttpHelper.getCPCatalogEntry(
+				commerceAccount.getCommerceAccountId(),
+				_commerceContext.getSiteGroupId(), _cpDefinitionId,
+				_themeDisplay.getLocale());
 
 		if (_quantity <= 0) {
 			CPDefinitionInventory cpDefinitionInventory =
@@ -374,7 +375,7 @@ public class PriceTag extends IncludeTag {
 
 	protected CommerceProductPriceCalculation commerceProductPriceCalculation;
 	protected ConfigurationProvider configurationProvider;
-	protected CPDefinitionHelper cpDefinitionHelper;
+	protected CPDefinitionHttpHelper cpDefinitionHttpHelper;
 	protected CPInstanceHelper cpInstanceHelper;
 
 	private static final String _PAGE = "/price/page.jsp";

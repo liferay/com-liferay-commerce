@@ -20,7 +20,7 @@ import com.liferay.commerce.product.configuration.CPDefinitionLinkTypeConfigurat
 import com.liferay.commerce.product.constants.CPWebKeys;
 import com.liferay.commerce.product.data.source.CPDataSourceResult;
 import com.liferay.commerce.product.data.source.CPHttpDataSource;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.product.util.CPDefinitionHttpHelper;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.configuration.metatype.bnd.util.ConfigurableUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -104,7 +104,7 @@ public class CPHttpDataSourceDefinitionLinkTypeImpl
 
 		searchContext.setKeywords(StringPool.STAR);
 
-		return _cpDefinitionHelper.search(
+		return _cpDefinitionHttpHelper.search(
 			_portal.getScopeGroupId(httpServletRequest), searchContext,
 			new CPQuery(), start, end);
 	}
@@ -118,7 +118,7 @@ public class CPHttpDataSourceDefinitionLinkTypeImpl
 	}
 
 	@Reference
-	private CPDefinitionHelper _cpDefinitionHelper;
+	private CPDefinitionHttpHelper _cpDefinitionHttpHelper;
 
 	private volatile CPDefinitionLinkTypeConfiguration
 		_cpDefinitionLinkTypeConfiguration;

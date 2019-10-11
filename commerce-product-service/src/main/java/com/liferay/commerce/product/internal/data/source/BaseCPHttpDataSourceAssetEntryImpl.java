@@ -19,7 +19,7 @@ import com.liferay.commerce.product.catalog.CPQuery;
 import com.liferay.commerce.product.constants.CPWebKeys;
 import com.liferay.commerce.product.data.source.CPDataSourceResult;
 import com.liferay.commerce.product.data.source.CPHttpDataSource;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.product.util.CPDefinitionHttpHelper;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.Field;
@@ -82,7 +82,7 @@ public abstract class BaseCPHttpDataSourceAssetEntryImpl
 
 		CPQuery cpQuery = getCPQuery(cpCatalogEntry.getCPDefinitionId());
 
-		return cpDefinitionHelper.search(
+		return cpDefinitionHttpHelper.search(
 			groupId, searchContext, cpQuery, start, end);
 	}
 
@@ -94,7 +94,7 @@ public abstract class BaseCPHttpDataSourceAssetEntryImpl
 			"content.Language", locale, getClass());
 	}
 
-	protected CPDefinitionHelper cpDefinitionHelper;
+	protected CPDefinitionHttpHelper cpDefinitionHttpHelper;
 	protected Portal portal;
 
 }

@@ -26,7 +26,7 @@ import com.liferay.commerce.frontend.internal.wishlist.model.WishListItemUpdated
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.product.util.CPDefinitionHttpHelper;
 import com.liferay.commerce.wish.list.model.CommerceWishList;
 import com.liferay.commerce.wish.list.model.CommerceWishListItem;
 import com.liferay.commerce.wish.list.service.CommerceWishListItemService;
@@ -88,7 +88,7 @@ public class CommerceWishListResource {
 					groupId, _portal.getUserId(httpServletRequest));
 
 			CPCatalogEntry cpCatalogEntry =
-				_cpDefinitionHelper.getCPCatalogEntry(
+				_cpDefinitionHttpHelper.getCPCatalogEntry(
 					commerceAccountId, groupId, cpDefinitionId,
 					_portal.getLocale(httpServletRequest));
 
@@ -177,7 +177,7 @@ public class CommerceWishListResource {
 	private CommerceWishListService _commerceWishListService;
 
 	@Reference
-	private CPDefinitionHelper _cpDefinitionHelper;
+	private CPDefinitionHttpHelper _cpDefinitionHttpHelper;
 
 	@Reference
 	private CPInstanceLocalService _cpInstanceLocalService;

@@ -20,7 +20,7 @@ import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderValidatorRegistry;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.product.util.CPDefinitionHttpHelper;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -49,7 +49,7 @@ public class CommerceCartContentTotalDisplayContext
 			CommerceOrderPriceCalculation commerceOrderPriceCalculation,
 			CommerceOrderValidatorRegistry commerceOrderValidatorRegistry,
 			CommerceProductPriceCalculation commerceProductPriceCalculation,
-			CPDefinitionHelper cpDefinitionHelper,
+			CPDefinitionHttpHelper cpDefinitionHttpHelper,
 			CPInstanceHelper cpInstanceHelper,
 			ModelResourcePermission<CommerceOrder>
 				commerceOrderModelResourcePermission,
@@ -60,7 +60,7 @@ public class CommerceCartContentTotalDisplayContext
 		super(
 			httpServletRequest, commerceOrderItemService,
 			commerceOrderPriceCalculation, commerceOrderValidatorRegistry,
-			commerceProductPriceCalculation, cpDefinitionHelper,
+			commerceProductPriceCalculation, cpDefinitionHttpHelper,
 			cpInstanceHelper, commerceOrderModelResourcePermission,
 			commerceProductPortletResourcePermission);
 

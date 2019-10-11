@@ -21,7 +21,7 @@ import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHelper;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.product.util.CPDefinitionHttpHelper;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
@@ -72,8 +72,8 @@ public class ServletContextUtil {
 		return _instance._getConfigurationProvider();
 	}
 
-	public static final CPDefinitionHelper getCPDefinitionHelper() {
-		return _instance._getCPDefinitionHelper();
+	public static final CPDefinitionHttpHelper getCPDefinitionHttpHelper() {
+		return _instance._getCPDefinitionHttpHelper();
 	}
 
 	public static final CPInstanceHelper getCPInstanceHelper() {
@@ -156,10 +156,10 @@ public class ServletContextUtil {
 	}
 
 	@Reference(unbind = "-")
-	protected void setCPDefinitionHelper(
-		CPDefinitionHelper cpDefinitionHelper) {
+	protected void setCPDefinitionHttpHelper(
+		CPDefinitionHttpHelper cpDefinitionHttpHelper) {
 
-		_cpDefinitionHelper = cpDefinitionHelper;
+		_cpDefinitionHttpHelper = cpDefinitionHttpHelper;
 	}
 
 	@Reference(unbind = "-")
@@ -220,8 +220,8 @@ public class ServletContextUtil {
 		return _configurationProvider;
 	}
 
-	private CPDefinitionHelper _getCPDefinitionHelper() {
-		return _cpDefinitionHelper;
+	private CPDefinitionHttpHelper _getCPDefinitionHttpHelper() {
+		return _cpDefinitionHttpHelper;
 	}
 
 	private CPInstanceHelper _getCPInstanceHelper() {
@@ -253,7 +253,7 @@ public class ServletContextUtil {
 	private CommercePriceListLocalService _commercePriceListLocalService;
 	private CommerceProductPriceCalculation _commerceProductPriceCalculation;
 	private ConfigurationProvider _configurationProvider;
-	private CPDefinitionHelper _cpDefinitionHelper;
+	private CPDefinitionHttpHelper _cpDefinitionHttpHelper;
 	private CPInstanceHelper _cpInstanceHelper;
 	private CPSubscriptionTypeRegistry _cpSubscriptionTypeRegistry;
 	private PanelAppRegistry _panelAppRegistry;

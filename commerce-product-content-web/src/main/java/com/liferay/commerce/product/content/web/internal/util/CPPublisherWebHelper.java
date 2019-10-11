@@ -22,7 +22,7 @@ import com.liferay.commerce.product.catalog.CPQuery;
 import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.product.util.CPDefinitionHttpHelper;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -72,7 +72,7 @@ public class CPPublisherWebHelper {
 
 			try {
 				CPCatalogEntry cpCatalogEntry =
-					_cpDefinitionHelper.getCPCatalogEntry(
+					_cpDefinitionHttpHelper.getCPCatalogEntry(
 						commerceAccountId, groupId, cpDefinitionId,
 						themeDisplay.getLocale());
 
@@ -322,6 +322,6 @@ public class CPPublisherWebHelper {
 	private AssetTagLocalService _assetTagLocalService;
 
 	@Reference
-	private CPDefinitionHelper _cpDefinitionHelper;
+	private CPDefinitionHttpHelper _cpDefinitionHttpHelper;
 
 }

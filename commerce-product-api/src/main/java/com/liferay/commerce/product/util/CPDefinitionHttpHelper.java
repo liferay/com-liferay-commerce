@@ -31,7 +31,7 @@ import java.util.Locale;
  * @author Andrea Di Giorgi
  */
 @ProviderType
-public interface CPDefinitionHelper {
+public interface CPDefinitionHttpHelper {
 
 	public CPCatalogEntry getCPCatalogEntry(Document document, Locale locale);
 

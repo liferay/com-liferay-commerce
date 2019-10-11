@@ -24,7 +24,7 @@ import com.liferay.commerce.product.data.source.CPDataSourceResult;
 import com.liferay.commerce.product.data.source.CPHttpDataSource;
 import com.liferay.commerce.product.type.CPType;
 import com.liferay.commerce.product.type.CPTypeServicesTracker;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.product.util.CPDefinitionHttpHelper;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Company;
@@ -56,7 +56,7 @@ public class CPPublisherDisplayContext extends BaseCPPublisherDisplayContext {
 			CPContentListEntryRendererRegistry contentListEntryRendererRegistry,
 			CPContentListRendererRegistry cpContentListRendererRegistry,
 			CPDataSourceRegistry cpDataSourceRegistry,
-			CPDefinitionHelper cpDefinitionHelper,
+			CPDefinitionHttpHelper cpDefinitionHttpHelper,
 			CPPublisherWebHelper cpPublisherWebHelper,
 			CPTypeServicesTracker cpTypeServicesTracker,
 			HttpServletRequest httpServletRequest)
@@ -67,7 +67,7 @@ public class CPPublisherDisplayContext extends BaseCPPublisherDisplayContext {
 			cpPublisherWebHelper, cpTypeServicesTracker, httpServletRequest);
 
 		_cpDataSourceRegistry = cpDataSourceRegistry;
-		_cpDefinitionHelper = cpDefinitionHelper;
+		_cpDefinitionHttpHelper = cpDefinitionHttpHelper;
 	}
 
 	public Map<String, String> getCPContentListEntryRendererKeys() {
@@ -193,13 +193,13 @@ public class CPPublisherDisplayContext extends BaseCPPublisherDisplayContext {
 		cpPublisherWebHelper.setOrdering(
 			cpQuery, cpContentRequestHelper.getPortletPreferences());
 
-		return _cpDefinitionHelper.search(
+		return _cpDefinitionHttpHelper.search(
 			cpContentRequestHelper.getScopeGroupId(), searchContext, cpQuery,
 			start, end);
 	}
 
 	private final CPDataSourceRegistry _cpDataSourceRegistry;
-	private final CPDefinitionHelper _cpDefinitionHelper;
+	private final CPDefinitionHttpHelper _cpDefinitionHttpHelper;
 	private SearchContainer<CPCatalogEntry> _searchContainer;
 
 }

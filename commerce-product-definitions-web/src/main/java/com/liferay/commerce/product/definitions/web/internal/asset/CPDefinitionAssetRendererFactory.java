@@ -21,7 +21,7 @@ import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.product.util.CPDefinitionHttpHelper;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.Group;
@@ -77,7 +77,8 @@ public class CPDefinitionAssetRendererFactory
 		CPDefinitionAssetRenderer cpDefinitionAssetRenderer =
 			new CPDefinitionAssetRenderer(
 				_cpDefinitionLocalService.getCPDefinition(classPK),
-				_cpDefinitionHelper, _commerceCatalogModelResourcePermission);
+				_cpDefinitionHttpHelper,
+				_commerceCatalogModelResourcePermission);
 
 		cpDefinitionAssetRenderer.setAssetRendererType(type);
 		cpDefinitionAssetRenderer.setServletContext(_servletContext);
@@ -175,7 +176,7 @@ public class CPDefinitionAssetRendererFactory
 		_commerceCatalogModelResourcePermission;
 
 	@Reference
-	private CPDefinitionHelper _cpDefinitionHelper;
+	private CPDefinitionHttpHelper _cpDefinitionHttpHelper;
 
 	@Reference
 	private CPDefinitionLocalService _cpDefinitionLocalService;

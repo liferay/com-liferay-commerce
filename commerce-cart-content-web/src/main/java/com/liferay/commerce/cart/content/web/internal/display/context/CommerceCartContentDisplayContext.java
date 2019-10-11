@@ -28,7 +28,7 @@ import com.liferay.commerce.price.CommerceOrderPriceCalculation;
 import com.liferay.commerce.price.CommerceProductPrice;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.constants.CPActionKeys;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.product.util.CPDefinitionHttpHelper;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
@@ -64,7 +64,7 @@ public class CommerceCartContentDisplayContext {
 			CommerceOrderPriceCalculation commerceOrderPriceCalculation,
 			CommerceOrderValidatorRegistry commerceOrderValidatorRegistry,
 			CommerceProductPriceCalculation commerceProductPriceCalculation,
-			CPDefinitionHelper cpDefinitionHelper,
+			CPDefinitionHttpHelper cpDefinitionHttpHelper,
 			CPInstanceHelper cpInstanceHelper,
 			ModelResourcePermission<CommerceOrder>
 				commerceOrderModelResourcePermission,
@@ -78,7 +78,7 @@ public class CommerceCartContentDisplayContext {
 		_commerceProductPortletResourcePermission =
 			commerceProductPortletResourcePermission;
 
-		this.cpDefinitionHelper = cpDefinitionHelper;
+		this.cpDefinitionHttpHelper = cpDefinitionHttpHelper;
 		this.cpInstanceHelper = cpInstanceHelper;
 		this.commerceOrderModelResourcePermission =
 			commerceOrderModelResourcePermission;
@@ -150,7 +150,8 @@ public class CommerceCartContentDisplayContext {
 			long cpDefinitionId, ThemeDisplay themeDisplay)
 		throws PortalException {
 
-		return cpDefinitionHelper.getFriendlyURL(cpDefinitionId, themeDisplay);
+		return cpDefinitionHttpHelper.getFriendlyURL(
+			cpDefinitionId, themeDisplay);
 	}
 
 	public String getDeleteURL(CommerceOrderItem commerceOrderItem) {
@@ -318,7 +319,7 @@ public class CommerceCartContentDisplayContext {
 	protected final CommerceContext commerceContext;
 	protected final ModelResourcePermission<CommerceOrder>
 		commerceOrderModelResourcePermission;
-	protected final CPDefinitionHelper cpDefinitionHelper;
+	protected final CPDefinitionHttpHelper cpDefinitionHttpHelper;
 	protected final CPInstanceHelper cpInstanceHelper;
 
 	private final CommerceCartContentPortletInstanceConfiguration

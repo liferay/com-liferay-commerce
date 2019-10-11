@@ -29,7 +29,7 @@ import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.search.CPDefinitionIndexer;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.product.type.CPTypeServicesTracker;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.product.util.CPDefinitionHttpHelper;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -126,7 +126,7 @@ public class CPSearchResultsPortlet
 			CPSearchResultsDisplayContext cpSearchResultsDisplayContext =
 				new CPSearchResultsDisplayContext(
 					_cpContentListEntryRendererRegistry,
-					_cpContentListRendererRegistry, _cpDefinitionHelper,
+					_cpContentListRendererRegistry, _cpDefinitionHttpHelper,
 					_cpTypeServicesTracker, httpServletRequest,
 					portletSharedSearchResponse);
 
@@ -297,7 +297,7 @@ public class CPSearchResultsPortlet
 	private CPContentListRendererRegistry _cpContentListRendererRegistry;
 
 	@Reference
-	private CPDefinitionHelper _cpDefinitionHelper;
+	private CPDefinitionHttpHelper _cpDefinitionHttpHelper;
 
 	@Reference
 	private CPTypeServicesTracker _cpTypeServicesTracker;
