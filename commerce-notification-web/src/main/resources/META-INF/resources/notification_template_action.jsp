@@ -17,8 +17,6 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CommerceNotificationTemplatesDisplayContext commerceNotificationTemplatesDisplayContext = (CommerceNotificationTemplatesDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
-
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 CommerceNotificationTemplate commerceNotificationTemplate = (CommerceNotificationTemplate)row.getObject();
@@ -31,7 +29,7 @@ CommerceNotificationTemplate commerceNotificationTemplate = (CommerceNotificatio
 	message="<%= StringPool.BLANK %>"
 	showWhenSingleIcon="<%= true %>"
 >
-	<c:if test="<%= commerceNotificationTemplatesDisplayContext.hasPermission(commerceNotificationTemplate, ActionKeys.UPDATE) %>">
+	<c:if test="<%= CommerceNotificationTemplatePermission.contains(permissionChecker, commerceNotificationTemplate, ActionKeys.UPDATE) %>">
 		<portlet:renderURL var="editURL">
 			<portlet:param name="mvcRenderCommandName" value="editCommerceNotificationTemplate" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -44,7 +42,7 @@ CommerceNotificationTemplate commerceNotificationTemplate = (CommerceNotificatio
 		/>
 	</c:if>
 
-	<c:if test="<%= commerceNotificationTemplatesDisplayContext.hasPermission(commerceNotificationTemplate, ActionKeys.DELETE) %>">
+	<c:if test="<%= CommerceNotificationTemplatePermission.contains(permissionChecker, commerceNotificationTemplate, ActionKeys.DELETE) %>">
 		<portlet:actionURL name="editCommerceNotificationTemplate" var="deleteURL">
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
