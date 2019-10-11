@@ -55,7 +55,6 @@ import com.liferay.portal.kernel.search.facet.collector.FacetCollector;
 import com.liferay.portal.kernel.search.facet.collector.TermCollector;
 import com.liferay.portal.kernel.search.facet.config.FacetConfiguration;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -228,14 +227,6 @@ public class CommerceOrderListDisplayContext {
 		}
 
 		return _searchContainer;
-	}
-
-	public boolean hasPermission(long commerceOrderId, String actionId)
-		throws PortalException {
-
-		return _commerceOrderPermission.contains(
-			PermissionThreadLocal.getPermissionChecker(), commerceOrderId,
-			actionId);
 	}
 
 	public boolean isShowFilter() {

@@ -46,6 +46,7 @@ page import="com.liferay.commerce.order.web.internal.display.context.CommerceOrd
 page import="com.liferay.commerce.order.web.internal.display.context.CommerceOrderSettingsDisplayContext" %><%@
 page import="com.liferay.commerce.order.web.internal.search.CommerceOrderDisplayTerms" %><%@
 page import="com.liferay.commerce.order.web.internal.search.CommerceOrderItemDisplayTerms" %><%@
+page import="com.liferay.commerce.order.web.internal.security.permission.resource.CommerceOrderPermission" %><%@
 page import="com.liferay.commerce.order.web.internal.servlet.taglib.ui.CommerceOrderFormNavigatorConstants" %><%@
 page import="com.liferay.commerce.order.web.internal.servlet.taglib.ui.CommerceOrderScreenNavigationConstants" %><%@
 page import="com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel" %><%@

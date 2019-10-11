@@ -17,8 +17,6 @@
 <%@ include file="/init.jsp" %>
 
 <%
-CommerceOrderListDisplayContext commerceOrderListDisplayContext = (CommerceOrderListDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
-
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 CommerceOrder commerceOrder = (CommerceOrder)row.getObject();
@@ -32,7 +30,7 @@ CommerceOrder commerceOrder = (CommerceOrder)row.getObject();
 	showWhenSingleIcon="<%= true %>"
 >
 	<c:choose>
-		<c:when test="<%= commerceOrderListDisplayContext.hasPermission(commerceOrder.getCommerceOrderId(), ActionKeys.UPDATE) %>">
+		<c:when test="<%= CommerceOrderPermission.contains(permissionChecker, commerceOrder, ActionKeys.UPDATE) %>">
 			<portlet:renderURL var="editURL">
 				<portlet:param name="mvcRenderCommandName" value="editCommerceOrder" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -58,7 +56,7 @@ CommerceOrder commerceOrder = (CommerceOrder)row.getObject();
 		</c:otherwise>
 	</c:choose>
 
-	<c:if test="<%= commerceOrderListDisplayContext.hasPermission(commerceOrder.getCommerceOrderId(), ActionKeys.DELETE) %>">
+	<c:if test="<%= CommerceOrderPermission.contains(permissionChecker, commerceOrder, ActionKeys.DELETE) %>">
 		<portlet:actionURL name="editCommerceOrder" var="deleteURL">
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
