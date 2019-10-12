@@ -580,12 +580,13 @@ public class CPAttachmentFileEntryLocalServiceImpl
 		if (cpAttachmentFileEntry == null) {
 			cpAttachmentFileEntry =
 				cpAttachmentFileEntryLocalService.addCPAttachmentFileEntry(
-					serviceContext.getUserId(), groupId, classNameId, classPK, fileEntryId, displayDateMonth,
-					displayDateDay, displayDateYear, displayDateHour,
-					displayDateMinute, expirationDateMonth, expirationDateDay,
-					expirationDateYear, expirationDateHour,
-					expirationDateMinute, neverExpire, titleMap, json, priority,
-					type, externalReferenceCode, serviceContext);
+					serviceContext.getUserId(), groupId, classNameId, classPK,
+					fileEntryId, displayDateMonth, displayDateDay,
+					displayDateYear, displayDateHour, displayDateMinute,
+					expirationDateMonth, expirationDateDay, expirationDateYear,
+					expirationDateHour, expirationDateMinute, neverExpire,
+					titleMap, json, priority, type, externalReferenceCode,
+					serviceContext);
 		}
 		else {
 			cpAttachmentFileEntry =

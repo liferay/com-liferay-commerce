@@ -249,6 +249,7 @@ public class EditCPAttachmentFileEntryMVCActionCommand
 			long classNameId = _portal.getClassNameId(CPDefinition.class);
 
 			_cpAttachmentFileEntryService.addCPAttachmentFileEntry(
+				serviceContext.getUserId(), serviceContext.getScopeGroupId(),
 				classNameId, cpDefinitionId, fileEntryId, displayDateMonth,
 				displayDateDay, displayDateYear, displayDateHour,
 				displayDateMinute, expirationDateMonth, expirationDateDay,

@@ -399,8 +399,8 @@ public class AttachmentResourceImpl extends BaseAttachmentResourceImpl {
 
 		CPAttachmentFileEntry cpAttachmentFileEntry =
 			AttachmentUtil.upsertCPAttachmentFileEntry(
-				_cpAttachmentFileEntryService, _uniqueFileNameProvider,
-				attachment,
+				cpDefinition.getGroupId(), _cpAttachmentFileEntryService,
+				_uniqueFileNameProvider, attachment,
 				_classNameLocalService.getClassNameId(
 					cpDefinition.getModelClassName()),
 				cpDefinition.getCPDefinitionId(), type,
