@@ -15,6 +15,7 @@
 package com.liferay.commerce.product.asset.categories.web.internal.portlet.action;
 
 import com.liferay.asset.kernel.model.AssetCategory;
+import com.liferay.asset.kernel.service.AssetCategoryLocalService;
 import com.liferay.commerce.product.model.CPAttachmentFileEntry;
 import com.liferay.commerce.product.service.CPAttachmentFileEntryService;
 import com.liferay.document.library.kernel.exception.NoSuchFileEntryException;
@@ -153,7 +154,11 @@ public class EditAssetCategoryCPAttachmentFileEntryMVCActionCommand
 		else {
 			long classNameId = _portal.getClassNameId(AssetCategory.class);
 
+			AssetCategory assetCategory =
+				_assetCategoryLocalService.getAssetCategory(categoryId);
+
 			_cpAttachmentFileEntryService.addCPAttachmentFileEntry(
+				serviceContext.getUserId(), assetCategory.getGroupId(),
 				classNameId, categoryId, fileEntryId, displayDateMonth,
 				displayDateDay, displayDateYear, displayDateHour,
 				displayDateMinute, expirationDateMonth, expirationDateDay,
@@ -161,6 +166,9 @@ public class EditAssetCategoryCPAttachmentFileEntryMVCActionCommand
 				neverExpire, titleMap, null, priority, type, serviceContext);
 		}
 	}
+
+	@Reference
+	private AssetCategoryLocalService _assetCategoryLocalService;
 
 	@Reference
 	private CPAttachmentFileEntryService _cpAttachmentFileEntryService;

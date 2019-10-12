@@ -402,8 +402,8 @@ public class ProductResourceImpl
 		if (attachments != null) {
 			for (Attachment attachment : attachments) {
 				AttachmentUtil.upsertCPAttachmentFileEntry(
-					_cpAttachmentFileEntryService, _uniqueFileNameProvider,
-					attachment,
+					cpDefinition.getGroupId(), _cpAttachmentFileEntryService,
+					_uniqueFileNameProvider, attachment,
 					_classNameLocalService.getClassNameId(
 						cpDefinition.getModelClassName()),
 					cpDefinition.getCPDefinitionId(),
@@ -418,8 +418,8 @@ public class ProductResourceImpl
 		if (images != null) {
 			for (Attachment image : images) {
 				AttachmentUtil.upsertCPAttachmentFileEntry(
-					_cpAttachmentFileEntryService, _uniqueFileNameProvider,
-					image,
+					cpDefinition.getGroupId(), _cpAttachmentFileEntryService,
+					_uniqueFileNameProvider, image,
 					_classNameLocalService.getClassNameId(
 						cpDefinition.getModelClassName()),
 					cpDefinition.getCPDefinitionId(),
