@@ -167,6 +167,7 @@ public class AttachmentUtil {
 	}
 
 	public static CPAttachmentFileEntry upsertCPAttachmentFileEntry(
+			long groupId,
 			CPAttachmentFileEntryService cpAttachmentFileEntryService,
 			UniqueFileNameProvider uniqueFileNameProvider,
 			Attachment attachment, long classNameId, long classPK, int type,
@@ -206,12 +207,12 @@ public class AttachmentUtil {
 		}
 
 		return cpAttachmentFileEntryService.upsertCPAttachmentFileEntry(
-			classNameId, classPK, fileEntryId, displayDateConfig.getMonth(),
-			displayDateConfig.getDay(), displayDateConfig.getYear(),
-			displayDateConfig.getHour(), displayDateConfig.getMinute(),
-			expirationDateConfig.getMonth(), expirationDateConfig.getDay(),
-			expirationDateConfig.getYear(), expirationDateConfig.getHour(),
-			expirationDateConfig.getMinute(),
+			groupId, classNameId, classPK, fileEntryId,
+			displayDateConfig.getMonth(), displayDateConfig.getDay(),
+			displayDateConfig.getYear(), displayDateConfig.getHour(),
+			displayDateConfig.getMinute(), expirationDateConfig.getMonth(),
+			expirationDateConfig.getDay(), expirationDateConfig.getYear(),
+			expirationDateConfig.getHour(), expirationDateConfig.getMinute(),
 			GetterUtil.get(attachment.getNeverExpire(), false),
 			getTitleMap(null, attachment),
 			GetterUtil.getString(attachment.getOptions()),
