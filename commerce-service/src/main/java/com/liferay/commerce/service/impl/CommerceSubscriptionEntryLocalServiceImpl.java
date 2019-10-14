@@ -280,8 +280,9 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 	}
 
 	@Override
-	public CommerceSubscriptionEntry fetchCommerceSubscriptionEntry(
-		long commerceOrderItemId) {
+	public CommerceSubscriptionEntry
+		fetchCommerceSubscriptionEntryByCommerceOrderItemId(
+			long commerceOrderItemId) {
 
 		return commerceSubscriptionEntryPersistence.fetchByCommerceOrderItemId(
 			commerceOrderItemId);
