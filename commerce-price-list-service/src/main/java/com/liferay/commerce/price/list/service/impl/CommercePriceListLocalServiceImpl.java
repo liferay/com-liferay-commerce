@@ -793,8 +793,8 @@ public class CommercePriceListLocalServiceImpl
 
 		attributes.put(Field.ENTRY_CLASS_PK, keywords);
 		attributes.put(Field.NAME, keywords);
-		attributes.put(Field.USER_NAME, keywords);
 		attributes.put(Field.STATUS, status);
+		attributes.put(Field.USER_NAME, keywords);
 		attributes.put("params", params);
 
 		searchContext.setAttributes(attributes);

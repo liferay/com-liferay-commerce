@@ -103,9 +103,9 @@ public class CommerceOrderHttpHelperImplTest {
 		CommerceContext commerceContext = new TestCommerceContext(
 			commerceCurrency, _user, _group, _commerceAccount, null);
 
-		_httpServletRequest.setAttribute(WebKeys.THEME_DISPLAY, _themeDisplay);
 		_httpServletRequest.setAttribute(
 			CommerceWebKeys.COMMERCE_CONTEXT, commerceContext);
+		_httpServletRequest.setAttribute(WebKeys.THEME_DISPLAY, _themeDisplay);
 
 		_themeDisplay.setRequest(_httpServletRequest);
 	}

@@ -284,8 +284,8 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 
 		attributes.put(
 			CPInstanceIndexer.FIELD_CP_DEFINITION_ID, cpDefinitionId);
-		attributes.put(Field.STATUS, WorkflowConstants.STATUS_APPROVED);
 		attributes.put(CPInstanceIndexer.FIELD_PUBLISHED, Boolean.TRUE);
+		attributes.put(Field.STATUS, WorkflowConstants.STATUS_APPROVED);
 
 		List<String> optionsKeys = new ArrayList<>();
 
@@ -355,8 +355,8 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 
 		attributes.put(
 			CPInstanceIndexer.FIELD_CP_DEFINITION_ID, cpDefinitionId);
-		attributes.put(Field.STATUS, WorkflowConstants.STATUS_APPROVED);
 		attributes.put(CPInstanceIndexer.FIELD_PUBLISHED, Boolean.TRUE);
+		attributes.put(Field.STATUS, WorkflowConstants.STATUS_APPROVED);
 
 		List<String> optionsKeys = new ArrayList<>();
 

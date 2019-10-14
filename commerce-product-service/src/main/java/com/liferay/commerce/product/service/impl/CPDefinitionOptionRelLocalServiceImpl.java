@@ -391,9 +391,9 @@ public class CPDefinitionOptionRelLocalServiceImpl
 
 		Map<String, Serializable> attributes = new HashMap<>();
 
+		attributes.put(Field.CONTENT, keywords);
 		attributes.put(Field.ENTRY_CLASS_PK, keywords);
 		attributes.put(Field.NAME, keywords);
-		attributes.put(Field.CONTENT, keywords);
 		attributes.put("CPDefinitionId", cpDefinitionId);
 		attributes.put("params", params);
 

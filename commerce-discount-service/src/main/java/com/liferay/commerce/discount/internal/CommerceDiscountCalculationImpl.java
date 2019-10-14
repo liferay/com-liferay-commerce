@@ -160,12 +160,12 @@ public class CommerceDiscountCalculationImpl
 
 		Map<String, Serializable> attributes = new HashMap<>();
 
-		attributes.put(Field.STATUS, WorkflowConstants.STATUS_APPROVED);
 		attributes.put(CommerceDiscountIndexer.FIELD_ACTIVE, true);
 		attributes.put(CommerceDiscountIndexer.FIELD_COUPON_CODE, couponCode);
 		attributes.put(
 			CommerceDiscountIndexer.FIELD_TARGET_TYPE,
 			commerceDiscountTargetType.toString());
+		attributes.put(Field.STATUS, WorkflowConstants.STATUS_APPROVED);
 		attributes.put("commerceAccountGroupIds", commerceAccountGroupIds);
 		attributes.put("commerceOrderId", commerceOrderId);
 		attributes.put("cpDefinitionId", cpDefinitionId);

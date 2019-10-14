@@ -1723,10 +1723,10 @@ public class CPDefinitionLocalServiceImpl
 
 		Map<String, Serializable> attributes = new HashMap<>();
 
+		attributes.put(Field.CONTENT, keywords);
+		attributes.put(Field.DESCRIPTION, keywords);
 		attributes.put(Field.ENTRY_CLASS_PK, keywords);
 		attributes.put(Field.NAME, keywords);
-		attributes.put(Field.DESCRIPTION, keywords);
-		attributes.put(Field.CONTENT, keywords);
 		attributes.put(Field.STATUS, status);
 		attributes.put("params", params);
 

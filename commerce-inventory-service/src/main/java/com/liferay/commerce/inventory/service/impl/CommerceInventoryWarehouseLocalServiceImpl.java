@@ -345,13 +345,13 @@ public class CommerceInventoryWarehouseLocalServiceImpl
 
 		Map<String, Serializable> attributes = new HashMap<>();
 
-		attributes.put(Field.ENTRY_CLASS_PK, keywords);
-		attributes.put(Field.NAME, keywords);
-		attributes.put(Field.DESCRIPTION, keywords);
 		attributes.put(CommerceInventoryWarehouseIndexer.FIELD_CITY, keywords);
 		attributes.put(
 			CommerceInventoryWarehouseIndexer.FIELD_STREET_1, keywords);
 		attributes.put(CommerceInventoryWarehouseIndexer.FIELD_ZIP, keywords);
+		attributes.put(Field.DESCRIPTION, keywords);
+		attributes.put(Field.ENTRY_CLASS_PK, keywords);
+		attributes.put(Field.NAME, keywords);
 		attributes.put("params", params);
 
 		if (active != null) {

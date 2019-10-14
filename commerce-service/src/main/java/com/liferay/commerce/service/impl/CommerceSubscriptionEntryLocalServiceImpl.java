@@ -526,10 +526,10 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 
 		Map<String, Serializable> attributes = new HashMap<>();
 
-		attributes.put(Field.ENTRY_CLASS_PK, keywords);
 		attributes.put(
 			CommerceSubscriptionEntryIndexer.FIELD_CP_INSTANCE_ID, keywords);
 		attributes.put(CommerceSubscriptionEntryIndexer.FIELD_SKU, keywords);
+		attributes.put(Field.ENTRY_CLASS_PK, keywords);
 
 		if (maxSubscriptionCycles != null) {
 			attributes.put(

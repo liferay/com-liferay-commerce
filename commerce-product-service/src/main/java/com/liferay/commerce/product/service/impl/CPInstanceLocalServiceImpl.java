@@ -1047,13 +1047,13 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 
 		Map<String, Serializable> attributes = new HashMap<>();
 
-		attributes.put(Field.CONTENT, keywords);
-		attributes.put(Field.STATUS, status);
 		attributes.put(
 			CPInstanceIndexer.FIELD_CP_DEFINITION_ID, cpDefinitionId);
 		attributes.put(
 			CPInstanceIndexer.FIELD_CP_DEFINITION_STATUS,
 			WorkflowConstants.STATUS_ANY);
+		attributes.put(Field.CONTENT, keywords);
+		attributes.put(Field.STATUS, status);
 		attributes.put("params", params);
 
 		searchContext.setAttributes(attributes);
