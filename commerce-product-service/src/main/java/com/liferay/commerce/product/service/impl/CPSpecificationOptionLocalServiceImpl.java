@@ -247,10 +247,10 @@ public class CPSpecificationOptionLocalServiceImpl
 		attributes.put(
 			CPSpecificationOptionIndexer.FIELD_CP_OPTION_CATEGORY_TITLE,
 			keywords);
+		attributes.put(Field.CONTENT, keywords);
+		attributes.put(Field.DESCRIPTION, keywords);
 		attributes.put(Field.ENTRY_CLASS_PK, keywords);
 		attributes.put(Field.TITLE, keywords);
-		attributes.put(Field.DESCRIPTION, keywords);
-		attributes.put(Field.CONTENT, keywords);
 
 		if (facetable != null) {
 			attributes.put(
