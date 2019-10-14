@@ -512,10 +512,10 @@ public class CommerceDiscountLocalServiceImpl
 
 		Map<String, Serializable> attributes = new HashMap<>();
 
-		attributes.put(Field.ENTRY_CLASS_PK, keywords);
-		attributes.put(Field.TITLE, keywords);
-		attributes.put(Field.STATUS, status);
 		attributes.put(CommerceDiscountIndexer.FIELD_GROUP_IDS, groupIds);
+		attributes.put(Field.ENTRY_CLASS_PK, keywords);
+		attributes.put(Field.STATUS, status);
+		attributes.put(Field.TITLE, keywords);
 		attributes.put("params", params);
 
 		searchContext.setAttributes(attributes);

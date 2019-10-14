@@ -241,9 +241,9 @@ public class CPOptionCategoryLocalServiceImpl
 
 		Map<String, Serializable> attributes = new HashMap<>();
 
+		attributes.put(Field.DESCRIPTION, keywords);
 		attributes.put(Field.ENTRY_CLASS_PK, keywords);
 		attributes.put(Field.TITLE, keywords);
-		attributes.put(Field.DESCRIPTION, keywords);
 
 		attributes.put(CPOptionCategoryIndexer.FIELD_KEY, keywords);
 		attributes.put("params", params);
