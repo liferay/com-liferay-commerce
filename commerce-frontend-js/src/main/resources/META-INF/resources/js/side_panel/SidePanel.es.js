@@ -85,7 +85,7 @@ export default class SidePanel extends React.Component {
 	}
 
 	setSize(size) {
-		if(!size) {
+		if (!size) {
 			new Error('Size parameter is mandatory');
 		}
 		this.setState({size});
