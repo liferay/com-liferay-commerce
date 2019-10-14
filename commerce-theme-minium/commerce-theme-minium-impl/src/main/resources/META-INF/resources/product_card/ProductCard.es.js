@@ -81,7 +81,7 @@ class ProductCard extends Component {
 
 		const formData = new FormData();
 
-		formData.append('commerceAccountId', this.accountId);
+		formData.append('commerceAccountId', this.accountId ? this.accountId : 0);
 		formData.append('groupId', themeDisplay.getScopeGroupId());
 		formData.append('productId', this.productId);
 		formData.append('skuId', this.skuId ? this.skuId : 0);
