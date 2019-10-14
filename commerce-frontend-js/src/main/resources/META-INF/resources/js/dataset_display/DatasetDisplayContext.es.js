@@ -1,9 +1,9 @@
 import React from 'react';
 
-const DataSetDisplayContext = React.createContext({
+const DatasetDisplayContext = React.createContext({
 	formRef: null,
 	loadData: () => {},
 	sidePanelId: null
 });
 
-export default DataSetDisplayContext;
+export default DatasetDisplayContext;

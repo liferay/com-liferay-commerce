@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, {useState, useRef} from 'react';
 
-import DataSetDisplayContext from './DataSetDisplayContext.es';
+import DatasetDisplayContext from './DatasetDisplayContext.es';
 import ManagementBar from './management_bar/index.es';
 import Pagination from './pagination/index.es';
 import Table from './table/Table.es';
@@ -22,7 +22,7 @@ import Table from './table/Table.es';
 // 	return endpoint;
 // }
 
-function DataSetDisplay(props) {
+function DatasetDisplay(props) {
 	const [selectedItemsId, setselectedItemsId] = useState([]);
 
 	const formRef = useRef(null);
@@ -74,7 +74,7 @@ function DataSetDisplay(props) {
 	);
 
 	return (
-		<DataSetDisplayContext.Provider
+		<DatasetDisplayContext.Provider
 			value={{
 				formRef,
 				loadData,
@@ -116,11 +116,11 @@ function DataSetDisplay(props) {
 					)}
 				</div>
 			</ClayIconSpriteContext.Provider>
-		</DataSetDisplayContext.Provider>
+		</DatasetDisplayContext.Provider>
 	);
 }
 
-DataSetDisplay.propTypes = {
+DatasetDisplay.propTypes = {
 	bulkActions: PropTypes.array,
 	currentPage: PropTypes.number.isRequired,
 	// dataProviderKey: PropTypes.string.isRequired,
@@ -145,9 +145,9 @@ DataSetDisplay.propTypes = {
 	wrapperCssClasses: PropTypes.string
 };
 
-DataSetDisplay.defaultProps = {
+DatasetDisplay.defaultProps = {
 	currentPage: 1,
 	showPagination: true
 };
 
-export default DataSetDisplay;
+export default DatasetDisplay;
