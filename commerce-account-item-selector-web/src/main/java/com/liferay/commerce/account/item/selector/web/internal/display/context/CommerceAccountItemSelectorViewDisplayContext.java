@@ -47,6 +47,12 @@ public class CommerceAccountItemSelectorViewDisplayContext {
 
 		_commerceAccountItemSelectorRequestHelper =
 			new CommerceAccountItemSelectorRequestHelper(httpServletRequest);
+
+		_portletURL.setParameter(
+			"checkedCommerceAccountIds",
+			ParamUtil.getString(
+				_commerceAccountItemSelectorRequestHelper.getRenderRequest(),
+				"checkedCommerceAccountIds"));
 	}
 
 	public String getItemSelectedEventName() {
