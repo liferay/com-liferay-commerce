@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import {OPEN_SIDE_PANEL} from '../../../utilities/eventsDefinitions.es';
-import DataSetDisplayContext from '../../DataSetDisplayContext.es';
+import DatasetDisplayContext from '../../DatasetDisplayContext.es';
 
 function fireOpenSidePanelEvent(id, options) {
 	const payload = {
@@ -15,7 +15,7 @@ function fireOpenSidePanelEvent(id, options) {
 
 function SidePanelLink(props) {
 	return (
-		<DataSetDisplayContext.Consumer>
+		<DatasetDisplayContext.Consumer>
 			{({loadData, sidePanelId}) => (
 				<ClayLink
 					href="#"
@@ -30,7 +30,7 @@ function SidePanelLink(props) {
 					{props.value.label}
 				</ClayLink>
 			)}
-		</DataSetDisplayContext.Consumer>
+		</DatasetDisplayContext.Consumer>
 	);
 }
 

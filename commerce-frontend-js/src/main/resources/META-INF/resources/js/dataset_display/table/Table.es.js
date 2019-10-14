@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React, {useState} from 'react';
 
 import Modal from '../../modal/Modal.es';
-import DataSetDisplayContext from '../DataSetDisplayContext.es';
+import DatasetDisplayContext from '../DatasetDisplayContext.es';
 import EmptyResultMessage from './EmptyResultMessage.es';
 import TableContext from './TableContext.es';
 import Checkbox from './cells/Checkbox.es';
@@ -71,7 +71,7 @@ function Table(props) {
 	const [sidePanelProps, setSidePanelProps] = useState({});
 
 	return (
-		<DataSetDisplayContext.Consumer>
+		<DatasetDisplayContext.Consumer>
 			{({formRef, loadData}) => (
 				<TableContext.Provider
 					value={{
@@ -169,7 +169,7 @@ function Table(props) {
 					</form>
 				</TableContext.Provider>
 			)}
-		</DataSetDisplayContext.Consumer>
+		</DatasetDisplayContext.Consumer>
 	);
 }
 
