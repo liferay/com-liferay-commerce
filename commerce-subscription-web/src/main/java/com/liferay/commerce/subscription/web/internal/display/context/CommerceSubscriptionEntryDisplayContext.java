@@ -336,7 +336,8 @@ public class CommerceSubscriptionEntryDisplayContext {
 
 		String emptyResultsMessage = "there-are-no-subscriptions";
 		Long maxSubscriptionCycles = null;
-		Integer subscriptionStatus = null;
+		Integer subscriptionStatus =
+			CommerceSubscriptionEntryConstants.SUBSCRIPTION_STATUS_ANY;
 
 		String navigation = getNavigation();
 
@@ -368,36 +369,33 @@ public class CommerceSubscriptionEntryDisplayContext {
 			maxSubscriptionCycles = 0L;
 		}
 
-		SearchContainer<CommerceSubscriptionEntry> searchContainer =
-			new SearchContainer<>(
-				_cpRequestHelper.getLiferayPortletRequest(), getPortletURL(),
-				null, emptyResultsMessage);
+		_searchContainer = new SearchContainer<>(
+			_cpRequestHelper.getLiferayPortletRequest(), getPortletURL(),
+			null, emptyResultsMessage);
 
 		String orderByCol = getOrderByCol();
 		String orderByType = getOrderByType();
 
-		searchContainer.setOrderByCol(orderByCol);
-		searchContainer.setOrderByType(orderByType);
+		_searchContainer.setOrderByCol(orderByCol);
+		_searchContainer.setOrderByType(orderByType);
 
-		searchContainer.setRowChecker(_rowChecker);
+		_searchContainer.setRowChecker(_rowChecker);
 
-		BaseModelSearchResult<CommerceSubscriptionEntry>
-			commerceSubscriptionBaseModelSearchResult =
-				_commerceSubscriptionEntryService.
-					searchCommerceSubscriptionEntries(
-						_cpRequestHelper.getCompanyId(), maxSubscriptionCycles,
-						subscriptionStatus, getKeywords(),
-						searchContainer.getStart(), searchContainer.getEnd(),
-						CommerceSubscriptionEntryPortletUtil.
-							getCommerceSubscriptionEntrySort(
-								orderByCol, orderByType));
+		List<CommerceSubscriptionEntry> subscriptionEntries =
+			_commerceSubscriptionEntryService.getCommerceSubscriptionEntries(
+				_cpRequestHelper.getCompanyId(), _cpRequestHelper.getUserId(),
+				_searchContainer.getStart(), _searchContainer.getEnd(),
+				_searchContainer.getOrderByComparator());
 
-		searchContainer.setResults(
-			commerceSubscriptionBaseModelSearchResult.getBaseModels());
-		searchContainer.setTotal(
-			commerceSubscriptionBaseModelSearchResult.getLength());
+		_searchContainer.setResults(subscriptionEntries);
 
-		_searchContainer = searchContainer;
+		int subscriptionEntriesCount =
+			_commerceSubscriptionEntryService.
+				getCommerceSubscriptionEntriesCount(
+					_cpRequestHelper.getCompanyId(),
+					_cpRequestHelper.getUserId());
+
+		_searchContainer.setTotal(subscriptionEntriesCount);
 
 		return _searchContainer;
 	}

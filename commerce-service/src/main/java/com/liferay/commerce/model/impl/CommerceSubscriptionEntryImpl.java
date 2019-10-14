@@ -17,7 +17,6 @@ package com.liferay.commerce.model.impl;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
-import com.liferay.commerce.product.service.CPInstanceLocalServiceUtil;
 import com.liferay.commerce.service.CommerceOrderItemLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.UnicodeProperties;
@@ -32,41 +31,46 @@ public class CommerceSubscriptionEntryImpl
 	}
 
 	@Override
-	public CommerceOrderItem fetchCommerceOrderItem() throws PortalException {
-		return CommerceOrderItemLocalServiceUtil.getCommerceOrderItem(
+	public CommerceOrderItem fetchCommerceOrderItem() {
+		return CommerceOrderItemLocalServiceUtil.fetchCommerceOrderItem(
 			getCommerceOrderItemId());
 	}
 
 	@Override
 	public CPDefinition fetchCPDefinition() throws PortalException {
-		CPInstance cpInstance = fetchCPInstance();
+		CommerceOrderItem commerceOrderItem = fetchCommerceOrderItem();
 
-		if (cpInstance == null) {
+		if (commerceOrderItem == null) {
 			return null;
 		}
 
-		return cpInstance.getCPDefinition();
+		return commerceOrderItem.getCPDefinition();
 	}
 
 	@Override
-	public CPInstance fetchCPInstance() {
-		return CPInstanceLocalServiceUtil.fetchCProductInstance(
-			getCProductId(), getCPInstanceUuid());
+	public CPInstance fetchCPInstance() throws PortalException {
+		CommerceOrderItem commerceOrderItem = fetchCommerceOrderItem();
+
+		if (commerceOrderItem == null) {
+			return null;
+		}
+
+		return commerceOrderItem.getCPInstance();
 	}
 
 	@Override
-	public long getCPDefinitionId() {
-		CPInstance cpInstance = fetchCPInstance();
+	public long getCPDefinitionId() throws PortalException {
+		CPDefinition cpDefinition = fetchCPDefinition();
 
-		if (cpInstance == null) {
+		if (cpDefinition == null) {
 			return 0;
 		}
 
-		return cpInstance.getCPDefinitionId();
+		return cpDefinition.getCPDefinitionId();
 	}
 
 	@Override
-	public long getCPInstanceId() {
+	public long getCPInstanceId() throws PortalException {
 		CPInstance cpInstance = fetchCPInstance();
 
 		if (cpInstance == null) {
