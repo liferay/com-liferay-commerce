@@ -50,15 +50,15 @@ public class CommerceFrontEndApplication extends Application {
 	public Set<Object> getSingletons() {
 		Set<Object> singletons = new HashSet<>();
 
+		singletons.add(_addressResource);
 		singletons.add(_commerceAccountResource);
 		singletons.add(_commerceCartResource);
 		singletons.add(_commerceDataSetDataProviderResource);
 		singletons.add(_commerceSearchResource);
+		singletons.add(_commerceWishListResource);
 		singletons.add(_paginationContextProvider);
 		singletons.add(_sortContextProvider);
 		singletons.add(_themeDisplayContextProvider);
-		singletons.add(_addressResource);
-		singletons.add(_commerceWishListResource);
 
 		return singletons;
 	}
