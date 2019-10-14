@@ -22,6 +22,12 @@ CommerceSubscriptionEntryDisplayContext commerceSubscriptionEntryDisplayContext 
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 CommerceSubscriptionEntry commerceSubscriptionEntry = (CommerceSubscriptionEntry)row.getObject();
+
+int subscriptionStatus = CommerceSubscriptionEntryConstants.SUBSCRIPTION_STATUS_ANY;
+
+if (commerceSubscriptionEntry != null) {
+	subscriptionStatus = commerceSubscriptionEntry.getSubscriptionStatus();
+}
 %>
 
 <liferay-ui:icon-menu
@@ -43,38 +49,45 @@ CommerceSubscriptionEntry commerceSubscriptionEntry = (CommerceSubscriptionEntry
 			url="<%= editURL %>"
 		/>
 
-		<portlet:actionURL name="editCommerceSubscriptionEntry" var="activateURL">
-			<portlet:param name="<%= Constants.CMD %>" value="activate" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="commerceSubscriptionEntryId" value="<%= String.valueOf(commerceSubscriptionEntry.getCommerceSubscriptionEntryId()) %>" />
-		</portlet:actionURL>
+		<c:if test="<%= subscriptionStatus != CommerceSubscriptionEntryConstants.SUBSCRIPTION_STATUS_ACTIVE %>">
+			<portlet:actionURL name="editCommerceSubscriptionEntry" var="activateURL">
+				<portlet:param name="<%= Constants.CMD %>" value="activate" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="commerceSubscriptionEntryId" value="<%= String.valueOf(commerceSubscriptionEntry.getCommerceSubscriptionEntryId()) %>" />
+			</portlet:actionURL>
 
-		<liferay-ui:icon
-			message="activate"
-			url="<%= activateURL %>"
-		/>
+			<liferay-ui:icon
+				message="activate"
+				url="<%= activateURL %>"
+			/>
+		</c:if>
 
-		<portlet:actionURL name="editCommerceSubscriptionEntry" var="suspendURL">
-			<portlet:param name="<%= Constants.CMD %>" value="suspend" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="commerceSubscriptionEntryId" value="<%= String.valueOf(commerceSubscriptionEntry.getCommerceSubscriptionEntryId()) %>" />
-		</portlet:actionURL>
+		<c:if test="<%= subscriptionStatus != CommerceSubscriptionEntryConstants.SUBSCRIPTION_STATUS_SUSPENDED %>">
+			<portlet:actionURL name="editCommerceSubscriptionEntry" var="suspendURL">
+				<portlet:param name="<%= Constants.CMD %>" value="suspend" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="commerceSubscriptionEntryId" value="<%= String.valueOf(commerceSubscriptionEntry.getCommerceSubscriptionEntryId()) %>" />
+			</portlet:actionURL>
 
-		<liferay-ui:icon
-			message="suspend"
-			url="<%= suspendURL %>"
-		/>
+			<liferay-ui:icon
+				message="suspend"
+				url="<%= suspendURL %>"
+			/>
+		</c:if>
 
-		<portlet:actionURL name="editCommerceSubscriptionEntry" var="cancelURL">
-			<portlet:param name="<%= Constants.CMD %>" value="cancel" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="commerceSubscriptionEntryId" value="<%= String.valueOf(commerceSubscriptionEntry.getCommerceSubscriptionEntryId()) %>" />
-		</portlet:actionURL>
+		<c:if test="<%= subscriptionStatus != CommerceSubscriptionEntryConstants.SUBSCRIPTION_STATUS_CANCELLED %>">
 
-		<liferay-ui:icon
-			message="cancel"
-			url="<%= cancelURL %>"
-		/>
+			<portlet:actionURL name="editCommerceSubscriptionEntry" var="cancelURL">
+				<portlet:param name="<%= Constants.CMD %>" value="cancel" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="commerceSubscriptionEntryId" value="<%= String.valueOf(commerceSubscriptionEntry.getCommerceSubscriptionEntryId()) %>" />
+			</portlet:actionURL>
+
+			<liferay-ui:icon
+				message="cancel"
+				url="<%= cancelURL %>"
+			/>
+		</c:if>
 
 		<portlet:actionURL name="editCommerceSubscriptionEntry" var="deleteURL">
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
