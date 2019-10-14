@@ -3,7 +3,7 @@ import ClayLink from '@clayui/link';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import TableContext from '../../DataSetDisplayContext.es';
+import TableContext from '../../DatasetDisplayContext.es';
 
 function submit(action, method = 'get', form) {
 	if (!form.current) {

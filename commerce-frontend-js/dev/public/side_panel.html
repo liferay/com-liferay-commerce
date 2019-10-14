@@ -7,27 +7,34 @@
 		content="width=device-width, initial-scale=1, shrink-to-fit=no"
 		name="viewport"
 	/>
-	<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/clay/lib/css/atlas.css" /> -->
 	<meta content="#000000" name="theme-color" />
-	<!--
-	  manifest.json provides metadata used when your web app is installed on a
-	  user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-	-->
 	<title>React App</title>
 
 	<link href="https://cdn.jsdelivr.net/npm/clay/lib/css/atlas.css" rel="stylesheet" />
+
+	<style>
+		body {padding: 20px;}
+	</style>
 </head>
 
 <body>
 	<noscript>You need to enable JavaScript to run this app.</noscript>
 
-	<div class="container mb-5">
-		<div id="side-panel"></div>
-		<div id="dataset-display"></div>
+	<div>
+		<button 
+			onclick="window.SidePanel.open(`/side_panel-1.html?${Math.random()}`);" 
+			class="btn btn-info" 
+			type="button"
+		>
+			Load
+		</button>
 	</div>
 
-	<script type="text/javascript" src="/dataset_display.js"></script>
-	<script type="text/javascript" src="/sidePanel.js"></script>
+	<div class="top-anchor"></div>
+
+	<div id="side-panel"></div>
+
+	<script type="text/javascript" src="/side_panel.js"></script>
 
 	<!--
 	  This HTML file is a template.
