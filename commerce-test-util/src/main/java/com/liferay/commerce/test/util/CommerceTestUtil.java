@@ -104,6 +104,35 @@ public class CommerceTestUtil {
 			0, serviceContext);
 	}
 	
+	public static CommerceOrderItem addCommerceOrderItem(
+			long commerceOrderId, long cpInstanceId, int quantity, User user, Group group)
+		throws Exception {
+
+		CommerceOrder commerceOrder =
+			CommerceOrderLocalServiceUtil.getCommerceOrder(commerceOrderId);
+
+		if (commerceOrder.getCommerceCurrency() == null) {
+			CommerceCurrency commerceCurrency =
+				CommerceCurrencyTestUtil.addCommerceCurrency(
+					commerceOrder.getGroupId());
+
+			commerceOrder.setCommerceCurrencyId(
+				commerceCurrency.getCommerceCurrencyId());
+
+			CommerceOrderLocalServiceUtil.updateCommerceOrder(commerceOrder);
+		}
+
+		CommerceContext commerceContext = new TestCommerceContext(
+			commerceOrder.getCommerceCurrency(), 
+			user, 
+			group, 
+			commerceOrder.getCommerceAccount(),
+			commerceOrder);
+
+		return addCommerceOrderItem(
+			commerceOrderId, cpInstanceId, quantity, commerceContext);
+	}
+	
 	public static CommerceOrder addCheckoutDetailsToUserOrder(
 			CommerceOrder commerceOrder, long userId)
 		throws Exception {
