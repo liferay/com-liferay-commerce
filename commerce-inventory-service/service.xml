@@ -188,7 +188,7 @@
 		<finder name="CommerceInventoryWarehouseId" return-type="Collection">
 			<finder-column name="commerceInventoryWarehouseId" />
 		</finder>
-		<finder name="C_S" return-type="CommerceInventoryWarehouseItem">
+		<finder name="C_S" return-type="CommerceInventoryWarehouseItem" unique="true">
 			<finder-column name="commerceInventoryWarehouseId" />
 			<finder-column name="sku" />
 		</finder>
