@@ -24,11 +24,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 @ProviderType
 public interface CommerceNotificationHelper {
 
-	public void sendNotifications(long groupId, String key, Object object)
-		throws PortalException;
-
 	public void sendNotifications(
-			long groupId, String key, Object object, long[] userIds)
+			long groupId, long userId, String key, Object object)
 		throws PortalException;
 
 }

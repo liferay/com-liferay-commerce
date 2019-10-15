@@ -19,10 +19,10 @@ package com.liferay.commerce.constants;
  */
 public class CommerceDefinitionTermConstants {
 
-	public static final String ORDER_DEFINITION_TERMS_CONTRIBUTOR =
-		"CommerceOrderTerms";
+	public static final String BODY_AND_SUBJECT_DEFINITION_TERMS_CONTRIBUTOR =
+		"BodyAndSubjectTerms";
 
-	public static final String SUBSCRIPTION_DEFINITION_TERMS_CONTRIBUTOR =
-		"CommerceSubscriptionTerms";
+	public static final String RECIPIENT_DEFINITION_TERMS_CONTRIBUTOR =
+		"RecipientTerms";
 
 }

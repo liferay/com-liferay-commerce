@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.constants;
 
+import com.liferay.petra.string.StringPool;
+
 /**
  * @author Luca Pellizzon
  */
@@ -29,5 +31,27 @@ public class CommerceSubscriptionNotificationConstants {
 
 	public static final String SUBSCRIPTION_SUSPENDED =
 		"subscription-suspended";
+
+	public static String getNotificationKey(int subscriptionStatus) {
+		if (subscriptionStatus ==
+				CommerceSubscriptionEntryConstants.SUBSCRIPTION_STATUS_ACTIVE) {
+
+			return SUBSCRIPTION_ACTIVATED;
+		}
+		else if (subscriptionStatus ==
+					CommerceSubscriptionEntryConstants.
+						SUBSCRIPTION_STATUS_CANCELLED) {
+
+			return SUBSCRIPTION_CANCELLED;
+		}
+		else if (subscriptionStatus ==
+					CommerceSubscriptionEntryConstants.
+						SUBSCRIPTION_STATUS_SUSPENDED) {
+
+			return SUBSCRIPTION_SUSPENDED;
+		}
+
+		return StringPool.BLANK;
+	}
 
 }
