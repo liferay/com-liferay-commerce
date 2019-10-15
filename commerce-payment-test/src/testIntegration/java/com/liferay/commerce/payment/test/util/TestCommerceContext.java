@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.test.util;
+package com.liferay.commerce.payment.test.util;
 
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.context.CommerceContext;
@@ -86,7 +86,7 @@ public class TestCommerceContext implements CommerceContext {
 
 	@Override
 	public long getSiteGroupId() throws PortalException {
-		return _contextGroup.getGroupId();
+		return 0;
 	}
 
 	private final CommerceAccount _commerceAccount;
