@@ -978,7 +978,7 @@ public class CPDefinitionLocalServiceImpl
 				String value = filterValuesArray[i];
 
 				if (key.startsWith("OPTION_")) {
-					key = key.replace("OPTION_", StringPool.BLANK);
+					key = StringUtil.replace(key, "OPTION_", StringPool.BLANK);
 
 					key = _getIndexFieldName(
 						key, searchContext.getLanguageId());

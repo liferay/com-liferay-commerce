@@ -662,8 +662,8 @@ public class CPFileImporterImpl implements CPFileImporter {
 			},
 			classLoader, dependenciesFilePath, serviceContext);
 
-		content = content.replace(
-			LOCALE_PLACEHOLDER,
+		content = StringUtil.replace(
+			content, LOCALE_PLACEHOLDER,
 			LocaleUtil.toLanguageId(serviceContext.getLocale()));
 
 		return content;
