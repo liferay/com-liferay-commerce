@@ -39,6 +39,7 @@ module.exports = {
 	entry: {
 		dataset_display: getComponentPath('dataset_display', 'entry.dev.es.js'),
 		example: getComponentPath('example', 'entry.dev.es.js'),
+		gallery: getComponentPath('gallery', 'entry.dev.es.js'),
 		side_panel: getComponentPath('side_panel', 'entry.dev.es.js'),
 	},
 	mode: 'development',
