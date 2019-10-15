@@ -44,8 +44,8 @@ public class CommerceNotificationTemplateServiceWrapper
 	public com.liferay.commerce.notification.model.CommerceNotificationTemplate
 			addCommerceNotificationTemplate(
 				String name, String description, String from,
-				java.util.Map<java.util.Locale, String> fromNameMap, String cc,
-				String bcc, String type, boolean enabled,
+				java.util.Map<java.util.Locale, String> fromNameMap, String to,
+				String cc, String bcc, String type, boolean enabled,
 				java.util.Map<java.util.Locale, String> subjectMap,
 				java.util.Map<java.util.Locale, String> bodyMap,
 				com.liferay.portal.kernel.service.ServiceContext serviceContext)
@@ -53,8 +53,8 @@ public class CommerceNotificationTemplateServiceWrapper
 
 		return _commerceNotificationTemplateService.
 			addCommerceNotificationTemplate(
-				name, description, from, fromNameMap, cc, bcc, type, enabled,
-				subjectMap, bodyMap, serviceContext);
+				name, description, from, fromNameMap, to, cc, bcc, type,
+				enabled, subjectMap, bodyMap, serviceContext);
 	}
 
 	@Override
@@ -137,8 +137,8 @@ public class CommerceNotificationTemplateServiceWrapper
 			updateCommerceNotificationTemplate(
 				long commerceNotificationTemplateId, String name,
 				String description, String from,
-				java.util.Map<java.util.Locale, String> fromNameMap, String cc,
-				String bcc, String type, boolean enabled,
+				java.util.Map<java.util.Locale, String> fromNameMap, String to,
+				String cc, String bcc, String type, boolean enabled,
 				java.util.Map<java.util.Locale, String> subjectMap,
 				java.util.Map<java.util.Locale, String> bodyMap,
 				com.liferay.portal.kernel.service.ServiceContext serviceContext)
@@ -147,7 +147,7 @@ public class CommerceNotificationTemplateServiceWrapper
 		return _commerceNotificationTemplateService.
 			updateCommerceNotificationTemplate(
 				commerceNotificationTemplateId, name, description, from,
-				fromNameMap, cc, bcc, type, enabled, subjectMap, bodyMap,
+				fromNameMap, to, cc, bcc, type, enabled, subjectMap, bodyMap,
 				serviceContext);
 	}
 

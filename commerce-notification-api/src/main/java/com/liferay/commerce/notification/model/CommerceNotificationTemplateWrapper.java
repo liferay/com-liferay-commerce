@@ -73,6 +73,7 @@ public class CommerceNotificationTemplateWrapper
 		attributes.put("description", getDescription());
 		attributes.put("from", getFrom());
 		attributes.put("fromName", getFromName());
+		attributes.put("to", getTo());
 		attributes.put("cc", getCc());
 		attributes.put("bcc", getBcc());
 		attributes.put("type", getType());
@@ -156,6 +157,12 @@ public class CommerceNotificationTemplateWrapper
 
 		if (fromName != null) {
 			setFromName(fromName);
+		}
+
+		String to = (String)attributes.get("to");
+
+		if (to != null) {
+			setTo(to);
 		}
 
 		String cc = (String)attributes.get("cc");
@@ -578,6 +585,16 @@ public class CommerceNotificationTemplateWrapper
 	@Override
 	public Map<java.util.Locale, String> getSubjectMap() {
 		return _commerceNotificationTemplate.getSubjectMap();
+	}
+
+	/**
+	 * Returns the to of this commerce notification template.
+	 *
+	 * @return the to of this commerce notification template
+	 */
+	@Override
+	public String getTo() {
+		return _commerceNotificationTemplate.getTo();
 	}
 
 	/**
@@ -1036,6 +1053,16 @@ public class CommerceNotificationTemplateWrapper
 		java.util.Locale defaultLocale) {
 
 		_commerceNotificationTemplate.setSubjectMap(subjectMap, defaultLocale);
+	}
+
+	/**
+	 * Sets the to of this commerce notification template.
+	 *
+	 * @param to the to of this commerce notification template
+	 */
+	@Override
+	public void setTo(String to) {
+		_commerceNotificationTemplate.setTo(to);
 	}
 
 	/**

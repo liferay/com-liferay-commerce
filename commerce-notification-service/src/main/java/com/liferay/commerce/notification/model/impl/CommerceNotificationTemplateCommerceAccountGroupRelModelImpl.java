@@ -398,12 +398,12 @@ public class CommerceNotificationTemplateCommerceAccountGroupRelModelImpl
 					CommerceNotificationTemplateCommerceAccountGroupRel
 						commerceNotificationTemplateCommerceAccountGroupRel,
 					Object
-						commerceNotificationTemplateCommerceAccountGroupRelId) {
+						commerceNotificationTemplateCommerceAccountGroupRelIdObject) {
 
 					commerceNotificationTemplateCommerceAccountGroupRel.
 						setCommerceNotificationTemplateCommerceAccountGroupRelId(
 							(Long)
-								commerceNotificationTemplateCommerceAccountGroupRelId);
+								commerceNotificationTemplateCommerceAccountGroupRelIdObject);
 				}
 
 			});
@@ -433,10 +433,10 @@ public class CommerceNotificationTemplateCommerceAccountGroupRelModelImpl
 				public void accept(
 					CommerceNotificationTemplateCommerceAccountGroupRel
 						commerceNotificationTemplateCommerceAccountGroupRel,
-					Object groupId) {
+					Object groupIdObject) {
 
 					commerceNotificationTemplateCommerceAccountGroupRel.
-						setGroupId((Long)groupId);
+						setGroupId((Long)groupIdObject);
 				}
 
 			});
@@ -466,10 +466,10 @@ public class CommerceNotificationTemplateCommerceAccountGroupRelModelImpl
 				public void accept(
 					CommerceNotificationTemplateCommerceAccountGroupRel
 						commerceNotificationTemplateCommerceAccountGroupRel,
-					Object companyId) {
+					Object companyIdObject) {
 
 					commerceNotificationTemplateCommerceAccountGroupRel.
-						setCompanyId((Long)companyId);
+						setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -499,10 +499,10 @@ public class CommerceNotificationTemplateCommerceAccountGroupRelModelImpl
 				public void accept(
 					CommerceNotificationTemplateCommerceAccountGroupRel
 						commerceNotificationTemplateCommerceAccountGroupRel,
-					Object userId) {
+					Object userIdObject) {
 
 					commerceNotificationTemplateCommerceAccountGroupRel.
-						setUserId((Long)userId);
+						setUserId((Long)userIdObject);
 				}
 
 			});
@@ -532,10 +532,10 @@ public class CommerceNotificationTemplateCommerceAccountGroupRelModelImpl
 				public void accept(
 					CommerceNotificationTemplateCommerceAccountGroupRel
 						commerceNotificationTemplateCommerceAccountGroupRel,
-					Object userName) {
+					Object userNameObject) {
 
 					commerceNotificationTemplateCommerceAccountGroupRel.
-						setUserName((String)userName);
+						setUserName((String)userNameObject);
 				}
 
 			});
@@ -565,10 +565,10 @@ public class CommerceNotificationTemplateCommerceAccountGroupRelModelImpl
 				public void accept(
 					CommerceNotificationTemplateCommerceAccountGroupRel
 						commerceNotificationTemplateCommerceAccountGroupRel,
-					Object createDate) {
+					Object createDateObject) {
 
 					commerceNotificationTemplateCommerceAccountGroupRel.
-						setCreateDate((Date)createDate);
+						setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -598,10 +598,10 @@ public class CommerceNotificationTemplateCommerceAccountGroupRelModelImpl
 				public void accept(
 					CommerceNotificationTemplateCommerceAccountGroupRel
 						commerceNotificationTemplateCommerceAccountGroupRel,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
 					commerceNotificationTemplateCommerceAccountGroupRel.
-						setModifiedDate((Date)modifiedDate);
+						setModifiedDate((Date)modifiedDateObject);
 				}
 
 			});
@@ -631,11 +631,11 @@ public class CommerceNotificationTemplateCommerceAccountGroupRelModelImpl
 				public void accept(
 					CommerceNotificationTemplateCommerceAccountGroupRel
 						commerceNotificationTemplateCommerceAccountGroupRel,
-					Object commerceNotificationTemplateId) {
+					Object commerceNotificationTemplateIdObject) {
 
 					commerceNotificationTemplateCommerceAccountGroupRel.
 						setCommerceNotificationTemplateId(
-							(Long)commerceNotificationTemplateId);
+							(Long)commerceNotificationTemplateIdObject);
 				}
 
 			});
@@ -665,10 +665,11 @@ public class CommerceNotificationTemplateCommerceAccountGroupRelModelImpl
 				public void accept(
 					CommerceNotificationTemplateCommerceAccountGroupRel
 						commerceNotificationTemplateCommerceAccountGroupRel,
-					Object commerceAccountGroupId) {
+					Object commerceAccountGroupIdObject) {
 
 					commerceNotificationTemplateCommerceAccountGroupRel.
-						setCommerceAccountGroupId((Long)commerceAccountGroupId);
+						setCommerceAccountGroupId(
+							(Long)commerceAccountGroupIdObject);
 				}
 
 			});

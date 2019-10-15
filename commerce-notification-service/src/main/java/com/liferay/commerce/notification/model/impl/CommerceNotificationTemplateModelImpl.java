@@ -90,9 +90,9 @@ public class CommerceNotificationTemplateModelImpl
 		{"createDate", Types.TIMESTAMP}, {"modifiedDate", Types.TIMESTAMP},
 		{"name", Types.VARCHAR}, {"description", Types.VARCHAR},
 		{"from_", Types.VARCHAR}, {"fromName", Types.VARCHAR},
-		{"cc", Types.VARCHAR}, {"bcc", Types.VARCHAR}, {"type_", Types.VARCHAR},
-		{"enabled", Types.BOOLEAN}, {"subject", Types.VARCHAR},
-		{"body", Types.CLOB}
+		{"to_", Types.VARCHAR}, {"cc", Types.VARCHAR}, {"bcc", Types.VARCHAR},
+		{"type_", Types.VARCHAR}, {"enabled", Types.BOOLEAN},
+		{"subject", Types.VARCHAR}, {"body", Types.CLOB}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
@@ -111,6 +111,7 @@ public class CommerceNotificationTemplateModelImpl
 		TABLE_COLUMNS_MAP.put("description", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("from_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("fromName", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("to_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("cc", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("bcc", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("type_", Types.VARCHAR);
@@ -120,7 +121,7 @@ public class CommerceNotificationTemplateModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CommerceNotificationTemplate (uuid_ VARCHAR(75) null,commerceNotificationTemplateId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,description STRING null,from_ VARCHAR(75) null,fromName STRING null,cc VARCHAR(255) null,bcc VARCHAR(255) null,type_ VARCHAR(75) null,enabled BOOLEAN,subject STRING null,body TEXT null)";
+		"create table CommerceNotificationTemplate (uuid_ VARCHAR(75) null,commerceNotificationTemplateId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,description STRING null,from_ VARCHAR(75) null,fromName STRING null,to_ VARCHAR(75) null,cc VARCHAR(255) null,bcc VARCHAR(255) null,type_ VARCHAR(75) null,enabled BOOLEAN,subject STRING null,body TEXT null)";
 
 	public static final String TABLE_SQL_DROP =
 		"drop table CommerceNotificationTemplate";
@@ -195,6 +196,7 @@ public class CommerceNotificationTemplateModelImpl
 		model.setDescription(soapModel.getDescription());
 		model.setFrom(soapModel.getFrom());
 		model.setFromName(soapModel.getFromName());
+		model.setTo(soapModel.getTo());
 		model.setCc(soapModel.getCc());
 		model.setBcc(soapModel.getBcc());
 		model.setType(soapModel.getType());
@@ -384,9 +386,9 @@ public class CommerceNotificationTemplateModelImpl
 				@Override
 				public void accept(
 					CommerceNotificationTemplate commerceNotificationTemplate,
-					Object uuid) {
+					Object uuidObject) {
 
-					commerceNotificationTemplate.setUuid((String)uuid);
+					commerceNotificationTemplate.setUuid((String)uuidObject);
 				}
 
 			});
@@ -410,11 +412,11 @@ public class CommerceNotificationTemplateModelImpl
 				@Override
 				public void accept(
 					CommerceNotificationTemplate commerceNotificationTemplate,
-					Object commerceNotificationTemplateId) {
+					Object commerceNotificationTemplateIdObject) {
 
 					commerceNotificationTemplate.
 						setCommerceNotificationTemplateId(
-							(Long)commerceNotificationTemplateId);
+							(Long)commerceNotificationTemplateIdObject);
 				}
 
 			});
@@ -437,9 +439,10 @@ public class CommerceNotificationTemplateModelImpl
 				@Override
 				public void accept(
 					CommerceNotificationTemplate commerceNotificationTemplate,
-					Object groupId) {
+					Object groupIdObject) {
 
-					commerceNotificationTemplate.setGroupId((Long)groupId);
+					commerceNotificationTemplate.setGroupId(
+						(Long)groupIdObject);
 				}
 
 			});
@@ -462,9 +465,10 @@ public class CommerceNotificationTemplateModelImpl
 				@Override
 				public void accept(
 					CommerceNotificationTemplate commerceNotificationTemplate,
-					Object companyId) {
+					Object companyIdObject) {
 
-					commerceNotificationTemplate.setCompanyId((Long)companyId);
+					commerceNotificationTemplate.setCompanyId(
+						(Long)companyIdObject);
 				}
 
 			});
@@ -487,9 +491,9 @@ public class CommerceNotificationTemplateModelImpl
 				@Override
 				public void accept(
 					CommerceNotificationTemplate commerceNotificationTemplate,
-					Object userId) {
+					Object userIdObject) {
 
-					commerceNotificationTemplate.setUserId((Long)userId);
+					commerceNotificationTemplate.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -512,9 +516,10 @@ public class CommerceNotificationTemplateModelImpl
 				@Override
 				public void accept(
 					CommerceNotificationTemplate commerceNotificationTemplate,
-					Object userName) {
+					Object userNameObject) {
 
-					commerceNotificationTemplate.setUserName((String)userName);
+					commerceNotificationTemplate.setUserName(
+						(String)userNameObject);
 				}
 
 			});
@@ -537,10 +542,10 @@ public class CommerceNotificationTemplateModelImpl
 				@Override
 				public void accept(
 					CommerceNotificationTemplate commerceNotificationTemplate,
-					Object createDate) {
+					Object createDateObject) {
 
 					commerceNotificationTemplate.setCreateDate(
-						(Date)createDate);
+						(Date)createDateObject);
 				}
 
 			});
@@ -563,10 +568,10 @@ public class CommerceNotificationTemplateModelImpl
 				@Override
 				public void accept(
 					CommerceNotificationTemplate commerceNotificationTemplate,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
 					commerceNotificationTemplate.setModifiedDate(
-						(Date)modifiedDate);
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -589,9 +594,9 @@ public class CommerceNotificationTemplateModelImpl
 				@Override
 				public void accept(
 					CommerceNotificationTemplate commerceNotificationTemplate,
-					Object name) {
+					Object nameObject) {
 
-					commerceNotificationTemplate.setName((String)name);
+					commerceNotificationTemplate.setName((String)nameObject);
 				}
 
 			});
@@ -614,10 +619,10 @@ public class CommerceNotificationTemplateModelImpl
 				@Override
 				public void accept(
 					CommerceNotificationTemplate commerceNotificationTemplate,
-					Object description) {
+					Object descriptionObject) {
 
 					commerceNotificationTemplate.setDescription(
-						(String)description);
+						(String)descriptionObject);
 				}
 
 			});
@@ -640,9 +645,9 @@ public class CommerceNotificationTemplateModelImpl
 				@Override
 				public void accept(
 					CommerceNotificationTemplate commerceNotificationTemplate,
-					Object from) {
+					Object fromObject) {
 
-					commerceNotificationTemplate.setFrom((String)from);
+					commerceNotificationTemplate.setFrom((String)fromObject);
 				}
 
 			});
@@ -665,9 +670,35 @@ public class CommerceNotificationTemplateModelImpl
 				@Override
 				public void accept(
 					CommerceNotificationTemplate commerceNotificationTemplate,
-					Object fromName) {
+					Object fromNameObject) {
 
-					commerceNotificationTemplate.setFromName((String)fromName);
+					commerceNotificationTemplate.setFromName(
+						(String)fromNameObject);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"to",
+			new Function<CommerceNotificationTemplate, Object>() {
+
+				@Override
+				public Object apply(
+					CommerceNotificationTemplate commerceNotificationTemplate) {
+
+					return commerceNotificationTemplate.getTo();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"to",
+			new BiConsumer<CommerceNotificationTemplate, Object>() {
+
+				@Override
+				public void accept(
+					CommerceNotificationTemplate commerceNotificationTemplate,
+					Object toObject) {
+
+					commerceNotificationTemplate.setTo((String)toObject);
 				}
 
 			});
@@ -690,9 +721,9 @@ public class CommerceNotificationTemplateModelImpl
 				@Override
 				public void accept(
 					CommerceNotificationTemplate commerceNotificationTemplate,
-					Object cc) {
+					Object ccObject) {
 
-					commerceNotificationTemplate.setCc((String)cc);
+					commerceNotificationTemplate.setCc((String)ccObject);
 				}
 
 			});
@@ -715,9 +746,9 @@ public class CommerceNotificationTemplateModelImpl
 				@Override
 				public void accept(
 					CommerceNotificationTemplate commerceNotificationTemplate,
-					Object bcc) {
+					Object bccObject) {
 
-					commerceNotificationTemplate.setBcc((String)bcc);
+					commerceNotificationTemplate.setBcc((String)bccObject);
 				}
 
 			});
@@ -740,9 +771,9 @@ public class CommerceNotificationTemplateModelImpl
 				@Override
 				public void accept(
 					CommerceNotificationTemplate commerceNotificationTemplate,
-					Object type) {
+					Object typeObject) {
 
-					commerceNotificationTemplate.setType((String)type);
+					commerceNotificationTemplate.setType((String)typeObject);
 				}
 
 			});
@@ -765,9 +796,10 @@ public class CommerceNotificationTemplateModelImpl
 				@Override
 				public void accept(
 					CommerceNotificationTemplate commerceNotificationTemplate,
-					Object enabled) {
+					Object enabledObject) {
 
-					commerceNotificationTemplate.setEnabled((Boolean)enabled);
+					commerceNotificationTemplate.setEnabled(
+						(Boolean)enabledObject);
 				}
 
 			});
@@ -790,9 +822,10 @@ public class CommerceNotificationTemplateModelImpl
 				@Override
 				public void accept(
 					CommerceNotificationTemplate commerceNotificationTemplate,
-					Object subject) {
+					Object subjectObject) {
 
-					commerceNotificationTemplate.setSubject((String)subject);
+					commerceNotificationTemplate.setSubject(
+						(String)subjectObject);
 				}
 
 			});
@@ -815,9 +848,9 @@ public class CommerceNotificationTemplateModelImpl
 				@Override
 				public void accept(
 					CommerceNotificationTemplate commerceNotificationTemplate,
-					Object body) {
+					Object bodyObject) {
 
-					commerceNotificationTemplate.setBody((String)body);
+					commerceNotificationTemplate.setBody((String)bodyObject);
 				}
 
 			});
@@ -1142,6 +1175,22 @@ public class CommerceNotificationTemplateModelImpl
 			LocalizationUtil.updateLocalization(
 				fromNameMap, getFromName(), "FromName",
 				LocaleUtil.toLanguageId(defaultLocale)));
+	}
+
+	@JSON
+	@Override
+	public String getTo() {
+		if (_to == null) {
+			return "";
+		}
+		else {
+			return _to;
+		}
+	}
+
+	@Override
+	public void setTo(String to) {
+		_to = to;
 	}
 
 	@JSON
@@ -1607,6 +1656,7 @@ public class CommerceNotificationTemplateModelImpl
 		commerceNotificationTemplateImpl.setDescription(getDescription());
 		commerceNotificationTemplateImpl.setFrom(getFrom());
 		commerceNotificationTemplateImpl.setFromName(getFromName());
+		commerceNotificationTemplateImpl.setTo(getTo());
 		commerceNotificationTemplateImpl.setCc(getCc());
 		commerceNotificationTemplateImpl.setBcc(getBcc());
 		commerceNotificationTemplateImpl.setType(getType());
@@ -1798,6 +1848,14 @@ public class CommerceNotificationTemplateModelImpl
 			commerceNotificationTemplateCacheModel.fromName = null;
 		}
 
+		commerceNotificationTemplateCacheModel.to = getTo();
+
+		String to = commerceNotificationTemplateCacheModel.to;
+
+		if ((to != null) && (to.length() == 0)) {
+			commerceNotificationTemplateCacheModel.to = null;
+		}
+
 		commerceNotificationTemplateCacheModel.cc = getCc();
 
 		String cc = commerceNotificationTemplateCacheModel.cc;
@@ -1938,6 +1996,7 @@ public class CommerceNotificationTemplateModelImpl
 	private String _from;
 	private String _fromName;
 	private String _fromNameCurrentLanguageId;
+	private String _to;
 	private String _cc;
 	private String _bcc;
 	private String _type;

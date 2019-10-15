@@ -157,6 +157,8 @@ public class CommerceNotificationTemplatePersistenceTest {
 		newCommerceNotificationTemplate.setFromName(
 			RandomTestUtil.randomString());
 
+		newCommerceNotificationTemplate.setTo(RandomTestUtil.randomString());
+
 		newCommerceNotificationTemplate.setCc(RandomTestUtil.randomString());
 
 		newCommerceNotificationTemplate.setBcc(RandomTestUtil.randomString());
@@ -220,6 +222,9 @@ public class CommerceNotificationTemplatePersistenceTest {
 		Assert.assertEquals(
 			existingCommerceNotificationTemplate.getFromName(),
 			newCommerceNotificationTemplate.getFromName());
+		Assert.assertEquals(
+			existingCommerceNotificationTemplate.getTo(),
+			newCommerceNotificationTemplate.getTo());
 		Assert.assertEquals(
 			existingCommerceNotificationTemplate.getCc(),
 			newCommerceNotificationTemplate.getCc());
@@ -334,8 +339,8 @@ public class CommerceNotificationTemplatePersistenceTest {
 			"commerceNotificationTemplateId", true, "groupId", true,
 			"companyId", true, "userId", true, "userName", true, "createDate",
 			true, "modifiedDate", true, "name", true, "description", true,
-			"from", true, "fromName", true, "cc", true, "bcc", true, "type",
-			true, "enabled", true, "subject", true);
+			"from", true, "fromName", true, "to", true, "cc", true, "bcc", true,
+			"type", true, "enabled", true, "subject", true);
 	}
 
 	@Test
@@ -639,6 +644,8 @@ public class CommerceNotificationTemplatePersistenceTest {
 		commerceNotificationTemplate.setFrom(RandomTestUtil.randomString());
 
 		commerceNotificationTemplate.setFromName(RandomTestUtil.randomString());
+
+		commerceNotificationTemplate.setTo(RandomTestUtil.randomString());
 
 		commerceNotificationTemplate.setCc(RandomTestUtil.randomString());
 

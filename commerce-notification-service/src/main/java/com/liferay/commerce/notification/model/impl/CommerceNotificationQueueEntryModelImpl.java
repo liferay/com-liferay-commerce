@@ -389,11 +389,11 @@ public class CommerceNotificationQueueEntryModelImpl
 				public void accept(
 					CommerceNotificationQueueEntry
 						commerceNotificationQueueEntry,
-					Object commerceNotificationQueueEntryId) {
+					Object commerceNotificationQueueEntryIdObject) {
 
 					commerceNotificationQueueEntry.
 						setCommerceNotificationQueueEntryId(
-							(Long)commerceNotificationQueueEntryId);
+							(Long)commerceNotificationQueueEntryIdObject);
 				}
 
 			});
@@ -418,9 +418,10 @@ public class CommerceNotificationQueueEntryModelImpl
 				public void accept(
 					CommerceNotificationQueueEntry
 						commerceNotificationQueueEntry,
-					Object groupId) {
+					Object groupIdObject) {
 
-					commerceNotificationQueueEntry.setGroupId((Long)groupId);
+					commerceNotificationQueueEntry.setGroupId(
+						(Long)groupIdObject);
 				}
 
 			});
@@ -445,10 +446,10 @@ public class CommerceNotificationQueueEntryModelImpl
 				public void accept(
 					CommerceNotificationQueueEntry
 						commerceNotificationQueueEntry,
-					Object companyId) {
+					Object companyIdObject) {
 
 					commerceNotificationQueueEntry.setCompanyId(
-						(Long)companyId);
+						(Long)companyIdObject);
 				}
 
 			});
@@ -473,9 +474,10 @@ public class CommerceNotificationQueueEntryModelImpl
 				public void accept(
 					CommerceNotificationQueueEntry
 						commerceNotificationQueueEntry,
-					Object userId) {
+					Object userIdObject) {
 
-					commerceNotificationQueueEntry.setUserId((Long)userId);
+					commerceNotificationQueueEntry.setUserId(
+						(Long)userIdObject);
 				}
 
 			});
@@ -500,10 +502,10 @@ public class CommerceNotificationQueueEntryModelImpl
 				public void accept(
 					CommerceNotificationQueueEntry
 						commerceNotificationQueueEntry,
-					Object userName) {
+					Object userNameObject) {
 
 					commerceNotificationQueueEntry.setUserName(
-						(String)userName);
+						(String)userNameObject);
 				}
 
 			});
@@ -528,10 +530,10 @@ public class CommerceNotificationQueueEntryModelImpl
 				public void accept(
 					CommerceNotificationQueueEntry
 						commerceNotificationQueueEntry,
-					Object createDate) {
+					Object createDateObject) {
 
 					commerceNotificationQueueEntry.setCreateDate(
-						(Date)createDate);
+						(Date)createDateObject);
 				}
 
 			});
@@ -556,10 +558,10 @@ public class CommerceNotificationQueueEntryModelImpl
 				public void accept(
 					CommerceNotificationQueueEntry
 						commerceNotificationQueueEntry,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
 					commerceNotificationQueueEntry.setModifiedDate(
-						(Date)modifiedDate);
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -584,10 +586,10 @@ public class CommerceNotificationQueueEntryModelImpl
 				public void accept(
 					CommerceNotificationQueueEntry
 						commerceNotificationQueueEntry,
-					Object classNameId) {
+					Object classNameIdObject) {
 
 					commerceNotificationQueueEntry.setClassNameId(
-						(Long)classNameId);
+						(Long)classNameIdObject);
 				}
 
 			});
@@ -612,9 +614,10 @@ public class CommerceNotificationQueueEntryModelImpl
 				public void accept(
 					CommerceNotificationQueueEntry
 						commerceNotificationQueueEntry,
-					Object classPK) {
+					Object classPKObject) {
 
-					commerceNotificationQueueEntry.setClassPK((Long)classPK);
+					commerceNotificationQueueEntry.setClassPK(
+						(Long)classPKObject);
 				}
 
 			});
@@ -640,11 +643,11 @@ public class CommerceNotificationQueueEntryModelImpl
 				public void accept(
 					CommerceNotificationQueueEntry
 						commerceNotificationQueueEntry,
-					Object commerceNotificationTemplateId) {
+					Object commerceNotificationTemplateIdObject) {
 
 					commerceNotificationQueueEntry.
 						setCommerceNotificationTemplateId(
-							(Long)commerceNotificationTemplateId);
+							(Long)commerceNotificationTemplateIdObject);
 				}
 
 			});
@@ -669,9 +672,9 @@ public class CommerceNotificationQueueEntryModelImpl
 				public void accept(
 					CommerceNotificationQueueEntry
 						commerceNotificationQueueEntry,
-					Object from) {
+					Object fromObject) {
 
-					commerceNotificationQueueEntry.setFrom((String)from);
+					commerceNotificationQueueEntry.setFrom((String)fromObject);
 				}
 
 			});
@@ -696,10 +699,10 @@ public class CommerceNotificationQueueEntryModelImpl
 				public void accept(
 					CommerceNotificationQueueEntry
 						commerceNotificationQueueEntry,
-					Object fromName) {
+					Object fromNameObject) {
 
 					commerceNotificationQueueEntry.setFromName(
-						(String)fromName);
+						(String)fromNameObject);
 				}
 
 			});
@@ -724,9 +727,9 @@ public class CommerceNotificationQueueEntryModelImpl
 				public void accept(
 					CommerceNotificationQueueEntry
 						commerceNotificationQueueEntry,
-					Object to) {
+					Object toObject) {
 
-					commerceNotificationQueueEntry.setTo((String)to);
+					commerceNotificationQueueEntry.setTo((String)toObject);
 				}
 
 			});
@@ -751,9 +754,10 @@ public class CommerceNotificationQueueEntryModelImpl
 				public void accept(
 					CommerceNotificationQueueEntry
 						commerceNotificationQueueEntry,
-					Object toName) {
+					Object toNameObject) {
 
-					commerceNotificationQueueEntry.setToName((String)toName);
+					commerceNotificationQueueEntry.setToName(
+						(String)toNameObject);
 				}
 
 			});
@@ -778,9 +782,9 @@ public class CommerceNotificationQueueEntryModelImpl
 				public void accept(
 					CommerceNotificationQueueEntry
 						commerceNotificationQueueEntry,
-					Object cc) {
+					Object ccObject) {
 
-					commerceNotificationQueueEntry.setCc((String)cc);
+					commerceNotificationQueueEntry.setCc((String)ccObject);
 				}
 
 			});
@@ -805,9 +809,9 @@ public class CommerceNotificationQueueEntryModelImpl
 				public void accept(
 					CommerceNotificationQueueEntry
 						commerceNotificationQueueEntry,
-					Object bcc) {
+					Object bccObject) {
 
-					commerceNotificationQueueEntry.setBcc((String)bcc);
+					commerceNotificationQueueEntry.setBcc((String)bccObject);
 				}
 
 			});
@@ -832,9 +836,10 @@ public class CommerceNotificationQueueEntryModelImpl
 				public void accept(
 					CommerceNotificationQueueEntry
 						commerceNotificationQueueEntry,
-					Object subject) {
+					Object subjectObject) {
 
-					commerceNotificationQueueEntry.setSubject((String)subject);
+					commerceNotificationQueueEntry.setSubject(
+						(String)subjectObject);
 				}
 
 			});
@@ -859,9 +864,9 @@ public class CommerceNotificationQueueEntryModelImpl
 				public void accept(
 					CommerceNotificationQueueEntry
 						commerceNotificationQueueEntry,
-					Object body) {
+					Object bodyObject) {
 
-					commerceNotificationQueueEntry.setBody((String)body);
+					commerceNotificationQueueEntry.setBody((String)bodyObject);
 				}
 
 			});
@@ -886,10 +891,10 @@ public class CommerceNotificationQueueEntryModelImpl
 				public void accept(
 					CommerceNotificationQueueEntry
 						commerceNotificationQueueEntry,
-					Object priority) {
+					Object priorityObject) {
 
 					commerceNotificationQueueEntry.setPriority(
-						(Double)priority);
+						(Double)priorityObject);
 				}
 
 			});
@@ -914,9 +919,9 @@ public class CommerceNotificationQueueEntryModelImpl
 				public void accept(
 					CommerceNotificationQueueEntry
 						commerceNotificationQueueEntry,
-					Object sent) {
+					Object sentObject) {
 
-					commerceNotificationQueueEntry.setSent((Boolean)sent);
+					commerceNotificationQueueEntry.setSent((Boolean)sentObject);
 				}
 
 			});
@@ -941,9 +946,10 @@ public class CommerceNotificationQueueEntryModelImpl
 				public void accept(
 					CommerceNotificationQueueEntry
 						commerceNotificationQueueEntry,
-					Object sentDate) {
+					Object sentDateObject) {
 
-					commerceNotificationQueueEntry.setSentDate((Date)sentDate);
+					commerceNotificationQueueEntry.setSentDate(
+						(Date)sentDateObject);
 				}
 
 			});

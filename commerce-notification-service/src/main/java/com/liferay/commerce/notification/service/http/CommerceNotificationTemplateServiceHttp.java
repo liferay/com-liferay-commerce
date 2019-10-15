@@ -57,7 +57,8 @@ public class CommerceNotificationTemplateServiceHttp {
 					HttpPrincipal httpPrincipal, String name,
 					String description, String from,
 					java.util.Map<java.util.Locale, String> fromNameMap,
-					String cc, String bcc, String type, boolean enabled,
+					String to, String cc, String bcc, String type,
+					boolean enabled,
 					java.util.Map<java.util.Locale, String> subjectMap,
 					java.util.Map<java.util.Locale, String> bodyMap,
 					com.liferay.portal.kernel.service.ServiceContext
@@ -71,8 +72,8 @@ public class CommerceNotificationTemplateServiceHttp {
 				_addCommerceNotificationTemplateParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, name, description, from, fromNameMap, cc, bcc, type,
-				enabled, subjectMap, bodyMap, serviceContext);
+				methodKey, name, description, from, fromNameMap, to, cc, bcc,
+				type, enabled, subjectMap, bodyMap, serviceContext);
 
 			Object returnObj = null;
 
@@ -357,7 +358,8 @@ public class CommerceNotificationTemplateServiceHttp {
 					long commerceNotificationTemplateId, String name,
 					String description, String from,
 					java.util.Map<java.util.Locale, String> fromNameMap,
-					String cc, String bcc, String type, boolean enabled,
+					String to, String cc, String bcc, String type,
+					boolean enabled,
 					java.util.Map<java.util.Locale, String> subjectMap,
 					java.util.Map<java.util.Locale, String> bodyMap,
 					com.liferay.portal.kernel.service.ServiceContext
@@ -372,8 +374,8 @@ public class CommerceNotificationTemplateServiceHttp {
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceNotificationTemplateId, name, description,
-				from, fromNameMap, cc, bcc, type, enabled, subjectMap, bodyMap,
-				serviceContext);
+				from, fromNameMap, to, cc, bcc, type, enabled, subjectMap,
+				bodyMap, serviceContext);
 
 			Object returnObj = null;
 
@@ -408,8 +410,8 @@ public class CommerceNotificationTemplateServiceHttp {
 	private static final Class<?>[]
 		_addCommerceNotificationTemplateParameterTypes0 = new Class[] {
 			String.class, String.class, String.class, java.util.Map.class,
-			String.class, String.class, String.class, boolean.class,
-			java.util.Map.class, java.util.Map.class,
+			String.class, String.class, String.class, String.class,
+			boolean.class, java.util.Map.class, java.util.Map.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
 	private static final Class<?>[]
@@ -442,7 +444,8 @@ public class CommerceNotificationTemplateServiceHttp {
 		_updateCommerceNotificationTemplateParameterTypes7 = new Class[] {
 			long.class, String.class, String.class, String.class,
 			java.util.Map.class, String.class, String.class, String.class,
-			boolean.class, java.util.Map.class, java.util.Map.class,
+			String.class, boolean.class, java.util.Map.class,
+			java.util.Map.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
 

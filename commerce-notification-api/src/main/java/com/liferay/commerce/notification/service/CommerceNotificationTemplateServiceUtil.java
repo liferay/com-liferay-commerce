@@ -48,7 +48,8 @@ public class CommerceNotificationTemplateServiceUtil {
 				addCommerceNotificationTemplate(
 					String name, String description, String from,
 					java.util.Map<java.util.Locale, String> fromNameMap,
-					String cc, String bcc, String type, boolean enabled,
+					String to, String cc, String bcc, String type,
+					boolean enabled,
 					java.util.Map<java.util.Locale, String> subjectMap,
 					java.util.Map<java.util.Locale, String> bodyMap,
 					com.liferay.portal.kernel.service.ServiceContext
@@ -56,7 +57,7 @@ public class CommerceNotificationTemplateServiceUtil {
 			throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().addCommerceNotificationTemplate(
-			name, description, from, fromNameMap, cc, bcc, type, enabled,
+			name, description, from, fromNameMap, to, cc, bcc, type, enabled,
 			subjectMap, bodyMap, serviceContext);
 	}
 
@@ -133,7 +134,8 @@ public class CommerceNotificationTemplateServiceUtil {
 					long commerceNotificationTemplateId, String name,
 					String description, String from,
 					java.util.Map<java.util.Locale, String> fromNameMap,
-					String cc, String bcc, String type, boolean enabled,
+					String to, String cc, String bcc, String type,
+					boolean enabled,
 					java.util.Map<java.util.Locale, String> subjectMap,
 					java.util.Map<java.util.Locale, String> bodyMap,
 					com.liferay.portal.kernel.service.ServiceContext
@@ -142,7 +144,7 @@ public class CommerceNotificationTemplateServiceUtil {
 
 		return getService().updateCommerceNotificationTemplate(
 			commerceNotificationTemplateId, name, description, from,
-			fromNameMap, cc, bcc, type, enabled, subjectMap, bodyMap,
+			fromNameMap, to, cc, bcc, type, enabled, subjectMap, bodyMap,
 			serviceContext);
 	}
 
