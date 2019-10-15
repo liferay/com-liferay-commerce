@@ -14,19 +14,6 @@
 
 package com.liferay.commerce.payment.engine.test;
 
-import java.util.Collections;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.frutilla.FrutillaRule;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.mock.web.MockHttpServletRequest;
-
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.currency.model.CommerceCurrency;
@@ -35,7 +22,6 @@ import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.payment.engine.CommercePaymentEngine;
 import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelLocalService;
-import com.liferay.commerce.payment.test.util.CommerceTestUtil;
 import com.liferay.commerce.payment.test.util.TestCommercePaymentMethod;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CommerceChannel;
@@ -46,6 +32,7 @@ import com.liferay.commerce.product.service.CommerceChannelRelLocalService;
 import com.liferay.commerce.product.test.util.CPTestUtil;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.test.util.CommerceInventoryTestUtil;
+import com.liferay.commerce.test.util.CommerceTestUtil;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
@@ -61,11 +48,26 @@ import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PermissionCheckerTestRule;
 
+import java.util.Collections;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.frutilla.FrutillaRule;
+
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import org.springframework.mock.web.MockHttpServletRequest;
+
 /**
  * @author Luca Pellizzon
  */
 @RunWith(Arquillian.class)
-public class CommercePaymentEngineTest {	
+public class CommercePaymentEngineTest {
 
 	@ClassRule
 	@Rule
@@ -73,7 +75,7 @@ public class CommercePaymentEngineTest {
 		new AggregateTestRule(
 			new LiferayIntegrationTestRule(),
 			PermissionCheckerTestRule.INSTANCE);
-	
+
 	@Before
 	public void setUp() throws Exception {
 		_group = GroupTestUtil.addGroup();
@@ -86,13 +88,13 @@ public class CommercePaymentEngineTest {
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(
 				_group.getCompanyId(), _group.getGroupId(), _user.getUserId());
-		
+
 		_commerceChannel = _commerceChannelLocalService.addCommerceChannel(
-				_group.getGroupId(),
-				_group.getName(serviceContext.getLanguageId()) + " Portal",
-				CommerceChannelConstants.CHANNEL_TYPE_SITE, null, StringPool.BLANK,
-				StringPool.BLANK, serviceContext);
-		
+			_group.getGroupId(),
+			_group.getName(serviceContext.getLanguageId()) + " Portal",
+			CommerceChannelConstants.CHANNEL_TYPE_SITE, null, StringPool.BLANK,
+			StringPool.BLANK, serviceContext);
+
 		_group.setClassPK(_commerceChannel.getCommerceChannelId());
 
 		_commercePaymentMethodGroupRelLocalService.
@@ -129,26 +131,27 @@ public class CommercePaymentEngineTest {
 		_commerceOrderLocalService.updateCommerceOrder(commerceOrder);
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
-		
+
 		ServiceContext serviceContext =
-				ServiceContextTestUtil.getServiceContext(
-					_group.getCompanyId(), _group.getGroupId(), _user.getUserId());
+			ServiceContextTestUtil.getServiceContext(
+				_group.getCompanyId(), _group.getGroupId(), _user.getUserId());
 
 		CommerceInventoryWarehouse commerceInventoryWarehouse =
 			CommerceInventoryTestUtil.addCommerceInventoryWarehouse(
 				_group.getGroupId());
-		
-		_commerceChannelRel = _commerceChannelRelServ.addCommerceChannelRel(_commerceChannel.getName(),
-				commerceInventoryWarehouse.getCommerceInventoryWarehouseId(), 
-				_commerceChannel.getCommerceChannelId(), serviceContext);
+
+		_commerceChannelRel = _commerceChannelRelServ.addCommerceChannelRel(
+			_commerceChannel.getName(),
+			commerceInventoryWarehouse.getCommerceInventoryWarehouseId(),
+			_commerceChannel.getCommerceChannelId(), serviceContext);
 
 		CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
 			_user.getUserId(), commerceInventoryWarehouse, cpInstance.getSku(),
 			10);
-						
+
 		CommerceTestUtil.addCommerceOrderItem(
-			commerceOrder.getCommerceOrderId(), cpInstance.getCPInstanceId(),
-			1, _user, _group);
+			commerceOrder.getCommerceOrderId(), cpInstance.getCPInstanceId(), 1,
+			_user, _group);
 
 		CommerceOrder checkoutOrder = CommerceTestUtil.checkoutOrder(
 			commerceOrder);
@@ -201,26 +204,27 @@ public class CommercePaymentEngineTest {
 		_commerceOrderLocalService.updateCommerceOrder(commerceOrder);
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
-		
+
 		ServiceContext serviceContext =
-				ServiceContextTestUtil.getServiceContext(
-					_group.getCompanyId(), _group.getGroupId(), _user.getUserId());
+			ServiceContextTestUtil.getServiceContext(
+				_group.getCompanyId(), _group.getGroupId(), _user.getUserId());
 
 		CommerceInventoryWarehouse commerceInventoryWarehouse =
 			CommerceInventoryTestUtil.addCommerceInventoryWarehouse(
 				_group.getGroupId());
-		
-		_commerceChannelRel = _commerceChannelRelServ.addCommerceChannelRel(_commerceChannel.getName(),
-				commerceInventoryWarehouse.getCommerceInventoryWarehouseId(), 
-				_commerceChannel.getCommerceChannelId(), serviceContext);
+
+		_commerceChannelRel = _commerceChannelRelServ.addCommerceChannelRel(
+			_commerceChannel.getName(),
+			commerceInventoryWarehouse.getCommerceInventoryWarehouseId(),
+			_commerceChannel.getCommerceChannelId(), serviceContext);
 
 		CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
 			_user.getUserId(), commerceInventoryWarehouse, cpInstance.getSku(),
 			10);
 
 		CommerceTestUtil.addCommerceOrderItem(
-			commerceOrder.getCommerceOrderId(), cpInstance.getCPInstanceId(),
-			1, _user, _group);
+			commerceOrder.getCommerceOrderId(), cpInstance.getCPInstanceId(), 1,
+			_user, _group);
 
 		CommerceOrder checkoutOrder = CommerceTestUtil.checkoutOrder(
 			commerceOrder);
@@ -243,22 +247,22 @@ public class CommercePaymentEngineTest {
 	public FrutillaRule frutillaRule = new FrutillaRule();
 
 	@DeleteAfterTestRun
-	private CommerceCurrency _commerceCurrency;
-	
-	@Inject
-	private CommerceChannelRelLocalService _commerceChannelRelServ;
-	
-	@DeleteAfterTestRun
 	private CommerceChannel _commerceChannel;
-	
+
+	@Inject
+	private CommerceChannelLocalService _commerceChannelLocalService;
+
 	@DeleteAfterTestRun
 	private CommerceChannelRel _commerceChannelRel;
 
 	@Inject
-	private CommerceOrderLocalService _commerceOrderLocalService;
+	private CommerceChannelRelLocalService _commerceChannelRelServ;
+
+	@DeleteAfterTestRun
+	private CommerceCurrency _commerceCurrency;
 
 	@Inject
-	private CommerceChannelLocalService _commerceChannelLocalService;
+	private CommerceOrderLocalService _commerceOrderLocalService;
 
 	@Inject
 	private CommercePaymentEngine _commercePaymentEngine;

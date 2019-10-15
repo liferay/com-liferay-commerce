@@ -10,6 +10,7 @@ dependencies {
 	testIntegrationCompile project(":apps:commerce:commerce-product-api")
 	testIntegrationCompile project(":apps:commerce:commerce-product-test-util")
 	testIntegrationCompile project(":apps:commerce:commerce-product-type-simple")
+	testIntegrationCompile project(":apps:commerce:commerce-test-util")
 }
 
 if (!System.getenv("JENKINS_HOME")) {
