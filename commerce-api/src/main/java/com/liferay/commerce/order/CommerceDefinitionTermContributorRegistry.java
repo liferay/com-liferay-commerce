@@ -22,12 +22,12 @@ import java.util.List;
  * @author Luca Pellizzon
  */
 @ProviderType
-public interface CommerceOrderDefinitionTermContributorRegistry {
-
-	public CommerceDefinitionTermContributor getDefinitionTermContributor(
-		String key);
+public interface CommerceDefinitionTermContributorRegistry {
 
 	public List<CommerceDefinitionTermContributor>
-		getDefinitionTermContributors();
+		getDefinitionTermContributorsByContributorKey(String key);
+
+	public List<CommerceDefinitionTermContributor>
+		getDefinitionTermContributorsByNotificationTypeKey(String key);
 
 }
