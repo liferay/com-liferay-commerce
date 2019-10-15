@@ -70,9 +70,10 @@ public class CommerceNotificationTemplateServiceSoap {
 				addCommerceNotificationTemplate(
 					String name, String description, String from,
 					String[] fromNameMapLanguageIds, String[] fromNameMapValues,
-					String cc, String bcc, String type, boolean enabled,
-					String[] subjectMapLanguageIds, String[] subjectMapValues,
-					String[] bodyMapLanguageIds, String[] bodyMapValues,
+					String to, String cc, String bcc, String type,
+					boolean enabled, String[] subjectMapLanguageIds,
+					String[] subjectMapValues, String[] bodyMapLanguageIds,
+					String[] bodyMapValues,
 					com.liferay.portal.kernel.service.ServiceContext
 						serviceContext)
 			throws RemoteException {
@@ -91,8 +92,8 @@ public class CommerceNotificationTemplateServiceSoap {
 				returnValue =
 					CommerceNotificationTemplateServiceUtil.
 						addCommerceNotificationTemplate(
-							name, description, from, fromNameMap, cc, bcc, type,
-							enabled, subjectMap, bodyMap, serviceContext);
+							name, description, from, fromNameMap, to, cc, bcc,
+							type, enabled, subjectMap, bodyMap, serviceContext);
 
 			return com.liferay.commerce.notification.model.
 				CommerceNotificationTemplateSoap.toSoapModel(returnValue);
@@ -239,9 +240,10 @@ public class CommerceNotificationTemplateServiceSoap {
 					long commerceNotificationTemplateId, String name,
 					String description, String from,
 					String[] fromNameMapLanguageIds, String[] fromNameMapValues,
-					String cc, String bcc, String type, boolean enabled,
-					String[] subjectMapLanguageIds, String[] subjectMapValues,
-					String[] bodyMapLanguageIds, String[] bodyMapValues,
+					String to, String cc, String bcc, String type,
+					boolean enabled, String[] subjectMapLanguageIds,
+					String[] subjectMapValues, String[] bodyMapLanguageIds,
+					String[] bodyMapValues,
 					com.liferay.portal.kernel.service.ServiceContext
 						serviceContext)
 			throws RemoteException {
@@ -261,7 +263,7 @@ public class CommerceNotificationTemplateServiceSoap {
 					CommerceNotificationTemplateServiceUtil.
 						updateCommerceNotificationTemplate(
 							commerceNotificationTemplateId, name, description,
-							from, fromNameMap, cc, bcc, type, enabled,
+							from, fromNameMap, to, cc, bcc, type, enabled,
 							subjectMap, bodyMap, serviceContext);
 
 			return com.liferay.commerce.notification.model.

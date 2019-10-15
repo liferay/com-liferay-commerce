@@ -47,6 +47,7 @@ public class CommerceNotificationTemplateSoap implements Serializable {
 		soapModel.setDescription(model.getDescription());
 		soapModel.setFrom(model.getFrom());
 		soapModel.setFromName(model.getFromName());
+		soapModel.setTo(model.getTo());
 		soapModel.setCc(model.getCc());
 		soapModel.setBcc(model.getBcc());
 		soapModel.setType(model.getType());
@@ -213,6 +214,14 @@ public class CommerceNotificationTemplateSoap implements Serializable {
 		_fromName = fromName;
 	}
 
+	public String getTo() {
+		return _to;
+	}
+
+	public void setTo(String to) {
+		_to = to;
+	}
+
 	public String getCc() {
 		return _cc;
 	}
@@ -277,6 +286,7 @@ public class CommerceNotificationTemplateSoap implements Serializable {
 	private String _description;
 	private String _from;
 	private String _fromName;
+	private String _to;
 	private String _cc;
 	private String _bcc;
 	private String _type;
