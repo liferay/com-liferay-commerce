@@ -47,7 +47,7 @@ public class OrderConfirmationCheckoutStepDisplayContext {
 		_httpServletRequest = httpServletRequest;
 
 		_commerceCheckoutRequestHelper = new CommerceCheckoutRequestHelper(
-			_httpServletRequest);
+			httpServletRequest);
 	}
 
 	public CommerceOrder getCommerceOrder() throws PortalException {

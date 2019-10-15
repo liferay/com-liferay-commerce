@@ -51,7 +51,7 @@ public class CommerceMediaDefaultImageDisplayContext {
 		_itemSelector = itemSelector;
 		_httpServletRequest = httpServletRequest;
 
-		_cpRequestHelper = new CPRequestHelper(_httpServletRequest);
+		_cpRequestHelper = new CPRequestHelper(httpServletRequest);
 	}
 
 	public FileEntry getDefaultFileEntry() throws PortalException {

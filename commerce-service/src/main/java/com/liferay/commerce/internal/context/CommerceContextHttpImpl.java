@@ -60,7 +60,7 @@ public class CommerceContextHttpImpl implements CommerceContext {
 				configurationProvider.getConfiguration(
 					CommerceAccountGroupServiceConfiguration.class,
 					new GroupServiceSettingsLocator(
-						_portal.getScopeGroupId(httpServletRequest),
+						portal.getScopeGroupId(httpServletRequest),
 						CommerceAccountConstants.SERVICE_NAME));
 		}
 		catch (PortalException pe) {

@@ -194,6 +194,7 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 				_commercePaymentMethodGroupRelService.
 					getCommercePaymentMethodGroupRels(
 						themeDisplay.getScopeGroupId());
+
 			commercePaymentMethodGroupRelsCount =
 				commercePaymentMethodGroupRels.size();
 		}

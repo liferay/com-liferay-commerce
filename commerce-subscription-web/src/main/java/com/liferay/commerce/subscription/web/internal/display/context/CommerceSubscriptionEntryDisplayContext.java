@@ -77,7 +77,7 @@ public class CommerceSubscriptionEntryDisplayContext {
 		_cpSubscriptionTypeRegistry = cpSubscriptionTypeRegistry;
 		_httpServletRequest = httpServletRequest;
 
-		_cpRequestHelper = new CPRequestHelper(_httpServletRequest);
+		_cpRequestHelper = new CPRequestHelper(httpServletRequest);
 
 		_themeDisplay = _cpRequestHelper.getThemeDisplay();
 
@@ -87,7 +87,7 @@ public class CommerceSubscriptionEntryDisplayContext {
 				_themeDisplay.getTimeZone());
 
 		_portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(
-			_httpServletRequest);
+			httpServletRequest);
 
 		_portalPreferenceNamespace = CommerceSubscriptionEntry.class.getName();
 

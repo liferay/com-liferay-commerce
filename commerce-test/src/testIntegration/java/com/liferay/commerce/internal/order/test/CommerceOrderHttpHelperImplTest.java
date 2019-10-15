@@ -85,14 +85,6 @@ public class CommerceOrderHttpHelperImplTest {
 
 		_httpServletRequest = new MockHttpServletRequest();
 
-		_themeDisplay = ThemeDisplayFactory.create();
-
-		_themeDisplay.setScopeGroupId(_group.getGroupId());
-		_themeDisplay.setUser(_user);
-		_themeDisplay.setSignedIn(true);
-		_themeDisplay.setPermissionChecker(
-			PermissionCheckerFactoryUtil.create(_user));
-
 		CommerceCurrency commerceCurrency =
 			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
 
@@ -105,6 +97,15 @@ public class CommerceOrderHttpHelperImplTest {
 
 		_httpServletRequest.setAttribute(
 			CommerceWebKeys.COMMERCE_CONTEXT, commerceContext);
+
+		_themeDisplay = ThemeDisplayFactory.create();
+
+		_themeDisplay.setScopeGroupId(_group.getGroupId());
+		_themeDisplay.setUser(_user);
+		_themeDisplay.setSignedIn(true);
+		_themeDisplay.setPermissionChecker(
+			PermissionCheckerFactoryUtil.create(_user));
+
 		_httpServletRequest.setAttribute(WebKeys.THEME_DISPLAY, _themeDisplay);
 
 		_themeDisplay.setRequest(_httpServletRequest);

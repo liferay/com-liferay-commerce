@@ -47,9 +47,9 @@ public class CheckoutDisplayContext {
 		_liferayPortletResponse = liferayPortletResponse;
 
 		_httpServletRequest = portal.getHttpServletRequest(
-			_liferayPortletRequest);
+			liferayPortletRequest);
 		_httpServletResponse = portal.getHttpServletResponse(
-			_liferayPortletResponse);
+			liferayPortletResponse);
 
 		_commerceOrder = (CommerceOrder)_httpServletRequest.getAttribute(
 			CommerceCheckoutWebKeys.COMMERCE_ORDER);
