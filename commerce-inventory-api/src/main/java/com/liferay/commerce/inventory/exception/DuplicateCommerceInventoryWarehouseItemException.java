@@ -3,9 +3,7 @@ package com.liferay.commerce.inventory.exception;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- *
  * @author Andrea Sbarra
- *
  */
 public class DuplicateCommerceInventoryWarehouseItemException
 	extends PortalException {

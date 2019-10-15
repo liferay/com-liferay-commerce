@@ -57,13 +57,15 @@ public class CommerceInventoryWarehouseItemLocalServiceImpl
 			externalReferenceCode = null;
 		}
 
-		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
-			commerceInventoryWarehouseItemPersistence.findByC_S(
-				commerceInventoryWarehouseId, sku);
+		if (Validator.isNotNull(sku)) {
+			CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
+				commerceInventoryWarehouseItemPersistence.fetchByC_S(
+					commerceInventoryWarehouseId, sku);
 
-		if (commerceInventoryWarehouseItem != null) {
-			throw new DuplicateCommerceInventoryWarehouseItemException(
-				"Duplicated sku code");
+			if (commerceInventoryWarehouseItem != null) {
+				throw new DuplicateCommerceInventoryWarehouseItemException(
+					"Duplicated sku code");
+			}
 		}
 
 		long commerceInventoryWarehouseItemId = counterLocalService.increment();

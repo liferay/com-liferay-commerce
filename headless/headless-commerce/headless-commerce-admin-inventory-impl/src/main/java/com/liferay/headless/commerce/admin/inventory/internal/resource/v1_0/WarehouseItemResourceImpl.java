@@ -222,6 +222,11 @@ public class WarehouseItemResourceImpl extends BaseWarehouseItemResourceImpl {
 			@NotNull String externalReferenceCode, WarehouseItem warehouseItem)
 		throws Exception {
 
+		if (warehouseItem.getWarehouseId() == null) {
+			throw new NoSuchInventoryWarehouseException(
+				"Unable to find Warehouse with id: " + warehouseItem.getId());
+		}
+
 		CommerceInventoryWarehouse commerceInventoryWarehouse =
 			_commerceInventoryWarehouseService.getCommerceInventoryWarehouse(
 				warehouseItem.getWarehouseId());
@@ -254,7 +259,8 @@ public class WarehouseItemResourceImpl extends BaseWarehouseItemResourceImpl {
 					_user.getUserId(),
 					commerceInventoryWarehouse.
 						getCommerceInventoryWarehouseId(),
-					warehouseItem.getSku(), warehouseItem.getQuantity());
+					externalReferenceCode, warehouseItem.getSku(),
+					warehouseItem.getQuantity());
 
 		DTOConverter warehouseItemDTOConverter =
 			_dtoConverterRegistry.getDTOConverter(
