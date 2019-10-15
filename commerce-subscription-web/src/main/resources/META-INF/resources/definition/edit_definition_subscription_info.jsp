@@ -17,6 +17,12 @@
 <%@ include file="/init.jsp" %>
 
 <%
+String lifecycle = (String)request.getAttribute(LiferayPortletRequest.LIFECYCLE_PHASE);
+
+PortletURL catalogURLObj = PortalUtil.getControlPanelPortletURL(request, CPPortletKeys.CP_DEFINITIONS, lifecycle);
+
+String catalogURL = catalogURLObj.toString();
+
 CPDefinitionSubscriptionInfoDisplayContext cpDefinitionSubscriptionInfoDisplayContext = (CPDefinitionSubscriptionInfoDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
 CPDefinition cpDefinition = cpDefinitionSubscriptionInfoDisplayContext.getCPDefinition();
