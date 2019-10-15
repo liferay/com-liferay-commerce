@@ -269,15 +269,15 @@ public class CommerceInventoryWarehouseItemServiceSoap {
 		}
 	}
 
-	public static int getCommerceInventoryWarehouseItemsCountByCompanyId(
-			long companyId)
+	public static int getCommerceInventoryWarehouseItemsCount(
+			long commerceInventoryWarehouseId)
 		throws RemoteException {
 
 		try {
 			int returnValue =
 				CommerceInventoryWarehouseItemServiceUtil.
-					getCommerceInventoryWarehouseItemsCountByCompanyId(
-						companyId);
+					getCommerceInventoryWarehouseItemsCount(
+						commerceInventoryWarehouseId);
 
 			return returnValue;
 		}
@@ -288,15 +288,15 @@ public class CommerceInventoryWarehouseItemServiceSoap {
 		}
 	}
 
-	public static int getCommerceInventoryWarehouseItemsCount(
-			long commerceInventoryWarehouseId)
+	public static int getCommerceInventoryWarehouseItemsCountByCompanyId(
+			long companyId)
 		throws RemoteException {
 
 		try {
 			int returnValue =
 				CommerceInventoryWarehouseItemServiceUtil.
-					getCommerceInventoryWarehouseItemsCount(
-						commerceInventoryWarehouseId);
+					getCommerceInventoryWarehouseItemsCountByCompanyId(
+						companyId);
 
 			return returnValue;
 		}

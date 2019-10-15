@@ -162,7 +162,6 @@ public class CommerceInventoryAuditPersistenceImpl
 		OrderByComparator<CommerceInventoryAudit> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
@@ -218,7 +217,7 @@ public class CommerceInventoryAuditPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(CommerceInventoryAuditModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -237,18 +236,8 @@ public class CommerceInventoryAuditPersistenceImpl
 					qPos.add(new Timestamp(createDate.getTime()));
 				}
 
-				if (!pagination) {
-					list = (List<CommerceInventoryAudit>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceInventoryAudit>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommerceInventoryAudit>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -714,14 +703,11 @@ public class CommerceInventoryAuditPersistenceImpl
 
 		sku = Objects.toString(sku, "");
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindBySku;
@@ -778,7 +764,7 @@ public class CommerceInventoryAuditPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(CommerceInventoryAuditModelImpl.ORDER_BY_JPQL);
 			}
 
@@ -797,18 +783,8 @@ public class CommerceInventoryAuditPersistenceImpl
 					qPos.add(sku);
 				}
 
-				if (!pagination) {
-					list = (List<CommerceInventoryAudit>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceInventoryAudit>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommerceInventoryAudit>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -1819,14 +1795,11 @@ public class CommerceInventoryAuditPersistenceImpl
 		OrderByComparator<CommerceInventoryAudit> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindAll;
@@ -1863,10 +1836,7 @@ public class CommerceInventoryAuditPersistenceImpl
 			else {
 				sql = _SQL_SELECT_COMMERCEINVENTORYAUDIT;
 
-				if (pagination) {
-					sql = sql.concat(
-						CommerceInventoryAuditModelImpl.ORDER_BY_JPQL);
-				}
+				sql = sql.concat(CommerceInventoryAuditModelImpl.ORDER_BY_JPQL);
 			}
 
 			Session session = null;
@@ -1876,18 +1846,8 @@ public class CommerceInventoryAuditPersistenceImpl
 
 				Query q = session.createQuery(sql);
 
-				if (!pagination) {
-					list = (List<CommerceInventoryAudit>)QueryUtil.list(
-						q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list = (List<CommerceInventoryAudit>)QueryUtil.list(
-						q, getDialect(), start, end);
-				}
+				list = (List<CommerceInventoryAudit>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 

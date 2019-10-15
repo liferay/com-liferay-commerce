@@ -434,18 +434,18 @@ public class CommerceInventoryWarehouseItemServiceHttp {
 		}
 	}
 
-	public static int getCommerceInventoryWarehouseItemsCountByCompanyId(
-			HttpPrincipal httpPrincipal, long companyId)
+	public static int getCommerceInventoryWarehouseItemsCount(
+			HttpPrincipal httpPrincipal, long commerceInventoryWarehouseId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceInventoryWarehouseItemServiceUtil.class,
-				"getCommerceInventoryWarehouseItemsCountByCompanyId",
-				_getCommerceInventoryWarehouseItemsCountByCompanyIdParameterTypes9);
+				"getCommerceInventoryWarehouseItemsCount",
+				_getCommerceInventoryWarehouseItemsCountParameterTypes9);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, companyId);
+				methodKey, commerceInventoryWarehouseId);
 
 			Object returnObj = null;
 
@@ -473,18 +473,18 @@ public class CommerceInventoryWarehouseItemServiceHttp {
 		}
 	}
 
-	public static int getCommerceInventoryWarehouseItemsCount(
-			HttpPrincipal httpPrincipal, long commerceInventoryWarehouseId)
+	public static int getCommerceInventoryWarehouseItemsCountByCompanyId(
+			HttpPrincipal httpPrincipal, long companyId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceInventoryWarehouseItemServiceUtil.class,
-				"getCommerceInventoryWarehouseItemsCount",
-				_getCommerceInventoryWarehouseItemsCountParameterTypes10);
+				"getCommerceInventoryWarehouseItemsCountByCompanyId",
+				_getCommerceInventoryWarehouseItemsCountByCompanyIdParameterTypes10);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, commerceInventoryWarehouseId);
+				methodKey, companyId);
 
 			Object returnObj = null;
 
@@ -767,12 +767,12 @@ public class CommerceInventoryWarehouseItemServiceHttp {
 		_getCommerceInventoryWarehouseItemsByCompanyIdParameterTypes8 =
 			new Class[] {long.class, int.class, int.class};
 	private static final Class<?>[]
-		_getCommerceInventoryWarehouseItemsCountByCompanyIdParameterTypes9 =
-			new Class[] {long.class};
-	private static final Class<?>[]
-		_getCommerceInventoryWarehouseItemsCountParameterTypes10 = new Class[] {
+		_getCommerceInventoryWarehouseItemsCountParameterTypes9 = new Class[] {
 			long.class
 		};
+	private static final Class<?>[]
+		_getCommerceInventoryWarehouseItemsCountByCompanyIdParameterTypes10 =
+			new Class[] {long.class};
 	private static final Class<?>[]
 		_getCommerceInventoryWarehouseItemsCountByModifiedDateParameterTypes11 =
 			new Class[] {
