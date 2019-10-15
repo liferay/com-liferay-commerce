@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Portal;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.ArrayList;
@@ -129,8 +130,8 @@ public class CommerceNotificationHelperImpl
 		}
 
 		for (String placeholder : placeholders) {
-			content = content.replace(
-				placeholder,
+			content = StringUtil.replace(
+				content, placeholder,
 				commerceNotificationType.getFilledTerm(
 					placeholder, object, locale));
 		}
