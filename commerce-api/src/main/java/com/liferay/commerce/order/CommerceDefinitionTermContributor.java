@@ -20,12 +20,15 @@ import com.liferay.portal.kernel.exception.PortalException;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * @author Luca Pellizzon
  */
 @ProviderType
 public interface CommerceDefinitionTermContributor {
+
+	public Map<String, String> getDefinitionTerms(Locale locale);
 
 	public String getFilledTerm(String term, Object object, Locale locale)
 		throws PortalException;
