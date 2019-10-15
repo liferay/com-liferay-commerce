@@ -25,7 +25,7 @@
 				CIWarehouseItem.commerceInventoryWarehouseId = CIWarehouse.CIWarehouseId
 			WHERE
 				(Group_.groupId = ?) AND
-				(CIWarehouseItem.sku = ?)
+				(CIWarehouseItem.sku = ?) AND
 				(CIWarehouse.active_ = 1)
 		]]>
 	</sql>
