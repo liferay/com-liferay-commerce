@@ -12,12 +12,13 @@
  * details.
  */
 
-package com.liferay.commerce.product.definitions.web.internal.display.context;
+package com.liferay.commerce.subscription.web.internal.display.context;
 
 import com.liferay.commerce.payment.method.CommercePaymentMethod;
 import com.liferay.commerce.payment.method.CommercePaymentMethodRegistry;
 import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
 import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelLocalService;
+import com.liferay.commerce.product.definitions.web.display.context.BaseCPDefinitionsDisplayContext;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 import com.liferay.commerce.product.model.CPDefinition;
@@ -40,9 +41,10 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Alessio Antonio Rendina
+ * @author Alec Sloan
  */
 public class CPDefinitionSubscriptionInfoDisplayContext
-	extends CPDefinitionsDisplayContext {
+	extends BaseCPDefinitionsDisplayContext {
 
 	public CPDefinitionSubscriptionInfoDisplayContext(
 		ActionHelper actionHelper, HttpServletRequest httpServletRequest,
@@ -55,9 +57,7 @@ public class CPDefinitionSubscriptionInfoDisplayContext
 			cpSubscriptionTypeJSPContributorRegistry,
 		CPSubscriptionTypeRegistry cpSubscriptionTypeRegistry) {
 
-		super(
-			actionHelper, httpServletRequest, commerceCatalogService,
-			cpDefinitionService);
+		super(actionHelper, httpServletRequest);
 
 		_commercePaymentMethodGroupRelLocalService =
 			commercePaymentMethodGroupRelLocalService;
@@ -102,7 +102,7 @@ public class CPDefinitionSubscriptionInfoDisplayContext
 	public boolean hasRecurringPaymentMethod() throws PortalException {
 		List<CommerceChannelRel> commerceChannelRels =
 			CommerceChannelRelLocalServiceUtil.getCommerceChannelRels(
-				CPDefinition.class.getName(), super.getCPDefinitionId(), -1, -1,
+				CPDefinition.class.getName(), getCPDefinitionId(), -1, -1,
 				null);
 
 		for (CommerceChannelRel commerceChannelRel : commerceChannelRels) {
