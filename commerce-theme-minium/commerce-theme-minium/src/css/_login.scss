@@ -60,7 +60,7 @@
         }
     }
 
-    #_com_liferay_login_web_portlet_LoginPortlet_loginForm {
+    #_com_liferay_login_web_portlet_LoginPortlet_loginForm, #_com_liferay_login_web_portlet_LoginPortlet_fm {
         .btn {
             @include clay-button-variant($gsdc-btn-primary);
 
@@ -106,6 +106,14 @@
         #main-content {
             height: 100%;
 
+            .navigation {
+                margin-bottom: auto;
+
+                .icon-plus, .icon-plus + .taglib-text {
+                    display: none;
+                }
+            }
+
             .row {
                 height: 100%;
                 margin: 0;
@@ -114,6 +122,30 @@
                 .form-group.form-inline.input-checkbox-wrapper {
                     display: inherit;
                     margin-bottom: 0;
+                }
+            }
+
+            .col-md-12.portlet-column.portlet-column-only {
+                .portlet-content {
+                    height: 100%;
+
+                    a.portlet-icon-back {
+                        display: none;
+                    }
+
+                    .portlet-content-container {
+                        height: 100%;
+
+                        .portlet-body {
+                            height: 100%;
+
+                            .login-container {
+                                height: 100%;
+                                margin: auto;
+                                max-width: 768px;
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -139,14 +171,6 @@
             margin-left: auto;
             padding: 20px 75px;
             width: 80%;
-
-            .navigation {
-                margin-bottom: auto;
-
-                ul > li:first-of-type {
-                    display: none;
-                }
-            }
 
             input, label {
                 font-size: 16px;
@@ -184,6 +208,10 @@
 
                 input, label {
                     color: #FFF;
+                }
+
+                input:focus {
+                    color: #000;
                 }
             }
 
