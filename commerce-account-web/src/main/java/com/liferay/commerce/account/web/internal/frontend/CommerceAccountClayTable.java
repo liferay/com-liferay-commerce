@@ -141,7 +141,7 @@ public class CommerceAccountClayTable
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		AccountFilterImpl accountFilter = (AccountFilterImpl)filter;
+		AccountFilterImpl accountFilterImpl = (AccountFilterImpl)filter;
 
 		CommerceContext commerceContext = _commerceContextFactory.create(
 			themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId(),
@@ -150,7 +150,8 @@ public class CommerceAccountClayTable
 		return _commerceAccountService.getUserCommerceAccountsCount(
 			_portal.getUserId(httpServletRequest),
 			CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID,
-			commerceContext.getCommerceSiteType(), accountFilter.getKeywords());
+			commerceContext.getCommerceSiteType(),
+			accountFilterImpl.getKeywords());
 	}
 
 	@Override
@@ -194,7 +195,7 @@ public class CommerceAccountClayTable
 
 		List<Account> accounts = new ArrayList<>();
 
-		AccountFilterImpl accountFilter = (AccountFilterImpl)filter;
+		AccountFilterImpl accountFilterImpl = (AccountFilterImpl)filter;
 
 		CommerceContext commerceContext = _commerceContextFactory.create(
 			themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId(),
@@ -205,7 +206,7 @@ public class CommerceAccountClayTable
 				_portal.getUserId(httpServletRequest),
 				CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID,
 				commerceContext.getCommerceSiteType(),
-				accountFilter.getKeywords(), pagination.getStartPosition(),
+				accountFilterImpl.getKeywords(), pagination.getStartPosition(),
 				pagination.getEndPosition());
 
 		for (CommerceAccount commerceAccount : commerceAccounts) {

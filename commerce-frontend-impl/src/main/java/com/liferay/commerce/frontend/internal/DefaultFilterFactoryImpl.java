@@ -28,13 +28,13 @@ public class DefaultFilterFactoryImpl implements FilterFactory {
 
 	@Override
 	public Filter create(HttpServletRequest httpServletRequest) {
-		DefaultFilterImpl defaultFilter = new DefaultFilterImpl();
+		DefaultFilterImpl defaultFilterImpl = new DefaultFilterImpl();
 
 		String keywords = ParamUtil.getString(httpServletRequest, "q");
 
-		defaultFilter.setKeywords(keywords);
+		defaultFilterImpl.setKeywords(keywords);
 
-		return defaultFilter;
+		return defaultFilterImpl;
 	}
 
 }

@@ -320,7 +320,7 @@ public class CommerceAccountLocalServiceImpl
 
 		User defaultUser = userLocalService.getDefaultUser(companyId);
 
-		CommerceAccountImpl commerceAccount = new CommerceAccountImpl();
+		CommerceAccount commerceAccount = new CommerceAccountImpl();
 
 		commerceAccount.setCommerceAccountId(
 			CommerceAccountConstants.GUEST_ACCOUNT_ID);

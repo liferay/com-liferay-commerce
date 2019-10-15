@@ -39,7 +39,7 @@ public class OrderFilterFactoryImpl implements FilterFactory {
 
 	@Override
 	public Filter create(HttpServletRequest httpServletRequest) {
-		OrderFilterImpl orderFilter = new OrderFilterImpl();
+		OrderFilterImpl orderFilterImpl = new OrderFilterImpl();
 
 		long commerceOrderId = ParamUtil.getLong(
 			httpServletRequest, "commerceOrderId");
@@ -47,15 +47,15 @@ public class OrderFilterFactoryImpl implements FilterFactory {
 		long commerceAccountId = ParamUtil.getLong(
 			httpServletRequest, "accountId");
 
-		orderFilter.setAccountId(commerceAccountId);
+		orderFilterImpl.setAccountId(commerceAccountId);
 
-		orderFilter.setOrderId(commerceOrderId);
+		orderFilterImpl.setOrderId(commerceOrderId);
 
 		String keywords = ParamUtil.getString(httpServletRequest, "q");
 
-		orderFilter.setKeywords(keywords);
+		orderFilterImpl.setKeywords(keywords);
 
-		return orderFilter;
+		return orderFilterImpl;
 	}
 
 }
