@@ -20,7 +20,6 @@ import com.liferay.commerce.notification.exception.CommerceNotificationTemplateN
 import com.liferay.commerce.notification.exception.CommerceNotificationTemplateTypeException;
 import com.liferay.commerce.notification.exception.NoSuchNotificationTemplateException;
 import com.liferay.commerce.notification.model.CommerceNotificationTemplate;
-import com.liferay.commerce.notification.model.CommerceNotificationTemplateCommerceAccountGroupRel;
 import com.liferay.commerce.notification.service.CommerceNotificationTemplateCommerceAccountGroupRelService;
 import com.liferay.commerce.notification.service.CommerceNotificationTemplateService;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -140,6 +139,7 @@ public class EditCommerceNotificationTemplateMVCActionCommand
 
 		String name = ParamUtil.getString(actionRequest, "name");
 		String description = ParamUtil.getString(actionRequest, "description");
+		String to = ParamUtil.getString(actionRequest, "to");
 		String from = ParamUtil.getString(actionRequest, "from");
 		Map<Locale, String> fromNameMap = LocalizationUtil.getLocalizationMap(
 			actionRequest, "fromName");
@@ -161,7 +161,7 @@ public class EditCommerceNotificationTemplateMVCActionCommand
 			commerceNotificationTemplate =
 				_commerceNotificationTemplateService.
 					addCommerceNotificationTemplate(
-						name, description, from, fromNameMap, cc, bcc, type,
+						name, description, from, fromNameMap, to, cc, bcc, type,
 						enabled, subjectMap, bodyMap, serviceContext);
 		}
 		else {
@@ -169,70 +169,11 @@ public class EditCommerceNotificationTemplateMVCActionCommand
 				_commerceNotificationTemplateService.
 					updateCommerceNotificationTemplate(
 						commerceNotificationTemplateId, name, description, from,
-						fromNameMap, cc, bcc, type, enabled, subjectMap,
+						fromNameMap, to, cc, bcc, type, enabled, subjectMap,
 						bodyMap, serviceContext);
 		}
 
-		if (commerceNotificationTemplate != null) {
-			updateCommercePriceListCommerceAccountGroupRels(
-				actionRequest, commerceNotificationTemplate);
-		}
-
 		return commerceNotificationTemplate;
-	}
-
-	protected void updateCommercePriceListCommerceAccountGroupRels(
-			ActionRequest actionRequest,
-			CommerceNotificationTemplate commerceNotificationTemplate)
-		throws PortalException {
-
-		long[] addCommerceAccountGroupIds = ParamUtil.getLongValues(
-			actionRequest, "addCommerceAccountGroupIds");
-
-		long[] deleteCommerceNotificationTemplateCommerceAccountGroupRelIds =
-			ParamUtil.getLongValues(
-				actionRequest,
-				"deleteCommerceNotificationTemplateCommerceAccountGroupRelIds");
-
-		if (deleteCommerceNotificationTemplateCommerceAccountGroupRelIds.
-				length > 0) {
-
-			for (long
-					deleteCommerceNotificationTemplateCommerceAccountGroupRelId :
-						deleteCommerceNotificationTemplateCommerceAccountGroupRelIds) {
-
-				_commerceNotificationTemplateCommerceAccountGroupRelService.
-					deleteCommerceNotificationTemplateCommerceAccountGroupRel(
-						deleteCommerceNotificationTemplateCommerceAccountGroupRelId);
-			}
-		}
-
-		if (addCommerceAccountGroupIds.length > 0) {
-			ServiceContext serviceContext = ServiceContextFactory.getInstance(
-				CommerceNotificationTemplateCommerceAccountGroupRel.class.
-					getName(),
-				actionRequest);
-
-			for (long addCommerceAccountGroupId : addCommerceAccountGroupIds) {
-				CommerceNotificationTemplateCommerceAccountGroupRel
-					commerceNotificationTemplateCommerceAccountGroupRel =
-						_commerceNotificationTemplateCommerceAccountGroupRelService.
-							fetchCommerceNotificationTemplateCommerceAccountGroupRel(
-								commerceNotificationTemplate.
-									getCommerceNotificationTemplateId(),
-								addCommerceAccountGroupId);
-
-				if (commerceNotificationTemplateCommerceAccountGroupRel ==
-						null) {
-
-					_commerceNotificationTemplateCommerceAccountGroupRelService.
-						addCommerceNotificationTemplateCommerceAccountGroupRel(
-							commerceNotificationTemplate.
-								getCommerceNotificationTemplateId(),
-							addCommerceAccountGroupId, serviceContext);
-				}
-			}
-		}
 	}
 
 	@Reference

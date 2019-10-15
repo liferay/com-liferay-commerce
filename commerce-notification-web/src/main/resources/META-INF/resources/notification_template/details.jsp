@@ -44,20 +44,6 @@ CommerceNotificationType commerceNotificationType = commerceNotificationTemplate
 <aui:model-context bean="<%= commerceNotificationTemplate %>" model="<%= CommerceNotificationTemplate.class %>" />
 
 <aui:fieldset>
-	<aui:input name="name" value="<%= name %>" />
-
-	<aui:input name="description" value="<%= description %>" />
-
-	<%@ include file="/notification_template/account_groups.jspf" %>
-
-	<aui:input label="from-address" name="from" value="<%= from %>" />
-
-	<aui:input name="fromName" value="<%= fromName %>" />
-
-	<aui:input name="cc" value="<%= cc %>" />
-
-	<aui:input name="bcc" value="<%= bcc %>" />
-
 	<aui:select name="type" onChange='<%= renderResponse.getNamespace() + "selectType();" %>' showEmptyOption="<%= true %>">
 
 		<%
@@ -75,12 +61,19 @@ CommerceNotificationType commerceNotificationType = commerceNotificationTemplate
 
 	</aui:select>
 
+	<aui:input name="name" value="<%= name %>" />
+
+	<aui:input name="description" value="<%= description %>" />
+
+	<aui:input label="from-address" name="from" value="<%= from %>" />
+
+	<aui:input name="fromName" value="<%= fromName %>" />
+
+	<aui:input name="cc" value="<%= cc %>" />
+
+	<aui:input name="bcc" value="<%= bcc %>" />
+
 	<c:if test="<%= commerceNotificationType != null %>">
-
-		<%
-		Map<String, String> definitionTerms = commerceNotificationType.getDefinitionTerms(locale);
-		%>
-
 		<%@ include file="/notification_template/notification_editor.jspf" %>
 	</c:if>
 </aui:fieldset>
