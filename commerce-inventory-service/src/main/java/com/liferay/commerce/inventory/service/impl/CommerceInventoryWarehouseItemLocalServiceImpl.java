@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.inventory.service.impl;
 
+import com.liferay.commerce.inventory.exception.DuplicateCommerceInventoryWarehouseItemException;
 import com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseItemException;
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem;
 import com.liferay.commerce.inventory.service.base.CommerceInventoryWarehouseItemLocalServiceBaseImpl;
@@ -56,24 +57,33 @@ public class CommerceInventoryWarehouseItemLocalServiceImpl
 			externalReferenceCode = null;
 		}
 
+		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
+			commerceInventoryWarehouseItemPersistence.findByC_S(
+				commerceInventoryWarehouseId, sku);
+
+		if (commerceInventoryWarehouseItem != null) {
+			throw new DuplicateCommerceInventoryWarehouseItemException(
+				"Duplicated sku code");
+		}
+
 		long commerceInventoryWarehouseItemId = counterLocalService.increment();
 
-		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
+		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem2 =
 			commerceInventoryWarehouseItemPersistence.create(
 				commerceInventoryWarehouseItemId);
 
-		commerceInventoryWarehouseItem.setCompanyId(user.getCompanyId());
-		commerceInventoryWarehouseItem.setUserId(user.getUserId());
-		commerceInventoryWarehouseItem.setUserName(user.getFullName());
-		commerceInventoryWarehouseItem.setCommerceInventoryWarehouseId(
+		commerceInventoryWarehouseItem2.setCompanyId(user.getCompanyId());
+		commerceInventoryWarehouseItem2.setUserId(user.getUserId());
+		commerceInventoryWarehouseItem2.setUserName(user.getFullName());
+		commerceInventoryWarehouseItem2.setCommerceInventoryWarehouseId(
 			commerceInventoryWarehouseId);
-		commerceInventoryWarehouseItem.setExternalReferenceCode(
+		commerceInventoryWarehouseItem2.setExternalReferenceCode(
 			externalReferenceCode);
-		commerceInventoryWarehouseItem.setSku(sku);
-		commerceInventoryWarehouseItem.setQuantity(quantity);
+		commerceInventoryWarehouseItem2.setSku(sku);
+		commerceInventoryWarehouseItem2.setQuantity(quantity);
 
 		return commerceInventoryWarehouseItemPersistence.update(
-			commerceInventoryWarehouseItem);
+			commerceInventoryWarehouseItem2);
 	}
 
 	@Override
