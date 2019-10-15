@@ -17,13 +17,13 @@ package com.liferay.commerce.internal.order.term.contributor;
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.constants.CommerceDefinitionTermConstants;
+import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceDefinitionTermContributor;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.UserLocalService;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 
 import java.util.ArrayList;
@@ -41,14 +41,36 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(
 	immediate = true,
-	property = "commerce.definition.term.contributor.key=" + CommerceOrderDefinitionTermContributor.KEY,
+	property = {
+		"commerce.definition.term.contributor.key=" + CommerceOrderDefinitionTermContributor.KEY,
+		"commerce.notification.type.key=" + CommerceOrderConstants.ORDER_NOTIFICATION_AWAITING_SHIPMENT,
+		"commerce.notification.type.key=" + CommerceOrderConstants.ORDER_NOTIFICATION_COMPLETED,
+		"commerce.notification.type.key=" + CommerceOrderConstants.ORDER_NOTIFICATION_PARTIALLY_SHIPPED,
+		"commerce.notification.type.key=" + CommerceOrderConstants.ORDER_NOTIFICATION_PLACED,
+		"commerce.notification.type.key=" + CommerceOrderConstants.ORDER_NOTIFICATION_SHIPPED,
+		"commerce.notification.type.key=" + CommerceOrderConstants.ORDER_NOTIFICATION_TRANSMITTED
+	},
 	service = CommerceDefinitionTermContributor.class
 )
 public class CommerceOrderDefinitionTermContributor
 	implements CommerceDefinitionTermContributor {
 
 	public static final String KEY =
-		CommerceDefinitionTermConstants.ORDER_DEFINITION_TERMS_CONTRIBUTOR;
+		CommerceDefinitionTermConstants.
+			BODY_AND_SUBJECT_DEFINITION_TERMS_CONTRIBUTOR;
+
+	@Override
+	public Map<String, String> getDefinitionTerms(Locale locale) {
+		Map<String, String> map = new HashMap<>();
+
+		List<String> terms = getTerms();
+
+		for (String term : terms) {
+			map.put(term, getLabel(term, locale));
+		}
+
+		return map;
+	}
 
 	@Override
 	public String getFilledTerm(String term, Object object, Locale locale)
@@ -68,7 +90,7 @@ public class CommerceOrderDefinitionTermContributor
 					CommerceAccountConstants.ACCOUNT_TYPE_PERSONAL) {
 
 				User user = _userLocalService.getUser(
-					GetterUtil.getLong(commerceAccount.getName()));
+					commerceAccount.getUserId());
 
 				return user.getFullName(true, true);
 			}
