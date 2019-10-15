@@ -76,7 +76,6 @@ if (commerceSubscriptionEntry != null) {
 		</c:if>
 
 		<c:if test="<%= subscriptionStatus != CommerceSubscriptionEntryConstants.SUBSCRIPTION_STATUS_CANCELLED %>">
-
 			<portlet:actionURL name="editCommerceSubscriptionEntry" var="cancelURL">
 				<portlet:param name="<%= Constants.CMD %>" value="cancel" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
