@@ -15,13 +15,12 @@
 package com.liferay.commerce.internal.messaging;
 
 import com.liferay.commerce.constants.CommerceDestinationNames;
-import com.liferay.commerce.constants.CommerceOrderConstants;
-import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.constants.CommerceSubscriptionNotificationConstants;
+import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.notification.util.CommerceNotificationHelper;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
-import com.liferay.commerce.service.CommerceOrderLocalService;
-import com.liferay.commerce.subscription.CommerceSubscriptionEntryHelper;
+import com.liferay.commerce.service.CommerceSubscriptionEntryLocalService;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
@@ -34,39 +33,33 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(
 	immediate = true,
-	property = "destination.name=" + CommerceDestinationNames.ORDER_STATUS,
+	property = "destination.name=" + CommerceDestinationNames.SUBSCRIPTION_STATUS,
 	service = MessageListener.class
 )
-public class CommerceOrderStatusMessageListener extends BaseMessageListener {
+public class CommerceSubscriptionStatusMessageListener
+	extends BaseMessageListener {
 
 	@Override
 	protected void doReceive(Message message) throws Exception {
-		int orderStatus = message.getInteger("orderStatus");
+		int subscriptionStatus = message.getInteger("subscriptionStatus");
 
-		long commerceOrderId = message.getLong("commerceOrderId");
+		long commerceSubscriptionEntryId = message.getLong(
+			"commerceSubscriptionEntryId");
 
-		CommerceOrder commerceOrder =
-			_commerceOrderLocalService.getCommerceOrder(commerceOrderId);
+		CommerceSubscriptionEntry commerceSubscriptionEntry =
+			_commerceSubscriptionEntryLocalService.getCommerceSubscriptionEntry(
+				commerceSubscriptionEntryId);
 
 		CommerceChannel commerceChannel =
 			_commerceChannelLocalService.getCommerceChannelByOrderGroupId(
-				commerceOrder.getGroupId());
+				commerceSubscriptionEntry.getGroupId());
 
-		if (orderStatus == CommerceOrderConstants.ORDER_STATUS_TO_TRANSMIT) {
-			_commerceNotificationHelper.sendNotifications(
-				commerceChannel.getSiteGroupId(), commerceOrder.getUserId(),
-				CommerceOrderConstants.ORDER_NOTIFICATION_PLACED,
-				commerceOrder);
-
-			_commerceSubscriptionEntryHelper.checkCommerceSubscriptions(
-				commerceOrder);
-		}
-		else {
-			_commerceNotificationHelper.sendNotifications(
-				commerceChannel.getSiteGroupId(), commerceOrder.getUserId(),
-				CommerceOrderConstants.getNotificationKey(orderStatus),
-				commerceOrder);
-		}
+		_commerceNotificationHelper.sendNotifications(
+			commerceChannel.getSiteGroupId(),
+			commerceSubscriptionEntry.getUserId(),
+			CommerceSubscriptionNotificationConstants.getNotificationKey(
+				subscriptionStatus),
+			commerceSubscriptionEntry);
 	}
 
 	@Reference
@@ -76,9 +69,7 @@ public class CommerceOrderStatusMessageListener extends BaseMessageListener {
 	private CommerceNotificationHelper _commerceNotificationHelper;
 
 	@Reference
-	private CommerceOrderLocalService _commerceOrderLocalService;
-
-	@Reference
-	private CommerceSubscriptionEntryHelper _commerceSubscriptionEntryHelper;
+	private CommerceSubscriptionEntryLocalService
+		_commerceSubscriptionEntryLocalService;
 
 }
