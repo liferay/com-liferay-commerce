@@ -29,6 +29,7 @@ import com.liferay.commerce.payment.result.CommercePaymentResult;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
+import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.module.configuration.ConfigurationException;
@@ -226,8 +227,8 @@ public class MercanetCommercePaymentMethod implements CommercePaymentMethod {
 
 		String transactionUuid = PortalUUIDUtil.generate();
 
-		String transactionId = transactionUuid.replace(
-			StringPool.DASH, StringPool.BLANK);
+		String transactionId = StringUtil.replace(
+			transactionUuid, CharPool.DASH, StringPool.BLANK);
 
 		paymentRequest.setTransactionReference(transactionId);
 

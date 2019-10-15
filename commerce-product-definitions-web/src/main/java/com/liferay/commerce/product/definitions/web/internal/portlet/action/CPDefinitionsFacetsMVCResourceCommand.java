@@ -50,6 +50,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
@@ -134,7 +135,8 @@ public class CPDefinitionsFacetsMVCResourceCommand
 		String currentOptionKey = StringPool.BLANK;
 
 		if (fieldName.startsWith("OPTION_")) {
-			currentOptionKey = fieldName.replace("OPTION_", StringPool.BLANK);
+			currentOptionKey = StringUtil.replace(
+				fieldName, "OPTION_", StringPool.BLANK);
 		}
 
 		JSONArray jsonArray = _jsonFactory.createJSONArray();
@@ -245,7 +247,8 @@ public class CPDefinitionsFacetsMVCResourceCommand
 
 	private String _getIndexFieldName(String fieldName, String languageId) {
 		if (fieldName.startsWith("OPTION_")) {
-			fieldName = fieldName.replace("OPTION_", StringPool.BLANK);
+			fieldName = StringUtil.replace(
+				fieldName, "OPTION_", StringPool.BLANK);
 
 			return StringBundler.concat(
 				languageId, "_ATTRIBUTE_", fieldName, "_VALUES_NAMES");

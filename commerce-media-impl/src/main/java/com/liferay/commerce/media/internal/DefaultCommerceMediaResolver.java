@@ -173,13 +173,12 @@ public class DefaultCommerceMediaResolver implements CommerceMediaResolver {
 		sb.append(StringPool.SLASH);
 		sb.append(cpAttachmentFileEntry.getFileEntryId());
 		sb.append(StringPool.SLASH);
-
-		String title = cpAttachmentFileEntry.getTitle(siteDefaultLocale);
-
 		sb.append(
 			URLCodec.encodeURL(
-				title.replace(StringPool.SLASH, StringPool.BLANK), true));
-
+				StringUtil.replace(
+					cpAttachmentFileEntry.getTitle(siteDefaultLocale),
+					CharPool.SLASH, StringPool.BLANK),
+				true));
 		sb.append("?download=");
 		sb.append(download);
 
