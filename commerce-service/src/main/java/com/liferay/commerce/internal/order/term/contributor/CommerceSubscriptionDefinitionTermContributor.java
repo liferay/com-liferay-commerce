@@ -17,6 +17,7 @@ package com.liferay.commerce.internal.order.term.contributor;
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.constants.CommerceDefinitionTermConstants;
+import com.liferay.commerce.constants.CommerceSubscriptionNotificationConstants;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
@@ -46,7 +47,13 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(
 	immediate = true,
-	property = "commerce.definition.term.contributor.key=" + CommerceSubscriptionDefinitionTermContributor.KEY,
+	property = {
+		"commerce.definition.term.contributor.key=" + CommerceSubscriptionDefinitionTermContributor.KEY,
+		"commerce.notification.type.key=" + CommerceSubscriptionNotificationConstants.SUBSCRIPTION_ACTIVATED,
+		"commerce.notification.type.key=" + CommerceSubscriptionNotificationConstants.SUBSCRIPTION_CANCELLED,
+		"commerce.notification.type.key=" + CommerceSubscriptionNotificationConstants.SUBSCRIPTION_RENEWED,
+		"commerce.notification.type.key=" + CommerceSubscriptionNotificationConstants.SUBSCRIPTION_SUSPENDED
+	},
 	service = CommerceDefinitionTermContributor.class
 )
 public class CommerceSubscriptionDefinitionTermContributor
@@ -54,7 +61,20 @@ public class CommerceSubscriptionDefinitionTermContributor
 
 	public static final String KEY =
 		CommerceDefinitionTermConstants.
-			SUBSCRIPTION_DEFINITION_TERMS_CONTRIBUTOR;
+			BODY_AND_SUBJECT_DEFINITION_TERMS_CONTRIBUTOR;
+
+	@Override
+	public Map<String, String> getDefinitionTerms(Locale locale) {
+		Map<String, String> map = new HashMap<>();
+
+		List<String> terms = getTerms();
+
+		for (String term : terms) {
+			map.put(term, getLabel(term, locale));
+		}
+
+		return map;
+	}
 
 	@Override
 	public String getFilledTerm(String term, Object object, Locale locale)
