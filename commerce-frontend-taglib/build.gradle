@@ -5,7 +5,6 @@ dependencies {
 	compileOnly group: "com.liferay", name: "com.liferay.frontend.taglib", version: "3.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.frontend.taglib.clay", version: "1.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.account.api", version: "3.6.0"
-	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.api", version: "9.3.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.currency.api", version: "2.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.content.api", version: "2.0.0"
 	compileOnly group: "com.liferay.portal", name: "com.liferay.util.taglib", version: "3.0.0"
