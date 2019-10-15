@@ -14,29 +14,24 @@
 
 package com.liferay.commerce.notification.internal.util;
 
-import com.liferay.commerce.account.model.CommerceAccountUserRel;
-import com.liferay.commerce.account.service.CommerceAccountGroupLocalService;
-import com.liferay.commerce.account.service.CommerceAccountUserRelLocalService;
+import com.liferay.commerce.constants.CommerceDefinitionTermConstants;
 import com.liferay.commerce.notification.model.CommerceNotificationTemplate;
-import com.liferay.commerce.notification.model.CommerceNotificationTemplateCommerceAccountGroupRel;
 import com.liferay.commerce.notification.service.CommerceNotificationQueueEntryLocalService;
-import com.liferay.commerce.notification.service.CommerceNotificationTemplateCommerceAccountGroupRelLocalService;
 import com.liferay.commerce.notification.service.CommerceNotificationTemplateLocalService;
 import com.liferay.commerce.notification.type.CommerceNotificationType;
 import com.liferay.commerce.notification.type.CommerceNotificationTypeRegistry;
 import com.liferay.commerce.notification.util.CommerceNotificationHelper;
+import com.liferay.commerce.order.CommerceDefinitionTermContributor;
+import com.liferay.commerce.order.CommerceDefinitionTermContributorRegistry;
 import com.liferay.petra.string.StringPool;
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.UserLocalService;
-import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -55,15 +50,8 @@ public class CommerceNotificationHelperImpl
 	implements CommerceNotificationHelper {
 
 	@Override
-	public void sendNotifications(long groupId, String key, Object object)
-		throws PortalException {
-
-		sendNotifications(groupId, key, object, null);
-	}
-
-	@Override
 	public void sendNotifications(
-			long groupId, String key, Object object, long[] userIds)
+			long groupId, long userId, String key, Object object)
 		throws PortalException {
 
 		if (Validator.isBlank(key)) {
@@ -85,36 +73,15 @@ public class CommerceNotificationHelperImpl
 		for (CommerceNotificationTemplate commerceNotificationTemplate :
 				commerceNotificationTemplates) {
 
-			List<CommerceNotificationTemplateCommerceAccountGroupRel>
-				commerceNotificationTemplateCommerceAccountGroupRels =
-					_commerceNotificationTemplateCommerceAccountGroupRelLocalService.
-						getCommerceNotificationTemplateCommerceAccountGroupRels(
-							commerceNotificationTemplate.
-								getCommerceNotificationTemplateId(),
-							QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-
-			long[] commerceAccountGroupIds = ListUtil.toLongArray(
-				commerceNotificationTemplateCommerceAccountGroupRels,
-				CommerceNotificationTemplateCommerceAccountGroupRel.
-					COMMERCE_ACCOUNT_GROUP_ID_ACCESSOR);
-
-			if (ArrayUtil.isNotEmpty(userIds)) {
-				sendNotificationsToUserIds(
-					userIds, commerceAccountGroupIds,
-					commerceNotificationTemplate, commerceNotificationType,
-					object);
-			}
-			else if (ArrayUtil.isNotEmpty(commerceAccountGroupIds)) {
-				sendNotificationsToAccountGroupUsers(
-					commerceAccountGroupIds, commerceNotificationTemplate,
-					commerceNotificationType, object);
-			}
+			sendNotification(
+				userId, commerceNotificationTemplate, commerceNotificationType,
+				object);
 		}
 	}
 
 	protected String formatString(
-			CommerceNotificationType commerceNotificationType, String content,
-			Object object, Locale locale)
+			CommerceNotificationType commerceNotificationType, int fieldType,
+			String content, Object object, Locale locale)
 		throws PortalException {
 
 		if (Validator.isNull(content)) {
@@ -129,20 +96,40 @@ public class CommerceNotificationHelperImpl
 			placeholders.add(matcher.group());
 		}
 
-		for (String placeholder : placeholders) {
-			content = StringUtil.replace(
-				content, placeholder,
-				commerceNotificationType.getFilledTerm(
-					placeholder, object, locale));
+		List<CommerceDefinitionTermContributor> definitionTermContributors;
+
+		if (fieldType == _TOFIELD) {
+			definitionTermContributors =
+				_commerceDefinitionTermContributorRegistry.
+					getDefinitionTermContributorsByContributorKey(
+						CommerceDefinitionTermConstants.
+							RECIPIENT_DEFINITION_TERMS_CONTRIBUTOR);
+		}
+		else {
+			definitionTermContributors =
+				_commerceDefinitionTermContributorRegistry.
+					getDefinitionTermContributorsByNotificationTypeKey(
+						commerceNotificationType.getKey());
+		}
+
+		for (CommerceDefinitionTermContributor definitionTermContributor :
+				definitionTermContributors) {
+
+			for (String placeholder : placeholders) {
+				content = StringUtil.replace(
+					content, placeholder,
+					definitionTermContributor.getFilledTerm(
+						placeholder, object, locale));
+			}
 		}
 
 		return content;
 	}
 
 	protected void sendNotification(
+			long userId,
 			CommerceNotificationTemplate commerceNotificationTemplate,
-			CommerceNotificationType commerceNotificationType, Object object,
-			long userId)
+			CommerceNotificationType commerceNotificationType, Object object)
 		throws PortalException {
 
 		long groupId = commerceNotificationTemplate.getGroupId();
@@ -156,11 +143,11 @@ public class CommerceNotificationHelperImpl
 			user.getLanguageId());
 
 		String subject = formatString(
-			commerceNotificationType,
+			commerceNotificationType, _SUBJECTFIELD,
 			commerceNotificationTemplate.getSubject(userLocale), object,
 			userLocale);
 		String body = formatString(
-			commerceNotificationType,
+			commerceNotificationType, _BODYFIELD,
 			commerceNotificationTemplate.getBody(userLocale), object,
 			userLocale);
 
@@ -171,103 +158,58 @@ public class CommerceNotificationHelperImpl
 
 		if (Validator.isNull(subject)) {
 			subject = formatString(
-				commerceNotificationType,
+				commerceNotificationType, _SUBJECTFIELD,
 				commerceNotificationTemplate.getSubject(siteDefaultLocale),
 				object, siteDefaultLocale);
 		}
 
 		if (Validator.isNull(body)) {
 			formatString(
-				commerceNotificationType,
+				commerceNotificationType, _BODYFIELD,
 				commerceNotificationTemplate.getBody(siteDefaultLocale), object,
 				siteDefaultLocale);
 		}
 
-		_commerceNotificationQueueEntryLocalService.
-			addCommerceNotificationQueueEntry(
-				user.getUserId(), groupId,
-				commerceNotificationType.getClassName(object),
-				commerceNotificationType.getClassPK(object),
-				commerceNotificationTemplate.
-					getCommerceNotificationTemplateId(),
-				commerceNotificationTemplate.getFrom(), fromName,
-				user.getEmailAddress(), user.getFullName(),
-				commerceNotificationTemplate.getCc(),
-				commerceNotificationTemplate.getBcc(), subject, body, 0);
-	}
+		String to = formatString(
+			commerceNotificationType, _TOFIELD,
+			commerceNotificationTemplate.getTo(), object, userLocale);
 
-	protected void sendNotificationsToAccountGroupUsers(
-			long[] commerceAccountGroupIds,
-			CommerceNotificationTemplate commerceNotificationTemplate,
-			CommerceNotificationType commerceNotificationType, Object object)
-		throws PortalException {
+		String[] toUserIds = StringUtil.split(to);
 
-		List<Long> commerceAccountUserIds =
-			_commerceAccountGroupLocalService.
-				getCommerceAccountUserIdsFromAccountGroupIds(
-					commerceAccountGroupIds, QueryUtil.ALL_POS,
-					QueryUtil.ALL_POS);
+		for (String toUserId : toUserIds) {
+			User toUser = _userLocalService.getUser(
+				GetterUtil.getLong(toUserId));
 
-		long[] commerceAccountUserIdsArray = ArrayUtil.toLongArray(
-			commerceAccountUserIds);
-
-		for (long userId : commerceAccountUserIdsArray) {
-			sendNotification(
-				commerceNotificationTemplate, commerceNotificationType, object,
-				userId);
+			_commerceNotificationQueueEntryLocalService.
+				addCommerceNotificationQueueEntry(
+					toUser.getUserId(), groupId,
+					commerceNotificationType.getClassName(object),
+					commerceNotificationType.getClassPK(object),
+					commerceNotificationTemplate.
+						getCommerceNotificationTemplateId(),
+					commerceNotificationTemplate.getFrom(), fromName,
+					toUser.getEmailAddress(), toUser.getFullName(),
+					commerceNotificationTemplate.getCc(),
+					commerceNotificationTemplate.getBcc(), subject, body, 0);
 		}
 	}
 
-	protected void sendNotificationsToUserIds(
-			long[] userIds, long[] commerceAccountGroupIds,
-			CommerceNotificationTemplate commerceNotificationTemplate,
-			CommerceNotificationType commerceNotificationType, Object object)
-		throws PortalException {
+	private static final int _BODYFIELD = 2;
 
-		for (long userId : userIds) {
-			List<CommerceAccountUserRel> commerceAccountUserRelsByUserId =
-				_commerceAccountUserRelLocalService.
-					getCommerceAccountUserRelsByCommerceAccountUserId(userId);
+	private static final int _SUBJECTFIELD = 1;
 
-			List<Long> commerceAccountIds = new ArrayList<>();
-
-			for (CommerceAccountUserRel commerceAccountUserRel :
-					commerceAccountUserRelsByUserId) {
-
-				commerceAccountIds.add(
-					commerceAccountUserRel.getCommerceAccountId());
-			}
-
-			long[] commerceAccountIdsArray = ArrayUtil.toLongArray(
-				commerceAccountIds);
-
-			if (ArrayUtil.containsAll(
-					commerceAccountIdsArray, commerceAccountGroupIds)) {
-
-				sendNotification(
-					commerceNotificationTemplate, commerceNotificationType,
-					object, userId);
-			}
-		}
-	}
+	private static final int _TOFIELD = 3;
 
 	private static final Pattern _placeholderPattern = Pattern.compile(
 		"\\[%[^\\[%]+%\\]", Pattern.CASE_INSENSITIVE);
 
 	@Reference
-	private CommerceAccountGroupLocalService _commerceAccountGroupLocalService;
-
-	@Reference
-	private CommerceAccountUserRelLocalService
-		_commerceAccountUserRelLocalService;
+	private CommerceDefinitionTermContributorRegistry
+		_commerceDefinitionTermContributorRegistry;
 
 	@Reference
 	private CommerceNotificationQueueEntryLocalService
 		_commerceNotificationQueueEntryLocalService;
-
-	@Reference
-	private CommerceNotificationTemplateCommerceAccountGroupRelLocalService
-		_commerceNotificationTemplateCommerceAccountGroupRelLocalService;
 
 	@Reference
 	private CommerceNotificationTemplateLocalService
