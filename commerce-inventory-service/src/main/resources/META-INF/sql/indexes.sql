@@ -17,6 +17,6 @@ create index IX_7202EB2 on CIWarehouse (countryTwoLettersISOCode[$COLUMN_LENGTH:
 create index IX_3996C237 on CIWarehouseGroupRel (groupId, commerceWarehouseId, primary_);
 create index IX_E4C1F39E on CIWarehouseGroupRel (groupId, primary_);
 
-create index IX_8D9FD306 on CIWarehouseItem (commerceInventoryWarehouseId, sku[$COLUMN_LENGTH:75$]);
+create unique index IX_8D9FD306 on CIWarehouseItem (commerceInventoryWarehouseId, sku[$COLUMN_LENGTH:75$]);
 create index IX_8A09C40B on CIWarehouseItem (companyId, externalReferenceCode[$COLUMN_LENGTH:75$]);
 create index IX_97CADC57 on CIWarehouseItem (sku[$COLUMN_LENGTH:75$]);
