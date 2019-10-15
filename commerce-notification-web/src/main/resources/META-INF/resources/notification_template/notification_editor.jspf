@@ -16,12 +16,50 @@
 
 <aui:input checked="<%= (commerceNotificationTemplate == null) ? false : commerceNotificationTemplate.getEnabled() %>" name="enabled" type="toggle-switch" />
 
+<%
+Map<String, String> definitionTerms = commerceNotificationTemplatesDisplayContext.getDefinitionTerms(CommerceDefinitionTermConstants.RECIPIENT_DEFINITION_TERMS_CONTRIBUTOR, commerceNotificationType.getKey(), locale);
+%>
+
+<aui:field-wrapper label="to">
+	<liferay-ui:input-localized
+		name="to"
+		xml="<%= (commerceNotificationTemplate == null) ? StringPool.BLANK : commerceNotificationTemplate.getTo() %>"
+	/>
+</aui:field-wrapper>
+
+<c:if test="<%= (definitionTerms != null) && !definitionTerms.isEmpty() %>">
+	<aui:fieldset collapsed="<%= true %>" collapsible="<%= true %>" label="definition-of-terms" markupView="lexicon">
+		<dl>
+
+			<%
+			for (Map.Entry<String, String> entry : definitionTerms.entrySet()) {
+			%>
+
+				<dt>
+					<%= entry.getKey() %>
+				</dt>
+				<dd>
+					<%= entry.getValue() %>
+				</dd>
+
+			<%
+			}
+			%>
+
+		</dl>
+	</aui:fieldset>
+</c:if>
+
 <aui:field-wrapper label="subject">
 	<liferay-ui:input-localized
 		name="subject"
 		xml="<%= (commerceNotificationTemplate == null) ? StringPool.BLANK : commerceNotificationTemplate.getSubject() %>"
 	/>
 </aui:field-wrapper>
+
+<%
+definitionTerms = commerceNotificationTemplatesDisplayContext.getDefinitionTerms(CommerceDefinitionTermConstants.BODY_AND_SUBJECT_DEFINITION_TERMS_CONTRIBUTOR, commerceNotificationType.getKey(), locale);
+%>
 
 <aui:field-wrapper label="body">
 	<liferay-ui:input-localized

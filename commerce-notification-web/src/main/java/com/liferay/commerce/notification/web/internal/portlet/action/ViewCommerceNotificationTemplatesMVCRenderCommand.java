@@ -22,6 +22,7 @@ import com.liferay.commerce.notification.service.CommerceNotificationTemplateCom
 import com.liferay.commerce.notification.service.CommerceNotificationTemplateService;
 import com.liferay.commerce.notification.type.CommerceNotificationTypeRegistry;
 import com.liferay.commerce.notification.web.internal.display.context.CommerceNotificationTemplatesDisplayContext;
+import com.liferay.commerce.order.CommerceDefinitionTermContributorRegistry;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderConstants;
@@ -74,6 +75,7 @@ public class ViewCommerceNotificationTemplatesMVCRenderCommand
 			CommerceNotificationTemplatesDisplayContext
 				commerceNotificationTemplatesDisplayContext =
 					new CommerceNotificationTemplatesDisplayContext(
+						_commerceDefinitionTermContributorRegistry,
 						_commerceNotificationTemplateService,
 						_commerceNotificationTemplateCommerceAccountGroupRelService,
 						_commerceNotificationTypeRegistry,
@@ -104,6 +106,10 @@ public class ViewCommerceNotificationTemplatesMVCRenderCommand
 
 	@Reference
 	private CommerceAccountGroupService _commerceAccountGroupService;
+
+	@Reference
+	private CommerceDefinitionTermContributorRegistry
+		_commerceDefinitionTermContributorRegistry;
 
 	@Reference
 	private CommerceNotificationTemplateCommerceAccountGroupRelService

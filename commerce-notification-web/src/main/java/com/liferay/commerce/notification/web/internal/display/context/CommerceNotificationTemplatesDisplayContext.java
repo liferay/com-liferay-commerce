@@ -28,6 +28,8 @@ import com.liferay.commerce.notification.util.comparator.CommerceNotificationTem
 import com.liferay.commerce.notification.web.internal.admin.NotificationsCommerceAdminModule;
 import com.liferay.commerce.notification.web.internal.display.context.util.CommerceNotificationsRequestHelper;
 import com.liferay.commerce.notification.web.internal.util.CommerceNotificationsUtil;
+import com.liferay.commerce.order.CommerceDefinitionTermContributor;
+import com.liferay.commerce.order.CommerceDefinitionTermContributorRegistry;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.UUIDItemSelectorReturnType;
@@ -46,7 +48,10 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import javax.portlet.PortletURL;
@@ -59,6 +64,8 @@ import javax.servlet.http.HttpServletRequest;
 public class CommerceNotificationTemplatesDisplayContext {
 
 	public CommerceNotificationTemplatesDisplayContext(
+		CommerceDefinitionTermContributorRegistry
+			commerceDefinitionTermContributorRegistry,
 		CommerceNotificationTemplateService commerceNotificationTemplateService,
 		CommerceNotificationTemplateCommerceAccountGroupRelService
 			commerceNotificationTemplateCommerceAccountGroupRelService,
@@ -67,6 +74,8 @@ public class CommerceNotificationTemplatesDisplayContext {
 		HttpServletRequest httpServletRequest, ItemSelector itemSelector,
 		PortletResourcePermission portletResourcePermission) {
 
+		_commerceDefinitionTermContributorRegistry =
+			commerceDefinitionTermContributorRegistry;
 		_commerceNotificationTemplateService =
 			commerceNotificationTemplateService;
 		_commerceNotificationTemplateCommerceAccountGroupRelService =
@@ -138,6 +147,38 @@ public class CommerceNotificationTemplatesDisplayContext {
 
 	public List<CommerceNotificationType> getCommerceNotificationTypes() {
 		return _commerceNotificationTypeRegistry.getCommerceNotificationTypes();
+	}
+
+	public Map<String, String> getDefinitionTerms(
+		String contributorKey, String notificationTypeKey, Locale locale) {
+
+		List<CommerceDefinitionTermContributor>
+			definitionTermContributorsByContributorKey =
+				_commerceDefinitionTermContributorRegistry.
+					getDefinitionTermContributorsByContributorKey(
+						contributorKey);
+		List<CommerceDefinitionTermContributor>
+			definitionTermContributorsByNotificationTypeKey =
+				_commerceDefinitionTermContributorRegistry.
+					getDefinitionTermContributorsByNotificationTypeKey(
+						notificationTypeKey);
+
+		Map<String, String> results = new HashMap<>();
+
+		for (CommerceDefinitionTermContributor
+				commerceDefinitionTermContributor :
+					definitionTermContributorsByContributorKey) {
+
+			if (definitionTermContributorsByNotificationTypeKey.contains(
+					commerceDefinitionTermContributor)) {
+
+				results.putAll(
+					commerceDefinitionTermContributor.getDefinitionTerms(
+						locale));
+			}
+		}
+
+		return results;
 	}
 
 	public String getItemSelectorUrl() throws PortalException {
@@ -326,6 +367,8 @@ public class CommerceNotificationTemplatesDisplayContext {
 	}
 
 	private final CommerceAccountGroupService _commerceAccountGroupService;
+	private final CommerceDefinitionTermContributorRegistry
+		_commerceDefinitionTermContributorRegistry;
 	private final CommerceNotificationsRequestHelper
 		_commerceNotificationsRequestHelper;
 	private CommerceNotificationTemplate _commerceNotificationTemplate;
