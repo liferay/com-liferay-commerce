@@ -130,6 +130,7 @@
 		<column name="description" type="String" />
 		<column name="from" type="String" />
 		<column localized="true" name="fromName" type="String" />
+		<column name="to" type="String" />
 		<column name="cc" type="String" />
 		<column name="bcc" type="String" />
 		<column name="type" type="String" />
