@@ -174,14 +174,11 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 				orderByComparator,
 			boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath =
@@ -240,7 +237,7 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(
 					CommerceInventoryReplenishmentItemModelImpl.ORDER_BY_JPQL);
 			}
@@ -258,20 +255,8 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 
 				qPos.add(commerceInventoryWarehouseId);
 
-				if (!pagination) {
-					list =
-						(List<CommerceInventoryReplenishmentItem>)
-							QueryUtil.list(q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list =
-						(List<CommerceInventoryReplenishmentItem>)
-							QueryUtil.list(q, getDialect(), start, end);
-				}
+				list = (List<CommerceInventoryReplenishmentItem>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -745,14 +730,11 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 
 		sku = Objects.toString(sku, "");
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindBySku;
@@ -814,7 +796,7 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(
 					CommerceInventoryReplenishmentItemModelImpl.ORDER_BY_JPQL);
 			}
@@ -834,20 +816,8 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 					qPos.add(sku);
 				}
 
-				if (!pagination) {
-					list =
-						(List<CommerceInventoryReplenishmentItem>)
-							QueryUtil.list(q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list =
-						(List<CommerceInventoryReplenishmentItem>)
-							QueryUtil.list(q, getDialect(), start, end);
-				}
+				list = (List<CommerceInventoryReplenishmentItem>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -1329,14 +1299,11 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 		OrderByComparator<CommerceInventoryReplenishmentItem> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindByAvailabilityDate;
@@ -1404,7 +1371,7 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(
 					CommerceInventoryReplenishmentItemModelImpl.ORDER_BY_JPQL);
 			}
@@ -1424,20 +1391,8 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 					qPos.add(new Timestamp(availabilityDate.getTime()));
 				}
 
-				if (!pagination) {
-					list =
-						(List<CommerceInventoryReplenishmentItem>)
-							QueryUtil.list(q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list =
-						(List<CommerceInventoryReplenishmentItem>)
-							QueryUtil.list(q, getDialect(), start, end);
-				}
+				list = (List<CommerceInventoryReplenishmentItem>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -1931,14 +1886,11 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 
 		sku = Objects.toString(sku, "");
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindByS_AD;
@@ -2017,7 +1969,7 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(
 					CommerceInventoryReplenishmentItemModelImpl.ORDER_BY_JPQL);
 			}
@@ -2041,20 +1993,8 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 					qPos.add(new Timestamp(availabilityDate.getTime()));
 				}
 
-				if (!pagination) {
-					list =
-						(List<CommerceInventoryReplenishmentItem>)
-							QueryUtil.list(q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list =
-						(List<CommerceInventoryReplenishmentItem>)
-							QueryUtil.list(q, getDialect(), start, end);
-				}
+				list = (List<CommerceInventoryReplenishmentItem>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -3293,14 +3233,11 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 		OrderByComparator<CommerceInventoryReplenishmentItem> orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindAll;
@@ -3338,11 +3275,8 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 			else {
 				sql = _SQL_SELECT_COMMERCEINVENTORYREPLENISHMENTITEM;
 
-				if (pagination) {
-					sql = sql.concat(
-						CommerceInventoryReplenishmentItemModelImpl.
-							ORDER_BY_JPQL);
-				}
+				sql = sql.concat(
+					CommerceInventoryReplenishmentItemModelImpl.ORDER_BY_JPQL);
 			}
 
 			Session session = null;
@@ -3352,20 +3286,8 @@ public class CommerceInventoryReplenishmentItemPersistenceImpl
 
 				Query q = session.createQuery(sql);
 
-				if (!pagination) {
-					list =
-						(List<CommerceInventoryReplenishmentItem>)
-							QueryUtil.list(q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list =
-						(List<CommerceInventoryReplenishmentItem>)
-							QueryUtil.list(q, getDialect(), start, end);
-				}
+				list = (List<CommerceInventoryReplenishmentItem>)QueryUtil.list(
+					q, getDialect(), start, end);
 
 				cacheResult(list);
 
