@@ -66,6 +66,7 @@
 		<field localized="true" name="fromName" type="String">
 			<validator name="required" />
 		</field>
+		<field name="to" type="String" />
 		<field name="cc" type="String">
 			<hint name="max-length">255</hint>
 		</field>

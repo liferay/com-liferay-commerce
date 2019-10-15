@@ -299,9 +299,9 @@ public class CommerceNotificationAttachmentModelImpl
 				public void accept(
 					CommerceNotificationAttachment
 						commerceNotificationAttachment,
-					Object uuid) {
+					Object uuidObject) {
 
-					commerceNotificationAttachment.setUuid((String)uuid);
+					commerceNotificationAttachment.setUuid((String)uuidObject);
 				}
 
 			});
@@ -327,11 +327,11 @@ public class CommerceNotificationAttachmentModelImpl
 				public void accept(
 					CommerceNotificationAttachment
 						commerceNotificationAttachment,
-					Object commerceNotificationAttachmentId) {
+					Object commerceNotificationAttachmentIdObject) {
 
 					commerceNotificationAttachment.
 						setCommerceNotificationAttachmentId(
-							(Long)commerceNotificationAttachmentId);
+							(Long)commerceNotificationAttachmentIdObject);
 				}
 
 			});
@@ -356,9 +356,10 @@ public class CommerceNotificationAttachmentModelImpl
 				public void accept(
 					CommerceNotificationAttachment
 						commerceNotificationAttachment,
-					Object groupId) {
+					Object groupIdObject) {
 
-					commerceNotificationAttachment.setGroupId((Long)groupId);
+					commerceNotificationAttachment.setGroupId(
+						(Long)groupIdObject);
 				}
 
 			});
@@ -383,10 +384,10 @@ public class CommerceNotificationAttachmentModelImpl
 				public void accept(
 					CommerceNotificationAttachment
 						commerceNotificationAttachment,
-					Object companyId) {
+					Object companyIdObject) {
 
 					commerceNotificationAttachment.setCompanyId(
-						(Long)companyId);
+						(Long)companyIdObject);
 				}
 
 			});
@@ -411,9 +412,10 @@ public class CommerceNotificationAttachmentModelImpl
 				public void accept(
 					CommerceNotificationAttachment
 						commerceNotificationAttachment,
-					Object userId) {
+					Object userIdObject) {
 
-					commerceNotificationAttachment.setUserId((Long)userId);
+					commerceNotificationAttachment.setUserId(
+						(Long)userIdObject);
 				}
 
 			});
@@ -438,10 +440,10 @@ public class CommerceNotificationAttachmentModelImpl
 				public void accept(
 					CommerceNotificationAttachment
 						commerceNotificationAttachment,
-					Object userName) {
+					Object userNameObject) {
 
 					commerceNotificationAttachment.setUserName(
-						(String)userName);
+						(String)userNameObject);
 				}
 
 			});
@@ -466,10 +468,10 @@ public class CommerceNotificationAttachmentModelImpl
 				public void accept(
 					CommerceNotificationAttachment
 						commerceNotificationAttachment,
-					Object createDate) {
+					Object createDateObject) {
 
 					commerceNotificationAttachment.setCreateDate(
-						(Date)createDate);
+						(Date)createDateObject);
 				}
 
 			});
@@ -494,10 +496,10 @@ public class CommerceNotificationAttachmentModelImpl
 				public void accept(
 					CommerceNotificationAttachment
 						commerceNotificationAttachment,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
 					commerceNotificationAttachment.setModifiedDate(
-						(Date)modifiedDate);
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -523,11 +525,11 @@ public class CommerceNotificationAttachmentModelImpl
 				public void accept(
 					CommerceNotificationAttachment
 						commerceNotificationAttachment,
-					Object commerceNotificationQueueEntryId) {
+					Object commerceNotificationQueueEntryIdObject) {
 
 					commerceNotificationAttachment.
 						setCommerceNotificationQueueEntryId(
-							(Long)commerceNotificationQueueEntryId);
+							(Long)commerceNotificationQueueEntryIdObject);
 				}
 
 			});
@@ -552,10 +554,10 @@ public class CommerceNotificationAttachmentModelImpl
 				public void accept(
 					CommerceNotificationAttachment
 						commerceNotificationAttachment,
-					Object fileEntryId) {
+					Object fileEntryIdObject) {
 
 					commerceNotificationAttachment.setFileEntryId(
-						(Long)fileEntryId);
+						(Long)fileEntryIdObject);
 				}
 
 			});
@@ -580,10 +582,10 @@ public class CommerceNotificationAttachmentModelImpl
 				public void accept(
 					CommerceNotificationAttachment
 						commerceNotificationAttachment,
-					Object deleteOnSend) {
+					Object deleteOnSendObject) {
 
 					commerceNotificationAttachment.setDeleteOnSend(
-						(Boolean)deleteOnSend);
+						(Boolean)deleteOnSendObject);
 				}
 
 			});

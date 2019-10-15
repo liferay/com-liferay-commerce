@@ -361,6 +361,21 @@ public interface CommerceNotificationTemplateModel
 		Map<Locale, String> fromNameMap, Locale defaultLocale);
 
 	/**
+	 * Returns the to of this commerce notification template.
+	 *
+	 * @return the to of this commerce notification template
+	 */
+	@AutoEscape
+	public String getTo();
+
+	/**
+	 * Sets the to of this commerce notification template.
+	 *
+	 * @param to the to of this commerce notification template
+	 */
+	public void setTo(String to);
+
+	/**
 	 * Returns the cc of this commerce notification template.
 	 *
 	 * @return the cc of this commerce notification template

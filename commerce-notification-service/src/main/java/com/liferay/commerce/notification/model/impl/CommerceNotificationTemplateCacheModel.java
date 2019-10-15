@@ -66,7 +66,7 @@ public class CommerceNotificationTemplateCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(39);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -92,6 +92,8 @@ public class CommerceNotificationTemplateCacheModel
 		sb.append(from);
 		sb.append(", fromName=");
 		sb.append(fromName);
+		sb.append(", to=");
+		sb.append(to);
 		sb.append(", cc=");
 		sb.append(cc);
 		sb.append(", bcc=");
@@ -178,6 +180,13 @@ public class CommerceNotificationTemplateCacheModel
 			commerceNotificationTemplateImpl.setFromName(fromName);
 		}
 
+		if (to == null) {
+			commerceNotificationTemplateImpl.setTo("");
+		}
+		else {
+			commerceNotificationTemplateImpl.setTo(to);
+		}
+
 		if (cc == null) {
 			commerceNotificationTemplateImpl.setCc("");
 		}
@@ -238,6 +247,7 @@ public class CommerceNotificationTemplateCacheModel
 		description = objectInput.readUTF();
 		from = objectInput.readUTF();
 		fromName = objectInput.readUTF();
+		to = objectInput.readUTF();
 		cc = objectInput.readUTF();
 		bcc = objectInput.readUTF();
 		type = objectInput.readUTF();
@@ -302,6 +312,13 @@ public class CommerceNotificationTemplateCacheModel
 			objectOutput.writeUTF(fromName);
 		}
 
+		if (to == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(to);
+		}
+
 		if (cc == null) {
 			objectOutput.writeUTF("");
 		}
@@ -352,6 +369,7 @@ public class CommerceNotificationTemplateCacheModel
 	public String description;
 	public String from;
 	public String fromName;
+	public String to;
 	public String cc;
 	public String bcc;
 	public String type;
