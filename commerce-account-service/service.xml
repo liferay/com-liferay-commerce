@@ -130,6 +130,10 @@
 		<finder name="CommerceAccountId" return-type="Collection">
 			<finder-column name="commerceAccountId" />
 		</finder>
+		<finder name="C_C" return-type="CommerceAccountGroupCommerceAccountRel" unique="true">
+			<finder-column name="commerceAccountGroupId" />
+			<finder-column name="commerceAccountId" />
+		</finder>
 	</entity>
 	<entity local-service="true" name="CommerceAccountGroupRel" remote-service="true">
 

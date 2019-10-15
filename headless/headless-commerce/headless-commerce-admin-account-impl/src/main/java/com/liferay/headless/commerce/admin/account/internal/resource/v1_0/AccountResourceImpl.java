@@ -16,9 +16,14 @@ package com.liferay.headless.commerce.admin.account.internal.resource.v1_0;
 
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.exception.NoSuchAccountException;
+import com.liferay.commerce.account.exception.NoSuchAccountGroupException;
 import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.model.CommerceAccountGroup;
 import com.liferay.commerce.account.model.CommerceAccountOrganizationRel;
 import com.liferay.commerce.account.model.CommerceAccountUserRel;
+import com.liferay.commerce.account.service.CommerceAccountGroupCommerceAccountRelServiceUtil;
+import com.liferay.commerce.account.service.CommerceAccountGroupRelService;
+import com.liferay.commerce.account.service.CommerceAccountGroupService;
 import com.liferay.commerce.account.service.CommerceAccountOrganizationRelService;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.account.service.CommerceAccountUserRelService;
@@ -59,6 +64,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import javax.validation.constraints.NotNull;
 
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
@@ -252,6 +259,44 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 		updateAccountLogo(commerceAccount, multipartBody);
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	public Response postAccountGroupByExternalReferenceCodeAccount(
+			@NotNull String externalReferenceCode, Account account)
+		throws Exception {
+
+		CommerceAccountGroup commerceAccountGroup =
+			_commerceAccountGroupService.fetchByExternalReferenceCode(
+				contextCompany.getCompanyId(), externalReferenceCode);
+
+		if (commerceAccountGroup == null) {
+			throw new NoSuchAccountGroupException(
+				"Unable to find AccountGroup with externalReferenceCode: " +
+					externalReferenceCode);
+		}
+
+		if (account.getExternalReferenceCode() == null) {
+			throw new NoSuchAccountException(
+				"Unable to find Account with external reference code: null." );
+		}
+		
+		CommerceAccount commerceAccount =
+			_commerceAccountService.fetchByExternalReferenceCode(contextCompany.getCompanyId(), account.getExternalReferenceCode());
+
+		if (commerceAccount == null) {
+			throw new NoSuchAccountException(
+				"Unable to find Account with external reference code: " + account.getExternalReferenceCode());
+		}
+
+		CommerceAccountGroupCommerceAccountRelServiceUtil.
+			addCommerceAccountGroupCommerceAccountRel(
+				commerceAccountGroup.getCommerceAccountGroupId(),
+				account.getId(), _serviceContextHelper.getServiceContext());
+
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
@@ -472,6 +517,12 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 
 		return commerceAccount;
 	}
+
+	@Reference
+	private CommerceAccountGroupRelService _commerceAccountGroupRelService;
+
+	@Reference
+	private CommerceAccountGroupService _commerceAccountGroupService;
 
 	@Reference
 	private CommerceAccountOrganizationRelService
