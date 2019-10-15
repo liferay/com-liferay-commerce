@@ -60,6 +60,26 @@ public abstract class BaseWarehouseItemResourceImpl
 	implements WarehouseItemResource {
 
 	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
+		}
+	)
+	@Path("/warehouseItems/by-externalReferenceCode/{externalReferenceCode}/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "WarehouseItem")})
+	public WarehouseItem postWarehouseItemByExternalReferenceCode(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode,
+			WarehouseItem warehouseItem)
+		throws Exception {
+
+		return new WarehouseItem();
+	}
+
+	@Override
 	@GET
 	@Parameters(
 		value = {
