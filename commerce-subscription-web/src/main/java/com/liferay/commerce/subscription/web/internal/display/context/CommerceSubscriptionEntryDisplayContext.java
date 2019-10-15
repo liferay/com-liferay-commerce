@@ -25,7 +25,6 @@ import com.liferay.commerce.product.util.CPSubscriptionTypeJSPContributorRegistr
 import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
 import com.liferay.commerce.service.CommerceSubscriptionEntryService;
 import com.liferay.commerce.subscription.web.internal.display.context.util.CommerceSubscriptionDisplayContextHelper;
-import com.liferay.commerce.subscription.web.internal.subscription.util.CommerceSubscriptionEntryPortletUtil;
 import com.liferay.frontend.taglib.clay.servlet.taglib.util.DropdownItemList;
 import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.dao.search.RowChecker;
@@ -38,7 +37,6 @@ import com.liferay.portal.kernel.portlet.PortalPreferences;
 import com.liferay.portal.kernel.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portal.kernel.portlet.PortletProvider;
 import com.liferay.portal.kernel.portlet.PortletProviderUtil;
-import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
@@ -370,14 +368,11 @@ public class CommerceSubscriptionEntryDisplayContext {
 		}
 
 		_searchContainer = new SearchContainer<>(
-			_cpRequestHelper.getLiferayPortletRequest(), getPortletURL(),
-			null, emptyResultsMessage);
+			_cpRequestHelper.getLiferayPortletRequest(), getPortletURL(), null,
+			emptyResultsMessage);
 
-		String orderByCol = getOrderByCol();
-		String orderByType = getOrderByType();
-
-		_searchContainer.setOrderByCol(orderByCol);
-		_searchContainer.setOrderByType(orderByType);
+		_searchContainer.setOrderByCol(getOrderByCol());
+		_searchContainer.setOrderByType(getOrderByType());
 
 		_searchContainer.setRowChecker(_rowChecker);
 
