@@ -36,6 +36,10 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface WarehouseItemResource {
 
+	public WarehouseItem postWarehouseItemByExternalReferenceCode(
+			String externalReferenceCode, WarehouseItem warehouseItem)
+		throws Exception;
+
 	public Page<WarehouseItem> getWarehouseItemsUpdatedPage(
 			Date end, Date start, Pagination pagination)
 		throws Exception;

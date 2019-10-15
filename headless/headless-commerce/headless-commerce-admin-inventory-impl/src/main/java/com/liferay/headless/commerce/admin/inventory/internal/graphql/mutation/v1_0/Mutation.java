@@ -117,6 +117,21 @@ public class Mutation {
 				id, warehouse));
 	}
 
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public WarehouseItem postWarehouseItemByExternalReferenceCode(
+			@GraphQLName("externalReferenceCode") String externalReferenceCode,
+			@GraphQLName("warehouseItem") WarehouseItem warehouseItem)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_warehouseItemResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			warehouseItemResource ->
+				warehouseItemResource.postWarehouseItemByExternalReferenceCode(
+					externalReferenceCode, warehouseItem));
+	}
+
 	@GraphQLInvokeDetached
 	public Response deleteWarehouseItem(@GraphQLName("id") Long id)
 		throws Exception {
