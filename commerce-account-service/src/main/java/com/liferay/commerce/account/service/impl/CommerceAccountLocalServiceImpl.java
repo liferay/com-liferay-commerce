@@ -328,9 +328,9 @@ public class CommerceAccountLocalServiceImpl
 		commerceAccount.setCompanyId(defaultUser.getCompanyId());
 		commerceAccount.setUserId(defaultUser.getUserId());
 		commerceAccount.setUserName(defaultUser.getFullName());
-		commerceAccount.setName(defaultUser.getFullName());
 		commerceAccount.setParentCommerceAccountId(
 			CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID);
+		commerceAccount.setName(defaultUser.getFullName());
 		commerceAccount.setEmail(defaultUser.getEmailAddress());
 		commerceAccount.setType(CommerceAccountConstants.ACCOUNT_TYPE_GUEST);
 		commerceAccount.setActive(true);
