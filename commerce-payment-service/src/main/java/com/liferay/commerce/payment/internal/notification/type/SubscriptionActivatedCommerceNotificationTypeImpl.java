@@ -14,23 +14,16 @@
 
 package com.liferay.commerce.payment.internal.notification.type;
 
-import com.liferay.commerce.constants.CommerceDefinitionTermConstants;
 import com.liferay.commerce.constants.CommerceSubscriptionNotificationConstants;
+import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.notification.type.CommerceNotificationType;
-import com.liferay.commerce.order.CommerceDefinitionTermContributor;
-import com.liferay.commerce.order.CommerceOrderDefinitionTermContributorRegistry;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Luca Pellizzon
@@ -47,35 +40,24 @@ public class SubscriptionActivatedCommerceNotificationTypeImpl
 	implements CommerceNotificationType {
 
 	@Override
-	public Map<String, String> getDefinitionTerms(Locale locale) {
-		Map<String, String> map = new HashMap<>();
-
-		CommerceDefinitionTermContributor definitionTermContributor =
-			_commerceOrderDefinitionTermContributorRegistry.
-				getDefinitionTermContributor(
-					CommerceDefinitionTermConstants.
-						SUBSCRIPTION_DEFINITION_TERMS_CONTRIBUTOR);
-
-		List<String> terms = definitionTermContributor.getTerms();
-
-		for (String term : terms) {
-			map.put(term, definitionTermContributor.getLabel(term, locale));
+	public String getClassName(Object object) {
+		if (!(object instanceof CommerceSubscriptionEntry)) {
+			return null;
 		}
 
-		return map;
+		return CommerceSubscriptionEntry.class.getName();
 	}
 
 	@Override
-	public String getFilledTerm(String term, Object object, Locale locale)
-		throws PortalException {
+	public long getClassPK(Object object) {
+		if (!(object instanceof CommerceSubscriptionEntry)) {
+			return 0;
+		}
 
-		CommerceDefinitionTermContributor definitionTermContributor =
-			_commerceOrderDefinitionTermContributorRegistry.
-				getDefinitionTermContributor(
-					CommerceDefinitionTermConstants.
-						SUBSCRIPTION_DEFINITION_TERMS_CONTRIBUTOR);
+		CommerceSubscriptionEntry commerceSubscriptionEntry =
+			(CommerceSubscriptionEntry)object;
 
-		return definitionTermContributor.getFilledTerm(term, object, locale);
+		return commerceSubscriptionEntry.getCommerceSubscriptionEntryId();
 	}
 
 	@Override
@@ -92,9 +74,5 @@ public class SubscriptionActivatedCommerceNotificationTypeImpl
 			resourceBundle,
 			CommerceSubscriptionNotificationConstants.SUBSCRIPTION_ACTIVATED);
 	}
-
-	@Reference
-	private CommerceOrderDefinitionTermContributorRegistry
-		_commerceOrderDefinitionTermContributorRegistry;
 
 }

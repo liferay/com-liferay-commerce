@@ -14,24 +14,16 @@
 
 package com.liferay.commerce.internal.notification.type;
 
-import com.liferay.commerce.constants.CommerceDefinitionTermConstants;
 import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.notification.type.CommerceNotificationType;
-import com.liferay.commerce.order.CommerceDefinitionTermContributor;
-import com.liferay.commerce.order.CommerceOrderDefinitionTermContributorRegistry;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Luca Pellizzon
@@ -68,38 +60,6 @@ public class OrderTransmittedCommerceNotificationTypeImpl
 	}
 
 	@Override
-	public Map<String, String> getDefinitionTerms(Locale locale) {
-		Map<String, String> map = new HashMap<>();
-
-		CommerceDefinitionTermContributor definitionTermContributor =
-			_commerceOrderDefinitionTermContributorRegistry.
-				getDefinitionTermContributor(
-					CommerceDefinitionTermConstants.
-						ORDER_DEFINITION_TERMS_CONTRIBUTOR);
-
-		List<String> terms = definitionTermContributor.getTerms();
-
-		for (String term : terms) {
-			map.put(term, definitionTermContributor.getLabel(term, locale));
-		}
-
-		return map;
-	}
-
-	@Override
-	public String getFilledTerm(String term, Object object, Locale locale)
-		throws PortalException {
-
-		CommerceDefinitionTermContributor definitionTermContributor =
-			_commerceOrderDefinitionTermContributorRegistry.
-				getDefinitionTermContributor(
-					CommerceDefinitionTermConstants.
-						ORDER_DEFINITION_TERMS_CONTRIBUTOR);
-
-		return definitionTermContributor.getFilledTerm(term, object, locale);
-	}
-
-	@Override
 	public String getKey() {
 		return CommerceOrderConstants.ORDER_NOTIFICATION_TRANSMITTED;
 	}
@@ -113,9 +73,5 @@ public class OrderTransmittedCommerceNotificationTypeImpl
 			resourceBundle,
 			CommerceOrderConstants.ORDER_NOTIFICATION_TRANSMITTED);
 	}
-
-	@Reference
-	private CommerceOrderDefinitionTermContributorRegistry
-		_commerceOrderDefinitionTermContributorRegistry;
 
 }
