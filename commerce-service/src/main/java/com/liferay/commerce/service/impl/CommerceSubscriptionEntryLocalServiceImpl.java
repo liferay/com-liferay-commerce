@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.service.impl;
 
+import com.liferay.commerce.constants.CommerceDestinationNames;
 import com.liferay.commerce.constants.CommerceSubscriptionEntryConstants;
 import com.liferay.commerce.constants.CommerceSubscriptionNotificationConstants;
 import com.liferay.commerce.exception.CommerceSubscriptionCPInstanceIdException;
@@ -36,6 +37,8 @@ import com.liferay.commerce.product.util.CPSubscriptionType;
 import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
 import com.liferay.commerce.service.base.CommerceSubscriptionEntryLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Document;
@@ -50,6 +53,7 @@ import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.transaction.TransactionCommitCallbackUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PortalUtil;
@@ -66,6 +70,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
 
 /**
  * @author Alessio Antonio Rendina
@@ -369,7 +374,7 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 			CommerceOrder commerceOrder = commerceOrderItem.getCommerceOrder();
 
 			_commerceNotificationHelper.sendNotifications(
-				commerceOrder.getGroupId(),
+				commerceOrder.getGroupId(), commerceOrder.getUserId(),
 				CommerceSubscriptionNotificationConstants.SUBSCRIPTION_RENEWED,
 				updatedSubscriptionEntry);
 		}
@@ -513,6 +518,11 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 
 		commerceSubscriptionEntry.setSubscriptionStatus(subscriptionStatus);
 
+		// Messaging
+
+		sendSubscriptionStatusMessage(
+			commerceSubscriptionEntryId, subscriptionStatus);
+
 		return commerceSubscriptionEntryPersistence.update(
 			commerceSubscriptionEntry);
 	}
@@ -633,6 +643,30 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 
 		throw new SearchException(
 			"Unable to fix the search index after 10 attempts");
+	}
+
+	protected void sendSubscriptionStatusMessage(
+		long commerceSubscriptionEntryId, int subscriptionStatus) {
+
+		TransactionCommitCallbackUtil.registerCallback(
+			new Callable<Void>() {
+
+				@Override
+				public Void call() throws Exception {
+					Message message = new Message();
+
+					message.put(
+						"commerceSubscriptionEntryId",
+						commerceSubscriptionEntryId);
+					message.put(" subscriptionStatus", subscriptionStatus);
+
+					MessageBusUtil.sendMessage(
+						CommerceDestinationNames.SUBSCRIPTION_STATUS, message);
+
+					return null;
+				}
+
+			});
 	}
 
 	protected void validateCPSubscriptionType(
