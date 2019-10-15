@@ -114,26 +114,26 @@ public class CommerceOrderPriceCalculationImpl
 			totalAmount = totalAmount.subtract(discountAmount.getPrice());
 		}
 
-		CommerceOrderPriceImpl commerceOrderPrice =
+		CommerceOrderPriceImpl commerceOrderPriceImpl =
 			new CommerceOrderPriceImpl();
 
-		commerceOrderPrice.setShippingDiscountValue(
+		commerceOrderPriceImpl.setShippingDiscountValue(
 			orderShippingCommerceDiscountValue);
-		commerceOrderPrice.setSubtotalDiscountValue(
+		commerceOrderPriceImpl.setSubtotalDiscountValue(
 			orderSubtotalCommerceDiscountValue);
-		commerceOrderPrice.setTotalDiscountValue(
+		commerceOrderPriceImpl.setTotalDiscountValue(
 			orderTotalCommerceDiscountValue);
 
-		commerceOrderPrice.setShippingValue(
+		commerceOrderPriceImpl.setShippingValue(
 			_commerceMoneyFactory.create(
 				commerceOrder.getCommerceCurrency(), shippingAmount));
-		commerceOrderPrice.setSubtotal(subtotalMoney);
-		commerceOrderPrice.setTaxValue(taxValue);
-		commerceOrderPrice.setTotal(
+		commerceOrderPriceImpl.setSubtotal(subtotalMoney);
+		commerceOrderPriceImpl.setTaxValue(taxValue);
+		commerceOrderPriceImpl.setTotal(
 			_commerceMoneyFactory.create(
 				commerceOrder.getCommerceCurrency(), totalAmount));
 
-		return commerceOrderPrice;
+		return commerceOrderPriceImpl;
 	}
 
 	@Override
@@ -314,30 +314,30 @@ public class CommerceOrderPriceCalculationImpl
 			commerceOrder.getTotalDiscountPercentageLevel3(),
 			commerceOrder.getTotalDiscountPercentageLevel4());
 
-		CommerceOrderPriceImpl commerceOrderPrice =
+		CommerceOrderPriceImpl commerceOrderPriceImpl =
 			new CommerceOrderPriceImpl();
 
-		commerceOrderPrice.setShippingDiscountValue(shippingDiscountValue);
-		commerceOrderPrice.setSubtotalDiscountValue(subtotalDiscountValue);
-		commerceOrderPrice.setTotalDiscountValue(totalDiscountValue);
+		commerceOrderPriceImpl.setShippingDiscountValue(shippingDiscountValue);
+		commerceOrderPriceImpl.setSubtotalDiscountValue(subtotalDiscountValue);
+		commerceOrderPriceImpl.setTotalDiscountValue(totalDiscountValue);
 
-		commerceOrderPrice.setShippingValue(
+		commerceOrderPriceImpl.setShippingValue(
 			_commerceMoneyFactory.create(
 				commerceOrder.getCommerceCurrency(),
 				commerceOrder.getShippingAmount()));
-		commerceOrderPrice.setSubtotal(
+		commerceOrderPriceImpl.setSubtotal(
 			_commerceMoneyFactory.create(
 				commerceOrder.getCommerceCurrency(),
 				commerceOrder.getSubtotal()));
-		commerceOrderPrice.setTaxValue(
+		commerceOrderPriceImpl.setTaxValue(
 			_commerceMoneyFactory.create(
 				commerceOrder.getCommerceCurrency(),
 				commerceOrder.getTaxAmount()));
-		commerceOrderPrice.setTotal(
+		commerceOrderPriceImpl.setTotal(
 			_commerceMoneyFactory.create(
 				commerceOrder.getCommerceCurrency(), commerceOrder.getTotal()));
 
-		return commerceOrderPrice;
+		return commerceOrderPriceImpl;
 	}
 
 	private CommerceOrderPriceImpl _getEmptyCommerceOrderPrice(
@@ -346,18 +346,18 @@ public class CommerceOrderPriceCalculationImpl
 		CommerceMoney zero = _commerceMoneyFactory.create(
 			commerceCurrency, BigDecimal.ZERO);
 
-		CommerceOrderPriceImpl commerceOrderPrice =
+		CommerceOrderPriceImpl commerceOrderPriceImpl =
 			new CommerceOrderPriceImpl();
 
-		commerceOrderPrice.setShippingDiscountValue(null);
-		commerceOrderPrice.setSubtotalDiscountValue(null);
-		commerceOrderPrice.setTotalDiscountValue(null);
-		commerceOrderPrice.setShippingValue(zero);
-		commerceOrderPrice.setSubtotal(zero);
-		commerceOrderPrice.setTaxValue(zero);
-		commerceOrderPrice.setTotal(zero);
+		commerceOrderPriceImpl.setShippingDiscountValue(null);
+		commerceOrderPriceImpl.setSubtotalDiscountValue(null);
+		commerceOrderPriceImpl.setTotalDiscountValue(null);
+		commerceOrderPriceImpl.setShippingValue(zero);
+		commerceOrderPriceImpl.setSubtotal(zero);
+		commerceOrderPriceImpl.setTaxValue(zero);
+		commerceOrderPriceImpl.setTotal(zero);
 
-		return commerceOrderPrice;
+		return commerceOrderPriceImpl;
 	}
 
 	private boolean _hasViewPricePermission(CommerceContext commerceContext)

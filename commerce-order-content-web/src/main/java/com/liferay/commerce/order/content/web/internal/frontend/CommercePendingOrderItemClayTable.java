@@ -123,10 +123,10 @@ public class CommercePendingOrderItemClayTable
 	public int countItems(HttpServletRequest httpServletRequest, Filter filter)
 		throws PortalException {
 
-		OrderFilterImpl orderFilter = (OrderFilterImpl)filter;
+		OrderFilterImpl orderFilterImpl = (OrderFilterImpl)filter;
 
 		return _commerceOrderItemService.getCommerceOrderItemsCount(
-			orderFilter.getOrderId());
+			orderFilterImpl.getOrderId());
 	}
 
 	@Override
@@ -168,7 +168,7 @@ public class CommercePendingOrderItemClayTable
 
 		List<OrderItem> orderItems = new ArrayList<>();
 
-		OrderFilterImpl orderFilter = (OrderFilterImpl)filter;
+		OrderFilterImpl orderFilterImpl = (OrderFilterImpl)filter;
 
 		CommerceContext commerceContext =
 			(CommerceContext)httpServletRequest.getAttribute(
@@ -180,7 +180,7 @@ public class CommercePendingOrderItemClayTable
 
 		List<CommerceOrderItem> commerceOrderItems =
 			_commerceOrderItemService.getCommerceOrderItems(
-				orderFilter.getOrderId(), pagination.getStartPosition(),
+				orderFilterImpl.getOrderId(), pagination.getStartPosition(),
 				pagination.getEndPosition());
 
 		try {

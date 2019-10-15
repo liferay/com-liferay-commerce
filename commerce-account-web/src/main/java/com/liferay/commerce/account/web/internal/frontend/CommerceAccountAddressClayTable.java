@@ -123,7 +123,7 @@ public class CommerceAccountAddressClayTable
 	public int countItems(HttpServletRequest httpServletRequest, Filter filter)
 		throws PortalException {
 
-		AccountFilterImpl accountFilter = (AccountFilterImpl)filter;
+		AccountFilterImpl accountFilterImpl = (AccountFilterImpl)filter;
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)httpServletRequest.getAttribute(
@@ -131,7 +131,7 @@ public class CommerceAccountAddressClayTable
 
 		return _commerceAddressService.getCommerceAddressesCountByCompanyId(
 			themeDisplay.getCompanyId(), CommerceAccount.class.getName(),
-			accountFilter.getAccountId());
+			accountFilterImpl.getAccountId());
 	}
 
 	@Override
@@ -158,7 +158,7 @@ public class CommerceAccountAddressClayTable
 			Pagination pagination, Sort sort)
 		throws PortalException {
 
-		AccountFilterImpl accountFilter = (AccountFilterImpl)filter;
+		AccountFilterImpl accountFilterImpl = (AccountFilterImpl)filter;
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)httpServletRequest.getAttribute(
@@ -169,7 +169,7 @@ public class CommerceAccountAddressClayTable
 		List<CommerceAddress> commerceAddresses =
 			_commerceAddressService.getCommerceAddressesByCompanyId(
 				themeDisplay.getCompanyId(), CommerceAccount.class.getName(),
-				accountFilter.getAccountId(), pagination.getStartPosition(),
+				accountFilterImpl.getAccountId(), pagination.getStartPosition(),
 				pagination.getEndPosition(), null);
 
 		for (CommerceAddress commerceAddress : commerceAddresses) {

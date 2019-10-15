@@ -53,7 +53,7 @@ public class CommerceOrderAssetRendererFactory
 	public AssetEntry getAssetEntry(String className, long classPK)
 		throws PortalException {
 
-		AssetEntryImpl assetEntry = new AssetEntryImpl();
+		AssetEntry assetEntry = new AssetEntryImpl();
 
 		assetEntry.setClassName(className);
 		assetEntry.setClassPK(classPK);

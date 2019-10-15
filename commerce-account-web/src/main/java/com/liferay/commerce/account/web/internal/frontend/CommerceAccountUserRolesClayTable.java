@@ -61,11 +61,11 @@ public class CommerceAccountUserRolesClayTable
 	public int countItems(HttpServletRequest httpServletRequest, Filter filter)
 		throws PortalException {
 
-		AccountFilterImpl accountFilter = (AccountFilterImpl)filter;
+		AccountFilterImpl accountFilterImpl = (AccountFilterImpl)filter;
 
 		CommerceAccount commerceAccount =
 			_commerceAccountService.getCommerceAccount(
-				accountFilter.getAccountId());
+				accountFilterImpl.getAccountId());
 
 		return _userGroupRoleLocalService.getUserGroupRolesCount(
 			_portal.getUserId(httpServletRequest),
@@ -93,7 +93,7 @@ public class CommerceAccountUserRolesClayTable
 			Pagination pagination, Sort sort)
 		throws PortalException {
 
-		AccountFilterImpl accountFilter = (AccountFilterImpl)filter;
+		AccountFilterImpl accountFilterImpl = (AccountFilterImpl)filter;
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)httpServletRequest.getAttribute(
@@ -101,11 +101,11 @@ public class CommerceAccountUserRolesClayTable
 
 		CommerceAccount commerceAccount =
 			_commerceAccountService.getCommerceAccount(
-				accountFilter.getAccountId());
+				accountFilterImpl.getAccountId());
 
 		List<UserGroupRole> userGroupRoles =
 			_userGroupRoleLocalService.getUserGroupRoles(
-				accountFilter.getUserId(),
+				accountFilterImpl.getUserId(),
 				commerceAccount.getCommerceAccountGroupId());
 
 		List<AccountRole> accountRoles = new ArrayList<>();

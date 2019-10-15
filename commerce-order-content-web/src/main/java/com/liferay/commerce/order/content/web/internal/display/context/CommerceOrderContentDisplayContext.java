@@ -374,13 +374,14 @@ public class CommerceOrderContentDisplayContext {
 	}
 
 	public OrderFilterImpl getOrderFilter() {
-		OrderFilterImpl orderFilter = new OrderFilterImpl();
+		OrderFilterImpl orderFilterImpl = new OrderFilterImpl();
 
 		if (_commerceAccount != null) {
-			orderFilter.setAccountId(_commerceAccount.getCommerceAccountId());
+			orderFilterImpl.setAccountId(
+				_commerceAccount.getCommerceAccountId());
 		}
 
-		return orderFilter;
+		return orderFilterImpl;
 	}
 
 	public PortletURL getPortletURL() throws PortalException {

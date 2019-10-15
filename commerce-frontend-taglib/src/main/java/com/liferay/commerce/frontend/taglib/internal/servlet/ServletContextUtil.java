@@ -41,59 +41,59 @@ public class ServletContextUtil {
 	public static final ClayTableContextContributorRegistry
 		getClayTableContextContributorRegistry() {
 
-		return _instance._getClayTableContextContributorRegistry();
+		return _servletContextUtil._getClayTableContextContributorRegistry();
 	}
 
 	public static final ClayTableDataJSONBuilder getClayTableDataJSONBuilder() {
-		return _instance._getClayTableDataJSONBuilder();
+		return _servletContextUtil._getClayTableDataJSONBuilder();
 	}
 
 	public static final ClayTableRegistry getClayTableRegistry() {
-		return _instance._getClayTableRegistry();
+		return _servletContextUtil._getClayTableRegistry();
 	}
 
 	public static final ClayTableSerializer getClayTableSerializer() {
-		return _instance._getClayTableSerializer();
+		return _servletContextUtil._getClayTableSerializer();
 	}
 
 	public static final CommerceDataProviderRegistry
 		getCommerceDataProviderRegistry() {
 
-		return _instance._getCommerceDataProviderRegistry();
+		return _servletContextUtil._getCommerceDataProviderRegistry();
 	}
 
 	public static final CommerceOrderHttpHelper getCommerceOrderHttpHelper() {
-		return _instance._getCommerceOrderHttpHelper();
+		return _servletContextUtil._getCommerceOrderHttpHelper();
 	}
 
 	public static final CPContentHelper getCPContentHelper() {
-		return _instance._getCPContentHelper();
+		return _servletContextUtil._getCPContentHelper();
 	}
 
 	public static final FilterFactoryRegistry getFilterFactoryRegistry() {
-		return _instance._getFilterFactoryRegistry();
+		return _servletContextUtil._getFilterFactoryRegistry();
 	}
 
 	public static final NPMResolver getNPMResolver() {
-		return _instance._getNPMResolver();
+		return _servletContextUtil._getNPMResolver();
 	}
 
 	public static final ProductHelper getProductHelper() {
-		return _instance._getProductHelper();
+		return _servletContextUtil._getProductHelper();
 	}
 
 	public static final ServletContext getServletContext() {
-		return _instance._getServletContext();
+		return _servletContextUtil._getServletContext();
 	}
 
 	@Activate
 	protected void activate() {
-		_instance = this;
+		_servletContextUtil = this;
 	}
 
 	@Deactivate
 	protected void deactivate() {
-		_instance = null;
+		_servletContextUtil = null;
 	}
 
 	@Reference(unbind = "-")
@@ -214,7 +214,7 @@ public class ServletContextUtil {
 		return _servletContext;
 	}
 
-	private static ServletContextUtil _instance;
+	private static ServletContextUtil _servletContextUtil;
 
 	private ClayTableContextContributorRegistry
 		_clayTableContextContributorRegistry;

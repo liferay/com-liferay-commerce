@@ -39,13 +39,13 @@ public class CommerceMoneyFactoryImpl implements CommerceMoneyFactory {
 	public CommerceMoney create(
 		CommerceCurrency commerceCurrency, BigDecimal price) {
 
-		CommerceMoneyImpl commerceMoney = new CommerceMoneyImpl(
+		CommerceMoneyImpl commerceMoneyImpl = new CommerceMoneyImpl(
 			_commercePriceFormatter);
 
-		commerceMoney.setCommerceCurrency(commerceCurrency);
-		commerceMoney.setPrice(price);
+		commerceMoneyImpl.setCommerceCurrency(commerceCurrency);
+		commerceMoneyImpl.setPrice(price);
 
-		return commerceMoney;
+		return commerceMoneyImpl;
 	}
 
 	@Override

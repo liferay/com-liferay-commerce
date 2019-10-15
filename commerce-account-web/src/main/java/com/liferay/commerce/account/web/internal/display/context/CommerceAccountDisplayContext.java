@@ -89,14 +89,14 @@ public class CommerceAccountDisplayContext {
 	}
 
 	public AccountFilterImpl getAccountFilter() throws PortalException {
-		AccountFilterImpl accountFilter = new AccountFilterImpl();
+		AccountFilterImpl accountFilterImpl = new AccountFilterImpl();
 
-		accountFilter.setAccountId(getCurrentCommerceAccountId());
-		accountFilter.setUserId(getSelectedUserId());
+		accountFilterImpl.setAccountId(getCurrentCommerceAccountId());
+		accountFilterImpl.setUserId(getSelectedUserId());
 
-		accountFilter.setKeywords(getKeywords());
+		accountFilterImpl.setKeywords(getKeywords());
 
-		return accountFilter;
+		return accountFilterImpl;
 	}
 
 	public List<CommerceAddress> getBillingCommerceAddresses()

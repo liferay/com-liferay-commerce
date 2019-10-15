@@ -494,19 +494,19 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 			CommerceOrder commerceOrder, ThemeDisplay themeDisplay)
 		throws PortalException {
 
-		VersionCommerceOrderValidatorImpl versionCommerceOrderValidator =
+		VersionCommerceOrderValidatorImpl versionCommerceOrderValidatorImpl =
 			new VersionCommerceOrderValidatorImpl();
 
-		versionCommerceOrderValidator.setCommerceOrderItemLocalService(
+		versionCommerceOrderValidatorImpl.setCommerceOrderItemLocalService(
 			_commerceOrderItemLocalService);
 
-		versionCommerceOrderValidator.setCPInstanceLocalService(
+		versionCommerceOrderValidatorImpl.setCPInstanceLocalService(
 			_cpInstanceLocalService);
 
 		for (CommerceOrderItem commerceOrderItem :
 				commerceOrder.getCommerceOrderItems()) {
 
-			versionCommerceOrderValidator.validate(
+			versionCommerceOrderValidatorImpl.validate(
 				themeDisplay.getLocale(), commerceOrderItem);
 		}
 	}

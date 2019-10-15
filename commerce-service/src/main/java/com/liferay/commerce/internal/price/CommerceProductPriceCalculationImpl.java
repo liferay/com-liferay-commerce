@@ -81,12 +81,12 @@ public class CommerceProductPriceCalculationImpl
 			cpInstanceId, quantity, commerceContext.getCommerceCurrency(),
 			secure, commerceContext);
 
-		CommerceProductPriceImpl commerceProductPrice =
+		CommerceProductPriceImpl commerceProductPriceImpl =
 			new CommerceProductPriceImpl();
 
-		commerceProductPrice.setQuantity(quantity);
-		commerceProductPrice.setUnitPrice(unitPriceMoney);
-		commerceProductPrice.setUnitPromoPrice(promoPriceMoney);
+		commerceProductPriceImpl.setQuantity(quantity);
+		commerceProductPriceImpl.setUnitPrice(unitPriceMoney);
+		commerceProductPriceImpl.setUnitPromoPrice(promoPriceMoney);
 
 		BigDecimal finalPrice = unitPriceMoney.getPrice();
 
@@ -112,12 +112,13 @@ public class CommerceProductPriceCalculationImpl
 			finalPrice = finalPrice.subtract(discountAmountMoney.getPrice());
 		}
 
-		commerceProductPrice.setCommerceDiscountValue(commerceDiscountValue);
-		commerceProductPrice.setFinalPrice(
+		commerceProductPriceImpl.setCommerceDiscountValue(
+			commerceDiscountValue);
+		commerceProductPriceImpl.setFinalPrice(
 			_commerceMoneyFactory.create(
 				commerceContext.getCommerceCurrency(), finalPrice));
 
-		return commerceProductPrice;
+		return commerceProductPriceImpl;
 	}
 
 	@Override

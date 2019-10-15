@@ -32,33 +32,33 @@ import org.osgi.service.component.annotations.Reference;
 public class ServletContextUtil {
 
 	public static final CPContentHelper getCPContentHelper() {
-		return _instance._getCPContentHelper();
+		return _servletContextUtil._getCPContentHelper();
 	}
 
 	public static final CPContentListEntryRendererRegistry
 		getCPContentListEntryRendererRegistry() {
 
-		return _instance._getCPContentListEntryRendererRegistry();
+		return _servletContextUtil._getCPContentListEntryRendererRegistry();
 	}
 
 	public static final CPContentListRendererRegistry
 		getCPContentListRendererRegistry() {
 
-		return _instance._getCPContentListRendererRegistry();
+		return _servletContextUtil._getCPContentListRendererRegistry();
 	}
 
 	public static final ServletContext getServletContext() {
-		return _instance._getServletContext();
+		return _servletContextUtil._getServletContext();
 	}
 
 	@Activate
 	protected void activate() {
-		_instance = this;
+		_servletContextUtil = this;
 	}
 
 	@Deactivate
 	protected void deactivate() {
-		_instance = null;
+		_servletContextUtil = null;
 	}
 
 	@Reference(unbind = "-")
@@ -107,7 +107,7 @@ public class ServletContextUtil {
 		return _servletContext;
 	}
 
-	private static ServletContextUtil _instance;
+	private static ServletContextUtil _servletContextUtil;
 
 	private CPContentHelper _cpContentHelper;
 	private CPContentListEntryRendererRegistry
