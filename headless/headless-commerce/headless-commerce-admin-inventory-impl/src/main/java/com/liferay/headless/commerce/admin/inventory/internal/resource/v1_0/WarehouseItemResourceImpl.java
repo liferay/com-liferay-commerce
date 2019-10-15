@@ -36,6 +36,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 
@@ -194,6 +196,56 @@ public class WarehouseItemResourceImpl extends BaseWarehouseItemResourceImpl {
 			throw new NoSuchInventoryWarehouseException(
 				"Unable to find Warehouse with externalReferenceCode: " +
 					externalReferenceCode);
+		}
+
+		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
+			_commerceInventoryWarehouseItemService.
+				addCommerceInventoryWarehouseItem(
+					_user.getUserId(),
+					commerceInventoryWarehouse.
+						getCommerceInventoryWarehouseId(),
+					warehouseItem.getSku(), warehouseItem.getQuantity());
+
+		DTOConverter warehouseItemDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				CommerceInventoryWarehouseItem.class.getName());
+
+		return (WarehouseItem)warehouseItemDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(),
+				commerceInventoryWarehouseItem.
+					getCommerceInventoryWarehouseItemId()));
+	}
+
+	@Override
+	public WarehouseItem postWarehouseItemByExternalReferenceCode(
+			@NotNull String externalReferenceCode, WarehouseItem warehouseItem)
+		throws Exception {
+
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
+			_commerceInventoryWarehouseService.getCommerceInventoryWarehouse(
+				warehouseItem.getWarehouseId());
+
+		if (commerceInventoryWarehouse == null) {
+			throw new NoSuchInventoryWarehouseException(
+				"Unable to find Warehouse with id: " + warehouseItem.getId());
+		}
+
+		CommerceInventoryWarehouse commerceInventoryWarehouse2 =
+			_commerceInventoryWarehouseService.fetchByExternalReferenceCode(
+				contextCompany.getCompanyId(),
+				warehouseItem.getWarehouseExternalReferenceCode());
+
+		if ((commerceInventoryWarehouse2 != null) &&
+			!(commerceInventoryWarehouse.getCommerceInventoryWarehouseId() ==
+				commerceInventoryWarehouse2.
+					getCommerceInventoryWarehouseId())) {
+
+			throw new NoSuchInventoryWarehouseException(
+				"Unable to find Warehouse with id: " +
+					warehouseItem.getWarehouseId() +
+						" externalReferenceCode: " +
+							warehouseItem.getWarehouseExternalReferenceCode());
 		}
 
 		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
