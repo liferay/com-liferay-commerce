@@ -44,8 +44,8 @@ public class CommerceNotificationTemplateLocalServiceImpl
 	@Override
 	public CommerceNotificationTemplate addCommerceNotificationTemplate(
 			String name, String description, String from,
-			Map<Locale, String> fromNameMap, String cc, String bcc, String type,
-			boolean enabled, Map<Locale, String> subjectMap,
+			Map<Locale, String> fromNameMap, String to, String cc, String bcc,
+			String type, boolean enabled, Map<Locale, String> subjectMap,
 			Map<Locale, String> bodyMap, ServiceContext serviceContext)
 		throws PortalException {
 
@@ -71,6 +71,7 @@ public class CommerceNotificationTemplateLocalServiceImpl
 		commerceNotificationTemplate.setDescription(description);
 		commerceNotificationTemplate.setFrom(from);
 		commerceNotificationTemplate.setFromNameMap(fromNameMap);
+		commerceNotificationTemplate.setTo(to);
 		commerceNotificationTemplate.setCc(cc);
 		commerceNotificationTemplate.setBcc(bcc);
 		commerceNotificationTemplate.setType(type);
@@ -203,7 +204,7 @@ public class CommerceNotificationTemplateLocalServiceImpl
 	public CommerceNotificationTemplate updateCommerceNotificationTemplate(
 			long commerceNotificationTemplateId, String name,
 			String description, String from, Map<Locale, String> fromNameMap,
-			String cc, String bcc, String type, boolean enabled,
+			String to, String cc, String bcc, String type, boolean enabled,
 			Map<Locale, String> subjectMap, Map<Locale, String> bodyMap,
 			ServiceContext serviceContext)
 		throws PortalException {
@@ -218,6 +219,7 @@ public class CommerceNotificationTemplateLocalServiceImpl
 		commerceNotificationTemplate.setDescription(description);
 		commerceNotificationTemplate.setFrom(from);
 		commerceNotificationTemplate.setFromNameMap(fromNameMap);
+		commerceNotificationTemplate.setTo(to);
 		commerceNotificationTemplate.setCc(cc);
 		commerceNotificationTemplate.setBcc(bcc);
 		commerceNotificationTemplate.setType(type);
