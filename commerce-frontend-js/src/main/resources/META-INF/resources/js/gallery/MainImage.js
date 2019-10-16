@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import ClayLoadingIndicator from "@clayui/loading-indicator";
 import Arrows from './Arrows';
 
-export default function MainImage({ loading = false, onNext, onPrev, onZoom, src, title }) {
+export default function MainImage({ background, loading = false, onNext, onPrev, onZoom, src, title }) {
   return (
-    <div className="card main-image" onClick={onZoom}>
+    <div className="card main-image" onClick={onZoom} style={{background}}>
       <div className="aspect-ratio aspect-ratio-4-to-3">
         <img
           alt={title}
@@ -20,6 +20,7 @@ export default function MainImage({ loading = false, onNext, onPrev, onZoom, src
 }
 
 MainImage.propTypes = {
+  background: PropTypes.string,
   loading: PropTypes.bool,
   onNext: PropTypes.func,
   onPrev: PropTypes.func,

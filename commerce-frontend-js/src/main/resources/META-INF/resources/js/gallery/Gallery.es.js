@@ -92,12 +92,13 @@ export default class Gallery extends React.Component {
   }
 
   render() {
-    const { images } = this.props;
+    const { images, background } = this.props;
     const { fullscreen, loading, selected } = this.state;
 
     return (
       <div className="product-gallery">
         <MainImage
+          background={background}
           loading={loading}
           onNext={images.length > 1 ? this.goToNext : null}
           onPrev={images.length > 1 ? this.goToPrev : null}
@@ -108,6 +109,7 @@ export default class Gallery extends React.Component {
 
         {images.length > 1 ? (
           <Thumbnails
+            background={background}
             images={images}
             onChange={this.imageSelect}
             selected={selected}
@@ -116,6 +118,7 @@ export default class Gallery extends React.Component {
 
         {fullscreen ? (
           <Overlay
+            background={background}
             onClose={this.fullscreenClose}
             onNext={images.length > 1 ? this.goToNext : null}
             onPrev={images.length > 1 ? this.goToPrev : null}
@@ -129,6 +132,7 @@ export default class Gallery extends React.Component {
 }
 
 Gallery.propTypes = {
+  background: PropTypes.string,
   images: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     thumbnailUrl: PropTypes.string.isRequired,

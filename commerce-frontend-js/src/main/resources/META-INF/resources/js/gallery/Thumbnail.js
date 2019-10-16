@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 import classNames from "classnames";
 
-export default function Thumbnail({ active = false, onClick, src, title }) {
+export default function Thumbnail({ background, active = false, onClick, src, title }) {
   const cardClasses = classNames(
     "card",
     "card-interactive",
@@ -11,7 +11,7 @@ export default function Thumbnail({ active = false, onClick, src, title }) {
   );
 
   return (
-    <div className={cardClasses} onClick={onClick}>
+    <div className={cardClasses} onClick={onClick} style={{background}}>
       <div className="aspect-ratio aspect-ratio-4-to-3">
         <img
           alt={title}
