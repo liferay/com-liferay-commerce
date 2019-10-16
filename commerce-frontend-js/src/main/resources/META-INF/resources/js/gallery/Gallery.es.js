@@ -1,7 +1,8 @@
 import React from "react";
-import classNames from "classnames";
-import ClayLoadingIndicator from "@clayui/loading-indicator";
-// import ClayCard from "@clayui/card"; // Re-render the card components when is not needed
+import PropTypes from 'prop-types';
+import MainImage from './MainImage';
+import Overlay from './Overlay';
+import Thumbnails from './Thumbnails';
 
 function fetchImage(url) {
   return new Promise(resolve => {
@@ -11,76 +12,6 @@ function fetchImage(url) {
 
     img.onload = () => resolve(url);
   });
-}
-
-function Arrows({ onNext, onPrev }) {
-  return (
-    <>
-      {onPrev && <div className="arrow prev" onClick={onPrev} />}
-      {onNext && <div className="arrow next" onClick={onNext} />}
-    </>
-  );
-}
-
-function MainImage({ loading, onNext, onPrev, onZoom, title, url }) {
-  return (
-    <div className="card main-image" onClick={onZoom}>
-      <div className="aspect-ratio aspect-ratio-4-to-3">
-        <img
-          alt={title}
-          className="aspect-ratio-item-center-middle aspect-ratio-item-fluid"
-          src={url}
-        />
-      </div>
-      <Arrows onNext={onNext} onPrev={onPrev} />
-      {loading ? <ClayLoadingIndicator /> : null}
-    </div>
-  );
-}
-
-function Overlay({ onClose, onNext, onPrev, title, url }) {
-  return (
-    <div className="gallery-overlay" onClick={onClose}>
-      <img alt={title} src={url} />
-      <Arrows onNext={onNext} onPrev={onPrev} />
-    </div>
-  );
-}
-
-function Thumbnail({ active, image, onClick }) {
-  const cardClasses = classNames(
-    "card",
-    "card-interactive",
-    "card-interactive-primary",
-    { active: active }
-  );
-
-  return (
-    <div className={cardClasses} onClick={onClick}>
-      <div className="aspect-ratio aspect-ratio-4-to-3">
-        <img
-          alt={image.title}
-          className="aspect-ratio-item-center-middle aspect-ratio-item-fluid"
-          src={image.thumbnailUrl}
-        />
-      </div>
-    </div>
-  );
-}
-
-function Thumbnails({ images, onChange, selected }) {
-  return (
-    <div className="gallery-thumbnails">
-      {images.map((image, i) => (
-        <Thumbnail
-          active={selected === i}
-          image={image}
-          key={image.thumbnailUrl}
-          onClick={() => onChange(i)}
-        />
-      ))}
-    </div>
-  );
 }
 
 export default class Gallery extends React.Component {
@@ -105,7 +36,7 @@ export default class Gallery extends React.Component {
 
   fullscreenOpen() {
     if (!this.state.loading) {
-      this.imageLoad(this.props.images[this.state.selected].url).then(() => {
+      this.imageLoad(this.props.images[this.state.selected].bigUrl).then(() => {
         this.setState({ fullscreen: true });
       });
     }
@@ -171,8 +102,8 @@ export default class Gallery extends React.Component {
           onNext={images.length > 1 ? this.goToNext : null}
           onPrev={images.length > 1 ? this.goToPrev : null}
           onZoom={this.fullscreenOpen}
+          src={images[selected].smallUrl}
           title={images[selected].title}
-          url={images[selected].smallUrl}
         />
 
         {images.length > 1 ? (
@@ -189,10 +120,19 @@ export default class Gallery extends React.Component {
             onNext={images.length > 1 ? this.goToNext : null}
             onPrev={images.length > 1 ? this.goToPrev : null}
             title={images[selected].title}
-            url={images[selected].url}
+            src={images[selected].bigUrl}
           />
         ) : null}
       </div>
     );
   }
 }
+
+Gallery.propTypes = {
+  images: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    thumbnailUrl: PropTypes.string.isRequired,
+    smallUrl: PropTypes.string.isRequired,
+    bigUrl: PropTypes.string.isRequired
+  }))
+};
