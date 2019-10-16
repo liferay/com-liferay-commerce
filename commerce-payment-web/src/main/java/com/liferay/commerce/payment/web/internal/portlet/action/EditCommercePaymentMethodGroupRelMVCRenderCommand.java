@@ -19,6 +19,10 @@ import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.payment.method.CommercePaymentMethodRegistry;
 import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelService;
 import com.liferay.commerce.payment.web.internal.display.context.CommercePaymentMethodGroupRelsDisplayContext;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
+import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.service.CommerceOrderLocalService;
+import com.liferay.commerce.service.CommerceSubscriptionEntryLocalService;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderConstants;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
@@ -60,10 +64,13 @@ public class EditCommercePaymentMethodGroupRelMVCRenderCommand
 			CommercePaymentMethodGroupRelsDisplayContext
 				commercePaymentMethodGroupRelsDisplayContext =
 					new CommercePaymentMethodGroupRelsDisplayContext(
+						_commerceChannelLocalService,
+						_commerceOrderLocalService,
 						_commercePaymentMethodRegistry,
 						_commercePaymentMethodGroupRelService,
-						_portletResourcePermission, renderRequest,
-						renderResponse);
+						_commerceSubscriptionEntryLocalService,
+						_cpDefinitionHelper, _portletResourcePermission,
+						renderRequest, renderResponse);
 
 			renderRequest.setAttribute(
 				WebKeys.PORTLET_DISPLAY_CONTEXT,
@@ -82,11 +89,24 @@ public class EditCommercePaymentMethodGroupRelMVCRenderCommand
 	}
 
 	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
+
+	@Reference
+	private CommerceOrderLocalService _commerceOrderLocalService;
+
+	@Reference
 	private CommercePaymentMethodGroupRelService
 		_commercePaymentMethodGroupRelService;
 
 	@Reference
 	private CommercePaymentMethodRegistry _commercePaymentMethodRegistry;
+
+	@Reference
+	private CommerceSubscriptionEntryLocalService
+		_commerceSubscriptionEntryLocalService;
+
+	@Reference
+	private CPDefinitionHelper _cpDefinitionHelper;
 
 	@Reference
 	private Portal _portal;

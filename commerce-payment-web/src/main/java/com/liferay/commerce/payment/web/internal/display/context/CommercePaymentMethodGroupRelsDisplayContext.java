@@ -15,6 +15,9 @@
 package com.liferay.commerce.payment.web.internal.display.context;
 
 import com.liferay.commerce.constants.CommerceActionKeys;
+import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.model.CommerceOrderItem;
+import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.payment.constants.CommercePaymentScreenNavigationConstants;
 import com.liferay.commerce.payment.method.CommercePaymentMethod;
 import com.liferay.commerce.payment.method.CommercePaymentMethodRegistry;
@@ -22,8 +25,18 @@ import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
 import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelService;
 import com.liferay.commerce.payment.util.comparator.CommercePaymentMethodGroupRelNameComparator;
 import com.liferay.commerce.payment.web.internal.admin.PaymentMethodsCommerceAdminModule;
+import com.liferay.commerce.product.catalog.CPQuery;
+import com.liferay.commerce.product.data.source.CPDataSourceResult;
+import com.liferay.commerce.product.search.CPDefinitionIndexer;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
+import com.liferay.commerce.product.util.CPDefinitionHelper;
+import com.liferay.commerce.service.CommerceOrderLocalService;
+import com.liferay.commerce.service.CommerceSubscriptionEntryLocalService;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -33,8 +46,12 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
+
+import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -53,15 +70,25 @@ import javax.portlet.RenderResponse;
 public class CommercePaymentMethodGroupRelsDisplayContext {
 
 	public CommercePaymentMethodGroupRelsDisplayContext(
+		CommerceChannelLocalService commerceChannelLocalService,
+		CommerceOrderLocalService commerceOrderLocalService,
 		CommercePaymentMethodRegistry commercePaymentMethodRegistry,
 		CommercePaymentMethodGroupRelService
 			commercePaymentMethodGroupRelService,
+		CommerceSubscriptionEntryLocalService
+			commerceSubscriptionEntryLocalService,
+		CPDefinitionHelper cpDefinitionHelper,
 		PortletResourcePermission portletResourcePermission,
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
+		_commerceChannelLocalService = commerceChannelLocalService;
+		_commerceOrderLocalService = commerceOrderLocalService;
 		_commercePaymentMethodRegistry = commercePaymentMethodRegistry;
 		_commercePaymentMethodGroupRelService =
 			commercePaymentMethodGroupRelService;
+		_commerceSubscriptionEntryLocalService =
+			commerceSubscriptionEntryLocalService;
+		_cpDefinitionHelper = cpDefinitionHelper;
 		_portletResourcePermission = portletResourcePermission;
 		_defaultCommercePaymentMethodGroupRels = new ArrayList<>();
 		_renderRequest = renderRequest;
@@ -147,6 +174,41 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 		return portletURL;
 	}
 
+	public int getRecurringCPDefinitionsCount(
+			CommercePaymentMethodGroupRel commercePaymentMethodGroupRel)
+		throws PortalException {
+
+		if ((commercePaymentMethodGroupRel == null) ||
+			(commercePaymentMethodGroupRel.getGroupId() == 0)) {
+
+			return 0;
+		}
+
+		SearchContext searchContext = new SearchContext();
+
+		Map<String, Serializable> attributes = new HashMap<>();
+
+		attributes.put(Field.STATUS, WorkflowConstants.STATUS_APPROVED);
+
+		attributes.put(CPDefinitionIndexer.FIELD_PUBLISHED, true);
+		attributes.put(CPDefinitionIndexer.FIELD_SUBSCRIPTION_ENABLED, true);
+
+		long groupId = commercePaymentMethodGroupRel.getGroupId();
+
+		attributes.put("commerceChannelGroupId", groupId);
+
+		searchContext.setAttributes(attributes);
+
+		searchContext.setCompanyId(
+			commercePaymentMethodGroupRel.getCompanyId());
+
+		CPDataSourceResult cpDataSourceResult = _cpDefinitionHelper.search(
+			groupId, searchContext, new CPQuery(), QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS);
+
+		return cpDataSourceResult.getLength();
+	}
+
 	public SearchContainer<CommercePaymentMethodGroupRel> getSearchContainer()
 		throws PortalException {
 
@@ -222,6 +284,41 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 				CATEGORY_KEY_COMMERCE_PAYMENT_METHOD_DETAILS);
 	}
 
+	public int getSubscriptionEntryCount(String engineKey)
+		throws PortalException {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)_renderRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		int activeSubscriptions = 0;
+
+		long groupId =
+			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
+				themeDisplay.getSiteGroupId());
+
+		List<CommerceOrder> commerceOrders =
+			_commerceOrderLocalService.getCommerceOrders(groupId, engineKey);
+
+		for (CommerceOrder commerceOrder : commerceOrders) {
+			for (CommerceOrderItem commerceOrderItem :
+					commerceOrder.getCommerceOrderItems()) {
+
+				if (commerceOrderItem.isSubscription()) {
+					CommerceSubscriptionEntry commerceSubscriptionEntry =
+						_commerceSubscriptionEntryLocalService.
+							fetchCommerceSubscriptionEntryByCommerceOrderItemId(
+								commerceOrderItem.getCommerceOrderItemId());
+
+					if (commerceSubscriptionEntry != null) {
+						activeSubscriptions++;
+					}
+				}
+			}
+		}
+
+		return activeSubscriptions;
+	}
+
 	public boolean hasManageCommercePaymentMethodGroupRelsPermission() {
 		ThemeDisplay themeDisplay = (ThemeDisplay)_renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -229,6 +326,33 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 		return _portletResourcePermission.contains(
 			themeDisplay.getPermissionChecker(), themeDisplay.getScopeGroupId(),
 			CommerceActionKeys.MANAGE_COMMERCE_PAYMENT_METHODS);
+	}
+
+	public boolean isLastRecurringPaymentMethod(String engineKey) {
+		Map<String, CommercePaymentMethod> commercePaymentMethodsMap =
+			_commercePaymentMethodRegistry.getCommercePaymentMethods();
+
+		List<CommercePaymentMethod> recurringCommercePaymentMethods =
+			new ArrayList<>();
+
+		for (CommercePaymentMethod commercePaymentMethod :
+				commercePaymentMethodsMap.values()) {
+
+			if (commercePaymentMethod.isProcessRecurringEnabled()) {
+				recurringCommercePaymentMethods.add(commercePaymentMethod);
+			}
+		}
+
+		if (recurringCommercePaymentMethods.size() == 1) {
+			CommercePaymentMethod lastRecurringCommercePaymentMethod =
+				recurringCommercePaymentMethods.get(0);
+
+			if (engineKey.equals(lastRecurringCommercePaymentMethod.getKey())) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	protected List<CommercePaymentMethodGroupRel>
@@ -292,10 +416,15 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 		return ParamUtil.getString(_renderRequest, "navigation");
 	}
 
+	private final CommerceChannelLocalService _commerceChannelLocalService;
+	private final CommerceOrderLocalService _commerceOrderLocalService;
 	private CommercePaymentMethodGroupRel _commercePaymentMethodGroupRel;
 	private final CommercePaymentMethodGroupRelService
 		_commercePaymentMethodGroupRelService;
 	private final CommercePaymentMethodRegistry _commercePaymentMethodRegistry;
+	private final CommerceSubscriptionEntryLocalService
+		_commerceSubscriptionEntryLocalService;
+	private final CPDefinitionHelper _cpDefinitionHelper;
 	private List<CommercePaymentMethodGroupRel>
 		_defaultCommercePaymentMethodGroupRels;
 	private final PortletResourcePermission _portletResourcePermission;
