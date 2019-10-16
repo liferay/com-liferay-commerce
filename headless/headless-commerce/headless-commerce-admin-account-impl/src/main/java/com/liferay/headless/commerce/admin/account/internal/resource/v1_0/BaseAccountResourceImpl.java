@@ -59,6 +59,30 @@ import javax.ws.rs.core.UriInfo;
 public abstract class BaseAccountResourceImpl implements AccountResource {
 
 	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
+		}
+	)
+	@Path(
+		"/accountGroups/by-externalReferenceCode/{externalReferenceCode}/accounts"
+	)
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Account")})
+	public Response postAccountGroupByExternalReferenceCodeAccount(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode,
+			Account account)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
 	@GET
 	@Parameters(
 		value = {
