@@ -17,6 +17,7 @@ package com.liferay.commerce.test.util;
 import java.math.BigDecimal;
 import java.util.Collections;
 
+import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountLocalServiceUtil;
 import com.liferay.commerce.context.CommerceContext;
