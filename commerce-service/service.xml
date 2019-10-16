@@ -317,6 +317,10 @@
 			<finder-column name="groupId" />
 			<finder-column name="commerceAccountId" />
 		</finder>
+		<finder name="G_CP" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="commercePaymentMethodKey" />
+		</finder>
 		<finder name="G_U_O" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="userId" />
