@@ -2,12 +2,13 @@ import React from "react";
 import PropTypes from 'prop-types';
 import Thumbnail from './Thumbnail';
 
-export default function Thumbnails({ images, onChange, selected = false }) {
+export default function Thumbnails({ background, images, onChange, selected = false }) {
   return (
     <div className="gallery-thumbnails">
       {images.map((image, i) => (
         <Thumbnail
           active={selected === i}
+          background={background}
           key={image.thumbnailUrl}
           onClick={onChange ? () => onChange(i): null}
           src={image.thumbnailUrl}
@@ -19,6 +20,7 @@ export default function Thumbnails({ images, onChange, selected = false }) {
 }
 
 Thumbnails.propTypes = {
+  background: PropTypes.string,
   images: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     thumbnailUrl: PropTypes.string.isRequired,

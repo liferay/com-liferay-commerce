@@ -18,7 +18,7 @@ const props = {
     thumbnailUrl: getImgUrl(img, 100),
     smallUrl: getImgUrl(img, 800),
     bigUrl: getImgUrl(img, 1600)
-  }))
+  })),
 };
 
 launcher('galleryId', 'gallery-root-id', props);
