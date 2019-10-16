@@ -373,10 +373,10 @@ public class CommerceAccountModelImpl
 				@Override
 				public void accept(
 					CommerceAccount commerceAccount,
-					Object externalReferenceCode) {
+					Object externalReferenceCodeObject) {
 
 					commerceAccount.setExternalReferenceCode(
-						(String)externalReferenceCode);
+						(String)externalReferenceCodeObject);
 				}
 
 			});
@@ -396,10 +396,11 @@ public class CommerceAccountModelImpl
 
 				@Override
 				public void accept(
-					CommerceAccount commerceAccount, Object commerceAccountId) {
+					CommerceAccount commerceAccount,
+					Object commerceAccountIdObject) {
 
 					commerceAccount.setCommerceAccountId(
-						(Long)commerceAccountId);
+						(Long)commerceAccountIdObject);
 				}
 
 			});
@@ -419,9 +420,9 @@ public class CommerceAccountModelImpl
 
 				@Override
 				public void accept(
-					CommerceAccount commerceAccount, Object companyId) {
+					CommerceAccount commerceAccount, Object companyIdObject) {
 
-					commerceAccount.setCompanyId((Long)companyId);
+					commerceAccount.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -441,9 +442,9 @@ public class CommerceAccountModelImpl
 
 				@Override
 				public void accept(
-					CommerceAccount commerceAccount, Object userId) {
+					CommerceAccount commerceAccount, Object userIdObject) {
 
-					commerceAccount.setUserId((Long)userId);
+					commerceAccount.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -463,9 +464,9 @@ public class CommerceAccountModelImpl
 
 				@Override
 				public void accept(
-					CommerceAccount commerceAccount, Object userName) {
+					CommerceAccount commerceAccount, Object userNameObject) {
 
-					commerceAccount.setUserName((String)userName);
+					commerceAccount.setUserName((String)userNameObject);
 				}
 
 			});
@@ -485,9 +486,9 @@ public class CommerceAccountModelImpl
 
 				@Override
 				public void accept(
-					CommerceAccount commerceAccount, Object createDate) {
+					CommerceAccount commerceAccount, Object createDateObject) {
 
-					commerceAccount.setCreateDate((Date)createDate);
+					commerceAccount.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -507,9 +508,10 @@ public class CommerceAccountModelImpl
 
 				@Override
 				public void accept(
-					CommerceAccount commerceAccount, Object modifiedDate) {
+					CommerceAccount commerceAccount,
+					Object modifiedDateObject) {
 
-					commerceAccount.setModifiedDate((Date)modifiedDate);
+					commerceAccount.setModifiedDate((Date)modifiedDateObject);
 				}
 
 			});
@@ -530,10 +532,10 @@ public class CommerceAccountModelImpl
 				@Override
 				public void accept(
 					CommerceAccount commerceAccount,
-					Object parentCommerceAccountId) {
+					Object parentCommerceAccountIdObject) {
 
 					commerceAccount.setParentCommerceAccountId(
-						(Long)parentCommerceAccountId);
+						(Long)parentCommerceAccountIdObject);
 				}
 
 			});
@@ -553,9 +555,9 @@ public class CommerceAccountModelImpl
 
 				@Override
 				public void accept(
-					CommerceAccount commerceAccount, Object name) {
+					CommerceAccount commerceAccount, Object nameObject) {
 
-					commerceAccount.setName((String)name);
+					commerceAccount.setName((String)nameObject);
 				}
 
 			});
@@ -575,9 +577,9 @@ public class CommerceAccountModelImpl
 
 				@Override
 				public void accept(
-					CommerceAccount commerceAccount, Object logoId) {
+					CommerceAccount commerceAccount, Object logoIdObject) {
 
-					commerceAccount.setLogoId((Long)logoId);
+					commerceAccount.setLogoId((Long)logoIdObject);
 				}
 
 			});
@@ -597,9 +599,9 @@ public class CommerceAccountModelImpl
 
 				@Override
 				public void accept(
-					CommerceAccount commerceAccount, Object email) {
+					CommerceAccount commerceAccount, Object emailObject) {
 
-					commerceAccount.setEmail((String)email);
+					commerceAccount.setEmail((String)emailObject);
 				}
 
 			});
@@ -619,9 +621,9 @@ public class CommerceAccountModelImpl
 
 				@Override
 				public void accept(
-					CommerceAccount commerceAccount, Object taxId) {
+					CommerceAccount commerceAccount, Object taxIdObject) {
 
-					commerceAccount.setTaxId((String)taxId);
+					commerceAccount.setTaxId((String)taxIdObject);
 				}
 
 			});
@@ -641,9 +643,9 @@ public class CommerceAccountModelImpl
 
 				@Override
 				public void accept(
-					CommerceAccount commerceAccount, Object type) {
+					CommerceAccount commerceAccount, Object typeObject) {
 
-					commerceAccount.setType((Integer)type);
+					commerceAccount.setType((Integer)typeObject);
 				}
 
 			});
@@ -663,9 +665,9 @@ public class CommerceAccountModelImpl
 
 				@Override
 				public void accept(
-					CommerceAccount commerceAccount, Object active) {
+					CommerceAccount commerceAccount, Object activeObject) {
 
-					commerceAccount.setActive((Boolean)active);
+					commerceAccount.setActive((Boolean)activeObject);
 				}
 
 			});
@@ -685,9 +687,9 @@ public class CommerceAccountModelImpl
 
 				@Override
 				public void accept(
-					CommerceAccount commerceAccount, Object displayDate) {
+					CommerceAccount commerceAccount, Object displayDateObject) {
 
-					commerceAccount.setDisplayDate((Date)displayDate);
+					commerceAccount.setDisplayDate((Date)displayDateObject);
 				}
 
 			});
@@ -708,10 +710,10 @@ public class CommerceAccountModelImpl
 				@Override
 				public void accept(
 					CommerceAccount commerceAccount,
-					Object defaultBillingAddressId) {
+					Object defaultBillingAddressIdObject) {
 
 					commerceAccount.setDefaultBillingAddressId(
-						(Long)defaultBillingAddressId);
+						(Long)defaultBillingAddressIdObject);
 				}
 
 			});
@@ -732,10 +734,10 @@ public class CommerceAccountModelImpl
 				@Override
 				public void accept(
 					CommerceAccount commerceAccount,
-					Object defaultShippingAddressId) {
+					Object defaultShippingAddressIdObject) {
 
 					commerceAccount.setDefaultShippingAddressId(
-						(Long)defaultShippingAddressId);
+						(Long)defaultShippingAddressIdObject);
 				}
 
 			});
@@ -755,9 +757,11 @@ public class CommerceAccountModelImpl
 
 				@Override
 				public void accept(
-					CommerceAccount commerceAccount, Object expirationDate) {
+					CommerceAccount commerceAccount,
+					Object expirationDateObject) {
 
-					commerceAccount.setExpirationDate((Date)expirationDate);
+					commerceAccount.setExpirationDate(
+						(Date)expirationDateObject);
 				}
 
 			});
@@ -777,9 +781,11 @@ public class CommerceAccountModelImpl
 
 				@Override
 				public void accept(
-					CommerceAccount commerceAccount, Object lastPublishDate) {
+					CommerceAccount commerceAccount,
+					Object lastPublishDateObject) {
 
-					commerceAccount.setLastPublishDate((Date)lastPublishDate);
+					commerceAccount.setLastPublishDate(
+						(Date)lastPublishDateObject);
 				}
 
 			});
@@ -799,9 +805,9 @@ public class CommerceAccountModelImpl
 
 				@Override
 				public void accept(
-					CommerceAccount commerceAccount, Object status) {
+					CommerceAccount commerceAccount, Object statusObject) {
 
-					commerceAccount.setStatus((Integer)status);
+					commerceAccount.setStatus((Integer)statusObject);
 				}
 
 			});
@@ -821,9 +827,11 @@ public class CommerceAccountModelImpl
 
 				@Override
 				public void accept(
-					CommerceAccount commerceAccount, Object statusByUserId) {
+					CommerceAccount commerceAccount,
+					Object statusByUserIdObject) {
 
-					commerceAccount.setStatusByUserId((Long)statusByUserId);
+					commerceAccount.setStatusByUserId(
+						(Long)statusByUserIdObject);
 				}
 
 			});
@@ -843,10 +851,11 @@ public class CommerceAccountModelImpl
 
 				@Override
 				public void accept(
-					CommerceAccount commerceAccount, Object statusByUserName) {
+					CommerceAccount commerceAccount,
+					Object statusByUserNameObject) {
 
 					commerceAccount.setStatusByUserName(
-						(String)statusByUserName);
+						(String)statusByUserNameObject);
 				}
 
 			});
@@ -866,9 +875,9 @@ public class CommerceAccountModelImpl
 
 				@Override
 				public void accept(
-					CommerceAccount commerceAccount, Object statusDate) {
+					CommerceAccount commerceAccount, Object statusDateObject) {
 
-					commerceAccount.setStatusDate((Date)statusDate);
+					commerceAccount.setStatusDate((Date)statusDateObject);
 				}
 
 			});
