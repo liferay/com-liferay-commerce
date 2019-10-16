@@ -137,6 +137,14 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 			contextBooleanFilter.addRequiredTerm(CPField.PUBLISHED, published);
 		}
 
+		if (attributes.containsKey(CPField.SUBSCRIPTION_ENABLED)) {
+			boolean subscriptionEnabled = GetterUtil.getBoolean(
+				attributes.get(CPField.SUBSCRIPTION_ENABLED));
+
+			contextBooleanFilter.addRequiredTerm(
+				CPField.SUBSCRIPTION_ENABLED, subscriptionEnabled);
+		}
+
 		contextBooleanFilter.addRequiredTerm(Field.HIDDEN, false);
 
 		String definitionLinkType = GetterUtil.getString(
@@ -474,6 +482,8 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 		document.addKeyword(
 			CPField.PRODUCT_TYPE_NAME, cpDefinition.getProductTypeName());
 		document.addKeyword(CPField.PUBLISHED, cpDefinition.isPublished());
+		document.addKeyword(
+			CPField.SUBSCRIPTION_ENABLED, cpDefinition.isSubscriptionEnabled());
 		document.addDateSortable(
 			CPField.DISPLAY_DATE, cpDefinition.getDisplayDate());
 
