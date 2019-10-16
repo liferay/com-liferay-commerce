@@ -1,64 +1,66 @@
 import React from "react";
 import classNames from "classnames";
 import ClayLoadingIndicator from "@clayui/loading-indicator";
-// import ClayCard from "@clayui/card";
+// import ClayCard from "@clayui/card"; // Re-render the card components when is not needed
 
 function fetchImage(url) {
   return new Promise(resolve => {
     const img = new Image();
+
     img.src = url;
+
     img.onload = () => resolve(url);
   });
 }
 
-function MainImage({ url, title, loading, onZoom, onPrev, onNext }) {
+function Arrows({ onNext, onPrev }) {
   return (
-    <div onClick={onZoom} className="card main-image">
+    <>
+      {onPrev && <div className="arrow prev" onClick={onPrev} />}
+      {onNext && <div className="arrow next" onClick={onNext} />}
+    </>
+  );
+}
+
+function MainImage({ loading, onNext, onPrev, onZoom, title, url }) {
+  return (
+    <div className="card main-image" onClick={onZoom}>
       <div className="aspect-ratio aspect-ratio-4-to-3">
         <img
+          alt={title}
           className="aspect-ratio-item-center-middle aspect-ratio-item-fluid"
           src={url}
-          alt={title}
         />
       </div>
+      <Arrows onNext={onNext} onPrev={onPrev} />
       {loading ? <ClayLoadingIndicator /> : null}
-      {onPrev && <div className="prev" onClick={onPrev} />}
-      {onNext && <div className="next" onClick={onNext} />}
     </div>
   );
 }
 
-function Overlay({ url, title, onClose, onPrev, onNext }) {
+function Overlay({ onClose, onNext, onPrev, title, url }) {
   return (
     <div className="gallery-overlay" onClick={onClose}>
-      <img src={url} alt={title} />
-
-      {onPrev && <div className="prev" onClick={onPrev} />}
-      {onNext && <div className="next" onClick={onNext} />}
+      <img alt={title} src={url} />
+      <Arrows onNext={onNext} onPrev={onPrev} />
     </div>
   );
 }
 
-function Thumbnail({ image, active, onClick }) {
+function Thumbnail({ active, image, onClick }) {
   const cardClasses = classNames(
-    'card',
-    'card-interactive',
-    'card-interactive-primary',
-    'card-type-template',
-    'template-card',
-    {active: active}
+    "card",
+    "card-interactive",
+    "card-interactive-primary",
+    { active: active }
   );
 
   return (
-    <div
-      key={image.thumbnailUrl}
-      onClick={onClick}
-      className={cardClasses}
-    >
+    <div className={cardClasses} onClick={onClick}>
       <div className="aspect-ratio aspect-ratio-4-to-3">
         <img
-          className="aspect-ratio-item-center-middle aspect-ratio-item-fluid"
           alt={image.title}
+          className="aspect-ratio-item-center-middle aspect-ratio-item-fluid"
           src={image.thumbnailUrl}
         />
       </div>
@@ -66,13 +68,14 @@ function Thumbnail({ image, active, onClick }) {
   );
 }
 
-function Thumbnails({ images, selected, onChange }) {
+function Thumbnails({ images, onChange, selected }) {
   return (
     <div className="gallery-thumbnails">
       {images.map((image, i) => (
         <Thumbnail
-          image={image}
           active={selected === i}
+          image={image}
+          key={image.thumbnailUrl}
           onClick={() => onChange(i)}
         />
       ))}
@@ -83,66 +86,39 @@ function Thumbnails({ images, selected, onChange }) {
 export default class Gallery extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       fullscreen: false,
-      loading: false,
       loaded: new Set(),
+      loading: false,
       selected: 0
     };
 
-    this.goToPrev = this.goToPrev.bind(this);
+    this.fullscreenClose = this.fullscreenClose.bind(this);
+    this.fullscreenOpen = this.fullscreenOpen.bind(this);
+    this.goTo = this.goTo.bind(this);
     this.goToNext = this.goToNext.bind(this);
-    this.loadImage = this.loadImage.bind(this);
-    this.selectImage = this.selectImage.bind(this);
-    this.openFullscreen = this.openFullscreen.bind(this);
-    this.closeFullscreen = this.closeFullscreen.bind(this);
+    this.goToPrev = this.goToPrev.bind(this);
+    this.imageLoad = this.imageLoad.bind(this);
+    this.imageSelect = this.imageSelect.bind(this);
   }
 
-  loadImage(imageUrl) {
-    return new Promise(resolve => {
-      if (this.state.loaded.has(imageUrl)) {
-        resolve(imageUrl);
-      } else {
-        this.setState({ loading: true });
-        fetchImage(imageUrl).then(() => {
-          this.setState(
-            {
-              loading: false,
-              loaded: new Set(this.state.loaded).add(imageUrl)
-            },
-            () => {
-              resolve(imageUrl);
-            }
-          );
-        });
-      }
-    });
-  }
-
-  selectImage(toSelect) {
-    if (toSelect !== this.state.selected && !this.state.loading) {
-      this.loadImage(this.props.images[toSelect].smallUrl).then(() => {
-        this.setState({ selected: toSelect });
-      });
-    }
-  }
-
-  openFullscreen() {
+  fullscreenOpen() {
     if (!this.state.loading) {
-      this.loadImage(this.props.images[this.state.selected].url).then(() => {
+      this.imageLoad(this.props.images[this.state.selected].url).then(() => {
         this.setState({ fullscreen: true });
       });
     }
   }
 
-  closeFullscreen() {
+  fullscreenClose() {
     this.setState({ fullscreen: false });
   }
 
   goTo(pos) {
-    this.setState({
-      selected: (this.props.images.length + pos) % this.props.images.length
-    });
+    this.imageSelect(
+      (this.props.images.length + pos) % this.props.images.length
+    );
   }
 
   goToPrev(e) {
@@ -155,36 +131,65 @@ export default class Gallery extends React.Component {
     this.goTo(this.state.selected + 1);
   }
 
+  imageLoad(imageUrl) {
+    return new Promise(resolve => {
+      if (this.state.loaded.has(imageUrl)) {
+        resolve(imageUrl);
+      } else {
+        this.setState({ loading: true });
+        fetchImage(imageUrl).then(() => {
+          this.setState(
+            {
+              loaded: new Set(this.state.loaded).add(imageUrl),
+              loading: false
+            },
+            () => {
+              resolve(imageUrl);
+            }
+          );
+        });
+      }
+    });
+  }
+
+  imageSelect(toSelect) {
+    if (toSelect !== this.state.selected && !this.state.loading) {
+      this.imageLoad(this.props.images[toSelect].smallUrl).then(() => {
+        this.setState({ selected: toSelect });
+      });
+    }
+  }
+
   render() {
-    const { loading, selected, fullscreen } = this.state;
     const { images } = this.props;
+    const { fullscreen, loading, selected } = this.state;
 
     return (
       <div className="product-gallery">
         <MainImage
-          url={images[selected].smallUrl}
-          title={images[selected].title}
           loading={loading}
-          onZoom={this.openFullscreen}
-          onPrev={images.length > 1 ? this.goToPrev : null}
           onNext={images.length > 1 ? this.goToNext : null}
+          onPrev={images.length > 1 ? this.goToPrev : null}
+          onZoom={this.fullscreenOpen}
+          title={images[selected].title}
+          url={images[selected].smallUrl}
         />
-
-        {fullscreen ? (
-          <Overlay
-            onClose={this.closeFullscreen}
-            url={images[selected].url}
-            title={images[selected].title}
-            onPrev={images.length > 1 ? this.goToPrev : null}
-            onNext={images.length > 1 ? this.goToNext : null}
-          />
-        ) : null}
 
         {images.length > 1 ? (
           <Thumbnails
             images={images}
+            onChange={this.imageSelect}
             selected={selected}
-            onChange={this.selectImage}
+          />
+        ) : null}
+
+        {fullscreen ? (
+          <Overlay
+            onClose={this.fullscreenClose}
+            onNext={images.length > 1 ? this.goToNext : null}
+            onPrev={images.length > 1 ? this.goToPrev : null}
+            title={images[selected].title}
+            url={images[selected].url}
           />
         ) : null}
       </div>
