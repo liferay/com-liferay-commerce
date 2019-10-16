@@ -14,6 +14,19 @@
 
 package com.liferay.headless.commerce.admin.account.internal.resource.v1_0;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import javax.validation.constraints.NotNull;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
+import org.osgi.service.component.annotations.ServiceScope;
+
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.exception.NoSuchAccountException;
 import com.liferay.commerce.account.exception.NoSuchAccountGroupException;
@@ -21,7 +34,7 @@ import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.model.CommerceAccountGroup;
 import com.liferay.commerce.account.model.CommerceAccountOrganizationRel;
 import com.liferay.commerce.account.model.CommerceAccountUserRel;
-import com.liferay.commerce.account.service.CommerceAccountGroupCommerceAccountRelServiceUtil;
+import com.liferay.commerce.account.service.CommerceAccountGroupCommerceAccountRelService;
 import com.liferay.commerce.account.service.CommerceAccountGroupRelService;
 import com.liferay.commerce.account.service.CommerceAccountGroupService;
 import com.liferay.commerce.account.service.CommerceAccountOrganizationRelService;
@@ -58,21 +71,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.vulcan.multipart.MultipartBody;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
-
-import java.io.IOException;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import javax.validation.constraints.NotNull;
-
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
-
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
-import org.osgi.service.component.annotations.ServiceScope;
 
 /**
  * @author Alessio Antonio Rendina
@@ -280,7 +278,7 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 
 		if (account.getExternalReferenceCode() == null) {
 			throw new NoSuchAccountException(
-				"Unable to find Account with external reference code: null.");
+				"Unable to find Account with external reference code: null");
 		}
 
 		CommerceAccount commerceAccount =
@@ -294,7 +292,7 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 					account.getExternalReferenceCode());
 		}
 
-		CommerceAccountGroupCommerceAccountRelServiceUtil.
+		_commerceAccountGroupCommerceAccountRelService.
 			addCommerceAccountGroupCommerceAccountRel(
 				commerceAccountGroup.getCommerceAccountGroupId(),
 				account.getId(), _serviceContextHelper.getServiceContext());
@@ -531,6 +529,10 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 	private CommerceAccountOrganizationRelService
 		_commerceAccountOrganizationRelService;
 
+	@Reference
+	private CommerceAccountGroupCommerceAccountRelService
+		_commerceAccountGroupCommerceAccountRelService;
+	
 	@Reference
 	private CommerceAccountService _commerceAccountService;
 
