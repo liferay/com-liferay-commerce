@@ -342,10 +342,10 @@ public class CommerceAccountGroupModelImpl
 				@Override
 				public void accept(
 					CommerceAccountGroup commerceAccountGroup,
-					Object externalReferenceCode) {
+					Object externalReferenceCodeObject) {
 
 					commerceAccountGroup.setExternalReferenceCode(
-						(String)externalReferenceCode);
+						(String)externalReferenceCodeObject);
 				}
 
 			});
@@ -366,10 +366,10 @@ public class CommerceAccountGroupModelImpl
 				@Override
 				public void accept(
 					CommerceAccountGroup commerceAccountGroup,
-					Object commerceAccountGroupId) {
+					Object commerceAccountGroupIdObject) {
 
 					commerceAccountGroup.setCommerceAccountGroupId(
-						(Long)commerceAccountGroupId);
+						(Long)commerceAccountGroupIdObject);
 				}
 
 			});
@@ -390,9 +390,9 @@ public class CommerceAccountGroupModelImpl
 				@Override
 				public void accept(
 					CommerceAccountGroup commerceAccountGroup,
-					Object companyId) {
+					Object companyIdObject) {
 
-					commerceAccountGroup.setCompanyId((Long)companyId);
+					commerceAccountGroup.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -412,9 +412,10 @@ public class CommerceAccountGroupModelImpl
 
 				@Override
 				public void accept(
-					CommerceAccountGroup commerceAccountGroup, Object userId) {
+					CommerceAccountGroup commerceAccountGroup,
+					Object userIdObject) {
 
-					commerceAccountGroup.setUserId((Long)userId);
+					commerceAccountGroup.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -435,9 +436,9 @@ public class CommerceAccountGroupModelImpl
 				@Override
 				public void accept(
 					CommerceAccountGroup commerceAccountGroup,
-					Object userName) {
+					Object userNameObject) {
 
-					commerceAccountGroup.setUserName((String)userName);
+					commerceAccountGroup.setUserName((String)userNameObject);
 				}
 
 			});
@@ -458,9 +459,9 @@ public class CommerceAccountGroupModelImpl
 				@Override
 				public void accept(
 					CommerceAccountGroup commerceAccountGroup,
-					Object createDate) {
+					Object createDateObject) {
 
-					commerceAccountGroup.setCreateDate((Date)createDate);
+					commerceAccountGroup.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -481,9 +482,10 @@ public class CommerceAccountGroupModelImpl
 				@Override
 				public void accept(
 					CommerceAccountGroup commerceAccountGroup,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
-					commerceAccountGroup.setModifiedDate((Date)modifiedDate);
+					commerceAccountGroup.setModifiedDate(
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -503,9 +505,10 @@ public class CommerceAccountGroupModelImpl
 
 				@Override
 				public void accept(
-					CommerceAccountGroup commerceAccountGroup, Object name) {
+					CommerceAccountGroup commerceAccountGroup,
+					Object nameObject) {
 
-					commerceAccountGroup.setName((String)name);
+					commerceAccountGroup.setName((String)nameObject);
 				}
 
 			});
@@ -525,9 +528,10 @@ public class CommerceAccountGroupModelImpl
 
 				@Override
 				public void accept(
-					CommerceAccountGroup commerceAccountGroup, Object type) {
+					CommerceAccountGroup commerceAccountGroup,
+					Object typeObject) {
 
-					commerceAccountGroup.setType((Integer)type);
+					commerceAccountGroup.setType((Integer)typeObject);
 				}
 
 			});
@@ -547,9 +551,10 @@ public class CommerceAccountGroupModelImpl
 
 				@Override
 				public void accept(
-					CommerceAccountGroup commerceAccountGroup, Object system) {
+					CommerceAccountGroup commerceAccountGroup,
+					Object systemObject) {
 
-					commerceAccountGroup.setSystem((Boolean)system);
+					commerceAccountGroup.setSystem((Boolean)systemObject);
 				}
 
 			});

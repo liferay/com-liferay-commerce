@@ -334,10 +334,10 @@ public class CommerceAccountUserRelModelImpl
 				@Override
 				public void accept(
 					CommerceAccountUserRel commerceAccountUserRel,
-					Object commerceAccountId) {
+					Object commerceAccountIdObject) {
 
 					commerceAccountUserRel.setCommerceAccountId(
-						(Long)commerceAccountId);
+						(Long)commerceAccountIdObject);
 				}
 
 			});
@@ -360,10 +360,10 @@ public class CommerceAccountUserRelModelImpl
 				@Override
 				public void accept(
 					CommerceAccountUserRel commerceAccountUserRel,
-					Object commerceAccountUserId) {
+					Object commerceAccountUserIdObject) {
 
 					commerceAccountUserRel.setCommerceAccountUserId(
-						(Long)commerceAccountUserId);
+						(Long)commerceAccountUserIdObject);
 				}
 
 			});
@@ -386,9 +386,9 @@ public class CommerceAccountUserRelModelImpl
 				@Override
 				public void accept(
 					CommerceAccountUserRel commerceAccountUserRel,
-					Object companyId) {
+					Object companyIdObject) {
 
-					commerceAccountUserRel.setCompanyId((Long)companyId);
+					commerceAccountUserRel.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -411,9 +411,9 @@ public class CommerceAccountUserRelModelImpl
 				@Override
 				public void accept(
 					CommerceAccountUserRel commerceAccountUserRel,
-					Object userId) {
+					Object userIdObject) {
 
-					commerceAccountUserRel.setUserId((Long)userId);
+					commerceAccountUserRel.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -436,9 +436,9 @@ public class CommerceAccountUserRelModelImpl
 				@Override
 				public void accept(
 					CommerceAccountUserRel commerceAccountUserRel,
-					Object userName) {
+					Object userNameObject) {
 
-					commerceAccountUserRel.setUserName((String)userName);
+					commerceAccountUserRel.setUserName((String)userNameObject);
 				}
 
 			});
@@ -461,9 +461,10 @@ public class CommerceAccountUserRelModelImpl
 				@Override
 				public void accept(
 					CommerceAccountUserRel commerceAccountUserRel,
-					Object createDate) {
+					Object createDateObject) {
 
-					commerceAccountUserRel.setCreateDate((Date)createDate);
+					commerceAccountUserRel.setCreateDate(
+						(Date)createDateObject);
 				}
 
 			});
@@ -486,9 +487,10 @@ public class CommerceAccountUserRelModelImpl
 				@Override
 				public void accept(
 					CommerceAccountUserRel commerceAccountUserRel,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
-					commerceAccountUserRel.setModifiedDate((Date)modifiedDate);
+					commerceAccountUserRel.setModifiedDate(
+						(Date)modifiedDateObject);
 				}
 
 			});
