@@ -119,4 +119,6 @@ public class CPField {
 	public static final String SPECIFICATION_VALUES_NAMES =
 		"specificationOptionsValuesNames";
 
+	public static final String SUBSCRIPTION_ENABLED = "subscriptionEnabled";
+
 }
