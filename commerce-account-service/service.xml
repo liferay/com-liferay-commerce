@@ -247,6 +247,7 @@
 		<exception>CommerceAccountUserRelEmailAddress</exception>
 		<exception>DuplicateCommerceAccount</exception>
 		<exception>DuplicateCommerceAccountGroupRel</exception>
+		<exception>DuplicateCommerceAccountGroupCommerceAccountRel</exception>
 		<exception>SystemCommerceAccountGroup</exception>
 	</exceptions>
 </service-builder>

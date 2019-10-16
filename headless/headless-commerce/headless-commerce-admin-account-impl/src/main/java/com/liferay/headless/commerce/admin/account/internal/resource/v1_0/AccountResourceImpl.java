@@ -280,15 +280,18 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 
 		if (account.getExternalReferenceCode() == null) {
 			throw new NoSuchAccountException(
-				"Unable to find Account with external reference code: null." );
+				"Unable to find Account with external reference code: null.");
 		}
-		
+
 		CommerceAccount commerceAccount =
-			_commerceAccountService.fetchByExternalReferenceCode(contextCompany.getCompanyId(), account.getExternalReferenceCode());
+			_commerceAccountService.fetchByExternalReferenceCode(
+				contextCompany.getCompanyId(),
+				account.getExternalReferenceCode());
 
 		if (commerceAccount == null) {
 			throw new NoSuchAccountException(
-				"Unable to find Account with external reference code: " + account.getExternalReferenceCode());
+				"Unable to find Account with external reference code: " +
+					account.getExternalReferenceCode());
 		}
 
 		CommerceAccountGroupCommerceAccountRelServiceUtil.
