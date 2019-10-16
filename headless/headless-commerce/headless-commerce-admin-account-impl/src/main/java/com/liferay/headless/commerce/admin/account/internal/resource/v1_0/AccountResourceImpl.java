@@ -14,6 +14,19 @@
 
 package com.liferay.headless.commerce.admin.account.internal.resource.v1_0;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import javax.validation.constraints.NotNull;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
+import org.osgi.service.component.annotations.ServiceScope;
+
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.exception.NoSuchAccountException;
 import com.liferay.commerce.account.exception.NoSuchAccountGroupException;
@@ -60,21 +73,6 @@ import com.liferay.portal.vulcan.multipart.MultipartBody;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
-import java.io.IOException;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import javax.validation.constraints.NotNull;
-
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
-
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
-import org.osgi.service.component.annotations.ServiceScope;
-
 /**
  * @author Alessio Antonio Rendina
  */
@@ -88,7 +86,7 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 	public Response deleteAccount(Long id) throws Exception {
 		_commerceAccountService.deleteCommerceAccount(id);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -111,7 +109,7 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 		_commerceAccountService.deleteCommerceAccount(
 			commerceAccount.getCommerceAccountId());
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -219,7 +217,7 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 	public Response patchAccount(Long id, Account account) throws Exception {
 		_updateAccount(id, account);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -241,7 +239,7 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 
 		_updateAccount(commerceAccount.getCommerceAccountId(), account);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -302,7 +300,7 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 
 		updateAccountLogo(commerceAccount, multipartBody);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -322,18 +320,15 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 					externalReferenceCode);
 		}
 
-		CommerceAccount commerceAccount = null;
+		if (account.getExternalReferenceCode() == null) {
+			throw new NoSuchAccountException(
+				"Unable to find Account with external reference code: null");
+		}
 
-		if (account.getId() != null) {
-			commerceAccount = _commerceAccountService.fetchCommerceAccount(
-				account.getId());
-		}
-		else if (account.getExternalReferenceCode() != null) {
-			commerceAccount =
-				_commerceAccountService.fetchByExternalReferenceCode(
-					contextCompany.getCompanyId(),
-					account.getExternalReferenceCode());
-		}
+		CommerceAccount commerceAccount =
+			_commerceAccountService.fetchByExternalReferenceCode(
+				contextCompany.getCompanyId(),
+				account.getExternalReferenceCode());
 
 		if (commerceAccount == null) {
 			throw new NoSuchAccountException(
@@ -344,8 +339,7 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 		_commerceAccountGroupCommerceAccountRelService.
 			addCommerceAccountGroupCommerceAccountRel(
 				commerceAccountGroup.getCommerceAccountGroupId(),
-				commerceAccount.getCommerceAccountId(),
-				_serviceContextHelper.getServiceContext());
+				account.getId(), _serviceContextHelper.getServiceContext());
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
@@ -359,7 +353,7 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 		updateAccountLogo(
 			_commerceAccountService.getCommerceAccount(id), multipartBody);
 
-		Response.ResponseBuilder responseBuilder = Response.noContent();
+		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
 	}
@@ -448,10 +442,7 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 			commerceAccount.getCommerceAccountId(), account.getName(), true,
 			null, _getEmailAddress(account, commerceAccount),
 			GetterUtil.get(account.getTaxId(), commerceAccount.getTaxId()),
-			commerceAccount.isActive(),
-			commerceAccount.getDefaultBillingAddressId(),
-			commerceAccount.getDefaultShippingAddressId(),
-			account.getExternalReferenceCode(), serviceContext);
+			commerceAccount.isActive(), serviceContext);
 
 		// Expando
 
@@ -592,10 +583,6 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 	}
 
 	@Reference
-	private CommerceAccountGroupCommerceAccountRelService
-		_commerceAccountGroupCommerceAccountRelService;
-
-	@Reference
 	private CommerceAccountGroupRelService _commerceAccountGroupRelService;
 
 	@Reference
@@ -605,6 +592,10 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 	private CommerceAccountOrganizationRelService
 		_commerceAccountOrganizationRelService;
 
+	@Reference
+	private CommerceAccountGroupCommerceAccountRelService
+		_commerceAccountGroupCommerceAccountRelService;
+	
 	@Reference
 	private CommerceAccountService _commerceAccountService;
 
