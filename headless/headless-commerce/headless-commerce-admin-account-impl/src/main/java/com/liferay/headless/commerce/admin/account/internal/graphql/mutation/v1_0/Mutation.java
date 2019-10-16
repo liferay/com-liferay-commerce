@@ -99,6 +99,21 @@ public class Mutation {
 
 	@GraphQLField
 	@GraphQLInvokeDetached
+	public Response postAccountGroupByExternalReferenceCodeAccount(
+			@GraphQLName("externalReferenceCode") String externalReferenceCode,
+			@GraphQLName("account") Account account)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountResource ->
+				accountResource.postAccountGroupByExternalReferenceCodeAccount(
+					externalReferenceCode, account));
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
 	public Account postAccount(@GraphQLName("account") Account account)
 		throws Exception {
 
