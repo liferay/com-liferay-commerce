@@ -221,6 +221,14 @@ public class CommerceAccountGroupCommerceAccountRelPersistenceTest {
 	}
 
 	@Test
+	public void testCountByC_C() throws Exception {
+		_persistence.countByC_C(
+			RandomTestUtil.nextLong(), RandomTestUtil.nextLong());
+
+		_persistence.countByC_C(0L, 0L);
+	}
+
+	@Test
 	public void testCountByC_ERC() throws Exception {
 		_persistence.countByC_ERC(RandomTestUtil.nextLong(), "");
 
@@ -551,6 +559,21 @@ public class CommerceAccountGroupCommerceAccountRelPersistenceTest {
 			existingCommerceAccountGroupCommerceAccountRel =
 				_persistence.findByPrimaryKey(
 					newCommerceAccountGroupCommerceAccountRel.getPrimaryKey());
+
+		Assert.assertEquals(
+			Long.valueOf(
+				existingCommerceAccountGroupCommerceAccountRel.
+					getCommerceAccountGroupId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCommerceAccountGroupCommerceAccountRel,
+				"getOriginalCommerceAccountGroupId", new Class<?>[0]));
+		Assert.assertEquals(
+			Long.valueOf(
+				existingCommerceAccountGroupCommerceAccountRel.
+					getCommerceAccountId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCommerceAccountGroupCommerceAccountRel,
+				"getOriginalCommerceAccountId", new Class<?>[0]));
 
 		Assert.assertEquals(
 			Long.valueOf(
