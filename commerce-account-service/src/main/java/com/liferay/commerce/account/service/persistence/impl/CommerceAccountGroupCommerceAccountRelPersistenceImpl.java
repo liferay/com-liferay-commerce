@@ -107,7 +107,7 @@ public class CommerceAccountGroupCommerceAccountRelPersistenceImpl
 	 * Returns a range of all the commerce account group commerce account rels where commerceAccountGroupId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAccountGroupCommerceAccountRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CommerceAccountGroupCommerceAccountRelModelImpl</code>.
 	 * </p>
 	 *
 	 * @param commerceAccountGroupId the commerce account group ID
@@ -128,7 +128,7 @@ public class CommerceAccountGroupCommerceAccountRelPersistenceImpl
 	 * Returns an ordered range of all the commerce account group commerce account rels where commerceAccountGroupId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAccountGroupCommerceAccountRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CommerceAccountGroupCommerceAccountRelModelImpl</code>.
 	 * </p>
 	 *
 	 * @param commerceAccountGroupId the commerce account group ID
@@ -152,7 +152,7 @@ public class CommerceAccountGroupCommerceAccountRelPersistenceImpl
 	 * Returns an ordered range of all the commerce account group commerce account rels where commerceAccountGroupId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAccountGroupCommerceAccountRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CommerceAccountGroupCommerceAccountRelModelImpl</code>.
 	 * </p>
 	 *
 	 * @param commerceAccountGroupId the commerce account group ID
@@ -170,14 +170,11 @@ public class CommerceAccountGroupCommerceAccountRelPersistenceImpl
 				orderByComparator,
 			boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath =
@@ -203,9 +200,9 @@ public class CommerceAccountGroupCommerceAccountRelPersistenceImpl
 				for (CommerceAccountGroupCommerceAccountRel
 						commerceAccountGroupCommerceAccountRel : list) {
 
-					if ((commerceAccountGroupId !=
+					if (commerceAccountGroupId !=
 							commerceAccountGroupCommerceAccountRel.
-								getCommerceAccountGroupId())) {
+								getCommerceAccountGroupId()) {
 
 						list = null;
 
@@ -236,7 +233,7 @@ public class CommerceAccountGroupCommerceAccountRelPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(
 					CommerceAccountGroupCommerceAccountRelModelImpl.
 						ORDER_BY_JPQL);
@@ -255,20 +252,9 @@ public class CommerceAccountGroupCommerceAccountRelPersistenceImpl
 
 				qPos.add(commerceAccountGroupId);
 
-				if (!pagination) {
-					list =
-						(List<CommerceAccountGroupCommerceAccountRel>)
-							QueryUtil.list(q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list =
-						(List<CommerceAccountGroupCommerceAccountRel>)
-							QueryUtil.list(q, getDialect(), start, end);
-				}
+				list =
+					(List<CommerceAccountGroupCommerceAccountRel>)
+						QueryUtil.list(q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -684,7 +670,7 @@ public class CommerceAccountGroupCommerceAccountRelPersistenceImpl
 	 * Returns a range of all the commerce account group commerce account rels where commerceAccountId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAccountGroupCommerceAccountRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CommerceAccountGroupCommerceAccountRelModelImpl</code>.
 	 * </p>
 	 *
 	 * @param commerceAccountId the commerce account ID
@@ -703,7 +689,7 @@ public class CommerceAccountGroupCommerceAccountRelPersistenceImpl
 	 * Returns an ordered range of all the commerce account group commerce account rels where commerceAccountId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAccountGroupCommerceAccountRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CommerceAccountGroupCommerceAccountRelModelImpl</code>.
 	 * </p>
 	 *
 	 * @param commerceAccountId the commerce account ID
@@ -726,7 +712,7 @@ public class CommerceAccountGroupCommerceAccountRelPersistenceImpl
 	 * Returns an ordered range of all the commerce account group commerce account rels where commerceAccountId = &#63;.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAccountGroupCommerceAccountRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CommerceAccountGroupCommerceAccountRelModelImpl</code>.
 	 * </p>
 	 *
 	 * @param commerceAccountId the commerce account ID
@@ -743,14 +729,11 @@ public class CommerceAccountGroupCommerceAccountRelPersistenceImpl
 			orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath =
@@ -776,9 +759,9 @@ public class CommerceAccountGroupCommerceAccountRelPersistenceImpl
 				for (CommerceAccountGroupCommerceAccountRel
 						commerceAccountGroupCommerceAccountRel : list) {
 
-					if ((commerceAccountId !=
+					if (commerceAccountId !=
 							commerceAccountGroupCommerceAccountRel.
-								getCommerceAccountId())) {
+								getCommerceAccountId()) {
 
 						list = null;
 
@@ -808,7 +791,7 @@ public class CommerceAccountGroupCommerceAccountRelPersistenceImpl
 				appendOrderByComparator(
 					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
 			}
-			else if (pagination) {
+			else {
 				query.append(
 					CommerceAccountGroupCommerceAccountRelModelImpl.
 						ORDER_BY_JPQL);
@@ -827,20 +810,9 @@ public class CommerceAccountGroupCommerceAccountRelPersistenceImpl
 
 				qPos.add(commerceAccountId);
 
-				if (!pagination) {
-					list =
-						(List<CommerceAccountGroupCommerceAccountRel>)
-							QueryUtil.list(q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list =
-						(List<CommerceAccountGroupCommerceAccountRel>)
-							QueryUtil.list(q, getDialect(), start, end);
-				}
+				list =
+					(List<CommerceAccountGroupCommerceAccountRel>)
+						QueryUtil.list(q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -1228,6 +1200,254 @@ public class CommerceAccountGroupCommerceAccountRelPersistenceImpl
 		_FINDER_COLUMN_COMMERCEACCOUNTID_COMMERCEACCOUNTID_2 =
 			"commerceAccountGroupCommerceAccountRel.commerceAccountId = ?";
 
+	private FinderPath _finderPathFetchByC_C;
+	private FinderPath _finderPathCountByC_C;
+
+	/**
+	 * Returns the commerce account group commerce account rel where commerceAccountGroupId = &#63; and commerceAccountId = &#63; or throws a <code>NoSuchAccountGroupCommerceAccountRelException</code> if it could not be found.
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param commerceAccountId the commerce account ID
+	 * @return the matching commerce account group commerce account rel
+	 * @throws NoSuchAccountGroupCommerceAccountRelException if a matching commerce account group commerce account rel could not be found
+	 */
+	@Override
+	public CommerceAccountGroupCommerceAccountRel findByC_C(
+			long commerceAccountGroupId, long commerceAccountId)
+		throws NoSuchAccountGroupCommerceAccountRelException {
+
+		CommerceAccountGroupCommerceAccountRel
+			commerceAccountGroupCommerceAccountRel = fetchByC_C(
+				commerceAccountGroupId, commerceAccountId);
+
+		if (commerceAccountGroupCommerceAccountRel == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("commerceAccountGroupId=");
+			msg.append(commerceAccountGroupId);
+
+			msg.append(", commerceAccountId=");
+			msg.append(commerceAccountId);
+
+			msg.append("}");
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
+			}
+
+			throw new NoSuchAccountGroupCommerceAccountRelException(
+				msg.toString());
+		}
+
+		return commerceAccountGroupCommerceAccountRel;
+	}
+
+	/**
+	 * Returns the commerce account group commerce account rel where commerceAccountGroupId = &#63; and commerceAccountId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param commerceAccountId the commerce account ID
+	 * @return the matching commerce account group commerce account rel, or <code>null</code> if a matching commerce account group commerce account rel could not be found
+	 */
+	@Override
+	public CommerceAccountGroupCommerceAccountRel fetchByC_C(
+		long commerceAccountGroupId, long commerceAccountId) {
+
+		return fetchByC_C(commerceAccountGroupId, commerceAccountId, true);
+	}
+
+	/**
+	 * Returns the commerce account group commerce account rel where commerceAccountGroupId = &#63; and commerceAccountId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param commerceAccountId the commerce account ID
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the matching commerce account group commerce account rel, or <code>null</code> if a matching commerce account group commerce account rel could not be found
+	 */
+	@Override
+	public CommerceAccountGroupCommerceAccountRel fetchByC_C(
+		long commerceAccountGroupId, long commerceAccountId,
+		boolean useFinderCache) {
+
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {
+				commerceAccountGroupId, commerceAccountId
+			};
+		}
+
+		Object result = null;
+
+		if (useFinderCache) {
+			result = finderCache.getResult(
+				_finderPathFetchByC_C, finderArgs, this);
+		}
+
+		if (result instanceof CommerceAccountGroupCommerceAccountRel) {
+			CommerceAccountGroupCommerceAccountRel
+				commerceAccountGroupCommerceAccountRel =
+					(CommerceAccountGroupCommerceAccountRel)result;
+
+			if ((commerceAccountGroupId !=
+					commerceAccountGroupCommerceAccountRel.
+						getCommerceAccountGroupId()) ||
+				(commerceAccountId !=
+					commerceAccountGroupCommerceAccountRel.
+						getCommerceAccountId())) {
+
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(
+				_SQL_SELECT_COMMERCEACCOUNTGROUPCOMMERCEACCOUNTREL_WHERE);
+
+			query.append(_FINDER_COLUMN_C_C_COMMERCEACCOUNTGROUPID_2);
+
+			query.append(_FINDER_COLUMN_C_C_COMMERCEACCOUNTID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(commerceAccountGroupId);
+
+				qPos.add(commerceAccountId);
+
+				List<CommerceAccountGroupCommerceAccountRel> list = q.list();
+
+				if (list.isEmpty()) {
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByC_C, finderArgs, list);
+					}
+				}
+				else {
+					CommerceAccountGroupCommerceAccountRel
+						commerceAccountGroupCommerceAccountRel = list.get(0);
+
+					result = commerceAccountGroupCommerceAccountRel;
+
+					cacheResult(commerceAccountGroupCommerceAccountRel);
+				}
+			}
+			catch (Exception e) {
+				if (useFinderCache) {
+					finderCache.removeResult(_finderPathFetchByC_C, finderArgs);
+				}
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (CommerceAccountGroupCommerceAccountRel)result;
+		}
+	}
+
+	/**
+	 * Removes the commerce account group commerce account rel where commerceAccountGroupId = &#63; and commerceAccountId = &#63; from the database.
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param commerceAccountId the commerce account ID
+	 * @return the commerce account group commerce account rel that was removed
+	 */
+	@Override
+	public CommerceAccountGroupCommerceAccountRel removeByC_C(
+			long commerceAccountGroupId, long commerceAccountId)
+		throws NoSuchAccountGroupCommerceAccountRelException {
+
+		CommerceAccountGroupCommerceAccountRel
+			commerceAccountGroupCommerceAccountRel = findByC_C(
+				commerceAccountGroupId, commerceAccountId);
+
+		return remove(commerceAccountGroupCommerceAccountRel);
+	}
+
+	/**
+	 * Returns the number of commerce account group commerce account rels where commerceAccountGroupId = &#63; and commerceAccountId = &#63;.
+	 *
+	 * @param commerceAccountGroupId the commerce account group ID
+	 * @param commerceAccountId the commerce account ID
+	 * @return the number of matching commerce account group commerce account rels
+	 */
+	@Override
+	public int countByC_C(long commerceAccountGroupId, long commerceAccountId) {
+		FinderPath finderPath = _finderPathCountByC_C;
+
+		Object[] finderArgs = new Object[] {
+			commerceAccountGroupId, commerceAccountId
+		};
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(
+				_SQL_COUNT_COMMERCEACCOUNTGROUPCOMMERCEACCOUNTREL_WHERE);
+
+			query.append(_FINDER_COLUMN_C_C_COMMERCEACCOUNTGROUPID_2);
+
+			query.append(_FINDER_COLUMN_C_C_COMMERCEACCOUNTID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(commerceAccountGroupId);
+
+				qPos.add(commerceAccountId);
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_C_C_COMMERCEACCOUNTGROUPID_2 =
+		"commerceAccountGroupCommerceAccountRel.commerceAccountGroupId = ? AND ";
+
+	private static final String _FINDER_COLUMN_C_C_COMMERCEACCOUNTID_2 =
+		"commerceAccountGroupCommerceAccountRel.commerceAccountId = ?";
+
 	private FinderPath _finderPathFetchByC_ERC;
 	private FinderPath _finderPathCountByC_ERC;
 
@@ -1560,6 +1780,15 @@ public class CommerceAccountGroupCommerceAccountRelPersistenceImpl
 			commerceAccountGroupCommerceAccountRel);
 
 		finderCache.putResult(
+			_finderPathFetchByC_C,
+			new Object[] {
+				commerceAccountGroupCommerceAccountRel.
+					getCommerceAccountGroupId(),
+				commerceAccountGroupCommerceAccountRel.getCommerceAccountId()
+			},
+			commerceAccountGroupCommerceAccountRel);
+
+		finderCache.putResult(
 			_finderPathFetchByC_ERC,
 			new Object[] {
 				commerceAccountGroupCommerceAccountRel.getCompanyId(),
@@ -1674,6 +1903,19 @@ public class CommerceAccountGroupCommerceAccountRelPersistenceImpl
 			commerceAccountGroupCommerceAccountRelModelImpl) {
 
 		Object[] args = new Object[] {
+			commerceAccountGroupCommerceAccountRelModelImpl.
+				getCommerceAccountGroupId(),
+			commerceAccountGroupCommerceAccountRelModelImpl.
+				getCommerceAccountId()
+		};
+
+		finderCache.putResult(
+			_finderPathCountByC_C, args, Long.valueOf(1), false);
+		finderCache.putResult(
+			_finderPathFetchByC_C, args,
+			commerceAccountGroupCommerceAccountRelModelImpl, false);
+
+		args = new Object[] {
 			commerceAccountGroupCommerceAccountRelModelImpl.getCompanyId(),
 			commerceAccountGroupCommerceAccountRelModelImpl.
 				getExternalReferenceCode()
@@ -1690,6 +1932,33 @@ public class CommerceAccountGroupCommerceAccountRelPersistenceImpl
 		CommerceAccountGroupCommerceAccountRelModelImpl
 			commerceAccountGroupCommerceAccountRelModelImpl,
 		boolean clearCurrent) {
+
+		if (clearCurrent) {
+			Object[] args = new Object[] {
+				commerceAccountGroupCommerceAccountRelModelImpl.
+					getCommerceAccountGroupId(),
+				commerceAccountGroupCommerceAccountRelModelImpl.
+					getCommerceAccountId()
+			};
+
+			finderCache.removeResult(_finderPathCountByC_C, args);
+			finderCache.removeResult(_finderPathFetchByC_C, args);
+		}
+
+		if ((commerceAccountGroupCommerceAccountRelModelImpl.
+				getColumnBitmask() &
+			 _finderPathFetchByC_C.getColumnBitmask()) != 0) {
+
+			Object[] args = new Object[] {
+				commerceAccountGroupCommerceAccountRelModelImpl.
+					getOriginalCommerceAccountGroupId(),
+				commerceAccountGroupCommerceAccountRelModelImpl.
+					getOriginalCommerceAccountId()
+			};
+
+			finderCache.removeResult(_finderPathCountByC_C, args);
+			finderCache.removeResult(_finderPathFetchByC_C, args);
+		}
 
 		if (clearCurrent) {
 			Object[] args = new Object[] {
@@ -2274,7 +2543,7 @@ public class CommerceAccountGroupCommerceAccountRelPersistenceImpl
 	 * Returns a range of all the commerce account group commerce account rels.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAccountGroupCommerceAccountRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CommerceAccountGroupCommerceAccountRelModelImpl</code>.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce account group commerce account rels
@@ -2292,7 +2561,7 @@ public class CommerceAccountGroupCommerceAccountRelPersistenceImpl
 	 * Returns an ordered range of all the commerce account group commerce account rels.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAccountGroupCommerceAccountRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CommerceAccountGroupCommerceAccountRelModelImpl</code>.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce account group commerce account rels
@@ -2313,7 +2582,7 @@ public class CommerceAccountGroupCommerceAccountRelPersistenceImpl
 	 * Returns an ordered range of all the commerce account group commerce account rels.
 	 *
 	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not <code>QueryUtil#ALL_POS</code>), then the query will include the default ORDER BY logic from <code>CommerceAccountGroupCommerceAccountRelModelImpl</code>. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CommerceAccountGroupCommerceAccountRelModelImpl</code>.
 	 * </p>
 	 *
 	 * @param start the lower bound of the range of commerce account group commerce account rels
@@ -2329,14 +2598,11 @@ public class CommerceAccountGroupCommerceAccountRelPersistenceImpl
 			orderByComparator,
 		boolean useFinderCache) {
 
-		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 			(orderByComparator == null)) {
-
-			pagination = false;
 
 			if (useFinderCache) {
 				finderPath = _finderPathWithoutPaginationFindAll;
@@ -2375,11 +2641,9 @@ public class CommerceAccountGroupCommerceAccountRelPersistenceImpl
 			else {
 				sql = _SQL_SELECT_COMMERCEACCOUNTGROUPCOMMERCEACCOUNTREL;
 
-				if (pagination) {
-					sql = sql.concat(
-						CommerceAccountGroupCommerceAccountRelModelImpl.
-							ORDER_BY_JPQL);
-				}
+				sql = sql.concat(
+					CommerceAccountGroupCommerceAccountRelModelImpl.
+						ORDER_BY_JPQL);
 			}
 
 			Session session = null;
@@ -2389,20 +2653,9 @@ public class CommerceAccountGroupCommerceAccountRelPersistenceImpl
 
 				Query q = session.createQuery(sql);
 
-				if (!pagination) {
-					list =
-						(List<CommerceAccountGroupCommerceAccountRel>)
-							QueryUtil.list(q, getDialect(), start, end, false);
-
-					Collections.sort(list);
-
-					list = Collections.unmodifiableList(list);
-				}
-				else {
-					list =
-						(List<CommerceAccountGroupCommerceAccountRel>)
-							QueryUtil.list(q, getDialect(), start, end);
-				}
+				list =
+					(List<CommerceAccountGroupCommerceAccountRel>)
+						QueryUtil.list(q, getDialect(), start, end);
 
 				cacheResult(list);
 
@@ -2581,6 +2834,27 @@ public class CommerceAccountGroupCommerceAccountRelPersistenceImpl
 				FINDER_CACHE_ENABLED,
 			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
 			"countByCommerceAccountId", new String[] {Long.class.getName()});
+
+		_finderPathFetchByC_C = new FinderPath(
+			CommerceAccountGroupCommerceAccountRelModelImpl.
+				ENTITY_CACHE_ENABLED,
+			CommerceAccountGroupCommerceAccountRelModelImpl.
+				FINDER_CACHE_ENABLED,
+			CommerceAccountGroupCommerceAccountRelImpl.class,
+			FINDER_CLASS_NAME_ENTITY, "fetchByC_C",
+			new String[] {Long.class.getName(), Long.class.getName()},
+			CommerceAccountGroupCommerceAccountRelModelImpl.
+				COMMERCEACCOUNTGROUPID_COLUMN_BITMASK |
+			CommerceAccountGroupCommerceAccountRelModelImpl.
+				COMMERCEACCOUNTID_COLUMN_BITMASK);
+
+		_finderPathCountByC_C = new FinderPath(
+			CommerceAccountGroupCommerceAccountRelModelImpl.
+				ENTITY_CACHE_ENABLED,
+			CommerceAccountGroupCommerceAccountRelModelImpl.
+				FINDER_CACHE_ENABLED,
+			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_C",
+			new String[] {Long.class.getName(), Long.class.getName()});
 
 		_finderPathFetchByC_ERC = new FinderPath(
 			CommerceAccountGroupCommerceAccountRelModelImpl.

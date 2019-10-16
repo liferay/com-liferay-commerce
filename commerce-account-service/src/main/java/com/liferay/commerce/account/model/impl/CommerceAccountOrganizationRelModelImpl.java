@@ -342,10 +342,10 @@ public class CommerceAccountOrganizationRelModelImpl
 				public void accept(
 					CommerceAccountOrganizationRel
 						commerceAccountOrganizationRel,
-					Object commerceAccountId) {
+					Object commerceAccountIdObject) {
 
 					commerceAccountOrganizationRel.setCommerceAccountId(
-						(Long)commerceAccountId);
+						(Long)commerceAccountIdObject);
 				}
 
 			});
@@ -370,10 +370,10 @@ public class CommerceAccountOrganizationRelModelImpl
 				public void accept(
 					CommerceAccountOrganizationRel
 						commerceAccountOrganizationRel,
-					Object organizationId) {
+					Object organizationIdObject) {
 
 					commerceAccountOrganizationRel.setOrganizationId(
-						(Long)organizationId);
+						(Long)organizationIdObject);
 				}
 
 			});
@@ -398,10 +398,10 @@ public class CommerceAccountOrganizationRelModelImpl
 				public void accept(
 					CommerceAccountOrganizationRel
 						commerceAccountOrganizationRel,
-					Object companyId) {
+					Object companyIdObject) {
 
 					commerceAccountOrganizationRel.setCompanyId(
-						(Long)companyId);
+						(Long)companyIdObject);
 				}
 
 			});
@@ -426,9 +426,10 @@ public class CommerceAccountOrganizationRelModelImpl
 				public void accept(
 					CommerceAccountOrganizationRel
 						commerceAccountOrganizationRel,
-					Object userId) {
+					Object userIdObject) {
 
-					commerceAccountOrganizationRel.setUserId((Long)userId);
+					commerceAccountOrganizationRel.setUserId(
+						(Long)userIdObject);
 				}
 
 			});
@@ -453,10 +454,10 @@ public class CommerceAccountOrganizationRelModelImpl
 				public void accept(
 					CommerceAccountOrganizationRel
 						commerceAccountOrganizationRel,
-					Object userName) {
+					Object userNameObject) {
 
 					commerceAccountOrganizationRel.setUserName(
-						(String)userName);
+						(String)userNameObject);
 				}
 
 			});
@@ -481,10 +482,10 @@ public class CommerceAccountOrganizationRelModelImpl
 				public void accept(
 					CommerceAccountOrganizationRel
 						commerceAccountOrganizationRel,
-					Object createDate) {
+					Object createDateObject) {
 
 					commerceAccountOrganizationRel.setCreateDate(
-						(Date)createDate);
+						(Date)createDateObject);
 				}
 
 			});
@@ -509,10 +510,10 @@ public class CommerceAccountOrganizationRelModelImpl
 				public void accept(
 					CommerceAccountOrganizationRel
 						commerceAccountOrganizationRel,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
 					commerceAccountOrganizationRel.setModifiedDate(
-						(Date)modifiedDate);
+						(Date)modifiedDateObject);
 				}
 
 			});
