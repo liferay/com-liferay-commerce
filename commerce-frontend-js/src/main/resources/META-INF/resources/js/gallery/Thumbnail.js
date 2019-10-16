@@ -15,7 +15,7 @@ export default function Thumbnail({ background, active = false, onClick, src, ti
       <div className="aspect-ratio aspect-ratio-4-to-3">
         <img
           alt={title}
-          className="aspect-ratio-item-center-middle aspect-ratio-item-fluid"
+          className="aspect-ratio-item-center-middle aspect-ratio-item-fluid aspect-ratio-item-vertical-fluid"
           src={src}
         />
       </div>
