@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.account.service.impl;
 
+import com.liferay.commerce.account.exception.DuplicateCommerceAccountGroupCommerceAccountRelException;
 import com.liferay.commerce.account.model.CommerceAccountGroupCommerceAccountRel;
 import com.liferay.commerce.account.service.base.CommerceAccountGroupCommerceAccountRelLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -52,6 +53,16 @@ public class CommerceAccountGroupCommerceAccountRelLocalServiceImpl
 
 		if (Validator.isBlank(externalReferenceCode)) {
 			externalReferenceCode = null;
+		}
+
+		CommerceAccountGroupCommerceAccountRel
+			commerceAccountGroupCommerceAccountRel2 =
+				commerceAccountGroupCommerceAccountRelPersistence.fetchByC_C(
+					commerceAccountGroupId, commerceAccountId);
+
+		if (commerceAccountGroupCommerceAccountRel2 != null) {
+			throw new DuplicateCommerceAccountGroupCommerceAccountRelException(
+				"Account already associated to AccountGroup ");
 		}
 
 		long commerceAccountGroupCommerceAccountRelId =

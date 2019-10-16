@@ -320,22 +320,23 @@ public class CommerceAccountLocalServiceImpl
 
 		User defaultUser = userLocalService.getDefaultUser(companyId);
 
-		CommerceAccountImpl commerceAccount = new CommerceAccountImpl();
+		CommerceAccountImpl commerceAccountImpl = new CommerceAccountImpl();
 
-		commerceAccount.setCommerceAccountId(
+		commerceAccountImpl.setCommerceAccountId(
 			CommerceAccountConstants.GUEST_ACCOUNT_ID);
 
-		commerceAccount.setCompanyId(defaultUser.getCompanyId());
-		commerceAccount.setUserId(defaultUser.getUserId());
-		commerceAccount.setUserName(defaultUser.getFullName());
-		commerceAccount.setName(defaultUser.getFullName());
-		commerceAccount.setParentCommerceAccountId(
+		commerceAccountImpl.setCompanyId(defaultUser.getCompanyId());
+		commerceAccountImpl.setUserId(defaultUser.getUserId());
+		commerceAccountImpl.setUserName(defaultUser.getFullName());
+		commerceAccountImpl.setName(defaultUser.getFullName());
+		commerceAccountImpl.setParentCommerceAccountId(
 			CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID);
-		commerceAccount.setEmail(defaultUser.getEmailAddress());
-		commerceAccount.setType(CommerceAccountConstants.ACCOUNT_TYPE_GUEST);
-		commerceAccount.setActive(true);
+		commerceAccountImpl.setEmail(defaultUser.getEmailAddress());
+		commerceAccountImpl.setType(
+			CommerceAccountConstants.ACCOUNT_TYPE_GUEST);
+		commerceAccountImpl.setActive(true);
 
-		return commerceAccount;
+		return commerceAccountImpl;
 	}
 
 	@Override
