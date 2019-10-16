@@ -619,6 +619,14 @@ public class CommerceOrderLocalServiceImpl
 	}
 
 	@Override
+	public List<CommerceOrder> getCommerceOrders(
+		long groupId, String commercePaymentMethodKey) {
+
+		return commerceOrderPersistence.findByG_CP(
+			groupId, commercePaymentMethodKey);
+	}
+
+	@Override
 	public List<CommerceOrder> getCommerceOrdersByBillingAddress(
 		long billingAddressId) {
 
