@@ -17,7 +17,7 @@ const props = {
     title: img,
     thumbnailUrl: getImgUrl(img, 100),
     smallUrl: getImgUrl(img, 800),
-    url: getImgUrl(img, 1600)
+    bigUrl: getImgUrl(img, 1600)
   }))
 };
 
