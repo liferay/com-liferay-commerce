@@ -24,7 +24,7 @@
 		z-index: 1120;
 
 		@media screen and (hover: none) {
-			box-shadow: $minium-shadow;
+			box-shadow: $shadow;
 			right: 0;
 			top: auto;
 			transition: all $transition;
@@ -89,7 +89,7 @@
 
 		.minium-frame.is-scrolled &,
 		.minium-frame.has-search & {
-			box-shadow: $minium-shadow;
+			box-shadow: $shadow;
 		}
 	}
 
@@ -108,7 +108,7 @@
 		align-self: flex-end;
 		grid-area: content;
 		justify-self: center;
-		padding: $minium-gutter;
+		padding: $gutter;
 		position: relative;
 		transition: transform $transition;
 	}
