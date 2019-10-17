@@ -75,6 +75,27 @@ public class CPAttachmentFileEntryLocalServiceImpl
 			double priority, int type, ServiceContext serviceContext)
 		throws PortalException {
 
+		return cpAttachmentFileEntryLocalService.addCPAttachmentFileEntry(
+			classNameId, classPK, fileEntryId, displayDateMonth, displayDateDay,
+			displayDateYear, displayDateHour, displayDateMinute,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire, titleMap,
+			json, priority, type, null, serviceContext);
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CPAttachmentFileEntry addCPAttachmentFileEntry(
+			long classNameId, long classPK, long fileEntryId,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
+			int expirationDateDay, int expirationDateYear,
+			int expirationDateHour, int expirationDateMinute,
+			boolean neverExpire, Map<Locale, String> titleMap, String json,
+			double priority, int type, String externalReferenceCode,
+			ServiceContext serviceContext)
+		throws PortalException {
+
 		// Commerce product attachment file entry
 
 		User user = userLocalService.getUser(serviceContext.getUserId());
@@ -139,6 +160,7 @@ public class CPAttachmentFileEntryLocalServiceImpl
 		}
 
 		cpAttachmentFileEntry.setFileEntryId(fileEntryId);
+		cpAttachmentFileEntry.setExternalReferenceCode(externalReferenceCode);
 
 		cpAttachmentFileEntry.setDisplayDate(displayDate);
 		cpAttachmentFileEntry.setExpirationDate(expirationDate);
@@ -527,7 +549,7 @@ public class CPAttachmentFileEntryLocalServiceImpl
 					displayDateMinute, expirationDateMonth, expirationDateDay,
 					expirationDateYear, expirationDateHour,
 					expirationDateMinute, neverExpire, titleMap, json, priority,
-					type, serviceContext);
+					type, externalReferenceCode, serviceContext);
 		}
 		else {
 			cpAttachmentFileEntry =
