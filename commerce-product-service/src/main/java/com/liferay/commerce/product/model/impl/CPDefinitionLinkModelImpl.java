@@ -345,9 +345,9 @@ public class CPDefinitionLinkModelImpl
 
 				@Override
 				public void accept(
-					CPDefinitionLink cpDefinitionLink, Object uuid) {
+					CPDefinitionLink cpDefinitionLink, Object uuidObject) {
 
-					cpDefinitionLink.setUuid((String)uuid);
+					cpDefinitionLink.setUuid((String)uuidObject);
 				}
 
 			});
@@ -368,10 +368,10 @@ public class CPDefinitionLinkModelImpl
 				@Override
 				public void accept(
 					CPDefinitionLink cpDefinitionLink,
-					Object CPDefinitionLinkId) {
+					Object CPDefinitionLinkIdObject) {
 
 					cpDefinitionLink.setCPDefinitionLinkId(
-						(Long)CPDefinitionLinkId);
+						(Long)CPDefinitionLinkIdObject);
 				}
 
 			});
@@ -391,9 +391,9 @@ public class CPDefinitionLinkModelImpl
 
 				@Override
 				public void accept(
-					CPDefinitionLink cpDefinitionLink, Object groupId) {
+					CPDefinitionLink cpDefinitionLink, Object groupIdObject) {
 
-					cpDefinitionLink.setGroupId((Long)groupId);
+					cpDefinitionLink.setGroupId((Long)groupIdObject);
 				}
 
 			});
@@ -413,9 +413,9 @@ public class CPDefinitionLinkModelImpl
 
 				@Override
 				public void accept(
-					CPDefinitionLink cpDefinitionLink, Object companyId) {
+					CPDefinitionLink cpDefinitionLink, Object companyIdObject) {
 
-					cpDefinitionLink.setCompanyId((Long)companyId);
+					cpDefinitionLink.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -435,9 +435,9 @@ public class CPDefinitionLinkModelImpl
 
 				@Override
 				public void accept(
-					CPDefinitionLink cpDefinitionLink, Object userId) {
+					CPDefinitionLink cpDefinitionLink, Object userIdObject) {
 
-					cpDefinitionLink.setUserId((Long)userId);
+					cpDefinitionLink.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -457,9 +457,9 @@ public class CPDefinitionLinkModelImpl
 
 				@Override
 				public void accept(
-					CPDefinitionLink cpDefinitionLink, Object userName) {
+					CPDefinitionLink cpDefinitionLink, Object userNameObject) {
 
-					cpDefinitionLink.setUserName((String)userName);
+					cpDefinitionLink.setUserName((String)userNameObject);
 				}
 
 			});
@@ -479,9 +479,10 @@ public class CPDefinitionLinkModelImpl
 
 				@Override
 				public void accept(
-					CPDefinitionLink cpDefinitionLink, Object createDate) {
+					CPDefinitionLink cpDefinitionLink,
+					Object createDateObject) {
 
-					cpDefinitionLink.setCreateDate((Date)createDate);
+					cpDefinitionLink.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -501,9 +502,10 @@ public class CPDefinitionLinkModelImpl
 
 				@Override
 				public void accept(
-					CPDefinitionLink cpDefinitionLink, Object modifiedDate) {
+					CPDefinitionLink cpDefinitionLink,
+					Object modifiedDateObject) {
 
-					cpDefinitionLink.setModifiedDate((Date)modifiedDate);
+					cpDefinitionLink.setModifiedDate((Date)modifiedDateObject);
 				}
 
 			});
@@ -523,9 +525,11 @@ public class CPDefinitionLinkModelImpl
 
 				@Override
 				public void accept(
-					CPDefinitionLink cpDefinitionLink, Object CPDefinitionId) {
+					CPDefinitionLink cpDefinitionLink,
+					Object CPDefinitionIdObject) {
 
-					cpDefinitionLink.setCPDefinitionId((Long)CPDefinitionId);
+					cpDefinitionLink.setCPDefinitionId(
+						(Long)CPDefinitionIdObject);
 				}
 
 			});
@@ -545,9 +549,10 @@ public class CPDefinitionLinkModelImpl
 
 				@Override
 				public void accept(
-					CPDefinitionLink cpDefinitionLink, Object CProductId) {
+					CPDefinitionLink cpDefinitionLink,
+					Object CProductIdObject) {
 
-					cpDefinitionLink.setCProductId((Long)CProductId);
+					cpDefinitionLink.setCProductId((Long)CProductIdObject);
 				}
 
 			});
@@ -567,9 +572,9 @@ public class CPDefinitionLinkModelImpl
 
 				@Override
 				public void accept(
-					CPDefinitionLink cpDefinitionLink, Object priority) {
+					CPDefinitionLink cpDefinitionLink, Object priorityObject) {
 
-					cpDefinitionLink.setPriority((Double)priority);
+					cpDefinitionLink.setPriority((Double)priorityObject);
 				}
 
 			});
@@ -589,9 +594,9 @@ public class CPDefinitionLinkModelImpl
 
 				@Override
 				public void accept(
-					CPDefinitionLink cpDefinitionLink, Object type) {
+					CPDefinitionLink cpDefinitionLink, Object typeObject) {
 
-					cpDefinitionLink.setType((String)type);
+					cpDefinitionLink.setType((String)typeObject);
 				}
 
 			});

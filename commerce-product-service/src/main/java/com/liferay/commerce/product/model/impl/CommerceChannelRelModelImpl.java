@@ -336,10 +336,10 @@ public class CommerceChannelRelModelImpl
 				@Override
 				public void accept(
 					CommerceChannelRel commerceChannelRel,
-					Object commerceChannelRelId) {
+					Object commerceChannelRelIdObject) {
 
 					commerceChannelRel.setCommerceChannelRelId(
-						(Long)commerceChannelRelId);
+						(Long)commerceChannelRelIdObject);
 				}
 
 			});
@@ -359,9 +359,10 @@ public class CommerceChannelRelModelImpl
 
 				@Override
 				public void accept(
-					CommerceChannelRel commerceChannelRel, Object companyId) {
+					CommerceChannelRel commerceChannelRel,
+					Object companyIdObject) {
 
-					commerceChannelRel.setCompanyId((Long)companyId);
+					commerceChannelRel.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -381,9 +382,10 @@ public class CommerceChannelRelModelImpl
 
 				@Override
 				public void accept(
-					CommerceChannelRel commerceChannelRel, Object userId) {
+					CommerceChannelRel commerceChannelRel,
+					Object userIdObject) {
 
-					commerceChannelRel.setUserId((Long)userId);
+					commerceChannelRel.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -403,9 +405,10 @@ public class CommerceChannelRelModelImpl
 
 				@Override
 				public void accept(
-					CommerceChannelRel commerceChannelRel, Object userName) {
+					CommerceChannelRel commerceChannelRel,
+					Object userNameObject) {
 
-					commerceChannelRel.setUserName((String)userName);
+					commerceChannelRel.setUserName((String)userNameObject);
 				}
 
 			});
@@ -425,9 +428,10 @@ public class CommerceChannelRelModelImpl
 
 				@Override
 				public void accept(
-					CommerceChannelRel commerceChannelRel, Object createDate) {
+					CommerceChannelRel commerceChannelRel,
+					Object createDateObject) {
 
-					commerceChannelRel.setCreateDate((Date)createDate);
+					commerceChannelRel.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -448,9 +452,10 @@ public class CommerceChannelRelModelImpl
 				@Override
 				public void accept(
 					CommerceChannelRel commerceChannelRel,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
-					commerceChannelRel.setModifiedDate((Date)modifiedDate);
+					commerceChannelRel.setModifiedDate(
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -470,9 +475,10 @@ public class CommerceChannelRelModelImpl
 
 				@Override
 				public void accept(
-					CommerceChannelRel commerceChannelRel, Object classNameId) {
+					CommerceChannelRel commerceChannelRel,
+					Object classNameIdObject) {
 
-					commerceChannelRel.setClassNameId((Long)classNameId);
+					commerceChannelRel.setClassNameId((Long)classNameIdObject);
 				}
 
 			});
@@ -492,9 +498,10 @@ public class CommerceChannelRelModelImpl
 
 				@Override
 				public void accept(
-					CommerceChannelRel commerceChannelRel, Object classPK) {
+					CommerceChannelRel commerceChannelRel,
+					Object classPKObject) {
 
-					commerceChannelRel.setClassPK((Long)classPK);
+					commerceChannelRel.setClassPK((Long)classPKObject);
 				}
 
 			});
@@ -515,10 +522,10 @@ public class CommerceChannelRelModelImpl
 				@Override
 				public void accept(
 					CommerceChannelRel commerceChannelRel,
-					Object commerceChannelId) {
+					Object commerceChannelIdObject) {
 
 					commerceChannelRel.setCommerceChannelId(
-						(Long)commerceChannelId);
+						(Long)commerceChannelIdObject);
 				}
 
 			});

@@ -399,9 +399,10 @@ public class CPAttachmentFileEntryModelImpl
 
 				@Override
 				public void accept(
-					CPAttachmentFileEntry cpAttachmentFileEntry, Object uuid) {
+					CPAttachmentFileEntry cpAttachmentFileEntry,
+					Object uuidObject) {
 
-					cpAttachmentFileEntry.setUuid((String)uuid);
+					cpAttachmentFileEntry.setUuid((String)uuidObject);
 				}
 
 			});
@@ -424,10 +425,10 @@ public class CPAttachmentFileEntryModelImpl
 				@Override
 				public void accept(
 					CPAttachmentFileEntry cpAttachmentFileEntry,
-					Object externalReferenceCode) {
+					Object externalReferenceCodeObject) {
 
 					cpAttachmentFileEntry.setExternalReferenceCode(
-						(String)externalReferenceCode);
+						(String)externalReferenceCodeObject);
 				}
 
 			});
@@ -450,10 +451,10 @@ public class CPAttachmentFileEntryModelImpl
 				@Override
 				public void accept(
 					CPAttachmentFileEntry cpAttachmentFileEntry,
-					Object CPAttachmentFileEntryId) {
+					Object CPAttachmentFileEntryIdObject) {
 
 					cpAttachmentFileEntry.setCPAttachmentFileEntryId(
-						(Long)CPAttachmentFileEntryId);
+						(Long)CPAttachmentFileEntryIdObject);
 				}
 
 			});
@@ -476,9 +477,9 @@ public class CPAttachmentFileEntryModelImpl
 				@Override
 				public void accept(
 					CPAttachmentFileEntry cpAttachmentFileEntry,
-					Object groupId) {
+					Object groupIdObject) {
 
-					cpAttachmentFileEntry.setGroupId((Long)groupId);
+					cpAttachmentFileEntry.setGroupId((Long)groupIdObject);
 				}
 
 			});
@@ -501,9 +502,9 @@ public class CPAttachmentFileEntryModelImpl
 				@Override
 				public void accept(
 					CPAttachmentFileEntry cpAttachmentFileEntry,
-					Object companyId) {
+					Object companyIdObject) {
 
-					cpAttachmentFileEntry.setCompanyId((Long)companyId);
+					cpAttachmentFileEntry.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -526,9 +527,9 @@ public class CPAttachmentFileEntryModelImpl
 				@Override
 				public void accept(
 					CPAttachmentFileEntry cpAttachmentFileEntry,
-					Object userId) {
+					Object userIdObject) {
 
-					cpAttachmentFileEntry.setUserId((Long)userId);
+					cpAttachmentFileEntry.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -551,9 +552,9 @@ public class CPAttachmentFileEntryModelImpl
 				@Override
 				public void accept(
 					CPAttachmentFileEntry cpAttachmentFileEntry,
-					Object userName) {
+					Object userNameObject) {
 
-					cpAttachmentFileEntry.setUserName((String)userName);
+					cpAttachmentFileEntry.setUserName((String)userNameObject);
 				}
 
 			});
@@ -576,9 +577,9 @@ public class CPAttachmentFileEntryModelImpl
 				@Override
 				public void accept(
 					CPAttachmentFileEntry cpAttachmentFileEntry,
-					Object createDate) {
+					Object createDateObject) {
 
-					cpAttachmentFileEntry.setCreateDate((Date)createDate);
+					cpAttachmentFileEntry.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -601,9 +602,10 @@ public class CPAttachmentFileEntryModelImpl
 				@Override
 				public void accept(
 					CPAttachmentFileEntry cpAttachmentFileEntry,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
-					cpAttachmentFileEntry.setModifiedDate((Date)modifiedDate);
+					cpAttachmentFileEntry.setModifiedDate(
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -626,9 +628,10 @@ public class CPAttachmentFileEntryModelImpl
 				@Override
 				public void accept(
 					CPAttachmentFileEntry cpAttachmentFileEntry,
-					Object classNameId) {
+					Object classNameIdObject) {
 
-					cpAttachmentFileEntry.setClassNameId((Long)classNameId);
+					cpAttachmentFileEntry.setClassNameId(
+						(Long)classNameIdObject);
 				}
 
 			});
@@ -651,9 +654,9 @@ public class CPAttachmentFileEntryModelImpl
 				@Override
 				public void accept(
 					CPAttachmentFileEntry cpAttachmentFileEntry,
-					Object classPK) {
+					Object classPKObject) {
 
-					cpAttachmentFileEntry.setClassPK((Long)classPK);
+					cpAttachmentFileEntry.setClassPK((Long)classPKObject);
 				}
 
 			});
@@ -676,9 +679,10 @@ public class CPAttachmentFileEntryModelImpl
 				@Override
 				public void accept(
 					CPAttachmentFileEntry cpAttachmentFileEntry,
-					Object fileEntryId) {
+					Object fileEntryIdObject) {
 
-					cpAttachmentFileEntry.setFileEntryId((Long)fileEntryId);
+					cpAttachmentFileEntry.setFileEntryId(
+						(Long)fileEntryIdObject);
 				}
 
 			});
@@ -701,9 +705,10 @@ public class CPAttachmentFileEntryModelImpl
 				@Override
 				public void accept(
 					CPAttachmentFileEntry cpAttachmentFileEntry,
-					Object displayDate) {
+					Object displayDateObject) {
 
-					cpAttachmentFileEntry.setDisplayDate((Date)displayDate);
+					cpAttachmentFileEntry.setDisplayDate(
+						(Date)displayDateObject);
 				}
 
 			});
@@ -726,10 +731,10 @@ public class CPAttachmentFileEntryModelImpl
 				@Override
 				public void accept(
 					CPAttachmentFileEntry cpAttachmentFileEntry,
-					Object expirationDate) {
+					Object expirationDateObject) {
 
 					cpAttachmentFileEntry.setExpirationDate(
-						(Date)expirationDate);
+						(Date)expirationDateObject);
 				}
 
 			});
@@ -751,9 +756,10 @@ public class CPAttachmentFileEntryModelImpl
 
 				@Override
 				public void accept(
-					CPAttachmentFileEntry cpAttachmentFileEntry, Object title) {
+					CPAttachmentFileEntry cpAttachmentFileEntry,
+					Object titleObject) {
 
-					cpAttachmentFileEntry.setTitle((String)title);
+					cpAttachmentFileEntry.setTitle((String)titleObject);
 				}
 
 			});
@@ -775,9 +781,10 @@ public class CPAttachmentFileEntryModelImpl
 
 				@Override
 				public void accept(
-					CPAttachmentFileEntry cpAttachmentFileEntry, Object json) {
+					CPAttachmentFileEntry cpAttachmentFileEntry,
+					Object jsonObject) {
 
-					cpAttachmentFileEntry.setJson((String)json);
+					cpAttachmentFileEntry.setJson((String)jsonObject);
 				}
 
 			});
@@ -800,9 +807,9 @@ public class CPAttachmentFileEntryModelImpl
 				@Override
 				public void accept(
 					CPAttachmentFileEntry cpAttachmentFileEntry,
-					Object priority) {
+					Object priorityObject) {
 
-					cpAttachmentFileEntry.setPriority((Double)priority);
+					cpAttachmentFileEntry.setPriority((Double)priorityObject);
 				}
 
 			});
@@ -824,9 +831,10 @@ public class CPAttachmentFileEntryModelImpl
 
 				@Override
 				public void accept(
-					CPAttachmentFileEntry cpAttachmentFileEntry, Object type) {
+					CPAttachmentFileEntry cpAttachmentFileEntry,
+					Object typeObject) {
 
-					cpAttachmentFileEntry.setType((Integer)type);
+					cpAttachmentFileEntry.setType((Integer)typeObject);
 				}
 
 			});
@@ -849,10 +857,10 @@ public class CPAttachmentFileEntryModelImpl
 				@Override
 				public void accept(
 					CPAttachmentFileEntry cpAttachmentFileEntry,
-					Object lastPublishDate) {
+					Object lastPublishDateObject) {
 
 					cpAttachmentFileEntry.setLastPublishDate(
-						(Date)lastPublishDate);
+						(Date)lastPublishDateObject);
 				}
 
 			});
@@ -875,9 +883,9 @@ public class CPAttachmentFileEntryModelImpl
 				@Override
 				public void accept(
 					CPAttachmentFileEntry cpAttachmentFileEntry,
-					Object status) {
+					Object statusObject) {
 
-					cpAttachmentFileEntry.setStatus((Integer)status);
+					cpAttachmentFileEntry.setStatus((Integer)statusObject);
 				}
 
 			});
@@ -900,10 +908,10 @@ public class CPAttachmentFileEntryModelImpl
 				@Override
 				public void accept(
 					CPAttachmentFileEntry cpAttachmentFileEntry,
-					Object statusByUserId) {
+					Object statusByUserIdObject) {
 
 					cpAttachmentFileEntry.setStatusByUserId(
-						(Long)statusByUserId);
+						(Long)statusByUserIdObject);
 				}
 
 			});
@@ -926,10 +934,10 @@ public class CPAttachmentFileEntryModelImpl
 				@Override
 				public void accept(
 					CPAttachmentFileEntry cpAttachmentFileEntry,
-					Object statusByUserName) {
+					Object statusByUserNameObject) {
 
 					cpAttachmentFileEntry.setStatusByUserName(
-						(String)statusByUserName);
+						(String)statusByUserNameObject);
 				}
 
 			});
@@ -952,9 +960,9 @@ public class CPAttachmentFileEntryModelImpl
 				@Override
 				public void accept(
 					CPAttachmentFileEntry cpAttachmentFileEntry,
-					Object statusDate) {
+					Object statusDateObject) {
 
-					cpAttachmentFileEntry.setStatusDate((Date)statusDate);
+					cpAttachmentFileEntry.setStatusDate((Date)statusDateObject);
 				}
 
 			});

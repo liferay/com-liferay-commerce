@@ -375,9 +375,10 @@ public class CPDefinitionOptionRelModelImpl
 
 				@Override
 				public void accept(
-					CPDefinitionOptionRel cpDefinitionOptionRel, Object uuid) {
+					CPDefinitionOptionRel cpDefinitionOptionRel,
+					Object uuidObject) {
 
-					cpDefinitionOptionRel.setUuid((String)uuid);
+					cpDefinitionOptionRel.setUuid((String)uuidObject);
 				}
 
 			});
@@ -400,10 +401,10 @@ public class CPDefinitionOptionRelModelImpl
 				@Override
 				public void accept(
 					CPDefinitionOptionRel cpDefinitionOptionRel,
-					Object CPDefinitionOptionRelId) {
+					Object CPDefinitionOptionRelIdObject) {
 
 					cpDefinitionOptionRel.setCPDefinitionOptionRelId(
-						(Long)CPDefinitionOptionRelId);
+						(Long)CPDefinitionOptionRelIdObject);
 				}
 
 			});
@@ -426,9 +427,9 @@ public class CPDefinitionOptionRelModelImpl
 				@Override
 				public void accept(
 					CPDefinitionOptionRel cpDefinitionOptionRel,
-					Object groupId) {
+					Object groupIdObject) {
 
-					cpDefinitionOptionRel.setGroupId((Long)groupId);
+					cpDefinitionOptionRel.setGroupId((Long)groupIdObject);
 				}
 
 			});
@@ -451,9 +452,9 @@ public class CPDefinitionOptionRelModelImpl
 				@Override
 				public void accept(
 					CPDefinitionOptionRel cpDefinitionOptionRel,
-					Object companyId) {
+					Object companyIdObject) {
 
-					cpDefinitionOptionRel.setCompanyId((Long)companyId);
+					cpDefinitionOptionRel.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -476,9 +477,9 @@ public class CPDefinitionOptionRelModelImpl
 				@Override
 				public void accept(
 					CPDefinitionOptionRel cpDefinitionOptionRel,
-					Object userId) {
+					Object userIdObject) {
 
-					cpDefinitionOptionRel.setUserId((Long)userId);
+					cpDefinitionOptionRel.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -501,9 +502,9 @@ public class CPDefinitionOptionRelModelImpl
 				@Override
 				public void accept(
 					CPDefinitionOptionRel cpDefinitionOptionRel,
-					Object userName) {
+					Object userNameObject) {
 
-					cpDefinitionOptionRel.setUserName((String)userName);
+					cpDefinitionOptionRel.setUserName((String)userNameObject);
 				}
 
 			});
@@ -526,9 +527,9 @@ public class CPDefinitionOptionRelModelImpl
 				@Override
 				public void accept(
 					CPDefinitionOptionRel cpDefinitionOptionRel,
-					Object createDate) {
+					Object createDateObject) {
 
-					cpDefinitionOptionRel.setCreateDate((Date)createDate);
+					cpDefinitionOptionRel.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -551,9 +552,10 @@ public class CPDefinitionOptionRelModelImpl
 				@Override
 				public void accept(
 					CPDefinitionOptionRel cpDefinitionOptionRel,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
-					cpDefinitionOptionRel.setModifiedDate((Date)modifiedDate);
+					cpDefinitionOptionRel.setModifiedDate(
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -576,10 +578,10 @@ public class CPDefinitionOptionRelModelImpl
 				@Override
 				public void accept(
 					CPDefinitionOptionRel cpDefinitionOptionRel,
-					Object CPDefinitionId) {
+					Object CPDefinitionIdObject) {
 
 					cpDefinitionOptionRel.setCPDefinitionId(
-						(Long)CPDefinitionId);
+						(Long)CPDefinitionIdObject);
 				}
 
 			});
@@ -602,9 +604,9 @@ public class CPDefinitionOptionRelModelImpl
 				@Override
 				public void accept(
 					CPDefinitionOptionRel cpDefinitionOptionRel,
-					Object CPOptionId) {
+					Object CPOptionIdObject) {
 
-					cpDefinitionOptionRel.setCPOptionId((Long)CPOptionId);
+					cpDefinitionOptionRel.setCPOptionId((Long)CPOptionIdObject);
 				}
 
 			});
@@ -626,9 +628,10 @@ public class CPDefinitionOptionRelModelImpl
 
 				@Override
 				public void accept(
-					CPDefinitionOptionRel cpDefinitionOptionRel, Object name) {
+					CPDefinitionOptionRel cpDefinitionOptionRel,
+					Object nameObject) {
 
-					cpDefinitionOptionRel.setName((String)name);
+					cpDefinitionOptionRel.setName((String)nameObject);
 				}
 
 			});
@@ -651,9 +654,10 @@ public class CPDefinitionOptionRelModelImpl
 				@Override
 				public void accept(
 					CPDefinitionOptionRel cpDefinitionOptionRel,
-					Object description) {
+					Object descriptionObject) {
 
-					cpDefinitionOptionRel.setDescription((String)description);
+					cpDefinitionOptionRel.setDescription(
+						(String)descriptionObject);
 				}
 
 			});
@@ -676,10 +680,10 @@ public class CPDefinitionOptionRelModelImpl
 				@Override
 				public void accept(
 					CPDefinitionOptionRel cpDefinitionOptionRel,
-					Object DDMFormFieldTypeName) {
+					Object DDMFormFieldTypeNameObject) {
 
 					cpDefinitionOptionRel.setDDMFormFieldTypeName(
-						(String)DDMFormFieldTypeName);
+						(String)DDMFormFieldTypeNameObject);
 				}
 
 			});
@@ -702,9 +706,9 @@ public class CPDefinitionOptionRelModelImpl
 				@Override
 				public void accept(
 					CPDefinitionOptionRel cpDefinitionOptionRel,
-					Object priority) {
+					Object priorityObject) {
 
-					cpDefinitionOptionRel.setPriority((Double)priority);
+					cpDefinitionOptionRel.setPriority((Double)priorityObject);
 				}
 
 			});
@@ -727,9 +731,10 @@ public class CPDefinitionOptionRelModelImpl
 				@Override
 				public void accept(
 					CPDefinitionOptionRel cpDefinitionOptionRel,
-					Object facetable) {
+					Object facetableObject) {
 
-					cpDefinitionOptionRel.setFacetable((Boolean)facetable);
+					cpDefinitionOptionRel.setFacetable(
+						(Boolean)facetableObject);
 				}
 
 			});
@@ -752,9 +757,9 @@ public class CPDefinitionOptionRelModelImpl
 				@Override
 				public void accept(
 					CPDefinitionOptionRel cpDefinitionOptionRel,
-					Object required) {
+					Object requiredObject) {
 
-					cpDefinitionOptionRel.setRequired((Boolean)required);
+					cpDefinitionOptionRel.setRequired((Boolean)requiredObject);
 				}
 
 			});
@@ -777,10 +782,10 @@ public class CPDefinitionOptionRelModelImpl
 				@Override
 				public void accept(
 					CPDefinitionOptionRel cpDefinitionOptionRel,
-					Object skuContributor) {
+					Object skuContributorObject) {
 
 					cpDefinitionOptionRel.setSkuContributor(
-						(Boolean)skuContributor);
+						(Boolean)skuContributorObject);
 				}
 
 			});

@@ -416,8 +416,8 @@ public class CPInstanceModelImpl
 			new BiConsumer<CPInstance, Object>() {
 
 				@Override
-				public void accept(CPInstance cpInstance, Object uuid) {
-					cpInstance.setUuid((String)uuid);
+				public void accept(CPInstance cpInstance, Object uuidObject) {
+					cpInstance.setUuid((String)uuidObject);
 				}
 
 			});
@@ -437,10 +437,10 @@ public class CPInstanceModelImpl
 
 				@Override
 				public void accept(
-					CPInstance cpInstance, Object externalReferenceCode) {
+					CPInstance cpInstance, Object externalReferenceCodeObject) {
 
 					cpInstance.setExternalReferenceCode(
-						(String)externalReferenceCode);
+						(String)externalReferenceCodeObject);
 				}
 
 			});
@@ -459,8 +459,10 @@ public class CPInstanceModelImpl
 			new BiConsumer<CPInstance, Object>() {
 
 				@Override
-				public void accept(CPInstance cpInstance, Object CPInstanceId) {
-					cpInstance.setCPInstanceId((Long)CPInstanceId);
+				public void accept(
+					CPInstance cpInstance, Object CPInstanceIdObject) {
+
+					cpInstance.setCPInstanceId((Long)CPInstanceIdObject);
 				}
 
 			});
@@ -479,8 +481,10 @@ public class CPInstanceModelImpl
 			new BiConsumer<CPInstance, Object>() {
 
 				@Override
-				public void accept(CPInstance cpInstance, Object groupId) {
-					cpInstance.setGroupId((Long)groupId);
+				public void accept(
+					CPInstance cpInstance, Object groupIdObject) {
+
+					cpInstance.setGroupId((Long)groupIdObject);
 				}
 
 			});
@@ -499,8 +503,10 @@ public class CPInstanceModelImpl
 			new BiConsumer<CPInstance, Object>() {
 
 				@Override
-				public void accept(CPInstance cpInstance, Object companyId) {
-					cpInstance.setCompanyId((Long)companyId);
+				public void accept(
+					CPInstance cpInstance, Object companyIdObject) {
+
+					cpInstance.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -519,8 +525,8 @@ public class CPInstanceModelImpl
 			new BiConsumer<CPInstance, Object>() {
 
 				@Override
-				public void accept(CPInstance cpInstance, Object userId) {
-					cpInstance.setUserId((Long)userId);
+				public void accept(CPInstance cpInstance, Object userIdObject) {
+					cpInstance.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -539,8 +545,10 @@ public class CPInstanceModelImpl
 			new BiConsumer<CPInstance, Object>() {
 
 				@Override
-				public void accept(CPInstance cpInstance, Object userName) {
-					cpInstance.setUserName((String)userName);
+				public void accept(
+					CPInstance cpInstance, Object userNameObject) {
+
+					cpInstance.setUserName((String)userNameObject);
 				}
 
 			});
@@ -559,8 +567,10 @@ public class CPInstanceModelImpl
 			new BiConsumer<CPInstance, Object>() {
 
 				@Override
-				public void accept(CPInstance cpInstance, Object createDate) {
-					cpInstance.setCreateDate((Date)createDate);
+				public void accept(
+					CPInstance cpInstance, Object createDateObject) {
+
+					cpInstance.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -579,8 +589,10 @@ public class CPInstanceModelImpl
 			new BiConsumer<CPInstance, Object>() {
 
 				@Override
-				public void accept(CPInstance cpInstance, Object modifiedDate) {
-					cpInstance.setModifiedDate((Date)modifiedDate);
+				public void accept(
+					CPInstance cpInstance, Object modifiedDateObject) {
+
+					cpInstance.setModifiedDate((Date)modifiedDateObject);
 				}
 
 			});
@@ -600,9 +612,9 @@ public class CPInstanceModelImpl
 
 				@Override
 				public void accept(
-					CPInstance cpInstance, Object CPDefinitionId) {
+					CPInstance cpInstance, Object CPDefinitionIdObject) {
 
-					cpInstance.setCPDefinitionId((Long)CPDefinitionId);
+					cpInstance.setCPDefinitionId((Long)CPDefinitionIdObject);
 				}
 
 			});
@@ -622,9 +634,9 @@ public class CPInstanceModelImpl
 
 				@Override
 				public void accept(
-					CPInstance cpInstance, Object CPInstanceUuid) {
+					CPInstance cpInstance, Object CPInstanceUuidObject) {
 
-					cpInstance.setCPInstanceUuid((String)CPInstanceUuid);
+					cpInstance.setCPInstanceUuid((String)CPInstanceUuidObject);
 				}
 
 			});
@@ -643,8 +655,8 @@ public class CPInstanceModelImpl
 			new BiConsumer<CPInstance, Object>() {
 
 				@Override
-				public void accept(CPInstance cpInstance, Object sku) {
-					cpInstance.setSku((String)sku);
+				public void accept(CPInstance cpInstance, Object skuObject) {
+					cpInstance.setSku((String)skuObject);
 				}
 
 			});
@@ -663,8 +675,8 @@ public class CPInstanceModelImpl
 			new BiConsumer<CPInstance, Object>() {
 
 				@Override
-				public void accept(CPInstance cpInstance, Object gtin) {
-					cpInstance.setGtin((String)gtin);
+				public void accept(CPInstance cpInstance, Object gtinObject) {
+					cpInstance.setGtin((String)gtinObject);
 				}
 
 			});
@@ -684,10 +696,11 @@ public class CPInstanceModelImpl
 
 				@Override
 				public void accept(
-					CPInstance cpInstance, Object manufacturerPartNumber) {
+					CPInstance cpInstance,
+					Object manufacturerPartNumberObject) {
 
 					cpInstance.setManufacturerPartNumber(
-						(String)manufacturerPartNumber);
+						(String)manufacturerPartNumberObject);
 				}
 
 			});
@@ -706,8 +719,10 @@ public class CPInstanceModelImpl
 			new BiConsumer<CPInstance, Object>() {
 
 				@Override
-				public void accept(CPInstance cpInstance, Object purchasable) {
-					cpInstance.setPurchasable((Boolean)purchasable);
+				public void accept(
+					CPInstance cpInstance, Object purchasableObject) {
+
+					cpInstance.setPurchasable((Boolean)purchasableObject);
 				}
 
 			});
@@ -726,8 +741,8 @@ public class CPInstanceModelImpl
 			new BiConsumer<CPInstance, Object>() {
 
 				@Override
-				public void accept(CPInstance cpInstance, Object json) {
-					cpInstance.setJson((String)json);
+				public void accept(CPInstance cpInstance, Object jsonObject) {
+					cpInstance.setJson((String)jsonObject);
 				}
 
 			});
@@ -746,8 +761,8 @@ public class CPInstanceModelImpl
 			new BiConsumer<CPInstance, Object>() {
 
 				@Override
-				public void accept(CPInstance cpInstance, Object width) {
-					cpInstance.setWidth((Double)width);
+				public void accept(CPInstance cpInstance, Object widthObject) {
+					cpInstance.setWidth((Double)widthObject);
 				}
 
 			});
@@ -766,8 +781,8 @@ public class CPInstanceModelImpl
 			new BiConsumer<CPInstance, Object>() {
 
 				@Override
-				public void accept(CPInstance cpInstance, Object height) {
-					cpInstance.setHeight((Double)height);
+				public void accept(CPInstance cpInstance, Object heightObject) {
+					cpInstance.setHeight((Double)heightObject);
 				}
 
 			});
@@ -786,8 +801,8 @@ public class CPInstanceModelImpl
 			new BiConsumer<CPInstance, Object>() {
 
 				@Override
-				public void accept(CPInstance cpInstance, Object depth) {
-					cpInstance.setDepth((Double)depth);
+				public void accept(CPInstance cpInstance, Object depthObject) {
+					cpInstance.setDepth((Double)depthObject);
 				}
 
 			});
@@ -806,8 +821,8 @@ public class CPInstanceModelImpl
 			new BiConsumer<CPInstance, Object>() {
 
 				@Override
-				public void accept(CPInstance cpInstance, Object weight) {
-					cpInstance.setWeight((Double)weight);
+				public void accept(CPInstance cpInstance, Object weightObject) {
+					cpInstance.setWeight((Double)weightObject);
 				}
 
 			});
@@ -826,8 +841,8 @@ public class CPInstanceModelImpl
 			new BiConsumer<CPInstance, Object>() {
 
 				@Override
-				public void accept(CPInstance cpInstance, Object price) {
-					cpInstance.setPrice((BigDecimal)price);
+				public void accept(CPInstance cpInstance, Object priceObject) {
+					cpInstance.setPrice((BigDecimal)priceObject);
 				}
 
 			});
@@ -846,8 +861,10 @@ public class CPInstanceModelImpl
 			new BiConsumer<CPInstance, Object>() {
 
 				@Override
-				public void accept(CPInstance cpInstance, Object promoPrice) {
-					cpInstance.setPromoPrice((BigDecimal)promoPrice);
+				public void accept(
+					CPInstance cpInstance, Object promoPriceObject) {
+
+					cpInstance.setPromoPrice((BigDecimal)promoPriceObject);
 				}
 
 			});
@@ -866,8 +883,8 @@ public class CPInstanceModelImpl
 			new BiConsumer<CPInstance, Object>() {
 
 				@Override
-				public void accept(CPInstance cpInstance, Object cost) {
-					cpInstance.setCost((BigDecimal)cost);
+				public void accept(CPInstance cpInstance, Object costObject) {
+					cpInstance.setCost((BigDecimal)costObject);
 				}
 
 			});
@@ -886,8 +903,10 @@ public class CPInstanceModelImpl
 			new BiConsumer<CPInstance, Object>() {
 
 				@Override
-				public void accept(CPInstance cpInstance, Object published) {
-					cpInstance.setPublished((Boolean)published);
+				public void accept(
+					CPInstance cpInstance, Object publishedObject) {
+
+					cpInstance.setPublished((Boolean)publishedObject);
 				}
 
 			});
@@ -906,8 +925,10 @@ public class CPInstanceModelImpl
 			new BiConsumer<CPInstance, Object>() {
 
 				@Override
-				public void accept(CPInstance cpInstance, Object displayDate) {
-					cpInstance.setDisplayDate((Date)displayDate);
+				public void accept(
+					CPInstance cpInstance, Object displayDateObject) {
+
+					cpInstance.setDisplayDate((Date)displayDateObject);
 				}
 
 			});
@@ -927,9 +948,9 @@ public class CPInstanceModelImpl
 
 				@Override
 				public void accept(
-					CPInstance cpInstance, Object expirationDate) {
+					CPInstance cpInstance, Object expirationDateObject) {
 
-					cpInstance.setExpirationDate((Date)expirationDate);
+					cpInstance.setExpirationDate((Date)expirationDateObject);
 				}
 
 			});
@@ -949,9 +970,9 @@ public class CPInstanceModelImpl
 
 				@Override
 				public void accept(
-					CPInstance cpInstance, Object lastPublishDate) {
+					CPInstance cpInstance, Object lastPublishDateObject) {
 
-					cpInstance.setLastPublishDate((Date)lastPublishDate);
+					cpInstance.setLastPublishDate((Date)lastPublishDateObject);
 				}
 
 			});
@@ -971,10 +992,11 @@ public class CPInstanceModelImpl
 
 				@Override
 				public void accept(
-					CPInstance cpInstance, Object overrideSubscriptionInfo) {
+					CPInstance cpInstance,
+					Object overrideSubscriptionInfoObject) {
 
 					cpInstance.setOverrideSubscriptionInfo(
-						(Boolean)overrideSubscriptionInfo);
+						(Boolean)overrideSubscriptionInfoObject);
 				}
 
 			});
@@ -994,10 +1016,10 @@ public class CPInstanceModelImpl
 
 				@Override
 				public void accept(
-					CPInstance cpInstance, Object subscriptionEnabled) {
+					CPInstance cpInstance, Object subscriptionEnabledObject) {
 
 					cpInstance.setSubscriptionEnabled(
-						(Boolean)subscriptionEnabled);
+						(Boolean)subscriptionEnabledObject);
 				}
 
 			});
@@ -1017,10 +1039,10 @@ public class CPInstanceModelImpl
 
 				@Override
 				public void accept(
-					CPInstance cpInstance, Object subscriptionLength) {
+					CPInstance cpInstance, Object subscriptionLengthObject) {
 
 					cpInstance.setSubscriptionLength(
-						(Integer)subscriptionLength);
+						(Integer)subscriptionLengthObject);
 				}
 
 			});
@@ -1040,9 +1062,10 @@ public class CPInstanceModelImpl
 
 				@Override
 				public void accept(
-					CPInstance cpInstance, Object subscriptionType) {
+					CPInstance cpInstance, Object subscriptionTypeObject) {
 
-					cpInstance.setSubscriptionType((String)subscriptionType);
+					cpInstance.setSubscriptionType(
+						(String)subscriptionTypeObject);
 				}
 
 			});
@@ -1062,10 +1085,11 @@ public class CPInstanceModelImpl
 
 				@Override
 				public void accept(
-					CPInstance cpInstance, Object subscriptionTypeSettings) {
+					CPInstance cpInstance,
+					Object subscriptionTypeSettingsObject) {
 
 					cpInstance.setSubscriptionTypeSettings(
-						(String)subscriptionTypeSettings);
+						(String)subscriptionTypeSettingsObject);
 				}
 
 			});
@@ -1085,10 +1109,10 @@ public class CPInstanceModelImpl
 
 				@Override
 				public void accept(
-					CPInstance cpInstance, Object maxSubscriptionCycles) {
+					CPInstance cpInstance, Object maxSubscriptionCyclesObject) {
 
 					cpInstance.setMaxSubscriptionCycles(
-						(Long)maxSubscriptionCycles);
+						(Long)maxSubscriptionCyclesObject);
 				}
 
 			});
@@ -1107,8 +1131,8 @@ public class CPInstanceModelImpl
 			new BiConsumer<CPInstance, Object>() {
 
 				@Override
-				public void accept(CPInstance cpInstance, Object status) {
-					cpInstance.setStatus((Integer)status);
+				public void accept(CPInstance cpInstance, Object statusObject) {
+					cpInstance.setStatus((Integer)statusObject);
 				}
 
 			});
@@ -1128,9 +1152,9 @@ public class CPInstanceModelImpl
 
 				@Override
 				public void accept(
-					CPInstance cpInstance, Object statusByUserId) {
+					CPInstance cpInstance, Object statusByUserIdObject) {
 
-					cpInstance.setStatusByUserId((Long)statusByUserId);
+					cpInstance.setStatusByUserId((Long)statusByUserIdObject);
 				}
 
 			});
@@ -1150,9 +1174,10 @@ public class CPInstanceModelImpl
 
 				@Override
 				public void accept(
-					CPInstance cpInstance, Object statusByUserName) {
+					CPInstance cpInstance, Object statusByUserNameObject) {
 
-					cpInstance.setStatusByUserName((String)statusByUserName);
+					cpInstance.setStatusByUserName(
+						(String)statusByUserNameObject);
 				}
 
 			});
@@ -1171,8 +1196,10 @@ public class CPInstanceModelImpl
 			new BiConsumer<CPInstance, Object>() {
 
 				@Override
-				public void accept(CPInstance cpInstance, Object statusDate) {
-					cpInstance.setStatusDate((Date)statusDate);
+				public void accept(
+					CPInstance cpInstance, Object statusDateObject) {
+
+					cpInstance.setStatusDate((Date)statusDateObject);
 				}
 
 			});

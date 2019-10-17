@@ -361,9 +361,9 @@ public class CPMeasurementUnitModelImpl
 
 				@Override
 				public void accept(
-					CPMeasurementUnit cpMeasurementUnit, Object uuid) {
+					CPMeasurementUnit cpMeasurementUnit, Object uuidObject) {
 
-					cpMeasurementUnit.setUuid((String)uuid);
+					cpMeasurementUnit.setUuid((String)uuidObject);
 				}
 
 			});
@@ -384,10 +384,10 @@ public class CPMeasurementUnitModelImpl
 				@Override
 				public void accept(
 					CPMeasurementUnit cpMeasurementUnit,
-					Object CPMeasurementUnitId) {
+					Object CPMeasurementUnitIdObject) {
 
 					cpMeasurementUnit.setCPMeasurementUnitId(
-						(Long)CPMeasurementUnitId);
+						(Long)CPMeasurementUnitIdObject);
 				}
 
 			});
@@ -407,9 +407,9 @@ public class CPMeasurementUnitModelImpl
 
 				@Override
 				public void accept(
-					CPMeasurementUnit cpMeasurementUnit, Object groupId) {
+					CPMeasurementUnit cpMeasurementUnit, Object groupIdObject) {
 
-					cpMeasurementUnit.setGroupId((Long)groupId);
+					cpMeasurementUnit.setGroupId((Long)groupIdObject);
 				}
 
 			});
@@ -429,9 +429,10 @@ public class CPMeasurementUnitModelImpl
 
 				@Override
 				public void accept(
-					CPMeasurementUnit cpMeasurementUnit, Object companyId) {
+					CPMeasurementUnit cpMeasurementUnit,
+					Object companyIdObject) {
 
-					cpMeasurementUnit.setCompanyId((Long)companyId);
+					cpMeasurementUnit.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -451,9 +452,9 @@ public class CPMeasurementUnitModelImpl
 
 				@Override
 				public void accept(
-					CPMeasurementUnit cpMeasurementUnit, Object userId) {
+					CPMeasurementUnit cpMeasurementUnit, Object userIdObject) {
 
-					cpMeasurementUnit.setUserId((Long)userId);
+					cpMeasurementUnit.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -473,9 +474,10 @@ public class CPMeasurementUnitModelImpl
 
 				@Override
 				public void accept(
-					CPMeasurementUnit cpMeasurementUnit, Object userName) {
+					CPMeasurementUnit cpMeasurementUnit,
+					Object userNameObject) {
 
-					cpMeasurementUnit.setUserName((String)userName);
+					cpMeasurementUnit.setUserName((String)userNameObject);
 				}
 
 			});
@@ -495,9 +497,10 @@ public class CPMeasurementUnitModelImpl
 
 				@Override
 				public void accept(
-					CPMeasurementUnit cpMeasurementUnit, Object createDate) {
+					CPMeasurementUnit cpMeasurementUnit,
+					Object createDateObject) {
 
-					cpMeasurementUnit.setCreateDate((Date)createDate);
+					cpMeasurementUnit.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -517,9 +520,10 @@ public class CPMeasurementUnitModelImpl
 
 				@Override
 				public void accept(
-					CPMeasurementUnit cpMeasurementUnit, Object modifiedDate) {
+					CPMeasurementUnit cpMeasurementUnit,
+					Object modifiedDateObject) {
 
-					cpMeasurementUnit.setModifiedDate((Date)modifiedDate);
+					cpMeasurementUnit.setModifiedDate((Date)modifiedDateObject);
 				}
 
 			});
@@ -539,9 +543,9 @@ public class CPMeasurementUnitModelImpl
 
 				@Override
 				public void accept(
-					CPMeasurementUnit cpMeasurementUnit, Object name) {
+					CPMeasurementUnit cpMeasurementUnit, Object nameObject) {
 
-					cpMeasurementUnit.setName((String)name);
+					cpMeasurementUnit.setName((String)nameObject);
 				}
 
 			});
@@ -561,9 +565,9 @@ public class CPMeasurementUnitModelImpl
 
 				@Override
 				public void accept(
-					CPMeasurementUnit cpMeasurementUnit, Object key) {
+					CPMeasurementUnit cpMeasurementUnit, Object keyObject) {
 
-					cpMeasurementUnit.setKey((String)key);
+					cpMeasurementUnit.setKey((String)keyObject);
 				}
 
 			});
@@ -583,9 +587,9 @@ public class CPMeasurementUnitModelImpl
 
 				@Override
 				public void accept(
-					CPMeasurementUnit cpMeasurementUnit, Object rate) {
+					CPMeasurementUnit cpMeasurementUnit, Object rateObject) {
 
-					cpMeasurementUnit.setRate((Double)rate);
+					cpMeasurementUnit.setRate((Double)rateObject);
 				}
 
 			});
@@ -605,9 +609,9 @@ public class CPMeasurementUnitModelImpl
 
 				@Override
 				public void accept(
-					CPMeasurementUnit cpMeasurementUnit, Object primary) {
+					CPMeasurementUnit cpMeasurementUnit, Object primaryObject) {
 
-					cpMeasurementUnit.setPrimary((Boolean)primary);
+					cpMeasurementUnit.setPrimary((Boolean)primaryObject);
 				}
 
 			});
@@ -627,9 +631,10 @@ public class CPMeasurementUnitModelImpl
 
 				@Override
 				public void accept(
-					CPMeasurementUnit cpMeasurementUnit, Object priority) {
+					CPMeasurementUnit cpMeasurementUnit,
+					Object priorityObject) {
 
-					cpMeasurementUnit.setPriority((Double)priority);
+					cpMeasurementUnit.setPriority((Double)priorityObject);
 				}
 
 			});
@@ -649,9 +654,9 @@ public class CPMeasurementUnitModelImpl
 
 				@Override
 				public void accept(
-					CPMeasurementUnit cpMeasurementUnit, Object type) {
+					CPMeasurementUnit cpMeasurementUnit, Object typeObject) {
 
-					cpMeasurementUnit.setType((Integer)type);
+					cpMeasurementUnit.setType((Integer)typeObject);
 				}
 
 			});
@@ -672,9 +677,10 @@ public class CPMeasurementUnitModelImpl
 				@Override
 				public void accept(
 					CPMeasurementUnit cpMeasurementUnit,
-					Object lastPublishDate) {
+					Object lastPublishDateObject) {
 
-					cpMeasurementUnit.setLastPublishDate((Date)lastPublishDate);
+					cpMeasurementUnit.setLastPublishDate(
+						(Date)lastPublishDateObject);
 				}
 
 			});

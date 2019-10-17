@@ -283,9 +283,10 @@ public class CPDefinitionLocalizationModelImpl
 				@Override
 				public void accept(
 					CPDefinitionLocalization cpDefinitionLocalization,
-					Object mvccVersion) {
+					Object mvccVersionObject) {
 
-					cpDefinitionLocalization.setMvccVersion((Long)mvccVersion);
+					cpDefinitionLocalization.setMvccVersion(
+						(Long)mvccVersionObject);
 				}
 
 			});
@@ -309,10 +310,10 @@ public class CPDefinitionLocalizationModelImpl
 				@Override
 				public void accept(
 					CPDefinitionLocalization cpDefinitionLocalization,
-					Object cpDefinitionLocalizationId) {
+					Object cpDefinitionLocalizationIdObject) {
 
 					cpDefinitionLocalization.setCpDefinitionLocalizationId(
-						(Long)cpDefinitionLocalizationId);
+						(Long)cpDefinitionLocalizationIdObject);
 				}
 
 			});
@@ -335,9 +336,10 @@ public class CPDefinitionLocalizationModelImpl
 				@Override
 				public void accept(
 					CPDefinitionLocalization cpDefinitionLocalization,
-					Object companyId) {
+					Object companyIdObject) {
 
-					cpDefinitionLocalization.setCompanyId((Long)companyId);
+					cpDefinitionLocalization.setCompanyId(
+						(Long)companyIdObject);
 				}
 
 			});
@@ -360,10 +362,10 @@ public class CPDefinitionLocalizationModelImpl
 				@Override
 				public void accept(
 					CPDefinitionLocalization cpDefinitionLocalization,
-					Object CPDefinitionId) {
+					Object CPDefinitionIdObject) {
 
 					cpDefinitionLocalization.setCPDefinitionId(
-						(Long)CPDefinitionId);
+						(Long)CPDefinitionIdObject);
 				}
 
 			});
@@ -386,9 +388,10 @@ public class CPDefinitionLocalizationModelImpl
 				@Override
 				public void accept(
 					CPDefinitionLocalization cpDefinitionLocalization,
-					Object languageId) {
+					Object languageIdObject) {
 
-					cpDefinitionLocalization.setLanguageId((String)languageId);
+					cpDefinitionLocalization.setLanguageId(
+						(String)languageIdObject);
 				}
 
 			});
@@ -411,9 +414,9 @@ public class CPDefinitionLocalizationModelImpl
 				@Override
 				public void accept(
 					CPDefinitionLocalization cpDefinitionLocalization,
-					Object name) {
+					Object nameObject) {
 
-					cpDefinitionLocalization.setName((String)name);
+					cpDefinitionLocalization.setName((String)nameObject);
 				}
 
 			});
@@ -436,10 +439,10 @@ public class CPDefinitionLocalizationModelImpl
 				@Override
 				public void accept(
 					CPDefinitionLocalization cpDefinitionLocalization,
-					Object shortDescription) {
+					Object shortDescriptionObject) {
 
 					cpDefinitionLocalization.setShortDescription(
-						(String)shortDescription);
+						(String)shortDescriptionObject);
 				}
 
 			});
@@ -462,10 +465,10 @@ public class CPDefinitionLocalizationModelImpl
 				@Override
 				public void accept(
 					CPDefinitionLocalization cpDefinitionLocalization,
-					Object description) {
+					Object descriptionObject) {
 
 					cpDefinitionLocalization.setDescription(
-						(String)description);
+						(String)descriptionObject);
 				}
 
 			});
@@ -488,9 +491,10 @@ public class CPDefinitionLocalizationModelImpl
 				@Override
 				public void accept(
 					CPDefinitionLocalization cpDefinitionLocalization,
-					Object metaTitle) {
+					Object metaTitleObject) {
 
-					cpDefinitionLocalization.setMetaTitle((String)metaTitle);
+					cpDefinitionLocalization.setMetaTitle(
+						(String)metaTitleObject);
 				}
 
 			});
@@ -513,10 +517,10 @@ public class CPDefinitionLocalizationModelImpl
 				@Override
 				public void accept(
 					CPDefinitionLocalization cpDefinitionLocalization,
-					Object metaDescription) {
+					Object metaDescriptionObject) {
 
 					cpDefinitionLocalization.setMetaDescription(
-						(String)metaDescription);
+						(String)metaDescriptionObject);
 				}
 
 			});
@@ -539,10 +543,10 @@ public class CPDefinitionLocalizationModelImpl
 				@Override
 				public void accept(
 					CPDefinitionLocalization cpDefinitionLocalization,
-					Object metaKeywords) {
+					Object metaKeywordsObject) {
 
 					cpDefinitionLocalization.setMetaKeywords(
-						(String)metaKeywords);
+						(String)metaKeywordsObject);
 				}
 
 			});

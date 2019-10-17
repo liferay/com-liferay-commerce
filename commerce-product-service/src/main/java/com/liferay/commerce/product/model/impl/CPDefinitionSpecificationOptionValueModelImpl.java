@@ -386,9 +386,10 @@ public class CPDefinitionSpecificationOptionValueModelImpl
 				public void accept(
 					CPDefinitionSpecificationOptionValue
 						cpDefinitionSpecificationOptionValue,
-					Object uuid) {
+					Object uuidObject) {
 
-					cpDefinitionSpecificationOptionValue.setUuid((String)uuid);
+					cpDefinitionSpecificationOptionValue.setUuid(
+						(String)uuidObject);
 				}
 
 			});
@@ -414,11 +415,11 @@ public class CPDefinitionSpecificationOptionValueModelImpl
 				public void accept(
 					CPDefinitionSpecificationOptionValue
 						cpDefinitionSpecificationOptionValue,
-					Object CPDefinitionSpecificationOptionValueId) {
+					Object CPDefinitionSpecificationOptionValueIdObject) {
 
 					cpDefinitionSpecificationOptionValue.
 						setCPDefinitionSpecificationOptionValueId(
-							(Long)CPDefinitionSpecificationOptionValueId);
+							(Long)CPDefinitionSpecificationOptionValueIdObject);
 				}
 
 			});
@@ -443,10 +444,10 @@ public class CPDefinitionSpecificationOptionValueModelImpl
 				public void accept(
 					CPDefinitionSpecificationOptionValue
 						cpDefinitionSpecificationOptionValue,
-					Object groupId) {
+					Object groupIdObject) {
 
 					cpDefinitionSpecificationOptionValue.setGroupId(
-						(Long)groupId);
+						(Long)groupIdObject);
 				}
 
 			});
@@ -471,10 +472,10 @@ public class CPDefinitionSpecificationOptionValueModelImpl
 				public void accept(
 					CPDefinitionSpecificationOptionValue
 						cpDefinitionSpecificationOptionValue,
-					Object companyId) {
+					Object companyIdObject) {
 
 					cpDefinitionSpecificationOptionValue.setCompanyId(
-						(Long)companyId);
+						(Long)companyIdObject);
 				}
 
 			});
@@ -499,10 +500,10 @@ public class CPDefinitionSpecificationOptionValueModelImpl
 				public void accept(
 					CPDefinitionSpecificationOptionValue
 						cpDefinitionSpecificationOptionValue,
-					Object userId) {
+					Object userIdObject) {
 
 					cpDefinitionSpecificationOptionValue.setUserId(
-						(Long)userId);
+						(Long)userIdObject);
 				}
 
 			});
@@ -527,10 +528,10 @@ public class CPDefinitionSpecificationOptionValueModelImpl
 				public void accept(
 					CPDefinitionSpecificationOptionValue
 						cpDefinitionSpecificationOptionValue,
-					Object userName) {
+					Object userNameObject) {
 
 					cpDefinitionSpecificationOptionValue.setUserName(
-						(String)userName);
+						(String)userNameObject);
 				}
 
 			});
@@ -555,10 +556,10 @@ public class CPDefinitionSpecificationOptionValueModelImpl
 				public void accept(
 					CPDefinitionSpecificationOptionValue
 						cpDefinitionSpecificationOptionValue,
-					Object createDate) {
+					Object createDateObject) {
 
 					cpDefinitionSpecificationOptionValue.setCreateDate(
-						(Date)createDate);
+						(Date)createDateObject);
 				}
 
 			});
@@ -584,10 +585,10 @@ public class CPDefinitionSpecificationOptionValueModelImpl
 				public void accept(
 					CPDefinitionSpecificationOptionValue
 						cpDefinitionSpecificationOptionValue,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
 					cpDefinitionSpecificationOptionValue.setModifiedDate(
-						(Date)modifiedDate);
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -613,10 +614,10 @@ public class CPDefinitionSpecificationOptionValueModelImpl
 				public void accept(
 					CPDefinitionSpecificationOptionValue
 						cpDefinitionSpecificationOptionValue,
-					Object CPDefinitionId) {
+					Object CPDefinitionIdObject) {
 
 					cpDefinitionSpecificationOptionValue.setCPDefinitionId(
-						(Long)CPDefinitionId);
+						(Long)CPDefinitionIdObject);
 				}
 
 			});
@@ -642,11 +643,11 @@ public class CPDefinitionSpecificationOptionValueModelImpl
 				public void accept(
 					CPDefinitionSpecificationOptionValue
 						cpDefinitionSpecificationOptionValue,
-					Object CPSpecificationOptionId) {
+					Object CPSpecificationOptionIdObject) {
 
 					cpDefinitionSpecificationOptionValue.
 						setCPSpecificationOptionId(
-							(Long)CPSpecificationOptionId);
+							(Long)CPSpecificationOptionIdObject);
 				}
 
 			});
@@ -672,10 +673,10 @@ public class CPDefinitionSpecificationOptionValueModelImpl
 				public void accept(
 					CPDefinitionSpecificationOptionValue
 						cpDefinitionSpecificationOptionValue,
-					Object CPOptionCategoryId) {
+					Object CPOptionCategoryIdObject) {
 
 					cpDefinitionSpecificationOptionValue.setCPOptionCategoryId(
-						(Long)CPOptionCategoryId);
+						(Long)CPOptionCategoryIdObject);
 				}
 
 			});
@@ -700,10 +701,10 @@ public class CPDefinitionSpecificationOptionValueModelImpl
 				public void accept(
 					CPDefinitionSpecificationOptionValue
 						cpDefinitionSpecificationOptionValue,
-					Object value) {
+					Object valueObject) {
 
 					cpDefinitionSpecificationOptionValue.setValue(
-						(String)value);
+						(String)valueObject);
 				}
 
 			});
@@ -728,10 +729,10 @@ public class CPDefinitionSpecificationOptionValueModelImpl
 				public void accept(
 					CPDefinitionSpecificationOptionValue
 						cpDefinitionSpecificationOptionValue,
-					Object priority) {
+					Object priorityObject) {
 
 					cpDefinitionSpecificationOptionValue.setPriority(
-						(Double)priority);
+						(Double)priorityObject);
 				}
 
 			});
@@ -757,10 +758,10 @@ public class CPDefinitionSpecificationOptionValueModelImpl
 				public void accept(
 					CPDefinitionSpecificationOptionValue
 						cpDefinitionSpecificationOptionValue,
-					Object lastPublishDate) {
+					Object lastPublishDateObject) {
 
 					cpDefinitionSpecificationOptionValue.setLastPublishDate(
-						(Date)lastPublishDate);
+						(Date)lastPublishDateObject);
 				}
 
 			});

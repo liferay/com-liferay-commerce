@@ -327,9 +327,10 @@ public class CPTaxCategoryModelImpl
 
 				@Override
 				public void accept(
-					CPTaxCategory cpTaxCategory, Object CPTaxCategoryId) {
+					CPTaxCategory cpTaxCategory, Object CPTaxCategoryIdObject) {
 
-					cpTaxCategory.setCPTaxCategoryId((Long)CPTaxCategoryId);
+					cpTaxCategory.setCPTaxCategoryId(
+						(Long)CPTaxCategoryIdObject);
 				}
 
 			});
@@ -349,9 +350,9 @@ public class CPTaxCategoryModelImpl
 
 				@Override
 				public void accept(
-					CPTaxCategory cpTaxCategory, Object companyId) {
+					CPTaxCategory cpTaxCategory, Object companyIdObject) {
 
-					cpTaxCategory.setCompanyId((Long)companyId);
+					cpTaxCategory.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -370,8 +371,10 @@ public class CPTaxCategoryModelImpl
 			new BiConsumer<CPTaxCategory, Object>() {
 
 				@Override
-				public void accept(CPTaxCategory cpTaxCategory, Object userId) {
-					cpTaxCategory.setUserId((Long)userId);
+				public void accept(
+					CPTaxCategory cpTaxCategory, Object userIdObject) {
+
+					cpTaxCategory.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -391,9 +394,9 @@ public class CPTaxCategoryModelImpl
 
 				@Override
 				public void accept(
-					CPTaxCategory cpTaxCategory, Object userName) {
+					CPTaxCategory cpTaxCategory, Object userNameObject) {
 
-					cpTaxCategory.setUserName((String)userName);
+					cpTaxCategory.setUserName((String)userNameObject);
 				}
 
 			});
@@ -413,9 +416,9 @@ public class CPTaxCategoryModelImpl
 
 				@Override
 				public void accept(
-					CPTaxCategory cpTaxCategory, Object createDate) {
+					CPTaxCategory cpTaxCategory, Object createDateObject) {
 
-					cpTaxCategory.setCreateDate((Date)createDate);
+					cpTaxCategory.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -435,9 +438,9 @@ public class CPTaxCategoryModelImpl
 
 				@Override
 				public void accept(
-					CPTaxCategory cpTaxCategory, Object modifiedDate) {
+					CPTaxCategory cpTaxCategory, Object modifiedDateObject) {
 
-					cpTaxCategory.setModifiedDate((Date)modifiedDate);
+					cpTaxCategory.setModifiedDate((Date)modifiedDateObject);
 				}
 
 			});
@@ -456,8 +459,10 @@ public class CPTaxCategoryModelImpl
 			new BiConsumer<CPTaxCategory, Object>() {
 
 				@Override
-				public void accept(CPTaxCategory cpTaxCategory, Object name) {
-					cpTaxCategory.setName((String)name);
+				public void accept(
+					CPTaxCategory cpTaxCategory, Object nameObject) {
+
+					cpTaxCategory.setName((String)nameObject);
 				}
 
 			});
@@ -477,9 +482,9 @@ public class CPTaxCategoryModelImpl
 
 				@Override
 				public void accept(
-					CPTaxCategory cpTaxCategory, Object description) {
+					CPTaxCategory cpTaxCategory, Object descriptionObject) {
 
-					cpTaxCategory.setDescription((String)description);
+					cpTaxCategory.setDescription((String)descriptionObject);
 				}
 
 			});
