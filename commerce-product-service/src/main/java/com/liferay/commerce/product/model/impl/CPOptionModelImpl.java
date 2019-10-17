@@ -349,8 +349,8 @@ public class CPOptionModelImpl
 			new BiConsumer<CPOption, Object>() {
 
 				@Override
-				public void accept(CPOption cpOption, Object uuid) {
-					cpOption.setUuid((String)uuid);
+				public void accept(CPOption cpOption, Object uuidObject) {
+					cpOption.setUuid((String)uuidObject);
 				}
 
 			});
@@ -370,10 +370,10 @@ public class CPOptionModelImpl
 
 				@Override
 				public void accept(
-					CPOption cpOption, Object externalReferenceCode) {
+					CPOption cpOption, Object externalReferenceCodeObject) {
 
 					cpOption.setExternalReferenceCode(
-						(String)externalReferenceCode);
+						(String)externalReferenceCodeObject);
 				}
 
 			});
@@ -392,8 +392,8 @@ public class CPOptionModelImpl
 			new BiConsumer<CPOption, Object>() {
 
 				@Override
-				public void accept(CPOption cpOption, Object CPOptionId) {
-					cpOption.setCPOptionId((Long)CPOptionId);
+				public void accept(CPOption cpOption, Object CPOptionIdObject) {
+					cpOption.setCPOptionId((Long)CPOptionIdObject);
 				}
 
 			});
@@ -412,8 +412,8 @@ public class CPOptionModelImpl
 			new BiConsumer<CPOption, Object>() {
 
 				@Override
-				public void accept(CPOption cpOption, Object companyId) {
-					cpOption.setCompanyId((Long)companyId);
+				public void accept(CPOption cpOption, Object companyIdObject) {
+					cpOption.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -432,8 +432,8 @@ public class CPOptionModelImpl
 			new BiConsumer<CPOption, Object>() {
 
 				@Override
-				public void accept(CPOption cpOption, Object userId) {
-					cpOption.setUserId((Long)userId);
+				public void accept(CPOption cpOption, Object userIdObject) {
+					cpOption.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -452,8 +452,8 @@ public class CPOptionModelImpl
 			new BiConsumer<CPOption, Object>() {
 
 				@Override
-				public void accept(CPOption cpOption, Object userName) {
-					cpOption.setUserName((String)userName);
+				public void accept(CPOption cpOption, Object userNameObject) {
+					cpOption.setUserName((String)userNameObject);
 				}
 
 			});
@@ -472,8 +472,8 @@ public class CPOptionModelImpl
 			new BiConsumer<CPOption, Object>() {
 
 				@Override
-				public void accept(CPOption cpOption, Object createDate) {
-					cpOption.setCreateDate((Date)createDate);
+				public void accept(CPOption cpOption, Object createDateObject) {
+					cpOption.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -492,8 +492,10 @@ public class CPOptionModelImpl
 			new BiConsumer<CPOption, Object>() {
 
 				@Override
-				public void accept(CPOption cpOption, Object modifiedDate) {
-					cpOption.setModifiedDate((Date)modifiedDate);
+				public void accept(
+					CPOption cpOption, Object modifiedDateObject) {
+
+					cpOption.setModifiedDate((Date)modifiedDateObject);
 				}
 
 			});
@@ -512,8 +514,8 @@ public class CPOptionModelImpl
 			new BiConsumer<CPOption, Object>() {
 
 				@Override
-				public void accept(CPOption cpOption, Object name) {
-					cpOption.setName((String)name);
+				public void accept(CPOption cpOption, Object nameObject) {
+					cpOption.setName((String)nameObject);
 				}
 
 			});
@@ -532,8 +534,10 @@ public class CPOptionModelImpl
 			new BiConsumer<CPOption, Object>() {
 
 				@Override
-				public void accept(CPOption cpOption, Object description) {
-					cpOption.setDescription((String)description);
+				public void accept(
+					CPOption cpOption, Object descriptionObject) {
+
+					cpOption.setDescription((String)descriptionObject);
 				}
 
 			});
@@ -553,10 +557,10 @@ public class CPOptionModelImpl
 
 				@Override
 				public void accept(
-					CPOption cpOption, Object DDMFormFieldTypeName) {
+					CPOption cpOption, Object DDMFormFieldTypeNameObject) {
 
 					cpOption.setDDMFormFieldTypeName(
-						(String)DDMFormFieldTypeName);
+						(String)DDMFormFieldTypeNameObject);
 				}
 
 			});
@@ -575,8 +579,8 @@ public class CPOptionModelImpl
 			new BiConsumer<CPOption, Object>() {
 
 				@Override
-				public void accept(CPOption cpOption, Object facetable) {
-					cpOption.setFacetable((Boolean)facetable);
+				public void accept(CPOption cpOption, Object facetableObject) {
+					cpOption.setFacetable((Boolean)facetableObject);
 				}
 
 			});
@@ -595,8 +599,8 @@ public class CPOptionModelImpl
 			new BiConsumer<CPOption, Object>() {
 
 				@Override
-				public void accept(CPOption cpOption, Object required) {
-					cpOption.setRequired((Boolean)required);
+				public void accept(CPOption cpOption, Object requiredObject) {
+					cpOption.setRequired((Boolean)requiredObject);
 				}
 
 			});
@@ -615,8 +619,10 @@ public class CPOptionModelImpl
 			new BiConsumer<CPOption, Object>() {
 
 				@Override
-				public void accept(CPOption cpOption, Object skuContributor) {
-					cpOption.setSkuContributor((Boolean)skuContributor);
+				public void accept(
+					CPOption cpOption, Object skuContributorObject) {
+
+					cpOption.setSkuContributor((Boolean)skuContributorObject);
 				}
 
 			});
@@ -635,8 +641,8 @@ public class CPOptionModelImpl
 			new BiConsumer<CPOption, Object>() {
 
 				@Override
-				public void accept(CPOption cpOption, Object key) {
-					cpOption.setKey((String)key);
+				public void accept(CPOption cpOption, Object keyObject) {
+					cpOption.setKey((String)keyObject);
 				}
 
 			});
@@ -655,8 +661,10 @@ public class CPOptionModelImpl
 			new BiConsumer<CPOption, Object>() {
 
 				@Override
-				public void accept(CPOption cpOption, Object lastPublishDate) {
-					cpOption.setLastPublishDate((Date)lastPublishDate);
+				public void accept(
+					CPOption cpOption, Object lastPublishDateObject) {
+
+					cpOption.setLastPublishDate((Date)lastPublishDateObject);
 				}
 
 			});
