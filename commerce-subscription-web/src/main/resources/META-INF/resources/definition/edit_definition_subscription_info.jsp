@@ -53,12 +53,10 @@ if (cpSubscriptionType != null) {
 CPSubscriptionTypeJSPContributor cpSubscriptionTypeJSPContributor = cpDefinitionSubscriptionInfoDisplayContext.getCPSubscriptionTypeJSPContributor(subscriptionType);
 
 boolean ending = maxSubscriptionCycles > 0;
-
-boolean hasRecurringPaymentMethod = cpDefinitionSubscriptionInfoDisplayContext.hasRecurringPaymentMethod();
 %>
 
 <c:choose>
-	<c:when test="<%= hasRecurringPaymentMethod %>">
+	<c:when test="<%= cpDefinitionSubscriptionInfoDisplayContext.hasRecurringPaymentMethod() %>">
 		<portlet:actionURL name="editProductDefinition" var="editProductDefinitionSubscriptionInfoActionURL" />
 
 		<aui:form action="<%= editProductDefinitionSubscriptionInfoActionURL %>" cssClass="container-fluid-1280" method="post" name="fm">
@@ -70,7 +68,7 @@ boolean hasRecurringPaymentMethod = cpDefinitionSubscriptionInfoDisplayContext.h
 
 			<aui:fieldset-group markupView="lexicon">
 				<aui:fieldset>
-					<aui:input checked="<%= subscriptionEnabled %>" disabled="<%= !hasRecurringPaymentMethod %>" label="enable-subscription" name="subscriptionEnabled" type="toggle-switch" value="<%= subscriptionEnabled %>" />
+					<aui:input checked="<%= subscriptionEnabled %>" label="enable-subscription" name="subscriptionEnabled" type="toggle-switch" value="<%= subscriptionEnabled %>" />
 
 					<div class="<%= subscriptionEnabled ? StringPool.BLANK : "hide" %>" id="<portlet:namespace />subscriptionOptions">
 						<aui:select name="subscriptionType" onChange='<%= renderResponse.getNamespace() + "selectSubscriptionType();" %>'>
