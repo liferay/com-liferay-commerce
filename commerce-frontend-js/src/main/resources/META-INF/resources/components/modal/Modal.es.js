@@ -172,32 +172,27 @@ const Modal = props => {
 				props.cancelLabel) && (
 				<ClayModal.Footer
 					last={
-						(props.showSubmit ||
-							props.submitLabel ||
-							props.showCancel ||
-							props.cancelLabel) && (
-							<ClayButton.Group spaced>
-								{(props.showCancel || props.cancelLabel) && (
-									<ClayButton
-										displayType="secondary"
-										onClick={onClose}
-									>
-										{props.cancelLabel ||
-											Liferay.Language.get('cancel')}
-									</ClayButton>
-								)}
-								{(props.showSubmit || props.submitLabel) && (
-									<ClayButton
-										disabled={!submitActive}
-										displayType="primary"
-										onClick={_submit}
-									>
-										{props.submitLabel ||
-											Liferay.Language.get('submit')}
-									</ClayButton>
-								)}
-							</ClayButton.Group>
-						)
+						<ClayButton.Group spaced>
+							{(props.showCancel || props.cancelLabel) && (
+								<ClayButton
+									displayType="secondary"
+									onClick={onClose}
+								>
+									{props.cancelLabel ||
+										Liferay.Language.get('cancel')}
+								</ClayButton>
+							)}
+							{(props.showSubmit || props.submitLabel) && (
+								<ClayButton
+									disabled={!submitActive}
+									displayType="primary"
+									onClick={_submit}
+								>
+									{props.submitLabel ||
+										Liferay.Language.get('submit')}
+								</ClayButton>
+							)}
+						</ClayButton.Group>
 					}
 				/>
 			)}

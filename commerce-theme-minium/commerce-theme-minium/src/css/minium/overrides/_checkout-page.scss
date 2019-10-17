@@ -7,7 +7,7 @@
 	.input-container > .address-fields,
 	.commerce-checkout-summary-footer,
 	.shipping-address {
-		@include minium-panel-body;
+		@include panel-body;
 	}
 
 	.input-container > .form-group-autofit,

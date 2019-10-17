@@ -2,12 +2,12 @@
 	align-items: center;
 	background-color: $color-theme;
 	border-radius: 50%;
-	bottom: $minium-gutter;
+	bottom: $gutter;
 	display: flex;
 	justify-content: center;
 	min-height: 60px;
 	position: fixed;
-	right: $minium-gutter;
+	right: $gutter;
 	width: 60px;
 	z-index: 1;
 

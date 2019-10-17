@@ -1,5 +1,5 @@
 .minium-product-gallery {
-	margin: $minium-big-gutter 0;
+	margin: $lg-gutter 0;
 
 	img {
 		max-width: 100%;
@@ -90,7 +90,7 @@
 		width: 75px;
 
 		& + & {
-			margin-left: $minium-small-gutter;
+			margin-left: $sm-gutter;
 		}
 
 		&.is-active {

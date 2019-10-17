@@ -4,7 +4,7 @@
 	&__curtain {
 		background: white;
 		border-radius: 8px;
-		box-shadow: $minium-shadow;
+		box-shadow: $shadow;
 		display: none;
 		height: 530px;
 		max-height: calc(100vh - #{$frame-size * 2 + $liferay-topbar-size + 60px});
@@ -19,11 +19,11 @@
 		z-index: 1160;
 
 		@media screen and (max-width: 767px) {
-			left: $minium-small-gutter;
+			left: $sm-gutter;
 			position: fixed;
-			right: $minium-small-gutter;
+			right: $sm-gutter;
 			top: 120px;
-			width: calc(100% - #{$minium-small-gutter * 2});
+			width: calc(100% - #{$sm-gutter * 2});
 		}
 
 		&::before {

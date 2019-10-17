@@ -19,12 +19,12 @@
 
 	&:focus,
 	&:focus-within {
-		box-shadow: $minium-shadow-focus;
+		box-shadow: $shadow-focus;
 		outline: none;
 	}
 
 	& + & {
-		margin-left: $minium-gutter;
+		margin-left: $gutter;
 	}
 
 	&--good {
@@ -91,7 +91,7 @@
 		height: 44px;
 
 		& + & {
-			margin-left: $minium-small-gutter;
+			margin-left: $sm-gutter;
 		}
 	}
 
@@ -126,6 +126,6 @@
 	}
 
 	&--spaced {
-		margin-left: $minium-gutter;
+		margin-left: $gutter;
 	}
 }

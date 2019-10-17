@@ -30,7 +30,7 @@
 	}
 
 	&__buttons {
-		margin: 0 $minium-gutter;
+		margin: 0 $gutter;
 	}
 
 	html:not(.ie):not(.edge) .table tr.is-active & {

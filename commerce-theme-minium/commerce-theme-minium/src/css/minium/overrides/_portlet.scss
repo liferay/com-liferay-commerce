@@ -3,7 +3,7 @@
 }
 
 .portlet-boundary + .portlet-boundary:not(.portlet-borderless) {
-	margin-top: $minium-big-gutter;
+	margin-top: $lg-gutter;
 }
 
 .portlet:not(:hover):not(.open) .portlet-title-default,
@@ -107,7 +107,7 @@
 }
 
 .portlet-content-container {
-	@include minium-typo-text;
+	@include typo-text;
 }
 
 .portlet-borderless .portlet-title-text {
@@ -124,14 +124,14 @@
 	}
 
 	.portlet-title-text {
-		@include minium-panel-title;
+		@include panel-title;
 
 		display: block;
 		max-width: 100%;
 	}
 
 	.portlet-content-container {
-		@include minium-panel-body;
+		@include panel-body;
 	}
 }
 

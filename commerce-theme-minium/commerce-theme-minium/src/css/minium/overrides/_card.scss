@@ -1,0 +1,25 @@
+.card {
+  position: inherit;
+  background-color: transparent;
+  box-shadow: none;
+  border: none;
+
+  .card-header {
+    background: white;
+    margin-bottom: $xs-gutter;
+    border-radius: $standard-radius;
+    @include card-title;
+  }
+
+  .card-body {
+    background: white;
+    border-radius: $standard-radius;
+
+    &:not(:last-child) {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+
+  }
+}

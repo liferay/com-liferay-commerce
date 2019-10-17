@@ -1,32 +1,40 @@
-@mixin minium-typo-title {
-	color: $color-fg;
+@mixin typo-text {
 	font-size: 14px;
-	font-weight: 500;
-	letter-spacing: 3px;
-	line-height: 19px;
-	margin: $minium-big-gutter 0;
-	text-transform: uppercase;
+	line-height: 1.6;
 }
 
-@mixin minium-typo-text {
-	font-size: 14px;
-	line-height: 32px;
-}
-
-@mixin minium-panel-title {
-	background-color: $color-bg;
-	border-radius: 8px;
-	font-size: 12px;
+@mixin base-title {
 	font-weight: 500;
 	letter-spacing: 1.2px;
-	line-height: 16px;
-	margin-bottom: 5px;
-	padding: 12px 30px;
+	line-height: 1;
 	text-transform: uppercase;
 }
 
-@mixin minium-panel-body {
-	@include minium-typo-text;
+@mixin minium-typo-title {
+	@include base-title;
+
+	color: $color-fg;
+	font-size: 14px;
+	margin: $lg-gutter 0;
+}
+
+@mixin card-title {
+	@include base-title;
+
+	font-size: 12px;
+	background-color: $color-bg;
+}
+
+@mixin panel-title {
+	@include card-title;
+
+	border-radius: 8px;
+	margin-bottom: 5px;
+	padding: 12px 30px;
+}
+
+@mixin panel-body {
+	@include typo-text;
 
 	background-color: $color-bg;
 	border-radius: 8px;

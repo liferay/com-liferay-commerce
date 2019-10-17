@@ -121,13 +121,7 @@
   }
 }
 
-.portlet-content-container {
-  // @include minium-typo-text;
-}
-
 .portlet-borderless .portlet-title-text {
-  // @include minium-typo-title;
-
   display: block;
   max-width: 100%;
 }
@@ -139,18 +133,12 @@
   }
 
   .portlet-title-text {
-    // @include minium-panel-title;
-
     display: block;
     font-size: 14px;
     font-weight: 600;
     line-height: normal;
     max-width: 100%;
     text-transform: uppercase;
-  }
-
-  .portlet-content-container {
-    // @include minium-panel-body;
   }
 }
 
