@@ -14,22 +14,18 @@
 
 package com.liferay.commerce.subscription.web.internal.display.context;
 
-import com.liferay.commerce.currency.util.CommercePriceFormatter;
 import com.liferay.commerce.payment.method.CommercePaymentMethod;
 import com.liferay.commerce.payment.method.CommercePaymentMethodRegistry;
 import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
 import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelLocalService;
-import com.liferay.commerce.product.definitions.web.internal.display.context.CPInstanceDisplayContext;
+import com.liferay.commerce.product.definitions.web.display.context.BaseCPDefinitionsDisplayContext;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPInstanceScreenNavigationConstants;
 import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.model.CommerceChannelRel;
-import com.liferay.commerce.product.service.CPDefinitionOptionRelService;
-import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.commerce.product.service.CommerceChannelRelLocalService;
-import com.liferay.commerce.product.service.CommerceChannelRelLocalServiceUtil;
-import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.product.util.CPSubscriptionType;
 import com.liferay.commerce.product.util.CPSubscriptionTypeJSPContributor;
 import com.liferay.commerce.product.util.CPSubscriptionTypeJSPContributorRegistry;
@@ -46,7 +42,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author Alessio Antonio Rendina
  */
 public class CPInstanceSubscriptionInfoDisplayContext
-	extends CPInstanceDisplayContext {
+	extends BaseCPDefinitionsDisplayContext {
 
 	public CPInstanceSubscriptionInfoDisplayContext(
 			ActionHelper actionHelper, HttpServletRequest httpServletRequest,
@@ -54,18 +50,12 @@ public class CPInstanceSubscriptionInfoDisplayContext
 			CommercePaymentMethodGroupRelLocalService
 				commercePaymentMethodGroupRelLocalService,
 			CommercePaymentMethodRegistry commercePaymentMethodRegistry,
-			CommercePriceFormatter commercePriceFormatter,
-			CPDefinitionOptionRelService cpDefinitionOptionRelService,
-			CPInstanceService cpInstanceService,
-			CPInstanceHelper cpInstanceHelper,
 			CPSubscriptionTypeJSPContributorRegistry
 				cpSubscriptionTypeJSPContributorRegistry,
 			CPSubscriptionTypeRegistry cpSubscriptionTypeRegistry)
 		throws PortalException {
 
-		super(
-			actionHelper, httpServletRequest, commercePriceFormatter,
-			cpDefinitionOptionRelService, cpInstanceService, cpInstanceHelper);
+		super(actionHelper, httpServletRequest);
 
 		_commerceChannelRelLocalService = commerceChannelRelLocalService;
 		_commercePaymentMethodGroupRelLocalService =
@@ -74,6 +64,20 @@ public class CPInstanceSubscriptionInfoDisplayContext
 		_cpSubscriptionTypeJSPContributorRegistry =
 			cpSubscriptionTypeJSPContributorRegistry;
 		_cpSubscriptionTypeRegistry = cpSubscriptionTypeRegistry;
+	}
+
+	public CPInstance getCPInstance() throws PortalException {
+		return actionHelper.getCPInstance(cpRequestHelper.getRenderRequest());
+	}
+
+	public long getCPInstanceId() throws PortalException {
+		CPInstance cpInstance = getCPInstance();
+
+		if (cpInstance == null) {
+			return 0;
+		}
+
+		return cpInstance.getCPInstanceId();
 	}
 
 	public CPSubscriptionType getCPSubscriptionType(String subscriptionType) {
@@ -115,7 +119,7 @@ public class CPInstanceSubscriptionInfoDisplayContext
 	public boolean hasRecurringPaymentMethod() throws PortalException {
 		List<CommerceChannelRel> commerceChannelRels =
 			_commerceChannelRelLocalService.getCommerceChannelRels(
-				CPDefinition.class.getName(), super.getCPDefinitionId(), -1, -1,
+				CPDefinition.class.getName(), getCPDefinitionId(), -1, -1,
 				null);
 
 		for (CommerceChannelRel commerceChannelRel : commerceChannelRels) {
@@ -130,7 +134,7 @@ public class CPInstanceSubscriptionInfoDisplayContext
 						commerceChannel.getSiteGroupId(), true);
 
 			for (CommercePaymentMethodGroupRel commercePaymentMethodGroupRel :
-				commercePaymentMethodGroupRels) {
+					commercePaymentMethodGroupRels) {
 
 				if (commercePaymentMethodGroupRel.getActive()) {
 					CommercePaymentMethod commercePaymentMethod =

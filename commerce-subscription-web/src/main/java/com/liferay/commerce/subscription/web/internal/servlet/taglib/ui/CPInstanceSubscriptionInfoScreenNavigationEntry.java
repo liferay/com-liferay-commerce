@@ -122,9 +122,7 @@ public class CPInstanceSubscriptionInfoScreenNavigationEntry
 						_actionHelper, httpServletRequest,
 						_commerceChannelRelLocalService,
 						_commercePaymentMethodGroupRelLocalService,
-						_commercePaymentMethodRegistry, _commercePriceFormatter,
-						_cpDefinitionOptionRelService, _cpInstanceService,
-						_cpInstanceHelper,
+						_commercePaymentMethodRegistry,
 						_cpSubscriptionTypeJSPContributorRegistry,
 						_cpSubscriptionTypeRegistry);
 
@@ -162,18 +160,6 @@ public class CPInstanceSubscriptionInfoScreenNavigationEntry
 
 	@Reference
 	private CommercePaymentMethodRegistry _commercePaymentMethodRegistry;
-
-	@Reference
-	private CommercePriceFormatter _commercePriceFormatter;
-
-	@Reference
-	private CPDefinitionOptionRelService _cpDefinitionOptionRelService;
-
-	@Reference
-	private CPInstanceHelper _cpInstanceHelper;
-
-	@Reference
-	private CPInstanceService _cpInstanceService;
 
 	@Reference
 	private CPSubscriptionTypeJSPContributorRegistry
