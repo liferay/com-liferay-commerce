@@ -192,6 +192,14 @@ public class CommercePaymentMethodGroupRelLocalServiceImpl
 	}
 
 	@Override
+	public CommercePaymentMethodGroupRel fetchCommercePaymentMethodGroupRel(
+		long groupId, String engineKey) {
+
+		return commercePaymentMethodGroupRelPersistence.fetchByG_E(
+			groupId, engineKey);
+	}
+
+	@Override
 	public List<CommerceAddressRestriction> getCommerceAddressRestrictions(
 		long commercePaymentMethodGroupRelId, int start, int end,
 		OrderByComparator<CommerceAddressRestriction> orderByComparator) {

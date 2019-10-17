@@ -123,6 +123,24 @@ public class CommercePaymentMethodGroupRelServiceImpl
 	}
 
 	@Override
+	public CommercePaymentMethodGroupRel fetchCommercePaymentMethodGroupRel(
+			long groupId, String engineKey)
+		throws PortalException {
+
+		CommercePaymentMethodGroupRel commercePaymentMethodGroupRel =
+			commercePaymentMethodGroupRelLocalService.
+				fetchCommercePaymentMethodGroupRel(groupId, engineKey);
+
+		if (commercePaymentMethodGroupRel != null) {
+			_portletResourcePermission.check(
+				getPermissionChecker(), groupId,
+				CommerceActionKeys.MANAGE_COMMERCE_PAYMENT_METHODS);
+		}
+
+		return commercePaymentMethodGroupRel;
+	}
+
+	@Override
 	public List<CommerceAddressRestriction> getCommerceAddressRestrictions(
 			long classPK, int start, int end,
 			OrderByComparator<CommerceAddressRestriction> orderByComparator)
