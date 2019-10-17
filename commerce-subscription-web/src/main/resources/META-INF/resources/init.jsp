@@ -25,7 +25,8 @@ taglib uri="http://liferay.com/tld/frontend" prefix="liferay-frontend" %><%@
 taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
 taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
-<%@ page import="com.liferay.commerce.constants.CommerceSubscriptionEntryConstants" %><%@
+<%@ page import="com.liferay.commerce.constants.CommerceOrderConstants" %><%@
+page import="com.liferay.commerce.constants.CommerceSubscriptionEntryConstants" %><%@
 page import="com.liferay.commerce.exception.CommerceSubscriptionEntrySubscriptionStatusException" %><%@
 page import="com.liferay.commerce.exception.CommerceSubscriptionTypeException" %><%@
 page import="com.liferay.commerce.exception.NoSuchSubscriptionEntryException" %><%@

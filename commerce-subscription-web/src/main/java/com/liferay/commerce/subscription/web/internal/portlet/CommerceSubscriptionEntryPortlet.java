@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.subscription.web.internal.portlet;
 
+import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelLocalService;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.util.CPSubscriptionTypeJSPContributorRegistry;
 import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
@@ -69,6 +70,7 @@ public class CommerceSubscriptionEntryPortlet extends MVCPortlet {
 		CommerceSubscriptionEntryDisplayContext
 			commerceSubscriptionEntryDisplayContext =
 				new CommerceSubscriptionEntryDisplayContext(
+					_commercePaymentMethodGroupRelLocalService,
 					_commerceSubscriptionEntryService, _configurationProvider,
 					_cpSubscriptionTypeJSPContributorRegistry,
 					_cpSubscriptionTypeRegistry,
@@ -80,6 +82,10 @@ public class CommerceSubscriptionEntryPortlet extends MVCPortlet {
 
 		super.render(renderRequest, renderResponse);
 	}
+
+	@Reference
+	private CommercePaymentMethodGroupRelLocalService
+		_commercePaymentMethodGroupRelLocalService;
 
 	@Reference
 	private CommerceSubscriptionEntryService _commerceSubscriptionEntryService;
