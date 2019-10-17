@@ -1,13 +1,13 @@
 .commerce-panel {
 	color: $color-fg;
-	margin-bottom: $minium-big-gutter;
+	margin-bottom: $lg-gutter;
 
 	&__title {
-		@include minium-panel-title;
+		@include panel-title;
 	}
 
 	&__content {
-		@include minium-panel-body;
+		@include panel-body;
 
 		& + & {
 			margin-top: 5px;

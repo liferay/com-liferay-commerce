@@ -15,11 +15,11 @@
 	}
 
 	.panel-group + .panel-group {
-		margin-top: $minium-big-gutter;
+		margin-top: $lg-gutter;
 	}
 
 	.panel-heading .panel-title {
-		@include minium-panel-title;
+		@include panel-title;
 
 		.collapse-icon {
 			padding: 0;
@@ -27,7 +27,7 @@
 	}
 
 	.panel-body {
-		@include minium-panel-body;
+		@include panel-body;
 	}
 
 	.facet-checkbox-label {

@@ -31,12 +31,13 @@ $placeholder-colors: (
 	#639DFF
 );
 
-$minium-shadow: 0 10px 20px $color-shadow;
-$minium-shadow-focus: 0 3px 20px 0 rgba($color-theme, .5);
+$shadow: 0 10px 20px $color-shadow;
+$shadow-focus: 0 3px 20px 0 rgba($color-theme, .5);
 
-$minium-gutter: 20px;
-$minium-small-gutter: $minium-gutter / 2;
-$minium-big-gutter: $minium-gutter * 2;
+$xs-gutter: 5px;
+$sm-gutter: 10px;
+$gutter: 20px;
+$lg-gutter: 40px;
 
 $liferay-topbar-size: 56px;
 $liferay-topbar-size-small: 49px;
@@ -47,3 +48,5 @@ $content-max-width: 1440px;
 
 $transition: ease 200ms;
 $micro-transition: ease 100ms;
+
+$standard-radius: 8px;

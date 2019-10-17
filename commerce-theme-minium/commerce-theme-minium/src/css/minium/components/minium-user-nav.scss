@@ -23,7 +23,7 @@
 		border-top-right-radius: 0;
 
 		@media screen and (hover: none) {
-			filter: drop-shadow($minium-shadow);
+			filter: drop-shadow($shadow);
 		}
 	}
 

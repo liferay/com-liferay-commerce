@@ -18,7 +18,7 @@
 	}
 
 	&:focus {
-		box-shadow: $minium-shadow-focus;
+		box-shadow: $shadow-focus;
 		outline: none;
 	}
 
@@ -27,9 +27,9 @@
 	}
 
 	&__compare {
-		left: $minium-gutter;
+		left: $gutter;
 		position: absolute;
-		top: $minium-gutter;
+		top: $gutter;
 	}
 
 	&__availability {
@@ -40,7 +40,7 @@
 		width: 100%;
 
 		.commerce-dot {
-			left: $minium-gutter;
+			left: $gutter;
 			line-height: 0;
 			position: absolute;
 			top: 0;
@@ -178,7 +178,7 @@
 		z-index: 10;
 
 		&:focus {
-			box-shadow: $minium-shadow-focus;
+			box-shadow: $shadow-focus;
 			outline: none;
 		}
 
