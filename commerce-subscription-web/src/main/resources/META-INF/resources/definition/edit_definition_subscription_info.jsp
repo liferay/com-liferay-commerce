@@ -197,7 +197,7 @@ boolean ending = maxSubscriptionCycles > 0;
 	</c:when>
 	<c:otherwise>
 		<aui:alert closeable="<%= false %>" cssClass="mt-3" type="warning">
-			<liferay-ui:message key="all-channels-associated-with-this-product-must-have-atleast-one-payment-method-active-that-supportss-recurring-payments" />
+			<liferay-ui:message key="all-channels-associated-with-this-product-must-have-at-least-one-payment-method-active-that-supports-recurring-payments" />
 		</aui:alert>
 	</c:otherwise>
 </c:choose>
