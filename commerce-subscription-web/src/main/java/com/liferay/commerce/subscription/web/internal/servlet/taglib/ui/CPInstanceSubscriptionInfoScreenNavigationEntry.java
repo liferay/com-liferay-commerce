@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.commerce.product.definitions.web.internal.servlet.taglib.ui;
+package com.liferay.commerce.subscription.web.internal.servlet.taglib.ui;
 
 import com.liferay.commerce.currency.util.CommercePriceFormatter;
 import com.liferay.commerce.product.definitions.web.internal.display.context.CPInstanceSubscriptionInfoDisplayContext;
@@ -174,7 +174,7 @@ public class CPInstanceSubscriptionInfoScreenNavigationEntry
 	private JSPRenderer _jspRenderer;
 
 	@Reference(
-		target = "(osgi.web.symbolicname=com.liferay.commerce.product.definitions.web)"
+		target = "(osgi.web.symbolicname=com.liferay.commerce.subscription.web)"
 	)
 	private ServletContext _setServletContext;
 
