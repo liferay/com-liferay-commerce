@@ -23,6 +23,7 @@ import com.liferay.commerce.payment.method.CommercePaymentMethod;
 import com.liferay.commerce.payment.method.CommercePaymentMethodRegistry;
 import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
 import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelService;
+import com.liferay.commerce.payment.util.comparator.CommercePaymentMethodGroupRelNameComparator;
 import com.liferay.commerce.payment.util.comparator.CommercePaymentMethodGroupRelNameOrderByComparator;
 import com.liferay.commerce.payment.web.internal.admin.PaymentMethodsCommerceAdminModule;
 import com.liferay.commerce.product.catalog.CPQuery;
@@ -237,6 +238,8 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 		_searchContainer = new SearchContainer<>(
 			_renderRequest, getPortletURL(), null, emptyResultsMessage);
 
+		long groupId = themeDisplay.getScopeGroupId();
+
 		List<CommercePaymentMethodGroupRel> commercePaymentMethodGroupRels =
 			null;
 		int commercePaymentMethodGroupRelsCount = 0;
@@ -250,26 +253,28 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 			commercePaymentMethodGroupRels =
 				_commercePaymentMethodGroupRelService.
 					getCommercePaymentMethodGroupRels(
-						themeDisplay.getScopeGroupId(), active,
-						_searchContainer.getStart(), _searchContainer.getEnd(),
+						groupId, active, _searchContainer.getStart(),
+						_searchContainer.getEnd(),
 						commercePaymentMethodGroupRelNameOrderByComparator);
 			commercePaymentMethodGroupRelsCount =
 				_commercePaymentMethodGroupRelService.
-					getCommercePaymentMethodGroupRelsCount(
-						themeDisplay.getScopeGroupId(), active);
+					getCommercePaymentMethodGroupRelsCount(groupId, active);
 		}
 		else {
 			commercePaymentMethodGroupRels =
 				_commercePaymentMethodGroupRelService.
-					getCommercePaymentMethodGroupRels(
-						themeDisplay.getScopeGroupId(),
-						_searchContainer.getStart(), _searchContainer.getEnd(),
-						commercePaymentMethodGroupRelNameOrderByComparator);
+					getCommercePaymentMethodGroupRels(groupId);
 
 			commercePaymentMethodGroupRelsCount =
 				_commercePaymentMethodGroupRelService.
-					getCommercePaymentMethodGroupRelsCount(
-						themeDisplay.getScopeGroupId());
+					getCommercePaymentMethodGroupRelsCount(groupId);
+		}
+
+		if (ListUtil.isNotEmpty(commercePaymentMethodGroupRels)) {
+			commercePaymentMethodGroupRels = ListUtil.sort(
+				commercePaymentMethodGroupRels,
+				new CommercePaymentMethodGroupRelNameComparator(
+					themeDisplay.getLocale()));
 		}
 
 		_searchContainer.setResults(commercePaymentMethodGroupRels);
