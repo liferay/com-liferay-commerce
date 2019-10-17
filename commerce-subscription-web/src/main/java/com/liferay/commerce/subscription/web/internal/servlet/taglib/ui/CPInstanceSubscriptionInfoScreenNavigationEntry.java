@@ -14,17 +14,16 @@
 
 package com.liferay.commerce.subscription.web.internal.servlet.taglib.ui;
 
-import com.liferay.commerce.currency.util.CommercePriceFormatter;
-import com.liferay.commerce.subscription.web.internal.display.context.CPInstanceSubscriptionInfoDisplayContext;
+import com.liferay.commerce.payment.method.CommercePaymentMethodRegistry;
+import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelLocalService;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPInstanceScreenNavigationConstants;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CommerceCatalog;
-import com.liferay.commerce.product.service.CPDefinitionOptionRelService;
-import com.liferay.commerce.product.service.CPInstanceService;
-import com.liferay.commerce.product.util.CPInstanceHelper;
+import com.liferay.commerce.product.service.CommerceChannelRelLocalService;
 import com.liferay.commerce.product.util.CPSubscriptionTypeJSPContributorRegistry;
 import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
+import com.liferay.commerce.subscription.web.internal.display.context.CPInstanceSubscriptionInfoDisplayContext;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -121,8 +120,11 @@ public class CPInstanceSubscriptionInfoScreenNavigationEntry
 				cpInstanceSubscriptionInfoDisplayContext =
 					new CPInstanceSubscriptionInfoDisplayContext(
 						_actionHelper, httpServletRequest,
-						_commercePriceFormatter, _cpDefinitionOptionRelService,
-						_cpInstanceService, _cpInstanceHelper,
+						_commerceChannelRelLocalService,
+						_commercePaymentMethodGroupRelLocalService,
+						_commercePaymentMethodRegistry, _commercePriceFormatter,
+						_cpDefinitionOptionRelService, _cpInstanceService,
+						_cpInstanceHelper,
 						_cpSubscriptionTypeJSPContributorRegistry,
 						_cpSubscriptionTypeRegistry);
 
@@ -150,6 +152,16 @@ public class CPInstanceSubscriptionInfoScreenNavigationEntry
 	)
 	private ModelResourcePermission<CommerceCatalog>
 		_commerceCatalogModelResourcePermission;
+
+	@Reference
+	private CommerceChannelRelLocalService _commerceChannelRelLocalService;
+
+	@Reference
+	private CommercePaymentMethodGroupRelLocalService
+		_commercePaymentMethodGroupRelLocalService;
+
+	@Reference
+	private CommercePaymentMethodRegistry _commercePaymentMethodRegistry;
 
 	@Reference
 	private CommercePriceFormatter _commercePriceFormatter;

@@ -15,11 +15,20 @@
 package com.liferay.commerce.subscription.web.internal.display.context;
 
 import com.liferay.commerce.currency.util.CommercePriceFormatter;
+import com.liferay.commerce.payment.method.CommercePaymentMethod;
+import com.liferay.commerce.payment.method.CommercePaymentMethodRegistry;
+import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
+import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelLocalService;
 import com.liferay.commerce.product.definitions.web.internal.display.context.CPInstanceDisplayContext;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPInstanceScreenNavigationConstants;
+import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.model.CommerceChannelRel;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelService;
 import com.liferay.commerce.product.service.CPInstanceService;
+import com.liferay.commerce.product.service.CommerceChannelRelLocalService;
+import com.liferay.commerce.product.service.CommerceChannelRelLocalServiceUtil;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.product.util.CPSubscriptionType;
 import com.liferay.commerce.product.util.CPSubscriptionTypeJSPContributor;
@@ -41,6 +50,10 @@ public class CPInstanceSubscriptionInfoDisplayContext
 
 	public CPInstanceSubscriptionInfoDisplayContext(
 			ActionHelper actionHelper, HttpServletRequest httpServletRequest,
+			CommerceChannelRelLocalService commerceChannelRelLocalService,
+			CommercePaymentMethodGroupRelLocalService
+				commercePaymentMethodGroupRelLocalService,
+			CommercePaymentMethodRegistry commercePaymentMethodRegistry,
 			CommercePriceFormatter commercePriceFormatter,
 			CPDefinitionOptionRelService cpDefinitionOptionRelService,
 			CPInstanceService cpInstanceService,
@@ -54,6 +67,10 @@ public class CPInstanceSubscriptionInfoDisplayContext
 			actionHelper, httpServletRequest, commercePriceFormatter,
 			cpDefinitionOptionRelService, cpInstanceService, cpInstanceHelper);
 
+		_commerceChannelRelLocalService = commerceChannelRelLocalService;
+		_commercePaymentMethodGroupRelLocalService =
+			commercePaymentMethodGroupRelLocalService;
+		_commercePaymentMethodRegistry = commercePaymentMethodRegistry;
 		_cpSubscriptionTypeJSPContributorRegistry =
 			cpSubscriptionTypeJSPContributorRegistry;
 		_cpSubscriptionTypeRegistry = cpSubscriptionTypeRegistry;
@@ -95,6 +112,50 @@ public class CPInstanceSubscriptionInfoDisplayContext
 		return portletURL;
 	}
 
+	public boolean hasRecurringPaymentMethod() throws PortalException {
+		List<CommerceChannelRel> commerceChannelRels =
+			_commerceChannelRelLocalService.getCommerceChannelRels(
+				CPDefinition.class.getName(), super.getCPDefinitionId(), -1, -1,
+				null);
+
+		for (CommerceChannelRel commerceChannelRel : commerceChannelRels) {
+			boolean channelHasRecurringPaymentMethod = false;
+
+			CommerceChannel commerceChannel =
+				commerceChannelRel.getCommerceChannel();
+
+			List<CommercePaymentMethodGroupRel> commercePaymentMethodGroupRels =
+				_commercePaymentMethodGroupRelLocalService.
+					getCommercePaymentMethodGroupRels(
+						commerceChannel.getSiteGroupId(), true);
+
+			for (CommercePaymentMethodGroupRel commercePaymentMethodGroupRel :
+				commercePaymentMethodGroupRels) {
+
+				if (commercePaymentMethodGroupRel.getActive()) {
+					CommercePaymentMethod commercePaymentMethod =
+						_commercePaymentMethodRegistry.getCommercePaymentMethod(
+							commercePaymentMethodGroupRel.getEngineKey());
+
+					if (commercePaymentMethod.isProcessRecurringEnabled()) {
+						channelHasRecurringPaymentMethod = true;
+					}
+				}
+			}
+
+			if (!channelHasRecurringPaymentMethod) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	private final CommerceChannelRelLocalService
+		_commerceChannelRelLocalService;
+	private final CommercePaymentMethodGroupRelLocalService
+		_commercePaymentMethodGroupRelLocalService;
+	private final CommercePaymentMethodRegistry _commercePaymentMethodRegistry;
 	private final CPSubscriptionTypeJSPContributorRegistry
 		_cpSubscriptionTypeJSPContributorRegistry;
 	private final CPSubscriptionTypeRegistry _cpSubscriptionTypeRegistry;
