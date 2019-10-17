@@ -20,6 +20,7 @@ import com.liferay.commerce.frontend.ClayTableRegistry;
 import com.liferay.commerce.frontend.ClayTableSerializer;
 import com.liferay.commerce.frontend.CommerceDataProviderRegistry;
 import com.liferay.commerce.frontend.FilterFactoryRegistry;
+import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.AddToCartItemRenderer;
 import com.liferay.commerce.frontend.util.ProductHelper;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.product.content.util.CPContentHelper;
@@ -76,6 +77,10 @@ public class ServletContextUtil {
 
 	public static final NPMResolver getNPMResolver() {
 		return _servletContextUtil._getNPMResolver();
+	}
+
+	public static final AddToCartItemRenderer getAddToCartItemRenderer() {
+		return _servletContextUtil._getAddToCartItemRenderer();
 	}
 
 	public static final ProductHelper getProductHelper() {
@@ -160,6 +165,11 @@ public class ServletContextUtil {
 		_productHelper = productHelper;
 	}
 
+	@Reference(unbind = "-")
+	protected void setAddToCartItemRenderer(AddToCartItemRenderer addToCartItemRenderer) {
+		_addToCartItemRenderer = addToCartItemRenderer;
+	}
+
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.commerce.frontend.taglib)",
 		unbind = "-"
@@ -214,6 +224,10 @@ public class ServletContextUtil {
 		return _servletContext;
 	}
 
+	private AddToCartItemRenderer _getAddToCartItemRenderer() {
+		return _addToCartItemRenderer;
+	}
+
 	private static ServletContextUtil _servletContextUtil;
 
 	private ClayTableContextContributorRegistry
@@ -228,5 +242,6 @@ public class ServletContextUtil {
 	private NPMResolver _npmResolver;
 	private ProductHelper _productHelper;
 	private ServletContext _servletContext;
+	private AddToCartItemRenderer _addToCartItemRenderer;
 
 }

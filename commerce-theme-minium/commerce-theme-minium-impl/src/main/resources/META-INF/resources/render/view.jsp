@@ -247,10 +247,8 @@ String galleryId = PortalUtil.generateRandomKey(request, "gallery");
 
 			<div class="product-detail__actions">
 				<div class="autofit-col">
-					<commerce-ui:add-to-cart
-						CPInstanceId="<%= (cpSku == null) ? 0 : cpSku.getCPInstanceId() %>"
-						id="<%= addToCartId %>"
-					/>
+					<!-- TODO TEST => RESTORE with params -->
+					<commerce-ui:add-to-cart />
 				</div>
 			</div>
 		</div>
