@@ -15,6 +15,8 @@
 package com.liferay.commerce.subscription.web.internal.display.context;
 
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
+import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
+import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelLocalService;
 import com.liferay.commerce.product.display.context.util.CPRequestHelper;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
@@ -48,12 +50,16 @@ import javax.servlet.http.HttpServletRequest;
 public class CommerceSubscriptionContentDisplayContext {
 
 	public CommerceSubscriptionContentDisplayContext(
+		CommercePaymentMethodGroupRelLocalService
+			commercePaymentMethodGroupRelLocalService,
 		CPDefinitionHelper cpDefinitionHelper,
 		CPInstanceHelper cpInstanceHelper,
 		CommerceSubscriptionEntryService commerceSubscriptionEntryService,
 		ConfigurationProvider configurationProvider,
 		HttpServletRequest httpServletRequest) {
 
+		_commercePaymentMethodGroupRelLocalService =
+			commercePaymentMethodGroupRelLocalService;
 		_cpDefinitionHelper = cpDefinitionHelper;
 		_cpInstanceHelper = cpInstanceHelper;
 		_commerceSubscriptionEntryService = commerceSubscriptionEntryService;
@@ -175,6 +181,19 @@ public class CommerceSubscriptionContentDisplayContext {
 		return _searchContainer;
 	}
 
+	public boolean isPaymentMethodActive(String engineKey)
+		throws PortalException {
+
+		CommercePaymentMethodGroupRel commercePaymentMethodGroupRel =
+			_commercePaymentMethodGroupRelLocalService.
+				getCommercePaymentMethodGroupRel(
+					_cpRequestHelper.getScopeGroupId(), engineKey);
+
+		return commercePaymentMethodGroupRel.isActive();
+	}
+
+	private final CommercePaymentMethodGroupRelLocalService
+		_commercePaymentMethodGroupRelLocalService;
 	private final CommerceSubscriptionEntryService
 		_commerceSubscriptionEntryService;
 	private final ConfigurationProvider _configurationProvider;

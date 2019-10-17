@@ -85,36 +85,38 @@ SearchContainer<CommerceSubscriptionEntry> commerceSubscriptionEntrySearchContai
 					property="nextIterationDate"
 				/>
 
-				<liferay-ui:search-container-column-text>
+				<c:if test="<%= commerceSubscriptionContentDisplayContext.isPaymentMethodActive(commerceOrderItem.getCommerceOrder().getCommercePaymentMethodKey()) %>">
+					<liferay-ui:search-container-column-text>
 
-					<%
-					DropdownItemList commerceSubscriptionEntryActionItemList = commerceSubscriptionContentDisplayContext.getCommerceSubscriptionEntryActionItemList(commerceSubscriptionEntry, renderRequest, renderResponse);
-					%>
+						<%
+						DropdownItemList commerceSubscriptionEntryActionItemList = commerceSubscriptionContentDisplayContext.getCommerceSubscriptionEntryActionItemList(commerceSubscriptionEntry, renderRequest, renderResponse);
+						%>
 
-					<c:if test="<%= commerceSubscriptionEntryActionItemList != null %>">
-						<c:choose>
-							<c:when test="<%= commerceSubscriptionEntryActionItemList.isEmpty() %>">
-							</c:when>
-							<c:when test="<%= commerceSubscriptionEntryActionItemList.size() > 1 %>">
-								<clay:dropdown-menu
-									dropdownItems="<%= commerceSubscriptionEntryActionItemList %>"
-								/>
-							</c:when>
-							<c:otherwise>
+						<c:if test="<%= commerceSubscriptionEntryActionItemList != null %>">
+							<c:choose>
+								<c:when test="<%= commerceSubscriptionEntryActionItemList.isEmpty() %>">
+								</c:when>
+								<c:when test="<%= commerceSubscriptionEntryActionItemList.size() > 1 %>">
+									<clay:dropdown-menu
+										dropdownItems="<%= commerceSubscriptionEntryActionItemList %>"
+									/>
+								</c:when>
+								<c:otherwise>
 
-								<%
-								DropdownItem dropdownItem = commerceSubscriptionEntryActionItemList.get(0);
-								%>
+									<%
+									DropdownItem dropdownItem = commerceSubscriptionEntryActionItemList.get(0);
+									%>
 
-								<clay:link
-									buttonStyle="secondary"
-									href='<%= String.valueOf(dropdownItem.get("href")) %>'
-									label='<%= String.valueOf(dropdownItem.get("label")) %>'
-								/>
-							</c:otherwise>
-						</c:choose>
-					</c:if>
-				</liferay-ui:search-container-column-text>
+									<clay:link
+										buttonStyle="secondary"
+										href='<%= String.valueOf(dropdownItem.get("href")) %>'
+										label='<%= String.valueOf(dropdownItem.get("label")) %>'
+									/>
+								</c:otherwise>
+							</c:choose>
+						</c:if>
+					</liferay-ui:search-container-column-text>
+				</c:if>
 			</liferay-ui:search-container-row>
 
 			<liferay-ui:search-iterator
