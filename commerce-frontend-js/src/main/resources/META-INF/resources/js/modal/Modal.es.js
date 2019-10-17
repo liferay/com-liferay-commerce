@@ -8,12 +8,6 @@ import {OPEN} from '../utilities/eventsDefinitions.es';
 const Modal = props => {
 	const [visible, setVisible] = useState(props.visible || false);
 
-	function handleOpenEvent(data) {
-		if (props.id === data.id) {
-			setVisible(true);
-		}
-	}
-
 	function reset() {
 		if (props.onClose) {
 			props.onClose();
@@ -47,6 +41,12 @@ const Modal = props => {
 			return;
 		}
 
+		function handleOpenEvent(data) {
+			if (props.id === data.id) {
+				setVisible(true);
+			}
+		}
+
 		function cleanUpListeners(e) {
 			if (e.portletId === props.portletId) {
 				Liferay.detach(OPEN, handleOpenEvent);
@@ -58,7 +58,7 @@ const Modal = props => {
 			Liferay.on(OPEN, handleOpenEvent);
 			Liferay.on('destroyPortlet', cleanUpListeners);
 		}
-	}, [handleOpenEvent, props.id, props.portletId]);
+	}, [props.id, props.portletId]);
 
 	function _handleIframeLoad() {
 		setIframeLoadingCounter(iframeLoadingCounter + 1);
