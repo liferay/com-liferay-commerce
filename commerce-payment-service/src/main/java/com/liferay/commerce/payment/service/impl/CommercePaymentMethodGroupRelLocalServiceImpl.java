@@ -285,6 +285,11 @@ public class CommercePaymentMethodGroupRelLocalServiceImpl
 	}
 
 	@Override
+	public int getCommercePaymentMethodGroupRelsCount(long groupId) {
+		return commercePaymentMethodGroupRelPersistence.countByGroupId(groupId);
+	}
+
+	@Override
 	public int getCommercePaymentMethodGroupRelsCount(
 		long groupId, boolean active) {
 
