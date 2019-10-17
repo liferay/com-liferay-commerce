@@ -18,20 +18,36 @@ import com.liferay.commerce.model.CommerceAddressRestriction;
 import com.liferay.commerce.payment.exception.CommercePaymentMethodGroupRelEngineKeyException;
 import com.liferay.commerce.payment.exception.CommercePaymentMethodGroupRelNameException;
 import com.liferay.commerce.payment.exception.NoSuchPaymentMethodGroupRelException;
+import com.liferay.commerce.payment.method.CommercePaymentMethod;
+import com.liferay.commerce.payment.method.CommercePaymentMethodRegistry;
 import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
 import com.liferay.commerce.payment.service.base.CommercePaymentMethodGroupRelLocalServiceBaseImpl;
+import com.liferay.commerce.product.catalog.CPCatalogEntry;
+import com.liferay.commerce.product.catalog.CPQuery;
+import com.liferay.commerce.product.data.source.CPDataSourceResult;
+import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.search.CPDefinitionIndexer;
+import com.liferay.commerce.product.service.CPDefinitionLocalService;
+import com.liferay.commerce.product.service.CommerceCatalogService;
+import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.service.CommerceAddressRestrictionLocalService;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.File;
+import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -279,6 +295,78 @@ public class CommercePaymentMethodGroupRelLocalServiceImpl
 
 		commercePaymentMethodGroupRel.setActive(active);
 
+		if (!active) {
+			Map<String, CommercePaymentMethod> commercePaymentMethodsMap =
+				_commercePaymentMethodRegistry.getCommercePaymentMethods();
+
+			List<CommercePaymentMethod> recurringCommercePaymentMethods =
+				new ArrayList<>();
+
+			for (CommercePaymentMethod commercePaymentMethod :
+					commercePaymentMethodsMap.values()) {
+
+				if (commercePaymentMethod.isProcessRecurringEnabled()) {
+					recurringCommercePaymentMethods.add(commercePaymentMethod);
+				}
+			}
+
+			if (recurringCommercePaymentMethods.size() == 1) {
+				CommercePaymentMethod lastRecurringCommercePaymentMethod =
+					recurringCommercePaymentMethods.get(0);
+
+				String lastRecurringCommercePaymentMethodKey =
+					lastRecurringCommercePaymentMethod.getKey();
+
+				if (!lastRecurringCommercePaymentMethodKey.equals(
+						commercePaymentMethodGroupRel.getEngineKey())) {
+
+					return commercePaymentMethodGroupRelPersistence.update(
+						commercePaymentMethodGroupRel);
+				}
+
+				SearchContext searchContext = new SearchContext();
+
+				Map<String, Serializable> attributes = new HashMap<>();
+
+				attributes.put(Field.STATUS, WorkflowConstants.STATUS_APPROVED);
+
+				attributes.put(CPDefinitionIndexer.FIELD_PUBLISHED, true);
+				attributes.put(
+					CPDefinitionIndexer.FIELD_SUBSCRIPTION_ENABLED, true);
+
+				long groupId = commercePaymentMethodGroupRel.getGroupId();
+
+				attributes.put("commerceChannelGroupId", groupId);
+
+				searchContext.setAttributes(attributes);
+
+				searchContext.setCompanyId(
+					commercePaymentMethodGroupRel.getCompanyId());
+
+				CPDataSourceResult cpDataSourceResult =
+					_cpDefinitionHelper.search(
+						groupId, searchContext, new CPQuery(),
+						QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+				List<CPCatalogEntry> cpCatalogEntries =
+					cpDataSourceResult.getCPCatalogEntries();
+
+				for (CPCatalogEntry cpCatalogEntry : cpCatalogEntries) {
+					CPDefinition cpDefinition =
+						_cpDefinitionLocalService.fetchCPDefinition(
+							cpCatalogEntry.getCPDefinitionId());
+
+					if (cpDefinition != null) {
+						cpDefinition.setSubscriptionEnabled(false);
+						cpDefinition.setStatus(WorkflowConstants.STATUS_DRAFT);
+
+						_cpDefinitionLocalService.updateCPDefinition(
+							cpDefinition);
+					}
+				}
+			}
+		}
+
 		return commercePaymentMethodGroupRelPersistence.update(
 			commercePaymentMethodGroupRel);
 	}
@@ -346,5 +434,17 @@ public class CommercePaymentMethodGroupRelLocalServiceImpl
 	@ServiceReference(type = CommerceAddressRestrictionLocalService.class)
 	private CommerceAddressRestrictionLocalService
 		_commerceAddressRestrictionLocalService;
+
+	@ServiceReference(type = CommerceCatalogService.class)
+	private CommerceCatalogService _commerceCatalogService;
+
+	@ServiceReference(type = CommercePaymentMethodRegistry.class)
+	private CommercePaymentMethodRegistry _commercePaymentMethodRegistry;
+
+	@ServiceReference(type = CPDefinitionHelper.class)
+	private CPDefinitionHelper _cpDefinitionHelper;
+
+	@ServiceReference(type = CPDefinitionLocalService.class)
+	private CPDefinitionLocalService _cpDefinitionLocalService;
 
 }
