@@ -18,6 +18,8 @@ import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.constants.CommerceSubscriptionEntryConstants;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
+import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
+import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelLocalService;
 import com.liferay.commerce.product.display.context.util.CPRequestHelper;
 import com.liferay.commerce.product.util.CPSubscriptionType;
 import com.liferay.commerce.product.util.CPSubscriptionTypeJSPContributor;
@@ -61,6 +63,8 @@ import javax.servlet.http.HttpServletRequest;
 public class CommerceSubscriptionEntryDisplayContext {
 
 	public CommerceSubscriptionEntryDisplayContext(
+		CommercePaymentMethodGroupRelLocalService
+			commercePaymentMethodGroupRelLocalService,
 		CommerceSubscriptionEntryService commerceSubscriptionEntryService,
 		ConfigurationProvider configurationProvider,
 		CPSubscriptionTypeJSPContributorRegistry
@@ -68,6 +72,8 @@ public class CommerceSubscriptionEntryDisplayContext {
 		CPSubscriptionTypeRegistry cpSubscriptionTypeRegistry,
 		HttpServletRequest httpServletRequest) {
 
+		_commercePaymentMethodGroupRelLocalService =
+			commercePaymentMethodGroupRelLocalService;
 		_commerceSubscriptionEntryService = commerceSubscriptionEntryService;
 		_configurationProvider = configurationProvider;
 		_cpSubscriptionTypeJSPContributorRegistry =
@@ -401,11 +407,24 @@ public class CommerceSubscriptionEntryDisplayContext {
 			CommerceActionKeys.MANAGE_COMMERCE_SUBSCRIPTIONS);
 	}
 
+	public boolean isPaymentMethodActive(String engineKey)
+		throws PortalException {
+
+		CommercePaymentMethodGroupRel commercePaymentMethodGroupRel =
+			_commercePaymentMethodGroupRelLocalService.
+				getCommercePaymentMethodGroupRel(
+					_themeDisplay.getScopeGroupId(), engineKey);
+
+		return commercePaymentMethodGroupRel.isActive();
+	}
+
 	protected String getNavigation() {
 		return ParamUtil.getString(_httpServletRequest, "navigation", "all");
 	}
 
 	private final Format _commerceOrderDateFormatDateTime;
+	private final CommercePaymentMethodGroupRelLocalService
+		_commercePaymentMethodGroupRelLocalService;
 	private CommerceSubscriptionEntry _commerceSubscriptionEntry;
 	private final CommerceSubscriptionEntryService
 		_commerceSubscriptionEntryService;
