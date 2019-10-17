@@ -366,9 +366,9 @@ public class CPDefinitionOptionValueRelModelImpl
 				@Override
 				public void accept(
 					CPDefinitionOptionValueRel cpDefinitionOptionValueRel,
-					Object uuid) {
+					Object uuidObject) {
 
-					cpDefinitionOptionValueRel.setUuid((String)uuid);
+					cpDefinitionOptionValueRel.setUuid((String)uuidObject);
 				}
 
 			});
@@ -392,10 +392,10 @@ public class CPDefinitionOptionValueRelModelImpl
 				@Override
 				public void accept(
 					CPDefinitionOptionValueRel cpDefinitionOptionValueRel,
-					Object CPDefinitionOptionValueRelId) {
+					Object CPDefinitionOptionValueRelIdObject) {
 
 					cpDefinitionOptionValueRel.setCPDefinitionOptionValueRelId(
-						(Long)CPDefinitionOptionValueRelId);
+						(Long)CPDefinitionOptionValueRelIdObject);
 				}
 
 			});
@@ -418,9 +418,9 @@ public class CPDefinitionOptionValueRelModelImpl
 				@Override
 				public void accept(
 					CPDefinitionOptionValueRel cpDefinitionOptionValueRel,
-					Object groupId) {
+					Object groupIdObject) {
 
-					cpDefinitionOptionValueRel.setGroupId((Long)groupId);
+					cpDefinitionOptionValueRel.setGroupId((Long)groupIdObject);
 				}
 
 			});
@@ -443,9 +443,10 @@ public class CPDefinitionOptionValueRelModelImpl
 				@Override
 				public void accept(
 					CPDefinitionOptionValueRel cpDefinitionOptionValueRel,
-					Object companyId) {
+					Object companyIdObject) {
 
-					cpDefinitionOptionValueRel.setCompanyId((Long)companyId);
+					cpDefinitionOptionValueRel.setCompanyId(
+						(Long)companyIdObject);
 				}
 
 			});
@@ -468,9 +469,9 @@ public class CPDefinitionOptionValueRelModelImpl
 				@Override
 				public void accept(
 					CPDefinitionOptionValueRel cpDefinitionOptionValueRel,
-					Object userId) {
+					Object userIdObject) {
 
-					cpDefinitionOptionValueRel.setUserId((Long)userId);
+					cpDefinitionOptionValueRel.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -493,9 +494,10 @@ public class CPDefinitionOptionValueRelModelImpl
 				@Override
 				public void accept(
 					CPDefinitionOptionValueRel cpDefinitionOptionValueRel,
-					Object userName) {
+					Object userNameObject) {
 
-					cpDefinitionOptionValueRel.setUserName((String)userName);
+					cpDefinitionOptionValueRel.setUserName(
+						(String)userNameObject);
 				}
 
 			});
@@ -518,9 +520,10 @@ public class CPDefinitionOptionValueRelModelImpl
 				@Override
 				public void accept(
 					CPDefinitionOptionValueRel cpDefinitionOptionValueRel,
-					Object createDate) {
+					Object createDateObject) {
 
-					cpDefinitionOptionValueRel.setCreateDate((Date)createDate);
+					cpDefinitionOptionValueRel.setCreateDate(
+						(Date)createDateObject);
 				}
 
 			});
@@ -543,10 +546,10 @@ public class CPDefinitionOptionValueRelModelImpl
 				@Override
 				public void accept(
 					CPDefinitionOptionValueRel cpDefinitionOptionValueRel,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
 					cpDefinitionOptionValueRel.setModifiedDate(
-						(Date)modifiedDate);
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -570,10 +573,10 @@ public class CPDefinitionOptionValueRelModelImpl
 				@Override
 				public void accept(
 					CPDefinitionOptionValueRel cpDefinitionOptionValueRel,
-					Object CPDefinitionOptionRelId) {
+					Object CPDefinitionOptionRelIdObject) {
 
 					cpDefinitionOptionValueRel.setCPDefinitionOptionRelId(
-						(Long)CPDefinitionOptionRelId);
+						(Long)CPDefinitionOptionRelIdObject);
 				}
 
 			});
@@ -596,9 +599,9 @@ public class CPDefinitionOptionValueRelModelImpl
 				@Override
 				public void accept(
 					CPDefinitionOptionValueRel cpDefinitionOptionValueRel,
-					Object name) {
+					Object nameObject) {
 
-					cpDefinitionOptionValueRel.setName((String)name);
+					cpDefinitionOptionValueRel.setName((String)nameObject);
 				}
 
 			});
@@ -621,9 +624,10 @@ public class CPDefinitionOptionValueRelModelImpl
 				@Override
 				public void accept(
 					CPDefinitionOptionValueRel cpDefinitionOptionValueRel,
-					Object priority) {
+					Object priorityObject) {
 
-					cpDefinitionOptionValueRel.setPriority((Double)priority);
+					cpDefinitionOptionValueRel.setPriority(
+						(Double)priorityObject);
 				}
 
 			});
@@ -646,9 +650,9 @@ public class CPDefinitionOptionValueRelModelImpl
 				@Override
 				public void accept(
 					CPDefinitionOptionValueRel cpDefinitionOptionValueRel,
-					Object key) {
+					Object keyObject) {
 
-					cpDefinitionOptionValueRel.setKey((String)key);
+					cpDefinitionOptionValueRel.setKey((String)keyObject);
 				}
 
 			});

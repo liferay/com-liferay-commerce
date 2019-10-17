@@ -350,8 +350,10 @@ public class CPOptionValueModelImpl
 			new BiConsumer<CPOptionValue, Object>() {
 
 				@Override
-				public void accept(CPOptionValue cpOptionValue, Object uuid) {
-					cpOptionValue.setUuid((String)uuid);
+				public void accept(
+					CPOptionValue cpOptionValue, Object uuidObject) {
+
+					cpOptionValue.setUuid((String)uuidObject);
 				}
 
 			});
@@ -371,10 +373,11 @@ public class CPOptionValueModelImpl
 
 				@Override
 				public void accept(
-					CPOptionValue cpOptionValue, Object externalReferenceCode) {
+					CPOptionValue cpOptionValue,
+					Object externalReferenceCodeObject) {
 
 					cpOptionValue.setExternalReferenceCode(
-						(String)externalReferenceCode);
+						(String)externalReferenceCodeObject);
 				}
 
 			});
@@ -394,9 +397,10 @@ public class CPOptionValueModelImpl
 
 				@Override
 				public void accept(
-					CPOptionValue cpOptionValue, Object CPOptionValueId) {
+					CPOptionValue cpOptionValue, Object CPOptionValueIdObject) {
 
-					cpOptionValue.setCPOptionValueId((Long)CPOptionValueId);
+					cpOptionValue.setCPOptionValueId(
+						(Long)CPOptionValueIdObject);
 				}
 
 			});
@@ -416,9 +420,9 @@ public class CPOptionValueModelImpl
 
 				@Override
 				public void accept(
-					CPOptionValue cpOptionValue, Object companyId) {
+					CPOptionValue cpOptionValue, Object companyIdObject) {
 
-					cpOptionValue.setCompanyId((Long)companyId);
+					cpOptionValue.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -437,8 +441,10 @@ public class CPOptionValueModelImpl
 			new BiConsumer<CPOptionValue, Object>() {
 
 				@Override
-				public void accept(CPOptionValue cpOptionValue, Object userId) {
-					cpOptionValue.setUserId((Long)userId);
+				public void accept(
+					CPOptionValue cpOptionValue, Object userIdObject) {
+
+					cpOptionValue.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -458,9 +464,9 @@ public class CPOptionValueModelImpl
 
 				@Override
 				public void accept(
-					CPOptionValue cpOptionValue, Object userName) {
+					CPOptionValue cpOptionValue, Object userNameObject) {
 
-					cpOptionValue.setUserName((String)userName);
+					cpOptionValue.setUserName((String)userNameObject);
 				}
 
 			});
@@ -480,9 +486,9 @@ public class CPOptionValueModelImpl
 
 				@Override
 				public void accept(
-					CPOptionValue cpOptionValue, Object createDate) {
+					CPOptionValue cpOptionValue, Object createDateObject) {
 
-					cpOptionValue.setCreateDate((Date)createDate);
+					cpOptionValue.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -502,9 +508,9 @@ public class CPOptionValueModelImpl
 
 				@Override
 				public void accept(
-					CPOptionValue cpOptionValue, Object modifiedDate) {
+					CPOptionValue cpOptionValue, Object modifiedDateObject) {
 
-					cpOptionValue.setModifiedDate((Date)modifiedDate);
+					cpOptionValue.setModifiedDate((Date)modifiedDateObject);
 				}
 
 			});
@@ -524,9 +530,9 @@ public class CPOptionValueModelImpl
 
 				@Override
 				public void accept(
-					CPOptionValue cpOptionValue, Object CPOptionId) {
+					CPOptionValue cpOptionValue, Object CPOptionIdObject) {
 
-					cpOptionValue.setCPOptionId((Long)CPOptionId);
+					cpOptionValue.setCPOptionId((Long)CPOptionIdObject);
 				}
 
 			});
@@ -545,8 +551,10 @@ public class CPOptionValueModelImpl
 			new BiConsumer<CPOptionValue, Object>() {
 
 				@Override
-				public void accept(CPOptionValue cpOptionValue, Object name) {
-					cpOptionValue.setName((String)name);
+				public void accept(
+					CPOptionValue cpOptionValue, Object nameObject) {
+
+					cpOptionValue.setName((String)nameObject);
 				}
 
 			});
@@ -566,9 +574,9 @@ public class CPOptionValueModelImpl
 
 				@Override
 				public void accept(
-					CPOptionValue cpOptionValue, Object priority) {
+					CPOptionValue cpOptionValue, Object priorityObject) {
 
-					cpOptionValue.setPriority((Double)priority);
+					cpOptionValue.setPriority((Double)priorityObject);
 				}
 
 			});
@@ -587,8 +595,10 @@ public class CPOptionValueModelImpl
 			new BiConsumer<CPOptionValue, Object>() {
 
 				@Override
-				public void accept(CPOptionValue cpOptionValue, Object key) {
-					cpOptionValue.setKey((String)key);
+				public void accept(
+					CPOptionValue cpOptionValue, Object keyObject) {
+
+					cpOptionValue.setKey((String)keyObject);
 				}
 
 			});
@@ -608,9 +618,10 @@ public class CPOptionValueModelImpl
 
 				@Override
 				public void accept(
-					CPOptionValue cpOptionValue, Object lastPublishDate) {
+					CPOptionValue cpOptionValue, Object lastPublishDateObject) {
 
-					cpOptionValue.setLastPublishDate((Date)lastPublishDate);
+					cpOptionValue.setLastPublishDate(
+						(Date)lastPublishDateObject);
 				}
 
 			});

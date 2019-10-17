@@ -361,9 +361,10 @@ public class CPSpecificationOptionModelImpl
 
 				@Override
 				public void accept(
-					CPSpecificationOption cpSpecificationOption, Object uuid) {
+					CPSpecificationOption cpSpecificationOption,
+					Object uuidObject) {
 
-					cpSpecificationOption.setUuid((String)uuid);
+					cpSpecificationOption.setUuid((String)uuidObject);
 				}
 
 			});
@@ -386,10 +387,10 @@ public class CPSpecificationOptionModelImpl
 				@Override
 				public void accept(
 					CPSpecificationOption cpSpecificationOption,
-					Object CPSpecificationOptionId) {
+					Object CPSpecificationOptionIdObject) {
 
 					cpSpecificationOption.setCPSpecificationOptionId(
-						(Long)CPSpecificationOptionId);
+						(Long)CPSpecificationOptionIdObject);
 				}
 
 			});
@@ -412,9 +413,9 @@ public class CPSpecificationOptionModelImpl
 				@Override
 				public void accept(
 					CPSpecificationOption cpSpecificationOption,
-					Object companyId) {
+					Object companyIdObject) {
 
-					cpSpecificationOption.setCompanyId((Long)companyId);
+					cpSpecificationOption.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -437,9 +438,9 @@ public class CPSpecificationOptionModelImpl
 				@Override
 				public void accept(
 					CPSpecificationOption cpSpecificationOption,
-					Object userId) {
+					Object userIdObject) {
 
-					cpSpecificationOption.setUserId((Long)userId);
+					cpSpecificationOption.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -462,9 +463,9 @@ public class CPSpecificationOptionModelImpl
 				@Override
 				public void accept(
 					CPSpecificationOption cpSpecificationOption,
-					Object userName) {
+					Object userNameObject) {
 
-					cpSpecificationOption.setUserName((String)userName);
+					cpSpecificationOption.setUserName((String)userNameObject);
 				}
 
 			});
@@ -487,9 +488,9 @@ public class CPSpecificationOptionModelImpl
 				@Override
 				public void accept(
 					CPSpecificationOption cpSpecificationOption,
-					Object createDate) {
+					Object createDateObject) {
 
-					cpSpecificationOption.setCreateDate((Date)createDate);
+					cpSpecificationOption.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -512,9 +513,10 @@ public class CPSpecificationOptionModelImpl
 				@Override
 				public void accept(
 					CPSpecificationOption cpSpecificationOption,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
-					cpSpecificationOption.setModifiedDate((Date)modifiedDate);
+					cpSpecificationOption.setModifiedDate(
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -537,10 +539,10 @@ public class CPSpecificationOptionModelImpl
 				@Override
 				public void accept(
 					CPSpecificationOption cpSpecificationOption,
-					Object CPOptionCategoryId) {
+					Object CPOptionCategoryIdObject) {
 
 					cpSpecificationOption.setCPOptionCategoryId(
-						(Long)CPOptionCategoryId);
+						(Long)CPOptionCategoryIdObject);
 				}
 
 			});
@@ -562,9 +564,10 @@ public class CPSpecificationOptionModelImpl
 
 				@Override
 				public void accept(
-					CPSpecificationOption cpSpecificationOption, Object title) {
+					CPSpecificationOption cpSpecificationOption,
+					Object titleObject) {
 
-					cpSpecificationOption.setTitle((String)title);
+					cpSpecificationOption.setTitle((String)titleObject);
 				}
 
 			});
@@ -587,9 +590,10 @@ public class CPSpecificationOptionModelImpl
 				@Override
 				public void accept(
 					CPSpecificationOption cpSpecificationOption,
-					Object description) {
+					Object descriptionObject) {
 
-					cpSpecificationOption.setDescription((String)description);
+					cpSpecificationOption.setDescription(
+						(String)descriptionObject);
 				}
 
 			});
@@ -612,9 +616,10 @@ public class CPSpecificationOptionModelImpl
 				@Override
 				public void accept(
 					CPSpecificationOption cpSpecificationOption,
-					Object facetable) {
+					Object facetableObject) {
 
-					cpSpecificationOption.setFacetable((Boolean)facetable);
+					cpSpecificationOption.setFacetable(
+						(Boolean)facetableObject);
 				}
 
 			});
@@ -636,9 +641,10 @@ public class CPSpecificationOptionModelImpl
 
 				@Override
 				public void accept(
-					CPSpecificationOption cpSpecificationOption, Object key) {
+					CPSpecificationOption cpSpecificationOption,
+					Object keyObject) {
 
-					cpSpecificationOption.setKey((String)key);
+					cpSpecificationOption.setKey((String)keyObject);
 				}
 
 			});
@@ -661,10 +667,10 @@ public class CPSpecificationOptionModelImpl
 				@Override
 				public void accept(
 					CPSpecificationOption cpSpecificationOption,
-					Object lastPublishDate) {
+					Object lastPublishDateObject) {
 
 					cpSpecificationOption.setLastPublishDate(
-						(Date)lastPublishDate);
+						(Date)lastPublishDateObject);
 				}
 
 			});

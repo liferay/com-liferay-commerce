@@ -348,9 +348,9 @@ public class CPOptionCategoryModelImpl
 
 				@Override
 				public void accept(
-					CPOptionCategory cpOptionCategory, Object uuid) {
+					CPOptionCategory cpOptionCategory, Object uuidObject) {
 
-					cpOptionCategory.setUuid((String)uuid);
+					cpOptionCategory.setUuid((String)uuidObject);
 				}
 
 			});
@@ -371,10 +371,10 @@ public class CPOptionCategoryModelImpl
 				@Override
 				public void accept(
 					CPOptionCategory cpOptionCategory,
-					Object CPOptionCategoryId) {
+					Object CPOptionCategoryIdObject) {
 
 					cpOptionCategory.setCPOptionCategoryId(
-						(Long)CPOptionCategoryId);
+						(Long)CPOptionCategoryIdObject);
 				}
 
 			});
@@ -394,9 +394,9 @@ public class CPOptionCategoryModelImpl
 
 				@Override
 				public void accept(
-					CPOptionCategory cpOptionCategory, Object companyId) {
+					CPOptionCategory cpOptionCategory, Object companyIdObject) {
 
-					cpOptionCategory.setCompanyId((Long)companyId);
+					cpOptionCategory.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -416,9 +416,9 @@ public class CPOptionCategoryModelImpl
 
 				@Override
 				public void accept(
-					CPOptionCategory cpOptionCategory, Object userId) {
+					CPOptionCategory cpOptionCategory, Object userIdObject) {
 
-					cpOptionCategory.setUserId((Long)userId);
+					cpOptionCategory.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -438,9 +438,9 @@ public class CPOptionCategoryModelImpl
 
 				@Override
 				public void accept(
-					CPOptionCategory cpOptionCategory, Object userName) {
+					CPOptionCategory cpOptionCategory, Object userNameObject) {
 
-					cpOptionCategory.setUserName((String)userName);
+					cpOptionCategory.setUserName((String)userNameObject);
 				}
 
 			});
@@ -460,9 +460,10 @@ public class CPOptionCategoryModelImpl
 
 				@Override
 				public void accept(
-					CPOptionCategory cpOptionCategory, Object createDate) {
+					CPOptionCategory cpOptionCategory,
+					Object createDateObject) {
 
-					cpOptionCategory.setCreateDate((Date)createDate);
+					cpOptionCategory.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -482,9 +483,10 @@ public class CPOptionCategoryModelImpl
 
 				@Override
 				public void accept(
-					CPOptionCategory cpOptionCategory, Object modifiedDate) {
+					CPOptionCategory cpOptionCategory,
+					Object modifiedDateObject) {
 
-					cpOptionCategory.setModifiedDate((Date)modifiedDate);
+					cpOptionCategory.setModifiedDate((Date)modifiedDateObject);
 				}
 
 			});
@@ -504,9 +506,9 @@ public class CPOptionCategoryModelImpl
 
 				@Override
 				public void accept(
-					CPOptionCategory cpOptionCategory, Object title) {
+					CPOptionCategory cpOptionCategory, Object titleObject) {
 
-					cpOptionCategory.setTitle((String)title);
+					cpOptionCategory.setTitle((String)titleObject);
 				}
 
 			});
@@ -526,9 +528,10 @@ public class CPOptionCategoryModelImpl
 
 				@Override
 				public void accept(
-					CPOptionCategory cpOptionCategory, Object description) {
+					CPOptionCategory cpOptionCategory,
+					Object descriptionObject) {
 
-					cpOptionCategory.setDescription((String)description);
+					cpOptionCategory.setDescription((String)descriptionObject);
 				}
 
 			});
@@ -548,9 +551,9 @@ public class CPOptionCategoryModelImpl
 
 				@Override
 				public void accept(
-					CPOptionCategory cpOptionCategory, Object priority) {
+					CPOptionCategory cpOptionCategory, Object priorityObject) {
 
-					cpOptionCategory.setPriority((Double)priority);
+					cpOptionCategory.setPriority((Double)priorityObject);
 				}
 
 			});
@@ -570,9 +573,9 @@ public class CPOptionCategoryModelImpl
 
 				@Override
 				public void accept(
-					CPOptionCategory cpOptionCategory, Object key) {
+					CPOptionCategory cpOptionCategory, Object keyObject) {
 
-					cpOptionCategory.setKey((String)key);
+					cpOptionCategory.setKey((String)keyObject);
 				}
 
 			});
@@ -592,9 +595,11 @@ public class CPOptionCategoryModelImpl
 
 				@Override
 				public void accept(
-					CPOptionCategory cpOptionCategory, Object lastPublishDate) {
+					CPOptionCategory cpOptionCategory,
+					Object lastPublishDateObject) {
 
-					cpOptionCategory.setLastPublishDate((Date)lastPublishDate);
+					cpOptionCategory.setLastPublishDate(
+						(Date)lastPublishDateObject);
 				}
 
 			});

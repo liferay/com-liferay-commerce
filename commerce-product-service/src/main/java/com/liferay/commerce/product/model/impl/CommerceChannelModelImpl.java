@@ -339,10 +339,10 @@ public class CommerceChannelModelImpl
 				@Override
 				public void accept(
 					CommerceChannel commerceChannel,
-					Object externalReferenceCode) {
+					Object externalReferenceCodeObject) {
 
 					commerceChannel.setExternalReferenceCode(
-						(String)externalReferenceCode);
+						(String)externalReferenceCodeObject);
 				}
 
 			});
@@ -362,10 +362,11 @@ public class CommerceChannelModelImpl
 
 				@Override
 				public void accept(
-					CommerceChannel commerceChannel, Object commerceChannelId) {
+					CommerceChannel commerceChannel,
+					Object commerceChannelIdObject) {
 
 					commerceChannel.setCommerceChannelId(
-						(Long)commerceChannelId);
+						(Long)commerceChannelIdObject);
 				}
 
 			});
@@ -385,9 +386,9 @@ public class CommerceChannelModelImpl
 
 				@Override
 				public void accept(
-					CommerceChannel commerceChannel, Object companyId) {
+					CommerceChannel commerceChannel, Object companyIdObject) {
 
-					commerceChannel.setCompanyId((Long)companyId);
+					commerceChannel.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -407,9 +408,9 @@ public class CommerceChannelModelImpl
 
 				@Override
 				public void accept(
-					CommerceChannel commerceChannel, Object userId) {
+					CommerceChannel commerceChannel, Object userIdObject) {
 
-					commerceChannel.setUserId((Long)userId);
+					commerceChannel.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -429,9 +430,9 @@ public class CommerceChannelModelImpl
 
 				@Override
 				public void accept(
-					CommerceChannel commerceChannel, Object userName) {
+					CommerceChannel commerceChannel, Object userNameObject) {
 
-					commerceChannel.setUserName((String)userName);
+					commerceChannel.setUserName((String)userNameObject);
 				}
 
 			});
@@ -451,9 +452,9 @@ public class CommerceChannelModelImpl
 
 				@Override
 				public void accept(
-					CommerceChannel commerceChannel, Object createDate) {
+					CommerceChannel commerceChannel, Object createDateObject) {
 
-					commerceChannel.setCreateDate((Date)createDate);
+					commerceChannel.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -473,9 +474,10 @@ public class CommerceChannelModelImpl
 
 				@Override
 				public void accept(
-					CommerceChannel commerceChannel, Object modifiedDate) {
+					CommerceChannel commerceChannel,
+					Object modifiedDateObject) {
 
-					commerceChannel.setModifiedDate((Date)modifiedDate);
+					commerceChannel.setModifiedDate((Date)modifiedDateObject);
 				}
 
 			});
@@ -495,9 +497,9 @@ public class CommerceChannelModelImpl
 
 				@Override
 				public void accept(
-					CommerceChannel commerceChannel, Object siteGroupId) {
+					CommerceChannel commerceChannel, Object siteGroupIdObject) {
 
-					commerceChannel.setSiteGroupId((Long)siteGroupId);
+					commerceChannel.setSiteGroupId((Long)siteGroupIdObject);
 				}
 
 			});
@@ -517,9 +519,9 @@ public class CommerceChannelModelImpl
 
 				@Override
 				public void accept(
-					CommerceChannel commerceChannel, Object name) {
+					CommerceChannel commerceChannel, Object nameObject) {
 
-					commerceChannel.setName((String)name);
+					commerceChannel.setName((String)nameObject);
 				}
 
 			});
@@ -539,9 +541,9 @@ public class CommerceChannelModelImpl
 
 				@Override
 				public void accept(
-					CommerceChannel commerceChannel, Object type) {
+					CommerceChannel commerceChannel, Object typeObject) {
 
-					commerceChannel.setType((String)type);
+					commerceChannel.setType((String)typeObject);
 				}
 
 			});
@@ -561,9 +563,10 @@ public class CommerceChannelModelImpl
 
 				@Override
 				public void accept(
-					CommerceChannel commerceChannel, Object typeSettings) {
+					CommerceChannel commerceChannel,
+					Object typeSettingsObject) {
 
-					commerceChannel.setTypeSettings((String)typeSettings);
+					commerceChannel.setTypeSettings((String)typeSettingsObject);
 				}
 
 			});
@@ -584,10 +587,10 @@ public class CommerceChannelModelImpl
 				@Override
 				public void accept(
 					CommerceChannel commerceChannel,
-					Object commerceCurrencyCode) {
+					Object commerceCurrencyCodeObject) {
 
 					commerceChannel.setCommerceCurrencyCode(
-						(String)commerceCurrencyCode);
+						(String)commerceCurrencyCodeObject);
 				}
 
 			});
