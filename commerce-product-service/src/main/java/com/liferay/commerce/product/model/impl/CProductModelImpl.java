@@ -281,8 +281,8 @@ public class CProductModelImpl
 			new BiConsumer<CProduct, Object>() {
 
 				@Override
-				public void accept(CProduct cProduct, Object uuid) {
-					cProduct.setUuid((String)uuid);
+				public void accept(CProduct cProduct, Object uuidObject) {
+					cProduct.setUuid((String)uuidObject);
 				}
 
 			});
@@ -302,10 +302,10 @@ public class CProductModelImpl
 
 				@Override
 				public void accept(
-					CProduct cProduct, Object externalReferenceCode) {
+					CProduct cProduct, Object externalReferenceCodeObject) {
 
 					cProduct.setExternalReferenceCode(
-						(String)externalReferenceCode);
+						(String)externalReferenceCodeObject);
 				}
 
 			});
@@ -324,8 +324,8 @@ public class CProductModelImpl
 			new BiConsumer<CProduct, Object>() {
 
 				@Override
-				public void accept(CProduct cProduct, Object CProductId) {
-					cProduct.setCProductId((Long)CProductId);
+				public void accept(CProduct cProduct, Object CProductIdObject) {
+					cProduct.setCProductId((Long)CProductIdObject);
 				}
 
 			});
@@ -344,8 +344,8 @@ public class CProductModelImpl
 			new BiConsumer<CProduct, Object>() {
 
 				@Override
-				public void accept(CProduct cProduct, Object groupId) {
-					cProduct.setGroupId((Long)groupId);
+				public void accept(CProduct cProduct, Object groupIdObject) {
+					cProduct.setGroupId((Long)groupIdObject);
 				}
 
 			});
@@ -364,8 +364,8 @@ public class CProductModelImpl
 			new BiConsumer<CProduct, Object>() {
 
 				@Override
-				public void accept(CProduct cProduct, Object companyId) {
-					cProduct.setCompanyId((Long)companyId);
+				public void accept(CProduct cProduct, Object companyIdObject) {
+					cProduct.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -384,8 +384,8 @@ public class CProductModelImpl
 			new BiConsumer<CProduct, Object>() {
 
 				@Override
-				public void accept(CProduct cProduct, Object userId) {
-					cProduct.setUserId((Long)userId);
+				public void accept(CProduct cProduct, Object userIdObject) {
+					cProduct.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -404,8 +404,8 @@ public class CProductModelImpl
 			new BiConsumer<CProduct, Object>() {
 
 				@Override
-				public void accept(CProduct cProduct, Object userName) {
-					cProduct.setUserName((String)userName);
+				public void accept(CProduct cProduct, Object userNameObject) {
+					cProduct.setUserName((String)userNameObject);
 				}
 
 			});
@@ -424,8 +424,8 @@ public class CProductModelImpl
 			new BiConsumer<CProduct, Object>() {
 
 				@Override
-				public void accept(CProduct cProduct, Object createDate) {
-					cProduct.setCreateDate((Date)createDate);
+				public void accept(CProduct cProduct, Object createDateObject) {
+					cProduct.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -444,8 +444,10 @@ public class CProductModelImpl
 			new BiConsumer<CProduct, Object>() {
 
 				@Override
-				public void accept(CProduct cProduct, Object modifiedDate) {
-					cProduct.setModifiedDate((Date)modifiedDate);
+				public void accept(
+					CProduct cProduct, Object modifiedDateObject) {
+
+					cProduct.setModifiedDate((Date)modifiedDateObject);
 				}
 
 			});
@@ -465,10 +467,10 @@ public class CProductModelImpl
 
 				@Override
 				public void accept(
-					CProduct cProduct, Object publishedCPDefinitionId) {
+					CProduct cProduct, Object publishedCPDefinitionIdObject) {
 
 					cProduct.setPublishedCPDefinitionId(
-						(Long)publishedCPDefinitionId);
+						(Long)publishedCPDefinitionIdObject);
 				}
 
 			});
@@ -487,8 +489,10 @@ public class CProductModelImpl
 			new BiConsumer<CProduct, Object>() {
 
 				@Override
-				public void accept(CProduct cProduct, Object latestVersion) {
-					cProduct.setLatestVersion((Integer)latestVersion);
+				public void accept(
+					CProduct cProduct, Object latestVersionObject) {
+
+					cProduct.setLatestVersion((Integer)latestVersionObject);
 				}
 
 			});

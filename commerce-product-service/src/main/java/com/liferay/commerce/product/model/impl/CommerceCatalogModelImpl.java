@@ -337,10 +337,10 @@ public class CommerceCatalogModelImpl
 				@Override
 				public void accept(
 					CommerceCatalog commerceCatalog,
-					Object externalReferenceCode) {
+					Object externalReferenceCodeObject) {
 
 					commerceCatalog.setExternalReferenceCode(
-						(String)externalReferenceCode);
+						(String)externalReferenceCodeObject);
 				}
 
 			});
@@ -360,10 +360,11 @@ public class CommerceCatalogModelImpl
 
 				@Override
 				public void accept(
-					CommerceCatalog commerceCatalog, Object commerceCatalogId) {
+					CommerceCatalog commerceCatalog,
+					Object commerceCatalogIdObject) {
 
 					commerceCatalog.setCommerceCatalogId(
-						(Long)commerceCatalogId);
+						(Long)commerceCatalogIdObject);
 				}
 
 			});
@@ -383,9 +384,9 @@ public class CommerceCatalogModelImpl
 
 				@Override
 				public void accept(
-					CommerceCatalog commerceCatalog, Object companyId) {
+					CommerceCatalog commerceCatalog, Object companyIdObject) {
 
-					commerceCatalog.setCompanyId((Long)companyId);
+					commerceCatalog.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -405,9 +406,9 @@ public class CommerceCatalogModelImpl
 
 				@Override
 				public void accept(
-					CommerceCatalog commerceCatalog, Object userId) {
+					CommerceCatalog commerceCatalog, Object userIdObject) {
 
-					commerceCatalog.setUserId((Long)userId);
+					commerceCatalog.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -427,9 +428,9 @@ public class CommerceCatalogModelImpl
 
 				@Override
 				public void accept(
-					CommerceCatalog commerceCatalog, Object userName) {
+					CommerceCatalog commerceCatalog, Object userNameObject) {
 
-					commerceCatalog.setUserName((String)userName);
+					commerceCatalog.setUserName((String)userNameObject);
 				}
 
 			});
@@ -449,9 +450,9 @@ public class CommerceCatalogModelImpl
 
 				@Override
 				public void accept(
-					CommerceCatalog commerceCatalog, Object createDate) {
+					CommerceCatalog commerceCatalog, Object createDateObject) {
 
-					commerceCatalog.setCreateDate((Date)createDate);
+					commerceCatalog.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -471,9 +472,10 @@ public class CommerceCatalogModelImpl
 
 				@Override
 				public void accept(
-					CommerceCatalog commerceCatalog, Object modifiedDate) {
+					CommerceCatalog commerceCatalog,
+					Object modifiedDateObject) {
 
-					commerceCatalog.setModifiedDate((Date)modifiedDate);
+					commerceCatalog.setModifiedDate((Date)modifiedDateObject);
 				}
 
 			});
@@ -493,9 +495,9 @@ public class CommerceCatalogModelImpl
 
 				@Override
 				public void accept(
-					CommerceCatalog commerceCatalog, Object name) {
+					CommerceCatalog commerceCatalog, Object nameObject) {
 
-					commerceCatalog.setName((String)name);
+					commerceCatalog.setName((String)nameObject);
 				}
 
 			});
@@ -516,10 +518,10 @@ public class CommerceCatalogModelImpl
 				@Override
 				public void accept(
 					CommerceCatalog commerceCatalog,
-					Object commerceCurrencyCode) {
+					Object commerceCurrencyCodeObject) {
 
 					commerceCatalog.setCommerceCurrencyCode(
-						(String)commerceCurrencyCode);
+						(String)commerceCurrencyCodeObject);
 				}
 
 			});
@@ -540,10 +542,10 @@ public class CommerceCatalogModelImpl
 				@Override
 				public void accept(
 					CommerceCatalog commerceCatalog,
-					Object catalogDefaultLanguageId) {
+					Object catalogDefaultLanguageIdObject) {
 
 					commerceCatalog.setCatalogDefaultLanguageId(
-						(String)catalogDefaultLanguageId);
+						(String)catalogDefaultLanguageIdObject);
 				}
 
 			});
@@ -563,9 +565,9 @@ public class CommerceCatalogModelImpl
 
 				@Override
 				public void accept(
-					CommerceCatalog commerceCatalog, Object system) {
+					CommerceCatalog commerceCatalog, Object systemObject) {
 
-					commerceCatalog.setSystem((Boolean)system);
+					commerceCatalog.setSystem((Boolean)systemObject);
 				}
 
 			});
