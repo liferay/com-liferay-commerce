@@ -103,6 +103,8 @@ boolean hasManageCommerceSubscriptionEntryPermission = commerceSubscriptionEntry
 					if (commerceOrderItem != null) {
 						commerceOrder = commerceOrderItem.getCommerceOrder();
 					}
+
+					request.setAttribute(CommerceOrderConstants.COMMERCE_ORDER, commerceOrder);
 					%>
 
 					<liferay-ui:search-container-column-text
@@ -162,6 +164,19 @@ boolean hasManageCommerceSubscriptionEntryPermission = commerceSubscriptionEntry
 					<liferay-ui:search-container-column-text
 						name="customer-id"
 						value="<%= String.valueOf(commerceOrder.getCommerceAccountId()) %>"
+					/>
+
+					<%
+					String paymentMethod = LanguageUtil.get(request, commerceOrder.getCommercePaymentMethodKey());
+
+					if (!commerceSubscriptionEntryDisplayContext.isPaymentMethodActive(commerceOrder.getCommercePaymentMethodKey())) {
+						paymentMethod += StringPool.DOUBLE_SPACE + StringPool.OPEN_PARENTHESIS + LanguageUtil.get(request, "inactive") + StringPool.CLOSE_PARENTHESIS;
+					}
+					%>
+
+					<liferay-ui:search-container-column-text
+						name="payment-method"
+						value="<%= paymentMethod %>"
 					/>
 
 					<liferay-ui:search-container-column-jsp
