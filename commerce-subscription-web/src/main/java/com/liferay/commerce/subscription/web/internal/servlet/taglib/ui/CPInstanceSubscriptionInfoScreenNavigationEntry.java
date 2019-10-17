@@ -136,7 +136,7 @@ public class CPInstanceSubscriptionInfoScreenNavigationEntry
 
 		_jspRenderer.renderJSP(
 			_setServletContext, httpServletRequest, httpServletResponse,
-			"/edit_instance_subscription_info.jsp");
+			"/definition/edit_instance_subscription_info.jsp");
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
