@@ -12,9 +12,10 @@
  * details.
  */
 
-package com.liferay.commerce.product.definitions.web.internal.display.context;
+package com.liferay.commerce.subscription.web.internal.display.context;
 
 import com.liferay.commerce.currency.util.CommercePriceFormatter;
+import com.liferay.commerce.product.definitions.web.internal.display.context.CPInstanceDisplayContext;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPInstanceScreenNavigationConstants;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelService;
