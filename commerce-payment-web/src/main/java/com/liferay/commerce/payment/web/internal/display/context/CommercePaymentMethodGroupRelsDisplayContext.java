@@ -236,6 +236,8 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 		_searchContainer = new SearchContainer<>(
 			_renderRequest, getPortletURL(), null, emptyResultsMessage);
 
+		long groupId = themeDisplay.getScopeGroupId();
+
 		List<CommercePaymentMethodGroupRel> commercePaymentMethodGroupRels =
 			null;
 		int commercePaymentMethodGroupRelsCount = 0;
@@ -244,21 +246,20 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 			commercePaymentMethodGroupRels =
 				_commercePaymentMethodGroupRelService.
 					getCommercePaymentMethodGroupRels(
-						themeDisplay.getScopeGroupId(), active,
-						_searchContainer.getStart(), _searchContainer.getEnd());
+						groupId, active, _searchContainer.getStart(),
+						_searchContainer.getEnd());
 			commercePaymentMethodGroupRelsCount =
 				_commercePaymentMethodGroupRelService.
-					getCommercePaymentMethodGroupRelsCount(
-						themeDisplay.getScopeGroupId(), active);
+					getCommercePaymentMethodGroupRelsCount(groupId, active);
 		}
 		else {
 			commercePaymentMethodGroupRels =
 				_commercePaymentMethodGroupRelService.
-					getCommercePaymentMethodGroupRels(
-						themeDisplay.getScopeGroupId());
+					getCommercePaymentMethodGroupRels(groupId);
 
 			commercePaymentMethodGroupRelsCount =
-				commercePaymentMethodGroupRels.size();
+				_commercePaymentMethodGroupRelService.
+					getCommercePaymentMethodGroupRelsCount(groupId);
 		}
 
 		if (ListUtil.isNotEmpty(commercePaymentMethodGroupRels)) {
@@ -267,9 +268,6 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 				new CommercePaymentMethodGroupRelNameComparator(
 					themeDisplay.getLocale()));
 		}
-
-		commercePaymentMethodGroupRelsCount +=
-			commercePaymentMethodGroupRels.size();
 
 		_searchContainer.setResults(commercePaymentMethodGroupRels);
 		_searchContainer.setTotal(commercePaymentMethodGroupRelsCount);
