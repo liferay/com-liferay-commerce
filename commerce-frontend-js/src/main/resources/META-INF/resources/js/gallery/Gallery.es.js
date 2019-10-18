@@ -138,9 +138,9 @@ Gallery.propTypes = {
 	images: PropTypes.arrayOf(
 		PropTypes.shape({
 			bigUrl: PropTypes.string.isRequired,
-			title: PropTypes.string.isRequired,
+			smallUrl: PropTypes.string.isRequired,
 			thumbnailUrl: PropTypes.string.isRequired,
-			smallUrl: PropTypes.string.isRequired
+			title: PropTypes.string.isRequired
 		})
 	)
 };

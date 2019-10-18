@@ -15,9 +15,9 @@ const props = {
 		'photo-1518131672697-613becd4fab5'
 	].map(img => ({
 		bigUrl: getImgUrl(img, 1600),
-		title: img,
+		smallUrl: getImgUrl(img, 800),
 		thumbnailUrl: getImgUrl(img, 100),
-		smallUrl: getImgUrl(img, 800)
+		title: img
 	}))
 };
 
