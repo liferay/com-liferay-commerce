@@ -21,12 +21,11 @@ layoutIsSystem = true
 />
 
 <#if layout.isSystem??>
-    <#assign layoutIsSystem = layout.isSystem() />
+	<#assign layoutIsSystem = layout.isSystem() />
 </#if>
 
-
 <#if layoutTypePortlet.hasStateMax()>
-    <#assign css_class = css_class + " page-maximized" />
+	<#assign css_class = css_class + " page-maximized" />
 </#if>
 
 <#assign
@@ -52,7 +51,7 @@ company_url = theme_display.getURLHome()
 />
 
 <#if !request.isRequestedSessionIdFromCookie()>
-    <#assign company_url = portalUtil.getURLWithSessionId(company_url, request.getSession().getId()) />
+	<#assign company_url = portalUtil.getURLWithSessionId(company_url, request.getSession().getId()) />
 </#if>
 
 <#assign
@@ -65,30 +64,30 @@ group_id = theme_display.getScopeGroupId()
 <#-- ---------- LPS-66428 ---------- -->
 
 <#if !user_initialized??>
-    <#assign
-    is_default_user = user.isDefaultUser()
-    is_female = user.isFemale()
-    is_male = user.isMale()
-    is_setup_complete = user.isSetupComplete()
-    language = locale.getLanguage()
-    language_id = user.getLanguageId()
-    user_birthday = user.getBirthday()
-    user_comments = user.getComments()
-    user_email_address = user.getEmailAddress()
-    user_first_name = user.getFirstName()
-    user_greeting = htmlUtil.escape(user.getGreeting())
-    user_id = user.getUserId()
-    user_last_login_ip = user.getLastLoginIP()
-    user_last_name = user.getLastName()
-    user_login_ip = user.getLoginIP()
-    user_middle_name = user.getMiddleName()
-    user_name = user.getFullName()
-    w3c_language_id = localeUtil.toW3cLanguageId(theme_display.getLanguageId())
-    />
+	<#assign
+	is_default_user = user.isDefaultUser()
+	is_female = user.isFemale()
+	is_male = user.isMale()
+	is_setup_complete = user.isSetupComplete()
+	language = locale.getLanguage()
+	language_id = user.getLanguageId()
+	user_birthday = user.getBirthday()
+	user_comments = user.getComments()
+	user_email_address = user.getEmailAddress()
+	user_first_name = user.getFirstName()
+	user_greeting = htmlUtil.escape(user.getGreeting())
+	user_id = user.getUserId()
+	user_last_login_ip = user.getLastLoginIP()
+	user_last_name = user.getLastName()
+	user_login_ip = user.getLoginIP()
+	user_middle_name = user.getMiddleName()
+	user_name = user.getFullName()
+	w3c_language_id = localeUtil.toW3cLanguageId(theme_display.getLanguageId())
+	/>
 </#if>
 
 <#if !is_setup_complete>
-    <#assign is_setup_complete = theme_display.isImpersonated() />
+	<#assign is_setup_complete = theme_display.isImpersonated() />
 </#if>
 
 <#-- ---------- URLs ---------- -->
@@ -96,51 +95,51 @@ group_id = theme_display.getScopeGroupId()
 <#assign show_control_panel = theme_display.isShowControlPanelIcon() />
 
 <#if show_control_panel>
-    <#assign
-    control_panel_text = languageUtil.get(locale, "control-panel")
-    control_panel_url = htmlUtil.escape(theme_display.getURLControlPanel())
-    />
+	<#assign
+	control_panel_text = languageUtil.get(locale, "control-panel")
+	control_panel_url = htmlUtil.escape(theme_display.getURLControlPanel())
+	/>
 </#if>
 
 <#assign show_home = theme_display.isShowHomeIcon() />
 
 <#if show_home>
-    <#assign
-    home_text = languageUtil.get(locale, "home")
-    home_url = htmlUtil.escape(theme_display.getURLHome())
-    />
+	<#assign
+	home_text = languageUtil.get(locale, "home")
+	home_url = htmlUtil.escape(theme_display.getURLHome())
+	/>
 
-    <#if !request.isRequestedSessionIdFromCookie()>
-        <#assign home_url = htmlUtil.escape(portalUtil.getURLWithSessionId(home_url, request.getSession().getId())) />
-    </#if>
+	<#if !request.isRequestedSessionIdFromCookie()>
+		<#assign home_url = htmlUtil.escape(portalUtil.getURLWithSessionId(home_url, request.getSession().getId())) />
+	</#if>
 </#if>
 
 <#assign show_my_account = theme_display.isShowMyAccountIcon() />
 
 <#if show_my_account>
-    <#assign my_account_text = languageUtil.get(locale, "my-account") />
+	<#assign my_account_text = languageUtil.get(locale, "my-account") />
 
-    <#if theme_display.getURLMyAccount()??>
-        <#assign my_account_url = htmlUtil.escape(theme_display.getURLMyAccount().toString()) />
-    </#if>
+	<#if theme_display.getURLMyAccount()??>
+		<#assign my_account_url = htmlUtil.escape(theme_display.getURLMyAccount().toString()) />
+	</#if>
 </#if>
 
 <#assign show_sign_in = theme_display.isShowSignInIcon() />
 
 <#if show_sign_in>
-    <#assign
-    sign_in_text = languageUtil.get(locale, "sign-in")
-    sign_in_url = htmlUtil.escape(theme_display.getURLSignIn())
-    />
+	<#assign
+	sign_in_text = languageUtil.get(locale, "sign-in")
+	sign_in_url = htmlUtil.escape(theme_display.getURLSignIn())
+	/>
 </#if>
 
 <#assign show_sign_out = theme_display.isShowSignOutIcon() />
 
 <#if show_sign_out>
-    <#assign
-    sign_out_text = languageUtil.get(locale, "sign-out")
-    sign_out_url = htmlUtil.escape(theme_display.getURLSignOut())
-    />
+	<#assign
+	sign_out_text = languageUtil.get(locale, "sign-out")
+	sign_out_url = htmlUtil.escape(theme_display.getURLSignOut())
+	/>
 </#if>
 
 <#-- ---------- Page ---------- -->
@@ -165,13 +164,13 @@ is_portlet_page = false
 />
 
 <#if stringUtil.equals(page.getType(), "portlet")>
-    <#assign is_portlet_page = true />
+	<#assign is_portlet_page = true />
 </#if>
 
 <#assign typeSettingsProperties = layout.getTypeSettingsProperties() />
 
 <#if typeSettingsProperties??>
-    <#assign page_javascript = typeSettingsProperties["javascript"]! />
+	<#assign page_javascript = typeSettingsProperties["javascript"]! />
 </#if>
 
 <#assign
@@ -183,37 +182,37 @@ is_guest_group = page_group.isGuest()
 />
 
 <#if is_guest_group>
-    <#assign css_class = css_class + " guest-site" />
+	<#assign css_class = css_class + " guest-site" />
 </#if>
 
 <#if is_signed_in>
-    <#assign css_class = css_class + " signed-in" />
+	<#assign css_class = css_class + " signed-in" />
 <#else>
-    <#assign css_class = css_class + " signed-out" />
+	<#assign css_class = css_class + " signed-out" />
 </#if>
 
 <#if layout.isPublicLayout()>
-    <#assign css_class = css_class + " public-page" />
+	<#assign css_class = css_class + " public-page" />
 <#else>
-    <#assign css_class = css_class + " private-page" />
+	<#assign css_class = css_class + " private-page" />
 </#if>
 
 <#if page_group.isLayoutPrototype()>
-    <#assign css_class = css_class + " page-template" />
+	<#assign css_class = css_class + " page-template" />
 </#if>
 
 <#if page_group.isLayoutSetPrototype()>
-    <#assign css_class = css_class + " site-template" />
+	<#assign css_class = css_class + " site-template" />
 </#if>
 
 <#if page_group.isCompany()>
-    <#assign site_type = "company-site" />
+	<#assign site_type = "company-site" />
 <#elseif page_group.isOrganization()>
-    <#assign site_type = "organization-site" />
+	<#assign site_type = "organization-site" />
 <#elseif page_group.isUser()>
-    <#assign site_type = "user-site" />
+	<#assign site_type = "user-site" />
 <#else>
-    <#assign site_type = "site" />
+	<#assign site_type = "site" />
 </#if>
 
 <#assign
@@ -233,37 +232,37 @@ community_default_url = site_default_url
 />
 
 <#if layout.isPrivateLayout()>
-    <#assign
-    site_default_url = site_default_private_url
+	<#assign
+	site_default_url = site_default_private_url
 
-    community_default_url = site_default_url
-    />
+	community_default_url = site_default_url
+	/>
 </#if>
 
 <#assign the_title = "" />
 
 <#if layout.getHTMLTitle(locale)??>
-    <#assign the_title = layout.getHTMLTitle(locale) />
+	<#assign the_title = layout.getHTMLTitle(locale) />
 </#if>
 
 <#if pageTitle??>
-    <#assign the_title = pageTitle />
+	<#assign the_title = pageTitle />
 </#if>
 
 <#if pageSubtitle??>
-    <#assign the_title = pageSubtitle + " - " + the_title />
+	<#assign the_title = pageSubtitle + " - " + the_title />
 </#if>
 
 <#if tilesTitle?has_content>
-    <#assign the_title = languageUtil.get(locale, tilesTitle) />
+	<#assign the_title = languageUtil.get(locale, tilesTitle) />
 </#if>
 
 <#if page_group.isLayoutPrototype()>
-    <#assign the_title = page_group.getDescriptiveName(locale) />
+	<#assign the_title = page_group.getDescriptiveName(locale) />
 </#if>
 
 <#if !tilesTitle?has_content>
-    <#assign the_title = htmlUtil.escape(the_title) />
+	<#assign the_title = htmlUtil.escape(the_title) />
 </#if>
 
 <#assign
@@ -273,15 +272,15 @@ portlet_id = paramUtil.getString(request, "p_p_id")
 />
 
 <#if validator.isNotNull(portlet_id) && layoutIsSystem && !layout.isTypeControlPanel() && stringUtil.equals(layout_friendly_url, "/manage")>
-    <#assign the_title = portalUtil.getPortletTitle(portlet_id, locale) />
+	<#assign the_title = portalUtil.getPortletTitle(portlet_id, locale) />
 </#if>
 
 <#if the_title ?has_content && !stringUtil.equals(company_name, site_name) && !page_group.isLayoutPrototype()>
-    <#assign the_title = the_title + " - " + site_name />
+	<#assign the_title = the_title + " - " + site_name />
 </#if>
 
 <#if layouts??>
-    <#assign pages = layouts />
+	<#assign pages = layouts />
 </#if>
 
 <#-- ---------- Logo ---------- -->
@@ -294,21 +293,21 @@ site_logo_width = company_logo_width
 />
 
 <#if (company.getLogoId() == 0) && use_company_logo>
-    <#assign logo_css_class = logo_css_class + " default-logo" />
+	<#assign logo_css_class = logo_css_class + " default-logo" />
 <#else>
-    <#assign logo_css_class = logo_css_class + " custom-logo" />
+	<#assign logo_css_class = logo_css_class + " custom-logo" />
 </#if>
 
 <#if theme_settings["show-site-name-supported"]??>
-    <#assign show_site_name_supported = getterUtil.getBoolean(theme_settings["show-site-name-supported"]!"", true) />
+	<#assign show_site_name_supported = getterUtil.getBoolean(theme_settings["show-site-name-supported"]!"", true) />
 <#else>
-    <#assign show_site_name_supported = true />
+	<#assign show_site_name_supported = true />
 </#if>
 
 <#if theme_settings["show-site-name-default"]??>
-    <#assign show_site_name_default = getterUtil.getBoolean(theme_settings["show-site-name-default"]!"", show_site_name_supported) />
+	<#assign show_site_name_default = getterUtil.getBoolean(theme_settings["show-site-name-default"]!"", show_site_name_supported) />
 <#else>
-    <#assign show_site_name_default = show_site_name_supported />
+	<#assign show_site_name_default = show_site_name_supported />
 </#if>
 
 <#assign
@@ -320,7 +319,7 @@ logo_description = ""
 />
 
 <#if !show_site_name>
-    <#assign logo_description = htmlUtil.escape(site_name) />
+	<#assign logo_description = htmlUtil.escape(site_name) />
 </#if>
 
 <#-- ---------- Navigation ---------- -->
@@ -328,14 +327,14 @@ logo_description = ""
 <#assign has_navigation = false />
 
 <#if navItems??>
-    <#assign nav_items = navItems />
-    <#assign has_navigation = (nav_items?size > 0) />
+	<#assign nav_items = navItems />
+	<#assign has_navigation = (nav_items?size > 0) />
 </#if>
 
 <#assign nav_css_class = "sort-pages modify-pages" />
 
 <#if !has_navigation>
-    <#assign nav_css_class = nav_css_class + " hide" />
+	<#assign nav_css_class = nav_css_class + " hide" />
 </#if>
 
 <#-- ---------- My sites ---------- -->
@@ -347,11 +346,11 @@ show_my_places = show_my_sites
 />
 
 <#if show_my_sites>
-    <#assign
-    my_sites_text = languageUtil.get(locale, "my-sites")
+	<#assign
+	my_sites_text = languageUtil.get(locale, "my-sites")
 
-    my_places_text = my_sites_text
-    />
+	my_places_text = my_sites_text
+	/>
 </#if>
 
 <#-- ---------- Includes ---------- -->
@@ -363,7 +362,7 @@ show_my_places = show_my_sites
 <#assign bottom_ext_include = bottom_include />
 
 <#if tilesContent?has_content>
-    <#assign content_include = "${dir_include}${tilesContent}" />
+	<#assign content_include = "${dir_include}${tilesContent}" />
 </#if>
 
 <#assign top_head_include = "${dir_include}/common/themes/top_head.jsp" />
