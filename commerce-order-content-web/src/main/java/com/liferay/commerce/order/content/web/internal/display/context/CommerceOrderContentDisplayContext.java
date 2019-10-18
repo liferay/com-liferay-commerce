@@ -26,6 +26,7 @@ import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.model.CommerceMoney;
+import com.liferay.commerce.frontend.model.HeaderActionModel;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderNote;
@@ -43,6 +44,7 @@ import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.commerce.service.CommerceOrderNoteService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.commerce.service.CommerceShipmentItemService;
+import com.liferay.frontend.taglib.clay.servlet.taglib.util.DropdownItem;
 import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
@@ -70,6 +72,7 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.Format;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.portlet.PortletURL;
@@ -349,6 +352,29 @@ public class CommerceOrderContentDisplayContext {
 		return _displayStyleGroupId;
 	}
 
+	public List<DropdownItem> getDropdownItems() {
+		List<DropdownItem> headerDropdownItems = new ArrayList<>();
+
+		DropdownItem headerDropdownItem = new DropdownItem();
+
+		headerDropdownItem.setLabel("First link");
+		headerDropdownItem.setHref("/first-link");
+		headerDropdownItem.setIcon("home");
+
+		headerDropdownItems.add(headerDropdownItem);
+
+		DropdownItem headerDropdownItem2 = new DropdownItem();
+
+		headerDropdownItem2.setLabel("Second link");
+		headerDropdownItem2.setIcon("blogs");
+		headerDropdownItem2.setHref("/second-link");
+		headerDropdownItem2.setActive(true);
+
+		headerDropdownItems.add(headerDropdownItem2);
+
+		return headerDropdownItems;
+	}
+
 	public String getFormattedPercentage(BigDecimal percentage)
 		throws PortalException {
 
@@ -371,6 +397,27 @@ public class CommerceOrderContentDisplayContext {
 		decimalFormat.setPositiveSuffix(StringPool.PERCENT);
 
 		return decimalFormat.format(percentage);
+	}
+
+	public List<HeaderActionModel> getHeaderActionModels()
+		throws PortalException {
+
+		List<HeaderActionModel> headerActionModels = new ArrayList<>();
+
+		HeaderActionModel headerActionModel1 = new HeaderActionModel();
+
+		headerActionModel1.setLabel("Action 1");
+		headerActionModel1.setStyle("secondary");
+
+		headerActionModels.add(headerActionModel1);
+
+		HeaderActionModel headerActionModel2 = new HeaderActionModel();
+
+		headerActionModel2.setLabel("Action 2");
+
+		headerActionModels.add(headerActionModel2);
+
+		return headerActionModels;
 	}
 
 	public OrderFilterImpl getOrderFilter() {
