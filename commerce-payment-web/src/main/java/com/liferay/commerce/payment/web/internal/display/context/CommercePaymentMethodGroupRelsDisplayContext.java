@@ -27,8 +27,8 @@ import com.liferay.commerce.payment.util.comparator.CommercePaymentMethodGroupRe
 import com.liferay.commerce.payment.util.comparator.CommercePaymentMethodGroupRelNameOrderByComparator;
 import com.liferay.commerce.payment.web.internal.admin.PaymentMethodsCommerceAdminModule;
 import com.liferay.commerce.product.catalog.CPQuery;
+import com.liferay.commerce.product.constants.CPField;
 import com.liferay.commerce.product.data.source.CPDataSourceResult;
-import com.liferay.commerce.product.search.CPDefinitionIndexer;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.service.CommerceOrderLocalService;
@@ -192,8 +192,8 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 
 		attributes.put(Field.STATUS, WorkflowConstants.STATUS_APPROVED);
 
-		attributes.put(CPDefinitionIndexer.FIELD_PUBLISHED, true);
-		attributes.put(CPDefinitionIndexer.FIELD_SUBSCRIPTION_ENABLED, true);
+		attributes.put(CPField.PUBLISHED, true);
+		attributes.put(CPField.SUBSCRIPTION_ENABLED, true);
 
 		long groupId = commercePaymentMethodGroupRel.getGroupId();
 
