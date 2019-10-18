@@ -3,6 +3,7 @@
 {template .render}
 	{@param? openingState: string}
 	{@param? currentView: string}
+	{@param? disabled: bool}
 
 	{@param? accounts: list<[
 		name: string,
@@ -51,9 +52,16 @@
 		{/if}
 	{/let}
 
+	{let $buttonClasses kind="text"}
+		commerce-topbar-button
+		{if $disabled}
+			{sp}is-disabled
+		{/if}
+	{/let}
+
 	<div class="{$dropdownClasses}">
 		<button
-			class="commerce-topbar-button"
+			class="{$buttonClasses}"
 			data-onclick="toggleAccountSelector"
 		>
 			{call .currentState}

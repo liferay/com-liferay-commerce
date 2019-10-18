@@ -42,12 +42,14 @@ class AccountSelector extends Component {
 	}
 
 	toggleAccountSelector() {
-		if (this.openingState === 'closed') {
-			this._openModal();
-		}
+		if (!this.disabled) {
+			if (this.openingState === 'closed') {
+				this._openModal();
+			}
 
-		if (this.openingState === 'open') {
-			this._closeModal();
+			if (this.openingState === 'open') {
+				this._closeModal();
+			}
 		}
 
 		return this.openingState;
@@ -216,6 +218,7 @@ AccountSelector.STATE = {
 		]
 	)
 		.value('accounts'),
+	disabled: Config.bool().value(false),
 	openingState: Config.oneOf(
 		[
 			'closed',

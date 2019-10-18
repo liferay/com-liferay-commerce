@@ -120,6 +120,20 @@ public class AccountSelectorTag extends ComponentRendererTag {
 
 			putValue(
 				"viewAllOrdersLink", _getViewCommerceOrdersURL(themeDisplay));
+
+			boolean disabled = false;
+
+			Layout layout = themeDisplay.getLayout();
+
+			Layout checkoutLayout =
+				LayoutLocalServiceUtil.fetchLayoutByFriendlyURL(
+					themeDisplay.getScopeGroupId(), true, "/checkout");
+
+			if (layout.equals(checkoutLayout)) {
+				disabled = true;
+			}
+
+			putValue("disabled", disabled);
 		}
 		catch (PortalException pe) {
 			_log.error(pe, pe);
