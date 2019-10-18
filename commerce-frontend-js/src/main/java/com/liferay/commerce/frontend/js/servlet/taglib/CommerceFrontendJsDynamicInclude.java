@@ -43,7 +43,7 @@ public class CommerceFrontendJsDynamicInclude extends BaseDynamicInclude {
 		PrintWriter printWriter = httpServletResponse.getWriter();
 
 		printWriter.print(
-			"<link href=\"/o/commerce-frontend-js/css/main.css\" " +
+			"<link href=\"/o/commerce-frontend-js/styles/main.css\" " +
 				"rel=\"stylesheet\" type=\"text/css\">");
 	}
 

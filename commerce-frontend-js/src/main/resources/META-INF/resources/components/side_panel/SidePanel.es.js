@@ -4,8 +4,8 @@ import ClayLoadingIndicator from '@clayui/loading-indicator';
 import ReactDOM from 'react-dom';
 import React from 'react';
 
-import {OPEN_SIDE_PANEL} from '../utilities/eventsDefinitions.es';
-import {debounce} from '../utilities/index.es';
+import {OPEN_SIDE_PANEL} from '../../utilities/eventsDefinitions.es';
+import {debounce} from '../../utilities/index.es';
 export default class SidePanel extends React.Component {
 	constructor(props) {
 		super(props);

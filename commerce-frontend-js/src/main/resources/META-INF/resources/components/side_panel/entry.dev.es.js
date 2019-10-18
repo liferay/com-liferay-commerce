@@ -1,6 +1,6 @@
 import launcher from './entry.es';
 
-import './_side_panel.scss';
+import '../../styles/main.scss';
 
 window.SidePanel = launcher('sidePanel', 'side-panel', {
 	id: 'sidePanelTestId',

@@ -1,6 +1,6 @@
 import launcher from './entry.es';
 
-import './_gallery.scss';
+import '../../styles/main.scss';
 
 function getImgUrl(img, width) {
 	return `https://images.unsplash.com/${img}?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=${width}&q=80`;
