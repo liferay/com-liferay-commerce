@@ -26,6 +26,7 @@ import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderException;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderRequest;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderResponse;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderResponseStatus;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -40,8 +41,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -57,7 +57,6 @@ import org.osgi.service.component.annotations.Reference;
 )
 public class CPInstanceOptionsValuesDataProvider implements DDMDataProvider {
 
-	@Override
 	public List<KeyValuePair> getData(
 			DDMDataProviderContext ddmDataProviderContext)
 		throws DDMDataProviderException {
@@ -73,14 +72,25 @@ public class CPInstanceOptionsValuesDataProvider implements DDMDataProvider {
 		DDMDataProviderResponse.Builder ddmDataProviderResponseBuilder =
 			DDMDataProviderResponse.Builder.newBuilder();
 
+		Optional<Object> cpDefinitionIdOptional =
+			ddmDataProviderRequest.getParameterOptional(
+				"cpDefinitionId", Object.class);
+
 		long cpDefinitionId = GetterUtil.getLong(
-			ddmDataProviderRequest.getParameter("cpDefinitionId"));
+			cpDefinitionIdOptional.orElse(0));
+
+		Optional<Object> commerceAccountIdOptional =
+			ddmDataProviderRequest.getParameterOptional(
+				"commerceAccountId", Object.class);
 
 		long commerceAccountId = GetterUtil.getLong(
-			ddmDataProviderRequest.getParameter("commerceAccountId"));
+			commerceAccountIdOptional.orElse(0));
 
-		long groupId = GetterUtil.getLong(
-			ddmDataProviderRequest.getParameter("groupId"));
+		Optional<Object> groupIdOptional =
+			ddmDataProviderRequest.getParameterOptional(
+				"groupId", Object.class);
+
+		long groupId = GetterUtil.getLong(groupIdOptional.orElse(0));
 
 		try {
 			if (!_commerceProductViewPermission.contains(
@@ -104,10 +114,7 @@ public class CPInstanceOptionsValuesDataProvider implements DDMDataProvider {
 			return ddmDataProviderResponseBuilder.build();
 		}
 
-		HttpServletRequest httpServletRequest =
-			ddmDataProviderRequest.getHttpServletRequest();
-
-		Locale locale = httpServletRequest.getLocale();
+		Locale locale = ddmDataProviderRequest.getLocale();
 
 		try {
 
@@ -125,9 +132,6 @@ public class CPInstanceOptionsValuesDataProvider implements DDMDataProvider {
 			 * 3 - Size empty and Color filled - the same approach that item 2
 			 * 4 - Size and Color both filled - the same approach that item 1
 			 */
-			Map<String, String> parameters =
-				ddmDataProviderRequest.getParameters();
-
 			Map<String, String> outputParameterNames = new HashMap<>();
 
 			Map<String, String> filters = new HashMap<>();
@@ -141,7 +145,12 @@ public class CPInstanceOptionsValuesDataProvider implements DDMDataProvider {
 
 				CPOption cpOption = cpDefinitionOptionRel.getCPOption();
 
-				String parameterValue = parameters.get(cpOption.getKey());
+				Optional<Object> parameterValueOptional =
+					ddmDataProviderRequest.getParameterOptional(
+						cpOption.getKey(), Object.class);
+
+				String parameterValue = String.valueOf(
+					parameterValueOptional.orElse(StringPool.BLANK));
 
 				// Collect filters and outputs
 
