@@ -1,6 +1,6 @@
 import launcher from './entry.es';
 
-import './_step-tracker.scss';
+import '../../styles/main.scss';
 
 launcher('step_tracker', 'step-tracker', {
 	spritemap: './assets/icons.svg',

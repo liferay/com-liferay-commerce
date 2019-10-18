@@ -1,6 +1,6 @@
 import launcher from './entry.es';
 
-import './_example.scss';
+import '../../styles/main.scss';
 
 const props = {
 	spritemap: './assets/icons.svg'
