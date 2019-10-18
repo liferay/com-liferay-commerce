@@ -108,8 +108,7 @@ public class EditCPDisplayLayoutMVCActionCommand extends BaseMVCActionCommand {
 			}
 		}
 		catch (Exception e) {
-			if (e instanceof NoSuchCPDefinitionException ||
-				e instanceof NoSuchCPDisplayLayoutException ||
+			if (e instanceof NoSuchCPDisplayLayoutException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(actionRequest, e.getClass());
@@ -117,7 +116,10 @@ public class EditCPDisplayLayoutMVCActionCommand extends BaseMVCActionCommand {
 				actionResponse.setRenderParameter("mvcPath", "/error.jsp");
 			}
 			else if (e instanceof CPDisplayLayoutEntryException ||
-					 e instanceof CPDisplayLayoutLayoutUuidException) {
+					 e instanceof CPDisplayLayoutLayoutUuidException ||
+					 e instanceof NoSuchCPDefinitionException) {
+
+				hideDefaultErrorMessage(actionRequest);
 
 				SessionErrors.add(actionRequest, e.getClass());
 
