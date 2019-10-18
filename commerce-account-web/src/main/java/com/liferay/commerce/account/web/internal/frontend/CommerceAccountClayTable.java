@@ -15,7 +15,6 @@
 package com.liferay.commerce.account.web.internal.frontend;
 
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
-import com.liferay.commerce.account.constants.CommerceAccountPortletKeys;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.account.web.internal.model.Account;
@@ -45,7 +44,6 @@ import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.webserver.WebServerServletTokenUtil;
@@ -53,8 +51,6 @@ import com.liferay.portal.kernel.webserver.WebServerServletTokenUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
@@ -113,16 +109,23 @@ public class CommerceAccountClayTable
 				themeDisplay.getPermissionChecker(), account.getAccountId(),
 				ActionKeys.UPDATE)) {
 
-			String setActiveURL = _getAccountSetActiveURL(
-				account.getAccountId(), httpServletRequest);
+			StringBundler sb = new StringBundler(7);
+
+			sb.append("javascript:toggleActiveCommerceAccount");
+			sb.append(StringPool.OPEN_PARENTHESIS);
+			sb.append(StringPool.APOSTROPHE);
+			sb.append(account.getAccountId());
+			sb.append(StringPool.APOSTROPHE);
+			sb.append(StringPool.CLOSE_PARENTHESIS);
+			sb.append(StringPool.SEMICOLON);
 
 			ClayTableAction clayTableSetActiveAction = new ClayTableAction(
-				"commerce-button--good", setActiveURL, StringPool.BLANK,
+				"commerce-button--good", sb.toString(), StringPool.BLANK,
 				LanguageUtil.get(httpServletRequest, "activate"), false, false);
 
 			if (account.getActive()) {
 				clayTableSetActiveAction = new ClayTableAction(
-					"commerce-button--bad", setActiveURL, StringPool.BLANK,
+					"commerce-button--bad", sb.toString(), StringPool.BLANK,
 					LanguageUtil.get(httpServletRequest, "deactivate"), false,
 					false);
 			}
@@ -251,27 +254,6 @@ public class CommerceAccountClayTable
 	@Override
 	public boolean isShowActionsMenu() {
 		return true;
-	}
-
-	private String _getAccountSetActiveURL(
-			long commerceAccountId, HttpServletRequest httpServletRequest)
-		throws PortalException {
-
-		PortletURL activateURL = _portletURLFactory.create(
-			httpServletRequest, CommerceAccountPortletKeys.COMMERCE_ACCOUNT,
-			PortletRequest.ACTION_PHASE);
-
-		activateURL.setParameter(
-			ActionRequest.ACTION_NAME, "editCommerceAccount");
-		activateURL.setParameter(Constants.CMD, "setActive");
-		activateURL.setParameter(
-			"commerceAccountId", String.valueOf(commerceAccountId));
-
-		String redirect = _portal.getCurrentURL(httpServletRequest);
-
-		activateURL.setParameter("redirect", redirect);
-
-		return activateURL.toString();
 	}
 
 	private String _getAccountViewDetailURL(
