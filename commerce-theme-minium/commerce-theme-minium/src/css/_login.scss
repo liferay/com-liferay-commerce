@@ -60,7 +60,7 @@
         }
     }
 
-    #_com_liferay_login_web_portlet_LoginPortlet_loginForm, #_com_liferay_login_web_portlet_LoginPortlet_fm {
+    #_com_liferay_login_web_portlet_LoginPortlet_fm, #_com_liferay_login_web_portlet_LoginPortlet_loginForm {
         .btn {
             @include clay-button-variant($gsdc-btn-primary);
 
@@ -106,25 +106,6 @@
         #main-content {
             height: 100%;
 
-            .navigation {
-                margin-bottom: auto;
-
-                .icon-plus, .icon-plus + .taglib-text {
-                    display: none;
-                }
-            }
-
-            .row {
-                height: 100%;
-                margin: 0;
-                width: 100%;
-
-                .form-group.form-inline.input-checkbox-wrapper {
-                    display: inherit;
-                    margin-bottom: 0;
-                }
-            }
-
             .col-md-12.portlet-column.portlet-column-only {
                 .portlet-content {
                     height: 100%;
@@ -148,19 +129,30 @@
                     }
                 }
             }
+
+            .navigation {
+                margin-bottom: auto;
+
+                .icon-plus, .icon-plus + .taglib-text {
+                    display: none;
+                }
+            }
+
+            .row {
+                height: 100%;
+                margin: 0;
+                width: 100%;
+
+                .form-group.form-inline.input-checkbox-wrapper {
+                    display: inherit;
+                    margin-bottom: 0;
+                }
+            }
         }
     }
 
     .portlet-login {
         height: 100%;
-
-        .portlet {
-            margin-bottom: 0;
-
-            .portlet-content-container {
-                padding: 0;
-            }
-        }
 
         .login-container {
             background-color: #FFFFFF;
@@ -171,6 +163,10 @@
             margin-left: auto;
             padding: 20px 75px;
             width: 80%;
+
+            form {
+                margin-top: auto;
+            }
 
             input, label {
                 font-size: 16px;
@@ -214,9 +210,13 @@
                     color: #000;
                 }
             }
+        }
 
-            form {
-                margin-top: auto;
+        .portlet {
+            margin-bottom: 0;
+
+            .portlet-content-container {
+                padding: 0;
             }
         }
     }
