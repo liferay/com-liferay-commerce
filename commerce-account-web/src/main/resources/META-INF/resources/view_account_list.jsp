@@ -69,6 +69,17 @@ request.setAttribute("view.jsp-filterPerAccount", false);
 
 		Liferay.provide(
 			window,
+			'setCurrentAccount',
+			function(id) {
+				document.querySelector('#<portlet:namespace /><%= Constants.CMD %>').value = 'setCurrentAccount';
+				document.querySelector('#<portlet:namespace />commerceAccountId').value = id;
+
+				submitForm(document.<portlet:namespace />commerceAccountFm);
+			}
+		);
+
+		Liferay.provide(
+			window,
 			'toggleActiveCommerceAccount',
 			function(id) {
 				document.querySelector('#<portlet:namespace /><%= Constants.CMD %>').value = 'setActive';
