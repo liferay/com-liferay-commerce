@@ -18,6 +18,7 @@ import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.account.web.internal.model.Account;
+import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.context.CommerceContextFactory;
 import com.liferay.commerce.frontend.ClayTable;
@@ -103,6 +104,36 @@ public class CommerceAccountClayTable
 				LanguageUtil.get(httpServletRequest, "view"), false, false);
 
 			clayTableActions.add(clayTableViewAction);
+
+			CommerceContext commerceContext =
+				(CommerceContext)httpServletRequest.getAttribute(
+					CommerceWebKeys.COMMERCE_CONTEXT);
+
+			CommerceAccount currentCommerceAccount =
+				commerceContext.getCommerceAccount();
+
+			if (((currentCommerceAccount == null) ||
+				 (account.getAccountId() !=
+					 currentCommerceAccount.getCommerceAccountId())) &&
+				account.getActive()) {
+
+				StringBundler sb = new StringBundler(7);
+
+				sb.append("javascript:setCurrentAccount");
+				sb.append(StringPool.OPEN_PARENTHESIS);
+				sb.append(StringPool.APOSTROPHE);
+				sb.append(account.getAccountId());
+				sb.append(StringPool.APOSTROPHE);
+				sb.append(StringPool.CLOSE_PARENTHESIS);
+				sb.append(StringPool.SEMICOLON);
+
+				ClayTableAction clayTableSetActiveAction = new ClayTableAction(
+					StringPool.BLANK, sb.toString(), StringPool.BLANK,
+					LanguageUtil.get(httpServletRequest, "select"), false,
+					false);
+
+				clayTableActions.add(clayTableSetActiveAction);
+			}
 		}
 
 		if (_modelResourcePermission.contains(
