@@ -2,6 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 const {defineServerResponses} = require('./dev/fakeServerUtilities');
+const components = require('./src/main/resources/META-INF/resources/components/index');
 
 const outputPath = path.resolve(__dirname, './dev/public');
 
@@ -12,7 +13,7 @@ const getComponentPath = (component, entry) => path.join(
 	'resources',
 	'META-INF',
 	'resources',
-	'js',
+	'components',
 	component,
 	entry
 );
@@ -36,12 +37,10 @@ module.exports = {
 		publicPath: '/',
 	},
 	devtool: 'inline-source-map',
-	entry: {
-		dataset_display: getComponentPath('dataset_display', 'entry.dev.es.js'),
-		example: getComponentPath('example', 'entry.dev.es.js'),
-		gallery: getComponentPath('gallery', 'entry.dev.es.js'),
-		side_panel: getComponentPath('side_panel', 'entry.dev.es.js'),
-	},
+	entry: components.reduce((comp, current) => {
+		comp[current.folder] = getComponentPath(current.folder, current.entry_dev)
+		return comp;
+	}, {}),
 	mode: 'development',
 	module: {
 		rules: [

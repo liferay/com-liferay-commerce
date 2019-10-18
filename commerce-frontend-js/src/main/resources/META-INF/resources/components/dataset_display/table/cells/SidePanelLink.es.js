@@ -2,7 +2,7 @@ import ClayLink from '@clayui/link';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import {OPEN_SIDE_PANEL} from '../../../utilities/eventsDefinitions.es';
+import {OPEN_SIDE_PANEL} from '../../../../utilities/eventsDefinitions.es';
 import DatasetDisplayContext from '../../DatasetDisplayContext.es';
 
 function fireOpenSidePanelEvent(id, options) {

@@ -3,7 +3,7 @@ import ClayModal, {useModal} from '@clayui/modal';
 import PropTypes from 'prop-types';
 import React, {useState, useRef, useEffect} from 'react';
 
-import {OPEN} from '../utilities/eventsDefinitions.es';
+import {OPEN} from '../../utilities/eventsDefinitions.es';
 
 const Modal = props => {
 	const [visible, setVisible] = useState(props.visible || false);

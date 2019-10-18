@@ -1,6 +1,6 @@
 import launcher from './entry.es';
 
-import '../../css/main.scss';
+import '../../styles/main.scss';
 
 launcher('dataset-display', 'dataset-display', {
 	apiUrl: '/o/headless-commerce-admin-order/v1.0/orders/37174/orderItems',
