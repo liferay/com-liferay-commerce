@@ -22,9 +22,10 @@ import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMap;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMapFactory;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.Validator;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -63,13 +64,19 @@ public class CPVersionContributorRegistryImpl
 	}
 
 	public List<CPVersionContributor> getCPVersionContributors() {
-		List<ServiceWrapper<CPVersionContributor>>
-			cpVersionContributorServiceWrappers = ListUtil.fromCollection(
-				_serviceTrackerMap.values());
+		Collection<ServiceWrapper<CPVersionContributor>>
+			cpVersionContributorServiceWrappers = _serviceTrackerMap.values();
 
-		List<CPVersionContributor> cpVersionContributors = ListUtil.toList(
-			cpVersionContributorServiceWrappers,
-			ServiceWrapper<CPVersionContributor>::getService);
+		List<CPVersionContributor> cpVersionContributors = new ArrayList<>(
+			cpVersionContributorServiceWrappers.size());
+
+		for (ServiceWrapper<CPVersionContributor>
+				cpVersionContributorServiceWrapper :
+					cpVersionContributorServiceWrappers) {
+
+			cpVersionContributors.add(
+				cpVersionContributorServiceWrapper.getService());
+		}
 
 		return Collections.unmodifiableList(cpVersionContributors);
 	}
