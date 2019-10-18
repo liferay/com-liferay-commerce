@@ -33,6 +33,6 @@ MainImage.propTypes = {
 	onNext: PropTypes.func,
 	onPrev: PropTypes.func,
 	onZoom: PropTypes.func,
-	title: PropTypes.string.isRequired,
-	src: PropTypes.string.isRequired
+	src: PropTypes.string.isRequired,
+	title: PropTypes.string.isRequired
 };
