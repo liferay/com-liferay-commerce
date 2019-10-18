@@ -24,9 +24,9 @@ import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
 import com.liferay.commerce.payment.service.base.CommercePaymentMethodGroupRelLocalServiceBaseImpl;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.catalog.CPQuery;
+import com.liferay.commerce.product.constants.CPField;
 import com.liferay.commerce.product.data.source.CPDataSourceResult;
 import com.liferay.commerce.product.model.CPDefinition;
-import com.liferay.commerce.product.search.CPDefinitionIndexer;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
@@ -343,9 +343,8 @@ public class CommercePaymentMethodGroupRelLocalServiceImpl
 
 				attributes.put(Field.STATUS, WorkflowConstants.STATUS_APPROVED);
 
-				attributes.put(CPDefinitionIndexer.FIELD_PUBLISHED, true);
-				attributes.put(
-					CPDefinitionIndexer.FIELD_SUBSCRIPTION_ENABLED, true);
+				attributes.put(CPField.PUBLISHED, true);
+				attributes.put(CPField.SUBSCRIPTION_ENABLED, true);
 
 				long groupId = commercePaymentMethodGroupRel.getGroupId();
 
