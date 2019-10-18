@@ -26,6 +26,8 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.Layout;
+import com.liferay.portal.kernel.service.LayoutLocalServiceUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -96,8 +98,20 @@ public class MiniCartTag extends ComponentRendererTag {
 
 			putValue("detailsUrl", detailsURL);
 
-			putValue("isDisabled", false);
-			putValue("isOpen", false);
+			boolean disabled = false;
+
+			Layout layout = themeDisplay.getLayout();
+
+			Layout checkoutLayout =
+				LayoutLocalServiceUtil.fetchLayoutByFriendlyURL(
+					themeDisplay.getScopeGroupId(), true, "/checkout");
+
+			if (layout.equals(checkoutLayout)) {
+				disabled = true;
+			}
+
+			putValue("disabled", disabled);
+			putValue("open", false);
 			putValue("products", Collections.emptyList());
 			putValue("productsCount", 0);
 			putValue(
