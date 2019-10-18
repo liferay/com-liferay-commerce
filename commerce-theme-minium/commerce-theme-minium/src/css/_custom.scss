@@ -16,7 +16,7 @@ html {
 #minium {
 	transition: padding ease 500ms;
 
-	body.signed-in & .minium-frame__topbar {
+	body.has-control-menu.signed-in & .minium-frame__topbar {
 		top: $liferay-topbar-size;
 
 		@media screen and (max-width: 767px) {
@@ -24,7 +24,7 @@ html {
 		}
 	}
 
-	body.signed-in & .minium-frame__toolbar {
+	body.has-control-menu.signed-in & .minium-frame__toolbar {
 		margin-top: $liferay-topbar-size;
 
 		@media screen and (max-width: 767px) {
@@ -32,7 +32,7 @@ html {
 		}
 	}
 
-	body.signed-in & .minium-frame__sidebar {
+	body.has-control-menu.signed-in & .minium-frame__sidebar {
 		top: $liferay-topbar-size;
 
 		@media screen and (max-width: 767px) {
@@ -41,7 +41,7 @@ html {
 	}
 
 	@media screen and (hover: none) {
-		body.signed-in & .minium-frame__sidebar {
+		body.has-control-menu.signed-in & .minium-frame__sidebar {
 			top: auto;
 		}
 	}
