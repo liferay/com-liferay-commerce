@@ -28,8 +28,8 @@ Thumbnails.propTypes = {
 	background: PropTypes.string,
 	images: PropTypes.arrayOf(
 		PropTypes.shape({
-			title: PropTypes.string.isRequired,
-			thumbnailUrl: PropTypes.string.isRequired
+			thumbnailUrl: PropTypes.string.isRequired,
+			title: PropTypes.string.isRequired
 		})
 	),
 	onChange: PropTypes.func,

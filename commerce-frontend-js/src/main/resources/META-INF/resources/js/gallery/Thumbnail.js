@@ -32,6 +32,6 @@ export default function Thumbnail({
 Thumbnail.propTypes = {
 	active: PropTypes.bool,
 	onClick: PropTypes.func,
-	title: PropTypes.string.isRequired,
-	src: PropTypes.string.isRequired
+	src: PropTypes.string.isRequired,
+	title: PropTypes.string.isRequired
 };
