@@ -134,9 +134,9 @@ export default class Gallery extends React.Component {
 Gallery.propTypes = {
   background: PropTypes.string,
   images: PropTypes.arrayOf(PropTypes.shape({
+    bigUrl: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     thumbnailUrl: PropTypes.string.isRequired,
     smallUrl: PropTypes.string.isRequired,
-    bigUrl: PropTypes.string.isRequired
   }))
 };
