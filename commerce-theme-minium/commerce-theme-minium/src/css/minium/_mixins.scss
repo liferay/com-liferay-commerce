@@ -21,8 +21,8 @@
 @mixin card-title {
 	@include base-title;
 
-	font-size: 12px;
 	background-color: $color-bg;
+	font-size: 12px;
 }
 
 @mixin panel-title {
