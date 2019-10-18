@@ -136,7 +136,7 @@ public class CPInstanceSubscriptionInfoDisplayContext
 			for (CommercePaymentMethodGroupRel commercePaymentMethodGroupRel :
 					commercePaymentMethodGroupRels) {
 
-				if (commercePaymentMethodGroupRel.getActive()) {
+				if (commercePaymentMethodGroupRel.isActive()) {
 					CommercePaymentMethod commercePaymentMethod =
 						_commercePaymentMethodRegistry.getCommercePaymentMethod(
 							commercePaymentMethodGroupRel.getEngineKey());
