@@ -134,6 +134,13 @@ public interface CommerceAccountService extends BaseService {
 			ServiceContext serviceContext)
 		throws PortalException;
 
+	public CommerceAccount updateCommerceAccount(
+			long commerceAccountId, String name, boolean logo, byte[] logoBytes,
+			String email, String taxId, boolean active,
+			long defaultBillingAddressId, long defaultShippingAddressId,
+			String externalReferenceCode, ServiceContext serviceContext)
+		throws PortalException;
+
 	/**
 	 * @deprecated As of Mueller (7.2.x), pass Default Billing/Shipping Ids
 	 */

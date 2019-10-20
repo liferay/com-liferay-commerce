@@ -549,7 +549,7 @@ public class CommerceAccountServiceHttp {
 				HttpPrincipal httpPrincipal, long commerceAccountId,
 				String name, boolean logo, byte[] logoBytes, String email,
 				String taxId, boolean active, long defaultBillingAddressId,
-				long defaultShippingAddressId,
+				long defaultShippingAddressId, String externalReferenceCode,
 				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
@@ -557,6 +557,53 @@ public class CommerceAccountServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceAccountServiceUtil.class, "updateCommerceAccount",
 				_updateCommerceAccountParameterTypes12);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceAccountId, name, logo, logoBytes, email,
+				taxId, active, defaultBillingAddressId,
+				defaultShippingAddressId, externalReferenceCode,
+				serviceContext);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return (com.liferay.commerce.account.model.CommerceAccount)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.commerce.account.model.CommerceAccount
+			updateCommerceAccount(
+				HttpPrincipal httpPrincipal, long commerceAccountId,
+				String name, boolean logo, byte[] logoBytes, String email,
+				String taxId, boolean active, long defaultBillingAddressId,
+				long defaultShippingAddressId,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceAccountServiceUtil.class, "updateCommerceAccount",
+				_updateCommerceAccountParameterTypes13);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceAccountId, name, logo, logoBytes, email,
@@ -601,7 +648,7 @@ public class CommerceAccountServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceAccountServiceUtil.class, "updateCommerceAccount",
-				_updateCommerceAccountParameterTypes13);
+				_updateCommerceAccountParameterTypes14);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceAccountId, name, logo, logoBytes, email,
@@ -643,7 +690,7 @@ public class CommerceAccountServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceAccountServiceUtil.class, "updateDefaultBillingAddress",
-				_updateDefaultBillingAddressParameterTypes14);
+				_updateDefaultBillingAddressParameterTypes15);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceAccountId, commerceAddressId);
@@ -685,7 +732,7 @@ public class CommerceAccountServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceAccountServiceUtil.class,
 				"updateDefaultShippingAddress",
-				_updateDefaultShippingAddressParameterTypes15);
+				_updateDefaultShippingAddressParameterTypes16);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceAccountId, commerceAddressId);
@@ -729,7 +776,7 @@ public class CommerceAccountServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceAccountServiceUtil.class, "upsertCommerceAccount",
-				_upsertCommerceAccountParameterTypes16);
+				_upsertCommerceAccountParameterTypes17);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, name, parentCommerceAccountId, logo, logoBytes,
@@ -814,24 +861,30 @@ public class CommerceAccountServiceHttp {
 	private static final Class<?>[] _updateCommerceAccountParameterTypes12 =
 		new Class[] {
 			long.class, String.class, boolean.class, byte[].class, String.class,
-			String.class, boolean.class, long.class, long.class,
+			String.class, boolean.class, long.class, long.class, String.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
 	private static final Class<?>[] _updateCommerceAccountParameterTypes13 =
+		new Class[] {
+			long.class, String.class, boolean.class, byte[].class, String.class,
+			String.class, boolean.class, long.class, long.class,
+			com.liferay.portal.kernel.service.ServiceContext.class
+		};
+	private static final Class<?>[] _updateCommerceAccountParameterTypes14 =
 		new Class[] {
 			long.class, String.class, boolean.class, byte[].class, String.class,
 			String.class, boolean.class,
 			com.liferay.portal.kernel.service.ServiceContext.class
 		};
 	private static final Class<?>[]
-		_updateDefaultBillingAddressParameterTypes14 = new Class[] {
+		_updateDefaultBillingAddressParameterTypes15 = new Class[] {
 			long.class, long.class
 		};
 	private static final Class<?>[]
-		_updateDefaultShippingAddressParameterTypes15 = new Class[] {
+		_updateDefaultShippingAddressParameterTypes16 = new Class[] {
 			long.class, long.class
 		};
-	private static final Class<?>[] _upsertCommerceAccountParameterTypes16 =
+	private static final Class<?>[] _upsertCommerceAccountParameterTypes17 =
 		new Class[] {
 			String.class, long.class, boolean.class, byte[].class, String.class,
 			String.class, int.class, boolean.class, String.class,

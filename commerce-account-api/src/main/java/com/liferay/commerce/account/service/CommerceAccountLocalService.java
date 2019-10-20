@@ -335,12 +335,19 @@ public interface CommerceAccountLocalService
 	public CommerceAccount updateCommerceAccount(
 		CommerceAccount commerceAccount);
 
-	@Indexable(type = IndexableType.REINDEX)
 	public CommerceAccount updateCommerceAccount(
 			long commerceAccountId, String name, boolean logo, byte[] logoBytes,
 			String email, String taxId, boolean active,
 			long defaultBillingAddressId, long defaultShippingAddressId,
 			ServiceContext serviceContext)
+		throws PortalException;
+
+	@Indexable(type = IndexableType.REINDEX)
+	public CommerceAccount updateCommerceAccount(
+			long commerceAccountId, String name, boolean logo, byte[] logoBytes,
+			String email, String taxId, boolean active,
+			long defaultBillingAddressId, long defaultShippingAddressId,
+			String externalReferenceCode, ServiceContext serviceContext)
 		throws PortalException;
 
 	/**
