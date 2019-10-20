@@ -208,7 +208,7 @@ public class CommerceInventoryWarehouseItemLocalServiceImpl
 		else {
 			CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
 				commerceInventoryWarehouseItemPersistence.fetchByC_ERC(
-					companyId, sku);
+					companyId, externalReferenceCode);
 
 			if (commerceInventoryWarehouseItem != null) {
 				return commerceInventoryWarehouseItemLocalService.
