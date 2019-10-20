@@ -464,6 +464,21 @@ public class CommerceAccountLocalServiceUtil {
 			defaultBillingAddressId, defaultShippingAddressId, serviceContext);
 	}
 
+	public static com.liferay.commerce.account.model.CommerceAccount
+			updateCommerceAccount(
+				long commerceAccountId, String name, boolean logo,
+				byte[] logoBytes, String email, String taxId, boolean active,
+				long defaultBillingAddressId, long defaultShippingAddressId,
+				String externalReferenceCode,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().updateCommerceAccount(
+			commerceAccountId, name, logo, logoBytes, email, taxId, active,
+			defaultBillingAddressId, defaultShippingAddressId,
+			externalReferenceCode, serviceContext);
+	}
+
 	/**
 	 * @deprecated As of Mueller (7.2.x), pass Default Billing/Shipping Ids
 	 */
