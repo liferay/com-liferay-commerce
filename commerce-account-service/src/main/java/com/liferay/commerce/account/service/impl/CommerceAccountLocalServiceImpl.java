@@ -452,13 +452,27 @@ public class CommerceAccountLocalServiceImpl
 		return commerceAccount;
 	}
 
-	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public CommerceAccount updateCommerceAccount(
 			long commerceAccountId, String name, boolean logo, byte[] logoBytes,
 			String email, String taxId, boolean active,
 			long defaultBillingAddressId, long defaultShippingAddressId,
 			ServiceContext serviceContext)
+		throws PortalException {
+
+		return commerceAccountLocalService.updateCommerceAccount(
+			commerceAccountId, name, logo, logoBytes, email, taxId, active,
+			defaultBillingAddressId, defaultShippingAddressId, null,
+			serviceContext);
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CommerceAccount updateCommerceAccount(
+			long commerceAccountId, String name, boolean logo, byte[] logoBytes,
+			String email, String taxId, boolean active,
+			long defaultBillingAddressId, long defaultShippingAddressId,
+			String externalReferenceCode, ServiceContext serviceContext)
 		throws PortalException {
 
 		CommerceAccount commerceAccount =
@@ -472,6 +486,10 @@ public class CommerceAccountLocalServiceImpl
 		if (defaultShippingAddressId == -1) {
 			defaultShippingAddressId =
 				commerceAccount.getDefaultShippingAddressId();
+		}
+
+		if (Validator.isBlank(externalReferenceCode)) {
+			externalReferenceCode = null;
 		}
 
 		// Using this method will skip default address validation.
@@ -495,6 +513,11 @@ public class CommerceAccountLocalServiceImpl
 		commerceAccount.setActive(active);
 		commerceAccount.setDefaultBillingAddressId(defaultBillingAddressId);
 		commerceAccount.setDefaultShippingAddressId(defaultShippingAddressId);
+
+		if (Validator.isNotNull(externalReferenceCode)) {
+			commerceAccount.setExternalReferenceCode(externalReferenceCode);
+		}
+
 		commerceAccount.setExpandoBridgeAttributes(serviceContext);
 
 		commerceAccountPersistence.update(commerceAccount);
