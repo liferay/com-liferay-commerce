@@ -98,6 +98,8 @@ public class CommerceOrderHttpHelperImplTest {
 		_httpServletRequest.setAttribute(
 			CommerceWebKeys.COMMERCE_CONTEXT, commerceContext);
 
+		_httpServletRequest.setAttribute(WebKeys.THEME_DISPLAY, _themeDisplay);
+
 		_themeDisplay = ThemeDisplayFactory.create();
 
 		_themeDisplay.setScopeGroupId(_group.getGroupId());
