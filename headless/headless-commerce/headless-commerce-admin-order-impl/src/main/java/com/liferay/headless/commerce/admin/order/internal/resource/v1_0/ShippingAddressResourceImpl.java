@@ -79,8 +79,12 @@ public class ShippingAddressResourceImpl
 			id);
 
 		CommerceAddress commerceAddress =
-			_commerceAddressService.getCommerceAddress(
+			_commerceAddressService.fetchCommerceAddress(
 				commerceOrder.getShippingAddressId());
+
+		if (commerceAddress == null) {
+			return new ShippingAddress();
+		}
 
 		DTOConverter shippingAddressDTOConverter =
 			_dtoConverterRegistry.getDTOConverter("ShippingAddress");
@@ -110,7 +114,7 @@ public class ShippingAddressResourceImpl
 			_commerceAddressService, _commerceOrderService, commerceOrder,
 			shippingAddress, _serviceContextHelper.getServiceContext());
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
@@ -125,7 +129,7 @@ public class ShippingAddressResourceImpl
 			_commerceOrderService.getCommerceOrder(id), shippingAddress,
 			_serviceContextHelper.getServiceContext());
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}

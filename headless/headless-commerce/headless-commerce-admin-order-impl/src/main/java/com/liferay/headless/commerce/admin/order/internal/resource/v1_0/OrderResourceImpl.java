@@ -87,7 +87,7 @@ public class OrderResourceImpl
 	public Response deleteOrder(Long id) throws Exception {
 		_commerceOrderService.deleteCommerceOrder(id);
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
@@ -110,7 +110,7 @@ public class OrderResourceImpl
 		_commerceOrderService.deleteCommerceOrder(
 			commerceOrder.getCommerceOrderId());
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
@@ -185,7 +185,7 @@ public class OrderResourceImpl
 	public Response patchOrder(Long id, Order order) throws Exception {
 		_updateOrder(_commerceOrderService.getCommerceOrder(id), order);
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
@@ -207,7 +207,7 @@ public class OrderResourceImpl
 
 		_updateOrder(commerceOrder, order);
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
@@ -343,7 +343,10 @@ public class OrderResourceImpl
 				commerceOrder.getExternalReferenceCode()),
 			_commerceContextFactory.create(
 				contextCompany.getCompanyId(), commerceChannel.getSiteGroupId(),
-				_user.getUserId(), 0L, order.getAccountId()));
+				_user.getUserId(), 0L,
+				GetterUtil.get(
+					order.getAccountId(),
+					commerceOrder.getCommerceAccountId())));
 
 		// Expando
 
@@ -361,6 +364,11 @@ public class OrderResourceImpl
 			order, commerceOrder,
 			_serviceContextHelper.getServiceContext(
 				commerceOrder.getGroupId()));
+
+		if (commerceOrder.getOrderStatus() != order.getOrderStatus()) {
+			commerceOrder = _commerceOrderService.updateOrderStatus(
+				commerceOrder.getCommerceOrderId(), order.getOrderStatus());
+		}
 
 		return commerceOrder;
 	}
