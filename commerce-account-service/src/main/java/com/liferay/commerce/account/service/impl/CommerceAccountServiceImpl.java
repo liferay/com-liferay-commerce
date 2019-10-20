@@ -303,6 +303,23 @@ public class CommerceAccountServiceImpl extends CommerceAccountServiceBaseImpl {
 			defaultBillingAddressId, defaultShippingAddressId, serviceContext);
 	}
 
+	@Override
+	public CommerceAccount updateCommerceAccount(
+			long commerceAccountId, String name, boolean logo, byte[] logoBytes,
+			String email, String taxId, boolean active,
+			long defaultBillingAddressId, long defaultShippingAddressId,
+			String externalReferenceCode, ServiceContext serviceContext)
+		throws PortalException {
+
+		_commerceAccountModelResourcePermission.check(
+			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+
+		return commerceAccountLocalService.updateCommerceAccount(
+			commerceAccountId, name, logo, logoBytes, email, taxId, active,
+			defaultBillingAddressId, defaultShippingAddressId,
+			externalReferenceCode, serviceContext);
+	}
+
 	/**
 	 * @deprecated As of Mueller (7.2.x), pass Default Billing/Shipping Ids
 	 */
