@@ -78,8 +78,12 @@ public class BillingAddressResourceImpl extends BaseBillingAddressResourceImpl {
 			id);
 
 		CommerceAddress commerceAddress =
-			_commerceAddressService.getCommerceAddress(
+			_commerceAddressService.fetchCommerceAddress(
 				commerceOrder.getBillingAddressId());
+
+		if (commerceAddress == null) {
+			return new BillingAddress();
+		}
 
 		DTOConverter billingAddressDTOConverter =
 			_dtoConverterRegistry.getDTOConverter("BillingAddress");
@@ -109,7 +113,7 @@ public class BillingAddressResourceImpl extends BaseBillingAddressResourceImpl {
 			_commerceAddressService, _commerceOrderService, commerceOrder,
 			billingAddress, _serviceContextHelper.getServiceContext());
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
@@ -124,7 +128,7 @@ public class BillingAddressResourceImpl extends BaseBillingAddressResourceImpl {
 			_commerceOrderService.getCommerceOrder(id), billingAddress,
 			_serviceContextHelper.getServiceContext());
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
