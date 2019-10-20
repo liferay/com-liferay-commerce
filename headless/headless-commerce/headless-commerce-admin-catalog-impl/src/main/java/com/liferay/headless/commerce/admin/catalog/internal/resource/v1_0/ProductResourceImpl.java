@@ -635,10 +635,17 @@ public class ProductResourceImpl
 			serviceContext.setAssetCategoryIds(categoryIds);
 		}
 
+		Map<String, String> shortDescriptionMap = product.getShortDescription();
+
+		if ((cpDefinition != null) && (shortDescriptionMap == null)) {
+			shortDescriptionMap = LanguageUtils.getLanguageIdMap(
+				cpDefinition.getShortDescriptionMap());
+		}
+
 		cpDefinition = _cpDefinitionService.upsertCPDefinition(
 			commerceCatalog.getGroupId(), _user.getUserId(),
 			LanguageUtils.getLocalizedMap(product.getName()),
-			LanguageUtils.getLocalizedMap(product.getShortDescription()),
+			LanguageUtils.getLocalizedMap(shortDescriptionMap),
 			LanguageUtils.getLocalizedMap(product.getDescription()), null,
 			LanguageUtils.getLocalizedMap(product.getMetaTitle()),
 			LanguageUtils.getLocalizedMap(product.getMetaDescription()),

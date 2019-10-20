@@ -34,6 +34,7 @@ public class OrderEntityModel implements EntityModel {
 		_entityFieldsMap = Stream.of(
 			new IntegerEntityField("accountId", locale -> "commerceAccountId"),
 			new IntegerEntityField("channelId", locale -> "commerceChannelId"),
+			new IntegerEntityField("orderStatus", locale -> "orderStatus"),
 			new DateTimeEntityField(
 				"createDate",
 				locale -> Field.getSortableFieldName(Field.CREATE_DATE),

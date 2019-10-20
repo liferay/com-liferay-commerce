@@ -15,18 +15,15 @@
 package com.liferay.headless.commerce.admin.catalog.internal.dto.v1_0.converter;
 
 import com.liferay.asset.kernel.model.AssetTag;
-import com.liferay.asset.kernel.service.AssetCategoryService;
 import com.liferay.asset.kernel.service.AssetTagService;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CProduct;
 import com.liferay.commerce.product.model.CommerceCatalog;
-import com.liferay.commerce.product.service.CPDefinitionLinkService;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Product;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterContext;
-import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.headless.commerce.core.util.LanguageUtils;
 
 import java.util.List;
@@ -113,18 +110,9 @@ public class ProductDTOConverter implements DTOConverter {
 	}
 
 	@Reference
-	private AssetCategoryService _assetCategoryService;
-
-	@Reference
 	private AssetTagService _assetTagService;
 
 	@Reference
-	private CPDefinitionLinkService _cpDefinitionLinkService;
-
-	@Reference
 	private CPDefinitionService _cpDefinitionService;
-
-	@Reference
-	private DTOConverterRegistry _dtoConverterRegistry;
 
 }
