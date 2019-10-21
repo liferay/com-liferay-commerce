@@ -964,7 +964,7 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 	}
 
 	private static final String _SPEEDWELL_THEME_ID =
-		"speedwell_WAR_commercethemespeedwell";
+		"speedwell_WAR_speedwelltheme";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		SpeedwellSiteInitializer.class);
