@@ -102,7 +102,7 @@ PortalUtil.addPortletBreadcrumbEntry(request, title, StringPool.BLANK, data);
 </aui:form>
 
 <c:if test="<%= cpMeasurementUnit == null %>">
-	<aui:script require="commerce-frontend-js/js/utilities/index.es as utilities">
+	<aui:script require="commerce-frontend-js/utilities/index.es as utilities">
 		function slugify(string) {
 			return string.toLowerCase().replace(/[^a-z1-9]+/g, '-');
 		}
