@@ -63,8 +63,8 @@
 
 					<div id="<%= assignedToWrapperId %>"></div>
 
-					<aui:script require="commerce-frontend-js/js/assign_to/entry.es as AssignTo">
-						var assignTo = new AssignTo.default(
+					<aui:script require="commerce-frontend-js/components/assigner/entry.es as assigner">
+						assigner.default(
 							"<%= assignedToWrapperId %>",
 							"<%= assignedToWrapperId %>",
 							{
