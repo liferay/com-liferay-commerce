@@ -231,6 +231,12 @@ public interface CommerceAccountGroupCommerceAccountRelLocalService
 				long commerceAccountGroupCommerceAccountRelId)
 		throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceAccountGroupCommerceAccountRel
+			getCommerceAccountGroupCommerceAccountRel(
+				long commerceAccountGroupId, long commerceAccountId)
+		throws PortalException;
+
 	/**
 	 * Returns a range of all the commerce account group commerce account rels.
 	 *

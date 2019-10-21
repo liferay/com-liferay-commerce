@@ -54,6 +54,50 @@ public class CommerceAccountGroupCommerceAccountRelServiceHttp {
 	public static
 		com.liferay.commerce.account.model.
 			CommerceAccountGroupCommerceAccountRel
+					getCommerceAccountGroupCommerceAccountRel(
+						HttpPrincipal httpPrincipal,
+						long commerceAccountGroupId, long commerceAccountId)
+				throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceAccountGroupCommerceAccountRelServiceUtil.class,
+				"getCommerceAccountGroupCommerceAccountRel",
+				_getCommerceAccountGroupCommerceAccountRelParameterTypes0);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceAccountGroupId, commerceAccountId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return (com.liferay.commerce.account.model.
+				CommerceAccountGroupCommerceAccountRel)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static
+		com.liferay.commerce.account.model.
+			CommerceAccountGroupCommerceAccountRel
 					addCommerceAccountGroupCommerceAccountRel(
 						HttpPrincipal httpPrincipal,
 						long commerceAccountGroupId, long commerceAccountId,
@@ -65,7 +109,7 @@ public class CommerceAccountGroupCommerceAccountRelServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceAccountGroupCommerceAccountRelServiceUtil.class,
 				"addCommerceAccountGroupCommerceAccountRel",
-				_addCommerceAccountGroupCommerceAccountRelParameterTypes0);
+				_addCommerceAccountGroupCommerceAccountRelParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceAccountGroupId, commerceAccountId,
@@ -107,7 +151,7 @@ public class CommerceAccountGroupCommerceAccountRelServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceAccountGroupCommerceAccountRelServiceUtil.class,
 				"deleteCommerceAccountGroupCommerceAccountRel",
-				_deleteCommerceAccountGroupCommerceAccountRelParameterTypes1);
+				_deleteCommerceAccountGroupCommerceAccountRelParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceAccountGroupCommerceAccountRelId);
@@ -146,7 +190,7 @@ public class CommerceAccountGroupCommerceAccountRelServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceAccountGroupCommerceAccountRelServiceUtil.class,
 				"getCommerceAccountGroupCommerceAccountRels",
-				_getCommerceAccountGroupCommerceAccountRelsParameterTypes2);
+				_getCommerceAccountGroupCommerceAccountRelsParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceAccountGroupId, start, end);
@@ -187,7 +231,7 @@ public class CommerceAccountGroupCommerceAccountRelServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceAccountGroupCommerceAccountRelServiceUtil.class,
 				"getCommerceAccountGroupCommerceAccountRelsCount",
-				_getCommerceAccountGroupCommerceAccountRelsCountParameterTypes3);
+				_getCommerceAccountGroupCommerceAccountRelsCountParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceAccountGroupId);
@@ -222,19 +266,22 @@ public class CommerceAccountGroupCommerceAccountRelServiceHttp {
 		CommerceAccountGroupCommerceAccountRelServiceHttp.class);
 
 	private static final Class<?>[]
-		_addCommerceAccountGroupCommerceAccountRelParameterTypes0 =
+		_getCommerceAccountGroupCommerceAccountRelParameterTypes0 =
+			new Class[] {long.class, long.class};
+	private static final Class<?>[]
+		_addCommerceAccountGroupCommerceAccountRelParameterTypes1 =
 			new Class[] {
 				long.class, long.class,
 				com.liferay.portal.kernel.service.ServiceContext.class
 			};
 	private static final Class<?>[]
-		_deleteCommerceAccountGroupCommerceAccountRelParameterTypes1 =
+		_deleteCommerceAccountGroupCommerceAccountRelParameterTypes2 =
 			new Class[] {long.class};
 	private static final Class<?>[]
-		_getCommerceAccountGroupCommerceAccountRelsParameterTypes2 =
+		_getCommerceAccountGroupCommerceAccountRelsParameterTypes3 =
 			new Class[] {long.class, int.class, int.class};
 	private static final Class<?>[]
-		_getCommerceAccountGroupCommerceAccountRelsCountParameterTypes3 =
+		_getCommerceAccountGroupCommerceAccountRelsCountParameterTypes4 =
 			new Class[] {long.class};
 
 }

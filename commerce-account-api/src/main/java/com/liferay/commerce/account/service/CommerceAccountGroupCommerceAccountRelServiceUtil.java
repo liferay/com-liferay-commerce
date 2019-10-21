@@ -64,6 +64,17 @@ public class CommerceAccountGroupCommerceAccountRelServiceUtil {
 			commerceAccountGroupCommerceAccountRelId);
 	}
 
+	public static
+		com.liferay.commerce.account.model.
+			CommerceAccountGroupCommerceAccountRel
+					getCommerceAccountGroupCommerceAccountRel(
+						long commerceAccountGroupId, long commerceAccountId)
+				throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getCommerceAccountGroupCommerceAccountRel(
+			commerceAccountGroupId, commerceAccountId);
+	}
+
 	public static java.util.List
 		<com.liferay.commerce.account.model.
 			CommerceAccountGroupCommerceAccountRel>
