@@ -19,6 +19,7 @@ import com.liferay.commerce.account.exception.NoSuchAccountException;
 import com.liferay.commerce.account.exception.NoSuchAccountGroupException;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.model.CommerceAccountGroup;
+import com.liferay.commerce.account.model.CommerceAccountGroupCommerceAccountRel;
 import com.liferay.commerce.account.model.CommerceAccountOrganizationRel;
 import com.liferay.commerce.account.model.CommerceAccountUserRel;
 import com.liferay.commerce.account.service.CommerceAccountGroupCommerceAccountRelService;
@@ -109,6 +110,49 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 
 		_commerceAccountService.deleteCommerceAccount(
 			commerceAccount.getCommerceAccountId());
+
+		Response.ResponseBuilder responseBuilder = Response.noContent();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	public Response deleteAccountGroupByExternalReferenceCodeAccount(
+			@NotNull String accountExternalReferenceCode,
+			@NotNull String externalReferenceCode)
+		throws Exception {
+
+		CommerceAccountGroup commerceAccountGroup =
+			_commerceAccountGroupService.fetchByExternalReferenceCode(
+				contextCompany.getCompanyId(), externalReferenceCode);
+
+		if (commerceAccountGroup == null) {
+			throw new NoSuchAccountGroupException(
+				"Unable to find AccountGroup with externalReferenceCode: " +
+					externalReferenceCode);
+		}
+
+		CommerceAccount commerceAccount =
+			_commerceAccountService.fetchByExternalReferenceCode(
+				contextCompany.getCompanyId(), accountExternalReferenceCode);
+
+		if (commerceAccount == null) {
+			throw new NoSuchAccountException(
+				"Unable to find Account with external reference code: " +
+					accountExternalReferenceCode);
+		}
+
+		CommerceAccountGroupCommerceAccountRel
+			commerceAccountGroupCommerceAccountRel =
+				_commerceAccountGroupCommerceAccountRelService.
+					getCommerceAccountGroupCommerceAccountRel(
+						commerceAccountGroup.getCommerceAccountGroupId(),
+						commerceAccount.getCommerceAccountId());
+
+		_commerceAccountGroupCommerceAccountRelService.
+			deleteCommerceAccountGroupCommerceAccountRel(
+				commerceAccountGroupCommerceAccountRel.
+					getCommerceAccountGroupCommerceAccountRelId());
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
