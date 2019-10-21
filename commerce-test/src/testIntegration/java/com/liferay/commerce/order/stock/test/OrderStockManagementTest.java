@@ -25,26 +25,31 @@ import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.test.util.CPTestUtil;
+import com.liferay.commerce.service.CommerceOrderLocalServiceUtil;
 import com.liferay.commerce.shipment.test.util.CommerceShipmentTestUtil;
 import com.liferay.commerce.test.util.CommerceInventoryTestUtil;
 import com.liferay.commerce.test.util.CommerceTestUtil;
-import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.CompanyLocalServiceUtil;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
-import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
-import com.liferay.portal.kernel.test.util.GroupTestUtil;
+import com.liferay.portal.kernel.test.util.CompanyTestUtil;
 import com.liferay.portal.kernel.test.util.UserTestUtil;
 import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PermissionCheckerTestRule;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.frutilla.FrutillaRule;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -52,7 +57,6 @@ import org.junit.runner.RunWith;
 /**
  * @author Luca Pellizzon
  */
-@Ignore
 @RunWith(Arquillian.class)
 public class OrderStockManagementTest {
 
@@ -65,9 +69,26 @@ public class OrderStockManagementTest {
 
 	@Before
 	public void setUp() throws Exception {
-		_group = GroupTestUtil.addGroup();
+		_company = CompanyTestUtil.addCompany();
 
-		_user = UserTestUtil.addUser(_group.getGroupId());
+		_user = UserTestUtil.addUser(_company);
+
+		_commerceCurrency = CommerceCurrencyTestUtil.addCommerceCurrency(
+			_company.getGroupId());
+
+		_commerceChannel = CommerceTestUtil.addCommerceChannel(
+			_company.getGroupId(), _commerceCurrency.getCode());
+
+		_commerceOrders = new ArrayList<>();
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		for (CommerceOrder commerceOrder : _commerceOrders) {
+			CommerceOrderLocalServiceUtil.deleteCommerceOrder(commerceOrder);
+		}
+
+		CompanyLocalServiceUtil.deleteCompany(_company);
 	}
 
 	@Test
@@ -84,12 +105,15 @@ public class OrderStockManagementTest {
 		);
 
 		CommerceCurrency commerceCurrency =
-			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
+			CommerceCurrencyTestUtil.addCommerceCurrency(_company.getGroupId());
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
-			_group.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId());
+			_company.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId(),
+			_commerceChannel.getSiteGroupId());
 
-		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
+		_commerceOrders.add(commerceOrder);
+
+		CPInstance cpInstance = CPTestUtil.addCPInstance(_company.getGroupId());
 
 		CPDefinition cpDefinition = cpInstance.getCPDefinition();
 
@@ -100,7 +124,8 @@ public class OrderStockManagementTest {
 		CommerceOrderItem commerceOrderItem =
 			CommerceTestUtil.addCommerceOrderItem(
 				commerceOrder.getCommerceOrderId(),
-				cpInstance.getCPInstanceId(), orderedQuantity);
+				cpInstance.getCPInstanceId(), orderedQuantity, _user,
+				_company.getGroup());
 
 		Assert.assertEquals(
 			commerceOrderItem.toString(), orderedQuantity,
@@ -123,16 +148,23 @@ public class OrderStockManagementTest {
 		);
 
 		CommerceCurrency commerceCurrency =
-			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
+			CommerceCurrencyTestUtil.addCommerceCurrency(_company.getGroupId());
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
-			_group.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId());
+			_company.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId(),
+			_commerceChannel.getSiteGroupId());
 
-		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
+		_commerceOrders.add(commerceOrder);
+
+		CPInstance cpInstance = CPTestUtil.addCPInstance(_company.getGroupId());
 
 		CommerceInventoryWarehouse commerceInventoryWarehouse =
 			CommerceInventoryTestUtil.addCommerceInventoryWarehouse(
-				_group.getGroupId());
+				_company.getGroupId());
+
+		CommerceTestUtil.addCommerceChannelRel(
+			_company.getGroupId(), _commerceChannel.getCommerceChannelId(),
+			commerceInventoryWarehouse.getCommerceInventoryWarehouseId());
 
 		int quantity = 10;
 		int orderedQuantity = 4;
@@ -145,7 +177,8 @@ public class OrderStockManagementTest {
 		CommerceOrderItem commerceOrderItem =
 			CommerceTestUtil.addCommerceOrderItem(
 				commerceOrder.getCommerceOrderId(),
-				cpInstance.getCPInstanceId(), orderedQuantity);
+				cpInstance.getCPInstanceId(), orderedQuantity, _user,
+				_company.getGroup());
 
 		Assert.assertEquals(
 			commerceOrderItem.toString(), orderedQuantity,
@@ -162,7 +195,7 @@ public class OrderStockManagementTest {
 			commerceInventoryWarehouseItem.getQuantity());
 
 		CommerceShipmentTestUtil.createOrderShipment(
-			_group.getGroupId(), commerceOrder.getCommerceOrderId(),
+			_company.getGroupId(), commerceOrder.getCommerceOrderId(),
 			commerceInventoryWarehouse.getCommerceInventoryWarehouseId());
 
 		commerceInventoryWarehouseItem =
@@ -190,16 +223,23 @@ public class OrderStockManagementTest {
 		);
 
 		CommerceCurrency commerceCurrency =
-			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
+			CommerceCurrencyTestUtil.addCommerceCurrency(_company.getGroupId());
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
-			_group.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId());
+			_company.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId(),
+			_commerceChannel.getSiteGroupId());
 
-		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
+		_commerceOrders.add(commerceOrder);
+
+		CPInstance cpInstance = CPTestUtil.addCPInstance(_company.getGroupId());
 
 		CommerceInventoryWarehouse commerceInventoryWarehouse =
 			CommerceInventoryTestUtil.addCommerceInventoryWarehouse(
-				_group.getGroupId());
+				_company.getGroupId());
+
+		CommerceTestUtil.addCommerceChannelRel(
+			_company.getGroupId(), _commerceChannel.getCommerceChannelId(),
+			commerceInventoryWarehouse.getCommerceInventoryWarehouseId());
 
 		CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
 			_user.getUserId(), commerceInventoryWarehouse, cpInstance.getSku(),
@@ -210,7 +250,8 @@ public class OrderStockManagementTest {
 		CommerceOrderItem commerceOrderItem =
 			CommerceTestUtil.addCommerceOrderItem(
 				commerceOrder.getCommerceOrderId(),
-				cpInstance.getCPInstanceId(), orderedQuantity);
+				cpInstance.getCPInstanceId(), orderedQuantity, _user,
+				_company.getGroup());
 
 		Assert.assertEquals(
 			commerceOrderItem.toString(), orderedQuantity,
@@ -230,16 +271,19 @@ public class OrderStockManagementTest {
 		);
 
 		CommerceCurrency commerceCurrency =
-			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
+			CommerceCurrencyTestUtil.addCommerceCurrency(_company.getGroupId());
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
-			_group.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId());
+			_company.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId(),
+			_commerceChannel.getSiteGroupId());
 
-		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
+		_commerceOrders.add(commerceOrder);
+
+		CPInstance cpInstance = CPTestUtil.addCPInstance(_company.getGroupId());
 
 		CommerceTestUtil.addCommerceOrderItem(
-			commerceOrder.getCommerceOrderId(), cpInstance.getCPInstanceId(),
-			2);
+			commerceOrder.getCommerceOrderId(), cpInstance.getCPInstanceId(), 2,
+			_user, _company.getGroup());
 	}
 
 	@Test(expected = CommerceOrderValidatorException.class)
@@ -259,16 +303,23 @@ public class OrderStockManagementTest {
 		);
 
 		CommerceCurrency commerceCurrency =
-			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
+			CommerceCurrencyTestUtil.addCommerceCurrency(_company.getGroupId());
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
-			_group.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId());
+			_company.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId(),
+			_commerceChannel.getSiteGroupId());
 
-		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
+		_commerceOrders.add(commerceOrder);
+
+		CPInstance cpInstance = CPTestUtil.addCPInstance(_company.getGroupId());
 
 		CommerceInventoryWarehouse commerceInventoryWarehouse =
 			CommerceInventoryTestUtil.addCommerceInventoryWarehouse(
-				_group.getGroupId());
+				_company.getGroupId());
+
+		CommerceTestUtil.addCommerceChannelRel(
+			_company.getGroupId(), _commerceChannel.getCommerceChannelId(),
+			commerceInventoryWarehouse.getCommerceInventoryWarehouseId());
 
 		CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
 			_user.getUserId(), commerceInventoryWarehouse, cpInstance.getSku(),
@@ -276,7 +327,7 @@ public class OrderStockManagementTest {
 
 		CommerceTestUtil.addCommerceOrderItem(
 			commerceOrder.getCommerceOrderId(), cpInstance.getCPInstanceId(),
-			20);
+			20, _user, _company.getGroup());
 	}
 
 	@Test(expected = CommerceOrderValidatorException.class)
@@ -296,19 +347,30 @@ public class OrderStockManagementTest {
 		);
 
 		CommerceCurrency commerceCurrency =
-			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
+			CommerceCurrencyTestUtil.addCommerceCurrency(_company.getGroupId());
 
 		CommerceOrder commerceOrder1 = CommerceTestUtil.addB2CCommerceOrder(
-			_group.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId());
+			_company.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId(),
+			_commerceChannel.getSiteGroupId());
+
+		_commerceOrders.add(commerceOrder1);
 
 		CommerceOrder commerceOrder2 = CommerceTestUtil.addB2CCommerceOrder(
-			_group.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId());
+			commerceOrder1.getCommerceAccount(), _company.getGroupId(),
+			commerceCurrency.getCommerceCurrencyId(),
+			_commerceChannel.getSiteGroupId());
 
-		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
+		_commerceOrders.add(commerceOrder2);
+
+		CPInstance cpInstance = CPTestUtil.addCPInstance(_company.getGroupId());
 
 		CommerceInventoryWarehouse commerceInventoryWarehouse =
 			CommerceInventoryTestUtil.addCommerceInventoryWarehouse(
-				_group.getGroupId());
+				_company.getGroupId());
+
+		CommerceTestUtil.addCommerceChannelRel(
+			_company.getGroupId(), _commerceChannel.getCommerceChannelId(),
+			commerceInventoryWarehouse.getCommerceInventoryWarehouseId());
 
 		CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
 			_user.getUserId(), commerceInventoryWarehouse, cpInstance.getSku(),
@@ -316,24 +378,29 @@ public class OrderStockManagementTest {
 
 		CommerceTestUtil.addCommerceOrderItem(
 			commerceOrder1.getCommerceOrderId(), cpInstance.getCPInstanceId(),
-			4);
+			4, _user, _company.getGroup());
+
+		CommerceShipmentTestUtil.createOrderShipment(
+			_company.getGroupId(), commerceOrder1.getCommerceOrderId(),
+			commerceInventoryWarehouse.getCommerceInventoryWarehouseId());
 
 		CommerceTestUtil.addCommerceOrderItem(
 			commerceOrder2.getCommerceOrderId(), cpInstance.getCPInstanceId(),
-			8);
+			8, _user, _company.getGroup());
 	}
 
 	@Rule
 	public FrutillaRule frutillaRule = new FrutillaRule();
 
+	private CommerceChannel _commerceChannel;
+	private CommerceCurrency _commerceCurrency;
+
 	@Inject
 	private CommerceInventoryWarehouseItemLocalService
 		_commerceInventoryWarehouseItemLocalService;
 
-	@DeleteAfterTestRun
-	private Group _group;
-
-	@DeleteAfterTestRun
+	private List<CommerceOrder> _commerceOrders;
+	private Company _company;
 	private User _user;
 
 }
