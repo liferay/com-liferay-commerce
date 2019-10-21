@@ -293,6 +293,17 @@ public class CommerceAccountGroupCommerceAccountRelLocalServiceUtil {
 			commerceAccountGroupCommerceAccountRelId);
 	}
 
+	public static
+		com.liferay.commerce.account.model.
+			CommerceAccountGroupCommerceAccountRel
+					getCommerceAccountGroupCommerceAccountRel(
+						long commerceAccountGroupId, long commerceAccountId)
+				throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getCommerceAccountGroupCommerceAccountRel(
+			commerceAccountGroupId, commerceAccountId);
+	}
+
 	/**
 	 * Returns a range of all the commerce account group commerce account rels.
 	 *

@@ -320,6 +320,19 @@ public class CommerceAccountGroupCommerceAccountRelLocalServiceWrapper
 				commerceAccountGroupCommerceAccountRelId);
 	}
 
+	@Override
+	public
+		com.liferay.commerce.account.model.
+			CommerceAccountGroupCommerceAccountRel
+					getCommerceAccountGroupCommerceAccountRel(
+						long commerceAccountGroupId, long commerceAccountId)
+				throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceAccountGroupCommerceAccountRelLocalService.
+			getCommerceAccountGroupCommerceAccountRel(
+				commerceAccountGroupId, commerceAccountId);
+	}
+
 	/**
 	 * Returns a range of all the commerce account group commerce account rels.
 	 *
