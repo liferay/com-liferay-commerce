@@ -15,6 +15,13 @@ module.exports = [
   {
     entry: "entry.es.js",
     entry_dev: "entry.dev.es.js",
+    folder: "assigner",
+    name: "Assigner",
+    page: "assigner.html"
+  },
+  {
+    entry: "entry.es.js",
+    entry_dev: "entry.dev.es.js",
     folder: "gallery",
     name: "Gallery",
     page: "gallery.html"

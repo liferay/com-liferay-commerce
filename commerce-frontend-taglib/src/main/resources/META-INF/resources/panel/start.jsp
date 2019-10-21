@@ -27,7 +27,7 @@
 			<%= title %>
 
 			<c:if test="<%= Validator.isNotNull(actionTargetId) %>">
-				<aui:script require="commerce-frontend-js/js/utilities/eventsDefinitions.es as eventsDefinitions">
+				<aui:script require="commerce-frontend-js/utilities/eventsDefinitions.es as eventsDefinitions">
 					const link = document.getElementById('<%= linkId %>');
 
 					if(link) {
