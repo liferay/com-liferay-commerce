@@ -20,6 +20,7 @@ import com.liferay.commerce.account.model.CommerceAccountOrganizationRel;
 import com.liferay.commerce.account.service.CommerceAccountOrganizationRelService;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.account.service.persistence.CommerceAccountOrganizationRelPK;
+import com.liferay.headless.commerce.admin.account.dto.v1_0.Account;
 import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountOrganization;
 import com.liferay.headless.commerce.admin.account.internal.util.v1_0.AccountOrganizationUtil;
 import com.liferay.headless.commerce.admin.account.resource.v1_0.AccountOrganizationResource;
@@ -168,7 +169,7 @@ public class AccountOrganizationResourceImpl
 				new CommerceAccountOrganizationRelPK(id, organizationId)));
 	}
 
-	@NestedField("organizations")
+	@NestedField(parentClass = Account.class, value = "organizations")
 	@Override
 	public Page<AccountOrganization> getAccountIdAccountOrganizationsPage(
 			Long id, Pagination pagination)
