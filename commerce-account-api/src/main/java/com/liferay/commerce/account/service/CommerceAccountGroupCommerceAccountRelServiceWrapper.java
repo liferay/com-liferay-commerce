@@ -66,6 +66,19 @@ public class CommerceAccountGroupCommerceAccountRelServiceWrapper
 	}
 
 	@Override
+	public
+		com.liferay.commerce.account.model.
+			CommerceAccountGroupCommerceAccountRel
+					getCommerceAccountGroupCommerceAccountRel(
+						long commerceAccountGroupId, long commerceAccountId)
+				throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceAccountGroupCommerceAccountRelService.
+			getCommerceAccountGroupCommerceAccountRel(
+				commerceAccountGroupId, commerceAccountId);
+	}
+
+	@Override
 	public java.util.List
 		<com.liferay.commerce.account.model.
 			CommerceAccountGroupCommerceAccountRel>

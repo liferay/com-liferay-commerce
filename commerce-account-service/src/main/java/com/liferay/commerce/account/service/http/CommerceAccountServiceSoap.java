@@ -308,7 +308,6 @@ public class CommerceAccountServiceSoap {
 				long commerceAccountId, String name, boolean logo,
 				byte[] logoBytes, String email, String taxId, boolean active,
 				long defaultBillingAddressId, long defaultShippingAddressId,
-				String externalReferenceCode,
 				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
 
@@ -317,7 +316,7 @@ public class CommerceAccountServiceSoap {
 				CommerceAccountServiceUtil.updateCommerceAccount(
 					commerceAccountId, name, logo, logoBytes, email, taxId,
 					active, defaultBillingAddressId, defaultShippingAddressId,
-					externalReferenceCode, serviceContext);
+					serviceContext);
 
 			return com.liferay.commerce.account.model.CommerceAccountSoap.
 				toSoapModel(returnValue);
@@ -334,6 +333,7 @@ public class CommerceAccountServiceSoap {
 				long commerceAccountId, String name, boolean logo,
 				byte[] logoBytes, String email, String taxId, boolean active,
 				long defaultBillingAddressId, long defaultShippingAddressId,
+				String externalReferenceCode,
 				com.liferay.portal.kernel.service.ServiceContext serviceContext)
 		throws RemoteException {
 
@@ -342,7 +342,7 @@ public class CommerceAccountServiceSoap {
 				CommerceAccountServiceUtil.updateCommerceAccount(
 					commerceAccountId, name, logo, logoBytes, email, taxId,
 					active, defaultBillingAddressId, defaultShippingAddressId,
-					serviceContext);
+					externalReferenceCode, serviceContext);
 
 			return com.liferay.commerce.account.model.CommerceAccountSoap.
 				toSoapModel(returnValue);

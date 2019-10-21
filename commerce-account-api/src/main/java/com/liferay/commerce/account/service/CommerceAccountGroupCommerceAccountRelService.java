@@ -72,6 +72,12 @@ public interface CommerceAccountGroupCommerceAccountRelService
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceAccountGroupCommerceAccountRel
+			getCommerceAccountGroupCommerceAccountRel(
+				long commerceAccountGroupId, long commerceAccountId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAccountGroupCommerceAccountRel>
 			getCommerceAccountGroupCommerceAccountRels(
 				long commerceAccountGroupId, int start, int end)
