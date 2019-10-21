@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 
 import java.math.BigDecimal;
 
+import java.util.Calendar;
 import java.util.concurrent.Callable;
 
 import javax.portlet.ActionRequest;
@@ -252,6 +253,29 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 		int orderStatus = ParamUtil.getInteger(actionRequest, "orderStatus");
 
 		_commerceOrderService.updateOrderStatus(commerceOrderId, orderStatus);
+
+		int orderDateMonth = ParamUtil.getInteger(
+			actionRequest, "orderDateMonth");
+		int orderDateDay = ParamUtil.getInteger(actionRequest, "orderDateDay");
+		int orderDateYear = ParamUtil.getInteger(
+			actionRequest, "orderDateYear");
+		int orderDateHour = ParamUtil.getInteger(
+			actionRequest, "orderDateHour");
+		int orderDateMinute = ParamUtil.getInteger(
+			actionRequest, "orderDateMinute");
+		int orderDateAmPm = ParamUtil.getInteger(
+			actionRequest, "orderDateAmPm");
+
+		if (orderDateAmPm == Calendar.PM) {
+			orderDateHour += 12;
+		}
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			CommerceOrder.class.getName(), actionRequest);
+
+		_commerceOrderService.updateOrderDate(
+			commerceOrderId, orderDateMonth, orderDateDay, orderDateYear,
+			orderDateHour, orderDateMinute, serviceContext);
 	}
 
 	protected void updatePayment(ActionRequest actionRequest) throws Exception {

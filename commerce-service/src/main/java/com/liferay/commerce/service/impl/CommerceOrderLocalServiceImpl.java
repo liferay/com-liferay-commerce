@@ -419,6 +419,8 @@ public class CommerceOrderLocalServiceImpl
 			commerceOrder.setShippingAddressId(shippingAddressId);
 		}
 
+		commerceOrder.setOrderDate(new Date());
+
 		return commerceOrderPersistence.update(commerceOrder);
 	}
 
