@@ -280,6 +280,7 @@
 		<column name="totalDiscountPercentageLevel4" type="BigDecimal" />
 		<column name="advanceStatus" type="String" />
 		<column name="paymentStatus" type="int" />
+		<column name="orderDate" type="Date" />
 		<column name="orderStatus" type="int" />
 		<column name="printedNote" type="String" />
 		<column name="requestedDeliveryDate" type="Date" />
