@@ -17,6 +17,7 @@ package com.liferay.headless.commerce.admin.catalog.internal.resource.v1_0;
 import com.liferay.commerce.product.exception.NoSuchCPDefinitionException;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionService;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Product;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductShippingConfiguration;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductShippingConfigurationUtil;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.ProductShippingConfigurationResource;
@@ -72,7 +73,7 @@ public class ProductShippingConfigurationResourceImpl
 					cpDefinition.getCPDefinitionId()));
 	}
 
-	@NestedField("shippingConfiguration")
+	@NestedField(parentClass = Product.class, value = "shippingConfiguration")
 	@Override
 	public ProductShippingConfiguration getProductIdShippingConfiguration(
 			@NestedFieldId(value = "productId") Long id)

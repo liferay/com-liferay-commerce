@@ -20,6 +20,7 @@ import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelService;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CPOptionService;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Product;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductOption;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductOptionUtil;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.ProductOptionResource;
@@ -96,7 +97,7 @@ public class ProductOptionResourceImpl extends BaseProductOptionResourceImpl {
 			_toProductOptions(cpDefinitionOptionRels), pagination, totalItems);
 	}
 
-	@NestedField("productOptions")
+	@NestedField(parentClass = Product.class, value = "productOptions")
 	@Override
 	public Page<ProductOption> getProductIdProductOptionsPage(
 			@NestedFieldId(value = "productId") Long id, Pagination pagination)

@@ -19,6 +19,7 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionLink;
 import com.liferay.commerce.product.service.CPDefinitionLinkService;
 import com.liferay.commerce.product.service.CPDefinitionService;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Product;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.RelatedProduct;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.RelatedProductUtil;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.RelatedProductResource;
@@ -81,7 +82,7 @@ public class RelatedProductResourceImpl extends BaseRelatedProductResourceImpl {
 		return _getRelatedProductPage(cpDefinition, type, pagination);
 	}
 
-	@NestedField("relatedProducts")
+	@NestedField(parentClass = Product.class, value = "relatedProducts")
 	@Override
 	public Page<RelatedProduct> getProductIdRelatedProductsPage(
 			@NestedFieldId(value = "productId") Long id, String type,

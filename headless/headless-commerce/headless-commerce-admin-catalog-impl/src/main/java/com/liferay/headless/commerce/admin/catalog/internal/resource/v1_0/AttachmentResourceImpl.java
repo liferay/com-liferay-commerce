@@ -22,6 +22,7 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPAttachmentFileEntryService;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Attachment;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Product;
 import com.liferay.headless.commerce.admin.catalog.internal.util.DateConfigUtil;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.AttachmentUtil;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.AttachmentResource;
@@ -173,7 +174,7 @@ public class AttachmentResourceImpl extends BaseAttachmentResourceImpl {
 			pagination);
 	}
 
-	@NestedField("attachments")
+	@NestedField(parentClass = Product.class, value = "attachments")
 	@Override
 	public Page<Attachment> getProductIdAttachmentsPage(
 			@NestedFieldId(value = "productId") Long id, Pagination pagination)
@@ -192,7 +193,7 @@ public class AttachmentResourceImpl extends BaseAttachmentResourceImpl {
 			pagination);
 	}
 
-	@NestedField("images")
+	@NestedField(parentClass = Product.class, value = "images")
 	@Override
 	public Page<Attachment> getProductIdImagesPage(
 			@NestedFieldId(value = "productId") Long id, Pagination pagination)

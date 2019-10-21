@@ -20,6 +20,7 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CPInstanceService;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Product;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Sku;
 import com.liferay.headless.commerce.admin.catalog.internal.util.DateConfigUtil;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.SkuUtil;
@@ -120,7 +121,7 @@ public class SkuResourceImpl extends BaseSkuResourceImpl {
 		return Page.of(_toSKUs(cpInstances), pagination, totalItems);
 	}
 
-	@NestedField("skus")
+	@NestedField(parentClass = Product.class, value = "skus")
 	@Override
 	public Page<Sku> getProductIdSkusPage(
 			@NestedFieldId(value = "productId") @NotNull Long id,

@@ -20,6 +20,7 @@ import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemService;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseService;
+import com.liferay.headless.commerce.admin.inventory.dto.v1_0.Warehouse;
 import com.liferay.headless.commerce.admin.inventory.dto.v1_0.WarehouseItem;
 import com.liferay.headless.commerce.admin.inventory.resource.v1_0.WarehouseItemResource;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
@@ -149,7 +150,7 @@ public class WarehouseItemResourceImpl extends BaseWarehouseItemResourceImpl {
 			totalItems);
 	}
 
-	@NestedField("items")
+	@NestedField(parentClass = Warehouse.class, value = "items")
 	@Override
 	public Page<WarehouseItem> getWarehousIdWarehouseItemsPage(
 			Long id, Pagination pagination)
