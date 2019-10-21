@@ -558,11 +558,25 @@ public class ProductResourceImpl
 			serviceContext.setAssetCategoryIds(categoryIds);
 		}
 
+		Map<String, String> shortDescriptionMap = product.getShortDescription();
+
+		if ((cpDefinition != null) && (shortDescriptionMap == null)) {
+			shortDescriptionMap = LanguageUtils.getLanguageIdMap(
+				cpDefinition.getShortDescriptionMap());
+		}
+
+		Map<String, String> descriptionMap = product.getDescription();
+
+		if ((cpDefinition != null) && (descriptionMap == null)) {
+			descriptionMap = LanguageUtils.getLanguageIdMap(
+				cpDefinition.getDescriptionMap());
+		}
+
 		cpDefinition = _cpDefinitionService.updateCPDefinition(
 			cpDefinition.getCPDefinitionId(),
 			LanguageUtils.getLocalizedMap(product.getName()),
-			LanguageUtils.getLocalizedMap(product.getShortDescription()),
-			LanguageUtils.getLocalizedMap(product.getDescription()),
+			LanguageUtils.getLocalizedMap(shortDescriptionMap),
+			LanguageUtils.getLocalizedMap(descriptionMap),
 			cpDefinition.getUrlTitleMap(), cpDefinition.getMetaTitleMap(),
 			cpDefinition.getMetaDescriptionMap(),
 			cpDefinition.getMetaKeywordsMap(),
@@ -642,11 +656,18 @@ public class ProductResourceImpl
 				cpDefinition.getShortDescriptionMap());
 		}
 
+		Map<String, String> descriptionMap = product.getDescription();
+
+		if ((cpDefinition != null) && (descriptionMap == null)) {
+			descriptionMap = LanguageUtils.getLanguageIdMap(
+				cpDefinition.getDescriptionMap());
+		}
+
 		cpDefinition = _cpDefinitionService.upsertCPDefinition(
 			commerceCatalog.getGroupId(), _user.getUserId(),
 			LanguageUtils.getLocalizedMap(product.getName()),
 			LanguageUtils.getLocalizedMap(shortDescriptionMap),
-			LanguageUtils.getLocalizedMap(product.getDescription()), null,
+			LanguageUtils.getLocalizedMap(descriptionMap), null,
 			LanguageUtils.getLocalizedMap(product.getMetaTitle()),
 			LanguageUtils.getLocalizedMap(product.getMetaDescription()),
 			LanguageUtils.getLocalizedMap(product.getMetaKeyword()),
