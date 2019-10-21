@@ -46,7 +46,8 @@ public class ProductEntityModel implements EntityModel {
 			new StringEntityField(
 				"name",
 				locale -> Field.getSortableFieldName(
-					"localized_name_".concat(LocaleUtil.toLanguageId(locale))))
+					"localized_name_".concat(LocaleUtil.toLanguageId(locale)))),
+			new StringEntityField("productType", locale -> "productTypeName")
 		).collect(
 			Collectors.toMap(EntityField::getName, Function.identity())
 		);
