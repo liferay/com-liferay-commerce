@@ -100,6 +100,16 @@ public class CommerceAccountGroupCommerceAccountRelLocalServiceImpl
 	}
 
 	@Override
+	public CommerceAccountGroupCommerceAccountRel
+			getCommerceAccountGroupCommerceAccountRel(
+				long commerceAccountGroupId, long commerceAccountId)
+		throws PortalException {
+
+		return commerceAccountGroupCommerceAccountRelPersistence.findByC_C(
+			commerceAccountGroupId, commerceAccountId);
+	}
+
+	@Override
 	public List<CommerceAccountGroupCommerceAccountRel>
 		getCommerceAccountGroupCommerceAccountRels(
 			long commerceAccountGroupId, int start, int end) {

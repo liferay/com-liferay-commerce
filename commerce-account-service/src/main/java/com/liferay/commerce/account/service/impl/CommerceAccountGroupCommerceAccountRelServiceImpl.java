@@ -43,7 +43,7 @@ public class CommerceAccountGroupCommerceAccountRelServiceImpl
 			getPermissionChecker(), commerceAccountGroupId, ActionKeys.UPDATE);
 
 		_commerceAccountModelResourcePermission.check(
-			getPermissionChecker(), commerceAccountGroupId, ActionKeys.UPDATE);
+			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
 
 		return commerceAccountGroupCommerceAccountRelLocalService.
 			addCommerceAccountGroupCommerceAccountRel(
@@ -74,6 +74,23 @@ public class CommerceAccountGroupCommerceAccountRelServiceImpl
 		commerceAccountGroupCommerceAccountRelLocalService.
 			deleteCommerceAccountGroupCommerceAccountRel(
 				commerceAccountGroupCommerceAccountRel);
+	}
+
+	@Override
+	public CommerceAccountGroupCommerceAccountRel
+			getCommerceAccountGroupCommerceAccountRel(
+				long commerceAccountGroupId, long commerceAccountId)
+		throws PortalException {
+
+		_commerceAccountGroupModelResourcePermission.check(
+			getPermissionChecker(), commerceAccountGroupId, ActionKeys.UPDATE);
+
+		_commerceAccountModelResourcePermission.check(
+			getPermissionChecker(), commerceAccountId, ActionKeys.UPDATE);
+
+		return commerceAccountGroupCommerceAccountRelLocalService.
+			getCommerceAccountGroupCommerceAccountRel(
+				commerceAccountGroupId, commerceAccountId);
 	}
 
 	@Override
