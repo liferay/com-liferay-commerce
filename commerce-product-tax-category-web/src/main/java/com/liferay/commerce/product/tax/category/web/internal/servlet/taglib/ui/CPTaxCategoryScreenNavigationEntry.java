@@ -56,11 +56,14 @@ public class CPTaxCategoryScreenNavigationEntry
 	implements ScreenNavigationCategory,
 			   ScreenNavigationEntry<CommerceAdminModule> {
 
+	public static final String CATEGORY_KEY =
+		CPTaxCategoryScreenNavigationEntry.ENTRY_KEY;
+
 	public static final String ENTRY_KEY = "tax-categories";
 
 	@Override
 	public String getCategoryKey() {
-		return "tax-categories";
+		return CATEGORY_KEY;
 	}
 
 	@Override
