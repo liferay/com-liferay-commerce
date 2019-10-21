@@ -117,13 +117,13 @@ public class CPTaxCategoryDisplayContext {
 		portletURL.setParameter("orderByCol", getOrderByCol());
 		portletURL.setParameter("orderByType", getOrderByType());
 		portletURL.setParameter(
-			"screenNavigationEntryKey", getScreenNavigationEntryKey());
+			"screenNavigationCategoryKey", getScreenNavigationCategoryKey());
 
 		return portletURL;
 	}
 
-	public String getScreenNavigationEntryKey() {
-		return CPTaxCategoryScreenNavigationEntry.ENTRY_KEY;
+	public String getScreenNavigationCategoryKey() {
+		return CPTaxCategoryScreenNavigationEntry.CATEGORY_KEY;
 	}
 
 	public SearchContainer<CPTaxCategory> getSearchContainer()
