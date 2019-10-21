@@ -381,10 +381,11 @@ public class CommerceAddressModelImpl
 
 				@Override
 				public void accept(
-					CommerceAddress commerceAddress, Object commerceAddressId) {
+					CommerceAddress commerceAddress,
+					Object commerceAddressIdObject) {
 
 					commerceAddress.setCommerceAddressId(
-						(Long)commerceAddressId);
+						(Long)commerceAddressIdObject);
 				}
 
 			});
@@ -404,9 +405,9 @@ public class CommerceAddressModelImpl
 
 				@Override
 				public void accept(
-					CommerceAddress commerceAddress, Object groupId) {
+					CommerceAddress commerceAddress, Object groupIdObject) {
 
-					commerceAddress.setGroupId((Long)groupId);
+					commerceAddress.setGroupId((Long)groupIdObject);
 				}
 
 			});
@@ -426,9 +427,9 @@ public class CommerceAddressModelImpl
 
 				@Override
 				public void accept(
-					CommerceAddress commerceAddress, Object companyId) {
+					CommerceAddress commerceAddress, Object companyIdObject) {
 
-					commerceAddress.setCompanyId((Long)companyId);
+					commerceAddress.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -448,9 +449,9 @@ public class CommerceAddressModelImpl
 
 				@Override
 				public void accept(
-					CommerceAddress commerceAddress, Object userId) {
+					CommerceAddress commerceAddress, Object userIdObject) {
 
-					commerceAddress.setUserId((Long)userId);
+					commerceAddress.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -470,9 +471,9 @@ public class CommerceAddressModelImpl
 
 				@Override
 				public void accept(
-					CommerceAddress commerceAddress, Object userName) {
+					CommerceAddress commerceAddress, Object userNameObject) {
 
-					commerceAddress.setUserName((String)userName);
+					commerceAddress.setUserName((String)userNameObject);
 				}
 
 			});
@@ -492,9 +493,9 @@ public class CommerceAddressModelImpl
 
 				@Override
 				public void accept(
-					CommerceAddress commerceAddress, Object createDate) {
+					CommerceAddress commerceAddress, Object createDateObject) {
 
-					commerceAddress.setCreateDate((Date)createDate);
+					commerceAddress.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -514,9 +515,10 @@ public class CommerceAddressModelImpl
 
 				@Override
 				public void accept(
-					CommerceAddress commerceAddress, Object modifiedDate) {
+					CommerceAddress commerceAddress,
+					Object modifiedDateObject) {
 
-					commerceAddress.setModifiedDate((Date)modifiedDate);
+					commerceAddress.setModifiedDate((Date)modifiedDateObject);
 				}
 
 			});
@@ -536,9 +538,9 @@ public class CommerceAddressModelImpl
 
 				@Override
 				public void accept(
-					CommerceAddress commerceAddress, Object classNameId) {
+					CommerceAddress commerceAddress, Object classNameIdObject) {
 
-					commerceAddress.setClassNameId((Long)classNameId);
+					commerceAddress.setClassNameId((Long)classNameIdObject);
 				}
 
 			});
@@ -558,9 +560,9 @@ public class CommerceAddressModelImpl
 
 				@Override
 				public void accept(
-					CommerceAddress commerceAddress, Object classPK) {
+					CommerceAddress commerceAddress, Object classPKObject) {
 
-					commerceAddress.setClassPK((Long)classPK);
+					commerceAddress.setClassPK((Long)classPKObject);
 				}
 
 			});
@@ -580,9 +582,9 @@ public class CommerceAddressModelImpl
 
 				@Override
 				public void accept(
-					CommerceAddress commerceAddress, Object name) {
+					CommerceAddress commerceAddress, Object nameObject) {
 
-					commerceAddress.setName((String)name);
+					commerceAddress.setName((String)nameObject);
 				}
 
 			});
@@ -602,9 +604,9 @@ public class CommerceAddressModelImpl
 
 				@Override
 				public void accept(
-					CommerceAddress commerceAddress, Object description) {
+					CommerceAddress commerceAddress, Object descriptionObject) {
 
-					commerceAddress.setDescription((String)description);
+					commerceAddress.setDescription((String)descriptionObject);
 				}
 
 			});
@@ -624,9 +626,9 @@ public class CommerceAddressModelImpl
 
 				@Override
 				public void accept(
-					CommerceAddress commerceAddress, Object street1) {
+					CommerceAddress commerceAddress, Object street1Object) {
 
-					commerceAddress.setStreet1((String)street1);
+					commerceAddress.setStreet1((String)street1Object);
 				}
 
 			});
@@ -646,9 +648,9 @@ public class CommerceAddressModelImpl
 
 				@Override
 				public void accept(
-					CommerceAddress commerceAddress, Object street2) {
+					CommerceAddress commerceAddress, Object street2Object) {
 
-					commerceAddress.setStreet2((String)street2);
+					commerceAddress.setStreet2((String)street2Object);
 				}
 
 			});
@@ -668,9 +670,9 @@ public class CommerceAddressModelImpl
 
 				@Override
 				public void accept(
-					CommerceAddress commerceAddress, Object street3) {
+					CommerceAddress commerceAddress, Object street3Object) {
 
-					commerceAddress.setStreet3((String)street3);
+					commerceAddress.setStreet3((String)street3Object);
 				}
 
 			});
@@ -690,9 +692,9 @@ public class CommerceAddressModelImpl
 
 				@Override
 				public void accept(
-					CommerceAddress commerceAddress, Object city) {
+					CommerceAddress commerceAddress, Object cityObject) {
 
-					commerceAddress.setCity((String)city);
+					commerceAddress.setCity((String)cityObject);
 				}
 
 			});
@@ -712,9 +714,9 @@ public class CommerceAddressModelImpl
 
 				@Override
 				public void accept(
-					CommerceAddress commerceAddress, Object zip) {
+					CommerceAddress commerceAddress, Object zipObject) {
 
-					commerceAddress.setZip((String)zip);
+					commerceAddress.setZip((String)zipObject);
 				}
 
 			});
@@ -734,9 +736,11 @@ public class CommerceAddressModelImpl
 
 				@Override
 				public void accept(
-					CommerceAddress commerceAddress, Object commerceRegionId) {
+					CommerceAddress commerceAddress,
+					Object commerceRegionIdObject) {
 
-					commerceAddress.setCommerceRegionId((Long)commerceRegionId);
+					commerceAddress.setCommerceRegionId(
+						(Long)commerceRegionIdObject);
 				}
 
 			});
@@ -756,10 +760,11 @@ public class CommerceAddressModelImpl
 
 				@Override
 				public void accept(
-					CommerceAddress commerceAddress, Object commerceCountryId) {
+					CommerceAddress commerceAddress,
+					Object commerceCountryIdObject) {
 
 					commerceAddress.setCommerceCountryId(
-						(Long)commerceCountryId);
+						(Long)commerceCountryIdObject);
 				}
 
 			});
@@ -779,9 +784,9 @@ public class CommerceAddressModelImpl
 
 				@Override
 				public void accept(
-					CommerceAddress commerceAddress, Object latitude) {
+					CommerceAddress commerceAddress, Object latitudeObject) {
 
-					commerceAddress.setLatitude((Double)latitude);
+					commerceAddress.setLatitude((Double)latitudeObject);
 				}
 
 			});
@@ -801,9 +806,9 @@ public class CommerceAddressModelImpl
 
 				@Override
 				public void accept(
-					CommerceAddress commerceAddress, Object longitude) {
+					CommerceAddress commerceAddress, Object longitudeObject) {
 
-					commerceAddress.setLongitude((Double)longitude);
+					commerceAddress.setLongitude((Double)longitudeObject);
 				}
 
 			});
@@ -823,9 +828,9 @@ public class CommerceAddressModelImpl
 
 				@Override
 				public void accept(
-					CommerceAddress commerceAddress, Object phoneNumber) {
+					CommerceAddress commerceAddress, Object phoneNumberObject) {
 
-					commerceAddress.setPhoneNumber((String)phoneNumber);
+					commerceAddress.setPhoneNumber((String)phoneNumberObject);
 				}
 
 			});
@@ -845,9 +850,11 @@ public class CommerceAddressModelImpl
 
 				@Override
 				public void accept(
-					CommerceAddress commerceAddress, Object defaultBilling) {
+					CommerceAddress commerceAddress,
+					Object defaultBillingObject) {
 
-					commerceAddress.setDefaultBilling((Boolean)defaultBilling);
+					commerceAddress.setDefaultBilling(
+						(Boolean)defaultBillingObject);
 				}
 
 			});
@@ -867,10 +874,11 @@ public class CommerceAddressModelImpl
 
 				@Override
 				public void accept(
-					CommerceAddress commerceAddress, Object defaultShipping) {
+					CommerceAddress commerceAddress,
+					Object defaultShippingObject) {
 
 					commerceAddress.setDefaultShipping(
-						(Boolean)defaultShipping);
+						(Boolean)defaultShippingObject);
 				}
 
 			});
@@ -890,9 +898,9 @@ public class CommerceAddressModelImpl
 
 				@Override
 				public void accept(
-					CommerceAddress commerceAddress, Object type) {
+					CommerceAddress commerceAddress, Object typeObject) {
 
-					commerceAddress.setType((Integer)type);
+					commerceAddress.setType((Integer)typeObject);
 				}
 
 			});

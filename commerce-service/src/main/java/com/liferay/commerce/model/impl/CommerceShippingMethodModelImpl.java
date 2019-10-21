@@ -358,10 +358,10 @@ public class CommerceShippingMethodModelImpl
 				@Override
 				public void accept(
 					CommerceShippingMethod commerceShippingMethod,
-					Object commerceShippingMethodId) {
+					Object commerceShippingMethodIdObject) {
 
 					commerceShippingMethod.setCommerceShippingMethodId(
-						(Long)commerceShippingMethodId);
+						(Long)commerceShippingMethodIdObject);
 				}
 
 			});
@@ -384,9 +384,9 @@ public class CommerceShippingMethodModelImpl
 				@Override
 				public void accept(
 					CommerceShippingMethod commerceShippingMethod,
-					Object groupId) {
+					Object groupIdObject) {
 
-					commerceShippingMethod.setGroupId((Long)groupId);
+					commerceShippingMethod.setGroupId((Long)groupIdObject);
 				}
 
 			});
@@ -409,9 +409,9 @@ public class CommerceShippingMethodModelImpl
 				@Override
 				public void accept(
 					CommerceShippingMethod commerceShippingMethod,
-					Object companyId) {
+					Object companyIdObject) {
 
-					commerceShippingMethod.setCompanyId((Long)companyId);
+					commerceShippingMethod.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -434,9 +434,9 @@ public class CommerceShippingMethodModelImpl
 				@Override
 				public void accept(
 					CommerceShippingMethod commerceShippingMethod,
-					Object userId) {
+					Object userIdObject) {
 
-					commerceShippingMethod.setUserId((Long)userId);
+					commerceShippingMethod.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -459,9 +459,9 @@ public class CommerceShippingMethodModelImpl
 				@Override
 				public void accept(
 					CommerceShippingMethod commerceShippingMethod,
-					Object userName) {
+					Object userNameObject) {
 
-					commerceShippingMethod.setUserName((String)userName);
+					commerceShippingMethod.setUserName((String)userNameObject);
 				}
 
 			});
@@ -484,9 +484,10 @@ public class CommerceShippingMethodModelImpl
 				@Override
 				public void accept(
 					CommerceShippingMethod commerceShippingMethod,
-					Object createDate) {
+					Object createDateObject) {
 
-					commerceShippingMethod.setCreateDate((Date)createDate);
+					commerceShippingMethod.setCreateDate(
+						(Date)createDateObject);
 				}
 
 			});
@@ -509,9 +510,10 @@ public class CommerceShippingMethodModelImpl
 				@Override
 				public void accept(
 					CommerceShippingMethod commerceShippingMethod,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
-					commerceShippingMethod.setModifiedDate((Date)modifiedDate);
+					commerceShippingMethod.setModifiedDate(
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -534,9 +536,9 @@ public class CommerceShippingMethodModelImpl
 				@Override
 				public void accept(
 					CommerceShippingMethod commerceShippingMethod,
-					Object name) {
+					Object nameObject) {
 
-					commerceShippingMethod.setName((String)name);
+					commerceShippingMethod.setName((String)nameObject);
 				}
 
 			});
@@ -559,9 +561,10 @@ public class CommerceShippingMethodModelImpl
 				@Override
 				public void accept(
 					CommerceShippingMethod commerceShippingMethod,
-					Object description) {
+					Object descriptionObject) {
 
-					commerceShippingMethod.setDescription((String)description);
+					commerceShippingMethod.setDescription(
+						(String)descriptionObject);
 				}
 
 			});
@@ -584,9 +587,9 @@ public class CommerceShippingMethodModelImpl
 				@Override
 				public void accept(
 					CommerceShippingMethod commerceShippingMethod,
-					Object imageId) {
+					Object imageIdObject) {
 
-					commerceShippingMethod.setImageId((Long)imageId);
+					commerceShippingMethod.setImageId((Long)imageIdObject);
 				}
 
 			});
@@ -609,9 +612,10 @@ public class CommerceShippingMethodModelImpl
 				@Override
 				public void accept(
 					CommerceShippingMethod commerceShippingMethod,
-					Object engineKey) {
+					Object engineKeyObject) {
 
-					commerceShippingMethod.setEngineKey((String)engineKey);
+					commerceShippingMethod.setEngineKey(
+						(String)engineKeyObject);
 				}
 
 			});
@@ -634,9 +638,9 @@ public class CommerceShippingMethodModelImpl
 				@Override
 				public void accept(
 					CommerceShippingMethod commerceShippingMethod,
-					Object priority) {
+					Object priorityObject) {
 
-					commerceShippingMethod.setPriority((Double)priority);
+					commerceShippingMethod.setPriority((Double)priorityObject);
 				}
 
 			});
@@ -659,9 +663,9 @@ public class CommerceShippingMethodModelImpl
 				@Override
 				public void accept(
 					CommerceShippingMethod commerceShippingMethod,
-					Object active) {
+					Object activeObject) {
 
-					commerceShippingMethod.setActive((Boolean)active);
+					commerceShippingMethod.setActive((Boolean)activeObject);
 				}
 
 			});

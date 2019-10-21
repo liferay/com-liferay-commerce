@@ -349,10 +349,10 @@ public class CommerceShipmentModelImpl
 				@Override
 				public void accept(
 					CommerceShipment commerceShipment,
-					Object commerceShipmentId) {
+					Object commerceShipmentIdObject) {
 
 					commerceShipment.setCommerceShipmentId(
-						(Long)commerceShipmentId);
+						(Long)commerceShipmentIdObject);
 				}
 
 			});
@@ -372,9 +372,9 @@ public class CommerceShipmentModelImpl
 
 				@Override
 				public void accept(
-					CommerceShipment commerceShipment, Object groupId) {
+					CommerceShipment commerceShipment, Object groupIdObject) {
 
-					commerceShipment.setGroupId((Long)groupId);
+					commerceShipment.setGroupId((Long)groupIdObject);
 				}
 
 			});
@@ -394,9 +394,9 @@ public class CommerceShipmentModelImpl
 
 				@Override
 				public void accept(
-					CommerceShipment commerceShipment, Object companyId) {
+					CommerceShipment commerceShipment, Object companyIdObject) {
 
-					commerceShipment.setCompanyId((Long)companyId);
+					commerceShipment.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -416,9 +416,9 @@ public class CommerceShipmentModelImpl
 
 				@Override
 				public void accept(
-					CommerceShipment commerceShipment, Object userId) {
+					CommerceShipment commerceShipment, Object userIdObject) {
 
-					commerceShipment.setUserId((Long)userId);
+					commerceShipment.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -438,9 +438,9 @@ public class CommerceShipmentModelImpl
 
 				@Override
 				public void accept(
-					CommerceShipment commerceShipment, Object userName) {
+					CommerceShipment commerceShipment, Object userNameObject) {
 
-					commerceShipment.setUserName((String)userName);
+					commerceShipment.setUserName((String)userNameObject);
 				}
 
 			});
@@ -460,9 +460,10 @@ public class CommerceShipmentModelImpl
 
 				@Override
 				public void accept(
-					CommerceShipment commerceShipment, Object createDate) {
+					CommerceShipment commerceShipment,
+					Object createDateObject) {
 
-					commerceShipment.setCreateDate((Date)createDate);
+					commerceShipment.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -482,9 +483,10 @@ public class CommerceShipmentModelImpl
 
 				@Override
 				public void accept(
-					CommerceShipment commerceShipment, Object modifiedDate) {
+					CommerceShipment commerceShipment,
+					Object modifiedDateObject) {
 
-					commerceShipment.setModifiedDate((Date)modifiedDate);
+					commerceShipment.setModifiedDate((Date)modifiedDateObject);
 				}
 
 			});
@@ -505,10 +507,10 @@ public class CommerceShipmentModelImpl
 				@Override
 				public void accept(
 					CommerceShipment commerceShipment,
-					Object commerceAccountId) {
+					Object commerceAccountIdObject) {
 
 					commerceShipment.setCommerceAccountId(
-						(Long)commerceAccountId);
+						(Long)commerceAccountIdObject);
 				}
 
 			});
@@ -529,10 +531,10 @@ public class CommerceShipmentModelImpl
 				@Override
 				public void accept(
 					CommerceShipment commerceShipment,
-					Object commerceAddressId) {
+					Object commerceAddressIdObject) {
 
 					commerceShipment.setCommerceAddressId(
-						(Long)commerceAddressId);
+						(Long)commerceAddressIdObject);
 				}
 
 			});
@@ -553,10 +555,10 @@ public class CommerceShipmentModelImpl
 				@Override
 				public void accept(
 					CommerceShipment commerceShipment,
-					Object commerceShippingMethodId) {
+					Object commerceShippingMethodIdObject) {
 
 					commerceShipment.setCommerceShippingMethodId(
-						(Long)commerceShippingMethodId);
+						(Long)commerceShippingMethodIdObject);
 				}
 
 			});
@@ -577,10 +579,10 @@ public class CommerceShipmentModelImpl
 				@Override
 				public void accept(
 					CommerceShipment commerceShipment,
-					Object shippingOptionName) {
+					Object shippingOptionNameObject) {
 
 					commerceShipment.setShippingOptionName(
-						(String)shippingOptionName);
+						(String)shippingOptionNameObject);
 				}
 
 			});
@@ -600,9 +602,9 @@ public class CommerceShipmentModelImpl
 
 				@Override
 				public void accept(
-					CommerceShipment commerceShipment, Object carrier) {
+					CommerceShipment commerceShipment, Object carrierObject) {
 
-					commerceShipment.setCarrier((String)carrier);
+					commerceShipment.setCarrier((String)carrierObject);
 				}
 
 			});
@@ -622,9 +624,11 @@ public class CommerceShipmentModelImpl
 
 				@Override
 				public void accept(
-					CommerceShipment commerceShipment, Object trackingNumber) {
+					CommerceShipment commerceShipment,
+					Object trackingNumberObject) {
 
-					commerceShipment.setTrackingNumber((String)trackingNumber);
+					commerceShipment.setTrackingNumber(
+						(String)trackingNumberObject);
 				}
 
 			});
@@ -644,9 +648,10 @@ public class CommerceShipmentModelImpl
 
 				@Override
 				public void accept(
-					CommerceShipment commerceShipment, Object shippingDate) {
+					CommerceShipment commerceShipment,
+					Object shippingDateObject) {
 
-					commerceShipment.setShippingDate((Date)shippingDate);
+					commerceShipment.setShippingDate((Date)shippingDateObject);
 				}
 
 			});
@@ -666,9 +671,10 @@ public class CommerceShipmentModelImpl
 
 				@Override
 				public void accept(
-					CommerceShipment commerceShipment, Object expectedDate) {
+					CommerceShipment commerceShipment,
+					Object expectedDateObject) {
 
-					commerceShipment.setExpectedDate((Date)expectedDate);
+					commerceShipment.setExpectedDate((Date)expectedDateObject);
 				}
 
 			});
@@ -688,9 +694,9 @@ public class CommerceShipmentModelImpl
 
 				@Override
 				public void accept(
-					CommerceShipment commerceShipment, Object status) {
+					CommerceShipment commerceShipment, Object statusObject) {
 
-					commerceShipment.setStatus((Integer)status);
+					commerceShipment.setStatus((Integer)statusObject);
 				}
 
 			});

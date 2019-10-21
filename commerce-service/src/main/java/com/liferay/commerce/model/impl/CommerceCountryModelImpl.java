@@ -370,9 +370,9 @@ public class CommerceCountryModelImpl
 
 				@Override
 				public void accept(
-					CommerceCountry commerceCountry, Object uuid) {
+					CommerceCountry commerceCountry, Object uuidObject) {
 
-					commerceCountry.setUuid((String)uuid);
+					commerceCountry.setUuid((String)uuidObject);
 				}
 
 			});
@@ -392,10 +392,11 @@ public class CommerceCountryModelImpl
 
 				@Override
 				public void accept(
-					CommerceCountry commerceCountry, Object commerceCountryId) {
+					CommerceCountry commerceCountry,
+					Object commerceCountryIdObject) {
 
 					commerceCountry.setCommerceCountryId(
-						(Long)commerceCountryId);
+						(Long)commerceCountryIdObject);
 				}
 
 			});
@@ -415,9 +416,9 @@ public class CommerceCountryModelImpl
 
 				@Override
 				public void accept(
-					CommerceCountry commerceCountry, Object companyId) {
+					CommerceCountry commerceCountry, Object companyIdObject) {
 
-					commerceCountry.setCompanyId((Long)companyId);
+					commerceCountry.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -437,9 +438,9 @@ public class CommerceCountryModelImpl
 
 				@Override
 				public void accept(
-					CommerceCountry commerceCountry, Object userId) {
+					CommerceCountry commerceCountry, Object userIdObject) {
 
-					commerceCountry.setUserId((Long)userId);
+					commerceCountry.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -459,9 +460,9 @@ public class CommerceCountryModelImpl
 
 				@Override
 				public void accept(
-					CommerceCountry commerceCountry, Object userName) {
+					CommerceCountry commerceCountry, Object userNameObject) {
 
-					commerceCountry.setUserName((String)userName);
+					commerceCountry.setUserName((String)userNameObject);
 				}
 
 			});
@@ -481,9 +482,9 @@ public class CommerceCountryModelImpl
 
 				@Override
 				public void accept(
-					CommerceCountry commerceCountry, Object createDate) {
+					CommerceCountry commerceCountry, Object createDateObject) {
 
-					commerceCountry.setCreateDate((Date)createDate);
+					commerceCountry.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -503,9 +504,10 @@ public class CommerceCountryModelImpl
 
 				@Override
 				public void accept(
-					CommerceCountry commerceCountry, Object modifiedDate) {
+					CommerceCountry commerceCountry,
+					Object modifiedDateObject) {
 
-					commerceCountry.setModifiedDate((Date)modifiedDate);
+					commerceCountry.setModifiedDate((Date)modifiedDateObject);
 				}
 
 			});
@@ -525,9 +527,9 @@ public class CommerceCountryModelImpl
 
 				@Override
 				public void accept(
-					CommerceCountry commerceCountry, Object name) {
+					CommerceCountry commerceCountry, Object nameObject) {
 
-					commerceCountry.setName((String)name);
+					commerceCountry.setName((String)nameObject);
 				}
 
 			});
@@ -547,9 +549,11 @@ public class CommerceCountryModelImpl
 
 				@Override
 				public void accept(
-					CommerceCountry commerceCountry, Object billingAllowed) {
+					CommerceCountry commerceCountry,
+					Object billingAllowedObject) {
 
-					commerceCountry.setBillingAllowed((Boolean)billingAllowed);
+					commerceCountry.setBillingAllowed(
+						(Boolean)billingAllowedObject);
 				}
 
 			});
@@ -569,10 +573,11 @@ public class CommerceCountryModelImpl
 
 				@Override
 				public void accept(
-					CommerceCountry commerceCountry, Object shippingAllowed) {
+					CommerceCountry commerceCountry,
+					Object shippingAllowedObject) {
 
 					commerceCountry.setShippingAllowed(
-						(Boolean)shippingAllowed);
+						(Boolean)shippingAllowedObject);
 				}
 
 			});
@@ -592,10 +597,11 @@ public class CommerceCountryModelImpl
 
 				@Override
 				public void accept(
-					CommerceCountry commerceCountry, Object twoLettersISOCode) {
+					CommerceCountry commerceCountry,
+					Object twoLettersISOCodeObject) {
 
 					commerceCountry.setTwoLettersISOCode(
-						(String)twoLettersISOCode);
+						(String)twoLettersISOCodeObject);
 				}
 
 			});
@@ -616,10 +622,10 @@ public class CommerceCountryModelImpl
 				@Override
 				public void accept(
 					CommerceCountry commerceCountry,
-					Object threeLettersISOCode) {
+					Object threeLettersISOCodeObject) {
 
 					commerceCountry.setThreeLettersISOCode(
-						(String)threeLettersISOCode);
+						(String)threeLettersISOCodeObject);
 				}
 
 			});
@@ -639,9 +645,11 @@ public class CommerceCountryModelImpl
 
 				@Override
 				public void accept(
-					CommerceCountry commerceCountry, Object numericISOCode) {
+					CommerceCountry commerceCountry,
+					Object numericISOCodeObject) {
 
-					commerceCountry.setNumericISOCode((Integer)numericISOCode);
+					commerceCountry.setNumericISOCode(
+						(Integer)numericISOCodeObject);
 				}
 
 			});
@@ -661,9 +669,11 @@ public class CommerceCountryModelImpl
 
 				@Override
 				public void accept(
-					CommerceCountry commerceCountry, Object subjectToVAT) {
+					CommerceCountry commerceCountry,
+					Object subjectToVATObject) {
 
-					commerceCountry.setSubjectToVAT((Boolean)subjectToVAT);
+					commerceCountry.setSubjectToVAT(
+						(Boolean)subjectToVATObject);
 				}
 
 			});
@@ -683,9 +693,9 @@ public class CommerceCountryModelImpl
 
 				@Override
 				public void accept(
-					CommerceCountry commerceCountry, Object priority) {
+					CommerceCountry commerceCountry, Object priorityObject) {
 
-					commerceCountry.setPriority((Double)priority);
+					commerceCountry.setPriority((Double)priorityObject);
 				}
 
 			});
@@ -705,9 +715,9 @@ public class CommerceCountryModelImpl
 
 				@Override
 				public void accept(
-					CommerceCountry commerceCountry, Object active) {
+					CommerceCountry commerceCountry, Object activeObject) {
 
-					commerceCountry.setActive((Boolean)active);
+					commerceCountry.setActive((Boolean)activeObject);
 				}
 
 			});
@@ -727,9 +737,11 @@ public class CommerceCountryModelImpl
 
 				@Override
 				public void accept(
-					CommerceCountry commerceCountry, Object lastPublishDate) {
+					CommerceCountry commerceCountry,
+					Object lastPublishDateObject) {
 
-					commerceCountry.setLastPublishDate((Date)lastPublishDate);
+					commerceCountry.setLastPublishDate(
+						(Date)lastPublishDateObject);
 				}
 
 			});
@@ -750,10 +762,10 @@ public class CommerceCountryModelImpl
 				@Override
 				public void accept(
 					CommerceCountry commerceCountry,
-					Object channelFilterEnabled) {
+					Object channelFilterEnabledObject) {
 
 					commerceCountry.setChannelFilterEnabled(
-						(Boolean)channelFilterEnabled);
+						(Boolean)channelFilterEnabledObject);
 				}
 
 			});

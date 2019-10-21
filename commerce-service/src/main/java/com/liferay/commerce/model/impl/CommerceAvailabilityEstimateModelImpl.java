@@ -355,9 +355,9 @@ public class CommerceAvailabilityEstimateModelImpl
 				@Override
 				public void accept(
 					CommerceAvailabilityEstimate commerceAvailabilityEstimate,
-					Object uuid) {
+					Object uuidObject) {
 
-					commerceAvailabilityEstimate.setUuid((String)uuid);
+					commerceAvailabilityEstimate.setUuid((String)uuidObject);
 				}
 
 			});
@@ -381,11 +381,11 @@ public class CommerceAvailabilityEstimateModelImpl
 				@Override
 				public void accept(
 					CommerceAvailabilityEstimate commerceAvailabilityEstimate,
-					Object commerceAvailabilityEstimateId) {
+					Object commerceAvailabilityEstimateIdObject) {
 
 					commerceAvailabilityEstimate.
 						setCommerceAvailabilityEstimateId(
-							(Long)commerceAvailabilityEstimateId);
+							(Long)commerceAvailabilityEstimateIdObject);
 				}
 
 			});
@@ -408,9 +408,10 @@ public class CommerceAvailabilityEstimateModelImpl
 				@Override
 				public void accept(
 					CommerceAvailabilityEstimate commerceAvailabilityEstimate,
-					Object companyId) {
+					Object companyIdObject) {
 
-					commerceAvailabilityEstimate.setCompanyId((Long)companyId);
+					commerceAvailabilityEstimate.setCompanyId(
+						(Long)companyIdObject);
 				}
 
 			});
@@ -433,9 +434,9 @@ public class CommerceAvailabilityEstimateModelImpl
 				@Override
 				public void accept(
 					CommerceAvailabilityEstimate commerceAvailabilityEstimate,
-					Object userId) {
+					Object userIdObject) {
 
-					commerceAvailabilityEstimate.setUserId((Long)userId);
+					commerceAvailabilityEstimate.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -458,9 +459,10 @@ public class CommerceAvailabilityEstimateModelImpl
 				@Override
 				public void accept(
 					CommerceAvailabilityEstimate commerceAvailabilityEstimate,
-					Object userName) {
+					Object userNameObject) {
 
-					commerceAvailabilityEstimate.setUserName((String)userName);
+					commerceAvailabilityEstimate.setUserName(
+						(String)userNameObject);
 				}
 
 			});
@@ -483,10 +485,10 @@ public class CommerceAvailabilityEstimateModelImpl
 				@Override
 				public void accept(
 					CommerceAvailabilityEstimate commerceAvailabilityEstimate,
-					Object createDate) {
+					Object createDateObject) {
 
 					commerceAvailabilityEstimate.setCreateDate(
-						(Date)createDate);
+						(Date)createDateObject);
 				}
 
 			});
@@ -509,10 +511,10 @@ public class CommerceAvailabilityEstimateModelImpl
 				@Override
 				public void accept(
 					CommerceAvailabilityEstimate commerceAvailabilityEstimate,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
 					commerceAvailabilityEstimate.setModifiedDate(
-						(Date)modifiedDate);
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -535,9 +537,9 @@ public class CommerceAvailabilityEstimateModelImpl
 				@Override
 				public void accept(
 					CommerceAvailabilityEstimate commerceAvailabilityEstimate,
-					Object title) {
+					Object titleObject) {
 
-					commerceAvailabilityEstimate.setTitle((String)title);
+					commerceAvailabilityEstimate.setTitle((String)titleObject);
 				}
 
 			});
@@ -560,9 +562,10 @@ public class CommerceAvailabilityEstimateModelImpl
 				@Override
 				public void accept(
 					CommerceAvailabilityEstimate commerceAvailabilityEstimate,
-					Object priority) {
+					Object priorityObject) {
 
-					commerceAvailabilityEstimate.setPriority((Double)priority);
+					commerceAvailabilityEstimate.setPriority(
+						(Double)priorityObject);
 				}
 
 			});
@@ -585,10 +588,10 @@ public class CommerceAvailabilityEstimateModelImpl
 				@Override
 				public void accept(
 					CommerceAvailabilityEstimate commerceAvailabilityEstimate,
-					Object lastPublishDate) {
+					Object lastPublishDateObject) {
 
 					commerceAvailabilityEstimate.setLastPublishDate(
-						(Date)lastPublishDate);
+						(Date)lastPublishDateObject);
 				}
 
 			});
