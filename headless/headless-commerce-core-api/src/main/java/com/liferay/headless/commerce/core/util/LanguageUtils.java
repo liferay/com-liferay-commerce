@@ -33,7 +33,8 @@ public class LanguageUtils {
 		Map<String, String> localizedMap = new HashMap<>();
 
 		map.forEach(
-			(locale, value) -> localizedMap.put(locale.getLanguage(), value));
+			(locale, value) -> localizedMap.put(
+				LocaleUtil.toLanguageId(locale), value));
 
 		return Collections.unmodifiableMap(localizedMap);
 	}
