@@ -97,6 +97,22 @@ public class Mutation {
 			userResourceComponentServiceObjects;
 	}
 
+	@GraphQLInvokeDetached
+	public Response deleteAccountGroupByExternalReferenceCodeAccount(
+			@GraphQLName("accountExternalReferenceCode") String
+				accountExternalReferenceCode,
+			@GraphQLName("externalReferenceCode") String externalReferenceCode)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountResource ->
+				accountResource.
+					deleteAccountGroupByExternalReferenceCodeAccount(
+						accountExternalReferenceCode, externalReferenceCode));
+	}
+
 	@GraphQLField
 	@GraphQLInvokeDetached
 	public Response postAccountGroupByExternalReferenceCodeAccount(

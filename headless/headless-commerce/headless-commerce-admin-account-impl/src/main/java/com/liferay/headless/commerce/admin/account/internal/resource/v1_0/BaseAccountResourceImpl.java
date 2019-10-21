@@ -59,6 +59,34 @@ import javax.ws.rs.core.UriInfo;
 public abstract class BaseAccountResourceImpl implements AccountResource {
 
 	@Override
+	@DELETE
+	@Parameters(
+		value = {
+			@Parameter(
+				in = ParameterIn.PATH, name = "accountExternalReferenceCode"
+			),
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
+		}
+	)
+	@Path(
+		"/accountGroups/by-externalReferenceCode/{externalReferenceCode}/accounts/{accountExternalReferenceCode}"
+	)
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Account")})
+	public Response deleteAccountGroupByExternalReferenceCodeAccount(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("accountExternalReferenceCode") String
+				accountExternalReferenceCode,
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
 	@Consumes({"application/json", "application/xml"})
 	@POST
 	@Parameters(

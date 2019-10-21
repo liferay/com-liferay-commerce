@@ -35,6 +35,10 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface AccountResource {
 
+	public Response deleteAccountGroupByExternalReferenceCodeAccount(
+			String accountExternalReferenceCode, String externalReferenceCode)
+		throws Exception;
+
 	public Response postAccountGroupByExternalReferenceCodeAccount(
 			String externalReferenceCode, Account account)
 		throws Exception;
