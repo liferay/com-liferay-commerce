@@ -343,10 +343,10 @@ public class CommerceShipmentItemModelImpl
 				@Override
 				public void accept(
 					CommerceShipmentItem commerceShipmentItem,
-					Object commerceShipmentItemId) {
+					Object commerceShipmentItemIdObject) {
 
 					commerceShipmentItem.setCommerceShipmentItemId(
-						(Long)commerceShipmentItemId);
+						(Long)commerceShipmentItemIdObject);
 				}
 
 			});
@@ -366,9 +366,10 @@ public class CommerceShipmentItemModelImpl
 
 				@Override
 				public void accept(
-					CommerceShipmentItem commerceShipmentItem, Object groupId) {
+					CommerceShipmentItem commerceShipmentItem,
+					Object groupIdObject) {
 
-					commerceShipmentItem.setGroupId((Long)groupId);
+					commerceShipmentItem.setGroupId((Long)groupIdObject);
 				}
 
 			});
@@ -389,9 +390,9 @@ public class CommerceShipmentItemModelImpl
 				@Override
 				public void accept(
 					CommerceShipmentItem commerceShipmentItem,
-					Object companyId) {
+					Object companyIdObject) {
 
-					commerceShipmentItem.setCompanyId((Long)companyId);
+					commerceShipmentItem.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -411,9 +412,10 @@ public class CommerceShipmentItemModelImpl
 
 				@Override
 				public void accept(
-					CommerceShipmentItem commerceShipmentItem, Object userId) {
+					CommerceShipmentItem commerceShipmentItem,
+					Object userIdObject) {
 
-					commerceShipmentItem.setUserId((Long)userId);
+					commerceShipmentItem.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -434,9 +436,9 @@ public class CommerceShipmentItemModelImpl
 				@Override
 				public void accept(
 					CommerceShipmentItem commerceShipmentItem,
-					Object userName) {
+					Object userNameObject) {
 
-					commerceShipmentItem.setUserName((String)userName);
+					commerceShipmentItem.setUserName((String)userNameObject);
 				}
 
 			});
@@ -457,9 +459,9 @@ public class CommerceShipmentItemModelImpl
 				@Override
 				public void accept(
 					CommerceShipmentItem commerceShipmentItem,
-					Object createDate) {
+					Object createDateObject) {
 
-					commerceShipmentItem.setCreateDate((Date)createDate);
+					commerceShipmentItem.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -480,9 +482,10 @@ public class CommerceShipmentItemModelImpl
 				@Override
 				public void accept(
 					CommerceShipmentItem commerceShipmentItem,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
-					commerceShipmentItem.setModifiedDate((Date)modifiedDate);
+					commerceShipmentItem.setModifiedDate(
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -503,10 +506,10 @@ public class CommerceShipmentItemModelImpl
 				@Override
 				public void accept(
 					CommerceShipmentItem commerceShipmentItem,
-					Object commerceShipmentId) {
+					Object commerceShipmentIdObject) {
 
 					commerceShipmentItem.setCommerceShipmentId(
-						(Long)commerceShipmentId);
+						(Long)commerceShipmentIdObject);
 				}
 
 			});
@@ -527,10 +530,10 @@ public class CommerceShipmentItemModelImpl
 				@Override
 				public void accept(
 					CommerceShipmentItem commerceShipmentItem,
-					Object commerceOrderItemId) {
+					Object commerceOrderItemIdObject) {
 
 					commerceShipmentItem.setCommerceOrderItemId(
-						(Long)commerceOrderItemId);
+						(Long)commerceOrderItemIdObject);
 				}
 
 			});
@@ -552,10 +555,10 @@ public class CommerceShipmentItemModelImpl
 				@Override
 				public void accept(
 					CommerceShipmentItem commerceShipmentItem,
-					Object commerceInventoryWarehouseId) {
+					Object commerceInventoryWarehouseIdObject) {
 
 					commerceShipmentItem.setCommerceInventoryWarehouseId(
-						(Long)commerceInventoryWarehouseId);
+						(Long)commerceInventoryWarehouseIdObject);
 				}
 
 			});
@@ -576,9 +579,9 @@ public class CommerceShipmentItemModelImpl
 				@Override
 				public void accept(
 					CommerceShipmentItem commerceShipmentItem,
-					Object quantity) {
+					Object quantityObject) {
 
-					commerceShipmentItem.setQuantity((Integer)quantity);
+					commerceShipmentItem.setQuantity((Integer)quantityObject);
 				}
 
 			});

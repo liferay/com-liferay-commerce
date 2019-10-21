@@ -350,9 +350,9 @@ public class CPDAvailabilityEstimateModelImpl
 				@Override
 				public void accept(
 					CPDAvailabilityEstimate cpdAvailabilityEstimate,
-					Object uuid) {
+					Object uuidObject) {
 
-					cpdAvailabilityEstimate.setUuid((String)uuid);
+					cpdAvailabilityEstimate.setUuid((String)uuidObject);
 				}
 
 			});
@@ -376,10 +376,10 @@ public class CPDAvailabilityEstimateModelImpl
 				@Override
 				public void accept(
 					CPDAvailabilityEstimate cpdAvailabilityEstimate,
-					Object CPDAvailabilityEstimateId) {
+					Object CPDAvailabilityEstimateIdObject) {
 
 					cpdAvailabilityEstimate.setCPDAvailabilityEstimateId(
-						(Long)CPDAvailabilityEstimateId);
+						(Long)CPDAvailabilityEstimateIdObject);
 				}
 
 			});
@@ -402,9 +402,9 @@ public class CPDAvailabilityEstimateModelImpl
 				@Override
 				public void accept(
 					CPDAvailabilityEstimate cpdAvailabilityEstimate,
-					Object companyId) {
+					Object companyIdObject) {
 
-					cpdAvailabilityEstimate.setCompanyId((Long)companyId);
+					cpdAvailabilityEstimate.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -427,9 +427,9 @@ public class CPDAvailabilityEstimateModelImpl
 				@Override
 				public void accept(
 					CPDAvailabilityEstimate cpdAvailabilityEstimate,
-					Object userId) {
+					Object userIdObject) {
 
-					cpdAvailabilityEstimate.setUserId((Long)userId);
+					cpdAvailabilityEstimate.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -452,9 +452,9 @@ public class CPDAvailabilityEstimateModelImpl
 				@Override
 				public void accept(
 					CPDAvailabilityEstimate cpdAvailabilityEstimate,
-					Object userName) {
+					Object userNameObject) {
 
-					cpdAvailabilityEstimate.setUserName((String)userName);
+					cpdAvailabilityEstimate.setUserName((String)userNameObject);
 				}
 
 			});
@@ -477,9 +477,10 @@ public class CPDAvailabilityEstimateModelImpl
 				@Override
 				public void accept(
 					CPDAvailabilityEstimate cpdAvailabilityEstimate,
-					Object createDate) {
+					Object createDateObject) {
 
-					cpdAvailabilityEstimate.setCreateDate((Date)createDate);
+					cpdAvailabilityEstimate.setCreateDate(
+						(Date)createDateObject);
 				}
 
 			});
@@ -502,9 +503,10 @@ public class CPDAvailabilityEstimateModelImpl
 				@Override
 				public void accept(
 					CPDAvailabilityEstimate cpdAvailabilityEstimate,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
-					cpdAvailabilityEstimate.setModifiedDate((Date)modifiedDate);
+					cpdAvailabilityEstimate.setModifiedDate(
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -528,10 +530,10 @@ public class CPDAvailabilityEstimateModelImpl
 				@Override
 				public void accept(
 					CPDAvailabilityEstimate cpdAvailabilityEstimate,
-					Object commerceAvailabilityEstimateId) {
+					Object commerceAvailabilityEstimateIdObject) {
 
 					cpdAvailabilityEstimate.setCommerceAvailabilityEstimateId(
-						(Long)commerceAvailabilityEstimateId);
+						(Long)commerceAvailabilityEstimateIdObject);
 				}
 
 			});
@@ -554,9 +556,10 @@ public class CPDAvailabilityEstimateModelImpl
 				@Override
 				public void accept(
 					CPDAvailabilityEstimate cpdAvailabilityEstimate,
-					Object CProductId) {
+					Object CProductIdObject) {
 
-					cpdAvailabilityEstimate.setCProductId((Long)CProductId);
+					cpdAvailabilityEstimate.setCProductId(
+						(Long)CProductIdObject);
 				}
 
 			});
@@ -579,10 +582,10 @@ public class CPDAvailabilityEstimateModelImpl
 				@Override
 				public void accept(
 					CPDAvailabilityEstimate cpdAvailabilityEstimate,
-					Object lastPublishDate) {
+					Object lastPublishDateObject) {
 
 					cpdAvailabilityEstimate.setLastPublishDate(
-						(Date)lastPublishDate);
+						(Date)lastPublishDateObject);
 				}
 
 			});

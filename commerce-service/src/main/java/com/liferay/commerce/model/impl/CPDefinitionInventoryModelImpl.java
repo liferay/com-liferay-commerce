@@ -374,9 +374,10 @@ public class CPDefinitionInventoryModelImpl
 
 				@Override
 				public void accept(
-					CPDefinitionInventory cpDefinitionInventory, Object uuid) {
+					CPDefinitionInventory cpDefinitionInventory,
+					Object uuidObject) {
 
-					cpDefinitionInventory.setUuid((String)uuid);
+					cpDefinitionInventory.setUuid((String)uuidObject);
 				}
 
 			});
@@ -399,10 +400,10 @@ public class CPDefinitionInventoryModelImpl
 				@Override
 				public void accept(
 					CPDefinitionInventory cpDefinitionInventory,
-					Object CPDefinitionInventoryId) {
+					Object CPDefinitionInventoryIdObject) {
 
 					cpDefinitionInventory.setCPDefinitionInventoryId(
-						(Long)CPDefinitionInventoryId);
+						(Long)CPDefinitionInventoryIdObject);
 				}
 
 			});
@@ -425,9 +426,9 @@ public class CPDefinitionInventoryModelImpl
 				@Override
 				public void accept(
 					CPDefinitionInventory cpDefinitionInventory,
-					Object groupId) {
+					Object groupIdObject) {
 
-					cpDefinitionInventory.setGroupId((Long)groupId);
+					cpDefinitionInventory.setGroupId((Long)groupIdObject);
 				}
 
 			});
@@ -450,9 +451,9 @@ public class CPDefinitionInventoryModelImpl
 				@Override
 				public void accept(
 					CPDefinitionInventory cpDefinitionInventory,
-					Object companyId) {
+					Object companyIdObject) {
 
-					cpDefinitionInventory.setCompanyId((Long)companyId);
+					cpDefinitionInventory.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -475,9 +476,9 @@ public class CPDefinitionInventoryModelImpl
 				@Override
 				public void accept(
 					CPDefinitionInventory cpDefinitionInventory,
-					Object userId) {
+					Object userIdObject) {
 
-					cpDefinitionInventory.setUserId((Long)userId);
+					cpDefinitionInventory.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -500,9 +501,9 @@ public class CPDefinitionInventoryModelImpl
 				@Override
 				public void accept(
 					CPDefinitionInventory cpDefinitionInventory,
-					Object userName) {
+					Object userNameObject) {
 
-					cpDefinitionInventory.setUserName((String)userName);
+					cpDefinitionInventory.setUserName((String)userNameObject);
 				}
 
 			});
@@ -525,9 +526,9 @@ public class CPDefinitionInventoryModelImpl
 				@Override
 				public void accept(
 					CPDefinitionInventory cpDefinitionInventory,
-					Object createDate) {
+					Object createDateObject) {
 
-					cpDefinitionInventory.setCreateDate((Date)createDate);
+					cpDefinitionInventory.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -550,9 +551,10 @@ public class CPDefinitionInventoryModelImpl
 				@Override
 				public void accept(
 					CPDefinitionInventory cpDefinitionInventory,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
-					cpDefinitionInventory.setModifiedDate((Date)modifiedDate);
+					cpDefinitionInventory.setModifiedDate(
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -575,10 +577,10 @@ public class CPDefinitionInventoryModelImpl
 				@Override
 				public void accept(
 					CPDefinitionInventory cpDefinitionInventory,
-					Object CPDefinitionId) {
+					Object CPDefinitionIdObject) {
 
 					cpDefinitionInventory.setCPDefinitionId(
-						(Long)CPDefinitionId);
+						(Long)CPDefinitionIdObject);
 				}
 
 			});
@@ -602,10 +604,10 @@ public class CPDefinitionInventoryModelImpl
 				@Override
 				public void accept(
 					CPDefinitionInventory cpDefinitionInventory,
-					Object CPDefinitionInventoryEngine) {
+					Object CPDefinitionInventoryEngineObject) {
 
 					cpDefinitionInventory.setCPDefinitionInventoryEngine(
-						(String)CPDefinitionInventoryEngine);
+						(String)CPDefinitionInventoryEngineObject);
 				}
 
 			});
@@ -628,10 +630,10 @@ public class CPDefinitionInventoryModelImpl
 				@Override
 				public void accept(
 					CPDefinitionInventory cpDefinitionInventory,
-					Object lowStockActivity) {
+					Object lowStockActivityObject) {
 
 					cpDefinitionInventory.setLowStockActivity(
-						(String)lowStockActivity);
+						(String)lowStockActivityObject);
 				}
 
 			});
@@ -654,10 +656,10 @@ public class CPDefinitionInventoryModelImpl
 				@Override
 				public void accept(
 					CPDefinitionInventory cpDefinitionInventory,
-					Object displayAvailability) {
+					Object displayAvailabilityObject) {
 
 					cpDefinitionInventory.setDisplayAvailability(
-						(Boolean)displayAvailability);
+						(Boolean)displayAvailabilityObject);
 				}
 
 			});
@@ -680,10 +682,10 @@ public class CPDefinitionInventoryModelImpl
 				@Override
 				public void accept(
 					CPDefinitionInventory cpDefinitionInventory,
-					Object displayStockQuantity) {
+					Object displayStockQuantityObject) {
 
 					cpDefinitionInventory.setDisplayStockQuantity(
-						(Boolean)displayStockQuantity);
+						(Boolean)displayStockQuantityObject);
 				}
 
 			});
@@ -706,10 +708,10 @@ public class CPDefinitionInventoryModelImpl
 				@Override
 				public void accept(
 					CPDefinitionInventory cpDefinitionInventory,
-					Object minStockQuantity) {
+					Object minStockQuantityObject) {
 
 					cpDefinitionInventory.setMinStockQuantity(
-						(Integer)minStockQuantity);
+						(Integer)minStockQuantityObject);
 				}
 
 			});
@@ -732,9 +734,10 @@ public class CPDefinitionInventoryModelImpl
 				@Override
 				public void accept(
 					CPDefinitionInventory cpDefinitionInventory,
-					Object backOrders) {
+					Object backOrdersObject) {
 
-					cpDefinitionInventory.setBackOrders((Boolean)backOrders);
+					cpDefinitionInventory.setBackOrders(
+						(Boolean)backOrdersObject);
 				}
 
 			});
@@ -757,10 +760,10 @@ public class CPDefinitionInventoryModelImpl
 				@Override
 				public void accept(
 					CPDefinitionInventory cpDefinitionInventory,
-					Object minOrderQuantity) {
+					Object minOrderQuantityObject) {
 
 					cpDefinitionInventory.setMinOrderQuantity(
-						(Integer)minOrderQuantity);
+						(Integer)minOrderQuantityObject);
 				}
 
 			});
@@ -783,10 +786,10 @@ public class CPDefinitionInventoryModelImpl
 				@Override
 				public void accept(
 					CPDefinitionInventory cpDefinitionInventory,
-					Object maxOrderQuantity) {
+					Object maxOrderQuantityObject) {
 
 					cpDefinitionInventory.setMaxOrderQuantity(
-						(Integer)maxOrderQuantity);
+						(Integer)maxOrderQuantityObject);
 				}
 
 			});
@@ -809,10 +812,10 @@ public class CPDefinitionInventoryModelImpl
 				@Override
 				public void accept(
 					CPDefinitionInventory cpDefinitionInventory,
-					Object allowedOrderQuantities) {
+					Object allowedOrderQuantitiesObject) {
 
 					cpDefinitionInventory.setAllowedOrderQuantities(
-						(String)allowedOrderQuantities);
+						(String)allowedOrderQuantitiesObject);
 				}
 
 			});
@@ -835,10 +838,10 @@ public class CPDefinitionInventoryModelImpl
 				@Override
 				public void accept(
 					CPDefinitionInventory cpDefinitionInventory,
-					Object multipleOrderQuantity) {
+					Object multipleOrderQuantityObject) {
 
 					cpDefinitionInventory.setMultipleOrderQuantity(
-						(Integer)multipleOrderQuantity);
+						(Integer)multipleOrderQuantityObject);
 				}
 
 			});

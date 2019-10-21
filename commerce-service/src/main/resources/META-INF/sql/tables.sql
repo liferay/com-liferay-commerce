@@ -150,7 +150,7 @@ create table CommerceOrder (
 	advanceStatus VARCHAR(75) null,
 	paymentStatus INTEGER,
 	orderStatus INTEGER,
-	printedNote VARCHAR(75) null,
+	printedNote STRING null,
 	requestedDeliveryDate DATE null,
 	status INTEGER,
 	statusByUserId LONG,
@@ -186,7 +186,7 @@ create table CommerceOrderItem (
 	subscription BOOLEAN,
 	deliveryGroup VARCHAR(75) null,
 	shippingAddressId LONG,
-	printedNote VARCHAR(75) null,
+	printedNote STRING null,
 	requestedDeliveryDate DATE null,
 	bookedQuantityId LONG
 );
