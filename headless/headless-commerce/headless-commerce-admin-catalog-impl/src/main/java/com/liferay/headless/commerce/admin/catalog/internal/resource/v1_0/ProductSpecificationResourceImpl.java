@@ -21,6 +21,7 @@ import com.liferay.commerce.product.model.CPDefinitionSpecificationOptionValue;
 import com.liferay.commerce.product.service.CPDefinitionService;
 import com.liferay.commerce.product.service.CPDefinitionSpecificationOptionValueService;
 import com.liferay.commerce.product.service.CPSpecificationOptionService;
+import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Product;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.ProductSpecification;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.ProductSpecificationUtil;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.ProductSpecificationResource;
@@ -53,7 +54,7 @@ import org.osgi.service.component.annotations.ServiceScope;
 public class ProductSpecificationResourceImpl
 	extends BaseProductSpecificationResourceImpl {
 
-	@NestedField("productSpecifications")
+	@NestedField(parentClass = Product.class, value = "productSpecifications")
 	@Override
 	public Page<ProductSpecification> getProductIdProductSpecificationsPage(
 			@NestedFieldId(value = "productId") Long id, Pagination pagination)
