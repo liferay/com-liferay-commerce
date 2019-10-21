@@ -144,7 +144,9 @@
 		<field name="advanceStatus" type="String" />
 		<field name="paymentStatus" type="int" />
 		<field name="orderStatus" type="int" />
-		<field name="printedNote" type="String" />
+		<field name="printedNote" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
 		<field name="requestedDeliveryDate" type="Date" />
 		<field name="status" type="int" />
 		<field name="statusByUserId" type="long" />
@@ -181,7 +183,9 @@
 		<field name="subscription" type="boolean" />
 		<field name="deliveryGroup" type="String" />
 		<field name="shippingAddressId" type="long" />
-		<field name="printedNote" type="String" />
+		<field name="printedNote" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
 		<field name="requestedDeliveryDate" type="Date" />
 		<field name="bookedQuantityId" type="long" />
 	</model>
