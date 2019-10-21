@@ -170,7 +170,7 @@ public class CommerceOrderModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CommerceOrder (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,commerceOrderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceAccountId LONG,commerceCurrencyId LONG,billingAddressId LONG,shippingAddressId LONG,commercePaymentMethodKey VARCHAR(75) null,transactionId TEXT null,commerceShippingMethodId LONG,shippingOptionName VARCHAR(255) null,purchaseOrderNumber VARCHAR(75) null,couponCode VARCHAR(75) null,lastPriceUpdateDate DATE null,subtotal DECIMAL(30, 16) null,subtotalDiscountAmount DECIMAL(30, 16) null,subtotalDiscountPercentLevel1 DECIMAL(30, 16) null,subtotalDiscountPercentLevel2 DECIMAL(30, 16) null,subtotalDiscountPercentLevel3 DECIMAL(30, 16) null,subtotalDiscountPercentLevel4 DECIMAL(30, 16) null,shippingAmount DECIMAL(30, 16) null,shippingDiscountAmount DECIMAL(30, 16) null,shippingDiscountPercentLevel1 DECIMAL(30, 16) null,shippingDiscountPercentLevel2 DECIMAL(30, 16) null,shippingDiscountPercentLevel3 DECIMAL(30, 16) null,shippingDiscountPercentLevel4 DECIMAL(30, 16) null,taxAmount DECIMAL(30, 16) null,total DECIMAL(30, 16) null,totalDiscountAmount DECIMAL(30, 16) null,totalDiscountPercentageLevel1 DECIMAL(30, 16) null,totalDiscountPercentageLevel2 DECIMAL(30, 16) null,totalDiscountPercentageLevel3 DECIMAL(30, 16) null,totalDiscountPercentageLevel4 DECIMAL(30, 16) null,advanceStatus VARCHAR(75) null,paymentStatus INTEGER,orderStatus INTEGER,printedNote VARCHAR(75) null,requestedDeliveryDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+		"create table CommerceOrder (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,commerceOrderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceAccountId LONG,commerceCurrencyId LONG,billingAddressId LONG,shippingAddressId LONG,commercePaymentMethodKey VARCHAR(75) null,transactionId TEXT null,commerceShippingMethodId LONG,shippingOptionName VARCHAR(255) null,purchaseOrderNumber VARCHAR(75) null,couponCode VARCHAR(75) null,lastPriceUpdateDate DATE null,subtotal DECIMAL(30, 16) null,subtotalDiscountAmount DECIMAL(30, 16) null,subtotalDiscountPercentLevel1 DECIMAL(30, 16) null,subtotalDiscountPercentLevel2 DECIMAL(30, 16) null,subtotalDiscountPercentLevel3 DECIMAL(30, 16) null,subtotalDiscountPercentLevel4 DECIMAL(30, 16) null,shippingAmount DECIMAL(30, 16) null,shippingDiscountAmount DECIMAL(30, 16) null,shippingDiscountPercentLevel1 DECIMAL(30, 16) null,shippingDiscountPercentLevel2 DECIMAL(30, 16) null,shippingDiscountPercentLevel3 DECIMAL(30, 16) null,shippingDiscountPercentLevel4 DECIMAL(30, 16) null,taxAmount DECIMAL(30, 16) null,total DECIMAL(30, 16) null,totalDiscountAmount DECIMAL(30, 16) null,totalDiscountPercentageLevel1 DECIMAL(30, 16) null,totalDiscountPercentageLevel2 DECIMAL(30, 16) null,totalDiscountPercentageLevel3 DECIMAL(30, 16) null,totalDiscountPercentageLevel4 DECIMAL(30, 16) null,advanceStatus VARCHAR(75) null,paymentStatus INTEGER,orderStatus INTEGER,printedNote STRING null,requestedDeliveryDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 
 	public static final String TABLE_SQL_DROP = "drop table CommerceOrder";
 
@@ -465,8 +465,10 @@ public class CommerceOrderModelImpl
 			new BiConsumer<CommerceOrder, Object>() {
 
 				@Override
-				public void accept(CommerceOrder commerceOrder, Object uuid) {
-					commerceOrder.setUuid((String)uuid);
+				public void accept(
+					CommerceOrder commerceOrder, Object uuidObject) {
+
+					commerceOrder.setUuid((String)uuidObject);
 				}
 
 			});
@@ -486,10 +488,11 @@ public class CommerceOrderModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrder commerceOrder, Object externalReferenceCode) {
+					CommerceOrder commerceOrder,
+					Object externalReferenceCodeObject) {
 
 					commerceOrder.setExternalReferenceCode(
-						(String)externalReferenceCode);
+						(String)externalReferenceCodeObject);
 				}
 
 			});
@@ -509,9 +512,10 @@ public class CommerceOrderModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrder commerceOrder, Object commerceOrderId) {
+					CommerceOrder commerceOrder, Object commerceOrderIdObject) {
 
-					commerceOrder.setCommerceOrderId((Long)commerceOrderId);
+					commerceOrder.setCommerceOrderId(
+						(Long)commerceOrderIdObject);
 				}
 
 			});
@@ -531,9 +535,9 @@ public class CommerceOrderModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrder commerceOrder, Object groupId) {
+					CommerceOrder commerceOrder, Object groupIdObject) {
 
-					commerceOrder.setGroupId((Long)groupId);
+					commerceOrder.setGroupId((Long)groupIdObject);
 				}
 
 			});
@@ -553,9 +557,9 @@ public class CommerceOrderModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrder commerceOrder, Object companyId) {
+					CommerceOrder commerceOrder, Object companyIdObject) {
 
-					commerceOrder.setCompanyId((Long)companyId);
+					commerceOrder.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -574,8 +578,10 @@ public class CommerceOrderModelImpl
 			new BiConsumer<CommerceOrder, Object>() {
 
 				@Override
-				public void accept(CommerceOrder commerceOrder, Object userId) {
-					commerceOrder.setUserId((Long)userId);
+				public void accept(
+					CommerceOrder commerceOrder, Object userIdObject) {
+
+					commerceOrder.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -595,9 +601,9 @@ public class CommerceOrderModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrder commerceOrder, Object userName) {
+					CommerceOrder commerceOrder, Object userNameObject) {
 
-					commerceOrder.setUserName((String)userName);
+					commerceOrder.setUserName((String)userNameObject);
 				}
 
 			});
@@ -617,9 +623,9 @@ public class CommerceOrderModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrder commerceOrder, Object createDate) {
+					CommerceOrder commerceOrder, Object createDateObject) {
 
-					commerceOrder.setCreateDate((Date)createDate);
+					commerceOrder.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -639,9 +645,9 @@ public class CommerceOrderModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrder commerceOrder, Object modifiedDate) {
+					CommerceOrder commerceOrder, Object modifiedDateObject) {
 
-					commerceOrder.setModifiedDate((Date)modifiedDate);
+					commerceOrder.setModifiedDate((Date)modifiedDateObject);
 				}
 
 			});
@@ -661,9 +667,11 @@ public class CommerceOrderModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrder commerceOrder, Object commerceAccountId) {
+					CommerceOrder commerceOrder,
+					Object commerceAccountIdObject) {
 
-					commerceOrder.setCommerceAccountId((Long)commerceAccountId);
+					commerceOrder.setCommerceAccountId(
+						(Long)commerceAccountIdObject);
 				}
 
 			});
@@ -683,10 +691,11 @@ public class CommerceOrderModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrder commerceOrder, Object commerceCurrencyId) {
+					CommerceOrder commerceOrder,
+					Object commerceCurrencyIdObject) {
 
 					commerceOrder.setCommerceCurrencyId(
-						(Long)commerceCurrencyId);
+						(Long)commerceCurrencyIdObject);
 				}
 
 			});
@@ -706,9 +715,11 @@ public class CommerceOrderModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrder commerceOrder, Object billingAddressId) {
+					CommerceOrder commerceOrder,
+					Object billingAddressIdObject) {
 
-					commerceOrder.setBillingAddressId((Long)billingAddressId);
+					commerceOrder.setBillingAddressId(
+						(Long)billingAddressIdObject);
 				}
 
 			});
@@ -728,9 +739,11 @@ public class CommerceOrderModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrder commerceOrder, Object shippingAddressId) {
+					CommerceOrder commerceOrder,
+					Object shippingAddressIdObject) {
 
-					commerceOrder.setShippingAddressId((Long)shippingAddressId);
+					commerceOrder.setShippingAddressId(
+						(Long)shippingAddressIdObject);
 				}
 
 			});
@@ -751,10 +764,10 @@ public class CommerceOrderModelImpl
 				@Override
 				public void accept(
 					CommerceOrder commerceOrder,
-					Object commercePaymentMethodKey) {
+					Object commercePaymentMethodKeyObject) {
 
 					commerceOrder.setCommercePaymentMethodKey(
-						(String)commercePaymentMethodKey);
+						(String)commercePaymentMethodKeyObject);
 				}
 
 			});
@@ -774,9 +787,9 @@ public class CommerceOrderModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrder commerceOrder, Object transactionId) {
+					CommerceOrder commerceOrder, Object transactionIdObject) {
 
-					commerceOrder.setTransactionId((String)transactionId);
+					commerceOrder.setTransactionId((String)transactionIdObject);
 				}
 
 			});
@@ -797,10 +810,10 @@ public class CommerceOrderModelImpl
 				@Override
 				public void accept(
 					CommerceOrder commerceOrder,
-					Object commerceShippingMethodId) {
+					Object commerceShippingMethodIdObject) {
 
 					commerceOrder.setCommerceShippingMethodId(
-						(Long)commerceShippingMethodId);
+						(Long)commerceShippingMethodIdObject);
 				}
 
 			});
@@ -820,10 +833,11 @@ public class CommerceOrderModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrder commerceOrder, Object shippingOptionName) {
+					CommerceOrder commerceOrder,
+					Object shippingOptionNameObject) {
 
 					commerceOrder.setShippingOptionName(
-						(String)shippingOptionName);
+						(String)shippingOptionNameObject);
 				}
 
 			});
@@ -843,10 +857,11 @@ public class CommerceOrderModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrder commerceOrder, Object purchaseOrderNumber) {
+					CommerceOrder commerceOrder,
+					Object purchaseOrderNumberObject) {
 
 					commerceOrder.setPurchaseOrderNumber(
-						(String)purchaseOrderNumber);
+						(String)purchaseOrderNumberObject);
 				}
 
 			});
@@ -866,9 +881,9 @@ public class CommerceOrderModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrder commerceOrder, Object couponCode) {
+					CommerceOrder commerceOrder, Object couponCodeObject) {
 
-					commerceOrder.setCouponCode((String)couponCode);
+					commerceOrder.setCouponCode((String)couponCodeObject);
 				}
 
 			});
@@ -888,10 +903,11 @@ public class CommerceOrderModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrder commerceOrder, Object lastPriceUpdateDate) {
+					CommerceOrder commerceOrder,
+					Object lastPriceUpdateDateObject) {
 
 					commerceOrder.setLastPriceUpdateDate(
-						(Date)lastPriceUpdateDate);
+						(Date)lastPriceUpdateDateObject);
 				}
 
 			});
@@ -911,9 +927,9 @@ public class CommerceOrderModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrder commerceOrder, Object subtotal) {
+					CommerceOrder commerceOrder, Object subtotalObject) {
 
-					commerceOrder.setSubtotal((BigDecimal)subtotal);
+					commerceOrder.setSubtotal((BigDecimal)subtotalObject);
 				}
 
 			});
@@ -934,10 +950,10 @@ public class CommerceOrderModelImpl
 				@Override
 				public void accept(
 					CommerceOrder commerceOrder,
-					Object subtotalDiscountAmount) {
+					Object subtotalDiscountAmountObject) {
 
 					commerceOrder.setSubtotalDiscountAmount(
-						(BigDecimal)subtotalDiscountAmount);
+						(BigDecimal)subtotalDiscountAmountObject);
 				}
 
 			});
@@ -958,10 +974,10 @@ public class CommerceOrderModelImpl
 				@Override
 				public void accept(
 					CommerceOrder commerceOrder,
-					Object subtotalDiscountPercentageLevel1) {
+					Object subtotalDiscountPercentageLevel1Object) {
 
 					commerceOrder.setSubtotalDiscountPercentageLevel1(
-						(BigDecimal)subtotalDiscountPercentageLevel1);
+						(BigDecimal)subtotalDiscountPercentageLevel1Object);
 				}
 
 			});
@@ -982,10 +998,10 @@ public class CommerceOrderModelImpl
 				@Override
 				public void accept(
 					CommerceOrder commerceOrder,
-					Object subtotalDiscountPercentageLevel2) {
+					Object subtotalDiscountPercentageLevel2Object) {
 
 					commerceOrder.setSubtotalDiscountPercentageLevel2(
-						(BigDecimal)subtotalDiscountPercentageLevel2);
+						(BigDecimal)subtotalDiscountPercentageLevel2Object);
 				}
 
 			});
@@ -1006,10 +1022,10 @@ public class CommerceOrderModelImpl
 				@Override
 				public void accept(
 					CommerceOrder commerceOrder,
-					Object subtotalDiscountPercentageLevel3) {
+					Object subtotalDiscountPercentageLevel3Object) {
 
 					commerceOrder.setSubtotalDiscountPercentageLevel3(
-						(BigDecimal)subtotalDiscountPercentageLevel3);
+						(BigDecimal)subtotalDiscountPercentageLevel3Object);
 				}
 
 			});
@@ -1030,10 +1046,10 @@ public class CommerceOrderModelImpl
 				@Override
 				public void accept(
 					CommerceOrder commerceOrder,
-					Object subtotalDiscountPercentageLevel4) {
+					Object subtotalDiscountPercentageLevel4Object) {
 
 					commerceOrder.setSubtotalDiscountPercentageLevel4(
-						(BigDecimal)subtotalDiscountPercentageLevel4);
+						(BigDecimal)subtotalDiscountPercentageLevel4Object);
 				}
 
 			});
@@ -1053,9 +1069,10 @@ public class CommerceOrderModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrder commerceOrder, Object shippingAmount) {
+					CommerceOrder commerceOrder, Object shippingAmountObject) {
 
-					commerceOrder.setShippingAmount((BigDecimal)shippingAmount);
+					commerceOrder.setShippingAmount(
+						(BigDecimal)shippingAmountObject);
 				}
 
 			});
@@ -1076,10 +1093,10 @@ public class CommerceOrderModelImpl
 				@Override
 				public void accept(
 					CommerceOrder commerceOrder,
-					Object shippingDiscountAmount) {
+					Object shippingDiscountAmountObject) {
 
 					commerceOrder.setShippingDiscountAmount(
-						(BigDecimal)shippingDiscountAmount);
+						(BigDecimal)shippingDiscountAmountObject);
 				}
 
 			});
@@ -1100,10 +1117,10 @@ public class CommerceOrderModelImpl
 				@Override
 				public void accept(
 					CommerceOrder commerceOrder,
-					Object shippingDiscountPercentageLevel1) {
+					Object shippingDiscountPercentageLevel1Object) {
 
 					commerceOrder.setShippingDiscountPercentageLevel1(
-						(BigDecimal)shippingDiscountPercentageLevel1);
+						(BigDecimal)shippingDiscountPercentageLevel1Object);
 				}
 
 			});
@@ -1124,10 +1141,10 @@ public class CommerceOrderModelImpl
 				@Override
 				public void accept(
 					CommerceOrder commerceOrder,
-					Object shippingDiscountPercentageLevel2) {
+					Object shippingDiscountPercentageLevel2Object) {
 
 					commerceOrder.setShippingDiscountPercentageLevel2(
-						(BigDecimal)shippingDiscountPercentageLevel2);
+						(BigDecimal)shippingDiscountPercentageLevel2Object);
 				}
 
 			});
@@ -1148,10 +1165,10 @@ public class CommerceOrderModelImpl
 				@Override
 				public void accept(
 					CommerceOrder commerceOrder,
-					Object shippingDiscountPercentageLevel3) {
+					Object shippingDiscountPercentageLevel3Object) {
 
 					commerceOrder.setShippingDiscountPercentageLevel3(
-						(BigDecimal)shippingDiscountPercentageLevel3);
+						(BigDecimal)shippingDiscountPercentageLevel3Object);
 				}
 
 			});
@@ -1172,10 +1189,10 @@ public class CommerceOrderModelImpl
 				@Override
 				public void accept(
 					CommerceOrder commerceOrder,
-					Object shippingDiscountPercentageLevel4) {
+					Object shippingDiscountPercentageLevel4Object) {
 
 					commerceOrder.setShippingDiscountPercentageLevel4(
-						(BigDecimal)shippingDiscountPercentageLevel4);
+						(BigDecimal)shippingDiscountPercentageLevel4Object);
 				}
 
 			});
@@ -1195,9 +1212,9 @@ public class CommerceOrderModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrder commerceOrder, Object taxAmount) {
+					CommerceOrder commerceOrder, Object taxAmountObject) {
 
-					commerceOrder.setTaxAmount((BigDecimal)taxAmount);
+					commerceOrder.setTaxAmount((BigDecimal)taxAmountObject);
 				}
 
 			});
@@ -1216,8 +1233,10 @@ public class CommerceOrderModelImpl
 			new BiConsumer<CommerceOrder, Object>() {
 
 				@Override
-				public void accept(CommerceOrder commerceOrder, Object total) {
-					commerceOrder.setTotal((BigDecimal)total);
+				public void accept(
+					CommerceOrder commerceOrder, Object totalObject) {
+
+					commerceOrder.setTotal((BigDecimal)totalObject);
 				}
 
 			});
@@ -1237,10 +1256,11 @@ public class CommerceOrderModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrder commerceOrder, Object totalDiscountAmount) {
+					CommerceOrder commerceOrder,
+					Object totalDiscountAmountObject) {
 
 					commerceOrder.setTotalDiscountAmount(
-						(BigDecimal)totalDiscountAmount);
+						(BigDecimal)totalDiscountAmountObject);
 				}
 
 			});
@@ -1261,10 +1281,10 @@ public class CommerceOrderModelImpl
 				@Override
 				public void accept(
 					CommerceOrder commerceOrder,
-					Object totalDiscountPercentageLevel1) {
+					Object totalDiscountPercentageLevel1Object) {
 
 					commerceOrder.setTotalDiscountPercentageLevel1(
-						(BigDecimal)totalDiscountPercentageLevel1);
+						(BigDecimal)totalDiscountPercentageLevel1Object);
 				}
 
 			});
@@ -1285,10 +1305,10 @@ public class CommerceOrderModelImpl
 				@Override
 				public void accept(
 					CommerceOrder commerceOrder,
-					Object totalDiscountPercentageLevel2) {
+					Object totalDiscountPercentageLevel2Object) {
 
 					commerceOrder.setTotalDiscountPercentageLevel2(
-						(BigDecimal)totalDiscountPercentageLevel2);
+						(BigDecimal)totalDiscountPercentageLevel2Object);
 				}
 
 			});
@@ -1309,10 +1329,10 @@ public class CommerceOrderModelImpl
 				@Override
 				public void accept(
 					CommerceOrder commerceOrder,
-					Object totalDiscountPercentageLevel3) {
+					Object totalDiscountPercentageLevel3Object) {
 
 					commerceOrder.setTotalDiscountPercentageLevel3(
-						(BigDecimal)totalDiscountPercentageLevel3);
+						(BigDecimal)totalDiscountPercentageLevel3Object);
 				}
 
 			});
@@ -1333,10 +1353,10 @@ public class CommerceOrderModelImpl
 				@Override
 				public void accept(
 					CommerceOrder commerceOrder,
-					Object totalDiscountPercentageLevel4) {
+					Object totalDiscountPercentageLevel4Object) {
 
 					commerceOrder.setTotalDiscountPercentageLevel4(
-						(BigDecimal)totalDiscountPercentageLevel4);
+						(BigDecimal)totalDiscountPercentageLevel4Object);
 				}
 
 			});
@@ -1356,9 +1376,9 @@ public class CommerceOrderModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrder commerceOrder, Object advanceStatus) {
+					CommerceOrder commerceOrder, Object advanceStatusObject) {
 
-					commerceOrder.setAdvanceStatus((String)advanceStatus);
+					commerceOrder.setAdvanceStatus((String)advanceStatusObject);
 				}
 
 			});
@@ -1378,9 +1398,10 @@ public class CommerceOrderModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrder commerceOrder, Object paymentStatus) {
+					CommerceOrder commerceOrder, Object paymentStatusObject) {
 
-					commerceOrder.setPaymentStatus((Integer)paymentStatus);
+					commerceOrder.setPaymentStatus(
+						(Integer)paymentStatusObject);
 				}
 
 			});
@@ -1400,9 +1421,9 @@ public class CommerceOrderModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrder commerceOrder, Object orderStatus) {
+					CommerceOrder commerceOrder, Object orderStatusObject) {
 
-					commerceOrder.setOrderStatus((Integer)orderStatus);
+					commerceOrder.setOrderStatus((Integer)orderStatusObject);
 				}
 
 			});
@@ -1422,9 +1443,9 @@ public class CommerceOrderModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrder commerceOrder, Object printedNote) {
+					CommerceOrder commerceOrder, Object printedNoteObject) {
 
-					commerceOrder.setPrintedNote((String)printedNote);
+					commerceOrder.setPrintedNote((String)printedNoteObject);
 				}
 
 			});
@@ -1444,10 +1465,11 @@ public class CommerceOrderModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrder commerceOrder, Object requestedDeliveryDate) {
+					CommerceOrder commerceOrder,
+					Object requestedDeliveryDateObject) {
 
 					commerceOrder.setRequestedDeliveryDate(
-						(Date)requestedDeliveryDate);
+						(Date)requestedDeliveryDateObject);
 				}
 
 			});
@@ -1466,8 +1488,10 @@ public class CommerceOrderModelImpl
 			new BiConsumer<CommerceOrder, Object>() {
 
 				@Override
-				public void accept(CommerceOrder commerceOrder, Object status) {
-					commerceOrder.setStatus((Integer)status);
+				public void accept(
+					CommerceOrder commerceOrder, Object statusObject) {
+
+					commerceOrder.setStatus((Integer)statusObject);
 				}
 
 			});
@@ -1487,9 +1511,9 @@ public class CommerceOrderModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrder commerceOrder, Object statusByUserId) {
+					CommerceOrder commerceOrder, Object statusByUserIdObject) {
 
-					commerceOrder.setStatusByUserId((Long)statusByUserId);
+					commerceOrder.setStatusByUserId((Long)statusByUserIdObject);
 				}
 
 			});
@@ -1509,9 +1533,11 @@ public class CommerceOrderModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrder commerceOrder, Object statusByUserName) {
+					CommerceOrder commerceOrder,
+					Object statusByUserNameObject) {
 
-					commerceOrder.setStatusByUserName((String)statusByUserName);
+					commerceOrder.setStatusByUserName(
+						(String)statusByUserNameObject);
 				}
 
 			});
@@ -1531,9 +1557,9 @@ public class CommerceOrderModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrder commerceOrder, Object statusDate) {
+					CommerceOrder commerceOrder, Object statusDateObject) {
 
-					commerceOrder.setStatusDate((Date)statusDate);
+					commerceOrder.setStatusDate((Date)statusDateObject);
 				}
 
 			});

@@ -343,8 +343,10 @@ public class CommerceRegionModelImpl
 			new BiConsumer<CommerceRegion, Object>() {
 
 				@Override
-				public void accept(CommerceRegion commerceRegion, Object uuid) {
-					commerceRegion.setUuid((String)uuid);
+				public void accept(
+					CommerceRegion commerceRegion, Object uuidObject) {
+
+					commerceRegion.setUuid((String)uuidObject);
 				}
 
 			});
@@ -364,9 +366,11 @@ public class CommerceRegionModelImpl
 
 				@Override
 				public void accept(
-					CommerceRegion commerceRegion, Object commerceRegionId) {
+					CommerceRegion commerceRegion,
+					Object commerceRegionIdObject) {
 
-					commerceRegion.setCommerceRegionId((Long)commerceRegionId);
+					commerceRegion.setCommerceRegionId(
+						(Long)commerceRegionIdObject);
 				}
 
 			});
@@ -386,9 +390,9 @@ public class CommerceRegionModelImpl
 
 				@Override
 				public void accept(
-					CommerceRegion commerceRegion, Object companyId) {
+					CommerceRegion commerceRegion, Object companyIdObject) {
 
-					commerceRegion.setCompanyId((Long)companyId);
+					commerceRegion.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -408,9 +412,9 @@ public class CommerceRegionModelImpl
 
 				@Override
 				public void accept(
-					CommerceRegion commerceRegion, Object userId) {
+					CommerceRegion commerceRegion, Object userIdObject) {
 
-					commerceRegion.setUserId((Long)userId);
+					commerceRegion.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -430,9 +434,9 @@ public class CommerceRegionModelImpl
 
 				@Override
 				public void accept(
-					CommerceRegion commerceRegion, Object userName) {
+					CommerceRegion commerceRegion, Object userNameObject) {
 
-					commerceRegion.setUserName((String)userName);
+					commerceRegion.setUserName((String)userNameObject);
 				}
 
 			});
@@ -452,9 +456,9 @@ public class CommerceRegionModelImpl
 
 				@Override
 				public void accept(
-					CommerceRegion commerceRegion, Object createDate) {
+					CommerceRegion commerceRegion, Object createDateObject) {
 
-					commerceRegion.setCreateDate((Date)createDate);
+					commerceRegion.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -474,9 +478,9 @@ public class CommerceRegionModelImpl
 
 				@Override
 				public void accept(
-					CommerceRegion commerceRegion, Object modifiedDate) {
+					CommerceRegion commerceRegion, Object modifiedDateObject) {
 
-					commerceRegion.setModifiedDate((Date)modifiedDate);
+					commerceRegion.setModifiedDate((Date)modifiedDateObject);
 				}
 
 			});
@@ -496,10 +500,11 @@ public class CommerceRegionModelImpl
 
 				@Override
 				public void accept(
-					CommerceRegion commerceRegion, Object commerceCountryId) {
+					CommerceRegion commerceRegion,
+					Object commerceCountryIdObject) {
 
 					commerceRegion.setCommerceCountryId(
-						(Long)commerceCountryId);
+						(Long)commerceCountryIdObject);
 				}
 
 			});
@@ -518,8 +523,10 @@ public class CommerceRegionModelImpl
 			new BiConsumer<CommerceRegion, Object>() {
 
 				@Override
-				public void accept(CommerceRegion commerceRegion, Object name) {
-					commerceRegion.setName((String)name);
+				public void accept(
+					CommerceRegion commerceRegion, Object nameObject) {
+
+					commerceRegion.setName((String)nameObject);
 				}
 
 			});
@@ -538,8 +545,10 @@ public class CommerceRegionModelImpl
 			new BiConsumer<CommerceRegion, Object>() {
 
 				@Override
-				public void accept(CommerceRegion commerceRegion, Object code) {
-					commerceRegion.setCode((String)code);
+				public void accept(
+					CommerceRegion commerceRegion, Object codeObject) {
+
+					commerceRegion.setCode((String)codeObject);
 				}
 
 			});
@@ -559,9 +568,9 @@ public class CommerceRegionModelImpl
 
 				@Override
 				public void accept(
-					CommerceRegion commerceRegion, Object priority) {
+					CommerceRegion commerceRegion, Object priorityObject) {
 
-					commerceRegion.setPriority((Double)priority);
+					commerceRegion.setPriority((Double)priorityObject);
 				}
 
 			});
@@ -581,9 +590,9 @@ public class CommerceRegionModelImpl
 
 				@Override
 				public void accept(
-					CommerceRegion commerceRegion, Object active) {
+					CommerceRegion commerceRegion, Object activeObject) {
 
-					commerceRegion.setActive((Boolean)active);
+					commerceRegion.setActive((Boolean)activeObject);
 				}
 
 			});
@@ -603,9 +612,11 @@ public class CommerceRegionModelImpl
 
 				@Override
 				public void accept(
-					CommerceRegion commerceRegion, Object lastPublishDate) {
+					CommerceRegion commerceRegion,
+					Object lastPublishDateObject) {
 
-					commerceRegion.setLastPublishDate((Date)lastPublishDate);
+					commerceRegion.setLastPublishDate(
+						(Date)lastPublishDateObject);
 				}
 
 			});

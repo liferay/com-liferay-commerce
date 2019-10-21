@@ -387,9 +387,9 @@ public class CommerceSubscriptionEntryModelImpl
 				@Override
 				public void accept(
 					CommerceSubscriptionEntry commerceSubscriptionEntry,
-					Object uuid) {
+					Object uuidObject) {
 
-					commerceSubscriptionEntry.setUuid((String)uuid);
+					commerceSubscriptionEntry.setUuid((String)uuidObject);
 				}
 
 			});
@@ -413,10 +413,10 @@ public class CommerceSubscriptionEntryModelImpl
 				@Override
 				public void accept(
 					CommerceSubscriptionEntry commerceSubscriptionEntry,
-					Object commerceSubscriptionEntryId) {
+					Object commerceSubscriptionEntryIdObject) {
 
 					commerceSubscriptionEntry.setCommerceSubscriptionEntryId(
-						(Long)commerceSubscriptionEntryId);
+						(Long)commerceSubscriptionEntryIdObject);
 				}
 
 			});
@@ -439,9 +439,9 @@ public class CommerceSubscriptionEntryModelImpl
 				@Override
 				public void accept(
 					CommerceSubscriptionEntry commerceSubscriptionEntry,
-					Object groupId) {
+					Object groupIdObject) {
 
-					commerceSubscriptionEntry.setGroupId((Long)groupId);
+					commerceSubscriptionEntry.setGroupId((Long)groupIdObject);
 				}
 
 			});
@@ -464,9 +464,10 @@ public class CommerceSubscriptionEntryModelImpl
 				@Override
 				public void accept(
 					CommerceSubscriptionEntry commerceSubscriptionEntry,
-					Object companyId) {
+					Object companyIdObject) {
 
-					commerceSubscriptionEntry.setCompanyId((Long)companyId);
+					commerceSubscriptionEntry.setCompanyId(
+						(Long)companyIdObject);
 				}
 
 			});
@@ -489,9 +490,9 @@ public class CommerceSubscriptionEntryModelImpl
 				@Override
 				public void accept(
 					CommerceSubscriptionEntry commerceSubscriptionEntry,
-					Object userId) {
+					Object userIdObject) {
 
-					commerceSubscriptionEntry.setUserId((Long)userId);
+					commerceSubscriptionEntry.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -514,9 +515,10 @@ public class CommerceSubscriptionEntryModelImpl
 				@Override
 				public void accept(
 					CommerceSubscriptionEntry commerceSubscriptionEntry,
-					Object userName) {
+					Object userNameObject) {
 
-					commerceSubscriptionEntry.setUserName((String)userName);
+					commerceSubscriptionEntry.setUserName(
+						(String)userNameObject);
 				}
 
 			});
@@ -539,9 +541,10 @@ public class CommerceSubscriptionEntryModelImpl
 				@Override
 				public void accept(
 					CommerceSubscriptionEntry commerceSubscriptionEntry,
-					Object createDate) {
+					Object createDateObject) {
 
-					commerceSubscriptionEntry.setCreateDate((Date)createDate);
+					commerceSubscriptionEntry.setCreateDate(
+						(Date)createDateObject);
 				}
 
 			});
@@ -564,10 +567,10 @@ public class CommerceSubscriptionEntryModelImpl
 				@Override
 				public void accept(
 					CommerceSubscriptionEntry commerceSubscriptionEntry,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
 					commerceSubscriptionEntry.setModifiedDate(
-						(Date)modifiedDate);
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -590,10 +593,10 @@ public class CommerceSubscriptionEntryModelImpl
 				@Override
 				public void accept(
 					CommerceSubscriptionEntry commerceSubscriptionEntry,
-					Object CPInstanceUuid) {
+					Object CPInstanceUuidObject) {
 
 					commerceSubscriptionEntry.setCPInstanceUuid(
-						(String)CPInstanceUuid);
+						(String)CPInstanceUuidObject);
 				}
 
 			});
@@ -616,9 +619,10 @@ public class CommerceSubscriptionEntryModelImpl
 				@Override
 				public void accept(
 					CommerceSubscriptionEntry commerceSubscriptionEntry,
-					Object CProductId) {
+					Object CProductIdObject) {
 
-					commerceSubscriptionEntry.setCProductId((Long)CProductId);
+					commerceSubscriptionEntry.setCProductId(
+						(Long)CProductIdObject);
 				}
 
 			});
@@ -641,10 +645,10 @@ public class CommerceSubscriptionEntryModelImpl
 				@Override
 				public void accept(
 					CommerceSubscriptionEntry commerceSubscriptionEntry,
-					Object commerceOrderItemId) {
+					Object commerceOrderItemIdObject) {
 
 					commerceSubscriptionEntry.setCommerceOrderItemId(
-						(Long)commerceOrderItemId);
+						(Long)commerceOrderItemIdObject);
 				}
 
 			});
@@ -667,10 +671,10 @@ public class CommerceSubscriptionEntryModelImpl
 				@Override
 				public void accept(
 					CommerceSubscriptionEntry commerceSubscriptionEntry,
-					Object subscriptionLength) {
+					Object subscriptionLengthObject) {
 
 					commerceSubscriptionEntry.setSubscriptionLength(
-						(Integer)subscriptionLength);
+						(Integer)subscriptionLengthObject);
 				}
 
 			});
@@ -693,10 +697,10 @@ public class CommerceSubscriptionEntryModelImpl
 				@Override
 				public void accept(
 					CommerceSubscriptionEntry commerceSubscriptionEntry,
-					Object subscriptionType) {
+					Object subscriptionTypeObject) {
 
 					commerceSubscriptionEntry.setSubscriptionType(
-						(String)subscriptionType);
+						(String)subscriptionTypeObject);
 				}
 
 			});
@@ -720,10 +724,10 @@ public class CommerceSubscriptionEntryModelImpl
 				@Override
 				public void accept(
 					CommerceSubscriptionEntry commerceSubscriptionEntry,
-					Object subscriptionTypeSettings) {
+					Object subscriptionTypeSettingsObject) {
 
 					commerceSubscriptionEntry.setSubscriptionTypeSettings(
-						(String)subscriptionTypeSettings);
+						(String)subscriptionTypeSettingsObject);
 				}
 
 			});
@@ -746,10 +750,10 @@ public class CommerceSubscriptionEntryModelImpl
 				@Override
 				public void accept(
 					CommerceSubscriptionEntry commerceSubscriptionEntry,
-					Object currentCycle) {
+					Object currentCycleObject) {
 
 					commerceSubscriptionEntry.setCurrentCycle(
-						(Long)currentCycle);
+						(Long)currentCycleObject);
 				}
 
 			});
@@ -772,10 +776,10 @@ public class CommerceSubscriptionEntryModelImpl
 				@Override
 				public void accept(
 					CommerceSubscriptionEntry commerceSubscriptionEntry,
-					Object maxSubscriptionCycles) {
+					Object maxSubscriptionCyclesObject) {
 
 					commerceSubscriptionEntry.setMaxSubscriptionCycles(
-						(Long)maxSubscriptionCycles);
+						(Long)maxSubscriptionCyclesObject);
 				}
 
 			});
@@ -798,10 +802,10 @@ public class CommerceSubscriptionEntryModelImpl
 				@Override
 				public void accept(
 					CommerceSubscriptionEntry commerceSubscriptionEntry,
-					Object subscriptionStatus) {
+					Object subscriptionStatusObject) {
 
 					commerceSubscriptionEntry.setSubscriptionStatus(
-						(Integer)subscriptionStatus);
+						(Integer)subscriptionStatusObject);
 				}
 
 			});
@@ -824,10 +828,10 @@ public class CommerceSubscriptionEntryModelImpl
 				@Override
 				public void accept(
 					CommerceSubscriptionEntry commerceSubscriptionEntry,
-					Object lastIterationDate) {
+					Object lastIterationDateObject) {
 
 					commerceSubscriptionEntry.setLastIterationDate(
-						(Date)lastIterationDate);
+						(Date)lastIterationDateObject);
 				}
 
 			});
@@ -850,10 +854,10 @@ public class CommerceSubscriptionEntryModelImpl
 				@Override
 				public void accept(
 					CommerceSubscriptionEntry commerceSubscriptionEntry,
-					Object nextIterationDate) {
+					Object nextIterationDateObject) {
 
 					commerceSubscriptionEntry.setNextIterationDate(
-						(Date)nextIterationDate);
+						(Date)nextIterationDateObject);
 				}
 
 			});
@@ -876,9 +880,10 @@ public class CommerceSubscriptionEntryModelImpl
 				@Override
 				public void accept(
 					CommerceSubscriptionEntry commerceSubscriptionEntry,
-					Object startDate) {
+					Object startDateObject) {
 
-					commerceSubscriptionEntry.setStartDate((Date)startDate);
+					commerceSubscriptionEntry.setStartDate(
+						(Date)startDateObject);
 				}
 
 			});

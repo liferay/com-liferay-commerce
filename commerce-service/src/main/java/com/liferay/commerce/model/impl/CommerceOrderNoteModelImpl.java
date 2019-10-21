@@ -340,10 +340,10 @@ public class CommerceOrderNoteModelImpl
 				@Override
 				public void accept(
 					CommerceOrderNote commerceOrderNote,
-					Object externalReferenceCode) {
+					Object externalReferenceCodeObject) {
 
 					commerceOrderNote.setExternalReferenceCode(
-						(String)externalReferenceCode);
+						(String)externalReferenceCodeObject);
 				}
 
 			});
@@ -364,10 +364,10 @@ public class CommerceOrderNoteModelImpl
 				@Override
 				public void accept(
 					CommerceOrderNote commerceOrderNote,
-					Object commerceOrderNoteId) {
+					Object commerceOrderNoteIdObject) {
 
 					commerceOrderNote.setCommerceOrderNoteId(
-						(Long)commerceOrderNoteId);
+						(Long)commerceOrderNoteIdObject);
 				}
 
 			});
@@ -387,9 +387,9 @@ public class CommerceOrderNoteModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrderNote commerceOrderNote, Object groupId) {
+					CommerceOrderNote commerceOrderNote, Object groupIdObject) {
 
-					commerceOrderNote.setGroupId((Long)groupId);
+					commerceOrderNote.setGroupId((Long)groupIdObject);
 				}
 
 			});
@@ -409,9 +409,10 @@ public class CommerceOrderNoteModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrderNote commerceOrderNote, Object companyId) {
+					CommerceOrderNote commerceOrderNote,
+					Object companyIdObject) {
 
-					commerceOrderNote.setCompanyId((Long)companyId);
+					commerceOrderNote.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -431,9 +432,9 @@ public class CommerceOrderNoteModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrderNote commerceOrderNote, Object userId) {
+					CommerceOrderNote commerceOrderNote, Object userIdObject) {
 
-					commerceOrderNote.setUserId((Long)userId);
+					commerceOrderNote.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -453,9 +454,10 @@ public class CommerceOrderNoteModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrderNote commerceOrderNote, Object userName) {
+					CommerceOrderNote commerceOrderNote,
+					Object userNameObject) {
 
-					commerceOrderNote.setUserName((String)userName);
+					commerceOrderNote.setUserName((String)userNameObject);
 				}
 
 			});
@@ -475,9 +477,10 @@ public class CommerceOrderNoteModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrderNote commerceOrderNote, Object createDate) {
+					CommerceOrderNote commerceOrderNote,
+					Object createDateObject) {
 
-					commerceOrderNote.setCreateDate((Date)createDate);
+					commerceOrderNote.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -497,9 +500,10 @@ public class CommerceOrderNoteModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrderNote commerceOrderNote, Object modifiedDate) {
+					CommerceOrderNote commerceOrderNote,
+					Object modifiedDateObject) {
 
-					commerceOrderNote.setModifiedDate((Date)modifiedDate);
+					commerceOrderNote.setModifiedDate((Date)modifiedDateObject);
 				}
 
 			});
@@ -520,9 +524,10 @@ public class CommerceOrderNoteModelImpl
 				@Override
 				public void accept(
 					CommerceOrderNote commerceOrderNote,
-					Object commerceOrderId) {
+					Object commerceOrderIdObject) {
 
-					commerceOrderNote.setCommerceOrderId((Long)commerceOrderId);
+					commerceOrderNote.setCommerceOrderId(
+						(Long)commerceOrderIdObject);
 				}
 
 			});
@@ -542,9 +547,9 @@ public class CommerceOrderNoteModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrderNote commerceOrderNote, Object content) {
+					CommerceOrderNote commerceOrderNote, Object contentObject) {
 
-					commerceOrderNote.setContent((String)content);
+					commerceOrderNote.setContent((String)contentObject);
 				}
 
 			});
@@ -564,9 +569,10 @@ public class CommerceOrderNoteModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrderNote commerceOrderNote, Object restricted) {
+					CommerceOrderNote commerceOrderNote,
+					Object restrictedObject) {
 
-					commerceOrderNote.setRestricted((Boolean)restricted);
+					commerceOrderNote.setRestricted((Boolean)restrictedObject);
 				}
 
 			});

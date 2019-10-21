@@ -351,10 +351,10 @@ public class CommerceAddressRestrictionModelImpl
 				@Override
 				public void accept(
 					CommerceAddressRestriction commerceAddressRestriction,
-					Object commerceAddressRestrictionId) {
+					Object commerceAddressRestrictionIdObject) {
 
 					commerceAddressRestriction.setCommerceAddressRestrictionId(
-						(Long)commerceAddressRestrictionId);
+						(Long)commerceAddressRestrictionIdObject);
 				}
 
 			});
@@ -377,9 +377,9 @@ public class CommerceAddressRestrictionModelImpl
 				@Override
 				public void accept(
 					CommerceAddressRestriction commerceAddressRestriction,
-					Object groupId) {
+					Object groupIdObject) {
 
-					commerceAddressRestriction.setGroupId((Long)groupId);
+					commerceAddressRestriction.setGroupId((Long)groupIdObject);
 				}
 
 			});
@@ -402,9 +402,10 @@ public class CommerceAddressRestrictionModelImpl
 				@Override
 				public void accept(
 					CommerceAddressRestriction commerceAddressRestriction,
-					Object companyId) {
+					Object companyIdObject) {
 
-					commerceAddressRestriction.setCompanyId((Long)companyId);
+					commerceAddressRestriction.setCompanyId(
+						(Long)companyIdObject);
 				}
 
 			});
@@ -427,9 +428,9 @@ public class CommerceAddressRestrictionModelImpl
 				@Override
 				public void accept(
 					CommerceAddressRestriction commerceAddressRestriction,
-					Object userId) {
+					Object userIdObject) {
 
-					commerceAddressRestriction.setUserId((Long)userId);
+					commerceAddressRestriction.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -452,9 +453,10 @@ public class CommerceAddressRestrictionModelImpl
 				@Override
 				public void accept(
 					CommerceAddressRestriction commerceAddressRestriction,
-					Object userName) {
+					Object userNameObject) {
 
-					commerceAddressRestriction.setUserName((String)userName);
+					commerceAddressRestriction.setUserName(
+						(String)userNameObject);
 				}
 
 			});
@@ -477,9 +479,10 @@ public class CommerceAddressRestrictionModelImpl
 				@Override
 				public void accept(
 					CommerceAddressRestriction commerceAddressRestriction,
-					Object createDate) {
+					Object createDateObject) {
 
-					commerceAddressRestriction.setCreateDate((Date)createDate);
+					commerceAddressRestriction.setCreateDate(
+						(Date)createDateObject);
 				}
 
 			});
@@ -502,10 +505,10 @@ public class CommerceAddressRestrictionModelImpl
 				@Override
 				public void accept(
 					CommerceAddressRestriction commerceAddressRestriction,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
 					commerceAddressRestriction.setModifiedDate(
-						(Date)modifiedDate);
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -528,10 +531,10 @@ public class CommerceAddressRestrictionModelImpl
 				@Override
 				public void accept(
 					CommerceAddressRestriction commerceAddressRestriction,
-					Object classNameId) {
+					Object classNameIdObject) {
 
 					commerceAddressRestriction.setClassNameId(
-						(Long)classNameId);
+						(Long)classNameIdObject);
 				}
 
 			});
@@ -554,9 +557,9 @@ public class CommerceAddressRestrictionModelImpl
 				@Override
 				public void accept(
 					CommerceAddressRestriction commerceAddressRestriction,
-					Object classPK) {
+					Object classPKObject) {
 
-					commerceAddressRestriction.setClassPK((Long)classPK);
+					commerceAddressRestriction.setClassPK((Long)classPKObject);
 				}
 
 			});
@@ -579,10 +582,10 @@ public class CommerceAddressRestrictionModelImpl
 				@Override
 				public void accept(
 					CommerceAddressRestriction commerceAddressRestriction,
-					Object commerceCountryId) {
+					Object commerceCountryIdObject) {
 
 					commerceAddressRestriction.setCommerceCountryId(
-						(Long)commerceCountryId);
+						(Long)commerceCountryIdObject);
 				}
 
 			});

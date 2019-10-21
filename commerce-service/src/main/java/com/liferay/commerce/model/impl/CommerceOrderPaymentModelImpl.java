@@ -281,10 +281,10 @@ public class CommerceOrderPaymentModelImpl
 				@Override
 				public void accept(
 					CommerceOrderPayment commerceOrderPayment,
-					Object commerceOrderPaymentId) {
+					Object commerceOrderPaymentIdObject) {
 
 					commerceOrderPayment.setCommerceOrderPaymentId(
-						(Long)commerceOrderPaymentId);
+						(Long)commerceOrderPaymentIdObject);
 				}
 
 			});
@@ -304,9 +304,10 @@ public class CommerceOrderPaymentModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrderPayment commerceOrderPayment, Object groupId) {
+					CommerceOrderPayment commerceOrderPayment,
+					Object groupIdObject) {
 
-					commerceOrderPayment.setGroupId((Long)groupId);
+					commerceOrderPayment.setGroupId((Long)groupIdObject);
 				}
 
 			});
@@ -327,9 +328,9 @@ public class CommerceOrderPaymentModelImpl
 				@Override
 				public void accept(
 					CommerceOrderPayment commerceOrderPayment,
-					Object companyId) {
+					Object companyIdObject) {
 
-					commerceOrderPayment.setCompanyId((Long)companyId);
+					commerceOrderPayment.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -349,9 +350,10 @@ public class CommerceOrderPaymentModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrderPayment commerceOrderPayment, Object userId) {
+					CommerceOrderPayment commerceOrderPayment,
+					Object userIdObject) {
 
-					commerceOrderPayment.setUserId((Long)userId);
+					commerceOrderPayment.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -372,9 +374,9 @@ public class CommerceOrderPaymentModelImpl
 				@Override
 				public void accept(
 					CommerceOrderPayment commerceOrderPayment,
-					Object userName) {
+					Object userNameObject) {
 
-					commerceOrderPayment.setUserName((String)userName);
+					commerceOrderPayment.setUserName((String)userNameObject);
 				}
 
 			});
@@ -395,9 +397,9 @@ public class CommerceOrderPaymentModelImpl
 				@Override
 				public void accept(
 					CommerceOrderPayment commerceOrderPayment,
-					Object createDate) {
+					Object createDateObject) {
 
-					commerceOrderPayment.setCreateDate((Date)createDate);
+					commerceOrderPayment.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -418,9 +420,10 @@ public class CommerceOrderPaymentModelImpl
 				@Override
 				public void accept(
 					CommerceOrderPayment commerceOrderPayment,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
-					commerceOrderPayment.setModifiedDate((Date)modifiedDate);
+					commerceOrderPayment.setModifiedDate(
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -441,10 +444,10 @@ public class CommerceOrderPaymentModelImpl
 				@Override
 				public void accept(
 					CommerceOrderPayment commerceOrderPayment,
-					Object commerceOrderId) {
+					Object commerceOrderIdObject) {
 
 					commerceOrderPayment.setCommerceOrderId(
-						(Long)commerceOrderId);
+						(Long)commerceOrderIdObject);
 				}
 
 			});
@@ -465,10 +468,10 @@ public class CommerceOrderPaymentModelImpl
 				@Override
 				public void accept(
 					CommerceOrderPayment commerceOrderPayment,
-					Object commercePaymentMethodKey) {
+					Object commercePaymentMethodKeyObject) {
 
 					commerceOrderPayment.setCommercePaymentMethodKey(
-						(String)commercePaymentMethodKey);
+						(String)commercePaymentMethodKeyObject);
 				}
 
 			});
@@ -488,9 +491,10 @@ public class CommerceOrderPaymentModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrderPayment commerceOrderPayment, Object content) {
+					CommerceOrderPayment commerceOrderPayment,
+					Object contentObject) {
 
-					commerceOrderPayment.setContent((String)content);
+					commerceOrderPayment.setContent((String)contentObject);
 				}
 
 			});
@@ -510,9 +514,10 @@ public class CommerceOrderPaymentModelImpl
 
 				@Override
 				public void accept(
-					CommerceOrderPayment commerceOrderPayment, Object status) {
+					CommerceOrderPayment commerceOrderPayment,
+					Object statusObject) {
 
-					commerceOrderPayment.setStatus((Integer)status);
+					commerceOrderPayment.setStatus((Integer)statusObject);
 				}
 
 			});
