@@ -14,19 +14,6 @@
 
 package com.liferay.headless.commerce.admin.account.internal.resource.v1_0;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import javax.validation.constraints.NotNull;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
-
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
-import org.osgi.service.component.annotations.ServiceScope;
-
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.exception.NoSuchAccountException;
 import com.liferay.commerce.account.exception.NoSuchAccountGroupException;
@@ -72,6 +59,21 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.vulcan.multipart.MultipartBody;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
+
+import java.io.IOException;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import javax.validation.constraints.NotNull;
+
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.Response;
+
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
+import org.osgi.service.component.annotations.ServiceScope;
 
 /**
  * @author Alessio Antonio Rendina
@@ -583,6 +585,10 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 	}
 
 	@Reference
+	private CommerceAccountGroupCommerceAccountRelService
+		_commerceAccountGroupCommerceAccountRelService;
+
+	@Reference
 	private CommerceAccountGroupRelService _commerceAccountGroupRelService;
 
 	@Reference
@@ -592,10 +598,6 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 	private CommerceAccountOrganizationRelService
 		_commerceAccountOrganizationRelService;
 
-	@Reference
-	private CommerceAccountGroupCommerceAccountRelService
-		_commerceAccountGroupCommerceAccountRelService;
-	
 	@Reference
 	private CommerceAccountService _commerceAccountService;
 

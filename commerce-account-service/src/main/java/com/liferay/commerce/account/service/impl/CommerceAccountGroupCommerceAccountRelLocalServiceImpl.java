@@ -62,7 +62,7 @@ public class CommerceAccountGroupCommerceAccountRelLocalServiceImpl
 
 		if (commerceAccountGroupCommerceAccountRel2 != null) {
 			throw new DuplicateCommerceAccountGroupCommerceAccountRelException(
-				"Account already associated to AccountGroup ");
+				"Account already associated to AccountGroup");
 		}
 
 		long commerceAccountGroupCommerceAccountRelId =
