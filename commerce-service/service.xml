@@ -814,6 +814,7 @@
 		<exception>CommerceCountryTwoLettersISOCode</exception>
 		<exception>CommerceGeocoder</exception>
 		<exception>CommerceOrderBillingAddress</exception>
+		<exception>CommerceOrderDate</exception>
 		<exception>CommerceOrderItemRequestedDeliveryDate</exception>
 		<exception>CommerceOrderNoteContent</exception>
 		<exception>CommerceOrderPaymentMethod</exception>

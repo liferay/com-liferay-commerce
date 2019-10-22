@@ -26,6 +26,7 @@ import com.liferay.commerce.discount.CommerceDiscountValue;
 import com.liferay.commerce.discount.exception.CommerceDiscountCouponCodeException;
 import com.liferay.commerce.discount.service.CommerceDiscountLocalService;
 import com.liferay.commerce.exception.CommerceOrderBillingAddressException;
+import com.liferay.commerce.exception.CommerceOrderDateException;
 import com.liferay.commerce.exception.CommerceOrderPurchaseOrderNumberException;
 import com.liferay.commerce.exception.CommerceOrderRequestedDeliveryDateException;
 import com.liferay.commerce.exception.CommerceOrderShippingAddressException;
@@ -1212,6 +1213,29 @@ public class CommerceOrderLocalServiceImpl
 
 		commerceOrder.setPrintedNote(printedNote);
 		commerceOrder.setRequestedDeliveryDate(requestedDeliveryDate);
+
+		return commerceOrderPersistence.update(commerceOrder);
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CommerceOrder updateOrderDate(
+			long commerceOrderId, int orderDateMonth, int orderDateDay,
+			int orderDateYear, int orderDateHour, int orderDateMinute,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		User user = userLocalService.getUser(serviceContext.getUserId());
+
+		CommerceOrder commerceOrder = commerceOrderPersistence.findByPrimaryKey(
+			commerceOrderId);
+
+		Date orderDate = PortalUtil.getDate(
+			orderDateMonth, orderDateDay, orderDateYear, orderDateHour,
+			orderDateMinute, user.getTimeZone(),
+			CommerceOrderDateException.class);
+
+		commerceOrder.setOrderDate(orderDate);
 
 		return commerceOrderPersistence.update(commerceOrder);
 	}
