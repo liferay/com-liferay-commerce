@@ -197,5 +197,6 @@
 		<exception>CommerceInventoryWarehouseActive</exception>
 		<exception>CommerceInventoryWarehouseItemQuantity</exception>
 		<exception>CommerceInventoryWarehouseName</exception>
+		<exception>DuplicateCommerceInventoryWarehouseItem</exception>
 	</exceptions>
 </service-builder>
