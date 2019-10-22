@@ -275,8 +275,8 @@ public class CommerceAccountResource {
 
 		List<CommerceAccount> userCommerceAccounts =
 			_commerceAccountService.getUserCommerceAccounts(
-				userId, parentAccountId, commerceSiteType, keywords, start,
-				end);
+				userId, parentAccountId, commerceSiteType, keywords, true,
+				start, end);
 
 		for (CommerceAccount commerceAccount : userCommerceAccounts) {
 			accounts.add(
