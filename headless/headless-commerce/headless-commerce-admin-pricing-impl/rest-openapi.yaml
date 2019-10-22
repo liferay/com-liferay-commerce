@@ -6,7 +6,8 @@ components:
             name: externalReferenceCode
             required: true
             schema:
-                description: The resource external reference code
+                description:
+                    The resource external reference code
                 example: AB-34098-789-N
                 minLength: 1
                 type: string
@@ -17,7 +18,8 @@ components:
             name: id
             required: true
             schema:
-                description: The resource Id
+                description:
+                    The resource Id
                 example: 30130
                 format: int64
                 minimum: 0
@@ -48,7 +50,8 @@ components:
                 application/xml:
                     schema:
                         $ref: '#/components/schemas/Error'
-            description: The specified resource was not found
+            description:
+                The specified resource was not found
         UnauthorizedError:
             content:
                 application/json:
@@ -57,7 +60,8 @@ components:
                 application/xml:
                     schema:
                         $ref: '#/components/schemas/Error'
-            description: Authentication information is missing or invalid
+            description:
+                Authentication information is missing or invalid
     schemas:
         Discount:
             properties:
@@ -259,7 +263,8 @@ components:
         Error:
             properties:
                 errorCode:
-                    description: Internal error code mapping
+                    description:
+                        Internal error code mapping
                     example: 996
                     readOnly: true
                     type: integer
@@ -274,7 +279,8 @@ components:
                     readOnly: true
                     type: string
                 status:
-                    description: HTTP Status code
+                    description:
+                        HTTP Status code
                     example: 404
                     readOnly: true
                     type: integer
@@ -476,7 +482,8 @@ info:
     contact:
         email: team-commerce@liferay.com
         name: Commerce Team
-    description: Liferay Commerce Admin Pricing API
+    description:
+        Liferay Commerce Admin Pricing API
     title: Liferay Commerce Admin Pricing API
     version: v1.0
 openapi: 3.0.0
@@ -490,7 +497,8 @@ paths:
                   name: externalReferenceCode
                   required: true
                   schema:
-                      description: The resource external reference code
+                      description:
+                          The resource external reference code
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
@@ -522,9 +530,11 @@ paths:
                                 items:
                                     $ref: '#/components/schemas/DiscountRule'
                                 type: array
-                    description: Successful operation
+                    description:
+                        Successful operation
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -533,7 +543,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -542,7 +553,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -551,7 +563,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -568,7 +581,8 @@ paths:
                   name: externalReferenceCode
                   required: true
                   schema:
-                      description: The resource external reference code
+                      description:
+                          The resource external reference code
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
@@ -591,13 +605,17 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/DiscountRule'
-                    description: Created
+                    description:
+                        Created
                 202:
-                    description: Async
+                    description:
+                        Async
                 204:
-                    description: Updated
+                    description:
+                        Updated
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -606,7 +624,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -615,7 +634,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -624,7 +644,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -642,7 +663,8 @@ paths:
                   name: id
                   required: true
                   schema:
-                      description: The resource Id
+                      description:
+                          The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
@@ -650,7 +672,8 @@ paths:
                   style: simple
             responses:
                 204:
-                    description: No content
+                    description:
+                        No content
                 401:
                     content:
                         application/json:
@@ -659,7 +682,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -677,7 +701,8 @@ paths:
                   name: id
                   required: true
                   schema:
-                      description: The resource Id
+                      description:
+                          The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
@@ -685,7 +710,8 @@ paths:
                   style: simple
             responses:
                 204:
-                    description: No content
+                    description:
+                        No content
                 401:
                     content:
                         application/json:
@@ -694,7 +720,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -712,7 +739,8 @@ paths:
                   name: id
                   required: true
                   schema:
-                      description: The resource Id
+                      description:
+                          The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
@@ -720,7 +748,8 @@ paths:
                   style: simple
             responses:
                 204:
-                    description: No content
+                    description:
+                        No content
                 401:
                     content:
                         application/json:
@@ -729,7 +758,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -747,7 +777,8 @@ paths:
                   name: id
                   required: true
                   schema:
-                      description: The resource Id
+                      description:
+                          The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
@@ -755,7 +786,8 @@ paths:
                   style: simple
             responses:
                 204:
-                    description: No content
+                    description:
+                        No content
                 401:
                     content:
                         application/json:
@@ -764,7 +796,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -781,7 +814,8 @@ paths:
                   name: id
                   required: true
                   schema:
-                      description: The resource Id
+                      description:
+                          The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
@@ -796,9 +830,11 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/DiscountRule'
-                    description: Successful operation
+                    description:
+                        Successful operation
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -807,7 +843,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -816,7 +853,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -825,7 +863,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -842,7 +881,8 @@ paths:
                   name: id
                   required: true
                   schema:
-                      description: The resource Id
+                      description:
+                          The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
@@ -859,11 +899,14 @@ paths:
                 required: true
             responses:
                 201:
-                    description: Created
+                    description:
+                        Created
                 202:
-                    description: Async
+                    description:
+                        Async
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -872,7 +915,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -881,7 +925,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -890,7 +935,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -930,7 +976,8 @@ paths:
                                 items:
                                     $ref: '#/components/schemas/Discount'
                                 type: array
-                    description: Successful operation
+                    description:
+                        Successful operation
                 401:
                     content:
                         application/json:
@@ -939,7 +986,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -948,7 +996,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -957,7 +1006,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -986,13 +1036,17 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Discount'
-                    description: Created
+                    description:
+                        Created
                 202:
-                    description: Async
+                    description:
+                        Async
                 204:
-                    description: Updated
+                    description:
+                        Updated
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -1001,7 +1055,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -1010,7 +1065,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -1019,7 +1075,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -1037,7 +1094,8 @@ paths:
                   name: externalReferenceCode
                   required: true
                   schema:
-                      description: The resource external reference code
+                      description:
+                          The resource external reference code
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
@@ -1069,7 +1127,8 @@ paths:
                                 items:
                                     $ref: '#/components/schemas/DiscountAccountGroup'
                                 type: array
-                    description: Successful operation
+                    description:
+                        Successful operation
                 401:
                     content:
                         application/json:
@@ -1078,7 +1137,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -1087,7 +1147,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -1096,7 +1157,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -1113,7 +1175,8 @@ paths:
                   name: externalReferenceCode
                   required: true
                   schema:
-                      description: The resource external reference code
+                      description:
+                          The resource external reference code
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
@@ -1136,13 +1199,17 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/DiscountAccountGroup'
-                    description: Created
+                    description:
+                        Created
                 202:
-                    description: Async
+                    description:
+                        Async
                 204:
-                    description: Updated
+                    description:
+                        Updated
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -1151,7 +1218,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -1160,7 +1228,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -1169,7 +1238,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -1187,7 +1257,8 @@ paths:
                   name: externalReferenceCode
                   required: true
                   schema:
-                      description: The resource external reference code
+                      description:
+                          The resource external reference code
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
@@ -1219,7 +1290,8 @@ paths:
                                 items:
                                     $ref: '#/components/schemas/DiscountCategory'
                                 type: array
-                    description: Successful operation
+                    description:
+                        Successful operation
                 401:
                     content:
                         application/json:
@@ -1228,7 +1300,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -1237,7 +1310,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -1246,7 +1320,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -1263,7 +1338,8 @@ paths:
                   name: externalReferenceCode
                   required: true
                   schema:
-                      description: The resource external reference code
+                      description:
+                          The resource external reference code
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
@@ -1286,13 +1362,17 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/DiscountCategory'
-                    description: Created
+                    description:
+                        Created
                 202:
-                    description: Async
+                    description:
+                        Async
                 204:
-                    description: Updated
+                    description:
+                        Updated
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -1301,7 +1381,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -1310,7 +1391,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -1319,7 +1401,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -1337,7 +1420,8 @@ paths:
                   name: externalReferenceCode
                   required: true
                   schema:
-                      description: The resource external reference code
+                      description:
+                          The resource external reference code
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
@@ -1369,7 +1453,8 @@ paths:
                                 items:
                                     $ref: '#/components/schemas/DiscountProduct'
                                 type: array
-                    description: Successful operation
+                    description:
+                        Successful operation
                 401:
                     content:
                         application/json:
@@ -1378,7 +1463,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -1387,7 +1473,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -1396,7 +1483,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -1413,7 +1501,8 @@ paths:
                   name: externalReferenceCode
                   required: true
                   schema:
-                      description: The resource external reference code
+                      description:
+                          The resource external reference code
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
@@ -1436,13 +1525,17 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/DiscountProduct'
-                    description: Created
+                    description:
+                        Created
                 202:
-                    description: Async
+                    description:
+                        Async
                 204:
-                    description: Updated
+                    description:
+                        Updated
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -1451,7 +1544,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -1460,7 +1554,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -1469,7 +1564,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -1487,14 +1583,16 @@ paths:
                   name: externalReferenceCode
                   required: true
                   schema:
-                      description: The resource external reference code
+                      description:
+                          The resource external reference code
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
                   style: simple
             responses:
                 204:
-                    description: No content
+                    description:
+                        No content
                 401:
                     content:
                         application/json:
@@ -1503,7 +1601,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -1520,7 +1619,8 @@ paths:
                   name: externalReferenceCode
                   required: true
                   schema:
-                      description: The resource external reference code
+                      description:
+                          The resource external reference code
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
@@ -1534,9 +1634,11 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Discount'
-                    description: Successful operation
+                    description:
+                        Successful operation
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -1545,7 +1647,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -1554,7 +1657,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -1563,7 +1667,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -1580,7 +1685,8 @@ paths:
                   name: externalReferenceCode
                   required: true
                   schema:
-                      description: The resource external reference code
+                      description:
+                          The resource external reference code
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
@@ -1596,11 +1702,14 @@ paths:
                 required: true
             responses:
                 202:
-                    description: Async
+                    description:
+                        Async
                 204:
-                    description: Updated
+                    description:
+                        Updated
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -1609,7 +1718,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -1618,7 +1728,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -1627,7 +1738,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -1645,7 +1757,8 @@ paths:
                   name: id
                   required: true
                   schema:
-                      description: The resource Id
+                      description:
+                          The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
@@ -1678,7 +1791,8 @@ paths:
                                 items:
                                     $ref: '#/components/schemas/DiscountAccountGroup'
                                 type: array
-                    description: Successful operation
+                    description:
+                        Successful operation
                 401:
                     content:
                         application/json:
@@ -1687,7 +1801,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -1696,7 +1811,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -1705,7 +1821,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -1722,7 +1839,8 @@ paths:
                   name: id
                   required: true
                   schema:
-                      description: The resource Id
+                      description:
+                          The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
@@ -1746,13 +1864,17 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/DiscountAccountGroup'
-                    description: Created
+                    description:
+                        Created
                 202:
-                    description: Async
+                    description:
+                        Async
                 204:
-                    description: Updated
+                    description:
+                        Updated
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -1761,7 +1883,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -1770,7 +1893,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -1779,7 +1903,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -1797,7 +1922,8 @@ paths:
                   name: id
                   required: true
                   schema:
-                      description: The resource Id
+                      description:
+                          The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
@@ -1830,7 +1956,8 @@ paths:
                                 items:
                                     $ref: '#/components/schemas/DiscountCategory'
                                 type: array
-                    description: Successful operation
+                    description:
+                        Successful operation
                 401:
                     content:
                         application/json:
@@ -1839,7 +1966,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -1848,7 +1976,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -1857,7 +1986,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -1874,7 +2004,8 @@ paths:
                   name: id
                   required: true
                   schema:
-                      description: The resource Id
+                      description:
+                          The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
@@ -1898,13 +2029,17 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/DiscountCategory'
-                    description: Created
+                    description:
+                        Created
                 202:
-                    description: Async
+                    description:
+                        Async
                 204:
-                    description: Updated
+                    description:
+                        Updated
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -1913,7 +2048,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -1922,7 +2058,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -1931,7 +2068,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -1949,7 +2087,8 @@ paths:
                   name: id
                   required: true
                   schema:
-                      description: The resource Id
+                      description:
+                          The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
@@ -1982,7 +2121,8 @@ paths:
                                 items:
                                     $ref: '#/components/schemas/DiscountProduct'
                                 type: array
-                    description: Successful operation
+                    description:
+                        Successful operation
                 401:
                     content:
                         application/json:
@@ -1991,7 +2131,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -2000,7 +2141,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -2009,7 +2151,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -2026,7 +2169,8 @@ paths:
                   name: id
                   required: true
                   schema:
-                      description: The resource Id
+                      description:
+                          The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
@@ -2050,13 +2194,17 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/DiscountProduct'
-                    description: Created
+                    description:
+                        Created
                 202:
-                    description: Async
+                    description:
+                        Async
                 204:
-                    description: Updated
+                    description:
+                        Updated
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -2065,7 +2213,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -2074,7 +2223,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -2083,7 +2233,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -2101,7 +2252,8 @@ paths:
                   name: id
                   required: true
                   schema:
-                      description: The resource Id
+                      description:
+                          The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
@@ -2134,9 +2286,11 @@ paths:
                                 items:
                                     $ref: '#/components/schemas/DiscountRule'
                                 type: array
-                    description: Successful operation
+                    description:
+                        Successful operation
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -2145,7 +2299,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -2154,7 +2309,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -2163,7 +2319,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -2180,7 +2337,8 @@ paths:
                   name: id
                   required: true
                   schema:
-                      description: The resource Id
+                      description:
+                          The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
@@ -2204,13 +2362,17 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/DiscountRule'
-                    description: Created
+                    description:
+                        Created
                 202:
-                    description: Async
+                    description:
+                        Async
                 204:
-                    description: Updated
+                    description:
+                        Updated
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -2219,7 +2381,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -2228,7 +2391,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -2237,7 +2401,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -2255,7 +2420,8 @@ paths:
                   name: id
                   required: true
                   schema:
-                      description: The resource Id
+                      description:
+                          The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
@@ -2263,7 +2429,8 @@ paths:
                   style: simple
             responses:
                 204:
-                    description: No content
+                    description:
+                        No content
                 401:
                     content:
                         application/json:
@@ -2272,7 +2439,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -2289,7 +2457,8 @@ paths:
                   name: id
                   required: true
                   schema:
-                      description: The resource Id
+                      description:
+                          The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
@@ -2304,9 +2473,11 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Discount'
-                    description: Successful operation
+                    description:
+                        Successful operation
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -2315,7 +2486,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -2324,7 +2496,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -2333,7 +2506,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -2350,7 +2524,8 @@ paths:
                   name: id
                   required: true
                   schema:
-                      description: The resource Id
+                      description:
+                          The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
@@ -2367,11 +2542,14 @@ paths:
                 required: true
             responses:
                 202:
-                    description: Async
+                    description:
+                        Async
                 204:
-                    description: Updated
+                    description:
+                        Updated
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -2380,7 +2558,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -2389,7 +2568,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -2398,7 +2578,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -2416,7 +2597,8 @@ paths:
                   name: externalReferenceCode
                   required: true
                   schema:
-                      description: The resource external reference code
+                      description:
+                          The resource external reference code
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
@@ -2448,9 +2630,11 @@ paths:
                                 items:
                                     $ref: '#/components/schemas/TierPrice'
                                 type: array
-                    description: Successful operation
+                    description:
+                        Successful operation
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -2459,7 +2643,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -2468,7 +2653,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -2477,7 +2663,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -2494,7 +2681,8 @@ paths:
                   name: externalReferenceCode
                   required: true
                   schema:
-                      description: The resource external reference code
+                      description:
+                          The resource external reference code
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
@@ -2517,13 +2705,17 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/TierPrice'
-                    description: Created
+                    description:
+                        Created
                 202:
-                    description: Async
+                    description:
+                        Async
                 204:
-                    description: Updated
+                    description:
+                        Updated
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -2532,7 +2724,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -2541,7 +2734,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -2550,7 +2744,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -2568,14 +2763,16 @@ paths:
                   name: externalReferenceCode
                   required: true
                   schema:
-                      description: The resource external reference code
+                      description:
+                          The resource external reference code
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
                   style: simple
             responses:
                 204:
-                    description: No content
+                    description:
+                        No content
                 401:
                     content:
                         application/json:
@@ -2584,7 +2781,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -2601,7 +2799,8 @@ paths:
                   name: externalReferenceCode
                   required: true
                   schema:
-                      description: The resource external reference code
+                      description:
+                          The resource external reference code
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
@@ -2615,9 +2814,11 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/PriceEntry'
-                    description: Successful operation
+                    description:
+                        Successful operation
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -2626,7 +2827,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -2635,7 +2837,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -2644,7 +2847,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -2661,7 +2865,8 @@ paths:
                   name: externalReferenceCode
                   required: true
                   schema:
-                      description: The resource external reference code
+                      description:
+                          The resource external reference code
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
@@ -2677,11 +2882,14 @@ paths:
                 required: true
             responses:
                 202:
-                    description: Async
+                    description:
+                        Async
                 204:
-                    description: Updated
+                    description:
+                        Updated
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -2690,7 +2898,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -2699,7 +2908,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -2708,7 +2918,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -2726,7 +2937,8 @@ paths:
                   name: id
                   required: true
                   schema:
-                      description: The resource Id
+                      description:
+                          The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
@@ -2759,9 +2971,11 @@ paths:
                                 items:
                                     $ref: '#/components/schemas/TierPrice'
                                 type: array
-                    description: Successful operation
+                    description:
+                        Successful operation
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -2770,7 +2984,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -2779,7 +2994,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -2788,7 +3004,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -2805,7 +3022,8 @@ paths:
                   name: id
                   required: true
                   schema:
-                      description: The resource Id
+                      description:
+                          The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
@@ -2829,13 +3047,17 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/TierPrice'
-                    description: Created
+                    description:
+                        Created
                 202:
-                    description: Async
+                    description:
+                        Async
                 204:
-                    description: Updated
+                    description:
+                        Updated
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -2844,7 +3066,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -2853,7 +3076,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -2862,7 +3086,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -2880,7 +3105,8 @@ paths:
                   name: id
                   required: true
                   schema:
-                      description: The resource Id
+                      description:
+                          The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
@@ -2888,7 +3114,8 @@ paths:
                   style: simple
             responses:
                 204:
-                    description: No content
+                    description:
+                        No content
                 401:
                     content:
                         application/json:
@@ -2897,7 +3124,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -2914,7 +3142,8 @@ paths:
                   name: id
                   required: true
                   schema:
-                      description: The resource Id
+                      description:
+                          The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
@@ -2929,9 +3158,11 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/PriceEntry'
-                    description: Successful operation
+                    description:
+                        Successful operation
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -2940,7 +3171,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -2949,7 +3181,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -2958,7 +3191,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -2975,7 +3209,8 @@ paths:
                   name: id
                   required: true
                   schema:
-                      description: The resource Id
+                      description:
+                          The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
@@ -2992,11 +3227,14 @@ paths:
                 required: true
             responses:
                 202:
-                    description: Async
+                    description:
+                        Async
                 204:
-                    description: Updated
+                    description:
+                        Updated
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -3005,7 +3243,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -3014,7 +3253,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -3023,7 +3263,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -3041,7 +3282,8 @@ paths:
                   name: id
                   required: true
                   schema:
-                      description: The resource Id
+                      description:
+                          The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
@@ -3049,7 +3291,8 @@ paths:
                   style: simple
             responses:
                 204:
-                    description: No content
+                    description:
+                        No content
                 401:
                     content:
                         application/json:
@@ -3058,7 +3301,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -3098,7 +3342,8 @@ paths:
                                 items:
                                     $ref: '#/components/schemas/PriceList'
                                 type: array
-                    description: Successful operation
+                    description:
+                        Successful operation
                 401:
                     content:
                         application/json:
@@ -3107,7 +3352,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -3116,7 +3362,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -3125,7 +3372,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -3154,13 +3402,17 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/PriceList'
-                    description: Created
+                    description:
+                        Created
                 202:
-                    description: Async
+                    description:
+                        Async
                 204:
-                    description: Updated
+                    description:
+                        Updated
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -3169,7 +3421,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -3178,7 +3431,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -3187,7 +3441,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -3205,7 +3460,8 @@ paths:
                   name: externalReferenceCode
                   required: true
                   schema:
-                      description: The resource external reference code
+                      description:
+                          The resource external reference code
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
@@ -3237,7 +3493,8 @@ paths:
                                 items:
                                     $ref: '#/components/schemas/PriceEntry'
                                 type: array
-                    description: Successful operation
+                    description:
+                        Successful operation
                 401:
                     content:
                         application/json:
@@ -3246,7 +3503,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -3255,7 +3513,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -3264,7 +3523,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -3281,7 +3541,8 @@ paths:
                   name: externalReferenceCode
                   required: true
                   schema:
-                      description: The resource external reference code
+                      description:
+                          The resource external reference code
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
@@ -3304,13 +3565,17 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/PriceEntry'
-                    description: Created
+                    description:
+                        Created
                 202:
-                    description: Async
+                    description:
+                        Async
                 204:
-                    description: Updated
+                    description:
+                        Updated
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -3319,7 +3584,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -3328,7 +3594,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -3337,7 +3604,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -3355,7 +3623,8 @@ paths:
                   name: externalReferenceCode
                   required: true
                   schema:
-                      description: The resource external reference code
+                      description:
+                          The resource external reference code
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
@@ -3387,7 +3656,8 @@ paths:
                                 items:
                                     $ref: '#/components/schemas/PriceListAccountGroup'
                                 type: array
-                    description: Successful operation
+                    description:
+                        Successful operation
                 401:
                     content:
                         application/json:
@@ -3396,7 +3666,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -3405,7 +3676,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -3414,7 +3686,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -3431,7 +3704,8 @@ paths:
                   name: externalReferenceCode
                   required: true
                   schema:
-                      description: The resource external reference code
+                      description:
+                          The resource external reference code
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
@@ -3454,13 +3728,17 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/PriceListAccountGroup'
-                    description: Created
+                    description:
+                        Created
                 202:
-                    description: Async
+                    description:
+                        Async
                 204:
-                    description: Updated
+                    description:
+                        Updated
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -3469,7 +3747,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -3478,7 +3757,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -3487,7 +3767,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -3505,14 +3786,16 @@ paths:
                   name: externalReferenceCode
                   required: true
                   schema:
-                      description: The resource external reference code
+                      description:
+                          The resource external reference code
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
                   style: simple
             responses:
                 204:
-                    description: No content
+                    description:
+                        No content
                 401:
                     content:
                         application/json:
@@ -3521,7 +3804,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -3538,7 +3822,8 @@ paths:
                   name: externalReferenceCode
                   required: true
                   schema:
-                      description: The resource external reference code
+                      description:
+                          The resource external reference code
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
@@ -3552,9 +3837,11 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/PriceList'
-                    description: Successful operation
+                    description:
+                        Successful operation
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -3563,7 +3850,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -3572,7 +3860,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -3581,7 +3870,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -3598,7 +3888,8 @@ paths:
                   name: externalReferenceCode
                   required: true
                   schema:
-                      description: The resource external reference code
+                      description:
+                          The resource external reference code
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
@@ -3614,11 +3905,14 @@ paths:
                 required: true
             responses:
                 201:
-                    description: Created
+                    description:
+                        Created
                 202:
-                    description: Async
+                    description:
+                        Async
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -3627,7 +3921,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -3636,7 +3931,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -3645,7 +3941,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -3663,7 +3960,8 @@ paths:
                   name: id
                   required: true
                   schema:
-                      description: The resource Id
+                      description:
+                          The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
@@ -3696,7 +3994,8 @@ paths:
                                 items:
                                     $ref: '#/components/schemas/PriceEntry'
                                 type: array
-                    description: Successful operation
+                    description:
+                        Successful operation
                 401:
                     content:
                         application/json:
@@ -3705,7 +4004,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -3714,7 +4014,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -3723,7 +4024,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -3740,7 +4042,8 @@ paths:
                   name: id
                   required: true
                   schema:
-                      description: The resource Id
+                      description:
+                          The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
@@ -3764,13 +4067,17 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/PriceEntry'
-                    description: Created
+                    description:
+                        Created
                 202:
-                    description: Async
+                    description:
+                        Async
                 204:
-                    description: Updated
+                    description:
+                        Updated
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -3779,7 +4086,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -3788,7 +4096,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -3797,7 +4106,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -3815,7 +4125,8 @@ paths:
                   name: id
                   required: true
                   schema:
-                      description: The resource Id
+                      description:
+                          The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
@@ -3848,7 +4159,8 @@ paths:
                                 items:
                                     $ref: '#/components/schemas/PriceListAccountGroup'
                                 type: array
-                    description: Successful operation
+                    description:
+                        Successful operation
                 401:
                     content:
                         application/json:
@@ -3857,7 +4169,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -3866,7 +4179,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -3875,7 +4189,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -3892,7 +4207,8 @@ paths:
                   name: id
                   required: true
                   schema:
-                      description: The resource Id
+                      description:
+                          The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
@@ -3916,13 +4232,17 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/PriceListAccountGroup'
-                    description: Created
+                    description:
+                        Created
                 202:
-                    description: Async
+                    description:
+                        Async
                 204:
-                    description: Updated
+                    description:
+                        Updated
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -3931,7 +4251,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -3940,7 +4261,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -3949,7 +4271,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -3967,7 +4290,8 @@ paths:
                   name: id
                   required: true
                   schema:
-                      description: The resource Id
+                      description:
+                          The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
@@ -3975,7 +4299,8 @@ paths:
                   style: simple
             responses:
                 204:
-                    description: No content
+                    description:
+                        No content
                 401:
                     content:
                         application/json:
@@ -3984,7 +4309,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -4001,7 +4327,8 @@ paths:
                   name: id
                   required: true
                   schema:
-                      description: The resource Id
+                      description:
+                          The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
@@ -4016,9 +4343,11 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/PriceList'
-                    description: Successful operation
+                    description:
+                        Successful operation
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -4027,7 +4356,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -4036,7 +4366,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -4045,7 +4376,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -4062,7 +4394,8 @@ paths:
                   name: id
                   required: true
                   schema:
-                      description: The resource Id
+                      description:
+                          The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
@@ -4079,11 +4412,14 @@ paths:
                 required: true
             responses:
                 201:
-                    description: Created
+                    description:
+                        Created
                 202:
-                    description: Async
+                    description:
+                        Async
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -4092,7 +4428,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -4101,7 +4438,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -4110,7 +4448,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -4128,14 +4467,16 @@ paths:
                   name: externalReferenceCode
                   required: true
                   schema:
-                      description: The resource external reference code
+                      description:
+                          The resource external reference code
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
                   style: simple
             responses:
                 204:
-                    description: No content
+                    description:
+                        No content
                 401:
                     content:
                         application/json:
@@ -4144,7 +4485,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -4161,7 +4503,8 @@ paths:
                   name: externalReferenceCode
                   required: true
                   schema:
-                      description: The resource external reference code
+                      description:
+                          The resource external reference code
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
@@ -4175,9 +4518,11 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/TierPrice'
-                    description: Successful operation
+                    description:
+                        Successful operation
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -4186,7 +4531,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -4195,7 +4541,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -4204,7 +4551,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -4221,7 +4569,8 @@ paths:
                   name: externalReferenceCode
                   required: true
                   schema:
-                      description: The resource external reference code
+                      description:
+                          The resource external reference code
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
@@ -4237,11 +4586,14 @@ paths:
                 required: true
             responses:
                 202:
-                    description: Async
+                    description:
+                        Async
                 204:
-                    description: Updated
+                    description:
+                        Updated
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -4250,7 +4602,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -4259,7 +4612,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -4268,7 +4622,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -4286,7 +4641,8 @@ paths:
                   name: id
                   required: true
                   schema:
-                      description: The resource Id
+                      description:
+                          The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
@@ -4294,7 +4650,8 @@ paths:
                   style: simple
             responses:
                 204:
-                    description: No content
+                    description:
+                        No content
                 401:
                     content:
                         application/json:
@@ -4303,7 +4660,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -4320,7 +4678,8 @@ paths:
                   name: id
                   required: true
                   schema:
-                      description: The resource Id
+                      description:
+                          The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
@@ -4335,9 +4694,11 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/TierPrice'
-                    description: Successful operation
+                    description:
+                        Successful operation
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -4346,7 +4707,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -4355,7 +4717,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -4364,7 +4727,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -4381,7 +4745,8 @@ paths:
                   name: id
                   required: true
                   schema:
-                      description: The resource Id
+                      description:
+                          The resource Id
                       example: 30130
                       format: int64
                       minimum: 0
@@ -4398,11 +4763,14 @@ paths:
                 required: true
             responses:
                 202:
-                    description: Async
+                    description:
+                        Async
                 204:
-                    description: Updated
+                    description:
+                        Updated
                 400:
-                    description: Invalid input
+                    description:
+                        Invalid input
                 401:
                     content:
                         application/json:
@@ -4411,7 +4779,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Authentication information is missing or invalid
+                    description:
+                        Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
@@ -4420,7 +4789,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: The specified resource was not found
+                    description:
+                        The specified resource was not found
                 500:
                     content:
                         application/json:
@@ -4429,7 +4799,8 @@ paths:
                         application/xml:
                             schema:
                                 $ref: '#/components/schemas/Error'
-                    description: Unexpected error
+                    description:
+                        Unexpected error
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -4439,7 +4810,8 @@ paths:
             tags:
                 - TierPrice
 servers:
-    - description: Liferay Commerce API server
+    - description:
+          Liferay Commerce API server
       url: https://commerce.{environment}.liferay.com/commerce-admin-pricing/{basePath}
       variables:
           basePath:
@@ -4450,7 +4822,8 @@ servers:
                   - api
                   - api.dev
                   - api.uat
-    - description: Liferay Commerce Local Development (Hosts file)
+    - description:
+          Liferay Commerce Local Development (Hosts file)
       url: '{protocol}://{host}:{port}/o/commerce-admin-pricing/{basePath}'
       variables:
           basePath:
@@ -4468,7 +4841,8 @@ servers:
               enum:
                   - http
                   - https
-    - description: Liferay Commerce Local Development with Ngrok
+    - description:
+          Liferay Commerce Local Development with Ngrok
       url: '{protocol}://{host}.ngrok.io/o/commerce-admin-pricing/{basePath}'
       variables:
           basePath:
@@ -4480,18 +4854,25 @@ servers:
               enum:
                   - http
                   - https
-    - description: SwaggerHub API Auto Mocking
+    - description:
+          SwaggerHub API Auto Mocking
       url: https://virtserver.swaggerhub.com/liferay6/commerce-admin-pricing/v1.0
-    - description: SwaggerHub API Auto Mocking
+    - description:
+          SwaggerHub API Auto Mocking
       url: https://virtserver.swaggerhub.com/liferayinc/commerce-admin-pricing/v1.0
 tags:
-    - description: Operations on Discount Rules
+    - description:
+          Operations on Discount Rules
       name: DiscountRule
-    - description: Operations on Discounts
+    - description:
+          Operations on Discounts
       name: Discount
-    - description: Operations on Price Entries
+    - description:
+          Operations on Price Entries
       name: PriceEntry
-    - description: Operations on Price Lists
+    - description:
+          Operations on Price Lists
       name: PriceList
-    - description: Operations on Tier Prices
+    - description:
+          Operations on Tier Prices
       name: TierPrice
