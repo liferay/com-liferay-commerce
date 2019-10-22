@@ -16,8 +16,8 @@
 
 <%@ include file="/header/init.jsp" %>
 
-<div class="bg-white commerce-header<%= fullWidth ? " container-fluid" : "" %><%= Validator.isNotNull(wrapperCssClasses) ? " " + wrapperCssClasses : "" %>">
-	<div class="container d-flex <%= Validator.isNotNull(cssClasses) ? " " + cssClasses : "" %>">
+<div class="bg-white commerce-header<%= fullWidth ? " container-fluid" : StringPool.BLANK %><%= Validator.isNotNull(wrapperCssClasses) ? StringPool.SPACE + wrapperCssClasses : StringPool.BLANK %>">
+	<div class="container d-flex <%= Validator.isNotNull(cssClasses) ? StringPool.SPACE + cssClasses : StringPool.BLANK %>">
 		<div class="align-items-center d-flex flex-grow-1">
 			<c:if test="<%= Validator.isNotNull(thumbnailUrl) %>">
 				<span class="mr-3 sticker sticker-primary sticker-xl">
@@ -58,7 +58,7 @@
 				<c:if test="<%= false %>">
 
 					<%
-					String assignedToWrapperId = randomNamespace + "assigned-to";
+					String assignedToWrapperId = randomNamespace + "assigner";
 					%>
 
 					<div id="<%= assignedToWrapperId %>"></div>
