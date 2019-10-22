@@ -26,6 +26,8 @@ import com.liferay.commerce.inventory.model.CommerceInventoryBookedQuantity;
 import com.liferay.commerce.inventory.service.CommerceInventoryBookedQuantityLocalService;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
+import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.base.CommerceOrderServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
@@ -824,8 +826,12 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 				getPermissionChecker(),
 				CommerceAccountActionKeys.MANAGE_ALL_ACCOUNTS)) {
 
+			CommerceChannel commerceChannel =
+				_commerceChannelLocalService.getCommerceChannelByOrderGroupId(
+					groupId);
+
 			return _commerceAccountHelper.getUserCommerceAccountIds(
-				getUserId(), groupId);
+				getUserId(), commerceChannel.getSiteGroupId());
 		}
 
 		return null;
@@ -847,6 +853,9 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 
 	@ServiceReference(type = CommerceAccountLocalService.class)
 	private CommerceAccountLocalService _commerceAccountLocalService;
+
+	@ServiceReference(type = CommerceChannelLocalService.class)
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@ServiceReference(type = CommerceInventoryBookedQuantityLocalService.class)
 	private CommerceInventoryBookedQuantityLocalService
