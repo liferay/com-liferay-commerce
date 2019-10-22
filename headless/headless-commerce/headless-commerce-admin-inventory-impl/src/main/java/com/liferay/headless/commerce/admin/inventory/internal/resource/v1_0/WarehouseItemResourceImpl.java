@@ -251,10 +251,10 @@ public class WarehouseItemResourceImpl extends BaseWarehouseItemResourceImpl {
 					_user.getCompanyId(),
 					warehouseItem.getWarehouseExternalReferenceCode());
 		}
-		
+
 		if (commerceInventoryWarehouse == null) {
 			throw new NoSuchInventoryWarehouseException(
-					"Unable to find Warehouse");
+				"Unable to find Warehouse");
 		}
 
 		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
