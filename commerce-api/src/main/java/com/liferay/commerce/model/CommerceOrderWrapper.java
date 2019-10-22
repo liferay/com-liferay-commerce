@@ -125,6 +125,7 @@ public class CommerceOrderWrapper
 			getTotalDiscountPercentageLevel4());
 		attributes.put("advanceStatus", getAdvanceStatus());
 		attributes.put("paymentStatus", getPaymentStatus());
+		attributes.put("orderDate", getOrderDate());
 		attributes.put("orderStatus", getOrderStatus());
 		attributes.put("printedNote", getPrintedNote());
 		attributes.put("requestedDeliveryDate", getRequestedDeliveryDate());
@@ -413,6 +414,12 @@ public class CommerceOrderWrapper
 			setPaymentStatus(paymentStatus);
 		}
 
+		Date orderDate = (Date)attributes.get("orderDate");
+
+		if (orderDate != null) {
+			setOrderDate(orderDate);
+		}
+
 		Integer orderStatus = (Integer)attributes.get("orderStatus");
 
 		if (orderStatus != null) {
@@ -664,6 +671,16 @@ public class CommerceOrderWrapper
 	@Override
 	public Date getModifiedDate() {
 		return _commerceOrder.getModifiedDate();
+	}
+
+	/**
+	 * Returns the order date of this commerce order.
+	 *
+	 * @return the order date of this commerce order
+	 */
+	@Override
+	public Date getOrderDate() {
+		return _commerceOrder.getOrderDate();
 	}
 
 	/**
@@ -1385,6 +1402,16 @@ public class CommerceOrderWrapper
 	@Override
 	public void setNew(boolean n) {
 		_commerceOrder.setNew(n);
+	}
+
+	/**
+	 * Sets the order date of this commerce order.
+	 *
+	 * @param orderDate the order date of this commerce order
+	 */
+	@Override
+	public void setOrderDate(Date orderDate) {
+		_commerceOrder.setOrderDate(orderDate);
 	}
 
 	/**

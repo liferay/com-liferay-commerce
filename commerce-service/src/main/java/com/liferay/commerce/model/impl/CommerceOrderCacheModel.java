@@ -64,7 +64,7 @@ public class CommerceOrderCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(97);
+		StringBundler sb = new StringBundler(99);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -148,6 +148,8 @@ public class CommerceOrderCacheModel
 		sb.append(advanceStatus);
 		sb.append(", paymentStatus=");
 		sb.append(paymentStatus);
+		sb.append(", orderDate=");
+		sb.append(orderDate);
 		sb.append(", orderStatus=");
 		sb.append(orderStatus);
 		sb.append(", printedNote=");
@@ -302,6 +304,14 @@ public class CommerceOrderCacheModel
 		}
 
 		commerceOrderImpl.setPaymentStatus(paymentStatus);
+
+		if (orderDate == Long.MIN_VALUE) {
+			commerceOrderImpl.setOrderDate(null);
+		}
+		else {
+			commerceOrderImpl.setOrderDate(new Date(orderDate));
+		}
+
 		commerceOrderImpl.setOrderStatus(orderStatus);
 
 		if (printedNote == null) {
@@ -396,6 +406,7 @@ public class CommerceOrderCacheModel
 		advanceStatus = objectInput.readUTF();
 
 		paymentStatus = objectInput.readInt();
+		orderDate = objectInput.readLong();
 
 		orderStatus = objectInput.readInt();
 		printedNote = objectInput.readUTF();
@@ -516,6 +527,7 @@ public class CommerceOrderCacheModel
 		}
 
 		objectOutput.writeInt(paymentStatus);
+		objectOutput.writeLong(orderDate);
 
 		objectOutput.writeInt(orderStatus);
 
@@ -583,6 +595,7 @@ public class CommerceOrderCacheModel
 	public BigDecimal totalDiscountPercentageLevel4;
 	public String advanceStatus;
 	public int paymentStatus;
+	public long orderDate;
 	public int orderStatus;
 	public String printedNote;
 	public long requestedDeliveryDate;
