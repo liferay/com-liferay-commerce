@@ -357,18 +357,18 @@ public class CommerceOrderContentDisplayContext {
 
 		DropdownItem headerDropdownItem = new DropdownItem();
 
-		headerDropdownItem.setLabel("First link");
 		headerDropdownItem.setHref("/first-link");
 		headerDropdownItem.setIcon("home");
+		headerDropdownItem.setLabel("First link");
 
 		headerDropdownItems.add(headerDropdownItem);
 
 		DropdownItem headerDropdownItem2 = new DropdownItem();
 
-		headerDropdownItem2.setLabel("Second link");
+		headerDropdownItem2.setActive(true);
 		headerDropdownItem2.setIcon("blogs");
 		headerDropdownItem2.setHref("/second-link");
-		headerDropdownItem2.setActive(true);
+		headerDropdownItem2.setLabel("Second link");
 
 		headerDropdownItems.add(headerDropdownItem2);
 

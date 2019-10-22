@@ -69,7 +69,7 @@ boolean manageRestrictedNotesPermission = commerceOrderContentDisplayContext.has
 							</c:if>
 
 							<aui:button-row>
-								<aui:button cssClass="commerce-button" type="submit" />
+								<aui:button cssClass="btn btn-primary" type="submit" />
 							</aui:button-row>
 						</div>
 					</div>

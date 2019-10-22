@@ -34,7 +34,6 @@
 @import "./components/commerce-search.scss";
 @import "./components/commerce-small-table.scss";
 @import "./components/commerce-suggestions.scss";
-@import "./components/commerce-thumb-menu.scss";
 @import "./components/commerce-topbar-button.scss";
 @import "./components/commerce-typo.scss";
 
@@ -66,10 +65,12 @@
 @import "./components/price.scss";
 @import "./components/product-compare-checkbox.scss";
 @import "./components/product-detail.scss";
+@import "./components/thumb-menu.scss";
 @import "./components/user-invitation.scss";
 @import "./components/user-item.scss";
 
 @import "./overrides/base.scss";
+@import "./overrides/button.scss";
 @import "./overrides/card.scss";
 @import "./overrides/checkout-page.scss";
 @import "./overrides/input.scss";
