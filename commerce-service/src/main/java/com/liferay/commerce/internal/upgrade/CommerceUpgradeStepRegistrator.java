@@ -29,6 +29,7 @@ import com.liferay.commerce.internal.upgrade.v3_2_0.CommerceRegionUpgradeProcess
 import com.liferay.commerce.internal.upgrade.v4_0_0.CommerceShipmentItemUpgradeProcess;
 import com.liferay.commerce.internal.upgrade.v4_1_0.CommerceAddressUpgradeProcess;
 import com.liferay.commerce.internal.upgrade.v4_2_1.PrintedNoteUpgradeProcess;
+import com.liferay.commerce.internal.upgrade.v4_3_0.CommerceOrderDateUpgradeProcess;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.portal.kernel.log.Log;
@@ -140,6 +141,10 @@ public class CommerceUpgradeStepRegistrator implements UpgradeStepRegistrator {
 			_SCHEMA_VERSION_4_2_0, _SCHEMA_VERSION_4_2_1,
 			new PrintedNoteUpgradeProcess());
 
+		registry.register(
+			_SCHEMA_VERSION_4_2_1, _SCHEMA_VERSION_4_3_0,
+			new CommerceOrderDateUpgradeProcess());
+
 		if (_log.isInfoEnabled()) {
 			_log.info("COMMERCE UPGRADE STEP REGISTRATOR FINISHED");
 		}
@@ -172,6 +177,8 @@ public class CommerceUpgradeStepRegistrator implements UpgradeStepRegistrator {
 	private static final String _SCHEMA_VERSION_4_2_0 = "4.2.0";
 
 	private static final String _SCHEMA_VERSION_4_2_1 = "4.2.1";
+
+	private static final String _SCHEMA_VERSION_4_3_0 = "4.3.0";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceUpgradeStepRegistrator.class);
