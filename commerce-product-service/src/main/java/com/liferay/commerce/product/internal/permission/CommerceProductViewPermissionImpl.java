@@ -141,7 +141,7 @@ public class CommerceProductViewPermissionImpl
 				CPDefinition.class.getName(), cpDefinition.getCPDefinitionId(),
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
-		long[] comerceAccountGroupIds =
+		long[] commerceAccountGroupIds =
 			_commerceAccountHelper.getCommerceAccountGroupIds(
 				commerceAccountId);
 
@@ -149,7 +149,7 @@ public class CommerceProductViewPermissionImpl
 				commerceAccountGroupRels) {
 
 			if (ArrayUtil.contains(
-					comerceAccountGroupIds,
+					commerceAccountGroupIds,
 					commerceAccountGroupRel.getCommerceAccountGroupId())) {
 
 				return true;
