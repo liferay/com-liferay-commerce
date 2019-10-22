@@ -1,5 +1,3 @@
-<%@ include file="/init.jsp" %>
-
 <%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
@@ -15,6 +13,8 @@
  * details.
  */
 --%>
+
+<%@ include file="/init.jsp" %>
 
 <%
 CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (CommerceOrderContentDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
@@ -38,7 +38,7 @@ CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (Commerc
 			<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
 			<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 			<aui:input name="deleteCommerceOrderIds" type="hidden" />
-			<aui:button cssClass="commerce-button commerce-button--big" type="submit" value="add-order" />
+			<clay:button elementClasses="btn-fixed" size="lg" style="primary" type="submit" label="<%= LanguageUtil.get(request, "add-order")%>" />
 		</aui:form>
 	</c:if>
 </div>
