@@ -20,6 +20,7 @@ import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.web.internal.display.context.CommerceOrderSettingsDisplayContext;
+import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -84,6 +85,14 @@ public class OrderSettingsCommerceAdminModule implements CommerceAdminModule {
 
 	@Override
 	public boolean isVisible(long groupId) throws PortalException {
+		CommerceChannel commerceChannel =
+			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
+				groupId);
+
+		if (commerceChannel == null) {
+			return false;
+		}
+
 		if (_workflowEngineManager.isDeployed() &&
 			(WorkflowHandlerRegistryUtil.getWorkflowHandler(
 				CommerceOrder.class.getName()) != null)) {
