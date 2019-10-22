@@ -120,6 +120,13 @@ public abstract class BaseCommerceTaxFixedRateDisplayContext<T> {
 			"screenNavigationCategoryKey",
 			getSelectedScreenNavigationCategoryKey());
 
+		String redirect = ParamUtil.getString(
+			commerceTaxFixedRateRequestHelper.getRequest(), "redirect");
+
+		if (Validator.isNotNull(redirect)) {
+			portletURL.setParameter("redirect", redirect);
+		}
+
 		CommerceTaxMethod commerceTaxMethod = getCommerceTaxMethod();
 
 		if (commerceTaxMethod != null) {
