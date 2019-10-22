@@ -244,45 +244,45 @@ List<CommerceAddress> billingAddresses = commerceOrderContentDisplayContext.getB
 		</div>
 	</div>
 
-	<div class="commerce-thumb-menu">
-		<div class="col-md-auto">
-			<liferay-ui:icon-menu
-				direction="right"
-				icon="<%= StringPool.BLANK %>"
-				markupView="lexicon"
-				message="<%= StringPool.BLANK %>"
-				showWhenSingleIcon="<%= true %>"
-				triggerCssClass="component-action"
-			>
-				<liferay-ui:icon
-					message="print"
-					url='<%= "javascript:window.print();" %>'
-				/>
+	<liferay-ui:icon-menu
+		direction="right"
+		icon="<%= StringPool.BLANK %>"
+		markupView="lexicon"
+		message="<%= StringPool.BLANK %>"
+		showWhenSingleIcon="<%= true %>"
+		triggerCssClass="btn btn-lg btn-monospaced btn-primary thumb-menu"
+	>
+		<liferay-ui:icon
+			message="print"
+			url='<%= "javascript:window.print();" %>'
+		/>
 
-				<c:if test="<%= commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, ActionKeys.DELETE) %>">
-					<portlet:actionURL name="editCommerceOrder" var="deleteURL">
-						<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-						<portlet:param name="redirect" value="<%= currentURL %>" />
-						<portlet:param name="commerceOrderId" value="<%= String.valueOf(commerceOrder.getCommerceOrderId()) %>" />
-					</portlet:actionURL>
+		<c:if test="<%= commerceOrderContentDisplayContext.hasModelPermission(commerceOrder, ActionKeys.DELETE) %>">
+			<portlet:actionURL name="editCommerceOrder" var="deleteURL">
+				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="commerceOrderId" value="<%= String.valueOf(commerceOrder.getCommerceOrderId()) %>" />
+			</portlet:actionURL>
 
-					<liferay-ui:icon-delete
-						message="delete"
-						url="<%= deleteURL %>"
-					/>
-				</c:if>
-			</liferay-ui:icon-menu>
-		</div>
-	</div>
+			<liferay-ui:icon-delete
+				message="delete"
+				url="<%= deleteURL %>"
+			/>
+		</c:if>
+	</liferay-ui:icon-menu>
 
 	<div class="commerce-cta is-visible">
-		<%-- <aui:button cssClass="commerce-button commerce-button--big commerce-button--outline" href="<%= backURL %>" value="cancel" /> --%>
-
-		<aui:button cssClass="commerce-button commerce-button--big commerce-button--outline" type="submit" />
+		<clay:button
+			elementClasses="btn-fixed"
+			label="<%= LanguageUtil.get(request, "save") %>"
+			size="lg"
+			style="secondary"
+			type="submit"
+		/>
 
 		<liferay-commerce:order-transitions
 			commerceOrderId="<%= commerceOrder.getCommerceOrderId() %>"
-			cssClass="commerce-button commerce-button--big commerce-button--spaced"
+			cssClass="btn btn-fixed btn-lg btn-primary ml-3"
 		/>
 	</div>
 </aui:form>
