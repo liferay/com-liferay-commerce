@@ -56,7 +56,9 @@ public class CommerceInventoryWarehouseItemLocalServiceImpl
 		if (Validator.isBlank(externalReferenceCode)) {
 			externalReferenceCode = null;
 		}
+
 		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem = null;
+
 		if (Validator.isNotNull(sku)) {
 			commerceInventoryWarehouseItem =
 				commerceInventoryWarehouseItemPersistence.fetchByC_S(
