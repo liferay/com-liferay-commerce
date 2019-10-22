@@ -53,13 +53,21 @@ CommerceOrderListDisplayContext commerceOrderListDisplayContext = (CommerceOrder
 			rowURL.setParameter("redirect", currentURL);
 			rowURL.setParameter("mvcRenderCommandName", "editCommerceOrder");
 			rowURL.setParameter("commerceOrderId", String.valueOf(commerceOrder.getCommerceOrderId()));
+
+			String dateLabel = "create-date";
+			String dateValue = HtmlUtil.escape(commerceOrderListDisplayContext.getCommerceOrderCreateDateTime(commerceOrder));
+
+			if (!commerceOrderListDisplayContext.isOpenTab()) {
+				dateLabel = "order-date";
+				dateValue = HtmlUtil.escape(commerceOrderListDisplayContext.getCommerceOrderDateTime(commerceOrder));
+			}
 			%>
 
 			<liferay-ui:search-container-column-text
 				cssClass="important table-cell-expand table-list-title"
 				href="<%= rowURL %>"
-				name="order-date"
-				value="<%= HtmlUtil.escape(commerceOrderListDisplayContext.getCommerceOrderDateTime(commerceOrder)) %>"
+				name="<%= dateLabel %>"
+				value="<%= dateValue %>"
 			/>
 
 			<liferay-ui:search-container-column-text

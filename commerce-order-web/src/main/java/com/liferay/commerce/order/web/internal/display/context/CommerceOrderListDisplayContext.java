@@ -152,9 +152,21 @@ public class CommerceOrderListDisplayContext {
 			_commerceOrderRequestHelper.getCompanyId());
 	}
 
-	public String getCommerceOrderDateTime(CommerceOrder commerceOrder) {
+	public String getCommerceOrderCreateDateTime(CommerceOrder commerceOrder) {
 		return _commerceOrderDateFormatDateTime.format(
 			commerceOrder.getCreateDate());
+	}
+
+	public String getCommerceOrderDateTime(CommerceOrder commerceOrder) {
+		if (commerceOrder.getOrderDate() == null) {
+			ThemeDisplay themeDisplay =
+				_commerceOrderRequestHelper.getThemeDisplay();
+
+			return LanguageUtil.get(themeDisplay.getLocale(), "unknown");
+		}
+
+		return _commerceOrderDateFormatDateTime.format(
+			commerceOrder.getOrderDate());
 	}
 
 	public int getCommerceOrderNotesCount(CommerceOrder commerceOrder)
@@ -227,6 +239,14 @@ public class CommerceOrderListDisplayContext {
 		}
 
 		return _searchContainer;
+	}
+
+	public boolean isOpenTab() {
+		if (_tabs1.equals("open")) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public boolean isShowFilter() {
