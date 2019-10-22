@@ -235,7 +235,7 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 			_commerceAccountService.getUserCommerceAccounts(
 				user.getUserId(),
 				CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID,
-				commerceSiteType, StringPool.BLANK, 0, 1);
+				commerceSiteType, StringPool.BLANK, true, 0, 1);
 
 		if (userCommerceAccounts.size() == 1) {
 			return userCommerceAccounts.get(0);
