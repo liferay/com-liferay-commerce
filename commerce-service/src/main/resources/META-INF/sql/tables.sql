@@ -149,6 +149,7 @@ create table CommerceOrder (
 	totalDiscountPercentageLevel4 DECIMAL(30, 16) null,
 	advanceStatus VARCHAR(75) null,
 	paymentStatus INTEGER,
+	orderDate DATE null,
 	orderStatus INTEGER,
 	printedNote STRING null,
 	requestedDeliveryDate DATE null,

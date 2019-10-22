@@ -226,6 +226,8 @@ public class CommerceOrderPersistenceTest {
 
 		newCommerceOrder.setPaymentStatus(RandomTestUtil.nextInt());
 
+		newCommerceOrder.setOrderDate(RandomTestUtil.nextDate());
+
 		newCommerceOrder.setOrderStatus(RandomTestUtil.nextInt());
 
 		newCommerceOrder.setPrintedNote(RandomTestUtil.randomString());
@@ -365,6 +367,9 @@ public class CommerceOrderPersistenceTest {
 		Assert.assertEquals(
 			existingCommerceOrder.getPaymentStatus(),
 			newCommerceOrder.getPaymentStatus());
+		Assert.assertEquals(
+			Time.getShortTimestamp(existingCommerceOrder.getOrderDate()),
+			Time.getShortTimestamp(newCommerceOrder.getOrderDate()));
 		Assert.assertEquals(
 			existingCommerceOrder.getOrderStatus(),
 			newCommerceOrder.getOrderStatus());
@@ -542,9 +547,10 @@ public class CommerceOrderPersistenceTest {
 			"totalDiscountPercentageLevel2", true,
 			"totalDiscountPercentageLevel3", true,
 			"totalDiscountPercentageLevel4", true, "advanceStatus", true,
-			"paymentStatus", true, "orderStatus", true, "printedNote", true,
-			"requestedDeliveryDate", true, "status", true, "statusByUserId",
-			true, "statusByUserName", true, "statusDate", true);
+			"paymentStatus", true, "orderDate", true, "orderStatus", true,
+			"printedNote", true, "requestedDeliveryDate", true, "status", true,
+			"statusByUserId", true, "statusByUserName", true, "statusDate",
+			true);
 	}
 
 	@Test
@@ -894,6 +900,8 @@ public class CommerceOrderPersistenceTest {
 		commerceOrder.setAdvanceStatus(RandomTestUtil.randomString());
 
 		commerceOrder.setPaymentStatus(RandomTestUtil.nextInt());
+
+		commerceOrder.setOrderDate(RandomTestUtil.nextDate());
 
 		commerceOrder.setOrderStatus(RandomTestUtil.nextInt());
 

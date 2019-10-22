@@ -293,6 +293,12 @@ public interface CommerceOrderService extends BaseService {
 			int requestedDeliveryDateMinute, ServiceContext serviceContext)
 		throws PortalException;
 
+	public CommerceOrder updateOrderDate(
+			long commerceOrderId, int orderDateMonth, int orderDateDay,
+			int orderDateYear, int orderDateHour, int orderDateMinute,
+			ServiceContext serviceContext)
+		throws PortalException;
+
 	public CommerceOrder updateOrderStatus(
 			long commerceOrderId, int orderStatus)
 		throws PortalException;

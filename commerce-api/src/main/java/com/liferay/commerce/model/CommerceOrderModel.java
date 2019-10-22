@@ -694,6 +694,20 @@ public interface CommerceOrderModel
 	public void setPaymentStatus(int paymentStatus);
 
 	/**
+	 * Returns the order date of this commerce order.
+	 *
+	 * @return the order date of this commerce order
+	 */
+	public Date getOrderDate();
+
+	/**
+	 * Sets the order date of this commerce order.
+	 *
+	 * @param orderDate the order date of this commerce order
+	 */
+	public void setOrderDate(Date orderDate);
+
+	/**
 	 * Returns the order status of this commerce order.
 	 *
 	 * @return the order status of this commerce order

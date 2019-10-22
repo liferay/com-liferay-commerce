@@ -143,6 +143,7 @@
 		<field name="totalDiscountPercentageLevel4" type="BigDecimal" />
 		<field name="advanceStatus" type="String" />
 		<field name="paymentStatus" type="int" />
+		<field name="orderDate" type="Date" />
 		<field name="orderStatus" type="int" />
 		<field name="printedNote" type="String">
 			<hint-collection name="TEXTAREA" />

@@ -485,6 +485,18 @@ public class CommerceOrderServiceWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.model.CommerceOrder updateOrderDate(
+			long commerceOrderId, int orderDateMonth, int orderDateDay,
+			int orderDateYear, int orderDateHour, int orderDateMinute,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceOrderService.updateOrderDate(
+			commerceOrderId, orderDateMonth, orderDateDay, orderDateYear,
+			orderDateHour, orderDateMinute, serviceContext);
+	}
+
+	@Override
 	public com.liferay.commerce.model.CommerceOrder updateOrderStatus(
 			long commerceOrderId, int orderStatus)
 		throws com.liferay.portal.kernel.exception.PortalException {

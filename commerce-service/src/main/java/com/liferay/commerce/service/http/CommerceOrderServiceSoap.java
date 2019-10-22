@@ -893,6 +893,29 @@ public class CommerceOrderServiceSoap {
 		}
 	}
 
+	public static com.liferay.commerce.model.CommerceOrderSoap updateOrderDate(
+			long commerceOrderId, int orderDateMonth, int orderDateDay,
+			int orderDateYear, int orderDateHour, int orderDateMinute,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws RemoteException {
+
+		try {
+			com.liferay.commerce.model.CommerceOrder returnValue =
+				CommerceOrderServiceUtil.updateOrderDate(
+					commerceOrderId, orderDateMonth, orderDateDay,
+					orderDateYear, orderDateHour, orderDateMinute,
+					serviceContext);
+
+			return com.liferay.commerce.model.CommerceOrderSoap.toSoapModel(
+				returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.commerce.model.CommerceOrderSoap
 			updateOrderStatus(long commerceOrderId, int orderStatus)
 		throws RemoteException {
