@@ -30,6 +30,18 @@ import com.liferay.portal.kernel.model.User;
 public class TestCommerceContext implements CommerceContext {
 
 	public TestCommerceContext(
+		CommerceCurrency commerceCurrency, CommerceChannel commerceChannel,
+		CommerceAccount commerceAccount, CommerceOrder commerceOrder) {
+
+		_commerceCurrency = commerceCurrency;
+		_commerceChannel = commerceChannel;
+		_contextUser = null;
+		_contextGroup = null;
+		_commerceAccount = commerceAccount;
+		_commerceOrder = commerceOrder;
+	}
+
+	public TestCommerceContext(
 		CommerceCurrency commerceCurrency, User contextUser, Group contextGroup,
 		CommerceAccount commerceAccount, CommerceOrder commerceOrder) {
 
@@ -86,7 +98,9 @@ public class TestCommerceContext implements CommerceContext {
 
 	@Override
 	public long getSiteGroupId() throws PortalException {
-		return _contextGroup.getGroupId();
+		//return _contextGroup.getGroupId();
+
+		return _commerceChannel.getSiteGroupId();
 	}
 
 	private final CommerceAccount _commerceAccount;

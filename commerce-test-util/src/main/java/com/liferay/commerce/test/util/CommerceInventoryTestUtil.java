@@ -43,6 +43,28 @@ public class CommerceInventoryTestUtil {
 			RandomTestUtil.nextInt(), false, 0, true, serviceContext);
 	}
 
+	public static CommerceInventoryWarehouse addCommerceInventoryWarehouse()
+		throws PortalException {
+
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext();
+
+		CommerceCountry commerceCountry = _setUpCountry(serviceContext);
+
+		CommerceRegion commerceRegion = _setUpRegion(
+			commerceCountry, serviceContext);
+
+		return CommerceInventoryWarehouseLocalServiceUtil.
+			addCommerceInventoryWarehouse(
+				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
+				true, RandomTestUtil.randomString(),
+				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
+				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
+				commerceRegion.getCode(),
+				commerceCountry.getTwoLettersISOCode(), 45.4386111, 12.3266667,
+				null, serviceContext);
+	}
+
 	public static CommerceInventoryWarehouse addCommerceInventoryWarehouse(
 			long groupId)
 		throws PortalException {
