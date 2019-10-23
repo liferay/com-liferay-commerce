@@ -127,6 +127,15 @@ public class CPTestUtil {
 			ServiceContextTestUtil.getServiceContext(groupId));
 	}
 
+	public static CPInstance addCPInstance() throws PortalException {
+		CPDefinition cpDefinition = _addCPDefinition(
+			SimpleCPTypeConstants.NAME, true, true,
+			ServiceContextTestUtil.getServiceContext());
+
+		return CPInstanceLocalServiceUtil.getCPInstance(
+			cpDefinition.getCPDefinitionId(), CPInstanceConstants.DEFAULT_SKU);
+	}
+
 	public static CPInstance addCPInstance(long groupId)
 		throws PortalException {
 

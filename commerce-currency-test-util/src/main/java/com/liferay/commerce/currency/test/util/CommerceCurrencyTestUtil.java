@@ -34,6 +34,24 @@ import java.util.Map;
  */
 public class CommerceCurrencyTestUtil {
 
+	public static CommerceCurrency addCommerceCurrency()
+		throws PortalException {
+
+		Map<Locale, String> formatPatternMap = new HashMap();
+
+		formatPatternMap.put(
+			LocaleUtil.US, CommerceCurrencyConstants.DEFAULT_FORMAT_PATTERN);
+
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext();
+
+		return CommerceCurrencyLocalServiceUtil.addCommerceCurrency(
+			serviceContext.getUserId(), RandomTestUtil.randomString(),
+			RandomTestUtil.randomLocaleStringMap(), BigDecimal.ONE,
+			formatPatternMap, 2, 2, "", false, RandomTestUtil.randomDouble(),
+			true, serviceContext);
+	}
+
 	public static CommerceCurrency addCommerceCurrency(long groupId)
 		throws PortalException {
 
