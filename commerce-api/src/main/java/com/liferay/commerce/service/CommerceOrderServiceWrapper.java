@@ -525,6 +525,15 @@ public class CommerceOrderServiceWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.model.CommerceOrder updatePrintedNote(
+			long commerceOrderId, String printedNote)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceOrderService.updatePrintedNote(
+			commerceOrderId, printedNote);
+	}
+
+	@Override
 	public com.liferay.commerce.model.CommerceOrder updatePurchaseOrderNumber(
 			long commerceOrderId, String purchaseOrderNumber)
 		throws com.liferay.portal.kernel.exception.PortalException {

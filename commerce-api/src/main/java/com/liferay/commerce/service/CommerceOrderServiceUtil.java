@@ -485,6 +485,13 @@ public class CommerceOrderServiceUtil {
 			commerceOrderId, paymentStatus, transactionId);
 	}
 
+	public static com.liferay.commerce.model.CommerceOrder updatePrintedNote(
+			long commerceOrderId, String printedNote)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().updatePrintedNote(commerceOrderId, printedNote);
+	}
+
 	public static com.liferay.commerce.model.CommerceOrder
 			updatePurchaseOrderNumber(
 				long commerceOrderId, String purchaseOrderNumber)
