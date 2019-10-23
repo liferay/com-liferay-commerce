@@ -41,7 +41,7 @@ long commerceOrderId = commerceOrderEditDisplayContext.getCommerceOrderId();
 			<aui:fieldset cssClass="add-comment">
 				<div class="panel">
 					<div class="panel-body">
-						<div class="lfr-discussion-details">
+						<div class="lfr-discussion-details position-absolute">
 							<liferay-ui:user-portrait
 								cssClass="user-icon-lg"
 								user="<%= user %>"
@@ -72,7 +72,7 @@ long commerceOrderId = commerceOrderEditDisplayContext.getCommerceOrderId();
 						<div class="panel-body">
 							<div class="card-row">
 								<div class="card-col-content">
-									<div class="lfr-discussion-details">
+									<div class="lfr-discussion-details position-absolute">
 										<liferay-ui:user-portrait
 											cssClass="user-icon-lg"
 											userId="<%= commerceOrderNote.getUserId() %>"
