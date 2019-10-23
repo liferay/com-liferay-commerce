@@ -26,7 +26,9 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@ page import="com.liferay.commerce.item.selector.web.internal.display.context.CommerceCountryItemSelectorViewDisplayContext" %><%@
 page import="com.liferay.commerce.item.selector.web.internal.display.context.CommerceInventoryWarehouseItemSelectorViewDisplayContext" %><%@
 page import="com.liferay.commerce.item.selector.web.internal.display.context.CommercePriceListItemSelectorViewDisplayContext" %><%@
+page import="com.liferay.commerce.item.selector.web.internal.display.context.CommerceProductInstanceItemSelectorViewDisplayContext" %><%@
 page import="com.liferay.commerce.item.selector.web.internal.display.context.SimpleSiteItemSelectorViewDisplayContext" %><%@
+page import="com.liferay.commerce.product.model.CPDefinition" %><%@
 page import="com.liferay.frontend.taglib.servlet.taglib.ManagementBarFilterItem" %><%@
 page import="com.liferay.portal.kernel.language.LanguageUtil" %><%@
 page import="com.liferay.portal.kernel.util.HtmlUtil" %><%@
