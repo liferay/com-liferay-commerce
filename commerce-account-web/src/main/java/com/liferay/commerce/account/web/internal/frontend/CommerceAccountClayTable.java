@@ -118,20 +118,11 @@ public class CommerceAccountClayTable
 					 currentCommerceAccount.getCommerceAccountId())) &&
 				account.getActive()) {
 
-				StringBundler sb = new StringBundler(7);
-
-				sb.append("setCurrentAccount");
-				sb.append(StringPool.OPEN_PARENTHESIS);
-				sb.append(StringPool.APOSTROPHE);
-				sb.append(account.getAccountId());
-				sb.append(StringPool.APOSTROPHE);
-				sb.append(StringPool.CLOSE_PARENTHESIS);
-				sb.append(StringPool.SEMICOLON);
-
 				ClayTableAction clayTableSetActiveAction = new ClayTableAction(
 					StringPool.BLANK, StringPool.POUND, StringPool.BLANK,
 					LanguageUtil.get(httpServletRequest, "select"),
-					sb.toString(), false, false);
+					"setCurrentAccount('" + account.getAccountId() + "')",
+					false, false);
 
 				clayTableActions.add(clayTableSetActiveAction);
 			}
@@ -141,26 +132,19 @@ public class CommerceAccountClayTable
 				themeDisplay.getPermissionChecker(), account.getAccountId(),
 				ActionKeys.UPDATE)) {
 
-			StringBundler sb = new StringBundler(7);
-
-			sb.append("toggleActiveCommerceAccount");
-			sb.append(StringPool.OPEN_PARENTHESIS);
-			sb.append(StringPool.APOSTROPHE);
-			sb.append(account.getAccountId());
-			sb.append(StringPool.APOSTROPHE);
-			sb.append(StringPool.CLOSE_PARENTHESIS);
-			sb.append(StringPool.SEMICOLON);
+			String toggleActiveJavascript =
+				"toggleActiveCommerceAccount('" + account.getAccountId() + "')";
 
 			ClayTableAction clayTableSetActiveAction = new ClayTableAction(
 				"commerce-button--good", StringPool.POUND, StringPool.BLANK,
-				LanguageUtil.get(httpServletRequest, "activate"), sb.toString(),
-				false, false);
+				LanguageUtil.get(httpServletRequest, "activate"),
+				toggleActiveJavascript, false, false);
 
 			if (account.getActive()) {
 				clayTableSetActiveAction = new ClayTableAction(
 					"commerce-button--bad", StringPool.POUND, StringPool.BLANK,
 					LanguageUtil.get(httpServletRequest, "deactivate"),
-					sb.toString(), false, false);
+					toggleActiveJavascript, false, false);
 			}
 
 			clayTableActions.add(clayTableSetActiveAction);
