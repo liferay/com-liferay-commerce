@@ -105,7 +105,8 @@ public class CommerceAccountUserClayTable
 
 			ClayTableAction viewClayTableAction = new ClayTableAction(
 				StringPool.BLANK, viewURL, StringPool.BLANK,
-				LanguageUtil.get(httpServletRequest, "view"), false, false);
+				LanguageUtil.get(httpServletRequest, "view"), null, false,
+				false);
 
 			clayTableActions.add(viewClayTableAction);
 
@@ -114,7 +115,7 @@ public class CommerceAccountUserClayTable
 
 				StringBundler sb = new StringBundler(7);
 
-				sb.append("javascript:removeCommerceAccountUser");
+				sb.append("removeCommerceAccountUser");
 				sb.append(StringPool.OPEN_PARENTHESIS);
 				sb.append(StringPool.APOSTROPHE);
 				sb.append(member.getMemberId());
@@ -123,9 +124,9 @@ public class CommerceAccountUserClayTable
 				sb.append(StringPool.SEMICOLON);
 
 				ClayTableAction removeClayTableAction = new ClayTableAction(
-					StringPool.BLANK, sb.toString(), StringPool.BLANK,
-					LanguageUtil.get(httpServletRequest, "remove"), false,
-					false);
+					StringPool.BLANK, StringPool.POUND, StringPool.BLANK,
+					LanguageUtil.get(httpServletRequest, "remove"),
+					sb.toString(), false, false);
 
 				clayTableActions.add(removeClayTableAction);
 			}

@@ -94,7 +94,7 @@ public class CommerceAccountAddressClayTable
 
 		StringBundler sb = new StringBundler(7);
 
-		sb.append("javascript:deleteCommerceAddress");
+		sb.append("deleteCommerceAddress");
 		sb.append(StringPool.OPEN_PARENTHESIS);
 		sb.append(StringPool.APOSTROPHE);
 		sb.append(address.getAddressId());
@@ -103,16 +103,18 @@ public class CommerceAccountAddressClayTable
 		sb.append(StringPool.SEMICOLON);
 
 		ClayTableAction deleteClayTableAction = new ClayTableAction(
-			StringPool.BLANK, sb.toString(), StringPool.BLANK,
-			LanguageUtil.get(httpServletRequest, "delete"), false, false);
+			StringPool.BLANK, StringPool.POUND, StringPool.BLANK,
+			LanguageUtil.get(httpServletRequest, "delete"), sb.toString(),
+			false, false);
 
 		clayTableActions.add(deleteClayTableAction);
 
-		sb.setStringAt("javascript:editCommerceAddress", 0);
+		sb.setStringAt("editCommerceAddress", 0);
 
 		ClayTableAction editClayTableAction = new ClayTableAction(
-			StringPool.BLANK, sb.toString(), StringPool.BLANK,
-			LanguageUtil.get(httpServletRequest, "edit"), false, false);
+			StringPool.BLANK, StringPool.POUND, StringPool.BLANK,
+			LanguageUtil.get(httpServletRequest, "edit"), sb.toString(), false,
+			false);
 
 		clayTableActions.add(editClayTableAction);
 

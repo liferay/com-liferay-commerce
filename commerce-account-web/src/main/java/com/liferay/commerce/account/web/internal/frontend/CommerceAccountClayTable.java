@@ -101,7 +101,8 @@ public class CommerceAccountClayTable
 
 			ClayTableAction clayTableViewAction = new ClayTableAction(
 				StringPool.BLANK, viewURL, StringPool.BLANK,
-				LanguageUtil.get(httpServletRequest, "view"), false, false);
+				LanguageUtil.get(httpServletRequest, "view"), null, false,
+				false);
 
 			clayTableActions.add(clayTableViewAction);
 
@@ -119,7 +120,7 @@ public class CommerceAccountClayTable
 
 				StringBundler sb = new StringBundler(7);
 
-				sb.append("javascript:setCurrentAccount");
+				sb.append("setCurrentAccount");
 				sb.append(StringPool.OPEN_PARENTHESIS);
 				sb.append(StringPool.APOSTROPHE);
 				sb.append(account.getAccountId());
@@ -128,9 +129,9 @@ public class CommerceAccountClayTable
 				sb.append(StringPool.SEMICOLON);
 
 				ClayTableAction clayTableSetActiveAction = new ClayTableAction(
-					StringPool.BLANK, sb.toString(), StringPool.BLANK,
-					LanguageUtil.get(httpServletRequest, "select"), false,
-					false);
+					StringPool.BLANK, StringPool.POUND, StringPool.BLANK,
+					LanguageUtil.get(httpServletRequest, "select"),
+					sb.toString(), false, false);
 
 				clayTableActions.add(clayTableSetActiveAction);
 			}
@@ -142,7 +143,7 @@ public class CommerceAccountClayTable
 
 			StringBundler sb = new StringBundler(7);
 
-			sb.append("javascript:toggleActiveCommerceAccount");
+			sb.append("toggleActiveCommerceAccount");
 			sb.append(StringPool.OPEN_PARENTHESIS);
 			sb.append(StringPool.APOSTROPHE);
 			sb.append(account.getAccountId());
@@ -151,14 +152,15 @@ public class CommerceAccountClayTable
 			sb.append(StringPool.SEMICOLON);
 
 			ClayTableAction clayTableSetActiveAction = new ClayTableAction(
-				"commerce-button--good", sb.toString(), StringPool.BLANK,
-				LanguageUtil.get(httpServletRequest, "activate"), false, false);
+				"commerce-button--good", StringPool.POUND, StringPool.BLANK,
+				LanguageUtil.get(httpServletRequest, "activate"), sb.toString(),
+				false, false);
 
 			if (account.getActive()) {
 				clayTableSetActiveAction = new ClayTableAction(
-					"commerce-button--bad", sb.toString(), StringPool.BLANK,
-					LanguageUtil.get(httpServletRequest, "deactivate"), false,
-					false);
+					"commerce-button--bad", StringPool.POUND, StringPool.BLANK,
+					LanguageUtil.get(httpServletRequest, "deactivate"),
+					sb.toString(), false, false);
 			}
 
 			clayTableActions.add(clayTableSetActiveAction);

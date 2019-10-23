@@ -92,7 +92,7 @@ public class CommerceAccountOrganizationClayTable
 
 			StringBundler sb = new StringBundler(7);
 
-			sb.append("javascript:deleteCommerceAccountOrganization");
+			sb.append("deleteCommerceAccountOrganization");
 			sb.append(StringPool.OPEN_PARENTHESIS);
 			sb.append(StringPool.APOSTROPHE);
 			sb.append(organization.getOrganizationId());
@@ -101,8 +101,9 @@ public class CommerceAccountOrganizationClayTable
 			sb.append(StringPool.SEMICOLON);
 
 			ClayTableAction deleteClayTableAction = new ClayTableAction(
-				StringPool.BLANK, sb.toString(), StringPool.BLANK,
-				LanguageUtil.get(httpServletRequest, "delete"), false, false);
+				StringPool.BLANK, StringPool.POUND, StringPool.BLANK,
+				LanguageUtil.get(httpServletRequest, "delete"), sb.toString(),
+				false, false);
 
 			clayTableActions.add(deleteClayTableAction);
 		}
