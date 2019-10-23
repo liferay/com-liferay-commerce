@@ -180,8 +180,8 @@ public class CommercePlacedOrderItemClayTable
 						commerceOrderItem.getQuantity(), formattedFinalPrice,
 						_cpInstanceHelper.getCPInstanceThumbnailSrc(
 							commerceOrderItem.getCPInstanceId()),
-						viewShipmentURL,
-						commerceOrderItem.getShippedQuantity()));
+						viewShipmentURL, commerceOrderItem.getShippedQuantity(),
+						null));
 			}
 		}
 		catch (Exception e) {
