@@ -90,19 +90,11 @@ public class CommerceAccountOrganizationClayTable
 				themeDisplay.getPermissionChecker(), commerceAccountId,
 				CommerceAccountActionKeys.MANAGE_ORGANIZATIONS)) {
 
-			StringBundler sb = new StringBundler(7);
-
-			sb.append("deleteCommerceAccountOrganization");
-			sb.append(StringPool.OPEN_PARENTHESIS);
-			sb.append(StringPool.APOSTROPHE);
-			sb.append(organization.getOrganizationId());
-			sb.append(StringPool.APOSTROPHE);
-			sb.append(StringPool.CLOSE_PARENTHESIS);
-			sb.append(StringPool.SEMICOLON);
-
 			ClayTableAction deleteClayTableAction = new ClayTableAction(
 				StringPool.BLANK, StringPool.POUND, StringPool.BLANK,
-				LanguageUtil.get(httpServletRequest, "delete"), sb.toString(),
+				LanguageUtil.get(httpServletRequest, "delete"),
+				"deleteCommerceAccountOrganization('" +
+					organization.getOrganizationId() + "')",
 				false, false);
 
 			clayTableActions.add(deleteClayTableAction);

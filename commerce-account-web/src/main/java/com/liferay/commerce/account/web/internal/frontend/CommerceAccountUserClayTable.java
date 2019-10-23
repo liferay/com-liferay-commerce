@@ -29,7 +29,6 @@ import com.liferay.commerce.frontend.ClayTableSchemaBuilderFactory;
 import com.liferay.commerce.frontend.CommerceDataSetDataProvider;
 import com.liferay.commerce.frontend.Filter;
 import com.liferay.commerce.frontend.Pagination;
-import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -113,20 +112,11 @@ public class CommerceAccountUserClayTable
 			if (permissionChecker.isCompanyAdmin() ||
 				(member.getMemberId() != themeDisplay.getUserId())) {
 
-				StringBundler sb = new StringBundler(7);
-
-				sb.append("removeCommerceAccountUser");
-				sb.append(StringPool.OPEN_PARENTHESIS);
-				sb.append(StringPool.APOSTROPHE);
-				sb.append(member.getMemberId());
-				sb.append(StringPool.APOSTROPHE);
-				sb.append(StringPool.CLOSE_PARENTHESIS);
-				sb.append(StringPool.SEMICOLON);
-
 				ClayTableAction removeClayTableAction = new ClayTableAction(
 					StringPool.BLANK, StringPool.POUND, StringPool.BLANK,
 					LanguageUtil.get(httpServletRequest, "remove"),
-					sb.toString(), false, false);
+					"removeCommerceAccountUser('" + member.getMemberId() + "')",
+					false, false);
 
 				clayTableActions.add(removeClayTableAction);
 			}
