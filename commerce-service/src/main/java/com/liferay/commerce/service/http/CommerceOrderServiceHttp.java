@@ -1807,6 +1807,45 @@ public class CommerceOrderServiceHttp {
 		}
 	}
 
+	public static com.liferay.commerce.model.CommerceOrder updatePrintedNote(
+			HttpPrincipal httpPrincipal, long commerceOrderId,
+			String printedNote)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceOrderServiceUtil.class, "updatePrintedNote",
+				_updatePrintedNoteParameterTypes42);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceOrderId, printedNote);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return (com.liferay.commerce.model.CommerceOrder)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static com.liferay.commerce.model.CommerceOrder
 			updatePurchaseOrderNumber(
 				HttpPrincipal httpPrincipal, long commerceOrderId,
@@ -2184,6 +2223,8 @@ public class CommerceOrderServiceHttp {
 		_updatePaymentStatusAndTransactionIdParameterTypes42 = new Class[] {
 			long.class, int.class, String.class
 		};
+	private static final Class<?>[] _updatePrintedNoteParameterTypes42 =
+		new Class[] {long.class, String.class};
 	private static final Class<?>[] _updatePurchaseOrderNumberParameterTypes43 =
 		new Class[] {long.class, String.class};
 	private static final Class<?>[] _updateShippingAddressParameterTypes44 =

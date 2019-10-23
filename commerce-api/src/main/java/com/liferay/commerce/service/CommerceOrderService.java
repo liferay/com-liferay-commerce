@@ -311,6 +311,10 @@ public interface CommerceOrderService extends BaseService {
 			long commerceOrderId, int paymentStatus, String transactionId)
 		throws PortalException;
 
+	public CommerceOrder updatePrintedNote(
+			long commerceOrderId, String printedNote)
+		throws PortalException;
+
 	public CommerceOrder updatePurchaseOrderNumber(
 			long commerceOrderId, String purchaseOrderNumber)
 		throws PortalException;
