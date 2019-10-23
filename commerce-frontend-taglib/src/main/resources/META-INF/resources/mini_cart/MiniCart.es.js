@@ -64,6 +64,7 @@ class Cart extends Component {
 			this.orderId = evt.orderId;
 			this.products = evt.products;
 			this.summary = evt.summary;
+			this.valid = evt.valid;
 			this.detailsUrl = evt.detailsUrl || null;
 			this._loading = false;
 			this.pendingOperations = [];
@@ -135,6 +136,7 @@ class Cart extends Component {
 		this.orderId = null;
 		this.products = null;
 		this.summary = null;
+		this.valid = true;
 		if (this._open === true) {
 			this.close();
 		}
@@ -377,6 +379,8 @@ class Cart extends Component {
 				updatedCart => {
 					this.products = updatedCart.products;
 					this.summary = updatedCart.summary;
+					this.valid = updatedCart.valid;
+					console.log(this.valid);
 					return !!(this.products && this.summary);
 				}
 			)
@@ -468,6 +472,7 @@ Cart.STATE = {
 		]
 	),
 	detailsUrl: Config.string(),
+	valid: Config.bool(),
 	disabled: Config.bool().value(false),
 	pendingOperations: Config.array().value(
 		[]

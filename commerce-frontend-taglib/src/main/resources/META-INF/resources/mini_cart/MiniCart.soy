@@ -8,6 +8,7 @@
 	{@param checkoutUrl: string}
 	{@param spritemap: string }
 
+	{@param? valid: bool}
 	{@param? disabled: bool}
 	{@param? products: list<[
 		id: string|number,
@@ -130,12 +131,14 @@
 			{if isNonnull($summary)}
 				{call Summary.render}
 					{param checkoutUrl: $checkoutUrl /}
+					{param detailsUrl: $detailsUrl /}
 					{param subtotal: $summary.subtotal /}
 					{param total: $summary.total /}
 					{param discount: $summary.discount /}
 					{param itemsQuantity: $summary.itemsQuantity /}
 					{param productsQuantity: $formattedProductsQuantity /}
 					{param loading: $_loading /}
+					{param valid: $valid /}
 					{param status: $workflowStatus /}
 				{/call}
 			{/if}

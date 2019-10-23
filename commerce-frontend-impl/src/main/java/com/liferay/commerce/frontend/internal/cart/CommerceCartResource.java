@@ -27,6 +27,7 @@ import com.liferay.commerce.frontend.internal.cart.model.Cart;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
+import com.liferay.commerce.order.CommerceOrderValidatorRegistry;
 import com.liferay.commerce.order.CommerceOrderValidatorResult;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
@@ -117,7 +118,7 @@ public class CommerceCartResource {
 
 			cart = _commerceCartResourceUtil.getCart(
 				commerceOrder.getCommerceOrderId(), portletURL.toString(),
-				themeDisplay.getLocale(), commerceContext);
+				themeDisplay.getLocale(), commerceContext, true);
 		}
 		catch (Exception e) {
 			cart = new Cart(StringUtil.split(e.getLocalizedMessage()));
@@ -163,9 +164,12 @@ public class CommerceCartResource {
 					themeDisplay.getScopeGroupId(), httpServletRequest,
 					commerceOrder);
 
+			boolean valid = _commerceOrderValidatorRegistry.isValid(
+				themeDisplay.getLocale(), commerceOrder);
+
 			cart = _commerceCartResourceUtil.getCart(
 				commerceOrderId, portletURL.toString(),
-				themeDisplay.getLocale(), commerceContext);
+				themeDisplay.getLocale(), commerceContext, valid);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -229,7 +233,7 @@ public class CommerceCartResource {
 
 			cart = _commerceCartResourceUtil.getCart(
 				commerceOrder.getCommerceOrderId(), portletURL.toString(),
-				themeDisplay.getLocale(), commerceContext);
+				themeDisplay.getLocale(), commerceContext, true);
 		}
 		catch (Exception e) {
 			if (e instanceof CommerceOrderValidatorException) {
@@ -313,7 +317,7 @@ public class CommerceCartResource {
 
 			cart = _commerceCartResourceUtil.getCart(
 				commerceOrderItem.getCommerceOrderId(), portletURL.toString(),
-				themeDisplay.getLocale(), commerceContext);
+				themeDisplay.getLocale(), commerceContext, true);
 		}
 		catch (Exception e) {
 			if (e instanceof CommerceOrderValidatorException) {
@@ -400,6 +404,9 @@ public class CommerceCartResource {
 
 	@Reference
 	private CommerceOrderService _commerceOrderService;
+
+	@Reference
+	private CommerceOrderValidatorRegistry _commerceOrderValidatorRegistry;
 
 	@Reference
 	private Portal _portal;

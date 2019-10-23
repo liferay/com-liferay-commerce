@@ -51,16 +51,23 @@ public class CommerceCartResourceUtil {
 
 	public Cart getCart(
 			long commerceOrderId, String detailsUrl, Locale locale,
-			CommerceContext commerceContext)
+			CommerceContext commerceContext, boolean valid)
 		throws Exception {
 
 		CommerceOrder commerceOrder = _commerceOrderService.getCommerceOrder(
 			commerceOrderId);
 
+		List<Product> product = getProducts(
+			commerceOrder, locale, commerceContext);
+
+		if (valid && product.isEmpty()) {
+			valid = false;
+		}
+
 		return new Cart(
 			detailsUrl, commerceOrderId,
 			getProducts(commerceOrder, locale, commerceContext),
-			getSummary(commerceOrder, locale, commerceContext));
+			getSummary(commerceOrder, locale, commerceContext), valid);
 	}
 
 	protected String[] getErrorMessages(
