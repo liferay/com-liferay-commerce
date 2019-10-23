@@ -26,11 +26,19 @@ long commerceOrderId = commerceOrderEditDisplayContext.getCommerceOrderId();
 CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
 
 int orderStatus = BeanParamUtil.getInteger(commerceOrder, request, "orderStatus");
+
+String externalReferenceCode = commerceOrder.getExternalReferenceCode();
 %>
 
 <liferay-portlet:actionURL name="editCommerceOrder" var="editCommerceOrderURL" />
 
 <aui:fieldset-group markupView="lexicon">
+	<c:if test="<%= !externalReferenceCode.isEmpty() %>">
+		<liferay-frontend:info-bar>
+			<liferay-ui:message arguments="<%= HtmlUtil.escape(commerceOrder.getExternalReferenceCode()) %>" key="external-reference-code-x" />
+		</liferay-frontend:info-bar>
+	</c:if>
+
 	<aui:container>
 		<aui:row>
 			<aui:col width="<%= 50 %>">
