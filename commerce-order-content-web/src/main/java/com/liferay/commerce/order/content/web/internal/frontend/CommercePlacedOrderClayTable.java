@@ -89,7 +89,8 @@ public class CommercePlacedOrderClayTable
 
 			ClayTableAction clayTableAction = new ClayTableAction(
 				StringPool.BLANK, viewURL, StringPool.BLANK,
-				LanguageUtil.get(httpServletRequest, "view"), false, false);
+				LanguageUtil.get(httpServletRequest, "view"), null, false,
+				false);
 
 			clayTableActions.add(clayTableAction);
 		}

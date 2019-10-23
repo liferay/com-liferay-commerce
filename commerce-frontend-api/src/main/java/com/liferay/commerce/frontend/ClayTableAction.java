@@ -21,12 +21,13 @@ public class ClayTableAction {
 
 	public ClayTableAction(
 		String cssClasses, String href, String icon, String label,
-		boolean quickAction, boolean separator) {
+		String onClick, boolean quickAction, boolean separator) {
 
 		_cssClasses = cssClasses;
 		_href = href;
 		_icon = icon;
 		_label = label;
+		_onClick = onClick;
 		_quickAction = quickAction;
 		_separator = separator;
 	}
@@ -45,6 +46,10 @@ public class ClayTableAction {
 
 	public String getLabel() {
 		return _label;
+	}
+
+	public String getOnClick() {
+		return _onClick;
 	}
 
 	public int getOrder() {
@@ -87,6 +92,7 @@ public class ClayTableAction {
 	private String _href;
 	private String _icon;
 	private String _label;
+	private final String _onClick;
 	private int _order;
 	private boolean _quickAction;
 	private boolean _separator;
