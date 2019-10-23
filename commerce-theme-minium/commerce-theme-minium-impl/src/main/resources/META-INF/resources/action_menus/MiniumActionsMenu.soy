@@ -17,7 +17,13 @@
 					<div class="minium-table-actions__buttons">
 						{foreach $item in $actionItems}
 							<a class="commerce-button commerce-button--outline commerce-button--small {$item.cssClasses}"
-								href="{$item.href}">
+								{if isNonnull($item.href)}
+									href="{$item.href}"
+								{/if}
+								{if isNonnull($item.onClick)}
+									onclick="{$item.onClick}"
+								{/if}
+							>
 								{$item.label}
 							</a>
 						{/foreach}

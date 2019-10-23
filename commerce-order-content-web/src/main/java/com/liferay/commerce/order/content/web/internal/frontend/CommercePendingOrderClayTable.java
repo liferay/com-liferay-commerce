@@ -89,7 +89,8 @@ public class CommercePendingOrderClayTable
 
 			ClayTableAction clayTableAction = new ClayTableAction(
 				StringPool.BLANK, editURL, StringPool.BLANK,
-				LanguageUtil.get(httpServletRequest, "view"), false, false);
+				LanguageUtil.get(httpServletRequest, "view"), null, false,
+				false);
 
 			clayTableActions.add(clayTableAction);
 		}
