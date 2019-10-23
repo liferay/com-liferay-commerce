@@ -5,11 +5,13 @@
  */
 {template .render}
 	{@param? loading: bool}
+	{@param? valid: bool}
 	{@param? subtotal: string}
 	{@param? total: string}
 	{@param? itemsQuantity: int}
 	{@param? productsQuantity: int}
 	{@param? checkoutUrl: string}
+	{@param? detailsUrl: string}
 	{@param? discount: string}
 	{@param? taxes: string}
 	{@param? status: int}
@@ -64,14 +66,14 @@
 			{/if}
 		{/let}
 
-		{if isNonnull($checkoutUrl)}
-			<a class="commerce-button commerce-button--block{$submitModifiers}" href="{$checkoutUrl}">
-				{if $status == 0}
-					{msg desc="Checkout"}checkout{/msg}
-				{else}
-					{msg desc="Review order"}review-order{/msg}
-				{/if}
-			</a>
-		{/if}
+	{if $status == 0 and isNonnull($checkoutUrl) and $valid}
+		<a class="commerce-button commerce-button--block{$submitModifiers}" href="{$checkoutUrl}">
+			{msg desc="Checkout"}checkout{/msg}
+		</a>
+	{elseif isNonnull($detailsUrl)}
+		<a class="commerce-button commerce-button--block{$submitModifiers}" href="{$detailsUrl}">
+			{msg desc="Review order"}review-order{/msg}
+		</a>
+	{/if}
 	</div>
 {/template}
