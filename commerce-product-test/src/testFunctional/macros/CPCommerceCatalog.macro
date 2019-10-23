@@ -52,6 +52,8 @@ definition {
 
 		Button.clickSave();
 
+		AssertElementPresent(locator1 = "Message#SUCCESS");
+
 		CommerceEntry.viewOptionsEntry(
 			optionDescription = "${optionDescription}",
 			optionFieldType = "${optionFieldType}",
