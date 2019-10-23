@@ -181,19 +181,29 @@ public class CommerceAccountGroupAdminDisplayContext {
 		HttpServletRequest httpServletRequest =
 			_commerceAccountGroupAdminRequestHelper.getRequest();
 
+		long commerceAccountGroupId = ParamUtil.getLong(
+			httpServletRequest, "commerceAccountGroupId");
+
+		if (commerceAccountGroupId > 0) {
+			portletURL.setParameter(
+				"mvcRenderCommandName", "editCommerceAccountGroup");
+			portletURL.setParameter(
+				"commerceAccountGroupId",
+				String.valueOf(commerceAccountGroupId));
+		}
+
 		String redirect = ParamUtil.getString(httpServletRequest, "redirect");
 
 		if (Validator.isNotNull(redirect)) {
 			portletURL.setParameter("redirect", redirect);
 		}
 
-		long commerceAccountGroupId = ParamUtil.getLong(
-			httpServletRequest, "commerceAccountGroupId");
+		String screenNavigationEntryKey = ParamUtil.getString(
+			httpServletRequest, "screenNavigationEntryKey");
 
-		if (commerceAccountGroupId > 0) {
+		if (Validator.isNotNull(screenNavigationEntryKey)) {
 			portletURL.setParameter(
-				"commerceAccountGroupId",
-				String.valueOf(commerceAccountGroupId));
+				"screenNavigationEntryKey", screenNavigationEntryKey);
 		}
 
 		String delta = ParamUtil.getString(httpServletRequest, "delta");
