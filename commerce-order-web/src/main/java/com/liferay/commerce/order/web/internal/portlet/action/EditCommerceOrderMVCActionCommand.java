@@ -122,6 +122,9 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 		else if (cmd.equals("payment")) {
 			updatePayment(actionRequest);
 		}
+		else if (cmd.equals("printedNote")) {
+			updatePrintedNote(actionRequest);
+		}
 		else if (cmd.equals("shippingAddress")) {
 			updateShippingAddress(actionRequest);
 		}
@@ -322,6 +325,17 @@ public class EditCommerceOrderMVCActionCommand extends BaseMVCActionCommand {
 				}
 
 			});
+	}
+
+	protected void updatePrintedNote(ActionRequest actionRequest)
+		throws Exception {
+
+		long commerceOrderId = ParamUtil.getLong(
+			actionRequest, "commerceOrderId");
+
+		String printedNote = ParamUtil.getString(actionRequest, "printedNote");
+
+		_commerceOrderService.updatePrintedNote(commerceOrderId, printedNote);
 	}
 
 	protected void updateShippingAddress(ActionRequest actionRequest)
