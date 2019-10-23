@@ -23,13 +23,14 @@ public class Cart {
 
 	public Cart(
 		String detailsUrl, long orderId, List<Product> products,
-		Summary summary) {
+		Summary summary, boolean valid) {
 
 		_detailsUrl = detailsUrl;
 		_orderId = orderId;
 		_products = products;
 		_summary = summary;
 		_success = true;
+		_valid = valid;
 	}
 
 	public Cart(String[] errorMessages) {
@@ -61,6 +62,10 @@ public class Cart {
 		return _summary;
 	}
 
+	public boolean getValid() {
+		return _valid;
+	}
+
 	public void setErrorMessages(String[] errorMessages) {
 		_errorMessages = errorMessages;
 	}
@@ -75,5 +80,6 @@ public class Cart {
 	private List<Product> _products;
 	private boolean _success;
 	private Summary _summary;
+	private boolean _valid;
 
 }

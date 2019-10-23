@@ -8,6 +8,7 @@ class Summary extends Component {}
 
 Summary.STATE = {
 	checkoutUrl: Config.string(),
+	detailsUrl: Config.string(),
 	discount: Config.string(),
 	itemsQuantity: Config.number(),
 	loading: Config.bool().value(false),
