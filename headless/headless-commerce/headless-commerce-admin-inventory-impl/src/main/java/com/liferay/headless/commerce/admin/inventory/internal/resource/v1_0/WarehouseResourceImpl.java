@@ -39,9 +39,6 @@ import com.liferay.portal.vulcan.pagination.Pagination;
 import com.liferay.portal.vulcan.resource.EntityModelResource;
 import com.liferay.portal.vulcan.util.SearchUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
@@ -134,9 +131,8 @@ public class WarehouseResourceImpl
 			CommerceInventoryWarehouse.class, StringPool.BLANK, pagination,
 			queryConfig -> queryConfig.setSelectedFieldNames(
 				Field.ENTRY_CLASS_PK),
-			searchContext -> {
-				searchContext.setCompanyId(contextCompany.getCompanyId());
-			},
+			searchContext -> searchContext.setCompanyId(
+				contextCompany.getCompanyId()),
 			document -> _toWarehouse(
 				_commerceInventoryWarehouseService.
 					getCommerceInventoryWarehouse(
@@ -246,30 +242,6 @@ public class WarehouseResourceImpl
 			new DefaultDTOConverterContext(
 				contextAcceptLanguage.getPreferredLocale(),
 				commerceInventoryWarehouse.getCommerceInventoryWarehouseId()));
-	}
-
-	private List<Warehouse> _toWarehouses(
-			List<CommerceInventoryWarehouse> commerceInventoryWarehouses)
-		throws Exception {
-
-		List<Warehouse> warehouses = new ArrayList<>();
-
-		DTOConverter warehouseDTOConverter =
-			_dtoConverterRegistry.getDTOConverter(
-				CommerceInventoryWarehouse.class.getName());
-
-		for (CommerceInventoryWarehouse commerceInventoryWarehouse :
-				commerceInventoryWarehouses) {
-
-			warehouses.add(
-				(Warehouse)warehouseDTOConverter.toDTO(
-					new DefaultDTOConverterContext(
-						contextAcceptLanguage.getPreferredLocale(),
-						commerceInventoryWarehouse.
-							getCommerceInventoryWarehouseId())));
-		}
-
-		return warehouses;
 	}
 
 	private void _updateNestedResources(
