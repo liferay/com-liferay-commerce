@@ -66,7 +66,7 @@ public class CommerceInventoryWarehouseItemLocalServiceImpl
 
 			if (commerceInventoryWarehouseItem != null) {
 				throw new DuplicateCommerceInventoryWarehouseItemException(
-					"Sku code already associated to this Warehouse");
+					"Sku code already associated with this Warehouse");
 			}
 		}
 
