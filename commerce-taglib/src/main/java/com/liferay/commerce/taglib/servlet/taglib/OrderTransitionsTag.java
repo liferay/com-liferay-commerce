@@ -17,6 +17,7 @@ package com.liferay.commerce.taglib.servlet.taglib;
 import com.liferay.commerce.constants.CommerceOrderActionKeys;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHelper;
+import com.liferay.commerce.order.CommerceOrderValidatorRegistry;
 import com.liferay.commerce.service.CommerceOrderServiceUtil;
 import com.liferay.commerce.taglib.servlet.taglib.internal.servlet.ServletContextUtil;
 import com.liferay.petra.string.StringPool;
@@ -95,6 +96,8 @@ public class OrderTransitionsTag extends IncludeTag {
 		commerceOrderHelper = ServletContextUtil.getCommerceOrderHelper();
 		commerceOrderModelResourcePermission =
 			ServletContextUtil.getCommerceOrderModelResourcePermission();
+		commerceOrderValidatorRegistry =
+			ServletContextUtil.getCommerceOrderValidatorRegistry();
 		servletContext = ServletContextUtil.getServletContext();
 	}
 
@@ -128,6 +131,7 @@ public class OrderTransitionsTag extends IncludeTag {
 	protected CommerceOrderHelper commerceOrderHelper;
 	protected ModelResourcePermission<CommerceOrder>
 		commerceOrderModelResourcePermission;
+	protected CommerceOrderValidatorRegistry commerceOrderValidatorRegistry;
 
 	private List<ObjectValuePair<Long, String>> _getCommerceOrderTransitionOVPs(
 			CommerceOrder commerceOrder, ThemeDisplay themeDisplay)
@@ -157,6 +161,8 @@ public class OrderTransitionsTag extends IncludeTag {
 		}
 
 		if (commerceOrder.isOpen() && commerceOrder.isApproved() &&
+			commerceOrderValidatorRegistry.isValid(
+				themeDisplay.getLocale(), commerceOrder) &&
 			commerceOrderModelResourcePermission.contains(
 				themeDisplay.getPermissionChecker(), commerceOrder,
 				CommerceOrderActionKeys.CHECKOUT_COMMERCE_ORDER)) {
@@ -166,6 +172,8 @@ public class OrderTransitionsTag extends IncludeTag {
 
 		if (commerceOrder.isOpen() && commerceOrder.isDraft() &&
 			!commerceOrder.isEmpty() &&
+			commerceOrderValidatorRegistry.isValid(
+				themeDisplay.getLocale(), commerceOrder) &&
 			commerceOrderModelResourcePermission.contains(
 				themeDisplay.getPermissionChecker(), commerceOrder,
 				ActionKeys.UPDATE)) {
