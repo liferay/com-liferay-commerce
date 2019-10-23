@@ -95,8 +95,8 @@ public class CommerceAccountAddressClayTable
 		StringBundler sb = new StringBundler(7);
 
 		sb.append("deleteCommerceAddress");
-		sb.append(StringPool.OPEN_PARENTHESIS);
 		sb.append(StringPool.APOSTROPHE);
+		sb.append(StringPool.OPEN_PARENTHESIS);
 		sb.append(address.getAddressId());
 		sb.append(StringPool.APOSTROPHE);
 		sb.append(StringPool.CLOSE_PARENTHESIS);
@@ -199,16 +199,14 @@ public class CommerceAccountAddressClayTable
 	protected String getCompleteAddress(CommerceAddress commerceAddress)
 		throws PortalException {
 
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(7);
 
 		sb.append(commerceAddress.getZip());
 		sb.append(StringPool.SPACE);
 		sb.append(commerceAddress.getStreet1());
 		sb.append(StringPool.SPACE);
 		sb.append(commerceAddress.getCity());
-		sb.append(StringPool.SPACE);
-		sb.append(StringPool.DASH);
-		sb.append(StringPool.SPACE);
+		sb.append(" - ");
 
 		CommerceCountry commerceCountry = commerceAddress.getCommerceCountry();
 

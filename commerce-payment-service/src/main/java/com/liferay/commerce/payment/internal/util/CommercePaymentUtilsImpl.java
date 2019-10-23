@@ -29,7 +29,6 @@ import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.petra.string.CharPool;
-import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -172,10 +171,9 @@ public class CommercePaymentUtilsImpl implements CommercePaymentUtils {
 
 		StringBundler sb = _getBaseUrl(
 			httpServletRequest, commerceOrder, redirect, commercePaymentMethod,
-			2);
+			1);
 
-		sb.append("&cancel=");
-		sb.append(StringPool.TRUE);
+		sb.append("&cancel=true");
 
 		return sb.toString();
 	}
