@@ -30,6 +30,32 @@ import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 public class CommerceShipmentTestUtil {
 
 	public static CommerceShipment createOrderShipment(
+			long orderId, long warehouseId)
+		throws PortalException {
+
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext();
+
+		CommerceShipment commerceShipment =
+			CommerceShipmentLocalServiceUtil.addCommerceShipment(
+				orderId, serviceContext);
+
+		CommerceOrder commerceOrder =
+			CommerceOrderLocalServiceUtil.getCommerceOrder(orderId);
+
+		for (CommerceOrderItem commerceOrderItem :
+				commerceOrder.getCommerceOrderItems()) {
+
+			CommerceShipmentItemLocalServiceUtil.addCommerceShipmentItem(
+				commerceShipment.getCommerceShipmentId(),
+				commerceOrderItem.getCommerceOrderItemId(), warehouseId,
+				commerceOrderItem.getQuantity(), serviceContext);
+		}
+
+		return commerceShipment;
+	}
+
+	public static CommerceShipment createOrderShipment(
 			long groupId, long orderId, long warehouseId)
 		throws PortalException {
 
