@@ -61,7 +61,6 @@ public class EditAssetCategoryFriendlyURLMVCActionCommand
 		throws Exception {
 
 		long categoryId = ParamUtil.getLong(actionRequest, "categoryId");
-		String layoutUuid = ParamUtil.getString(actionRequest, "layoutUuid");
 		Map<Locale, String> urlTitleMap = LocalizationUtil.getLocalizationMap(
 			actionRequest, "urlTitleMapAsXML");
 
@@ -70,11 +69,6 @@ public class EditAssetCategoryFriendlyURLMVCActionCommand
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			AssetCategory.class.getName(), actionRequest);
-
-		// Commerce product display layout
-
-		_cpDisplayLayoutLocalService.addCPDisplayLayout(
-			AssetCategory.class, categoryId, layoutUuid, serviceContext);
 
 		// Commerce product friendly URL
 
