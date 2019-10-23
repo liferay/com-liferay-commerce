@@ -15,7 +15,6 @@
 package com.liferay.commerce.order.web.internal.servlet.taglib.ui;
 
 import com.liferay.commerce.model.CommerceOrder;
-import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationCategory;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -34,16 +33,16 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Andrea Di Giorgi
+ * @author Alec Sloan
  */
 @Component(
-	property = {
-		"screen.navigation.category.order:Integer=50",
-		"screen.navigation.entry.order:Integer=10"
-	},
-	service = {ScreenNavigationCategory.class, ScreenNavigationEntry.class}
+	property = "screen.navigation.entry.order:Integer=10",
+	service = ScreenNavigationEntry.class
 )
 public class CommerceOrderNotesScreenNavigationEntry
-	implements ScreenNavigationCategory, ScreenNavigationEntry<CommerceOrder> {
+	implements ScreenNavigationEntry<CommerceOrder> {
+
+	public static final String KEY = "order-notes";
 
 	@Override
 	public String getCategoryKey() {
@@ -53,7 +52,7 @@ public class CommerceOrderNotesScreenNavigationEntry
 
 	@Override
 	public String getEntryKey() {
-		return getCategoryKey();
+		return KEY;
 	}
 
 	@Override
@@ -61,7 +60,7 @@ public class CommerceOrderNotesScreenNavigationEntry
 		ResourceBundle resourceBundle = ResourceBundleUtil.getBundle(
 			"content.Language", locale, getClass());
 
-		return LanguageUtil.get(resourceBundle, getCategoryKey());
+		return LanguageUtil.get(resourceBundle, KEY);
 	}
 
 	@Override
