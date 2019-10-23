@@ -15,6 +15,7 @@
 package com.liferay.commerce.price.list.web.internal.display.context;
 
 import com.liferay.commerce.currency.model.CommerceMoney;
+import com.liferay.commerce.item.selector.criterion.CommerceProductInstanceItemSelectorCriterion;
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceEntryService;
@@ -23,13 +24,9 @@ import com.liferay.commerce.price.list.web.internal.servlet.taglib.ui.CommercePr
 import com.liferay.commerce.price.list.web.internal.util.CommercePriceListPortletUtil;
 import com.liferay.commerce.price.list.web.portlet.action.CommercePriceListActionHelper;
 import com.liferay.commerce.product.display.context.util.CPRequestHelper;
-import com.liferay.commerce.product.item.selector.criterion.CPInstanceItemSelectorCriterion;
-import com.liferay.commerce.product.model.CPInstance;
-import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.UUIDItemSelectorReturnType;
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
@@ -37,13 +34,10 @@ import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PortalUtil;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -60,13 +54,11 @@ public class CommercePriceEntryDisplayContext
 	public CommercePriceEntryDisplayContext(
 		CommercePriceListActionHelper commercePriceListActionHelper,
 		CommercePriceEntryService commercePriceEntryService,
-		CPInstanceService cpInstanceService, ItemSelector itemSelector,
-		HttpServletRequest httpServletRequest) {
+		ItemSelector itemSelector, HttpServletRequest httpServletRequest) {
 
 		super(commercePriceListActionHelper, httpServletRequest);
 
 		_commercePriceEntryService = commercePriceEntryService;
-		_cpInstanceService = cpInstanceService;
 		_itemSelector = itemSelector;
 	}
 
@@ -113,28 +105,27 @@ public class CommercePriceEntryDisplayContext
 		RequestBackedPortletURLFactory requestBackedPortletURLFactory =
 			RequestBackedPortletURLFactoryUtil.create(httpServletRequest);
 
-		CPInstanceItemSelectorCriterion cpInstanceItemSelectorCriterion =
-			new CPInstanceItemSelectorCriterion();
+		CommerceProductInstanceItemSelectorCriterion
+			commerceProductInstanceItemSelectorCriterion =
+				new CommerceProductInstanceItemSelectorCriterion();
 
-		cpInstanceItemSelectorCriterion.setDesiredItemSelectorReturnTypes(
-			Collections.<ItemSelectorReturnType>singletonList(
-				new UUIDItemSelectorReturnType()));
+		commerceProductInstanceItemSelectorCriterion.
+			setDesiredItemSelectorReturnTypes(
+				Collections.<ItemSelectorReturnType>singletonList(
+					new UUIDItemSelectorReturnType()));
 
 		PortletURL itemSelectorURL = _itemSelector.getItemSelectorURL(
 			requestBackedPortletURLFactory, "productInstancesSelectItem",
-			cpInstanceItemSelectorCriterion);
-
-		String checkedCPInstanceIds = StringUtil.merge(
-			getCheckedCPInstanceIds());
-
-		itemSelectorURL.setParameter(
-			"checkedCPInstanceIds", checkedCPInstanceIds);
+			commerceProductInstanceItemSelectorCriterion);
 
 		CommercePriceList commercePriceList = getCommercePriceList();
 
 		itemSelectorURL.setParameter(
 			"commerceCatalogGroupId",
 			String.valueOf(commercePriceList.getGroupId()));
+		itemSelectorURL.setParameter(
+			"commercePriceListId",
+			String.valueOf(commercePriceList.getCommercePriceListId()));
 
 		return itemSelectorURL.toString();
 	}
@@ -214,37 +205,8 @@ public class CommercePriceEntryDisplayContext
 		return searchContainer;
 	}
 
-	protected long[] getCheckedCPInstanceIds() throws PortalException {
-		List<Long> cpInstanceIdsList = new ArrayList<>();
-
-		List<CommercePriceEntry> commercePriceEntries =
-			getCommercePriceEntries();
-
-		for (CommercePriceEntry commercePriceEntry : commercePriceEntries) {
-			CPInstance cpInstance = _cpInstanceService.fetchCProductInstance(
-				commercePriceEntry.getCProductId(),
-				commercePriceEntry.getCPInstanceUuid());
-
-			cpInstanceIdsList.add(cpInstance.getCPInstanceId());
-		}
-
-		if (!cpInstanceIdsList.isEmpty()) {
-			return ArrayUtil.toLongArray(cpInstanceIdsList);
-		}
-
-		return new long[0];
-	}
-
-	protected List<CommercePriceEntry> getCommercePriceEntries()
-		throws PortalException {
-
-		return _commercePriceEntryService.getCommercePriceEntries(
-			getCommercePriceListId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-	}
-
 	private CommercePriceEntry _commercePriceEntry;
 	private final CommercePriceEntryService _commercePriceEntryService;
-	private final CPInstanceService _cpInstanceService;
 	private final ItemSelector _itemSelector;
 
 }
