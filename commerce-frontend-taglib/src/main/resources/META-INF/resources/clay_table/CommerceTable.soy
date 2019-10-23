@@ -149,6 +149,28 @@
 	</td>
 {/deltemplate}
 
+{deltemplate ClayTable.Cell variant="'commerceTableCellNameWithError'"}
+	{@param fieldSchema: ?}
+	{@param item: ?}
+	{@param value: ?}
+	{@param? _handleCellContentClick: any}
+	{@param? spritemap: string}
+
+	<td>
+		<span class="text-truncate">
+			{$item.name}
+		</span>
+
+		{if isNonnull($item.errorMessages) and length($item.errorMessages) > 0}
+			{foreach $error in $item.errorMessages}
+				<div class="alert-danger commerce-alert-danger">
+					- {$error}
+				</div>
+			{/foreach}
+		{/if}
+	</td>
+{/deltemplate}
+
 {deltemplate ClayTable.Cell variant="'commerceTablePrice'"}
 	{@param fieldSchema: ?}
 	{@param item: ?}

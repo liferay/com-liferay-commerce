@@ -30,6 +30,8 @@ import com.liferay.commerce.frontend.Filter;
 import com.liferay.commerce.frontend.Pagination;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
+import com.liferay.commerce.order.CommerceOrderValidatorRegistry;
+import com.liferay.commerce.order.CommerceOrderValidatorResult;
 import com.liferay.commerce.order.content.web.internal.frontend.util.CommerceOrderClayTableUtil;
 import com.liferay.commerce.order.content.web.internal.model.OrderItem;
 import com.liferay.commerce.price.CommerceProductPrice;
@@ -48,6 +50,7 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -55,6 +58,7 @@ import java.math.BigDecimal;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.PortletRequest;
@@ -139,7 +143,10 @@ public class CommercePendingOrderItemClayTable
 
 		skuField.setContentRenderer("commerceTableCellImageName");
 
-		clayTableSchemaBuilder.addField("name", "name");
+		ClayTableSchemaField nameField = clayTableSchemaBuilder.addField(
+			"name", "name");
+
+		nameField.setContentRenderer("commerceTableCellNameWithError");
 
 		ClayTableSchemaField priceField = clayTableSchemaBuilder.addField(
 			"price", "price");
@@ -182,6 +189,23 @@ public class CommercePendingOrderItemClayTable
 			_commerceOrderItemService.getCommerceOrderItems(
 				orderFilterImpl.getOrderId(), pagination.getStartPosition(),
 				pagination.getEndPosition());
+
+		CommerceOrder commerceOrder = null;
+		Map<Long, List<CommerceOrderValidatorResult>>
+			commerceOrderValidatorResultMap = null;
+
+		if (!commerceOrderItems.isEmpty()) {
+			CommerceOrderItem firstCommerceOrderItem = commerceOrderItems.get(
+				0);
+
+			commerceOrder = _commerceOrderService.getCommerceOrder(
+				firstCommerceOrderItem.getCommerceOrderId());
+
+			commerceOrderValidatorResultMap =
+				_commerceOrderValidatorRegistry.
+					getCommerceOrderValidatorResults(
+						themeDisplay.getLocale(), commerceOrder);
+		}
 
 		try {
 			for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
@@ -236,6 +260,20 @@ public class CommercePendingOrderItemClayTable
 					}
 				}
 
+				List<CommerceOrderValidatorResult>
+					commerceOrderValidatorResults =
+						commerceOrderValidatorResultMap.get(
+							commerceOrderItem.getCommerceOrderItemId());
+
+				List<String> errorMessages = new ArrayList<>();
+
+				for (CommerceOrderValidatorResult commerceOrderValidatorResult :
+						commerceOrderValidatorResults) {
+
+					errorMessages.add(
+						commerceOrderValidatorResult.getLocalizedMessage());
+				}
+
 				orderItems.add(
 					new OrderItem(
 						commerceOrderItem.getCommerceOrderItemId(),
@@ -250,7 +288,7 @@ public class CommercePendingOrderItemClayTable
 						CommerceOrderClayTableUtil.getViewShipmentURL(
 							commerceOrderItem.getCommerceOrderId(),
 							themeDisplay),
-						0));
+						0, ArrayUtil.toStringArray(errorMessages)));
 			}
 		}
 		catch (Exception e) {
@@ -295,6 +333,9 @@ public class CommercePendingOrderItemClayTable
 
 	@Reference
 	private CommerceOrderService _commerceOrderService;
+
+	@Reference
+	private CommerceOrderValidatorRegistry _commerceOrderValidatorRegistry;
 
 	@Reference
 	private CommerceProductPriceCalculation _commerceProductPriceCalculation;
