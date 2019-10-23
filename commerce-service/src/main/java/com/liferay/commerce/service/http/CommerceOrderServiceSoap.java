@@ -952,6 +952,25 @@ public class CommerceOrderServiceSoap {
 	}
 
 	public static com.liferay.commerce.model.CommerceOrderSoap
+			updatePrintedNote(long commerceOrderId, String printedNote)
+		throws RemoteException {
+
+		try {
+			com.liferay.commerce.model.CommerceOrder returnValue =
+				CommerceOrderServiceUtil.updatePrintedNote(
+					commerceOrderId, printedNote);
+
+			return com.liferay.commerce.model.CommerceOrderSoap.toSoapModel(
+				returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.model.CommerceOrderSoap
 			updatePurchaseOrderNumber(
 				long commerceOrderId, String purchaseOrderNumber)
 		throws RemoteException {
