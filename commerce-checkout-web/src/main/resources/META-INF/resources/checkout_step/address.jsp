@@ -91,7 +91,9 @@ long commerceRegionId = BeanParamUtil.getLong(currentCommerceAddress, request, "
 	<div class="form-group-autofit">
 		<aui:input disabled="<%= commerceAddressId > 0 %>" label="" name="street1" placeholder="address" wrapperCssClass="form-group-item" />
 
-		<aui:select disabled="<%= commerceAddressId > 0 %>" label="" name="commerceCountryId" placeholder="country" title="country" wrapperCssClass="form-group-item" />
+		<aui:select disabled="<%= commerceAddressId > 0 %>" label="" name="commerceCountryId" placeholder="country" title="country" wrapperCssClass="form-group-item">
+			<aui:validator errorMessage='<%= LanguageUtil.get(request, "please-enter-a-valid-country") %>' name="min">1</aui:validator>
+		</aui:select>
 	</div>
 
 	<div class="add-street-link form-group-autofit">
