@@ -225,9 +225,6 @@ public class EditCPAttachmentFileEntryMVCActionCommand
 		double priority = ParamUtil.getDouble(actionRequest, "priority");
 		int type = ParamUtil.getInteger(actionRequest, "type");
 
-		ddmFormValues = _ddmFormValuesHelper.cleanDDMFormValuesJSON(
-			ddmFormValues);
-
 		CPDefinition cpDefinition = _cpDefinitionService.getCPDefinition(
 			cpDefinitionId);
 

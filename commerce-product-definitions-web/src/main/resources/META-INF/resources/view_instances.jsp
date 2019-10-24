@@ -175,7 +175,7 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 
 							<liferay-ui:search-container-column-text
 								name="options"
-								value="<%= HtmlUtil.escape(cpInstanceDisplayContext.getOptions(cpInstance.getJson(), locale)) %>"
+								value="<%= HtmlUtil.escape(cpInstanceDisplayContext.getOptions(cpInstance.getCPDefinitionId(), cpInstance.getJson(), locale)) %>"
 							/>
 
 							<liferay-ui:search-container-column-status

@@ -14,10 +14,6 @@
 
 package com.liferay.commerce.product.internal.util;
 
-import com.liferay.commerce.product.model.CPDefinitionOptionRel;
-import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
-import com.liferay.commerce.product.service.CPDefinitionOptionRelLocalService;
-import com.liferay.commerce.product.service.CPDefinitionOptionValueRelLocalService;
 import com.liferay.commerce.product.util.DDMFormValuesHelper;
 import com.liferay.commerce.product.util.DDMFormValuesUtil;
 import com.liferay.dynamic.data.mapping.model.DDMForm;
@@ -30,7 +26,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -47,62 +42,16 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true, service = DDMFormValuesHelper.class)
 public class DDMFormValuesHelperImpl implements DDMFormValuesHelper {
 
+	@Deprecated
 	@Override
 	public String cleanDDMFormValuesJSON(String json) throws PortalException {
-		JSONArray newJSONArray = _jsonFactory.createJSONArray();
-		JSONArray jsonArray = _jsonFactory.createJSONArray(json);
-
-		for (int i = 0; i < jsonArray.length(); i++) {
-			JSONObject newJSONObject = _jsonFactory.createJSONObject();
-
-			JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-			long cpDefinitionOptionRelId = jsonObject.getLong("key");
-
-			CPDefinitionOptionRel cpDefinitionOptionRel =
-				_cpDefinitionOptionRelLocalService.fetchCPDefinitionOptionRel(
-					cpDefinitionOptionRelId);
-
-			if (cpDefinitionOptionRel == null) {
-				continue;
-			}
-
-			newJSONObject.put("key", String.valueOf(cpDefinitionOptionRelId));
-
-			JSONArray newValueJSONArray = _jsonFactory.createJSONArray();
-			JSONArray valueJSONArray = jsonObject.getJSONArray("value");
-
-			for (int j = 0; j < valueJSONArray.length(); j++) {
-				long cpDefinitionOptionValueRelId = GetterUtil.getLong(
-					valueJSONArray.getString(j));
-
-				CPDefinitionOptionValueRel cpDefinitionOptionValueRel =
-					_cpDefinitionOptionValueRelLocalService.
-						fetchCPDefinitionOptionValueRel(
-							cpDefinitionOptionValueRelId);
-
-				if (cpDefinitionOptionValueRel == null) {
-					continue;
-				}
-
-				newValueJSONArray.put(
-					String.valueOf(cpDefinitionOptionValueRelId));
-			}
-
-			newJSONObject.put("value", newValueJSONArray);
-
-			newJSONArray.put(newJSONObject);
-		}
-
-		return newJSONArray.toJSONString();
+		return json;
 	}
 
 	@Override
 	public DDMFormValues deserialize(
 			DDMForm ddmForm, String json, Locale locale)
 		throws PortalException {
-
-		json = cleanDDMFormValuesJSON(json);
 
 		DDMFormValues ddmFormValues = new DDMFormValues(ddmForm);
 
@@ -172,15 +121,10 @@ public class DDMFormValuesHelperImpl implements DDMFormValuesHelper {
 		JSONArray valueJSONArray = jsonObject.getJSONArray("value");
 
 		for (int i = 0; i < valueJSONArray.length(); i++) {
-			long cpDefinitionOptionValueRelId = GetterUtil.getLong(
-				valueJSONArray.get(i));
+			String valueKey = valueJSONArray.getString(i);
 
-			if (cpDefinitionOptionValueRelId > 0) {
-				String ddmFormFieldValueValue = String.valueOf(
-					cpDefinitionOptionValueRelId);
-
-				ddmFormFieldValue.setValue(
-					new UnlocalizedValue(ddmFormFieldValueValue));
+			if (Validator.isNotNull(valueKey)) {
+				ddmFormFieldValue.setValue(new UnlocalizedValue(valueKey));
 			}
 			else {
 				ddmFormFieldValue.setValue(
@@ -204,14 +148,6 @@ public class DDMFormValuesHelperImpl implements DDMFormValuesHelper {
 
 		return jsonObject;
 	}
-
-	@Reference
-	private CPDefinitionOptionRelLocalService
-		_cpDefinitionOptionRelLocalService;
-
-	@Reference
-	private CPDefinitionOptionValueRelLocalService
-		_cpDefinitionOptionValueRelLocalService;
 
 	@Reference
 	private JSONFactory _jsonFactory;
