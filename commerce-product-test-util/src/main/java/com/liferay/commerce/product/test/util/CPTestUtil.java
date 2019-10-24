@@ -49,6 +49,7 @@ import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.io.Serializable;
 
@@ -145,6 +146,63 @@ public class CPTestUtil {
 
 		return CPInstanceLocalServiceUtil.getCPInstance(
 			cpDefinition.getCPDefinitionId(), CPInstanceConstants.DEFAULT_SKU);
+	}
+
+	public static CPInstance addCPInstanceWithSku() throws PortalException {
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext();
+
+		User user = UserLocalServiceUtil.getUser(serviceContext.getUserId());
+
+		CPDefinition cpDefinition = _addCPDefinition(
+			SimpleCPTypeConstants.NAME, true, true, serviceContext);
+
+		long now = System.currentTimeMillis();
+
+		Date displayDate = new Date(now - Time.HOUR);
+		Date expirationDate = new Date(now + Time.DAY);
+
+		Calendar displayCal = CalendarFactoryUtil.getCalendar(
+			user.getTimeZone());
+
+		displayCal.setTime(displayDate);
+
+		int displayDateMonth = displayCal.get(Calendar.MONTH);
+		int displayDateDay = displayCal.get(Calendar.DATE);
+		int displayDateYear = displayCal.get(Calendar.YEAR);
+		int displayDateHour = displayCal.get(Calendar.HOUR);
+		int displayDateMinute = displayCal.get(Calendar.MINUTE);
+
+		if (displayCal.get(Calendar.AM_PM) == Calendar.PM) {
+			displayDateHour += 12;
+		}
+
+		Calendar expirationCal = CalendarFactoryUtil.getCalendar(
+			user.getTimeZone());
+
+		expirationCal.setTime(expirationDate);
+
+		int expirationDateMonth = expirationCal.get(Calendar.MONTH);
+		int expirationDateDay = expirationCal.get(Calendar.DATE);
+		int expirationDateYear = expirationCal.get(Calendar.YEAR);
+		int expirationDateHour = expirationCal.get(Calendar.HOUR);
+		int expirationDateMinute = expirationCal.get(Calendar.MINUTE);
+
+		if (expirationCal.get(Calendar.AM_PM) == Calendar.PM) {
+			expirationDateHour += 12;
+		}
+
+		CPInstance cpInstance = CPInstanceLocalServiceUtil.addCPInstance(
+			cpDefinition.getCPDefinitionId(), cpDefinition.getGroupId(),
+			RandomTestUtil.randomString(), RandomTestUtil.randomString(),
+			RandomTestUtil.randomString(), true, null, true, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, true, serviceContext);
+
+		cpInstance.setStatus(WorkflowConstants.STATUS_APPROVED);
+
+		return CPInstanceLocalServiceUtil.updateCPInstance(cpInstance);
 	}
 
 	public static CPOption addCPOption(long groupId, boolean skuContributor)
