@@ -16,6 +16,7 @@ package com.liferay.commerce.product.internal.util.data.provider;
 
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
+import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.permission.CommerceProductViewPermission;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelLocalService;
 import com.liferay.commerce.product.util.CPInstanceHelper;
@@ -138,23 +139,18 @@ public class CPInstanceOptionsValuesDataProvider implements DDMDataProvider {
 			for (CPDefinitionOptionRel cpDefinitionOptionRel :
 					cpDefinitionOptionRels) {
 
-				long cpDefinitionOptionRelId =
-					cpDefinitionOptionRel.getCPDefinitionOptionRelId();
+				CPOption cpOption = cpDefinitionOptionRel.getCPOption();
 
-				String parameterValue = parameters.get(
-					String.valueOf(cpDefinitionOptionRelId));
+				String parameterValue = parameters.get(cpOption.getKey());
 
 				// Collect filters and outputs
 
 				if (Validator.isNull(parameterValue)) {
 					outputParameterNames.put(
-						String.valueOf(cpDefinitionOptionRelId),
-						String.valueOf(cpDefinitionOptionRelId));
+						cpOption.getKey(), cpOption.getKey());
 				}
 				else {
-					filters.put(
-						String.valueOf(cpDefinitionOptionRelId),
-						parameterValue);
+					filters.put(cpOption.getKey(), parameterValue);
 				}
 			}
 
@@ -180,13 +176,10 @@ public class CPInstanceOptionsValuesDataProvider implements DDMDataProvider {
 				for (CPDefinitionOptionValueRel cpDefinitionOptionValueRel :
 						cpDefinitionOptionValueRels) {
 
-					String key = String.valueOf(
-						cpDefinitionOptionValueRel.
-							getCPDefinitionOptionValueRelId());
-
 					data.add(
 						new KeyValuePair(
-							key, cpDefinitionOptionValueRel.getName(locale)));
+							cpDefinitionOptionValueRel.getKey(),
+							cpDefinitionOptionValueRel.getName(locale)));
 				}
 
 				ddmDataProviderResponseBuilder.withOutput(

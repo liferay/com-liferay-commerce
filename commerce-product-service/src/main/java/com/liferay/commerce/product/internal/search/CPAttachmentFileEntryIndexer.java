@@ -41,7 +41,6 @@ import com.liferay.portal.kernel.search.filter.Filter;
 import com.liferay.portal.kernel.search.filter.TermsFilter;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
@@ -218,6 +217,7 @@ public class CPAttachmentFileEntryIndexer
 		Map<CPDefinitionOptionRel, List<CPDefinitionOptionValueRel>>
 			cpDefinitionOptionRelListMap =
 				_cpInstanceHelper.getCPDefinitionOptionRelsMap(
+					cpAttachmentFileEntry.getClassPK(),
 					cpAttachmentFileEntry.getJson());
 
 		for (Map.Entry<CPDefinitionOptionRel, List<CPDefinitionOptionValueRel>>
@@ -229,37 +229,17 @@ public class CPAttachmentFileEntryIndexer
 
 			CPOption cpOption = cpDefinitionOptionRel.getCPOption();
 
-			List<String> optionValueNames = new ArrayList<>();
-			List<Long> optionValueIds = new ArrayList<>();
+			List<String> optionValueIds = new ArrayList<>();
 
 			for (CPDefinitionOptionValueRel cpDefinitionOptionValueRel :
 					cpDefinitionOptionRelListMapEntry.getValue()) {
 
-				optionValueNames.add(
-					StringUtil.toLowerCase(
-						cpDefinitionOptionValueRel.getKey()));
-				optionValueIds.add(
-					cpDefinitionOptionValueRel.
-						getCPDefinitionOptionValueRelId());
+				optionValueIds.add(cpDefinitionOptionValueRel.getKey());
 			}
 
 			document.addText(
-				"ATTRIBUTE_" + cpOption.getKey() + "_VALUES_NAMES",
-				ArrayUtil.toStringArray(optionValueNames));
-			document.addNumber(
 				"ATTRIBUTE_" + cpOption.getKey() + "_VALUES_IDS",
-				ArrayUtil.toLongArray(optionValueIds));
-
-			document.addText(
-				"ATTRIBUTE_" +
-					cpDefinitionOptionRel.getCPDefinitionOptionRelId() +
-						"_VALUES_NAMES",
-				ArrayUtil.toStringArray(optionValueNames));
-			document.addNumber(
-				"ATTRIBUTE_" +
-					cpDefinitionOptionRel.getCPDefinitionOptionRelId() +
-						"_VALUES_IDS",
-				ArrayUtil.toLongArray(optionValueIds));
+				ArrayUtil.toStringArray(optionValueIds));
 		}
 
 		if (_log.isDebugEnabled()) {

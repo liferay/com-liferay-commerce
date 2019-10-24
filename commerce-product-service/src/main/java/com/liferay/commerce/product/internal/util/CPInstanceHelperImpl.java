@@ -27,6 +27,7 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelLocalService;
@@ -205,7 +206,7 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 
 	@Override
 	public Map<CPDefinitionOptionRel, List<CPDefinitionOptionValueRel>>
-			getCPDefinitionOptionRelsMap(String json)
+			getCPDefinitionOptionRelsMap(long cpDefinitionId, String json)
 		throws PortalException {
 
 		Map<CPDefinitionOptionRel, List<CPDefinitionOptionValueRel>>
@@ -220,11 +221,10 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-			long cpDefinitionOptionRelId = jsonObject.getLong("key");
-
 			CPDefinitionOptionRel cpDefinitionOptionRel =
-				_cpDefinitionOptionRelLocalService.fetchCPDefinitionOptionRel(
-					cpDefinitionOptionRelId);
+				_cpDefinitionOptionRelLocalService.
+					fetchCPDefinitionOptionRelByKey(
+						cpDefinitionId, jsonObject.getString("key"));
 
 			if (cpDefinitionOptionRel == null) {
 				continue;
@@ -233,13 +233,11 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 			JSONArray valueJSONArray = jsonObject.getJSONArray("value");
 
 			for (int j = 0; j < valueJSONArray.length(); j++) {
-				long cpDefinitionOptionValueRelId = GetterUtil.getLong(
-					valueJSONArray.getString(j));
-
 				CPDefinitionOptionValueRel cpDefinitionOptionValueRel =
 					_cpDefinitionOptionValueRelLocalService.
 						fetchCPDefinitionOptionValueRel(
-							cpDefinitionOptionValueRelId);
+							cpDefinitionOptionRel.getCPDefinitionOptionRelId(),
+							valueJSONArray.getString(j));
 
 				if (cpDefinitionOptionValueRel == null) {
 					continue;
@@ -359,13 +357,13 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 
 			String key = jsonObject.getString("key");
 
-			long cpDefinitionOptionRelId = GetterUtil.getLong(key);
-
 			CPDefinitionOptionRel cpDefinitionOptionRel =
-				_cpDefinitionOptionRelLocalService.getCPDefinitionOptionRel(
-					cpDefinitionOptionRelId);
+				_cpDefinitionOptionRelLocalService.
+					fetchCPDefinitionOptionRelByKey(cpDefinitionId, key);
 
-			if (!cpDefinitionOptionRel.isSkuContributor()) {
+			if ((cpDefinitionOptionRel != null) &&
+				!cpDefinitionOptionRel.isSkuContributor()) {
+
 				continue;
 			}
 
@@ -470,7 +468,8 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 	}
 
 	@Override
-	public List<KeyValuePair> getKeyValuePairs(String json, Locale locale)
+	public List<KeyValuePair> getKeyValuePairs(
+			long cpDefinitionId, String json, Locale locale)
 		throws PortalException {
 
 		List<KeyValuePair> values = new ArrayList<>();
@@ -484,11 +483,11 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-			long cpDefinitionOptionRelId = jsonObject.getLong("key");
+			String key = jsonObject.getString("key");
 
 			CPDefinitionOptionRel cpDefinitionOptionRel =
-				_cpDefinitionOptionRelLocalService.fetchCPDefinitionOptionRel(
-					cpDefinitionOptionRelId);
+				_cpDefinitionOptionRelLocalService.
+					fetchCPDefinitionOptionRelByKey(cpDefinitionId, key);
 
 			if (cpDefinitionOptionRel == null) {
 				continue;
@@ -497,15 +496,13 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 			JSONArray valueJSONArray = jsonObject.getJSONArray("value");
 
 			for (int j = 0; j < valueJSONArray.length(); j++) {
-				String value = StringPool.BLANK;
-
-				long cpDefinitionOptionValueRelId = GetterUtil.getLong(
-					valueJSONArray.getString(j));
+				String value = valueJSONArray.getString(j);
 
 				CPDefinitionOptionValueRel cpDefinitionOptionValueRel =
 					_cpDefinitionOptionValueRelLocalService.
 						fetchCPDefinitionOptionValueRel(
-							cpDefinitionOptionValueRelId);
+							cpDefinitionOptionRel.getCPDefinitionOptionRelId(),
+							value);
 
 				if (cpDefinitionOptionValueRel != null) {
 					value = cpDefinitionOptionValueRel.getName(locale);
@@ -729,12 +726,13 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 				continue;
 			}
 
+			CPOption cpOption = cpDefinitionOptionRel.getCPOption();
+
 			List<CPDefinitionOptionValueRel> cpDefinitionOptionValueRels =
 				cpDefinitionOptionRel.getCPDefinitionOptionValueRels();
 
 			DDMFormField ddmFormField = new DDMFormField(
-				String.valueOf(
-					cpDefinitionOptionRel.getCPDefinitionOptionRelId()),
+				cpOption.getKey(),
 				cpDefinitionOptionRel.getDDMFormFieldTypeName());
 
 			if (!cpDefinitionOptionValueRels.isEmpty()) {
@@ -744,12 +742,8 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 				for (CPDefinitionOptionValueRel cpDefinitionOptionValueRel :
 						cpDefinitionOptionValueRels) {
 
-					String optionLabel = String.valueOf(
-						cpDefinitionOptionValueRel.
-							getCPDefinitionOptionValueRelId());
-
 					ddmFormFieldOptions.addOptionLabel(
-						optionLabel, locale,
+						cpDefinitionOptionValueRel.getKey(), locale,
 						cpDefinitionOptionValueRel.getName(locale));
 				}
 
