@@ -9,7 +9,7 @@ function Assigner(props) {
 	return (
 		<ClayIconSpriteContext.Provider value={props.spritemap}>
 			<div className="d-flex align-items-center">
-				<span className="mr-3">{Liferay.Language.get("assigned-to")}:</span>
+				<span className="mr-3">{Liferay.Language.get("assigned-to")}</span>
 				<ClayDropDown
 					active={active}
 					alignmentPosition={Align.BottomLeft}
