@@ -135,17 +135,8 @@ public class AccountGroupResourceImpl
 			CommerceAccountGroup.class, StringPool.BLANK, pagination,
 			queryConfig -> queryConfig.setSelectedFieldNames(
 				Field.ENTRY_CLASS_PK),
-			searchContext -> {
-				searchContext.setCompanyId(contextCompany.getCompanyId());
-
-				//					long[] commerceChannelGroupIds = _getCommerceChannelGroupIds();
-				//
-				//					if ((commerceChannelGroupIds != null) &&
-				//						(commerceChannelGroupIds.length > 0)) {
-				//
-				//						searchContext.setGroupIds(commerceChannelGroupIds);
-				//					}
-			},
+			searchContext -> searchContext.setCompanyId(
+				contextCompany.getCompanyId()),
 			document -> _toAccountGroup(
 				_commerceAccountGroupService.getCommerceAccountGroup(
 					GetterUtil.getLong(document.get(Field.ENTRY_CLASS_PK)))),
