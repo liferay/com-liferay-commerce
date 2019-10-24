@@ -274,7 +274,7 @@ List<CommerceAddress> billingAddresses = commerceOrderContentDisplayContext.getB
 	<div class="commerce-cta is-visible">
 		<clay:button
 			elementClasses="btn-fixed"
-			label="<%= LanguageUtil.get(request, "save") %>"
+			label='<%= LanguageUtil.get(request, "save") %>'
 			size="lg"
 			style="secondary"
 			type="submit"
