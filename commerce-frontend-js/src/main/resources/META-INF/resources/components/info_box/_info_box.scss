@@ -1,14 +1,14 @@
 .info-box {
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+  .action {
+    line-height: 1;
+    margin-right: -4px;
+    margin-top: -4px;
+    padding: 4px;
   }
 
-  .action {
-    padding: 4px;
-    margin-top: -4px;
-    margin-right: -4px;
-    line-height: 1;
+  .header {
+    align-items: baseline;
+    display: flex;
+    justify-content: space-between;
   }
 }
