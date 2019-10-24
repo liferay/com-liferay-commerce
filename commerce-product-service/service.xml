@@ -398,6 +398,7 @@
 		<column name="facetable" type="boolean" />
 		<column name="required" type="boolean" />
 		<column name="skuContributor" type="boolean" />
+		<column name="key" type="String" />
 
 		<!-- Order -->
 
@@ -419,6 +420,10 @@
 		<finder name="C_C" return-type="CPDefinitionOptionRel" unique="true">
 			<finder-column name="CPDefinitionId" />
 			<finder-column name="CPOptionId" />
+		</finder>
+		<finder name="C_K" return-type="CPDefinitionOptionRel" unique="true">
+			<finder-column name="CPDefinitionId" />
+			<finder-column name="key" />
 		</finder>
 		<finder name="C_SC" return-type="Collection">
 			<finder-column name="CPDefinitionId" />
@@ -1094,6 +1099,7 @@
 		<exception>CPTaxCategoryName</exception>
 		<exception>DuplicateCommerceChannelRel</exception>
 		<exception>DuplicateCPAttachmentFileEntry</exception>
+		<exception>DuplicateCPDefinitionOptionRelKey</exception>
 		<exception>DuplicateCPFriendlyURLEntry</exception>
 		<exception>DuplicateCProduct</exception>
 		<exception>NoSuchSkuContributorCPDefinitionOptionRel</exception>

@@ -16,6 +16,7 @@ package com.liferay.commerce.wish.list.web.internal.display.context;
 
 import com.liferay.commerce.currency.model.CommerceMoney;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
+import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.product.util.CPInstanceHelper;
@@ -132,8 +133,10 @@ public class CommerceWishListDisplayContext {
 			CommerceWishListItem commerceWishListItem)
 		throws PortalException {
 
+		CPDefinition cpDefinition = commerceWishListItem.getCPDefinition();
+
 		List<KeyValuePair> keyValuePairs = _cpInstanceHelper.getKeyValuePairs(
-			commerceWishListItem.getJson(),
+			cpDefinition.getCPDefinitionId(), commerceWishListItem.getJson(),
 			_commerceWishListRequestHelper.getLocale());
 
 		StringBundler sb = new StringBundler(keyValuePairs.size() * 2 - 1);

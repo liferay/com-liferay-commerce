@@ -54,7 +54,7 @@ List<CommerceVirtualOrderItem> results = commerceVirtualOrderContentDisplayConte
 
 					String thumbnailSrc = commerceVirtualOrderItemContentDisplayContext.getCommerceOrderItemThumbnailSrc(commerceOrderItem);
 
-					List<KeyValuePair> keyValuePairs = commerceVirtualOrderItemContentDisplayContext.getKeyValuePairs(commerceOrderItem.getJson(), locale);
+					List<KeyValuePair> keyValuePairs = commerceVirtualOrderItemContentDisplayContext.getKeyValuePairs(commerceOrderItem.getCPDefinitionId(), commerceOrderItem.getJson(), locale);
 
 					StringJoiner stringJoiner = new StringJoiner(StringPool.COMMA);
 

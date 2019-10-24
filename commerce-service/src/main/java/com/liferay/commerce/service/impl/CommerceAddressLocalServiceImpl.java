@@ -88,7 +88,7 @@ public class CommerceAddressLocalServiceImpl
 			type = CommerceAddressConstants.ADDRESS_TYPE_SHIPPING;
 		}
 
-		return addCommerceAddress(
+		return commerceAddressLocalService.addCommerceAddress(
 			className, classPK, name, description, street1, street2, street3,
 			city, zip, commerceRegionId, commerceCountryId, phoneNumber, type,
 			serviceContext);

@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.product.service.impl;
 
+import com.liferay.commerce.product.exception.DuplicateCPDefinitionOptionRelKeyException;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
@@ -114,6 +115,10 @@ public class CPDefinitionOptionRelLocalServiceImpl
 				"versionable#" + cpDefinitionId, Boolean.FALSE);
 		}
 
+		CPOption cpOption = cpOptionLocalService.getCPOption(cpOptionId);
+
+		validate(cpDefinitionId, cpOption.getKey());
+
 		cpDefinitionOptionRel.setUuid(serviceContext.getUuid());
 		cpDefinitionOptionRel.setGroupId(groupId);
 		cpDefinitionOptionRel.setCompanyId(user.getCompanyId());
@@ -128,6 +133,7 @@ public class CPDefinitionOptionRelLocalServiceImpl
 		cpDefinitionOptionRel.setFacetable(facetable);
 		cpDefinitionOptionRel.setRequired(required);
 		cpDefinitionOptionRel.setSkuContributor(skuContributor);
+		cpDefinitionOptionRel.setKey(cpOption.getKey());
 		cpDefinitionOptionRel.setExpandoBridgeAttributes(serviceContext);
 
 		cpDefinitionOptionRelPersistence.update(cpDefinitionOptionRel);
@@ -251,6 +257,13 @@ public class CPDefinitionOptionRelLocalServiceImpl
 
 		return cpDefinitionOptionRelPersistence.fetchByC_C(
 			cpDefinitionId, cpOptionId);
+	}
+
+	@Override
+	public CPDefinitionOptionRel fetchCPDefinitionOptionRelByKey(
+		long cpDefinitionId, String key) {
+
+		return cpDefinitionOptionRelPersistence.fetchByC_K(cpDefinitionId, key);
 	}
 
 	@Override
@@ -575,6 +588,17 @@ public class CPDefinitionOptionRelLocalServiceImpl
 
 		throw new SearchException(
 			"Unable to fix the search index after 10 attempts");
+	}
+
+	protected void validate(long cpDefinitionId, String key)
+		throws PortalException {
+
+		CPDefinitionOptionRel cpDefinitionOptionRel =
+			cpDefinitionOptionRelPersistence.fetchByC_K(cpDefinitionId, key);
+
+		if (cpDefinitionOptionRel != null) {
+			throw new DuplicateCPDefinitionOptionRelKeyException();
+		}
 	}
 
 	private static final String[] _SELECTED_FIELD_NAMES = {

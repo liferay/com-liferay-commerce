@@ -429,7 +429,7 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 			List<CPDefinitionOptionValueRel> cpDefinitionOptionValueRels =
 				cpDefinitionOptionRel.getCPDefinitionOptionValueRels();
 
-			List<Long> optionValueIds = new ArrayList<>();
+			List<String> optionValueIds = new ArrayList<>();
 
 			Set<Locale> availableLocales = LanguageUtil.getAvailableLocales(
 				cpDefinitionOptionRel.getGroupId());
@@ -442,9 +442,7 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 				for (CPDefinitionOptionValueRel cpDefinitionOptionValueRel :
 						cpDefinitionOptionValueRels) {
 
-					optionValueIds.add(
-						cpDefinitionOptionValueRel.
-							getCPDefinitionOptionValueRelId());
+					optionValueIds.add(cpDefinitionOptionValueRel.getKey());
 
 					String localizedOptionValue =
 						cpDefinitionOptionValueRel.getName(languageId);
@@ -465,14 +463,9 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 					ArrayUtil.toStringArray(localizedOptionValues));
 			}
 
-			document.addNumber(
+			document.addText(
 				"ATTRIBUTE_" + cpOption.getKey() + "_VALUES_IDS",
-				ArrayUtil.toLongArray(optionValueIds));
-
-			document.addNumber(
-				"ATTRIBUTE_" + cpDefinitionOptionRel.getCPOptionId() +
-					"_VALUES_IDS",
-				ArrayUtil.toLongArray(optionValueIds));
+				ArrayUtil.toStringArray(optionValueIds));
 		}
 
 		document.addKeyword(
@@ -567,22 +560,8 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 				cpDefinitionSpecificationOptionValue.getValue(
 					cpDefinitionDefaultLanguageId));
 
-			document.addText(
-				"SPECIFICATION_" +
-					cpSpecificationOption.getCPSpecificationOptionId() +
-						"_VALUE_NAME",
-				cpDefinitionSpecificationOptionValue.getValue(
-					cpDefinitionDefaultLanguageId));
-
 			document.addNumber(
 				"SPECIFICATION_" + cpSpecificationOption.getKey() + "_VALUE_ID",
-				cpDefinitionSpecificationOptionValue.
-					getCPDefinitionSpecificationOptionValueId());
-
-			document.addNumber(
-				"SPECIFICATION_" +
-					cpSpecificationOption.getCPSpecificationOptionId() +
-						"_VALUE_ID",
 				cpDefinitionSpecificationOptionValue.
 					getCPDefinitionSpecificationOptionValueId());
 		}

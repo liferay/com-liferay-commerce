@@ -363,6 +363,7 @@ public class CPAttachmentFileEntriesDisplayContext
 		}
 
 		return _cpInstanceHelper.getCPDefinitionOptionRelsMap(
+			cpAttachmentFileEntry.getClassPK(),
 			cpAttachmentFileEntry.getJson());
 	}
 

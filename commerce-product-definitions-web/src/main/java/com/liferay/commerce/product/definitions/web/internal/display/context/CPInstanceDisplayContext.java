@@ -93,7 +93,7 @@ public class CPInstanceDisplayContext
 		CPInstance cpInstance = _cpInstanceService.getCPInstance(cpInstanceId);
 
 		return _cpInstanceHelper.getCPDefinitionOptionRelsMap(
-			cpInstance.getJson());
+			cpInstance.getCPDefinitionId(), cpInstance.getJson());
 	}
 
 	public String formatPrice(long companyId, BigDecimal price)
@@ -204,11 +204,11 @@ public class CPInstanceDisplayContext
 		return managementBarFilterItems;
 	}
 
-	public String getOptions(String json, Locale locale)
+	public String getOptions(long cpDefinitionId, String json, Locale locale)
 		throws PortalException {
 
 		List<KeyValuePair> keyValuePairs = _cpInstanceHelper.getKeyValuePairs(
-			json, locale);
+			cpDefinitionId, json, locale);
 
 		StringJoiner stringJoiner = new StringJoiner(
 			StringPool.COMMA + StringPool.SPACE);
