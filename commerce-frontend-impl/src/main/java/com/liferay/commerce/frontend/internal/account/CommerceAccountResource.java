@@ -190,7 +190,7 @@ public class CommerceAccountResource {
 		throws PortalException {
 
 		List<Order> orders = getOrders(
-			groupId, accountId, page, pageSize, httpServletRequest);
+			groupId, page, pageSize, httpServletRequest);
 
 		return new OrderList(orders, orders.size());
 	}
@@ -312,7 +312,7 @@ public class CommerceAccountResource {
 	}
 
 	protected List<Order> getOrders(
-			long groupId, long accountId, int page, int pageSize,
+			long groupId, int page, int pageSize,
 			HttpServletRequest httpServletRequest)
 		throws PortalException {
 
@@ -327,8 +327,8 @@ public class CommerceAccountResource {
 
 		List<CommerceOrder> userCommerceOrders =
 			_commerceOrderService.getPendingCommerceOrders(
-				commerceChannelGroupId, accountId, StringPool.BLANK, start,
-				end);
+				_portal.getCompanyId(httpServletRequest),
+				commerceChannelGroupId, start, end);
 
 		for (CommerceOrder commerceOrder : userCommerceOrders) {
 			Date modifiedDate = commerceOrder.getModifiedDate();
