@@ -5,19 +5,19 @@
 	text-transform: uppercase;
 }
 
+@mixin card-title {
+	@include base-title;
+
+	background-color: $color-bg;
+	font-size: 12px;
+}
+
 @mixin minium-typo-title {
 	@include base-title;
 
 	color: $color-fg;
 	font-size: 14px;
 	margin: $lg-gutter 0;
-}
-
-@mixin card-title {
-	@include base-title;
-
-	background-color: $color-bg;
-	font-size: 12px;
 }
 
 @mixin panel-title {
