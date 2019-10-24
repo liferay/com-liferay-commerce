@@ -147,10 +147,11 @@ public class OrderSummaryCheckoutStepDisplayContext {
 		return decimalFormat.format(percentage);
 	}
 
-	public List<KeyValuePair> getKeyValuePairs(String json, Locale locale)
+	public List<KeyValuePair> getKeyValuePairs(
+			long cpDefinitionId, String json, Locale locale)
 		throws PortalException {
 
-		return _cpInstanceHelper.getKeyValuePairs(json, locale);
+		return _cpInstanceHelper.getKeyValuePairs(cpDefinitionId, json, locale);
 	}
 
 	public String getPaymentMethodName(String paymentMethodKey, Locale locale) {

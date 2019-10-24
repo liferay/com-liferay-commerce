@@ -31,7 +31,6 @@ import com.liferay.headless.commerce.admin.pricing.dto.v1_0.PriceEntry;
 import com.liferay.headless.commerce.admin.pricing.dto.v1_0.PriceList;
 import com.liferay.headless.commerce.admin.pricing.dto.v1_0.PriceListAccountGroup;
 import com.liferay.headless.commerce.admin.pricing.dto.v1_0.TierPrice;
-import com.liferay.headless.commerce.admin.pricing.internal.util.v1_0.PriceEntryUtil;
 import com.liferay.headless.commerce.admin.pricing.internal.util.v1_0.PriceListAccountGroupUtil;
 import com.liferay.headless.commerce.admin.pricing.internal.util.v1_0.TierPriceUtil;
 import com.liferay.headless.commerce.admin.pricing.resource.v1_0.PriceListResource;
@@ -48,6 +47,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
+
+import java.math.BigDecimal;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -268,9 +269,16 @@ public class PriceListResourceImpl extends BasePriceListResourceImpl {
 		if (priceEntries != null) {
 			for (PriceEntry priceEntry : priceEntries) {
 				CommercePriceEntry commercePriceEntry =
-					PriceEntryUtil.upsertCommercePriceEntry(
-						_commercePriceEntryService, priceEntry,
-						commercePriceList, serviceContext);
+					_commercePriceEntryService.upsertCommercePriceEntry(
+						GetterUtil.getLong(priceEntry.getId()),
+						GetterUtil.getLong(priceEntry.getSkuId()), null,
+						commercePriceList.getCommercePriceListId(),
+						priceEntry.getExternalReferenceCode(),
+						priceEntry.getPrice(),
+						(BigDecimal)GetterUtil.get(
+							priceEntry.getPromoPrice(), BigDecimal.ZERO),
+						priceEntry.getSkuExternalReferenceCode(),
+						serviceContext);
 
 				TierPrice[] tierPrices = priceEntry.getTierPrices();
 

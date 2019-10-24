@@ -112,6 +112,7 @@ public class CommerceCartResourceUtil {
 
 			product.setOptions(
 				_cpInstanceHelper.getKeyValuePairs(
+					commerceOrderItem.getCPDefinitionId(),
 					commerceOrderItem.getJson(), locale));
 
 			products.add(product);

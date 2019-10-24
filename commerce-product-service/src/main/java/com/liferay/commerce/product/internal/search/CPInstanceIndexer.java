@@ -227,7 +227,7 @@ public class CPInstanceIndexer extends BaseIndexer<CPInstance> {
 		Map<CPDefinitionOptionRel, List<CPDefinitionOptionValueRel>>
 			cpDefinitionOptionRelListMap =
 				_cpInstanceHelper.getCPDefinitionOptionRelsMap(
-					cpInstance.getJson());
+					cpInstance.getCPDefinitionId(), cpInstance.getJson());
 
 		for (Map.Entry<CPDefinitionOptionRel, List<CPDefinitionOptionValueRel>>
 				cpDefinitionOptionRelListMapEntry :
@@ -244,31 +244,9 @@ public class CPInstanceIndexer extends BaseIndexer<CPInstance> {
 			CPDefinitionOptionValueRel cpDefinitionOptionValueRel =
 				cpDefinitionOptionValueRels.get(0);
 
-			for (String languageId : languageIds) {
-				document.addText(
-					LocalizationUtil.getLocalizedName(
-						"ATTRIBUTE_" + cpOption.getKey() + "_TITLE",
-						languageId),
-					cpDefinitionOptionValueRel.getName(languageId));
-
-				document.addText(
-					LocalizationUtil.getLocalizedName(
-						"ATTRIBUTE_" +
-							cpDefinitionOptionRel.getCPDefinitionOptionRelId() +
-								"_TITLE",
-						languageId),
-					cpDefinitionOptionValueRel.getName(languageId));
-			}
-
-			document.addNumber(
+			document.addText(
 				"ATTRIBUTE_" + cpOption.getKey() + "_VALUE_ID",
-				cpDefinitionOptionValueRel.getCPDefinitionOptionValueRelId());
-
-			document.addNumber(
-				"ATTRIBUTE_" +
-					cpDefinitionOptionRel.getCPDefinitionOptionRelId() +
-						"_VALUE_ID",
-				cpDefinitionOptionValueRel.getCPDefinitionOptionValueRelId());
+				cpDefinitionOptionValueRel.getKey());
 		}
 
 		if (_log.isDebugEnabled()) {

@@ -90,7 +90,7 @@ public class CPDefinitionOptionRelModelImpl
 		{"name", Types.VARCHAR}, {"description", Types.VARCHAR},
 		{"DDMFormFieldTypeName", Types.VARCHAR}, {"priority", Types.DOUBLE},
 		{"facetable", Types.BOOLEAN}, {"required", Types.BOOLEAN},
-		{"skuContributor", Types.BOOLEAN}
+		{"skuContributor", Types.BOOLEAN}, {"key_", Types.VARCHAR}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
@@ -114,10 +114,11 @@ public class CPDefinitionOptionRelModelImpl
 		TABLE_COLUMNS_MAP.put("facetable", Types.BOOLEAN);
 		TABLE_COLUMNS_MAP.put("required", Types.BOOLEAN);
 		TABLE_COLUMNS_MAP.put("skuContributor", Types.BOOLEAN);
+		TABLE_COLUMNS_MAP.put("key_", Types.VARCHAR);
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CPDefinitionOptionRel (uuid_ VARCHAR(75) null,CPDefinitionOptionRelId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CPDefinitionId LONG,CPOptionId LONG,name STRING null,description STRING null,DDMFormFieldTypeName VARCHAR(75) null,priority DOUBLE,facetable BOOLEAN,required BOOLEAN,skuContributor BOOLEAN)";
+		"create table CPDefinitionOptionRel (uuid_ VARCHAR(75) null,CPDefinitionOptionRelId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CPDefinitionId LONG,CPOptionId LONG,name STRING null,description STRING null,DDMFormFieldTypeName VARCHAR(75) null,priority DOUBLE,facetable BOOLEAN,required BOOLEAN,skuContributor BOOLEAN,key_ VARCHAR(75) null)";
 
 	public static final String TABLE_SQL_DROP =
 		"drop table CPDefinitionOptionRel";
@@ -157,11 +158,13 @@ public class CPDefinitionOptionRelModelImpl
 
 	public static final long GROUPID_COLUMN_BITMASK = 8L;
 
-	public static final long SKUCONTRIBUTOR_COLUMN_BITMASK = 16L;
+	public static final long KEY_COLUMN_BITMASK = 16L;
 
-	public static final long UUID_COLUMN_BITMASK = 32L;
+	public static final long SKUCONTRIBUTOR_COLUMN_BITMASK = 32L;
 
-	public static final long PRIORITY_COLUMN_BITMASK = 64L;
+	public static final long UUID_COLUMN_BITMASK = 64L;
+
+	public static final long PRIORITY_COLUMN_BITMASK = 128L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -196,6 +199,7 @@ public class CPDefinitionOptionRelModelImpl
 		model.setFacetable(soapModel.isFacetable());
 		model.setRequired(soapModel.isRequired());
 		model.setSkuContributor(soapModel.isSkuContributor());
+		model.setKey(soapModel.getKey());
 
 		return model;
 	}
@@ -789,6 +793,31 @@ public class CPDefinitionOptionRelModelImpl
 				}
 
 			});
+		attributeGetterFunctions.put(
+			"key",
+			new Function<CPDefinitionOptionRel, Object>() {
+
+				@Override
+				public Object apply(
+					CPDefinitionOptionRel cpDefinitionOptionRel) {
+
+					return cpDefinitionOptionRel.getKey();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"key",
+			new BiConsumer<CPDefinitionOptionRel, Object>() {
+
+				@Override
+				public void accept(
+					CPDefinitionOptionRel cpDefinitionOptionRel,
+					Object keyObject) {
+
+					cpDefinitionOptionRel.setKey((String)keyObject);
+				}
+
+			});
 
 		_attributeGetterFunctions = Collections.unmodifiableMap(
 			attributeGetterFunctions);
@@ -1299,6 +1328,32 @@ public class CPDefinitionOptionRelModelImpl
 		return _originalSkuContributor;
 	}
 
+	@JSON
+	@Override
+	public String getKey() {
+		if (_key == null) {
+			return "";
+		}
+		else {
+			return _key;
+		}
+	}
+
+	@Override
+	public void setKey(String key) {
+		_columnBitmask |= KEY_COLUMN_BITMASK;
+
+		if (_originalKey == null) {
+			_originalKey = _key;
+		}
+
+		_key = key;
+	}
+
+	public String getOriginalKey() {
+		return GetterUtil.getString(_originalKey);
+	}
+
 	@Override
 	public StagedModelType getStagedModelType() {
 		return new StagedModelType(
@@ -1450,6 +1505,7 @@ public class CPDefinitionOptionRelModelImpl
 		cpDefinitionOptionRelImpl.setFacetable(isFacetable());
 		cpDefinitionOptionRelImpl.setRequired(isRequired());
 		cpDefinitionOptionRelImpl.setSkuContributor(isSkuContributor());
+		cpDefinitionOptionRelImpl.setKey(getKey());
 
 		cpDefinitionOptionRelImpl.resetOriginalValues();
 
@@ -1549,6 +1605,9 @@ public class CPDefinitionOptionRelModelImpl
 
 		cpDefinitionOptionRelModelImpl._setOriginalSkuContributor = false;
 
+		cpDefinitionOptionRelModelImpl._originalKey =
+			cpDefinitionOptionRelModelImpl._key;
+
 		cpDefinitionOptionRelModelImpl._columnBitmask = 0;
 	}
 
@@ -1640,6 +1699,14 @@ public class CPDefinitionOptionRelModelImpl
 		cpDefinitionOptionRelCacheModel.required = isRequired();
 
 		cpDefinitionOptionRelCacheModel.skuContributor = isSkuContributor();
+
+		cpDefinitionOptionRelCacheModel.key = getKey();
+
+		String key = cpDefinitionOptionRelCacheModel.key;
+
+		if ((key != null) && (key.length() == 0)) {
+			cpDefinitionOptionRelCacheModel.key = null;
+		}
 
 		return cpDefinitionOptionRelCacheModel;
 	}
@@ -1747,6 +1814,8 @@ public class CPDefinitionOptionRelModelImpl
 	private boolean _skuContributor;
 	private boolean _originalSkuContributor;
 	private boolean _setOriginalSkuContributor;
+	private String _key;
+	private String _originalKey;
 	private long _columnBitmask;
 	private CPDefinitionOptionRel _escapedModel;
 

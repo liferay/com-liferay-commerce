@@ -265,6 +265,14 @@ public class CPDefinitionOptionRelLocalServiceWrapper
 			cpDefinitionId, cpOptionId);
 	}
 
+	@Override
+	public com.liferay.commerce.product.model.CPDefinitionOptionRel
+		fetchCPDefinitionOptionRelByKey(long cpDefinitionId, String key) {
+
+		return _cpDefinitionOptionRelLocalService.
+			fetchCPDefinitionOptionRelByKey(cpDefinitionId, key);
+	}
+
 	/**
 	 * Returns the cp definition option rel matching the UUID and group.
 	 *
