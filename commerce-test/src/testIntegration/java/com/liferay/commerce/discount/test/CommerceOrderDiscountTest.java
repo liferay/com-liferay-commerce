@@ -17,6 +17,7 @@ package com.liferay.commerce.discount.test;
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountLocalService;
+import com.liferay.commerce.account.service.CommerceAccountLocalServiceUtil;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.model.CommerceMoney;
@@ -29,16 +30,19 @@ import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.price.CommerceOrderPriceCalculation;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.test.util.CPTestUtil;
 import com.liferay.commerce.service.CommerceOrderLocalService;
+import com.liferay.commerce.service.CommerceOrderLocalServiceUtil;
 import com.liferay.commerce.test.util.CommerceInventoryTestUtil;
 import com.liferay.commerce.test.util.CommerceTestUtil;
 import com.liferay.commerce.test.util.TestCommerceContext;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.GroupLocalServiceUtil;
+import com.liferay.portal.kernel.service.UserLocalServiceUtil;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
-import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
 import com.liferay.portal.kernel.test.util.UserTestUtil;
 import com.liferay.portal.test.rule.Inject;
@@ -47,10 +51,15 @@ import com.liferay.portal.test.rule.PermissionCheckerTestRule;
 
 import java.math.BigDecimal;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.frutilla.FrutillaRule;
+
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -58,7 +67,6 @@ import org.junit.runner.RunWith;
 /**
  * @author Luca Pellizzon
  */
-@Ignore
 @RunWith(Arquillian.class)
 public class CommerceOrderDiscountTest {
 
@@ -76,27 +84,56 @@ public class CommerceOrderDiscountTest {
 		_commerceAccount =
 			_commerceAccountLocalService.getPersonalCommerceAccount(
 				_user.getUserId());
+
+		_commerceOrders = new ArrayList<>();
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		for (CommerceOrder commerceOrder : _commerceOrders) {
+			CommerceOrderLocalServiceUtil.deleteCommerceOrder(commerceOrder);
+		}
+
+		CommerceAccountLocalServiceUtil.deleteCommerceAccount(_commerceAccount);
+		GroupLocalServiceUtil.deleteGroup(_group);
+		UserLocalServiceUtil.deleteUser(_user);
 	}
 
 	@Test
 	public void testMultiTargetDiscounts() throws Exception {
+		frutillaRule.scenario(
+			"Discounts on multiple targets shall be applied on the order"
+		).given(
+			"An order with some order items"
+		).and(
+			"A discount associated to one product and a discount on the total price"
+		).when(
+			"I try to get the final price of the order"
+		).then(
+			"The final price will be calculated taking into consideration " +
+				"the discounts"
+		);
+
 		CommerceCurrency commerceCurrency =
-			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
+			CommerceCurrencyTestUtil.addCommerceCurrency();
+
+		CommerceChannel commerceChannel = CommerceTestUtil.addCommerceChannel(
+			commerceCurrency.getCode());
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
-			_group.getGroupId(), _user.getUserId(),
-			commerceCurrency.getCommerceCurrencyId());
+			_user.getUserId(), _commerceAccount.getCommerceAccountId(),
+			commerceChannel.getSiteGroupId(), commerceCurrency);
+
+		_commerceOrders.add(commerceOrder);
 
 		commerceOrder.setCommerceCurrencyId(
 			commerceCurrency.getCommerceCurrencyId());
 
 		_commerceOrderLocalService.updateCommerceOrder(commerceOrder);
 
-		CPInstance cpInstanceDiscount = CPTestUtil.addCPInstance(
-			_group.getGroupId());
+		CPInstance cpInstanceDiscount = CPTestUtil.addCPInstanceWithSku();
 
-		CPInstance cpInstancePlain = CPTestUtil.addCPInstance(
-			_group.getGroupId());
+		CPInstance cpInstancePlain = CPTestUtil.addCPInstanceWithSku();
 
 		cpInstanceDiscount.setPrice(BigDecimal.valueOf(25));
 		cpInstancePlain.setPrice(BigDecimal.valueOf(10));
@@ -107,8 +144,11 @@ public class CommerceOrderDiscountTest {
 		CPDefinition cpDefinition = cpInstanceDiscount.getCPDefinition();
 
 		CommerceInventoryWarehouse commerceInventoryWarehouse =
-			CommerceInventoryTestUtil.addCommerceInventoryWarehouse(
-				_group.getGroupId());
+			CommerceInventoryTestUtil.addCommerceInventoryWarehouse();
+
+		CommerceTestUtil.addWarehouseCommerceChannelRel(
+			commerceInventoryWarehouse.getCommerceInventoryWarehouseId(),
+			commerceChannel.getCommerceChannelId());
 
 		int quantity = 10;
 		int orderedQuantity = 1;
@@ -179,23 +219,38 @@ public class CommerceOrderDiscountTest {
 
 	@Test
 	public void testMultiTargetDiscountsWithCoupon() throws Exception {
+		frutillaRule.scenario(
+			"Discounts on multiple targets shall be applied on the order"
+		).given(
+			"An order with some order items"
+		).and(
+			"A discount associated to one product and a discount coupon on the total price"
+		).when(
+			"I try to get the final price of the order"
+		).then(
+			"The final price will be calculated taking into consideration " +
+				"the discounts"
+		);
 		CommerceCurrency commerceCurrency =
-			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
+			CommerceCurrencyTestUtil.addCommerceCurrency();
+
+		CommerceChannel commerceChannel = CommerceTestUtil.addCommerceChannel(
+			commerceCurrency.getCode());
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
-			_group.getGroupId(), _user.getUserId(),
-			commerceCurrency.getCommerceCurrencyId());
+			_user.getUserId(), _commerceAccount.getCommerceAccountId(),
+			commerceChannel.getSiteGroupId(), commerceCurrency);
+
+		_commerceOrders.add(commerceOrder);
 
 		commerceOrder.setCommerceCurrencyId(
 			commerceCurrency.getCommerceCurrencyId());
 
 		_commerceOrderLocalService.updateCommerceOrder(commerceOrder);
 
-		CPInstance cpInstanceDiscount = CPTestUtil.addCPInstance(
-			_group.getGroupId());
+		CPInstance cpInstanceDiscount = CPTestUtil.addCPInstanceWithSku();
 
-		CPInstance cpInstancePlain = CPTestUtil.addCPInstance(
-			_group.getGroupId());
+		CPInstance cpInstancePlain = CPTestUtil.addCPInstanceWithSku();
 
 		cpInstanceDiscount.setPrice(BigDecimal.valueOf(25));
 		cpInstancePlain.setPrice(BigDecimal.valueOf(10));
@@ -206,8 +261,11 @@ public class CommerceOrderDiscountTest {
 		CPDefinition cpDefinition = cpInstanceDiscount.getCPDefinition();
 
 		CommerceInventoryWarehouse commerceInventoryWarehouse =
-			CommerceInventoryTestUtil.addCommerceInventoryWarehouse(
-				_group.getGroupId());
+			CommerceInventoryTestUtil.addCommerceInventoryWarehouse();
+
+		CommerceTestUtil.addWarehouseCommerceChannelRel(
+			commerceInventoryWarehouse.getCommerceInventoryWarehouseId(),
+			commerceChannel.getCommerceChannelId());
 
 		int quantity = 10;
 		int orderedQuantity = 1;
@@ -236,12 +294,6 @@ public class CommerceOrderDiscountTest {
 		CommerceContext commerceContext = new TestCommerceContext(
 			commerceCurrency, _user, _group, _commerceAccount, commerceOrder);
 
-		commerceOrder = _commerceOrderLocalService.applyCouponCode(
-			commerceOrder.getCommerceOrderId(), couponCode, commerceContext);
-
-		commerceContext = new TestCommerceContext(
-			commerceCurrency, _user, _group, _commerceAccount, commerceOrder);
-
 		CommerceTestUtil.addCommerceOrderItem(
 			commerceOrder.getCommerceOrderId(),
 			cpInstanceDiscount.getCPInstanceId(), orderedQuantity,
@@ -251,6 +303,9 @@ public class CommerceOrderDiscountTest {
 			commerceOrder.getCommerceOrderId(),
 			cpInstancePlain.getCPInstanceId(), orderedQuantity,
 			commerceContext);
+
+		commerceOrder = _commerceOrderLocalService.applyCouponCode(
+			commerceOrder.getCommerceOrderId(), couponCode, commerceContext);
 
 		CommerceMoney total = _commerceOrderPriceCalculation.getTotal(
 			commerceOrder, commerceContext);
@@ -286,7 +341,9 @@ public class CommerceOrderDiscountTest {
 			totalPrice.stripTrailingZeros());
 	}
 
-	@DeleteAfterTestRun
+	@Rule
+	public FrutillaRule frutillaRule = new FrutillaRule();
+
 	private CommerceAccount _commerceAccount;
 
 	@Inject
@@ -298,13 +355,12 @@ public class CommerceOrderDiscountTest {
 	@Inject
 	private CommerceOrderPriceCalculation _commerceOrderPriceCalculation;
 
+	private List<CommerceOrder> _commerceOrders;
+
 	@Inject
 	private CPInstanceLocalService _cpInstanceLocalService;
 
-	@DeleteAfterTestRun
 	private Group _group;
-
-	@DeleteAfterTestRun
 	private User _user;
 
 }
