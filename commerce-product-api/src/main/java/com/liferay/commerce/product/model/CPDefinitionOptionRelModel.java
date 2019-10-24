@@ -533,6 +533,21 @@ public interface CPDefinitionOptionRelModel
 	 */
 	public void setSkuContributor(boolean skuContributor);
 
+	/**
+	 * Returns the key of this cp definition option rel.
+	 *
+	 * @return the key of this cp definition option rel
+	 */
+	@AutoEscape
+	public String getKey();
+
+	/**
+	 * Sets the key of this cp definition option rel.
+	 *
+	 * @param key the key of this cp definition option rel
+	 */
+	public void setKey(String key);
+
 	@Override
 	public boolean isNew();
 

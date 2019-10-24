@@ -12,31 +12,31 @@
  * details.
  */
 
-package com.liferay.commerce.product.util;
+package com.liferay.commerce.product.exception;
 
-import aQute.bnd.annotation.ProviderType;
-
-import com.liferay.dynamic.data.mapping.model.DDMForm;
-import com.liferay.dynamic.data.mapping.storage.DDMFormValues;
 import com.liferay.portal.kernel.exception.PortalException;
-
-import java.util.Locale;
 
 /**
  * @author Marco Leo
  */
-@ProviderType
-public interface DDMFormValuesHelper {
+public class DuplicateCPDefinitionOptionRelKeyException
+	extends PortalException {
 
-	@Deprecated
-	public String cleanDDMFormValuesJSON(String json) throws PortalException;
+	public DuplicateCPDefinitionOptionRelKeyException() {
+	}
 
-	public DDMFormValues deserialize(
-			DDMForm ddmForm, String json, Locale locale)
-		throws PortalException;
+	public DuplicateCPDefinitionOptionRelKeyException(String msg) {
+		super(msg);
+	}
 
-	public boolean equals(String json1, String json2) throws PortalException;
+	public DuplicateCPDefinitionOptionRelKeyException(
+		String msg, Throwable cause) {
 
-	public String serialize(DDMFormValues ddmFormValues);
+		super(msg, cause);
+	}
+
+	public DuplicateCPDefinitionOptionRelKeyException(Throwable cause) {
+		super(cause);
+	}
 
 }

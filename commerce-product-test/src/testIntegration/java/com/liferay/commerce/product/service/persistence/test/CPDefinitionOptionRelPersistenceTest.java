@@ -163,6 +163,8 @@ public class CPDefinitionOptionRelPersistenceTest {
 		newCPDefinitionOptionRel.setSkuContributor(
 			RandomTestUtil.randomBoolean());
 
+		newCPDefinitionOptionRel.setKey(RandomTestUtil.randomString());
+
 		_cpDefinitionOptionRels.add(
 			_persistence.update(newCPDefinitionOptionRel));
 
@@ -223,6 +225,9 @@ public class CPDefinitionOptionRelPersistenceTest {
 		Assert.assertEquals(
 			existingCPDefinitionOptionRel.isSkuContributor(),
 			newCPDefinitionOptionRel.isSkuContributor());
+		Assert.assertEquals(
+			existingCPDefinitionOptionRel.getKey(),
+			newCPDefinitionOptionRel.getKey());
 	}
 
 	@Test
@@ -282,6 +287,15 @@ public class CPDefinitionOptionRelPersistenceTest {
 	}
 
 	@Test
+	public void testCountByC_K() throws Exception {
+		_persistence.countByC_K(RandomTestUtil.nextLong(), "");
+
+		_persistence.countByC_K(0L, "null");
+
+		_persistence.countByC_K(0L, (String)null);
+	}
+
+	@Test
 	public void testCountByC_SC() throws Exception {
 		_persistence.countByC_SC(
 			RandomTestUtil.nextLong(), RandomTestUtil.randomBoolean());
@@ -322,7 +336,8 @@ public class CPDefinitionOptionRelPersistenceTest {
 			"userName", true, "createDate", true, "modifiedDate", true,
 			"CPDefinitionId", true, "CPOptionId", true, "name", true,
 			"description", true, "DDMFormFieldTypeName", true, "priority", true,
-			"facetable", true, "required", true, "skuContributor", true);
+			"facetable", true, "required", true, "skuContributor", true, "key",
+			true);
 	}
 
 	@Test
@@ -594,6 +609,18 @@ public class CPDefinitionOptionRelPersistenceTest {
 			ReflectionTestUtil.<Long>invoke(
 				existingCPDefinitionOptionRel, "getOriginalCPOptionId",
 				new Class<?>[0]));
+
+		Assert.assertEquals(
+			Long.valueOf(existingCPDefinitionOptionRel.getCPDefinitionId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCPDefinitionOptionRel, "getOriginalCPDefinitionId",
+				new Class<?>[0]));
+		Assert.assertTrue(
+			Objects.equals(
+				existingCPDefinitionOptionRel.getKey(),
+				ReflectionTestUtil.invoke(
+					existingCPDefinitionOptionRel, "getOriginalKey",
+					new Class<?>[0])));
 	}
 
 	protected CPDefinitionOptionRel addCPDefinitionOptionRel()
@@ -635,6 +662,8 @@ public class CPDefinitionOptionRelPersistenceTest {
 		cpDefinitionOptionRel.setRequired(RandomTestUtil.randomBoolean());
 
 		cpDefinitionOptionRel.setSkuContributor(RandomTestUtil.randomBoolean());
+
+		cpDefinitionOptionRel.setKey(RandomTestUtil.randomString());
 
 		_cpDefinitionOptionRels.add(_persistence.update(cpDefinitionOptionRel));
 

@@ -219,6 +219,10 @@ public interface CPDefinitionOptionRelLocalService
 	public CPDefinitionOptionRel fetchCPDefinitionOptionRel(
 		long cpDefinitionId, long cpOptionId);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CPDefinitionOptionRel fetchCPDefinitionOptionRelByKey(
+		long cpDefinitionId, String key);
+
 	/**
 	 * Returns the cp definition option rel matching the UUID and group.
 	 *

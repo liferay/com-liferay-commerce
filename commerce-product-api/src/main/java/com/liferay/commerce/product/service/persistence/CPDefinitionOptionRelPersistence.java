@@ -881,6 +881,56 @@ public interface CPDefinitionOptionRelPersistence
 	public int countByC_C(long CPDefinitionId, long CPOptionId);
 
 	/**
+	 * Returns the cp definition option rel where CPDefinitionId = &#63; and key = &#63; or throws a <code>NoSuchCPDefinitionOptionRelException</code> if it could not be found.
+	 *
+	 * @param CPDefinitionId the cp definition ID
+	 * @param key the key
+	 * @return the matching cp definition option rel
+	 * @throws NoSuchCPDefinitionOptionRelException if a matching cp definition option rel could not be found
+	 */
+	public CPDefinitionOptionRel findByC_K(long CPDefinitionId, String key)
+		throws NoSuchCPDefinitionOptionRelException;
+
+	/**
+	 * Returns the cp definition option rel where CPDefinitionId = &#63; and key = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param CPDefinitionId the cp definition ID
+	 * @param key the key
+	 * @return the matching cp definition option rel, or <code>null</code> if a matching cp definition option rel could not be found
+	 */
+	public CPDefinitionOptionRel fetchByC_K(long CPDefinitionId, String key);
+
+	/**
+	 * Returns the cp definition option rel where CPDefinitionId = &#63; and key = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param CPDefinitionId the cp definition ID
+	 * @param key the key
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the matching cp definition option rel, or <code>null</code> if a matching cp definition option rel could not be found
+	 */
+	public CPDefinitionOptionRel fetchByC_K(
+		long CPDefinitionId, String key, boolean useFinderCache);
+
+	/**
+	 * Removes the cp definition option rel where CPDefinitionId = &#63; and key = &#63; from the database.
+	 *
+	 * @param CPDefinitionId the cp definition ID
+	 * @param key the key
+	 * @return the cp definition option rel that was removed
+	 */
+	public CPDefinitionOptionRel removeByC_K(long CPDefinitionId, String key)
+		throws NoSuchCPDefinitionOptionRelException;
+
+	/**
+	 * Returns the number of cp definition option rels where CPDefinitionId = &#63; and key = &#63;.
+	 *
+	 * @param CPDefinitionId the cp definition ID
+	 * @param key the key
+	 * @return the number of matching cp definition option rels
+	 */
+	public int countByC_K(long CPDefinitionId, String key);
+
+	/**
 	 * Returns all the cp definition option rels where CPDefinitionId = &#63; and skuContributor = &#63;.
 	 *
 	 * @param CPDefinitionId the cp definition ID
