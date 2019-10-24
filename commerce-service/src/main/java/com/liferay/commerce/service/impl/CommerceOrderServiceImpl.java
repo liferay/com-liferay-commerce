@@ -28,6 +28,7 @@ import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.service.base.CommerceOrderServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
@@ -369,10 +370,10 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			groupId, commerceAccountId,
 			CommerceOrderActionKeys.VIEW_OPEN_COMMERCE_ORDERS);
 
-		return commerceOrderLocalService.getUserCommerceOrders(
-			groupId, getUserId(), commerceAccountId,
-			CommerceOrderConstants.ORDER_STATUS_OPEN, false, keywords, start,
-			end);
+		Group group = groupLocalService.getGroup(groupId);
+
+		return getPendingCommerceOrders(
+			group.getCompanyId(), groupId, start, end);
 	}
 
 	@Override
@@ -399,9 +400,10 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			groupId, commerceAccountId,
 			CommerceOrderActionKeys.VIEW_OPEN_COMMERCE_ORDERS);
 
-		return commerceOrderLocalService.getUserCommerceOrdersCount(
-			groupId, getUserId(), commerceAccountId,
-			CommerceOrderConstants.ORDER_STATUS_OPEN, false, keywords);
+		Group group = groupLocalService.getGroup(groupId);
+
+		return (int)getPendingCommerceOrdersCount(
+			group.getCompanyId(), groupId);
 	}
 
 	@Override
@@ -431,10 +433,10 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			groupId, commerceAccountId,
 			CommerceOrderActionKeys.VIEW_COMMERCE_ORDERS);
 
-		return commerceOrderLocalService.getUserCommerceOrders(
-			groupId, getUserId(), commerceAccountId,
-			CommerceOrderConstants.ORDER_STATUS_OPEN, true, keywords, start,
-			end);
+		Group group = groupLocalService.getGroup(groupId);
+
+		return getPlacedCommerceOrders(
+			group.getCompanyId(), groupId, start, end);
 	}
 
 	@Override
@@ -461,9 +463,9 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			groupId, commerceAccountId,
 			CommerceOrderActionKeys.VIEW_COMMERCE_ORDERS);
 
-		return commerceOrderLocalService.getUserCommerceOrdersCount(
-			groupId, getUserId(), commerceAccountId,
-			CommerceOrderConstants.ORDER_STATUS_OPEN, true, keywords);
+		Group group = groupLocalService.getGroup(groupId);
+
+		return (int)getPlacedCommerceOrdersCount(group.getCompanyId(), groupId);
 	}
 
 	@Override

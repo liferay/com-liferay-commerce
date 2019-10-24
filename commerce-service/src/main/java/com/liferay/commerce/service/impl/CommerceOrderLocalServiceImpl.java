@@ -47,9 +47,10 @@ import com.liferay.commerce.search.facet.NegatableMultiValueFacet;
 import com.liferay.commerce.service.base.CommerceOrderLocalServiceBaseImpl;
 import com.liferay.commerce.util.CommerceShippingHelper;
 import com.liferay.petra.string.StringPool;
-import com.liferay.portal.kernel.dao.orm.QueryDefinition;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.model.Group;
@@ -89,6 +90,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -682,18 +684,19 @@ public class CommerceOrderLocalServiceImpl
 		long groupId, long userId, long commerceAccountId, Integer orderStatus,
 		boolean excludeOrderStatus, String keywords, int start, int end) {
 
-		QueryDefinition<CommerceOrder> queryDefinition =
-			new QueryDefinition<>();
+		try {
+			Group group = groupLocalService.getGroup(groupId);
 
-		queryDefinition.setAttribute("commerceAccountId", commerceAccountId);
-		queryDefinition.setAttribute("excludeOrderStatus", excludeOrderStatus);
-		queryDefinition.setAttribute("groupId", groupId);
-		queryDefinition.setAttribute("keywords", keywords);
-		queryDefinition.setAttribute("orderStatus", orderStatus);
-		queryDefinition.setStart(start);
-		queryDefinition.setEnd(end);
+			return commerceOrderLocalService.getCommerceOrders(
+				group.getCompanyId(), groupId, new long[] {commerceAccountId},
+				new int[] {CommerceOrderConstants.ORDER_STATUS_OPEN}, false,
+				start, end);
+		}
+		catch (PortalException pe) {
+			_log.error(pe, pe);
+		}
 
-		return commerceOrderFinder.findByG_U_C_O(userId, queryDefinition);
+		return Collections.emptyList();
 	}
 
 	/**
@@ -705,16 +708,18 @@ public class CommerceOrderLocalServiceImpl
 		long groupId, long userId, long commerceAccountId, Integer orderStatus,
 		boolean excludeOrderStatus, String keywords) {
 
-		QueryDefinition<CommerceOrder> queryDefinition =
-			new QueryDefinition<>();
+		try {
+			Group group = groupLocalService.getGroup(groupId);
 
-		queryDefinition.setAttribute("commerceAccountId", commerceAccountId);
-		queryDefinition.setAttribute("excludeOrderStatus", excludeOrderStatus);
-		queryDefinition.setAttribute("groupId", groupId);
-		queryDefinition.setAttribute("keywords", keywords);
-		queryDefinition.setAttribute("orderStatus", orderStatus);
+			return (int)commerceOrderLocalService.getCommerceOrdersCount(
+				group.getCompanyId(), groupId, new long[] {commerceAccountId},
+				new int[] {CommerceOrderConstants.ORDER_STATUS_OPEN}, false);
+		}
+		catch (PortalException pe) {
+			_log.error(pe, pe);
+		}
 
-		return commerceOrderFinder.countByG_U_C_O(userId, queryDefinition);
+		return 0;
 	}
 
 	@Override
@@ -1959,6 +1964,9 @@ public class CommerceOrderLocalServiceImpl
 		commerceOrder.setTotalDiscountPercentageLevel4(
 			discountPercentageLevel4);
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CommerceOrderLocalServiceImpl.class);
 
 	@ServiceReference(type = CommerceChannelLocalService.class)
 	private CommerceChannelLocalService _commerceChannelLocalService;
