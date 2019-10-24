@@ -248,6 +248,13 @@ public class CPDefinitionOptionRelLocalServiceUtil {
 			cpDefinitionId, cpOptionId);
 	}
 
+	public static com.liferay.commerce.product.model.CPDefinitionOptionRel
+		fetchCPDefinitionOptionRelByKey(long cpDefinitionId, String key) {
+
+		return getService().fetchCPDefinitionOptionRelByKey(
+			cpDefinitionId, key);
+	}
+
 	/**
 	 * Returns the cp definition option rel matching the UUID and group.
 	 *
