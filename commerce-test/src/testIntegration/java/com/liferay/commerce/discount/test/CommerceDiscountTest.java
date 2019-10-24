@@ -105,10 +105,6 @@ public class CommerceDiscountTest {
 		UserLocalServiceUtil.deleteUser(_user);
 	}
 
-	// if the discount is not associated to any account group then it's applied to any account
-	// only if the account group associated to the discount is different from the one to which the account is associated
-	// the discount is not applied
-
 	@Test
 	public void testAccountGroupDiscount() throws Exception {
 		frutillaRule.scenario(
