@@ -278,10 +278,10 @@ public class CommerceDiscountUsageEntryModelImpl
 				@Override
 				public void accept(
 					CommerceDiscountUsageEntry commerceDiscountUsageEntry,
-					Object commerceDiscountUsageEntryId) {
+					Object commerceDiscountUsageEntryIdObject) {
 
 					commerceDiscountUsageEntry.setCommerceDiscountUsageEntryId(
-						(Long)commerceDiscountUsageEntryId);
+						(Long)commerceDiscountUsageEntryIdObject);
 				}
 
 			});
@@ -304,9 +304,10 @@ public class CommerceDiscountUsageEntryModelImpl
 				@Override
 				public void accept(
 					CommerceDiscountUsageEntry commerceDiscountUsageEntry,
-					Object companyId) {
+					Object companyIdObject) {
 
-					commerceDiscountUsageEntry.setCompanyId((Long)companyId);
+					commerceDiscountUsageEntry.setCompanyId(
+						(Long)companyIdObject);
 				}
 
 			});
@@ -329,9 +330,9 @@ public class CommerceDiscountUsageEntryModelImpl
 				@Override
 				public void accept(
 					CommerceDiscountUsageEntry commerceDiscountUsageEntry,
-					Object userId) {
+					Object userIdObject) {
 
-					commerceDiscountUsageEntry.setUserId((Long)userId);
+					commerceDiscountUsageEntry.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -354,9 +355,10 @@ public class CommerceDiscountUsageEntryModelImpl
 				@Override
 				public void accept(
 					CommerceDiscountUsageEntry commerceDiscountUsageEntry,
-					Object userName) {
+					Object userNameObject) {
 
-					commerceDiscountUsageEntry.setUserName((String)userName);
+					commerceDiscountUsageEntry.setUserName(
+						(String)userNameObject);
 				}
 
 			});
@@ -379,9 +381,10 @@ public class CommerceDiscountUsageEntryModelImpl
 				@Override
 				public void accept(
 					CommerceDiscountUsageEntry commerceDiscountUsageEntry,
-					Object createDate) {
+					Object createDateObject) {
 
-					commerceDiscountUsageEntry.setCreateDate((Date)createDate);
+					commerceDiscountUsageEntry.setCreateDate(
+						(Date)createDateObject);
 				}
 
 			});
@@ -404,10 +407,10 @@ public class CommerceDiscountUsageEntryModelImpl
 				@Override
 				public void accept(
 					CommerceDiscountUsageEntry commerceDiscountUsageEntry,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
 					commerceDiscountUsageEntry.setModifiedDate(
-						(Date)modifiedDate);
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -430,10 +433,10 @@ public class CommerceDiscountUsageEntryModelImpl
 				@Override
 				public void accept(
 					CommerceDiscountUsageEntry commerceDiscountUsageEntry,
-					Object commerceAccountId) {
+					Object commerceAccountIdObject) {
 
 					commerceDiscountUsageEntry.setCommerceAccountId(
-						(Long)commerceAccountId);
+						(Long)commerceAccountIdObject);
 				}
 
 			});
@@ -456,10 +459,10 @@ public class CommerceDiscountUsageEntryModelImpl
 				@Override
 				public void accept(
 					CommerceDiscountUsageEntry commerceDiscountUsageEntry,
-					Object commerceOrderId) {
+					Object commerceOrderIdObject) {
 
 					commerceDiscountUsageEntry.setCommerceOrderId(
-						(Long)commerceOrderId);
+						(Long)commerceOrderIdObject);
 				}
 
 			});
@@ -482,10 +485,10 @@ public class CommerceDiscountUsageEntryModelImpl
 				@Override
 				public void accept(
 					CommerceDiscountUsageEntry commerceDiscountUsageEntry,
-					Object commerceDiscountId) {
+					Object commerceDiscountIdObject) {
 
 					commerceDiscountUsageEntry.setCommerceDiscountId(
-						(Long)commerceDiscountId);
+						(Long)commerceDiscountIdObject);
 				}
 
 			});

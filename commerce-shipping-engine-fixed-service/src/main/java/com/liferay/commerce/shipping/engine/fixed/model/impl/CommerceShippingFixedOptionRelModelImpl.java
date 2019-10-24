@@ -380,11 +380,11 @@ public class CommerceShippingFixedOptionRelModelImpl
 				public void accept(
 					CommerceShippingFixedOptionRel
 						commerceShippingFixedOptionRel,
-					Object commerceShippingFixedOptionRelId) {
+					Object commerceShippingFixedOptionRelIdObject) {
 
 					commerceShippingFixedOptionRel.
 						setCommerceShippingFixedOptionRelId(
-							(Long)commerceShippingFixedOptionRelId);
+							(Long)commerceShippingFixedOptionRelIdObject);
 				}
 
 			});
@@ -409,9 +409,10 @@ public class CommerceShippingFixedOptionRelModelImpl
 				public void accept(
 					CommerceShippingFixedOptionRel
 						commerceShippingFixedOptionRel,
-					Object groupId) {
+					Object groupIdObject) {
 
-					commerceShippingFixedOptionRel.setGroupId((Long)groupId);
+					commerceShippingFixedOptionRel.setGroupId(
+						(Long)groupIdObject);
 				}
 
 			});
@@ -436,10 +437,10 @@ public class CommerceShippingFixedOptionRelModelImpl
 				public void accept(
 					CommerceShippingFixedOptionRel
 						commerceShippingFixedOptionRel,
-					Object companyId) {
+					Object companyIdObject) {
 
 					commerceShippingFixedOptionRel.setCompanyId(
-						(Long)companyId);
+						(Long)companyIdObject);
 				}
 
 			});
@@ -464,9 +465,10 @@ public class CommerceShippingFixedOptionRelModelImpl
 				public void accept(
 					CommerceShippingFixedOptionRel
 						commerceShippingFixedOptionRel,
-					Object userId) {
+					Object userIdObject) {
 
-					commerceShippingFixedOptionRel.setUserId((Long)userId);
+					commerceShippingFixedOptionRel.setUserId(
+						(Long)userIdObject);
 				}
 
 			});
@@ -491,10 +493,10 @@ public class CommerceShippingFixedOptionRelModelImpl
 				public void accept(
 					CommerceShippingFixedOptionRel
 						commerceShippingFixedOptionRel,
-					Object userName) {
+					Object userNameObject) {
 
 					commerceShippingFixedOptionRel.setUserName(
-						(String)userName);
+						(String)userNameObject);
 				}
 
 			});
@@ -519,10 +521,10 @@ public class CommerceShippingFixedOptionRelModelImpl
 				public void accept(
 					CommerceShippingFixedOptionRel
 						commerceShippingFixedOptionRel,
-					Object createDate) {
+					Object createDateObject) {
 
 					commerceShippingFixedOptionRel.setCreateDate(
-						(Date)createDate);
+						(Date)createDateObject);
 				}
 
 			});
@@ -547,10 +549,10 @@ public class CommerceShippingFixedOptionRelModelImpl
 				public void accept(
 					CommerceShippingFixedOptionRel
 						commerceShippingFixedOptionRel,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
 					commerceShippingFixedOptionRel.setModifiedDate(
-						(Date)modifiedDate);
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -576,10 +578,10 @@ public class CommerceShippingFixedOptionRelModelImpl
 				public void accept(
 					CommerceShippingFixedOptionRel
 						commerceShippingFixedOptionRel,
-					Object commerceShippingMethodId) {
+					Object commerceShippingMethodIdObject) {
 
 					commerceShippingFixedOptionRel.setCommerceShippingMethodId(
-						(Long)commerceShippingMethodId);
+						(Long)commerceShippingMethodIdObject);
 				}
 
 			});
@@ -605,11 +607,11 @@ public class CommerceShippingFixedOptionRelModelImpl
 				public void accept(
 					CommerceShippingFixedOptionRel
 						commerceShippingFixedOptionRel,
-					Object commerceShippingFixedOptionId) {
+					Object commerceShippingFixedOptionIdObject) {
 
 					commerceShippingFixedOptionRel.
 						setCommerceShippingFixedOptionId(
-							(Long)commerceShippingFixedOptionId);
+							(Long)commerceShippingFixedOptionIdObject);
 				}
 
 			});
@@ -635,11 +637,11 @@ public class CommerceShippingFixedOptionRelModelImpl
 				public void accept(
 					CommerceShippingFixedOptionRel
 						commerceShippingFixedOptionRel,
-					Object commerceInventoryWarehouseId) {
+					Object commerceInventoryWarehouseIdObject) {
 
 					commerceShippingFixedOptionRel.
 						setCommerceInventoryWarehouseId(
-							(Long)commerceInventoryWarehouseId);
+							(Long)commerceInventoryWarehouseIdObject);
 				}
 
 			});
@@ -665,10 +667,10 @@ public class CommerceShippingFixedOptionRelModelImpl
 				public void accept(
 					CommerceShippingFixedOptionRel
 						commerceShippingFixedOptionRel,
-					Object commerceCountryId) {
+					Object commerceCountryIdObject) {
 
 					commerceShippingFixedOptionRel.setCommerceCountryId(
-						(Long)commerceCountryId);
+						(Long)commerceCountryIdObject);
 				}
 
 			});
@@ -693,10 +695,10 @@ public class CommerceShippingFixedOptionRelModelImpl
 				public void accept(
 					CommerceShippingFixedOptionRel
 						commerceShippingFixedOptionRel,
-					Object commerceRegionId) {
+					Object commerceRegionIdObject) {
 
 					commerceShippingFixedOptionRel.setCommerceRegionId(
-						(Long)commerceRegionId);
+						(Long)commerceRegionIdObject);
 				}
 
 			});
@@ -721,9 +723,9 @@ public class CommerceShippingFixedOptionRelModelImpl
 				public void accept(
 					CommerceShippingFixedOptionRel
 						commerceShippingFixedOptionRel,
-					Object zip) {
+					Object zipObject) {
 
-					commerceShippingFixedOptionRel.setZip((String)zip);
+					commerceShippingFixedOptionRel.setZip((String)zipObject);
 				}
 
 			});
@@ -748,10 +750,10 @@ public class CommerceShippingFixedOptionRelModelImpl
 				public void accept(
 					CommerceShippingFixedOptionRel
 						commerceShippingFixedOptionRel,
-					Object weightFrom) {
+					Object weightFromObject) {
 
 					commerceShippingFixedOptionRel.setWeightFrom(
-						(Double)weightFrom);
+						(Double)weightFromObject);
 				}
 
 			});
@@ -776,10 +778,10 @@ public class CommerceShippingFixedOptionRelModelImpl
 				public void accept(
 					CommerceShippingFixedOptionRel
 						commerceShippingFixedOptionRel,
-					Object weightTo) {
+					Object weightToObject) {
 
 					commerceShippingFixedOptionRel.setWeightTo(
-						(Double)weightTo);
+						(Double)weightToObject);
 				}
 
 			});
@@ -804,10 +806,10 @@ public class CommerceShippingFixedOptionRelModelImpl
 				public void accept(
 					CommerceShippingFixedOptionRel
 						commerceShippingFixedOptionRel,
-					Object fixedPrice) {
+					Object fixedPriceObject) {
 
 					commerceShippingFixedOptionRel.setFixedPrice(
-						(BigDecimal)fixedPrice);
+						(BigDecimal)fixedPriceObject);
 				}
 
 			});
@@ -833,10 +835,10 @@ public class CommerceShippingFixedOptionRelModelImpl
 				public void accept(
 					CommerceShippingFixedOptionRel
 						commerceShippingFixedOptionRel,
-					Object rateUnitWeightPrice) {
+					Object rateUnitWeightPriceObject) {
 
 					commerceShippingFixedOptionRel.setRateUnitWeightPrice(
-						(BigDecimal)rateUnitWeightPrice);
+						(BigDecimal)rateUnitWeightPriceObject);
 				}
 
 			});
@@ -861,10 +863,10 @@ public class CommerceShippingFixedOptionRelModelImpl
 				public void accept(
 					CommerceShippingFixedOptionRel
 						commerceShippingFixedOptionRel,
-					Object ratePercentage) {
+					Object ratePercentageObject) {
 
 					commerceShippingFixedOptionRel.setRatePercentage(
-						(Double)ratePercentage);
+						(Double)ratePercentageObject);
 				}
 
 			});

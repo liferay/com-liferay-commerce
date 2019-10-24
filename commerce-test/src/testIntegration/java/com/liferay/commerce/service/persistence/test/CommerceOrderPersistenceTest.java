@@ -470,6 +470,15 @@ public class CommerceOrderPersistenceTest {
 	}
 
 	@Test
+	public void testCountByG_CP() throws Exception {
+		_persistence.countByG_CP(RandomTestUtil.nextLong(), "");
+
+		_persistence.countByG_CP(0L, "null");
+
+		_persistence.countByG_CP(0L, (String)null);
+	}
+
+	@Test
 	public void testCountByG_U_O() throws Exception {
 		_persistence.countByG_U_O(
 			RandomTestUtil.nextLong(), RandomTestUtil.nextLong(),

@@ -209,21 +209,23 @@ public class CommerceOrderModelImpl
 
 	public static final long COMMERCEACCOUNTID_COLUMN_BITMASK = 2L;
 
-	public static final long COMPANYID_COLUMN_BITMASK = 4L;
+	public static final long COMMERCEPAYMENTMETHODKEY_COLUMN_BITMASK = 4L;
 
-	public static final long CREATEDATE_COLUMN_BITMASK = 8L;
+	public static final long COMPANYID_COLUMN_BITMASK = 8L;
 
-	public static final long EXTERNALREFERENCECODE_COLUMN_BITMASK = 16L;
+	public static final long CREATEDATE_COLUMN_BITMASK = 16L;
 
-	public static final long GROUPID_COLUMN_BITMASK = 32L;
+	public static final long EXTERNALREFERENCECODE_COLUMN_BITMASK = 32L;
 
-	public static final long ORDERSTATUS_COLUMN_BITMASK = 64L;
+	public static final long GROUPID_COLUMN_BITMASK = 64L;
 
-	public static final long SHIPPINGADDRESSID_COLUMN_BITMASK = 128L;
+	public static final long ORDERSTATUS_COLUMN_BITMASK = 128L;
 
-	public static final long USERID_COLUMN_BITMASK = 256L;
+	public static final long SHIPPINGADDRESSID_COLUMN_BITMASK = 256L;
 
-	public static final long UUID_COLUMN_BITMASK = 512L;
+	public static final long USERID_COLUMN_BITMASK = 512L;
+
+	public static final long UUID_COLUMN_BITMASK = 1024L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -1917,7 +1919,17 @@ public class CommerceOrderModelImpl
 
 	@Override
 	public void setCommercePaymentMethodKey(String commercePaymentMethodKey) {
+		_columnBitmask |= COMMERCEPAYMENTMETHODKEY_COLUMN_BITMASK;
+
+		if (_originalCommercePaymentMethodKey == null) {
+			_originalCommercePaymentMethodKey = _commercePaymentMethodKey;
+		}
+
 		_commercePaymentMethodKey = commercePaymentMethodKey;
+	}
+
+	public String getOriginalCommercePaymentMethodKey() {
+		return GetterUtil.getString(_originalCommercePaymentMethodKey);
 	}
 
 	@JSON
@@ -2697,6 +2709,9 @@ public class CommerceOrderModelImpl
 
 		commerceOrderModelImpl._setOriginalShippingAddressId = false;
 
+		commerceOrderModelImpl._originalCommercePaymentMethodKey =
+			commerceOrderModelImpl._commercePaymentMethodKey;
+
 		commerceOrderModelImpl._originalOrderStatus =
 			commerceOrderModelImpl._orderStatus;
 
@@ -3051,6 +3066,7 @@ public class CommerceOrderModelImpl
 	private long _originalShippingAddressId;
 	private boolean _setOriginalShippingAddressId;
 	private String _commercePaymentMethodKey;
+	private String _originalCommercePaymentMethodKey;
 	private String _transactionId;
 	private long _commerceShippingMethodId;
 	private String _shippingOptionName;

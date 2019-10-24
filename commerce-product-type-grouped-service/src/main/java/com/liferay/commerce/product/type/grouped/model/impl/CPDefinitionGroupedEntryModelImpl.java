@@ -355,9 +355,9 @@ public class CPDefinitionGroupedEntryModelImpl
 				@Override
 				public void accept(
 					CPDefinitionGroupedEntry cpDefinitionGroupedEntry,
-					Object uuid) {
+					Object uuidObject) {
 
-					cpDefinitionGroupedEntry.setUuid((String)uuid);
+					cpDefinitionGroupedEntry.setUuid((String)uuidObject);
 				}
 
 			});
@@ -381,10 +381,10 @@ public class CPDefinitionGroupedEntryModelImpl
 				@Override
 				public void accept(
 					CPDefinitionGroupedEntry cpDefinitionGroupedEntry,
-					Object CPDefinitionGroupedEntryId) {
+					Object CPDefinitionGroupedEntryIdObject) {
 
 					cpDefinitionGroupedEntry.setCPDefinitionGroupedEntryId(
-						(Long)CPDefinitionGroupedEntryId);
+						(Long)CPDefinitionGroupedEntryIdObject);
 				}
 
 			});
@@ -407,9 +407,9 @@ public class CPDefinitionGroupedEntryModelImpl
 				@Override
 				public void accept(
 					CPDefinitionGroupedEntry cpDefinitionGroupedEntry,
-					Object groupId) {
+					Object groupIdObject) {
 
-					cpDefinitionGroupedEntry.setGroupId((Long)groupId);
+					cpDefinitionGroupedEntry.setGroupId((Long)groupIdObject);
 				}
 
 			});
@@ -432,9 +432,10 @@ public class CPDefinitionGroupedEntryModelImpl
 				@Override
 				public void accept(
 					CPDefinitionGroupedEntry cpDefinitionGroupedEntry,
-					Object companyId) {
+					Object companyIdObject) {
 
-					cpDefinitionGroupedEntry.setCompanyId((Long)companyId);
+					cpDefinitionGroupedEntry.setCompanyId(
+						(Long)companyIdObject);
 				}
 
 			});
@@ -457,9 +458,9 @@ public class CPDefinitionGroupedEntryModelImpl
 				@Override
 				public void accept(
 					CPDefinitionGroupedEntry cpDefinitionGroupedEntry,
-					Object userId) {
+					Object userIdObject) {
 
-					cpDefinitionGroupedEntry.setUserId((Long)userId);
+					cpDefinitionGroupedEntry.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -482,9 +483,10 @@ public class CPDefinitionGroupedEntryModelImpl
 				@Override
 				public void accept(
 					CPDefinitionGroupedEntry cpDefinitionGroupedEntry,
-					Object userName) {
+					Object userNameObject) {
 
-					cpDefinitionGroupedEntry.setUserName((String)userName);
+					cpDefinitionGroupedEntry.setUserName(
+						(String)userNameObject);
 				}
 
 			});
@@ -507,9 +509,10 @@ public class CPDefinitionGroupedEntryModelImpl
 				@Override
 				public void accept(
 					CPDefinitionGroupedEntry cpDefinitionGroupedEntry,
-					Object createDate) {
+					Object createDateObject) {
 
-					cpDefinitionGroupedEntry.setCreateDate((Date)createDate);
+					cpDefinitionGroupedEntry.setCreateDate(
+						(Date)createDateObject);
 				}
 
 			});
@@ -532,10 +535,10 @@ public class CPDefinitionGroupedEntryModelImpl
 				@Override
 				public void accept(
 					CPDefinitionGroupedEntry cpDefinitionGroupedEntry,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
 					cpDefinitionGroupedEntry.setModifiedDate(
-						(Date)modifiedDate);
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -558,10 +561,10 @@ public class CPDefinitionGroupedEntryModelImpl
 				@Override
 				public void accept(
 					CPDefinitionGroupedEntry cpDefinitionGroupedEntry,
-					Object CPDefinitionId) {
+					Object CPDefinitionIdObject) {
 
 					cpDefinitionGroupedEntry.setCPDefinitionId(
-						(Long)CPDefinitionId);
+						(Long)CPDefinitionIdObject);
 				}
 
 			});
@@ -584,10 +587,10 @@ public class CPDefinitionGroupedEntryModelImpl
 				@Override
 				public void accept(
 					CPDefinitionGroupedEntry cpDefinitionGroupedEntry,
-					Object entryCProductId) {
+					Object entryCProductIdObject) {
 
 					cpDefinitionGroupedEntry.setEntryCProductId(
-						(Long)entryCProductId);
+						(Long)entryCProductIdObject);
 				}
 
 			});
@@ -610,9 +613,10 @@ public class CPDefinitionGroupedEntryModelImpl
 				@Override
 				public void accept(
 					CPDefinitionGroupedEntry cpDefinitionGroupedEntry,
-					Object priority) {
+					Object priorityObject) {
 
-					cpDefinitionGroupedEntry.setPriority((Double)priority);
+					cpDefinitionGroupedEntry.setPriority(
+						(Double)priorityObject);
 				}
 
 			});
@@ -635,9 +639,10 @@ public class CPDefinitionGroupedEntryModelImpl
 				@Override
 				public void accept(
 					CPDefinitionGroupedEntry cpDefinitionGroupedEntry,
-					Object quantity) {
+					Object quantityObject) {
 
-					cpDefinitionGroupedEntry.setQuantity((Integer)quantity);
+					cpDefinitionGroupedEntry.setQuantity(
+						(Integer)quantityObject);
 				}
 
 			});

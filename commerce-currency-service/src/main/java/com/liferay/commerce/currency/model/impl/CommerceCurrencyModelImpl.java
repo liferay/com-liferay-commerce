@@ -367,9 +367,9 @@ public class CommerceCurrencyModelImpl
 
 				@Override
 				public void accept(
-					CommerceCurrency commerceCurrency, Object uuid) {
+					CommerceCurrency commerceCurrency, Object uuidObject) {
 
-					commerceCurrency.setUuid((String)uuid);
+					commerceCurrency.setUuid((String)uuidObject);
 				}
 
 			});
@@ -390,10 +390,10 @@ public class CommerceCurrencyModelImpl
 				@Override
 				public void accept(
 					CommerceCurrency commerceCurrency,
-					Object commerceCurrencyId) {
+					Object commerceCurrencyIdObject) {
 
 					commerceCurrency.setCommerceCurrencyId(
-						(Long)commerceCurrencyId);
+						(Long)commerceCurrencyIdObject);
 				}
 
 			});
@@ -413,9 +413,9 @@ public class CommerceCurrencyModelImpl
 
 				@Override
 				public void accept(
-					CommerceCurrency commerceCurrency, Object companyId) {
+					CommerceCurrency commerceCurrency, Object companyIdObject) {
 
-					commerceCurrency.setCompanyId((Long)companyId);
+					commerceCurrency.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -435,9 +435,9 @@ public class CommerceCurrencyModelImpl
 
 				@Override
 				public void accept(
-					CommerceCurrency commerceCurrency, Object userId) {
+					CommerceCurrency commerceCurrency, Object userIdObject) {
 
-					commerceCurrency.setUserId((Long)userId);
+					commerceCurrency.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -457,9 +457,9 @@ public class CommerceCurrencyModelImpl
 
 				@Override
 				public void accept(
-					CommerceCurrency commerceCurrency, Object userName) {
+					CommerceCurrency commerceCurrency, Object userNameObject) {
 
-					commerceCurrency.setUserName((String)userName);
+					commerceCurrency.setUserName((String)userNameObject);
 				}
 
 			});
@@ -479,9 +479,10 @@ public class CommerceCurrencyModelImpl
 
 				@Override
 				public void accept(
-					CommerceCurrency commerceCurrency, Object createDate) {
+					CommerceCurrency commerceCurrency,
+					Object createDateObject) {
 
-					commerceCurrency.setCreateDate((Date)createDate);
+					commerceCurrency.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -501,9 +502,10 @@ public class CommerceCurrencyModelImpl
 
 				@Override
 				public void accept(
-					CommerceCurrency commerceCurrency, Object modifiedDate) {
+					CommerceCurrency commerceCurrency,
+					Object modifiedDateObject) {
 
-					commerceCurrency.setModifiedDate((Date)modifiedDate);
+					commerceCurrency.setModifiedDate((Date)modifiedDateObject);
 				}
 
 			});
@@ -523,9 +525,9 @@ public class CommerceCurrencyModelImpl
 
 				@Override
 				public void accept(
-					CommerceCurrency commerceCurrency, Object code) {
+					CommerceCurrency commerceCurrency, Object codeObject) {
 
-					commerceCurrency.setCode((String)code);
+					commerceCurrency.setCode((String)codeObject);
 				}
 
 			});
@@ -545,9 +547,9 @@ public class CommerceCurrencyModelImpl
 
 				@Override
 				public void accept(
-					CommerceCurrency commerceCurrency, Object name) {
+					CommerceCurrency commerceCurrency, Object nameObject) {
 
-					commerceCurrency.setName((String)name);
+					commerceCurrency.setName((String)nameObject);
 				}
 
 			});
@@ -567,9 +569,9 @@ public class CommerceCurrencyModelImpl
 
 				@Override
 				public void accept(
-					CommerceCurrency commerceCurrency, Object rate) {
+					CommerceCurrency commerceCurrency, Object rateObject) {
 
-					commerceCurrency.setRate((BigDecimal)rate);
+					commerceCurrency.setRate((BigDecimal)rateObject);
 				}
 
 			});
@@ -589,9 +591,11 @@ public class CommerceCurrencyModelImpl
 
 				@Override
 				public void accept(
-					CommerceCurrency commerceCurrency, Object formatPattern) {
+					CommerceCurrency commerceCurrency,
+					Object formatPatternObject) {
 
-					commerceCurrency.setFormatPattern((String)formatPattern);
+					commerceCurrency.setFormatPattern(
+						(String)formatPatternObject);
 				}
 
 			});
@@ -612,10 +616,10 @@ public class CommerceCurrencyModelImpl
 				@Override
 				public void accept(
 					CommerceCurrency commerceCurrency,
-					Object maxFractionDigits) {
+					Object maxFractionDigitsObject) {
 
 					commerceCurrency.setMaxFractionDigits(
-						(Integer)maxFractionDigits);
+						(Integer)maxFractionDigitsObject);
 				}
 
 			});
@@ -636,10 +640,10 @@ public class CommerceCurrencyModelImpl
 				@Override
 				public void accept(
 					CommerceCurrency commerceCurrency,
-					Object minFractionDigits) {
+					Object minFractionDigitsObject) {
 
 					commerceCurrency.setMinFractionDigits(
-						(Integer)minFractionDigits);
+						(Integer)minFractionDigitsObject);
 				}
 
 			});
@@ -659,9 +663,11 @@ public class CommerceCurrencyModelImpl
 
 				@Override
 				public void accept(
-					CommerceCurrency commerceCurrency, Object roundingMode) {
+					CommerceCurrency commerceCurrency,
+					Object roundingModeObject) {
 
-					commerceCurrency.setRoundingMode((String)roundingMode);
+					commerceCurrency.setRoundingMode(
+						(String)roundingModeObject);
 				}
 
 			});
@@ -681,9 +687,9 @@ public class CommerceCurrencyModelImpl
 
 				@Override
 				public void accept(
-					CommerceCurrency commerceCurrency, Object primary) {
+					CommerceCurrency commerceCurrency, Object primaryObject) {
 
-					commerceCurrency.setPrimary((Boolean)primary);
+					commerceCurrency.setPrimary((Boolean)primaryObject);
 				}
 
 			});
@@ -703,9 +709,9 @@ public class CommerceCurrencyModelImpl
 
 				@Override
 				public void accept(
-					CommerceCurrency commerceCurrency, Object priority) {
+					CommerceCurrency commerceCurrency, Object priorityObject) {
 
-					commerceCurrency.setPriority((Double)priority);
+					commerceCurrency.setPriority((Double)priorityObject);
 				}
 
 			});
@@ -725,9 +731,9 @@ public class CommerceCurrencyModelImpl
 
 				@Override
 				public void accept(
-					CommerceCurrency commerceCurrency, Object active) {
+					CommerceCurrency commerceCurrency, Object activeObject) {
 
-					commerceCurrency.setActive((Boolean)active);
+					commerceCurrency.setActive((Boolean)activeObject);
 				}
 
 			});
@@ -747,9 +753,11 @@ public class CommerceCurrencyModelImpl
 
 				@Override
 				public void accept(
-					CommerceCurrency commerceCurrency, Object lastPublishDate) {
+					CommerceCurrency commerceCurrency,
+					Object lastPublishDateObject) {
 
-					commerceCurrency.setLastPublishDate((Date)lastPublishDate);
+					commerceCurrency.setLastPublishDate(
+						(Date)lastPublishDateObject);
 				}
 
 			});

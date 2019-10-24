@@ -339,10 +339,10 @@ public class CommerceDiscountRelModelImpl
 				@Override
 				public void accept(
 					CommerceDiscountRel commerceDiscountRel,
-					Object commerceDiscountRelId) {
+					Object commerceDiscountRelIdObject) {
 
 					commerceDiscountRel.setCommerceDiscountRelId(
-						(Long)commerceDiscountRelId);
+						(Long)commerceDiscountRelIdObject);
 				}
 
 			});
@@ -362,9 +362,10 @@ public class CommerceDiscountRelModelImpl
 
 				@Override
 				public void accept(
-					CommerceDiscountRel commerceDiscountRel, Object companyId) {
+					CommerceDiscountRel commerceDiscountRel,
+					Object companyIdObject) {
 
-					commerceDiscountRel.setCompanyId((Long)companyId);
+					commerceDiscountRel.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -384,9 +385,10 @@ public class CommerceDiscountRelModelImpl
 
 				@Override
 				public void accept(
-					CommerceDiscountRel commerceDiscountRel, Object userId) {
+					CommerceDiscountRel commerceDiscountRel,
+					Object userIdObject) {
 
-					commerceDiscountRel.setUserId((Long)userId);
+					commerceDiscountRel.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -406,9 +408,10 @@ public class CommerceDiscountRelModelImpl
 
 				@Override
 				public void accept(
-					CommerceDiscountRel commerceDiscountRel, Object userName) {
+					CommerceDiscountRel commerceDiscountRel,
+					Object userNameObject) {
 
-					commerceDiscountRel.setUserName((String)userName);
+					commerceDiscountRel.setUserName((String)userNameObject);
 				}
 
 			});
@@ -429,9 +432,9 @@ public class CommerceDiscountRelModelImpl
 				@Override
 				public void accept(
 					CommerceDiscountRel commerceDiscountRel,
-					Object createDate) {
+					Object createDateObject) {
 
-					commerceDiscountRel.setCreateDate((Date)createDate);
+					commerceDiscountRel.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -452,9 +455,10 @@ public class CommerceDiscountRelModelImpl
 				@Override
 				public void accept(
 					CommerceDiscountRel commerceDiscountRel,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
-					commerceDiscountRel.setModifiedDate((Date)modifiedDate);
+					commerceDiscountRel.setModifiedDate(
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -475,10 +479,10 @@ public class CommerceDiscountRelModelImpl
 				@Override
 				public void accept(
 					CommerceDiscountRel commerceDiscountRel,
-					Object commerceDiscountId) {
+					Object commerceDiscountIdObject) {
 
 					commerceDiscountRel.setCommerceDiscountId(
-						(Long)commerceDiscountId);
+						(Long)commerceDiscountIdObject);
 				}
 
 			});
@@ -499,9 +503,9 @@ public class CommerceDiscountRelModelImpl
 				@Override
 				public void accept(
 					CommerceDiscountRel commerceDiscountRel,
-					Object classNameId) {
+					Object classNameIdObject) {
 
-					commerceDiscountRel.setClassNameId((Long)classNameId);
+					commerceDiscountRel.setClassNameId((Long)classNameIdObject);
 				}
 
 			});
@@ -521,9 +525,10 @@ public class CommerceDiscountRelModelImpl
 
 				@Override
 				public void accept(
-					CommerceDiscountRel commerceDiscountRel, Object classPK) {
+					CommerceDiscountRel commerceDiscountRel,
+					Object classPKObject) {
 
-					commerceDiscountRel.setClassPK((Long)classPK);
+					commerceDiscountRel.setClassPK((Long)classPKObject);
 				}
 
 			});

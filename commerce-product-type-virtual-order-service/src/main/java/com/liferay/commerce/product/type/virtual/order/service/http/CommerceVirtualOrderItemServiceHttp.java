@@ -63,8 +63,21 @@ public class CommerceVirtualOrderItemServiceHttp {
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceVirtualOrderItemId);
 
-			return (java.io.File)TunnelUtil.invoke(
-				httpPrincipal, methodHandler);
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof Exception) {
+					throw (Exception)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return (java.io.File)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);

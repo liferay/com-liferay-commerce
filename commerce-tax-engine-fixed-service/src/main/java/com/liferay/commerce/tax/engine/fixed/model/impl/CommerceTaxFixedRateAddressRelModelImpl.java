@@ -359,11 +359,11 @@ public class CommerceTaxFixedRateAddressRelModelImpl
 				public void accept(
 					CommerceTaxFixedRateAddressRel
 						commerceTaxFixedRateAddressRel,
-					Object commerceTaxFixedRateAddressRelId) {
+					Object commerceTaxFixedRateAddressRelIdObject) {
 
 					commerceTaxFixedRateAddressRel.
 						setCommerceTaxFixedRateAddressRelId(
-							(Long)commerceTaxFixedRateAddressRelId);
+							(Long)commerceTaxFixedRateAddressRelIdObject);
 				}
 
 			});
@@ -388,9 +388,10 @@ public class CommerceTaxFixedRateAddressRelModelImpl
 				public void accept(
 					CommerceTaxFixedRateAddressRel
 						commerceTaxFixedRateAddressRel,
-					Object groupId) {
+					Object groupIdObject) {
 
-					commerceTaxFixedRateAddressRel.setGroupId((Long)groupId);
+					commerceTaxFixedRateAddressRel.setGroupId(
+						(Long)groupIdObject);
 				}
 
 			});
@@ -415,10 +416,10 @@ public class CommerceTaxFixedRateAddressRelModelImpl
 				public void accept(
 					CommerceTaxFixedRateAddressRel
 						commerceTaxFixedRateAddressRel,
-					Object companyId) {
+					Object companyIdObject) {
 
 					commerceTaxFixedRateAddressRel.setCompanyId(
-						(Long)companyId);
+						(Long)companyIdObject);
 				}
 
 			});
@@ -443,9 +444,10 @@ public class CommerceTaxFixedRateAddressRelModelImpl
 				public void accept(
 					CommerceTaxFixedRateAddressRel
 						commerceTaxFixedRateAddressRel,
-					Object userId) {
+					Object userIdObject) {
 
-					commerceTaxFixedRateAddressRel.setUserId((Long)userId);
+					commerceTaxFixedRateAddressRel.setUserId(
+						(Long)userIdObject);
 				}
 
 			});
@@ -470,10 +472,10 @@ public class CommerceTaxFixedRateAddressRelModelImpl
 				public void accept(
 					CommerceTaxFixedRateAddressRel
 						commerceTaxFixedRateAddressRel,
-					Object userName) {
+					Object userNameObject) {
 
 					commerceTaxFixedRateAddressRel.setUserName(
-						(String)userName);
+						(String)userNameObject);
 				}
 
 			});
@@ -498,10 +500,10 @@ public class CommerceTaxFixedRateAddressRelModelImpl
 				public void accept(
 					CommerceTaxFixedRateAddressRel
 						commerceTaxFixedRateAddressRel,
-					Object createDate) {
+					Object createDateObject) {
 
 					commerceTaxFixedRateAddressRel.setCreateDate(
-						(Date)createDate);
+						(Date)createDateObject);
 				}
 
 			});
@@ -526,10 +528,10 @@ public class CommerceTaxFixedRateAddressRelModelImpl
 				public void accept(
 					CommerceTaxFixedRateAddressRel
 						commerceTaxFixedRateAddressRel,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
 					commerceTaxFixedRateAddressRel.setModifiedDate(
-						(Date)modifiedDate);
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -555,10 +557,10 @@ public class CommerceTaxFixedRateAddressRelModelImpl
 				public void accept(
 					CommerceTaxFixedRateAddressRel
 						commerceTaxFixedRateAddressRel,
-					Object commerceTaxMethodId) {
+					Object commerceTaxMethodIdObject) {
 
 					commerceTaxFixedRateAddressRel.setCommerceTaxMethodId(
-						(Long)commerceTaxMethodId);
+						(Long)commerceTaxMethodIdObject);
 				}
 
 			});
@@ -583,10 +585,10 @@ public class CommerceTaxFixedRateAddressRelModelImpl
 				public void accept(
 					CommerceTaxFixedRateAddressRel
 						commerceTaxFixedRateAddressRel,
-					Object CPTaxCategoryId) {
+					Object CPTaxCategoryIdObject) {
 
 					commerceTaxFixedRateAddressRel.setCPTaxCategoryId(
-						(Long)CPTaxCategoryId);
+						(Long)CPTaxCategoryIdObject);
 				}
 
 			});
@@ -612,10 +614,10 @@ public class CommerceTaxFixedRateAddressRelModelImpl
 				public void accept(
 					CommerceTaxFixedRateAddressRel
 						commerceTaxFixedRateAddressRel,
-					Object commerceCountryId) {
+					Object commerceCountryIdObject) {
 
 					commerceTaxFixedRateAddressRel.setCommerceCountryId(
-						(Long)commerceCountryId);
+						(Long)commerceCountryIdObject);
 				}
 
 			});
@@ -640,10 +642,10 @@ public class CommerceTaxFixedRateAddressRelModelImpl
 				public void accept(
 					CommerceTaxFixedRateAddressRel
 						commerceTaxFixedRateAddressRel,
-					Object commerceRegionId) {
+					Object commerceRegionIdObject) {
 
 					commerceTaxFixedRateAddressRel.setCommerceRegionId(
-						(Long)commerceRegionId);
+						(Long)commerceRegionIdObject);
 				}
 
 			});
@@ -668,9 +670,9 @@ public class CommerceTaxFixedRateAddressRelModelImpl
 				public void accept(
 					CommerceTaxFixedRateAddressRel
 						commerceTaxFixedRateAddressRel,
-					Object zip) {
+					Object zipObject) {
 
-					commerceTaxFixedRateAddressRel.setZip((String)zip);
+					commerceTaxFixedRateAddressRel.setZip((String)zipObject);
 				}
 
 			});
@@ -695,9 +697,9 @@ public class CommerceTaxFixedRateAddressRelModelImpl
 				public void accept(
 					CommerceTaxFixedRateAddressRel
 						commerceTaxFixedRateAddressRel,
-					Object rate) {
+					Object rateObject) {
 
-					commerceTaxFixedRateAddressRel.setRate((Double)rate);
+					commerceTaxFixedRateAddressRel.setRate((Double)rateObject);
 				}
 
 			});

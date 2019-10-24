@@ -90,6 +90,11 @@ public interface CommercePaymentMethodGroupRelService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommercePaymentMethodGroupRel fetchCommercePaymentMethodGroupRel(
+			long groupId, String engineKey)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceAddressRestriction> getCommerceAddressRestrictions(
 			long classPK, int start, int end,
 			OrderByComparator<CommerceAddressRestriction> orderByComparator)
@@ -129,6 +134,10 @@ public interface CommercePaymentMethodGroupRelService extends BaseService {
 	public List<CommercePaymentMethodGroupRel>
 			getCommercePaymentMethodGroupRels(
 				long groupId, long commerceCountryId, boolean active)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommercePaymentMethodGroupRelsCount(long groupId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

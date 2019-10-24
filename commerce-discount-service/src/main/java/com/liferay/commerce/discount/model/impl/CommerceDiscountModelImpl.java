@@ -395,9 +395,9 @@ public class CommerceDiscountModelImpl
 
 				@Override
 				public void accept(
-					CommerceDiscount commerceDiscount, Object uuid) {
+					CommerceDiscount commerceDiscount, Object uuidObject) {
 
-					commerceDiscount.setUuid((String)uuid);
+					commerceDiscount.setUuid((String)uuidObject);
 				}
 
 			});
@@ -418,10 +418,10 @@ public class CommerceDiscountModelImpl
 				@Override
 				public void accept(
 					CommerceDiscount commerceDiscount,
-					Object externalReferenceCode) {
+					Object externalReferenceCodeObject) {
 
 					commerceDiscount.setExternalReferenceCode(
-						(String)externalReferenceCode);
+						(String)externalReferenceCodeObject);
 				}
 
 			});
@@ -442,10 +442,10 @@ public class CommerceDiscountModelImpl
 				@Override
 				public void accept(
 					CommerceDiscount commerceDiscount,
-					Object commerceDiscountId) {
+					Object commerceDiscountIdObject) {
 
 					commerceDiscount.setCommerceDiscountId(
-						(Long)commerceDiscountId);
+						(Long)commerceDiscountIdObject);
 				}
 
 			});
@@ -465,9 +465,9 @@ public class CommerceDiscountModelImpl
 
 				@Override
 				public void accept(
-					CommerceDiscount commerceDiscount, Object companyId) {
+					CommerceDiscount commerceDiscount, Object companyIdObject) {
 
-					commerceDiscount.setCompanyId((Long)companyId);
+					commerceDiscount.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -487,9 +487,9 @@ public class CommerceDiscountModelImpl
 
 				@Override
 				public void accept(
-					CommerceDiscount commerceDiscount, Object userId) {
+					CommerceDiscount commerceDiscount, Object userIdObject) {
 
-					commerceDiscount.setUserId((Long)userId);
+					commerceDiscount.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -509,9 +509,9 @@ public class CommerceDiscountModelImpl
 
 				@Override
 				public void accept(
-					CommerceDiscount commerceDiscount, Object userName) {
+					CommerceDiscount commerceDiscount, Object userNameObject) {
 
-					commerceDiscount.setUserName((String)userName);
+					commerceDiscount.setUserName((String)userNameObject);
 				}
 
 			});
@@ -531,9 +531,10 @@ public class CommerceDiscountModelImpl
 
 				@Override
 				public void accept(
-					CommerceDiscount commerceDiscount, Object createDate) {
+					CommerceDiscount commerceDiscount,
+					Object createDateObject) {
 
-					commerceDiscount.setCreateDate((Date)createDate);
+					commerceDiscount.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -553,9 +554,10 @@ public class CommerceDiscountModelImpl
 
 				@Override
 				public void accept(
-					CommerceDiscount commerceDiscount, Object modifiedDate) {
+					CommerceDiscount commerceDiscount,
+					Object modifiedDateObject) {
 
-					commerceDiscount.setModifiedDate((Date)modifiedDate);
+					commerceDiscount.setModifiedDate((Date)modifiedDateObject);
 				}
 
 			});
@@ -575,9 +577,9 @@ public class CommerceDiscountModelImpl
 
 				@Override
 				public void accept(
-					CommerceDiscount commerceDiscount, Object title) {
+					CommerceDiscount commerceDiscount, Object titleObject) {
 
-					commerceDiscount.setTitle((String)title);
+					commerceDiscount.setTitle((String)titleObject);
 				}
 
 			});
@@ -597,9 +599,9 @@ public class CommerceDiscountModelImpl
 
 				@Override
 				public void accept(
-					CommerceDiscount commerceDiscount, Object target) {
+					CommerceDiscount commerceDiscount, Object targetObject) {
 
-					commerceDiscount.setTarget((String)target);
+					commerceDiscount.setTarget((String)targetObject);
 				}
 
 			});
@@ -619,9 +621,11 @@ public class CommerceDiscountModelImpl
 
 				@Override
 				public void accept(
-					CommerceDiscount commerceDiscount, Object useCouponCode) {
+					CommerceDiscount commerceDiscount,
+					Object useCouponCodeObject) {
 
-					commerceDiscount.setUseCouponCode((Boolean)useCouponCode);
+					commerceDiscount.setUseCouponCode(
+						(Boolean)useCouponCodeObject);
 				}
 
 			});
@@ -641,9 +645,10 @@ public class CommerceDiscountModelImpl
 
 				@Override
 				public void accept(
-					CommerceDiscount commerceDiscount, Object couponCode) {
+					CommerceDiscount commerceDiscount,
+					Object couponCodeObject) {
 
-					commerceDiscount.setCouponCode((String)couponCode);
+					commerceDiscount.setCouponCode((String)couponCodeObject);
 				}
 
 			});
@@ -663,9 +668,11 @@ public class CommerceDiscountModelImpl
 
 				@Override
 				public void accept(
-					CommerceDiscount commerceDiscount, Object usePercentage) {
+					CommerceDiscount commerceDiscount,
+					Object usePercentageObject) {
 
-					commerceDiscount.setUsePercentage((Boolean)usePercentage);
+					commerceDiscount.setUsePercentage(
+						(Boolean)usePercentageObject);
 				}
 
 			});
@@ -686,10 +693,10 @@ public class CommerceDiscountModelImpl
 				@Override
 				public void accept(
 					CommerceDiscount commerceDiscount,
-					Object maximumDiscountAmount) {
+					Object maximumDiscountAmountObject) {
 
 					commerceDiscount.setMaximumDiscountAmount(
-						(BigDecimal)maximumDiscountAmount);
+						(BigDecimal)maximumDiscountAmountObject);
 				}
 
 			});
@@ -709,9 +716,9 @@ public class CommerceDiscountModelImpl
 
 				@Override
 				public void accept(
-					CommerceDiscount commerceDiscount, Object level1) {
+					CommerceDiscount commerceDiscount, Object level1Object) {
 
-					commerceDiscount.setLevel1((BigDecimal)level1);
+					commerceDiscount.setLevel1((BigDecimal)level1Object);
 				}
 
 			});
@@ -731,9 +738,9 @@ public class CommerceDiscountModelImpl
 
 				@Override
 				public void accept(
-					CommerceDiscount commerceDiscount, Object level2) {
+					CommerceDiscount commerceDiscount, Object level2Object) {
 
-					commerceDiscount.setLevel2((BigDecimal)level2);
+					commerceDiscount.setLevel2((BigDecimal)level2Object);
 				}
 
 			});
@@ -753,9 +760,9 @@ public class CommerceDiscountModelImpl
 
 				@Override
 				public void accept(
-					CommerceDiscount commerceDiscount, Object level3) {
+					CommerceDiscount commerceDiscount, Object level3Object) {
 
-					commerceDiscount.setLevel3((BigDecimal)level3);
+					commerceDiscount.setLevel3((BigDecimal)level3Object);
 				}
 
 			});
@@ -775,9 +782,9 @@ public class CommerceDiscountModelImpl
 
 				@Override
 				public void accept(
-					CommerceDiscount commerceDiscount, Object level4) {
+					CommerceDiscount commerceDiscount, Object level4Object) {
 
-					commerceDiscount.setLevel4((BigDecimal)level4);
+					commerceDiscount.setLevel4((BigDecimal)level4Object);
 				}
 
 			});
@@ -797,9 +804,11 @@ public class CommerceDiscountModelImpl
 
 				@Override
 				public void accept(
-					CommerceDiscount commerceDiscount, Object limitationType) {
+					CommerceDiscount commerceDiscount,
+					Object limitationTypeObject) {
 
-					commerceDiscount.setLimitationType((String)limitationType);
+					commerceDiscount.setLimitationType(
+						(String)limitationTypeObject);
 				}
 
 			});
@@ -819,10 +828,11 @@ public class CommerceDiscountModelImpl
 
 				@Override
 				public void accept(
-					CommerceDiscount commerceDiscount, Object limitationTimes) {
+					CommerceDiscount commerceDiscount,
+					Object limitationTimesObject) {
 
 					commerceDiscount.setLimitationTimes(
-						(Integer)limitationTimes);
+						(Integer)limitationTimesObject);
 				}
 
 			});
@@ -842,9 +852,10 @@ public class CommerceDiscountModelImpl
 
 				@Override
 				public void accept(
-					CommerceDiscount commerceDiscount, Object numberOfUse) {
+					CommerceDiscount commerceDiscount,
+					Object numberOfUseObject) {
 
-					commerceDiscount.setNumberOfUse((Integer)numberOfUse);
+					commerceDiscount.setNumberOfUse((Integer)numberOfUseObject);
 				}
 
 			});
@@ -864,9 +875,9 @@ public class CommerceDiscountModelImpl
 
 				@Override
 				public void accept(
-					CommerceDiscount commerceDiscount, Object active) {
+					CommerceDiscount commerceDiscount, Object activeObject) {
 
-					commerceDiscount.setActive((Boolean)active);
+					commerceDiscount.setActive((Boolean)activeObject);
 				}
 
 			});
@@ -886,9 +897,10 @@ public class CommerceDiscountModelImpl
 
 				@Override
 				public void accept(
-					CommerceDiscount commerceDiscount, Object displayDate) {
+					CommerceDiscount commerceDiscount,
+					Object displayDateObject) {
 
-					commerceDiscount.setDisplayDate((Date)displayDate);
+					commerceDiscount.setDisplayDate((Date)displayDateObject);
 				}
 
 			});
@@ -908,9 +920,11 @@ public class CommerceDiscountModelImpl
 
 				@Override
 				public void accept(
-					CommerceDiscount commerceDiscount, Object expirationDate) {
+					CommerceDiscount commerceDiscount,
+					Object expirationDateObject) {
 
-					commerceDiscount.setExpirationDate((Date)expirationDate);
+					commerceDiscount.setExpirationDate(
+						(Date)expirationDateObject);
 				}
 
 			});
@@ -930,9 +944,11 @@ public class CommerceDiscountModelImpl
 
 				@Override
 				public void accept(
-					CommerceDiscount commerceDiscount, Object lastPublishDate) {
+					CommerceDiscount commerceDiscount,
+					Object lastPublishDateObject) {
 
-					commerceDiscount.setLastPublishDate((Date)lastPublishDate);
+					commerceDiscount.setLastPublishDate(
+						(Date)lastPublishDateObject);
 				}
 
 			});
@@ -952,9 +968,9 @@ public class CommerceDiscountModelImpl
 
 				@Override
 				public void accept(
-					CommerceDiscount commerceDiscount, Object status) {
+					CommerceDiscount commerceDiscount, Object statusObject) {
 
-					commerceDiscount.setStatus((Integer)status);
+					commerceDiscount.setStatus((Integer)statusObject);
 				}
 
 			});
@@ -974,9 +990,11 @@ public class CommerceDiscountModelImpl
 
 				@Override
 				public void accept(
-					CommerceDiscount commerceDiscount, Object statusByUserId) {
+					CommerceDiscount commerceDiscount,
+					Object statusByUserIdObject) {
 
-					commerceDiscount.setStatusByUserId((Long)statusByUserId);
+					commerceDiscount.setStatusByUserId(
+						(Long)statusByUserIdObject);
 				}
 
 			});
@@ -997,10 +1015,10 @@ public class CommerceDiscountModelImpl
 				@Override
 				public void accept(
 					CommerceDiscount commerceDiscount,
-					Object statusByUserName) {
+					Object statusByUserNameObject) {
 
 					commerceDiscount.setStatusByUserName(
-						(String)statusByUserName);
+						(String)statusByUserNameObject);
 				}
 
 			});
@@ -1020,9 +1038,10 @@ public class CommerceDiscountModelImpl
 
 				@Override
 				public void accept(
-					CommerceDiscount commerceDiscount, Object statusDate) {
+					CommerceDiscount commerceDiscount,
+					Object statusDateObject) {
 
-					commerceDiscount.setStatusDate((Date)statusDate);
+					commerceDiscount.setStatusDate((Date)statusDateObject);
 				}
 
 			});

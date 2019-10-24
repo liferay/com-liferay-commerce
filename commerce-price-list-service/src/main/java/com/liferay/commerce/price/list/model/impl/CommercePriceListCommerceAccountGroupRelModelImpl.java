@@ -372,10 +372,10 @@ public class CommercePriceListCommerceAccountGroupRelModelImpl
 				public void accept(
 					CommercePriceListCommerceAccountGroupRel
 						commercePriceListCommerceAccountGroupRel,
-					Object uuid) {
+					Object uuidObject) {
 
 					commercePriceListCommerceAccountGroupRel.setUuid(
-						(String)uuid);
+						(String)uuidObject);
 				}
 
 			});
@@ -401,11 +401,12 @@ public class CommercePriceListCommerceAccountGroupRelModelImpl
 				public void accept(
 					CommercePriceListCommerceAccountGroupRel
 						commercePriceListCommerceAccountGroupRel,
-					Object commercePriceListCommerceAccountGroupRelId) {
+					Object commercePriceListCommerceAccountGroupRelIdObject) {
 
 					commercePriceListCommerceAccountGroupRel.
 						setCommercePriceListCommerceAccountGroupRelId(
-							(Long)commercePriceListCommerceAccountGroupRelId);
+							(Long)
+								commercePriceListCommerceAccountGroupRelIdObject);
 				}
 
 			});
@@ -431,10 +432,10 @@ public class CommercePriceListCommerceAccountGroupRelModelImpl
 				public void accept(
 					CommercePriceListCommerceAccountGroupRel
 						commercePriceListCommerceAccountGroupRel,
-					Object companyId) {
+					Object companyIdObject) {
 
 					commercePriceListCommerceAccountGroupRel.setCompanyId(
-						(Long)companyId);
+						(Long)companyIdObject);
 				}
 
 			});
@@ -459,10 +460,10 @@ public class CommercePriceListCommerceAccountGroupRelModelImpl
 				public void accept(
 					CommercePriceListCommerceAccountGroupRel
 						commercePriceListCommerceAccountGroupRel,
-					Object userId) {
+					Object userIdObject) {
 
 					commercePriceListCommerceAccountGroupRel.setUserId(
-						(Long)userId);
+						(Long)userIdObject);
 				}
 
 			});
@@ -488,10 +489,10 @@ public class CommercePriceListCommerceAccountGroupRelModelImpl
 				public void accept(
 					CommercePriceListCommerceAccountGroupRel
 						commercePriceListCommerceAccountGroupRel,
-					Object userName) {
+					Object userNameObject) {
 
 					commercePriceListCommerceAccountGroupRel.setUserName(
-						(String)userName);
+						(String)userNameObject);
 				}
 
 			});
@@ -517,10 +518,10 @@ public class CommercePriceListCommerceAccountGroupRelModelImpl
 				public void accept(
 					CommercePriceListCommerceAccountGroupRel
 						commercePriceListCommerceAccountGroupRel,
-					Object createDate) {
+					Object createDateObject) {
 
 					commercePriceListCommerceAccountGroupRel.setCreateDate(
-						(Date)createDate);
+						(Date)createDateObject);
 				}
 
 			});
@@ -546,10 +547,10 @@ public class CommercePriceListCommerceAccountGroupRelModelImpl
 				public void accept(
 					CommercePriceListCommerceAccountGroupRel
 						commercePriceListCommerceAccountGroupRel,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
 					commercePriceListCommerceAccountGroupRel.setModifiedDate(
-						(Date)modifiedDate);
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -575,10 +576,10 @@ public class CommercePriceListCommerceAccountGroupRelModelImpl
 				public void accept(
 					CommercePriceListCommerceAccountGroupRel
 						commercePriceListCommerceAccountGroupRel,
-					Object commercePriceListId) {
+					Object commercePriceListIdObject) {
 
 					commercePriceListCommerceAccountGroupRel.
-						setCommercePriceListId((Long)commercePriceListId);
+						setCommercePriceListId((Long)commercePriceListIdObject);
 				}
 
 			});
@@ -604,10 +605,11 @@ public class CommercePriceListCommerceAccountGroupRelModelImpl
 				public void accept(
 					CommercePriceListCommerceAccountGroupRel
 						commercePriceListCommerceAccountGroupRel,
-					Object commerceAccountGroupId) {
+					Object commerceAccountGroupIdObject) {
 
 					commercePriceListCommerceAccountGroupRel.
-						setCommerceAccountGroupId((Long)commerceAccountGroupId);
+						setCommerceAccountGroupId(
+							(Long)commerceAccountGroupIdObject);
 				}
 
 			});
@@ -632,10 +634,10 @@ public class CommercePriceListCommerceAccountGroupRelModelImpl
 				public void accept(
 					CommercePriceListCommerceAccountGroupRel
 						commercePriceListCommerceAccountGroupRel,
-					Object order) {
+					Object orderObject) {
 
 					commercePriceListCommerceAccountGroupRel.setOrder(
-						(Integer)order);
+						(Integer)orderObject);
 				}
 
 			});
@@ -661,10 +663,10 @@ public class CommercePriceListCommerceAccountGroupRelModelImpl
 				public void accept(
 					CommercePriceListCommerceAccountGroupRel
 						commercePriceListCommerceAccountGroupRel,
-					Object lastPublishDate) {
+					Object lastPublishDateObject) {
 
 					commercePriceListCommerceAccountGroupRel.setLastPublishDate(
-						(Date)lastPublishDate);
+						(Date)lastPublishDateObject);
 				}
 
 			});
