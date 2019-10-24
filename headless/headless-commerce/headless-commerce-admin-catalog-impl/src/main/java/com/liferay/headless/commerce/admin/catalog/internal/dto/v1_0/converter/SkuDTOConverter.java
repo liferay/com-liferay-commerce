@@ -80,7 +80,7 @@ public class SkuDTOConverter implements DTOConverter {
 		Map<CPDefinitionOptionRel, List<CPDefinitionOptionValueRel>>
 			cpDefinitionOptionRelsMap =
 				_cpInstanceHelper.getCPDefinitionOptionRelsMap(
-					cpInstance.getJson());
+					cpInstance.getCPDefinitionId(), cpInstance.getJson());
 
 		for (Map.Entry<CPDefinitionOptionRel, List<CPDefinitionOptionValueRel>>
 				entry : cpDefinitionOptionRelsMap.entrySet()) {
