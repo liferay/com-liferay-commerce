@@ -215,9 +215,8 @@ public class AccountResourceImpl
 			CommerceAccount.class, StringPool.BLANK, pagination,
 			queryConfig -> queryConfig.setSelectedFieldNames(
 				Field.ENTRY_CLASS_PK),
-			searchContext -> {
-				searchContext.setCompanyId(contextCompany.getCompanyId());
-			},
+			searchContext -> searchContext.setCompanyId(
+				contextCompany.getCompanyId()),
 			document -> _toAccount(
 				_commerceAccountService.getCommerceAccount(
 					GetterUtil.getLong(document.get(Field.ENTRY_CLASS_PK)))),
