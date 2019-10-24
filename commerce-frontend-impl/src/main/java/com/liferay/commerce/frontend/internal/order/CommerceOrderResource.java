@@ -69,17 +69,21 @@ public class CommerceOrderResource {
 			commerceAccountId = commerceAccount.getCommerceAccountId();
 		}
 
-		List<Order> orders = getOrders(
-			groupId, keywords, page, pageSize, httpServletRequest,
-			commerceAccountId);
+		long companyId = _portal.getCompanyId(httpServletRequest);
 
-		return new OrderList(
-			orders, getOrdersCount(groupId, keywords, commerceAccountId));
+		groupId =
+			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
+				groupId);
+
+		List<Order> orders = getOrders(
+			companyId, groupId, page, pageSize, httpServletRequest);
+
+		return new OrderList(orders, getOrdersCount(companyId, groupId));
 	}
 
 	protected List<Order> getOrders(
-			long groupId, String keywords, int page, int pageSize,
-			HttpServletRequest httpServletRequest, long commerceAccountId)
+			long companyId, long groupId, int page, int pageSize,
+			HttpServletRequest httpServletRequest)
 		throws PortalException {
 
 		List<Order> orders = new ArrayList<>();
@@ -87,14 +91,9 @@ public class CommerceOrderResource {
 		int start = (page - 1) * pageSize;
 		int end = page * pageSize;
 
-		long commerceChannelGroupId =
-			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
-				groupId);
-
 		List<CommerceOrder> userCommerceOrders =
 			_commerceOrderService.getPendingCommerceOrders(
-				commerceChannelGroupId, commerceAccountId, keywords, start,
-				end);
+				companyId, groupId, start, end);
 
 		for (CommerceOrder commerceOrder : userCommerceOrders) {
 			Date modifiedDate = commerceOrder.getModifiedDate();
@@ -121,16 +120,11 @@ public class CommerceOrderResource {
 		return orders;
 	}
 
-	protected int getOrdersCount(
-			long groupId, String keywords, long commerceAccountId)
+	protected int getOrdersCount(long companyId, long groupId)
 		throws PortalException {
 
-		long commerceChannelGroupId =
-			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
-				groupId);
-
-		return _commerceOrderService.getPendingCommerceOrdersCount(
-			commerceChannelGroupId, commerceAccountId, keywords);
+		return (int)_commerceOrderService.getPendingCommerceOrdersCount(
+			companyId, groupId);
 	}
 
 	protected Response getResponse(Object object) {
