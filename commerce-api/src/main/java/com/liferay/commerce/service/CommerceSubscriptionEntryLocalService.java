@@ -233,6 +233,11 @@ public interface CommerceSubscriptionEntryLocalService
 	public CommerceSubscriptionEntry fetchCommerceSubscriptionEntry(
 		long commerceSubscriptionEntryId);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceSubscriptionEntry
+		fetchCommerceSubscriptionEntryByCommerceOrderItemId(
+			long commerceOrderItemId);
+
 	/**
 	 * Returns the commerce subscription entry matching the UUID and group.
 	 *

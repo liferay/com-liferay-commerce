@@ -98,6 +98,15 @@ public class CommercePaymentMethodGroupRelServiceWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel
+			fetchCommercePaymentMethodGroupRel(long groupId, String engineKey)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commercePaymentMethodGroupRelService.
+			fetchCommercePaymentMethodGroupRel(groupId, engineKey);
+	}
+
+	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceAddressRestriction>
 			getCommerceAddressRestrictions(
 				long classPK, int start, int end,
@@ -179,6 +188,14 @@ public class CommercePaymentMethodGroupRelServiceWrapper
 		return _commercePaymentMethodGroupRelService.
 			getCommercePaymentMethodGroupRels(
 				groupId, commerceCountryId, active);
+	}
+
+	@Override
+	public int getCommercePaymentMethodGroupRelsCount(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commercePaymentMethodGroupRelService.
+			getCommercePaymentMethodGroupRelsCount(groupId);
 	}
 
 	@Override

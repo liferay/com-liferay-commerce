@@ -334,10 +334,10 @@ public class CommerceDiscountRuleModelImpl
 				@Override
 				public void accept(
 					CommerceDiscountRule commerceDiscountRule,
-					Object commerceDiscountRuleId) {
+					Object commerceDiscountRuleIdObject) {
 
 					commerceDiscountRule.setCommerceDiscountRuleId(
-						(Long)commerceDiscountRuleId);
+						(Long)commerceDiscountRuleIdObject);
 				}
 
 			});
@@ -358,9 +358,9 @@ public class CommerceDiscountRuleModelImpl
 				@Override
 				public void accept(
 					CommerceDiscountRule commerceDiscountRule,
-					Object companyId) {
+					Object companyIdObject) {
 
-					commerceDiscountRule.setCompanyId((Long)companyId);
+					commerceDiscountRule.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -380,9 +380,10 @@ public class CommerceDiscountRuleModelImpl
 
 				@Override
 				public void accept(
-					CommerceDiscountRule commerceDiscountRule, Object userId) {
+					CommerceDiscountRule commerceDiscountRule,
+					Object userIdObject) {
 
-					commerceDiscountRule.setUserId((Long)userId);
+					commerceDiscountRule.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -403,9 +404,9 @@ public class CommerceDiscountRuleModelImpl
 				@Override
 				public void accept(
 					CommerceDiscountRule commerceDiscountRule,
-					Object userName) {
+					Object userNameObject) {
 
-					commerceDiscountRule.setUserName((String)userName);
+					commerceDiscountRule.setUserName((String)userNameObject);
 				}
 
 			});
@@ -426,9 +427,9 @@ public class CommerceDiscountRuleModelImpl
 				@Override
 				public void accept(
 					CommerceDiscountRule commerceDiscountRule,
-					Object createDate) {
+					Object createDateObject) {
 
-					commerceDiscountRule.setCreateDate((Date)createDate);
+					commerceDiscountRule.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -449,9 +450,10 @@ public class CommerceDiscountRuleModelImpl
 				@Override
 				public void accept(
 					CommerceDiscountRule commerceDiscountRule,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
-					commerceDiscountRule.setModifiedDate((Date)modifiedDate);
+					commerceDiscountRule.setModifiedDate(
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -472,10 +474,10 @@ public class CommerceDiscountRuleModelImpl
 				@Override
 				public void accept(
 					CommerceDiscountRule commerceDiscountRule,
-					Object commerceDiscountId) {
+					Object commerceDiscountIdObject) {
 
 					commerceDiscountRule.setCommerceDiscountId(
-						(Long)commerceDiscountId);
+						(Long)commerceDiscountIdObject);
 				}
 
 			});
@@ -495,9 +497,10 @@ public class CommerceDiscountRuleModelImpl
 
 				@Override
 				public void accept(
-					CommerceDiscountRule commerceDiscountRule, Object type) {
+					CommerceDiscountRule commerceDiscountRule,
+					Object typeObject) {
 
-					commerceDiscountRule.setType((String)type);
+					commerceDiscountRule.setType((String)typeObject);
 				}
 
 			});
@@ -518,9 +521,10 @@ public class CommerceDiscountRuleModelImpl
 				@Override
 				public void accept(
 					CommerceDiscountRule commerceDiscountRule,
-					Object typeSettings) {
+					Object typeSettingsObject) {
 
-					commerceDiscountRule.setTypeSettings((String)typeSettings);
+					commerceDiscountRule.setTypeSettings(
+						(String)typeSettingsObject);
 				}
 
 			});

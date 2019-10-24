@@ -347,10 +347,10 @@ public class CommerceTaxMethodModelImpl
 				@Override
 				public void accept(
 					CommerceTaxMethod commerceTaxMethod,
-					Object commerceTaxMethodId) {
+					Object commerceTaxMethodIdObject) {
 
 					commerceTaxMethod.setCommerceTaxMethodId(
-						(Long)commerceTaxMethodId);
+						(Long)commerceTaxMethodIdObject);
 				}
 
 			});
@@ -370,9 +370,9 @@ public class CommerceTaxMethodModelImpl
 
 				@Override
 				public void accept(
-					CommerceTaxMethod commerceTaxMethod, Object groupId) {
+					CommerceTaxMethod commerceTaxMethod, Object groupIdObject) {
 
-					commerceTaxMethod.setGroupId((Long)groupId);
+					commerceTaxMethod.setGroupId((Long)groupIdObject);
 				}
 
 			});
@@ -392,9 +392,10 @@ public class CommerceTaxMethodModelImpl
 
 				@Override
 				public void accept(
-					CommerceTaxMethod commerceTaxMethod, Object companyId) {
+					CommerceTaxMethod commerceTaxMethod,
+					Object companyIdObject) {
 
-					commerceTaxMethod.setCompanyId((Long)companyId);
+					commerceTaxMethod.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -414,9 +415,9 @@ public class CommerceTaxMethodModelImpl
 
 				@Override
 				public void accept(
-					CommerceTaxMethod commerceTaxMethod, Object userId) {
+					CommerceTaxMethod commerceTaxMethod, Object userIdObject) {
 
-					commerceTaxMethod.setUserId((Long)userId);
+					commerceTaxMethod.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -436,9 +437,10 @@ public class CommerceTaxMethodModelImpl
 
 				@Override
 				public void accept(
-					CommerceTaxMethod commerceTaxMethod, Object userName) {
+					CommerceTaxMethod commerceTaxMethod,
+					Object userNameObject) {
 
-					commerceTaxMethod.setUserName((String)userName);
+					commerceTaxMethod.setUserName((String)userNameObject);
 				}
 
 			});
@@ -458,9 +460,10 @@ public class CommerceTaxMethodModelImpl
 
 				@Override
 				public void accept(
-					CommerceTaxMethod commerceTaxMethod, Object createDate) {
+					CommerceTaxMethod commerceTaxMethod,
+					Object createDateObject) {
 
-					commerceTaxMethod.setCreateDate((Date)createDate);
+					commerceTaxMethod.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -480,9 +483,10 @@ public class CommerceTaxMethodModelImpl
 
 				@Override
 				public void accept(
-					CommerceTaxMethod commerceTaxMethod, Object modifiedDate) {
+					CommerceTaxMethod commerceTaxMethod,
+					Object modifiedDateObject) {
 
-					commerceTaxMethod.setModifiedDate((Date)modifiedDate);
+					commerceTaxMethod.setModifiedDate((Date)modifiedDateObject);
 				}
 
 			});
@@ -502,9 +506,9 @@ public class CommerceTaxMethodModelImpl
 
 				@Override
 				public void accept(
-					CommerceTaxMethod commerceTaxMethod, Object name) {
+					CommerceTaxMethod commerceTaxMethod, Object nameObject) {
 
-					commerceTaxMethod.setName((String)name);
+					commerceTaxMethod.setName((String)nameObject);
 				}
 
 			});
@@ -524,9 +528,10 @@ public class CommerceTaxMethodModelImpl
 
 				@Override
 				public void accept(
-					CommerceTaxMethod commerceTaxMethod, Object description) {
+					CommerceTaxMethod commerceTaxMethod,
+					Object descriptionObject) {
 
-					commerceTaxMethod.setDescription((String)description);
+					commerceTaxMethod.setDescription((String)descriptionObject);
 				}
 
 			});
@@ -546,9 +551,10 @@ public class CommerceTaxMethodModelImpl
 
 				@Override
 				public void accept(
-					CommerceTaxMethod commerceTaxMethod, Object engineKey) {
+					CommerceTaxMethod commerceTaxMethod,
+					Object engineKeyObject) {
 
-					commerceTaxMethod.setEngineKey((String)engineKey);
+					commerceTaxMethod.setEngineKey((String)engineKeyObject);
 				}
 
 			});
@@ -568,9 +574,10 @@ public class CommerceTaxMethodModelImpl
 
 				@Override
 				public void accept(
-					CommerceTaxMethod commerceTaxMethod, Object percentage) {
+					CommerceTaxMethod commerceTaxMethod,
+					Object percentageObject) {
 
-					commerceTaxMethod.setPercentage((Boolean)percentage);
+					commerceTaxMethod.setPercentage((Boolean)percentageObject);
 				}
 
 			});
@@ -590,9 +597,9 @@ public class CommerceTaxMethodModelImpl
 
 				@Override
 				public void accept(
-					CommerceTaxMethod commerceTaxMethod, Object active) {
+					CommerceTaxMethod commerceTaxMethod, Object activeObject) {
 
-					commerceTaxMethod.setActive((Boolean)active);
+					commerceTaxMethod.setActive((Boolean)activeObject);
 				}
 
 			});

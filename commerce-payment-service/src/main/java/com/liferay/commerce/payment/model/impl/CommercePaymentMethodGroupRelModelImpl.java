@@ -364,11 +364,11 @@ public class CommercePaymentMethodGroupRelModelImpl
 				@Override
 				public void accept(
 					CommercePaymentMethodGroupRel commercePaymentMethodGroupRel,
-					Object commercePaymentMethodGroupRelId) {
+					Object commercePaymentMethodGroupRelIdObject) {
 
 					commercePaymentMethodGroupRel.
 						setCommercePaymentMethodGroupRelId(
-							(Long)commercePaymentMethodGroupRelId);
+							(Long)commercePaymentMethodGroupRelIdObject);
 				}
 
 			});
@@ -392,9 +392,10 @@ public class CommercePaymentMethodGroupRelModelImpl
 				@Override
 				public void accept(
 					CommercePaymentMethodGroupRel commercePaymentMethodGroupRel,
-					Object groupId) {
+					Object groupIdObject) {
 
-					commercePaymentMethodGroupRel.setGroupId((Long)groupId);
+					commercePaymentMethodGroupRel.setGroupId(
+						(Long)groupIdObject);
 				}
 
 			});
@@ -418,9 +419,10 @@ public class CommercePaymentMethodGroupRelModelImpl
 				@Override
 				public void accept(
 					CommercePaymentMethodGroupRel commercePaymentMethodGroupRel,
-					Object companyId) {
+					Object companyIdObject) {
 
-					commercePaymentMethodGroupRel.setCompanyId((Long)companyId);
+					commercePaymentMethodGroupRel.setCompanyId(
+						(Long)companyIdObject);
 				}
 
 			});
@@ -444,9 +446,9 @@ public class CommercePaymentMethodGroupRelModelImpl
 				@Override
 				public void accept(
 					CommercePaymentMethodGroupRel commercePaymentMethodGroupRel,
-					Object userId) {
+					Object userIdObject) {
 
-					commercePaymentMethodGroupRel.setUserId((Long)userId);
+					commercePaymentMethodGroupRel.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -470,9 +472,10 @@ public class CommercePaymentMethodGroupRelModelImpl
 				@Override
 				public void accept(
 					CommercePaymentMethodGroupRel commercePaymentMethodGroupRel,
-					Object userName) {
+					Object userNameObject) {
 
-					commercePaymentMethodGroupRel.setUserName((String)userName);
+					commercePaymentMethodGroupRel.setUserName(
+						(String)userNameObject);
 				}
 
 			});
@@ -496,10 +499,10 @@ public class CommercePaymentMethodGroupRelModelImpl
 				@Override
 				public void accept(
 					CommercePaymentMethodGroupRel commercePaymentMethodGroupRel,
-					Object createDate) {
+					Object createDateObject) {
 
 					commercePaymentMethodGroupRel.setCreateDate(
-						(Date)createDate);
+						(Date)createDateObject);
 				}
 
 			});
@@ -523,10 +526,10 @@ public class CommercePaymentMethodGroupRelModelImpl
 				@Override
 				public void accept(
 					CommercePaymentMethodGroupRel commercePaymentMethodGroupRel,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
 					commercePaymentMethodGroupRel.setModifiedDate(
-						(Date)modifiedDate);
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -550,9 +553,9 @@ public class CommercePaymentMethodGroupRelModelImpl
 				@Override
 				public void accept(
 					CommercePaymentMethodGroupRel commercePaymentMethodGroupRel,
-					Object name) {
+					Object nameObject) {
 
-					commercePaymentMethodGroupRel.setName((String)name);
+					commercePaymentMethodGroupRel.setName((String)nameObject);
 				}
 
 			});
@@ -576,10 +579,10 @@ public class CommercePaymentMethodGroupRelModelImpl
 				@Override
 				public void accept(
 					CommercePaymentMethodGroupRel commercePaymentMethodGroupRel,
-					Object description) {
+					Object descriptionObject) {
 
 					commercePaymentMethodGroupRel.setDescription(
-						(String)description);
+						(String)descriptionObject);
 				}
 
 			});
@@ -603,9 +606,10 @@ public class CommercePaymentMethodGroupRelModelImpl
 				@Override
 				public void accept(
 					CommercePaymentMethodGroupRel commercePaymentMethodGroupRel,
-					Object imageId) {
+					Object imageIdObject) {
 
-					commercePaymentMethodGroupRel.setImageId((Long)imageId);
+					commercePaymentMethodGroupRel.setImageId(
+						(Long)imageIdObject);
 				}
 
 			});
@@ -629,10 +633,10 @@ public class CommercePaymentMethodGroupRelModelImpl
 				@Override
 				public void accept(
 					CommercePaymentMethodGroupRel commercePaymentMethodGroupRel,
-					Object engineKey) {
+					Object engineKeyObject) {
 
 					commercePaymentMethodGroupRel.setEngineKey(
-						(String)engineKey);
+						(String)engineKeyObject);
 				}
 
 			});
@@ -656,9 +660,10 @@ public class CommercePaymentMethodGroupRelModelImpl
 				@Override
 				public void accept(
 					CommercePaymentMethodGroupRel commercePaymentMethodGroupRel,
-					Object priority) {
+					Object priorityObject) {
 
-					commercePaymentMethodGroupRel.setPriority((Double)priority);
+					commercePaymentMethodGroupRel.setPriority(
+						(Double)priorityObject);
 				}
 
 			});
@@ -682,9 +687,10 @@ public class CommercePaymentMethodGroupRelModelImpl
 				@Override
 				public void accept(
 					CommercePaymentMethodGroupRel commercePaymentMethodGroupRel,
-					Object active) {
+					Object activeObject) {
 
-					commercePaymentMethodGroupRel.setActive((Boolean)active);
+					commercePaymentMethodGroupRel.setActive(
+						(Boolean)activeObject);
 				}
 
 			});

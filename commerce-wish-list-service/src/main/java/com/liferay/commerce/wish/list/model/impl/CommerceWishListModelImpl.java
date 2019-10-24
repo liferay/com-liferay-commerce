@@ -340,9 +340,9 @@ public class CommerceWishListModelImpl
 
 				@Override
 				public void accept(
-					CommerceWishList commerceWishList, Object uuid) {
+					CommerceWishList commerceWishList, Object uuidObject) {
 
-					commerceWishList.setUuid((String)uuid);
+					commerceWishList.setUuid((String)uuidObject);
 				}
 
 			});
@@ -363,10 +363,10 @@ public class CommerceWishListModelImpl
 				@Override
 				public void accept(
 					CommerceWishList commerceWishList,
-					Object commerceWishListId) {
+					Object commerceWishListIdObject) {
 
 					commerceWishList.setCommerceWishListId(
-						(Long)commerceWishListId);
+						(Long)commerceWishListIdObject);
 				}
 
 			});
@@ -386,9 +386,9 @@ public class CommerceWishListModelImpl
 
 				@Override
 				public void accept(
-					CommerceWishList commerceWishList, Object groupId) {
+					CommerceWishList commerceWishList, Object groupIdObject) {
 
-					commerceWishList.setGroupId((Long)groupId);
+					commerceWishList.setGroupId((Long)groupIdObject);
 				}
 
 			});
@@ -408,9 +408,9 @@ public class CommerceWishListModelImpl
 
 				@Override
 				public void accept(
-					CommerceWishList commerceWishList, Object companyId) {
+					CommerceWishList commerceWishList, Object companyIdObject) {
 
-					commerceWishList.setCompanyId((Long)companyId);
+					commerceWishList.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -430,9 +430,9 @@ public class CommerceWishListModelImpl
 
 				@Override
 				public void accept(
-					CommerceWishList commerceWishList, Object userId) {
+					CommerceWishList commerceWishList, Object userIdObject) {
 
-					commerceWishList.setUserId((Long)userId);
+					commerceWishList.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -452,9 +452,9 @@ public class CommerceWishListModelImpl
 
 				@Override
 				public void accept(
-					CommerceWishList commerceWishList, Object userName) {
+					CommerceWishList commerceWishList, Object userNameObject) {
 
-					commerceWishList.setUserName((String)userName);
+					commerceWishList.setUserName((String)userNameObject);
 				}
 
 			});
@@ -474,9 +474,10 @@ public class CommerceWishListModelImpl
 
 				@Override
 				public void accept(
-					CommerceWishList commerceWishList, Object createDate) {
+					CommerceWishList commerceWishList,
+					Object createDateObject) {
 
-					commerceWishList.setCreateDate((Date)createDate);
+					commerceWishList.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -496,9 +497,10 @@ public class CommerceWishListModelImpl
 
 				@Override
 				public void accept(
-					CommerceWishList commerceWishList, Object modifiedDate) {
+					CommerceWishList commerceWishList,
+					Object modifiedDateObject) {
 
-					commerceWishList.setModifiedDate((Date)modifiedDate);
+					commerceWishList.setModifiedDate((Date)modifiedDateObject);
 				}
 
 			});
@@ -518,9 +520,9 @@ public class CommerceWishListModelImpl
 
 				@Override
 				public void accept(
-					CommerceWishList commerceWishList, Object name) {
+					CommerceWishList commerceWishList, Object nameObject) {
 
-					commerceWishList.setName((String)name);
+					commerceWishList.setName((String)nameObject);
 				}
 
 			});
@@ -540,10 +542,11 @@ public class CommerceWishListModelImpl
 
 				@Override
 				public void accept(
-					CommerceWishList commerceWishList, Object defaultWishList) {
+					CommerceWishList commerceWishList,
+					Object defaultWishListObject) {
 
 					commerceWishList.setDefaultWishList(
-						(Boolean)defaultWishList);
+						(Boolean)defaultWishListObject);
 				}
 
 			});

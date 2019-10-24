@@ -395,9 +395,9 @@ public class CPDefinitionVirtualSettingModelImpl
 				@Override
 				public void accept(
 					CPDefinitionVirtualSetting cpDefinitionVirtualSetting,
-					Object uuid) {
+					Object uuidObject) {
 
-					cpDefinitionVirtualSetting.setUuid((String)uuid);
+					cpDefinitionVirtualSetting.setUuid((String)uuidObject);
 				}
 
 			});
@@ -421,10 +421,10 @@ public class CPDefinitionVirtualSettingModelImpl
 				@Override
 				public void accept(
 					CPDefinitionVirtualSetting cpDefinitionVirtualSetting,
-					Object CPDefinitionVirtualSettingId) {
+					Object CPDefinitionVirtualSettingIdObject) {
 
 					cpDefinitionVirtualSetting.setCPDefinitionVirtualSettingId(
-						(Long)CPDefinitionVirtualSettingId);
+						(Long)CPDefinitionVirtualSettingIdObject);
 				}
 
 			});
@@ -447,9 +447,9 @@ public class CPDefinitionVirtualSettingModelImpl
 				@Override
 				public void accept(
 					CPDefinitionVirtualSetting cpDefinitionVirtualSetting,
-					Object groupId) {
+					Object groupIdObject) {
 
-					cpDefinitionVirtualSetting.setGroupId((Long)groupId);
+					cpDefinitionVirtualSetting.setGroupId((Long)groupIdObject);
 				}
 
 			});
@@ -472,9 +472,10 @@ public class CPDefinitionVirtualSettingModelImpl
 				@Override
 				public void accept(
 					CPDefinitionVirtualSetting cpDefinitionVirtualSetting,
-					Object companyId) {
+					Object companyIdObject) {
 
-					cpDefinitionVirtualSetting.setCompanyId((Long)companyId);
+					cpDefinitionVirtualSetting.setCompanyId(
+						(Long)companyIdObject);
 				}
 
 			});
@@ -497,9 +498,9 @@ public class CPDefinitionVirtualSettingModelImpl
 				@Override
 				public void accept(
 					CPDefinitionVirtualSetting cpDefinitionVirtualSetting,
-					Object userId) {
+					Object userIdObject) {
 
-					cpDefinitionVirtualSetting.setUserId((Long)userId);
+					cpDefinitionVirtualSetting.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -522,9 +523,10 @@ public class CPDefinitionVirtualSettingModelImpl
 				@Override
 				public void accept(
 					CPDefinitionVirtualSetting cpDefinitionVirtualSetting,
-					Object userName) {
+					Object userNameObject) {
 
-					cpDefinitionVirtualSetting.setUserName((String)userName);
+					cpDefinitionVirtualSetting.setUserName(
+						(String)userNameObject);
 				}
 
 			});
@@ -547,9 +549,10 @@ public class CPDefinitionVirtualSettingModelImpl
 				@Override
 				public void accept(
 					CPDefinitionVirtualSetting cpDefinitionVirtualSetting,
-					Object createDate) {
+					Object createDateObject) {
 
-					cpDefinitionVirtualSetting.setCreateDate((Date)createDate);
+					cpDefinitionVirtualSetting.setCreateDate(
+						(Date)createDateObject);
 				}
 
 			});
@@ -572,10 +575,10 @@ public class CPDefinitionVirtualSettingModelImpl
 				@Override
 				public void accept(
 					CPDefinitionVirtualSetting cpDefinitionVirtualSetting,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
 					cpDefinitionVirtualSetting.setModifiedDate(
-						(Date)modifiedDate);
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -598,10 +601,10 @@ public class CPDefinitionVirtualSettingModelImpl
 				@Override
 				public void accept(
 					CPDefinitionVirtualSetting cpDefinitionVirtualSetting,
-					Object classNameId) {
+					Object classNameIdObject) {
 
 					cpDefinitionVirtualSetting.setClassNameId(
-						(Long)classNameId);
+						(Long)classNameIdObject);
 				}
 
 			});
@@ -624,9 +627,9 @@ public class CPDefinitionVirtualSettingModelImpl
 				@Override
 				public void accept(
 					CPDefinitionVirtualSetting cpDefinitionVirtualSetting,
-					Object classPK) {
+					Object classPKObject) {
 
-					cpDefinitionVirtualSetting.setClassPK((Long)classPK);
+					cpDefinitionVirtualSetting.setClassPK((Long)classPKObject);
 				}
 
 			});
@@ -649,10 +652,10 @@ public class CPDefinitionVirtualSettingModelImpl
 				@Override
 				public void accept(
 					CPDefinitionVirtualSetting cpDefinitionVirtualSetting,
-					Object fileEntryId) {
+					Object fileEntryIdObject) {
 
 					cpDefinitionVirtualSetting.setFileEntryId(
-						(Long)fileEntryId);
+						(Long)fileEntryIdObject);
 				}
 
 			});
@@ -675,9 +678,9 @@ public class CPDefinitionVirtualSettingModelImpl
 				@Override
 				public void accept(
 					CPDefinitionVirtualSetting cpDefinitionVirtualSetting,
-					Object url) {
+					Object urlObject) {
 
-					cpDefinitionVirtualSetting.setUrl((String)url);
+					cpDefinitionVirtualSetting.setUrl((String)urlObject);
 				}
 
 			});
@@ -700,10 +703,10 @@ public class CPDefinitionVirtualSettingModelImpl
 				@Override
 				public void accept(
 					CPDefinitionVirtualSetting cpDefinitionVirtualSetting,
-					Object activationStatus) {
+					Object activationStatusObject) {
 
 					cpDefinitionVirtualSetting.setActivationStatus(
-						(Integer)activationStatus);
+						(Integer)activationStatusObject);
 				}
 
 			});
@@ -726,9 +729,10 @@ public class CPDefinitionVirtualSettingModelImpl
 				@Override
 				public void accept(
 					CPDefinitionVirtualSetting cpDefinitionVirtualSetting,
-					Object duration) {
+					Object durationObject) {
 
-					cpDefinitionVirtualSetting.setDuration((Long)duration);
+					cpDefinitionVirtualSetting.setDuration(
+						(Long)durationObject);
 				}
 
 			});
@@ -751,9 +755,10 @@ public class CPDefinitionVirtualSettingModelImpl
 				@Override
 				public void accept(
 					CPDefinitionVirtualSetting cpDefinitionVirtualSetting,
-					Object maxUsages) {
+					Object maxUsagesObject) {
 
-					cpDefinitionVirtualSetting.setMaxUsages((Integer)maxUsages);
+					cpDefinitionVirtualSetting.setMaxUsages(
+						(Integer)maxUsagesObject);
 				}
 
 			});
@@ -776,9 +781,10 @@ public class CPDefinitionVirtualSettingModelImpl
 				@Override
 				public void accept(
 					CPDefinitionVirtualSetting cpDefinitionVirtualSetting,
-					Object useSample) {
+					Object useSampleObject) {
 
-					cpDefinitionVirtualSetting.setUseSample((Boolean)useSample);
+					cpDefinitionVirtualSetting.setUseSample(
+						(Boolean)useSampleObject);
 				}
 
 			});
@@ -801,10 +807,10 @@ public class CPDefinitionVirtualSettingModelImpl
 				@Override
 				public void accept(
 					CPDefinitionVirtualSetting cpDefinitionVirtualSetting,
-					Object sampleFileEntryId) {
+					Object sampleFileEntryIdObject) {
 
 					cpDefinitionVirtualSetting.setSampleFileEntryId(
-						(Long)sampleFileEntryId);
+						(Long)sampleFileEntryIdObject);
 				}
 
 			});
@@ -827,9 +833,10 @@ public class CPDefinitionVirtualSettingModelImpl
 				@Override
 				public void accept(
 					CPDefinitionVirtualSetting cpDefinitionVirtualSetting,
-					Object sampleUrl) {
+					Object sampleUrlObject) {
 
-					cpDefinitionVirtualSetting.setSampleUrl((String)sampleUrl);
+					cpDefinitionVirtualSetting.setSampleUrl(
+						(String)sampleUrlObject);
 				}
 
 			});
@@ -852,10 +859,10 @@ public class CPDefinitionVirtualSettingModelImpl
 				@Override
 				public void accept(
 					CPDefinitionVirtualSetting cpDefinitionVirtualSetting,
-					Object termsOfUseRequired) {
+					Object termsOfUseRequiredObject) {
 
 					cpDefinitionVirtualSetting.setTermsOfUseRequired(
-						(Boolean)termsOfUseRequired);
+						(Boolean)termsOfUseRequiredObject);
 				}
 
 			});
@@ -878,10 +885,10 @@ public class CPDefinitionVirtualSettingModelImpl
 				@Override
 				public void accept(
 					CPDefinitionVirtualSetting cpDefinitionVirtualSetting,
-					Object termsOfUseContent) {
+					Object termsOfUseContentObject) {
 
 					cpDefinitionVirtualSetting.setTermsOfUseContent(
-						(String)termsOfUseContent);
+						(String)termsOfUseContentObject);
 				}
 
 			});
@@ -905,11 +912,12 @@ public class CPDefinitionVirtualSettingModelImpl
 				@Override
 				public void accept(
 					CPDefinitionVirtualSetting cpDefinitionVirtualSetting,
-					Object termsOfUseJournalArticleResourcePrimKey) {
+					Object termsOfUseJournalArticleResourcePrimKeyObject) {
 
 					cpDefinitionVirtualSetting.
 						setTermsOfUseJournalArticleResourcePrimKey(
-							(Long)termsOfUseJournalArticleResourcePrimKey);
+							(Long)
+								termsOfUseJournalArticleResourcePrimKeyObject);
 				}
 
 			});
@@ -932,9 +940,10 @@ public class CPDefinitionVirtualSettingModelImpl
 				@Override
 				public void accept(
 					CPDefinitionVirtualSetting cpDefinitionVirtualSetting,
-					Object override) {
+					Object overrideObject) {
 
-					cpDefinitionVirtualSetting.setOverride((Boolean)override);
+					cpDefinitionVirtualSetting.setOverride(
+						(Boolean)overrideObject);
 				}
 
 			});
@@ -957,10 +966,10 @@ public class CPDefinitionVirtualSettingModelImpl
 				@Override
 				public void accept(
 					CPDefinitionVirtualSetting cpDefinitionVirtualSetting,
-					Object lastPublishDate) {
+					Object lastPublishDateObject) {
 
 					cpDefinitionVirtualSetting.setLastPublishDate(
-						(Date)lastPublishDate);
+						(Date)lastPublishDateObject);
 				}
 
 			});

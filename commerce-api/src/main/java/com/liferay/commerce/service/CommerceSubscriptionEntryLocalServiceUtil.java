@@ -274,6 +274,14 @@ public class CommerceSubscriptionEntryLocalServiceUtil {
 			commerceSubscriptionEntryId);
 	}
 
+	public static com.liferay.commerce.model.CommerceSubscriptionEntry
+		fetchCommerceSubscriptionEntryByCommerceOrderItemId(
+			long commerceOrderItemId) {
+
+		return getService().fetchCommerceSubscriptionEntryByCommerceOrderItemId(
+			commerceOrderItemId);
+	}
+
 	/**
 	 * Returns the commerce subscription entry matching the UUID and group.
 	 *

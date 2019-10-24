@@ -376,9 +376,9 @@ public class CommercePriceListModelImpl
 
 				@Override
 				public void accept(
-					CommercePriceList commercePriceList, Object uuid) {
+					CommercePriceList commercePriceList, Object uuidObject) {
 
-					commercePriceList.setUuid((String)uuid);
+					commercePriceList.setUuid((String)uuidObject);
 				}
 
 			});
@@ -399,10 +399,10 @@ public class CommercePriceListModelImpl
 				@Override
 				public void accept(
 					CommercePriceList commercePriceList,
-					Object externalReferenceCode) {
+					Object externalReferenceCodeObject) {
 
 					commercePriceList.setExternalReferenceCode(
-						(String)externalReferenceCode);
+						(String)externalReferenceCodeObject);
 				}
 
 			});
@@ -423,10 +423,10 @@ public class CommercePriceListModelImpl
 				@Override
 				public void accept(
 					CommercePriceList commercePriceList,
-					Object commercePriceListId) {
+					Object commercePriceListIdObject) {
 
 					commercePriceList.setCommercePriceListId(
-						(Long)commercePriceListId);
+						(Long)commercePriceListIdObject);
 				}
 
 			});
@@ -446,9 +446,9 @@ public class CommercePriceListModelImpl
 
 				@Override
 				public void accept(
-					CommercePriceList commercePriceList, Object groupId) {
+					CommercePriceList commercePriceList, Object groupIdObject) {
 
-					commercePriceList.setGroupId((Long)groupId);
+					commercePriceList.setGroupId((Long)groupIdObject);
 				}
 
 			});
@@ -468,9 +468,10 @@ public class CommercePriceListModelImpl
 
 				@Override
 				public void accept(
-					CommercePriceList commercePriceList, Object companyId) {
+					CommercePriceList commercePriceList,
+					Object companyIdObject) {
 
-					commercePriceList.setCompanyId((Long)companyId);
+					commercePriceList.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -490,9 +491,9 @@ public class CommercePriceListModelImpl
 
 				@Override
 				public void accept(
-					CommercePriceList commercePriceList, Object userId) {
+					CommercePriceList commercePriceList, Object userIdObject) {
 
-					commercePriceList.setUserId((Long)userId);
+					commercePriceList.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -512,9 +513,10 @@ public class CommercePriceListModelImpl
 
 				@Override
 				public void accept(
-					CommercePriceList commercePriceList, Object userName) {
+					CommercePriceList commercePriceList,
+					Object userNameObject) {
 
-					commercePriceList.setUserName((String)userName);
+					commercePriceList.setUserName((String)userNameObject);
 				}
 
 			});
@@ -534,9 +536,10 @@ public class CommercePriceListModelImpl
 
 				@Override
 				public void accept(
-					CommercePriceList commercePriceList, Object createDate) {
+					CommercePriceList commercePriceList,
+					Object createDateObject) {
 
-					commercePriceList.setCreateDate((Date)createDate);
+					commercePriceList.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -556,9 +559,10 @@ public class CommercePriceListModelImpl
 
 				@Override
 				public void accept(
-					CommercePriceList commercePriceList, Object modifiedDate) {
+					CommercePriceList commercePriceList,
+					Object modifiedDateObject) {
 
-					commercePriceList.setModifiedDate((Date)modifiedDate);
+					commercePriceList.setModifiedDate((Date)modifiedDateObject);
 				}
 
 			});
@@ -579,10 +583,10 @@ public class CommercePriceListModelImpl
 				@Override
 				public void accept(
 					CommercePriceList commercePriceList,
-					Object commerceCurrencyId) {
+					Object commerceCurrencyIdObject) {
 
 					commercePriceList.setCommerceCurrencyId(
-						(Long)commerceCurrencyId);
+						(Long)commerceCurrencyIdObject);
 				}
 
 			});
@@ -603,10 +607,10 @@ public class CommercePriceListModelImpl
 				@Override
 				public void accept(
 					CommercePriceList commercePriceList,
-					Object parentCommercePriceListId) {
+					Object parentCommercePriceListIdObject) {
 
 					commercePriceList.setParentCommercePriceListId(
-						(Long)parentCommercePriceListId);
+						(Long)parentCommercePriceListIdObject);
 				}
 
 			});
@@ -626,9 +630,9 @@ public class CommercePriceListModelImpl
 
 				@Override
 				public void accept(
-					CommercePriceList commercePriceList, Object name) {
+					CommercePriceList commercePriceList, Object nameObject) {
 
-					commercePriceList.setName((String)name);
+					commercePriceList.setName((String)nameObject);
 				}
 
 			});
@@ -648,9 +652,10 @@ public class CommercePriceListModelImpl
 
 				@Override
 				public void accept(
-					CommercePriceList commercePriceList, Object priority) {
+					CommercePriceList commercePriceList,
+					Object priorityObject) {
 
-					commercePriceList.setPriority((Double)priority);
+					commercePriceList.setPriority((Double)priorityObject);
 				}
 
 			});
@@ -670,9 +675,10 @@ public class CommercePriceListModelImpl
 
 				@Override
 				public void accept(
-					CommercePriceList commercePriceList, Object displayDate) {
+					CommercePriceList commercePriceList,
+					Object displayDateObject) {
 
-					commercePriceList.setDisplayDate((Date)displayDate);
+					commercePriceList.setDisplayDate((Date)displayDateObject);
 				}
 
 			});
@@ -693,9 +699,10 @@ public class CommercePriceListModelImpl
 				@Override
 				public void accept(
 					CommercePriceList commercePriceList,
-					Object expirationDate) {
+					Object expirationDateObject) {
 
-					commercePriceList.setExpirationDate((Date)expirationDate);
+					commercePriceList.setExpirationDate(
+						(Date)expirationDateObject);
 				}
 
 			});
@@ -716,9 +723,10 @@ public class CommercePriceListModelImpl
 				@Override
 				public void accept(
 					CommercePriceList commercePriceList,
-					Object lastPublishDate) {
+					Object lastPublishDateObject) {
 
-					commercePriceList.setLastPublishDate((Date)lastPublishDate);
+					commercePriceList.setLastPublishDate(
+						(Date)lastPublishDateObject);
 				}
 
 			});
@@ -738,9 +746,9 @@ public class CommercePriceListModelImpl
 
 				@Override
 				public void accept(
-					CommercePriceList commercePriceList, Object status) {
+					CommercePriceList commercePriceList, Object statusObject) {
 
-					commercePriceList.setStatus((Integer)status);
+					commercePriceList.setStatus((Integer)statusObject);
 				}
 
 			});
@@ -761,9 +769,10 @@ public class CommercePriceListModelImpl
 				@Override
 				public void accept(
 					CommercePriceList commercePriceList,
-					Object statusByUserId) {
+					Object statusByUserIdObject) {
 
-					commercePriceList.setStatusByUserId((Long)statusByUserId);
+					commercePriceList.setStatusByUserId(
+						(Long)statusByUserIdObject);
 				}
 
 			});
@@ -784,10 +793,10 @@ public class CommercePriceListModelImpl
 				@Override
 				public void accept(
 					CommercePriceList commercePriceList,
-					Object statusByUserName) {
+					Object statusByUserNameObject) {
 
 					commercePriceList.setStatusByUserName(
-						(String)statusByUserName);
+						(String)statusByUserNameObject);
 				}
 
 			});
@@ -807,9 +816,10 @@ public class CommercePriceListModelImpl
 
 				@Override
 				public void accept(
-					CommercePriceList commercePriceList, Object statusDate) {
+					CommercePriceList commercePriceList,
+					Object statusDateObject) {
 
-					commercePriceList.setStatusDate((Date)statusDate);
+					commercePriceList.setStatusDate((Date)statusDateObject);
 				}
 
 			});

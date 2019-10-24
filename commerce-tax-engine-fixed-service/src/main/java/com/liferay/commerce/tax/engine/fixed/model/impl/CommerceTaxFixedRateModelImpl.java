@@ -338,10 +338,10 @@ public class CommerceTaxFixedRateModelImpl
 				@Override
 				public void accept(
 					CommerceTaxFixedRate commerceTaxFixedRate,
-					Object commerceTaxFixedRateId) {
+					Object commerceTaxFixedRateIdObject) {
 
 					commerceTaxFixedRate.setCommerceTaxFixedRateId(
-						(Long)commerceTaxFixedRateId);
+						(Long)commerceTaxFixedRateIdObject);
 				}
 
 			});
@@ -361,9 +361,10 @@ public class CommerceTaxFixedRateModelImpl
 
 				@Override
 				public void accept(
-					CommerceTaxFixedRate commerceTaxFixedRate, Object groupId) {
+					CommerceTaxFixedRate commerceTaxFixedRate,
+					Object groupIdObject) {
 
-					commerceTaxFixedRate.setGroupId((Long)groupId);
+					commerceTaxFixedRate.setGroupId((Long)groupIdObject);
 				}
 
 			});
@@ -384,9 +385,9 @@ public class CommerceTaxFixedRateModelImpl
 				@Override
 				public void accept(
 					CommerceTaxFixedRate commerceTaxFixedRate,
-					Object companyId) {
+					Object companyIdObject) {
 
-					commerceTaxFixedRate.setCompanyId((Long)companyId);
+					commerceTaxFixedRate.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -406,9 +407,10 @@ public class CommerceTaxFixedRateModelImpl
 
 				@Override
 				public void accept(
-					CommerceTaxFixedRate commerceTaxFixedRate, Object userId) {
+					CommerceTaxFixedRate commerceTaxFixedRate,
+					Object userIdObject) {
 
-					commerceTaxFixedRate.setUserId((Long)userId);
+					commerceTaxFixedRate.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -429,9 +431,9 @@ public class CommerceTaxFixedRateModelImpl
 				@Override
 				public void accept(
 					CommerceTaxFixedRate commerceTaxFixedRate,
-					Object userName) {
+					Object userNameObject) {
 
-					commerceTaxFixedRate.setUserName((String)userName);
+					commerceTaxFixedRate.setUserName((String)userNameObject);
 				}
 
 			});
@@ -452,9 +454,9 @@ public class CommerceTaxFixedRateModelImpl
 				@Override
 				public void accept(
 					CommerceTaxFixedRate commerceTaxFixedRate,
-					Object createDate) {
+					Object createDateObject) {
 
-					commerceTaxFixedRate.setCreateDate((Date)createDate);
+					commerceTaxFixedRate.setCreateDate((Date)createDateObject);
 				}
 
 			});
@@ -475,9 +477,10 @@ public class CommerceTaxFixedRateModelImpl
 				@Override
 				public void accept(
 					CommerceTaxFixedRate commerceTaxFixedRate,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
-					commerceTaxFixedRate.setModifiedDate((Date)modifiedDate);
+					commerceTaxFixedRate.setModifiedDate(
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -498,10 +501,10 @@ public class CommerceTaxFixedRateModelImpl
 				@Override
 				public void accept(
 					CommerceTaxFixedRate commerceTaxFixedRate,
-					Object CPTaxCategoryId) {
+					Object CPTaxCategoryIdObject) {
 
 					commerceTaxFixedRate.setCPTaxCategoryId(
-						(Long)CPTaxCategoryId);
+						(Long)CPTaxCategoryIdObject);
 				}
 
 			});
@@ -522,10 +525,10 @@ public class CommerceTaxFixedRateModelImpl
 				@Override
 				public void accept(
 					CommerceTaxFixedRate commerceTaxFixedRate,
-					Object commerceTaxMethodId) {
+					Object commerceTaxMethodIdObject) {
 
 					commerceTaxFixedRate.setCommerceTaxMethodId(
-						(Long)commerceTaxMethodId);
+						(Long)commerceTaxMethodIdObject);
 				}
 
 			});
@@ -545,9 +548,10 @@ public class CommerceTaxFixedRateModelImpl
 
 				@Override
 				public void accept(
-					CommerceTaxFixedRate commerceTaxFixedRate, Object rate) {
+					CommerceTaxFixedRate commerceTaxFixedRate,
+					Object rateObject) {
 
-					commerceTaxFixedRate.setRate((Double)rate);
+					commerceTaxFixedRate.setRate((Double)rateObject);
 				}
 
 			});

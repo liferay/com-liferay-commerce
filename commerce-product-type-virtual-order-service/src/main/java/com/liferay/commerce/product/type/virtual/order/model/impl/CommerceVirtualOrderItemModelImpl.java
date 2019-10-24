@@ -373,9 +373,9 @@ public class CommerceVirtualOrderItemModelImpl
 				@Override
 				public void accept(
 					CommerceVirtualOrderItem commerceVirtualOrderItem,
-					Object uuid) {
+					Object uuidObject) {
 
-					commerceVirtualOrderItem.setUuid((String)uuid);
+					commerceVirtualOrderItem.setUuid((String)uuidObject);
 				}
 
 			});
@@ -399,10 +399,10 @@ public class CommerceVirtualOrderItemModelImpl
 				@Override
 				public void accept(
 					CommerceVirtualOrderItem commerceVirtualOrderItem,
-					Object commerceVirtualOrderItemId) {
+					Object commerceVirtualOrderItemIdObject) {
 
 					commerceVirtualOrderItem.setCommerceVirtualOrderItemId(
-						(Long)commerceVirtualOrderItemId);
+						(Long)commerceVirtualOrderItemIdObject);
 				}
 
 			});
@@ -425,9 +425,9 @@ public class CommerceVirtualOrderItemModelImpl
 				@Override
 				public void accept(
 					CommerceVirtualOrderItem commerceVirtualOrderItem,
-					Object groupId) {
+					Object groupIdObject) {
 
-					commerceVirtualOrderItem.setGroupId((Long)groupId);
+					commerceVirtualOrderItem.setGroupId((Long)groupIdObject);
 				}
 
 			});
@@ -450,9 +450,10 @@ public class CommerceVirtualOrderItemModelImpl
 				@Override
 				public void accept(
 					CommerceVirtualOrderItem commerceVirtualOrderItem,
-					Object companyId) {
+					Object companyIdObject) {
 
-					commerceVirtualOrderItem.setCompanyId((Long)companyId);
+					commerceVirtualOrderItem.setCompanyId(
+						(Long)companyIdObject);
 				}
 
 			});
@@ -475,9 +476,9 @@ public class CommerceVirtualOrderItemModelImpl
 				@Override
 				public void accept(
 					CommerceVirtualOrderItem commerceVirtualOrderItem,
-					Object userId) {
+					Object userIdObject) {
 
-					commerceVirtualOrderItem.setUserId((Long)userId);
+					commerceVirtualOrderItem.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -500,9 +501,10 @@ public class CommerceVirtualOrderItemModelImpl
 				@Override
 				public void accept(
 					CommerceVirtualOrderItem commerceVirtualOrderItem,
-					Object userName) {
+					Object userNameObject) {
 
-					commerceVirtualOrderItem.setUserName((String)userName);
+					commerceVirtualOrderItem.setUserName(
+						(String)userNameObject);
 				}
 
 			});
@@ -525,9 +527,10 @@ public class CommerceVirtualOrderItemModelImpl
 				@Override
 				public void accept(
 					CommerceVirtualOrderItem commerceVirtualOrderItem,
-					Object createDate) {
+					Object createDateObject) {
 
-					commerceVirtualOrderItem.setCreateDate((Date)createDate);
+					commerceVirtualOrderItem.setCreateDate(
+						(Date)createDateObject);
 				}
 
 			});
@@ -550,10 +553,10 @@ public class CommerceVirtualOrderItemModelImpl
 				@Override
 				public void accept(
 					CommerceVirtualOrderItem commerceVirtualOrderItem,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
 					commerceVirtualOrderItem.setModifiedDate(
-						(Date)modifiedDate);
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -576,10 +579,10 @@ public class CommerceVirtualOrderItemModelImpl
 				@Override
 				public void accept(
 					CommerceVirtualOrderItem commerceVirtualOrderItem,
-					Object commerceOrderItemId) {
+					Object commerceOrderItemIdObject) {
 
 					commerceVirtualOrderItem.setCommerceOrderItemId(
-						(Long)commerceOrderItemId);
+						(Long)commerceOrderItemIdObject);
 				}
 
 			});
@@ -602,9 +605,10 @@ public class CommerceVirtualOrderItemModelImpl
 				@Override
 				public void accept(
 					CommerceVirtualOrderItem commerceVirtualOrderItem,
-					Object fileEntryId) {
+					Object fileEntryIdObject) {
 
-					commerceVirtualOrderItem.setFileEntryId((Long)fileEntryId);
+					commerceVirtualOrderItem.setFileEntryId(
+						(Long)fileEntryIdObject);
 				}
 
 			});
@@ -627,9 +631,9 @@ public class CommerceVirtualOrderItemModelImpl
 				@Override
 				public void accept(
 					CommerceVirtualOrderItem commerceVirtualOrderItem,
-					Object url) {
+					Object urlObject) {
 
-					commerceVirtualOrderItem.setUrl((String)url);
+					commerceVirtualOrderItem.setUrl((String)urlObject);
 				}
 
 			});
@@ -652,10 +656,10 @@ public class CommerceVirtualOrderItemModelImpl
 				@Override
 				public void accept(
 					CommerceVirtualOrderItem commerceVirtualOrderItem,
-					Object activationStatus) {
+					Object activationStatusObject) {
 
 					commerceVirtualOrderItem.setActivationStatus(
-						(Integer)activationStatus);
+						(Integer)activationStatusObject);
 				}
 
 			});
@@ -678,9 +682,9 @@ public class CommerceVirtualOrderItemModelImpl
 				@Override
 				public void accept(
 					CommerceVirtualOrderItem commerceVirtualOrderItem,
-					Object duration) {
+					Object durationObject) {
 
-					commerceVirtualOrderItem.setDuration((Long)duration);
+					commerceVirtualOrderItem.setDuration((Long)durationObject);
 				}
 
 			});
@@ -703,9 +707,9 @@ public class CommerceVirtualOrderItemModelImpl
 				@Override
 				public void accept(
 					CommerceVirtualOrderItem commerceVirtualOrderItem,
-					Object usages) {
+					Object usagesObject) {
 
-					commerceVirtualOrderItem.setUsages((Integer)usages);
+					commerceVirtualOrderItem.setUsages((Integer)usagesObject);
 				}
 
 			});
@@ -728,9 +732,10 @@ public class CommerceVirtualOrderItemModelImpl
 				@Override
 				public void accept(
 					CommerceVirtualOrderItem commerceVirtualOrderItem,
-					Object maxUsages) {
+					Object maxUsagesObject) {
 
-					commerceVirtualOrderItem.setMaxUsages((Integer)maxUsages);
+					commerceVirtualOrderItem.setMaxUsages(
+						(Integer)maxUsagesObject);
 				}
 
 			});
@@ -753,9 +758,9 @@ public class CommerceVirtualOrderItemModelImpl
 				@Override
 				public void accept(
 					CommerceVirtualOrderItem commerceVirtualOrderItem,
-					Object active) {
+					Object activeObject) {
 
-					commerceVirtualOrderItem.setActive((Boolean)active);
+					commerceVirtualOrderItem.setActive((Boolean)activeObject);
 				}
 
 			});
@@ -778,9 +783,10 @@ public class CommerceVirtualOrderItemModelImpl
 				@Override
 				public void accept(
 					CommerceVirtualOrderItem commerceVirtualOrderItem,
-					Object startDate) {
+					Object startDateObject) {
 
-					commerceVirtualOrderItem.setStartDate((Date)startDate);
+					commerceVirtualOrderItem.setStartDate(
+						(Date)startDateObject);
 				}
 
 			});
@@ -803,9 +809,9 @@ public class CommerceVirtualOrderItemModelImpl
 				@Override
 				public void accept(
 					CommerceVirtualOrderItem commerceVirtualOrderItem,
-					Object endDate) {
+					Object endDateObject) {
 
-					commerceVirtualOrderItem.setEndDate((Date)endDate);
+					commerceVirtualOrderItem.setEndDate((Date)endDateObject);
 				}
 
 			});
