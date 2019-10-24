@@ -131,7 +131,8 @@ create table CPDefinitionOptionRel (
 	priority DOUBLE,
 	facetable BOOLEAN,
 	required BOOLEAN,
-	skuContributor BOOLEAN
+	skuContributor BOOLEAN,
+	key_ VARCHAR(75) null
 );
 
 create table CPDefinitionOptionValueRel (

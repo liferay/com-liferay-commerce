@@ -64,7 +64,7 @@ public class CPDefinitionOptionRelCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(35);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -100,6 +100,8 @@ public class CPDefinitionOptionRelCacheModel
 		sb.append(required);
 		sb.append(", skuContributor=");
 		sb.append(skuContributor);
+		sb.append(", key=");
+		sb.append(key);
 		sb.append("}");
 
 		return sb.toString();
@@ -174,6 +176,13 @@ public class CPDefinitionOptionRelCacheModel
 		cpDefinitionOptionRelImpl.setRequired(required);
 		cpDefinitionOptionRelImpl.setSkuContributor(skuContributor);
 
+		if (key == null) {
+			cpDefinitionOptionRelImpl.setKey("");
+		}
+		else {
+			cpDefinitionOptionRelImpl.setKey(key);
+		}
+
 		cpDefinitionOptionRelImpl.resetOriginalValues();
 
 		return cpDefinitionOptionRelImpl;
@@ -208,6 +217,7 @@ public class CPDefinitionOptionRelCacheModel
 		required = objectInput.readBoolean();
 
 		skuContributor = objectInput.readBoolean();
+		key = objectInput.readUTF();
 	}
 
 	@Override
@@ -269,6 +279,13 @@ public class CPDefinitionOptionRelCacheModel
 		objectOutput.writeBoolean(required);
 
 		objectOutput.writeBoolean(skuContributor);
+
+		if (key == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(key);
+		}
 	}
 
 	public String uuid;
@@ -288,5 +305,6 @@ public class CPDefinitionOptionRelCacheModel
 	public boolean facetable;
 	public boolean required;
 	public boolean skuContributor;
+	public String key;
 
 }

@@ -75,6 +75,7 @@ public class CPDefinitionOptionRelWrapper
 		attributes.put("facetable", isFacetable());
 		attributes.put("required", isRequired());
 		attributes.put("skuContributor", isSkuContributor());
+		attributes.put("key", getKey());
 
 		return attributes;
 	}
@@ -183,6 +184,12 @@ public class CPDefinitionOptionRelWrapper
 
 		if (skuContributor != null) {
 			setSkuContributor(skuContributor);
+		}
+
+		String key = (String)attributes.get("key");
+
+		if (key != null) {
+			setKey(key);
 		}
 	}
 
@@ -387,6 +394,16 @@ public class CPDefinitionOptionRelWrapper
 	@Override
 	public long getGroupId() {
 		return _cpDefinitionOptionRel.getGroupId();
+	}
+
+	/**
+	 * Returns the key of this cp definition option rel.
+	 *
+	 * @return the key of this cp definition option rel
+	 */
+	@Override
+	public String getKey() {
+		return _cpDefinitionOptionRel.getKey();
 	}
 
 	/**
@@ -805,6 +822,16 @@ public class CPDefinitionOptionRelWrapper
 	@Override
 	public void setGroupId(long groupId) {
 		_cpDefinitionOptionRel.setGroupId(groupId);
+	}
+
+	/**
+	 * Sets the key of this cp definition option rel.
+	 *
+	 * @param key the key of this cp definition option rel
+	 */
+	@Override
+	public void setKey(String key) {
+		_cpDefinitionOptionRel.setKey(key);
 	}
 
 	/**
