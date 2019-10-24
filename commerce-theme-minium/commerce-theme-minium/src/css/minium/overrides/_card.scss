@@ -1,8 +1,8 @@
 .card {
-  position: inherit;
   background-color: transparent;
-  box-shadow: none;
   border: none;
+  box-shadow: none;
+  position: inherit;
 
   .card-body {
     background: white;
@@ -16,8 +16,8 @@
 
   .card-header {
     background: white;
-    margin-bottom: $xs-gutter;
     border-radius: $standard-radius;
+    margin-bottom: $xs-gutter;
     @include card-title;
   }
 }

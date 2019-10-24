@@ -1,7 +1,6 @@
 .btn {
-  border: 0 solid currentColor;
+  border: 2px solid transparent;
   border-radius: 8px;
-  cursor: pointer;
   display: inline-flex;
   font-size: 10px;
   font-weight: 900;
@@ -21,25 +20,27 @@
 
   &.btn-primary {
     background-color: $color-theme;
+    border-color: $color-theme;
     color: $color-bg;
 
     &:not([disabled]):not(.disabled) {
       &:hover {
         background-color: $color-theme-dark;
+        border-color: $color-theme-dark;
       }
   
       &:active,
       &:focus {
         background-color: darken( $color-theme-dark, 10% );
+        border-color: darken( $color-theme-dark, 10% );
       }
     }
   }
 
   &.btn-secondary {
     background-color: $color-bg;
-    border-width: 2px;
-    color: $color-theme;
     border-color: $color-theme;
+    color: $color-theme;
 
     &:not([disabled]):not(.disabled) {
       &:hover {
@@ -56,48 +57,57 @@
 
   &.btn-success {
     background-color: $color-mood-good;
+    border-color: $color-mood-good;
     color: $color-bg;
 
     &:not([disabled]):not(.disabled) {
       &:hover {
         background-color: darken( $color-mood-good, 10% );
+        border-color: darken( $color-mood-good, 10% );
       }
   
       &:active,
       &:focus {
         background-color: darken( $color-mood-good, 20% );
+        border-color: darken( $color-mood-good, 20% );
       }
     }
   }
 
   &.btn-danger {
     background-color: $color-mood-bad;
+    border-color: $color-mood-bad;
     color: $color-bg;
 
     &:not([disabled]):not(.disabled) {
       &:hover {
         background-color: darken( $color-mood-bad, 10% );
+        border-color: darken( $color-mood-bad, 10% );
       }
   
       &:active,
       &:focus {
         background-color: darken( $color-mood-bad, 20% );
+        border-color: darken( $color-mood-bad, 20% );
       }
     }
   }
 
   &.btn-warning {
     background-color: $color-mood-neutral;
+    border-color: $color-mood-neutral;
     color: $color-bg;
 
     &:not([disabled]):not(.disabled) {
       &:hover {
         background-color: darken( $color-mood-neutral, 10% );
+        border-color: darken( $color-mood-neutral, 10% );
       }
   
       &:active,
       &:focus {
         background-color: darken( $color-mood-neutral, 20% );
+        border-color: darken( $color-mood-neutral, 20% );
       }
     }
   }
