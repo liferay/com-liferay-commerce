@@ -28,6 +28,7 @@ import com.liferay.commerce.product.internal.upgrade.v1_6_0.CPDefinitionTrashEnt
 import com.liferay.commerce.product.internal.upgrade.v1_6_0.CommerceCatalogUpgradeProcess;
 import com.liferay.commerce.product.internal.upgrade.v1_6_0.CommerceChannelUpgradeProcess;
 import com.liferay.commerce.product.internal.upgrade.v1_7_0.CPDefinitionFiltersUpgradeProcess;
+import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.service.ClassNameLocalService;
@@ -92,6 +93,18 @@ public class CommerceProductUpgradeStepRegistrator
 			new com.liferay.commerce.product.internal.upgrade.v1_8_0.
 				CPAttachmentFileEntryUpgradeProcess(_classNameLocalService));
 
+		registry.register(
+			_SCHEMA_VERSION_1_8_0, _SCHEMA_VERSION_1_9_0,
+			new com.liferay.commerce.product.internal.upgrade.v1_9_0.
+				CPDefinitionOptionRelUpgradeProcess());
+
+		registry.register(
+			_SCHEMA_VERSION_1_9_0, _SCHEMA_VERSION_1_10_0,
+			new com.liferay.commerce.product.internal.upgrade.v1_10_0.
+				CPAttachmentFileEntryUpgradeProcess(_jsonFactory),
+			new com.liferay.commerce.product.internal.upgrade.v1_10_0.
+				CPInstanceUpgradeProcess(_jsonFactory));
+
 		if (_log.isInfoEnabled()) {
 			_log.info("COMMERCE PRODUCT UPGRADE STEP REGISTRATOR FINISHED");
 		}
@@ -115,6 +128,10 @@ public class CommerceProductUpgradeStepRegistrator
 
 	private static final String _SCHEMA_VERSION_1_8_0 = "1.8.0";
 
+	private static final String _SCHEMA_VERSION_1_9_0 = "1.9.0";
+
+	private static final String _SCHEMA_VERSION_1_10_0 = "1.10.0";
+
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceProductUpgradeStepRegistrator.class);
 
@@ -123,5 +140,8 @@ public class CommerceProductUpgradeStepRegistrator
 
 	@Reference
 	private GroupLocalService _groupLocalService;
+
+	@Reference
+	private JSONFactory _jsonFactory;
 
 }
