@@ -106,7 +106,8 @@ public class CommerceOrderDiscountTest {
 		).given(
 			"An order with some order items"
 		).and(
-			"A discount associated to one product and a discount on the total price"
+			"A discount associated to one product and a discount on the " + 
+					"total price"
 		).when(
 			"I try to get the final price of the order"
 		).then(
@@ -224,7 +225,8 @@ public class CommerceOrderDiscountTest {
 		).given(
 			"An order with some order items"
 		).and(
-			"A discount associated to one product and a discount coupon on the total price"
+			"A discount associated to one product and a discount coupon on " + 
+					"the total price"
 		).when(
 			"I try to get the final price of the order"
 		).then(
