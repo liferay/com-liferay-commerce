@@ -69,9 +69,15 @@ public class UserResourceImpl extends BaseUserResourceImpl {
 		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
 			commerceAccount.getCommerceAccountGroupId());
 
-		com.liferay.portal.kernel.model.User invitedUser =
-			_userLocalService.fetchUserByReferenceCode(
+		com.liferay.portal.kernel.model.User invitedUser = null;
+
+		if (user.getId() != null) {
+			invitedUser = _userLocalService.fetchUserById(user.getId());
+		}
+		else if (Validator.isNotNull(user.getExternalReferenceCode())) {
+			invitedUser = _userLocalService.fetchUserByReferenceCode(
 				contextCompany.getCompanyId(), user.getExternalReferenceCode());
+		}
 
 		if (invitedUser == null) {
 			invitedUser = _userService.addUser(

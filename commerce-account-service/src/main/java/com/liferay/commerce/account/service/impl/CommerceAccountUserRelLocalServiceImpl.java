@@ -69,7 +69,13 @@ public class CommerceAccountUserRelLocalServiceImpl
 				commerceAccountId, commerceAccountUserId);
 
 		CommerceAccountUserRel commerceAccountUserRel =
-			commerceAccountUserRelPersistence.create(commerceAccountUserRelPK);
+			commerceAccountUserRelPersistence.fetchByPrimaryKey(
+				commerceAccountUserRelPK);
+
+		if (commerceAccountUserRel == null) {
+			commerceAccountUserRel = commerceAccountUserRelPersistence.create(
+				commerceAccountUserRelPK);
+		}
 
 		commerceAccountUserRel.setCommerceAccountId(commerceAccountId);
 		commerceAccountUserRel.setCommerceAccountUserId(commerceAccountUserId);
