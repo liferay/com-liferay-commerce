@@ -23,7 +23,6 @@ import com.liferay.commerce.price.list.service.CommercePriceListService;
 import com.liferay.commerce.price.list.service.CommerceTierPriceEntryService;
 import com.liferay.headless.commerce.admin.pricing.dto.v1_0.PriceEntry;
 import com.liferay.headless.commerce.admin.pricing.dto.v1_0.TierPrice;
-import com.liferay.headless.commerce.admin.pricing.internal.util.v1_0.PriceEntryUtil;
 import com.liferay.headless.commerce.admin.pricing.internal.util.v1_0.TierPriceUtil;
 import com.liferay.headless.commerce.admin.pricing.resource.v1_0.PriceEntryResource;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
@@ -32,8 +31,11 @@ import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverter
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
+
+import java.math.BigDecimal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -317,9 +319,14 @@ public class PriceEntryResourceImpl extends BasePriceEntryResourceImpl {
 		// Commerce price entry
 
 		CommercePriceEntry commercePriceEntry =
-			PriceEntryUtil.upsertCommercePriceEntry(
-				_commercePriceEntryService, priceEntry, commercePriceList,
-				serviceContext);
+			_commercePriceEntryService.upsertCommercePriceEntry(
+				GetterUtil.getLong(priceEntry.getId()),
+				GetterUtil.getLong(priceEntry.getSkuId()), null,
+				commercePriceList.getCommercePriceListId(),
+				priceEntry.getExternalReferenceCode(), priceEntry.getPrice(),
+				(BigDecimal)GetterUtil.get(
+					priceEntry.getPromoPrice(), BigDecimal.ZERO),
+				priceEntry.getSkuExternalReferenceCode(), serviceContext);
 
 		// Update nested resources
 

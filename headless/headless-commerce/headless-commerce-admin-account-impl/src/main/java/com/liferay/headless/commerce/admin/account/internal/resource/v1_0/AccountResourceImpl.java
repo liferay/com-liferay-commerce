@@ -497,19 +497,38 @@ public class AccountResourceImpl extends BaseAccountResourceImpl {
 						commerceAccount.getCompanyId(),
 						accountAddress.getCountryISOCode());
 
-				_commerceAddressService.addCommerceAddress(
-					commerceAccount.getModelClassName(),
-					commerceAccount.getCommerceAccountId(),
-					accountAddress.getName(), accountAddress.getDescription(),
-					accountAddress.getStreet1(), accountAddress.getStreet2(),
-					accountAddress.getStreet3(), accountAddress.getCity(),
-					accountAddress.getZip(),
-					_getCommerceRegionId(commerceCountry, accountAddress),
-					commerceCountry.getCommerceCountryId(),
-					accountAddress.getPhoneNumber(),
-					GetterUtil.get(accountAddress.getDefaultBilling(), false),
-					GetterUtil.get(accountAddress.getDefaultShipping(), false),
-					serviceContext);
+				CommerceAddress commerceAddress =
+					_commerceAddressService.addCommerceAddress(
+						commerceAccount.getModelClassName(),
+						commerceAccount.getCommerceAccountId(),
+						accountAddress.getName(),
+						accountAddress.getDescription(),
+						accountAddress.getStreet1(),
+						accountAddress.getStreet2(),
+						accountAddress.getStreet3(), accountAddress.getCity(),
+						accountAddress.getZip(),
+						_getCommerceRegionId(commerceCountry, accountAddress),
+						commerceCountry.getCommerceCountryId(),
+						accountAddress.getPhoneNumber(),
+						GetterUtil.get(
+							accountAddress.getDefaultBilling(), false),
+						GetterUtil.get(
+							accountAddress.getDefaultShipping(), false),
+						serviceContext);
+
+				if (GetterUtil.get(accountAddress.getDefaultBilling(), false)) {
+					_commerceAccountService.updateDefaultBillingAddress(
+						commerceAccount.getCommerceAccountId(),
+						commerceAddress.getCommerceAddressId());
+				}
+
+				if (GetterUtil.get(
+						accountAddress.getDefaultShipping(), false)) {
+
+					_commerceAccountService.updateDefaultShippingAddress(
+						commerceAccount.getCommerceAccountId(),
+						commerceAddress.getCommerceAddressId());
+				}
 			}
 		}
 
