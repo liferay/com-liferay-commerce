@@ -18,6 +18,7 @@
 
 <liferay-ui:error-header />
 
+<liferay-ui:error exception="<%= NoSuchCategoryException.class %>" message="the-category-could-not-be-found" />
 <liferay-ui:error exception="<%= NoSuchCPAttachmentFileEntryException.class %>" message="the-image-could-not-be-found" />
 
 <liferay-ui:error-principal />
