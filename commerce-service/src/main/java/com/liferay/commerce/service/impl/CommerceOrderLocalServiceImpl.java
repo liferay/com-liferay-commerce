@@ -35,6 +35,8 @@ import com.liferay.commerce.exception.CommerceOrderStatusException;
 import com.liferay.commerce.exception.CommercePaymentEngineException;
 import com.liferay.commerce.exception.GuestCartMaxAllowedException;
 import com.liferay.commerce.internal.order.comparator.CommerceOrderModifiedDateComparator;
+import com.liferay.commerce.inventory.model.CommerceInventoryBookedQuantity;
+import com.liferay.commerce.inventory.service.CommerceInventoryBookedQuantityLocalService;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
@@ -347,6 +349,10 @@ public class CommerceOrderLocalServiceImpl
 
 		CommerceOrder commerceOrder = commerceOrderPersistence.findByPrimaryKey(
 			commerceOrderId);
+
+		// Book quantities
+
+		_bookQuantities(commerceOrder);
 
 		WorkflowInstanceLink workflowInstanceLink =
 			workflowInstanceLinkLocalService.fetchWorkflowInstanceLink(
@@ -1832,6 +1838,61 @@ public class CommerceOrderLocalServiceImpl
 		CommerceOrderConstants.ORDER_STATUS_DISPUTED
 	};
 
+	private void _bookQuantities(CommerceOrder commerceOrder)
+		throws PortalException {
+
+		List<CommerceOrderItem> commerceOrderItems =
+			commerceOrder.getCommerceOrderItems();
+
+		for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
+			Map<String, String> context = new HashMap<>();
+
+			context.put(
+				"OrderId ",
+				String.valueOf(commerceOrderItem.getCommerceOrderId()));
+			context.put(
+				"OrderItemId ",
+				String.valueOf(commerceOrderItem.getCommerceOrderItemId()));
+
+			CommerceInventoryBookedQuantity commerceInventoryBookedQuantity =
+				_commerceInventoryBookedQuantityLocalService.
+					addCommerceBookedQuantity(
+						commerceOrderItem.getUserId(),
+						commerceOrderItem.getSku(),
+						commerceOrderItem.getQuantity(), null, context);
+
+			commerceOrderItemLocalService.updateCommerceOrderItem(
+				commerceOrderItem.getCommerceOrderItemId(),
+				commerceInventoryBookedQuantity.
+					getCommerceInventoryBookedQuantityId());
+		}
+
+		// Low stock action
+
+		for (CommerceOrderItem commerceOrderItem :
+				commerceOrder.getCommerceOrderItems()) {
+
+			TransactionCommitCallbackUtil.registerCallback(
+				new Callable<Void>() {
+
+					@Override
+					public Void call() throws Exception {
+						Message message = new Message();
+
+						message.put(
+							"cpInstanceId",
+							commerceOrderItem.getCPInstanceId());
+
+						MessageBusUtil.sendMessage(
+							CommerceDestinationNames.STOCK_QUANTITY, message);
+
+						return null;
+					}
+
+				});
+		}
+	}
+
 	private void _setCommerceOrderShippingDiscountValue(
 		CommerceOrder commerceOrder,
 		CommerceDiscountValue commerceDiscountValue) {
@@ -1981,6 +2042,10 @@ public class CommerceOrderLocalServiceImpl
 
 	@ServiceReference(type = CommerceDiscountLocalService.class)
 	private CommerceDiscountLocalService _commerceDiscountLocalService;
+
+	@ServiceReference(type = CommerceInventoryBookedQuantityLocalService.class)
+	private CommerceInventoryBookedQuantityLocalService
+		_commerceInventoryBookedQuantityLocalService;
 
 	@ServiceReference(type = CommerceOrderConfiguration.class)
 	private CommerceOrderConfiguration _commerceOrderConfiguration;
