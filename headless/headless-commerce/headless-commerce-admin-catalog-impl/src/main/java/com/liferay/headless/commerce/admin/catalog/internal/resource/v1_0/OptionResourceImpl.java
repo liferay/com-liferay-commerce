@@ -18,20 +18,25 @@ import com.liferay.commerce.product.exception.NoSuchCPOptionException;
 import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.service.CPOptionService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Option;
+import com.liferay.headless.commerce.admin.catalog.internal.odata.entity.v1_0.OptionEntityModel;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.OptionResource;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverterContext;
 import com.liferay.headless.commerce.core.util.LanguageUtils;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
-import com.liferay.portal.kernel.search.BaseModelSearchResult;
+import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.search.filter.Filter;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.odata.entity.EntityModel;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
+import com.liferay.portal.vulcan.resource.EntityModelResource;
+import com.liferay.portal.vulcan.util.SearchUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
@@ -45,7 +50,8 @@ import org.osgi.service.component.annotations.ServiceScope;
 	properties = "OSGI-INF/liferay/rest/v1_0/option.properties",
 	scope = ServiceScope.PROTOTYPE, service = OptionResource.class
 )
-public class OptionResourceImpl extends BaseOptionResourceImpl {
+public class OptionResourceImpl
+	extends BaseOptionResourceImpl implements EntityModelResource {
 
 	@Override
 	public Response deleteOption(Long id) throws Exception {
@@ -80,6 +86,13 @@ public class OptionResourceImpl extends BaseOptionResourceImpl {
 	}
 
 	@Override
+	public EntityModel getEntityModel(MultivaluedMap multivaluedMap)
+		throws Exception {
+
+		return _entityModel;
+	}
+
+	@Override
 	public Option getOption(Long id) throws Exception {
 		DTOConverter optionDTOConverter = _dtoConverterRegistry.getDTOConverter(
 			CPOption.class.getName());
@@ -107,18 +120,21 @@ public class OptionResourceImpl extends BaseOptionResourceImpl {
 	}
 
 	@Override
-	public Page<Option> getOptionsPage(Pagination pagination) throws Exception {
-		BaseModelSearchResult<CPOption> cpOptionBaseModelSearchResult =
-			_cpOptionService.searchCPOptions(
-				contextCompany.getCompanyId(), null,
-				pagination.getStartPosition(), pagination.getEndPosition(),
-				null);
+	public Page<Option> getOptionsPage(
+			Filter filter, Pagination pagination, Sort[] sorts)
+		throws Exception {
 
-		int totalItems = cpOptionBaseModelSearchResult.getLength();
-
-		return Page.of(
-			_toOptions(cpOptionBaseModelSearchResult.getBaseModels()),
-			pagination, totalItems);
+		return SearchUtil.search(
+			booleanQuery -> booleanQuery.getPreBooleanFilter(), filter,
+			CPOption.class, StringPool.BLANK, pagination,
+			queryConfig -> queryConfig.setSelectedFieldNames(
+				Field.ENTRY_CLASS_PK),
+			searchContext -> searchContext.setCompanyId(
+				contextCompany.getCompanyId()),
+			document -> _toOption(
+				_cpOptionService.getCPOption(
+					GetterUtil.getLong(document.get(Field.ENTRY_CLASS_PK)))),
+			sorts);
 	}
 
 	@Override
@@ -156,21 +172,14 @@ public class OptionResourceImpl extends BaseOptionResourceImpl {
 		return _upsertOption(option);
 	}
 
-	private List<Option> _toOptions(List<CPOption> cpOptions) throws Exception {
-		List<Option> options = new ArrayList<>();
-
+	private Option _toOption(CPOption cpOption) throws Exception {
 		DTOConverter optionDTOConverter = _dtoConverterRegistry.getDTOConverter(
 			CPOption.class.getName());
 
-		for (CPOption cpOption : cpOptions) {
-			options.add(
-				(Option)optionDTOConverter.toDTO(
-					new DefaultDTOConverterContext(
-						contextAcceptLanguage.getPreferredLocale(),
-						cpOption.getCPOptionId())));
-		}
-
-		return options;
+		return (Option)optionDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(),
+				cpOption.getCPOptionId()));
 	}
 
 	private Option _updateOption(CPOption cpOption, Option option)
@@ -218,6 +227,8 @@ public class OptionResourceImpl extends BaseOptionResourceImpl {
 				contextAcceptLanguage.getPreferredLocale(),
 				cpOption.getCPOptionId()));
 	}
+
+	private static final EntityModel _entityModel = new OptionEntityModel();
 
 	@Reference
 	private CPOptionService _cpOptionService;
