@@ -15,16 +15,21 @@
 package com.liferay.commerce.subscription.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
+import com.liferay.commerce.currency.model.CommerceCurrency;
+import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
+import com.liferay.commerce.exception.CommerceOrderValidatorException;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.model.CPSubscriptionInfo;
+import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CPDefinitionLocalServiceUtil;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelLocalServiceUtil;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalServiceUtil;
+import com.liferay.commerce.product.service.CommerceChannelRelLocalServiceUtil;
 import com.liferay.commerce.product.test.util.CPTestUtil;
 import com.liferay.commerce.product.type.simple.constants.SimpleCPTypeConstants;
 import com.liferay.commerce.service.CommerceSubscriptionEntryLocalService;
@@ -53,7 +58,6 @@ import org.frutilla.FrutillaRule;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -61,7 +65,6 @@ import org.junit.runner.RunWith;
 /**
  * @author Alessio Antonio Rendina
  */
-@Ignore
 @RunWith(Arquillian.class)
 public class CommerceSubscriptionEntryTest {
 
@@ -76,7 +79,6 @@ public class CommerceSubscriptionEntryTest {
 		_user = UserTestUtil.addUser();
 	}
 
-	@Ignore
 	@Test
 	public void testAddCommerceSubscriptionEntry() throws Exception {
 		frutillaRule.scenario(
@@ -93,6 +95,12 @@ public class CommerceSubscriptionEntryTest {
 			"The product subscription entry is created"
 		);
 
+		CommerceCurrency commerceCurrency =
+			CommerceCurrencyTestUtil.addCommerceCurrency();
+
+		CommerceTestUtil.addCommerceChannel(
+			_group.getGroupId(), commerceCurrency.getCode());
+
 		CommerceSubscriptionEntryTestUtil.setUpCommerceSubscriptionEntry(
 			_group.getGroupId(), _user.getUserId(), 1,
 			_commerceSubscriptionEntryHelper);
@@ -100,7 +108,7 @@ public class CommerceSubscriptionEntryTest {
 		int commerceSubscriptionEntriesCount =
 			_commerceSubscriptionEntryLocalService.
 				getCommerceSubscriptionEntriesCount(
-					_group.getGroupId(), _user.getUserId());
+					_group.getCompanyId(), _user.getUserId());
 
 		Assert.assertEquals(1, commerceSubscriptionEntriesCount);
 	}
@@ -124,8 +132,7 @@ public class CommerceSubscriptionEntryTest {
 		_testOverrideCPInstanceSubscriptionInfo(false, false);
 	}
 
-	@Ignore
-	@Test
+	@Test(expected = CommerceOrderValidatorException.class)
 	public void testOverrideCPInstanceSubscriptionInfoAllEnabled()
 		throws Exception {
 
@@ -138,13 +145,13 @@ public class CommerceSubscriptionEntryTest {
 		).when(
 			"Subscription entries are created"
 		).then(
-			"They should have right subscription info"
+			"It should not be possible to add two subscription order items " +
+				"in the same order"
 		);
 
 		_testOverrideCPInstanceSubscriptionInfo(true, true);
 	}
 
-	@Ignore
 	@Test
 	public void testOverrideCPInstanceSubscriptionInfoDefinitionEnabled()
 		throws Exception {
@@ -164,7 +171,6 @@ public class CommerceSubscriptionEntryTest {
 		_testOverrideCPInstanceSubscriptionInfo(true, false);
 	}
 
-	@Ignore
 	@Test
 	public void testOverrideCPInstanceSubscriptionInfoInstanceEnabled()
 		throws Exception {
@@ -192,7 +198,7 @@ public class CommerceSubscriptionEntryTest {
 			boolean cpInstanceSubscriptionEnabled)
 		throws Exception {
 
-		long groupId = _group.getGroupId();
+		long groupId = _group.getGroupId(); //catalogGroupId
 
 		CPDefinition cpDefinition = CPTestUtil.addCPDefinition(
 			groupId, SimpleCPTypeConstants.NAME, false, false);
@@ -229,8 +235,21 @@ public class CommerceSubscriptionEntryTest {
 
 		CPTestUtil.buildCPInstances(cpDefinition);
 
+		CommerceCurrency commerceCurrency =
+			CommerceCurrencyTestUtil.addCommerceCurrency();
+
+		CommerceChannel commerceChannel = CommerceTestUtil.addCommerceChannel(
+			commerceCurrency.getCode());
+
+		CommerceChannelRelLocalServiceUtil.addCommerceChannelRel(
+			CPDefinition.class.getName(), cpDefinition.getCPDefinitionId(),
+			commerceChannel.getCommerceChannelId(),
+			ServiceContextTestUtil.getServiceContext(
+				commerceChannel.getGroupId()));
+
 		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
-			groupId, _user.getUserId(), 0);
+			_user.getUserId(), commerceChannel.getSiteGroupId(),
+			commerceCurrency);
 
 		List<CPInstance> cpInstances =
 			_cpInstanceLocalService.getCPDefinitionInstances(
@@ -268,7 +287,7 @@ public class CommerceSubscriptionEntryTest {
 		List<CommerceSubscriptionEntry> commerceSubscriptionEntries =
 			_commerceSubscriptionEntryLocalService.
 				getCommerceSubscriptionEntries(
-					groupId, _user.getUserId(), QueryUtil.ALL_POS,
+					_group.getCompanyId(), _user.getUserId(), QueryUtil.ALL_POS,
 					QueryUtil.ALL_POS,
 					new CommerceSubscriptionEntryCreateDateComparator());
 
