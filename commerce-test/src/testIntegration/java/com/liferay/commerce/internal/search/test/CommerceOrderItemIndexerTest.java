@@ -27,6 +27,7 @@ import com.liferay.commerce.service.CommerceOrderItemLocalService;
 import com.liferay.commerce.test.util.CommerceTestUtil;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
@@ -39,6 +40,7 @@ import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.rule.Sync;
 import com.liferay.portal.kernel.test.rule.SynchronousDestinationTestRule;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
+import com.liferay.portal.kernel.test.util.UserTestUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
@@ -48,10 +50,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.frutilla.FrutillaRule;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -59,7 +62,6 @@ import org.junit.runner.RunWith;
 /**
  * @author Andrea Di Giorgi
  */
-@Ignore
 @RunWith(Arquillian.class)
 @Sync
 public class CommerceOrderItemIndexerTest {
@@ -88,16 +90,25 @@ public class CommerceOrderItemIndexerTest {
 		_assertSearch(StringPool.BLANK, commerceOrderItems);
 	}
 
+	@Rule
+	public FrutillaRule frutillaRule = new FrutillaRule();
+
 	private CommerceOrderItem[] _addCommerceOrderItems(int count)
 		throws Exception {
+
+		User user = UserTestUtil.addUser();
 
 		CommerceOrderItem[] commerceOrderItems = new CommerceOrderItem[count];
 
 		CommerceCurrency commerceCurrency =
-			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
+			CommerceCurrencyTestUtil.addCommerceCurrency();
+
+		CommerceTestUtil.addCommerceChannel(
+			_group.getGroupId(), commerceCurrency.getCode());
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
-			_group.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId());
+			_group.getGroupId(), user.getUserId(),
+			commerceCurrency.getCommerceCurrencyId());
 
 		for (int i = 0; i < count; i++) {
 			CPInstance cpInstance = CPTestUtil.addCPInstance(
