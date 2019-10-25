@@ -46,8 +46,7 @@ public class CPDefinitionOptionRelUpgradeProcess extends UpgradeProcess {
 					connection, updateCPDefinitionOptionRelSQL);
 			Statement s = connection.createStatement(
 				ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
-			ResultSet rs = s.executeQuery(
-				selectCPOptionSQL)) {
+			ResultSet rs = s.executeQuery(selectCPOptionSQL)) {
 
 			while (rs.next()) {
 				ps.setString(1, rs.getString("key_"));
