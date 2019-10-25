@@ -35,10 +35,11 @@ import java.math.BigDecimal;
 
 import java.util.List;
 
+import org.frutilla.FrutillaRule;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,7 +47,6 @@ import org.junit.runner.RunWith;
 /**
  * @author Luca Pellizzon
  */
-@Ignore
 @RunWith(Arquillian.class)
 public class CommerceCheckoutTest {
 
@@ -63,8 +63,22 @@ public class CommerceCheckoutTest {
 
 	@Test
 	public void testUserCheckout() throws Exception {
+		frutillaRule.scenario(
+			"When multiple price lists are available, check that only the " +
+				"matching one is retrieved"
+		).given(
+			"I add some price lists with different priorities"
+		).when(
+			"I try to get the best matching price list"
+		).then(
+			"The price list with the highest priority should be retrieved"
+		);
+
 		CommerceCurrency commerceCurrency =
-			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
+			CommerceCurrencyTestUtil.addCommerceCurrency();
+
+		CommerceTestUtil.addCommerceChannel(
+			_group.getGroupId(), commerceCurrency.getCode());
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
 			_group.getGroupId(), _user.getUserId(),
@@ -110,6 +124,9 @@ public class CommerceCheckoutTest {
 		Assert.assertEquals(
 			expectedTotal.doubleValue(), actualTotal.doubleValue(), 0.0001);
 	}
+
+	@Rule
+	public FrutillaRule frutillaRule = new FrutillaRule();
 
 	@DeleteAfterTestRun
 	private Group _group;
