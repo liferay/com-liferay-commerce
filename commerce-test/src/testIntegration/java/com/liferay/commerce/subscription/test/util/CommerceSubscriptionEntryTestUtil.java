@@ -33,7 +33,7 @@ public class CommerceSubscriptionEntryTestUtil {
 			CommerceSubscriptionEntryHelper commerceSubscriptionEntryHelper)
 		throws Exception {
 
-		CPInstance cpInstance = CPTestUtil.addCPInstance(groupId);
+		CPInstance cpInstance = CPTestUtil.addCPInstance();
 
 		cpInstance.setOverrideSubscriptionInfo(true);
 		cpInstance.setSubscriptionEnabled(true);
