@@ -15,6 +15,7 @@
 package com.liferay.commerce.price.list.test.util;
 
 import com.liferay.commerce.account.model.CommerceAccountGroup;
+import com.liferay.commerce.account.service.CommerceAccountGroupLocalServiceUtil;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
 import com.liferay.commerce.price.list.model.CommercePriceList;
@@ -33,6 +34,7 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * @author Luca Pellizzon
@@ -64,8 +66,7 @@ public class CommercePriceListTestUtil {
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
 
 		return CommercePriceListLocalServiceUtil.addCommercePriceList(
-			commerceCatalog.getGroupId(), user.getUserId(),
-			commerceCurrency.getCommerceCurrencyId(),
+			groupId, user.getUserId(), commerceCurrency.getCommerceCurrencyId(),
 			RandomTestUtil.randomString(), priority,
 			calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH),
 			calendar.get(Calendar.YEAR), calendar.get(Calendar.HOUR_OF_DAY),
@@ -114,6 +115,24 @@ public class CommercePriceListTestUtil {
 	}
 
 	public static CommercePriceList addUserPriceList(
+			long groupId, double priority,
+			CommerceAccountGroup commerceAccountGroup)
+		throws Exception {
+
+		CommercePriceList commercePriceList = addCommercePriceList(
+			groupId, priority);
+
+		CommercePriceListCommerceAccountGroupRelServiceUtil.
+			addCommercePriceListCommerceAccountGroupRel(
+				commercePriceList.getCommercePriceListId(),
+				commerceAccountGroup.getCommerceAccountGroupId(),
+				RandomTestUtil.randomInt(),
+				ServiceContextTestUtil.getServiceContext(groupId));
+
+		return commercePriceList;
+	}
+
+	public static CommercePriceList addUserPriceList(
 			long groupId, double priority, long userId)
 		throws Exception {
 
@@ -135,16 +154,42 @@ public class CommercePriceListTestUtil {
 		return commercePriceList;
 	}
 
+	public static CommercePriceList addUserPriceListToAccountGroup(
+			CommercePriceList commercePriceList,
+			CommerceAccountGroup commerceAccountGroup)
+		throws Exception {
+
+		long groupId = commercePriceList.getGroupId();
+
+		CommercePriceListCommerceAccountGroupRelServiceUtil.
+			addCommercePriceListCommerceAccountGroupRel(
+				commercePriceList.getCommercePriceListId(),
+				commerceAccountGroup.getCommerceAccountGroupId(),
+				RandomTestUtil.randomInt(),
+				ServiceContextTestUtil.getServiceContext(groupId));
+
+		return commercePriceList;
+	}
+
 	public static Optional<CommercePriceList> getCommercePriceList(
 			long groupId, long commerceAccountId, long userId)
 		throws Exception {
 
 		User user = UserLocalServiceUtil.getUser(userId);
 
-		long[] commerceAccountGroupIds = null;
 		/*CommerceAccountGroupLocalServiceUtil.
 			getCommerceAccountGroupIds(
 				groupId, commerceAccountId, userId);*/
+
+		List<CommerceAccountGroup> commerceAccountGroups =
+			CommerceAccountGroupLocalServiceUtil.
+				getCommerceAccountGroupsByCommerceAccountId(commerceAccountId);
+
+		Stream<CommerceAccountGroup> stream = commerceAccountGroups.stream();
+
+		long[] commerceAccountGroupIds = stream.mapToLong(
+			CommerceAccountGroup::getCommerceAccountGroupId
+		).toArray();
 
 		return CommercePriceListLocalServiceUtil.getCommercePriceList(
 			user.getCompanyId(), groupId, commerceAccountId,
