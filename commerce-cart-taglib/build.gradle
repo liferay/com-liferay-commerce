@@ -1,8 +1,8 @@
 apply plugin: "com.liferay.lang.merger"
 
 dependencies {
-	compileInclude group: "com.fasterxml.jackson.core", name: "jackson-annotations", version: "2.9.8"
-	compileInclude group: "com.fasterxml.jackson.core", name: "jackson-core", version: "2.9.8"
+	compileInclude group: "com.fasterxml.jackson.core", name: "jackson-annotations", version: "2.9.10"
+	compileInclude group: "com.fasterxml.jackson.core", name: "jackson-core", version: "2.9.10"
 	compileInclude group: "com.fasterxml.jackson.core", name: "jackson-databind", version: "2.9.10.1"
 
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.currency.api", version: "2.0.0"
