@@ -16,6 +16,8 @@ package com.liferay.headless.commerce.admin.catalog.resource.v1_0;
 
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Catalog;
 import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.search.filter.Filter;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
@@ -52,7 +54,8 @@ public interface CatalogResource {
 
 	public Response patchCatalog(Long id, Catalog catalog) throws Exception;
 
-	public Page<Catalog> getCatalogsPage(Pagination pagination)
+	public Page<Catalog> getCatalogsPage(
+			Filter filter, Pagination pagination, Sort[] sorts)
 		throws Exception;
 
 	public Catalog postCatalog(Catalog catalog) throws Exception;
