@@ -16,6 +16,8 @@ package com.liferay.headless.commerce.admin.catalog.resource.v1_0;
 
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.OptionCategory;
 import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.search.filter.Filter;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
@@ -34,7 +36,8 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface OptionCategoryResource {
 
-	public Page<OptionCategory> getOptionCategoriesPage(Pagination pagination)
+	public Page<OptionCategory> getOptionCategoriesPage(
+			Filter filter, Pagination pagination, Sort[] sorts)
 		throws Exception;
 
 	public OptionCategory postOptionCategory(OptionCategory optionCategory)
