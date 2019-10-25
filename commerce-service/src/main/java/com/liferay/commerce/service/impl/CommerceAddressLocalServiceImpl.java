@@ -123,9 +123,7 @@ public class CommerceAddressLocalServiceImpl
 
 		long companyId = user.getCompanyId();
 
-		validate(
-			0, companyId, className, classPK, name, street1, city, zip,
-			commerceCountryId, type);
+		validate(name, street1, city, zip, commerceCountryId, type);
 
 		long commerceAddressId = counterLocalService.increment();
 
@@ -498,11 +496,7 @@ public class CommerceAddressLocalServiceImpl
 		CommerceAddress commerceAddress =
 			commerceAddressPersistence.findByPrimaryKey(commerceAddressId);
 
-		validate(
-			commerceAddress.getCommerceAddressId(),
-			commerceAddress.getCompanyId(), commerceAddress.getClassName(),
-			commerceAddress.getClassPK(), name, street1, city, zip,
-			commerceCountryId, type);
+		validate(name, street1, city, zip, commerceCountryId, type);
 
 		commerceAddress.setName(name);
 		commerceAddress.setDescription(description);
@@ -692,8 +686,7 @@ public class CommerceAddressLocalServiceImpl
 	}
 
 	protected void validate(
-			long commerceAddressId, long companyId, String className,
-			long classPK, String name, String street1, String city, String zip,
+			String name, String street1, String city, String zip,
 			long commerceCountryId, int type)
 		throws PortalException {
 
