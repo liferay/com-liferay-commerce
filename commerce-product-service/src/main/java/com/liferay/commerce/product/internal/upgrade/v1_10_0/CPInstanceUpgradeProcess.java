@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
-import com.liferay.portal.kernel.util.StringBundler;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -36,8 +35,8 @@ public class CPInstanceUpgradeProcess extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		String updateCPInstanceSQL = StringBundler.concat(
-			"update CPInstance set json = ? WHERE CPInstanceId = ?");
+		String updateCPInstanceSQL =
+			"update CPInstance set json = ? WHERE CPInstanceId = ?";
 
 		try (PreparedStatement ps1 =
 				AutoBatchPreparedStatementUtil.concurrentAutoBatch(

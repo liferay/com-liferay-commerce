@@ -28,6 +28,10 @@ import java.util.Locale;
 @ProviderType
 public interface DDMFormValuesHelper {
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), without direct replacement, as this
+	 * processing is no longer necessary
+	 */
 	@Deprecated
 	public String cleanDDMFormValuesJSON(String json) throws PortalException;
 

@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.dao.jdbc.AutoBatchPreparedStatementUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
-import com.liferay.portal.kernel.util.StringBundler;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -37,8 +36,8 @@ public class CPDefinitionOptionRelUpgradeProcess extends UpgradeProcess {
 			CPDefinitionOptionRelModelImpl.class,
 			CPDefinitionOptionRelModelImpl.TABLE_NAME, "key_", "VARCHAR(75)");
 
-		String updateCPDefinitionOptionRelSQL = StringBundler.concat(
-			"update CPDefinitionOptionRel set key_ = ? WHERE CPOptionId = ?");
+		String updateCPDefinitionOptionRelSQL =
+			"update CPDefinitionOptionRel set key_ = ? WHERE CPOptionId = ?";
 
 		try (PreparedStatement ps1 =
 				AutoBatchPreparedStatementUtil.concurrentAutoBatch(
