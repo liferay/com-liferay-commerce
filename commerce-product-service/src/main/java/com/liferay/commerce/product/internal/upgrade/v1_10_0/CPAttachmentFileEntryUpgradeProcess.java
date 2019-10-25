@@ -70,9 +70,9 @@ public class CPAttachmentFileEntryUpgradeProcess extends UpgradeProcess {
 						continue;
 					}
 
-					JSONArray valueInputJSONArray = inputJSONObject.getJSONArray("value");
-
 					JSONArray valueOutputJSONArray = _jsonFactory.createJSONArray();
+
+					JSONArray valueInputJSONArray = inputJSONObject.getJSONArray("value");
 
 					for (int j = 0; j < valueInputJSONArray.length(); j++) {
 						ResultSet rs3 = s3.executeQuery(
