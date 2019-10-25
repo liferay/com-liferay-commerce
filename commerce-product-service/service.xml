@@ -421,13 +421,13 @@
 			<finder-column name="CPDefinitionId" />
 			<finder-column name="CPOptionId" />
 		</finder>
-		<finder name="C_K" return-type="CPDefinitionOptionRel" unique="true">
-			<finder-column name="CPDefinitionId" />
-			<finder-column name="key" />
-		</finder>
 		<finder name="C_SC" return-type="Collection">
 			<finder-column name="CPDefinitionId" />
 			<finder-column name="skuContributor" />
+		</finder>
+		<finder name="C_K" return-type="CPDefinitionOptionRel" unique="true">
+			<finder-column name="CPDefinitionId" />
+			<finder-column name="key" />
 		</finder>
 
 		<!-- References -->

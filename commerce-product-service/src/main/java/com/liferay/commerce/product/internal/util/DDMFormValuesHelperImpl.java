@@ -42,6 +42,10 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true, service = DDMFormValuesHelper.class)
 public class DDMFormValuesHelperImpl implements DDMFormValuesHelper {
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), without direct replacement, as this
+	 * processing is no longer necessary
+	 */
 	@Deprecated
 	@Override
 	public String cleanDDMFormValuesJSON(String json) throws PortalException {
