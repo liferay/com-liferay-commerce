@@ -36,25 +36,27 @@ public class CPDefinitionOptionRelUpgradeProcess extends UpgradeProcess {
 			CPDefinitionOptionRelModelImpl.class,
 			CPDefinitionOptionRelModelImpl.TABLE_NAME, "key_", "VARCHAR(75)");
 
+		String selectCPOptionSQL =
+			"select distinct CPOptionId, key_  from CPOption";
 		String updateCPDefinitionOptionRelSQL =
 			"update CPDefinitionOptionRel set key_ = ? WHERE CPOptionId = ?";
 
-		try (PreparedStatement ps1 =
+		try (PreparedStatement ps =
 				AutoBatchPreparedStatementUtil.concurrentAutoBatch(
 					connection, updateCPDefinitionOptionRelSQL);
 			Statement s = connection.createStatement(
 				ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
 			ResultSet rs = s.executeQuery(
-				"select distinct CPOptionId, key_  from CPOption")) {
+				selectCPOptionSQL)) {
 
 			while (rs.next()) {
-				ps1.setString(1, rs.getString("key_"));
-				ps1.setLong(2, rs.getLong("CPOptionId"));
+				ps.setString(1, rs.getString("key_"));
+				ps.setLong(2, rs.getLong("CPOptionId"));
 
-				ps1.executeUpdate();
+				ps.executeUpdate();
 			}
 
-			ps1.executeBatch();
+			ps.executeBatch();
 		}
 	}
 

@@ -35,69 +35,72 @@ public class CPAttachmentFileEntryUpgradeProcess extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		String updateCPInstanceSQL =
-			"update CPAttachmentFileEntry set json = ? WHERE CPAttachmentFileEntryId = ?";
+		String selectCPAttachmentFileEntrySQL =
+			"select CPAttachmentFileEntryId, json from CPAttachmentFileEntry " +
+				"where json <> ''";
+		String updateCPAttachmentFileEntrySQL =
+			"update CPAttachmentFileEntry set json = ? where CPAttachmentFileEntryId = ?";
 
-		try (PreparedStatement ps1 =
+		try (PreparedStatement ps =
 				AutoBatchPreparedStatementUtil.concurrentAutoBatch(
-					connection, updateCPInstanceSQL);
-			Statement s = connection.createStatement(
+					connection, updateCPAttachmentFileEntrySQL);
+			Statement s1 = connection.createStatement(
 				ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
 			Statement s2 = connection.createStatement(
 				ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
 			Statement s3 = connection.createStatement(
 				ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
-			ResultSet rs = s.executeQuery(
-				"select CPAttachmentFileEntryId, json from CPAttachmentFileEntry where json <> ''")) {
+			ResultSet rs1 = s1.executeQuery(
+				selectCPAttachmentFileEntrySQL)) {
 
-			while (rs.next()) {
-				JSONArray jsonArray2 = _jsonFactory.createJSONArray();
+			while (rs1.next()) {
+				JSONArray outputJSONArray = _jsonFactory.createJSONArray();
 
-				JSONArray jsonArray = _jsonFactory.createJSONArray(
-					rs.getString("json"));
+				JSONArray inputJSONArray = _jsonFactory.createJSONArray(
+					rs1.getString("json"));
 
-				for (int i = 0; i < jsonArray.length(); i++) {
-					JSONObject jsonObject = jsonArray.getJSONObject(i);
+				for (int i = 0; i < inputJSONArray.length(); i++) {
+					JSONObject inputJSONObject = inputJSONArray.getJSONObject(i);
 
 					ResultSet rs2 = s2.executeQuery(
 						"select key_ from CPDefinitionOptionRel where CPDefinitionOptionRelId = " +
-							jsonObject.getLong("key"));
+							inputJSONObject.getLong("key"));
 
 					if (!rs2.next()) {
 						continue;
 					}
 
-					JSONArray valueJSONArray = jsonObject.getJSONArray("value");
+					JSONArray valueInputJSONArray = inputJSONObject.getJSONArray("value");
 
-					JSONArray valueJSONArray2 = _jsonFactory.createJSONArray();
+					JSONArray valueOutputJSONArray = _jsonFactory.createJSONArray();
 
-					for (int j = 0; j < valueJSONArray.length(); j++) {
+					for (int j = 0; j < valueInputJSONArray.length(); j++) {
 						ResultSet rs3 = s3.executeQuery(
 							"select key_ from CPDefinitionOptionValueRel where CPDefinitionOptionValueRelId = " +
-								valueJSONArray.getLong(j));
+								valueInputJSONArray.getLong(j));
 
 						if (!rs3.next()) {
 							continue;
 						}
 
-						valueJSONArray2.put(rs3.getString("key_"));
+						valueOutputJSONArray.put(rs3.getString("key_"));
 					}
 
-					JSONObject jsonObject2 = _jsonFactory.createJSONObject();
+					JSONObject outputJSONObject = _jsonFactory.createJSONObject();
 
-					jsonObject2.put("key", rs2.getString("key_"));
-					jsonObject2.put("value", valueJSONArray2);
+					outputJSONObject.put("key", rs2.getString("key_"));
+					outputJSONObject.put("value", valueOutputJSONArray);
 
-					jsonArray2.put(jsonObject2);
+					outputJSONArray.put(outputJSONObject);
 				}
 
-				ps1.setString(1, jsonArray2.toString());
-				ps1.setLong(2, rs.getLong("CPAttachmentFileEntryId"));
+				ps.setString(1, outputJSONArray.toString());
+				ps.setLong(2, rs1.getLong("CPAttachmentFileEntryId"));
 
-				ps1.executeUpdate();
+				ps.executeUpdate();
 			}
 
-			ps1.executeBatch();
+			ps.executeBatch();
 		}
 	}
 
