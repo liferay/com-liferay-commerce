@@ -15,8 +15,12 @@
 package com.liferay.commerce.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
+import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.model.CommerceAccountGroup;
+import com.liferay.commerce.account.service.CommerceAccountLocalService;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.test.util.CommercePriceListTestUtil;
+import com.liferay.commerce.test.util.CommerceAccountGroupTestUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.Role;
@@ -52,7 +56,6 @@ import org.junit.runner.RunWith;
 /**
  * @author Luca Pellizzon
  */
-@Ignore
 @RunWith(Arquillian.class)
 public class CommercePriceListAccountGroupTest {
 
@@ -71,6 +74,10 @@ public class CommercePriceListAccountGroupTest {
 
 		_user = UserTestUtil.addUser();
 
+		_commerceAccount =
+			_commerceAccountLocalService.getPersonalCommerceAccount(
+				_user.getUserId());
+
 		_role1 = RoleTestUtil.addRole(RoleConstants.TYPE_REGULAR);
 		_role2 = RoleTestUtil.addRole(RoleConstants.TYPE_REGULAR);
 	}
@@ -88,19 +95,24 @@ public class CommercePriceListAccountGroupTest {
 			"The price list with the highest priority should be retrieved"
 		);
 
-		CommercePriceListTestUtil.addUserPriceList(
-			_group.getGroupId(), 1, _user.getUserId());
+		CommerceAccountGroup commerceAccountGroup =
+			CommerceAccountGroupTestUtil.addCommerceAccountToAccountGroup(
+				_commerceAccount);
 
 		CommercePriceListTestUtil.addUserPriceList(
-			_group.getGroupId(), 2, _user.getUserId());
+			_group.getGroupId(), 1, commerceAccountGroup);
+
+		CommercePriceListTestUtil.addUserPriceList(
+			_group.getGroupId(), 2, commerceAccountGroup);
 
 		CommercePriceList expectedCommercePriceList =
 			CommercePriceListTestUtil.addUserPriceList(
-				_group.getGroupId(), 3, _user.getUserId());
+				_group.getGroupId(), 3, commerceAccountGroup);
 
 		Optional<CommercePriceList> actualCommercePriceList =
 			CommercePriceListTestUtil.getCommercePriceList(
-				_group.getGroupId(), 0, _user.getUserId());
+				_group.getGroupId(), _commerceAccount.getCommerceAccountId(),
+				_user.getUserId());
 
 		Assert.assertEquals(
 			expectedCommercePriceList.getCommercePriceListId(),
@@ -108,6 +120,95 @@ public class CommercePriceListAccountGroupTest {
 			).getCommercePriceListId());
 	}
 
+	@Test(expected = NoSuchElementException.class)
+	public void testPriceListWithDifferentAccountGroups() throws Exception {
+		frutillaRule.scenario(
+			"Add a price list with different account groups"
+		).given(
+			"A group and a user"
+		).and(
+			"I add a price list"
+		).and(
+			"I associate to the price list one account group"
+		).and(
+			"The account trying to get the price list is in a different " +
+				"account group to the one associated to it"
+		).when(
+			"I try to get the price list"
+		).then(
+			"The price list should be returned only if the account belongs " +
+				"to the account group associated to it"
+		);
+
+		CommerceAccountGroupTestUtil.addCommerceAccountToAccountGroup(
+			_commerceAccount);
+
+		CommerceAccountGroup associatedAccountGroup =
+			CommerceAccountGroupTestUtil.addCommerceAccountGroup();
+
+		CommercePriceListTestUtil.addUserPriceList(
+			_group.getGroupId(), 1, associatedAccountGroup);
+
+		Optional<CommercePriceList> actualCommercePriceList =
+			CommercePriceListTestUtil.getCommercePriceList(
+				_group.getGroupId(), _commerceAccount.getCommerceAccountId(),
+				_user.getUserId());
+
+		actualCommercePriceList.get();
+	}
+
+	@Test(expected = Test.None.class)
+	public void testPriceListWithMultipleAccountGroups() throws Exception {
+		frutillaRule.scenario(
+			"Add a price list with multiple account groups"
+		).given(
+			"A group and a user"
+		).and(
+			"I add a price list"
+		).and(
+			"I associate to the price list to many account groups"
+		).when(
+			"I try to get the price list"
+		).then(
+			"The price list should be returned only if the account belongs " +
+				"to every account group associated to it"
+		);
+
+		CommerceAccountGroup accountGroup1 =
+			CommerceAccountGroupTestUtil.addCommerceAccountToAccountGroup(
+				_commerceAccount);
+		CommerceAccountGroup accountGroup2 =
+			CommerceAccountGroupTestUtil.addCommerceAccountToAccountGroup(
+				_commerceAccount);
+		CommerceAccountGroup accountGroup3 =
+			CommerceAccountGroupTestUtil.addCommerceAccountToAccountGroup(
+				_commerceAccount);
+		CommerceAccountGroup accountGroup4 =
+			CommerceAccountGroupTestUtil.addCommerceAccountToAccountGroup(
+				_commerceAccount);
+
+		CommercePriceList commercePriceList =
+			CommercePriceListTestUtil.addUserPriceList(
+				_group.getGroupId(), 1, accountGroup1);
+
+		CommercePriceListTestUtil.addUserPriceListToAccountGroup(
+			commercePriceList, accountGroup2);
+
+		CommercePriceListTestUtil.addUserPriceListToAccountGroup(
+			commercePriceList, accountGroup3);
+
+		CommercePriceListTestUtil.addUserPriceListToAccountGroup(
+			commercePriceList, accountGroup4);
+
+		Optional<CommercePriceList> actualCommercePriceList =
+			CommercePriceListTestUtil.getCommercePriceList(
+				_group.getGroupId(), _commerceAccount.getCommerceAccountId(),
+				_user.getUserId());
+
+		actualCommercePriceList.get();
+	}
+
+	@Ignore
 	@Test(expected = NoSuchElementException.class)
 	public void testPriceListWithUserAndDifferentRoleAccountGroups()
 		throws Exception {
@@ -133,20 +234,26 @@ public class CommercePriceListAccountGroupTest {
 
 		_userLocalService.addRoleUser(_role1.getRoleId(), _user);
 
+		CommerceAccountGroup commerceAccountGroup1 =
+			CommerceAccountGroupTestUtil.addCommerceAccountToAccountGroup(
+				_commerceAccount);
+
 		CommercePriceList expectedCommercePriceList =
 			CommercePriceListTestUtil.addUserPriceList(
-				_group.getGroupId(), 1, _user.getUserId());
+				_group.getGroupId(), 1, commerceAccountGroup1);
 
 		CommercePriceListTestUtil.addRoleSegmentToPriceList(
 			expectedCommercePriceList, _role2.getRoleId());
 
 		Optional<CommercePriceList> actualCommercePriceList =
 			CommercePriceListTestUtil.getCommercePriceList(
-				_group.getGroupId(), 0, _user.getUserId());
+				_group.getGroupId(), _commerceAccount.getCommerceAccountId(),
+				_user.getUserId());
 
 		actualCommercePriceList.get();
 	}
 
+	@Ignore
 	@Test
 	public void testPriceListWithUserAndRoleAccountGroups() throws Exception {
 		frutillaRule.scenario(
@@ -193,6 +300,7 @@ public class CommercePriceListAccountGroupTest {
 			).getCommercePriceListId());
 	}
 
+	@Ignore
 	@Test
 	public void testPriceListWithUserAndRoleAndOrganizationAccountGroups()
 		throws Exception {
@@ -247,6 +355,11 @@ public class CommercePriceListAccountGroupTest {
 
 	@Rule
 	public FrutillaRule frutillaRule = new FrutillaRule();
+
+	private CommerceAccount _commerceAccount;
+
+	@Inject
+	private CommerceAccountLocalService _commerceAccountLocalService;
 
 	@DeleteAfterTestRun
 	private Group _group;
