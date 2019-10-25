@@ -22,6 +22,7 @@ import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.Dimensions;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.test.util.CPTestUtil;
@@ -30,20 +31,23 @@ import com.liferay.commerce.test.util.CommerceTestUtil;
 import com.liferay.commerce.util.CommerceShippingHelper;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
+import com.liferay.portal.kernel.test.util.UserTestUtil;
 import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PermissionCheckerTestRule;
 
 import java.math.BigDecimal;
 
+import org.frutilla.FrutillaRule;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,7 +55,6 @@ import org.junit.runner.RunWith;
 /**
  * @author Luca Pellizzon
  */
-@Ignore
 @RunWith(Arquillian.class)
 public class CommerceShippingHelperTest {
 
@@ -66,22 +69,41 @@ public class CommerceShippingHelperTest {
 	public void setUp() throws Exception {
 		_group = GroupTestUtil.addGroup();
 
+		_user = UserTestUtil.addUser();
+
+		_commerceCurrency = CommerceCurrencyTestUtil.addCommerceCurrency();
+
+		_commerceChannel = CommerceTestUtil.addCommerceChannel(
+			_commerceCurrency.getCode());
+
 		_commerceInventoryWarehouse =
-			CommerceInventoryTestUtil.addCommerceInventoryWarehouse(
-				_group.getGroupId());
+			CommerceInventoryTestUtil.addCommerceInventoryWarehouse();
+
+		CommerceTestUtil.addWarehouseCommerceChannelRel(
+			_commerceInventoryWarehouse.getCommerceInventoryWarehouseId(),
+			_commerceChannel.getCommerceChannelId());
 	}
 
 	@Test
 	public void testGetDimensions() throws Exception {
-		CommerceCurrency commerceCurrency =
-			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
+		frutillaRule.scenario(
+			"Verify that the product dimensions are correctly retrieved " +
+				"from the order"
+		).given(
+			"I add some product instances with some dimensions"
+		).when(
+			"The products are available on a channel"
+		).then(
+			"The dimensions are correctly retrieved from the order"
+		);
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
-			_group.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId());
+			_user.getUserId(), _commerceChannel.getSiteGroupId(),
+			_commerceCurrency);
 
-		CPInstance cpInstance1 = CPTestUtil.addCPInstance(_group.getGroupId());
-		CPInstance cpInstance2 = CPTestUtil.addCPInstance(_group.getGroupId());
-		CPInstance cpInstance3 = CPTestUtil.addCPInstance(_group.getGroupId());
+		CPInstance cpInstance1 = CPTestUtil.addCPInstanceWithSku();
+		CPInstance cpInstance2 = CPTestUtil.addCPInstanceWithSku();
+		CPInstance cpInstance3 = CPTestUtil.addCPInstanceWithSku();
 
 		_addCPDefinitionProperties(cpInstance1);
 		_addCPDefinitionProperties(cpInstance2);
@@ -129,15 +151,24 @@ public class CommerceShippingHelperTest {
 
 	@Test
 	public void testGetWeight() throws Exception {
-		CommerceCurrency commerceCurrency =
-			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
+		frutillaRule.scenario(
+			"Verify that the product weights are correctly retrieved " +
+				"from the order"
+		).given(
+			"I add some product instances with some weights"
+		).when(
+			"The products are available on a channel"
+		).then(
+			"The weights are correctly retrieved from the order"
+		);
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
-			_group.getGroupId(), 0, commerceCurrency.getCommerceCurrencyId());
+			_user.getUserId(), _commerceChannel.getSiteGroupId(),
+			_commerceCurrency);
 
-		CPInstance cpInstance1 = CPTestUtil.addCPInstance(_group.getGroupId());
-		CPInstance cpInstance2 = CPTestUtil.addCPInstance(_group.getGroupId());
-		CPInstance cpInstance3 = CPTestUtil.addCPInstance(_group.getGroupId());
+		CPInstance cpInstance1 = CPTestUtil.addCPInstanceWithSku();
+		CPInstance cpInstance2 = CPTestUtil.addCPInstanceWithSku();
+		CPInstance cpInstance3 = CPTestUtil.addCPInstanceWithSku();
 
 		_addCPDefinitionProperties(cpInstance1);
 		_addCPDefinitionProperties(cpInstance2);
@@ -170,6 +201,9 @@ public class CommerceShippingHelperTest {
 
 		Assert.assertEquals(expectedWeight, actualWeight, 0.0001);
 	}
+
+	@Rule
+	public FrutillaRule frutillaRule = new FrutillaRule();
 
 	private static void _addAvailability(CPInstance cpInstance)
 		throws Exception {
@@ -218,10 +252,16 @@ public class CommerceShippingHelperTest {
 	@Inject
 	private static CPInstanceLocalService _cpInstanceLocalService;
 
+	private CommerceChannel _commerceChannel;
+	private CommerceCurrency _commerceCurrency;
+
 	@Inject
 	private CommerceShippingHelper _commerceShippingHelper;
 
 	@DeleteAfterTestRun
 	private Group _group;
+
+	@DeleteAfterTestRun
+	private User _user;
 
 }
