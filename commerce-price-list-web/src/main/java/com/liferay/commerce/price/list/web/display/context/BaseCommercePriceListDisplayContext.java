@@ -19,13 +19,15 @@ import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.web.internal.servlet.taglib.ui.CommercePriceListScreenNavigationConstants;
 import com.liferay.commerce.price.list.web.portlet.action.CommercePriceListActionHelper;
 import com.liferay.commerce.product.display.context.util.CPRequestHelper;
+import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.dao.search.RowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
-import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -41,9 +43,15 @@ import javax.servlet.http.HttpServletRequest;
 public abstract class BaseCommercePriceListDisplayContext<T> {
 
 	public BaseCommercePriceListDisplayContext(
+		ModelResourcePermission<CommerceCatalog>
+			commerceCatalogModelResourcePermission,
+		CommerceCatalogService commerceCatalogService,
 		CommercePriceListActionHelper commercePriceListActionHelper,
 		HttpServletRequest httpServletRequest) {
 
+		this.commerceCatalogModelResourcePermission =
+			commerceCatalogModelResourcePermission;
+		this.commerceCatalogService = commerceCatalogService;
 		this.commercePriceListActionHelper = commercePriceListActionHelper;
 		this.httpServletRequest = httpServletRequest;
 
@@ -168,13 +176,29 @@ public abstract class BaseCommercePriceListDisplayContext<T> {
 	public abstract SearchContainer<T> getSearchContainer()
 		throws PortalException;
 
-	public boolean hasManageCommercePriceListPermission() {
+	public boolean hasManageCommercePriceListPermission()
+		throws PortalException {
+
+		CommercePriceList commercePriceList = getCommercePriceList();
+
+		if (commercePriceList == null) {
+			return false;
+		}
+
+		CommerceCatalog commerceCatalog =
+			commerceCatalogService.fetchCommerceCatalogByGroupId(
+				commercePriceList.getGroupId());
+
+		if (commerceCatalog == null) {
+			return false;
+		}
+
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		return PortalPermissionUtil.contains(
-			themeDisplay.getPermissionChecker(),
+		return commerceCatalogModelResourcePermission.contains(
+			themeDisplay.getPermissionChecker(), commerceCatalog,
 			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 	}
 
@@ -206,6 +230,9 @@ public abstract class BaseCommercePriceListDisplayContext<T> {
 		return ParamUtil.getString(httpServletRequest, "navigation");
 	}
 
+	protected final ModelResourcePermission<CommerceCatalog>
+		commerceCatalogModelResourcePermission;
+	protected final CommerceCatalogService commerceCatalogService;
 	protected final CommercePriceListActionHelper commercePriceListActionHelper;
 	protected final HttpServletRequest httpServletRequest;
 	protected final LiferayPortletRequest liferayPortletRequest;

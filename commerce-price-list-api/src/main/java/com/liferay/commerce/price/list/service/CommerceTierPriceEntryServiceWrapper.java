@@ -84,17 +84,6 @@ public class CommerceTierPriceEntryServiceWrapper
 	}
 
 	@Override
-	public java.util.List
-		<com.liferay.commerce.price.list.model.CommerceTierPriceEntry>
-				fetchCommerceTierPriceEntries(
-					long companyId, int start, int end)
-			throws com.liferay.portal.kernel.exception.PortalException {
-
-		return _commerceTierPriceEntryService.fetchCommerceTierPriceEntries(
-			companyId, start, end);
-	}
-
-	@Override
 	public com.liferay.commerce.price.list.model.CommerceTierPriceEntry
 			fetchCommerceTierPriceEntry(long commerceTierPriceEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -134,14 +123,6 @@ public class CommerceTierPriceEntryServiceWrapper
 
 		return _commerceTierPriceEntryService.getCommerceTierPriceEntriesCount(
 			commercePriceEntryId);
-	}
-
-	@Override
-	public int getCommerceTierPriceEntriesCountByCompanyId(long companyId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-
-		return _commerceTierPriceEntryService.
-			getCommerceTierPriceEntriesCountByCompanyId(companyId);
 	}
 
 	@Override

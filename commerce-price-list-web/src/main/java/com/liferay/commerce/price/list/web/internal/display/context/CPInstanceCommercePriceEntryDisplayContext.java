@@ -28,6 +28,8 @@ import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPInstanceScreenNavigationConstants;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.UUIDItemSelectorReturnType;
@@ -36,7 +38,7 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
-import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -59,6 +61,9 @@ public class CPInstanceCommercePriceEntryDisplayContext
 
 	public CPInstanceCommercePriceEntryDisplayContext(
 		ActionHelper actionHelper,
+		ModelResourcePermission<CommerceCatalog>
+			commerceCatalogModelResourcePermission,
+		CommerceCatalogService commerceCatalogService,
 		CommercePriceEntryService commercePriceEntryService,
 		CommercePriceFormatter commercePriceFormatter,
 		CommercePriceListActionHelper commercePriceListActionHelper,
@@ -68,6 +73,9 @@ public class CPInstanceCommercePriceEntryDisplayContext
 			actionHelper, httpServletRequest,
 			CommercePriceEntry.class.getSimpleName());
 
+		_commerceCatalogModelResourcePermission =
+			commerceCatalogModelResourcePermission;
+		_commerceCatalogService = commerceCatalogService;
 		_commercePriceEntryService = commercePriceEntryService;
 		_commercePriceFormatter = commercePriceFormatter;
 		_commercePriceListActionHelper = commercePriceListActionHelper;
@@ -252,9 +260,25 @@ public class CPInstanceCommercePriceEntryDisplayContext
 		return searchContainer;
 	}
 
-	public boolean hasManageCommercePriceListPermission() {
-		return PortalPermissionUtil.contains(
-			cpRequestHelper.getPermissionChecker(),
+	public boolean hasManageCommercePriceListPermission()
+		throws PortalException {
+
+		CPInstance cpInstance = getCPInstance();
+
+		if (cpInstance == null) {
+			return false;
+		}
+
+		CommerceCatalog commerceCatalog =
+			_commerceCatalogService.fetchCommerceCatalogByGroupId(
+				cpInstance.getGroupId());
+
+		if (commerceCatalog == null) {
+			return false;
+		}
+
+		return _commerceCatalogModelResourcePermission.contains(
+			cpRequestHelper.getPermissionChecker(), commerceCatalog,
 			CommercePriceListActionKeys.MANAGE_COMMERCE_PRICE_LISTS);
 	}
 
@@ -283,6 +307,9 @@ public class CPInstanceCommercePriceEntryDisplayContext
 			getCPInstanceId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
+	private final ModelResourcePermission<CommerceCatalog>
+		_commerceCatalogModelResourcePermission;
+	private final CommerceCatalogService _commerceCatalogService;
 	private final CommercePriceEntryService _commercePriceEntryService;
 	private final CommercePriceFormatter _commercePriceFormatter;
 	private final CommercePriceListActionHelper _commercePriceListActionHelper;

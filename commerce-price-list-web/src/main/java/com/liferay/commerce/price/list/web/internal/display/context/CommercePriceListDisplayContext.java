@@ -47,6 +47,7 @@ import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -73,6 +74,8 @@ public class CommercePriceListDisplayContext
 		CommercePriceListActionHelper commercePriceListActionHelper,
 		CommerceAccountService commerceAccountService,
 		CommerceAccountGroupService commerceAccountGroupService,
+		ModelResourcePermission<CommerceCatalog>
+			commerceCatalogModelResourcePermission,
 		CommerceCatalogService commerceCatalogService,
 		CommerceCurrencyService commerceCurrencyService,
 		CommercePriceListAccountRelService commercePriceListAccountRelService,
@@ -81,7 +84,9 @@ public class CommercePriceListDisplayContext
 		CommercePriceListService commercePriceListService,
 		HttpServletRequest httpServletRequest, ItemSelector itemSelector) {
 
-		super(commercePriceListActionHelper, httpServletRequest);
+		super(
+			commerceCatalogModelResourcePermission, commerceCatalogService,
+			commercePriceListActionHelper, httpServletRequest);
 
 		_commerceAccountService = commerceAccountService;
 		_commerceAccountGroupService = commerceAccountGroupService;

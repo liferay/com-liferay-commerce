@@ -180,7 +180,7 @@ public class CommercePriceListCommerceAccountGroupRelServiceHttp {
 		CommercePriceListCommerceAccountGroupRel
 				getCommercePriceListCommerceAccountGroupRel(
 					HttpPrincipal httpPrincipal,
-					long commercePriceListCommerceAccoungGroupRelId)
+					long commercePriceListCommerceAccountGroupRelId)
 			throws com.liferay.portal.kernel.exception.PortalException {
 
 		try {
@@ -190,7 +190,7 @@ public class CommercePriceListCommerceAccountGroupRelServiceHttp {
 				_getCommercePriceListCommerceAccountGroupRelParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, commercePriceListCommerceAccoungGroupRelId);
+				methodKey, commercePriceListCommerceAccountGroupRelId);
 
 			Object returnObj = null;
 

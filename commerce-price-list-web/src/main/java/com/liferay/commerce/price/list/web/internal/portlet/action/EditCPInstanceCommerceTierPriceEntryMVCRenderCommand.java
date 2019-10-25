@@ -20,9 +20,12 @@ import com.liferay.commerce.price.list.web.internal.display.context.CPInstanceCo
 import com.liferay.commerce.price.list.web.portlet.action.CommercePriceListActionHelper;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
+import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderConstants;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -71,7 +74,8 @@ public class EditCPInstanceCommerceTierPriceEntryMVCRenderCommand
 			CPInstanceCommerceTierPriceEntryDisplayContext
 				cpInstanceCommerceTierPriceEntryDisplayContext =
 					new CPInstanceCommerceTierPriceEntryDisplayContext(
-						_actionHelper, _commercePriceListActionHelper,
+						_actionHelper, _commerceCatalogModelResourcePermission,
+						_commerceCatalogService, _commercePriceListActionHelper,
 						_commerceTierPriceEntryService, httpServletRequest);
 
 			renderRequest.setAttribute(
@@ -98,6 +102,15 @@ public class EditCPInstanceCommerceTierPriceEntryMVCRenderCommand
 
 	@Reference
 	private ActionHelper _actionHelper;
+
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.product.model.CommerceCatalog)"
+	)
+	private ModelResourcePermission<CommerceCatalog>
+		_commerceCatalogModelResourcePermission;
+
+	@Reference
+	private CommerceCatalogService _commerceCatalogService;
 
 	@Reference
 	private CommercePriceListActionHelper _commercePriceListActionHelper;

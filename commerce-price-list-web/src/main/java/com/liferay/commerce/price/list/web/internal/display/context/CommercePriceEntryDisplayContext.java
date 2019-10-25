@@ -25,7 +25,9 @@ import com.liferay.commerce.price.list.web.portlet.action.CommercePriceListActio
 import com.liferay.commerce.product.display.context.util.CPRequestHelper;
 import com.liferay.commerce.product.item.selector.criterion.CPInstanceItemSelectorCriterion;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CPInstanceService;
+import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.UUIDItemSelectorReturnType;
@@ -36,6 +38,7 @@ import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactoryUtil;
 import com.liferay.portal.kernel.search.BaseModelSearchResult;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -58,12 +61,17 @@ public class CommercePriceEntryDisplayContext
 	extends BaseCommercePriceListDisplayContext<CommercePriceEntry> {
 
 	public CommercePriceEntryDisplayContext(
+		ModelResourcePermission<CommerceCatalog>
+			commerceCatalogModelResourcePermission,
+		CommerceCatalogService commerceCatalogService,
 		CommercePriceListActionHelper commercePriceListActionHelper,
 		CommercePriceEntryService commercePriceEntryService,
 		CPInstanceService cpInstanceService, ItemSelector itemSelector,
 		HttpServletRequest httpServletRequest) {
 
-		super(commercePriceListActionHelper, httpServletRequest);
+		super(
+			commerceCatalogModelResourcePermission, commerceCatalogService,
+			commercePriceListActionHelper, httpServletRequest);
 
 		_commercePriceEntryService = commercePriceEntryService;
 		_cpInstanceService = cpInstanceService;

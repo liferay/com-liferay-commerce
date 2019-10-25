@@ -81,7 +81,7 @@ public interface CommercePriceListCommerceAccountGroupRelService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommercePriceListCommerceAccountGroupRel
 			getCommercePriceListCommerceAccountGroupRel(
-				long commercePriceListCommerceAccoungGroupRelId)
+				long commercePriceListCommerceAccountGroupRelId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

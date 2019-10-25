@@ -23,9 +23,11 @@ import com.liferay.commerce.price.list.service.CommercePriceListCommerceAccountG
 import com.liferay.commerce.price.list.service.CommercePriceListService;
 import com.liferay.commerce.price.list.web.internal.display.context.CommercePriceListDisplayContext;
 import com.liferay.commerce.price.list.web.portlet.action.CommercePriceListActionHelper;
+import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -75,8 +77,10 @@ public class CommercePriceListPortlet extends MVCPortlet {
 		CommercePriceListDisplayContext commercePriceListDisplayContext =
 			new CommercePriceListDisplayContext(
 				_commercePriceListActionHelper, _commerceAccountService,
-				_commerceAccountGroupService, _commerceCatalogService,
-				_commerceCurrencyService, _commercePriceListAccountRelService,
+				_commerceAccountGroupService,
+				_commerceCatalogModelResourcePermission,
+				_commerceCatalogService, _commerceCurrencyService,
+				_commercePriceListAccountRelService,
 				_commercePriceListCommerceAccountGroupRelService,
 				_commercePriceListService,
 				_portal.getHttpServletRequest(renderRequest), _itemSelector);
@@ -92,6 +96,12 @@ public class CommercePriceListPortlet extends MVCPortlet {
 
 	@Reference
 	private CommerceAccountService _commerceAccountService;
+
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.product.model.CommerceCatalog)"
+	)
+	private ModelResourcePermission<CommerceCatalog>
+		_commerceCatalogModelResourcePermission;
 
 	@Reference
 	private CommerceCatalogService _commerceCatalogService;

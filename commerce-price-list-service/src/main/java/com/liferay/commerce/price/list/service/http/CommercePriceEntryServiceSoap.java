@@ -213,29 +213,6 @@ public class CommercePriceEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.commerce.price.list.model.CommercePriceEntrySoap[]
-			getCommercePriceEntriesByCompanyId(
-				long companyId, int start, int end)
-		throws RemoteException {
-
-		try {
-			java.util.List
-				<com.liferay.commerce.price.list.model.CommercePriceEntry>
-					returnValue =
-						CommercePriceEntryServiceUtil.
-							getCommercePriceEntriesByCompanyId(
-								companyId, start, end);
-
-			return com.liferay.commerce.price.list.model.CommercePriceEntrySoap.
-				toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static int getCommercePriceEntriesCount(long commercePriceListId)
 		throws RemoteException {
 
@@ -243,23 +220,6 @@ public class CommercePriceEntryServiceSoap {
 			int returnValue =
 				CommercePriceEntryServiceUtil.getCommercePriceEntriesCount(
 					commercePriceListId);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static int getCommercePriceEntriesCountByCompanyId(long companyId)
-		throws RemoteException {
-
-		try {
-			int returnValue =
-				CommercePriceEntryServiceUtil.
-					getCommercePriceEntriesCountByCompanyId(companyId);
 
 			return returnValue;
 		}

@@ -118,30 +118,11 @@ public class CommercePriceEntryServiceWrapper
 	}
 
 	@Override
-	public java.util.List
-		<com.liferay.commerce.price.list.model.CommercePriceEntry>
-				getCommercePriceEntriesByCompanyId(
-					long companyId, int start, int end)
-			throws com.liferay.portal.kernel.exception.PortalException {
-
-		return _commercePriceEntryService.getCommercePriceEntriesByCompanyId(
-			companyId, start, end);
-	}
-
-	@Override
 	public int getCommercePriceEntriesCount(long commercePriceListId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _commercePriceEntryService.getCommercePriceEntriesCount(
 			commercePriceListId);
-	}
-
-	@Override
-	public int getCommercePriceEntriesCountByCompanyId(long companyId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-
-		return _commercePriceEntryService.
-			getCommercePriceEntriesCountByCompanyId(companyId);
 	}
 
 	@Override

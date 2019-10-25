@@ -21,13 +21,14 @@ import com.liferay.commerce.price.list.web.portlet.action.CommercePriceListActio
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPInstanceScreenNavigationConstants;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.frontend.taglib.servlet.taglib.ScreenNavigationEntry;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -92,32 +93,34 @@ public class CPInstancePriceListsScreenNavigationEntry
 			HttpServletResponse httpServletResponse)
 		throws IOException {
 
-		try {
-			CPInstanceCommercePriceEntryDisplayContext
-				cpInstanceCommercePriceEntryDisplayContext =
-					new CPInstanceCommercePriceEntryDisplayContext(
-						_actionHelper, _commercePriceEntryService,
-						_commercePriceFormatter, _commercePriceListActionHelper,
-						httpServletRequest, _itemSelector);
+		CPInstanceCommercePriceEntryDisplayContext
+			cpInstanceCommercePriceEntryDisplayContext =
+				new CPInstanceCommercePriceEntryDisplayContext(
+					_actionHelper, _commerceCatalogModelResourcePermission,
+					_commerceCatalogService, _commercePriceEntryService,
+					_commercePriceFormatter, _commercePriceListActionHelper,
+					httpServletRequest, _itemSelector);
 
-			httpServletRequest.setAttribute(
-				WebKeys.PORTLET_DISPLAY_CONTEXT,
-				cpInstanceCommercePriceEntryDisplayContext);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
+		httpServletRequest.setAttribute(
+			WebKeys.PORTLET_DISPLAY_CONTEXT,
+			cpInstanceCommercePriceEntryDisplayContext);
 
 		_jspRenderer.renderJSP(
 			_setServletContext, httpServletRequest, httpServletResponse,
 			"/instance_price_lists.jsp");
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
-		CPInstancePriceListsScreenNavigationEntry.class);
-
 	@Reference
 	private ActionHelper _actionHelper;
+
+	@Reference(
+		target = "(model.class.name=com.liferay.commerce.product.model.CommerceCatalog)"
+	)
+	private ModelResourcePermission<CommerceCatalog>
+		_commerceCatalogModelResourcePermission;
+
+	@Reference
+	private CommerceCatalogService _commerceCatalogService;
 
 	@Reference
 	private CommercePriceEntryService _commercePriceEntryService;

@@ -113,26 +113,10 @@ public class CommercePriceEntryServiceUtil {
 			commercePriceListId, start, end, orderByComparator);
 	}
 
-	public static java.util.List
-		<com.liferay.commerce.price.list.model.CommercePriceEntry>
-				getCommercePriceEntriesByCompanyId(
-					long companyId, int start, int end)
-			throws com.liferay.portal.kernel.exception.PortalException {
-
-		return getService().getCommercePriceEntriesByCompanyId(
-			companyId, start, end);
-	}
-
 	public static int getCommercePriceEntriesCount(long commercePriceListId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().getCommercePriceEntriesCount(commercePriceListId);
-	}
-
-	public static int getCommercePriceEntriesCountByCompanyId(long companyId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-
-		return getService().getCommercePriceEntriesCountByCompanyId(companyId);
 	}
 
 	public static com.liferay.commerce.price.list.model.CommercePriceEntry
