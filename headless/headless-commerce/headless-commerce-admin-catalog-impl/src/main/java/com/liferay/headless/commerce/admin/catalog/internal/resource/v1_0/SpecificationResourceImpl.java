@@ -19,25 +19,30 @@ import com.liferay.commerce.product.model.CPSpecificationOption;
 import com.liferay.commerce.product.service.CPSpecificationOptionService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.OptionCategory;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Specification;
+import com.liferay.headless.commerce.admin.catalog.internal.odata.entity.v1_0.SpecificationEntityModel;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.SpecificationResource;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverterContext;
 import com.liferay.headless.commerce.core.util.LanguageUtils;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.search.BaseModelSearchResult;
+import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.search.filter.Filter;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.odata.entity.EntityModel;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.liferay.portal.vulcan.resource.EntityModelResource;
+import com.liferay.portal.vulcan.util.SearchUtil;
 
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
@@ -52,7 +57,8 @@ import org.osgi.service.component.annotations.ServiceScope;
 	properties = "OSGI-INF/liferay/rest/v1_0/specification.properties",
 	scope = ServiceScope.PROTOTYPE, service = SpecificationResource.class
 )
-public class SpecificationResourceImpl extends BaseSpecificationResourceImpl {
+public class SpecificationResourceImpl
+	extends BaseSpecificationResourceImpl implements EntityModelResource {
 
 	@Override
 	public Response deleteSpecification(Long id) throws Exception {
@@ -61,6 +67,13 @@ public class SpecificationResourceImpl extends BaseSpecificationResourceImpl {
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
+	}
+
+	@Override
+	public EntityModel getEntityModel(MultivaluedMap multivaluedMap)
+		throws Exception {
+
+		return _entityModel;
 	}
 
 	@Override
@@ -76,20 +89,21 @@ public class SpecificationResourceImpl extends BaseSpecificationResourceImpl {
 	}
 
 	@Override
-	public Page<Specification> getSpecificationsPage(Pagination pagination)
+	public Page<Specification> getSpecificationsPage(
+			Filter filter, Pagination pagination, Sort[] sorts)
 		throws Exception {
 
-		BaseModelSearchResult<CPSpecificationOption>
-			cpSpecificationOptionBaseModelSearchResult =
-				_cpSpecificationOptionService.searchCPSpecificationOptions(
-					_user.getCompanyId(), null, null,
-					pagination.getStartPosition(), pagination.getEndPosition(),
-					null);
-
-		return Page.of(
-			_toSpecifications(
-				cpSpecificationOptionBaseModelSearchResult.getBaseModels()),
-			pagination, cpSpecificationOptionBaseModelSearchResult.getLength());
+		return SearchUtil.search(
+			booleanQuery -> booleanQuery.getPreBooleanFilter(), filter,
+			CPSpecificationOption.class, StringPool.BLANK, pagination,
+			queryConfig -> queryConfig.setSelectedFieldNames(
+				Field.ENTRY_CLASS_PK),
+			searchContext -> searchContext.setCompanyId(
+				contextCompany.getCompanyId()),
+			document -> _toSpecification(
+				_cpSpecificationOptionService.getCPSpecificationOption(
+					GetterUtil.getLong(document.get(Field.ENTRY_CLASS_PK)))),
+			sorts);
 	}
 
 	@Override
@@ -130,27 +144,18 @@ public class SpecificationResourceImpl extends BaseSpecificationResourceImpl {
 		return facetable;
 	}
 
-	private List<Specification> _toSpecifications(
-			List<CPSpecificationOption> cpSpecificationOptions)
+	private Specification _toSpecification(
+			CPSpecificationOption cpSpecificationOption)
 		throws Exception {
-
-		List<Specification> specifications = new ArrayList<>();
 
 		DTOConverter specificationDTOConverter =
 			_dtoConverterRegistry.getDTOConverter(
 				CPSpecificationOption.class.getName());
 
-		for (CPSpecificationOption cpSpecificationOption :
-				cpSpecificationOptions) {
-
-			specifications.add(
-				(Specification)specificationDTOConverter.toDTO(
-					new DefaultDTOConverterContext(
-						contextAcceptLanguage.getPreferredLocale(),
-						cpSpecificationOption.getCPSpecificationOptionId())));
-		}
-
-		return specifications;
+		return (Specification)specificationDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(),
+				cpSpecificationOption.getCPSpecificationOptionId()));
 	}
 
 	private CPSpecificationOption _updateSpecification(
@@ -209,6 +214,9 @@ public class SpecificationResourceImpl extends BaseSpecificationResourceImpl {
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		SpecificationResourceImpl.class);
+
+	private static final EntityModel _entityModel =
+		new SpecificationEntityModel();
 
 	@Reference
 	private CPSpecificationOptionService _cpSpecificationOptionService;

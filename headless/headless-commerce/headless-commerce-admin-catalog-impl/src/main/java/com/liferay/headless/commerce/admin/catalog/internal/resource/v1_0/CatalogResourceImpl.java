@@ -16,20 +16,27 @@ package com.liferay.headless.commerce.admin.catalog.internal.resource.v1_0;
 
 import com.liferay.commerce.product.exception.NoSuchCatalogException;
 import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.service.CommerceCatalogLocalService;
 import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Catalog;
+import com.liferay.headless.commerce.admin.catalog.internal.odata.entity.v1_0.CatalogEntityModel;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.CatalogResource;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverterContext;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
+import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.search.filter.Filter;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.odata.entity.EntityModel;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
+import com.liferay.portal.vulcan.resource.EntityModelResource;
+import com.liferay.portal.vulcan.util.SearchUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
 import org.osgi.service.component.annotations.Component;
@@ -43,7 +50,8 @@ import org.osgi.service.component.annotations.ServiceScope;
 	properties = "OSGI-INF/liferay/rest/v1_0/catalog.properties",
 	scope = ServiceScope.PROTOTYPE, service = CatalogResource.class
 )
-public class CatalogResourceImpl extends BaseCatalogResourceImpl {
+public class CatalogResourceImpl
+	extends BaseCatalogResourceImpl implements EntityModelResource {
 
 	@Override
 	public Response deleteCatalog(Long id) throws Exception {
@@ -120,19 +128,28 @@ public class CatalogResourceImpl extends BaseCatalogResourceImpl {
 	}
 
 	@Override
-	public Page<Catalog> getCatalogsPage(Pagination pagination)
+	public Page<Catalog> getCatalogsPage(
+			Filter filter, Pagination pagination, Sort[] sorts)
 		throws Exception {
 
-		List<CommerceCatalog> commerceCatalogs =
-			_commerceCatalogService.searchCommerceCatalogs(
-				contextCompany.getCompanyId(), null,
-				pagination.getStartPosition(), pagination.getEndPosition(),
-				null);
+		return SearchUtil.search(
+			booleanQuery -> booleanQuery.getPreBooleanFilter(), filter,
+			CommerceCatalog.class, StringPool.BLANK, pagination,
+			queryConfig -> queryConfig.setSelectedFieldNames(
+				Field.ENTRY_CLASS_PK),
+			searchContext -> searchContext.setCompanyId(
+				contextCompany.getCompanyId()),
+			document -> _toCatalog(
+				_commerceCatalogService.getCommerceCatalog(
+					GetterUtil.getLong(document.get(Field.ENTRY_CLASS_PK)))),
+			sorts);
+	}
 
-		int totalItems = _commerceCatalogService.searchCommerceCatalogsCount(
-			contextCompany.getCompanyId(), null);
+	@Override
+	public EntityModel getEntityModel(MultivaluedMap multivaluedMap)
+		throws Exception {
 
-		return Page.of(_toCatalogs(commerceCatalogs), pagination, totalItems);
+		return _entityModel;
 	}
 
 	@Override
@@ -209,25 +226,23 @@ public class CatalogResourceImpl extends BaseCatalogResourceImpl {
 				commerceCatalog.getCommerceCatalogId()));
 	}
 
-	private List<Catalog> _toCatalogs(List<CommerceCatalog> commerceCatalogs)
+	private Catalog _toCatalog(CommerceCatalog commerceCatalog)
 		throws Exception {
-
-		List<Catalog> catalogs = new ArrayList<>();
 
 		DTOConverter catalogDTOConverter =
 			_dtoConverterRegistry.getDTOConverter(
 				CommerceCatalog.class.getName());
 
-		for (CommerceCatalog commerceCatalog : commerceCatalogs) {
-			catalogs.add(
-				(Catalog)catalogDTOConverter.toDTO(
-					new DefaultDTOConverterContext(
-						contextAcceptLanguage.getPreferredLocale(),
-						commerceCatalog.getCommerceCatalogId())));
-		}
-
-		return catalogs;
+		return (Catalog)catalogDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(),
+				commerceCatalog.getCommerceCatalogId()));
 	}
+
+	private static final EntityModel _entityModel = new CatalogEntityModel();
+
+	@Reference
+	private CommerceCatalogLocalService _commerceCatalogLocalService;
 
 	@Reference
 	private CommerceCatalogService _commerceCatalogService;
