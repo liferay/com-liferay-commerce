@@ -28,6 +28,17 @@ import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
  */
 public class CommerceAccountGroupTestUtil {
 
+	public static CommerceAccountGroup addCommerceAccountGroup()
+		throws PortalException {
+
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext();
+
+		return CommerceAccountGroupLocalServiceUtil.addCommerceAccountGroup(
+			serviceContext.getCompanyId(), RandomTestUtil.randomString(), 0,
+			false, null, serviceContext);
+	}
+
 	public static CommerceAccountGroup addCommerceAccountToAccountGroup(
 			CommerceAccount commerceAccount)
 		throws PortalException {
