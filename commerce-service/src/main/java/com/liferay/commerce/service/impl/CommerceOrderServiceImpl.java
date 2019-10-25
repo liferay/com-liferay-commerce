@@ -22,10 +22,7 @@ import com.liferay.commerce.constants.CommerceActionKeys;
 import com.liferay.commerce.constants.CommerceOrderActionKeys;
 import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.context.CommerceContext;
-import com.liferay.commerce.inventory.model.CommerceInventoryBookedQuantity;
-import com.liferay.commerce.inventory.service.CommerceInventoryBookedQuantityLocalService;
 import com.liferay.commerce.model.CommerceOrder;
-import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.service.base.CommerceOrderServiceBaseImpl;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -43,9 +40,7 @@ import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.math.BigDecimal;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Andrea Di Giorgi
@@ -132,8 +127,6 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 		_commerceOrderModelResourcePermission.check(
 			getPermissionChecker(), commerceOrderId,
 			CommerceOrderActionKeys.CHECKOUT_COMMERCE_ORDER);
-
-		_bookQuantities(getCommerceOrder(commerceOrderId));
 
 		return commerceOrderLocalService.checkoutCommerceOrder(
 			commerceOrderId, commerceContext, serviceContext);
@@ -830,36 +823,6 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			serviceContext);
 	}
 
-	private void _bookQuantities(CommerceOrder commerceOrder)
-		throws PortalException {
-
-		List<CommerceOrderItem> commerceOrderItems =
-			commerceOrder.getCommerceOrderItems();
-
-		for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
-			Map<String, String> context = new HashMap<>();
-
-			context.put(
-				"OrderId ",
-				String.valueOf(commerceOrderItem.getCommerceOrderId()));
-			context.put(
-				"OrderItemId ",
-				String.valueOf(commerceOrderItem.getCommerceOrderItemId()));
-
-			CommerceInventoryBookedQuantity commerceInventoryBookedQuantity =
-				_commerceInventoryBookedQuantityLocalService.
-					addCommerceBookedQuantity(
-						commerceOrderItem.getUserId(),
-						commerceOrderItem.getSku(),
-						commerceOrderItem.getQuantity(), null, context);
-
-			commerceOrderItemLocalService.updateCommerceOrderItem(
-				commerceOrderItem.getCommerceOrderItemId(),
-				commerceInventoryBookedQuantity.
-					getCommerceInventoryBookedQuantityId());
-		}
-	}
-
 	private void _checkAccountOrderPermissions(
 			long groupId, long commerceAccountId, String action)
 		throws PortalException {
@@ -907,9 +870,5 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 
 	@ServiceReference(type = CommerceAccountLocalService.class)
 	private CommerceAccountLocalService _commerceAccountLocalService;
-
-	@ServiceReference(type = CommerceInventoryBookedQuantityLocalService.class)
-	private CommerceInventoryBookedQuantityLocalService
-		_commerceInventoryBookedQuantityLocalService;
 
 }
