@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -34,14 +33,11 @@ import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
@@ -63,7 +59,6 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 		_commercePaymentMethodGroupRelService =
 			commercePaymentMethodGroupRelService;
 		_portletResourcePermission = portletResourcePermission;
-		_defaultCommercePaymentMethodGroupRels = new ArrayList<>();
 		_renderRequest = renderRequest;
 		_renderResponse = renderResponse;
 	}
@@ -91,43 +86,6 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 		}
 
 		return _commercePaymentMethodGroupRel;
-	}
-
-	public List<CommercePaymentMethodGroupRel>
-			getDefaultCommercePaymentMethodGroupRels()
-		throws PortalException {
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)_renderRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		List<CommercePaymentMethodGroupRel> commercePaymentMethodGroupRels =
-			_commercePaymentMethodGroupRelService.
-				getCommercePaymentMethodGroupRels(
-					themeDisplay.getScopeGroupId());
-
-		Stream<CommercePaymentMethodGroupRel> stream =
-			commercePaymentMethodGroupRels.stream();
-
-		String[] array = stream.map(
-			CommercePaymentMethodGroupRel::getEngineKey
-		).toArray(
-			String[]::new
-		);
-
-		_defaultCommercePaymentMethodGroupRels =
-			addDefaultCommercePaymentMethodGroupRels(
-				_defaultCommercePaymentMethodGroupRels);
-
-		stream = _defaultCommercePaymentMethodGroupRels.stream();
-
-		_defaultCommercePaymentMethodGroupRels = stream.filter(
-			commercePaymentMethodGroupRel -> !ArrayUtil.contains(
-				array, commercePaymentMethodGroupRel.getEngineKey())
-		).collect(
-			Collectors.toList()
-		);
-
-		return _defaultCommercePaymentMethodGroupRels;
 	}
 
 	public PortletURL getPortletURL() {
@@ -302,8 +260,6 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 	private final CommercePaymentMethodGroupRelService
 		_commercePaymentMethodGroupRelService;
 	private final CommercePaymentMethodRegistry _commercePaymentMethodRegistry;
-	private List<CommercePaymentMethodGroupRel>
-		_defaultCommercePaymentMethodGroupRels;
 	private final PortletResourcePermission _portletResourcePermission;
 	private final RenderRequest _renderRequest;
 	private final RenderResponse _renderResponse;
