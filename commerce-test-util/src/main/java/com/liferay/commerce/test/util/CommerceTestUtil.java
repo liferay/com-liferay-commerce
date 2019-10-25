@@ -245,7 +245,15 @@ public class CommerceTestUtil {
 		CPInstanceLocalServiceUtil.updateCPInstance(cpInstance);
 
 		CommerceInventoryWarehouse commerceInventoryWarehouse =
-			CommerceInventoryTestUtil.addCommerceInventoryWarehouse(groupId);
+			CommerceInventoryTestUtil.addCommerceInventoryWarehouse();
+
+		CommerceChannel commerceChannel =
+			CommerceChannelLocalServiceUtil.getCommerceChannelByOrderGroupId(
+				commerceOrder.getGroupId());
+
+		CommerceTestUtil.addWarehouseCommerceChannelRel(
+			commerceInventoryWarehouse.getCommerceInventoryWarehouseId(),
+			commerceChannel.getCommerceChannelId());
 
 		CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
 			userId, commerceInventoryWarehouse, cpInstance.getSku(), 10);
@@ -303,7 +311,7 @@ public class CommerceTestUtil {
 		throws Exception {
 
 		return CommerceChannelLocalServiceUtil.addCommerceChannel(
-			RandomTestUtil.nextLong(), RandomTestUtil.randomString(),
+			groupId, RandomTestUtil.randomString(),
 			RandomTestUtil.randomString(), null, commerceCurrencyCode,
 			StringPool.BLANK,
 			ServiceContextTestUtil.getServiceContext(groupId));
