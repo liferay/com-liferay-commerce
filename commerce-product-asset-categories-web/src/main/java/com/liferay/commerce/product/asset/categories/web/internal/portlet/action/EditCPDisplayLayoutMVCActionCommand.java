@@ -16,6 +16,8 @@ package com.liferay.commerce.product.asset.categories.web.internal.portlet.actio
 
 import com.liferay.asset.kernel.exception.NoSuchCategoryException;
 import com.liferay.asset.kernel.model.AssetCategory;
+import com.liferay.asset.kernel.model.AssetVocabulary;
+import com.liferay.asset.kernel.service.AssetVocabularyLocalService;
 import com.liferay.commerce.admin.constants.CommerceAdminPortletKeys;
 import com.liferay.commerce.product.exception.CPDisplayLayoutEntryException;
 import com.liferay.commerce.product.exception.CPDisplayLayoutLayoutUuidException;
@@ -33,7 +35,11 @@ import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -133,7 +139,31 @@ public class EditCPDisplayLayoutMVCActionCommand extends BaseMVCActionCommand {
 		long cpDisplayLayoutId = ParamUtil.getLong(
 			actionRequest, "cpDisplayLayoutId");
 
-		long classPK = ParamUtil.getLong(actionRequest, "classPK");
+		List<Long> classPKs = new ArrayList<>();
+
+		long classPKParam = ParamUtil.getLong(actionRequest, "classPK");
+
+		if (classPKParam > 0) {
+			classPKs.add(classPKParam);
+		}
+		else {
+			long groupId = _portal.getScopeGroupId(actionRequest);
+
+			List<AssetVocabulary> assetVocabularies =
+				_assetVocabularyLocalService.getGroupVocabularies(
+					groupId, false);
+
+			for (AssetVocabulary assetVocabulary : assetVocabularies) {
+				classPKParam = ParamUtil.getLong(
+					actionRequest,
+					"classPK_" + assetVocabulary.getVocabularyId());
+
+				if (classPKParam > 0) {
+					classPKs.add(classPKParam);
+				}
+			}
+		}
+
 		String layoutUuid = ParamUtil.getString(actionRequest, "layoutUuid");
 
 		if (cpDisplayLayoutId > 0) {
@@ -144,12 +174,20 @@ public class EditCPDisplayLayoutMVCActionCommand extends BaseMVCActionCommand {
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(
 				CPDisplayLayout.class.getName(), actionRequest);
 
-			_cpDisplayLayoutService.addCPDisplayLayout(
-				AssetCategory.class, classPK, layoutUuid, serviceContext);
+			for (long classPK : classPKs) {
+				_cpDisplayLayoutService.addCPDisplayLayout(
+					AssetCategory.class, classPK, layoutUuid, serviceContext);
+			}
 		}
 	}
 
 	@Reference
+	private AssetVocabularyLocalService _assetVocabularyLocalService;
+
+	@Reference
 	private CPDisplayLayoutService _cpDisplayLayoutService;
+
+	@Reference
+	private Portal _portal;
 
 }
