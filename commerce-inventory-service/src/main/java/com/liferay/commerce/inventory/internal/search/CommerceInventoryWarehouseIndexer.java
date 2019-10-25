@@ -34,7 +34,6 @@ import com.liferay.portal.kernel.search.filter.BooleanFilter;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Locale;
 
@@ -95,15 +94,6 @@ public class CommerceInventoryWarehouseIndexer
 			contextBooleanFilter.addTerm(
 				FIELD_ACTIVE, String.valueOf(active), BooleanClauseOccur.MUST);
 		}
-
-		String countryTwoLettersISOCode = (String)searchContext.getAttribute(
-			FIELD_COUNTRY_TWO_LETTERS_ISO_CODE);
-
-		if (Validator.isNotNull(countryTwoLettersISOCode)) {
-			contextBooleanFilter.addTerm(
-				FIELD_COUNTRY_TWO_LETTERS_ISO_CODE, countryTwoLettersISOCode,
-				BooleanClauseOccur.MUST);
-		}
 	}
 
 	@Override
@@ -120,6 +110,9 @@ public class CommerceInventoryWarehouseIndexer
 		addSearchTerm(searchQuery, searchContext, FIELD_CITY, false);
 		addSearchTerm(searchQuery, searchContext, FIELD_STREET_1, false);
 		addSearchTerm(searchQuery, searchContext, FIELD_ZIP, false);
+		addSearchTerm(
+			searchQuery, searchContext, FIELD_COUNTRY_TWO_LETTERS_ISO_CODE,
+			false);
 	}
 
 	@Override
