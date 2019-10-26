@@ -157,10 +157,12 @@ class AddToCartButton extends Component {
 		this.hasQuantityChanged = false;
 
 		window.Liferay.on('accountSelected', this._handleAccountChange, this);
+		window.Liferay.on('productRemovedFromCart', this._handleCartProductRemoval, this);
 	}
 
 	detached() {
 		window.Liferay.detach('accountSelected', this._handleAccountChange, this);
+		window.Liferay.detach('productRemovedFromCart', this._handleCartProductRemoval, this);
 	}
 
 	willReceiveState(changes) {
@@ -214,6 +216,13 @@ class AddToCartButton extends Component {
 		this.orderId = null;
 		this.quantity = 0;
 		resetInputQuantity.call(this);
+	}
+
+	_handleCartProductRemoval(e) {
+		if (e.productId === this.productId) {
+			this.quantity = 0;
+			resetInputQuantity.call(this);
+		}
 	}
 
 	_handleBtnFocus(e) {
