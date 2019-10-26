@@ -108,7 +108,8 @@ public class CommerceCartResourceUtil {
 				commerceOrderItem.getQuantity(),
 				_cpInstanceHelper.getCPInstanceThumbnailSrc(
 					commerceOrderItem.getCPInstanceId()),
-				prices, settings, getErrorMessages(locale, commerceOrderItem));
+				prices, settings, getErrorMessages(locale, commerceOrderItem),
+				commerceOrderItem.getCPInstanceId());
 
 			product.setOptions(
 				_cpInstanceHelper.getKeyValuePairs(
