@@ -28,7 +28,7 @@ public class Product {
 	public Product(
 		long id, String name, String sku, int quantity, String thumbnail,
 		PriceModel prices, ProductSettingsModel settings,
-		String[] errorMessages) {
+		String[] errorMessages, long cpInstanceId) {
 
 		_id = id;
 		_name = name;
@@ -38,6 +38,11 @@ public class Product {
 		_prices = prices;
 		_settings = settings;
 		_errorMessages = errorMessages;
+		_cpInstanceId = cpInstanceId;
+	}
+
+	public long getCPInstanceId() {
+		return _cpInstanceId;
 	}
 
 	public String[] getErrorMessages() {
@@ -76,6 +81,10 @@ public class Product {
 		return _thumbnail;
 	}
 
+	public void setCPInstanceId(long cpInstanceId) {
+		_cpInstanceId = cpInstanceId;
+	}
+
 	public void setErrorMessages(String[] errorMessages) {
 		_errorMessages = errorMessages;
 	}
@@ -112,6 +121,7 @@ public class Product {
 		_thumbnail = thumbnail;
 	}
 
+	private long _cpInstanceId;
 	private String[] _errorMessages;
 	private long _id;
 	private String _name;

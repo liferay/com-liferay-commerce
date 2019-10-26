@@ -12,6 +12,13 @@ import './Summary.es';
 const COMMERCE_TOPBAR_CLASS = 'commerce-topbar',
 	OPEN_CART_CLASS = 'cart-open';
 
+function notifyProductRemoval(productId = '') {
+	Liferay.fire(
+		'productRemovedFromCart',
+		{productId}
+	);
+}
+
 class Cart extends Component {
 
 	created() {
@@ -194,16 +201,25 @@ class Cart extends Component {
 		return this._updateProductQuantity(productId, quantity);
 	}
 
-	_deleteProduct(productId) {
-		return this._setProductProperties(
-			productId,
-			{
-				collapsed: true,
-				deleteDisabled: true,
-				inputChanged: false,
-				updating: false
-			}
-		);
+	_removeProductsFromCart(products = []) {
+		products.length && products.forEach(product => {
+			const {
+				id: orderProductId,
+				cpinstanceId: catalogProductId
+			} = product;
+
+			notifyProductRemoval(catalogProductId.toString());
+
+			this._setProductProperties(
+				orderProductId,
+				{
+					collapsed: true,
+					deleteDisabled: true,
+					inputChanged: false,
+					updating: false
+				}
+			);
+		});
 	}
 
 	_setProductProperties(productId, newProperties) {
@@ -228,13 +244,16 @@ class Cart extends Component {
 	}
 
 	_subtractProducts(orArray, subArray) {
-		const result = subArray.reduce(
-			(arrayToBeFiltered, elToRemove) => {
-				return arrayToBeFiltered.filter((elToCheck) => elToCheck.id !== elToRemove.id);
-			},
-			orArray
-		);
-		return !subArray.length && result;
+		return new Promise(resolve => {
+			const result = subArray.reduce(
+				(arrayToBeFiltered, elToRemove) => {
+					return arrayToBeFiltered.filter((elToCheck) => elToCheck.id !== elToRemove.id);
+				},
+				orArray
+			);
+
+			return resolve(result);
+		});
 	}
 
 	_handleDeleteItem(productId) {
@@ -425,12 +444,11 @@ class Cart extends Component {
 
 						this.summary = jsonresponse.summary;
 
-						const productsToBeRemoved = this._subtractProducts(this.products, jsonresponse.products);
-						productsToBeRemoved.forEach(
-							product => {
-								this._deleteProduct(product.id);
-							}
-						);
+						this._subtractProducts(this.products, jsonresponse.products)
+							.then(
+								products => {
+									setTimeout(() => this._removeProductsFromCart(products), 50);
+								});
 					}
 
 					this._handleResponseErrors(productId, jsonresponse);
@@ -476,6 +494,16 @@ Cart.STATE = {
 	pendingOperations: Config.array().value(
 		[]
 	),
+
+	/**
+	 * For each product in the cart,
+	 * the related object received from the endpoint
+	 * contains 2 ID's:
+	 *
+	 * @param productId The id of the product relative to the cart.
+	 * @param cpinstanceId The id of the product relative to the catalog.
+	 */
+
 	products: {
 		setter: 'normalizeProducts',
 		value: null
