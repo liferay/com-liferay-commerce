@@ -14,18 +14,6 @@
 
 package com.liferay.commerce.product.util.test;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
-import org.frutilla.FrutillaRule;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
@@ -53,6 +41,19 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PermissionCheckerTestRule;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+import org.frutilla.FrutillaRule;
+
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * @author Luca Pellizzon
