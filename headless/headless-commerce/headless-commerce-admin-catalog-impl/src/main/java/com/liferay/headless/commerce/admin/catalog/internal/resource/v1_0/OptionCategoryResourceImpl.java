@@ -131,15 +131,11 @@ public class OptionCategoryResourceImpl
 
 		if (cpOptionCategory == null) {
 			cpOptionCategory = _addOptionCategory(optionCategory);
-
-			return (OptionCategory)optionCategoryDTOConverter.toDTO(
-				new DefaultDTOConverterContext(
-					contextAcceptLanguage.getPreferredLocale(),
-					cpOptionCategory.getCPOptionCategoryId()));
 		}
-
-		cpOptionCategory = _updateOptionCategory(
-			optionCategory.getId(), optionCategory);
+		else {
+			cpOptionCategory = _updateOptionCategory(
+				optionCategory.getId(), optionCategory);
+		}
 
 		return (OptionCategory)optionCategoryDTOConverter.toDTO(
 			new DefaultDTOConverterContext(
@@ -186,11 +182,6 @@ public class OptionCategoryResourceImpl
 				optionCategory.getPriority(), cpOptionCategory.getPriority()),
 			optionCategory.getKey());
 	}
-
-
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		OptionCategoryResourceImpl.class);
 
 	private static final EntityModel _entityModel =
 		new OptionCategoryEntityModel();
