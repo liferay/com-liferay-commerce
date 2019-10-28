@@ -14,19 +14,6 @@
 
 package com.liferay.commerce.product.type.virtual.order.service.test;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
-import org.frutilla.FrutillaRule;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.currency.model.CommerceCurrency;
@@ -61,6 +48,20 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PermissionCheckerTestRule;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+import org.frutilla.FrutillaRule;
+
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * @author Alessio Antonio Rendina
