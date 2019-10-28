@@ -156,7 +156,7 @@ const Modal = props => {
 	return visible ? (
 		<ClayModal
 			observer={observer}
-			size={props.size}
+			size={"lg"}
 			spritemap={props.spritemap}
 			status={props.status}
 		>
