@@ -600,19 +600,35 @@ public class CommercePriceEntryLocalServiceImpl
 			}
 		}
 
+		CommercePriceEntry commercePriceEntry = null;
+		CPInstance cpInstance = null;
+
 		if (Validator.isBlank(externalReferenceCode)) {
 			externalReferenceCode = null;
 		}
-		else {
-			CommercePriceEntry commercePriceEntry =
-				commercePriceEntryPersistence.fetchByC_ERC(
-					serviceContext.getCompanyId(), externalReferenceCode);
 
-			if (commercePriceEntry != null) {
-				return updateCommercePriceEntry(
-					commercePriceEntry.getCommercePriceEntryId(), price,
-					promoPrice, serviceContext);
+		if (!Validator.isBlank(externalReferenceCode)) {
+			commercePriceEntry = commercePriceEntryPersistence.fetchByC_ERC(
+				serviceContext.getCompanyId(), externalReferenceCode);
+		}
+		else if (cpInstanceUuid != null) {
+			commercePriceEntry = commercePriceEntryPersistence.fetchByC_C(
+				commercePriceListId, cpInstanceUuid);
+		}
+		else if (Validator.isNotNull(skuExternalReferenceCode)) {
+			cpInstance = _cpInstanceLocalService.fetchCPInstanceByReferenceCode(
+				serviceContext.getCompanyId(), skuExternalReferenceCode);
+
+			if (cpInstance != null) {
+				commercePriceEntry = commercePriceEntryPersistence.fetchByC_C(
+					commercePriceListId, cpInstance.getCPInstanceUuid());
 			}
+		}
+
+		if (commercePriceEntry != null) {
+			return updateCommercePriceEntry(
+				commercePriceEntry.getCommercePriceEntryId(), price, promoPrice,
+				serviceContext);
 		}
 
 		// Add
@@ -626,7 +642,7 @@ public class CommercePriceEntryLocalServiceImpl
 		}
 
 		if (Validator.isNotNull(skuExternalReferenceCode)) {
-			CPInstance cpInstance =
+			cpInstance =
 				_cpInstanceLocalService.getCPInstanceByExternalReferenceCode(
 					serviceContext.getCompanyId(), skuExternalReferenceCode);
 
