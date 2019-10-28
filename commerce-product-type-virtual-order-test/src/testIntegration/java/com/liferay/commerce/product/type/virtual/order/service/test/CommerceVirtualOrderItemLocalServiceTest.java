@@ -14,13 +14,30 @@
 
 package com.liferay.commerce.product.type.virtual.order.service.test;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+import org.frutilla.FrutillaRule;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.ClassRule;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.commerce.constants.CommerceOrderConstants;
+import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
+import com.liferay.commerce.product.service.CommerceCatalogLocalServiceUtil;
 import com.liferay.commerce.product.test.util.CPTestUtil;
 import com.liferay.commerce.product.type.virtual.constants.VirtualCPTypeConstants;
 import com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem;
@@ -28,35 +45,26 @@ import com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOr
 import com.liferay.commerce.product.type.virtual.order.util.CommerceVirtualOrderItemChecker;
 import com.liferay.commerce.product.type.virtual.test.util.VirtualCPTypeTestUtil;
 import com.liferay.commerce.service.CommerceOrderLocalService;
+import com.liferay.commerce.service.CommerceOrderLocalServiceUtil;
 import com.liferay.commerce.subscription.CommerceSubscriptionEntryHelper;
 import com.liferay.commerce.test.util.CommerceTestUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
-import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.CompanyLocalServiceUtil;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
-import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
-import com.liferay.portal.kernel.test.util.GroupTestUtil;
+import com.liferay.portal.kernel.test.util.CompanyTestUtil;
+import com.liferay.portal.kernel.test.util.RandomTestUtil;
+import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 import com.liferay.portal.kernel.test.util.UserTestUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PermissionCheckerTestRule;
 
-import java.util.List;
-
-import org.frutilla.FrutillaRule;
-
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.ClassRule;
-import org.junit.Ignore;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 /**
  * @author Alessio Antonio Rendina
  */
-@Ignore
 @RunWith(Arquillian.class)
 public class CommerceVirtualOrderItemLocalServiceTest {
 
@@ -69,8 +77,19 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 
 	@Before
 	public void setUp() throws Exception {
-		_group = GroupTestUtil.addGroup();
-		_user = UserTestUtil.addUser();
+		_company = CompanyTestUtil.addCompany();
+		_user = UserTestUtil.addUser(_company);
+
+		_commerceOrders = new ArrayList<>();
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		for (CommerceOrder commerceOrder : _commerceOrders) {
+			CommerceOrderLocalServiceUtil.deleteCommerceOrder(commerceOrder);
+		}
+
+		CompanyLocalServiceUtil.deleteCompany(_company);
 	}
 
 	@Test
@@ -85,18 +104,33 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 			"I should be able to see the created virtual order item"
 		);
 
+		CommerceChannel commerceChannel = CommerceTestUtil.addCommerceChannel();
+
+		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
+			_company.getGroupId(), _user.getUserId(), 0,
+			commerceChannel.getSiteGroupId());
+
+		_commerceOrders.add(commerceOrder);
+
+		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
+
+		CommerceCatalog commerceCatalog =
+			CommerceCatalogLocalServiceUtil.addCommerceCatalog(
+				RandomTestUtil.randomString(), commerceCurrency.getCode(),
+				LocaleUtil.toLanguageId(Locale.US), null,
+				ServiceContextTestUtil.getServiceContext(
+					_company.getGroupId()));
+
 		CPDefinition cpDefinition = CPTestUtil.addCPDefinition(
-			_group.getGroupId(), VirtualCPTypeConstants.NAME, true, true);
+			commerceCatalog.getGroupId(), VirtualCPTypeConstants.NAME, true,
+			true);
 
 		VirtualCPTypeTestUtil.addCPDefinitionVirtualSetting(
-			_group.getGroupId(), cpDefinition.getModelClassName(),
+			commerceCatalog.getGroupId(), cpDefinition.getModelClassName(),
 			cpDefinition.getCPDefinitionId(), 0L,
 			CommerceOrderConstants.ORDER_STATUS_TO_TRANSMIT, 0L, 0L, 0L);
 
 		CommerceTestUtil.addBackOrderCPDefinitionInventory(cpDefinition);
-
-		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
-			_group.getGroupId(), _user.getUserId(), 0);
 
 		for (CPInstance cpInstance : cpDefinition.getCPInstances()) {
 			CommerceTestUtil.addCommerceOrderItem(
@@ -116,8 +150,9 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 
 		List<CommerceVirtualOrderItem> userCommerceVirtualOrderItems =
 			_commerceVirtualOrderItemLocalService.getCommerceVirtualOrderItems(
-				_group.getGroupId(), commerceOrder.getCommerceAccountId(),
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+				commerceChannel.getGroupId(),
+				commerceOrder.getCommerceAccountId(), QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null);
 
 		Assert.assertEquals(
 			userCommerceVirtualOrderItems.toString(), commerceOrderItems.size(),
@@ -149,18 +184,33 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 			"I should be able to see the created virtual order item"
 		);
 
+		CommerceChannel commerceChannel = CommerceTestUtil.addCommerceChannel();
+
+		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
+			_company.getGroupId(), _user.getUserId(), 0,
+			commerceChannel.getSiteGroupId());
+
+		_commerceOrders.add(commerceOrder);
+
+		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
+
+		CommerceCatalog commerceCatalog =
+			CommerceCatalogLocalServiceUtil.addCommerceCatalog(
+				RandomTestUtil.randomString(), commerceCurrency.getCode(),
+				LocaleUtil.toLanguageId(Locale.US), null,
+				ServiceContextTestUtil.getServiceContext(
+					_company.getGroupId()));
+
 		CPDefinition cpDefinition = CPTestUtil.addCPDefinition(
-			_group.getGroupId(), VirtualCPTypeConstants.NAME, true, true);
+			commerceCatalog.getGroupId(), VirtualCPTypeConstants.NAME, true,
+			true);
 
 		VirtualCPTypeTestUtil.addCPDefinitionVirtualSetting(
-			_group.getGroupId(), cpDefinition.getModelClassName(),
+			commerceCatalog.getGroupId(), cpDefinition.getModelClassName(),
 			cpDefinition.getCPDefinitionId(), 0L,
 			CommerceOrderConstants.ORDER_STATUS_TO_TRANSMIT, 0L, 0L, 0L);
 
 		CommerceTestUtil.addBackOrderCPDefinitionInventory(cpDefinition);
-
-		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
-			_group.getGroupId(), _user.getUserId(), 0);
 
 		int subscriptionLength = 1;
 
@@ -188,8 +238,9 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 
 		List<CommerceVirtualOrderItem> userCommerceVirtualOrderItems =
 			_commerceVirtualOrderItemLocalService.getCommerceVirtualOrderItems(
-				_group.getGroupId(), commerceOrder.getCommerceAccountId(),
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+				commerceChannel.getGroupId(),
+				commerceOrder.getCommerceAccountId(), QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null);
 
 		Assert.assertEquals(
 			userCommerceVirtualOrderItems.toString(), commerceOrderItems.size(),
@@ -239,6 +290,8 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 	@Inject
 	private CommerceOrderLocalService _commerceOrderLocalService;
 
+	private List<CommerceOrder> _commerceOrders;
+
 	@Inject
 	private CommerceSubscriptionEntryHelper _commerceSubscriptionEntryHelper;
 
@@ -249,13 +302,11 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 	private CommerceVirtualOrderItemLocalService
 		_commerceVirtualOrderItemLocalService;
 
+	private Company _company;
+
 	@Inject
 	private CPInstanceLocalService _cpInstanceLocalService;
 
-	@DeleteAfterTestRun
-	private Group _group;
-
-	@DeleteAfterTestRun
 	private User _user;
 
 }
