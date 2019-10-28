@@ -30,9 +30,14 @@ module.exports = {
 		openPage: 'index.html',
 		port: 9000,
 		proxy: {
-			'/o': {
-				target: 'http://localhost:8080/'
-			}
+			context: [
+				'/o',
+				'/group',
+				'/c',
+				'/web',
+				'/image'
+			],
+			target: 'http://localhost:8080/'
 		},
 		publicPath: '/',
 	},
