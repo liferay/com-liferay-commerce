@@ -6,6 +6,8 @@ import React from 'react';
 
 import {OPEN_SIDE_PANEL} from '../../utilities/eventsDefinitions.es';
 import {debounce} from '../../utilities/index.es';
+import SideMenu from './SideMenu.es';
+import { ClayIconSpriteContext } from '@clayui/icon';
 export default class SidePanel extends React.Component {
 	constructor(props) {
 		super(props);
@@ -15,7 +17,8 @@ export default class SidePanel extends React.Component {
 			moving: false,
 			size: props.size || 'md',
 			topDistance: 0,
-			visible: !!props.visible
+			visible: !!props.visible,
+			active: null
 		};
 		this.handleContentLoaded = this.handleContentLoaded.bind(this);
 		this.close = this.close.bind(this);
@@ -46,7 +49,7 @@ export default class SidePanel extends React.Component {
 			return this.close();
 		}
 
-		this.open(e.options.url);
+		this.open(e.options.url, e.options.slug);
 
 		if (e.options.onAfterSubmit) {
 			this.setState({
@@ -106,7 +109,8 @@ export default class SidePanel extends React.Component {
 		this.setState({size});
 	}
 
-	open(url = this.state.currentUrl, slug) {
+	open(url = this.state.currentUrl, active = null) {
+		this.setState({active})
 		switch (true) {
 			case !this.state.visible:
 				return this.toggle(true).then(() => {
@@ -123,7 +127,8 @@ export default class SidePanel extends React.Component {
 		this.toggle(false).then(() => {
 			this.setState({
 				currentUrl: null,
-				loading: true
+				loading: true,
+				active: null
 			});
 		});
 	}
@@ -148,19 +153,23 @@ export default class SidePanel extends React.Component {
 			loading: false
 		});
 
-		const iframeBody = this.iframeRef.current.contentDocument.querySelector(
-			'body'
-		);
-
-		iframeBody.classList.add('within-commerce-iframe');
-
-		const submitButton = iframeBody.querySelector('[type="submit"]');
-		if (submitButton) {
-			submitButton.addEventListener('click', () => {
-				if (this.props.onSubmit) {
-					this.props.onSubmit();
-				}
-			});
+		try {
+			const iframeBody = this.iframeRef.current.contentDocument.querySelector(
+				'body'
+			);
+	
+			iframeBody.classList.add('within-commerce-iframe');
+	
+			const submitButton = iframeBody.querySelector('[type="submit"]');
+			if (submitButton) {
+				submitButton.addEventListener('click', () => {
+					if (this.props.onSubmit) {
+						this.props.onSubmit();
+					}
+				});
+			}
+		} catch (error) {
+			throw new Error(`Cannot access to iframe body. Url: "${this.state.currentUrl}"`)
 		}
 	}
 
@@ -171,12 +180,18 @@ export default class SidePanel extends React.Component {
 				? 'is-loading'
 				: '';
 
-		return ReactDOM.createPortal(
+		const content = (
 			<div
 				className={`side-panel side-panel-${this.state.size} ${visibility} ${loading}`}
 				ref={this.panel}
 				style={{top: this.state.topDistance}}
 			>
+				<SideMenu
+					active={this.state.active}
+					items={this.props.items}
+					open={this.open}
+				/>
+
 				<ClayButton
 					className="btn-close"
 					displayType="monospaced"
@@ -200,7 +215,17 @@ export default class SidePanel extends React.Component {
 						)}
 					</div>
 				</div>
-			</div>,
+			</div>
+		)
+
+		return ReactDOM.createPortal(
+			this.props.spritemap 
+			? (
+				<ClayIconSpriteContext.Provider value={this.props.spritemap}>
+					{content}
+				</ClayIconSpriteContext.Provider>
+			)
+			: content,
 			this.props.portalWrapperId
 				? document.getElementById(this.props.portalWrapperId)
 				: document.querySelector('body')
