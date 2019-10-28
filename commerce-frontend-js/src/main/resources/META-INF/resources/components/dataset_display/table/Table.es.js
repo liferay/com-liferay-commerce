@@ -14,6 +14,25 @@ import Link from './cells/Link.es';
 import ModalLink from './cells/ModalLink.es';
 import Price from './cells/Price.es';
 import SidePanelLink from './cells/SidePanelLink.es';
+import {ClayTooltipProvider} from '@clayui/tooltip';
+import ClayIcon from '@clayui/icon';
+import ClayButton from '@clayui/button/lib/Button';
+
+function Comment(props) {
+	return (
+		<ClayTooltipProvider>
+			<ClayButton
+				displayType="link"
+				className="cell-comment text-warning px-1 my-n2 ml-2 inline-item"
+				data-tooltip-align="top"
+				data-tooltip-delay={0}
+				title={props.comment}
+			>
+				<ClayIcon symbol="info-circle" />
+			</ClayButton>
+		</ClayTooltipProvider>
+	)
+}
 
 function TableCell(props) {
 	const {template, ...otherProps} = props;
@@ -21,6 +40,9 @@ function TableCell(props) {
 	return (
 		<ClayTable.Cell>
 			<Template {...otherProps} />
+			{props.comment && (
+				<Comment comment={props.comment} />
+			)}
 		</ClayTable.Cell>
 	);
 }
@@ -143,6 +165,9 @@ function Table(props) {
 												[fieldName]: value,
 												...otherProps
 											} = item;
+											const comment = otherProps.comments 
+												? otherProps.comments[field.fieldName] 
+												: null;
 											return (
 												<TableCell
 													data={otherProps}
@@ -151,6 +176,7 @@ function Table(props) {
 													template={
 														field.contentRenderer
 													}
+													comment={comment}
 													value={value}
 												/>
 											);
