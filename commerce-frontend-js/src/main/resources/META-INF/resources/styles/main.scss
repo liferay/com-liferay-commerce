@@ -22,6 +22,14 @@
   }
 }
 
+.cell-comment {
+  cursor: pointer;
+
+  svg {
+    pointer-events: none;
+  }
+}
+
 .row.vertically-divided {
   overflow: hidden;
 
