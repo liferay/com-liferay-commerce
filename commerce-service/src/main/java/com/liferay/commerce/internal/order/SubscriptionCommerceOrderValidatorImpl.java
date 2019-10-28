@@ -79,7 +79,8 @@ public class SubscriptionCommerceOrderValidatorImpl
 			return new CommerceOrderValidatorResult(
 				commerceOrderItem.getCommerceOrderItemId(), false,
 				_getLocalizedMessage(
-					locale, "your-cart-can-contain-only-one-recurring-item"));
+					locale,
+					"your-cart-can-contain-only-one-subscription-product"));
 		}
 		else if (commerceOrderItem.isSubscription() &&
 				 (cpSubscriptionInfo == null)) {
