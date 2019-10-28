@@ -87,8 +87,8 @@ public class CommerceShippingHelperTest {
 	@Test
 	public void testGetDimensions() throws Exception {
 		frutillaRule.scenario(
-			"Verify that the product dimensions are correctly retrieved " +
-				"from the order"
+			"Verify that the product dimensions are correctly retrieved from " + 
+				"the order"
 		).given(
 			"I add some product instances with some dimensions"
 		).when(
@@ -152,8 +152,8 @@ public class CommerceShippingHelperTest {
 	@Test
 	public void testGetWeight() throws Exception {
 		frutillaRule.scenario(
-			"Verify that the product weights are correctly retrieved " +
-				"from the order"
+			"Verify that the product weights are correctly retrieved from " + 
+				"the order"
 		).given(
 			"I add some product instances with some weights"
 		).when(

@@ -251,7 +251,7 @@ public class CommerceTestUtil {
 			CommerceChannelLocalServiceUtil.getCommerceChannelByOrderGroupId(
 				commerceOrder.getGroupId());
 
-		CommerceTestUtil.addWarehouseCommerceChannelRel(
+		addWarehouseCommerceChannelRel(
 			commerceInventoryWarehouse.getCommerceInventoryWarehouseId(),
 			commerceChannel.getCommerceChannelId());
 
