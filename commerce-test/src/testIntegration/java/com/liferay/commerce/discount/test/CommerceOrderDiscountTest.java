@@ -107,7 +107,7 @@ public class CommerceOrderDiscountTest {
 			"An order with some order items"
 		).and(
 			"A discount associated to one product and a discount on the " + 
-					"total price"
+				"total price"
 		).when(
 			"I try to get the final price of the order"
 		).then(
