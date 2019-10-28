@@ -94,6 +94,24 @@ public class CPTestUtil {
 		return assetCategory;
 	}
 
+	public static CPDefinition addCPDefinition(long groupId)
+		throws PortalException {
+
+		return _addCPDefinition(
+			groupId, SimpleCPTypeConstants.NAME, true, true,
+			ServiceContextTestUtil.getServiceContext(groupId));
+	}
+
+	/*public static CPDefinition addCPDefinition(
+			long groupId, String productTypeName, boolean ignoreSKUCombinations,
+			boolean hasDefaultInstance)
+		throws PortalException {
+
+		return _addCPDefinition(
+			productTypeName, ignoreSKUCombinations, hasDefaultInstance,
+			ServiceContextTestUtil.getServiceContext(groupId));
+	}*/
+
 	public static CPDefinition addCPDefinition(
 			long groupId, boolean ignoreSKUCombinations,
 			boolean hasDefaultInstance, int workflowAction)
@@ -115,7 +133,7 @@ public class CPTestUtil {
 		throws PortalException {
 
 		return _addCPDefinition(
-			productTypeName, ignoreSKUCombinations, hasDefaultInstance,
+			groupId, productTypeName, ignoreSKUCombinations, hasDefaultInstance,
 			ServiceContextTestUtil.getServiceContext(groupId));
 	}
 
@@ -141,7 +159,7 @@ public class CPTestUtil {
 		throws PortalException {
 
 		CPDefinition cpDefinition = _addCPDefinition(
-			SimpleCPTypeConstants.NAME, true, true,
+			groupId, SimpleCPTypeConstants.NAME, true, true,
 			ServiceContextTestUtil.getServiceContext(groupId));
 
 		return CPInstanceLocalServiceUtil.getCPInstance(
@@ -282,17 +300,11 @@ public class CPTestUtil {
 	}
 
 	private static CPDefinition _addCPDefinition(
-			String productTypeName, boolean ignoreSKUCombinations,
+			long groupId, String productTypeName, boolean ignoreSKUCombinations,
 			boolean hasDefaultInstance, ServiceContext serviceContext)
 		throws PortalException {
 
 		User user = UserLocalServiceUtil.getUser(serviceContext.getUserId());
-
-		List<CommerceCatalog> commerceCatalogs =
-			CommerceCatalogLocalServiceUtil.getCommerceCatalogs(
-				user.getCompanyId(), true);
-
-		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
 
 		long now = System.currentTimeMillis();
 
@@ -363,16 +375,36 @@ public class CPTestUtil {
 		}
 
 		return CPDefinitionLocalServiceUtil.addCPDefinition(
-			commerceCatalog.getGroupId(), user.getUserId(), titleMap,
-			shortDescriptionMap, descriptionMap, urlTitleMap, metaTitleMap,
-			metaKeywordsMap, metaDescriptionMap, productTypeName,
-			ignoreSKUCombinations, shippable, freeShipping, shipSeparately,
-			shippingExtraPrice, width, height, depth, weight, cpTaxCategoryId,
-			taxExempt, telcoOrElectronics, ddmStructureKey, published,
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, expirationDateMonth, expirationDateDay,
-			expirationDateYear, expirationDateHour, expirationDateMinute, false,
-			defaultSku, false, 0, null, null, 0L, null, serviceContext);
+			groupId, user.getUserId(), titleMap, shortDescriptionMap,
+			descriptionMap, urlTitleMap, metaTitleMap, metaKeywordsMap,
+			metaDescriptionMap, productTypeName, ignoreSKUCombinations,
+			shippable, freeShipping, shipSeparately, shippingExtraPrice, width,
+			height, depth, weight, cpTaxCategoryId, taxExempt,
+			telcoOrElectronics, ddmStructureKey, published, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, false, defaultSku, false,
+			0, null, null, 0L, null, serviceContext);
+	}
+
+	private static CPDefinition _addCPDefinition(
+			String productTypeName, boolean ignoreSKUCombinations,
+			boolean hasDefaultInstance, ServiceContext serviceContext)
+		throws PortalException {
+
+		User user = UserLocalServiceUtil.getUser(serviceContext.getUserId());
+
+		List<CommerceCatalog> commerceCatalogs =
+			CommerceCatalogLocalServiceUtil.getCommerceCatalogs(
+				user.getCompanyId(), true);
+
+		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
+
+		return _addCPDefinition(
+			commerceCatalog.getGroupId(), SimpleCPTypeConstants.NAME, true,
+			true,
+			ServiceContextTestUtil.getServiceContext(
+				commerceCatalog.getGroupId()));
 	}
 
 }
