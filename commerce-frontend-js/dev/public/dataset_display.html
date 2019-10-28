@@ -23,6 +23,11 @@
 		<div id="dataset-display"></div>
 	</div>
 
+	<script>
+		if (window.parent !== window) {
+			window.__REACT_DEVTOOLS_GLOBAL_HOOK__ = window.parent.__REACT_DEVTOOLS_GLOBAL_HOOK__;
+		}
+	</script>
 	<script type="text/javascript" src="/dataset_display.js"></script>
 	<script type="text/javascript" src="/side_panel.js"></script>
 
