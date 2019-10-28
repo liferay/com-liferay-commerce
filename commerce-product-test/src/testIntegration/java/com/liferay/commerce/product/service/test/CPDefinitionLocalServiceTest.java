@@ -19,28 +19,36 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CPInstanceConstants;
 import com.liferay.commerce.product.model.CPOption;
+import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
+import com.liferay.commerce.product.service.CPDefinitionLocalServiceUtil;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.service.CPOptionLocalService;
+import com.liferay.commerce.product.service.CommerceCatalogLocalServiceUtil;
 import com.liferay.commerce.product.test.util.CPTestUtil;
 import com.liferay.commerce.product.type.simple.constants.SimpleCPTypeConstants;
-import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
-import com.liferay.portal.kernel.test.util.GroupTestUtil;
+import com.liferay.portal.kernel.test.util.CompanyTestUtil;
+import com.liferay.portal.kernel.test.util.RandomTestUtil;
+import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 
 import java.util.List;
+import java.util.Locale;
 
 import org.frutilla.FrutillaRule;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -49,7 +57,6 @@ import org.junit.runner.RunWith;
  * @author Luca Pellizzon
  * @author Alessio Antonio Rendina
  */
-@Ignore
 @RunWith(Arquillian.class)
 public class CPDefinitionLocalServiceTest {
 
@@ -60,7 +67,25 @@ public class CPDefinitionLocalServiceTest {
 
 	@Before
 	public void setUp() throws Exception {
-		_group = GroupTestUtil.addGroup();
+		_company = CompanyTestUtil.addCompany();
+		_commerceCatalog = CommerceCatalogLocalServiceUtil.addCommerceCatalog(
+			RandomTestUtil.randomString(), RandomTestUtil.randomString(),
+			LocaleUtil.toLanguageId(Locale.US), null,
+			ServiceContextTestUtil.getServiceContext(_company.getGroupId()));
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		List<CPDefinition> cpDefinitions =
+			CPDefinitionLocalServiceUtil.getCPDefinitions(
+				_commerceCatalog.getGroupId(), WorkflowConstants.STATUS_ANY,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+		for (CPDefinition cpDefinition : cpDefinitions) {
+			CPDefinitionLocalServiceUtil.deleteCPDefinition(cpDefinition);
+		}
+
+		CommerceCatalogLocalServiceUtil.deleteCommerceCatalog(_commerceCatalog);
 	}
 
 	@Test
@@ -78,7 +103,8 @@ public class CPDefinitionLocalServiceTest {
 		);
 
 		CPDefinition cpDefinition = CPTestUtil.addCPDefinition(
-			_group.getGroupId(), SimpleCPTypeConstants.NAME, false, false);
+			_commerceCatalog.getGroupId(), SimpleCPTypeConstants.NAME, false,
+			false);
 
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_APPROVED, cpDefinition.getStatus());
@@ -101,7 +127,8 @@ public class CPDefinitionLocalServiceTest {
 		);
 
 		CPDefinition cpDefinition = CPTestUtil.addCPDefinition(
-			_group.getGroupId(), SimpleCPTypeConstants.NAME, false, true);
+			_commerceCatalog.getGroupId(), SimpleCPTypeConstants.NAME, false,
+			true);
 
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_APPROVED, cpDefinition.getStatus());
@@ -142,24 +169,25 @@ public class CPDefinitionLocalServiceTest {
 		int cpOptionValuesCount = 2;
 
 		CPDefinition cpDefinition = CPTestUtil.addCPDefinition(
-			_group.getGroupId(), SimpleCPTypeConstants.NAME, true, true);
+			_commerceCatalog.getGroupId(), SimpleCPTypeConstants.NAME, true,
+			true);
 
 		for (int i = 0; i < cpOptionsCount; i++) {
 			CPOption cpOption = CPTestUtil.addCPOption(
-				_group.getGroupId(), true);
+				_commerceCatalog.getGroupId(), true);
 
 			for (int j = 0; j < cpOptionValuesCount; j++) {
 				CPTestUtil.addCPOptionValue(cpOption);
 			}
 
 			CPTestUtil.addCPDefinitionOptionRel(
-				_group.getGroupId(), cpDefinition.getCPDefinitionId(),
+				_commerceCatalog.getGroupId(), cpDefinition.getCPDefinitionId(),
 				cpOption.getCPOptionId());
 		}
 
 		Assert.assertEquals(
 			cpOptionsCount,
-			_cpOptionLocalService.getCPOptionsCount(_group.getGroupId()));
+			_cpOptionLocalService.getCPOptionsCount(_company.getCompanyId()));
 
 		cpDefinition = _cpDefinitionLocalService.getCPDefinition(
 			cpDefinition.getCPDefinitionId());
@@ -205,24 +233,25 @@ public class CPDefinitionLocalServiceTest {
 		int cpOptionValuesCount = 2;
 
 		CPDefinition cpDefinition = CPTestUtil.addCPDefinition(
-			_group.getGroupId(), SimpleCPTypeConstants.NAME, false, true);
+			_commerceCatalog.getGroupId(), SimpleCPTypeConstants.NAME, false,
+			true);
 
 		for (int i = 0; i < cpOptionsCount; i++) {
 			CPOption cpOption = CPTestUtil.addCPOption(
-				_group.getGroupId(), true);
+				_commerceCatalog.getGroupId(), true);
 
 			for (int j = 0; j < cpOptionValuesCount; j++) {
 				CPTestUtil.addCPOptionValue(cpOption);
 			}
 
 			CPTestUtil.addCPDefinitionOptionRel(
-				_group.getGroupId(), cpDefinition.getCPDefinitionId(),
+				_commerceCatalog.getGroupId(), cpDefinition.getCPDefinitionId(),
 				cpOption.getCPOptionId());
 		}
 
 		Assert.assertEquals(
 			cpOptionsCount,
-			_cpOptionLocalService.getCPOptionsCount(_group.getGroupId()));
+			_cpOptionLocalService.getCPOptionsCount(_company.getCompanyId()));
 
 		Assert.assertEquals(
 			cpOptionsCount,
@@ -260,7 +289,8 @@ public class CPDefinitionLocalServiceTest {
 		);
 
 		CPDefinition cpDefinition = CPTestUtil.addCPDefinition(
-			_group.getGroupId(), SimpleCPTypeConstants.NAME, true, false);
+			_commerceCatalog.getGroupId(), SimpleCPTypeConstants.NAME, true,
+			false);
 
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_APPROVED, cpDefinition.getStatus());
@@ -290,7 +320,8 @@ public class CPDefinitionLocalServiceTest {
 		);
 
 		CPDefinition cpDefinition = CPTestUtil.addCPDefinition(
-			_group.getGroupId(), SimpleCPTypeConstants.NAME, true, true);
+			_commerceCatalog.getGroupId(), SimpleCPTypeConstants.NAME, true,
+			true);
 
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_APPROVED, cpDefinition.getStatus());
@@ -329,7 +360,8 @@ public class CPDefinitionLocalServiceTest {
 		);
 
 		CPDefinition cpDefinition = CPTestUtil.addCPDefinition(
-			_group.getGroupId(), SimpleCPTypeConstants.NAME, true, true);
+			_commerceCatalog.getGroupId(), SimpleCPTypeConstants.NAME, true,
+			true);
 
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_APPROVED, cpDefinition.getStatus());
@@ -352,6 +384,11 @@ public class CPDefinitionLocalServiceTest {
 	@Rule
 	public final FrutillaRule frutillaRule = new FrutillaRule();
 
+	private CommerceCatalog _commerceCatalog;
+
+	@DeleteAfterTestRun
+	private Company _company;
+
 	@Inject
 	private CPDefinitionLocalService _cpDefinitionLocalService;
 
@@ -364,8 +401,5 @@ public class CPDefinitionLocalServiceTest {
 
 	@Inject
 	private CPOptionLocalService _cpOptionLocalService;
-
-	@DeleteAfterTestRun
-	private Group _group;
 
 }
