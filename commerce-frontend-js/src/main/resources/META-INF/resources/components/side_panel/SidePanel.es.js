@@ -19,6 +19,7 @@ export default class SidePanel extends React.Component {
 		};
 		this.handleContentLoaded = this.handleContentLoaded.bind(this);
 		this.close = this.close.bind(this);
+		this.open = this.open.bind(this);
 		this.handlePanelOpenEvent = this.handlePanelOpenEvent.bind(this);
 		this.updateTop = this.updateTop.bind(this);
 		this.debouncedUpdateTop = debounce(this.updateTop, 250);
@@ -105,7 +106,7 @@ export default class SidePanel extends React.Component {
 		this.setState({size});
 	}
 
-	open(url = this.state.currentUrl) {
+	open(url = this.state.currentUrl, slug) {
 		switch (true) {
 			case !this.state.visible:
 				return this.toggle(true).then(() => {
