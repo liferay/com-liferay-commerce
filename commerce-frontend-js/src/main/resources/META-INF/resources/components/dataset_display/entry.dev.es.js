@@ -154,6 +154,10 @@ launcher('dataset-display', 'dataset-display', {
 				label: 'MIN38794',
 				url: '/sidepanel-1.html'
 			},
+			comments: {
+				quantity: "This is a test! I don't like this number btw",
+				name: "Square pls"
+			},
 			skuExternalReferenceCode: 'min38794',
 			skuId: 36456,
 			subscription: false,
