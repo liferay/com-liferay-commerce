@@ -21,6 +21,9 @@ import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceEntryService;
 import com.liferay.commerce.price.list.service.CommercePriceListService;
 import com.liferay.commerce.price.list.service.CommerceTierPriceEntryService;
+import com.liferay.commerce.product.model.CPDefinition;
+import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.service.CPInstanceService;
 import com.liferay.headless.commerce.admin.pricing.dto.v1_0.PriceEntry;
 import com.liferay.headless.commerce.admin.pricing.dto.v1_0.TierPrice;
 import com.liferay.headless.commerce.admin.pricing.internal.util.v1_0.TierPriceUtil;
@@ -32,6 +35,7 @@ import com.liferay.headless.commerce.core.util.ServiceContextHelper;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
@@ -318,11 +322,32 @@ public class PriceEntryResourceImpl extends BasePriceEntryResourceImpl {
 
 		// Commerce price entry
 
+		long cProductId = 0;
+		String cpInstanceUuid = null;
+		CPInstance cpInstance = null;
+		long skuId = GetterUtil.getLong(priceEntry.getSkuId());
+		String skuExternalReferenceCode =
+			priceEntry.getSkuExternalReferenceCode();
+
+		if (skuId > 0) {
+			cpInstance = _cpInstanceService.fetchCPInstance(skuId);
+		}
+		else if (Validator.isNotNull(skuExternalReferenceCode)) {
+			cpInstance = _cpInstanceService.fetchByExternalReferenceCode(
+				serviceContext.getCompanyId(), skuExternalReferenceCode);
+		}
+
+		if (cpInstance != null) {
+			CPDefinition cpDefinition = cpInstance.getCPDefinition();
+
+			cProductId = cpDefinition.getCProductId();
+			cpInstanceUuid = cpInstance.getCPInstanceUuid();
+		}
+
 		CommercePriceEntry commercePriceEntry =
 			_commercePriceEntryService.upsertCommercePriceEntry(
-				GetterUtil.getLong(priceEntry.getId()),
-				GetterUtil.getLong(priceEntry.getSkuId()), null,
-				commercePriceList.getCommercePriceListId(),
+				GetterUtil.getLong(priceEntry.getId()), cProductId,
+				cpInstanceUuid, commercePriceList.getCommercePriceListId(),
 				priceEntry.getExternalReferenceCode(), priceEntry.getPrice(),
 				(BigDecimal)GetterUtil.get(
 					priceEntry.getPromoPrice(), BigDecimal.ZERO),
@@ -343,6 +368,9 @@ public class PriceEntryResourceImpl extends BasePriceEntryResourceImpl {
 
 	@Reference
 	private CommerceTierPriceEntryService _commerceTierPriceEntryService;
+
+	@Reference
+	private CPInstanceService _cpInstanceService;
 
 	@Reference
 	private DTOConverterRegistry _dtoConverterRegistry;
