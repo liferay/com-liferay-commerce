@@ -306,6 +306,13 @@ public class CommerceTestUtil {
 			ServiceContextTestUtil.getServiceContext(groupId));
 	}
 
+	public static CommerceChannel addCommerceChannel() throws Exception {
+		CommerceCurrency commerceCurrency =
+			CommerceCurrencyTestUtil.addCommerceCurrency();
+
+		return addCommerceChannel(commerceCurrency.getCode());
+	}
+
 	public static CommerceChannel addCommerceChannel(
 			long groupId, String commerceCurrencyCode)
 		throws Exception {
