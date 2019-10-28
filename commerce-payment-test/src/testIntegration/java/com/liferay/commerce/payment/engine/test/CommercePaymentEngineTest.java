@@ -17,23 +17,26 @@ package com.liferay.commerce.payment.engine.test;
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.currency.model.CommerceCurrency;
-import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.payment.engine.CommercePaymentEngine;
 import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelLocalService;
 import com.liferay.commerce.payment.test.util.TestCommercePaymentMethod;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.service.CommerceCatalogLocalServiceUtil;
 import com.liferay.commerce.product.test.util.CPTestUtil;
 import com.liferay.commerce.service.CommerceOrderLocalService;
+import com.liferay.commerce.service.CommerceOrderLocalServiceUtil;
 import com.liferay.commerce.test.util.CommerceInventoryTestUtil;
 import com.liferay.commerce.test.util.CommerceTestUtil;
-import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.CompanyLocalServiceUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
-import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
-import com.liferay.portal.kernel.test.util.GroupTestUtil;
+import com.liferay.portal.kernel.test.util.CompanyTestUtil;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 import com.liferay.portal.kernel.test.util.UserTestUtil;
@@ -42,16 +45,19 @@ import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PermissionCheckerTestRule;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.frutilla.FrutillaRule;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -61,7 +67,6 @@ import org.springframework.mock.web.MockHttpServletRequest;
 /**
  * @author Luca Pellizzon
  */
-@Ignore
 @RunWith(Arquillian.class)
 public class CommercePaymentEngineTest {
 
@@ -74,16 +79,18 @@ public class CommercePaymentEngineTest {
 
 	@Before
 	public void setUp() throws Exception {
-		_group = GroupTestUtil.addGroup();
+		_company = CompanyTestUtil.addCompany();
 
-		_user = UserTestUtil.addUser();
+		_user = UserTestUtil.addUser(_company);
 
-		_commerceCurrency = CommerceCurrencyTestUtil.addCommerceCurrency(
-			_group.getGroupId());
+		_commerceChannel = CommerceTestUtil.addCommerceChannel();
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(
-				_group.getCompanyId(), _group.getGroupId(), _user.getUserId());
+				_company.getCompanyId(), _company.getGroupId(),
+				_user.getUserId());
+
+		serviceContext.setScopeGroupId(_commerceChannel.getSiteGroupId());
 
 		_commercePaymentMethodGroupRelLocalService.
 			addCommercePaymentMethodGroupRel(
@@ -92,9 +99,20 @@ public class CommercePaymentEngineTest {
 				TestCommercePaymentMethod.KEY, Collections.emptyMap(), 99, true,
 				serviceContext);
 
+		_commerceOrders = new ArrayList<>();
+
 		_httpServletRequest = new MockHttpServletRequest("GET", "");
 
 		_httpServletRequest.setAttribute("LOCALE", LocaleUtil.ITALY);
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		for (CommerceOrder commerceOrder : _commerceOrders) {
+			CommerceOrderLocalServiceUtil.deleteCommerceOrder(commerceOrder);
+		}
+
+		CompanyLocalServiceUtil.deleteCompany(_company);
 	}
 
 	@Test
@@ -110,23 +128,39 @@ public class CommercePaymentEngineTest {
 		);
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
-			_group.getGroupId(), _user.getUserId(),
-			_commerceCurrency.getCommerceCurrencyId());
+			_company.getGroupId(), _user.getUserId(), 0,
+			_commerceChannel.getSiteGroupId());
+
+		_commerceOrders.add(commerceOrder);
 
 		commerceOrder.setCommercePaymentMethodKey(
 			TestCommercePaymentMethod.KEY);
 
 		_commerceOrderLocalService.updateCommerceOrder(commerceOrder);
 
-		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
+		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
+
+		CommerceCatalog commerceCatalog =
+			CommerceCatalogLocalServiceUtil.addCommerceCatalog(
+				RandomTestUtil.randomString(), commerceCurrency.getCode(),
+				LocaleUtil.toLanguageId(Locale.US), null,
+				ServiceContextTestUtil.getServiceContext(
+					_company.getGroupId()));
+
+		CPInstance cpInstance = CPTestUtil.addCPInstance(
+			commerceCatalog.getGroupId());
 
 		CommerceInventoryWarehouse commerceInventoryWarehouse =
 			CommerceInventoryTestUtil.addCommerceInventoryWarehouse(
-				_group.getGroupId());
+				_company.getGroupId());
 
 		CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
 			_user.getUserId(), commerceInventoryWarehouse, cpInstance.getSku(),
 			10);
+
+		CommerceTestUtil.addWarehouseCommerceChannelRel(
+			commerceInventoryWarehouse.getCommerceInventoryWarehouseId(),
+			_commerceChannel.getCommerceChannelId());
 
 		CommerceTestUtil.addCommerceOrderItem(
 			commerceOrder.getCommerceOrderId(), cpInstance.getCPInstanceId(),
@@ -174,23 +208,39 @@ public class CommercePaymentEngineTest {
 		);
 
 		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
-			_group.getGroupId(), _user.getUserId(),
-			_commerceCurrency.getCommerceCurrencyId());
+			_company.getGroupId(), _user.getUserId(), 0,
+			_commerceChannel.getSiteGroupId());
+
+		_commerceOrders.add(commerceOrder);
 
 		commerceOrder.setCommercePaymentMethodKey(
 			TestCommercePaymentMethod.KEY);
 
 		_commerceOrderLocalService.updateCommerceOrder(commerceOrder);
 
-		CPInstance cpInstance = CPTestUtil.addCPInstance(_group.getGroupId());
+		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
+
+		CommerceCatalog commerceCatalog =
+			CommerceCatalogLocalServiceUtil.addCommerceCatalog(
+				RandomTestUtil.randomString(), commerceCurrency.getCode(),
+				LocaleUtil.toLanguageId(Locale.US), null,
+				ServiceContextTestUtil.getServiceContext(
+					_company.getGroupId()));
+
+		CPInstance cpInstance = CPTestUtil.addCPInstance(
+			commerceCatalog.getGroupId());
 
 		CommerceInventoryWarehouse commerceInventoryWarehouse =
 			CommerceInventoryTestUtil.addCommerceInventoryWarehouse(
-				_group.getGroupId());
+				_company.getGroupId());
 
 		CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
 			_user.getUserId(), commerceInventoryWarehouse, cpInstance.getSku(),
 			10);
+
+		CommerceTestUtil.addWarehouseCommerceChannelRel(
+			commerceInventoryWarehouse.getCommerceInventoryWarehouseId(),
+			_commerceChannel.getCommerceChannelId());
 
 		CommerceTestUtil.addCommerceOrderItem(
 			commerceOrder.getCommerceOrderId(), cpInstance.getCPInstanceId(),
@@ -216,11 +266,12 @@ public class CommercePaymentEngineTest {
 	@Rule
 	public FrutillaRule frutillaRule = new FrutillaRule();
 
-	@DeleteAfterTestRun
-	private CommerceCurrency _commerceCurrency;
+	private CommerceChannel _commerceChannel;
 
 	@Inject
 	private CommerceOrderLocalService _commerceOrderLocalService;
+
+	private List<CommerceOrder> _commerceOrders;
 
 	@Inject
 	private CommercePaymentEngine _commercePaymentEngine;
@@ -229,12 +280,8 @@ public class CommercePaymentEngineTest {
 	private CommercePaymentMethodGroupRelLocalService
 		_commercePaymentMethodGroupRelLocalService;
 
-	@DeleteAfterTestRun
-	private Group _group;
-
+	private Company _company;
 	private HttpServletRequest _httpServletRequest;
-
-	@DeleteAfterTestRun
 	private User _user;
 
 }
