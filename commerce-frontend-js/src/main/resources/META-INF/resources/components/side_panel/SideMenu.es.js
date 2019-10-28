@@ -1,6 +1,5 @@
 import React from 'react';
 import ClayIcon from '@clayui/icon';
-import ClayLink from '@clayui/link';
 import classNames from 'classnames';
 import ClayButton from '@clayui/button/lib/Button';
 
@@ -12,7 +11,7 @@ export default function SideMenu(props) {
 					<ClayButton
 						className={
 							classNames(
-								"mx-3 my-2 btn-link",
+								"mx-3 my-2 btn-secondary",
 								props.active === item.slug && 'active'
 							)
 						}
@@ -25,24 +24,6 @@ export default function SideMenu(props) {
 					>
 						<ClayIcon symbol={item.icon} />
 					</ClayButton>
-					{/* <ClayLink 
-						className={
-							classNames(
-								"mx-3 my-2",
-								props.active === item.slug && 'active'
-							)
-						}
-						displayType="primary"
-						href="#"
-						monospaced
-						onClick={(e) => {
-							e.preventDefault();
-							props.open(item.href, item.slug)
-						}}
-						outline
-					>
-						<ClayIcon symbol={item.icon} />
-					</ClayLink> */}
 				</li>
 			))}
 		</ul>
