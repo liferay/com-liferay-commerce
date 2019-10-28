@@ -8,4 +8,21 @@ window.SidePanel = launcher('sidePanel', 'side-panel', {
 	size: 'md',
 	spritemap: './assets/icons.svg',
 	topAnchorSelector: '.top-anchor',
+	items: [
+		{
+			slug: 'comments',
+			href: 'http://google.com',
+			icon: 'comments'
+		},
+		{
+			slug: 'edit',
+			href: 'http://google.com',
+			icon: 'pencil'
+		},
+		{
+			slug: 'changelog',
+			href: 'http://google.com',
+			icon: 'restore'
+		},
+	]
 });
