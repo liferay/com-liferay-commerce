@@ -17,6 +17,8 @@ package com.liferay.commerce.product.search.test;
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CommerceCatalog;
+import com.liferay.commerce.product.service.CommerceCatalogLocalServiceUtil;
 import com.liferay.commerce.product.test.util.CPTestUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.search.Document;
@@ -28,15 +30,19 @@ import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
+import com.liferay.portal.kernel.test.util.RandomTestUtil;
+import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.search.test.util.HitsAssert;
 import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+
+import java.util.Locale;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,7 +50,6 @@ import org.junit.runner.RunWith;
 /**
  * @author Luca Pellizzon
  */
-@Ignore
 @RunWith(Arquillian.class)
 public class CPDefinitionIndexerTest {
 
@@ -65,9 +70,13 @@ public class CPDefinitionIndexerTest {
 
 	@Test
 	public void testSearch() throws Exception {
-		long groupId = _group.getGroupId();
+		CommerceCatalog catalog =
+			CommerceCatalogLocalServiceUtil.addCommerceCatalog(
+				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
+				LocaleUtil.toLanguageId(Locale.US), null,
+				ServiceContextTestUtil.getServiceContext());
 
-		CPInstance cpInstance = CPTestUtil.addCPInstance(groupId);
+		CPInstance cpInstance = CPTestUtil.addCPInstance(catalog.getGroupId());
 
 		CPDefinition cpDefinition = cpInstance.getCPDefinition();
 
@@ -76,7 +85,7 @@ public class CPDefinitionIndexerTest {
 		searchContext.setCompanyId(_group.getCompanyId());
 		searchContext.setEntryClassNames(
 			new String[] {CPDefinition.class.getName()});
-		searchContext.setGroupIds(new long[] {_group.getGroupId()});
+		searchContext.setGroupIds(new long[] {catalog.getGroupId()});
 
 		Hits hits = _indexer.search(searchContext);
 
