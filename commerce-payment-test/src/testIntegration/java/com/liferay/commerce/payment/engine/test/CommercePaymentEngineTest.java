@@ -28,12 +28,11 @@ import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceCatalogLocalServiceUtil;
 import com.liferay.commerce.product.test.util.CPTestUtil;
 import com.liferay.commerce.service.CommerceOrderLocalService;
-import com.liferay.commerce.service.CommerceOrderLocalServiceUtil;
 import com.liferay.commerce.test.util.CommerceInventoryTestUtil;
 import com.liferay.commerce.test.util.CommerceTestUtil;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.service.CompanyLocalServiceUtil;
+import com.liferay.portal.kernel.service.CompanyLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.util.CompanyTestUtil;
@@ -48,7 +47,6 @@ import com.liferay.portal.test.rule.PermissionCheckerTestRule;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -109,10 +107,10 @@ public class CommercePaymentEngineTest {
 	@After
 	public void tearDown() throws Exception {
 		for (CommerceOrder commerceOrder : _commerceOrders) {
-			CommerceOrderLocalServiceUtil.deleteCommerceOrder(commerceOrder);
+			_commerceOrderLocalService.deleteCommerceOrder(commerceOrder);
 		}
 
-		CompanyLocalServiceUtil.deleteCompany(_company);
+		_companyLocalService.deleteCompany(_company);
 	}
 
 	@Test
@@ -143,7 +141,7 @@ public class CommercePaymentEngineTest {
 		CommerceCatalog commerceCatalog =
 			CommerceCatalogLocalServiceUtil.addCommerceCatalog(
 				RandomTestUtil.randomString(), commerceCurrency.getCode(),
-				LocaleUtil.toLanguageId(Locale.US), null,
+				LocaleUtil.US.getDisplayLanguage(), null,
 				ServiceContextTestUtil.getServiceContext(
 					_company.getGroupId()));
 
@@ -223,7 +221,7 @@ public class CommercePaymentEngineTest {
 		CommerceCatalog commerceCatalog =
 			CommerceCatalogLocalServiceUtil.addCommerceCatalog(
 				RandomTestUtil.randomString(), commerceCurrency.getCode(),
-				LocaleUtil.toLanguageId(Locale.US), null,
+				LocaleUtil.US.getDisplayLanguage(), null,
 				ServiceContextTestUtil.getServiceContext(
 					_company.getGroupId()));
 
@@ -281,6 +279,10 @@ public class CommercePaymentEngineTest {
 		_commercePaymentMethodGroupRelLocalService;
 
 	private Company _company;
+
+	@Inject
+	private CompanyLocalService _companyLocalService;
+
 	private HttpServletRequest _httpServletRequest;
 	private User _user;
 
