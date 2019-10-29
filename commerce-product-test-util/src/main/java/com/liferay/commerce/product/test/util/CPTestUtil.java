@@ -133,6 +133,16 @@ public class CPTestUtil {
 		throws PortalException {
 
 		return _addCPDefinition(
+			productTypeName, ignoreSKUCombinations, hasDefaultInstance,
+			ServiceContextTestUtil.getServiceContext(groupId));
+	}
+
+	public static CPDefinition addCPDefinitionFromCatalog(
+			long groupId, String productTypeName, boolean ignoreSKUCombinations,
+			boolean hasDefaultInstance)
+		throws PortalException {
+
+		return _addCPDefinition(
 			groupId, productTypeName, ignoreSKUCombinations, hasDefaultInstance,
 			ServiceContextTestUtil.getServiceContext(groupId));
 	}
@@ -156,6 +166,17 @@ public class CPTestUtil {
 	}
 
 	public static CPInstance addCPInstance(long groupId)
+		throws PortalException {
+
+		CPDefinition cpDefinition = _addCPDefinition(
+			SimpleCPTypeConstants.NAME, true, true,
+			ServiceContextTestUtil.getServiceContext(groupId));
+
+		return CPInstanceLocalServiceUtil.getCPInstance(
+			cpDefinition.getCPDefinitionId(), CPInstanceConstants.DEFAULT_SKU);
+	}
+
+	public static CPInstance addCPInstanceFromCatalog(long groupId)
 		throws PortalException {
 
 		CPDefinition cpDefinition = _addCPDefinition(
