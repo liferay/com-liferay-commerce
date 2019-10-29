@@ -24,7 +24,7 @@ import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
-import com.liferay.commerce.product.service.CommerceCatalogLocalServiceUtil;
+import com.liferay.commerce.product.service.CommerceCatalogLocalService;
 import com.liferay.commerce.product.test.util.CPTestUtil;
 import com.liferay.commerce.product.type.virtual.constants.VirtualCPTypeConstants;
 import com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem;
@@ -32,13 +32,12 @@ import com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOr
 import com.liferay.commerce.product.type.virtual.order.util.CommerceVirtualOrderItemChecker;
 import com.liferay.commerce.product.type.virtual.test.util.VirtualCPTypeTestUtil;
 import com.liferay.commerce.service.CommerceOrderLocalService;
-import com.liferay.commerce.service.CommerceOrderLocalServiceUtil;
 import com.liferay.commerce.subscription.CommerceSubscriptionEntryHelper;
 import com.liferay.commerce.test.util.CommerceTestUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.service.CompanyLocalServiceUtil;
+import com.liferay.portal.kernel.service.CompanyLocalService;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.util.CompanyTestUtil;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
@@ -51,7 +50,6 @@ import com.liferay.portal.test.rule.PermissionCheckerTestRule;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import org.frutilla.FrutillaRule;
 
@@ -79,6 +77,7 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 	@Before
 	public void setUp() throws Exception {
 		_company = CompanyTestUtil.addCompany();
+
 		_user = UserTestUtil.addUser(_company);
 
 		_commerceOrders = new ArrayList<>();
@@ -87,10 +86,10 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 	@After
 	public void tearDown() throws Exception {
 		for (CommerceOrder commerceOrder : _commerceOrders) {
-			CommerceOrderLocalServiceUtil.deleteCommerceOrder(commerceOrder);
+			_commerceOrderLocalService.deleteCommerceOrder(commerceOrder);
 		}
 
-		CompanyLocalServiceUtil.deleteCompany(_company);
+		_companyLocalService.deleteCompany(_company);
 	}
 
 	@Test
@@ -116,9 +115,9 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
 
 		CommerceCatalog commerceCatalog =
-			CommerceCatalogLocalServiceUtil.addCommerceCatalog(
+			_commerceCatalogLocalService.addCommerceCatalog(
 				RandomTestUtil.randomString(), commerceCurrency.getCode(),
-				LocaleUtil.toLanguageId(Locale.US), null,
+				LocaleUtil.US.getDisplayLanguage(), null,
 				ServiceContextTestUtil.getServiceContext(
 					_company.getGroupId()));
 
@@ -196,9 +195,9 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 		CommerceCurrency commerceCurrency = commerceOrder.getCommerceCurrency();
 
 		CommerceCatalog commerceCatalog =
-			CommerceCatalogLocalServiceUtil.addCommerceCatalog(
+			_commerceCatalogLocalService.addCommerceCatalog(
 				RandomTestUtil.randomString(), commerceCurrency.getCode(),
-				LocaleUtil.toLanguageId(Locale.US), null,
+				LocaleUtil.US.getDisplayLanguage(), null,
 				ServiceContextTestUtil.getServiceContext(
 					_company.getGroupId()));
 
@@ -289,6 +288,9 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 	}
 
 	@Inject
+	private CommerceCatalogLocalService _commerceCatalogLocalService;
+
+	@Inject
 	private CommerceOrderLocalService _commerceOrderLocalService;
 
 	private List<CommerceOrder> _commerceOrders;
@@ -304,6 +306,9 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 		_commerceVirtualOrderItemLocalService;
 
 	private Company _company;
+
+	@Inject
+	private CompanyLocalService _companyLocalService;
 
 	@Inject
 	private CPInstanceLocalService _cpInstanceLocalService;
