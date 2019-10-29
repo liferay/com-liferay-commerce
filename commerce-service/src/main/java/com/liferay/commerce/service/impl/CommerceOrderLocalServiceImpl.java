@@ -14,7 +14,6 @@
 
 package com.liferay.commerce.service.impl;
 
-import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.configuration.CommerceOrderConfiguration;
 import com.liferay.commerce.constants.CommerceDestinationNames;
 import com.liferay.commerce.constants.CommerceOrderConstants;
@@ -394,32 +393,39 @@ public class CommerceOrderLocalServiceImpl
 
 		// Commerce addresses
 
-		long billingAddressId = commerceOrder.getBillingAddressId();
+		CommerceAddress commerceBillingAddress =
+			commerceAddressLocalService.getCommerceAddress(
+				commerceOrder.getBillingAddressId());
 
-		if (billingAddressId > 0) {
-			CommerceAddress commerceAddress =
-				commerceAddressLocalService.copyCommerceAddress(
-					billingAddressId, commerceOrder.getModelClassName(),
-					commerceOrder.getCommerceOrderId(), serviceContext);
+		commerceOrder.setBillingName(commerceBillingAddress.getName());
+		commerceOrder.setBillingDescription(
+			commerceBillingAddress.getDescription());
+		commerceOrder.setBillingStreet1(commerceBillingAddress.getStreet1());
+		commerceOrder.setBillingStreet2(commerceBillingAddress.getStreet2());
+		commerceOrder.setBillingStreet3(commerceBillingAddress.getStreet3());
+		commerceOrder.setBillingCity(commerceBillingAddress.getCity());
+		commerceOrder.setBillingZip(commerceBillingAddress.getZip());
+		commerceOrder.setBillingRegionId(
+			commerceBillingAddress.getCommerceRegionId());
+		commerceOrder.setBillingCountryId(
+			commerceBillingAddress.getCommerceCountryId());
 
-			billingAddressId = commerceAddress.getCommerceAddressId();
-		}
+		CommerceAddress commerceShippingAddress =
+			commerceAddressLocalService.getCommerceAddress(
+				commerceOrder.getShippingAddressId());
 
-		long shippingAddressId = commerceOrder.getShippingAddressId();
-
-		if (shippingAddressId > 0) {
-			CommerceAddress commerceAddress =
-				commerceAddressLocalService.copyCommerceAddress(
-					shippingAddressId, commerceOrder.getModelClassName(),
-					commerceOrder.getCommerceOrderId(), serviceContext);
-
-			shippingAddressId = commerceAddress.getCommerceAddressId();
-		}
-
-		if ((billingAddressId > 0) || (shippingAddressId > 0)) {
-			commerceOrder.setBillingAddressId(billingAddressId);
-			commerceOrder.setShippingAddressId(shippingAddressId);
-		}
+		commerceOrder.setShippingName(commerceShippingAddress.getName());
+		commerceOrder.setShippingDescription(
+			commerceShippingAddress.getDescription());
+		commerceOrder.setShippingStreet1(commerceShippingAddress.getStreet1());
+		commerceOrder.setShippingStreet2(commerceShippingAddress.getStreet2());
+		commerceOrder.setShippingStreet3(commerceShippingAddress.getStreet3());
+		commerceOrder.setShippingCity(commerceShippingAddress.getCity());
+		commerceOrder.setShippingZip(commerceShippingAddress.getZip());
+		commerceOrder.setShippingRegionId(
+			commerceShippingAddress.getCommerceRegionId());
+		commerceOrder.setShippingCountryId(
+			commerceShippingAddress.getCommerceCountryId());
 
 		commerceOrder.setOrderDate(new Date());
 
@@ -836,36 +842,14 @@ public class CommerceOrderLocalServiceImpl
 		serviceContext.setScopeGroupId(commerceOrder.getGroupId());
 		serviceContext.setUserId(userId);
 
-		long billingAddressId = 0;
-		long shippingAddressId = 0;
-
-		CommerceAddress billingAddress = getNewCommerceAddress(
-			commerceOrder, commerceOrder.getBillingAddress(), serviceContext);
-
-		CommerceAddress shippingAddress = billingAddress;
-
-		if (commerceOrder.getBillingAddressId() !=
-				commerceOrder.getShippingAddressId()) {
-
-			shippingAddress = getNewCommerceAddress(
-				commerceOrder, commerceOrder.getShippingAddress(),
-				serviceContext);
-		}
-
-		if (billingAddress != null) {
-			billingAddressId = billingAddress.getCommerceAddressId();
-		}
-
-		if (shippingAddress != null) {
-			shippingAddressId = shippingAddress.getCommerceAddressId();
-		}
-
 		CommerceOrder newCommerceOrder =
 			commerceOrderLocalService.addCommerceOrder(
 				userId, commerceOrder.getGroupId(),
 				commerceOrder.getCommerceAccountId(),
-				commerceOrder.getCommerceCurrencyId(), billingAddressId,
-				shippingAddressId, commerceOrder.getCommercePaymentMethodKey(),
+				commerceOrder.getCommerceCurrencyId(),
+				commerceOrder.getBillingAddressId(),
+				commerceOrder.getShippingAddressId(),
+				commerceOrder.getCommercePaymentMethodKey(),
 				commerceOrder.getCommerceShippingMethodId(),
 				commerceOrder.getShippingOptionName(), StringPool.BLANK,
 				commerceOrder.getSubtotal(), commerceOrder.getShippingAmount(),
@@ -1025,9 +1009,41 @@ public class CommerceOrderLocalServiceImpl
 	public CommerceOrder updateBillingAddress(
 			long commerceOrderId, String name, String description,
 			String street1, String street2, String street3, String city,
+			String zip, long commerceRegionId, long commerceCountryId)
+		throws PortalException {
+
+		CommerceOrder commerceOrder = commerceOrderPersistence.findByPrimaryKey(
+			commerceOrderId);
+
+		commerceOrder.setBillingName(name);
+		commerceOrder.setBillingDescription(description);
+		commerceOrder.setBillingStreet1(street1);
+		commerceOrder.setBillingStreet2(street2);
+		commerceOrder.setBillingStreet3(street3);
+		commerceOrder.setBillingCity(city);
+		commerceOrder.setBillingZip(zip);
+		commerceOrder.setBillingRegionId(commerceRegionId);
+		commerceOrder.setBillingCountryId(commerceCountryId);
+
+		return commerceOrderPersistence.update(commerceOrder);
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CommerceOrder updateBillingAddress(
+			long commerceOrderId, String name, String description,
+			String street1, String street2, String street3, String city,
 			String zip, long commerceRegionId, long commerceCountryId,
 			String phoneNumber, ServiceContext serviceContext)
 		throws PortalException {
+
+		CommerceOrder commerceOrder = getCommerceOrder(commerceOrderId);
+
+		if (!commerceOrder.isOpen()) {
+			return updateBillingAddress(
+				commerceOrderId, name, description, street1, street2, street3,
+				city, zip, commerceRegionId, commerceCountryId);
+		}
 
 		return updateAddress(
 			commerceOrderId, name, description, street1, street2, street3, city,
@@ -1385,9 +1401,41 @@ public class CommerceOrderLocalServiceImpl
 	public CommerceOrder updateShippingAddress(
 			long commerceOrderId, String name, String description,
 			String street1, String street2, String street3, String city,
+			String zip, long commerceRegionId, long commerceCountryId)
+		throws PortalException {
+
+		CommerceOrder commerceOrder = commerceOrderPersistence.findByPrimaryKey(
+			commerceOrderId);
+
+		commerceOrder.setShippingName(name);
+		commerceOrder.setShippingDescription(description);
+		commerceOrder.setShippingStreet1(street1);
+		commerceOrder.setShippingStreet2(street2);
+		commerceOrder.setShippingStreet3(street3);
+		commerceOrder.setShippingCity(city);
+		commerceOrder.setShippingZip(zip);
+		commerceOrder.setShippingRegionId(commerceRegionId);
+		commerceOrder.setShippingCountryId(commerceCountryId);
+
+		return commerceOrderPersistence.update(commerceOrder);
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CommerceOrder updateShippingAddress(
+			long commerceOrderId, String name, String description,
+			String street1, String street2, String street3, String city,
 			String zip, long commerceRegionId, long commerceCountryId,
 			String phoneNumber, ServiceContext serviceContext)
 		throws PortalException {
+
+		CommerceOrder commerceOrder = getCommerceOrder(commerceOrderId);
+
+		if (!commerceOrder.isOpen()) {
+			return updateBillingAddress(
+				commerceOrderId, name, description, street1, street2, street3,
+				city, zip, commerceRegionId, commerceCountryId);
+		}
 
 		return updateAddress(
 			commerceOrderId, name, description, street1, street2, street3, city,
@@ -1609,32 +1657,6 @@ public class CommerceOrderLocalServiceImpl
 		}
 
 		return commerceOrders;
-	}
-
-	protected CommerceAddress getNewCommerceAddress(
-			CommerceOrder commerceOrder, CommerceAddress commerceAddress,
-			ServiceContext serviceContext)
-		throws PortalException {
-
-		if (commerceAddress == null) {
-			return commerceAddress;
-		}
-
-		List<CommerceAddress> commerceAddresses =
-			commerceAddressLocalService.getCommerceAddressesByCompanyId(
-				serviceContext.getCompanyId(), CommerceAccount.class.getName(),
-				commerceOrder.getCommerceAccountId());
-
-		for (CommerceAddress newCommerceAddress : commerceAddresses) {
-			if (commerceAddress.isSameAddress(newCommerceAddress)) {
-				return newCommerceAddress;
-			}
-		}
-
-		return commerceAddressLocalService.copyCommerceAddress(
-			commerceAddress.getCommerceAddressId(),
-			CommerceOrder.class.getName(), commerceOrder.getCommerceOrderId(),
-			serviceContext);
 	}
 
 	protected boolean hasWorkflowDefinition(long groupId, long typePK)
