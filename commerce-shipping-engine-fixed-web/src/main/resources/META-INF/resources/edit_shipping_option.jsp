@@ -85,7 +85,7 @@ if (commerceShippingFixedOption != null) {
 				}
 			);
 		},
-		['aui-base', 'aui-io-request']
+		['aui-base', 'aui-io-request', 'io-form']
 	);
 </aui:script>
 
