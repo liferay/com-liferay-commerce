@@ -278,6 +278,26 @@
 		<column name="totalDiscountPercentageLevel2" type="BigDecimal" />
 		<column name="totalDiscountPercentageLevel3" type="BigDecimal" />
 		<column name="totalDiscountPercentageLevel4" type="BigDecimal" />
+		<column name="billingName" type="String" />
+		<column name="billingDescription" type="String" />
+		<column name="billingStreet1" type="String" />
+		<column name="billingStreet2" type="String" />
+		<column name="billingStreet3" type="String" />
+		<column name="billingCity" type="String" />
+		<column name="billingZip" type="String" />
+		<column name="billingRegionId" type="long" />
+		<column name="billingCountryId" type="long" />
+		<column name="billingPhoneNumber" type="String" />
+		<column name="shippingName" type="String" />
+		<column name="shippingDescription" type="String" />
+		<column name="shippingStreet1" type="String" />
+		<column name="shippingStreet2" type="String" />
+		<column name="shippingStreet3" type="String" />
+		<column name="shippingCity" type="String" />
+		<column name="shippingZip" type="String" />
+		<column name="shippingRegionId" type="long" />
+		<column name="shippingCountryId" type="long" />
+		<column name="shippingPhoneNumber" type="String" />
 		<column name="advanceStatus" type="String" />
 		<column name="paymentStatus" type="int" />
 		<column name="orderDate" type="Date" />
