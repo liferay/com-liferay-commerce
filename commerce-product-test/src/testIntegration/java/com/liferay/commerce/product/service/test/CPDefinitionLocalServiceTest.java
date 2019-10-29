@@ -102,7 +102,7 @@ public class CPDefinitionLocalServiceTest {
 			"product definition should be APPROVED"
 		);
 
-		CPDefinition cpDefinition = CPTestUtil.addCPDefinition(
+		CPDefinition cpDefinition = CPTestUtil.addCPDefinitionFromCatalog(
 			_commerceCatalog.getGroupId(), SimpleCPTypeConstants.NAME, false,
 			false);
 
@@ -126,7 +126,7 @@ public class CPDefinitionLocalServiceTest {
 			"default product instance should be INACTIVE"
 		);
 
-		CPDefinition cpDefinition = CPTestUtil.addCPDefinition(
+		CPDefinition cpDefinition = CPTestUtil.addCPDefinitionFromCatalog(
 			_commerceCatalog.getGroupId(), SimpleCPTypeConstants.NAME, false,
 			true);
 
@@ -168,7 +168,7 @@ public class CPDefinitionLocalServiceTest {
 		int cpOptionsCount = 2;
 		int cpOptionValuesCount = 2;
 
-		CPDefinition cpDefinition = CPTestUtil.addCPDefinition(
+		CPDefinition cpDefinition = CPTestUtil.addCPDefinitionFromCatalog(
 			_commerceCatalog.getGroupId(), SimpleCPTypeConstants.NAME, true,
 			true);
 
@@ -232,7 +232,7 @@ public class CPDefinitionLocalServiceTest {
 		int cpOptionsCount = 2;
 		int cpOptionValuesCount = 2;
 
-		CPDefinition cpDefinition = CPTestUtil.addCPDefinition(
+		CPDefinition cpDefinition = CPTestUtil.addCPDefinitionFromCatalog(
 			_commerceCatalog.getGroupId(), SimpleCPTypeConstants.NAME, false,
 			true);
 
@@ -288,7 +288,7 @@ public class CPDefinitionLocalServiceTest {
 			"product definition should have no instances"
 		);
 
-		CPDefinition cpDefinition = CPTestUtil.addCPDefinition(
+		CPDefinition cpDefinition = CPTestUtil.addCPDefinitionFromCatalog(
 			_commerceCatalog.getGroupId(), SimpleCPTypeConstants.NAME, true,
 			false);
 
@@ -319,7 +319,7 @@ public class CPDefinitionLocalServiceTest {
 			"default product instance should be APPROVED"
 		);
 
-		CPDefinition cpDefinition = CPTestUtil.addCPDefinition(
+		CPDefinition cpDefinition = CPTestUtil.addCPDefinitionFromCatalog(
 			_commerceCatalog.getGroupId(), SimpleCPTypeConstants.NAME, true,
 			true);
 
@@ -359,7 +359,7 @@ public class CPDefinitionLocalServiceTest {
 			"product definition should be APPROVED"
 		);
 
-		CPDefinition cpDefinition = CPTestUtil.addCPDefinition(
+		CPDefinition cpDefinition = CPTestUtil.addCPDefinitionFromCatalog(
 			_commerceCatalog.getGroupId(), SimpleCPTypeConstants.NAME, true,
 			true);
 
