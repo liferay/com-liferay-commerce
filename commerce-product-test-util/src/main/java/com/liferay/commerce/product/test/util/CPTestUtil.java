@@ -401,8 +401,8 @@ public class CPTestUtil {
 		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
 
 		return _addCPDefinition(
-			commerceCatalog.getGroupId(), SimpleCPTypeConstants.NAME, true,
-			true,
+			commerceCatalog.getGroupId(), productTypeName,
+			ignoreSKUCombinations, hasDefaultInstance,
 			ServiceContextTestUtil.getServiceContext(
 				commerceCatalog.getGroupId()));
 	}

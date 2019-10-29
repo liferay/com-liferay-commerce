@@ -22,7 +22,7 @@ import com.liferay.commerce.product.data.source.CPDataSourceResult;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CommerceCatalog;
-import com.liferay.commerce.product.service.CommerceCatalogLocalServiceUtil;
+import com.liferay.commerce.product.service.CommerceCatalogLocalService;
 import com.liferay.commerce.product.test.util.CPTestUtil;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -44,7 +44,6 @@ import com.liferay.portal.test.rule.PermissionCheckerTestRule;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import org.frutilla.FrutillaRule;
 
@@ -71,9 +70,10 @@ public class CPDefinitionHelperTest {
 	@Before
 	public void setUp() throws Exception {
 		_company = CompanyTestUtil.addCompany();
-		_commerceCatalog = CommerceCatalogLocalServiceUtil.addCommerceCatalog(
+
+		_commerceCatalog = _commerceCatalogLocalService.addCommerceCatalog(
 			RandomTestUtil.randomString(), RandomTestUtil.randomString(),
-			LocaleUtil.toLanguageId(Locale.US), null,
+			LocaleUtil.US.getDisplayLanguage(), null,
 			ServiceContextTestUtil.getServiceContext(_company.getGroupId()));
 	}
 
@@ -258,6 +258,9 @@ public class CPDefinitionHelperTest {
 	private static final int _CP_INSTANCES_COUNT = 10;
 
 	private CommerceCatalog _commerceCatalog;
+
+	@Inject
+	private CommerceCatalogLocalService _commerceCatalogLocalService;
 
 	@DeleteAfterTestRun
 	private Company _company;

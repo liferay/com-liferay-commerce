@@ -18,7 +18,7 @@ import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CommerceCatalog;
-import com.liferay.commerce.product.service.CommerceCatalogLocalServiceUtil;
+import com.liferay.commerce.product.service.CommerceCatalogLocalService;
 import com.liferay.commerce.product.test.util.CPTestUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.search.Document;
@@ -36,8 +36,6 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.search.test.util.HitsAssert;
 import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
-
-import java.util.Locale;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -71,9 +69,9 @@ public class CPDefinitionIndexerTest {
 	@Test
 	public void testSearch() throws Exception {
 		CommerceCatalog catalog =
-			CommerceCatalogLocalServiceUtil.addCommerceCatalog(
+			_commerceCatalogLocalService.addCommerceCatalog(
 				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
-				LocaleUtil.toLanguageId(Locale.US), null,
+				LocaleUtil.US.getDisplayLanguage(), null,
 				ServiceContextTestUtil.getServiceContext());
 
 		CPInstance cpInstance = CPTestUtil.addCPInstance(catalog.getGroupId());
@@ -100,6 +98,9 @@ public class CPDefinitionIndexerTest {
 
 	@Inject
 	private static IndexerRegistry _indexerRegistry;
+
+	@Inject
+	private CommerceCatalogLocalService _commerceCatalogLocalService;
 
 	@DeleteAfterTestRun
 	private Group _group;

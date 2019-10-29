@@ -21,10 +21,10 @@ import com.liferay.commerce.product.model.CPInstanceConstants;
 import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.model.CommerceCatalog;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
-import com.liferay.commerce.product.service.CPDefinitionLocalServiceUtil;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.service.CPOptionLocalService;
+import com.liferay.commerce.product.service.CommerceCatalogLocalService;
 import com.liferay.commerce.product.service.CommerceCatalogLocalServiceUtil;
 import com.liferay.commerce.product.test.util.CPTestUtil;
 import com.liferay.commerce.product.type.simple.constants.SimpleCPTypeConstants;
@@ -41,7 +41,6 @@ import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 
 import java.util.List;
-import java.util.Locale;
 
 import org.frutilla.FrutillaRule;
 
@@ -68,24 +67,25 @@ public class CPDefinitionLocalServiceTest {
 	@Before
 	public void setUp() throws Exception {
 		_company = CompanyTestUtil.addCompany();
+
 		_commerceCatalog = CommerceCatalogLocalServiceUtil.addCommerceCatalog(
 			RandomTestUtil.randomString(), RandomTestUtil.randomString(),
-			LocaleUtil.toLanguageId(Locale.US), null,
+			LocaleUtil.US.getDisplayLanguage(), null,
 			ServiceContextTestUtil.getServiceContext(_company.getGroupId()));
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		List<CPDefinition> cpDefinitions =
-			CPDefinitionLocalServiceUtil.getCPDefinitions(
+			_cpDefinitionLocalService.getCPDefinitions(
 				_commerceCatalog.getGroupId(), WorkflowConstants.STATUS_ANY,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		for (CPDefinition cpDefinition : cpDefinitions) {
-			CPDefinitionLocalServiceUtil.deleteCPDefinition(cpDefinition);
+			_cpDefinitionLocalService.deleteCPDefinition(cpDefinition);
 		}
 
-		CommerceCatalogLocalServiceUtil.deleteCommerceCatalog(_commerceCatalog);
+		_commerceCatalogLocalService.deleteCommerceCatalog(_commerceCatalog);
 	}
 
 	@Test
@@ -385,6 +385,9 @@ public class CPDefinitionLocalServiceTest {
 	public final FrutillaRule frutillaRule = new FrutillaRule();
 
 	private CommerceCatalog _commerceCatalog;
+
+	@Inject
+	private CommerceCatalogLocalService _commerceCatalogLocalService;
 
 	@DeleteAfterTestRun
 	private Company _company;

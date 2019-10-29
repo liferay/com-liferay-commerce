@@ -19,11 +19,11 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPOptionCategory;
 import com.liferay.commerce.product.model.CPSpecificationOption;
 import com.liferay.commerce.product.model.CommerceCatalog;
-import com.liferay.commerce.product.service.CPDefinitionLocalServiceUtil;
+import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPDefinitionSpecificationOptionValueLocalService;
 import com.liferay.commerce.product.service.CPOptionCategoryLocalService;
 import com.liferay.commerce.product.service.CPSpecificationOptionLocalService;
-import com.liferay.commerce.product.service.CommerceCatalogLocalServiceUtil;
+import com.liferay.commerce.product.service.CommerceCatalogLocalService;
 import com.liferay.commerce.product.test.util.CPTestUtil;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -47,7 +47,6 @@ import com.liferay.portal.test.rule.PermissionCheckerTestRule;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import org.frutilla.FrutillaRule;
 
@@ -74,24 +73,24 @@ public class SpecificationOptionFacetsTest {
 
 	@Before
 	public void setUp() throws Exception {
-		_commerceCatalog = CommerceCatalogLocalServiceUtil.addCommerceCatalog(
+		_commerceCatalog = _commerceCatalogLocalService.addCommerceCatalog(
 			RandomTestUtil.randomString(), RandomTestUtil.randomString(),
-			LocaleUtil.toLanguageId(Locale.US), null,
+			LocaleUtil.US.getDisplayLanguage(), null,
 			ServiceContextTestUtil.getServiceContext());
 	}
 
 	@After
 	public void tearDown() throws Exception {
 		List<CPDefinition> cpDefinitions =
-			CPDefinitionLocalServiceUtil.getCPDefinitions(
+			_cpDefinitionLocalService.getCPDefinitions(
 				_commerceCatalog.getGroupId(), WorkflowConstants.STATUS_ANY,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		for (CPDefinition cpDefinition : cpDefinitions) {
-			CPDefinitionLocalServiceUtil.deleteCPDefinition(cpDefinition);
+			_cpDefinitionLocalService.deleteCPDefinition(cpDefinition);
 		}
 
-		CommerceCatalogLocalServiceUtil.deleteCommerceCatalog(_commerceCatalog);
+		_commerceCatalogLocalService.deleteCommerceCatalog(_commerceCatalog);
 	}
 
 	@Test
@@ -241,7 +240,13 @@ public class SpecificationOptionFacetsTest {
 	private CommerceCatalog _commerceCatalog;
 
 	@Inject
+	private CommerceCatalogLocalService _commerceCatalogLocalService;
+
+	@Inject
 	private CPDefinitionHelper _cpDefinitionHelper;
+
+	@Inject
+	private CPDefinitionLocalService _cpDefinitionLocalService;
 
 	@Inject
 	private CPDefinitionSpecificationOptionValueLocalService
