@@ -36,7 +36,6 @@ import org.junit.runner.RunWith;
 /**
  * @author Andrea Di Giorgi
  */
-@Ignore
 @RunWith(Arquillian.class)
 @Sync
 public class CommerceInventoryWarehouseFinderTest {
