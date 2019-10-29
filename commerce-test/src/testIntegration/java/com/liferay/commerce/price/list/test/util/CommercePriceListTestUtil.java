@@ -14,6 +14,11 @@
 
 package com.liferay.commerce.price.list.test.util;
 
+import java.util.Calendar;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
+
 import com.liferay.commerce.account.model.CommerceAccountGroup;
 import com.liferay.commerce.account.service.CommerceAccountGroupLocalServiceUtil;
 import com.liferay.commerce.currency.model.CommerceCurrency;
@@ -21,8 +26,6 @@ import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceListCommerceAccountGroupRelServiceUtil;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalServiceUtil;
-import com.liferay.commerce.product.model.CommerceCatalog;
-import com.liferay.commerce.product.service.CommerceCatalogLocalServiceUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
@@ -30,11 +33,6 @@ import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
-
-import java.util.Calendar;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Stream;
 
 /**
  * @author Luca Pellizzon
@@ -54,12 +52,6 @@ public class CommercePriceListTestUtil {
 
 		User user = UserLocalServiceUtil.getDefaultUser(
 			serviceContext.getCompanyId());
-
-		List<CommerceCatalog> commerceCatalogs =
-			CommerceCatalogLocalServiceUtil.getCommerceCatalogs(
-				user.getCompanyId(), true);
-
-		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
 
 		Calendar calendar = CalendarFactoryUtil.getCalendar(user.getTimeZone());
 
