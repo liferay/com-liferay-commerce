@@ -29,7 +29,7 @@ import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.product.test.util.CPTestUtil;
-import com.liferay.commerce.service.CommerceOrderLocalServiceUtil;
+import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.shipment.test.util.CommerceShipmentTestUtil;
 import com.liferay.commerce.test.util.CommerceInventoryTestUtil;
 import com.liferay.commerce.test.util.CommerceTestUtil;
@@ -81,7 +81,7 @@ public class OrderStockManagementTest {
 	@After
 	public void tearDown() throws Exception {
 		for (CommerceOrder commerceOrder : _commerceOrders) {
-			CommerceOrderLocalServiceUtil.deleteCommerceOrder(commerceOrder);
+			_commerceOrderLocalService.deleteCommerceOrder(commerceOrder);
 		}
 
 		_commerceCurrencyLocalService.deleteCommerceCurrency(_commerceCurrency);
@@ -377,6 +377,9 @@ public class OrderStockManagementTest {
 	@Inject
 	private CommerceInventoryWarehouseItemLocalService
 		_commerceInventoryWarehouseItemLocalService;
+
+	@Inject
+	private CommerceOrderLocalService _commerceOrderLocalService;
 
 	private List<CommerceOrder> _commerceOrders;
 	private User _user;

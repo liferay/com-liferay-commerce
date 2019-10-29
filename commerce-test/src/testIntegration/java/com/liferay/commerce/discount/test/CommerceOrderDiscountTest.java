@@ -17,7 +17,6 @@ package com.liferay.commerce.discount.test;
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountLocalService;
-import com.liferay.commerce.account.service.CommerceAccountLocalServiceUtil;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.model.CommerceMoney;
@@ -34,14 +33,12 @@ import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.test.util.CPTestUtil;
 import com.liferay.commerce.service.CommerceOrderLocalService;
-import com.liferay.commerce.service.CommerceOrderLocalServiceUtil;
 import com.liferay.commerce.test.util.CommerceInventoryTestUtil;
 import com.liferay.commerce.test.util.CommerceTestUtil;
 import com.liferay.commerce.test.util.TestCommerceContext;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.service.GroupLocalServiceUtil;
-import com.liferay.portal.kernel.service.UserLocalServiceUtil;
+import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
 import com.liferay.portal.kernel.test.util.UserTestUtil;
@@ -91,12 +88,12 @@ public class CommerceOrderDiscountTest {
 	@After
 	public void tearDown() throws Exception {
 		for (CommerceOrder commerceOrder : _commerceOrders) {
-			CommerceOrderLocalServiceUtil.deleteCommerceOrder(commerceOrder);
+			_commerceOrderLocalService.deleteCommerceOrder(commerceOrder);
 		}
 
-		CommerceAccountLocalServiceUtil.deleteCommerceAccount(_commerceAccount);
-		GroupLocalServiceUtil.deleteGroup(_group);
-		UserLocalServiceUtil.deleteUser(_user);
+		_commerceAccountLocalService.deleteCommerceAccount(_commerceAccount);
+		GroupTestUtil.deleteGroup(_group);
+		_userLocalService.deleteUser(_user);
 	}
 
 	@Test
@@ -106,13 +103,11 @@ public class CommerceOrderDiscountTest {
 		).given(
 			"An order with some order items"
 		).and(
-			"A discount associated to one product and a discount on the " +
-				"total price"
+			"A discount on one product and a discount on the total price"
 		).when(
 			"I try to get the final price of the order"
 		).then(
-			"The final price will be calculated taking into consideration " +
-				"the discounts"
+			"The final price will be calculated with the discounts"
 		);
 
 		CommerceCurrency commerceCurrency =
@@ -225,13 +220,11 @@ public class CommerceOrderDiscountTest {
 		).given(
 			"An order with some order items"
 		).and(
-			"A discount associated to one product and a discount coupon on " +
-				"the total price"
+			"A discount on one product and a discount coupon on the total price"
 		).when(
 			"I try to get the final price of the order"
 		).then(
-			"The final price will be calculated taking into consideration " +
-				"the discounts"
+			"The final price will be calculated with the discounts"
 		);
 		CommerceCurrency commerceCurrency =
 			CommerceCurrencyTestUtil.addCommerceCurrency();
@@ -364,5 +357,8 @@ public class CommerceOrderDiscountTest {
 
 	private Group _group;
 	private User _user;
+
+	@Inject
+	private UserLocalService _userLocalService;
 
 }

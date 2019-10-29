@@ -46,9 +46,6 @@ public class CommerceDiscountTestUtil {
 
 		CommerceAccountGroup commerceAccountGroup = null;
 
-		/*CommerceAccountGroup commerceAccountGroup = CommerceAccountGroupTestUtil.addUserCommerceAccountGroup(
-			userId);*/
-
 		return CommerceDiscountCommerceAccountGroupRelLocalServiceUtil.
 			addCommerceDiscountCommerceAccountGroupRel(
 				commerceDiscount.getCommerceDiscountId(),

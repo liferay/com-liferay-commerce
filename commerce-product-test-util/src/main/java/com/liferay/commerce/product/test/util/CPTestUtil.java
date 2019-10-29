@@ -162,33 +162,33 @@ public class CPTestUtil {
 		Date displayDate = new Date(now - Time.HOUR);
 		Date expirationDate = new Date(now + Time.DAY);
 
-		Calendar displayCal = CalendarFactoryUtil.getCalendar(
+		Calendar displayCalendar = CalendarFactoryUtil.getCalendar(
 			user.getTimeZone());
 
-		displayCal.setTime(displayDate);
+		displayCalendar.setTime(displayDate);
 
-		int displayDateMonth = displayCal.get(Calendar.MONTH);
-		int displayDateDay = displayCal.get(Calendar.DATE);
-		int displayDateYear = displayCal.get(Calendar.YEAR);
-		int displayDateHour = displayCal.get(Calendar.HOUR);
-		int displayDateMinute = displayCal.get(Calendar.MINUTE);
+		int displayDateMonth = displayCalendar.get(Calendar.MONTH);
+		int displayDateDay = displayCalendar.get(Calendar.DATE);
+		int displayDateYear = displayCalendar.get(Calendar.YEAR);
+		int displayDateHour = displayCalendar.get(Calendar.HOUR);
+		int displayDateMinute = displayCalendar.get(Calendar.MINUTE);
 
-		if (displayCal.get(Calendar.AM_PM) == Calendar.PM) {
+		if (displayCalendar.get(Calendar.AM_PM) == Calendar.PM) {
 			displayDateHour += 12;
 		}
 
-		Calendar expirationCal = CalendarFactoryUtil.getCalendar(
+		Calendar expirationCalendar = CalendarFactoryUtil.getCalendar(
 			user.getTimeZone());
 
-		expirationCal.setTime(expirationDate);
+		expirationCalendar.setTime(expirationDate);
 
-		int expirationDateMonth = expirationCal.get(Calendar.MONTH);
-		int expirationDateDay = expirationCal.get(Calendar.DATE);
-		int expirationDateYear = expirationCal.get(Calendar.YEAR);
-		int expirationDateHour = expirationCal.get(Calendar.HOUR);
-		int expirationDateMinute = expirationCal.get(Calendar.MINUTE);
+		int expirationDateMonth = expirationCalendar.get(Calendar.MONTH);
+		int expirationDateDay = expirationCalendar.get(Calendar.DATE);
+		int expirationDateYear = expirationCalendar.get(Calendar.YEAR);
+		int expirationDateHour = expirationCalendar.get(Calendar.HOUR);
+		int expirationDateMinute = expirationCalendar.get(Calendar.MINUTE);
 
-		if (expirationCal.get(Calendar.AM_PM) == Calendar.PM) {
+		if (expirationCalendar.get(Calendar.AM_PM) == Calendar.PM) {
 			expirationDateHour += 12;
 		}
 
