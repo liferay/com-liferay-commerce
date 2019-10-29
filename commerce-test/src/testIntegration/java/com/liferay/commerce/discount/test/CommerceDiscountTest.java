@@ -19,7 +19,6 @@ import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.model.CommerceAccountGroup;
 import com.liferay.commerce.account.service.CommerceAccountLocalService;
-import com.liferay.commerce.account.service.CommerceAccountLocalServiceUtil;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.model.CommerceMoney;
@@ -27,7 +26,7 @@ import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
 import com.liferay.commerce.discount.CommerceDiscountValue;
 import com.liferay.commerce.discount.constants.CommerceDiscountConstants;
 import com.liferay.commerce.discount.model.CommerceDiscount;
-import com.liferay.commerce.discount.service.CommerceDiscountLocalServiceUtil;
+import com.liferay.commerce.discount.service.CommerceDiscountLocalService;
 import com.liferay.commerce.discount.test.util.CommerceDiscountTestUtil;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.price.CommerceProductPrice;
@@ -38,14 +37,12 @@ import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
 import com.liferay.commerce.product.test.util.CPTestUtil;
 import com.liferay.commerce.service.CommerceOrderLocalService;
-import com.liferay.commerce.service.CommerceOrderLocalServiceUtil;
 import com.liferay.commerce.test.util.CommerceAccountGroupTestUtil;
 import com.liferay.commerce.test.util.CommerceTestUtil;
 import com.liferay.commerce.test.util.TestCommerceContext;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.service.GroupLocalServiceUtil;
-import com.liferay.portal.kernel.service.UserLocalServiceUtil;
+import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
 import com.liferay.portal.kernel.test.util.UserTestUtil;
@@ -95,14 +92,14 @@ public class CommerceDiscountTest {
 	@After
 	public void tearDown() throws Exception {
 		for (CommerceOrder commerceOrder : _commerceOrders) {
-			CommerceOrderLocalServiceUtil.deleteCommerceOrder(commerceOrder);
+			_commerceOrderLocalService.deleteCommerceOrder(commerceOrder);
 		}
 
-		CommerceDiscountLocalServiceUtil.deleteCommerceDiscounts(
+		_commerceDiscountLocalService.deleteCommerceDiscounts(
 			_group.getCompanyId());
-		CommerceAccountLocalServiceUtil.deleteCommerceAccount(_commerceAccount);
-		GroupLocalServiceUtil.deleteGroup(_group);
-		UserLocalServiceUtil.deleteUser(_user);
+		_commerceAccountLocalService.deleteCommerceAccount(_commerceAccount);
+		GroupTestUtil.deleteGroup(_group);
+		_userLocalService.deleteUser(_user);
 	}
 
 	@Test
@@ -687,6 +684,9 @@ public class CommerceDiscountTest {
 	private CommerceAccountLocalService _commerceAccountLocalService;
 
 	@Inject
+	private CommerceDiscountLocalService _commerceDiscountLocalService;
+
+	@Inject
 	private CommerceOrderLocalService _commerceOrderLocalService;
 
 	private List<CommerceOrder> _commerceOrders;
@@ -699,5 +699,8 @@ public class CommerceDiscountTest {
 
 	private Group _group;
 	private User _user;
+
+	@Inject
+	private UserLocalService _userLocalService;
 
 }

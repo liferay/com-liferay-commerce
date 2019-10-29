@@ -98,9 +98,9 @@ public class TestCommerceContext implements CommerceContext {
 
 	@Override
 	public long getSiteGroupId() throws PortalException {
-		if (_commerceChannel == null)
-
+		if (_commerceChannel == null) {
 			return _contextGroup.getGroupId();
+		}
 
 		return _commerceChannel.getSiteGroupId();
 	}
