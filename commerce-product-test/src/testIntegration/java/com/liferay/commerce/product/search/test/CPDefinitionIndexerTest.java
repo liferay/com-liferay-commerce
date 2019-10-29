@@ -74,7 +74,8 @@ public class CPDefinitionIndexerTest {
 				LocaleUtil.US.getDisplayLanguage(), null,
 				ServiceContextTestUtil.getServiceContext());
 
-		CPInstance cpInstance = CPTestUtil.addCPInstance(catalog.getGroupId());
+		CPInstance cpInstance = CPTestUtil.addCPInstanceFromCatalog(
+			catalog.getGroupId());
 
 		CPDefinition cpDefinition = cpInstance.getCPDefinition();
 
