@@ -16,6 +16,7 @@ package com.liferay.commerce.frontend;
 
 import aQute.bnd.annotation.ProviderType;
 
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -24,6 +25,6 @@ import java.util.Map;
 @ProviderType
 public interface ClayTableSerializer {
 
-	public Map<String, Object> serialize(ClayTable clayTable);
+	public Map<String, Object> serialize(ClayTable clayTable, Locale locale);
 
 }

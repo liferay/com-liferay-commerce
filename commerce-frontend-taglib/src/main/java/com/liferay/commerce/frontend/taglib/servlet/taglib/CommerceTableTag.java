@@ -295,10 +295,13 @@ public class CommerceTableTag extends ComponentRendererTag {
 	}
 
 	private void _setTableContext(String tableName) {
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		ClayTable clayTable = _clayTableRegistry.getClayTable(tableName);
 
 		Map<String, Object> clayTableContext = _clayTableSerializer.serialize(
-			clayTable);
+			clayTable, themeDisplay.getLocale());
 
 		for (Map.Entry<String, Object> entry : clayTableContext.entrySet()) {
 			putValue(entry.getKey(), entry.getValue());
