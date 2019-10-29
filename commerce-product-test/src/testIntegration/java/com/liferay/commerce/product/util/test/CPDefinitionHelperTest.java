@@ -249,7 +249,7 @@ public class CPDefinitionHelperTest {
 		CPInstance[] cpInstances = new CPInstance[iterations];
 
 		for (int i = 0; i < iterations; i++) {
-			cpInstances[i] = CPTestUtil.addCPInstance(groupId);
+			cpInstances[i] = CPTestUtil.addCPInstanceFromCatalog(groupId);
 		}
 
 		return cpInstances;
