@@ -49,6 +49,22 @@ public class CommerceOrderImpl extends CommerceOrderBaseImpl {
 
 	@Override
 	public CommerceAddress getBillingAddress() throws PortalException {
+		if (!isOpen()) {
+			CommerceAddress commerceAddress = new CommerceAddressImpl();
+
+			commerceAddress.setName(getBillingName());
+			commerceAddress.setDescription(getBillingDescription());
+			commerceAddress.setStreet1(getBillingStreet1());
+			commerceAddress.setStreet2(getBillingStreet2());
+			commerceAddress.setStreet3(getBillingStreet3());
+			commerceAddress.setCity(getBillingCity());
+			commerceAddress.setZip(getBillingZip());
+			commerceAddress.setCommerceRegionId(getBillingRegionId());
+			commerceAddress.setCommerceCountryId(getBillingCountryId());
+
+			return commerceAddress;
+		}
+
 		long billingAddressId = getBillingAddressId();
 
 		if (billingAddressId > 0) {
@@ -134,6 +150,22 @@ public class CommerceOrderImpl extends CommerceOrderBaseImpl {
 
 	@Override
 	public CommerceAddress getShippingAddress() throws PortalException {
+		if (!isOpen()) {
+			CommerceAddress commerceAddress = new CommerceAddressImpl();
+
+			commerceAddress.setName(getShippingName());
+			commerceAddress.setDescription(getShippingDescription());
+			commerceAddress.setStreet1(getShippingStreet1());
+			commerceAddress.setStreet2(getShippingStreet2());
+			commerceAddress.setStreet3(getShippingStreet3());
+			commerceAddress.setCity(getShippingCity());
+			commerceAddress.setZip(getShippingZip());
+			commerceAddress.setCommerceRegionId(getShippingRegionId());
+			commerceAddress.setCommerceCountryId(getShippingCountryId());
+
+			return commerceAddress;
+		}
+
 		long shippingAddressId = getShippingAddressId();
 
 		if (shippingAddressId > 0) {
