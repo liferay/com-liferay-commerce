@@ -269,6 +269,9 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 		addSearchTerm(
 			searchQuery, searchContext, CPField.EXTERNAL_REFERENCE_CODE, false);
 		addSearchTerm(searchQuery, searchContext, Field.USER_NAME, false);
+		addSearchLocalizedTerm(
+			searchQuery, searchContext, CPField.SPECIFICATION_VALUES_NAMES,
+			false);
 
 		LinkedHashMap<String, Object> params =
 			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
