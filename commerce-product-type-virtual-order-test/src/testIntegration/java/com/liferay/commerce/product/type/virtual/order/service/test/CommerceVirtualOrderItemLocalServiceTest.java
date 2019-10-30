@@ -121,7 +121,7 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 				ServiceContextTestUtil.getServiceContext(
 					_company.getGroupId()));
 
-		CPDefinition cpDefinition = CPTestUtil.addCPDefinition(
+		CPDefinition cpDefinition = CPTestUtil.addCPDefinitionFromCatalog(
 			commerceCatalog.getGroupId(), VirtualCPTypeConstants.NAME, true,
 			true);
 
@@ -201,7 +201,7 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 				ServiceContextTestUtil.getServiceContext(
 					_company.getGroupId()));
 
-		CPDefinition cpDefinition = CPTestUtil.addCPDefinition(
+		CPDefinition cpDefinition = CPTestUtil.addCPDefinitionFromCatalog(
 			commerceCatalog.getGroupId(), VirtualCPTypeConstants.NAME, true,
 			true);
 
