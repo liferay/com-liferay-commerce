@@ -142,6 +142,10 @@ components:
                     example: 2017-08-21
                     format: date
                     type: string
+                orderDate:
+                    example: 2017-07-21
+                    format: date
+                    type: string
                 orderStatus:
                     example: 0
                     format: int32
