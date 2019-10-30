@@ -18,7 +18,6 @@ import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountLocalServiceUtil;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceShippingMethod;
-import com.liferay.commerce.service.CommerceAddressLocalServiceUtil;
 import com.liferay.commerce.service.CommerceShippingMethodLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 
@@ -32,8 +31,20 @@ public class CommerceShipmentImpl extends CommerceShipmentBaseImpl {
 
 	@Override
 	public CommerceAddress fetchCommerceAddress() {
-		return CommerceAddressLocalServiceUtil.fetchCommerceAddress(
-			getCommerceAddressId());
+		CommerceAddress commerceAddress = new CommerceAddressImpl();
+
+		commerceAddress.setName(getShippingName());
+		commerceAddress.setDescription(getShippingDescription());
+		commerceAddress.setStreet1(getShippingStreet1());
+		commerceAddress.setStreet2(getShippingStreet2());
+		commerceAddress.setStreet3(getShippingStreet3());
+		commerceAddress.setCity(getShippingCity());
+		commerceAddress.setZip(getShippingZip());
+		commerceAddress.setCommerceRegionId(getShippingRegionId());
+		commerceAddress.setCommerceCountryId(getShippingCountryId());
+		commerceAddress.setPhoneNumber(getShippingPhoneNumber());
+
+		return commerceAddress;
 	}
 
 	@Override
