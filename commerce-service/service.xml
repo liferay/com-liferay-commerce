@@ -575,7 +575,16 @@
 		<!-- Other fields -->
 
 		<column name="commerceAccountId" type="long" />
-		<column name="commerceAddressId" type="long" />
+		<column name="shippingName" type="String" />
+		<column name="shippingDescription" type="String" />
+		<column name="shippingStreet1" type="String" />
+		<column name="shippingStreet2" type="String" />
+		<column name="shippingStreet3" type="String" />
+		<column name="shippingCity" type="String" />
+		<column name="shippingZip" type="String" />
+		<column name="shippingRegionId" type="long" />
+		<column name="shippingCountryId" type="long" />
+		<column name="shippingPhoneNumber" type="String" />
 		<column name="commerceShippingMethodId" type="long" />
 		<column name="shippingOptionName" type="String" />
 		<column name="carrier" type="String" />
