@@ -481,6 +481,34 @@ public class Order {
 	protected Date modifiedDate;
 
 	@Schema
+	public Date getOrderDate() {
+		return orderDate;
+	}
+
+	public void setOrderDate(Date orderDate) {
+		this.orderDate = orderDate;
+	}
+
+	@JsonIgnore
+	public void setOrderDate(
+		UnsafeSupplier<Date, Exception> orderDateUnsafeSupplier) {
+
+		try {
+			orderDate = orderDateUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected Date orderDate;
+
+	@Schema
 	public Integer getOrderStatus() {
 		return orderStatus;
 	}
@@ -1598,6 +1626,20 @@ public class Order {
 			sb.append("\"");
 
 			sb.append(liferayToJSONDateFormat.format(modifiedDate));
+
+			sb.append("\"");
+		}
+
+		if (orderDate != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"orderDate\": ");
+
+			sb.append("\"");
+
+			sb.append(liferayToJSONDateFormat.format(orderDate));
 
 			sb.append("\"");
 		}
