@@ -19,7 +19,6 @@ import com.liferay.commerce.constants.CommerceShipmentConstants;
 import com.liferay.commerce.exception.CommerceShipmentExpectedDateException;
 import com.liferay.commerce.exception.CommerceShipmentShippingDateException;
 import com.liferay.commerce.exception.CommerceShipmentStatusException;
-import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceShipment;
@@ -32,14 +31,12 @@ import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PortalUtil;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @author Alessio Antonio Rendina
@@ -69,8 +66,20 @@ public class CommerceShipmentLocalServiceImpl
 		commerceShipment.setUserName(user.getFullName());
 		commerceShipment.setCommerceAccountId(
 			commerceOrder.getCommerceAccountId());
-		commerceShipment.setCommerceAddressId(
-			commerceOrder.getShippingAddressId());
+		commerceShipment.setShippingName(commerceOrder.getShippingName());
+		commerceShipment.setShippingDescription(
+			commerceOrder.getShippingDescription());
+		commerceShipment.setShippingStreet1(commerceOrder.getShippingStreet1());
+		commerceShipment.setShippingStreet2(commerceOrder.getShippingStreet2());
+		commerceShipment.setShippingStreet3(commerceOrder.getShippingStreet3());
+		commerceShipment.setShippingCity(commerceOrder.getShippingCity());
+		commerceShipment.setShippingZip(commerceOrder.getShippingZip());
+		commerceShipment.setShippingRegionId(
+			commerceOrder.getShippingRegionId());
+		commerceShipment.setShippingCountryId(
+			commerceOrder.getShippingCountryId());
+		commerceShipment.setShippingPhoneNumber(
+			commerceOrder.getShippingPhoneNumber());
 		commerceShipment.setCommerceShippingMethodId(
 			commerceOrder.getCommerceShippingMethodId());
 		commerceShipment.setShippingOptionName(
@@ -147,35 +156,19 @@ public class CommerceShipmentLocalServiceImpl
 			int expectedDateHour, int expectedDateMinute)
 		throws PortalException {
 
-		String name = null;
-		String description = null;
-		String street1 = null;
-		String street2 = null;
-		String street3 = null;
-		String city = null;
-		String zip = null;
-		long commerceRegionId = 0;
-		long commerceCountryId = 0;
-		String phoneNumber = null;
-
 		CommerceShipment commerceShipment =
 			commerceShipmentPersistence.findByPrimaryKey(commerceShipmentId);
 
-		CommerceAddress commerceAddress =
-			commerceShipment.fetchCommerceAddress();
-
-		if (commerceAddress != null) {
-			name = commerceAddress.getName();
-			description = commerceAddress.getDescription();
-			street1 = commerceAddress.getStreet1();
-			street2 = commerceAddress.getStreet2();
-			street3 = commerceAddress.getStreet3();
-			city = commerceAddress.getCity();
-			zip = commerceAddress.getZip();
-			commerceRegionId = commerceAddress.getCommerceRegionId();
-			commerceCountryId = commerceAddress.getCommerceCountryId();
-			phoneNumber = commerceAddress.getPhoneNumber();
-		}
+		String name = commerceShipment.getShippingName();
+		String description = commerceShipment.getShippingDescription();
+		String street1 = commerceShipment.getShippingStreet1();
+		String street2 = commerceShipment.getShippingStreet2();
+		String street3 = commerceShipment.getShippingStreet3();
+		String city = commerceShipment.getShippingCity();
+		String zip = commerceShipment.getShippingZip();
+		long commerceRegionId = commerceShipment.getShippingRegionId();
+		long commerceCountryId = commerceShipment.getShippingCountryId();
+		String phoneNumber = commerceShipment.getShippingPhoneNumber();
 
 		return commerceShipmentLocalService.updateCommerceShipment(
 			commerceShipmentId, name, description, street1, street2, street3,
@@ -220,12 +213,16 @@ public class CommerceShipmentLocalServiceImpl
 			expectedDateHour, expectedDateMinute, user.getTimeZone(),
 			CommerceShipmentExpectedDateException.class);
 
-		CommerceAddress commerceAddress = updateCommerceShipmentAddress(
-			commerceShipment, name, description, street1, street2, street3,
-			city, zip, commerceRegionId, commerceCountryId, phoneNumber);
-
-		commerceShipment.setCommerceAddressId(
-			commerceAddress.getCommerceAddressId());
+		commerceShipment.setShippingName(name);
+		commerceShipment.setShippingDescription(description);
+		commerceShipment.setShippingStreet1(street1);
+		commerceShipment.setShippingStreet2(street2);
+		commerceShipment.setShippingStreet3(street3);
+		commerceShipment.setShippingCity(city);
+		commerceShipment.setShippingZip(zip);
+		commerceShipment.setShippingRegionId(commerceRegionId);
+		commerceShipment.setShippingCountryId(commerceCountryId);
+		commerceShipment.setShippingPhoneNumber(phoneNumber);
 
 		commerceShipment.setCarrier(carrier);
 		commerceShipment.setTrackingNumber(trackingNumber);
@@ -303,40 +300,6 @@ public class CommerceShipmentLocalServiceImpl
 					CommerceOrderConstants.ORDER_STATUS_COMPLETED);
 			}
 		}
-	}
-
-	protected CommerceAddress updateCommerceShipmentAddress(
-			CommerceShipment commerceShipment, String name, String description,
-			String street1, String street2, String street3, String city,
-			String zip, long commerceRegionId, long commerceCountryId,
-			String phoneNumber)
-		throws PortalException {
-
-		CommerceAddress commerceAddress =
-			commerceShipment.fetchCommerceAddress();
-
-		if (Objects.equals(name, commerceAddress.getName()) &&
-			Objects.equals(description, commerceAddress.getDescription()) &&
-			Objects.equals(street1, commerceAddress.getStreet1()) &&
-			Objects.equals(street2, commerceAddress.getStreet2()) &&
-			Objects.equals(street3, commerceAddress.getStreet3()) &&
-			Objects.equals(city, commerceAddress.getCity()) &&
-			Objects.equals(zip, commerceAddress.getZip()) &&
-			Objects.equals(
-				commerceRegionId, commerceAddress.getCommerceRegionId()) &&
-			Objects.equals(
-				commerceCountryId, commerceAddress.getCommerceCountryId()) &&
-			Objects.equals(phoneNumber, commerceAddress.getPhoneNumber())) {
-
-			return commerceAddress;
-		}
-
-		return commerceAddressLocalService.addCommerceAddress(
-			commerceShipment.getModelClassName(),
-			commerceShipment.getCommerceShipmentId(), name, description,
-			street1, street2, street3, city, zip, commerceRegionId,
-			commerceCountryId, phoneNumber, false, false,
-			ServiceContextThreadLocal.getServiceContext());
 	}
 
 	protected void validate(int status, int oldStatus) throws PortalException {
