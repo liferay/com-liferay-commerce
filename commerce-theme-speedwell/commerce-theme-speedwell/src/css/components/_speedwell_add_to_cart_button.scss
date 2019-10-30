@@ -218,6 +218,7 @@
       font-size: 12px;
       height: $button-height;
       min-width: 160px;
+      position: relative;
 
       @media only screen and (max-width: 767px) {
         align-self: center;
@@ -247,10 +248,17 @@
 
         &:hover::before {
           align-items: center;
+          background-color: inherit;
+          border-radius: inherit;
+          bottom: 0;
           color: white;
           content: attr(data-add-more-label);
           display: flex;
           justify-content: center;
+          left: 0;
+          position: absolute;
+          right: 0;
+          top: 0;
         }
       }
     }
