@@ -145,7 +145,7 @@ public class CommercePaymentEngineTest {
 				ServiceContextTestUtil.getServiceContext(
 					_company.getGroupId()));
 
-		CPInstance cpInstance = CPTestUtil.addCPInstance(
+		CPInstance cpInstance = CPTestUtil.addCPInstanceFromCatalog(
 			commerceCatalog.getGroupId());
 
 		CommerceInventoryWarehouse commerceInventoryWarehouse =
@@ -225,7 +225,7 @@ public class CommercePaymentEngineTest {
 				ServiceContextTestUtil.getServiceContext(
 					_company.getGroupId()));
 
-		CPInstance cpInstance = CPTestUtil.addCPInstance(
+		CPInstance cpInstance = CPTestUtil.addCPInstanceFromCatalog(
 			commerceCatalog.getGroupId());
 
 		CommerceInventoryWarehouse commerceInventoryWarehouse =
