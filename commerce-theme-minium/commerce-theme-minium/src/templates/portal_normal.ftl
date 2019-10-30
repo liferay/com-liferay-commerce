@@ -10,6 +10,12 @@
 	<@liferay_util["include"] page=top_head_include />
 </head>
 
+<#if themeDisplay.isSignedIn() && themeDisplay.getLayout().isPublicLayout()>
+	<script>
+		window.location.replace("${themeDisplay.getPathFriendlyURLPrivateGroup() + themeDisplay.getScopeGroup().getFriendlyURL()}");
+	</script>
+</#if>
+
 <#assign isMiniumLogin = false />
 
 <#if themeDisplay.isSignedIn() && themeDisplay.getLayoutSet().isPrivateLayout()>
