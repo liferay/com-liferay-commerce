@@ -16,6 +16,7 @@ package com.liferay.commerce.internal.upgrade.v4_6_0;
 
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.impl.CommerceOrderModelImpl;
+import com.liferay.commerce.model.impl.CommerceShipmentModelImpl;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.jdbc.AutoBatchPreparedStatementUtil;
@@ -48,7 +49,7 @@ public class CommerceOrderAddressUpgradeProcess extends UpgradeProcess {
 
 		ResultSet rs = ps.executeQuery();
 
-		// Create columns on CommerceOrder to hold billing and shipping address info for placed orders
+		// Create columns on CommerceOrder to hold address info for placed order
 
 		_addOrderAddressColumns();
 
@@ -74,6 +75,22 @@ public class CommerceOrderAddressUpgradeProcess extends UpgradeProcess {
 
 		_updateAddressValues(rs, updateOrderShippingAddressSQL);
 
+		// Create columns on Shipment to hold shipping address info
+
+		_addShipmentAddressColumns();
+
+		// Add to new Shipping address columns for shipments
+
+		String updateShipmentAddressSQL = StringBundler.concat(
+			"update CommerceShipment set shippingName = ?,",
+			"shippingDescription = ?, shippingStreet1 = ?, shippingStreet2 = ",
+			"?, shippingStreet3 = ?, shippingCity = ?, shippingZip = ?,",
+			"shippingRegionId = ?, shippingCountryId = ?,",
+			"shippingPhoneNumber = ? where commerceAddressId = ?");
+
+		_updateAddressValues(rs, updateShipmentAddressSQL);
+
+		// Remove all addresses that belong to orders
 
 		PreparedStatement ps1 = connection.prepareStatement(
 			"delete from CommerceAddress where classNameId = ?");
@@ -82,6 +99,37 @@ public class CommerceOrderAddressUpgradeProcess extends UpgradeProcess {
 			1, _classNameLocalService.getClassNameId(CommerceOrder.class));
 
 		ps1.execute();
+
+		// Drop stale column from CommerceShipment
+
+		_dropColumn(CommerceShipmentModelImpl.TABLE_NAME, "commerceAddressId");
+	}
+
+	private void _addColumn(
+			Class<?> entityClass, String tableName, String columnName,
+			String columnType)
+		throws Exception {
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				String.format(
+					"Adding column %s to table %s", columnName, tableName));
+		}
+
+		if (!hasColumn(tableName, columnName)) {
+			alter(
+				entityClass,
+				new AlterTableAddColumn(
+					columnName + StringPool.SPACE + columnType));
+		}
+		else {
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					String.format(
+						"Column %s already exists on table %s", columnName,
+						tableName));
+			}
+		}
 	}
 
 	private void _addOrderAddressColumns() throws Exception {
@@ -147,29 +195,61 @@ public class CommerceOrderAddressUpgradeProcess extends UpgradeProcess {
 			"shippingPhoneNumber", "STRING");
 	}
 
-	private void _addColumn(
-			Class<?> entityClass, String tableName, String columnName,
-			String columnType)
+	private void _addShipmentAddressColumns() throws Exception {
+		_addColumn(
+			CommerceShipmentModelImpl.class,
+			CommerceShipmentModelImpl.TABLE_NAME, "shippingName", "STRING");
+		_addColumn(
+			CommerceShipmentModelImpl.class,
+			CommerceShipmentModelImpl.TABLE_NAME, "shippingDescription",
+			"STRING");
+		_addColumn(
+			CommerceShipmentModelImpl.class,
+			CommerceShipmentModelImpl.TABLE_NAME, "shippingStreet1", "STRING");
+		_addColumn(
+			CommerceShipmentModelImpl.class,
+			CommerceShipmentModelImpl.TABLE_NAME, "shippingStreet2", "STRING");
+		_addColumn(
+			CommerceShipmentModelImpl.class,
+			CommerceShipmentModelImpl.TABLE_NAME, "shippingStreet3", "STRING");
+		_addColumn(
+			CommerceShipmentModelImpl.class,
+			CommerceShipmentModelImpl.TABLE_NAME, "shippingCity", "STRING");
+		_addColumn(
+			CommerceShipmentModelImpl.class,
+			CommerceShipmentModelImpl.TABLE_NAME, "shippingZip", "STRING");
+		_addColumn(
+			CommerceShipmentModelImpl.class,
+			CommerceShipmentModelImpl.TABLE_NAME, "shippingRegionId", "LONG");
+		_addColumn(
+			CommerceShipmentModelImpl.class,
+			CommerceShipmentModelImpl.TABLE_NAME, "shippingCountryId", "LONG");
+		_addColumn(
+			CommerceShipmentModelImpl.class,
+			CommerceShipmentModelImpl.TABLE_NAME, "shippingPhoneNumber",
+			"STRING");
+	}
+
+	private void _dropColumn(String tableName, String columnName)
 		throws Exception {
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
 				String.format(
-					"Adding column %s to table %s", columnName, tableName));
+					"Dropping column %s from table %s", columnName, tableName));
 		}
 
-		if (!hasColumn(tableName, columnName)) {
-			alter(
-				entityClass,
-				new AlterTableAddColumn(
-					columnName + StringPool.SPACE + columnType));
+		if (hasColumn(tableName, columnName)) {
+			runSQL(
+				com.liferay.portal.kernel.util.StringBundler.concat(
+					"alter table ", tableName, " drop column ", columnName));
 		}
 		else {
 			if (_log.isInfoEnabled()) {
 				_log.info(
 					String.format(
-						"Column %s already exists on table %s", columnName,
-						tableName));
+						"Column %s already does not exist on table %s",
+						columnName, tableName));
 			}
 		}
 	}
