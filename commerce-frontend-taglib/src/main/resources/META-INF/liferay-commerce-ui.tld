@@ -398,6 +398,16 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>summary</name>
+		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.SummaryTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>items</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>table</name>
 		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.CommerceTableTag</tag-class>
 		<body-content>empty</body-content>
