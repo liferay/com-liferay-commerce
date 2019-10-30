@@ -14,11 +14,6 @@
 
 package com.liferay.commerce.price.list.test.util;
 
-import java.util.Calendar;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Stream;
-
 import com.liferay.commerce.account.model.CommerceAccountGroup;
 import com.liferay.commerce.account.service.CommerceAccountGroupLocalServiceUtil;
 import com.liferay.commerce.currency.model.CommerceCurrency;
@@ -33,6 +28,11 @@ import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+
+import java.util.Calendar;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * @author Luca Pellizzon
@@ -151,14 +151,13 @@ public class CommercePriceListTestUtil {
 			CommerceAccountGroup commerceAccountGroup)
 		throws Exception {
 
-		long groupId = commercePriceList.getGroupId();
-
 		CommercePriceListCommerceAccountGroupRelServiceUtil.
 			addCommercePriceListCommerceAccountGroupRel(
 				commercePriceList.getCommercePriceListId(),
 				commerceAccountGroup.getCommerceAccountGroupId(),
 				RandomTestUtil.randomInt(),
-				ServiceContextTestUtil.getServiceContext(groupId));
+				ServiceContextTestUtil.getServiceContext(
+					commercePriceList.getGroupId()));
 
 		return commercePriceList;
 	}
