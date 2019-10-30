@@ -6,13 +6,9 @@
     max-width: 500px;
     position: fixed;
     right: 0;
-    top: $liferay-topbar-size;
+    top: 0;
     transition: all ease 200ms;
     width: 100%;
-
-    @media screen and (max-width: 767px) {
-      top: $liferay-topbar-size-small;
-    }
 
     &::before {
       background: rgba(42, 42, 42, 0.7);
@@ -21,11 +17,11 @@
       left: 0;
       position: fixed;
       right: 0;
-      top: calc(#{$liferay-topbar-size} + #{$speedwell-topbar-size});
+      top: $speedwell-topbar-size;
       transition: all ease 200ms 200ms;
 
       @media screen and (max-width: 767px) {
-        top: calc(#{$liferay-topbar-size-small} + #{$speedwell-topbar-size-small} - 1px);
+        top: calc(#{$speedwell-topbar-size-small} - 1px);
       }
     }
 
@@ -35,6 +31,28 @@
 
     &:not(.is-open) {
       transform: translateX(100%);
+    }
+
+    body.has-control-menu & {
+      top: $liferay-topbar-size;
+
+      @media screen and (max-width: 767px) {
+        top: $liferay-topbar-size-small;
+      }
+
+      &::before {
+        top: calc(#{$liferay-topbar-size} + #{$speedwell-topbar-size});
+
+        @media screen and (max-width: 767px) {
+          top: calc(#{$liferay-topbar-size-small} + #{$speedwell-topbar-size-small} - 1px);
+        }
+      }
+
+      @media screen and (min-width: 450px) and (max-width: 767px) {
+        &.commerce-cart {
+          top: $speedwell-topbar-size-small !important;
+        }
+      }
     }
 
     &__close {

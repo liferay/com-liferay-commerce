@@ -6,9 +6,13 @@
   left: 0;
   position: fixed;
   right: 0;
-  top: $liferay-topbar-size;
+  top: 0;
   transition: background-color .2s $easeOutQuart;
   z-index: 988;
+
+  body.has-control-menu & {
+    top: $liferay-topbar-size;
+  }
 
   &__button,
   .speedwell-cart .commerce-topbar-button {

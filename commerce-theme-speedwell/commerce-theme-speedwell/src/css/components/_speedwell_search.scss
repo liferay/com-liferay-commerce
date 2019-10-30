@@ -71,12 +71,20 @@
     opacity: 1;
     position: fixed;
     right: 0;
-    top: calc(#{$liferay-topbar-size} + #{$speedwell-topbar-size});
+    top: $speedwell-topbar-size;
     transition-delay: 500ms !important;
     transition: opacity 200ms ease-in;
 
+    body.has-control-menu & {
+      top: calc(#{$liferay-topbar-size} + #{$speedwell-topbar-size});
+    }
+
     @media screen and (min-width: 376px) and (max-width: 767px) {
-      top: calc(#{$liferay-topbar-size-small} + #{$speedwell-topbar-size-small});
+      top: $speedwell-topbar-size-small;
+
+      body.has-control-menu & {
+        top: calc(#{$liferay-topbar-size-small} + #{$speedwell-topbar-size-small});
+      }
 
       .commerce-suggestions {
         &__wrapper {
@@ -86,7 +94,11 @@
     }
 
     @media screen and (max-width: 375px) {
-      top: calc(#{$liferay-topbar-size-small} + #{$speedwell-topbar-size-small} - 11px);
+      top: calc(#{$speedwell-topbar-size-small} - 11px);
+
+      body.has-control-menu & {
+        top: calc(#{$liferay-topbar-size-small} + #{$speedwell-topbar-size-small} - 11px);
+      }
 
       .commerce-suggestions {
         &__wrapper {

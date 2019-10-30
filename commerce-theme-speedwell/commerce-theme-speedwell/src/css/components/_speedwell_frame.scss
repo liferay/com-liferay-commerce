@@ -21,7 +21,11 @@
 
 		&--wide {
 			max-width: 100%;
-			padding: $liferay-topbar-size 0 0 0;
+			padding: 0;
+
+			body.has-control-menu & {
+				padding: $liferay-topbar-size 0 0 0;
+			}
 		}
 	}
 }

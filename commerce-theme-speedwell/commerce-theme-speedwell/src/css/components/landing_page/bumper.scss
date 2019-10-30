@@ -186,6 +186,10 @@
   }
 
   @media screen and (max-width: 767px) {
-    height: calc(100vh - #{$liferay-topbar-size-small})
+    height: 100vh;
+
+    body.has-control-menu & {
+      height: calc(100vh - #{$liferay-topbar-size-small});
+    }
   }
 }

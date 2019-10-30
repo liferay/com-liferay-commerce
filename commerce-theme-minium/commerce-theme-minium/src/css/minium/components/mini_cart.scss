@@ -30,7 +30,7 @@
 		bottom: 0;
 	}
 
-	body.signed-in & {
+	body.has-control-menu & {
 		top: $frame-size + $liferay-topbar-size;
 
 		@media screen and (max-width: 767px) {
