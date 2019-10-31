@@ -134,6 +134,8 @@ if ((cpDefinition != null) && (cpDefinition.getExpirationDate() != null)) {
 		</aui:fieldset>
 
 		<aui:fieldset collapsed="<%= true %>" collapsible="<%= true %>" label="schedule">
+			<liferay-ui:error exception="<%= CPDefinitionExpirationDateException.class %>" message="please-select-a-valid-expiration-date" />
+
 			<aui:input name="published" />
 
 			<aui:input formName="fm" name="displayDate" />
