@@ -108,4 +108,40 @@ public class CommerceInventoryBookedQuantityLocalServiceImpl
 		return resultQuantity;
 	}
 
+	@Override
+	public CommerceInventoryBookedQuantity resetCommerceBookedQuantity(
+			long commerceBookedQuantityId, long userId, String sku,
+			int quantity, Date expirationDate, Map<String, String> context)
+		throws PortalException {
+
+		CommerceInventoryBookedQuantity commerceBookedQuantity =
+			commerceInventoryBookedQuantityPersistence.fetchByPrimaryKey(
+				commerceBookedQuantityId);
+
+		if (commerceBookedQuantity == null) {
+			User user = userLocalService.getUser(userId);
+
+			commerceBookedQuantity =
+				commerceInventoryBookedQuantityPersistence.create(
+					commerceBookedQuantityId);
+
+			commerceBookedQuantity.setCompanyId(user.getCompanyId());
+			commerceBookedQuantity.setUserId(userId);
+			commerceBookedQuantity.setUserName(user.getFullName());
+			commerceBookedQuantity.setSku(sku);
+			commerceBookedQuantity.setExpirationDate(expirationDate);
+		}
+
+		commerceBookedQuantity.setQuantity(quantity);
+
+		String description =
+			"Book Quantity " + JSONFactoryUtil.serialize(context);
+
+		commerceInventoryAuditLocalService.addCommerceInventoryAudit(
+			userId, sku, quantity, description);
+
+		return commerceInventoryBookedQuantityPersistence.update(
+			commerceBookedQuantity);
+	}
+
 }
