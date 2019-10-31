@@ -69,6 +69,13 @@ public class CommerceOrderItemServiceWrapper
 	}
 
 	@Override
+	public void deleteCommerceOrderItems(long commerceOrderId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		_commerceOrderItemService.deleteCommerceOrderItems(commerceOrderId);
+	}
+
+	@Override
 	public com.liferay.commerce.model.CommerceOrderItem
 			fetchByExternalReferenceCode(
 				long companyId, String externalReferenceCode)
