@@ -776,6 +776,12 @@ public class CommerceOrderLocalServiceImpl
 		CommerceOrder commerceOrder = commerceOrderPersistence.findByPrimaryKey(
 			commerceOrderId);
 
+		if (commerceOrder.getOrderStatus() !=
+				CommerceOrderConstants.ORDER_STATUS_OPEN) {
+
+			return commerceOrder;
+		}
+
 		for (CommerceOrderItem commerceOrderItem :
 				commerceOrder.getCommerceOrderItems()) {
 
