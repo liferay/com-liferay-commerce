@@ -82,6 +82,8 @@ public class CommerceOrderIndexer extends BaseIndexer<CommerceOrder> {
 
 		addSearchTerm(searchQuery, searchContext, Field.ENTRY_CLASS_PK, false);
 		addSearchTerm(searchQuery, searchContext, "purchaseOrderNumber", false);
+		addSearchTerm(
+			searchQuery, searchContext, "externalReferenceCode", false);
 	}
 
 	@Override
@@ -116,6 +118,8 @@ public class CommerceOrderIndexer extends BaseIndexer<CommerceOrder> {
 		document.addKeyword("orderStatus", commerceOrder.getOrderStatus());
 		document.addKeyword(
 			"purchaseOrderNumber", commerceOrder.getPurchaseOrderNumber());
+		document.addKeyword(
+			"externalReferenceCode", commerceOrder.getExternalReferenceCode());
 		document.addNumber("total", commerceOrder.getTotal());
 
 		if (_log.isDebugEnabled()) {
