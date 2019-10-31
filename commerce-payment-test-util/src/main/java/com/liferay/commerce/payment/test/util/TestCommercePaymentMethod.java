@@ -38,6 +38,22 @@ public class TestCommercePaymentMethod implements CommercePaymentMethod {
 	public static final String KEY = "test-payment-method";
 
 	@Override
+	public boolean activateRecurringPayment(
+			CommercePaymentRequest commercePaymentRequest)
+		throws Exception {
+
+		return true;
+	}
+
+	@Override
+	public boolean cancelRecurringPayment(
+			CommercePaymentRequest commercePaymentRequest)
+		throws Exception {
+
+		return true;
+	}
+
+	@Override
 	public CommercePaymentResult completePayment(
 			CommercePaymentRequest commercePaymentRequest)
 		throws Exception {
@@ -74,12 +90,22 @@ public class TestCommercePaymentMethod implements CommercePaymentMethod {
 	}
 
 	@Override
+	public boolean isCancelRecurringEnabled() {
+		return true;
+	}
+
+	@Override
 	public boolean isCompleteEnabled() {
 		return true;
 	}
 
 	@Override
 	public boolean isProcessPaymentEnabled() {
+		return true;
+	}
+
+	@Override
+	public boolean isProcessRecurringEnabled() {
 		return true;
 	}
 
@@ -92,6 +118,14 @@ public class TestCommercePaymentMethod implements CommercePaymentMethod {
 			null, commercePaymentRequest.getCommerceOrderId(),
 			CommerceOrderConstants.PAYMENT_STATUS_AUTHORIZED, false, null, null,
 			Collections.emptyList(), true);
+	}
+
+	@Override
+	public boolean suspendRecurringPayment(
+			CommercePaymentRequest commercePaymentRequest)
+		throws Exception {
+
+		return true;
 	}
 
 }
