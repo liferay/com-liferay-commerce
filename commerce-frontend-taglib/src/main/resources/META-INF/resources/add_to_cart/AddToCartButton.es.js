@@ -105,7 +105,8 @@ function doSubmit() {
 							detailsUrl: jsonresponse.detailsUrl,
 							orderId: jsonresponse.orderId,
 							products: jsonresponse.products,
-							summary: jsonresponse.summary
+							summary: jsonresponse.summary,
+							valid: jsonresponse.valid
 						}
 					);
 				}
