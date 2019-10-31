@@ -8,6 +8,7 @@ dependencies {
 	testIntegrationCompile project(":apps:commerce:commerce-currency-test-util")
 	testIntegrationCompile project(":apps:commerce:commerce-notification-api")
 	testIntegrationCompile project(":apps:commerce:commerce-notification-test-util")
+	testIntegrationCompile project(":apps:commerce:commerce-payment-test-util")
 	testIntegrationCompile project(":apps:commerce:commerce-product-api")
 	testIntegrationCompile project(":apps:commerce:commerce-test-util")
 }
