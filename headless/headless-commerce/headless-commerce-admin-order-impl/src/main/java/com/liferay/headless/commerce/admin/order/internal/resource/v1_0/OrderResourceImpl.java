@@ -260,6 +260,9 @@ public class OrderResourceImpl
 		OrderItem[] orderItems = order.getItems();
 
 		if (orderItems != null) {
+			_commerceOrderItemService.deleteCommerceOrderItems(
+				commerceOrder.getCommerceOrderId());
+
 			for (OrderItem orderItem : orderItems) {
 				OrderItemUtil.upsertCommerceOrderItem(
 					_cpInstanceService, _commerceOrderItemService, orderItem,
