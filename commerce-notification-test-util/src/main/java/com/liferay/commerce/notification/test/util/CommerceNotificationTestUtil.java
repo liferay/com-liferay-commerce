@@ -38,4 +38,14 @@ public class CommerceNotificationTestUtil {
 				RandomTestUtil.randomLocaleStringMap(), serviceContext);
 	}
 
+	public static CommerceNotificationTemplate addNotificationTemplate(
+			String to, String notificationType, ServiceContext serviceContext)
+		throws PortalException {
+
+		return addCommerceNotificationTemplate(
+			RandomTestUtil.randomString(), RandomTestUtil.randomString(),
+			RandomTestUtil.randomString(), to, notificationType,
+			serviceContext);
+	}
+
 }

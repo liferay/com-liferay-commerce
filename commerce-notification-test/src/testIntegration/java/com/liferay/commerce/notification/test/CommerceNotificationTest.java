@@ -117,9 +117,11 @@ public class CommerceNotificationTest {
 	public void testAccountAdministratorRecipient() throws Exception {
 		_setUpAccountAdministrator();
 
-		_commerceNotificationTemplate = _addNotificationTemplate(
-			"[%ACCOUNT_ROLE_ADMINISTRATOR%]",
-			CommerceOrderConstants.ORDER_NOTIFICATION_PLACED);
+		_commerceNotificationTemplate =
+			CommerceNotificationTestUtil.addNotificationTemplate(
+				"[%ACCOUNT_ROLE_ADMINISTRATOR%]",
+				CommerceOrderConstants.ORDER_NOTIFICATION_PLACED,
+				_serviceContext);
 
 		_commerceOrder = CommerceTestUtil.addB2BCommerceOrder(
 			_group.getGroupId(), _user.getUserId(),
@@ -150,9 +152,11 @@ public class CommerceNotificationTest {
 
 	@Test
 	public void testOrderCreatorRecipient() throws Exception {
-		_commerceNotificationTemplate = _addNotificationTemplate(
-			"[%ORDER_CREATOR%]",
-			CommerceOrderConstants.ORDER_NOTIFICATION_PLACED);
+		_commerceNotificationTemplate =
+			CommerceNotificationTestUtil.addNotificationTemplate(
+				"[%ORDER_CREATOR%]",
+				CommerceOrderConstants.ORDER_NOTIFICATION_PLACED,
+				_serviceContext);
 
 		_commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
 			_group.getGroupId(), _user.getUserId(),
@@ -187,9 +191,11 @@ public class CommerceNotificationTest {
 
 		_setUpOrderManager();
 
-		_commerceNotificationTemplate = _addNotificationTemplate(
-			"[%ACCOUNT_ROLE_ORDER_MANAGER%]",
-			CommerceOrderConstants.ORDER_NOTIFICATION_PLACED);
+		_commerceNotificationTemplate =
+			CommerceNotificationTestUtil.addNotificationTemplate(
+				"[%ACCOUNT_ROLE_ORDER_MANAGER%]",
+				CommerceOrderConstants.ORDER_NOTIFICATION_PLACED,
+				_serviceContext);
 
 		_commerceOrder = CommerceTestUtil.addB2BCommerceOrder(
 			_group.getGroupId(), _user.getUserId(),
@@ -220,9 +226,11 @@ public class CommerceNotificationTest {
 
 	@Test
 	public void testOrderPlacedNotification() throws Exception {
-		_commerceNotificationTemplate = _addNotificationTemplate(
-			"[%ORDER_CREATOR%]",
-			CommerceOrderConstants.ORDER_NOTIFICATION_PLACED);
+		_commerceNotificationTemplate =
+			CommerceNotificationTestUtil.addNotificationTemplate(
+				"[%ORDER_CREATOR%]",
+				CommerceOrderConstants.ORDER_NOTIFICATION_PLACED,
+				_serviceContext);
 
 		_commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
 			_group.getGroupId(), _user.getUserId(),
@@ -237,16 +245,6 @@ public class CommerceNotificationTest {
 				getCommerceNotificationQueueEntriesCount(_group.getGroupId());
 
 		Assert.assertEquals(1, commerceNotificationQueueEntriesCount);
-	}
-
-	private CommerceNotificationTemplate _addNotificationTemplate(
-			String to, String notificationType)
-		throws PortalException {
-
-		return CommerceNotificationTestUtil.addCommerceNotificationTemplate(
-			RandomTestUtil.randomString(), RandomTestUtil.randomString(),
-			RandomTestUtil.randomString(), to, notificationType,
-			_serviceContext);
 	}
 
 	private void _setUpAccountAdministrator() throws Exception {
