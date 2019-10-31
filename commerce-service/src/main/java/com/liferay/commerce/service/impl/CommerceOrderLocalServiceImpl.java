@@ -210,6 +210,7 @@ public class CommerceOrderLocalServiceImpl
 		commerceOrder.setTotal(total);
 		commerceOrder.setPaymentStatus(paymentStatus);
 		commerceOrder.setOrderStatus(orderStatus);
+		commerceOrder.setManuallyAdjusted(false);
 		commerceOrder.setStatus(WorkflowConstants.STATUS_DRAFT);
 		commerceOrder.setStatusByUserId(user.getUserId());
 		commerceOrder.setStatusByUserName(user.getFullName());
