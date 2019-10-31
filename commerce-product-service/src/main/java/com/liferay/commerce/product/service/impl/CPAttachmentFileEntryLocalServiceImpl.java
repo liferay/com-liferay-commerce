@@ -119,6 +119,14 @@ public class CPAttachmentFileEntryLocalServiceImpl
 				CPAttachmentFileEntryExpirationDateException.class);
 		}
 
+		if ((expirationDate != null) &&
+			(expirationDate.before(new Date()) ||
+			 ((displayDate != null) && expirationDate.before(displayDate)))) {
+
+			throw new CPAttachmentFileEntryExpirationDateException(
+				"Expiration date " + expirationDate + " is in the past");
+		}
+
 		FileEntry fileEntry = dlAppLocalService.getFileEntry(fileEntryId);
 
 		if (Validator.isNull(titleMap.get(locale))) {
@@ -432,6 +440,14 @@ public class CPAttachmentFileEntryLocalServiceImpl
 				expirationDateMonth, expirationDateDay, expirationDateYear,
 				expirationDateHour, expirationDateMinute, user.getTimeZone(),
 				CPAttachmentFileEntryExpirationDateException.class);
+		}
+
+		if ((expirationDate != null) &&
+			(expirationDate.before(new Date()) ||
+			 ((displayDate != null) && expirationDate.before(displayDate)))) {
+
+			throw new CPAttachmentFileEntryExpirationDateException(
+				"Expiration date " + expirationDate + " is in the past");
 		}
 
 		FileEntry fileEntry = dlAppLocalService.getFileEntry(fileEntryId);

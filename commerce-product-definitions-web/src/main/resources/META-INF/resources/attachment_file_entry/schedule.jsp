@@ -35,9 +35,9 @@ if ((cpAttachmentFileEntry != null) && (cpAttachmentFileEntry.getExpirationDate(
 
 <aui:model-context bean="<%= cpAttachmentFileEntry %>" model="<%= CPAttachmentFileEntry.class %>" />
 
-<liferay-ui:error exception="<%= CPAttachmentFileEntryExpirationDateException.class %>" message="please-enter-a-valid-expiration-date" />
-
 <aui:fieldset>
+	<liferay-ui:error exception="<%= CPAttachmentFileEntryExpirationDateException.class %>" message="please-enter-a-valid-expiration-date" />
+
 	<aui:input formName="fm" name="displayDate" />
 
 	<aui:input dateTogglerCheckboxLabel="never-expire" disabled="<%= neverExpire %>" formName="fm" name="expirationDate" />

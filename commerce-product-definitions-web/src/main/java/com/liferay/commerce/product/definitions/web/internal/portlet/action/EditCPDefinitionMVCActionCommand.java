@@ -24,6 +24,7 @@ import com.liferay.commerce.account.model.CommerceAccountGroupRel;
 import com.liferay.commerce.account.service.CommerceAccountGroupRelService;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
+import com.liferay.commerce.product.exception.CPDefinitionExpirationDateException;
 import com.liferay.commerce.product.exception.CPDefinitionMetaDescriptionException;
 import com.liferay.commerce.product.exception.CPDefinitionMetaKeywordsException;
 import com.liferay.commerce.product.exception.CPDefinitionMetaTitleException;
@@ -176,6 +177,7 @@ public class EditCPDefinitionMVCActionCommand extends BaseMVCActionCommand {
 			}
 			else if (t instanceof AssetCategoryException ||
 					 t instanceof AssetTagException ||
+					 t instanceof CPDefinitionExpirationDateException ||
 					 t instanceof CPDefinitionMetaDescriptionException ||
 					 t instanceof CPDefinitionMetaKeywordsException ||
 					 t instanceof CPDefinitionMetaTitleException ||
