@@ -26,7 +26,7 @@
 			WHERE
 				(Group_.groupId = ?) AND
 				(CIWarehouseItem.sku = ?) AND
-				(CIWarehouse.active_ = 1)
+				(CIWarehouse.active_ = true)
 		]]>
 	</sql>
 	<sql id="com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseFinder.findByC_G_A">
@@ -59,9 +59,14 @@
 				SUM(CIWarehouseItem.quantity - CIWarehouseItem.reservedQuantity)  AS SUM_VALUE
 			FROM
 				CIWarehouseItem
+			INNER JOIN
+				CIWarehouse
+			ON
+				CIWarehouseItem.commerceInventoryWarehouseId = CIWarehouse.CIWarehouseId
 			WHERE
 				(CIWarehouseItem.companyId = ?) AND
-				(CIWarehouseItem.sku = ?)
+				(CIWarehouseItem.sku = ?) AND
+				(CIWarehouse.active_ = true)
 		]]>
 	</sql>
 	<sql id="com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseItemFinder.countStockQuantityByC_G_S">
@@ -82,10 +87,15 @@
 				Group_
 			ON
 				CommerceChannel.commerceChannelId = Group_.classPK
+			INNER JOIN
+				CIWarehouse
+			ON
+				CIWarehouseItem.commerceInventoryWarehouseId = CIWarehouse.CIWarehouseId
 			WHERE
 				(CIWarehouseItem.companyId = ?) AND
 				(Group_.groupId = ?) AND
-				(CIWarehouseItem.sku = ?)
+				(CIWarehouseItem.sku = ?) AND
+				(CIWarehouse.active_ = true)
 		]]>
 	</sql>
 	<sql id="com.liferay.commerce.inventory.service.persistence.CommerceInventoryWarehouseItemFinder.countUpdatedItemsByC_M">
