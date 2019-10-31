@@ -16,12 +16,16 @@ package com.liferay.commerce.account.test.util;
 
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.model.CommerceAccountGroup;
+import com.liferay.commerce.account.service.CommerceAccountGroupCommerceAccountRelLocalServiceUtil;
+import com.liferay.commerce.account.service.CommerceAccountGroupLocalServiceUtil;
 import com.liferay.commerce.account.service.CommerceAccountLocalServiceUtil;
 import com.liferay.commerce.account.service.CommerceAccountOrganizationRelLocalServiceUtil;
 import com.liferay.commerce.account.service.CommerceAccountUserRelLocalServiceUtil;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.test.util.RandomTestUtil;
 
 /**
  * @author Alessio Antonio Rendina
@@ -73,6 +77,33 @@ public class CommerceAccountTestUtil {
 		return addBusinessCommerceAccount(
 			userId, name, email, externalReferenceCode, null, null,
 			serviceContext);
+	}
+
+	public static CommerceAccountGroup addCommerceAccountGroup(
+			long companyId, String name, int type, String externalReferenceCode,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		return CommerceAccountGroupLocalServiceUtil.addCommerceAccountGroup(
+			companyId, name, type, false, externalReferenceCode,
+			serviceContext);
+	}
+
+	public static CommerceAccountGroup addCommerceAccountGroupAndAccountRel(
+			long companyId, String name, int type, long commerceAccountId,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		CommerceAccountGroup commerceAccountGroup = addCommerceAccountGroup(
+			companyId, name, type, RandomTestUtil.randomString(),
+			serviceContext);
+
+		CommerceAccountGroupCommerceAccountRelLocalServiceUtil.
+			addCommerceAccountGroupCommerceAccountRel(
+				commerceAccountGroup.getCommerceAccountGroupId(),
+				commerceAccountId, serviceContext);
+
+		return commerceAccountGroup;
 	}
 
 	public static void addCommerceAccountOrganizationRels(
