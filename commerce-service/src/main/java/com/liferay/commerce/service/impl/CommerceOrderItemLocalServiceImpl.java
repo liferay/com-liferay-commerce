@@ -142,6 +142,7 @@ public class CommerceOrderItemLocalServiceImpl
 		commerceOrderItem.setFinalPrice(finalPriceMoney.getPrice());
 		commerceOrderItem.setNameMap(cpDefinition.getNameMap());
 		commerceOrderItem.setSku(cpInstance.getSku());
+		commerceOrderItem.setManuallyAdjusted(false);
 		commerceOrderItem.setExpandoBridgeAttributes(serviceContext);
 
 		_setCommerceOrderItemDiscountValue(
