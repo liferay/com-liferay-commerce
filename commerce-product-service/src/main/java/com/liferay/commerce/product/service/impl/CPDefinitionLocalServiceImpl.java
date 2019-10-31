@@ -173,7 +173,7 @@ public class CPDefinitionLocalServiceImpl
 
 		validate(
 			groupId, ddmStructureKey, metaTitleMap, metaDescriptionMap,
-			metaKeywordsMap, productTypeName);
+			metaKeywordsMap, displayDate, expirationDate, productTypeName);
 
 		long cpDefinitionId = counterLocalService.increment();
 
@@ -1279,7 +1279,8 @@ public class CPDefinitionLocalServiceImpl
 
 		validate(
 			groupId, ddmStructureKey, metaTitleMap, metaDescriptionMap,
-			metaKeywordsMap, cpDefinition.getProductTypeName());
+			metaKeywordsMap, displayDate, expirationDate,
+			cpDefinition.getProductTypeName());
 
 		if (cpDefinitionLocalService.isVersionable(cpDefinition)) {
 			cpDefinition = cpDefinitionLocalService.copyCPDefinition(
@@ -1935,7 +1936,8 @@ public class CPDefinitionLocalServiceImpl
 			long groupId, String ddmStructureKey,
 			Map<Locale, String> metaTitleMap,
 			Map<Locale, String> metaDescriptionMap,
-			Map<Locale, String> metaKeywordsMap, String productTypeName)
+			Map<Locale, String> metaKeywordsMap, Date displayDate,
+			Date expirationDate, String productTypeName)
 		throws PortalException {
 
 		if (Validator.isNotNull(ddmStructureKey)) {
@@ -1987,6 +1989,14 @@ public class CPDefinitionLocalServiceImpl
 					throw cpDefinitionMetaKeywordsException;
 				}
 			}
+		}
+
+		if ((expirationDate != null) &&
+			(expirationDate.before(new Date()) ||
+			 ((displayDate != null) && expirationDate.before(displayDate)))) {
+
+			throw new CPDefinitionExpirationDateException(
+				"Expiration date " + expirationDate + " is in the past");
 		}
 
 		CPType cpType = _cpTypeServicesTracker.getCPType(productTypeName);
