@@ -43,6 +43,7 @@ public class ProductEntityModel implements EntityModel {
 				"modifiedDate",
 				locale -> Field.getSortableFieldName(Field.MODIFIED_DATE),
 				locale -> Field.MODIFIED_DATE),
+			new StringEntityField("productType", locale -> "productTypeName"),
 			new StringEntityField(
 				"name",
 				locale -> Field.getSortableFieldName(
