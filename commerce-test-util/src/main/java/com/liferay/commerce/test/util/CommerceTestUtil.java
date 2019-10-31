@@ -30,6 +30,8 @@ import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.model.CommerceShippingMethod;
 import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
 import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelLocalServiceUtil;
+import com.liferay.commerce.payment.test.util.TestCommercePaymentMethod;
+import com.liferay.commerce.product.constants.CPConstants;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CommerceCatalog;
@@ -260,7 +262,7 @@ public class CommerceTestUtil {
 	}
 
 	public static CommerceOrder addCheckoutDetailsToUserOrder(
-			CommerceOrder commerceOrder, long userId)
+			CommerceOrder commerceOrder, long userId, boolean subscription)
 		throws Exception {
 
 		long groupId = commerceOrder.getGroupId();
@@ -270,6 +272,14 @@ public class CommerceTestUtil {
 		BigDecimal price = BigDecimal.valueOf(RandomTestUtil.randomDouble());
 
 		cpInstance.setPrice(price);
+
+		if (subscription) {
+			cpInstance.setOverrideSubscriptionInfo(true);
+			cpInstance.setSubscriptionEnabled(true);
+			cpInstance.setSubscriptionLength(1);
+			cpInstance.setSubscriptionType(CPConstants.DAILY_SUBSCRIPTION_TYPE);
+			cpInstance.setMaxSubscriptionCycles(2);
+		}
 
 		CPInstanceLocalServiceUtil.updateCPInstance(cpInstance);
 
@@ -302,7 +312,9 @@ public class CommerceTestUtil {
 			shippingCommerceAddress.getCommerceAddressId());
 
 		CommercePaymentMethodGroupRel commercePaymentMethodGroupRel =
-			addCommercePaymentMethodGroupRel(groupId);
+			addCommercePaymentMethodGroupRel(
+				commerceOrder.getCompanyId(), groupId, userId,
+				commerceChannel.getSiteGroupId());
 
 		commerceOrder.setCommercePaymentMethodKey(
 			commercePaymentMethodGroupRel.getEngineKey());
@@ -420,15 +432,23 @@ public class CommerceTestUtil {
 	}
 
 	public static CommercePaymentMethodGroupRel
-			addCommercePaymentMethodGroupRel(long groupId)
+			addCommercePaymentMethodGroupRel(
+				long companyId, long groupId, long userId, long scopeGroupId)
 		throws Exception {
+
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(
+				companyId, groupId, userId);
+
+		serviceContext.setScopeGroupId(scopeGroupId);
 
 		return CommercePaymentMethodGroupRelLocalServiceUtil.
 			addCommercePaymentMethodGroupRel(
 				RandomTestUtil.randomLocaleStringMap(),
-				RandomTestUtil.randomLocaleStringMap(), null, "money-order",
+				RandomTestUtil.randomLocaleStringMap(), null,
+				TestCommercePaymentMethod.KEY,
 				Collections.<String, String>emptyMap(), 1, true,
-				ServiceContextTestUtil.getServiceContext(groupId));
+				serviceContext);
 	}
 
 	public static CommerceShippingFixedOption addCommerceShippingFixedOption(

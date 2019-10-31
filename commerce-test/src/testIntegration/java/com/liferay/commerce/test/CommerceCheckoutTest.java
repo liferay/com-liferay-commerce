@@ -85,7 +85,7 @@ public class CommerceCheckoutTest {
 			commerceCurrency.getCommerceCurrencyId());
 
 		CommerceTestUtil.addCheckoutDetailsToUserOrder(
-			commerceOrder, commerceOrder.getUserId());
+			commerceOrder, commerceOrder.getUserId(), false);
 
 		commerceOrder = CommerceTestUtil.checkoutOrder(commerceOrder);
 
