@@ -92,6 +92,16 @@ public class CommerceOrderItemServiceImpl
 	}
 
 	@Override
+	public void deleteCommerceOrderItems(long commerceOrderId)
+		throws PortalException {
+
+		_commerceOrderModelResourcePermission.check(
+			getPermissionChecker(), commerceOrderId, ActionKeys.UPDATE);
+
+		commerceOrderItemLocalService.deleteCommerceOrderItems(commerceOrderId);
+	}
+
+	@Override
 	public CommerceOrderItem fetchByExternalReferenceCode(
 			long companyId, String externalReferenceCode)
 		throws PortalException {
