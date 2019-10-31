@@ -308,6 +308,20 @@ public class CommerceOrderItemServiceSoap {
 		}
 	}
 
+	public static void deleteCommerceOrderItems(long commerceOrderId)
+		throws RemoteException {
+
+		try {
+			CommerceOrderItemServiceUtil.deleteCommerceOrderItems(
+				commerceOrderId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.commerce.model.CommerceOrderItemSoap
 			updateCommerceOrderItem(
 				long commerceOrderItemId, int quantity, String json,

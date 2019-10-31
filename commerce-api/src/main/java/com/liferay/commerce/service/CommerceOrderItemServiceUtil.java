@@ -71,6 +71,12 @@ public class CommerceOrderItemServiceUtil {
 			commerceOrderItemId, commerceContext);
 	}
 
+	public static void deleteCommerceOrderItems(long commerceOrderId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		getService().deleteCommerceOrderItems(commerceOrderId);
+	}
+
 	public static com.liferay.commerce.model.CommerceOrderItem
 			fetchByExternalReferenceCode(
 				long companyId, String externalReferenceCode)
