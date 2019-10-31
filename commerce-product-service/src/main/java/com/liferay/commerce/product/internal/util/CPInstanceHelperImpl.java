@@ -27,7 +27,6 @@ import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
 import com.liferay.commerce.product.model.CPInstance;
-import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.service.CPAttachmentFileEntryLocalService;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelLocalService;
@@ -726,13 +725,11 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 				continue;
 			}
 
-			CPOption cpOption = cpDefinitionOptionRel.getCPOption();
-
 			List<CPDefinitionOptionValueRel> cpDefinitionOptionValueRels =
 				cpDefinitionOptionRel.getCPDefinitionOptionValueRels();
 
 			DDMFormField ddmFormField = new DDMFormField(
-				cpOption.getKey(),
+				cpDefinitionOptionRel.getKey(),
 				cpDefinitionOptionRel.getDDMFormFieldTypeName());
 
 			if (!cpDefinitionOptionValueRels.isEmpty()) {
