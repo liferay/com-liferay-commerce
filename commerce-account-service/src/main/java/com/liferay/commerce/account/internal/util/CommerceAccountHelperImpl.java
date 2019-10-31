@@ -126,6 +126,11 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 			if (commerceAccount == null) {
 				setCurrentCommerceAccount(httpServletRequest, groupId, -1);
 			}
+			else {
+				setCurrentCommerceAccount(
+					httpServletRequest, groupId,
+					commerceAccount.getCommerceAccountId());
+			}
 		}
 
 		return commerceAccount;
@@ -234,7 +239,7 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 				user.getUserId(),
 				CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID,
 				commerceAccountGroupServiceConfiguration.commerceSiteType(),
-				StringPool.BLANK, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+				StringPool.BLANK, 0, 1);
 
 		if (userCommerceAccounts.size() == 1) {
 			return userCommerceAccounts.get(0);
