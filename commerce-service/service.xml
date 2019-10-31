@@ -284,6 +284,7 @@
 		<column name="orderStatus" type="int" />
 		<column name="printedNote" type="String" />
 		<column name="requestedDeliveryDate" type="Date" />
+		<column name="manuallyAdjusted" type="boolean" />
 		<column name="status" type="int" />
 		<column name="statusByUserId" type="long" />
 		<column name="statusByUserName" type="String" />
@@ -381,6 +382,7 @@
 		<column name="printedNote" type="String" />
 		<column name="requestedDeliveryDate" type="Date" />
 		<column name="bookedQuantityId" type="long" />
+		<column name="manuallyAdjusted" type="boolean" />
 
 		<!-- Order -->
 
