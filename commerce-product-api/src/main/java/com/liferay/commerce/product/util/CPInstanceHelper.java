@@ -58,7 +58,7 @@ public interface CPInstanceHelper {
 		throws PortalException;
 
 	public List<CPDefinitionOptionValueRel> getCPDefinitionOptionValueRel(
-			long cpDefinitionId, String optionFieldName,
+			long cpDefinitionId, String optionKey,
 			Map<String, String> optionMap)
 		throws Exception;
 
