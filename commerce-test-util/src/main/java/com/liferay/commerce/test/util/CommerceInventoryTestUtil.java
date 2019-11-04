@@ -47,23 +47,7 @@ public class CommerceInventoryTestUtil {
 			long groupId)
 		throws PortalException {
 
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(groupId);
-
-		CommerceCountry commerceCountry = _setUpCountry(serviceContext);
-
-		CommerceRegion commerceRegion = _setUpRegion(
-			commerceCountry, serviceContext);
-
-		return CommerceInventoryWarehouseLocalServiceUtil.
-			addCommerceInventoryWarehouse(
-				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
-				true, RandomTestUtil.randomString(),
-				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
-				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
-				commerceRegion.getCode(),
-				commerceCountry.getTwoLettersISOCode(), 45.4386111, 12.3266667,
-				null, serviceContext);
+		return addCommerceInventoryWarehouse(groupId, true);
 	}
 
 	public static CommerceInventoryWarehouse addCommerceInventoryWarehouse(

@@ -16,6 +16,8 @@ package com.liferay.commerce.inventory.engine.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.commerce.inventory.engine.CommerceInventoryEngine;
+import com.liferay.commerce.inventory.exception.DuplicateCommerceInventoryWarehouseException;
+import com.liferay.commerce.inventory.exception.DuplicateCommerceInventoryWarehouseItemException;
 import com.liferay.commerce.inventory.exception.NoSuchInventoryBookedQuantityException;
 import com.liferay.commerce.inventory.model.CommerceInventoryBookedQuantity;
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
@@ -34,6 +36,7 @@ import com.liferay.commerce.product.test.util.CPTestUtil;
 import com.liferay.commerce.service.CommerceCountryLocalService;
 import com.liferay.commerce.test.util.CommerceInventoryTestUtil;
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
@@ -51,6 +54,7 @@ import com.liferay.portal.test.rule.PermissionCheckerTestRule;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -99,6 +103,37 @@ public class CommerceInventoryEngineTest {
 
 		_cpInstance1 = _randomCPInstanceSku();
 		_cpInstance2 = _randomCPInstanceSku();
+	}
+
+	@Test(expected = DuplicateCommerceInventoryWarehouseItemException.class)
+	public void testAddMultipleItemsWithSameSkuToWarehouse() throws Exception {
+		frutillaRule.scenario(
+			"It should not be possible to add multiple items with same SKU"
+		).given(
+			"1 active warehouse"
+		).when(
+			"The same SKU is added twice to the same warehouse"
+		).then(
+			"An exception is raised"
+		);
+
+		CommerceInventoryWarehouse commerceInventoryWarehouseActive =
+			CommerceInventoryTestUtil.addCommerceInventoryWarehouse(
+				_user.getGroupId(), true);
+
+		_commerceInventoryWarehouseItemLocalService.
+			addCommerceInventoryWarehouseItem(
+				_user.getUserId(),
+				commerceInventoryWarehouseActive.
+					getCommerceInventoryWarehouseId(),
+				_cpInstance1.getSku(), 1);
+
+		_commerceInventoryWarehouseItemLocalService.
+			addCommerceInventoryWarehouseItem(
+				_user.getUserId(),
+				commerceInventoryWarehouseActive.
+					getCommerceInventoryWarehouseId(),
+				_cpInstance1.getSku(), 1);
 	}
 
 	@Test
@@ -214,8 +249,6 @@ public class CommerceInventoryEngineTest {
 
 		int bookedQuantity = 12;
 
-		// there is no check on the booked quantity
-
 		CommerceInventoryBookedQuantity commerceBookedQuantity =
 			_commerceBookedQuantityLocalService.addCommerceBookedQuantity(
 				_user.getUserId(), _cpInstance1.getSku(), bookedQuantity, null,
@@ -264,6 +297,19 @@ public class CommerceInventoryEngineTest {
 
 	@Test(expected = NoSuchInventoryBookedQuantityException.class)
 	public void testConsumeQuantity() throws Exception {
+		frutillaRule.scenario(
+			"When the booked quantity is consumed also the DB record shall " +
+				"be deleted"
+		).given(
+			"1 warehouse item"
+		).and(
+			"Some booked quantity of that item"
+		).when(
+			"The quantity is consumed"
+		).then(
+			"The booked quantity record shall not be present"
+		);
+
 		_commerceInventoryWarehouseItem1 =
 			CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
 				_commerceChannel.getCommerceChannelId(), _cpInstance1.getSku(),
@@ -306,7 +352,7 @@ public class CommerceInventoryEngineTest {
 	@Test
 	public void testConsumeQuantityFromMultipleWarehouses() throws Exception {
 		frutillaRule.scenario(
-			"When the same warehouse item is added to 2 active warehouse the" +
+			"When the same warehouse item is added to 2 active warehouse the " +
 				"maximum consumable quantity is qual to the sum of the stock " +
 					"in both warehouses"
 		).given(
@@ -352,9 +398,6 @@ public class CommerceInventoryEngineTest {
 
 		int quantity = 7;
 
-		// consume quantity is called only after a validation done by the
-		// shipping process
-
 		_commerceInventoryEngine.consumeQuantity(
 			_user.getUserId(),
 			commerceInventoryWarehouse1.getCommerceInventoryWarehouseId(),
@@ -369,7 +412,7 @@ public class CommerceInventoryEngineTest {
 			remainingCompanyStockQuantity);
 	}
 
-	@Test
+	@Test(expected = DuplicateCommerceInventoryWarehouseException.class)
 	public void testCreateMultipleWarehousesWithSameAttributes()
 		throws Exception {
 
@@ -393,9 +436,6 @@ public class CommerceInventoryEngineTest {
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(_user.getGroupId());
-
-		// even after setting the external reference code it is possible
-		// to add the second warehouse
 
 		_commerceInventoryWarehouseLocalService.addCommerceInventoryWarehouse(
 			commerceInventoryWarehouse.getName(),
@@ -512,6 +552,16 @@ public class CommerceInventoryEngineTest {
 
 	@Test
 	public void testGetStockQuantities() throws Exception {
+		frutillaRule.scenario(
+			"Stock quantities shall be correctly retrieved given the SKUs"
+		).given(
+			"2 warehouse items with different SKUs"
+		).when(
+			"I retrieve the stock quantity of the items"
+		).then(
+			"The correct value shall be returned"
+		);
+
 		_commerceInventoryWarehouseItem1 =
 			CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
 				_commerceChannel.getCommerceChannelId(), _cpInstance1.getSku(),
@@ -686,6 +736,202 @@ public class CommerceInventoryEngineTest {
 
 		Assert.assertEquals(
 			_commerceInventoryWarehouseItem1.getQuantity(), stockQuantity);
+	}
+
+	@Test
+	public void testGetWarehouse() throws Exception {
+		frutillaRule.scenario(
+			"It should be possible to filter warehouses based on their status"
+		).given(
+			"1 active and 1 inactive warehouse"
+		).when(
+			"I search by company, groupId and status"
+		).then(
+			"The correct warehouses are retrieved"
+		);
+
+		CommerceInventoryWarehouse commerceInventoryWarehouseActive =
+			CommerceInventoryTestUtil.addCommerceInventoryWarehouse(
+				_user.getGroupId(), true);
+
+		CommerceInventoryWarehouse commerceInventoryWarehouseInactive =
+			CommerceInventoryTestUtil.addCommerceInventoryWarehouse(
+				_user.getGroupId(), false);
+
+		CommerceChannelRelLocalServiceUtil.addCommerceChannelRel(
+			CommerceInventoryWarehouse.class.getName(),
+			commerceInventoryWarehouseActive.getCommerceInventoryWarehouseId(),
+			_commerceChannel.getCommerceChannelId(), _serviceContext);
+
+		CommerceChannelRelLocalServiceUtil.addCommerceChannelRel(
+			CommerceInventoryWarehouse.class.getName(),
+			commerceInventoryWarehouseInactive.
+				getCommerceInventoryWarehouseId(),
+			_commerceChannel.getCommerceChannelId(), _serviceContext);
+
+		List<CommerceInventoryWarehouse> activeWarehouses =
+			_commerceInventoryWarehouseLocalService.
+				getCommerceInventoryWarehouses(
+					_company.getCompanyId(), _commerceChannel.getGroupId(),
+					true);
+		List<CommerceInventoryWarehouse> inactiveWarehouses =
+			_commerceInventoryWarehouseLocalService.
+				getCommerceInventoryWarehouses(
+					_company.getCompanyId(), _commerceChannel.getGroupId(),
+					false);
+
+		Assert.assertEquals(
+			activeWarehouses.toString(), 1, activeWarehouses.size());
+		Assert.assertEquals(
+			inactiveWarehouses.toString(), 1, inactiveWarehouses.size());
+
+		Assert.assertEquals(
+			commerceInventoryWarehouseActive, activeWarehouses.get(0));
+		Assert.assertEquals(
+			commerceInventoryWarehouseInactive, inactiveWarehouses.get(0));
+	}
+
+	@Test
+	public void testGetWarehouseBySku() throws Exception {
+		frutillaRule.scenario(
+			"It should be possible to search warehouses by SKUs only for " +
+				"active warehouses"
+		).given(
+			"1 active and 1 inactive warehouse"
+		).when(
+			"I search by groupId and SKUs"
+		).then(
+			"The correct warehouses are retrieved"
+		);
+
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
+			CommerceInventoryTestUtil.addCommerceInventoryWarehouse(
+				_user.getGroupId(), true);
+
+		CommerceChannelRelLocalServiceUtil.addCommerceChannelRel(
+			CommerceInventoryWarehouse.class.getName(),
+			commerceInventoryWarehouse.getCommerceInventoryWarehouseId(),
+			_commerceChannel.getCommerceChannelId(), _serviceContext);
+
+		_commerceInventoryWarehouseItemLocalService.
+			addCommerceInventoryWarehouseItem(
+				_user.getUserId(),
+				commerceInventoryWarehouse.getCommerceInventoryWarehouseId(),
+				_cpInstance1.getSku(), 1);
+
+		List<CommerceInventoryWarehouse> expectedWarehouses =
+			_commerceInventoryWarehouseLocalService.
+				getCommerceInventoryWarehouses(
+					_commerceChannel.getGroupId(), _cpInstance1.getSku());
+
+		Assert.assertEquals(
+			expectedWarehouses.toString(), 1, expectedWarehouses.size());
+
+		CommerceInventoryWarehouse retrievedWarehouse = expectedWarehouses.get(
+			0);
+
+		Assert.assertEquals(commerceInventoryWarehouse, retrievedWarehouse);
+
+		CommerceInventoryWarehouse commerceInventoryWarehouse1 =
+			CommerceInventoryTestUtil.addCommerceInventoryWarehouse(
+				_user.getGroupId(), false);
+
+		CommerceChannelRelLocalServiceUtil.addCommerceChannelRel(
+			CommerceInventoryWarehouse.class.getName(),
+			commerceInventoryWarehouse1.getCommerceInventoryWarehouseId(),
+			_commerceChannel.getCommerceChannelId(), _serviceContext);
+
+		_commerceInventoryWarehouseItemLocalService.
+			addCommerceInventoryWarehouseItem(
+				_user.getUserId(),
+				commerceInventoryWarehouse1.getCommerceInventoryWarehouseId(),
+				_cpInstance1.getSku(), 1);
+
+		expectedWarehouses =
+			_commerceInventoryWarehouseLocalService.
+				getCommerceInventoryWarehouses(
+					_commerceChannel.getGroupId(), _cpInstance1.getSku());
+
+		Assert.assertEquals(
+			expectedWarehouses.toString(), 1, expectedWarehouses.size());
+
+		retrievedWarehouse = expectedWarehouses.get(0);
+
+		Assert.assertEquals(commerceInventoryWarehouse, retrievedWarehouse);
+
+		CommerceInventoryWarehouse commerceInventoryWarehouse2 =
+			CommerceInventoryTestUtil.addCommerceInventoryWarehouse(
+				_user.getGroupId(), true);
+
+		CommerceChannelRelLocalServiceUtil.addCommerceChannelRel(
+			CommerceInventoryWarehouse.class.getName(),
+			commerceInventoryWarehouse2.getCommerceInventoryWarehouseId(),
+			_commerceChannel.getCommerceChannelId(), _serviceContext);
+
+		_commerceInventoryWarehouseItemLocalService.
+			addCommerceInventoryWarehouseItem(
+				_user.getUserId(),
+				commerceInventoryWarehouse2.getCommerceInventoryWarehouseId(),
+				_cpInstance2.getSku(), 1);
+
+		expectedWarehouses =
+			_commerceInventoryWarehouseLocalService.
+				getCommerceInventoryWarehouses(
+					_commerceChannel.getGroupId(), _cpInstance1.getSku());
+
+		Assert.assertEquals(
+			expectedWarehouses.toString(), 1, expectedWarehouses.size());
+
+		expectedWarehouses =
+			_commerceInventoryWarehouseLocalService.
+				getCommerceInventoryWarehouses(
+					_commerceChannel.getGroupId(), _cpInstance2.getSku());
+
+		Assert.assertEquals(
+			expectedWarehouses.toString(), 1, expectedWarehouses.size());
+
+		retrievedWarehouse = expectedWarehouses.get(0);
+
+		Assert.assertEquals(commerceInventoryWarehouse2, retrievedWarehouse);
+	}
+
+	@Test
+	public void testGetWarehouseItemByDate() throws Exception {
+		frutillaRule.scenario(
+			"It should be possible to filter warehousesItes based on their " +
+				"modified date"
+		).given(
+			"1 warehouse item"
+		).when(
+			"I search by company and date range"
+		).then(
+			"The warehouse item is retrieved"
+		);
+
+		Date startDate = new Date();
+
+		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
+			CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
+				_commerceChannel.getCommerceChannelId(), _cpInstance1.getSku(),
+				10, _serviceContext);
+
+		Date endDate = new Date();
+
+		int countWarehouseItems =
+			_commerceInventoryWarehouseItemLocalService.
+				getCommerceInventoryWarehouseItemsCountByModifiedDate(
+					_company.getCompanyId(), startDate, endDate);
+
+		Assert.assertEquals(1, countWarehouseItems);
+
+		List<CommerceInventoryWarehouseItem> warehouseItems =
+			_commerceInventoryWarehouseItemLocalService.
+				getCommerceInventoryWarehouseItemsByModifiedDate(
+					_company.getCompanyId(), startDate, endDate,
+					QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+		Assert.assertEquals(
+			warehouseItems.get(0), commerceInventoryWarehouseItem);
 	}
 
 	@Rule
