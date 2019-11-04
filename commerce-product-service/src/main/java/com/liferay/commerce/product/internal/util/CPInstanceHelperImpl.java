@@ -261,12 +261,19 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 
 	@Override
 	public List<CPDefinitionOptionValueRel> getCPDefinitionOptionValueRel(
-			long cpDefinitionId, String optionFieldName,
+			long cpDefinitionId, String optionKey,
 			Map<String, String> optionMap)
 		throws Exception {
 
+		List<CPDefinitionOptionValueRel> cpDefinitionOptionValueRels =
+			new ArrayList<>();
+
 		CPDefinition cpDefinition = _cpDefinitionLocalService.getCPDefinition(
 			cpDefinitionId);
+
+		CPDefinitionOptionRel cpDefinitionOptionRel =
+			_cpDefinitionOptionRelLocalService.fetchCPDefinitionOptionRelByKey(
+				cpDefinitionId, optionKey);
 
 		Indexer<CPInstance> indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 			CPInstance.class);
@@ -302,25 +309,23 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 		searchContext.setCompanyId(cpDefinition.getCompanyId());
 		searchContext.setGroupIds(new long[] {cpDefinition.getGroupId()});
 
+		String optionFieldName = "ATTRIBUTE_" + optionKey + "_VALUE_ID";
+
 		Hits hits = indexer.search(searchContext, optionFieldName);
 
 		Document[] documents = hits.getDocs();
 
-		List<Long> cpDefinitionOptionValueRelIsList = new ArrayList<>();
-
 		for (Document document : documents) {
-			long classPK = GetterUtil.getLong(document.get(optionFieldName));
+			String key = GetterUtil.getString(document.get(optionFieldName));
 
-			if (classPK > 0) {
-				cpDefinitionOptionValueRelIsList.add(classPK);
-			}
+			cpDefinitionOptionValueRels.add(
+				_cpDefinitionOptionValueRelLocalService.
+					fetchCPDefinitionOptionValueRel(
+						cpDefinitionOptionRel.getCPDefinitionOptionRelId(),
+						key));
 		}
 
-		long[] cpDefinitionOptionValueRelIds = ArrayUtil.toLongArray(
-			cpDefinitionOptionValueRelIsList);
-
-		return _cpDefinitionOptionValueRelLocalService.
-			getCPDefinitionOptionValueRels(cpDefinitionOptionValueRelIds);
+		return cpDefinitionOptionValueRels;
 	}
 
 	@Override
@@ -716,6 +721,8 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 
 		DDMForm ddmForm = new DDMForm();
 
+		Map<String, String> filters = new HashMap<>();
+
 		for (CPDefinitionOptionRel cpDefinitionOptionRel :
 				cpDefinitionOptionRels) {
 
@@ -725,42 +732,49 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 				continue;
 			}
 
-			List<CPDefinitionOptionValueRel> cpDefinitionOptionValueRels =
-				cpDefinitionOptionRel.getCPDefinitionOptionValueRels();
+			try {
+				List<CPDefinitionOptionValueRel> cpDefinitionOptionValueRels =
+					getCPDefinitionOptionValueRel(
+						cpDefinitionId, cpDefinitionOptionRel.getKey(),
+						filters);
 
-			DDMFormField ddmFormField = new DDMFormField(
-				cpDefinitionOptionRel.getKey(),
-				cpDefinitionOptionRel.getDDMFormFieldTypeName());
+				DDMFormField ddmFormField = new DDMFormField(
+					cpDefinitionOptionRel.getKey(),
+					cpDefinitionOptionRel.getDDMFormFieldTypeName());
 
-			if (!cpDefinitionOptionValueRels.isEmpty()) {
-				DDMFormFieldOptions ddmFormFieldOptions =
-					new DDMFormFieldOptions();
+				if (!cpDefinitionOptionValueRels.isEmpty()) {
+					DDMFormFieldOptions ddmFormFieldOptions =
+						new DDMFormFieldOptions();
 
-				for (CPDefinitionOptionValueRel cpDefinitionOptionValueRel :
-						cpDefinitionOptionValueRels) {
+					for (CPDefinitionOptionValueRel cpDefinitionOptionValueRel :
+							cpDefinitionOptionValueRels) {
 
-					ddmFormFieldOptions.addOptionLabel(
-						cpDefinitionOptionValueRel.getKey(), locale,
-						cpDefinitionOptionValueRel.getName(locale));
+						ddmFormFieldOptions.addOptionLabel(
+							cpDefinitionOptionValueRel.getKey(), locale,
+							cpDefinitionOptionValueRel.getName(locale));
+					}
+
+					ddmFormField.setDDMFormFieldOptions(ddmFormFieldOptions);
 				}
 
-				ddmFormField.setDDMFormFieldOptions(ddmFormFieldOptions);
+				LocalizedValue localizedValue = new LocalizedValue(locale);
+
+				localizedValue.addString(
+					locale, cpDefinitionOptionRel.getName(locale));
+
+				ddmFormField.setLabel(localizedValue);
+
+				boolean required = _isDDMFormRequired(
+					cpDefinitionOptionRel, ignoreSKUCombinations, optional,
+					publicStore);
+
+				ddmFormField.setRequired(required);
+
+				ddmForm.addDDMFormField(ddmFormField);
 			}
-
-			LocalizedValue localizedValue = new LocalizedValue(locale);
-
-			localizedValue.addString(
-				locale, cpDefinitionOptionRel.getName(locale));
-
-			ddmFormField.setLabel(localizedValue);
-
-			boolean required = _isDDMFormRequired(
-				cpDefinitionOptionRel, ignoreSKUCombinations, optional,
-				publicStore);
-
-			ddmFormField.setRequired(required);
-
-			ddmForm.addDDMFormField(ddmFormField);
+			catch (Exception e) {
+				throw new PortalException("Unable to find option values", e);
+			}
 		}
 
 		ddmForm.addAvailableLocale(locale);
