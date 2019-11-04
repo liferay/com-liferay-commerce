@@ -64,6 +64,12 @@ public class CommerceAccountGroupItemSelectorViewDisplayContext {
 	}
 
 	public PortletURL getPortletURL() {
+		_portletURL.setParameter(
+			"checkedCommerceAccountGroupIds",
+			ParamUtil.getString(
+				_commerceAccountItemSelectorRequestHelper.getRenderRequest(),
+				"checkedCommerceAccountGroupIds"));
+
 		return _portletURL;
 	}
 
