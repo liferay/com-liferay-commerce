@@ -163,13 +163,10 @@ public class CPInstanceOptionsValuesDataProvider implements DDMDataProvider {
 			for (Map.Entry<String, String> outputParameterNameEntry :
 					outputParameterNames.entrySet()) {
 
-				String fieldName =
-					"ATTRIBUTE_" + outputParameterNameEntry.getKey() +
-						"_VALUE_ID";
-
 				List<CPDefinitionOptionValueRel> cpDefinitionOptionValueRels =
 					_cpInstanceHelper.getCPDefinitionOptionValueRel(
-						cpDefinitionId, fieldName, filters);
+						cpDefinitionId, outputParameterNameEntry.getKey(),
+						filters);
 
 				List<KeyValuePair> data = new ArrayList<>();
 
