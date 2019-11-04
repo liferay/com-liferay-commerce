@@ -54,6 +54,10 @@ public class CommerceInventoryWarehouseFinderImpl
 
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
+			q.addEntity(
+				CommerceInventoryWarehouseImpl.TABLE_NAME,
+				CommerceInventoryWarehouseImpl.class);
+
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(groupId);
