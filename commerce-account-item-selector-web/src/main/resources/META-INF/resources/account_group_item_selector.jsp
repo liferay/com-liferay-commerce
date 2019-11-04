@@ -94,6 +94,7 @@ PortletURL portletURL = commerceAccountGroupItemSelectorViewDisplayContext.getPo
 
 		<liferay-ui:search-iterator
 			markupView="lexicon"
+			searchContainer="<%= commerceAccountGroupSearchContainer %>"
 		/>
 	</liferay-ui:search-container>
 </div>
