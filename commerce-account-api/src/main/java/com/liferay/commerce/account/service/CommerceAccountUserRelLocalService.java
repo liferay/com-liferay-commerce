@@ -88,6 +88,9 @@ public interface CommerceAccountUserRelLocalService
 			long[] roleIds, ServiceContext serviceContext)
 		throws PortalException;
 
+	public void addDefaultRole(long userId, ServiceContext serviceContext)
+		throws PortalException;
+
 	/**
 	 * Creates a new commerce account user rel with the primary key. Does not add the commerce account user rel to the database.
 	 *
