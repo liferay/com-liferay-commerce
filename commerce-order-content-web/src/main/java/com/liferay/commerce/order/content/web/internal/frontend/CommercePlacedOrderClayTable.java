@@ -113,8 +113,9 @@ public class CommercePlacedOrderClayTable
 			return 0;
 		}
 
-		return (int)_commerceOrderService.getPlacedCommerceOrdersCount(
-			commerceChannel.getCompanyId(), commerceChannel.getGroupId());
+		return (int)_commerceOrderService.getUserPlacedCommerceOrdersCount(
+			commerceChannel.getCompanyId(), commerceChannel.getGroupId(),
+			filter.getKeywords());
 	}
 
 	@Override
@@ -166,9 +167,10 @@ public class CommercePlacedOrderClayTable
 		}
 
 		List<CommerceOrder> commerceOrders =
-			_commerceOrderService.getPlacedCommerceOrders(
+			_commerceOrderService.getUserPlacedCommerceOrders(
 				commerceChannel.getCompanyId(), commerceChannel.getGroupId(),
-				pagination.getStartPosition(), pagination.getEndPosition());
+				filter.getKeywords(), pagination.getStartPosition(),
+				pagination.getEndPosition());
 
 		return CommerceOrderClayTableUtil.getOrders(
 			commerceOrders, themeDisplay, false);

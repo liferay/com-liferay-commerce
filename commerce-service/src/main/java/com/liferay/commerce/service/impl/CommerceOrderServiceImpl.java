@@ -27,6 +27,7 @@ import com.liferay.commerce.inventory.service.CommerceInventoryBookedQuantityLoc
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.service.base.CommerceOrderServiceBaseImpl;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
@@ -343,19 +344,6 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			groupId, commerceAccountId);
 	}
 
-	@Override
-	public List<CommerceOrder> getPendingCommerceOrders(
-			long companyId, long groupId, int start, int end)
-		throws PortalException {
-
-		long[] commerceAccountIds = _getCommerceAccountIds(groupId);
-
-		return commerceOrderLocalService.getCommerceOrders(
-			companyId, groupId, commerceAccountIds,
-			new int[] {CommerceOrderConstants.ORDER_STATUS_OPEN}, false, start,
-			end);
-	}
-
 	/**
 	 * @deprecated As of Mueller (7.2.x)
 	 */
@@ -372,8 +360,10 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 
 		Group group = groupLocalService.getGroup(groupId);
 
-		return getPendingCommerceOrders(
-			group.getCompanyId(), groupId, start, end);
+		return commerceOrderLocalService.getCommerceOrders(
+			group.getCompanyId(), groupId, new long[] {commerceAccountId},
+			keywords, new int[] {CommerceOrderConstants.ORDER_STATUS_OPEN},
+			false, start, end);
 	}
 
 	@Override
@@ -383,7 +373,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 		long[] commerceAccountIds = _getCommerceAccountIds(groupId);
 
 		return commerceOrderLocalService.getCommerceOrdersCount(
-			companyId, groupId, commerceAccountIds,
+			companyId, groupId, commerceAccountIds, StringPool.BLANK,
 			new int[] {CommerceOrderConstants.ORDER_STATUS_OPEN}, false);
 	}
 
@@ -402,8 +392,8 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 
 		Group group = groupLocalService.getGroup(groupId);
 
-		return (int)getPendingCommerceOrdersCount(
-			group.getCompanyId(), groupId);
+		return (int)getUserPendingCommerceOrdersCount(
+			group.getCompanyId(), groupId, keywords);
 	}
 
 	@Override
@@ -414,7 +404,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 		long[] commerceAccountIds = _getCommerceAccountIds(groupId);
 
 		return commerceOrderLocalService.getCommerceOrders(
-			companyId, groupId, commerceAccountIds,
+			companyId, groupId, commerceAccountIds, StringPool.BLANK,
 			new int[] {CommerceOrderConstants.ORDER_STATUS_OPEN}, true, start,
 			end);
 	}
@@ -435,8 +425,10 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 
 		Group group = groupLocalService.getGroup(groupId);
 
-		return getPlacedCommerceOrders(
-			group.getCompanyId(), groupId, start, end);
+		return commerceOrderLocalService.getCommerceOrders(
+			group.getCompanyId(), groupId, new long[] {commerceAccountId},
+			keywords, new int[] {CommerceOrderConstants.ORDER_STATUS_OPEN},
+			true, start, end);
 	}
 
 	@Override
@@ -446,7 +438,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 		long[] commerceAccountIds = _getCommerceAccountIds(groupId);
 
 		return commerceOrderLocalService.getCommerceOrdersCount(
-			companyId, groupId, commerceAccountIds,
+			companyId, groupId, commerceAccountIds, StringPool.BLANK,
 			new int[] {CommerceOrderConstants.ORDER_STATUS_OPEN}, true);
 	}
 
@@ -465,7 +457,58 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 
 		Group group = groupLocalService.getGroup(groupId);
 
-		return (int)getPlacedCommerceOrdersCount(group.getCompanyId(), groupId);
+		return (int)getUserPlacedCommerceOrdersCount(
+			group.getCompanyId(), groupId, keywords);
+	}
+
+	@Override
+	public List<CommerceOrder> getUserPendingCommerceOrders(
+			long companyId, long groupId, String keywords, int start, int end)
+		throws PortalException {
+
+		long[] commerceAccountIds = _getCommerceAccountIds(groupId);
+
+		return commerceOrderLocalService.getCommerceOrders(
+			companyId, groupId, commerceAccountIds, keywords,
+			new int[] {CommerceOrderConstants.ORDER_STATUS_OPEN}, false, start,
+			end);
+	}
+
+	@Override
+	public long getUserPendingCommerceOrdersCount(
+			long companyId, long groupId, String keywords)
+		throws PortalException {
+
+		long[] commerceAccountIds = _getCommerceAccountIds(groupId);
+
+		return commerceOrderLocalService.getCommerceOrdersCount(
+			companyId, groupId, commerceAccountIds, keywords,
+			new int[] {CommerceOrderConstants.ORDER_STATUS_OPEN}, false);
+	}
+
+	@Override
+	public List<CommerceOrder> getUserPlacedCommerceOrders(
+			long companyId, long groupId, String keywords, int start, int end)
+		throws PortalException {
+
+		long[] commerceAccountIds = _getCommerceAccountIds(groupId);
+
+		return commerceOrderLocalService.getCommerceOrders(
+			companyId, groupId, commerceAccountIds, keywords,
+			new int[] {CommerceOrderConstants.ORDER_STATUS_OPEN}, true, start,
+			end);
+	}
+
+	@Override
+	public long getUserPlacedCommerceOrdersCount(
+			long companyId, long groupId, String keywords)
+		throws PortalException {
+
+		long[] commerceAccountIds = _getCommerceAccountIds(groupId);
+
+		return commerceOrderLocalService.getCommerceOrdersCount(
+			companyId, groupId, commerceAccountIds, keywords,
+			new int[] {CommerceOrderConstants.ORDER_STATUS_OPEN}, false);
 	}
 
 	@Override
