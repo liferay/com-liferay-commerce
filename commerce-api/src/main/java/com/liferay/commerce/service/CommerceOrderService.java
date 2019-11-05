@@ -169,15 +169,6 @@ public interface CommerceOrderService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceOrder> getPendingCommerceOrders(
-			long companyId, long groupId, int start, int end)
-		throws PortalException;
-
-	/**
-	 * @deprecated As of Mueller (7.2.x)
-	 */
-	@Deprecated
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<CommerceOrder> getPendingCommerceOrders(
 			long groupId, long commerceAccountId, String keywords, int start,
 			int end)
 		throws PortalException;
@@ -186,10 +177,6 @@ public interface CommerceOrderService extends BaseService {
 	public long getPendingCommerceOrdersCount(long companyId, long groupId)
 		throws PortalException;
 
-	/**
-	 * @deprecated As of Mueller (7.2.x)
-	 */
-	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getPendingCommerceOrdersCount(
 			long groupId, long commerceAccountId, String keywords)
@@ -200,10 +187,6 @@ public interface CommerceOrderService extends BaseService {
 			long companyId, long groupId, int start, int end)
 		throws PortalException;
 
-	/**
-	 * @deprecated As of Mueller (7.2.x)
-	 */
-	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceOrder> getPlacedCommerceOrders(
 			long groupId, long commerceAccountId, String keywords, int start,
@@ -214,13 +197,29 @@ public interface CommerceOrderService extends BaseService {
 	public long getPlacedCommerceOrdersCount(long companyId, long groupId)
 		throws PortalException;
 
-	/**
-	 * @deprecated As of Mueller (7.2.x)
-	 */
-	@Deprecated
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getPlacedCommerceOrdersCount(
 			long groupId, long commerceAccountId, String keywords)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceOrder> getUserPendingCommerceOrders(
+			long companyId, long groupId, String keywords, int start, int end)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public long getUserPendingCommerceOrdersCount(
+			long companyId, long groupId, String keywords)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceOrder> getUserPlacedCommerceOrders(
+			long companyId, long groupId, String keywords, int start, int end)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public long getUserPlacedCommerceOrdersCount(
+			long companyId, long groupId, String keywords)
 		throws PortalException;
 
 	public void mergeGuestCommerceOrder(
