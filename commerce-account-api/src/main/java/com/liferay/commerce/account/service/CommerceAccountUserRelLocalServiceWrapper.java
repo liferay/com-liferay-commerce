@@ -85,6 +85,16 @@ public class CommerceAccountUserRelLocalServiceWrapper
 			serviceContext);
 	}
 
+	@Override
+	public void addDefaultRole(
+			long userId,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		_commerceAccountUserRelLocalService.addDefaultRole(
+			userId, serviceContext);
+	}
+
 	/**
 	 * Creates a new commerce account user rel with the primary key. Does not add the commerce account user rel to the database.
 	 *

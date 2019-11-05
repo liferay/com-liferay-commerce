@@ -54,50 +54,6 @@ public class CommerceAccountGroupCommerceAccountRelServiceHttp {
 	public static
 		com.liferay.commerce.account.model.
 			CommerceAccountGroupCommerceAccountRel
-					getCommerceAccountGroupCommerceAccountRel(
-						HttpPrincipal httpPrincipal,
-						long commerceAccountGroupId, long commerceAccountId)
-				throws com.liferay.portal.kernel.exception.PortalException {
-
-		try {
-			MethodKey methodKey = new MethodKey(
-				CommerceAccountGroupCommerceAccountRelServiceUtil.class,
-				"getCommerceAccountGroupCommerceAccountRel",
-				_getCommerceAccountGroupCommerceAccountRelParameterTypes0);
-
-			MethodHandler methodHandler = new MethodHandler(
-				methodKey, commerceAccountGroupId, commerceAccountId);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof
-						com.liferay.portal.kernel.exception.PortalException) {
-
-					throw (com.liferay.portal.kernel.exception.PortalException)
-						e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(
-					e);
-			}
-
-			return (com.liferay.commerce.account.model.
-				CommerceAccountGroupCommerceAccountRel)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static
-		com.liferay.commerce.account.model.
-			CommerceAccountGroupCommerceAccountRel
 					addCommerceAccountGroupCommerceAccountRel(
 						HttpPrincipal httpPrincipal,
 						long commerceAccountGroupId, long commerceAccountId,
@@ -109,7 +65,7 @@ public class CommerceAccountGroupCommerceAccountRelServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceAccountGroupCommerceAccountRelServiceUtil.class,
 				"addCommerceAccountGroupCommerceAccountRel",
-				_addCommerceAccountGroupCommerceAccountRelParameterTypes1);
+				_addCommerceAccountGroupCommerceAccountRelParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceAccountGroupId, commerceAccountId,
@@ -151,7 +107,7 @@ public class CommerceAccountGroupCommerceAccountRelServiceHttp {
 			MethodKey methodKey = new MethodKey(
 				CommerceAccountGroupCommerceAccountRelServiceUtil.class,
 				"deleteCommerceAccountGroupCommerceAccountRel",
-				_deleteCommerceAccountGroupCommerceAccountRelParameterTypes2);
+				_deleteCommerceAccountGroupCommerceAccountRelParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceAccountGroupCommerceAccountRelId);
@@ -170,6 +126,50 @@ public class CommerceAccountGroupCommerceAccountRelServiceHttp {
 				throw new com.liferay.portal.kernel.exception.SystemException(
 					e);
 			}
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static
+		com.liferay.commerce.account.model.
+			CommerceAccountGroupCommerceAccountRel
+					getCommerceAccountGroupCommerceAccountRel(
+						HttpPrincipal httpPrincipal,
+						long commerceAccountGroupId, long commerceAccountId)
+				throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceAccountGroupCommerceAccountRelServiceUtil.class,
+				"getCommerceAccountGroupCommerceAccountRel",
+				_getCommerceAccountGroupCommerceAccountRelParameterTypes2);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceAccountGroupId, commerceAccountId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+
+			return (com.liferay.commerce.account.model.
+				CommerceAccountGroupCommerceAccountRel)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -266,17 +266,17 @@ public class CommerceAccountGroupCommerceAccountRelServiceHttp {
 		CommerceAccountGroupCommerceAccountRelServiceHttp.class);
 
 	private static final Class<?>[]
-		_getCommerceAccountGroupCommerceAccountRelParameterTypes0 =
-			new Class[] {long.class, long.class};
-	private static final Class<?>[]
-		_addCommerceAccountGroupCommerceAccountRelParameterTypes1 =
+		_addCommerceAccountGroupCommerceAccountRelParameterTypes0 =
 			new Class[] {
 				long.class, long.class,
 				com.liferay.portal.kernel.service.ServiceContext.class
 			};
 	private static final Class<?>[]
-		_deleteCommerceAccountGroupCommerceAccountRelParameterTypes2 =
+		_deleteCommerceAccountGroupCommerceAccountRelParameterTypes1 =
 			new Class[] {long.class};
+	private static final Class<?>[]
+		_getCommerceAccountGroupCommerceAccountRelParameterTypes2 =
+			new Class[] {long.class, long.class};
 	private static final Class<?>[]
 		_getCommerceAccountGroupCommerceAccountRelsParameterTypes3 =
 			new Class[] {long.class, int.class, int.class};
