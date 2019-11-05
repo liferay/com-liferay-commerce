@@ -440,7 +440,7 @@ public class CommerceInventoryEngineTest {
 		_commerceInventoryWarehouseLocalService.addCommerceInventoryWarehouse(
 			commerceInventoryWarehouse.getName(),
 			commerceInventoryWarehouse.getDescription(),
-			commerceInventoryWarehouse.getActive(),
+			commerceInventoryWarehouse.isActive(),
 			commerceInventoryWarehouse.getStreet1(),
 			commerceInventoryWarehouse.getStreet2(),
 			commerceInventoryWarehouse.getStreet3(),
