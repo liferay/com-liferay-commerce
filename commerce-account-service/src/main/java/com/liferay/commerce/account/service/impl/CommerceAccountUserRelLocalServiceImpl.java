@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.account.service.impl;
 
+import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.exception.CommerceAccountTypeException;
 import com.liferay.commerce.account.exception.CommerceAccountUserRelEmailAddressException;
 import com.liferay.commerce.account.model.CommerceAccount;
@@ -23,11 +24,14 @@ import com.liferay.commerce.account.service.persistence.CommerceAccountUserRelPK
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.model.Role;
+import com.liferay.portal.kernel.model.RoleConstants;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Validator;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -85,6 +89,10 @@ public class CommerceAccountUserRelLocalServiceImpl
 
 		commerceAccountUserRelPersistence.update(commerceAccountUserRel);
 
+		// Default role
+
+		addDefaultRole(commerceAccountUserId, serviceContext);
+
 		return commerceAccountUserRel;
 	}
 
@@ -131,6 +139,44 @@ public class CommerceAccountUserRelLocalServiceImpl
 					commerceAccountId, emailAddress, roleIds, StringPool.BLANK,
 					serviceContext);
 			}
+		}
+	}
+
+	@Override
+	public void addDefaultRole(long userId, ServiceContext serviceContext)
+		throws PortalException {
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		Role role = rolePersistence.fetchByC_N(
+			user.getCompanyId(),
+			CommerceAccountConstants.ROLE_NAME_ACCOUNT_USER);
+
+		if (role == null) {
+			role = roleLocalService.addRole(
+				user.getUserId(), null, 0,
+				CommerceAccountConstants.ROLE_NAME_ACCOUNT_USER,
+				Collections.singletonMap(
+					serviceContext.getLocale(),
+					CommerceAccountConstants.ROLE_NAME_ACCOUNT_USER),
+				Collections.emptyMap(), RoleConstants.TYPE_SITE,
+				StringPool.BLANK, serviceContext);
+		}
+
+		List<CommerceAccountUserRel> commerceAccountUserRels =
+			commerceAccountUserRelPersistence.findByCommerceAccountUserId(
+				userId);
+
+		for (CommerceAccountUserRel commerceAccountUserRel :
+				commerceAccountUserRels) {
+
+			CommerceAccount commerceAccount =
+				commerceAccountLocalService.getCommerceAccount(
+					commerceAccountUserRel.getCommerceAccountId());
+
+			userGroupRoleLocalService.addUserGroupRoles(
+				userId, commerceAccount.getCommerceAccountGroupId(),
+				new long[] {role.getRoleId()});
 		}
 	}
 
