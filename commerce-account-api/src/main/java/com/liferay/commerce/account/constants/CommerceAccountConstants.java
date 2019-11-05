@@ -23,6 +23,8 @@ public class CommerceAccountConstants {
 	public static final String ACCOUNT_ADMINISTRATOR_ROLE_NAME =
 		"Account Administrator";
 
+	public static final String ACCOUNT_BUYER_ROLE_NAME = "Buyer";
+
 	public static final String ACCOUNT_GROUP_GUEST_NAME = "Guest";
 
 	public static final int ACCOUNT_GROUP_TYPE_DYNAMIC = 1;
@@ -35,6 +37,9 @@ public class CommerceAccountConstants {
 		ACCOUNT_GROUP_TYPE_STATIC, ACCOUNT_GROUP_TYPE_DYNAMIC
 	};
 
+	public static final String ACCOUNT_ORDER_MANAGER_ROLE_NAME =
+		"Order Manager";
+
 	public static final int ACCOUNT_TYPE_BUSINESS = 2;
 
 	public static final int ACCOUNT_TYPE_GUEST = 0;
@@ -44,6 +49,8 @@ public class CommerceAccountConstants {
 	public static final int[] ACCOUNT_TYPES = {
 		ACCOUNT_TYPE_PERSONAL, ACCOUNT_TYPE_BUSINESS
 	};
+
+	public static final String ACCOUNT_USER_ROLE_NAME = "Account User";
 
 	public static final long DEFAULT_PARENT_ACCOUNT_ID = 0;
 
