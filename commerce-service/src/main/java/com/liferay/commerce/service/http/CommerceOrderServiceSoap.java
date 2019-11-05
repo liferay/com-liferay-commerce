@@ -467,30 +467,6 @@ public class CommerceOrderServiceSoap {
 
 	public static com.liferay.commerce.model.CommerceOrderSoap[]
 			getPendingCommerceOrders(
-				long companyId, long groupId, int start, int end)
-		throws RemoteException {
-
-		try {
-			java.util.List<com.liferay.commerce.model.CommerceOrder>
-				returnValue = CommerceOrderServiceUtil.getPendingCommerceOrders(
-					companyId, groupId, start, end);
-
-			return com.liferay.commerce.model.CommerceOrderSoap.toSoapModels(
-				returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	/**
-	 * @deprecated As of Mueller (7.2.x)
-	 */
-	@Deprecated
-	public static com.liferay.commerce.model.CommerceOrderSoap[]
-			getPendingCommerceOrders(
 				long groupId, long commerceAccountId, String keywords,
 				int start, int end)
 		throws RemoteException {
@@ -528,10 +504,6 @@ public class CommerceOrderServiceSoap {
 		}
 	}
 
-	/**
-	 * @deprecated As of Mueller (7.2.x)
-	 */
-	@Deprecated
 	public static int getPendingCommerceOrdersCount(
 			long groupId, long commerceAccountId, String keywords)
 		throws RemoteException {
@@ -570,10 +542,6 @@ public class CommerceOrderServiceSoap {
 		}
 	}
 
-	/**
-	 * @deprecated As of Mueller (7.2.x)
-	 */
-	@Deprecated
 	public static com.liferay.commerce.model.CommerceOrderSoap[]
 			getPlacedCommerceOrders(
 				long groupId, long commerceAccountId, String keywords,
@@ -613,10 +581,6 @@ public class CommerceOrderServiceSoap {
 		}
 	}
 
-	/**
-	 * @deprecated As of Mueller (7.2.x)
-	 */
-	@Deprecated
 	public static int getPlacedCommerceOrdersCount(
 			long groupId, long commerceAccountId, String keywords)
 		throws RemoteException {
@@ -625,6 +589,86 @@ public class CommerceOrderServiceSoap {
 			int returnValue =
 				CommerceOrderServiceUtil.getPlacedCommerceOrdersCount(
 					groupId, commerceAccountId, keywords);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.model.CommerceOrderSoap[]
+			getUserPendingCommerceOrders(
+				long companyId, long groupId, String keywords, int start,
+				int end)
+		throws RemoteException {
+
+		try {
+			java.util.List<com.liferay.commerce.model.CommerceOrder>
+				returnValue =
+					CommerceOrderServiceUtil.getUserPendingCommerceOrders(
+						companyId, groupId, keywords, start, end);
+
+			return com.liferay.commerce.model.CommerceOrderSoap.toSoapModels(
+				returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static long getUserPendingCommerceOrdersCount(
+			long companyId, long groupId, String keywords)
+		throws RemoteException {
+
+		try {
+			long returnValue =
+				CommerceOrderServiceUtil.getUserPendingCommerceOrdersCount(
+					companyId, groupId, keywords);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.commerce.model.CommerceOrderSoap[]
+			getUserPlacedCommerceOrders(
+				long companyId, long groupId, String keywords, int start,
+				int end)
+		throws RemoteException {
+
+		try {
+			java.util.List<com.liferay.commerce.model.CommerceOrder>
+				returnValue =
+					CommerceOrderServiceUtil.getUserPlacedCommerceOrders(
+						companyId, groupId, keywords, start, end);
+
+			return com.liferay.commerce.model.CommerceOrderSoap.toSoapModels(
+				returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static long getUserPlacedCommerceOrdersCount(
+			long companyId, long groupId, String keywords)
+		throws RemoteException {
+
+		try {
+			long returnValue =
+				CommerceOrderServiceUtil.getUserPlacedCommerceOrdersCount(
+					companyId, groupId, keywords);
 
 			return returnValue;
 		}

@@ -115,6 +115,20 @@ public class CommerceOrderItemServiceSoap {
 		}
 	}
 
+	public static void deleteCommerceOrderItems(long commerceOrderId)
+		throws RemoteException {
+
+		try {
+			CommerceOrderItemServiceUtil.deleteCommerceOrderItems(
+				commerceOrderId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.commerce.model.CommerceOrderItemSoap
 			fetchByExternalReferenceCode(
 				long companyId, String externalReferenceCode)
@@ -300,20 +314,6 @@ public class CommerceOrderItemServiceSoap {
 
 			return com.liferay.commerce.model.CommerceOrderItemSoap.toSoapModel(
 				returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static void deleteCommerceOrderItems(long commerceOrderId)
-		throws RemoteException {
-
-		try {
-			CommerceOrderItemServiceUtil.deleteCommerceOrderItems(
-				commerceOrderId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
