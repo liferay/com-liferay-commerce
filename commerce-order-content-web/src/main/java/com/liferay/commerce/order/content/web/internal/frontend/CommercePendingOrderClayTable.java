@@ -113,8 +113,9 @@ public class CommercePendingOrderClayTable
 			return 0;
 		}
 
-		return (int)_commerceOrderService.getPendingCommerceOrdersCount(
-			commerceChannel.getCompanyId(), commerceChannel.getGroupId());
+		return (int)_commerceOrderService.getUserPendingCommerceOrdersCount(
+			commerceChannel.getCompanyId(), commerceChannel.getGroupId(),
+			filter.getKeywords());
 	}
 
 	@Override
@@ -161,9 +162,10 @@ public class CommercePendingOrderClayTable
 		}
 
 		List<CommerceOrder> commerceOrders =
-			_commerceOrderService.getPendingCommerceOrders(
+			_commerceOrderService.getUserPendingCommerceOrders(
 				commerceChannel.getCompanyId(), commerceChannel.getGroupId(),
-				pagination.getStartPosition(), pagination.getEndPosition());
+				filter.getKeywords(), pagination.getStartPosition(),
+				pagination.getEndPosition());
 
 		return CommerceOrderClayTableUtil.getOrders(
 			commerceOrders, themeDisplay, true);

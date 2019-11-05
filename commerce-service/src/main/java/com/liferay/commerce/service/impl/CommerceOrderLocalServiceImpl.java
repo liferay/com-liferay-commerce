@@ -605,12 +605,13 @@ public class CommerceOrderLocalServiceImpl
 	@Override
 	public List<CommerceOrder> getCommerceOrders(
 			long companyId, long groupId, long[] commerceAccountIds,
-			int[] orderStatuses, boolean excludeOrderStatus, int start, int end)
+			String keywords, int[] orderStatuses, boolean excludeOrderStatus,
+			int start, int end)
 		throws PortalException {
 
 		SearchContext searchContext = buildSearchContext(
-			companyId, groupId, commerceAccountIds, excludeOrderStatus,
-			orderStatuses, start, end);
+			companyId, groupId, commerceAccountIds, keywords,
+			excludeOrderStatus, orderStatuses, start, end);
 
 		BaseModelSearchResult<CommerceOrder> baseModelSearchResult =
 			commerceOrderLocalService.searchCommerceOrders(searchContext);
@@ -656,12 +657,13 @@ public class CommerceOrderLocalServiceImpl
 	@Override
 	public long getCommerceOrdersCount(
 			long companyId, long groupId, long[] commerceAccountIds,
-			int[] orderStatuses, boolean excludeOrderStatus)
+			String keywords, int[] orderStatuses, boolean excludeOrderStatus)
 		throws PortalException {
 
 		SearchContext searchContext = buildSearchContext(
-			companyId, groupId, commerceAccountIds, excludeOrderStatus,
-			orderStatuses, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+			companyId, groupId, commerceAccountIds, keywords,
+			excludeOrderStatus, orderStatuses, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS);
 
 		return commerceOrderLocalService.searchCommerceOrdersCount(
 			searchContext);
@@ -689,8 +691,8 @@ public class CommerceOrderLocalServiceImpl
 
 			return commerceOrderLocalService.getCommerceOrders(
 				group.getCompanyId(), groupId, new long[] {commerceAccountId},
-				new int[] {CommerceOrderConstants.ORDER_STATUS_OPEN}, false,
-				start, end);
+				keywords, new int[] {CommerceOrderConstants.ORDER_STATUS_OPEN},
+				false, start, end);
 		}
 		catch (PortalException pe) {
 			_log.error(pe, pe);
@@ -713,7 +715,8 @@ public class CommerceOrderLocalServiceImpl
 
 			return (int)commerceOrderLocalService.getCommerceOrdersCount(
 				group.getCompanyId(), groupId, new long[] {commerceAccountId},
-				new int[] {CommerceOrderConstants.ORDER_STATUS_OPEN}, false);
+				keywords, new int[] {CommerceOrderConstants.ORDER_STATUS_OPEN},
+				false);
 		}
 		catch (PortalException pe) {
 			_log.error(pe, pe);
@@ -1540,8 +1543,8 @@ public class CommerceOrderLocalServiceImpl
 
 	protected SearchContext buildSearchContext(
 			long companyId, long commerceChannelGroupId,
-			long[] commerceAccountIds, boolean negated, int[] orderStatuses,
-			int start, int end)
+			long[] commerceAccountIds, String keywords, boolean negated,
+			int[] orderStatuses, int start, int end)
 		throws PortalException {
 
 		SearchContext searchContext = new SearchContext();
@@ -1560,6 +1563,7 @@ public class CommerceOrderLocalServiceImpl
 
 		searchContext.setCompanyId(companyId);
 		searchContext.setGroupIds(new long[] {commerceChannelGroupId});
+		searchContext.setKeywords(keywords);
 		searchContext.setStart(start);
 		searchContext.setEnd(end);
 
