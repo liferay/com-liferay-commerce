@@ -105,10 +105,6 @@ PortletURL portletURL = cpInstanceItemSelectorViewDisplayContext.getPortletURL()
 			markupView="lexicon"
 			searchContainer="<%= cpInstanceSearchContainer %>"
 		/>
-
-		<liferay-ui:search-paginator
-			searchContainer="<%= cpInstanceSearchContainer %>"
-		/>
 	</liferay-ui:search-container>
 </div>
 
