@@ -238,6 +238,7 @@
 
 		<!-- References -->
 
+		<reference entity="Role" package-path="com.liferay.portal" />
 		<reference entity="UserGroupRole" package-path="com.liferay.portal" />
 	</entity>
 	<exceptions>
