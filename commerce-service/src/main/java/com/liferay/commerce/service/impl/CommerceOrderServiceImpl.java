@@ -344,10 +344,6 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			groupId, commerceAccountId);
 	}
 
-	/**
-	 * @deprecated As of Mueller (7.2.x)
-	 */
-	@Deprecated
 	@Override
 	public List<CommerceOrder> getPendingCommerceOrders(
 			long groupId, long commerceAccountId, String keywords, int start,
@@ -377,10 +373,6 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			new int[] {CommerceOrderConstants.ORDER_STATUS_OPEN}, false);
 	}
 
-	/**
-	 * @deprecated As of Mueller (7.2.x)
-	 */
-	@Deprecated
 	@Override
 	public int getPendingCommerceOrdersCount(
 			long groupId, long commerceAccountId, String keywords)
@@ -392,8 +384,10 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 
 		Group group = groupLocalService.getGroup(groupId);
 
-		return (int)getUserPendingCommerceOrdersCount(
-			group.getCompanyId(), groupId, keywords);
+		return (int)commerceOrderLocalService.getCommerceOrdersCount(
+			group.getCompanyId(), groupId, new long[] {commerceAccountId},
+			keywords, new int[] {CommerceOrderConstants.ORDER_STATUS_OPEN},
+			false);
 	}
 
 	@Override
@@ -409,10 +403,6 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			end);
 	}
 
-	/**
-	 * @deprecated As of Mueller (7.2.x)
-	 */
-	@Deprecated
 	@Override
 	public List<CommerceOrder> getPlacedCommerceOrders(
 			long groupId, long commerceAccountId, String keywords, int start,
@@ -442,10 +432,6 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 			new int[] {CommerceOrderConstants.ORDER_STATUS_OPEN}, true);
 	}
 
-	/**
-	 * @deprecated As of Mueller (7.2.x)
-	 */
-	@Deprecated
 	@Override
 	public int getPlacedCommerceOrdersCount(
 			long groupId, long commerceAccountId, String keywords)
@@ -457,8 +443,10 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 
 		Group group = groupLocalService.getGroup(groupId);
 
-		return (int)getUserPlacedCommerceOrdersCount(
-			group.getCompanyId(), groupId, keywords);
+		return (int)commerceOrderLocalService.getCommerceOrdersCount(
+			group.getCompanyId(), groupId, new long[] {commerceAccountId},
+			keywords, new int[] {CommerceOrderConstants.ORDER_STATUS_OPEN},
+			true);
 	}
 
 	@Override
