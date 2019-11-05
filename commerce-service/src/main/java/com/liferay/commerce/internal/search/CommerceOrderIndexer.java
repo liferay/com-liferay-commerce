@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.BaseIndexer;
+import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
@@ -32,9 +33,13 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.search.filter.BooleanFilter;
+import com.liferay.portal.kernel.search.filter.Filter;
+import com.liferay.portal.kernel.search.filter.MissingFilter;
+import com.liferay.portal.kernel.search.filter.TermFilter;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.search.filter.FilterBuilders;
 
 import java.util.Locale;
 
@@ -69,6 +74,34 @@ public class CommerceOrderIndexer extends BaseIndexer<CommerceOrder> {
 
 		return _modelResourcePermission.contains(
 			permissionChecker, entryClassPK, actionId);
+	}
+
+	@Override
+	public void postProcessContextBooleanFilter(
+			BooleanFilter contextBooleanFilter, SearchContext searchContext)
+		throws Exception {
+
+		long[] commerceAccountIds = GetterUtil.getLongValues(
+			searchContext.getAttribute("commerceAccountIds"), null);
+
+		if (commerceAccountIds != null) {
+			BooleanFilter commerceAccountIdBooleanFilter = new BooleanFilter();
+
+			for (long commerceAccountId : commerceAccountIds) {
+				Filter termFilter = new TermFilter(
+					"commerceAccountId", String.valueOf(commerceAccountId));
+
+				commerceAccountIdBooleanFilter.add(
+					termFilter, BooleanClauseOccur.SHOULD);
+			}
+
+			commerceAccountIdBooleanFilter.add(
+				new MissingFilter("commerceAccountId"),
+				BooleanClauseOccur.SHOULD);
+
+			contextBooleanFilter.add(
+				commerceAccountIdBooleanFilter, BooleanClauseOccur.MUST);
+		}
 	}
 
 	@Override
@@ -217,6 +250,9 @@ public class CommerceOrderIndexer extends BaseIndexer<CommerceOrder> {
 
 	@Reference
 	private CommerceOrderLocalService _commerceOrderLocalService;
+
+	@Reference
+	private FilterBuilders _filterBuilders;
 
 	@Reference
 	private IndexWriterHelper _indexWriterHelper;

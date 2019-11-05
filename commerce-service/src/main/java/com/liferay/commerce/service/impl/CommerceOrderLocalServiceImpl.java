@@ -69,7 +69,6 @@ import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.QueryConfig;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchException;
-import com.liferay.portal.kernel.search.facet.MultiValueFacet;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.transaction.TransactionCommitCallbackUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -1552,13 +1551,8 @@ public class CommerceOrderLocalServiceImpl
 		addFacetOrderStatus(negated, orderStatuses, searchContext);
 
 		if (commerceAccountIds != null) {
-			MultiValueFacet multiValueFacet = new MultiValueFacet(
-				searchContext);
-
-			multiValueFacet.setFieldName("commerceAccountId");
-			multiValueFacet.setValues(commerceAccountIds);
-
-			searchContext.addFacet(multiValueFacet);
+			searchContext.setAttribute(
+				"commerceAccountIds", commerceAccountIds);
 		}
 
 		searchContext.setCompanyId(companyId);
