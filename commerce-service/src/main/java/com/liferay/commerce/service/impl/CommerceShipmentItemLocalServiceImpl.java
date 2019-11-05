@@ -153,10 +153,10 @@ public class CommerceShipmentItemLocalServiceImpl
 	}
 
 	@Override
-	public void deleteCommerceShipmentItems(long commerceShipment) {
+	public void deleteCommerceShipmentItems(long commerceShipmentId) {
 		List<CommerceShipmentItem> commerceShipmentItems =
 			commerceShipmentItemPersistence.findByCommerceShipment(
-				commerceShipment);
+				commerceShipmentId);
 
 		for (CommerceShipmentItem commerceShipmentItem :
 				commerceShipmentItems) {
