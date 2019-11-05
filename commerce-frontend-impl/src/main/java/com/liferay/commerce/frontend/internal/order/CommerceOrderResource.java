@@ -26,6 +26,7 @@ import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceOrderService;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -63,12 +64,6 @@ public class CommerceOrderResource {
 			CommerceAccount commerceAccount)
 		throws PortalException {
 
-		long commerceAccountId = 0;
-
-		if (commerceAccount != null) {
-			commerceAccountId = commerceAccount.getCommerceAccountId();
-		}
-
 		long companyId = _portal.getCompanyId(httpServletRequest);
 
 		groupId =
@@ -76,14 +71,14 @@ public class CommerceOrderResource {
 				groupId);
 
 		List<Order> orders = getOrders(
-			companyId, groupId, page, pageSize, httpServletRequest);
+			companyId, groupId, keywords, page, pageSize, httpServletRequest);
 
 		return new OrderList(orders, getOrdersCount(companyId, groupId));
 	}
 
 	protected List<Order> getOrders(
-			long companyId, long groupId, int page, int pageSize,
-			HttpServletRequest httpServletRequest)
+			long companyId, long groupId, String keywords, int page,
+			int pageSize, HttpServletRequest httpServletRequest)
 		throws PortalException {
 
 		List<Order> orders = new ArrayList<>();
@@ -92,8 +87,8 @@ public class CommerceOrderResource {
 		int end = page * pageSize;
 
 		List<CommerceOrder> userCommerceOrders =
-			_commerceOrderService.getPendingCommerceOrders(
-				companyId, groupId, start, end);
+			_commerceOrderService.getUserPendingCommerceOrders(
+				companyId, groupId, keywords, start, end);
 
 		for (CommerceOrder commerceOrder : userCommerceOrders) {
 			Date modifiedDate = commerceOrder.getModifiedDate();
@@ -123,8 +118,8 @@ public class CommerceOrderResource {
 	protected int getOrdersCount(long companyId, long groupId)
 		throws PortalException {
 
-		return (int)_commerceOrderService.getPendingCommerceOrdersCount(
-			companyId, groupId);
+		return (int)_commerceOrderService.getUserPendingCommerceOrdersCount(
+			companyId, groupId, StringPool.BLANK);
 	}
 
 	protected Response getResponse(Object object) {
