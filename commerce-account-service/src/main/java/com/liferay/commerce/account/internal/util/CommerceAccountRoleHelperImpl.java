@@ -52,6 +52,11 @@ public class CommerceAccountRoleHelperImpl
 		_checkRole(
 			CommerceAccountConstants.ACCOUNT_ADMINISTRATOR_ROLE_NAME,
 			serviceContext);
+		_checkRole(
+			CommerceAccountConstants.ACCOUNT_BUYER_ROLE_NAME, serviceContext);
+		_checkRole(
+			CommerceAccountConstants.ACCOUNT_ORDER_MANAGER_ROLE_NAME,
+			serviceContext);
 	}
 
 	private void _checkRole(String name, ServiceContext serviceContext)
@@ -108,6 +113,28 @@ public class CommerceAccountRoleHelperImpl
 					ActionKeys.VIEW, CommerceAccountActionKeys.VIEW_ADDRESSES,
 					CommerceAccountActionKeys.VIEW_MEMBERS
 				});
+
+			resourceActionIds.put(
+				"com.liferay.commerce.order",
+				new String[] {
+					"ADD_COMMERCE_ORDER", "APPROVE_OPEN_COMMERCE_ORDERS",
+					"CHECKOUT_OPEN_COMMERCE_ORDERS", "DELETE_COMMERCE_ORDERS",
+					"MANAGE_COMMERCE_ORDERS", "VIEW_COMMERCE_ORDERS",
+					"VIEW_OPEN_COMMERCE_ORDERS"
+				});
+		}
+		else if (name.equals(
+					CommerceAccountConstants.ACCOUNT_BUYER_ROLE_NAME)) {
+
+			resourceActionIds.put(
+				"com.liferay.commerce.order",
+				new String[] {
+					"ADD_COMMERCE_ORDER", "CHECKOUT_OPEN_COMMERCE_ORDERS",
+					"VIEW_COMMERCE_ORDERS", "VIEW_OPEN_COMMERCE_ORDERS"
+				});
+		}
+		else if (name.equals(
+					CommerceAccountConstants.ACCOUNT_ORDER_MANAGER_ROLE_NAME)) {
 
 			resourceActionIds.put(
 				"com.liferay.commerce.order",
