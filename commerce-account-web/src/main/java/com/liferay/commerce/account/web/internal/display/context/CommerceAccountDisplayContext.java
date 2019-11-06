@@ -34,7 +34,6 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.module.configuration.ConfigurationException;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.PortletQName;
@@ -131,13 +130,13 @@ public class CommerceAccountDisplayContext {
 			commerceCountryId, true);
 	}
 
-	public int getCommerceSiteType() throws ConfigurationException {
+	public int getCommerceSiteType() throws PortalException {
 		CommerceAccountGroupServiceConfiguration
 			commerceAccountGroupServiceConfiguration =
 				_configurationProvider.getConfiguration(
 					CommerceAccountGroupServiceConfiguration.class,
 					new GroupServiceSettingsLocator(
-						_commerceAccountRequestHelper.getScopeGroupId(),
+						_commerceContext.getCommerceChannelGroupId(),
 						CommerceAccountConstants.SERVICE_NAME));
 
 		return commerceAccountGroupServiceConfiguration.commerceSiteType();
