@@ -316,13 +316,13 @@ public class CPInstanceLocalServiceImpl extends CPInstanceLocalServiceBaseImpl {
 							serviceContext.getLanguageId())));
 
 				JSONArray valueJSONArray = JSONUtil.put(
-					String.valueOf(
-						cpDefinitionOptionValueRel.
-							getCPDefinitionOptionValueRelId()));
+					String.valueOf(cpDefinitionOptionValueRel.getKey()));
+
+				CPDefinitionOptionRel cpDefinitionOptionRel =
+					cpDefinitionOptionValueRel.getCPDefinitionOptionRel();
 
 				JSONObject jsonObject = JSONUtil.put(
-					"key",
-					cpDefinitionOptionValueRel.getCPDefinitionOptionRelId()
+					"key", cpDefinitionOptionRel.getKey()
 				).put(
 					"value", valueJSONArray
 				);
