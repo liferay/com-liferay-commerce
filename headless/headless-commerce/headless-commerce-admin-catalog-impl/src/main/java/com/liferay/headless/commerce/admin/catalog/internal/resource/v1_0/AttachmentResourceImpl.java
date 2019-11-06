@@ -416,7 +416,9 @@ public class AttachmentResourceImpl extends BaseAttachmentResourceImpl {
 				GetterUtil.get(
 					attachment.getPriority(),
 					cpAttachmentFileEntry.getPriority()),
-				attachment.getType(), serviceContext);
+				GetterUtil.get(
+					attachment.getType(), cpAttachmentFileEntry.getType()),
+				serviceContext);
 
 		DTOConverter attachmentDTOConverter =
 			_dtoConverterRegistry.getDTOConverter(
