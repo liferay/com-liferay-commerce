@@ -1636,7 +1636,11 @@ public class CommerceOrderLocalServiceImpl
 	protected boolean hasWorkflowDefinition(long groupId, long typePK)
 		throws PortalException {
 
-		Group group = groupLocalService.getGroup(groupId);
+		Group group = groupLocalService.fetchGroup(groupId);
+
+		if (group == null) {
+			return false;
+		}
 
 		return workflowDefinitionLinkLocalService.hasWorkflowDefinitionLink(
 			group.getCompanyId(), group.getGroupId(),
