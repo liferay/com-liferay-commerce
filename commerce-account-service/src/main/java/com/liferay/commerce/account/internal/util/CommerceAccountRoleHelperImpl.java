@@ -50,12 +50,12 @@ public class CommerceAccountRoleHelperImpl
 		throws PortalException {
 
 		_checkRole(
-			CommerceAccountConstants.ACCOUNT_ADMINISTRATOR_ROLE_NAME,
+			CommerceAccountConstants.ROLE_NAME_ACCOUNT_ADMINISTRATOR,
 			serviceContext);
 		_checkRole(
-			CommerceAccountConstants.ACCOUNT_BUYER_ROLE_NAME, serviceContext);
+			CommerceAccountConstants.ROLE_NAME_ACCOUNT_BUYER, serviceContext);
 		_checkRole(
-			CommerceAccountConstants.ACCOUNT_ORDER_MANAGER_ROLE_NAME,
+			CommerceAccountConstants.ROLE_NAME_ACCOUNT_ORDER_MANAGER,
 			serviceContext);
 	}
 
@@ -103,7 +103,7 @@ public class CommerceAccountRoleHelperImpl
 		String name = role.getName();
 
 		if (name.equals(
-				CommerceAccountConstants.ACCOUNT_ADMINISTRATOR_ROLE_NAME)) {
+				CommerceAccountConstants.ROLE_NAME_ACCOUNT_ADMINISTRATOR)) {
 
 			resourceActionIds.put(
 				"com.liferay.commerce.account.model.CommerceAccount",
@@ -124,7 +124,7 @@ public class CommerceAccountRoleHelperImpl
 				});
 		}
 		else if (name.equals(
-					CommerceAccountConstants.ACCOUNT_BUYER_ROLE_NAME)) {
+					CommerceAccountConstants.ROLE_NAME_ACCOUNT_BUYER)) {
 
 			resourceActionIds.put(
 				"com.liferay.commerce.order",
@@ -134,7 +134,7 @@ public class CommerceAccountRoleHelperImpl
 				});
 		}
 		else if (name.equals(
-					CommerceAccountConstants.ACCOUNT_ORDER_MANAGER_ROLE_NAME)) {
+					CommerceAccountConstants.ROLE_NAME_ACCOUNT_ORDER_MANAGER)) {
 
 			resourceActionIds.put(
 				"com.liferay.commerce.order",
