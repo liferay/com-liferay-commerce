@@ -41,8 +41,7 @@ public class OrderFilterFactoryImpl implements FilterFactory {
 	public Filter create(HttpServletRequest httpServletRequest) {
 		OrderFilterImpl orderFilterImpl = new OrderFilterImpl();
 
-		long commerceOrderId = ParamUtil.getLong(
-			httpServletRequest, "commerceOrderId");
+		long commerceOrderId = ParamUtil.getLong(httpServletRequest, "orderId");
 
 		long commerceAccountId = ParamUtil.getLong(
 			httpServletRequest, "accountId");
