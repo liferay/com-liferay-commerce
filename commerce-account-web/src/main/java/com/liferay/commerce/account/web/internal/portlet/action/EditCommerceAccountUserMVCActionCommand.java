@@ -22,6 +22,7 @@ import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.permission.CommerceAccountPermission;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.account.web.internal.servlet.taglib.ui.CommerceAccountScreenNavigationConstants;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.portal.kernel.bean.BeanParamUtil;
 import com.liferay.portal.kernel.exception.ContactBirthdayException;
@@ -124,7 +125,9 @@ public class EditCommerceAccountUserMVCActionCommand
 					_configurationProvider.getConfiguration(
 						CommerceAccountGroupServiceConfiguration.class,
 						new GroupServiceSettingsLocator(
-							_portal.getScopeGroupId(actionRequest),
+							_commerceChannelLocalService.
+								getCommerceChannelGroupIdBySiteGroupId(
+									_portal.getScopeGroupId(actionRequest)),
 							CommerceAccountConstants.SERVICE_NAME));
 
 			if (commerceAccountGroupServiceConfiguration.commerceSiteType() !=
@@ -420,6 +423,9 @@ public class EditCommerceAccountUserMVCActionCommand
 
 	@Reference
 	private CommerceAccountService _commerceAccountService;
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private ConfigurationProvider _configurationProvider;

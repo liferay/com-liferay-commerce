@@ -62,7 +62,8 @@ public class CommerceContextImpl implements CommerceContext {
 				configurationProvider.getConfiguration(
 					CommerceAccountGroupServiceConfiguration.class,
 					new GroupServiceSettingsLocator(
-						_groupId, CommerceAccountConstants.SERVICE_NAME));
+						getCommerceChannelGroupId(),
+						CommerceAccountConstants.SERVICE_NAME));
 		}
 		catch (PortalException pe) {
 			_log.error(pe, pe);
