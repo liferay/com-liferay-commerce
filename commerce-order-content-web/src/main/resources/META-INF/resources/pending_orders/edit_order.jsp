@@ -291,6 +291,7 @@ List<CommerceAddress> billingAddresses = commerceOrderContentDisplayContext.getB
 	<div class="col-md-9">
 		<commerce-ui:table
 			dataProviderKey="commercePendingOrderItems"
+			filter="<%= commerceOrderContentDisplayContext.getOrderFilter() %>"
 			itemPerPage="<%= 5 %>"
 			namespace="<%= renderResponse.getNamespace() %>"
 			pageNumber="1"
