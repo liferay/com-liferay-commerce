@@ -431,6 +431,8 @@ public class CommerceOrderContentDisplayContext {
 				_commerceAccount.getCommerceAccountId());
 		}
 
+		orderFilterImpl.setOrderId(getCommerceOrderId());
+
 		return orderFilterImpl;
 	}
 

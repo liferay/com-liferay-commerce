@@ -33,8 +33,8 @@ public class OrderFilterImpl extends DefaultFilterImpl {
 		_accountId = accountId;
 	}
 
-	public void setOrderId(long accountId) {
-		_orderId = accountId;
+	public void setOrderId(long orderId) {
+		_orderId = orderId;
 	}
 
 	private long _accountId;
