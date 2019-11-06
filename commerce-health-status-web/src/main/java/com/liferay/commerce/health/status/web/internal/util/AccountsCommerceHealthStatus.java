@@ -111,7 +111,7 @@ public class AccountsCommerceHealthStatus implements CommerceHealthStatus {
 
 		Role role = _roleLocalService.fetchRole(
 			companyId,
-			CommerceAccountConstants.ACCOUNT_ADMINISTRATOR_ROLE_NAME);
+			CommerceAccountConstants.ROLE_NAME_ACCOUNT_ADMINISTRATOR);
 
 		if (role != null) {
 			return true;
