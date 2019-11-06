@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.TempFileEntryUtil;
@@ -34,7 +35,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.upload.UniqueFileNameProvider;
 
 import java.io.File;
-import java.io.FileOutputStream;
 
 import java.net.URI;
 
@@ -55,13 +55,7 @@ public class AttachmentUtil {
 		if (Validator.isNotNull(attachment.getAttachment())) {
 			byte[] attachmentBytes = Base64.decode(attachment.getAttachment());
 
-			File file = new File(_TEMP_FOLDER_NAME);
-
-			try (FileOutputStream fileOutputStream = new FileOutputStream(
-					file)) {
-
-				fileOutputStream.write(attachmentBytes);
-			}
+			File file = FileUtil.createTempFile(attachmentBytes);
 
 			return _addFileEntry(
 				groupId, userId, file, MimeTypesUtil.getContentType(file),
@@ -159,7 +153,7 @@ public class AttachmentUtil {
 			curFileName -> _exists(groupId, userId, curFileName));
 
 		return TempFileEntryUtil.addTempFileEntry(
-			groupId, userId, _TEMP_FOLDER_NAME, uniqueFileName, file,
+			groupId, userId, _TEMP_FILE_NAME, uniqueFileName, file,
 			contentType);
 	}
 
@@ -168,7 +162,7 @@ public class AttachmentUtil {
 
 		try {
 			if (TempFileEntryUtil.getTempFileEntry(
-					groupId, userId, _TEMP_FOLDER_NAME, curFileName) != null) {
+					groupId, userId, _TEMP_FILE_NAME, curFileName) != null) {
 
 				return true;
 			}
@@ -184,7 +178,7 @@ public class AttachmentUtil {
 		}
 	}
 
-	private static final String _TEMP_FOLDER_NAME =
+	private static final String _TEMP_FILE_NAME =
 		AttachmentUtil.class.getName();
 
 	private static final Log _log = LogFactoryUtil.getLog(AttachmentUtil.class);
