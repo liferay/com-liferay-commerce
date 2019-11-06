@@ -97,12 +97,8 @@ public class CommerceAddressDisplayContext {
 	}
 
 	public CommerceAccount getCommerceAccount() throws PortalException {
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)_httpServletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
 		return _commerceAccountHelper.getCurrentCommerceAccount(
-			themeDisplay.getScopeGroupId(), _httpServletRequest);
+			_cpRequestHelper.getChannelGroupId(), _httpServletRequest);
 	}
 
 	public CommerceAddress getCommerceAddress() throws PortalException {

@@ -19,6 +19,7 @@ import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting;
 import com.liferay.commerce.product.type.virtual.order.content.web.internal.display.context.util.CommerceVirtualOrderItemContentRequestHelper;
 import com.liferay.commerce.product.type.virtual.order.content.web.internal.portlet.configuration.CommerceVirtualOrderItemContentPortletInstanceConfiguration;
@@ -56,6 +57,7 @@ import javax.servlet.http.HttpServletRequest;
 public class CommerceVirtualOrderItemContentDisplayContext {
 
 	public CommerceVirtualOrderItemContentDisplayContext(
+			CommerceChannelLocalService commerceChannelLocalService,
 			CommerceVirtualOrderItemLocalService
 				commerceVirtualOrderItemLocalService,
 			CPDefinitionHelper cpDefinitionHelper,
@@ -65,6 +67,7 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 			HttpServletRequest httpServletRequest)
 		throws PortalException {
 
+		_commerceChannelLocalService = commerceChannelLocalService;
 		_commerceVirtualOrderItemLocalService =
 			commerceVirtualOrderItemLocalService;
 		_cpDefinitionHelper = cpDefinitionHelper;
@@ -72,12 +75,14 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 		_cpDefinitionVirtualSettingService = cpDefinitionVirtualSettingService;
 		_cpInstanceHelper = cpInstanceHelper;
 
-		_commerceAccount = commerceAccountHelper.getCurrentCommerceAccount(
-			httpServletRequest);
-
 		_commerceVirtualOrderItemContentRequestHelper =
 			new CommerceVirtualOrderItemContentRequestHelper(
 				httpServletRequest);
+
+		_commerceAccount = commerceAccountHelper.getCurrentCommerceAccount(
+			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
+				_commerceVirtualOrderItemContentRequestHelper.getSiteGroupId()),
+			httpServletRequest);
 
 		PortletDisplay portletDisplay =
 			_commerceVirtualOrderItemContentRequestHelper.getPortletDisplay();
@@ -321,6 +326,7 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 	private JournalArticleDisplay _articleDisplay;
 	private final CommerceAccount _commerceAccount;
 	private final CommerceAccountHelper _commerceAccountHelper;
+	private final CommerceChannelLocalService _commerceChannelLocalService;
 	private final CommerceVirtualOrderItemContentPortletInstanceConfiguration
 		_commerceVirtualOrderItemContentPortletInstanceConfiguration;
 	private final CommerceVirtualOrderItemContentRequestHelper
