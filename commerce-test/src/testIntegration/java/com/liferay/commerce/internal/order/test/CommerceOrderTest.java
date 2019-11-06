@@ -82,9 +82,22 @@ public class CommerceOrderTest {
 		_group = GroupTestUtil.addGroup();
 		_user = UserTestUtil.addUser(true);
 
+		_commerceCurrency =
+			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
+
+		_serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
+
+		_commerceChannel =
+			_commerceChannelLocalService.addCommerceChannel(
+				_group.getGroupId(), "Test Channel",
+				CommerceChannelConstants.CHANNEL_TYPE_SITE, null,
+				_commerceCurrency.getCode(), null, _serviceContext);
+
 		Settings settings = _settingsFactory.getSettings(
 			new GroupServiceSettingsLocator(
-				_group.getGroupId(), CommerceAccountConstants.SERVICE_NAME));
+				_commerceChannel.getGroupId(),
+				CommerceAccountConstants.SERVICE_NAME));
 
 		ModifiableSettings modifiableSettings =
 			settings.getModifiableSettings();
@@ -118,30 +131,18 @@ public class CommerceOrderTest {
 			"I should be able to get it both ways"
 		);
 
-		CommerceCurrency commerceCurrency =
-			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
-
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
-
 		CommerceAccount commerceAccount =
 			_commerceAccountLocalService.addBusinessCommerceAccount(
 				"Test Business Account", 0, null, null, true, null,
 				new long[] {_user.getUserId()},
-				new String[] {_user.getEmailAddress()}, serviceContext);
+				new String[] {_user.getEmailAddress()}, _serviceContext);
 
-		CommerceChannel commerceChannel =
-			_commerceChannelLocalService.addCommerceChannel(
-				_group.getGroupId(), "Test Channel",
-				CommerceChannelConstants.CHANNEL_TYPE_SITE, null,
-				commerceCurrency.getCode(), null, serviceContext);
-
-		long commerceChannelGroupId = commerceChannel.getGroupId();
+		long commerceChannelGroupId = _commerceChannel.getGroupId();
 
 		_commerceOrderLocalService.addCommerceOrder(
 			_user.getUserId(), commerceChannelGroupId,
 			commerceAccount.getCommerceAccountId(),
-			commerceCurrency.getCommerceCurrencyId());
+			_commerceCurrency.getCommerceCurrencyId());
 
 		int ordersCountByAccountId =
 			_commerceOrderService.getPendingCommerceOrdersCount(
@@ -168,8 +169,6 @@ public class CommerceOrderTest {
 
 		_commerceOrderLocalService.deleteCommerceOrders(commerceChannelGroupId);
 		_commerceAccountLocalService.deleteCommerceAccount(commerceAccount);
-		_commerceChannelLocalService.deleteCommerceChannel(commerceChannel);
-		_commerceCurrencyLocalService.deleteCommerceCurrency(commerceCurrency);
 	}
 
 	@Test
@@ -190,44 +189,32 @@ public class CommerceOrderTest {
 			"If they are added to the second account they should see 2 orders"
 		);
 
-		CommerceCurrency commerceCurrency =
-			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
-
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
-
 		CommerceAccount commerceAccount =
 			_commerceAccountLocalService.addBusinessCommerceAccount(
 				"Test Business Account", 0, null, null, true, null,
 				new long[] {_user.getUserId()},
-				new String[] {_user.getEmailAddress()}, serviceContext);
+				new String[] {_user.getEmailAddress()}, _serviceContext);
 
-		CommerceChannel commerceChannel =
-			_commerceChannelLocalService.addCommerceChannel(
-				_group.getGroupId(), "Test Channel",
-				CommerceChannelConstants.CHANNEL_TYPE_SITE, null,
-				commerceCurrency.getCode(), null, serviceContext);
-
-		long commerceChannelGroupId = commerceChannel.getGroupId();
+		long commerceChannelGroupId = _commerceChannel.getGroupId();
 
 		CommerceOrder commerceOrder =
 			_commerceOrderLocalService.addCommerceOrder(
 				_user.getUserId(), commerceChannelGroupId,
 				commerceAccount.getCommerceAccountId(),
-				commerceCurrency.getCommerceCurrencyId());
+				_commerceCurrency.getCommerceCurrencyId());
 
 		User secondUser = UserTestUtil.addUser();
 
 		CommerceAccount secondCommerceAccount =
 			_commerceAccountLocalService.addBusinessCommerceAccount(
 				"Second Test Business Account", 0, null, null, true, null, null,
-				null, serviceContext);
+				null, _serviceContext);
 
 		CommerceOrder secondCommerceOrder =
 			_commerceOrderLocalService.addCommerceOrder(
 				secondUser.getUserId(), commerceChannelGroupId,
 				secondCommerceAccount.getCommerceAccountId(),
-				commerceCurrency.getCommerceCurrencyId());
+				_commerceCurrency.getCommerceCurrencyId());
 
 		List<CommerceOrder> commerceOrders = _getUserOrders(
 			commerceChannelGroupId);
@@ -249,7 +236,7 @@ public class CommerceOrderTest {
 		_commerceAccountUserRelLocalService.addCommerceAccountUserRels(
 			secondCommerceAccount.getCommerceAccountId(),
 			new long[] {_user.getUserId()},
-			new String[] {_user.getEmailAddress()}, null, serviceContext);
+			new String[] {_user.getEmailAddress()}, null, _serviceContext);
 
 		commerceOrders = _getUserOrders(commerceChannelGroupId);
 
@@ -264,8 +251,6 @@ public class CommerceOrderTest {
 		_commerceAccountLocalService.deleteCommerceAccount(
 			secondCommerceAccount);
 		_userLocalService.deleteUser(secondUser);
-		_commerceChannelLocalService.deleteCommerceChannel(commerceChannel);
-		_commerceCurrencyLocalService.deleteCommerceCurrency(commerceCurrency);
 	}
 
 	@Test
@@ -286,19 +271,7 @@ public class CommerceOrderTest {
 			"I should get the same count of Orders that were created"
 		);
 
-		CommerceCurrency commerceCurrency =
-			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
-
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
-
-		CommerceChannel commerceChannel =
-			_commerceChannelLocalService.addCommerceChannel(
-				_group.getGroupId(), "Test Channel",
-				CommerceChannelConstants.CHANNEL_TYPE_SITE, null,
-				commerceCurrency.getCode(), null, serviceContext);
-
-		long commerceChannelGroupId = commerceChannel.getGroupId();
+		long commerceChannelGroupId = _commerceChannel.getGroupId();
 
 		int ordersCreated = 0;
 
@@ -316,7 +289,7 @@ public class CommerceOrderTest {
 				_commerceAccountLocalService.addBusinessCommerceAccount(
 					"Test Generated Account " + i, 0, null, null, true, null,
 					new long[] {user.getUserId()},
-					new String[] {user.getEmailAddress()}, serviceContext);
+					new String[] {user.getEmailAddress()}, _serviceContext);
 
 			randomAccounts.add(commerceAccount);
 
@@ -326,7 +299,7 @@ public class CommerceOrderTest {
 				_commerceOrderLocalService.addCommerceOrder(
 					user.getUserId(), commerceChannelGroupId,
 					commerceAccount.getCommerceAccountId(),
-					commerceCurrency.getCommerceCurrencyId());
+					_commerceCurrency.getCommerceCurrencyId());
 			}
 
 			ordersCreated += ordersToCreate;
@@ -348,9 +321,6 @@ public class CommerceOrderTest {
 		for (User user : randomUsers) {
 			_userLocalService.deleteUser(user);
 		}
-
-		_commerceChannelLocalService.deleteCommerceChannel(commerceChannel);
-		_commerceCurrencyLocalService.deleteCommerceCurrency(commerceCurrency);
 	}
 
 	@Test
@@ -373,52 +343,39 @@ public class CommerceOrderTest {
 			"If I remove the user from the second account they should only " +
 				"see 1 order"
 		);
-
-		CommerceCurrency commerceCurrency =
-			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
-
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
-
 		CommerceAccount commerceAccount =
 			_commerceAccountLocalService.addBusinessCommerceAccount(
 				"Test Business Account", 0, null, null, true, null,
 				new long[] {_user.getUserId()},
-				new String[] {_user.getEmailAddress()}, serviceContext);
+				new String[] {_user.getEmailAddress()}, _serviceContext);
 
-		CommerceChannel commerceChannel =
-			_commerceChannelLocalService.addCommerceChannel(
-				_group.getGroupId(), "Test Channel",
-				CommerceChannelConstants.CHANNEL_TYPE_SITE, null,
-				commerceCurrency.getCode(), null, serviceContext);
-
-		long commerceChannelGroupId = commerceChannel.getGroupId();
+		long commerceChannelGroupId = _commerceChannel.getGroupId();
 
 		CommerceOrder commerceOrder =
 			_commerceOrderLocalService.addCommerceOrder(
 				_user.getUserId(), commerceChannelGroupId,
 				commerceAccount.getCommerceAccountId(),
-				commerceCurrency.getCommerceCurrencyId());
+				_commerceCurrency.getCommerceCurrencyId());
 
 		User secondUser = UserTestUtil.addUser();
 
 		CommerceAccount secondCommerceAccount =
 			_commerceAccountLocalService.addBusinessCommerceAccount(
 				"Second Test Business Account", 0, null, null, true, null, null,
-				null, serviceContext);
+				null, _serviceContext);
 
 		// Add the user to the second account
 
 		_commerceAccountUserRelLocalService.addCommerceAccountUserRels(
 			secondCommerceAccount.getCommerceAccountId(),
 			new long[] {_user.getUserId()},
-			new String[] {_user.getEmailAddress()}, null, serviceContext);
+			new String[] {_user.getEmailAddress()}, null, _serviceContext);
 
 		CommerceOrder secondCommerceOrder =
 			_commerceOrderLocalService.addCommerceOrder(
 				secondUser.getUserId(), commerceChannelGroupId,
 				secondCommerceAccount.getCommerceAccountId(),
-				commerceCurrency.getCommerceCurrencyId());
+				_commerceCurrency.getCommerceCurrencyId());
 
 		List<CommerceOrder> commerceOrders = _getUserOrders(
 			commerceChannelGroupId);
@@ -454,8 +411,6 @@ public class CommerceOrderTest {
 		_commerceAccountLocalService.deleteCommerceAccount(
 			secondCommerceAccount);
 		_userLocalService.deleteUser(secondUser);
-		_commerceChannelLocalService.deleteCommerceChannel(commerceChannel);
-		_commerceCurrencyLocalService.deleteCommerceCurrency(commerceCurrency);
 	}
 
 	@Rule
@@ -488,11 +443,14 @@ public class CommerceOrderTest {
 	private CommerceAccountUserRelLocalService
 		_commerceAccountUserRelLocalService;
 
+	@DeleteAfterTestRun
+	private CommerceChannel _commerceChannel;
+
 	@Inject
 	private CommerceChannelLocalService _commerceChannelLocalService;
 
-	@Inject
-	private CommerceCurrencyLocalService _commerceCurrencyLocalService;
+	@DeleteAfterTestRun
+	private CommerceCurrency _commerceCurrency;
 
 	@Inject
 	private CommerceOrderLocalService _commerceOrderLocalService;
@@ -502,6 +460,8 @@ public class CommerceOrderTest {
 
 	@DeleteAfterTestRun
 	private Group _group;
+
+	private ServiceContext _serviceContext;
 
 	@Inject
 	private SettingsFactory _settingsFactory;
