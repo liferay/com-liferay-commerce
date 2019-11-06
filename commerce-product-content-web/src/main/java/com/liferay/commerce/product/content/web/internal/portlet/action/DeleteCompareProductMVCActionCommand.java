@@ -57,9 +57,13 @@ public class DeleteCompareProductMVCActionCommand extends BaseMVCActionCommand {
 		long cpDefinitionId = ParamUtil.getLong(
 			actionRequest, "cpDefinitionId");
 
+		long commerceChannelGroupId =
+			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
+				_portal.getScopeGroupId(httpServletRequest));
+
 		CommerceAccount commerceAccount =
 			_commerceAccountHelper.getCurrentCommerceAccount(
-				httpServletRequest);
+				commerceChannelGroupId, httpServletRequest);
 
 		long commerceAccountId = 0;
 
@@ -71,9 +75,7 @@ public class DeleteCompareProductMVCActionCommand extends BaseMVCActionCommand {
 			_portal.getOriginalServletRequest(httpServletRequest);
 
 		CPCompareHelperUtil.removeCompareProduct(
-			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
-				_portal.getScopeGroupId(httpServletRequest)),
-			commerceAccountId, cpDefinitionId,
+			commerceChannelGroupId, commerceAccountId, cpDefinitionId,
 			originalHttpServletRequest.getSession());
 
 		hideDefaultErrorMessage(actionRequest);

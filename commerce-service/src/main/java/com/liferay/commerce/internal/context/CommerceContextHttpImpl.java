@@ -75,7 +75,7 @@ public class CommerceContextHttpImpl implements CommerceContext {
 		}
 
 		_commerceAccount = _commerceAccountHelper.getCurrentCommerceAccount(
-			_httpServletRequest);
+			getCommerceChannelGroupId(), _httpServletRequest);
 
 		return _commerceAccount;
 	}
