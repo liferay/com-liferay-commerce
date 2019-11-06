@@ -350,7 +350,9 @@ public class CommerceOrderGenerator {
 				_configurationProvider.getConfiguration(
 					CommerceAccountGroupServiceConfiguration.class,
 					new GroupServiceSettingsLocator(
-						groupId, CommerceAccountConstants.SERVICE_NAME));
+						_commerceChannelLocalService.
+							getCommerceChannelGroupIdBySiteGroupId(groupId),
+						CommerceAccountConstants.SERVICE_NAME));
 
 		if (commerceAccountGroupServiceConfiguration.commerceSiteType() ==
 				CommerceAccountConstants.SITE_TYPE_B2C) {

@@ -172,8 +172,6 @@ public class MiniumSiteInitializer implements SiteInitializer {
 
 			ServiceContext serviceContext = getServiceContext(groupId);
 
-			configureB2BSite(groupId, serviceContext);
-
 			_cpFileImporter.updateLookAndFeel(
 				_MINIUM_THEME_ID, true, serviceContext);
 			_cpFileImporter.updateLookAndFeel(
@@ -189,6 +187,8 @@ public class MiniumSiteInitializer implements SiteInitializer {
 
 			CommerceChannel commerceChannel = createChannel(
 				commerceCatalog, serviceContext);
+
+			configureB2BSite(commerceChannel.getGroupId(), serviceContext);
 
 			_miniumLayoutsInitializer.initialize(serviceContext);
 

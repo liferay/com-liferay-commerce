@@ -16,6 +16,7 @@ package com.liferay.commerce.admin.web.internal.portlet;
 
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.admin.constants.CommerceAdminPortletKeys;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
@@ -61,7 +62,9 @@ public class EditCommerceAccountSettingsMVCActionCommand
 
 			Settings settings = _settingsFactory.getSettings(
 				new GroupServiceSettingsLocator(
-					_portal.getScopeGroupId(actionRequest),
+					_commerceChannelLocalService.
+						getCommerceChannelGroupIdBySiteGroupId(
+							_portal.getScopeGroupId(actionRequest)),
 					CommerceAccountConstants.SERVICE_NAME));
 
 			ModifiableSettings modifiableSettings =
@@ -84,6 +87,9 @@ public class EditCommerceAccountSettingsMVCActionCommand
 			sendRedirect(actionRequest, actionResponse, redirect);
 		}
 	}
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private Portal _portal;

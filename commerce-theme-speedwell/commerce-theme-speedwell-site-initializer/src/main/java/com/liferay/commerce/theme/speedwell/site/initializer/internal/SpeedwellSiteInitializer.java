@@ -169,8 +169,6 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 		try {
 			ServiceContext serviceContext = getServiceContext(groupId);
 
-			configureB2CSite(groupId, serviceContext);
-
 			_cpFileImporter.updateLookAndFeel(
 				_SPEEDWELL_THEME_ID, false, serviceContext);
 
@@ -184,6 +182,8 @@ public class SpeedwellSiteInitializer implements SiteInitializer {
 
 			CommerceChannel commerceChannel = createChannel(
 				commerceCatalog, serviceContext);
+
+			configureB2CSite(commerceChannel.getGroupId(), serviceContext);
 
 			_speedwellLayoutsInitializer.initialize(serviceContext);
 
