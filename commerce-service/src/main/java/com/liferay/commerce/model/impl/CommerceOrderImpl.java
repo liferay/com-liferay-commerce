@@ -62,7 +62,7 @@ public class CommerceOrderImpl extends CommerceOrderBaseImpl {
 	@Override
 	public CommerceAccount getCommerceAccount() throws PortalException {
 		if (getCommerceAccountId() ==
-				CommerceAccountConstants.GUEST_ACCOUNT_ID) {
+				CommerceAccountConstants.ACCOUNT_ID_GUEST) {
 
 			return CommerceAccountLocalServiceUtil.getGuestCommerceAccount(
 				getCompanyId());

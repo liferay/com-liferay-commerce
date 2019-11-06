@@ -96,7 +96,7 @@ public class CommerceAccountLocalServiceImpl
 
 		Role role = roleLocalService.getRole(
 			serviceContext.getCompanyId(),
-			CommerceAccountConstants.ACCOUNT_ADMINISTRATOR_ROLE_NAME);
+			CommerceAccountConstants.ROLE_NAME_ACCOUNT_ADMINISTRATOR);
 
 		// Commerce account user rels
 
@@ -323,7 +323,7 @@ public class CommerceAccountLocalServiceImpl
 		CommerceAccountImpl commerceAccountImpl = new CommerceAccountImpl();
 
 		commerceAccountImpl.setCommerceAccountId(
-			CommerceAccountConstants.GUEST_ACCOUNT_ID);
+			CommerceAccountConstants.ACCOUNT_ID_GUEST);
 
 		commerceAccountImpl.setCompanyId(defaultUser.getCompanyId());
 		commerceAccountImpl.setUserId(defaultUser.getUserId());

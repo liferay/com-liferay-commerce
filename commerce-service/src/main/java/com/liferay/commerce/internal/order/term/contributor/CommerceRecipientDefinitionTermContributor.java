@@ -117,7 +117,7 @@ public class CommerceRecipientDefinitionTermContributor
 
 			Role accountAdminRole = _roleLocalService.getRole(
 				commerceOrder.getCompanyId(),
-				CommerceAccountConstants.ACCOUNT_ADMINISTRATOR_ROLE_NAME);
+				CommerceAccountConstants.ROLE_NAME_ACCOUNT_ADMINISTRATOR);
 
 			return _getUserIds(commerceAccount, accountAdminRole);
 		}
@@ -127,7 +127,8 @@ public class CommerceRecipientDefinitionTermContributor
 				commerceOrder.getCommerceAccount();
 
 			Role orderManagerRole = _roleLocalService.getRole(
-				commerceOrder.getCompanyId(), "Order Manager");
+				commerceOrder.getCompanyId(),
+				CommerceAccountConstants.ROLE_NAME_ACCOUNT_ORDER_MANAGER);
 
 			return _getUserIds(commerceAccount, orderManagerRole);
 		}

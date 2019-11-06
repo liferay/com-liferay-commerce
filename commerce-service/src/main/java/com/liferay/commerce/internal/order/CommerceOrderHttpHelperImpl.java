@@ -384,7 +384,7 @@ public class CommerceOrderHttpHelperImpl implements CommerceOrderHttpHelper {
 			return null;
 		}
 
-		if (commerceAccountId != CommerceAccountConstants.GUEST_ACCOUNT_ID) {
+		if (commerceAccountId != CommerceAccountConstants.ACCOUNT_ID_GUEST) {
 			String cookieName = _getCookieName(commerceChannel.getGroupId());
 
 			String commerceOrderUuid = CookieKeys.getCookie(

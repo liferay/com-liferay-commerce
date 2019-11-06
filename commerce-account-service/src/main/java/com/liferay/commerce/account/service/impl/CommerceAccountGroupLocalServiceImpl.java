@@ -133,14 +133,14 @@ public class CommerceAccountGroupLocalServiceImpl
 
 		CommerceAccountGroup commerceAccountGroup =
 			commerceAccountGroupLocalService.addCommerceAccountGroup(
-				companyId, CommerceAccountConstants.ACCOUNT_GROUP_GUEST_NAME,
+				companyId, CommerceAccountConstants.ACCOUNT_GROUP_NAME_GUEST,
 				CommerceAccountConstants.ACCOUNT_GROUP_TYPE_GUEST, true, null,
 				serviceContext);
 
 		commerceAccountGroupCommerceAccountRelLocalService.
 			addCommerceAccountGroupCommerceAccountRel(
 				commerceAccountGroup.getCommerceAccountGroupId(),
-				CommerceAccountConstants.GUEST_ACCOUNT_ID, serviceContext);
+				CommerceAccountConstants.ACCOUNT_ID_GUEST, serviceContext);
 	}
 
 	@Indexable(type = IndexableType.DELETE)
