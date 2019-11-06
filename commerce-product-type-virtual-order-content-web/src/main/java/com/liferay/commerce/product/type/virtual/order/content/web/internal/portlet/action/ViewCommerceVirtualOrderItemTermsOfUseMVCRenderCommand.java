@@ -15,6 +15,7 @@
 package com.liferay.commerce.product.type.virtual.order.content.web.internal.portlet.action;
 
 import com.liferay.commerce.account.util.CommerceAccountHelper;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.product.type.virtual.order.constants.CommerceVirtualOrderPortletKeys;
 import com.liferay.commerce.product.type.virtual.order.content.web.internal.display.context.CommerceVirtualOrderItemContentDisplayContext;
 import com.liferay.commerce.product.type.virtual.order.service.CommerceVirtualOrderItemLocalService;
@@ -58,6 +59,7 @@ public class ViewCommerceVirtualOrderItemTermsOfUseMVCRenderCommand
 			CommerceVirtualOrderItemContentDisplayContext
 				commerceVirtualOrderItemContentDisplayContext =
 					new CommerceVirtualOrderItemContentDisplayContext(
+						_commerceChannelLocalService,
 						_commerceVirtualOrderItemLocalService,
 						_cpDefinitionHelper, _commerceAccountHelper,
 						_cpDefinitionVirtualSettingService, _cpInstanceHelper,
@@ -79,6 +81,9 @@ public class ViewCommerceVirtualOrderItemTermsOfUseMVCRenderCommand
 
 	@Reference
 	private CommerceAccountHelper _commerceAccountHelper;
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private CommerceVirtualOrderItemLocalService

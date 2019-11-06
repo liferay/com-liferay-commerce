@@ -249,7 +249,10 @@ public class CommerceAccountResource {
 
 		try {
 			_commerceAccountHelper.setCurrentCommerceAccount(
-				httpServletRequest, groupId, accountId);
+				httpServletRequest,
+				_commerceChannelLocalService.
+					getCommerceChannelGroupIdBySiteGroupId(groupId),
+				accountId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

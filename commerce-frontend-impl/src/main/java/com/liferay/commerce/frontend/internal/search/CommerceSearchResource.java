@@ -111,7 +111,10 @@ public class CommerceSearchResource {
 
 			CommerceAccount commerceAccount =
 				_commerceAccountHelper.getCurrentCommerceAccount(
-					themeDisplay.getScopeGroupId(), httpServletRequest);
+					_commerceChannelLocalService.
+						getCommerceChannelGroupIdBySiteGroupId(
+							themeDisplay.getScopeGroupId()),
+					httpServletRequest);
 
 			List<SearchItemModel> searchItemModels = new ArrayList<>();
 

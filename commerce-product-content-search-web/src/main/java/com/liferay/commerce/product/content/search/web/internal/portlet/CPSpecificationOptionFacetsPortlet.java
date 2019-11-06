@@ -197,19 +197,20 @@ public class CPSpecificationOptionFacetsPortlet
 		if (commerceChannel != null) {
 			searchContext.setAttribute(
 				"commerceChannelGroupId", commerceChannel.getGroupId());
-		}
 
-		CommerceAccount commerceAccount =
-			_commerceAccountHelper.getCurrentCommerceAccount(
-				_portal.getHttpServletRequest(renderRequest));
+			CommerceAccount commerceAccount =
+				_commerceAccountHelper.getCurrentCommerceAccount(
+					commerceChannel.getGroupId(),
+					_portal.getHttpServletRequest(renderRequest));
 
-		if (commerceAccount != null) {
-			long[] commerceAccountGroupIds =
-				_commerceAccountHelper.getCommerceAccountGroupIds(
-					commerceAccount.getCommerceAccountId());
+			if (commerceAccount != null) {
+				long[] commerceAccountGroupIds =
+					_commerceAccountHelper.getCommerceAccountGroupIds(
+						commerceAccount.getCommerceAccountId());
 
-			searchContext.setAttribute(
-				"commerceAccountGroupIds", commerceAccountGroupIds);
+				searchContext.setAttribute(
+					"commerceAccountGroupIds", commerceAccountGroupIds);
+			}
 		}
 
 		searchContext.setAttribute("secure", Boolean.TRUE);
