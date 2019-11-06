@@ -25,8 +25,6 @@ import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.repository.model.FileEntry;
-import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.File;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -59,13 +57,8 @@ public class AttachmentDTOConverter implements DTOConverter {
 			_cpAttachmentFileEntryService.getCPAttachmentFileEntry(
 				dtoConverterContext.getResourcePrimKey());
 
-		FileEntry fileEntry = cpAttachmentFileEntry.getFileEntry();
-
-		byte[] bytes = _file.getBytes(fileEntry.getContentStream());
-
 		return new Attachment() {
 			{
-				attachment = Base64.encode(bytes);
 				displayDate = cpAttachmentFileEntry.getDisplayDate();
 				expirationDate = cpAttachmentFileEntry.getExpirationDate();
 				externalReferenceCode =
