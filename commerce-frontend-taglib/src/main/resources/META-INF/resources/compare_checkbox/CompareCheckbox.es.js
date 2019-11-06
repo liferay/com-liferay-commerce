@@ -6,29 +6,32 @@ import Soy, {Config} from 'metal-soy';
 
 class CompareCheckbox extends Component {
 	attached() {
-		Liferay.on(
-			'compareIsAvailable',
-			() => {
-				this.compareAvailable = true;
-				return this._emitUpdates();
-			}
-		);
-		Liferay.on(
-			'compareIsUnavailable',
-			() => {
-				this.compareAvailable = false;
-				return this._emitUpdates();
-			}
-		);
-		Liferay.on(
-			'productRemovedFromCompare',
-			(data) => {
-				if (data.id === this.productId) {
-					this.inCompare = false;
-				}
-				return this._emitUpdates();
-			}
-		);
+		window.Liferay.on('compareIsAvailable', this._enableCompare, this);
+		window.Liferay.on('compareIsUnavailable', this._disableCompare, this);
+		window.Liferay.on('productRemovedFromCompare', this._removeFromCompare, this);
+	}
+
+	detached() {
+		window.Liferay.detach('compareIsAvailable', this._enableCompare, this);
+		window.Liferay.detach('compareIsUnavailable', this._disableCompare, this);
+		window.Liferay.detach('productRemovedFromCompare', this._removeFromCompare, this);
+	}
+
+	_enableCompare() {
+		this.compareAvailable = true;
+		return this._emitUpdates();
+	}
+
+	_disableCompare() {
+		this.compareAvailable = false;
+		return this._emitUpdates();
+	}
+
+	_removeFromCompare(data) {
+		if (data.id === this.productId) {
+			this.inCompare = false;
+		}
+		return this._emitUpdates();
 	}
 
 	_emitUpdates() {
