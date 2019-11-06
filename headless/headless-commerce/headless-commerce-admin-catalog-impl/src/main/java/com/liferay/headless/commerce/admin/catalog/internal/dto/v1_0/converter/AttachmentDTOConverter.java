@@ -25,6 +25,8 @@ import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.kernel.service.CompanyLocalService;
 import com.liferay.portal.kernel.util.File;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -57,6 +59,11 @@ public class AttachmentDTOConverter implements DTOConverter {
 			_cpAttachmentFileEntryService.getCPAttachmentFileEntry(
 				dtoConverterContext.getResourcePrimKey());
 
+		Company company = _companyLocalService.getCompany(
+			cpAttachmentFileEntry.getCompanyId());
+
+		String portalURL = company.getPortalURL(company.getGroupId());
+
 		return new Attachment() {
 			{
 				displayDate = cpAttachmentFileEntry.getDisplayDate();
@@ -66,8 +73,10 @@ public class AttachmentDTOConverter implements DTOConverter {
 				id = cpAttachmentFileEntry.getCPAttachmentFileEntryId();
 				options = _getAttachmentOptions(cpAttachmentFileEntry);
 				priority = cpAttachmentFileEntry.getPriority();
-				src = _commerceMediaResolver.getDownloadUrl(
-					cpAttachmentFileEntry.getCPAttachmentFileEntryId());
+				src =
+					portalURL +
+						_commerceMediaResolver.getDownloadUrl(
+							cpAttachmentFileEntry.getCPAttachmentFileEntryId());
 				title = LanguageUtils.getLanguageIdMap(
 					cpAttachmentFileEntry.getTitleMap());
 				type = cpAttachmentFileEntry.getType();
@@ -105,6 +114,9 @@ public class AttachmentDTOConverter implements DTOConverter {
 
 	@Reference
 	private CommerceMediaResolver _commerceMediaResolver;
+
+	@Reference
+	private CompanyLocalService _companyLocalService;
 
 	@Reference
 	private CPAttachmentFileEntryService _cpAttachmentFileEntryService;
