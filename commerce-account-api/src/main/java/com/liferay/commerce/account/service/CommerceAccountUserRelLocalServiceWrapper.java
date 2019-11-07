@@ -86,13 +86,10 @@ public class CommerceAccountUserRelLocalServiceWrapper
 	}
 
 	@Override
-	public void addDefaultRole(
-			long userId,
-			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public void addDefaultRoles(long userId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		_commerceAccountUserRelLocalService.addDefaultRole(
-			userId, serviceContext);
+		_commerceAccountUserRelLocalService.addDefaultRoles(userId);
 	}
 
 	/**
