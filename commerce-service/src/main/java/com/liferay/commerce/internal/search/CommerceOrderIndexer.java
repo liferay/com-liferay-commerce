@@ -102,6 +102,35 @@ public class CommerceOrderIndexer extends BaseIndexer<CommerceOrder> {
 			contextBooleanFilter.add(
 				commerceAccountIdBooleanFilter, BooleanClauseOccur.MUST);
 		}
+
+		int[] orderStatuses = GetterUtil.getIntegerValues(
+			searchContext.getAttribute("orderStatuses"), null);
+
+		if (orderStatuses != null) {
+			BooleanFilter orderStatusesBooleanFilter = new BooleanFilter();
+
+			for (long orderStatus : orderStatuses) {
+				Filter termFilter = new TermFilter(
+					"orderStatus", String.valueOf(orderStatus));
+
+				orderStatusesBooleanFilter.add(
+					termFilter, BooleanClauseOccur.SHOULD);
+			}
+
+			orderStatusesBooleanFilter.add(
+				new MissingFilter("orderStatus"), BooleanClauseOccur.SHOULD);
+
+			if (GetterUtil.getBoolean(
+					searchContext.getAttribute("negateOrderStatuses"))) {
+
+				contextBooleanFilter.add(
+					orderStatusesBooleanFilter, BooleanClauseOccur.MUST_NOT);
+			}
+			else {
+				contextBooleanFilter.add(
+					orderStatusesBooleanFilter, BooleanClauseOccur.MUST);
+			}
+		}
 	}
 
 	@Override

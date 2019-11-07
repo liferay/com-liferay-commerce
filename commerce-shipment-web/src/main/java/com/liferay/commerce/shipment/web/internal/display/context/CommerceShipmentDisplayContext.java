@@ -24,7 +24,6 @@ import com.liferay.commerce.model.CommerceShipment;
 import com.liferay.commerce.model.CommerceShipmentItem;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelService;
-import com.liferay.commerce.search.facet.NegatableMultiValueFacet;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.service.CommerceShipmentItemLocalServiceUtil;
@@ -43,7 +42,6 @@ import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import java.util.Collections;
@@ -261,29 +259,11 @@ public class CommerceShipmentDisplayContext
 		return searchContainer;
 	}
 
-	private SearchContext _addFacetOrderStatus(SearchContext searchContext) {
-		NegatableMultiValueFacet negatableMultiValueFacet =
-			new NegatableMultiValueFacet(searchContext);
-
-		negatableMultiValueFacet.setFieldName("orderStatus");
-
-		searchContext.addFacet(negatableMultiValueFacet);
-
-		boolean negated = false;
-
-		negatableMultiValueFacet.setNegated(negated);
-
-		searchContext.setAttribute(
-			negatableMultiValueFacet.getFieldId(),
-			StringUtil.merge(CommerceShipmentConstants.ALLOWED_ORDER_STATUSES));
-
-		return searchContext;
-	}
-
 	private SearchContext _buildSearchContext() throws PortalException {
 		SearchContext searchContext = new SearchContext();
 
-		_addFacetOrderStatus(searchContext);
+		searchContext.setAttribute(
+			"orderStatuses", CommerceShipmentConstants.ALLOWED_ORDER_STATUSES);
 
 		searchContext.setAttribute(
 			"useSearchResultPermissionFilter", Boolean.FALSE);
