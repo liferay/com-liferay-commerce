@@ -23,7 +23,6 @@ import com.liferay.commerce.order.web.internal.search.CommerceOrderSearch;
 import com.liferay.commerce.order.web.internal.security.permission.resource.CommerceOrderPermission;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelService;
-import com.liferay.commerce.search.facet.NegatableMultiValueFacet;
 import com.liferay.commerce.search.facet.NegatableSimpleFacet;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.service.CommerceOrderNoteService;
@@ -295,13 +294,6 @@ public class CommerceOrderListDisplayContext {
 	private SearchContext _addFacetOrderStatus(
 		SearchContext searchContext, String tabs1, int orderStatus) {
 
-		NegatableMultiValueFacet negatableMultiValueFacet =
-			new NegatableMultiValueFacet(searchContext);
-
-		negatableMultiValueFacet.setFieldName("orderStatus");
-
-		searchContext.addFacet(negatableMultiValueFacet);
-
 		boolean negated = false;
 		int[] orderStatuses = null;
 
@@ -329,11 +321,9 @@ public class CommerceOrderListDisplayContext {
 			orderStatuses = new int[] {orderStatus};
 		}
 
-		negatableMultiValueFacet.setNegated(negated);
+		searchContext.setAttribute("negateOrderStatuses", negated);
 
-		searchContext.setAttribute(
-			negatableMultiValueFacet.getFieldId(),
-			StringUtil.merge(orderStatuses));
+		searchContext.setAttribute("orderStatuses", orderStatuses);
 
 		return searchContext;
 	}
