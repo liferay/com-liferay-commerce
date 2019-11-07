@@ -496,7 +496,7 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 
 		return commerceOrderLocalService.getCommerceOrdersCount(
 			companyId, groupId, commerceAccountIds, keywords,
-			new int[] {CommerceOrderConstants.ORDER_STATUS_OPEN}, false);
+			new int[] {CommerceOrderConstants.ORDER_STATUS_OPEN}, true);
 	}
 
 	@Override
