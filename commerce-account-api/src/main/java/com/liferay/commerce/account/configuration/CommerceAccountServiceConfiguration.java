@@ -37,4 +37,7 @@ public interface CommerceAccountServiceConfiguration {
 	)
 	public boolean applyDefaultRoleToExistingUsers();
 
+	@Meta.AD(name = "site-roles", required = false)
+	public String[] siteRoles();
+
 }
