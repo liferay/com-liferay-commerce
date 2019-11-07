@@ -1235,6 +1235,18 @@ public class CommerceAccountOrganizationRelPersistenceImpl
 		}
 	}
 
+	public void clearCache(Set<Serializable> primaryKeys) {
+		finderCache.clearCache(FINDER_CLASS_NAME_ENTITY);
+		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (Serializable primaryKey : primaryKeys) {
+			entityCache.removeResult(
+				CommerceAccountOrganizationRelModelImpl.ENTITY_CACHE_ENABLED,
+				CommerceAccountOrganizationRelImpl.class, primaryKey);
+		}
+	}
+
 	/**
 	 * Creates a new commerce account organization rel with the primary key. Does not add the commerce account organization rel to the database.
 	 *
