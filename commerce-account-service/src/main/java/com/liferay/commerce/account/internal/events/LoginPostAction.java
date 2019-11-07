@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.events.LifecycleAction;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
-import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.util.Portal;
 
 import javax.servlet.http.HttpServletRequest;
@@ -56,11 +54,7 @@ public class LoginPostAction extends Action {
 
 				long userId = _portal.getUserId(httpServletRequest);
 
-				ServiceContext serviceContext =
-					ServiceContextFactory.getInstance(httpServletRequest);
-
-				_commerceAccountUserRelLocalService.addDefaultRole(
-					userId, serviceContext);
+				_commerceAccountUserRelLocalService.addDefaultRoles(userId);
 			}
 		}
 		catch (Exception e) {
