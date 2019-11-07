@@ -263,15 +263,15 @@ public class CommerceNotificationTest {
 
 		_accountAdminRole = _roleLocalService.fetchRole(
 			_company.getCompanyId(),
-			CommerceAccountConstants.ACCOUNT_ADMINISTRATOR_ROLE_NAME);
+			CommerceAccountConstants.ROLE_NAME_ACCOUNT_ADMINISTRATOR);
 
 		if (_accountAdminRole == null) {
 			_accountAdminRole = _roleLocalService.addRole(
 				_serviceContext.getUserId(), null, 0,
-				CommerceAccountConstants.ACCOUNT_ADMINISTRATOR_ROLE_NAME,
+				CommerceAccountConstants.ROLE_NAME_ACCOUNT_ADMINISTRATOR,
 				Collections.singletonMap(
 					_serviceContext.getLocale(),
-					CommerceAccountConstants.ACCOUNT_ADMINISTRATOR_ROLE_NAME),
+					CommerceAccountConstants.ROLE_NAME_ACCOUNT_ADMINISTRATOR),
 				Collections.emptyMap(), RoleConstants.TYPE_SITE,
 				StringPool.BLANK, _serviceContext);
 
