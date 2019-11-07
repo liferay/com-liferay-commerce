@@ -1548,7 +1548,10 @@ public class CommerceOrderLocalServiceImpl
 
 		SearchContext searchContext = new SearchContext();
 
-		addFacetOrderStatus(negated, orderStatuses, searchContext);
+		if (orderStatuses != null) {
+			searchContext.setAttribute("negateOrderStatuses", negated);
+			searchContext.setAttribute("orderStatuses", orderStatuses);
+		}
 
 		if (commerceAccountIds != null) {
 			searchContext.setAttribute(
