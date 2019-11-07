@@ -16,7 +16,6 @@ package com.liferay.commerce.order.web.internal.portlet;
 
 import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.order.web.internal.display.context.CommerceOrderListDisplayContext;
-import com.liferay.commerce.price.CommerceOrderPriceCalculation;
 import com.liferay.commerce.product.service.CommerceChannelService;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.service.CommerceOrderNoteService;
@@ -86,7 +85,7 @@ public class CommerceOrderPortlet extends MVCPortlet {
 	@Override
 	public void render(
 			RenderRequest renderRequest, RenderResponse renderResponse)
-		throws IOException, PortletException {
+		throws PortletException {
 
 		try {
 			String mvcRenderCommandName = ParamUtil.getString(
@@ -97,8 +96,7 @@ public class CommerceOrderPortlet extends MVCPortlet {
 					commerceOrderListDisplayContext =
 						new CommerceOrderListDisplayContext(
 							_commerceChannelService, _commerceOrderLocalService,
-							_commerceOrderNoteService,
-							_commerceOrderPriceCalculation, _groupLocalService,
+							_commerceOrderNoteService, _groupLocalService,
 							_jsonFactory, renderRequest);
 
 				renderRequest.setAttribute(
@@ -121,9 +119,6 @@ public class CommerceOrderPortlet extends MVCPortlet {
 
 	@Reference
 	private CommerceOrderNoteService _commerceOrderNoteService;
-
-	@Reference
-	private CommerceOrderPriceCalculation _commerceOrderPriceCalculation;
 
 	@Reference
 	private GroupLocalService _groupLocalService;
