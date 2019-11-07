@@ -489,7 +489,7 @@ components:
                 - active
                 - catalogId
                 - name
-                - productTypeName
+                - productType
             type: object
         ProductConfiguration:
             properties:
