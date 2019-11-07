@@ -21,7 +21,6 @@ import com.liferay.commerce.order.web.internal.display.context.util.CommerceOrde
 import com.liferay.commerce.order.web.internal.search.CommerceOrderDisplayTerms;
 import com.liferay.commerce.order.web.internal.search.CommerceOrderSearch;
 import com.liferay.commerce.order.web.internal.security.permission.resource.CommerceOrderPermission;
-import com.liferay.commerce.price.CommerceOrderPriceCalculation;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelService;
 import com.liferay.commerce.search.facet.NegatableMultiValueFacet;
@@ -94,14 +93,12 @@ public class CommerceOrderListDisplayContext {
 		CommerceChannelService commerceChannelService,
 		CommerceOrderLocalService commerceOrderLocalService,
 		CommerceOrderNoteService commerceOrderNoteService,
-		CommerceOrderPriceCalculation commerceOrderPriceCalculation,
 		GroupLocalService groupLocalService, JSONFactory jsonFactory,
 		RenderRequest renderRequest) {
 
 		_commerceChannelService = commerceChannelService;
 		_commerceOrderLocalService = commerceOrderLocalService;
 		_commerceOrderNoteService = commerceOrderNoteService;
-		_commerceOrderPriceCalculation = commerceOrderPriceCalculation;
 		_groupLocalService = groupLocalService;
 		_jsonFactory = jsonFactory;
 
@@ -201,8 +198,7 @@ public class CommerceOrderListDisplayContext {
 	public String getCommerceOrderValue(CommerceOrder commerceOrder)
 		throws PortalException {
 
-		CommerceMoney subtotal = _commerceOrderPriceCalculation.getSubtotal(
-			commerceOrder, _commerceOrderRequestHelper.getCommerceContext());
+		CommerceMoney subtotal = commerceOrder.getSubtotalMoney();
 
 		if (subtotal == null) {
 			return StringPool.BLANK;
@@ -621,7 +617,6 @@ public class CommerceOrderListDisplayContext {
 	private final Format _commerceOrderDateFormatDateTime;
 	private final CommerceOrderLocalService _commerceOrderLocalService;
 	private final CommerceOrderNoteService _commerceOrderNoteService;
-	private final CommerceOrderPriceCalculation _commerceOrderPriceCalculation;
 	private final CommerceOrderRequestHelper _commerceOrderRequestHelper;
 	private final GroupLocalService _groupLocalService;
 	private final JSONFactory _jsonFactory;
