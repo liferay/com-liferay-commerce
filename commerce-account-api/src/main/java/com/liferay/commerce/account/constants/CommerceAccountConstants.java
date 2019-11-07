@@ -54,8 +54,6 @@ public class CommerceAccountConstants {
 	public static final String ROLE_NAME_ACCOUNT_ORDER_MANAGER =
 		"Order Manager";
 
-	public static final String ROLE_NAME_ACCOUNT_USER = "Account User";
-
 	public static final String SERVICE_NAME = "com.liferay.commerce.account";
 
 	public static final int SITE_TYPE_B2B = 1;
