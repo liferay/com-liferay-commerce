@@ -84,12 +84,10 @@ public class CommerceAccountUserRelLocalServiceUtil {
 			serviceContext);
 	}
 
-	public static void addDefaultRole(
-			long userId,
-			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+	public static void addDefaultRoles(long userId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
-		getService().addDefaultRole(userId, serviceContext);
+		getService().addDefaultRoles(userId);
 	}
 
 	/**
