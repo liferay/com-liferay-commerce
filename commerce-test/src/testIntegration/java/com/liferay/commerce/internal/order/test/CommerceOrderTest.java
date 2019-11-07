@@ -22,7 +22,6 @@ import com.liferay.commerce.account.service.CommerceAccountUserRelLocalService;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.currency.model.CommerceCurrency;
-import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.product.model.CommerceChannel;
@@ -82,17 +81,16 @@ public class CommerceOrderTest {
 		_group = GroupTestUtil.addGroup();
 		_user = UserTestUtil.addUser(true);
 
-		_commerceCurrency =
-			CommerceCurrencyTestUtil.addCommerceCurrency(_group.getGroupId());
+		_commerceCurrency = CommerceCurrencyTestUtil.addCommerceCurrency(
+			_group.getGroupId());
 
-		_serviceContext =
-			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
+		_serviceContext = ServiceContextTestUtil.getServiceContext(
+			_group.getGroupId());
 
-		_commerceChannel =
-			_commerceChannelLocalService.addCommerceChannel(
-				_group.getGroupId(), "Test Channel",
-				CommerceChannelConstants.CHANNEL_TYPE_SITE, null,
-				_commerceCurrency.getCode(), null, _serviceContext);
+		_commerceChannel = _commerceChannelLocalService.addCommerceChannel(
+			_group.getGroupId(), "Test Channel",
+			CommerceChannelConstants.CHANNEL_TYPE_SITE, null,
+			_commerceCurrency.getCode(), null, _serviceContext);
 
 		Settings settings = _settingsFactory.getSettings(
 			new GroupServiceSettingsLocator(
