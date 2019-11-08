@@ -16,7 +16,6 @@ package com.liferay.commerce.product.internal.util.data.provider;
 
 import com.liferay.commerce.product.model.CPDefinitionOptionRel;
 import com.liferay.commerce.product.model.CPDefinitionOptionValueRel;
-import com.liferay.commerce.product.model.CPOption;
 import com.liferay.commerce.product.permission.CommerceProductViewPermission;
 import com.liferay.commerce.product.service.CPDefinitionOptionRelLocalService;
 import com.liferay.commerce.product.util.CPInstanceHelper;
@@ -25,7 +24,7 @@ import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderContext;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderException;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderRequest;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderResponse;
-import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderResponseStatus;
+import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderResponseOutput;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -70,9 +69,6 @@ public class CPInstanceOptionsValuesDataProvider implements DDMDataProvider {
 			DDMDataProviderRequest ddmDataProviderRequest)
 		throws DDMDataProviderException {
 
-		DDMDataProviderResponse.Builder ddmDataProviderResponseBuilder =
-			DDMDataProviderResponse.Builder.newBuilder();
-
 		long cpDefinitionId = GetterUtil.getLong(
 			ddmDataProviderRequest.getParameter("cpDefinitionId"));
 
@@ -87,21 +83,17 @@ public class CPInstanceOptionsValuesDataProvider implements DDMDataProvider {
 					PermissionThreadLocal.getPermissionChecker(),
 					commerceAccountId, groupId, cpDefinitionId)) {
 
-				return ddmDataProviderResponseBuilder.withStatus(
-					DDMDataProviderResponseStatus.UNAUTHORIZED
-				).build();
+				return DDMDataProviderResponse.of();
 			}
 		}
 		catch (PortalException pe) {
 			_log.error(pe, pe);
 
-			return ddmDataProviderResponseBuilder.withStatus(
-				DDMDataProviderResponseStatus.UNAUTHORIZED
-			).build();
+			return DDMDataProviderResponse.of();
 		}
 
 		if (cpDefinitionId == 0) {
-			return ddmDataProviderResponseBuilder.build();
+			return DDMDataProviderResponse.of();
 		}
 
 		HttpServletRequest httpServletRequest =
@@ -139,26 +131,29 @@ public class CPInstanceOptionsValuesDataProvider implements DDMDataProvider {
 			for (CPDefinitionOptionRel cpDefinitionOptionRel :
 					cpDefinitionOptionRels) {
 
-				CPOption cpOption = cpDefinitionOptionRel.getCPOption();
-
-				String parameterValue = parameters.get(cpOption.getKey());
+				String parameterValue = parameters.get(
+					cpDefinitionOptionRel.getKey());
 
 				// Collect filters and outputs
 
 				if (Validator.isNull(parameterValue)) {
 					outputParameterNames.put(
-						cpOption.getKey(), cpOption.getKey());
+						cpDefinitionOptionRel.getKey(),
+						cpDefinitionOptionRel.getKey());
 				}
 				else {
-					filters.put(cpOption.getKey(), parameterValue);
+					filters.put(cpDefinitionOptionRel.getKey(), parameterValue);
 				}
 			}
 
 			// Do search and populate the outputs if the outputs are not empty
 
 			if (outputParameterNames.isEmpty()) {
-				return ddmDataProviderResponseBuilder.build();
+				return DDMDataProviderResponse.of();
 			}
+
+			List<DDMDataProviderResponseOutput> ddmDataProviderResponseOutputs =
+				new ArrayList<>();
 
 			for (Map.Entry<String, String> outputParameterNameEntry :
 					outputParameterNames.entrySet()) {
@@ -179,20 +174,27 @@ public class CPInstanceOptionsValuesDataProvider implements DDMDataProvider {
 							cpDefinitionOptionValueRel.getName(locale)));
 				}
 
-				ddmDataProviderResponseBuilder.withOutput(
-					outputParameterNameEntry.getValue(), data);
+				ddmDataProviderResponseOutputs.add(
+					DDMDataProviderResponseOutput.of(
+						outputParameterNameEntry.getValue(), "list", data));
 			}
 
-			return ddmDataProviderResponseBuilder.build();
+			DDMDataProviderResponseOutput[] ddmDataProviderResponseOutputArray =
+				new DDMDataProviderResponseOutput
+					[ddmDataProviderResponseOutputs.size()];
+
+			ddmDataProviderResponseOutputArray =
+				ddmDataProviderResponseOutputs.toArray(
+					ddmDataProviderResponseOutputArray);
+
+			return DDMDataProviderResponse.of(
+				ddmDataProviderResponseOutputArray);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
 
-		ddmDataProviderResponseBuilder =
-			DDMDataProviderResponse.Builder.newBuilder();
-
-		return ddmDataProviderResponseBuilder.build();
+		return DDMDataProviderResponse.of();
 	}
 
 	@Override
