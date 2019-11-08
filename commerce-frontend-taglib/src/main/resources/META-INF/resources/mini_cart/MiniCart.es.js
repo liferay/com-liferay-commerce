@@ -380,7 +380,6 @@ class Cart extends Component {
 					this.products = updatedCart.products;
 					this.summary = updatedCart.summary;
 					this.valid = updatedCart.valid;
-					console.log(this.valid);
 					return !!(this.products && this.summary);
 				}
 			)
