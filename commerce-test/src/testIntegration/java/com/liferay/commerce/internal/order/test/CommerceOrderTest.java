@@ -17,7 +17,9 @@ package com.liferay.commerce.internal.order.test;
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.account.model.CommerceAccount;
+import com.liferay.commerce.account.model.CommerceAccountOrganizationRel;
 import com.liferay.commerce.account.service.CommerceAccountLocalService;
+import com.liferay.commerce.account.service.CommerceAccountOrganizationRelLocalService;
 import com.liferay.commerce.account.service.CommerceAccountUserRelLocalService;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.constants.CommerceAddressConstants;
@@ -42,8 +44,17 @@ import com.liferay.petra.lang.CentralizedThreadLocal;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.model.Organization;
+import com.liferay.portal.kernel.model.OrganizationConstants;
+import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
+import com.liferay.portal.kernel.service.OrganizationLocalService;
+import com.liferay.portal.kernel.service.ResourcePermissionLocalService;
+import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.UserGroupRoleLocalService;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.settings.ModifiableSettings;
@@ -61,7 +72,10 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.test.rule.PermissionCheckerTestRule;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import org.frutilla.FrutillaRule;
 
@@ -420,6 +434,285 @@ public class CommerceOrderTest {
 	}
 
 	@Test
+	public void testGetCommerceOrdersForSalesAgent() throws Exception {
+		frutillaRule.scenario(
+			"Ensure that the Sales Agents are able to pull orders for their " +
+				"organizations"
+		).given(
+			"2 Organizations"
+		).and(
+			"2 Accounts with 1 order each"
+		).and(
+			"A User who has the Sales Agent role"
+		).and(
+			"The User has not been assigned to either account"
+		).and(
+			"The User is part of both organizations"
+		).when(
+			"The User queries for orders"
+		).then(
+			"They should see and count 0 orders"
+		).but(
+			"If 1 Organization is associated with 1 accounts, the user " +
+				"should see and count 1 order"
+		).and(
+			"If the other Organization is associated with the other account, " +
+				"the user should see and count 2 orders"
+		);
+
+		PermissionChecker permissionChecker =
+			PermissionThreadLocal.getPermissionChecker();
+
+		long adminUserId = permissionChecker.getUserId();
+
+		Organization organization = _organizationLocalService.addOrganization(
+			adminUserId, OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
+			"Test Organization" + RandomTestUtil.randomString(), false);
+
+		_organizationLocalService.addUserOrganization(
+			_user.getUserId(), organization);
+
+		Organization secondOrganization =
+			_organizationLocalService.addOrganization(
+				adminUserId,
+				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
+				"Test Organization" + RandomTestUtil.randomString(), false);
+
+		_organizationLocalService.addUserOrganization(
+			_user.getUserId(), secondOrganization);
+
+		long commerceChannelGroupId = _commerceChannel.getGroupId();
+
+		CommerceAccount commerceAccount =
+			_commerceAccountLocalService.addBusinessCommerceAccount(
+				"Test Business Account", 0, null, null, true, null, null, null,
+				_serviceContext);
+
+		CommerceOrder commerceOrder =
+			_commerceOrderLocalService.addCommerceOrder(
+				adminUserId, commerceChannelGroupId,
+				commerceAccount.getCommerceAccountId(),
+				_commerceCurrency.getCommerceCurrencyId());
+
+		CommerceAccount secondCommerceAccount =
+			_commerceAccountLocalService.addBusinessCommerceAccount(
+				"Test Business Account 2", 0, null, null, true, null, null,
+				null, _serviceContext);
+
+		CommerceOrder secondCommerceOrder =
+			_commerceOrderLocalService.addCommerceOrder(
+				adminUserId, commerceChannelGroupId,
+				secondCommerceAccount.getCommerceAccountId(),
+				_commerceCurrency.getCommerceCurrencyId());
+
+		Role role = _roleLocalService.fetchRole(
+			_serviceContext.getCompanyId(), "Sales Agent");
+
+		if (role == null) {
+			role = _addSalesAgentRole();
+		}
+
+		_userGroupRoleLocalService.addUserGroupRoles(
+			_user.getUserId(), commerceAccount.getCommerceAccountGroupId(),
+			new long[] {role.getRoleId()});
+
+		long ordersCountByUser = _getUserOrdersCount(
+			commerceChannelGroupId, false);
+
+		Assert.assertEquals(0, ordersCountByUser);
+
+		List<CommerceOrder> commerceOrders = _getUserOrders(
+			commerceChannelGroupId, false);
+
+		Assert.assertEquals(
+			"The Organizations are not associated with any accounts. They " +
+				"should not be able to get any orders",
+			0, commerceOrders.size());
+
+		// The Sales Agent's first organization is added to the first Account
+
+		CommerceAccountOrganizationRel commerceAccountOrganizationRel =
+			_commerceAccountOrganizationRelLocalService.
+				addCommerceAccountOrganizationRel(
+					commerceAccount.getCommerceAccountId(),
+					organization.getOrganizationId(), _serviceContext);
+
+		ordersCountByUser = _getUserOrdersCount(commerceChannelGroupId, false);
+
+		Assert.assertEquals(1, ordersCountByUser);
+
+		commerceOrders = _getUserOrders(commerceChannelGroupId, false);
+
+		Assert.assertEquals(commerceOrder.toString(), 1, commerceOrders.size());
+
+		Assert.assertEquals(
+			"The Sales Agent should see first order created, which belongs " +
+				"to the account their 1 organization is associated with",
+			commerceOrder, commerceOrders.get(0));
+
+		// The Sales Agent's Second organization is added to the second Account
+
+		CommerceAccountOrganizationRel secondCommerceAccountOrganizationRel =
+			_commerceAccountOrganizationRelLocalService.
+				addCommerceAccountOrganizationRel(
+					secondCommerceAccount.getCommerceAccountId(),
+					secondOrganization.getOrganizationId(), _serviceContext);
+
+		ordersCountByUser = _getUserOrdersCount(commerceChannelGroupId, false);
+
+		Assert.assertEquals(2, ordersCountByUser);
+
+		commerceOrders = _getUserOrders(commerceChannelGroupId, false);
+
+		Assert.assertEquals(
+			"The Sales Agent should see the 2 Orders that were created", 2,
+			commerceOrders.size());
+
+		Assert.assertEquals(
+			"The first Order the Sales manager can see should match the " +
+				"first created",
+			commerceOrder, commerceOrders.get(0));
+		Assert.assertEquals(
+			"The second Order the Sales manager can see should match the " +
+				"second created",
+			secondCommerceOrder, commerceOrders.get(1));
+
+		// Checkout the first order
+
+		CommerceAddress commerceAddress = _addAddressToAccount(
+			commerceAccount.getCommerceAccountId());
+
+		commerceOrder.setBillingAddressId(
+			commerceAddress.getCommerceAddressId());
+		commerceOrder.setShippingAddressId(
+			commerceAddress.getCommerceAddressId());
+
+		commerceOrder = _commerceOrderLocalService.updateCommerceOrder(
+			commerceOrder);
+
+		CommerceContext commerceContext = new TestCommerceContext(
+			_commerceCurrency, _user, _group, commerceAccount, commerceOrder);
+
+		commerceOrder = _commerceOrderLocalService.checkoutCommerceOrder(
+			commerceOrder.getCommerceOrderId(), commerceContext,
+			_serviceContext);
+
+		ordersCountByUser = _getUserOrdersCount(commerceChannelGroupId, true);
+
+		Assert.assertEquals(1, ordersCountByUser);
+
+		commerceOrders = _getUserOrders(commerceChannelGroupId, true);
+
+		Assert.assertEquals(
+			commerceOrders.toString(), 1, commerceOrders.size());
+
+		Assert.assertEquals(
+			"The Sales Agent should see first order created, which belongs " +
+				"to the account their 1 organization is associated with",
+			commerceOrder, commerceOrders.get(0));
+
+		// Checkout the second order
+
+		CommerceAddress secondCommerceAddress = _addAddressToAccount(
+			secondCommerceAccount.getCommerceAccountId());
+
+		secondCommerceOrder.setBillingAddressId(
+			secondCommerceAddress.getCommerceAddressId());
+		secondCommerceOrder.setShippingAddressId(
+			secondCommerceAddress.getCommerceAddressId());
+
+		secondCommerceOrder = _commerceOrderLocalService.updateCommerceOrder(
+			secondCommerceOrder);
+
+		CommerceContext secondCommerceContext = new TestCommerceContext(
+			_commerceCurrency, _user, _group, secondCommerceAccount,
+			secondCommerceOrder);
+
+		secondCommerceOrder = _commerceOrderLocalService.checkoutCommerceOrder(
+			secondCommerceOrder.getCommerceOrderId(), secondCommerceContext,
+			_serviceContext);
+
+		ordersCountByUser = _getUserOrdersCount(commerceChannelGroupId, true);
+
+		Assert.assertEquals(2, ordersCountByUser);
+
+		commerceOrders = _getUserOrders(commerceChannelGroupId, true);
+
+		Assert.assertEquals(
+			"The Sales Agent should see the 2 Placed Orders", 2,
+			commerceOrders.size());
+
+		Assert.assertEquals(
+			"The first Order the Sales manager can see should match the " +
+				"first created",
+			commerceOrder, commerceOrders.get(0));
+		Assert.assertEquals(
+			"The second Order the Sales manager can see should match the " +
+				"second created",
+			secondCommerceOrder, commerceOrders.get(1));
+
+		// There shouldn't be any open orders
+
+		ordersCountByUser = _getUserOrdersCount(commerceChannelGroupId, false);
+
+		Assert.assertEquals(0, ordersCountByUser);
+
+		commerceOrders = _getUserOrders(commerceChannelGroupId, false);
+
+		Assert.assertEquals(
+			commerceOrders.toString(), 0, commerceOrders.size());
+
+		// Remove the Organization association from the second account
+
+		_commerceAccountOrganizationRelLocalService.
+			deleteCommerceAccountOrganizationRel(
+				secondCommerceAccountOrganizationRel);
+
+		ordersCountByUser = _getUserOrdersCount(commerceChannelGroupId, true);
+
+		Assert.assertEquals(1, ordersCountByUser);
+
+		commerceOrders = _getUserOrders(commerceChannelGroupId, true);
+
+		Assert.assertEquals(
+			commerceOrders.toString(), 1, commerceOrders.size());
+
+		Assert.assertEquals(
+			"The Sales Agent should only see the first order", commerceOrder,
+			commerceOrders.get(0));
+
+		// Remove the Organization association from the first account
+
+		_commerceAccountOrganizationRelLocalService.
+			deleteCommerceAccountOrganizationRel(
+				commerceAccountOrganizationRel);
+
+		ordersCountByUser = _getUserOrdersCount(commerceChannelGroupId, true);
+
+		Assert.assertEquals(0, ordersCountByUser);
+
+		commerceOrders = _getUserOrders(commerceChannelGroupId, true);
+
+		Assert.assertEquals(
+			commerceOrders.toString(), 0, commerceOrders.size());
+
+		_commerceOrderLocalService.deleteCommerceOrder(commerceOrder);
+		_commerceOrderLocalService.deleteCommerceOrder(secondCommerceOrder);
+		_commerceAddressLocalService.deleteCommerceAddress(commerceAddress);
+		_commerceAddressLocalService.deleteCommerceAddress(
+			secondCommerceAddress);
+		_commerceAccountLocalService.deleteCommerceAccount(commerceAccount);
+		_commerceAccountLocalService.deleteCommerceAccount(
+			secondCommerceAccount);
+		_organizationLocalService.deleteUserOrganization(
+			_user.getUserId(), organization);
+		_organizationLocalService.deleteUserOrganization(
+			_user.getUserId(), secondOrganization);
+		_organizationLocalService.deleteOrganization(organization);
+		_organizationLocalService.deleteOrganization(secondOrganization);
+	}
+
+	@Test
 	public void testGetPendingCommerceOrder() throws Exception {
 		frutillaRule.scenario(
 			"Try to get a pending order based on the userId, and directly " +
@@ -466,8 +759,8 @@ public class CommerceOrderTest {
 
 		Assert.assertEquals(commerceOrder, actualCommerceOrder);
 
-		long ordersCountByUser =
-			_getUserOrdersCount(commerceChannelGroupId, false);
+		long ordersCountByUser = _getUserOrdersCount(
+			commerceChannelGroupId, false);
 
 		Assert.assertEquals(1, ordersCountByUser);
 
@@ -546,8 +839,8 @@ public class CommerceOrderTest {
 
 		Assert.assertEquals(commerceOrder, actualCommerceOrder);
 
-		long ordersCountByUser =
-			_getUserOrdersCount(commerceChannelGroupId, true);
+		long ordersCountByUser = _getUserOrdersCount(
+			commerceChannelGroupId, true);
 
 		Assert.assertEquals(1, ordersCountByUser);
 
@@ -599,6 +892,29 @@ public class CommerceOrderTest {
 			_serviceContext);
 	}
 
+	private Role _addSalesAgentRole() throws Exception {
+		Map<Locale, String> titleMap = new HashMap<>();
+
+		titleMap.put(_serviceContext.getLocale(), "Sales Agent");
+
+		Role role = _roleLocalService.addRole(
+			_user.getUserId(), null, 0, "Sales Agent", titleMap, null, 1, null,
+			_serviceContext);
+
+		_resourcePermissionLocalService.addResourcePermission(
+			_serviceContext.getCompanyId(), "90", 1,
+			String.valueOf(role.getCompanyId()), role.getRoleId(),
+			"MANAGE_AVAILABLE_ACCOUNTS");
+
+		_resourcePermissionLocalService.addResourcePermission(
+			_serviceContext.getCompanyId(),
+			"com.liferay.commerce.account.model.CommerceAccount", 1,
+			String.valueOf(role.getCompanyId()), role.getRoleId(),
+			"MANAGE_ORGANIZATIONS");
+
+		return role;
+	}
+
 	private List<CommerceOrder> _getUserOrders(long groupId, boolean negate)
 		throws Exception {
 
@@ -641,6 +957,10 @@ public class CommerceOrderTest {
 	private CommerceAccountLocalService _commerceAccountLocalService;
 
 	@Inject
+	private CommerceAccountOrganizationRelLocalService
+		_commerceAccountOrganizationRelLocalService;
+
+	@Inject
 	private CommerceAccountUserRelLocalService
 		_commerceAccountUserRelLocalService;
 
@@ -677,6 +997,15 @@ public class CommerceOrderTest {
 	@DeleteAfterTestRun
 	private Group _group;
 
+	@Inject
+	private OrganizationLocalService _organizationLocalService;
+
+	@Inject
+	private ResourcePermissionLocalService _resourcePermissionLocalService;
+
+	@Inject
+	private RoleLocalService _roleLocalService;
+
 	private ServiceContext _serviceContext;
 
 	@Inject
@@ -684,6 +1013,9 @@ public class CommerceOrderTest {
 
 	@DeleteAfterTestRun
 	private User _user;
+
+	@Inject
+	private UserGroupRoleLocalService _userGroupRoleLocalService;
 
 	@Inject
 	private UserLocalService _userLocalService;
