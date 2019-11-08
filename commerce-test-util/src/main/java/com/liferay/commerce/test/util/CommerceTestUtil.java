@@ -14,9 +14,6 @@
 
 package com.liferay.commerce.test.util;
 
-import java.math.BigDecimal;
-import java.util.Collections;
-
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountLocalServiceUtil;
 import com.liferay.commerce.constants.CommerceShipmentConstants;
@@ -59,6 +56,10 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
+
+import java.math.BigDecimal;
+
+import java.util.Collections;
 
 /**
  * @author Andrea Di Giorgi
