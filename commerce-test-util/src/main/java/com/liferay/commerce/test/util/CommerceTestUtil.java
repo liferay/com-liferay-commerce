@@ -428,17 +428,17 @@ public class CommerceTestUtil {
 			BigDecimal value)
 		throws Exception {
 
-		CommerceOrder commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
+		CommerceOrder commerceOrder = addB2CCommerceOrder(
 			companyId, userId, currencyId, siteGroupId);
 
 		int orderStatus = CommerceShipmentConstants.ALLOWED_ORDER_STATUSES[0];
 
 		commerceOrder.setOrderStatus(orderStatus);
 
-		CommerceAddress billingCommerceAddress =
-			CommerceTestUtil.addUserCommerceAddress(companyId, userId);
-		CommerceAddress shippingCommerceAddress =
-			CommerceTestUtil.addUserCommerceAddress(companyId, userId);
+		CommerceAddress billingCommerceAddress = addUserCommerceAddress(
+			companyId, userId);
+		CommerceAddress shippingCommerceAddress = addUserCommerceAddress(
+			companyId, userId);
 
 		commerceOrder.setBillingAddressId(
 			billingCommerceAddress.getCommerceAddressId());
