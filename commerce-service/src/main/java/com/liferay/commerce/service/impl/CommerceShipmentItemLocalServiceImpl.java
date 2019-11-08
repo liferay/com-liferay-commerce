@@ -15,10 +15,13 @@
 package com.liferay.commerce.service.impl;
 
 import com.liferay.commerce.constants.CommerceDestinationNames;
+import com.liferay.commerce.exception.CommerceShipmentInactiveWarehouseException;
 import com.liferay.commerce.exception.CommerceShipmentItemQuantityException;
 import com.liferay.commerce.inventory.engine.CommerceInventoryEngine;
+import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemLocalService;
+import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceShipmentItem;
 import com.liferay.commerce.product.model.CPInstance;
@@ -237,6 +240,14 @@ public class CommerceShipmentItemLocalServiceImpl
 			commerceOrderItem.getQuantity() -
 				commerceOrderItem.getShippedQuantity();
 
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
+			_commerceInventoryWarehouseLocalService.
+				fetchCommerceInventoryWarehouse(commerceInventoryWarehouseId);
+
+		if (!commerceInventoryWarehouse.isActive()) {
+			throw new CommerceShipmentInactiveWarehouseException();
+		}
+
 		int commerceInventoryWarehouseQuantity =
 			commerceOrderItemLocalService.
 				getCommerceInventoryWarehouseItemQuantity(
@@ -343,5 +354,9 @@ public class CommerceShipmentItemLocalServiceImpl
 	@ServiceReference(type = CommerceInventoryWarehouseItemLocalService.class)
 	private CommerceInventoryWarehouseItemLocalService
 		_commerceInventoryWarehouseItemLocalService;
+
+	@ServiceReference(type = CommerceInventoryWarehouseLocalService.class)
+	private CommerceInventoryWarehouseLocalService
+		_commerceInventoryWarehouseLocalService;
 
 }
