@@ -24,6 +24,7 @@ import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
 import com.liferay.commerce.discount.CommerceDiscountValue;
 import com.liferay.commerce.exception.CommerceOrderShippingAddressException;
 import com.liferay.commerce.exception.CommerceOrderStatusException;
+import com.liferay.commerce.exception.CommerceShipmentInactiveWarehouseException;
 import com.liferay.commerce.exception.CommerceShipmentItemQuantityException;
 import com.liferay.commerce.exception.NoSuchOrderException;
 import com.liferay.commerce.exception.NoSuchShipmentItemException;
@@ -77,7 +78,6 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -114,7 +114,6 @@ public class CommerceShipmentTest {
 		_companyLocalService.deleteCompany(_company);
 	}
 
-	@Ignore
 	@Test(expected = CommerceOrderShippingAddressException.class)
 	public void testCheckoutWihoutShippingAddress() throws Exception {
 		frutillaRule.scenario(
@@ -158,7 +157,6 @@ public class CommerceShipmentTest {
 				commerceOrder.getGroupId()));
 	}
 
-	@Ignore
 	@Test
 	public void testCreateMultipleShippingForSameOrder() throws Exception {
 		frutillaRule.scenario(
@@ -197,7 +195,6 @@ public class CommerceShipmentTest {
 			commerceOrder.getGroupId(), commerceShipment1.getGroupId());
 	}
 
-	@Ignore
 	@Test
 	public void testCreateOrderShipment() throws Exception {
 		frutillaRule.scenario(
@@ -238,7 +235,6 @@ public class CommerceShipmentTest {
 			commerceShipment.getCommerceAddressId());
 	}
 
-	@Ignore
 	@Test
 	public void testCreateOrderWithItemsShipment() throws Exception {
 		frutillaRule.scenario(
@@ -320,7 +316,6 @@ public class CommerceShipmentTest {
 			commerceShipment, commerceShipmentItem.getCommerceShipment());
 	}
 
-	@Ignore
 	@Test
 	public void testCreateOrderWithShippingAmount() throws Exception {
 		frutillaRule.scenario(
@@ -386,7 +381,6 @@ public class CommerceShipmentTest {
 		Assert.assertEquals(value, shippableValue.getPrice());
 	}
 
-	@Ignore
 	@Test
 	public void testCreateOrderWithShippingDiscount() throws Exception {
 		frutillaRule.scenario(
@@ -467,7 +461,6 @@ public class CommerceShipmentTest {
 		Assert.assertEquals(expectedL1Discount, percentages[0]);
 	}
 
-	@Ignore
 	@Test
 	public void testCreateSeparateItemShippings() throws Exception {
 		frutillaRule.scenario(
@@ -561,7 +554,6 @@ public class CommerceShipmentTest {
 			commerceShipment1, commerceShipmentItem1.getCommerceShipment());
 	}
 
-	@Ignore
 	@Test
 	public void testCreateShipmentWithNonshippableItem() throws Exception {
 		frutillaRule.scenario(
@@ -625,7 +617,6 @@ public class CommerceShipmentTest {
 			false, _commerceShippingHelper.isShippable(commerceOrder));
 	}
 
-	@Ignore
 	@Test(expected = CommerceOrderStatusException.class)
 	public void testCreateShippingForCancelledOrder() throws Exception {
 		frutillaRule.scenario(
@@ -670,7 +661,6 @@ public class CommerceShipmentTest {
 				commerceOrder.getGroupId()));
 	}
 
-	@Ignore
 	@Test
 	public void testCreateShippingForItemsOnly() throws Exception {
 		frutillaRule.scenario(
@@ -749,7 +739,7 @@ public class CommerceShipmentTest {
 		}
 	}
 
-	@Test(expected = CommerceShipmentItemQuantityException.class)
+	@Test(expected = CommerceShipmentInactiveWarehouseException.class)
 	public void testCreateShippingFromInactiveWarehouse() throws Exception {
 		frutillaRule.scenario(
 			"Attach a shipment to a item that is stocked in an inactive " +
@@ -810,7 +800,6 @@ public class CommerceShipmentTest {
 				commerceOrder.getGroupId()));
 	}
 
-	@Ignore
 	@Test(expected = NoSuchOrderException.class)
 	public void testCreateShippingWithNoOrder() throws Exception {
 		frutillaRule.scenario(
@@ -829,7 +818,6 @@ public class CommerceShipmentTest {
 			commerceChannel.getGroupId(), 0);
 	}
 
-	@Ignore
 	@Test(expected = CommerceShipmentItemQuantityException.class)
 	public void testUpdateShippingItemQuantity() throws Exception {
 		frutillaRule.scenario(
@@ -898,7 +886,6 @@ public class CommerceShipmentTest {
 			newOrderedQuantity);
 	}
 
-	@Ignore
 	@Test(expected = NoSuchShipmentItemException.class)
 	public void testUpdateShippingItemQuantityWithNoShipping()
 		throws Exception {
