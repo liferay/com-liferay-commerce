@@ -436,10 +436,6 @@ public class CPDefinitionOptionRelLocalServiceImpl
 	protected void checkCPInstances(CPDefinitionOptionRel cpDefinitionOptionRel)
 		throws PortalException {
 
-		if (!cpDefinitionOptionRel.isSkuContributor()) {
-			return;
-		}
-
 		CPDefinition cpDefinition = cpDefinitionLocalService.getCPDefinition(
 			cpDefinitionOptionRel.getCPDefinitionId());
 
@@ -483,6 +479,10 @@ public class CPDefinitionOptionRelLocalServiceImpl
 			cpDefinitionLocalService.updateCPDefinitionIgnoreSKUCombinations(
 				cpDefinition.getCPDefinitionId(), true, new ServiceContext());
 		}
+		else {
+			cpDefinitionLocalService.updateCPDefinitionIgnoreSKUCombinations(
+				cpDefinition.getCPDefinitionId(), false, new ServiceContext());
+		}
 	}
 
 	protected void checkCPInstances(
@@ -490,22 +490,20 @@ public class CPDefinitionOptionRelLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		if (!skuContributor) {
-			return;
-		}
-
 		CPDefinition cpDefinition = cpDefinitionLocalService.getCPDefinition(
 			cpDefinitionId);
-
-		cpDefinitionLocalService.updateCPDefinitionIgnoreSKUCombinations(
-			cpDefinition.getCPDefinitionId(), false, serviceContext);
 
 		int cpDefinitionOptionRelsCount =
 			cpDefinitionOptionRelLocalService.getCPDefinitionOptionRelsCount(
 				cpDefinition.getCPDefinitionId(), true);
 
 		if (cpDefinitionOptionRelsCount == 0) {
-			return;
+			cpDefinitionLocalService.updateCPDefinitionIgnoreSKUCombinations(
+				cpDefinition.getCPDefinitionId(), true, serviceContext);
+		}
+		else {
+			cpDefinitionLocalService.updateCPDefinitionIgnoreSKUCombinations(
+				cpDefinition.getCPDefinitionId(), false, serviceContext);
 		}
 
 		List<CPInstance> cpInstances =
