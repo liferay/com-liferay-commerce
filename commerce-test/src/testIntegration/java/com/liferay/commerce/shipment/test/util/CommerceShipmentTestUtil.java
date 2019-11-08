@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
  * @author Luca Pellizzon
  */
 public class CommerceShipmentTestUtil {
-	
+
 	public static CommerceShipment createEmptyOrderShipment(
 			long groupId, long orderId)
 		throws PortalException {
