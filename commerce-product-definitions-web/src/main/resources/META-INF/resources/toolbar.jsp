@@ -81,11 +81,10 @@ String definitionToolbarFilterRequire = npmResolver.resolveModuleName("commerce-
 			/>
 
 			<li>
-				<aui:form action="<%= String.valueOf(cpDefinitionsDisplayContext.getPortletURL()) %>" name="searchFm">
-					<liferay-ui:input-search
-						markupView="lexicon"
-					/>
-				</aui:form>
+				<liferay-commerce:search-input
+					actionURL="<%= cpDefinitionsDisplayContext.getPortletURL() %>"
+					formName="searchFm"
+				/>
 			</li>
 		</liferay-frontend:management-bar-filters>
 

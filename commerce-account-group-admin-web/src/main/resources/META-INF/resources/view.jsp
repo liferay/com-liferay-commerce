@@ -63,11 +63,10 @@ CommerceAccountGroupAdminDisplayContext commerceAccountGroupAdminDisplayContext 
 			/>
 
 			<li>
-				<aui:form action="<%= String.valueOf(commerceAccountGroupAdminDisplayContext.getPortletURL()) %>" name="searchFm">
-					<liferay-ui:input-search
-						markupView="lexicon"
-					/>
-				</aui:form>
+				<liferay-commerce:search-input
+					actionURL="<%= commerceAccountGroupAdminDisplayContext.getPortletURL() %>"
+					formName="searchFm"
+				/>
 			</li>
 		</liferay-frontend:management-bar-filters>
 

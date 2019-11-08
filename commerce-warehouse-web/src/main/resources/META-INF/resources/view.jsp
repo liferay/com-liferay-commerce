@@ -68,11 +68,10 @@ CommerceInventoryWarehousesDisplayContext commerceInventoryWarehousesDisplayCont
 			/>
 
 			<li>
-				<aui:form action="<%= String.valueOf(commerceInventoryWarehousesDisplayContext.getPortletURL()) %>" name="searchFm">
-					<liferay-ui:input-search
-						markupView="lexicon"
-					/>
-				</aui:form>
+				<liferay-commerce:search-input
+					actionURL="<%= commerceInventoryWarehousesDisplayContext.getPortletURL() %>"
+					formName="searchFm"
+				/>
 			</li>
 		</liferay-frontend:management-bar-filters>
 

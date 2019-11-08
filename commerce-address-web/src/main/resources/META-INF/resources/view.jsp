@@ -39,11 +39,10 @@ CommerceCountriesDisplayContext commerceCountriesDisplayContext = (CommerceCount
 			/>
 
 			<li>
-				<aui:form action="<%= String.valueOf(commerceCountriesDisplayContext.getPortletURL()) %>" name="searchFm">
-					<liferay-ui:input-search
-						markupView="lexicon"
-					/>
-				</aui:form>
+				<liferay-commerce:search-input
+					actionURL="<%= commerceCountriesDisplayContext.getPortletURL() %>"
+					formName="searchFm"
+				/>
 			</li>
 		</liferay-frontend:management-bar-filters>
 

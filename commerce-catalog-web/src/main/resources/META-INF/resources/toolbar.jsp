@@ -60,11 +60,10 @@ CommerceCatalogDisplayContext commerceCatalogDisplayContext = (CommerceCatalogDi
 			/>
 
 			<li>
-				<aui:form action="<%= String.valueOf(commerceCatalogDisplayContext.getPortletURL()) %>" name="searchFm">
-					<liferay-ui:input-search
-						markupView="lexicon"
-					/>
-				</aui:form>
+				<liferay-commerce:search-input
+					actionURL="<%= commerceCatalogDisplayContext.getPortletURL() %>"
+					formName="searchFm"
+				/>
 			</li>
 		</liferay-frontend:management-bar-filters>
 

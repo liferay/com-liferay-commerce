@@ -69,11 +69,10 @@ CommerceAccountAdminDisplayContext commerceAccountAdminDisplayContext = (Commerc
 			/>
 
 			<li>
-				<aui:form action="<%= String.valueOf(commerceAccountAdminDisplayContext.getPortletURL()) %>" name="searchFm">
-					<liferay-ui:input-search
-						markupView="lexicon"
-					/>
-				</aui:form>
+				<liferay-commerce:search-input
+					actionURL="<%= commerceAccountAdminDisplayContext.getPortletURL() %>"
+					formName="searchFm"
+				/>
 			</li>
 		</liferay-frontend:management-bar-filters>
 
