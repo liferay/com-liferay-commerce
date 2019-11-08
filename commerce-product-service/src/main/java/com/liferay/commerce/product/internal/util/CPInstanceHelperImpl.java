@@ -738,9 +738,17 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 
 			try {
 				List<CPDefinitionOptionValueRel> cpDefinitionOptionValueRels =
-					getCPDefinitionOptionValueRel(
+					null;
+
+				if (cpDefinitionOptionRel.isSkuContributor()) {
+					cpDefinitionOptionValueRels = getCPDefinitionOptionValueRel(
 						cpDefinitionId, cpDefinitionOptionRel.getKey(),
 						filters);
+				}
+				else {
+					cpDefinitionOptionValueRels =
+						cpDefinitionOptionRel.getCPDefinitionOptionValueRels();
+				}
 
 				DDMFormField ddmFormField = new DDMFormField(
 					cpDefinitionOptionRel.getKey(),
