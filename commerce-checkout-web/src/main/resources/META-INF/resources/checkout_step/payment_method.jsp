@@ -1,3 +1,4 @@
+
 <%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
@@ -53,10 +54,9 @@ String commercePaymentMethodKey = BeanParamUtil.getString(commerceOrder, request
 				<%
 				for (CommercePaymentMethod commercePaymentMethod : commercePaymentMethods) {
 				%>
-
 					<li class="commerce-payment-types list-group-item list-group-item-flex">
 						<div class="autofit-col autofit-col-expand">
-							<aui:input checked="<%= commercePaymentMethod.getKey() == commercePaymentMethodKey %>" label="<%= commercePaymentMethod.getName(locale) %>" name="commercePaymentMethodKey" type="radio" value="<%= commercePaymentMethod.getKey() %>" />
+							<aui:input checked="<%= commercePaymentMethodKey.equals(commercePaymentMethod.getKey()) %>" label="<%= commercePaymentMethod.getName(locale) %>" name="commercePaymentMethodKey" type="radio" value="<%= commercePaymentMethod.getKey() %>" />
 						</div>
 
 						<%
