@@ -35,7 +35,7 @@
 				"en_US": "Navigation Item Link"
 			},
 			"localizable": true,
-			"name": "NavigationItemLink",
+			"name": "NavigationItemLinkOrders",
 			"nestedFields": [
 				{
 					"dataType": "string",
@@ -44,7 +44,7 @@
 						"en_US": "Navigation Item Title"
 					},
 					"localizable": true,
-					"name": "NavigationItemTitle",
+					"name": "NavigationItemTitleOrders",
 					"predefinedValue": {
 						"en_US": ""
 					},
@@ -67,7 +67,7 @@
 						"en_US": "Navigation Item Description"
 					},
 					"localizable": true,
-					"name": "NavigationItemDescription",
+					"name": "NavigationItemDescriptionOrders",
 					"predefinedValue": {
 						"en_US": ""
 					},
@@ -107,7 +107,7 @@
 				"en_US": "Navigation Item Link"
 			},
 			"localizable": true,
-			"name": "NavigationItemLinkech5",
+			"name": "NavigationItemLinkLogin",
 			"nestedFields": [
 				{
 					"dataType": "string",
@@ -116,7 +116,7 @@
 						"en_US": "Navigation Item Title"
 					},
 					"localizable": true,
-					"name": "NavigationItemTitlea1vf",
+					"name": "NavigationItemTitleLogin",
 					"predefinedValue": {
 						"en_US": ""
 					},
@@ -139,7 +139,7 @@
 						"en_US": "Navigation Item Description"
 					},
 					"localizable": true,
-					"name": "NavigationItemDescription3s36",
+					"name": "NavigationItemDescriptionLogin",
 					"predefinedValue": {
 						"en_US": ""
 					},
@@ -179,7 +179,7 @@
 				"en_US": "Navigation Item Link"
 			},
 			"localizable": true,
-			"name": "NavigationItemLink3kgp",
+			"name": "NavigationItemLinkAddresses",
 			"nestedFields": [
 				{
 					"dataType": "string",
@@ -188,7 +188,7 @@
 						"en_US": "Navigation Item Title"
 					},
 					"localizable": true,
-					"name": "NavigationItemTitleictv",
+					"name": "NavigationItemTitleAddresses",
 					"predefinedValue": {
 						"en_US": ""
 					},
@@ -211,7 +211,7 @@
 						"en_US": "Navigation Item Description"
 					},
 					"localizable": true,
-					"name": "NavigationItemDescriptionb0lp",
+					"name": "NavigationItemDescriptionAddresses",
 					"predefinedValue": {
 						"en_US": ""
 					},
@@ -251,7 +251,7 @@
 				"en_US": "Navigation Item Link"
 			},
 			"localizable": true,
-			"name": "NavigationItemLinkbond",
+			"name": "NavigationItemLinkPaymentMethods",
 			"nestedFields": [
 				{
 					"dataType": "string",
@@ -260,7 +260,7 @@
 						"en_US": "Navigation Item Title"
 					},
 					"localizable": true,
-					"name": "NavigationItemTitle70k0",
+					"name": "NavigationItemTitlePaymentMethods",
 					"predefinedValue": {
 						"en_US": ""
 					},
@@ -283,7 +283,7 @@
 						"en_US": "Navigation Item Description"
 					},
 					"localizable": true,
-					"name": "NavigationItemDescriptionhwr9",
+					"name": "NavigationItemDescriptionPaymentMethods",
 					"predefinedValue": {
 						"en_US": ""
 					},
@@ -323,7 +323,7 @@
 				"en_US": "Navigation Item Link"
 			},
 			"localizable": true,
-			"name": "NavigationItemLink5r41",
+			"name": "NavigationItemLinkSubscriptions",
 			"nestedFields": [
 				{
 					"dataType": "string",
@@ -332,7 +332,7 @@
 						"en_US": "Navigation Item Title"
 					},
 					"localizable": true,
-					"name": "NavigationItemTitle1q7m",
+					"name": "NavigationItemTitleSubscriptions",
 					"predefinedValue": {
 						"en_US": ""
 					},
@@ -355,7 +355,7 @@
 						"en_US": "Navigation Item Description"
 					},
 					"localizable": true,
-					"name": "NavigationItemDescriptionbrbx",
+					"name": "NavigationItemDescriptionSubscriptions",
 					"predefinedValue": {
 						"en_US": ""
 					},
@@ -395,7 +395,7 @@
 				"en_US": "Navigation Item Link"
 			},
 			"localizable": true,
-			"name": "NavigationItemLink54l2",
+			"name": "NavigationItemLinkDownloads",
 			"nestedFields": [
 				{
 					"dataType": "string",
@@ -404,7 +404,7 @@
 						"en_US": "Navigation Item Title"
 					},
 					"localizable": true,
-					"name": "NavigationItemTitleavfp",
+					"name": "NavigationItemTitleDownloads",
 					"predefinedValue": {
 						"en_US": ""
 					},
@@ -427,7 +427,7 @@
 						"en_US": "Navigation Item Description"
 					},
 					"localizable": true,
-					"name": "NavigationItemDescriptiondifv",
+					"name": "NavigationItemDescriptionDownloads",
 					"predefinedValue": {
 						"en_US": ""
 					},
