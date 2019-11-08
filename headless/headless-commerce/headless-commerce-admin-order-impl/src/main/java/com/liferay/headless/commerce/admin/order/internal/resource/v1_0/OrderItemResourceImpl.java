@@ -145,10 +145,10 @@ public class OrderItemResourceImpl extends BaseOrderItemResourceImpl {
 			Long id, Pagination pagination)
 		throws Exception {
 
-		CommerceOrderItem commerceOrderItem =
-			_commerceOrderItemService.fetchCommerceOrderItem(id);
+		CommerceOrder commerceOrder = _commerceOrderService.fetchCommerceOrder(
+			id);
 
-		if (commerceOrderItem == null) {
+		if (commerceOrder == null) {
 			return super.getOrderIdOrderItemsPage(id, pagination);
 		}
 
