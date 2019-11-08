@@ -96,8 +96,8 @@ public class CommerceShipmentDisplayContext
 
 		_commerceInventoryWarehouses =
 			_commerceInventoryWarehouseService.getCommerceInventoryWarehouses(
-				cpRequestHelper.getCompanyId(), QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS, null);
+				cpRequestHelper.getCompanyId(),
+				cpRequestHelper.getChannelGroupId(), true);
 
 		return _commerceInventoryWarehouses;
 	}
