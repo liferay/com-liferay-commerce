@@ -102,16 +102,6 @@ public class CPTestUtil {
 			ServiceContextTestUtil.getServiceContext(groupId));
 	}
 
-	/*public static CPDefinition addCPDefinition(
-			long groupId, String productTypeName, boolean ignoreSKUCombinations,
-			boolean hasDefaultInstance)
-		throws PortalException {
-
-		return _addCPDefinition(
-			productTypeName, ignoreSKUCombinations, hasDefaultInstance,
-			ServiceContextTestUtil.getServiceContext(groupId));
-	}*/
-
 	public static CPDefinition addCPDefinition(
 			long groupId, boolean ignoreSKUCombinations,
 			boolean hasDefaultInstance, int workflowAction)
@@ -244,6 +234,19 @@ public class CPTestUtil {
 		return CPInstanceLocalServiceUtil.updateCPInstance(cpInstance);
 	}
 
+	public static CPInstance addCPInstanceWithRandomSku(long groupId)
+		throws PortalException {
+
+		String sku = RandomTestUtil.randomString();
+
+		CPDefinition cpDefinition = _addCPDefinitionWithSku(
+			SimpleCPTypeConstants.NAME, true,
+			ServiceContextTestUtil.getServiceContext(groupId), sku);
+
+		return CPInstanceLocalServiceUtil.getCPInstance(
+			cpDefinition.getCPDefinitionId(), sku);
+	}
+
 	public static CPOption addCPOption(long groupId, boolean skuContributor)
 		throws PortalException {
 
@@ -325,7 +328,28 @@ public class CPTestUtil {
 			boolean hasDefaultInstance, ServiceContext serviceContext)
 		throws PortalException {
 
+		String defaultSku = null;
+
+		if (hasDefaultInstance) {
+			defaultSku = CPInstanceConstants.DEFAULT_SKU;
+		}
+
+		return _addCPDefinitionWithSku(
+			productTypeName, ignoreSKUCombinations, serviceContext, defaultSku);
+	}
+
+	private static CPDefinition _addCPDefinitionWithSku(
+			String productTypeName, boolean ignoreSKUCombinations,
+			ServiceContext serviceContext, String sku)
+		throws PortalException {
+
 		User user = UserLocalServiceUtil.getUser(serviceContext.getUserId());
+		
+		List<CommerceCatalog> commerceCatalogs =
+				CommerceCatalogLocalServiceUtil.getCommerceCatalogs(
+					user.getCompanyId(), true);
+
+		CommerceCatalog commerceCatalog = commerceCatalogs.get(0);
 
 		long now = System.currentTimeMillis();
 
@@ -389,25 +413,19 @@ public class CPTestUtil {
 			expirationDateHour += 12;
 		}
 
-		String defaultSku = null;
-
-		if (hasDefaultInstance) {
-			defaultSku = CPInstanceConstants.DEFAULT_SKU;
-		}
-
 		return CPDefinitionLocalServiceUtil.addCPDefinition(
-			groupId, user.getUserId(), titleMap, shortDescriptionMap,
-			descriptionMap, urlTitleMap, metaTitleMap, metaKeywordsMap,
-			metaDescriptionMap, productTypeName, ignoreSKUCombinations,
-			shippable, freeShipping, shipSeparately, shippingExtraPrice, width,
-			height, depth, weight, cpTaxCategoryId, taxExempt,
-			telcoOrElectronics, ddmStructureKey, published, displayDateMonth,
-			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, false, defaultSku, false,
-			0, null, null, 0L, null, serviceContext);
+			commerceCatalog.getGroupId(), user.getUserId(), titleMap,
+			shortDescriptionMap, descriptionMap, urlTitleMap, metaTitleMap,
+			metaKeywordsMap, metaDescriptionMap, productTypeName,
+			ignoreSKUCombinations, shippable, freeShipping, shipSeparately,
+			shippingExtraPrice, width, height, depth, weight, cpTaxCategoryId,
+			taxExempt, telcoOrElectronics, ddmStructureKey, published,
+			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
+			displayDateMinute, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute, false,
+			sku, false, 0, null, null, 0L, null, serviceContext);
 	}
-
+	
 	private static CPDefinition _addCPDefinition(
 			String productTypeName, boolean ignoreSKUCombinations,
 			boolean hasDefaultInstance, ServiceContext serviceContext)
@@ -427,5 +445,4 @@ public class CPTestUtil {
 			ServiceContextTestUtil.getServiceContext(
 				commerceCatalog.getGroupId()));
 	}
-
 }

@@ -31,12 +31,13 @@ public class TestCommerceContext implements CommerceContext {
 
 	public TestCommerceContext(
 		CommerceCurrency commerceCurrency, CommerceChannel commerceChannel,
-		CommerceAccount commerceAccount, CommerceOrder commerceOrder) {
+		User contextUser, Group contextGroup, CommerceAccount commerceAccount,
+		CommerceOrder commerceOrder) {
 
 		_commerceCurrency = commerceCurrency;
 		_commerceChannel = commerceChannel;
-		_contextUser = null;
-		_contextGroup = null;
+		_contextUser = contextUser;
+		_contextGroup = contextGroup;
 		_commerceAccount = commerceAccount;
 		_commerceOrder = commerceOrder;
 	}
