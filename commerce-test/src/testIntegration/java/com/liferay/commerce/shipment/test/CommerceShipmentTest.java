@@ -867,10 +867,9 @@ public class CommerceShipmentTest {
 				commerceOrder.getCommerceOrderId(),
 				cpInstance.getCPInstanceId(), orderedQuantity, commerceContext);
 
-		CommerceShipment commerceShipment =
-			CommerceShipmentTestUtil.createOrderShipment(
-				commerceOrder.getGroupId(), commerceOrder.getCommerceOrderId(),
-				commerceInventoryWarehouse.getCommerceInventoryWarehouseId());
+		CommerceShipmentTestUtil.createOrderShipment(
+			commerceOrder.getGroupId(), commerceOrder.getCommerceOrderId(),
+			commerceInventoryWarehouse.getCommerceInventoryWarehouseId());
 
 		List<CommerceShipmentItem> commerceShipmentItems =
 			_commerceShipmentItemLocalService.getCommerceShipmentItems(
@@ -931,10 +930,9 @@ public class CommerceShipmentTest {
 
 		int orderedQuantity = 1;
 
-		CommerceOrderItem commerceOrderItem =
-			CommerceTestUtil.addCommerceOrderItem(
-				commerceOrder.getCommerceOrderId(),
-				cpInstance.getCPInstanceId(), orderedQuantity, commerceContext);
+		CommerceTestUtil.addCommerceOrderItem(
+			commerceOrder.getCommerceOrderId(), cpInstance.getCPInstanceId(),
+			orderedQuantity, commerceContext);
 
 		_commerceShipmentItemLocalService.updateCommerceShipmentItem(
 			0, orderedQuantity);
