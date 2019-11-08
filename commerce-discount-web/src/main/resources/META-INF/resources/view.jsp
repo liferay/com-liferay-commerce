@@ -64,11 +64,10 @@ CommerceDiscountDisplayContext commerceDiscountDisplayContext = (CommerceDiscoun
 			/>
 
 			<li>
-				<aui:form action="<%= String.valueOf(commerceDiscountDisplayContext.getPortletURL()) %>" name="searchFm">
-					<liferay-ui:input-search
-						markupView="lexicon"
-					/>
-				</aui:form>
+				<liferay-commerce:search-input
+					actionURL="<%= commerceDiscountDisplayContext.getPortletURL() %>"
+					formName="searchFm"
+				/>
 			</li>
 		</liferay-frontend:management-bar-filters>
 

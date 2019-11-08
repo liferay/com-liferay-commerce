@@ -60,11 +60,10 @@ CommerceChannelDisplayContext commerceChannelDisplayContext = (CommerceChannelDi
 			/>
 
 			<li>
-				<aui:form action="<%= String.valueOf(commerceChannelDisplayContext.getPortletURL()) %>" name="searchFm">
-					<liferay-ui:input-search
-						markupView="lexicon"
-					/>
-				</aui:form>
+				<liferay-commerce:search-input
+					actionURL="<%= commerceChannelDisplayContext.getPortletURL() %>"
+					formName="searchFm"
+				/>
 			</li>
 		</liferay-frontend:management-bar-filters>
 
