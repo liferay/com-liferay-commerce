@@ -29,48 +29,47 @@ List<CommerceChannel> channels = commerceOrderListDisplayContext.getCommerceChan
 List<KeyValuePair> availableAdvanceStatusKVPs = commerceOrderListDisplayContext.getAvailableAdvanceStatusKVPs();
 List<KeyValuePair> availableOrderStatusKVPs = commerceOrderListDisplayContext.getAvailableOrderStatusKVPs();
 
-PortletURL searchURL = commerceOrderListDisplayContext.getPortletURL();
+PortletURL searchURL = commerceOrderListDisplayContext.getSearchURL();
 
 searchURL.setParameter("showFilter", String.valueOf(showFilter));
 
 pageContext.setAttribute("searchURL", searchURL);
 %>
 
+<liferay-frontend:management-bar
+	includeCheckBox="<%= true %>"
+	searchContainerId="commerceOrders"
+>
+	<liferay-frontend:management-bar-buttons>
+		<liferay-frontend:management-bar-button
+			cssClass='<%= showFilter ? "active" : StringPool.BLANK %>'
+			href='<%= "javascript:" + renderResponse.getNamespace() + "toggleFilter();" %>'
+			iconCssClass="icon-filter"
+			id="filterButton"
+			label="filter"
+		/>
+	</liferay-frontend:management-bar-buttons>
+
+	<liferay-frontend:management-bar-filters>
+		<li>
+			<liferay-commerce:search-input
+				actionURL="<%= commerceOrderListDisplayContext.getPortletURL() %>"
+				formName="searchFm1"
+			/>
+		</li>
+	</liferay-frontend:management-bar-filters>
+
+	<liferay-frontend:management-bar-action-buttons>
+		<liferay-frontend:management-bar-button
+			href='<%= "javascript:" + renderResponse.getNamespace() + "deleteCommerceOrders();" %>'
+			icon="times"
+			label="delete"
+		/>
+	</liferay-frontend:management-bar-action-buttons>
+</liferay-frontend:management-bar>
+
 <aui:form action="<%= searchURL %>" method="get" name="searchFm">
 	<liferay-portlet:renderURLParams varImpl="searchURL" />
-
-	<liferay-frontend:management-bar
-		includeCheckBox="<%= true %>"
-		searchContainerId="commerceOrders"
-	>
-		<liferay-frontend:management-bar-buttons>
-			<liferay-frontend:management-bar-button
-				cssClass='<%= showFilter ? "active" : StringPool.BLANK %>'
-				href='<%= "javascript:" + renderResponse.getNamespace() + "toggleFilter();" %>'
-				iconCssClass="icon-filter"
-				id="filterButton"
-				label="filter"
-			/>
-		</liferay-frontend:management-bar-buttons>
-
-		<liferay-frontend:management-bar-filters>
-			<li>
-				<liferay-portlet:renderURLParams varImpl="searchURL" />
-
-				<liferay-ui:input-search
-					markupView="lexicon"
-				/>
-			</li>
-		</liferay-frontend:management-bar-filters>
-
-		<liferay-frontend:management-bar-action-buttons>
-			<liferay-frontend:management-bar-button
-				href='<%= "javascript:" + renderResponse.getNamespace() + "deleteCommerceOrders();" %>'
-				icon="times"
-				label="delete"
-			/>
-		</liferay-frontend:management-bar-action-buttons>
-	</liferay-frontend:management-bar>
 
 	<div class="container form-group-autofit panel p-2 <%= showFilter ? StringPool.BLANK : "hide" %>" id="<portlet:namespace />filterSettings">
 		<div class="form-group-item">

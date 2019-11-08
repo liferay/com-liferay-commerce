@@ -57,6 +57,13 @@ public class CommerceOrderDisplayTerms extends DisplayTerms {
 	public static final String START_CREATE_DATE_YEAR =
 		START_CREATE_DATE + "Year";
 
+	public static final String[] VALID_TERMS = {
+		ADVANCE_STATUS, CHANNEL, COMMERCE_ACCOUNT_ID, END_CREATE_DATE,
+		END_CREATE_DATE_DAY, END_CREATE_DATE_MONTH, END_CREATE_DATE_YEAR,
+		ORDER_STATUS, START_CREATE_DATE, START_CREATE_DATE_DAY,
+		START_CREATE_DATE_MONTH, START_CREATE_DATE_YEAR
+	};
+
 	public CommerceOrderDisplayTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
