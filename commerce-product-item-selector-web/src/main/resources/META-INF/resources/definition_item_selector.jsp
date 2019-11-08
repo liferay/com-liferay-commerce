@@ -54,11 +54,10 @@ PortletURL portletURL = cpDefinitionItemSelectorViewDisplayContext.getPortletURL
 		/>
 
 		<li>
-			<aui:form action="<%= String.valueOf(portletURL) %>" name="searchFm">
-				<liferay-ui:input-search
-					markupView="lexicon"
-				/>
-			</aui:form>
+			<liferay-commerce:search-input
+				actionURL="<%= portletURL %>"
+				formName="searchFm"
+			/>
 		</li>
 	</liferay-frontend:management-bar-filters>
 </liferay-frontend:management-bar>

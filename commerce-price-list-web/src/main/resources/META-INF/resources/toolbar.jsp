@@ -70,11 +70,10 @@ CommercePriceListDisplayContext commercePriceListDisplayContext = (CommercePrice
 		/>
 
 		<li>
-			<aui:form action="<%= String.valueOf(commercePriceListDisplayContext.getPortletURL()) %>" name="searchFm">
-				<liferay-ui:input-search
-					markupView="lexicon"
-				/>
-			</aui:form>
+			<liferay-commerce:search-input
+				actionURL="<%= commercePriceListDisplayContext.getPortletURL() %>"
+				formName="searchFm"
+			/>
 		</li>
 	</liferay-frontend:management-bar-filters>
 

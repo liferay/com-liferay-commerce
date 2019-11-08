@@ -44,11 +44,10 @@ boolean hasManageCommerceSubscriptionEntryPermission = commerceSubscriptionEntry
 		/>
 
 		<li>
-			<aui:form action="<%= String.valueOf(commerceSubscriptionEntryDisplayContext.getPortletURL()) %>" name="searchFm">
-				<liferay-ui:input-search
-					markupView="lexicon"
-				/>
-			</aui:form>
+			<liferay-commerce:search-input
+				actionURL="<%= commerceSubscriptionEntryDisplayContext.getPortletURL() %>"
+				formName="searchFm"
+			/>
 		</li>
 	</liferay-frontend:management-bar-filters>
 

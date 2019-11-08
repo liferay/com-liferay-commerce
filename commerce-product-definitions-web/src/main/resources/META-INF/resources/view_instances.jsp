@@ -76,11 +76,10 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 		/>
 
 		<li>
-			<aui:form action="<%= portletURL.toString() %>" name="searchFm">
-				<liferay-ui:input-search
-					markupView="lexicon"
-				/>
-			</aui:form>
+			<liferay-commerce:search-input
+				actionURL="<%= portletURL %>"
+				formName="searchFm"
+			/>
 		</li>
 	</liferay-frontend:management-bar-filters>
 

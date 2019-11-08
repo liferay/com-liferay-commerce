@@ -86,11 +86,10 @@ renderResponse.setTitle(LanguageUtil.get(request, "catalog"));
 		/>
 
 		<li>
-			<aui:form action="<%= String.valueOf(cpSpecificationOptionDisplayContext.getPortletURL()) %>" name="searchFm">
-				<liferay-ui:input-search
-					markupView="lexicon"
-				/>
-			</aui:form>
+			<liferay-commerce:search-input
+				actionURL="<%= cpSpecificationOptionDisplayContext.getPortletURL() %>"
+				formName="searchFm"
+			/>
 		</li>
 	</liferay-frontend:management-bar-filters>
 
