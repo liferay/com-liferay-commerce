@@ -123,7 +123,7 @@ public class CommercePendingOrderClayTable
 		ClayTableSchemaBuilder clayTableSchemaBuilder =
 			_clayTableSchemaBuilderFactory.clayTableSchemaBuilder();
 
-		clayTableSchemaBuilder.addField("createDate", "create-date");
+		clayTableSchemaBuilder.addField("date", "create-date");
 
 		clayTableSchemaBuilder.addField("orderId", "order-id");
 
