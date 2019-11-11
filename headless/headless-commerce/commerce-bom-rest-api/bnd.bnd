@@ -1,0 +1,6 @@
+Bundle-Name: Liferay Commerce BOM Rest API
+Bundle-SymbolicName: com.liferay.commerce.bom.rest.api
+Bundle-Version: 1.0.3
+Export-Package:\
+	com.liferay.commerce.bom.rest.dto.v1_0,\
+	com.liferay.commerce.bom.rest.resource.v1_0
