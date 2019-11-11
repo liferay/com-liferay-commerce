@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.notification.internal.model.listener;
 
+import com.liferay.commerce.notification.service.CommerceNotificationQueueEntryLocalService;
 import com.liferay.commerce.notification.service.CommerceNotificationTemplateLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -34,6 +35,9 @@ public class GroupModelListener extends BaseModelListener<Group> {
 	@Override
 	public void onBeforeRemove(Group group) {
 		try {
+			_commerceNotificationQueueEntryLocalService.
+				deleteCommerceNotificationQueueEntries(group.getGroupId());
+
 			_commerceNotificationTemplateLocalService.
 				deleteCommerceNotificationTemplates(group.getGroupId());
 		}
@@ -46,6 +50,10 @@ public class GroupModelListener extends BaseModelListener<Group> {
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		GroupModelListener.class);
+
+	@Reference
+	private CommerceNotificationQueueEntryLocalService
+		_commerceNotificationQueueEntryLocalService;
 
 	@Reference
 	private CommerceNotificationTemplateLocalService
