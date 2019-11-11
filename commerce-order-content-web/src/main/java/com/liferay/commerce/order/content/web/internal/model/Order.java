@@ -20,12 +20,12 @@ package com.liferay.commerce.order.content.web.internal.model;
 public class Order {
 
 	public Order(
-		long orderId, String accountName, String createDate, String author,
+		long orderId, String accountName, String date, String author,
 		String orderStatus, String status, String amount, String href) {
 
 		_orderId = orderId;
 		_accountName = accountName;
-		_createDate = createDate;
+		_date = date;
 		_author = author;
 		_orderStatus = orderStatus;
 		_status = status;
@@ -46,8 +46,8 @@ public class Order {
 		return _author;
 	}
 
-	public String getCreateDate() {
-		return _createDate;
+	public String getDate() {
+		return _date;
 	}
 
 	public String getHref() {
@@ -73,7 +73,7 @@ public class Order {
 	private final String _accountName;
 	private final String _amount;
 	private final String _author;
-	private final String _createDate;
+	private final String _date;
 	private final String _href;
 	private final long _orderId;
 	private final String _orderStatus;
