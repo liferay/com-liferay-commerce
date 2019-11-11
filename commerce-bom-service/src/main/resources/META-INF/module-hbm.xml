@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" default-lazy="false">
+	<import class="com.liferay.commerce.bom.model.CommerceBOMDefinition" />
+	<import class="com.liferay.commerce.bom.model.CommerceBOMEntry" />
+	<import class="com.liferay.commerce.bom.model.CommerceBOMFolder" />
+	<import class="com.liferay.commerce.bom.model.CommerceBOMFolderApplicationRel" />
+	<class name="com.liferay.commerce.bom.model.impl.CommerceBOMDefinitionImpl" table="CommerceBOMDefinition">
+		<id name="commerceBOMDefinitionId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="commerceBOMFolderId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="CPAttachmentFileEntryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="friendlyUrl" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.liferay.commerce.bom.model.impl.CommerceBOMEntryImpl" table="CommerceBOMEntry">
+		<id name="commerceBOMEntryId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property column="number_" name="number" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="CPInstanceUuid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="CProductId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="commerceBOMDefinitionId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="positionX" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="positionY" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="radius" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+	</class>
+	<class name="com.liferay.commerce.bom.model.impl.CommerceBOMFolderImpl" table="CommerceBOMFolder">
+		<id name="commerceBOMFolderId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="parentCommerceBOMFolderId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="logoId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="treePath" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.liferay.commerce.bom.model.impl.CommerceBOMFolderApplicationRelImpl" table="CBOMFolderApplicationRel">
+		<id column="CBOMFolderApplicationRelId" name="commerceBOMFolderApplicationRelId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="commerceBOMFolderId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="commerceApplicationModelId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+</hibernate-mapping>
