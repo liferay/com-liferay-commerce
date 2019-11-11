@@ -17,6 +17,8 @@ package com.liferay.commerce.order.content.web.internal.frontend.util;
 import com.liferay.commerce.constants.CommerceOrderConstants;
 import com.liferay.commerce.currency.model.CommerceMoney;
 import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.order.content.web.internal.frontend.CommercePendingOrderClayTable;
+import com.liferay.commerce.order.content.web.internal.frontend.CommercePlacedOrderClayTable;
 import com.liferay.commerce.order.content.web.internal.model.Order;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -27,6 +29,7 @@ import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
 import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
@@ -54,6 +57,20 @@ public class CommerceOrderClayTableUtil {
 		PortletURL portletURL = PortletURLFactoryUtil.create(
 			themeDisplay.getRequest(), portletDisplay.getId(),
 			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
+
+		PortletURL backURL = portletURL;
+
+		backURL.setParameter(
+			"itemsPerPage",
+			ParamUtil.getString(themeDisplay.getRequest(), "pageSize"));
+		backURL.setParameter(
+			"pageNumber",
+			ParamUtil.getString(themeDisplay.getRequest(), "page"));
+		backURL.setParameter("tableName", CommercePendingOrderClayTable.NAME);
+
+		portletURL.setParameter(
+			PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backURL",
+			backURL.toString());
 
 		portletURL.setParameter("mvcRenderCommandName", "editCommerceOrder");
 		portletURL.setParameter(
@@ -130,14 +147,24 @@ public class CommerceOrderClayTableUtil {
 			themeDisplay.getRequest(), portletDisplay.getId(),
 			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
 
+		PortletURL backURL = portletURL;
+
+		backURL.setParameter(
+			"itemsPerPage",
+			ParamUtil.getString(themeDisplay.getRequest(), "pageSize"));
+		backURL.setParameter(
+			"pageNumber",
+			ParamUtil.getString(themeDisplay.getRequest(), "page"));
+		backURL.setParameter("tableName", CommercePlacedOrderClayTable.NAME);
+
+		portletURL.setParameter(
+			PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backURL",
+			backURL.toString());
+
 		portletURL.setParameter(
 			"mvcRenderCommandName", "viewCommerceOrderDetails");
 		portletURL.setParameter(
 			"commerceOrderId", String.valueOf(commerceOrderId));
-
-		portletURL.setParameter(
-			PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE + "backURL",
-			themeDisplay.getURLCurrent());
 
 		return portletURL.toString();
 	}

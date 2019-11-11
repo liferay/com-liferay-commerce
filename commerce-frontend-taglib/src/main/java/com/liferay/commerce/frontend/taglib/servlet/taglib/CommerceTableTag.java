@@ -41,6 +41,7 @@ import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.util.PropsValues;
@@ -215,14 +216,33 @@ public class CommerceTableTag extends ComponentRendererTag {
 	private void _setItems(String dataProviderKey) throws Exception {
 		Map<String, Object> context = getContext();
 
+		String tableName = GetterUtil.getString(context.get("tableName"));
+
+		if (tableName.equals(ParamUtil.getString(request, "tableName"))) {
+			int pageNumberFromURL = ParamUtil.getInteger(request, "pageNumber");
+
+			if (pageNumberFromURL > 0) {
+				setPageNumber(pageNumberFromURL);
+			}
+
+			int pageNumber = GetterUtil.getInteger(context.get("pageNumber"));
+
+			putValue("currentPage", pageNumber);
+
+			int itemsPerPageFromURL = ParamUtil.getInteger(
+				request, "itemsPerPage");
+
+			if (itemsPerPageFromURL > 0) {
+				setItemPerPage(itemsPerPageFromURL);
+			}
+		}
+
 		int pageNumber = GetterUtil.getInteger(context.get("pageNumber"));
 
 		putValue("currentPage", pageNumber);
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
-
-		String tableName = GetterUtil.getString(context.get("tableName"));
 
 		CommerceDataSetDataProvider commerceDataSetDataProvider =
 			_commerceDataProviderRegistry.getCommerceDataProvider(
@@ -266,6 +286,27 @@ public class CommerceTableTag extends ComponentRendererTag {
 
 	private void _setPagination() {
 		Map<String, Object> context = getContext();
+
+		String tableName = GetterUtil.getString(context.get("tableName"));
+
+		if (tableName.equals(ParamUtil.getString(request, "tableName"))) {
+			int pageNumberFromURL = ParamUtil.getInteger(request, "pageNumber");
+
+			if (pageNumberFromURL > 0) {
+				setPageNumber(pageNumberFromURL);
+			}
+
+			int pageNumber = GetterUtil.getInteger(context.get("pageNumber"));
+
+			putValue("currentPage", pageNumber);
+
+			int itemsPerPageFromURL = ParamUtil.getInteger(
+				request, "itemsPerPage");
+
+			if (itemsPerPageFromURL > 0) {
+				setItemPerPage(itemsPerPageFromURL);
+			}
+		}
 
 		PortletURL portletURL = (PortletURL)context.get("portletURL");
 		String namespace = GetterUtil.getString(context.get("namespace"));
