@@ -1,16 +1,16 @@
-### Nested Fields Support to Our APIs
+### Nested Fields Support in Our APIs
 - **Date: 2019-Oct-19**
 - **JIRA Ticket: COMMERCE-2270**
 
 #### What changed?
 
-The following entities *Products*, *Accounts*, *Orders*, *Warehouses* are now supporting the **nested fields**, which means that request to the **GET endpoints** of these entities will return just the *root object*, instead of the root object and the *nested entities*.
+The following entities *Products*, *Accounts*, *Orders*, *Warehouses* now support **nested fields**, which means that requests to the **GET endpoints** of these entities will return just the *root object*, instead of the root object and the *nested entities*.
 
-For example the endpoint
+For example, the endpoint
 ```
 ../o/headless-commerce-admin-inventory/v1.0/warehouses/
 ```
-would have produced a response like this:
+used to produce a response like this:
 ```
 {
   "items": [
@@ -47,8 +47,9 @@ would have produced a response like this:
     }
   ]
 }
-while now it produce a response like this:
-
+```
+while now it produces a response like this:
+```
 {
   "items": [
     {
@@ -68,7 +69,7 @@ while now it produce a response like this:
 }
 ```
 
-and it is now possible to make the endpoint load the nested fields with the query parameter nestedFields valorized with the name of the desired nested property.
+It is still possible to request the nested fields by passing the query parameter `nestedFields` with the name of the desired nested property.
 
 For example the endpoint
 ```
@@ -112,17 +113,17 @@ will produce a response like this:
   ]
 }
 ```
-Finally it is also possible to request a list of desired nested properties to be loaded within the same request.
+Finally, it is also possible to request a list of desired nested properties to be provided within the same request.
 
-For example a request like this:
+For example, a request like this:
 ```
 ../o/headless-commerce-admin-catalog/v1.0/products/?nestedFields=images,categories
 ```
-would load both images and categories for the products.
+will include both images and categories for the products.
 
-The following are the supported nested properties for each entity that supports this mechanism.
+The valid nested properties for each entity that supports this mechanism are listed below.
 
-#### Who is affected?
+#### What is affected?
 
 - **Product**: [attachments, images, categories, configuration, productOptions, shippingConfiguration, productSpecifications, subscriptionConfiguration, taxConfiguration, relatedProducts, skus]
 - **Account**: [addresses, users, organizations]
@@ -131,11 +132,11 @@ The following are the supported nested properties for each entity that supports 
 
 #### How should I update my code?
 
-Changes are required if some nested fields is used in the client side. For example if *categories* of product is needed, the call to that endpoint must now use the query parameter: 
+Changes are required if some nested fields are used on the client side. For example if the *categories* of a product are needed, the call to that endpoint must now use the query parameter:
 ```
 ../o/headless-commerce-admin-catalog/v1.0/products/?nestedFields=categories
 ```
 
 #### Why was this change made?
 
-This change was made to make the payload of the response a bit thinner.
+This change was made to make the response payload more lightweight by default.
