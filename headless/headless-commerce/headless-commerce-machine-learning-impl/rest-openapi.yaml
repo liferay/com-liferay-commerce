@@ -1,0 +1,566 @@
+components:
+    parameters:
+        accountIdsQueryParam:
+            in: query
+            explode: true
+            name: accountIds
+            required: false
+            schema:
+                items:
+                    format: int64
+                    type: integer
+                type: array
+            style: form
+        categoryIdsQueryParam:
+            in: query
+            explode: true
+            name: categoryIds
+            required: false
+            schema:
+                items:
+                    format: int64
+                    type: integer
+                type: array
+            style: form
+        forecastLengthQueryParam:
+            in: query
+            explode: true
+            name: forecastLength
+            required: false
+            schema:
+                type: integer
+            style: form
+        forecastStartDateQueryParam:
+            in: query
+            explode: true
+            name: forecastStartDate
+            required: false
+            schema:
+                format: date
+                type: string
+            style: form
+        historyLengthQueryParam:
+            in: query
+            explode: true
+            name: historyLength
+            required: false
+            schema:
+                type: integer
+            style: form
+    responses:
+        NotFound:
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/Error'
+                application/xml:
+                    schema:
+                        $ref: '#/components/schemas/Error'
+            description:
+                The specified resource was not found
+        UnauthorizedError:
+            content:
+                application/json:
+                    schema:
+                        $ref: '#/components/schemas/Error'
+                application/xml:
+                    schema:
+                        $ref: '#/components/schemas/Error'
+            description:
+                Authentication information is missing or invalid
+    schemas:
+        AccountCategoryForecast:
+            properties:
+                account:
+                    format: int64
+                    type: integer
+                actual:
+                    format: float
+                    type: number
+                category:
+                    format: int64
+                    type: integer
+                forecast:
+                    format: float
+                    type: number
+                forecastLowerBound:
+                    format: float
+                    type: number
+                forecastUpperBound:
+                    format: float
+                    type: number
+                timestamp:
+                    format: date-time
+                    type: string
+                unit:
+                    type: string
+            type: object
+        AccountForecast:
+            properties:
+                account:
+                    format: int64
+                    type: integer
+                actual:
+                    format: float
+                    type: number
+                forecast:
+                    format: float
+                    type: number
+                forecastLowerBound:
+                    format: float
+                    type: number
+                forecastUpperBound:
+                    format: float
+                    type: number
+                timestamp:
+                    format: date-time
+                    type: string
+                unit:
+                    type: string
+            type: object
+        Error:
+            properties:
+                errorCode:
+                    description:
+                        Internal error code mapping
+                    example: 996
+                    readOnly: true
+                    type: integer
+                errorDescription:
+                    example: Unable to find currency. Currency code should be expressed with
+                        3-letter ISO 4217 format.
+                    readOnly: true
+                    type: string
+                message:
+                    example: No CommerceCurrency exists with the key {groupId=41811, code=US
+                        Dollar}
+                    readOnly: true
+                    type: string
+                status:
+                    description:
+                        HTTP Status code
+                    example: 404
+                    readOnly: true
+                    type: integer
+            required:
+                - errorCode
+                - errorDescription
+                - message
+                - status
+            type: object
+    securitySchemes:
+        BasicAuth:
+            scheme: basic
+            type: http
+        BearerAuth:
+            scheme: bearer
+            type: http
+        OAuth2:
+            flows:
+                authorizationCode:
+                    authorizationUrl: /oauth/authorize
+                    scopes:
+                        CommerceOpenApiForecast.read: Grants read access
+                    tokenUrl: /oauth/token
+            type: oauth2
+info:
+    contact:
+        email: team-commerce@liferay.com
+        name: Commerce Team
+    description:
+        Liferay Commerce Forecast API
+    license:
+        name: "Apache 2.0"
+        url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+    title: Liferay Commerce Forecast API
+    version: v1.0
+openapi: 3.0.0
+paths:
+    /accountCategoryForecasts/by-monthlyRevenue:
+        get:
+            description:
+                Get the forecast points
+            operationId: getAccountCategoryForecastsByMonthlyRevenuePage
+            parameters:
+                - in: query
+                  explode: true
+                  name: accountIds
+                  required: false
+                  schema:
+                      items:
+                          format: int64
+                          type: integer
+                      type: array
+                  style: form
+                - in: query
+                  explode: true
+                  name: categoryIds
+                  required: false
+                  schema:
+                      items:
+                          format: int64
+                          type: integer
+                      type: array
+                  style: form
+                - in: query
+                  explode: true
+                  name: forecastLength
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+                - in: query
+                  explode: true
+                  name: forecastStartDate
+                  required: false
+                  schema:
+                      format: date
+                      type: string
+                  style: form
+                - in: query
+                  explode: true
+                  name: historyLength
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+                - in: query
+                  name: page
+                  required: false
+                  schema:
+                      type: integer
+                - in: query
+                  name: pageSize
+                  required: false
+                  schema:
+                      type: integer
+            responses:
+                200:
+                    content:
+                        application/json:
+                            example:
+                                - actual: 126198
+                                  category: 2
+                                  timestamp: 2017-08-01T00:00:00.000Z
+                                  unit: pcs
+                                - actual: 150400
+                                  category: 2
+                                  timestamp: 2017-12-01T00:00:00.000Z
+                                  unit: pcs
+                                - actual: 177266
+                                  category: 2
+                                  timestamp: 2017-09-01T00:00:00.000Z
+                                  unit: pcs
+                                - actual: 192432
+                                  category: 2
+                                  timestamp: 2017-11-01T00:00:00.000Z
+                                  unit: pcs
+                                - actual: 210465
+                                  category: 2
+                                  timestamp: 2017-07-01T00:00:00.000Z
+                                  unit: pcs
+                                - actual: 246984
+                                  category: 1
+                                  timestamp: 2017-08-01T00:00:00.000Z
+                                  unit: pcs
+                                - actual: 254805
+                                  category: 1
+                                  timestamp: 2017-12-01T00:00:00.000Z
+                                  unit: pcs
+                                - actual: 304131.5
+                                  category: 2
+                                  timestamp: 2017-06-01T00:00:00.000Z
+                                  unit: pcs
+                                - actual: 341114
+                                  category: 1
+                                  timestamp: 2017-11-01T00:00:00.000Z
+                                  unit: pcs
+                                - actual: 371046
+                                  category: 2
+                                  forecast: 257032.38
+                                  forecast_lower_bound: -295959.4
+                                  forecast_upper_bound: 810024.1
+                                  timestamp: 2018-01-01T00:00:00.000Z
+                                  unit: pcs
+                                - actual: 373648
+                                  category: 1
+                                  timestamp: 2017-07-01T00:00:00.000Z
+                                  unit: pcs
+                                - actual: 381046
+                                  category: 2
+                                  forecast: 264262.47
+                                  forecast_lower_bound: -405616.44
+                                  forecast_upper_bound: 934141.4
+                                  timestamp: 2018-02-01T00:00:00.000Z
+                                  unit: pcs
+                                - actual: 415526
+                                  category: 2
+                                  timestamp: 2017-10-01T00:00:00.000Z
+                                  unit: pcs
+                                - actual: 428195
+                                  category: 1
+                                  forecast: 341156.06
+                                  forecast_lower_bound: -196911.53
+                                  forecast_upper_bound: 879223.6
+                                  timestamp: 2018-01-01T00:00:00.000Z
+                                  unit: pcs
+                                - actual: 441380
+                                  category: 1
+                                  timestamp: 2017-09-01T00:00:00.000Z
+                                  unit: pcs
+                                - actual: 574145.5
+                                  category: 1
+                                  forecast: 357949.7380752992
+                                  forecast_lower_bound: -169949.48
+                                  forecast_upper_bound: 885848.9548455138
+                                  timestamp: 2018-02-01T00:00:00.000Z
+                                  unit: pcs
+                                - actual: 579357
+                                  category: 1
+                                  timestamp: 2017-10-01T00:00:00.000Z
+                                  unit: pcs
+                                - actual: 579903.5
+                                  category: 1
+                                  timestamp: 2017-06-01T00:00:00.000Z
+                                  unit: pcs
+                                - category: 1
+                                  forecast: 410217.9
+                                  forecast_lower_bound: -107465.266
+                                  forecast_upper_bound: 927901.1
+                                  timestamp: 2018-03-01T00:00:00.000Z
+                                  unit: pcs
+                                - category: 1
+                                  forecast: 514895.12
+                                  forecast_lower_bound: -3468.954
+                                  forecast_upper_bound: 1033259.2
+                                  timestamp: 2018-04-01T00:00:00.000Z
+                                  unit: pcs
+                                - category: 1
+                                  forecast: 473034.75
+                                  forecast_lower_bound: -47860.043
+                                  forecast_upper_bound: 993929.5
+                                  timestamp: 2018-05-01T00:00:00.000Z
+                                  unit: pcs
+                                - category: 2
+                                  forecast: 243985.42
+                                  forecast_lower_bound: -487107.16
+                                  forecast_upper_bound: 975078
+                                  timestamp: 2018-03-01T00:00:00.000Z
+                                  unit: pcs
+                                - category: 2
+                                  forecast: 277306.4
+                                  forecast_lower_bound: -464114.16
+                                  forecast_upper_bound: 1018727
+                                  timestamp: 2018-04-01T00:00:00.000Z
+                                  unit: pcs
+                                - category: 2
+                                  forecast: 297306.4
+                                  forecast_lower_bound: -444114.16
+                                  forecast_upper_bound: 1038727
+                                  timestamp: 2018-05-01T00:00:00.000Z
+                                  unit: pcs
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/AccountCategoryForecast'
+                                type: array
+                        application/xml:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/AccountCategoryForecast'
+                                type: array
+                    description:
+                        Successful operation
+                400:
+                    description:
+                        Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description:
+                        Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description:
+                        The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description:
+                        Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - CommerceOpenApiForecast.read
+            tags:
+                - AccountCategoryForecast
+    /accountForecasts/by-monthlyRevenue:
+        get:
+            description:
+                Get the forecast points
+            operationId: getAccountForecastsByMonthlyRevenuePage
+            parameters:
+                - in: query
+                  explode: true
+                  name: accountIds
+                  required: false
+                  schema:
+                      items:
+                          format: int64
+                          type: integer
+                      type: array
+                  style: form
+                - in: query
+                  explode: true
+                  name: forecastLength
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+                - in: query
+                  explode: true
+                  name: forecastStartDate
+                  required: false
+                  schema:
+                      format: date
+                      type: string
+                  style: form
+                - in: query
+                  explode: true
+                  name: historyLength
+                  required: false
+                  schema:
+                      type: integer
+                  style: form
+                - in: query
+                  name: page
+                  required: false
+                  schema:
+                      type: integer
+                - in: query
+                  name: pageSize
+                  required: false
+                  schema:
+                      type: integer
+            responses:
+                200:
+                    content:
+                        application/json:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/AccountForecast'
+                                type: array
+                        application/xml:
+                            schema:
+                                items:
+                                    $ref: '#/components/schemas/AccountForecast'
+                                type: array
+                    description:
+                        Successful operation
+                400:
+                    description:
+                        Invalid input
+                401:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description:
+                        Authentication information is missing or invalid
+                404:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description:
+                        The specified resource was not found
+                500:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                        application/xml:
+                            schema:
+                                $ref: '#/components/schemas/Error'
+                    description:
+                        Unexpected error
+            security:
+                - BasicAuth: []
+                - BearerAuth: []
+                - OAuth2:
+                      - CommerceOpenApiForecast.read
+            tags:
+                - AccountForecast
+servers:
+    - description:
+          Liferay Commerce API server
+      url: https://commerce.{environment}.liferay.com/commerce-forecast/{basePath}
+      variables:
+          basePath:
+              default: v1.0
+          environment:
+              default: api
+              enum:
+                  - api
+                  - api.dev
+                  - api.uat
+    - description:
+          Liferay Commerce Local Development (Hosts file)
+      url: '{protocol}://{host}:{port}/o/commerce-forecast/{basePath}'
+      variables:
+          basePath:
+              default: v1.0
+          host:
+              default: test.dev
+          port:
+              default: "8080"
+              enum:
+                  - "443"
+                  - "8080"
+                  - "8443"
+          protocol:
+              default: http
+              enum:
+                  - http
+                  - https
+    - description:
+          Liferay Commerce Local Development with Ngrok
+      url: '{protocol}://{host}.ngrok.io/o/commerce-forecast/{basePath}'
+      variables:
+          basePath:
+              default: v1.0
+          host:
+              default: commerce
+          protocol:
+              default: http
+              enum:
+                  - http
+                  - https
+    - description:
+          SwaggerHub API Auto Mocking
+      url: https://virtserver.swaggerhub.com/liferayinc/commerce-forecast/1.0.0
+    - description:
+          SwaggerHub API Auto Mocking
+      url: https://virtserver.swaggerhub.com/liferayinc/commerce-forecast/v1.0
