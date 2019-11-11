@@ -1,0 +1,75 @@
+{
+	"csfConfig": {
+		"js": {
+			"lint": {
+				"env": {
+					"browser": true,
+					"es6": true,
+					"jest": true,
+					"node": true
+				},
+				"extends": "liferay",
+				"parser": "babel-eslint",
+				"parserOptions": {
+					"ecmaVersion": 7
+				},
+				"plugins": [
+					"./node_modules/eslint-plugin-react"
+				],
+				"rules": {
+					"react/jsx-handler-names": [
+						2,
+						{
+							"eventHandlerPrefix": "_handle"
+						}
+					]
+				}
+			}
+		}
+	},
+	"dependencies": {
+		"classnames": "^2.2.3",
+		"d3": "^4.7.4",
+		"prop-types": "^15.7.2",
+		"react": "^16.8.6",
+		"react-dom": "^16.8.6"
+	},
+	"description": "",
+	"devDependencies": {
+		"@babel/preset-env": "^7.4.4",
+		"@babel/preset-react": "^7.0.0",
+		"babel-core": "^6.26.3",
+		"babel-loader": "^8.0.5",
+		"babel-plugin-module-resolver": "^3.2.0",
+		"compass-mixins": "^0.12.10",
+		"css-loader": "^2.1.1",
+		"eslint": "^5.16.0",
+		"eslint-config-liferay": "^3.0.0",
+		"eslint-plugin-react": "^7.13.0",
+		"file-loader": "^3.0.1",
+		"liferay-frontend-common-css": "^1.0.4",
+		"liferay-lang-key-dev-loader": "^1.0.3",
+		"liferay-npm-bridge-generator": "2.7.1",
+		"liferay-npm-bundler": "2.7.1",
+		"liferay-npm-bundler-preset-standard": "2.7.1",
+		"liferay-npm-scripts": "^1.7.2",
+		"node-sass": "^4.12.0",
+		"sass-loader": "^7.1.0",
+		"style-loader": "^0.23.1",
+		"webpack": "^4.30.0",
+		"webpack-cli": "^3.3.1",
+		"webpack-merge": "^4.2.1"
+	},
+	"main": "js/index.es.js",
+	"name": "commerce-organization-web",
+	"private": true,
+	"scripts": {
+		"build": "liferay-npm-scripts build",
+		"csf": "csf {src,test}/**/*.es.js src/**/*.scss",
+		"format": "npm run csf -- -i",
+		"test:watch": "env TZ=utc liferay-npm-scripts test --watch",
+		"test_DISABLED": "env TZ=utc liferay-npm-scripts test",
+		"watch": "liferay-npm-scripts webpack --watch"
+	},
+	"version": "1.0.7"
+}
