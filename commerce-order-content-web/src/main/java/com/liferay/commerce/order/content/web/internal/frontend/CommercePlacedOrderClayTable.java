@@ -125,7 +125,7 @@ public class CommercePlacedOrderClayTable
 
 		clayTableSchemaBuilder.addField("title", "order-id");
 
-		clayTableSchemaBuilder.addField("createDate", "create-date");
+		clayTableSchemaBuilder.addField("date", "order-date");
 
 		clayTableSchemaBuilder.addField("accountName", "account");
 
