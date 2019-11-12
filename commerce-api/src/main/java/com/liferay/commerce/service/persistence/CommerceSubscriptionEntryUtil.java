@@ -551,6 +551,176 @@ public class CommerceSubscriptionEntryUtil {
 	}
 
 	/**
+	 * Returns all the commerce subscription entries where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @return the matching commerce subscription entries
+	 */
+	public static List<CommerceSubscriptionEntry> findByGroupId(long groupId) {
+		return getPersistence().findByGroupId(groupId);
+	}
+
+	/**
+	 * Returns a range of all the commerce subscription entries where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CommerceSubscriptionEntryModelImpl</code>.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of commerce subscription entries
+	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
+	 * @return the range of matching commerce subscription entries
+	 */
+	public static List<CommerceSubscriptionEntry> findByGroupId(
+		long groupId, int start, int end) {
+
+		return getPersistence().findByGroupId(groupId, start, end);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce subscription entries where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CommerceSubscriptionEntryModelImpl</code>.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of commerce subscription entries
+	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce subscription entries
+	 */
+	public static List<CommerceSubscriptionEntry> findByGroupId(
+		long groupId, int start, int end,
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator) {
+
+		return getPersistence().findByGroupId(
+			groupId, start, end, orderByComparator);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce subscription entries where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CommerceSubscriptionEntryModelImpl</code>.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param start the lower bound of the range of commerce subscription entries
+	 * @param end the upper bound of the range of commerce subscription entries (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching commerce subscription entries
+	 */
+	public static List<CommerceSubscriptionEntry> findByGroupId(
+		long groupId, int start, int end,
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator,
+		boolean useFinderCache) {
+
+		return getPersistence().findByGroupId(
+			groupId, start, end, orderByComparator, useFinderCache);
+	}
+
+	/**
+	 * Returns the first commerce subscription entry in the ordered set where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce subscription entry
+	 * @throws NoSuchSubscriptionEntryException if a matching commerce subscription entry could not be found
+	 */
+	public static CommerceSubscriptionEntry findByGroupId_First(
+			long groupId,
+			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
+		throws com.liferay.commerce.exception.NoSuchSubscriptionEntryException {
+
+		return getPersistence().findByGroupId_First(groupId, orderByComparator);
+	}
+
+	/**
+	 * Returns the first commerce subscription entry in the ordered set where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
+	 */
+	public static CommerceSubscriptionEntry fetchByGroupId_First(
+		long groupId,
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator) {
+
+		return getPersistence().fetchByGroupId_First(
+			groupId, orderByComparator);
+	}
+
+	/**
+	 * Returns the last commerce subscription entry in the ordered set where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce subscription entry
+	 * @throws NoSuchSubscriptionEntryException if a matching commerce subscription entry could not be found
+	 */
+	public static CommerceSubscriptionEntry findByGroupId_Last(
+			long groupId,
+			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
+		throws com.liferay.commerce.exception.NoSuchSubscriptionEntryException {
+
+		return getPersistence().findByGroupId_Last(groupId, orderByComparator);
+	}
+
+	/**
+	 * Returns the last commerce subscription entry in the ordered set where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce subscription entry, or <code>null</code> if a matching commerce subscription entry could not be found
+	 */
+	public static CommerceSubscriptionEntry fetchByGroupId_Last(
+		long groupId,
+		OrderByComparator<CommerceSubscriptionEntry> orderByComparator) {
+
+		return getPersistence().fetchByGroupId_Last(groupId, orderByComparator);
+	}
+
+	/**
+	 * Returns the commerce subscription entries before and after the current commerce subscription entry in the ordered set where groupId = &#63;.
+	 *
+	 * @param commerceSubscriptionEntryId the primary key of the current commerce subscription entry
+	 * @param groupId the group ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce subscription entry
+	 * @throws NoSuchSubscriptionEntryException if a commerce subscription entry with the primary key could not be found
+	 */
+	public static CommerceSubscriptionEntry[] findByGroupId_PrevAndNext(
+			long commerceSubscriptionEntryId, long groupId,
+			OrderByComparator<CommerceSubscriptionEntry> orderByComparator)
+		throws com.liferay.commerce.exception.NoSuchSubscriptionEntryException {
+
+		return getPersistence().findByGroupId_PrevAndNext(
+			commerceSubscriptionEntryId, groupId, orderByComparator);
+	}
+
+	/**
+	 * Removes all the commerce subscription entries where groupId = &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 */
+	public static void removeByGroupId(long groupId) {
+		getPersistence().removeByGroupId(groupId);
+	}
+
+	/**
+	 * Returns the number of commerce subscription entries where groupId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @return the number of matching commerce subscription entries
+	 */
+	public static int countByGroupId(long groupId) {
+		return getPersistence().countByGroupId(groupId);
+	}
+
+	/**
 	 * Returns all the commerce subscription entries where companyId = &#63;.
 	 *
 	 * @param companyId the company ID
