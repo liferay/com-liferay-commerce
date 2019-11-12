@@ -218,22 +218,19 @@ public class CommerceTableTag extends ComponentRendererTag {
 
 		String tableName = GetterUtil.getString(context.get("tableName"));
 
-		if (tableName.equals(ParamUtil.getString(request, "tableName"))) {
-			int pageNumberFromURL = ParamUtil.getInteger(request, "pageNumber");
+		String requestTableName = ParamUtil.getString(request, "tableName");
 
-			if (pageNumberFromURL > 0) {
-				setPageNumber(pageNumberFromURL);
+		if (tableName.equals(requestTableName)) {
+			int pageNumber = ParamUtil.getInteger(request, "pageNumber");
+
+			if (pageNumber > 0) {
+				setPageNumber(pageNumber);
 			}
 
-			int pageNumber = GetterUtil.getInteger(context.get("pageNumber"));
+			int itemsPerPage = ParamUtil.getInteger(request, "itemsPerPage");
 
-			putValue("currentPage", pageNumber);
-
-			int itemsPerPageFromURL = ParamUtil.getInteger(
-				request, "itemsPerPage");
-
-			if (itemsPerPageFromURL > 0) {
-				setItemPerPage(itemsPerPageFromURL);
+			if (itemsPerPage > 0) {
+				setItemPerPage(itemsPerPage);
 			}
 		}
 
@@ -289,22 +286,19 @@ public class CommerceTableTag extends ComponentRendererTag {
 
 		String tableName = GetterUtil.getString(context.get("tableName"));
 
-		if (tableName.equals(ParamUtil.getString(request, "tableName"))) {
-			int pageNumberFromURL = ParamUtil.getInteger(request, "pageNumber");
+		String requestTableName = ParamUtil.getString(request, "tableName");
 
-			if (pageNumberFromURL > 0) {
-				setPageNumber(pageNumberFromURL);
+		if (tableName.equals(requestTableName)) {
+			int pageNumber = ParamUtil.getInteger(request, "pageNumber");
+
+			if (pageNumber > 0) {
+				setPageNumber(pageNumber);
 			}
 
-			int pageNumber = GetterUtil.getInteger(context.get("pageNumber"));
+			int itemsPerPage = ParamUtil.getInteger(request, "itemsPerPage");
 
-			putValue("currentPage", pageNumber);
-
-			int itemsPerPageFromURL = ParamUtil.getInteger(
-				request, "itemsPerPage");
-
-			if (itemsPerPageFromURL > 0) {
-				setItemPerPage(itemsPerPageFromURL);
+			if (itemsPerPage > 0) {
+				setItemPerPage(itemsPerPage);
 			}
 		}
 
