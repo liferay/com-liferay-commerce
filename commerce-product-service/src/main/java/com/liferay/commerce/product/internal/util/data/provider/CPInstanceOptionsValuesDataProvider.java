@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.KeyValuePair;
+import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.ArrayList;
@@ -69,6 +70,9 @@ public class CPInstanceOptionsValuesDataProvider implements DDMDataProvider {
 			DDMDataProviderRequest ddmDataProviderRequest)
 		throws DDMDataProviderException {
 
+		DDMDataProviderResponse.Builder ddmDataProviderResponseBuilder =
+			DDMDataProviderResponse.Builder.newBuilder();
+
 		long cpDefinitionId = GetterUtil.getLong(
 			ddmDataProviderRequest.getParameter("cpDefinitionId"));
 
@@ -83,17 +87,17 @@ public class CPInstanceOptionsValuesDataProvider implements DDMDataProvider {
 					PermissionThreadLocal.getPermissionChecker(),
 					commerceAccountId, groupId, cpDefinitionId)) {
 
-				return DDMDataProviderResponse.of();
+				return ddmDataProviderResponseBuilder.build();
 			}
 		}
 		catch (PortalException pe) {
 			_log.error(pe, pe);
 
-			return DDMDataProviderResponse.of();
+			return ddmDataProviderResponseBuilder.build();
 		}
 
 		if (cpDefinitionId == 0) {
-			return DDMDataProviderResponse.of();
+			return ddmDataProviderResponseBuilder.build();
 		}
 
 		HttpServletRequest httpServletRequest =
@@ -149,11 +153,10 @@ public class CPInstanceOptionsValuesDataProvider implements DDMDataProvider {
 			// Do search and populate the outputs if the outputs are not empty
 
 			if (outputParameterNames.isEmpty()) {
-				return DDMDataProviderResponse.of();
+				return ddmDataProviderResponseBuilder.build();
 			}
 
-			List<DDMDataProviderResponseOutput> ddmDataProviderResponseOutputs =
-				new ArrayList<>();
+			List<Output> outputs = new ArrayList<>();
 
 			for (Map.Entry<String, String> outputParameterNameEntry :
 					outputParameterNames.entrySet()) {
@@ -174,27 +177,18 @@ public class CPInstanceOptionsValuesDataProvider implements DDMDataProvider {
 							cpDefinitionOptionValueRel.getName(locale)));
 				}
 
-				ddmDataProviderResponseOutputs.add(
-					DDMDataProviderResponseOutput.of(
+				outputs.add(
+					new Output(
 						outputParameterNameEntry.getValue(), "list", data));
 			}
 
-			DDMDataProviderResponseOutput[] ddmDataProviderResponseOutputArray =
-				new DDMDataProviderResponseOutput
-					[ddmDataProviderResponseOutputs.size()];
-
-			ddmDataProviderResponseOutputArray =
-				ddmDataProviderResponseOutputs.toArray(
-					ddmDataProviderResponseOutputArray);
-
-			return DDMDataProviderResponse.of(
-				ddmDataProviderResponseOutputArray);
+			return Output.toDDMDataProviderResponse(outputs);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
 
-		return DDMDataProviderResponse.of();
+		return ddmDataProviderResponseBuilder.build();
 	}
 
 	@Override
@@ -202,8 +196,54 @@ public class CPInstanceOptionsValuesDataProvider implements DDMDataProvider {
 		throw new UnsupportedOperationException();
 	}
 
+	protected static class Output {
+
+		public Output(String name, String type, Object value) {
+			_name = name;
+			_type = type;
+			_value = value;
+		}
+
+		public static DDMDataProviderResponse toDDMDataProviderResponse(
+			List<Output> outputs) {
+
+			if (ReleaseInfo.getBuildNumber() >= _RELEASE_7_2_0_BUILD_NUMBER) {
+				DDMDataProviderResponse.Builder ddmDataProviderResponseBuilder =
+					DDMDataProviderResponse.Builder.newBuilder();
+
+				for (Output output : outputs) {
+					ddmDataProviderResponseBuilder.withOutput(
+						output._name, output._value);
+				}
+
+				return ddmDataProviderResponseBuilder.build();
+			}
+
+			DDMDataProviderResponseOutput[] ddmDataProviderResponseOutputs =
+				new DDMDataProviderResponseOutput[outputs.size()];
+
+			for (int i = 0; i < outputs.size(); i++) {
+				Output output = outputs.get(i);
+
+				ddmDataProviderResponseOutputs[i] =
+					DDMDataProviderResponseOutput.of(
+						output._name, output._type, output._value);
+			}
+
+			return DDMDataProviderResponse.of(ddmDataProviderResponseOutputs);
+		}
+
+		private final String _name;
+		private final String _type;
+		private final Object _value;
+
+	}
+
 	private static final Log _log = LogFactoryUtil.getLog(
 		CPInstanceOptionsValuesDataProvider.class);
+
+	private static final int _RELEASE_7_2_0_BUILD_NUMBER =
+		ReleaseInfo.RELEASE_7_1_0_BUILD_NUMBER + 100;
 
 	@Reference
 	private CommerceProductViewPermission _commerceProductViewPermission;
