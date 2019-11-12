@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.data.integration.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -36,7 +34,6 @@ import java.util.Objects;
  * @see CommerceDataIntegrationProcess
  * @generated
  */
-@ProviderType
 public class CommerceDataIntegrationProcessWrapper
 	implements CommerceDataIntegrationProcess,
 			   ModelWrapper<CommerceDataIntegrationProcess> {
@@ -403,6 +400,11 @@ public class CommerceDataIntegrationProcessWrapper
 		return _commerceDataIntegrationProcess.isSystem();
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a commerce data integration process model instance should use the <code>CommerceDataIntegrationProcess</code> interface instead.
+	 */
 	@Override
 	public void persist() {
 		_commerceDataIntegrationProcess.persist();

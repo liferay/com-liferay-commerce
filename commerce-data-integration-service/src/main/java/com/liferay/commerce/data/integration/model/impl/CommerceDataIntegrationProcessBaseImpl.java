@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.data.integration.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.data.integration.model.CommerceDataIntegrationProcess;
 import com.liferay.commerce.data.integration.service.CommerceDataIntegrationProcessLocalServiceUtil;
 
@@ -31,12 +29,11 @@ import com.liferay.commerce.data.integration.service.CommerceDataIntegrationProc
  * @see CommerceDataIntegrationProcess
  * @generated
  */
-@ProviderType
 public abstract class CommerceDataIntegrationProcessBaseImpl
 	extends CommerceDataIntegrationProcessModelImpl
 	implements CommerceDataIntegrationProcess {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce data integration process model instance should use the <code>CommerceDataIntegrationProcess</code> interface instead.

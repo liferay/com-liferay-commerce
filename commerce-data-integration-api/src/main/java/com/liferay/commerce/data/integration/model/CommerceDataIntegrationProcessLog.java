@@ -34,7 +34,7 @@ import com.liferay.portal.kernel.util.Accessor;
 public interface CommerceDataIntegrationProcessLog
 	extends CommerceDataIntegrationProcessLogModel, PersistedModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify this interface directly. Add methods to <code>com.liferay.commerce.data.integration.model.impl.CommerceDataIntegrationProcessLogImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.

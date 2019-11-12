@@ -44,7 +44,7 @@ public interface CommerceDataIntegrationProcessModel
 	extends AuditedModel, BaseModel<CommerceDataIntegrationProcess>,
 			ShardedModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. All methods that expect a commerce data integration process model instance should use the {@link CommerceDataIntegrationProcess} interface instead.

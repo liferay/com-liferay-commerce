@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.data.integration.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.data.integration.model.CommerceDataIntegrationProcess;
 import com.liferay.commerce.data.integration.model.CommerceDataIntegrationProcessModel;
 import com.liferay.commerce.data.integration.model.CommerceDataIntegrationProcessSoap;
@@ -64,12 +62,11 @@ import java.util.function.Function;
  * @generated
  */
 @JSON(strict = true)
-@ProviderType
 public class CommerceDataIntegrationProcessModelImpl
 	extends BaseModelImpl<CommerceDataIntegrationProcess>
 	implements CommerceDataIntegrationProcessModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce data integration process model instance should use the <code>CommerceDataIntegrationProcess</code> interface instead.
@@ -366,11 +363,11 @@ public class CommerceDataIntegrationProcessModelImpl
 				public void accept(
 					CommerceDataIntegrationProcess
 						commerceDataIntegrationProcess,
-					Object commerceDataIntegrationProcessId) {
+					Object commerceDataIntegrationProcessIdObject) {
 
 					commerceDataIntegrationProcess.
 						setCommerceDataIntegrationProcessId(
-							(Long)commerceDataIntegrationProcessId);
+							(Long)commerceDataIntegrationProcessIdObject);
 				}
 
 			});
@@ -395,10 +392,10 @@ public class CommerceDataIntegrationProcessModelImpl
 				public void accept(
 					CommerceDataIntegrationProcess
 						commerceDataIntegrationProcess,
-					Object companyId) {
+					Object companyIdObject) {
 
 					commerceDataIntegrationProcess.setCompanyId(
-						(Long)companyId);
+						(Long)companyIdObject);
 				}
 
 			});
@@ -423,9 +420,10 @@ public class CommerceDataIntegrationProcessModelImpl
 				public void accept(
 					CommerceDataIntegrationProcess
 						commerceDataIntegrationProcess,
-					Object userId) {
+					Object userIdObject) {
 
-					commerceDataIntegrationProcess.setUserId((Long)userId);
+					commerceDataIntegrationProcess.setUserId(
+						(Long)userIdObject);
 				}
 
 			});
@@ -450,10 +448,10 @@ public class CommerceDataIntegrationProcessModelImpl
 				public void accept(
 					CommerceDataIntegrationProcess
 						commerceDataIntegrationProcess,
-					Object userName) {
+					Object userNameObject) {
 
 					commerceDataIntegrationProcess.setUserName(
-						(String)userName);
+						(String)userNameObject);
 				}
 
 			});
@@ -478,10 +476,10 @@ public class CommerceDataIntegrationProcessModelImpl
 				public void accept(
 					CommerceDataIntegrationProcess
 						commerceDataIntegrationProcess,
-					Object createDate) {
+					Object createDateObject) {
 
 					commerceDataIntegrationProcess.setCreateDate(
-						(Date)createDate);
+						(Date)createDateObject);
 				}
 
 			});
@@ -506,10 +504,10 @@ public class CommerceDataIntegrationProcessModelImpl
 				public void accept(
 					CommerceDataIntegrationProcess
 						commerceDataIntegrationProcess,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
 					commerceDataIntegrationProcess.setModifiedDate(
-						(Date)modifiedDate);
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -534,9 +532,9 @@ public class CommerceDataIntegrationProcessModelImpl
 				public void accept(
 					CommerceDataIntegrationProcess
 						commerceDataIntegrationProcess,
-					Object name) {
+					Object nameObject) {
 
-					commerceDataIntegrationProcess.setName((String)name);
+					commerceDataIntegrationProcess.setName((String)nameObject);
 				}
 
 			});
@@ -561,9 +559,9 @@ public class CommerceDataIntegrationProcessModelImpl
 				public void accept(
 					CommerceDataIntegrationProcess
 						commerceDataIntegrationProcess,
-					Object type) {
+					Object typeObject) {
 
-					commerceDataIntegrationProcess.setType((String)type);
+					commerceDataIntegrationProcess.setType((String)typeObject);
 				}
 
 			});
@@ -588,10 +586,10 @@ public class CommerceDataIntegrationProcessModelImpl
 				public void accept(
 					CommerceDataIntegrationProcess
 						commerceDataIntegrationProcess,
-					Object typeSettings) {
+					Object typeSettingsObject) {
 
 					commerceDataIntegrationProcess.setTypeSettings(
-						(String)typeSettings);
+						(String)typeSettingsObject);
 				}
 
 			});
@@ -616,9 +614,10 @@ public class CommerceDataIntegrationProcessModelImpl
 				public void accept(
 					CommerceDataIntegrationProcess
 						commerceDataIntegrationProcess,
-					Object system) {
+					Object systemObject) {
 
-					commerceDataIntegrationProcess.setSystem((Boolean)system);
+					commerceDataIntegrationProcess.setSystem(
+						(Boolean)systemObject);
 				}
 
 			});
@@ -643,9 +642,10 @@ public class CommerceDataIntegrationProcessModelImpl
 				public void accept(
 					CommerceDataIntegrationProcess
 						commerceDataIntegrationProcess,
-					Object active) {
+					Object activeObject) {
 
-					commerceDataIntegrationProcess.setActive((Boolean)active);
+					commerceDataIntegrationProcess.setActive(
+						(Boolean)activeObject);
 				}
 
 			});
@@ -670,10 +670,10 @@ public class CommerceDataIntegrationProcessModelImpl
 				public void accept(
 					CommerceDataIntegrationProcess
 						commerceDataIntegrationProcess,
-					Object cronExpression) {
+					Object cronExpressionObject) {
 
 					commerceDataIntegrationProcess.setCronExpression(
-						(String)cronExpression);
+						(String)cronExpressionObject);
 				}
 
 			});
@@ -698,10 +698,10 @@ public class CommerceDataIntegrationProcessModelImpl
 				public void accept(
 					CommerceDataIntegrationProcess
 						commerceDataIntegrationProcess,
-					Object startDate) {
+					Object startDateObject) {
 
 					commerceDataIntegrationProcess.setStartDate(
-						(Date)startDate);
+						(Date)startDateObject);
 				}
 
 			});
@@ -726,9 +726,10 @@ public class CommerceDataIntegrationProcessModelImpl
 				public void accept(
 					CommerceDataIntegrationProcess
 						commerceDataIntegrationProcess,
-					Object endDate) {
+					Object endDateObject) {
 
-					commerceDataIntegrationProcess.setEndDate((Date)endDate);
+					commerceDataIntegrationProcess.setEndDate(
+						(Date)endDateObject);
 				}
 
 			});

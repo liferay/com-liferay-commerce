@@ -44,7 +44,7 @@ public interface CommerceDataIntegrationProcessLogModel
 	extends AuditedModel, BaseModel<CommerceDataIntegrationProcessLog>,
 			ShardedModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this interface directly. All methods that expect a commerce data integration process log model instance should use the {@link CommerceDataIntegrationProcessLog} interface instead.
@@ -221,20 +221,6 @@ public interface CommerceDataIntegrationProcessLogModel
 	public void setOutput(String output);
 
 	/**
-	 * Returns the status of this commerce data integration process log.
-	 *
-	 * @return the status of this commerce data integration process log
-	 */
-	public int getStatus();
-
-	/**
-	 * Sets the status of this commerce data integration process log.
-	 *
-	 * @param status the status of this commerce data integration process log
-	 */
-	public void setStatus(int status);
-
-	/**
 	 * Returns the start date of this commerce data integration process log.
 	 *
 	 * @return the start date of this commerce data integration process log
@@ -261,6 +247,20 @@ public interface CommerceDataIntegrationProcessLogModel
 	 * @param endDate the end date of this commerce data integration process log
 	 */
 	public void setEndDate(Date endDate);
+
+	/**
+	 * Returns the status of this commerce data integration process log.
+	 *
+	 * @return the status of this commerce data integration process log
+	 */
+	public int getStatus();
+
+	/**
+	 * Sets the status of this commerce data integration process log.
+	 *
+	 * @param status the status of this commerce data integration process log
+	 */
+	public void setStatus(int status);
 
 	@Override
 	public boolean isNew();

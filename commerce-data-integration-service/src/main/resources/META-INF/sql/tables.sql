@@ -25,7 +25,7 @@ create table CDataIntegrationProcessLog (
 	CDataIntegrationProcessId LONG,
 	error TEXT null,
 	output_ TEXT null,
-	status INTEGER,
 	startDate DATE null,
-	endDate DATE null
+	endDate DATE null,
+	status INTEGER
 );
