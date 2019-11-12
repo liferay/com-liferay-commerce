@@ -254,6 +254,19 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 			cpInstanceUuid, cProductId, commerceOrderItemId);
 	}
 
+	@Override
+	public void deleteCommerceSubscriptionEntries(long groupId) {
+		List<CommerceSubscriptionEntry> commerceSubscriptionEntries =
+			commerceSubscriptionEntryPersistence.findByGroupId(groupId);
+
+		for (CommerceSubscriptionEntry commerceSubscriptionEntry :
+				commerceSubscriptionEntries) {
+
+			commerceSubscriptionEntryLocalService.
+				deleteCommerceSubscriptionEntry(commerceSubscriptionEntry);
+		}
+	}
+
 	/**
 	 * @deprecated As of Mueller (7.2.x), fetch by commerceOrderItemId instead
 	 */
@@ -658,7 +671,7 @@ public class CommerceSubscriptionEntryLocalServiceImpl
 					message.put(
 						"commerceSubscriptionEntryId",
 						commerceSubscriptionEntryId);
-					message.put(" subscriptionStatus", subscriptionStatus);
+					message.put("subscriptionStatus", subscriptionStatus);
 
 					MessageBusUtil.sendMessage(
 						CommerceDestinationNames.SUBSCRIPTION_STATUS, message);
