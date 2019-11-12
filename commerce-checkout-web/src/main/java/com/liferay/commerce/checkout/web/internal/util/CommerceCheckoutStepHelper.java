@@ -37,7 +37,6 @@ import com.liferay.portal.kernel.util.Portal;
 import java.math.BigDecimal;
 
 import java.util.List;
-import java.util.Objects;
 
 import javax.portlet.PortletURL;
 
@@ -77,17 +76,15 @@ public class CommerceCheckoutStepHelper {
 				CommerceCheckoutWebKeys.COMMERCE_ORDER);
 
 		CommerceAccount commerceAccount = commerceOrder.getCommerceAccount();
+		CommerceAddress shippingAddress = commerceOrder.getShippingAddress();
+		CommerceAddress billingAddress = commerceOrder.getBillingAddress();
 
-		if ((commerceOrder.getBillingAddressId() > 0) &&
-			Objects.equals(
-				commerceOrder.getBillingAddressId(),
-				commerceOrder.getShippingAddressId())) {
-
-			return false;
-		}
-		else if ((commerceAccount.getDefaultBillingAddressId() > 0) &&
-				 (commerceAccount.getDefaultBillingAddressId() ==
-					 commerceAccount.getDefaultShippingAddressId())) {
+		if ((commerceAccount != null) &&
+			(commerceAccount.getDefaultBillingAddressId() ==
+				commerceAccount.getDefaultShippingAddressId()) &&
+			(billingAddress != null) && (shippingAddress != null) &&
+			(shippingAddress.getCommerceAddressId() ==
+				billingAddress.getCommerceAddressId())) {
 
 			return false;
 		}

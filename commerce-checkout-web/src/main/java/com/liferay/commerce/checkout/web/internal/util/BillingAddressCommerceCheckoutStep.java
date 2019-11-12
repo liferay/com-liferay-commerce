@@ -97,10 +97,10 @@ public class BillingAddressCommerceCheckoutStep
 		if (commerceOrder.getBillingAddressId() ==
 				commerceOrder.getShippingAddressId()) {
 
-			return true;
+			return false;
 		}
 
-		return false;
+		return true;
 	}
 
 	@Override
