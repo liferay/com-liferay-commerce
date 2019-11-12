@@ -134,6 +134,12 @@ public class CommerceSubscriptionEntryLocalServiceWrapper
 			createCommerceSubscriptionEntry(commerceSubscriptionEntryId);
 	}
 
+	@Override
+	public void deleteCommerceSubscriptionEntries(long groupId) {
+		_commerceSubscriptionEntryLocalService.
+			deleteCommerceSubscriptionEntries(groupId);
+	}
+
 	/**
 	 * Deletes the commerce subscription entry from the database. Also notifies the appropriate model listeners.
 	 *

@@ -124,6 +124,8 @@ public interface CommerceSubscriptionEntryLocalService
 	public CommerceSubscriptionEntry createCommerceSubscriptionEntry(
 		long commerceSubscriptionEntryId);
 
+	public void deleteCommerceSubscriptionEntries(long groupId);
+
 	/**
 	 * Deletes the commerce subscription entry from the database. Also notifies the appropriate model listeners.
 	 *
