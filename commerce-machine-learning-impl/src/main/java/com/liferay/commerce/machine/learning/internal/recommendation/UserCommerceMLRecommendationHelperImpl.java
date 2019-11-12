@@ -56,7 +56,7 @@ public class UserCommerceMLRecommendationHelperImpl
 
 		searchSearchRequest.setSize(_DEFAULT_FETCH_SIZE);
 
-		TermQueryImpl companyTermQuery = new TermQueryImpl(
+		TermQuery companyTermQuery = new TermQueryImpl(
 			Field.COMPANY_ID, String.valueOf(companyId));
 
 		TermQuery entryClassPKTermQuery = new TermQueryImpl(

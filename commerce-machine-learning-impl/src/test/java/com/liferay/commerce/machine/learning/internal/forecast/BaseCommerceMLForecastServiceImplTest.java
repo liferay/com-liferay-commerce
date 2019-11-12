@@ -36,7 +36,7 @@ public class BaseCommerceMLForecastServiceImplTest {
 
 	@Before
 	public void setUp() {
-		_baseCommerceMLForecastService = Mockito.mock(
+		_baseCommerceMLForecastServiceImpl = Mockito.mock(
 			BaseCommerceMLForecastServiceImpl.class,
 			Mockito.CALLS_REAL_METHODS);
 	}
@@ -48,7 +48,7 @@ public class BaseCommerceMLForecastServiceImplTest {
 
 		Date testDate = _toDate(testLocalDateTime);
 
-		Date actualEndDate = _baseCommerceMLForecastService.getEndDate(
+		Date actualEndDate = _baseCommerceMLForecastServiceImpl.getEndDate(
 			testDate, CommerceMLForecastPeriod.MONTH, 3);
 
 		LocalDateTime expectedDateTime = testLocalDateTime.truncatedTo(
@@ -70,7 +70,7 @@ public class BaseCommerceMLForecastServiceImplTest {
 
 		Date testDate = _toDate(testLocalDateTime);
 
-		Date actualEndDate = _baseCommerceMLForecastService.getEndDate(
+		Date actualEndDate = _baseCommerceMLForecastServiceImpl.getEndDate(
 			testDate, CommerceMLForecastPeriod.WEEK, 3);
 
 		LocalDateTime expectedDateTime = testLocalDateTime.truncatedTo(
@@ -92,7 +92,7 @@ public class BaseCommerceMLForecastServiceImplTest {
 
 		Date testDate = _toDate(testLocalDateTime);
 
-		Date actualEndDate = _baseCommerceMLForecastService.getEndDate(
+		Date actualEndDate = _baseCommerceMLForecastServiceImpl.getEndDate(
 			testDate, CommerceMLForecastPeriod.MONTH, 0);
 
 		LocalDateTime expectedDateTime = testLocalDateTime.truncatedTo(
@@ -112,7 +112,7 @@ public class BaseCommerceMLForecastServiceImplTest {
 
 		Date testDate = _toDate(testLocalDateTime);
 
-		Date actualEndDate = _baseCommerceMLForecastService.getEndDate(
+		Date actualEndDate = _baseCommerceMLForecastServiceImpl.getEndDate(
 			testDate, CommerceMLForecastPeriod.WEEK, 0);
 
 		LocalDateTime expectedDateTime = testLocalDateTime.truncatedTo(
@@ -132,7 +132,7 @@ public class BaseCommerceMLForecastServiceImplTest {
 
 		Date testDate = _toDate(testLocalDateTime);
 
-		Date actualStartDate = _baseCommerceMLForecastService.getStartDate(
+		Date actualStartDate = _baseCommerceMLForecastServiceImpl.getStartDate(
 			testDate, CommerceMLForecastPeriod.MONTH, 3);
 
 		LocalDateTime expectedDateTime = testLocalDateTime.truncatedTo(
@@ -154,7 +154,7 @@ public class BaseCommerceMLForecastServiceImplTest {
 
 		Date testDate = _toDate(testLocalDateTime);
 
-		Date actualStartDate = _baseCommerceMLForecastService.getStartDate(
+		Date actualStartDate = _baseCommerceMLForecastServiceImpl.getStartDate(
 			testDate, CommerceMLForecastPeriod.WEEK, 3);
 
 		LocalDateTime expectedDateTime = testLocalDateTime.truncatedTo(
@@ -176,7 +176,7 @@ public class BaseCommerceMLForecastServiceImplTest {
 
 		Date testDate = _toDate(testLocalDateTime);
 
-		Date actualStartDate = _baseCommerceMLForecastService.getStartDate(
+		Date actualStartDate = _baseCommerceMLForecastServiceImpl.getStartDate(
 			testDate, CommerceMLForecastPeriod.MONTH, 0);
 
 		LocalDateTime expectedDateTime = testLocalDateTime.truncatedTo(
@@ -196,7 +196,7 @@ public class BaseCommerceMLForecastServiceImplTest {
 
 		Date testDate = _toDate(testLocalDateTime);
 
-		Date actualStartDate = _baseCommerceMLForecastService.getStartDate(
+		Date actualStartDate = _baseCommerceMLForecastServiceImpl.getStartDate(
 			testDate, CommerceMLForecastPeriod.WEEK, 0);
 
 		LocalDateTime expectedDateTime = testLocalDateTime.truncatedTo(
@@ -217,6 +217,6 @@ public class BaseCommerceMLForecastServiceImplTest {
 	}
 
 	private static BaseCommerceMLForecastServiceImpl
-		_baseCommerceMLForecastService;
+		_baseCommerceMLForecastServiceImpl;
 
 }
