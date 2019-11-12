@@ -125,6 +125,10 @@ public class CommerceSubscriptionEntryLocalServiceUtil {
 			commerceSubscriptionEntryId);
 	}
 
+	public static void deleteCommerceSubscriptionEntries(long groupId) {
+		getService().deleteCommerceSubscriptionEntries(groupId);
+	}
+
 	/**
 	 * Deletes the commerce subscription entry from the database. Also notifies the appropriate model listeners.
 	 *
