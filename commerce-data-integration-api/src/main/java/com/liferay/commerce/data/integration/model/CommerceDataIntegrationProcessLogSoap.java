@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.data.integration.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -28,7 +26,6 @@ import java.util.List;
  * @author Alessio Antonio Rendina
  * @generated
  */
-@ProviderType
 public class CommerceDataIntegrationProcessLogSoap implements Serializable {
 
 	public static CommerceDataIntegrationProcessLogSoap toSoapModel(
@@ -48,9 +45,9 @@ public class CommerceDataIntegrationProcessLogSoap implements Serializable {
 			model.getCDataIntegrationProcessId());
 		soapModel.setError(model.getError());
 		soapModel.setOutput(model.getOutput());
-		soapModel.setStatus(model.getStatus());
 		soapModel.setStartDate(model.getStartDate());
 		soapModel.setEndDate(model.getEndDate());
+		soapModel.setStatus(model.getStatus());
 
 		return soapModel;
 	}
@@ -188,14 +185,6 @@ public class CommerceDataIntegrationProcessLogSoap implements Serializable {
 		_output = output;
 	}
 
-	public int getStatus() {
-		return _status;
-	}
-
-	public void setStatus(int status) {
-		_status = status;
-	}
-
 	public Date getStartDate() {
 		return _startDate;
 	}
@@ -212,6 +201,14 @@ public class CommerceDataIntegrationProcessLogSoap implements Serializable {
 		_endDate = endDate;
 	}
 
+	public int getStatus() {
+		return _status;
+	}
+
+	public void setStatus(int status) {
+		_status = status;
+	}
+
 	private long _commerceDataIntegrationProcessLogId;
 	private long _companyId;
 	private long _userId;
@@ -221,8 +218,8 @@ public class CommerceDataIntegrationProcessLogSoap implements Serializable {
 	private long _CDataIntegrationProcessId;
 	private String _error;
 	private String _output;
-	private int _status;
 	private Date _startDate;
 	private Date _endDate;
+	private int _status;
 
 }
