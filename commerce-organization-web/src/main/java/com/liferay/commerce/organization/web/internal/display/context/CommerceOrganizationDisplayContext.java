@@ -107,15 +107,15 @@ public class CommerceOrganizationDisplayContext {
 	public OrganizationFilterImpl getOrganizationFilter()
 		throws PortalException {
 
-		OrganizationFilterImpl organizationFilter =
+		OrganizationFilterImpl organizationFilterImpl =
 			new OrganizationFilterImpl();
 
-		organizationFilter.setOrganizationId(getOrganizationId());
-		organizationFilter.setUserId(getSelectedUserId());
+		organizationFilterImpl.setOrganizationId(getOrganizationId());
+		organizationFilterImpl.setUserId(getSelectedUserId());
 
-		organizationFilter.setKeywords(getKeywords());
+		organizationFilterImpl.setKeywords(getKeywords());
 
-		return organizationFilter;
+		return organizationFilterImpl;
 	}
 
 	public long getOrganizationId() throws PortalException {
