@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.data.integration.model;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -36,7 +34,6 @@ import java.util.Objects;
  * @see CommerceDataIntegrationProcessLog
  * @generated
  */
-@ProviderType
 public class CommerceDataIntegrationProcessLogWrapper
 	implements CommerceDataIntegrationProcessLog,
 			   ModelWrapper<CommerceDataIntegrationProcessLog> {
@@ -73,9 +70,9 @@ public class CommerceDataIntegrationProcessLogWrapper
 			"CDataIntegrationProcessId", getCDataIntegrationProcessId());
 		attributes.put("error", getError());
 		attributes.put("output", getOutput());
-		attributes.put("status", getStatus());
 		attributes.put("startDate", getStartDate());
 		attributes.put("endDate", getEndDate());
+		attributes.put("status", getStatus());
 
 		return attributes;
 	}
@@ -139,12 +136,6 @@ public class CommerceDataIntegrationProcessLogWrapper
 			setOutput(output);
 		}
 
-		Integer status = (Integer)attributes.get("status");
-
-		if (status != null) {
-			setStatus(status);
-		}
-
 		Date startDate = (Date)attributes.get("startDate");
 
 		if (startDate != null) {
@@ -155,6 +146,12 @@ public class CommerceDataIntegrationProcessLogWrapper
 
 		if (endDate != null) {
 			setEndDate(endDate);
+		}
+
+		Integer status = (Integer)attributes.get("status");
+
+		if (status != null) {
+			setStatus(status);
 		}
 	}
 
@@ -345,6 +342,11 @@ public class CommerceDataIntegrationProcessLogWrapper
 		return _commerceDataIntegrationProcessLog.isNew();
 	}
 
+	/**
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never modify or reference this class directly. All methods that expect a commerce data integration process log model instance should use the <code>CommerceDataIntegrationProcessLog</code> interface instead.
+	 */
 	@Override
 	public void persist() {
 		_commerceDataIntegrationProcessLog.persist();

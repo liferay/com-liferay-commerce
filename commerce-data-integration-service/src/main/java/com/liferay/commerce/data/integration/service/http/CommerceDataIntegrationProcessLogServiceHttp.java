@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.data.integration.service.http;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.data.integration.service.CommerceDataIntegrationProcessLogServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -51,7 +49,6 @@ import com.liferay.portal.kernel.util.MethodKey;
  * @see CommerceDataIntegrationProcessLogServiceSoap
  * @generated
  */
-@ProviderType
 public class CommerceDataIntegrationProcessLogServiceHttp {
 
 	public static com.liferay.commerce.data.integration.model.
