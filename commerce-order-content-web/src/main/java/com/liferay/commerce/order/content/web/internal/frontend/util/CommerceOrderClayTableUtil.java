@@ -61,12 +61,14 @@ public class CommerceOrderClayTableUtil {
 
 		PortletURL backURL = portletURL;
 
-		backURL.setParameter(
-			"itemsPerPage",
-			ParamUtil.getString(themeDisplay.getRequest(), "pageSize"));
-		backURL.setParameter(
-			"pageNumber",
-			ParamUtil.getString(themeDisplay.getRequest(), "page"));
+		String pageSize = ParamUtil.getString(
+			themeDisplay.getRequest(), "pageSize");
+
+		String pageNumber = ParamUtil.getString(
+			themeDisplay.getRequest(), "page");
+
+		backURL.setParameter("itemsPerPage", pageSize);
+		backURL.setParameter("pageNumber", pageNumber);
 		backURL.setParameter("tableName", CommercePendingOrderClayTable.NAME);
 
 		portletURL.setParameter(
@@ -156,12 +158,14 @@ public class CommerceOrderClayTableUtil {
 
 		PortletURL backURL = portletURL;
 
-		backURL.setParameter(
-			"itemsPerPage",
-			ParamUtil.getString(themeDisplay.getRequest(), "pageSize"));
-		backURL.setParameter(
-			"pageNumber",
-			ParamUtil.getString(themeDisplay.getRequest(), "page"));
+		String pageSize = ParamUtil.getString(
+			themeDisplay.getRequest(), "pageSize");
+
+		String pageNumber = ParamUtil.getString(
+			themeDisplay.getRequest(), "page");
+
+		backURL.setParameter("itemsPerPage", pageSize);
+		backURL.setParameter("pageNumber", pageNumber);
 		backURL.setParameter("tableName", CommercePlacedOrderClayTable.NAME);
 
 		portletURL.setParameter(
