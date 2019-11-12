@@ -37,6 +37,7 @@ import java.text.DateFormat;
 import java.text.Format;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -125,13 +126,19 @@ public class CommerceOrderClayTableUtil {
 				resourceBundle,
 				WorkflowConstants.getStatusLabel(commerceOrder.getStatus()));
 
+			Date orderDate = commerceOrder.getCreateDate();
+
+			if (commerceOrder.getOrderDate() != null) {
+				orderDate = commerceOrder.getOrderDate();
+			}
+
 			orders.add(
 				new Order(
 					commerceOrder.getCommerceOrderId(),
 					commerceOrder.getCommerceAccountName(),
-					dateFormat.format(commerceOrder.getCreateDate()),
-					commerceOrder.getUserName(), commerceOrderStatusLabel,
-					workflowStatusLabel, amount, url));
+					dateFormat.format(orderDate), commerceOrder.getUserName(),
+					commerceOrderStatusLabel, workflowStatusLabel, amount,
+					url));
 		}
 
 		return orders;
