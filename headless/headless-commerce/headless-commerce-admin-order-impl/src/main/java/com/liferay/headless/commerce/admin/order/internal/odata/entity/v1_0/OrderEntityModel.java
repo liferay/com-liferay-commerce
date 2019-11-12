@@ -35,6 +35,7 @@ public class OrderEntityModel implements EntityModel {
 			new IntegerEntityField("accountId", locale -> "commerceAccountId"),
 			new IntegerEntityField("channelId", locale -> "commerceChannelId"),
 			new IntegerEntityField("orderStatus", locale -> "orderStatus"),
+			new IntegerEntityField("orderId", locale -> Field.ENTRY_CLASS_PK),
 			new DateTimeEntityField(
 				"createDate",
 				locale -> Field.getSortableFieldName(Field.CREATE_DATE),
