@@ -407,16 +407,16 @@ public class AttachmentResourceImpl extends BaseAttachmentResourceImpl {
 				expirationDateConfig.getMonth(), expirationDateConfig.getDay(),
 				expirationDateConfig.getYear(), expirationDateConfig.getHour(),
 				expirationDateConfig.getMinute(),
-				GetterUtil.get(
+				GetterUtil.getBoolean(
 					attachment.getNeverExpire(),
 					cpAttachmentFileEntry.getExpirationDate() == null),
 				AttachmentUtil.getTitleMap(cpAttachmentFileEntry, attachment),
-				GetterUtil.get(
+				GetterUtil.getString(
 					attachment.getOptions(), cpAttachmentFileEntry.getJson()),
-				GetterUtil.get(
+				GetterUtil.getDouble(
 					attachment.getPriority(),
 					cpAttachmentFileEntry.getPriority()),
-				GetterUtil.get(
+				GetterUtil.getInteger(
 					attachment.getType(), cpAttachmentFileEntry.getType()),
 				serviceContext);
 
