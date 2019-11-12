@@ -140,7 +140,7 @@ public class CommerceOrganizationClayTable
 	public int countItems(HttpServletRequest httpServletRequest, Filter filter)
 		throws PortalException {
 
-		OrganizationFilterImpl organizationFilter =
+		OrganizationFilterImpl organizationFilterImpl =
 			(OrganizationFilterImpl)filter;
 
 		ThemeDisplay themeDisplay =
@@ -149,7 +149,7 @@ public class CommerceOrganizationClayTable
 
 		return _organizationService.getOrganizationsCount(
 			themeDisplay.getCompanyId(),
-			organizationFilter.getOrganizationId());
+			organizationFilterImpl.getOrganizationId());
 	}
 
 	@Override
@@ -174,7 +174,7 @@ public class CommerceOrganizationClayTable
 			Pagination pagination, Sort sort)
 		throws PortalException {
 
-		OrganizationFilterImpl organizationFilter =
+		OrganizationFilterImpl organizationFilterImpl =
 			(OrganizationFilterImpl)filter;
 
 		List<Organization> organizations = new ArrayList<>();
@@ -186,7 +186,7 @@ public class CommerceOrganizationClayTable
 		List<com.liferay.portal.kernel.model.Organization> organizationList =
 			_organizationService.getOrganizations(
 				themeDisplay.getCompanyId(),
-				organizationFilter.getOrganizationId(),
+				organizationFilterImpl.getOrganizationId(),
 				pagination.getStartPosition(), pagination.getEndPosition());
 
 		for (com.liferay.portal.kernel.model.Organization organization :
