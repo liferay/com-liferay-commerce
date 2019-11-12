@@ -79,12 +79,14 @@ public class CommerceContextHttpImpl implements CommerceContext {
 
 	@Override
 	public CommerceAccount getCommerceAccount() throws PortalException {
-		if (_commerceAccount != null) {
+		CommerceChannel commerceChannel = fetchCommerceChannel();
+
+		if ((_commerceAccount != null) || (commerceChannel == null)) {
 			return _commerceAccount;
 		}
 
 		_commerceAccount = _commerceAccountHelper.getCurrentCommerceAccount(
-			getCommerceChannelGroupId(), _httpServletRequest);
+			commerceChannel.getGroupId(), _httpServletRequest);
 
 		return _commerceAccount;
 	}
