@@ -14,10 +14,7 @@
 
 package com.liferay.commerce.order.content.web.internal.frontend;
 
-import com.liferay.commerce.constants.CommerceWebKeys;
-import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceMoney;
-import com.liferay.commerce.discount.CommerceDiscountValue;
 import com.liferay.commerce.frontend.ClayTable;
 import com.liferay.commerce.frontend.ClayTableAction;
 import com.liferay.commerce.frontend.ClayTableActionProvider;
@@ -34,7 +31,6 @@ import com.liferay.commerce.order.CommerceOrderValidatorRegistry;
 import com.liferay.commerce.order.CommerceOrderValidatorResult;
 import com.liferay.commerce.order.content.web.internal.frontend.util.CommerceOrderClayTableUtil;
 import com.liferay.commerce.order.content.web.internal.model.OrderItem;
-import com.liferay.commerce.price.CommerceProductPrice;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.product.util.CPInstanceHelper;
 import com.liferay.commerce.service.CommerceOrderItemService;
@@ -130,7 +126,7 @@ public class CommercePendingOrderItemClayTable
 		OrderFilterImpl orderFilterImpl = (OrderFilterImpl)filter;
 
 		return _commerceOrderItemService.getCommerceOrderItemsCount(
-			orderFilterImpl.getOrderId());
+			orderFilterImpl.getCommerceOrderId());
 	}
 
 	@Override
@@ -177,18 +173,14 @@ public class CommercePendingOrderItemClayTable
 
 		OrderFilterImpl orderFilterImpl = (OrderFilterImpl)filter;
 
-		CommerceContext commerceContext =
-			(CommerceContext)httpServletRequest.getAttribute(
-				CommerceWebKeys.COMMERCE_CONTEXT);
-
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)httpServletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
 		List<CommerceOrderItem> commerceOrderItems =
 			_commerceOrderItemService.getCommerceOrderItems(
-				orderFilterImpl.getOrderId(), pagination.getStartPosition(),
-				pagination.getEndPosition());
+				orderFilterImpl.getCommerceOrderId(),
+				pagination.getStartPosition(), pagination.getEndPosition());
 
 		CommerceOrder commerceOrder = null;
 		Map<Long, List<CommerceOrderValidatorResult>>
@@ -214,50 +206,40 @@ public class CommercePendingOrderItemClayTable
 				String formattedDiscountAmount = StringPool.BLANK;
 				String formattedFinalPrice = StringPool.BLANK;
 
-				CommerceProductPrice commerceProductPrice =
-					_commerceProductPriceCalculation.getCommerceProductPrice(
-						commerceOrderItem.getCPInstanceId(),
-						commerceOrderItem.getQuantity(), commerceContext);
+				CommerceMoney unitPriceMoney =
+					commerceOrderItem.getUnitPriceMoney();
 
-				if (commerceProductPrice != null) {
-					CommerceMoney unitPriceMoney =
-						commerceProductPrice.getUnitPrice();
+				if (unitPriceMoney != null) {
+					formattedUnitPrice = unitPriceMoney.format(
+						themeDisplay.getLocale());
+				}
 
-					if (unitPriceMoney != null) {
-						formattedUnitPrice = unitPriceMoney.format(
-							themeDisplay.getLocale());
-					}
+				CommerceMoney promoPriceMoney =
+					commerceOrderItem.getPromoPriceMoney();
 
-					CommerceMoney unitPromoPriceMoney =
-						commerceProductPrice.getUnitPromoPrice();
+				BigDecimal promoPrice = promoPriceMoney.getPrice();
 
-					BigDecimal promoPrice = unitPromoPriceMoney.getPrice();
+				if ((promoPriceMoney != null) &&
+					(promoPrice.compareTo(BigDecimal.ZERO) > 0)) {
 
-					if ((unitPromoPriceMoney != null) &&
-						(promoPrice.compareTo(BigDecimal.ZERO) > 0)) {
+					formattedPromoPrice = promoPriceMoney.format(
+						themeDisplay.getLocale());
+				}
 
-						formattedPromoPrice = unitPromoPriceMoney.format(
-							themeDisplay.getLocale());
-					}
+				CommerceMoney finalPriceMoney =
+					commerceOrderItem.getFinalPriceMoney();
 
-					CommerceMoney finalPriceMoney =
-						commerceProductPrice.getFinalPrice();
+				if (finalPriceMoney != null) {
+					formattedFinalPrice = finalPriceMoney.format(
+						themeDisplay.getLocale());
+				}
 
-					if (finalPriceMoney != null) {
-						formattedFinalPrice = finalPriceMoney.format(
-							themeDisplay.getLocale());
-					}
+				CommerceMoney discountAmount =
+					commerceOrderItem.getDiscountAmountMoney();
 
-					CommerceDiscountValue discountValue =
-						commerceProductPrice.getDiscountValue();
-
-					if (discountValue != null) {
-						CommerceMoney discountAmount =
-							discountValue.getDiscountAmount();
-
-						formattedDiscountAmount = discountAmount.format(
-							themeDisplay.getLocale());
-					}
+				if (discountAmount != null) {
+					formattedDiscountAmount = discountAmount.format(
+						themeDisplay.getLocale());
 				}
 
 				List<CommerceOrderValidatorResult>

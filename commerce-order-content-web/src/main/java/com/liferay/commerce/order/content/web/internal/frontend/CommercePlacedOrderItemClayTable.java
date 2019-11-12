@@ -70,7 +70,7 @@ public class CommercePlacedOrderItemClayTable
 		OrderFilterImpl orderFilterImpl = (OrderFilterImpl)filter;
 
 		return _commerceOrderItemService.getCommerceOrderItemsCount(
-			orderFilterImpl.getOrderId());
+			orderFilterImpl.getCommerceOrderId());
 	}
 
 	@Override
@@ -128,8 +128,8 @@ public class CommercePlacedOrderItemClayTable
 
 		List<CommerceOrderItem> commerceOrderItems =
 			_commerceOrderItemService.getCommerceOrderItems(
-				orderFilterImpl.getOrderId(), pagination.getStartPosition(),
-				pagination.getEndPosition());
+				orderFilterImpl.getCommerceOrderId(),
+				pagination.getStartPosition(), pagination.getEndPosition());
 
 		try {
 			for (CommerceOrderItem commerceOrderItem : commerceOrderItems) {
