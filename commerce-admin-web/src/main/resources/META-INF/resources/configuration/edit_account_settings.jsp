@@ -18,6 +18,12 @@
 
 <%
 CommerceContext commerceContext = (CommerceContext)request.getAttribute(CommerceWebKeys.COMMERCE_CONTEXT);
+
+boolean disabled = true;
+
+if (commerceContext.getCommerceChannelId() > 0) {
+	disabled = false;
+}
 %>
 
 <div class="container-fluid-1280 mt-4 sheet">
@@ -27,7 +33,7 @@ CommerceContext commerceContext = (CommerceContext)request.getAttribute(Commerce
 		<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 
 		<aui:fieldset>
-			<aui:select label="commerce-site-type" name="settings--commerceSiteType--">
+			<aui:select disabled="<%= disabled %>" label="commerce-site-type" name="settings--commerceSiteType--">
 
 				<%
 				for (int commerceSiteType : CommerceAccountConstants.SITE_TYPES) {
@@ -42,8 +48,17 @@ CommerceContext commerceContext = (CommerceContext)request.getAttribute(Commerce
 			</aui:select>
 		</aui:fieldset>
 
-		<aui:button-row>
-			<aui:button cssClass="btn-lg" type="submit" value="save" />
-		</aui:button-row>
+		<c:choose>
+			<c:when test="<%= disabled %>">
+				<aui:alert closeable="<%= false %>" cssClass="mt-3" type="warning">
+					<liferay-ui:message key="this-site-does-not-have-a-channel" />
+				</aui:alert>
+			</c:when>
+			<c:otherwise>
+				<aui:button-row>
+					<aui:button cssClass="btn-lg" type="submit" value="save" />
+				</aui:button-row>
+			</c:otherwise>
+		</c:choose>
 	</aui:form>
 </div>
