@@ -25,19 +25,19 @@ public class OrderFilterImpl extends DefaultFilterImpl {
 		return _accountId;
 	}
 
-	public long getOrderId() {
-		return _orderId;
+	public long getCommerceOrderId() {
+		return _commerceOrderId;
 	}
 
 	public void setAccountId(long accountId) {
 		_accountId = accountId;
 	}
 
-	public void setOrderId(long orderId) {
-		_orderId = orderId;
+	public void setCommerceOrderId(long commerceOrderId) {
+		_commerceOrderId = commerceOrderId;
 	}
 
 	private long _accountId;
-	private long _orderId;
+	private long _commerceOrderId;
 
 }
