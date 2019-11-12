@@ -136,6 +136,23 @@ public class AddressCommerceCheckoutStepUtil {
 				paramName) &&
 			useAsBilling) {
 
+			CommerceAddress commerceAddress =
+				_commerceAddressService.getCommerceAddress(commerceAddressId);
+
+			_commerceAddressService.updateCommerceAddress(
+				commerceAddressId, commerceAddress.getName(),
+				commerceAddress.getDescription(), commerceAddress.getStreet1(),
+				commerceAddress.getStreet2(), commerceAddress.getStreet3(),
+				commerceAddress.getCity(), commerceAddress.getZip(),
+				commerceAddress.getCommerceRegionId(),
+				commerceAddress.getCommerceCountryId(),
+				commerceAddress.getPhoneNumber(), _commerceAddressType, null);
+
+			commerceOrder.setBillingAddressId(commerceAddressId);
+
+			actionRequest.setAttribute(
+				CommerceCheckoutWebKeys.COMMERCE_ORDER, commerceOrder);
+
 			return updateCommerceOrderAddress(
 				commerceOrder, commerceAddressId, commerceAddressId,
 				commerceContext);
