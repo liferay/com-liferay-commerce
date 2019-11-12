@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 
 import java.util.List;
-import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -72,21 +71,16 @@ public abstract class BaseAddressCheckoutStepDisplayContext {
 	public abstract String getTitle();
 
 	public boolean isShippingUsedAsBilling() throws PortalException {
+		CommerceAccount commerceAccount = _commerceOrder.getCommerceAccount();
 		CommerceAddress shippingAddress = _commerceOrder.getShippingAddress();
 		CommerceAddress billingAddress = _commerceOrder.getBillingAddress();
 
-		CommerceAccount commerceAccount = _commerceOrder.getCommerceAccount();
-
-		if ((shippingAddress != null) && (billingAddress != null) &&
-			Objects.equals(
-				shippingAddress.getCommerceAddressId(),
+		if ((commerceAccount != null) &&
+			(commerceAccount.getDefaultBillingAddressId() ==
+				commerceAccount.getDefaultShippingAddressId()) &&
+			(billingAddress != null) && (shippingAddress != null) &&
+			(shippingAddress.getCommerceAddressId() ==
 				billingAddress.getCommerceAddressId())) {
-
-			return true;
-		}
-		else if ((commerceAccount != null) &&
-				 (commerceAccount.getDefaultBillingAddressId() ==
-					 commerceAccount.getDefaultShippingAddressId())) {
 
 			return true;
 		}

@@ -62,7 +62,7 @@ long commerceRegionId = BeanParamUtil.getLong(currentCommerceAddress, request, "
 		%>
 
 		<c:if test="<%= (currentCommerceAddress != null) && !addressWasFound %>">
-			<aui:option label='<%= currentCommerceAddress.getName() + " - " + LanguageUtil.get(request, "copied-from-previous-order") %>' selected="<%= true %>" value="<%= currentCommerceAddress.getCommerceAddressId() %>" />
+			<aui:option label="<%= currentCommerceAddress.getName() %>" selected="<%= true %>" value="<%= currentCommerceAddress.getCommerceAddressId() %>" />
 		</c:if>
 	</aui:select>
 
@@ -147,7 +147,7 @@ long commerceRegionId = BeanParamUtil.getLong(currentCommerceAddress, request, "
 
 			A.all('.address-fields select').set('selectedIndex', 0);
 			A.all('.address-fields input').val('');
-			A.one('#<portlet:namespace />use-as-billing').attr('checked', true);
+			A.one('#<portlet:namespace />use-as-billing').attr('checked', <%= baseAddressCheckoutStepDisplayContext.isShippingUsedAsBilling() %>);
 		},
 		['aui-base']
 	);
