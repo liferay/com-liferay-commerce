@@ -34,21 +34,21 @@ public class OrganizationFilterFactoryImpl implements FilterFactory {
 
 	@Override
 	public Filter create(HttpServletRequest httpServletRequest) {
-		OrganizationFilterImpl organizationFilter =
+		OrganizationFilterImpl organizationFilterImpl =
 			new OrganizationFilterImpl();
 
 		long organizationId = ParamUtil.getLong(
 			httpServletRequest, "organizationId");
 		long userId = ParamUtil.getLong(httpServletRequest, "userId");
 
-		organizationFilter.setOrganizationId(organizationId);
-		organizationFilter.setUserId(userId);
+		organizationFilterImpl.setOrganizationId(organizationId);
+		organizationFilterImpl.setUserId(userId);
 
 		String keywords = ParamUtil.getString(httpServletRequest, "q");
 
-		organizationFilter.setKeywords(keywords);
+		organizationFilterImpl.setKeywords(keywords);
 
-		return organizationFilter;
+		return organizationFilterImpl;
 	}
 
 }
