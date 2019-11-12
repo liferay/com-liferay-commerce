@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.data.integration.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.data.integration.model.CommerceDataIntegrationProcessLog;
 import com.liferay.commerce.data.integration.model.CommerceDataIntegrationProcessLogModel;
 import com.liferay.commerce.data.integration.model.CommerceDataIntegrationProcessLogSoap;
@@ -64,12 +62,11 @@ import java.util.function.Function;
  * @generated
  */
 @JSON(strict = true)
-@ProviderType
 public class CommerceDataIntegrationProcessLogModelImpl
 	extends BaseModelImpl<CommerceDataIntegrationProcessLog>
 	implements CommerceDataIntegrationProcessLogModel {
 
-	/*
+	/**
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify or reference this class directly. All methods that expect a commerce data integration process log model instance should use the <code>CommerceDataIntegrationProcessLog</code> interface instead.
@@ -82,8 +79,8 @@ public class CommerceDataIntegrationProcessLogModelImpl
 		{"userName", Types.VARCHAR}, {"createDate", Types.TIMESTAMP},
 		{"modifiedDate", Types.TIMESTAMP},
 		{"CDataIntegrationProcessId", Types.BIGINT}, {"error", Types.CLOB},
-		{"output_", Types.CLOB}, {"status", Types.INTEGER},
-		{"startDate", Types.TIMESTAMP}, {"endDate", Types.TIMESTAMP}
+		{"output_", Types.CLOB}, {"startDate", Types.TIMESTAMP},
+		{"endDate", Types.TIMESTAMP}, {"status", Types.INTEGER}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
@@ -99,13 +96,13 @@ public class CommerceDataIntegrationProcessLogModelImpl
 		TABLE_COLUMNS_MAP.put("CDataIntegrationProcessId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("error", Types.CLOB);
 		TABLE_COLUMNS_MAP.put("output_", Types.CLOB);
-		TABLE_COLUMNS_MAP.put("status", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("startDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("endDate", Types.TIMESTAMP);
+		TABLE_COLUMNS_MAP.put("status", Types.INTEGER);
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CDataIntegrationProcessLog (CDataIntegrationProcessLogId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CDataIntegrationProcessId LONG,error TEXT null,output_ TEXT null,status INTEGER,startDate DATE null,endDate DATE null)";
+		"create table CDataIntegrationProcessLog (CDataIntegrationProcessLogId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,CDataIntegrationProcessId LONG,error TEXT null,output_ TEXT null,startDate DATE null,endDate DATE null,status INTEGER)";
 
 	public static final String TABLE_SQL_DROP =
 		"drop table CDataIntegrationProcessLog";
@@ -170,9 +167,9 @@ public class CommerceDataIntegrationProcessLogModelImpl
 			soapModel.getCDataIntegrationProcessId());
 		model.setError(soapModel.getError());
 		model.setOutput(soapModel.getOutput());
-		model.setStatus(soapModel.getStatus());
 		model.setStartDate(soapModel.getStartDate());
 		model.setEndDate(soapModel.getEndDate());
+		model.setStatus(soapModel.getStatus());
 
 		return model;
 	}
@@ -363,11 +360,11 @@ public class CommerceDataIntegrationProcessLogModelImpl
 				public void accept(
 					CommerceDataIntegrationProcessLog
 						commerceDataIntegrationProcessLog,
-					Object commerceDataIntegrationProcessLogId) {
+					Object commerceDataIntegrationProcessLogIdObject) {
 
 					commerceDataIntegrationProcessLog.
 						setCommerceDataIntegrationProcessLogId(
-							(Long)commerceDataIntegrationProcessLogId);
+							(Long)commerceDataIntegrationProcessLogIdObject);
 				}
 
 			});
@@ -392,10 +389,10 @@ public class CommerceDataIntegrationProcessLogModelImpl
 				public void accept(
 					CommerceDataIntegrationProcessLog
 						commerceDataIntegrationProcessLog,
-					Object companyId) {
+					Object companyIdObject) {
 
 					commerceDataIntegrationProcessLog.setCompanyId(
-						(Long)companyId);
+						(Long)companyIdObject);
 				}
 
 			});
@@ -420,9 +417,10 @@ public class CommerceDataIntegrationProcessLogModelImpl
 				public void accept(
 					CommerceDataIntegrationProcessLog
 						commerceDataIntegrationProcessLog,
-					Object userId) {
+					Object userIdObject) {
 
-					commerceDataIntegrationProcessLog.setUserId((Long)userId);
+					commerceDataIntegrationProcessLog.setUserId(
+						(Long)userIdObject);
 				}
 
 			});
@@ -447,10 +445,10 @@ public class CommerceDataIntegrationProcessLogModelImpl
 				public void accept(
 					CommerceDataIntegrationProcessLog
 						commerceDataIntegrationProcessLog,
-					Object userName) {
+					Object userNameObject) {
 
 					commerceDataIntegrationProcessLog.setUserName(
-						(String)userName);
+						(String)userNameObject);
 				}
 
 			});
@@ -475,10 +473,10 @@ public class CommerceDataIntegrationProcessLogModelImpl
 				public void accept(
 					CommerceDataIntegrationProcessLog
 						commerceDataIntegrationProcessLog,
-					Object createDate) {
+					Object createDateObject) {
 
 					commerceDataIntegrationProcessLog.setCreateDate(
-						(Date)createDate);
+						(Date)createDateObject);
 				}
 
 			});
@@ -503,10 +501,10 @@ public class CommerceDataIntegrationProcessLogModelImpl
 				public void accept(
 					CommerceDataIntegrationProcessLog
 						commerceDataIntegrationProcessLog,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
 					commerceDataIntegrationProcessLog.setModifiedDate(
-						(Date)modifiedDate);
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -532,11 +530,11 @@ public class CommerceDataIntegrationProcessLogModelImpl
 				public void accept(
 					CommerceDataIntegrationProcessLog
 						commerceDataIntegrationProcessLog,
-					Object CDataIntegrationProcessId) {
+					Object CDataIntegrationProcessIdObject) {
 
 					commerceDataIntegrationProcessLog.
 						setCDataIntegrationProcessId(
-							(Long)CDataIntegrationProcessId);
+							(Long)CDataIntegrationProcessIdObject);
 				}
 
 			});
@@ -561,9 +559,10 @@ public class CommerceDataIntegrationProcessLogModelImpl
 				public void accept(
 					CommerceDataIntegrationProcessLog
 						commerceDataIntegrationProcessLog,
-					Object error) {
+					Object errorObject) {
 
-					commerceDataIntegrationProcessLog.setError((String)error);
+					commerceDataIntegrationProcessLog.setError(
+						(String)errorObject);
 				}
 
 			});
@@ -588,37 +587,10 @@ public class CommerceDataIntegrationProcessLogModelImpl
 				public void accept(
 					CommerceDataIntegrationProcessLog
 						commerceDataIntegrationProcessLog,
-					Object output) {
+					Object outputObject) {
 
-					commerceDataIntegrationProcessLog.setOutput((String)output);
-				}
-
-			});
-		attributeGetterFunctions.put(
-			"status",
-			new Function<CommerceDataIntegrationProcessLog, Object>() {
-
-				@Override
-				public Object apply(
-					CommerceDataIntegrationProcessLog
-						commerceDataIntegrationProcessLog) {
-
-					return commerceDataIntegrationProcessLog.getStatus();
-				}
-
-			});
-		attributeSetterBiConsumers.put(
-			"status",
-			new BiConsumer<CommerceDataIntegrationProcessLog, Object>() {
-
-				@Override
-				public void accept(
-					CommerceDataIntegrationProcessLog
-						commerceDataIntegrationProcessLog,
-					Object status) {
-
-					commerceDataIntegrationProcessLog.setStatus(
-						(Integer)status);
+					commerceDataIntegrationProcessLog.setOutput(
+						(String)outputObject);
 				}
 
 			});
@@ -643,10 +615,10 @@ public class CommerceDataIntegrationProcessLogModelImpl
 				public void accept(
 					CommerceDataIntegrationProcessLog
 						commerceDataIntegrationProcessLog,
-					Object startDate) {
+					Object startDateObject) {
 
 					commerceDataIntegrationProcessLog.setStartDate(
-						(Date)startDate);
+						(Date)startDateObject);
 				}
 
 			});
@@ -671,9 +643,38 @@ public class CommerceDataIntegrationProcessLogModelImpl
 				public void accept(
 					CommerceDataIntegrationProcessLog
 						commerceDataIntegrationProcessLog,
-					Object endDate) {
+					Object endDateObject) {
 
-					commerceDataIntegrationProcessLog.setEndDate((Date)endDate);
+					commerceDataIntegrationProcessLog.setEndDate(
+						(Date)endDateObject);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"status",
+			new Function<CommerceDataIntegrationProcessLog, Object>() {
+
+				@Override
+				public Object apply(
+					CommerceDataIntegrationProcessLog
+						commerceDataIntegrationProcessLog) {
+
+					return commerceDataIntegrationProcessLog.getStatus();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"status",
+			new BiConsumer<CommerceDataIntegrationProcessLog, Object>() {
+
+				@Override
+				public void accept(
+					CommerceDataIntegrationProcessLog
+						commerceDataIntegrationProcessLog,
+					Object statusObject) {
+
+					commerceDataIntegrationProcessLog.setStatus(
+						(Integer)statusObject);
 				}
 
 			});
@@ -839,6 +840,28 @@ public class CommerceDataIntegrationProcessLogModelImpl
 
 	@JSON
 	@Override
+	public Date getStartDate() {
+		return _startDate;
+	}
+
+	@Override
+	public void setStartDate(Date startDate) {
+		_startDate = startDate;
+	}
+
+	@JSON
+	@Override
+	public Date getEndDate() {
+		return _endDate;
+	}
+
+	@Override
+	public void setEndDate(Date endDate) {
+		_endDate = endDate;
+	}
+
+	@JSON
+	@Override
 	public int getStatus() {
 		return _status;
 	}
@@ -858,28 +881,6 @@ public class CommerceDataIntegrationProcessLogModelImpl
 
 	public int getOriginalStatus() {
 		return _originalStatus;
-	}
-
-	@JSON
-	@Override
-	public Date getStartDate() {
-		return _startDate;
-	}
-
-	@Override
-	public void setStartDate(Date startDate) {
-		_startDate = startDate;
-	}
-
-	@JSON
-	@Override
-	public Date getEndDate() {
-		return _endDate;
-	}
-
-	@Override
-	public void setEndDate(Date endDate) {
-		_endDate = endDate;
 	}
 
 	public long getColumnBitmask() {
@@ -934,9 +935,9 @@ public class CommerceDataIntegrationProcessLogModelImpl
 			getCDataIntegrationProcessId());
 		commerceDataIntegrationProcessLogImpl.setError(getError());
 		commerceDataIntegrationProcessLogImpl.setOutput(getOutput());
-		commerceDataIntegrationProcessLogImpl.setStatus(getStatus());
 		commerceDataIntegrationProcessLogImpl.setStartDate(getStartDate());
 		commerceDataIntegrationProcessLogImpl.setEndDate(getEndDate());
+		commerceDataIntegrationProcessLogImpl.setStatus(getStatus());
 
 		commerceDataIntegrationProcessLogImpl.resetOriginalValues();
 
@@ -1086,8 +1087,6 @@ public class CommerceDataIntegrationProcessLogModelImpl
 			commerceDataIntegrationProcessLogCacheModel.output = null;
 		}
 
-		commerceDataIntegrationProcessLogCacheModel.status = getStatus();
-
 		Date startDate = getStartDate();
 
 		if (startDate != null) {
@@ -1109,6 +1108,8 @@ public class CommerceDataIntegrationProcessLogModelImpl
 			commerceDataIntegrationProcessLogCacheModel.endDate =
 				Long.MIN_VALUE;
 		}
+
+		commerceDataIntegrationProcessLogCacheModel.status = getStatus();
 
 		return commerceDataIntegrationProcessLogCacheModel;
 	}
@@ -1203,11 +1204,11 @@ public class CommerceDataIntegrationProcessLogModelImpl
 	private boolean _setOriginalCDataIntegrationProcessId;
 	private String _error;
 	private String _output;
+	private Date _startDate;
+	private Date _endDate;
 	private int _status;
 	private int _originalStatus;
 	private boolean _setOriginalStatus;
-	private Date _startDate;
-	private Date _endDate;
 	private long _columnBitmask;
 	private CommerceDataIntegrationProcessLog _escapedModel;
 

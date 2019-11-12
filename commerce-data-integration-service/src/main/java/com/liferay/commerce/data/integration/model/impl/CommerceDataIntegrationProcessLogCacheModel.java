@@ -14,8 +14,6 @@
 
 package com.liferay.commerce.data.integration.model.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.commerce.data.integration.model.CommerceDataIntegrationProcessLog;
 import com.liferay.portal.kernel.model.CacheModel;
 import com.liferay.portal.kernel.util.HashUtil;
@@ -34,7 +32,6 @@ import java.util.Date;
  * @author Alessio Antonio Rendina
  * @generated
  */
-@ProviderType
 public class CommerceDataIntegrationProcessLogCacheModel
 	implements CacheModel<CommerceDataIntegrationProcessLog>, Externalizable {
 
@@ -89,12 +86,12 @@ public class CommerceDataIntegrationProcessLogCacheModel
 		sb.append(error);
 		sb.append(", output=");
 		sb.append(output);
-		sb.append(", status=");
-		sb.append(status);
 		sb.append(", startDate=");
 		sb.append(startDate);
 		sb.append(", endDate=");
 		sb.append(endDate);
+		sb.append(", status=");
+		sb.append(status);
 		sb.append("}");
 
 		return sb.toString();
@@ -152,8 +149,6 @@ public class CommerceDataIntegrationProcessLogCacheModel
 			commerceDataIntegrationProcessLogImpl.setOutput(output);
 		}
 
-		commerceDataIntegrationProcessLogImpl.setStatus(status);
-
 		if (startDate == Long.MIN_VALUE) {
 			commerceDataIntegrationProcessLogImpl.setStartDate(null);
 		}
@@ -168,6 +163,8 @@ public class CommerceDataIntegrationProcessLogCacheModel
 		else {
 			commerceDataIntegrationProcessLogImpl.setEndDate(new Date(endDate));
 		}
+
+		commerceDataIntegrationProcessLogImpl.setStatus(status);
 
 		commerceDataIntegrationProcessLogImpl.resetOriginalValues();
 
@@ -188,10 +185,10 @@ public class CommerceDataIntegrationProcessLogCacheModel
 		CDataIntegrationProcessId = objectInput.readLong();
 		error = objectInput.readUTF();
 		output = objectInput.readUTF();
-
-		status = objectInput.readInt();
 		startDate = objectInput.readLong();
 		endDate = objectInput.readLong();
+
+		status = objectInput.readInt();
 	}
 
 	@Override
@@ -228,9 +225,10 @@ public class CommerceDataIntegrationProcessLogCacheModel
 			objectOutput.writeUTF(output);
 		}
 
-		objectOutput.writeInt(status);
 		objectOutput.writeLong(startDate);
 		objectOutput.writeLong(endDate);
+
+		objectOutput.writeInt(status);
 	}
 
 	public long commerceDataIntegrationProcessLogId;
@@ -242,8 +240,8 @@ public class CommerceDataIntegrationProcessLogCacheModel
 	public long CDataIntegrationProcessId;
 	public String error;
 	public String output;
-	public int status;
 	public long startDate;
 	public long endDate;
+	public int status;
 
 }
