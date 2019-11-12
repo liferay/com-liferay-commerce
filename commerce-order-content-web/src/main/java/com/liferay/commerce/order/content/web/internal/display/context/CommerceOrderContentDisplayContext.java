@@ -73,6 +73,7 @@ import java.text.DecimalFormat;
 import java.text.Format;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.portlet.PortletURL;
@@ -168,8 +169,13 @@ public class CommerceOrderContentDisplayContext {
 	}
 
 	public String getCommerceOrderDate(CommerceOrder commerceOrder) {
-		return _commerceOrderDateFormatDate.format(
-			commerceOrder.getCreateDate());
+		Date orderDate = commerceOrder.getCreateDate();
+
+		if (commerceOrder.getOrderDate() != null) {
+			orderDate = commerceOrder.getOrderDate();
+		}
+
+		return _commerceOrderDateFormatDate.format(orderDate);
 	}
 
 	public long getCommerceOrderId() {
@@ -304,8 +310,13 @@ public class CommerceOrderContentDisplayContext {
 	}
 
 	public String getCommerceOrderTime(CommerceOrder commerceOrder) {
-		return _commerceOrderDateFormatTime.format(
-			commerceOrder.getCreateDate());
+		Date orderDate = commerceOrder.getCreateDate();
+
+		if (commerceOrder.getOrderDate() != null) {
+			orderDate = commerceOrder.getOrderDate();
+		}
+
+		return _commerceOrderDateFormatTime.format(orderDate);
 	}
 
 	public String getCommerceOrderTotal(CommerceOrder commerceOrder)
@@ -431,7 +442,7 @@ public class CommerceOrderContentDisplayContext {
 				_commerceAccount.getCommerceAccountId());
 		}
 
-		orderFilterImpl.setOrderId(getCommerceOrderId());
+		orderFilterImpl.setCommerceOrderId(getCommerceOrderId());
 
 		return orderFilterImpl;
 	}
