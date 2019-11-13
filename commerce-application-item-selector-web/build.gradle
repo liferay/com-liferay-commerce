@@ -1,3 +1,7 @@
+baseline {
+	enabled = false
+}
+
 dependencies {
 	compileOnly group: "com.liferay", name: "com.liferay.frontend.taglib", version: "3.0.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.taglib", version: "1.0.0"

@@ -1,5 +1,9 @@
 apply plugin: "com.liferay.lang.merger"
 
+baseline {
+	enabled = false
+}
+
 buildService {
 	apiDir = "../commerce-machine-learning-forecast-alert-api/src/main/java"
 	testDir = "../commerce-machine-learning-forecast-alert-test/src/testIntegration/java"

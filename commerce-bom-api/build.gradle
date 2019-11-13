@@ -1,3 +1,7 @@
+baseline {
+	enabled = false
+}
+
 dependencies {
 	compileOnly group: "biz.aQute.bnd", name: "biz.aQute.bndlib", version: "3.5.0"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.product.api", version: "11.0.0"

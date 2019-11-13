@@ -1,3 +1,7 @@
+baseline {
+	enabled = false
+}
+
 buildService {
 	apiDir = "../commerce-bom-api/src/main/java"
 }
