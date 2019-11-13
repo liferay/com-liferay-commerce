@@ -620,6 +620,27 @@ public interface CommerceOrderItemModel
 	 */
 	public void setBookedQuantityId(long bookedQuantityId);
 
+	/**
+	 * Returns the manually adjusted of this commerce order item.
+	 *
+	 * @return the manually adjusted of this commerce order item
+	 */
+	public boolean getManuallyAdjusted();
+
+	/**
+	 * Returns <code>true</code> if this commerce order item is manually adjusted.
+	 *
+	 * @return <code>true</code> if this commerce order item is manually adjusted; <code>false</code> otherwise
+	 */
+	public boolean isManuallyAdjusted();
+
+	/**
+	 * Sets whether this commerce order item is manually adjusted.
+	 *
+	 * @param manuallyAdjusted the manually adjusted of this commerce order item
+	 */
+	public void setManuallyAdjusted(boolean manuallyAdjusted);
+
 	@Override
 	public boolean isNew();
 

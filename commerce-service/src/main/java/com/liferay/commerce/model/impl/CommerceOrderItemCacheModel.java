@@ -66,7 +66,7 @@ public class CommerceOrderItemCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(61);
+		StringBundler sb = new StringBundler(63);
 
 		sb.append("{externalReferenceCode=");
 		sb.append(externalReferenceCode);
@@ -128,6 +128,8 @@ public class CommerceOrderItemCacheModel
 		sb.append(requestedDeliveryDate);
 		sb.append(", bookedQuantityId=");
 		sb.append(bookedQuantityId);
+		sb.append(", manuallyAdjusted=");
+		sb.append(manuallyAdjusted);
 		sb.append("}");
 
 		return sb.toString();
@@ -238,6 +240,7 @@ public class CommerceOrderItemCacheModel
 		}
 
 		commerceOrderItemImpl.setBookedQuantityId(bookedQuantityId);
+		commerceOrderItemImpl.setManuallyAdjusted(manuallyAdjusted);
 
 		commerceOrderItemImpl.resetOriginalValues();
 
@@ -290,6 +293,8 @@ public class CommerceOrderItemCacheModel
 		requestedDeliveryDate = objectInput.readLong();
 
 		bookedQuantityId = objectInput.readLong();
+
+		manuallyAdjusted = objectInput.readBoolean();
 	}
 
 	@Override
@@ -380,6 +385,8 @@ public class CommerceOrderItemCacheModel
 		objectOutput.writeLong(requestedDeliveryDate);
 
 		objectOutput.writeLong(bookedQuantityId);
+
+		objectOutput.writeBoolean(manuallyAdjusted);
 	}
 
 	public String externalReferenceCode;
@@ -412,5 +419,6 @@ public class CommerceOrderItemCacheModel
 	public String printedNote;
 	public long requestedDeliveryDate;
 	public long bookedQuantityId;
+	public boolean manuallyAdjusted;
 
 }

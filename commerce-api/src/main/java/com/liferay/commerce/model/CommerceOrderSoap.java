@@ -92,6 +92,7 @@ public class CommerceOrderSoap implements Serializable {
 		soapModel.setOrderStatus(model.getOrderStatus());
 		soapModel.setPrintedNote(model.getPrintedNote());
 		soapModel.setRequestedDeliveryDate(model.getRequestedDeliveryDate());
+		soapModel.setManuallyAdjusted(model.isManuallyAdjusted());
 		soapModel.setStatus(model.getStatus());
 		soapModel.setStatusByUserId(model.getStatusByUserId());
 		soapModel.setStatusByUserName(model.getStatusByUserName());
@@ -533,6 +534,18 @@ public class CommerceOrderSoap implements Serializable {
 		_requestedDeliveryDate = requestedDeliveryDate;
 	}
 
+	public boolean getManuallyAdjusted() {
+		return _manuallyAdjusted;
+	}
+
+	public boolean isManuallyAdjusted() {
+		return _manuallyAdjusted;
+	}
+
+	public void setManuallyAdjusted(boolean manuallyAdjusted) {
+		_manuallyAdjusted = manuallyAdjusted;
+	}
+
 	public int getStatus() {
 		return _status;
 	}
@@ -610,6 +623,7 @@ public class CommerceOrderSoap implements Serializable {
 	private int _orderStatus;
 	private String _printedNote;
 	private Date _requestedDeliveryDate;
+	private boolean _manuallyAdjusted;
 	private int _status;
 	private long _statusByUserId;
 	private String _statusByUserName;
