@@ -41,6 +41,7 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Modified;
 import org.osgi.service.component.annotations.Reference;
+import org.osgi.service.component.annotations.ReferenceCardinality;
 
 /**
  * @author Andrea Di Giorgi
@@ -215,11 +216,15 @@ public class BingCommerceGeocoder implements CommerceGeocoder {
 
 	private volatile String _apiKey;
 
-	@Reference
-	private CommerceCountryLocalService _commerceCountryLocalService;
+	@Reference(
+		cardinality = ReferenceCardinality.OPTIONAL
+	)
+	private volatile CommerceCountryLocalService _commerceCountryLocalService;
 
-	@Reference
-	private CommerceRegionLocalService _commerceRegionLocalService;
+	@Reference(
+		cardinality = ReferenceCardinality.OPTIONAL
+	)
+	private volatile CommerceRegionLocalService _commerceRegionLocalService;
 
 	@Reference
 	private Http _http;
