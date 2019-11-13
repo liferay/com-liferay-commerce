@@ -17,6 +17,7 @@ package com.liferay.commerce.product.internal.upgrade.v1_10_1;
 import com.liferay.commerce.account.configuration.CommerceAccountGroupServiceConfiguration;
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.settings.ModifiableSettings;
@@ -44,37 +45,45 @@ public class CommerceSiteTypeUpgradeProcess extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		Statement s = connection.createStatement();
+		Statement s = null;
+		ResultSet rs = null;
 
-		ResultSet rs = s.executeQuery(
-			"select siteGroupId from CommerceChannel");
+		try {
+			s = connection.createStatement();
 
-		while (rs.next()) {
-			long groupId = rs.getLong("siteGroupId");
+			rs = s.executeQuery("select siteGroupId from CommerceChannel");
 
-			CommerceAccountGroupServiceConfiguration
-				commerceAccountGroupServiceConfiguration =
-					_configurationProvider.getConfiguration(
-						CommerceAccountGroupServiceConfiguration.class,
-						new GroupServiceSettingsLocator(
-							groupId, CommerceAccountConstants.SERVICE_NAME));
+			while (rs.next()) {
+				long groupId = rs.getLong("siteGroupId");
 
-			Settings settings = _settingsFactory.getSettings(
-				new GroupServiceSettingsLocator(
-					_commerceChannelLocalService.
-						getCommerceChannelGroupIdBySiteGroupId(groupId),
-					CommerceAccountConstants.SERVICE_NAME));
+				CommerceAccountGroupServiceConfiguration
+					commerceAccountGroupServiceConfiguration =
+						_configurationProvider.getConfiguration(
+							CommerceAccountGroupServiceConfiguration.class,
+							new GroupServiceSettingsLocator(
+								groupId,
+								CommerceAccountConstants.SERVICE_NAME));
 
-			ModifiableSettings modifiableSettings =
-				settings.getModifiableSettings();
+				Settings settings = _settingsFactory.getSettings(
+					new GroupServiceSettingsLocator(
+						_commerceChannelLocalService.
+							getCommerceChannelGroupIdBySiteGroupId(groupId),
+						CommerceAccountConstants.SERVICE_NAME));
 
-			modifiableSettings.setValue(
-				"commerceSiteType",
-				String.valueOf(
-					commerceAccountGroupServiceConfiguration.
-						commerceSiteType()));
+				ModifiableSettings modifiableSettings =
+					settings.getModifiableSettings();
 
-			modifiableSettings.store();
+				modifiableSettings.setValue(
+					"commerceSiteType",
+					String.valueOf(
+						commerceAccountGroupServiceConfiguration.
+							commerceSiteType()));
+
+				modifiableSettings.store();
+			}
+		}
+		finally {
+			DataAccess.cleanUp(s, rs);
 		}
 	}
 
