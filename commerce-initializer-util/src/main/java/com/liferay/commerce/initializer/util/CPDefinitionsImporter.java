@@ -753,7 +753,7 @@ public class CPDefinitionsImporter {
 				}
 
 				JSONObject jsonObject = JSONUtil.put(
-					"key", cpDefinitionOptionRel.getCPDefinitionOptionRelId());
+					"key", cpDefinitionOptionRel.getKey());
 
 				List<CPDefinitionOptionValueRel> cpDefinitionOptionValueRels =
 					_cpDefinitionOptionValueRelLocalService.
@@ -768,9 +768,7 @@ public class CPDefinitionsImporter {
 
 					if (name.equals(optionsJSONObject.getString("value"))) {
 						JSONArray valueJSONArray = JSONUtil.put(
-							String.valueOf(
-								cpDefinitionOptionValueRel.
-									getCPDefinitionOptionValueRelId()));
+							cpDefinitionOptionValueRel.getKey());
 
 						jsonObject.put("value", valueJSONArray);
 					}
