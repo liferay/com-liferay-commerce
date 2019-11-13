@@ -11,9 +11,18 @@
 </head>
 
 <#if redirect_to_private_layouts && themeDisplay.isSignedIn() && themeDisplay.getLayout().isPublicLayout()>
+
+	<#-- Instant redirect, when the page is hit directly or refreshed -->
+
 	<script>
 		window.location.replace("${themeDisplay.getPathFriendlyURLPrivateGroup() + themeDisplay.getScopeGroup().getFriendlyURL()}");
 	</script>
+
+	<#-- Redirect for Senna (I.E. when you press "Go to Site"). This will cause a flash as the page has to fully load -->
+
+	<@liferay_aui.script>
+		window.location.replace("${themeDisplay.getPathFriendlyURLPrivateGroup() + themeDisplay.getScopeGroup().getFriendlyURL()}");
+	</@>
 </#if>
 
 <#if is_login_page && !themeDisplay.isSignedIn()>
