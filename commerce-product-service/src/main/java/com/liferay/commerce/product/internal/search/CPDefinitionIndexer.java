@@ -35,6 +35,7 @@ import com.liferay.commerce.product.service.CPDefinitionLinkLocalService;
 import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CPFriendlyURLEntryLocalService;
 import com.liferay.commerce.product.service.CPInstanceLocalService;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.product.service.CommerceChannelRelLocalService;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
@@ -59,6 +60,8 @@ import com.liferay.portal.kernel.search.filter.TermFilter;
 import com.liferay.portal.kernel.search.filter.TermsFilter;
 import com.liferay.portal.kernel.service.ClassNameLocalService;
 import com.liferay.portal.kernel.service.CompanyLocalService;
+import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
@@ -164,9 +167,23 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 				BooleanClauseOccur.MUST_NOT);
 		}
 
-		if (GetterUtil.getBoolean(attributes.get("secure"))) {
-			long commerceChannelId = GetterUtil.getLong(
+		if (GetterUtil.getBoolean(attributes.get("secure"), true)) {
+			long commerceChannelGroupId = GetterUtil.getLong(
 				attributes.get("commerceChannelGroupId"));
+
+			if (commerceChannelGroupId < 1) {
+				ServiceContext serviceContext =
+					ServiceContextThreadLocal.getServiceContext();
+
+				CommerceChannel commerceChannel =
+					_commerceChannelLocalService.
+						fetchCommerceChannelBySiteGroupId(
+							serviceContext.getScopeGroupId());
+
+				if (commerceChannel != null) {
+					commerceChannelGroupId = commerceChannel.getGroupId();
+				}
+			}
 
 			BooleanFilter channelBooleanFiler = new BooleanFilter();
 
@@ -176,10 +193,11 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 				CPField.CHANNEL_FILTER_ENABLED, Boolean.TRUE.toString(),
 				BooleanClauseOccur.MUST);
 
-			if (commerceChannelId > 0) {
+			if (commerceChannelGroupId > 0) {
 				channelFilterEnableBooleanFiler.addTerm(
 					CPField.CHANNEL_GROUP_IDS,
-					String.valueOf(commerceChannelId), BooleanClauseOccur.MUST);
+					String.valueOf(commerceChannelGroupId),
+					BooleanClauseOccur.MUST);
 			}
 			else {
 				channelFilterEnableBooleanFiler.addTerm(
@@ -730,6 +748,9 @@ public class CPDefinitionIndexer extends BaseIndexer<CPDefinition> {
 
 	@Reference
 	private CommerceAccountGroupRelService _commerceAccountGroupRelService;
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private CommerceChannelRelLocalService _commerceChannelRelLocalService;
