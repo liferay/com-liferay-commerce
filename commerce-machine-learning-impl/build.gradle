@@ -19,3 +19,7 @@ dependencies {
 tasks.withType(FindBugs) {
 	excludeFilter = file("fb-exclude.xml")
 }
+
+baseline {
+	enabled = false
+}
