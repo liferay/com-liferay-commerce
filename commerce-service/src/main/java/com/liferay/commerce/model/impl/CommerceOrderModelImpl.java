@@ -111,7 +111,8 @@ public class CommerceOrderModelImpl
 		{"advanceStatus", Types.VARCHAR}, {"paymentStatus", Types.INTEGER},
 		{"orderDate", Types.TIMESTAMP}, {"orderStatus", Types.INTEGER},
 		{"printedNote", Types.VARCHAR},
-		{"requestedDeliveryDate", Types.TIMESTAMP}, {"status", Types.INTEGER},
+		{"requestedDeliveryDate", Types.TIMESTAMP},
+		{"manuallyAdjusted", Types.BOOLEAN}, {"status", Types.INTEGER},
 		{"statusByUserId", Types.BIGINT}, {"statusByUserName", Types.VARCHAR},
 		{"statusDate", Types.TIMESTAMP}
 	};
@@ -165,6 +166,7 @@ public class CommerceOrderModelImpl
 		TABLE_COLUMNS_MAP.put("orderStatus", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("printedNote", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("requestedDeliveryDate", Types.TIMESTAMP);
+		TABLE_COLUMNS_MAP.put("manuallyAdjusted", Types.BOOLEAN);
 		TABLE_COLUMNS_MAP.put("status", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("statusByUserId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("statusByUserName", Types.VARCHAR);
@@ -172,7 +174,7 @@ public class CommerceOrderModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CommerceOrder (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,commerceOrderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceAccountId LONG,commerceCurrencyId LONG,billingAddressId LONG,shippingAddressId LONG,commercePaymentMethodKey VARCHAR(75) null,transactionId TEXT null,commerceShippingMethodId LONG,shippingOptionName VARCHAR(255) null,purchaseOrderNumber VARCHAR(75) null,couponCode VARCHAR(75) null,lastPriceUpdateDate DATE null,subtotal DECIMAL(30, 16) null,subtotalDiscountAmount DECIMAL(30, 16) null,subtotalDiscountPercentLevel1 DECIMAL(30, 16) null,subtotalDiscountPercentLevel2 DECIMAL(30, 16) null,subtotalDiscountPercentLevel3 DECIMAL(30, 16) null,subtotalDiscountPercentLevel4 DECIMAL(30, 16) null,shippingAmount DECIMAL(30, 16) null,shippingDiscountAmount DECIMAL(30, 16) null,shippingDiscountPercentLevel1 DECIMAL(30, 16) null,shippingDiscountPercentLevel2 DECIMAL(30, 16) null,shippingDiscountPercentLevel3 DECIMAL(30, 16) null,shippingDiscountPercentLevel4 DECIMAL(30, 16) null,taxAmount DECIMAL(30, 16) null,total DECIMAL(30, 16) null,totalDiscountAmount DECIMAL(30, 16) null,totalDiscountPercentageLevel1 DECIMAL(30, 16) null,totalDiscountPercentageLevel2 DECIMAL(30, 16) null,totalDiscountPercentageLevel3 DECIMAL(30, 16) null,totalDiscountPercentageLevel4 DECIMAL(30, 16) null,advanceStatus VARCHAR(75) null,paymentStatus INTEGER,orderDate DATE null,orderStatus INTEGER,printedNote STRING null,requestedDeliveryDate DATE null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+		"create table CommerceOrder (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,commerceOrderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceAccountId LONG,commerceCurrencyId LONG,billingAddressId LONG,shippingAddressId LONG,commercePaymentMethodKey VARCHAR(75) null,transactionId TEXT null,commerceShippingMethodId LONG,shippingOptionName VARCHAR(255) null,purchaseOrderNumber VARCHAR(75) null,couponCode VARCHAR(75) null,lastPriceUpdateDate DATE null,subtotal DECIMAL(30, 16) null,subtotalDiscountAmount DECIMAL(30, 16) null,subtotalDiscountPercentLevel1 DECIMAL(30, 16) null,subtotalDiscountPercentLevel2 DECIMAL(30, 16) null,subtotalDiscountPercentLevel3 DECIMAL(30, 16) null,subtotalDiscountPercentLevel4 DECIMAL(30, 16) null,shippingAmount DECIMAL(30, 16) null,shippingDiscountAmount DECIMAL(30, 16) null,shippingDiscountPercentLevel1 DECIMAL(30, 16) null,shippingDiscountPercentLevel2 DECIMAL(30, 16) null,shippingDiscountPercentLevel3 DECIMAL(30, 16) null,shippingDiscountPercentLevel4 DECIMAL(30, 16) null,taxAmount DECIMAL(30, 16) null,total DECIMAL(30, 16) null,totalDiscountAmount DECIMAL(30, 16) null,totalDiscountPercentageLevel1 DECIMAL(30, 16) null,totalDiscountPercentageLevel2 DECIMAL(30, 16) null,totalDiscountPercentageLevel3 DECIMAL(30, 16) null,totalDiscountPercentageLevel4 DECIMAL(30, 16) null,advanceStatus VARCHAR(75) null,paymentStatus INTEGER,orderDate DATE null,orderStatus INTEGER,printedNote STRING null,requestedDeliveryDate DATE null,manuallyAdjusted BOOLEAN,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 
 	public static final String TABLE_SQL_DROP = "drop table CommerceOrder";
 
@@ -295,6 +297,7 @@ public class CommerceOrderModelImpl
 		model.setOrderStatus(soapModel.getOrderStatus());
 		model.setPrintedNote(soapModel.getPrintedNote());
 		model.setRequestedDeliveryDate(soapModel.getRequestedDeliveryDate());
+		model.setManuallyAdjusted(soapModel.isManuallyAdjusted());
 		model.setStatus(soapModel.getStatus());
 		model.setStatusByUserId(soapModel.getStatusByUserId());
 		model.setStatusByUserName(soapModel.getStatusByUserName());
@@ -1499,6 +1502,30 @@ public class CommerceOrderModelImpl
 
 			});
 		attributeGetterFunctions.put(
+			"manuallyAdjusted",
+			new Function<CommerceOrder, Object>() {
+
+				@Override
+				public Object apply(CommerceOrder commerceOrder) {
+					return commerceOrder.getManuallyAdjusted();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"manuallyAdjusted",
+			new BiConsumer<CommerceOrder, Object>() {
+
+				@Override
+				public void accept(
+					CommerceOrder commerceOrder,
+					Object manuallyAdjustedObject) {
+
+					commerceOrder.setManuallyAdjusted(
+						(Boolean)manuallyAdjustedObject);
+				}
+
+			});
+		attributeGetterFunctions.put(
 			"status",
 			new Function<CommerceOrder, Object>() {
 
@@ -2302,6 +2329,23 @@ public class CommerceOrderModelImpl
 
 	@JSON
 	@Override
+	public boolean getManuallyAdjusted() {
+		return _manuallyAdjusted;
+	}
+
+	@JSON
+	@Override
+	public boolean isManuallyAdjusted() {
+		return _manuallyAdjusted;
+	}
+
+	@Override
+	public void setManuallyAdjusted(boolean manuallyAdjusted) {
+		_manuallyAdjusted = manuallyAdjusted;
+	}
+
+	@JSON
+	@Override
 	public int getStatus() {
 		return _status;
 	}
@@ -2548,6 +2592,7 @@ public class CommerceOrderModelImpl
 		commerceOrderImpl.setOrderStatus(getOrderStatus());
 		commerceOrderImpl.setPrintedNote(getPrintedNote());
 		commerceOrderImpl.setRequestedDeliveryDate(getRequestedDeliveryDate());
+		commerceOrderImpl.setManuallyAdjusted(isManuallyAdjusted());
 		commerceOrderImpl.setStatus(getStatus());
 		commerceOrderImpl.setStatusByUserId(getStatusByUserId());
 		commerceOrderImpl.setStatusByUserName(getStatusByUserName());
@@ -2880,6 +2925,8 @@ public class CommerceOrderModelImpl
 			commerceOrderCacheModel.requestedDeliveryDate = Long.MIN_VALUE;
 		}
 
+		commerceOrderCacheModel.manuallyAdjusted = isManuallyAdjusted();
+
 		commerceOrderCacheModel.status = getStatus();
 
 		commerceOrderCacheModel.statusByUserId = getStatusByUserId();
@@ -3037,6 +3084,7 @@ public class CommerceOrderModelImpl
 	private boolean _setOriginalOrderStatus;
 	private String _printedNote;
 	private Date _requestedDeliveryDate;
+	private boolean _manuallyAdjusted;
 	private int _status;
 	private long _statusByUserId;
 	private String _statusByUserName;

@@ -234,6 +234,8 @@ public class CommerceOrderPersistenceTest {
 
 		newCommerceOrder.setRequestedDeliveryDate(RandomTestUtil.nextDate());
 
+		newCommerceOrder.setManuallyAdjusted(RandomTestUtil.randomBoolean());
+
 		newCommerceOrder.setStatus(RandomTestUtil.nextInt());
 
 		newCommerceOrder.setStatusByUserId(RandomTestUtil.nextLong());
@@ -381,6 +383,9 @@ public class CommerceOrderPersistenceTest {
 				existingCommerceOrder.getRequestedDeliveryDate()),
 			Time.getShortTimestamp(
 				newCommerceOrder.getRequestedDeliveryDate()));
+		Assert.assertEquals(
+			existingCommerceOrder.isManuallyAdjusted(),
+			newCommerceOrder.isManuallyAdjusted());
 		Assert.assertEquals(
 			existingCommerceOrder.getStatus(), newCommerceOrder.getStatus());
 		Assert.assertEquals(
@@ -548,9 +553,9 @@ public class CommerceOrderPersistenceTest {
 			"totalDiscountPercentageLevel3", true,
 			"totalDiscountPercentageLevel4", true, "advanceStatus", true,
 			"paymentStatus", true, "orderDate", true, "orderStatus", true,
-			"printedNote", true, "requestedDeliveryDate", true, "status", true,
-			"statusByUserId", true, "statusByUserName", true, "statusDate",
-			true);
+			"printedNote", true, "requestedDeliveryDate", true,
+			"manuallyAdjusted", true, "status", true, "statusByUserId", true,
+			"statusByUserName", true, "statusDate", true);
 	}
 
 	@Test
@@ -908,6 +913,8 @@ public class CommerceOrderPersistenceTest {
 		commerceOrder.setPrintedNote(RandomTestUtil.randomString());
 
 		commerceOrder.setRequestedDeliveryDate(RandomTestUtil.nextDate());
+
+		commerceOrder.setManuallyAdjusted(RandomTestUtil.randomBoolean());
 
 		commerceOrder.setStatus(RandomTestUtil.nextInt());
 

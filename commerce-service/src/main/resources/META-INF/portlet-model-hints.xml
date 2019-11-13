@@ -149,6 +149,7 @@
 			<hint-collection name="TEXTAREA" />
 		</field>
 		<field name="requestedDeliveryDate" type="Date" />
+		<field name="manuallyAdjusted" type="boolean" />
 		<field name="status" type="int" />
 		<field name="statusByUserId" type="long" />
 		<field name="statusByUserName" type="String" />
@@ -189,6 +190,7 @@
 		</field>
 		<field name="requestedDeliveryDate" type="Date" />
 		<field name="bookedQuantityId" type="long" />
+		<field name="manuallyAdjusted" type="boolean" />
 	</model>
 	<model name="com.liferay.commerce.model.CommerceOrderNote">
 		<field name="externalReferenceCode" type="String" />

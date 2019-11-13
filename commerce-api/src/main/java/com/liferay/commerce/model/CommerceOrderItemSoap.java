@@ -67,6 +67,7 @@ public class CommerceOrderItemSoap implements Serializable {
 		soapModel.setPrintedNote(model.getPrintedNote());
 		soapModel.setRequestedDeliveryDate(model.getRequestedDeliveryDate());
 		soapModel.setBookedQuantityId(model.getBookedQuantityId());
+		soapModel.setManuallyAdjusted(model.isManuallyAdjusted());
 
 		return soapModel;
 	}
@@ -380,6 +381,18 @@ public class CommerceOrderItemSoap implements Serializable {
 		_bookedQuantityId = bookedQuantityId;
 	}
 
+	public boolean getManuallyAdjusted() {
+		return _manuallyAdjusted;
+	}
+
+	public boolean isManuallyAdjusted() {
+		return _manuallyAdjusted;
+	}
+
+	public void setManuallyAdjusted(boolean manuallyAdjusted) {
+		_manuallyAdjusted = manuallyAdjusted;
+	}
+
 	private String _externalReferenceCode;
 	private long _commerceOrderItemId;
 	private long _groupId;
@@ -410,5 +423,6 @@ public class CommerceOrderItemSoap implements Serializable {
 	private String _printedNote;
 	private Date _requestedDeliveryDate;
 	private long _bookedQuantityId;
+	private boolean _manuallyAdjusted;
 
 }

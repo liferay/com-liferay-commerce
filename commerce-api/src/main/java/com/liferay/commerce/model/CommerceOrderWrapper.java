@@ -129,6 +129,7 @@ public class CommerceOrderWrapper
 		attributes.put("orderStatus", getOrderStatus());
 		attributes.put("printedNote", getPrintedNote());
 		attributes.put("requestedDeliveryDate", getRequestedDeliveryDate());
+		attributes.put("manuallyAdjusted", isManuallyAdjusted());
 		attributes.put("status", getStatus());
 		attributes.put("statusByUserId", getStatusByUserId());
 		attributes.put("statusByUserName", getStatusByUserName());
@@ -439,6 +440,12 @@ public class CommerceOrderWrapper
 			setRequestedDeliveryDate(requestedDeliveryDate);
 		}
 
+		Boolean manuallyAdjusted = (Boolean)attributes.get("manuallyAdjusted");
+
+		if (manuallyAdjusted != null) {
+			setManuallyAdjusted(manuallyAdjusted);
+		}
+
 		Integer status = (Integer)attributes.get("status");
 
 		if (status != null) {
@@ -661,6 +668,16 @@ public class CommerceOrderWrapper
 	@Override
 	public Date getLastPriceUpdateDate() {
 		return _commerceOrder.getLastPriceUpdateDate();
+	}
+
+	/**
+	 * Returns the manually adjusted of this commerce order.
+	 *
+	 * @return the manually adjusted of this commerce order
+	 */
+	@Override
+	public boolean getManuallyAdjusted() {
+		return _commerceOrder.getManuallyAdjusted();
 	}
 
 	/**
@@ -1187,6 +1204,16 @@ public class CommerceOrderWrapper
 		return _commerceOrder.isIncomplete();
 	}
 
+	/**
+	 * Returns <code>true</code> if this commerce order is manually adjusted.
+	 *
+	 * @return <code>true</code> if this commerce order is manually adjusted; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isManuallyAdjusted() {
+		return _commerceOrder.isManuallyAdjusted();
+	}
+
 	@Override
 	public boolean isNew() {
 		return _commerceOrder.isNew();
@@ -1387,6 +1414,16 @@ public class CommerceOrderWrapper
 	@Override
 	public void setLastPriceUpdateDate(Date lastPriceUpdateDate) {
 		_commerceOrder.setLastPriceUpdateDate(lastPriceUpdateDate);
+	}
+
+	/**
+	 * Sets whether this commerce order is manually adjusted.
+	 *
+	 * @param manuallyAdjusted the manually adjusted of this commerce order
+	 */
+	@Override
+	public void setManuallyAdjusted(boolean manuallyAdjusted) {
+		_commerceOrder.setManuallyAdjusted(manuallyAdjusted);
 	}
 
 	/**
