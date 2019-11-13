@@ -97,5 +97,13 @@
 			"rootMenuItemLevel": "1",
 			"rootMenuItemType": "relative"
 		}
+	},
+	{
+		"instanceId": "speedwell",
+		"layoutFriendlyURL": "/search",
+		"portletName": "com_liferay_portal_search_web_search_bar_portlet_SearchBarPortlet",
+		"portletPreferences": {
+			"searchScope": "everything"
+		}
 	}
 ]

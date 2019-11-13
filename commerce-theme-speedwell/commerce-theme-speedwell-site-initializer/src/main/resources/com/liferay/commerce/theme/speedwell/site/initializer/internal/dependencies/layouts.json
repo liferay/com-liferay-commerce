@@ -532,7 +532,7 @@
 			{
 				"layoutColumnId": "column-1",
 				"layoutColumnPos": 0,
-				"portletName": "com_liferay_portal_search_web_search_bar_portlet_SearchBarPortlet"
+				"portletName": "com_liferay_portal_search_web_search_bar_portlet_SearchBarPortlet_INSTANCE_speedwell"
 			},
 			{
 				"layoutColumnId": "column-1",
