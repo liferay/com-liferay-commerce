@@ -24,6 +24,7 @@ import com.liferay.commerce.account.service.CommerceAccountGroupLocalService;
 import com.liferay.commerce.account.service.CommerceAccountLocalService;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -98,7 +99,10 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 			HttpServletRequest httpServletRequest)
 		throws PortalException {
 
-		return null;
+		return getCurrentCommerceAccount(
+			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
+				_portal.getScopeGroupId(httpServletRequest)),
+			httpServletRequest);
 	}
 
 	@Override
@@ -147,7 +151,7 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 		List<CommerceAccount> commerceAccounts =
 			_commerceAccountLocalService.getUserCommerceAccounts(
 				userId, CommerceAccountConstants.DEFAULT_PARENT_ACCOUNT_ID,
-				_getCommerceChannelType(channelGroupId), StringPool.BLANK,
+				_getCommerceSiteType(channelGroupId), StringPool.BLANK,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		return ListUtil.toLongArray(
@@ -178,7 +182,7 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 	private void _checkAccountType(long channelGroupId, long commerceAccountId)
 		throws PortalException {
 
-		int commerceSiteType = _getCommerceChannelType(channelGroupId);
+		int commerceSiteType = _getCommerceSiteType(channelGroupId);
 
 		CommerceAccount commerceAccount =
 			_commerceAccountLocalService.getCommerceAccount(commerceAccountId);
@@ -198,7 +202,7 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 		}
 	}
 
-	private int _getCommerceChannelType(long channelGroupId)
+	private int _getCommerceSiteType(long channelGroupId)
 		throws ConfigurationException {
 
 		CommerceAccountGroupServiceConfiguration
@@ -222,7 +226,7 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 				_portal.getCompanyId(httpServletRequest));
 		}
 
-		int commerceSiteType = _getCommerceChannelType(channelGroupId);
+		int commerceSiteType = _getCommerceSiteType(channelGroupId);
 
 		if ((commerceSiteType == CommerceAccountConstants.SITE_TYPE_B2C) ||
 			(commerceSiteType == CommerceAccountConstants.SITE_TYPE_B2C_B2B)) {
@@ -255,6 +259,9 @@ public class CommerceAccountHelperImpl implements CommerceAccountHelper {
 
 	@Reference
 	private CommerceAccountService _commerceAccountService;
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private ConfigurationProvider _configurationProvider;
