@@ -216,14 +216,10 @@ public class BingCommerceGeocoder implements CommerceGeocoder {
 
 	private volatile String _apiKey;
 
-	@Reference(
-		cardinality = ReferenceCardinality.OPTIONAL
-	)
+	@Reference(cardinality = ReferenceCardinality.OPTIONAL)
 	private volatile CommerceCountryLocalService _commerceCountryLocalService;
 
-	@Reference(
-		cardinality = ReferenceCardinality.OPTIONAL
-	)
+	@Reference(cardinality = ReferenceCardinality.OPTIONAL)
 	private volatile CommerceRegionLocalService _commerceRegionLocalService;
 
 	@Reference
