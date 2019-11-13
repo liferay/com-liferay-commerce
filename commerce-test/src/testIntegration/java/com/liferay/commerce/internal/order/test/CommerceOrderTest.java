@@ -319,7 +319,7 @@ public class CommerceOrderTest {
 		).and(
 			"A random amount of Accounts"
 		).and(
-			"a random amount of Orders for each Account"
+			"A random amount of Orders for each Account"
 		).when(
 			"I get the count of all Orders the Omni-Admin can see"
 		).then(
