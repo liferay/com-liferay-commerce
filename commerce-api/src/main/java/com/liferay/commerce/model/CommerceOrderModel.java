@@ -751,6 +751,27 @@ public interface CommerceOrderModel
 	public void setRequestedDeliveryDate(Date requestedDeliveryDate);
 
 	/**
+	 * Returns the manually adjusted of this commerce order.
+	 *
+	 * @return the manually adjusted of this commerce order
+	 */
+	public boolean getManuallyAdjusted();
+
+	/**
+	 * Returns <code>true</code> if this commerce order is manually adjusted.
+	 *
+	 * @return <code>true</code> if this commerce order is manually adjusted; <code>false</code> otherwise
+	 */
+	public boolean isManuallyAdjusted();
+
+	/**
+	 * Sets whether this commerce order is manually adjusted.
+	 *
+	 * @param manuallyAdjusted the manually adjusted of this commerce order
+	 */
+	public void setManuallyAdjusted(boolean manuallyAdjusted);
+
+	/**
 	 * Returns the status of this commerce order.
 	 *
 	 * @return the status of this commerce order

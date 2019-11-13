@@ -195,6 +195,9 @@ public class CommerceOrderItemPersistenceTest {
 
 		newCommerceOrderItem.setBookedQuantityId(RandomTestUtil.nextLong());
 
+		newCommerceOrderItem.setManuallyAdjusted(
+			RandomTestUtil.randomBoolean());
+
 		_commerceOrderItems.add(_persistence.update(newCommerceOrderItem));
 
 		CommerceOrderItem existingCommerceOrderItem =
@@ -291,6 +294,9 @@ public class CommerceOrderItemPersistenceTest {
 		Assert.assertEquals(
 			existingCommerceOrderItem.getBookedQuantityId(),
 			newCommerceOrderItem.getBookedQuantityId());
+		Assert.assertEquals(
+			existingCommerceOrderItem.isManuallyAdjusted(),
+			newCommerceOrderItem.isManuallyAdjusted());
 	}
 
 	@Test
@@ -375,7 +381,7 @@ public class CommerceOrderItemPersistenceTest {
 			"discountPercentageLevel3", true, "discountPercentageLevel4", true,
 			"subscription", true, "deliveryGroup", true, "shippingAddressId",
 			true, "printedNote", true, "requestedDeliveryDate", true,
-			"bookedQuantityId", true);
+			"bookedQuantityId", true, "manuallyAdjusted", true);
 	}
 
 	@Test
@@ -691,6 +697,8 @@ public class CommerceOrderItemPersistenceTest {
 		commerceOrderItem.setRequestedDeliveryDate(RandomTestUtil.nextDate());
 
 		commerceOrderItem.setBookedQuantityId(RandomTestUtil.nextLong());
+
+		commerceOrderItem.setManuallyAdjusted(RandomTestUtil.randomBoolean());
 
 		_commerceOrderItems.add(_persistence.update(commerceOrderItem));
 

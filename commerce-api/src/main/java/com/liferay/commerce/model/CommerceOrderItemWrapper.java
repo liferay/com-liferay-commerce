@@ -91,6 +91,7 @@ public class CommerceOrderItemWrapper
 		attributes.put("printedNote", getPrintedNote());
 		attributes.put("requestedDeliveryDate", getRequestedDeliveryDate());
 		attributes.put("bookedQuantityId", getBookedQuantityId());
+		attributes.put("manuallyAdjusted", isManuallyAdjusted());
 
 		return attributes;
 	}
@@ -282,6 +283,12 @@ public class CommerceOrderItemWrapper
 
 		if (bookedQuantityId != null) {
 			setBookedQuantityId(bookedQuantityId);
+		}
+
+		Boolean manuallyAdjusted = (Boolean)attributes.get("manuallyAdjusted");
+
+		if (manuallyAdjusted != null) {
+			setManuallyAdjusted(manuallyAdjusted);
 		}
 	}
 
@@ -530,6 +537,16 @@ public class CommerceOrderItemWrapper
 	@Override
 	public String getJson() {
 		return _commerceOrderItem.getJson();
+	}
+
+	/**
+	 * Returns the manually adjusted of this commerce order item.
+	 *
+	 * @return the manually adjusted of this commerce order item
+	 */
+	@Override
+	public boolean getManuallyAdjusted() {
+		return _commerceOrderItem.getManuallyAdjusted();
 	}
 
 	/**
@@ -783,6 +800,16 @@ public class CommerceOrderItemWrapper
 		return _commerceOrderItem.isEscapedModel();
 	}
 
+	/**
+	 * Returns <code>true</code> if this commerce order item is manually adjusted.
+	 *
+	 * @return <code>true</code> if this commerce order item is manually adjusted; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isManuallyAdjusted() {
+		return _commerceOrderItem.isManuallyAdjusted();
+	}
+
 	@Override
 	public boolean isNew() {
 		return _commerceOrderItem.isNew();
@@ -1025,6 +1052,16 @@ public class CommerceOrderItemWrapper
 	@Override
 	public void setJson(String json) {
 		_commerceOrderItem.setJson(json);
+	}
+
+	/**
+	 * Sets whether this commerce order item is manually adjusted.
+	 *
+	 * @param manuallyAdjusted the manually adjusted of this commerce order item
+	 */
+	@Override
+	public void setManuallyAdjusted(boolean manuallyAdjusted) {
+		_commerceOrderItem.setManuallyAdjusted(manuallyAdjusted);
 	}
 
 	/**

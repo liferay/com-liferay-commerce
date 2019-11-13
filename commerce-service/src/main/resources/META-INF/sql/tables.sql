@@ -153,6 +153,7 @@ create table CommerceOrder (
 	orderStatus INTEGER,
 	printedNote STRING null,
 	requestedDeliveryDate DATE null,
+	manuallyAdjusted BOOLEAN,
 	status INTEGER,
 	statusByUserId LONG,
 	statusByUserName VARCHAR(75) null,
@@ -189,7 +190,8 @@ create table CommerceOrderItem (
 	shippingAddressId LONG,
 	printedNote STRING null,
 	requestedDeliveryDate DATE null,
-	bookedQuantityId LONG
+	bookedQuantityId LONG,
+	manuallyAdjusted BOOLEAN
 );
 
 create table CommerceOrderNote (

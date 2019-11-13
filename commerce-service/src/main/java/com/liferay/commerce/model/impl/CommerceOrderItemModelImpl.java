@@ -99,7 +99,7 @@ public class CommerceOrderItemModelImpl
 		{"subscription", Types.BOOLEAN}, {"deliveryGroup", Types.VARCHAR},
 		{"shippingAddressId", Types.BIGINT}, {"printedNote", Types.VARCHAR},
 		{"requestedDeliveryDate", Types.TIMESTAMP},
-		{"bookedQuantityId", Types.BIGINT}
+		{"bookedQuantityId", Types.BIGINT}, {"manuallyAdjusted", Types.BOOLEAN}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
@@ -136,10 +136,11 @@ public class CommerceOrderItemModelImpl
 		TABLE_COLUMNS_MAP.put("printedNote", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("requestedDeliveryDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("bookedQuantityId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("manuallyAdjusted", Types.BOOLEAN);
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CommerceOrderItem (externalReferenceCode VARCHAR(75) null,commerceOrderItemId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceOrderId LONG,CProductId LONG,CPInstanceId LONG,quantity INTEGER,shippedQuantity INTEGER,json TEXT null,name STRING null,sku VARCHAR(75) null,unitPrice DECIMAL(30, 16) null,promoPrice DECIMAL(30, 16) null,discountAmount DECIMAL(30, 16) null,finalPrice DECIMAL(30, 16) null,discountPercentageLevel1 DECIMAL(30, 16) null,discountPercentageLevel2 DECIMAL(30, 16) null,discountPercentageLevel3 DECIMAL(30, 16) null,discountPercentageLevel4 DECIMAL(30, 16) null,subscription BOOLEAN,deliveryGroup VARCHAR(75) null,shippingAddressId LONG,printedNote STRING null,requestedDeliveryDate DATE null,bookedQuantityId LONG)";
+		"create table CommerceOrderItem (externalReferenceCode VARCHAR(75) null,commerceOrderItemId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceOrderId LONG,CProductId LONG,CPInstanceId LONG,quantity INTEGER,shippedQuantity INTEGER,json TEXT null,name STRING null,sku VARCHAR(75) null,unitPrice DECIMAL(30, 16) null,promoPrice DECIMAL(30, 16) null,discountAmount DECIMAL(30, 16) null,finalPrice DECIMAL(30, 16) null,discountPercentageLevel1 DECIMAL(30, 16) null,discountPercentageLevel2 DECIMAL(30, 16) null,discountPercentageLevel3 DECIMAL(30, 16) null,discountPercentageLevel4 DECIMAL(30, 16) null,subscription BOOLEAN,deliveryGroup VARCHAR(75) null,shippingAddressId LONG,printedNote STRING null,requestedDeliveryDate DATE null,bookedQuantityId LONG,manuallyAdjusted BOOLEAN)";
 
 	public static final String TABLE_SQL_DROP = "drop table CommerceOrderItem";
 
@@ -231,6 +232,7 @@ public class CommerceOrderItemModelImpl
 		model.setPrintedNote(soapModel.getPrintedNote());
 		model.setRequestedDeliveryDate(soapModel.getRequestedDeliveryDate());
 		model.setBookedQuantityId(soapModel.getBookedQuantityId());
+		model.setManuallyAdjusted(soapModel.isManuallyAdjusted());
 
 		return model;
 	}
@@ -1091,6 +1093,30 @@ public class CommerceOrderItemModelImpl
 				}
 
 			});
+		attributeGetterFunctions.put(
+			"manuallyAdjusted",
+			new Function<CommerceOrderItem, Object>() {
+
+				@Override
+				public Object apply(CommerceOrderItem commerceOrderItem) {
+					return commerceOrderItem.getManuallyAdjusted();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"manuallyAdjusted",
+			new BiConsumer<CommerceOrderItem, Object>() {
+
+				@Override
+				public void accept(
+					CommerceOrderItem commerceOrderItem,
+					Object manuallyAdjustedObject) {
+
+					commerceOrderItem.setManuallyAdjusted(
+						(Boolean)manuallyAdjustedObject);
+				}
+
+			});
 
 		_attributeGetterFunctions = Collections.unmodifiableMap(
 			attributeGetterFunctions);
@@ -1658,6 +1684,23 @@ public class CommerceOrderItemModelImpl
 		_bookedQuantityId = bookedQuantityId;
 	}
 
+	@JSON
+	@Override
+	public boolean getManuallyAdjusted() {
+		return _manuallyAdjusted;
+	}
+
+	@JSON
+	@Override
+	public boolean isManuallyAdjusted() {
+		return _manuallyAdjusted;
+	}
+
+	@Override
+	public void setManuallyAdjusted(boolean manuallyAdjusted) {
+		_manuallyAdjusted = manuallyAdjusted;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -1797,6 +1840,7 @@ public class CommerceOrderItemModelImpl
 		commerceOrderItemImpl.setRequestedDeliveryDate(
 			getRequestedDeliveryDate());
 		commerceOrderItemImpl.setBookedQuantityId(getBookedQuantityId());
+		commerceOrderItemImpl.setManuallyAdjusted(isManuallyAdjusted());
 
 		commerceOrderItemImpl.resetOriginalValues();
 
@@ -2029,6 +2073,8 @@ public class CommerceOrderItemModelImpl
 
 		commerceOrderItemCacheModel.bookedQuantityId = getBookedQuantityId();
 
+		commerceOrderItemCacheModel.manuallyAdjusted = isManuallyAdjusted();
+
 		return commerceOrderItemCacheModel;
 	}
 
@@ -2145,6 +2191,7 @@ public class CommerceOrderItemModelImpl
 	private String _printedNote;
 	private Date _requestedDeliveryDate;
 	private long _bookedQuantityId;
+	private boolean _manuallyAdjusted;
 	private long _columnBitmask;
 	private CommerceOrderItem _escapedModel;
 
