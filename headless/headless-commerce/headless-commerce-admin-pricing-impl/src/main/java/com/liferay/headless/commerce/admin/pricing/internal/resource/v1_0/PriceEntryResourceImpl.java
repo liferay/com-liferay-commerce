@@ -325,6 +325,7 @@ public class PriceEntryResourceImpl extends BasePriceEntryResourceImpl {
 		long cProductId = 0;
 		String cpInstanceUuid = null;
 		CPInstance cpInstance = null;
+
 		long skuId = GetterUtil.getLong(priceEntry.getSkuId());
 		String skuExternalReferenceCode =
 			priceEntry.getSkuExternalReferenceCode();
@@ -341,6 +342,7 @@ public class PriceEntryResourceImpl extends BasePriceEntryResourceImpl {
 			CPDefinition cpDefinition = cpInstance.getCPDefinition();
 
 			cProductId = cpDefinition.getCProductId();
+
 			cpInstanceUuid = cpInstance.getCPInstanceUuid();
 		}
 
