@@ -73,14 +73,13 @@ public class CPInstanceOptionsValuesDataProvider implements DDMDataProvider {
 		DDMDataProviderResponse.Builder ddmDataProviderResponseBuilder =
 			DDMDataProviderResponse.Builder.newBuilder();
 
-		long cpDefinitionId = GetterUtil.getLong(
-			ddmDataProviderRequest.getParameter("cpDefinitionId"));
+		long cpDefinitionId = _getParameter(
+			ddmDataProviderRequest, "cpDefinitionId");
 
-		long commerceAccountId = GetterUtil.getLong(
-			ddmDataProviderRequest.getParameter("commerceAccountId"));
+		long commerceAccountId = _getParameter(
+			ddmDataProviderRequest, "commerceAccountId");
 
-		long groupId = GetterUtil.getLong(
-			ddmDataProviderRequest.getParameter("groupId"));
+		long groupId = _getParameter(ddmDataProviderRequest, "groupId");
 
 		try {
 			if (!_commerceProductViewPermission.contains(
@@ -100,10 +99,7 @@ public class CPInstanceOptionsValuesDataProvider implements DDMDataProvider {
 			return ddmDataProviderResponseBuilder.build();
 		}
 
-		HttpServletRequest httpServletRequest =
-			ddmDataProviderRequest.getHttpServletRequest();
-
-		Locale locale = httpServletRequest.getLocale();
+		Locale locale = ddmDataProviderRequest.getLocale();
 
 		try {
 
@@ -237,6 +233,14 @@ public class CPInstanceOptionsValuesDataProvider implements DDMDataProvider {
 		private final String _type;
 		private final Object _value;
 
+	}
+
+	private long _getParameter(
+		DDMDataProviderRequest ddmDataProviderRequest, String param) {
+
+		Map<String, String> parameters = ddmDataProviderRequest.getParameters();
+
+		return GetterUtil.getLong(parameters.get(param));
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
