@@ -3,7 +3,7 @@ apply plugin: "com.liferay.lang.merger"
 dependencies {
 	compileOnly group: "biz.aQute.bnd", name: "biz.aQute.bndlib", version: "3.1.0"
 	compileOnly group: "com.liferay", name: "com.liferay.frontend.taglib", version: "3.0.0"
-	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.discount.api", version: "3.0.0"
+	compileOnly project(":apps:commerce:commerce-discount-api")
 	compileOnly group: "com.liferay.portal", name: "com.liferay.util.taglib", version: "3.0.0"
 	compileOnly group: "com.liferay.portal", name: "release.portal.api", version: "7.1.1"
 	compileOnly group: "javax.portlet", name: "portlet-api", version: "3.0.0"
