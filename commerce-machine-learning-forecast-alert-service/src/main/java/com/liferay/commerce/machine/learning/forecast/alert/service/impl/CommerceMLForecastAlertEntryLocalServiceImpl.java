@@ -128,18 +128,18 @@ public class CommerceMLForecastAlertEntryLocalServiceImpl
 				commerceMLForecastAlertEntryPersistence.create(
 					commerceSmartAlertId);
 
-			commerceMLForecastAlertEntry.setCommerceAccountId(
-				commerceAccountId);
 			commerceMLForecastAlertEntry.setCompanyId(companyId);
-			commerceMLForecastAlertEntry.setCreateDate(new Date());
-			commerceMLForecastAlertEntry.setTimestamp(timestamp);
 			commerceMLForecastAlertEntry.setUserId(userId);
 			commerceMLForecastAlertEntry.setUserName(user.getFullName());
+			commerceMLForecastAlertEntry.setCreateDate(new Date());
+			commerceMLForecastAlertEntry.setCommerceAccountId(
+				commerceAccountId);
+			commerceMLForecastAlertEntry.setTimestamp(timestamp);
 		}
 
+		commerceMLForecastAlertEntry.setModifiedDate(new Date());
 		commerceMLForecastAlertEntry.setActual(actual);
 		commerceMLForecastAlertEntry.setForecast(forecast);
-		commerceMLForecastAlertEntry.setModifiedDate(new Date());
 		commerceMLForecastAlertEntry.setRelativeChange(relativeChange);
 		commerceMLForecastAlertEntry.setStatus(
 			CommerceMLForecastAlertConstants.STATUS_NEW);
