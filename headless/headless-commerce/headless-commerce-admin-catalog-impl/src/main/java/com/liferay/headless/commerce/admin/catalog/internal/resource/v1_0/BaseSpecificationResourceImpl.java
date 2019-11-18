@@ -61,39 +61,6 @@ public abstract class BaseSpecificationResourceImpl
 	implements SpecificationResource {
 
 	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.QUERY, name = "filter"),
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize"),
-			@Parameter(in = ParameterIn.QUERY, name = "sort")
-		}
-	)
-	@Path("/specifications/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Specification")})
-	public Page<Specification> getSpecificationsPage(
-			@Context Filter filter, @Context Pagination pagination,
-			@Context Sort[] sorts)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Path("/specifications/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Specification")})
-	public Specification postSpecification(Specification specification)
-		throws Exception {
-
-		return new Specification();
-	}
-
-	@Override
 	@DELETE
 	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
 	@Path("/specifications/{id}")
@@ -136,6 +103,39 @@ public abstract class BaseSpecificationResourceImpl
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
 		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.QUERY, name = "filter"),
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize"),
+			@Parameter(in = ParameterIn.QUERY, name = "sort")
+		}
+	)
+	@Path("/specifications/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Specification")})
+	public Page<Specification> getSpecificationsPage(
+			@Context Filter filter, @Context Pagination pagination,
+			@Context Sort[] sorts)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@POST
+	@Path("/specifications/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Specification")})
+	public Specification postSpecification(Specification specification)
+		throws Exception {
+
+		return new Specification();
 	}
 
 	public void setContextCompany(Company contextCompany) {

@@ -36,11 +36,11 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface ProductResource {
 
-	public Page<Product> getProductsPage(
-			Filter filter, Pagination pagination, Sort[] sorts)
-		throws Exception;
+	public Response deleteProduct(Long id) throws Exception;
 
-	public Product postProduct(Product product) throws Exception;
+	public Product getProduct(Long id) throws Exception;
+
+	public Response patchProduct(Long id, Product product) throws Exception;
 
 	public Response deleteProductByExternalReferenceCode(
 			String externalReferenceCode)
@@ -54,11 +54,11 @@ public interface ProductResource {
 			String externalReferenceCode, Product product)
 		throws Exception;
 
-	public Response deleteProduct(Long id) throws Exception;
+	public Page<Product> getProductsPage(
+			Filter filter, Pagination pagination, Sort[] sorts)
+		throws Exception;
 
-	public Product getProduct(Long id) throws Exception;
-
-	public Response patchProduct(Long id, Product product) throws Exception;
+	public Product postProduct(Product product) throws Exception;
 
 	public void setContextCompany(Company contextCompany);
 

@@ -59,6 +59,43 @@ public abstract class BaseCategoryResourceImpl implements CategoryResource {
 	@GET
 	@Parameters(
 		value = {
+			@Parameter(in = ParameterIn.PATH, name = "id"),
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
+		}
+	)
+	@Path("/products/{id}/categories/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Category")})
+	public Page<Category> getProductIdCategoriesPage(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			@Context Pagination pagination)
+		throws Exception {
+
+		return Page.of(Collections.emptyList());
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@PATCH
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/products/{id}/categories/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Category")})
+	public Response patchProductIdCategory(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			Category[] categories)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
+	@Parameters(
+		value = {
 			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode"),
 			@Parameter(in = ParameterIn.QUERY, name = "page"),
 			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
@@ -94,43 +131,6 @@ public abstract class BaseCategoryResourceImpl implements CategoryResource {
 	public Response patchProductByExternalReferenceCodeCategory(
 			@NotNull @Parameter(hidden = true)
 			@PathParam("externalReferenceCode") String externalReferenceCode,
-			Category[] categories)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.PATH, name = "id"),
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize")
-		}
-	)
-	@Path("/products/{id}/categories/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Category")})
-	public Page<Category> getProductIdCategoriesPage(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			@Context Pagination pagination)
-		throws Exception {
-
-		return Page.of(Collections.emptyList());
-	}
-
-	@Override
-	@Consumes({"application/json", "application/xml"})
-	@PATCH
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/products/{id}/categories/")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Category")})
-	public Response patchProductIdCategory(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
 			Category[] categories)
 		throws Exception {
 
