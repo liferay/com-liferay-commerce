@@ -14,7 +14,9 @@ class UserRolesModal extends Component {
 	syncSelectedRoles() {
 		const contentWrapper = this.element.querySelector('.autocomplete-input__content');
 		this.element.querySelector('.autocomplete-input__box').focus();
-		return contentWrapper.scrollTo(0, contentWrapper.offsetHeight);
+		if (contentWrapper.scrollTo) {
+			contentWrapper.scrollTo(0, contentWrapper.offsetHeight);
+		}
 	}
 
 	_handleCloseModal(e) {
