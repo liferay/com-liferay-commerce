@@ -122,11 +122,12 @@ public class CommerceMLForecastAlertEntryLocalServiceImpl
 		User user = userLocalService.getUser(userId);
 
 		if (commerceMLForecastAlertEntry == null) {
-			long commerceSmartAlertId = counterLocalService.increment();
+			long commerceMLForecastAlertEntryId =
+				counterLocalService.increment();
 
 			commerceMLForecastAlertEntry =
 				commerceMLForecastAlertEntryPersistence.create(
-					commerceSmartAlertId);
+					commerceMLForecastAlertEntryId);
 
 			commerceMLForecastAlertEntry.setCompanyId(companyId);
 			commerceMLForecastAlertEntry.setUserId(userId);
