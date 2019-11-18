@@ -49,9 +49,9 @@ public class CommerceDataIntegrationProcessLogLocalServiceImpl
 			commerceDataIntegrationProcessId);
 		commerceDataIntegrationProcessLog.setError(error);
 		commerceDataIntegrationProcessLog.setOutput(output);
-		commerceDataIntegrationProcessLog.setStatus(status);
 		commerceDataIntegrationProcessLog.setStartDate(startDate);
 		commerceDataIntegrationProcessLog.setEndDate(endDate);
+		commerceDataIntegrationProcessLog.setStatus(status);
 
 		return commerceDataIntegrationProcessLogPersistence.update(
 			commerceDataIntegrationProcessLog);
@@ -96,8 +96,8 @@ public class CommerceDataIntegrationProcessLogLocalServiceImpl
 
 		commerceDataIntegrationProcessLog.setError(error);
 		commerceDataIntegrationProcessLog.setOutput(output);
-		commerceDataIntegrationProcessLog.setStatus(status);
 		commerceDataIntegrationProcessLog.setEndDate(endDate);
+		commerceDataIntegrationProcessLog.setStatus(status);
 
 		return commerceDataIntegrationProcessLogPersistence.update(
 			commerceDataIntegrationProcessLog);
