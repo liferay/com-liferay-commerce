@@ -50,7 +50,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "AttachmentBase64")
 public class AttachmentBase64 {
 
-	@Schema(description = "Base64 enoded file")
+	@Schema(description = "Base64 encoded file")
 	public String getAttachment() {
 		return attachment;
 	}
@@ -272,6 +272,32 @@ public class AttachmentBase64 {
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
 	protected Double priority;
 
+	@Schema(description = "URL of the location")
+	public String getSrc() {
+		return src;
+	}
+
+	public void setSrc(String src) {
+		this.src = src;
+	}
+
+	@JsonIgnore
+	public void setSrc(UnsafeSupplier<String, Exception> srcUnsafeSupplier) {
+		try {
+			src = srcUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected String src;
+
 	@Schema
 	public Map<String, String> getTitle() {
 		return title;
@@ -450,6 +476,20 @@ public class AttachmentBase64 {
 			sb.append("\"priority\": ");
 
 			sb.append(priority);
+		}
+
+		if (src != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"src\": ");
+
+			sb.append("\"");
+
+			sb.append(_escape(src));
+
+			sb.append("\"");
 		}
 
 		if (title != null) {
