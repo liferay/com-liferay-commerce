@@ -146,9 +146,9 @@ public class CommerceAccountUserRelLocalServiceImpl
 	public void addDefaultRole(long userId, ServiceContext serviceContext)
 		throws PortalException {
 
-		User user = userPersistence.findByPrimaryKey(userId);
+		User user = userLocalService.getUser(userId);
 
-		Role role = rolePersistence.fetchByC_N(
+		Role role = roleLocalService.fetchRole(
 			user.getCompanyId(),
 			CommerceAccountConstants.ROLE_NAME_ACCOUNT_USER);
 
