@@ -199,12 +199,6 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 				commercePaymentMethodGroupRels.size();
 		}
 
-		if ((active == null) || !active) {
-			commercePaymentMethodGroupRels =
-				addDefaultCommercePaymentMethodGroupRels(
-					commercePaymentMethodGroupRels);
-		}
-
 		if (ListUtil.isNotEmpty(commercePaymentMethodGroupRels)) {
 			commercePaymentMethodGroupRels = ListUtil.sort(
 				commercePaymentMethodGroupRels,
