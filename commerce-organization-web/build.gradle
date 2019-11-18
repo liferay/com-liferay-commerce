@@ -3,9 +3,9 @@ baseline {
 }
 
 dependencies {
-	compileOnly group: "com.fasterxml.jackson.core", name: "jackson-annotations", version: "2.9.9"
-	compileOnly group: "com.fasterxml.jackson.core", name: "jackson-core", version: "2.9.9"
-	compileOnly group: "com.fasterxml.jackson.core", name: "jackson-databind", version: "2.9.9.3"
+	compileOnly group: "com.fasterxml.jackson.core", name: "jackson-annotations", version: "2.9.10"
+	compileOnly group: "com.fasterxml.jackson.core", name: "jackson-core", version: "2.9.10"
+	compileOnly group: "com.fasterxml.jackson.core", name: "jackson-databind", version: "2.9.10"
 	compileOnly group: "com.liferay", name: "com.liferay.frontend.taglib", version: "3.0.0"
 	compileOnly group: "com.liferay.portal", name: "com.liferay.util.taglib", version: "3.0.0"
 	compileOnly group: "com.liferay.portal", name: "release.portal.api", version: "7.1.1"

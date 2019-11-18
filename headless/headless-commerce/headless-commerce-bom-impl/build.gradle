@@ -3,7 +3,7 @@ baseline {
 }
 
 dependencies {
-	compileOnly group: "com.fasterxml.jackson.core", name: "jackson-annotations", version: "2.9.9"
+	compileOnly group: "com.fasterxml.jackson.core", name: "jackson-annotations", version: "2.9.10"
 	compileOnly group: "com.liferay", name: "com.liferay.portal.odata.api", version: "1.0.0"
 	compileOnly group: "com.liferay", name: "com.liferay.portal.vulcan.api", version: "1.0.0-20190325.181508-2"
 	compileOnly group: "com.liferay.commerce", name: "com.liferay.commerce.api", version: "8.0.0"
