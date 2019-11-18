@@ -26,6 +26,4 @@ dependencies {
 	compileOnly project(":apps:commerce:commerce-product-service")
 	compileOnly project(":apps:commerce:commerce-product-taglib")
 	compileOnly project(":apps:commerce:commerce-taglib")
-
-	runtime group: "com.liferay.commerce", name: "com.liferay.commerce.openapi.core.impl", version: "1.0.0"
 }
