@@ -33,11 +33,10 @@ class UserInvitation extends Component {
 
 	testAddedUsers(e) {
 		const contentWrapper = this.element.querySelector('.autocomplete-input__content');
-
 		this.element.querySelector('.autocomplete-input__box').focus();
-
-		contentWrapper.scrollTo(0, contentWrapper.offsetHeight);
-
+		if (contentWrapper.scrollTo) {
+			contentWrapper.scrollTo(0, contentWrapper.offsetHeight);
+		}
 		return this.emit('updateUsers', this.addedUsers);
 	}
 

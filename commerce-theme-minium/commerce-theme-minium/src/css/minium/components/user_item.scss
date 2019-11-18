@@ -1,18 +1,9 @@
 .user-item {
-	display: grid;
-	grid-template-columns: auto min-content;
-	grid-template-rows: 50px;
+	display: flex;
 	margin-bottom: 20px;
 
 	&:last-child {
 		margin-bottom: 0;
-	}
-
-	&__content {
-		align-self: center;
-		display: grid;
-		grid-template-areas: "thumbnail primary-text" "thumbnail secondary-text";
-		grid-template-columns: auto 1fr;
 	}
 
 	&[class*="commerce-bdc"] {
@@ -27,9 +18,42 @@
 		}
 	}
 
+	&__action {
+		flex-grow: 0;
+		margin-left: 20px;
+		padding: 0;
+	}
+	
+	&__content {
+		align-self: center;
+		display: flex;
+		flex-grow: 1;
+	}
+
+	&__info {
+		align-items: flex-start;
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
+		justify-content: center;
+	}
+
+	&__primary {
+		color: $color-fg;
+		display: block;
+		line-height: 1.1;
+	}
+
+	&__secondary {
+		color: $color-fg-alt;
+		display: block;
+		font-size: 12px;
+		letter-spacing: 1.1px;
+	}
+
 	&__thumbnail {
 		border-radius: 50%;
-		grid-area: thumbnail;
+		flex-grow: 0;
 		height: 50px;
 		margin-right: 20px;
 		overflow: hidden;
@@ -39,27 +63,5 @@
 			height: 100%;
 			width: 100%;
 		}
-	}
-
-	&__primary-text {
-		align-self: end;
-		color: $color-fg;
-		display: block;
-		grid-area: primary-text;
-		line-height: 1.1;
-	}
-
-	&__secondary-text {
-		color: $color-fg-alt;
-		display: block;
-		font-size: 12px;
-		grid-area: secondary-text;
-		letter-spacing: 1.1px;
-	}
-
-	&__action {
-		justify-self: flex-end;
-		margin-left: 20px;
-		padding: 0;
 	}
 }

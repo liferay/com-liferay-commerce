@@ -2,8 +2,7 @@
 	border: 2px solid $color-shadow;
 	border-radius: 10px;
 	color: $color-fg;
-	display: grid;
-	grid-template-columns: 30px auto;
+	display: flex;
 	overflow: hidden;
 	padding: 10px;
 	width: 100%;
@@ -17,13 +16,12 @@
 		outline: none;
 	}
 
-	&__icon {
-		align-self: start;
-		text-align: center;
-	}
-
-	&__wrapper {
-		overflow: auto;
+	&__box {
+		background: transparent;
+		border: none;
+		margin-bottom: 4px;
+		margin-left: 15px;
+		width: calc(100% - 18px);
 	}
 
 	&__content {
@@ -34,16 +32,19 @@
 		overflow: auto;
 	}
 
-	&__box {
-		background: transparent;
-		border: none;
-		margin-bottom: 4px;
-		margin-left: 15px;
-		width: calc(100% - 18px);
-	}
-
 	&__delete {
 		display: inline-block;
 		margin-left: 10px;
+	}
+
+	&__icon {
+		align-self: start;
+		flex-grow: 0;
+		text-align: center;
+	}
+
+	&__wrapper {
+		flex-grow: 1;
+		overflow: auto;
 	}
 }

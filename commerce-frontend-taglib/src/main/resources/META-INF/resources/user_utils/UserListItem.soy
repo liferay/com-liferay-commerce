@@ -17,38 +17,40 @@
 					<img src="{$thumbnail}" />
 				</div>
 			{/if}
-			{if isNonnull($name)}
-				<span class="user-item__primary-text">
-					{call AutocompleteItem.render}
-						{param text: $name /}
-						{param query: $query /}
-					{/call}
-				</span>
-				<span class="user-item__secondary-text">
-					{call AutocompleteItem.render}
-						{param text: $email /}
-						{param query: $query /}
-					{/call}
-				</span>
-			{else}
-				<span class="user-item__primary-text">
-					{call AutocompleteItem.render}
-						{param text: $email /}
-						{param query: $query /}
-					{/call}
-				</span>
-				<span class="user-item__secondary-text">
-					{switch $_status}
-						{case 'user-not-found'}
-							{msg desc="User not found. You could invite a new user typing his email address."}user-not-found-you-could-invite-a-new-user{/msg}
-						{case 'email-not-valid'}
-							{msg desc="Please add a valid email address"}please-add-a-valid-email-address{/msg}
-						{case 'valid'}
-							{msg desc="Click to add to your Organization"}click-to-add-to-your-organization{/msg}
-						{default}
-					{/switch}
-				</span>
-			{/if}
+			<div class="user-item__info">
+				{if isNonnull($name)}
+					<span class="user-item__primary">
+						{call AutocompleteItem.render}
+							{param text: $name /}
+							{param query: $query /}
+						{/call}
+					</span>
+					<span class="user-item__secondary">
+						{call AutocompleteItem.render}
+							{param text: $email /}
+							{param query: $query /}
+						{/call}
+					</span>
+				{else}
+					<span class="user-item__primary">
+						{call AutocompleteItem.render}
+							{param text: $email /}
+							{param query: $query /}
+						{/call}
+					</span>
+					<span class="user-item__secondary">
+						{switch $_status}
+							{case 'user-not-found'}
+								{msg desc="User not found. You could invite a new user typing his email address."}user-not-found-you-could-invite-a-new-user{/msg}
+							{case 'email-not-valid'}
+								{msg desc="Please add a valid email address"}please-add-a-valid-email-address{/msg}
+							{case 'valid'}
+								{msg desc="Click to add to your Organization"}click-to-add-to-your-organization{/msg}
+							{default}
+						{/switch}
+					</span>
+				{/if}
+			</div>
 		</div>
 		{if $_status == 'valid'}
 			<button class="user-item__action" data-onclick="{$_handleToggleInvitation}">
