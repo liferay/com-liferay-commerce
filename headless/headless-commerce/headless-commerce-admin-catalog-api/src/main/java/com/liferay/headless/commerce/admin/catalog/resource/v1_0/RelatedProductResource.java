@@ -34,15 +34,9 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface RelatedProductResource {
 
-	public Page<RelatedProduct>
-			getProductByExternalReferenceCodeRelatedProductsPage(
-				String externalReferenceCode, String type,
-				Pagination pagination)
-		throws Exception;
+	public Response deleteRelatedProduct(Long id) throws Exception;
 
-	public RelatedProduct postProductByExternalReferenceCodeRelatedProduct(
-			String externalReferenceCode, RelatedProduct relatedProduct)
-		throws Exception;
+	public RelatedProduct getRelatedProduct(Long id) throws Exception;
 
 	public Page<RelatedProduct> getProductIdRelatedProductsPage(
 			Long id, String type, Pagination pagination)
@@ -52,9 +46,15 @@ public interface RelatedProductResource {
 			Long id, RelatedProduct relatedProduct)
 		throws Exception;
 
-	public Response deleteRelatedProduct(Long id) throws Exception;
+	public Page<RelatedProduct>
+			getProductByExternalReferenceCodeRelatedProductsPage(
+				String externalReferenceCode, String type,
+				Pagination pagination)
+		throws Exception;
 
-	public RelatedProduct getRelatedProduct(Long id) throws Exception;
+	public RelatedProduct postProductByExternalReferenceCodeRelatedProduct(
+			String externalReferenceCode, RelatedProduct relatedProduct)
+		throws Exception;
 
 	public void setContextCompany(Company contextCompany);
 
