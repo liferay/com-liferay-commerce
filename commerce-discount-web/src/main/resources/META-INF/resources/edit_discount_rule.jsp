@@ -84,7 +84,7 @@ PortalUtil.addPortletBreadcrumbEntry(request, title, StringPool.BLANK, data);
 				<c:if test="<%= commerceDiscountRuleTypeJSPContributor != null %>">
 
 					<%
-					commerceDiscountRuleTypeJSPContributor.render(commerceDiscountId, commerceDiscountRuleId, request, response);
+					commerceDiscountRuleTypeJSPContributor.render(commerceDiscountId, commerceDiscountRuleId, request, PipingServletResponse.createPipingServletResponse(pageContext));
 					%>
 
 				</c:if>
