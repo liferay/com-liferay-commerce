@@ -2,6 +2,7 @@
 
 <model-hints>
 	<model name="com.liferay.commerce.model.CommerceAddress">
+		<field name="externalReferenceCode" type="String" />
 		<field name="commerceAddressId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />

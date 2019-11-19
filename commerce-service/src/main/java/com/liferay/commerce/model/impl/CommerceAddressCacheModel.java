@@ -62,9 +62,11 @@ public class CommerceAddressCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(49);
+		StringBundler sb = new StringBundler(51);
 
-		sb.append("{commerceAddressId=");
+		sb.append("{externalReferenceCode=");
+		sb.append(externalReferenceCode);
+		sb.append(", commerceAddressId=");
 		sb.append(commerceAddressId);
 		sb.append(", groupId=");
 		sb.append(groupId);
@@ -120,6 +122,13 @@ public class CommerceAddressCacheModel
 	@Override
 	public CommerceAddress toEntityModel() {
 		CommerceAddressImpl commerceAddressImpl = new CommerceAddressImpl();
+
+		if (externalReferenceCode == null) {
+			commerceAddressImpl.setExternalReferenceCode("");
+		}
+		else {
+			commerceAddressImpl.setExternalReferenceCode(externalReferenceCode);
+		}
 
 		commerceAddressImpl.setCommerceAddressId(commerceAddressId);
 		commerceAddressImpl.setGroupId(groupId);
@@ -222,6 +231,8 @@ public class CommerceAddressCacheModel
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		externalReferenceCode = objectInput.readUTF();
+
 		commerceAddressId = objectInput.readLong();
 
 		groupId = objectInput.readLong();
@@ -262,6 +273,13 @@ public class CommerceAddressCacheModel
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput) throws IOException {
+		if (externalReferenceCode == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(externalReferenceCode);
+		}
+
 		objectOutput.writeLong(commerceAddressId);
 
 		objectOutput.writeLong(groupId);
@@ -355,6 +373,7 @@ public class CommerceAddressCacheModel
 		objectOutput.writeInt(type);
 	}
 
+	public String externalReferenceCode;
 	public long commerceAddressId;
 	public long groupId;
 	public long companyId;

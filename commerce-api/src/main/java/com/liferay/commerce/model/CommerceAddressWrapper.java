@@ -55,6 +55,7 @@ public class CommerceAddressWrapper
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("externalReferenceCode", getExternalReferenceCode());
 		attributes.put("commerceAddressId", getCommerceAddressId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -85,6 +86,13 @@ public class CommerceAddressWrapper
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		String externalReferenceCode = (String)attributes.get(
+			"externalReferenceCode");
+
+		if (externalReferenceCode != null) {
+			setExternalReferenceCode(externalReferenceCode);
+		}
+
 		Long commerceAddressId = (Long)attributes.get("commerceAddressId");
 
 		if (commerceAddressId != null) {
@@ -383,6 +391,16 @@ public class CommerceAddressWrapper
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return _commerceAddress.getExpandoBridge();
+	}
+
+	/**
+	 * Returns the external reference code of this commerce address.
+	 *
+	 * @return the external reference code of this commerce address
+	 */
+	@Override
+	public String getExternalReferenceCode() {
+		return _commerceAddress.getExternalReferenceCode();
 	}
 
 	/**
@@ -735,6 +753,16 @@ public class CommerceAddressWrapper
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		_commerceAddress.setExpandoBridgeAttributes(serviceContext);
+	}
+
+	/**
+	 * Sets the external reference code of this commerce address.
+	 *
+	 * @param externalReferenceCode the external reference code of this commerce address
+	 */
+	@Override
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_commerceAddress.setExternalReferenceCode(externalReferenceCode);
 	}
 
 	/**
