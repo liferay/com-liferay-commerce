@@ -68,7 +68,7 @@ long cpDefinitionId = cpDefinitionOptionValueRelDisplayContext.getCPDefinitionId
 				const form = document.getElementById('<portlet:namespace />cpDefinitionOptionValueRelfm');
 
 				const keyInput = form.querySelector('#<portlet:namespace />key');
-				const nameInput = form.querySelector('#<portlet:namespace />name');
+				const nameInput = form.querySelector('#<portlet:namespace />optionValueName');
 
 				const debounce = utilities.debounce;
 
