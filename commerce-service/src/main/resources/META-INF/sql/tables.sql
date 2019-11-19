@@ -34,6 +34,7 @@ create table CPDefinitionInventory (
 );
 
 create table CommerceAddress (
+	externalReferenceCode VARCHAR(75) null,
 	commerceAddressId LONG not null primary key,
 	groupId LONG,
 	companyId LONG,

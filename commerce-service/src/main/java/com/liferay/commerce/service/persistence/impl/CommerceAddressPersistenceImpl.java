@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
 import java.io.Serializable;
@@ -50,6 +51,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -4735,6 +4737,286 @@ public class CommerceAddressPersistenceImpl
 	private static final String _FINDER_COLUMN_C_C_C_C_TYPE_2 =
 		"commerceAddress.type = ?";
 
+	private FinderPath _finderPathFetchByC_ERC;
+	private FinderPath _finderPathCountByC_ERC;
+
+	/**
+	 * Returns the commerce address where companyId = &#63; and externalReferenceCode = &#63; or throws a <code>NoSuchAddressException</code> if it could not be found.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @return the matching commerce address
+	 * @throws NoSuchAddressException if a matching commerce address could not be found
+	 */
+	@Override
+	public CommerceAddress findByC_ERC(
+			long companyId, String externalReferenceCode)
+		throws NoSuchAddressException {
+
+		CommerceAddress commerceAddress = fetchByC_ERC(
+			companyId, externalReferenceCode);
+
+		if (commerceAddress == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("companyId=");
+			msg.append(companyId);
+
+			msg.append(", externalReferenceCode=");
+			msg.append(externalReferenceCode);
+
+			msg.append("}");
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
+			}
+
+			throw new NoSuchAddressException(msg.toString());
+		}
+
+		return commerceAddress;
+	}
+
+	/**
+	 * Returns the commerce address where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @return the matching commerce address, or <code>null</code> if a matching commerce address could not be found
+	 */
+	@Override
+	public CommerceAddress fetchByC_ERC(
+		long companyId, String externalReferenceCode) {
+
+		return fetchByC_ERC(companyId, externalReferenceCode, true);
+	}
+
+	/**
+	 * Returns the commerce address where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the matching commerce address, or <code>null</code> if a matching commerce address could not be found
+	 */
+	@Override
+	public CommerceAddress fetchByC_ERC(
+		long companyId, String externalReferenceCode, boolean useFinderCache) {
+
+		externalReferenceCode = Objects.toString(externalReferenceCode, "");
+
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {companyId, externalReferenceCode};
+		}
+
+		Object result = null;
+
+		if (useFinderCache) {
+			result = finderCache.getResult(
+				_finderPathFetchByC_ERC, finderArgs, this);
+		}
+
+		if (result instanceof CommerceAddress) {
+			CommerceAddress commerceAddress = (CommerceAddress)result;
+
+			if ((companyId != commerceAddress.getCompanyId()) ||
+				!Objects.equals(
+					externalReferenceCode,
+					commerceAddress.getExternalReferenceCode())) {
+
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_SELECT_COMMERCEADDRESS_WHERE);
+
+			query.append(_FINDER_COLUMN_C_ERC_COMPANYID_2);
+
+			boolean bindExternalReferenceCode = false;
+
+			if (externalReferenceCode.isEmpty()) {
+				query.append(_FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_3);
+			}
+			else {
+				bindExternalReferenceCode = true;
+
+				query.append(_FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				if (bindExternalReferenceCode) {
+					qPos.add(externalReferenceCode);
+				}
+
+				List<CommerceAddress> list = q.list();
+
+				if (list.isEmpty()) {
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByC_ERC, finderArgs, list);
+					}
+				}
+				else {
+					if (list.size() > 1) {
+						Collections.sort(list, Collections.reverseOrder());
+
+						if (_log.isWarnEnabled()) {
+							if (!useFinderCache) {
+								finderArgs = new Object[] {
+									companyId, externalReferenceCode
+								};
+							}
+
+							_log.warn(
+								"CommerceAddressPersistenceImpl.fetchByC_ERC(long, String, boolean) with parameters (" +
+									StringUtil.merge(finderArgs) +
+										") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+						}
+					}
+
+					CommerceAddress commerceAddress = list.get(0);
+
+					result = commerceAddress;
+
+					cacheResult(commerceAddress);
+				}
+			}
+			catch (Exception e) {
+				if (useFinderCache) {
+					finderCache.removeResult(
+						_finderPathFetchByC_ERC, finderArgs);
+				}
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (CommerceAddress)result;
+		}
+	}
+
+	/**
+	 * Removes the commerce address where companyId = &#63; and externalReferenceCode = &#63; from the database.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @return the commerce address that was removed
+	 */
+	@Override
+	public CommerceAddress removeByC_ERC(
+			long companyId, String externalReferenceCode)
+		throws NoSuchAddressException {
+
+		CommerceAddress commerceAddress = findByC_ERC(
+			companyId, externalReferenceCode);
+
+		return remove(commerceAddress);
+	}
+
+	/**
+	 * Returns the number of commerce addresses where companyId = &#63; and externalReferenceCode = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @return the number of matching commerce addresses
+	 */
+	@Override
+	public int countByC_ERC(long companyId, String externalReferenceCode) {
+		externalReferenceCode = Objects.toString(externalReferenceCode, "");
+
+		FinderPath finderPath = _finderPathCountByC_ERC;
+
+		Object[] finderArgs = new Object[] {companyId, externalReferenceCode};
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_COMMERCEADDRESS_WHERE);
+
+			query.append(_FINDER_COLUMN_C_ERC_COMPANYID_2);
+
+			boolean bindExternalReferenceCode = false;
+
+			if (externalReferenceCode.isEmpty()) {
+				query.append(_FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_3);
+			}
+			else {
+				bindExternalReferenceCode = true;
+
+				query.append(_FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				if (bindExternalReferenceCode) {
+					qPos.add(externalReferenceCode);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_C_ERC_COMPANYID_2 =
+		"commerceAddress.companyId = ? AND ";
+
+	private static final String _FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_2 =
+		"commerceAddress.externalReferenceCode = ?";
+
+	private static final String _FINDER_COLUMN_C_ERC_EXTERNALREFERENCECODE_3 =
+		"(commerceAddress.externalReferenceCode IS NULL OR commerceAddress.externalReferenceCode = '')";
+
 	public CommerceAddressPersistenceImpl() {
 		setModelClass(CommerceAddress.class);
 
@@ -4767,6 +5049,14 @@ public class CommerceAddressPersistenceImpl
 		entityCache.putResult(
 			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceAddressImpl.class, commerceAddress.getPrimaryKey(),
+			commerceAddress);
+
+		finderCache.putResult(
+			_finderPathFetchByC_ERC,
+			new Object[] {
+				commerceAddress.getCompanyId(),
+				commerceAddress.getExternalReferenceCode()
+			},
 			commerceAddress);
 
 		commerceAddress.resetOriginalValues();
@@ -4824,6 +5114,9 @@ public class CommerceAddressPersistenceImpl
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(
+			(CommerceAddressModelImpl)commerceAddress, true);
 	}
 
 	@Override
@@ -4835,6 +5128,62 @@ public class CommerceAddressPersistenceImpl
 			entityCache.removeResult(
 				CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
 				CommerceAddressImpl.class, commerceAddress.getPrimaryKey());
+
+			clearUniqueFindersCache(
+				(CommerceAddressModelImpl)commerceAddress, true);
+		}
+	}
+
+	public void clearCache(Set<Serializable> primaryKeys) {
+		finderCache.clearCache(FINDER_CLASS_NAME_ENTITY);
+		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (Serializable primaryKey : primaryKeys) {
+			entityCache.removeResult(
+				CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+				CommerceAddressImpl.class, primaryKey);
+		}
+	}
+
+	protected void cacheUniqueFindersCache(
+		CommerceAddressModelImpl commerceAddressModelImpl) {
+
+		Object[] args = new Object[] {
+			commerceAddressModelImpl.getCompanyId(),
+			commerceAddressModelImpl.getExternalReferenceCode()
+		};
+
+		finderCache.putResult(
+			_finderPathCountByC_ERC, args, Long.valueOf(1), false);
+		finderCache.putResult(
+			_finderPathFetchByC_ERC, args, commerceAddressModelImpl, false);
+	}
+
+	protected void clearUniqueFindersCache(
+		CommerceAddressModelImpl commerceAddressModelImpl,
+		boolean clearCurrent) {
+
+		if (clearCurrent) {
+			Object[] args = new Object[] {
+				commerceAddressModelImpl.getCompanyId(),
+				commerceAddressModelImpl.getExternalReferenceCode()
+			};
+
+			finderCache.removeResult(_finderPathCountByC_ERC, args);
+			finderCache.removeResult(_finderPathFetchByC_ERC, args);
+		}
+
+		if ((commerceAddressModelImpl.getColumnBitmask() &
+			 _finderPathFetchByC_ERC.getColumnBitmask()) != 0) {
+
+			Object[] args = new Object[] {
+				commerceAddressModelImpl.getOriginalCompanyId(),
+				commerceAddressModelImpl.getOriginalExternalReferenceCode()
+			};
+
+			finderCache.removeResult(_finderPathCountByC_ERC, args);
+			finderCache.removeResult(_finderPathFetchByC_ERC, args);
 		}
 	}
 
@@ -5319,6 +5668,9 @@ public class CommerceAddressPersistenceImpl
 			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
 			CommerceAddressImpl.class, commerceAddress.getPrimaryKey(),
 			commerceAddress, false);
+
+		clearUniqueFindersCache(commerceAddressModelImpl, false);
+		cacheUniqueFindersCache(commerceAddressModelImpl);
 
 		commerceAddress.resetOriginalValues();
 
@@ -5995,6 +6347,20 @@ public class CommerceAddressPersistenceImpl
 				Long.class.getName(), Long.class.getName(),
 				Long.class.getName(), Integer.class.getName()
 			});
+
+		_finderPathFetchByC_ERC = new FinderPath(
+			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressModelImpl.FINDER_CACHE_ENABLED,
+			CommerceAddressImpl.class, FINDER_CLASS_NAME_ENTITY, "fetchByC_ERC",
+			new String[] {Long.class.getName(), String.class.getName()},
+			CommerceAddressModelImpl.COMPANYID_COLUMN_BITMASK |
+			CommerceAddressModelImpl.EXTERNALREFERENCECODE_COLUMN_BITMASK);
+
+		_finderPathCountByC_ERC = new FinderPath(
+			CommerceAddressModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceAddressModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_ERC",
+			new String[] {Long.class.getName(), String.class.getName()});
 	}
 
 	public void destroy() {

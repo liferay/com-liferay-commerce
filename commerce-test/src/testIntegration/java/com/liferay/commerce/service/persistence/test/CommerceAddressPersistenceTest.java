@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.test.AssertUtils;
+import com.liferay.portal.kernel.test.ReflectionTestUtil;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
@@ -45,6 +46,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import org.junit.After;
@@ -123,6 +125,9 @@ public class CommerceAddressPersistenceTest {
 
 		CommerceAddress newCommerceAddress = _persistence.create(pk);
 
+		newCommerceAddress.setExternalReferenceCode(
+			RandomTestUtil.randomString());
+
 		newCommerceAddress.setGroupId(RandomTestUtil.nextLong());
 
 		newCommerceAddress.setCompanyId(RandomTestUtil.nextLong());
@@ -174,6 +179,9 @@ public class CommerceAddressPersistenceTest {
 		CommerceAddress existingCommerceAddress = _persistence.findByPrimaryKey(
 			newCommerceAddress.getPrimaryKey());
 
+		Assert.assertEquals(
+			existingCommerceAddress.getExternalReferenceCode(),
+			newCommerceAddress.getExternalReferenceCode());
 		Assert.assertEquals(
 			existingCommerceAddress.getCommerceAddressId(),
 			newCommerceAddress.getCommerceAddressId());
@@ -314,6 +322,15 @@ public class CommerceAddressPersistenceTest {
 	}
 
 	@Test
+	public void testCountByC_ERC() throws Exception {
+		_persistence.countByC_ERC(RandomTestUtil.nextLong(), "");
+
+		_persistence.countByC_ERC(0L, "null");
+
+		_persistence.countByC_ERC(0L, (String)null);
+	}
+
+	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		CommerceAddress newCommerceAddress = addCommerceAddress();
 
@@ -338,10 +355,11 @@ public class CommerceAddressPersistenceTest {
 
 	protected OrderByComparator<CommerceAddress> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create(
-			"CommerceAddress", "commerceAddressId", true, "groupId", true,
-			"companyId", true, "userId", true, "userName", true, "createDate",
-			true, "modifiedDate", true, "classNameId", true, "classPK", true,
-			"name", true, "description", true, "street1", true, "street2", true,
+			"CommerceAddress", "externalReferenceCode", true,
+			"commerceAddressId", true, "groupId", true, "companyId", true,
+			"userId", true, "userName", true, "createDate", true,
+			"modifiedDate", true, "classNameId", true, "classPK", true, "name",
+			true, "description", true, "street1", true, "street2", true,
 			"street3", true, "city", true, "zip", true, "commerceRegionId",
 			true, "commerceCountryId", true, "latitude", true, "longitude",
 			true, "phoneNumber", true, "defaultBilling", true,
@@ -563,10 +581,34 @@ public class CommerceAddressPersistenceTest {
 		Assert.assertEquals(0, result.size());
 	}
 
+	@Test
+	public void testResetOriginalValues() throws Exception {
+		CommerceAddress newCommerceAddress = addCommerceAddress();
+
+		_persistence.clearCache();
+
+		CommerceAddress existingCommerceAddress = _persistence.findByPrimaryKey(
+			newCommerceAddress.getPrimaryKey());
+
+		Assert.assertEquals(
+			Long.valueOf(existingCommerceAddress.getCompanyId()),
+			ReflectionTestUtil.<Long>invoke(
+				existingCommerceAddress, "getOriginalCompanyId",
+				new Class<?>[0]));
+		Assert.assertTrue(
+			Objects.equals(
+				existingCommerceAddress.getExternalReferenceCode(),
+				ReflectionTestUtil.invoke(
+					existingCommerceAddress, "getOriginalExternalReferenceCode",
+					new Class<?>[0])));
+	}
+
 	protected CommerceAddress addCommerceAddress() throws Exception {
 		long pk = RandomTestUtil.nextLong();
 
 		CommerceAddress commerceAddress = _persistence.create(pk);
+
+		commerceAddress.setExternalReferenceCode(RandomTestUtil.randomString());
 
 		commerceAddress.setGroupId(RandomTestUtil.nextLong());
 

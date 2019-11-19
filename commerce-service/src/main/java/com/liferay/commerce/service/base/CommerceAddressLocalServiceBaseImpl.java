@@ -239,6 +239,21 @@ public abstract class CommerceAddressLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the commerce address with the matching external reference code and company.
+	 *
+	 * @param companyId the primary key of the company
+	 * @param externalReferenceCode the commerce address's external reference code
+	 * @return the matching commerce address, or <code>null</code> if a matching commerce address could not be found
+	 */
+	@Override
+	public CommerceAddress fetchCommerceAddressByReferenceCode(
+		long companyId, String externalReferenceCode) {
+
+		return commerceAddressPersistence.fetchByC_ERC(
+			companyId, externalReferenceCode);
+	}
+
+	/**
 	 * Returns the commerce address with the primary key.
 	 *
 	 * @param commerceAddressId the primary key of the commerce address

@@ -93,6 +93,15 @@ public interface CommerceAddressLocalService
 			String phoneNumber, int type, ServiceContext serviceContext)
 		throws PortalException;
 
+	@Indexable(type = IndexableType.REINDEX)
+	public CommerceAddress addCommerceAddress(
+			String className, long classPK, String name, String description,
+			String street1, String street2, String street3, String city,
+			String zip, long commerceRegionId, long commerceCountryId,
+			String phoneNumber, int type, String externalReferenceCode,
+			ServiceContext serviceContext)
+		throws PortalException;
+
 	public CommerceAddress copyCommerceAddress(
 			long commerceAddressId, String className, long classPK,
 			ServiceContext serviceContext)
@@ -213,7 +222,23 @@ public interface CommerceAddressLocalService
 		DynamicQuery dynamicQuery, Projection projection);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceAddress fetchByExternalReferenceCode(
+			long companyId, String externalReferenceCode)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CommerceAddress fetchCommerceAddress(long commerceAddressId);
+
+	/**
+	 * Returns the commerce address with the matching external reference code and company.
+	 *
+	 * @param companyId the primary key of the company
+	 * @param externalReferenceCode the commerce address's external reference code
+	 * @return the matching commerce address, or <code>null</code> if a matching commerce address could not be found
+	 */
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceAddress fetchCommerceAddressByReferenceCode(
+		long companyId, String externalReferenceCode);
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceAddress geolocateCommerceAddress(long commerceAddressId)

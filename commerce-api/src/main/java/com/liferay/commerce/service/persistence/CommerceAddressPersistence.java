@@ -1380,6 +1380,59 @@ public interface CommerceAddressPersistence
 		long companyId, long classNameId, long classPK, int type);
 
 	/**
+	 * Returns the commerce address where companyId = &#63; and externalReferenceCode = &#63; or throws a <code>NoSuchAddressException</code> if it could not be found.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @return the matching commerce address
+	 * @throws NoSuchAddressException if a matching commerce address could not be found
+	 */
+	public CommerceAddress findByC_ERC(
+			long companyId, String externalReferenceCode)
+		throws NoSuchAddressException;
+
+	/**
+	 * Returns the commerce address where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @return the matching commerce address, or <code>null</code> if a matching commerce address could not be found
+	 */
+	public CommerceAddress fetchByC_ERC(
+		long companyId, String externalReferenceCode);
+
+	/**
+	 * Returns the commerce address where companyId = &#63; and externalReferenceCode = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the matching commerce address, or <code>null</code> if a matching commerce address could not be found
+	 */
+	public CommerceAddress fetchByC_ERC(
+		long companyId, String externalReferenceCode, boolean useFinderCache);
+
+	/**
+	 * Removes the commerce address where companyId = &#63; and externalReferenceCode = &#63; from the database.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @return the commerce address that was removed
+	 */
+	public CommerceAddress removeByC_ERC(
+			long companyId, String externalReferenceCode)
+		throws NoSuchAddressException;
+
+	/**
+	 * Returns the number of commerce addresses where companyId = &#63; and externalReferenceCode = &#63;.
+	 *
+	 * @param companyId the company ID
+	 * @param externalReferenceCode the external reference code
+	 * @return the number of matching commerce addresses
+	 */
+	public int countByC_ERC(long companyId, String externalReferenceCode);
+
+	/**
 	 * Caches the commerce address in the entity cache if it is enabled.
 	 *
 	 * @param commerceAddress the commerce address
