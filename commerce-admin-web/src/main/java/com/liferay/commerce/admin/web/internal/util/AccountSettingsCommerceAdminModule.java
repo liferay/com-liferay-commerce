@@ -31,6 +31,9 @@ import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -73,12 +76,12 @@ public class AccountSettingsCommerceAdminModule implements CommerceAdminModule {
 
 	@Override
 	public void render(
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse)
 		throws IOException {
 
 		_jspRenderer.renderJSP(
-			_portal.getHttpServletRequest(renderRequest),
-			_portal.getHttpServletResponse(renderResponse),
+			httpServletRequest, httpServletResponse,
 			"/configuration/edit_account_settings.jsp");
 	}
 
