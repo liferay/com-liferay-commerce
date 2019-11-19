@@ -27,11 +27,10 @@ class CPOptionsEditor extends Component {
 	}
 
 	loadOptions() {
-		var url = new URL(this.optionsURL);
-
+		const url = new URL(this.optionsURL);
 		url.searchParams.set('p_auth', window.Liferay.authToken);
 
-		fetch(
+		return fetch(
 			url,
 			{
 				credentials: 'include',
@@ -63,26 +62,30 @@ class CPOptionsEditor extends Component {
 	_handleOptionSaved(event) {
 		this._currentOption = event.cpOptionId;
 
-		this.loadOptions();
-
 		if (event.success) {
 			this._showNotification(this.successMessage, 'success');
+			setTimeout(
+				() => window.location.reload(),
+				500
+			)
 		}
 		else {
 			this._showNotification(event.message, 'danger');
 		}
+
+		return this.loadOptions();
 	}
 
 	_handleoptionDeleted(event) {
 		this._currentOption = null;
 
-		this.loadOptions();
+		return this.loadOptions();
 	}
 
 	_handleCancelEditing(event) {
 		this._currentOption = null;
 
-		this.loadOptions();
+		return this.loadOptions();
 	}
 
 	_handleNameChange(newName) {

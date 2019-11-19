@@ -65,21 +65,19 @@ class CPOptionDetail extends Component {
 	}
 
 	_handleSaveOption() {
-		var instance = this;
+		const instance = this;
 
 		AUI().use(
 			'aui-base',
 			'aui-form-validator',
 			'liferay-form',
 			(A) => {
-				var hasErrors = false;
-
+				let hasErrors = false;
 				let form = instance.element.querySelector('.option-detail form');
-
-				var liferayForm = Liferay.Form.get(form.getAttribute('id'));
+				const liferayForm = Liferay.Form.get(form.getAttribute('id'));
 
 				if (liferayForm) {
-					var validator = liferayForm.formValidator;
+					const validator = liferayForm.formValidator;
 
 					if (A.instanceOf(validator, A.FormValidator)) {
 						validator.validate();
@@ -141,7 +139,7 @@ class CPOptionDetail extends Component {
 
 		formData.set('p_auth', Liferay.authToken);
 
-		fetch(
+		return fetch(
 			form.action,
 			{
 				body: formData,
@@ -152,7 +150,7 @@ class CPOptionDetail extends Component {
 			response => response.json()
 		).then(
 			(jsonResponse) => {
-				this.emit('optionSaved', jsonResponse);
+				return this.emit('optionSaved', jsonResponse);
 			}
 		);
 	}
