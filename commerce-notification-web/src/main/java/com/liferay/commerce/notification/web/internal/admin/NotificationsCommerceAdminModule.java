@@ -84,13 +84,9 @@ public class NotificationsCommerceAdminModule implements CommerceAdminModule {
 
 	@Override
 	public void render(
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse)
 		throws IOException {
-
-		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
-			renderRequest);
-		HttpServletResponse httpServletResponse =
-			_portal.getHttpServletResponse(renderResponse);
 
 		setCommerceNotificationQueueEntriesDisplayContext(httpServletRequest);
 
