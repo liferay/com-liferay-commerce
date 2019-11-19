@@ -26,6 +26,9 @@ import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * @author Andrea Di Giorgi
  * @author Alessio Antonio Rendina
@@ -43,7 +46,8 @@ public interface CommerceAdminModule {
 	public boolean isVisible(long groupId) throws PortalException;
 
 	public void render(
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse)
 		throws IOException;
 
 }

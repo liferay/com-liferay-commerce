@@ -43,6 +43,7 @@ import javax.portlet.RenderResponse;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
@@ -92,11 +93,9 @@ public class CommerceMediaDefaultImageAdminModule
 
 	@Override
 	public void render(
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			HttpServletRequest httpServletRequest,
+			HttpServletResponse httpServletResponse)
 		throws IOException {
-
-		HttpServletRequest httpServletRequest = _portal.getHttpServletRequest(
-			renderRequest);
 
 		CommerceMediaDefaultImageDisplayContext
 			commerceMediaDefaultImageDisplayContext =
@@ -109,8 +108,7 @@ public class CommerceMediaDefaultImageAdminModule
 			commerceMediaDefaultImageDisplayContext);
 
 		_jspRenderer.renderJSP(
-			_servletContext, httpServletRequest,
-			_portal.getHttpServletResponse(renderResponse),
+			_servletContext, httpServletRequest, httpServletResponse,
 			"/configuration/edit_default_images.jsp");
 	}
 
