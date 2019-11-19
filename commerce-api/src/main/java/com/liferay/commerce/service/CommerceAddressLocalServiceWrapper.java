@@ -81,6 +81,21 @@ public class CommerceAddressLocalServiceWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.model.CommerceAddress addCommerceAddress(
+			String className, long classPK, String name, String description,
+			String street1, String street2, String street3, String city,
+			String zip, long commerceRegionId, long commerceCountryId,
+			String phoneNumber, int type, String externalReferenceCode,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceAddressLocalService.addCommerceAddress(
+			className, classPK, name, description, street1, street2, street3,
+			city, zip, commerceRegionId, commerceCountryId, phoneNumber, type,
+			externalReferenceCode, serviceContext);
+	}
+
+	@Override
 	public com.liferay.commerce.model.CommerceAddress copyCommerceAddress(
 			long commerceAddressId, String className, long classPK,
 			com.liferay.portal.kernel.service.ServiceContext serviceContext)
@@ -264,11 +279,37 @@ public class CommerceAddressLocalServiceWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.model.CommerceAddress
+			fetchByExternalReferenceCode(
+				long companyId, String externalReferenceCode)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceAddressLocalService.fetchByExternalReferenceCode(
+			companyId, externalReferenceCode);
+	}
+
+	@Override
 	public com.liferay.commerce.model.CommerceAddress fetchCommerceAddress(
 		long commerceAddressId) {
 
 		return _commerceAddressLocalService.fetchCommerceAddress(
 			commerceAddressId);
+	}
+
+	/**
+	 * Returns the commerce address with the matching external reference code and company.
+	 *
+	 * @param companyId the primary key of the company
+	 * @param externalReferenceCode the commerce address's external reference code
+	 * @return the matching commerce address, or <code>null</code> if a matching commerce address could not be found
+	 */
+	@Override
+	public com.liferay.commerce.model.CommerceAddress
+		fetchCommerceAddressByReferenceCode(
+			long companyId, String externalReferenceCode) {
+
+		return _commerceAddressLocalService.fetchCommerceAddressByReferenceCode(
+			companyId, externalReferenceCode);
 	}
 
 	@Override

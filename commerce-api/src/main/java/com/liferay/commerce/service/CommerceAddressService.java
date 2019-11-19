@@ -83,7 +83,20 @@ public interface CommerceAddressService extends BaseService {
 			String phoneNumber, int type, ServiceContext serviceContext)
 		throws PortalException;
 
+	public CommerceAddress addCommerceAddress(
+			String className, long classPK, String name, String description,
+			String street1, String street2, String street3, String city,
+			String zip, long commerceRegionId, long commerceCountryId,
+			String phoneNumber, int type, String externalReferenceCode,
+			ServiceContext serviceContext)
+		throws PortalException;
+
 	public void deleteCommerceAddress(long commerceAddressId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommerceAddress fetchByExternalReferenceCode(
+			long companyId, String externalReferenceCode)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

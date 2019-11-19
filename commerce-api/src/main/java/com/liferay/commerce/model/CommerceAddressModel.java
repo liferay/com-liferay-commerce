@@ -66,6 +66,21 @@ public interface CommerceAddressModel
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the external reference code of this commerce address.
+	 *
+	 * @return the external reference code of this commerce address
+	 */
+	@AutoEscape
+	public String getExternalReferenceCode();
+
+	/**
+	 * Sets the external reference code of this commerce address.
+	 *
+	 * @param externalReferenceCode the external reference code of this commerce address
+	 */
+	public void setExternalReferenceCode(String externalReferenceCode);
+
+	/**
 	 * Returns the commerce address ID of this commerce address.
 	 *
 	 * @return the commerce address ID of this commerce address

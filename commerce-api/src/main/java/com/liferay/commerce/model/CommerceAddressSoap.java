@@ -31,6 +31,7 @@ public class CommerceAddressSoap implements Serializable {
 	public static CommerceAddressSoap toSoapModel(CommerceAddress model) {
 		CommerceAddressSoap soapModel = new CommerceAddressSoap();
 
+		soapModel.setExternalReferenceCode(model.getExternalReferenceCode());
 		soapModel.setCommerceAddressId(model.getCommerceAddressId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
@@ -112,6 +113,14 @@ public class CommerceAddressSoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setCommerceAddressId(pk);
+	}
+
+	public String getExternalReferenceCode() {
+		return _externalReferenceCode;
+	}
+
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_externalReferenceCode = externalReferenceCode;
 	}
 
 	public long getCommerceAddressId() {
@@ -314,6 +323,7 @@ public class CommerceAddressSoap implements Serializable {
 		_type = type;
 	}
 
+	private String _externalReferenceCode;
 	private long _commerceAddressId;
 	private long _groupId;
 	private long _companyId;

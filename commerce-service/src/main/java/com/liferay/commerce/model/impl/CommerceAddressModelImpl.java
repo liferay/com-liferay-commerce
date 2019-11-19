@@ -75,6 +75,7 @@ public class CommerceAddressModelImpl
 	public static final String TABLE_NAME = "CommerceAddress";
 
 	public static final Object[][] TABLE_COLUMNS = {
+		{"externalReferenceCode", Types.VARCHAR},
 		{"commerceAddressId", Types.BIGINT}, {"groupId", Types.BIGINT},
 		{"companyId", Types.BIGINT}, {"userId", Types.BIGINT},
 		{"userName", Types.VARCHAR}, {"createDate", Types.TIMESTAMP},
@@ -93,6 +94,7 @@ public class CommerceAddressModelImpl
 		new HashMap<String, Integer>();
 
 	static {
+		TABLE_COLUMNS_MAP.put("externalReferenceCode", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("commerceAddressId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
@@ -120,7 +122,7 @@ public class CommerceAddressModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CommerceAddress (commerceAddressId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,name VARCHAR(255) null,description STRING null,street1 VARCHAR(255) null,street2 VARCHAR(255) null,street3 VARCHAR(255) null,city VARCHAR(75) null,zip VARCHAR(75) null,commerceRegionId LONG,commerceCountryId LONG,latitude DOUBLE,longitude DOUBLE,phoneNumber VARCHAR(75) null,defaultBilling BOOLEAN,defaultShipping BOOLEAN,type_ INTEGER)";
+		"create table CommerceAddress (externalReferenceCode VARCHAR(75) null,commerceAddressId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,name VARCHAR(255) null,description STRING null,street1 VARCHAR(255) null,street2 VARCHAR(255) null,street3 VARCHAR(255) null,city VARCHAR(75) null,zip VARCHAR(75) null,commerceRegionId LONG,commerceCountryId LONG,latitude DOUBLE,longitude DOUBLE,phoneNumber VARCHAR(75) null,defaultBilling BOOLEAN,defaultShipping BOOLEAN,type_ INTEGER)";
 
 	public static final String TABLE_SQL_DROP = "drop table CommerceAddress";
 
@@ -165,11 +167,13 @@ public class CommerceAddressModelImpl
 
 	public static final long DEFAULTSHIPPING_COLUMN_BITMASK = 64L;
 
-	public static final long GROUPID_COLUMN_BITMASK = 128L;
+	public static final long EXTERNALREFERENCECODE_COLUMN_BITMASK = 128L;
 
-	public static final long TYPE_COLUMN_BITMASK = 256L;
+	public static final long GROUPID_COLUMN_BITMASK = 256L;
 
-	public static final long CREATEDATE_COLUMN_BITMASK = 512L;
+	public static final long TYPE_COLUMN_BITMASK = 512L;
+
+	public static final long CREATEDATE_COLUMN_BITMASK = 1024L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -184,6 +188,7 @@ public class CommerceAddressModelImpl
 
 		CommerceAddress model = new CommerceAddressImpl();
 
+		model.setExternalReferenceCode(soapModel.getExternalReferenceCode());
 		model.setCommerceAddressId(soapModel.getCommerceAddressId());
 		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
@@ -365,6 +370,30 @@ public class CommerceAddressModelImpl
 		Map<String, BiConsumer<CommerceAddress, ?>> attributeSetterBiConsumers =
 			new LinkedHashMap<String, BiConsumer<CommerceAddress, ?>>();
 
+		attributeGetterFunctions.put(
+			"externalReferenceCode",
+			new Function<CommerceAddress, Object>() {
+
+				@Override
+				public Object apply(CommerceAddress commerceAddress) {
+					return commerceAddress.getExternalReferenceCode();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"externalReferenceCode",
+			new BiConsumer<CommerceAddress, Object>() {
+
+				@Override
+				public void accept(
+					CommerceAddress commerceAddress,
+					Object externalReferenceCodeObject) {
+
+					commerceAddress.setExternalReferenceCode(
+						(String)externalReferenceCodeObject);
+				}
+
+			});
 		attributeGetterFunctions.put(
 			"commerceAddressId",
 			new Function<CommerceAddress, Object>() {
@@ -913,6 +942,32 @@ public class CommerceAddressModelImpl
 
 	@JSON
 	@Override
+	public String getExternalReferenceCode() {
+		if (_externalReferenceCode == null) {
+			return "";
+		}
+		else {
+			return _externalReferenceCode;
+		}
+	}
+
+	@Override
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_columnBitmask |= EXTERNALREFERENCECODE_COLUMN_BITMASK;
+
+		if (_originalExternalReferenceCode == null) {
+			_originalExternalReferenceCode = _externalReferenceCode;
+		}
+
+		_externalReferenceCode = externalReferenceCode;
+	}
+
+	public String getOriginalExternalReferenceCode() {
+		return GetterUtil.getString(_originalExternalReferenceCode);
+	}
+
+	@JSON
+	@Override
 	public long getCommerceAddressId() {
 		return _commerceAddressId;
 	}
@@ -1420,6 +1475,8 @@ public class CommerceAddressModelImpl
 	public Object clone() {
 		CommerceAddressImpl commerceAddressImpl = new CommerceAddressImpl();
 
+		commerceAddressImpl.setExternalReferenceCode(
+			getExternalReferenceCode());
 		commerceAddressImpl.setCommerceAddressId(getCommerceAddressId());
 		commerceAddressImpl.setGroupId(getGroupId());
 		commerceAddressImpl.setCompanyId(getCompanyId());
@@ -1507,6 +1564,9 @@ public class CommerceAddressModelImpl
 	public void resetOriginalValues() {
 		CommerceAddressModelImpl commerceAddressModelImpl = this;
 
+		commerceAddressModelImpl._originalExternalReferenceCode =
+			commerceAddressModelImpl._externalReferenceCode;
+
 		commerceAddressModelImpl._originalGroupId =
 			commerceAddressModelImpl._groupId;
 
@@ -1560,6 +1620,18 @@ public class CommerceAddressModelImpl
 	public CacheModel<CommerceAddress> toCacheModel() {
 		CommerceAddressCacheModel commerceAddressCacheModel =
 			new CommerceAddressCacheModel();
+
+		commerceAddressCacheModel.externalReferenceCode =
+			getExternalReferenceCode();
+
+		String externalReferenceCode =
+			commerceAddressCacheModel.externalReferenceCode;
+
+		if ((externalReferenceCode != null) &&
+			(externalReferenceCode.length() == 0)) {
+
+			commerceAddressCacheModel.externalReferenceCode = null;
+		}
 
 		commerceAddressCacheModel.commerceAddressId = getCommerceAddressId();
 
@@ -1750,6 +1822,8 @@ public class CommerceAddressModelImpl
 
 	}
 
+	private String _externalReferenceCode;
+	private String _originalExternalReferenceCode;
 	private long _commerceAddressId;
 	private long _groupId;
 	private long _originalGroupId;
