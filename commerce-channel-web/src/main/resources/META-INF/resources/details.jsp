@@ -77,7 +77,7 @@ portletDisplay.setURLBack(backURL);
 				<c:if test="<%= commerceChannelTypeJSPContributor != null %>">
 
 					<%
-					commerceChannelTypeJSPContributor.render(commerceChannelId, request, response);
+					commerceChannelTypeJSPContributor.render(commerceChannelId, request, PipingServletResponse.createPipingServletResponse(pageContext));
 					%>
 
 				</c:if>
