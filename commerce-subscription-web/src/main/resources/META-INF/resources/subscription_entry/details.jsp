@@ -85,7 +85,7 @@ if (maxSubscriptionCycles > 0) {
 
 			<%
 			if (cpSubscriptionTypeJSPContributor != null) {
-				cpSubscriptionTypeJSPContributor.render(commerceSubscriptionEntry, request, response);
+				cpSubscriptionTypeJSPContributor.render(commerceSubscriptionEntry, request, PipingServletResponse.createPipingServletResponse(pageContext));
 			}
 			%>
 

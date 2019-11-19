@@ -79,7 +79,7 @@ boolean ending = maxSubscriptionCycles > 0;
 
 				<%
 				if (cpSubscriptionTypeJSPContributor != null) {
-					cpSubscriptionTypeJSPContributor.render(cpDefinition, request, response);
+					cpSubscriptionTypeJSPContributor.render(cpDefinition, request, PipingServletResponse.createPipingServletResponse(pageContext));
 				}
 				%>
 
