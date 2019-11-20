@@ -15,7 +15,9 @@
 package com.liferay.headless.commerce.admin.inventory.internal.resource.v1_0;
 
 import com.liferay.commerce.inventory.exception.CommerceInventoryInvalidDateException;
+import com.liferay.commerce.inventory.exception.DuplicateCommerceInventoryWarehouseItemException;
 import com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseException;
+import com.liferay.commerce.inventory.exception.NoSuchInventoryWarehouseItemException;
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemService;
@@ -66,6 +68,31 @@ public class WarehouseItemResourceImpl extends BaseWarehouseItemResourceImpl {
 	}
 
 	@Override
+	public Response deleteWarehouseItemByExternalReferenceCode(
+			@NotNull String externalReferenceCode)
+		throws Exception {
+
+		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
+			_commerceInventoryWarehouseItemService.
+				fetchCommerceInventoryWarehouseItemByReferenceCode(
+					contextCompany.getCompanyId(), externalReferenceCode);
+
+		if (commerceInventoryWarehouseItem == null) {
+			throw new NoSuchInventoryWarehouseItemException(
+				"Unable to find WarehouseItem with externalReferenceCode: " +
+					externalReferenceCode);
+		}
+
+		_commerceInventoryWarehouseItemService.
+			deleteCommerceInventoryWarehouseItem(
+				commerceInventoryWarehouseItem.
+					getCommerceInventoryWarehouseItemId());
+		Response.ResponseBuilder responseBuilder = Response.noContent();
+
+		return responseBuilder.build();
+	}
+
+	@Override
 	public Page<WarehouseItem>
 			getWarehousByExternalReferenceCodeWarehouseItemsPage(
 				String externalReferenceCode, Pagination pagination)
@@ -109,6 +136,25 @@ public class WarehouseItemResourceImpl extends BaseWarehouseItemResourceImpl {
 			new DefaultDTOConverterContext(
 				contextAcceptLanguage.getPreferredLocale(),
 				GetterUtil.getLong(id)));
+	}
+
+	@Override
+	public WarehouseItem getWarehouseItemByExternalReferenceCode(
+			@NotNull String externalReferenceCode)
+		throws Exception {
+
+		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
+			_commerceInventoryWarehouseItemService.
+				fetchCommerceInventoryWarehouseItemByReferenceCode(
+					contextCompany.getCompanyId(), externalReferenceCode);
+
+		if (commerceInventoryWarehouseItem == null) {
+			throw new NoSuchInventoryWarehouseItemException(
+				"Unable to find WarehouseItem with externalReferenceCode: " +
+					externalReferenceCode);
+		}
+
+		return _toWarehouseItem(commerceInventoryWarehouseItem);
 	}
 
 	@Override
@@ -177,9 +223,36 @@ public class WarehouseItemResourceImpl extends BaseWarehouseItemResourceImpl {
 
 		_commerceInventoryWarehouseItemService.
 			updateCommerceInventoryWarehouseItem(
-				id, warehouseItem.getQuantity());
+				id, GetterUtil.getInteger(warehouseItem.getQuantity(), 0));
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	public Response patchWarehouseItemByExternalReferenceCode(
+			@NotNull String externalReferenceCode, WarehouseItem warehouseItem)
+		throws Exception {
+
+		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
+			_commerceInventoryWarehouseItemService.
+				fetchCommerceInventoryWarehouseItemByReferenceCode(
+					contextCompany.getCompanyId(), externalReferenceCode);
+
+		if (commerceInventoryWarehouseItem == null) {
+			throw new NoSuchInventoryWarehouseItemException(
+				"Unable to find WarehouseItem with externalReferenceCode: " +
+					externalReferenceCode);
+		}
+
+		_commerceInventoryWarehouseItemService.
+			updateCommerceInventoryWarehouseItem(
+				commerceInventoryWarehouseItem.
+					getCommerceInventoryWarehouseItemId(),
+				GetterUtil.getInteger(warehouseItem.getQuantity(), 0));
+
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
@@ -257,7 +330,19 @@ public class WarehouseItemResourceImpl extends BaseWarehouseItemResourceImpl {
 				"Unable to find Warehouse");
 		}
 
-		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
+		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem = null;
+
+		commerceInventoryWarehouseItem =
+			_commerceInventoryWarehouseItemService.
+				fetchCommerceInventoryWarehouseItemByReferenceCode(
+					contextCompany.getCompanyId(), externalReferenceCode);
+
+		if (commerceInventoryWarehouseItem != null) {
+			throw new DuplicateCommerceInventoryWarehouseItemException(
+				"External reference code already associated with this Warehouse");
+		}
+
+		commerceInventoryWarehouseItem =
 			_commerceInventoryWarehouseItemService.
 				addCommerceInventoryWarehouseItem(
 					_user.getUserId(),
@@ -307,6 +392,21 @@ public class WarehouseItemResourceImpl extends BaseWarehouseItemResourceImpl {
 		cal.add(Calendar.DATE, increment);
 
 		return cal.getTime();
+	}
+
+	private WarehouseItem _toWarehouseItem(
+			CommerceInventoryWarehouseItem commerceInventoryWarehouseItem)
+		throws Exception {
+
+		DTOConverter warehouseItemDTOConverter =
+			_dtoConverterRegistry.getDTOConverter(
+				CommerceInventoryWarehouseItem.class.getName());
+
+		return (WarehouseItem)warehouseItemDTOConverter.toDTO(
+			new DefaultDTOConverterContext(
+				contextAcceptLanguage.getPreferredLocale(),
+				commerceInventoryWarehouseItem.
+					getCommerceInventoryWarehouseItemId()));
 	}
 
 	private List<WarehouseItem> _toWarehouseItems(
