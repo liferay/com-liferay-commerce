@@ -7,7 +7,6 @@
 {template .render}
 	{@param? cpOptionValueId: string}
 	{@param? id: string}
-	{@param? _handleCancel: any }
 	{@param? _handleDeleteOptionValue: any }
 	{@param? _handleSaveOptionValue: any }
 
@@ -22,8 +21,6 @@
 			{if $cpOptionValueId != '0'}
 				<button class="btn btn-secondary" onclick="{$_handleDeleteOptionValue}" type="button">{msg desc=""}Delete{/msg}</button>
 			{/if}
-
-			<button class="btn btn-link" onclick="{$_handleCancel}" type="button">{msg desc=""}cancel{/msg}</button>
 		</div>
 	</div>
 {/template}
