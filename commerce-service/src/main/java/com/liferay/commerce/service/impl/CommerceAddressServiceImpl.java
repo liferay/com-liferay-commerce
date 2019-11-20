@@ -63,12 +63,27 @@ public class CommerceAddressServiceImpl extends CommerceAddressServiceBaseImpl {
 			String phoneNumber, int type, ServiceContext serviceContext)
 		throws PortalException {
 
+		return commerceAddressService.addCommerceAddress(
+			className, classPK, name, description, street1, street2, street3,
+			city, zip, commerceRegionId, commerceCountryId, phoneNumber, type,
+			null, serviceContext);
+	}
+
+	@Override
+	public CommerceAddress addCommerceAddress(
+			String className, long classPK, String name, String description,
+			String street1, String street2, String street3, String city,
+			String zip, long commerceRegionId, long commerceCountryId,
+			String phoneNumber, int type, String externalReferenceCode,
+			ServiceContext serviceContext)
+		throws PortalException {
+
 		checkPermission(className, classPK);
 
 		return commerceAddressLocalService.addCommerceAddress(
 			className, classPK, name, description, street1, street2, street3,
 			city, zip, commerceRegionId, commerceCountryId, phoneNumber, type,
-			serviceContext);
+			externalReferenceCode, serviceContext);
 	}
 
 	@Override
@@ -81,6 +96,22 @@ public class CommerceAddressServiceImpl extends CommerceAddressServiceBaseImpl {
 		checkPermission(commerceAddress);
 
 		commerceAddressLocalService.deleteCommerceAddress(commerceAddress);
+	}
+
+	@Override
+	public CommerceAddress fetchByExternalReferenceCode(
+			long companyId, String externalReferenceCode)
+		throws PortalException {
+
+		CommerceAddress commerceAddress =
+			commerceAddressLocalService.fetchByExternalReferenceCode(
+				companyId, externalReferenceCode);
+
+		if (commerceAddress != null) {
+			checkPermission(commerceAddress);
+		}
+
+		return commerceAddress;
 	}
 
 	@Override
