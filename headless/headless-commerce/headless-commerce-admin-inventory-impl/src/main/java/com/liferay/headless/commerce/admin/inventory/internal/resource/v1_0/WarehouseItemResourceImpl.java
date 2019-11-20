@@ -168,8 +168,7 @@ public class WarehouseItemResourceImpl extends BaseWarehouseItemResourceImpl {
 		}
 
 		if ((start == null) && (end == null)) {
-			throw new CommerceInventoryInvalidDateException(
-				"At least one date should be defined");
+			start = new Date();
 		}
 
 		if (start == null) {
