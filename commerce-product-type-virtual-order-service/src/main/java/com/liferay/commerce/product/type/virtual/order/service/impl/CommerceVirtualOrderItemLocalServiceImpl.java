@@ -217,32 +217,33 @@ public class CommerceVirtualOrderItemLocalServiceImpl
 			commerceVirtualOrderItem.getCommerceOrderItem();
 
 		InputStream contentStream;
+		String extension = StringPool.BLANK;
 
 		if (commerceVirtualOrderItem.getFileEntryId() > 0) {
 			FileEntry fileEntry = commerceVirtualOrderItem.getFileEntry();
 
 			contentStream = fileEntry.getContentStream();
+
+			extension = fileEntry.getExtension();
 		}
 		else {
 			URL url = new URL(commerceVirtualOrderItem.getUrl());
 
 			contentStream = url.openStream();
+
+			String mimeType = URLConnection.guessContentTypeFromStream(
+				contentStream);
+
+			Set<String> extensions = MimeTypesUtil.getExtensions(mimeType);
+
+			if (!extensions.isEmpty()) {
+				Iterator<String> iterator = extensions.iterator();
+
+				extension = iterator.next();
+			}
 		}
 
 		File tempFile = FileUtil.createTempFile(contentStream);
-
-		String mimeType = URLConnection.guessContentTypeFromStream(
-			contentStream);
-
-		Set<String> extensions = MimeTypesUtil.getExtensions(mimeType);
-
-		String extension = StringPool.BLANK;
-
-		if (!extensions.isEmpty()) {
-			Iterator<String> iterator = extensions.iterator();
-
-			extension = iterator.next();
-		}
 
 		File file = new File(
 			tempFile.getParent(),
