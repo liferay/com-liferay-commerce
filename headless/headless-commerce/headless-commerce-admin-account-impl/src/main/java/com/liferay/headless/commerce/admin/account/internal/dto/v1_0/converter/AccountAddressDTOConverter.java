@@ -57,6 +57,8 @@ public class AccountAddressDTOConverter implements DTOConverter {
 				defaultBilling = commerceAddress.isDefaultBilling();
 				defaultShipping = commerceAddress.isDefaultShipping();
 				description = commerceAddress.getDescription();
+				externalReferenceCode =
+					commerceAddress.getExternalReferenceCode();
 				id = commerceAddress.getCommerceAddressId();
 				latitude = commerceAddress.getLatitude();
 				longitude = commerceAddress.getLongitude();
@@ -66,6 +68,7 @@ public class AccountAddressDTOConverter implements DTOConverter {
 				street1 = commerceAddress.getStreet1();
 				street2 = commerceAddress.getStreet2();
 				street3 = commerceAddress.getStreet3();
+				type = commerceAddress.getType();
 				zip = commerceAddress.getZip();
 			}
 		};
