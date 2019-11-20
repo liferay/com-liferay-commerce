@@ -60,34 +60,48 @@ import javax.ws.rs.core.UriInfo;
 public abstract class BaseWarehouseResourceImpl implements WarehouseResource {
 
 	@Override
-	@GET
-	@Parameters(
-		value = {
-			@Parameter(in = ParameterIn.QUERY, name = "filter"),
-			@Parameter(in = ParameterIn.QUERY, name = "page"),
-			@Parameter(in = ParameterIn.QUERY, name = "pageSize"),
-			@Parameter(in = ParameterIn.QUERY, name = "sort")
-		}
-	)
-	@Path("/warehouses/")
+	@DELETE
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/warehouses/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Warehouse")})
-	public Page<Warehouse> getWarehousesPage(
-			@Context Filter filter, @Context Pagination pagination,
-			@Context Sort[] sorts)
+	public Response deleteWarehousId(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
 		throws Exception {
 
-		return Page.of(Collections.emptyList());
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/warehouses/{id}")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "Warehouse")})
+	public Warehouse getWarehousId(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
+		throws Exception {
+
+		return new Warehouse();
 	}
 
 	@Override
 	@Consumes({"application/json", "application/xml"})
-	@POST
-	@Path("/warehouses/")
+	@PATCH
+	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
+	@Path("/warehouses/{id}")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Warehouse")})
-	public Warehouse postWarehous(Warehouse warehouse) throws Exception {
-		return new Warehouse();
+	public Response patchWarehousId(
+			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
+			Warehouse warehouse)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
 	}
 
 	@Override
@@ -151,48 +165,34 @@ public abstract class BaseWarehouseResourceImpl implements WarehouseResource {
 	}
 
 	@Override
-	@DELETE
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/warehouses/{id}")
-	@Produces({"application/json", "application/xml"})
-	@Tags(value = {@Tag(name = "Warehouse")})
-	public Response deleteWarehousId(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
-	}
-
-	@Override
 	@GET
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/warehouses/{id}")
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.QUERY, name = "filter"),
+			@Parameter(in = ParameterIn.QUERY, name = "page"),
+			@Parameter(in = ParameterIn.QUERY, name = "pageSize"),
+			@Parameter(in = ParameterIn.QUERY, name = "sort")
+		}
+	)
+	@Path("/warehouses/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Warehouse")})
-	public Warehouse getWarehousId(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id)
+	public Page<Warehouse> getWarehousesPage(
+			@Context Filter filter, @Context Pagination pagination,
+			@Context Sort[] sorts)
 		throws Exception {
 
-		return new Warehouse();
+		return Page.of(Collections.emptyList());
 	}
 
 	@Override
 	@Consumes({"application/json", "application/xml"})
-	@PATCH
-	@Parameters(value = {@Parameter(in = ParameterIn.PATH, name = "id")})
-	@Path("/warehouses/{id}")
+	@POST
+	@Path("/warehouses/")
 	@Produces({"application/json", "application/xml"})
 	@Tags(value = {@Tag(name = "Warehouse")})
-	public Response patchWarehousId(
-			@NotNull @Parameter(hidden = true) @PathParam("id") Long id,
-			Warehouse warehouse)
-		throws Exception {
-
-		Response.ResponseBuilder responseBuilder = Response.ok();
-
-		return responseBuilder.build();
+	public Warehouse postWarehous(Warehouse warehouse) throws Exception {
+		return new Warehouse();
 	}
 
 	public void setContextCompany(Company contextCompany) {

@@ -36,19 +36,12 @@ import javax.ws.rs.core.Response;
 @Generated("")
 public interface WarehouseItemResource {
 
-	public WarehouseItem postWarehouseItemByExternalReferenceCode(
-			String externalReferenceCode, WarehouseItem warehouseItem)
+	public Page<WarehouseItem> getWarehousIdWarehouseItemsPage(
+			Long id, Pagination pagination)
 		throws Exception;
 
-	public Page<WarehouseItem> getWarehouseItemsUpdatedPage(
-			Date end, Date start, Pagination pagination)
-		throws Exception;
-
-	public Response deleteWarehouseItem(Long id) throws Exception;
-
-	public WarehouseItem getWarehouseItem(Long id) throws Exception;
-
-	public Response patchWarehouseItem(Long id, WarehouseItem warehouseItem)
+	public WarehouseItem postWarehousIdWarehouseItem(
+			Long id, WarehouseItem warehouseItem)
 		throws Exception;
 
 	public Page<WarehouseItem>
@@ -60,12 +53,31 @@ public interface WarehouseItemResource {
 			String externalReferenceCode, WarehouseItem warehouseItem)
 		throws Exception;
 
-	public Page<WarehouseItem> getWarehousIdWarehouseItemsPage(
-			Long id, Pagination pagination)
+	public Response deleteWarehouseItem(Long id) throws Exception;
+
+	public WarehouseItem getWarehouseItem(Long id) throws Exception;
+
+	public Response patchWarehouseItem(Long id, WarehouseItem warehouseItem)
 		throws Exception;
 
-	public WarehouseItem postWarehousIdWarehouseItem(
-			Long id, WarehouseItem warehouseItem)
+	public Response deleteWarehouseItemByExternalReferenceCode(
+			String externalReferenceCode)
+		throws Exception;
+
+	public WarehouseItem getWarehouseItemByExternalReferenceCode(
+			String externalReferenceCode)
+		throws Exception;
+
+	public Response patchWarehouseItemByExternalReferenceCode(
+			String externalReferenceCode, WarehouseItem warehouseItem)
+		throws Exception;
+
+	public WarehouseItem postWarehouseItemByExternalReferenceCode(
+			String externalReferenceCode, WarehouseItem warehouseItem)
+		throws Exception;
+
+	public Page<WarehouseItem> getWarehouseItemsUpdatedPage(
+			Date end, Date start, Pagination pagination)
 		throws Exception;
 
 	public void setContextCompany(Company contextCompany);
