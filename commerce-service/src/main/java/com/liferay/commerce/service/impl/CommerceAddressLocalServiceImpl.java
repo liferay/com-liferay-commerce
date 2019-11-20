@@ -103,6 +103,22 @@ public class CommerceAddressLocalServiceImpl
 			String phoneNumber, int type, ServiceContext serviceContext)
 		throws PortalException {
 
+		return commerceAddressLocalService.addCommerceAddress(
+			className, classPK, name, description, street1, street2, street3,
+			city, zip, commerceRegionId, commerceCountryId, phoneNumber, type,
+			null, serviceContext);
+	}
+
+	@Indexable(type = IndexableType.REINDEX)
+	@Override
+	public CommerceAddress addCommerceAddress(
+			String className, long classPK, String name, String description,
+			String street1, String street2, String street3, String city,
+			String zip, long commerceRegionId, long commerceCountryId,
+			String phoneNumber, int type, String externalReferenceCode,
+			ServiceContext serviceContext)
+		throws PortalException {
+
 		User user = userLocalService.getUser(serviceContext.getUserId());
 
 		long companyId = user.getCompanyId();
@@ -132,7 +148,7 @@ public class CommerceAddressLocalServiceImpl
 		commerceAddress.setCommerceCountryId(commerceCountryId);
 		commerceAddress.setPhoneNumber(phoneNumber);
 		commerceAddress.setType(type);
-
+		commerceAddress.setExternalReferenceCode(externalReferenceCode);
 		commerceAddressPersistence.update(commerceAddress);
 
 		return commerceAddress;
@@ -233,6 +249,15 @@ public class CommerceAddressLocalServiceImpl
 		for (CommerceAddress commerceAddress : commerceAddresses) {
 			commerceAddressLocalService.deleteCommerceAddress(commerceAddress);
 		}
+	}
+
+	@Override
+	public CommerceAddress fetchByExternalReferenceCode(
+			long companyId, String externalReferenceCode)
+		throws PortalException {
+
+		return commerceAddressPersistence.fetchByC_ERC(
+			companyId, externalReferenceCode, true);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
