@@ -112,7 +112,7 @@
 		display: inline-block;
 		font-size: 12px;
 		line-height: 1;
-		margin-bottom: 0;
+		margin-bottom: 8px;
 		margin-top: 24px;
 	}
 
@@ -120,7 +120,7 @@
 		display: inline-block;
 		font-size: 12px;
 		line-height: 1;
-		margin-bottom: 0;
+		margin-bottom: 8px;
 		margin-top: 24px;
 		min-height: 12px;
 	}
@@ -130,8 +130,7 @@
 		font-size: 17px;
 		font-weight: 600;
 		line-height: 1;
-		margin-bottom: 0;
-		margin-top: 8px;
+		margin-bottom: 15px;
 
 		&:hover {
 		 color: inherit;
@@ -160,8 +159,8 @@
 	}
 
 	&__price {
-		margin: 8px 0;
-		min-height: 33px;
+		margin-bottom: 20px;
+		line-height: 1;
 	}
 
 	&__add-to-wishlist-button {
