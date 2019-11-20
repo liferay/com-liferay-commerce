@@ -98,7 +98,6 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 
 	/**
 	 * @param commerceOrderId
-	 * @return
 	 * @deprecated As of Mueller (7.2.x), this method is being moved to Subscription Engine
 	 */
 	@Deprecated
@@ -210,7 +209,6 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 	 * @param commerceOrderId
 	 * @param transactionId
 	 * @param httpServletRequest
-	 * @return
 	 * @throws Exception
 	 * @deprecated As of Mueller (7.2.x), this method is being moved to Subscription Engine
 	 */
@@ -287,7 +285,6 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 
 	/**
 	 * @param commerceOrderId
-	 * @return
 	 * @throws PortalException
 	 * @deprecated As of Mueller (7.2.x), this method is being replaced
 	 */
@@ -356,7 +353,6 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 
 	/**
 	 * @param commerceOrderId
-	 * @return
 	 * @throws PortalException
 	 * @deprecated As of Mueller (7.2.x), this method will be removed
 	 */
@@ -392,7 +388,6 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 
 	/**
 	 * @param commerceOrderId
-	 * @return
 	 * @throws Exception
 	 * @deprecated As of Mueller (7.2.x), this method will be removed
 	 */
@@ -488,7 +483,6 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 	 * @param commerceOrderId
 	 * @param nextUrl
 	 * @param httpServletRequest
-	 * @return
 	 * @throws Exception
 	 * @deprecated As of Mueller (7.2.x), this method is being moved to Subscription Engine
 	 */
@@ -550,7 +544,6 @@ public class CommercePaymentEngineImpl implements CommercePaymentEngine {
 
 	/**
 	 * @param commerceSubscriptionEntryId
-	 * @return
 	 * @throws Exception
 	 * @deprecated As of Mueller (7.2.x), this method is being moved to Subscription Engine
 	 */
