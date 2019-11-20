@@ -45,6 +45,18 @@ public interface AccountAddressResource {
 			String externalReferenceCode, AccountAddress accountAddress)
 		throws Exception;
 
+	public Response deleteAccountAddressByExternalReferenceCode(
+			String externalReferenceCode)
+		throws Exception;
+
+	public AccountAddress getAccountAddressByExternalReferenceCode(
+			String externalReferenceCode)
+		throws Exception;
+
+	public Response patchAccountAddressByExternalReferenceCode(
+			String externalReferenceCode, AccountAddress accountAddress)
+		throws Exception;
+
 	public Page<AccountAddress> getAccountIdAccountAddressesPage(
 			Long id, Pagination pagination)
 		throws Exception;
