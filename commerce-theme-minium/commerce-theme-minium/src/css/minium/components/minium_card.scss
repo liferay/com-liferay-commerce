@@ -129,7 +129,7 @@
 		color: inherit;
 		font-size: 17px;
 		font-weight: 600;
-		line-height: 1;
+		line-height: 1.2;
 		margin-bottom: 15px;
 
 		&:hover {
@@ -161,6 +161,7 @@
 	&__price {
 		line-height: 1;
 		margin-bottom: 20px;
+		min-height: 33px;
 	}
 
 	&__add-to-wishlist-button {

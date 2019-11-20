@@ -18,24 +18,51 @@
 		height: auto;
 	}
 
-	.commerce-compare-table__title {
-		width: 150px;
-	}
-
 	tbody tr:not(.commerce-compare-table__separator) {
 		background: white;
 		overflow: hidden;
+	}
+	
+	.minium-card{
+		padding-bottom: 64px;
+		position: static;
+
+		&:hover {
+			box-shadow: none;
+		}
+
+		&__actions {
+			bottom: 20px;
+			left: 20px;
+			position: absolute;
+			right: 20px;
+		}
+	}
+
+
+	&__card {
+		background: white;
+		border-radius: 8px;
+		border-right: 2px solid $color-bg-alt;
+		padding: 0;
+		position: relative;
+		vertical-align: top;
+
+		&:last-child {
+			border-right: none;
+		}
 	}
 
 	&__separator {
 		font-weight: 800;
 	}
-
+	
 	&__title {
 		font-size: 12px;
 		letter-spacing: 1.2px;
 		line-height: 16px;
 		text-transform: uppercase;
+		width: 150px;
 	}
 
 	&__value {
