@@ -40,6 +40,7 @@ import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.PATCH;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -117,6 +118,66 @@ public abstract class BaseAccountAddressResourceImpl
 		throws Exception {
 
 		return new AccountAddress();
+	}
+
+	@Override
+	@DELETE
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
+		}
+	)
+	@Path("/accountAddresses/by-externalReferenceCode/{externalReferenceCode}/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "AccountAddress")})
+	public Response deleteAccountAddressByExternalReferenceCode(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
+	}
+
+	@Override
+	@GET
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
+		}
+	)
+	@Path("/accountAddresses/by-externalReferenceCode/{externalReferenceCode}/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "AccountAddress")})
+	public AccountAddress getAccountAddressByExternalReferenceCode(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode)
+		throws Exception {
+
+		return new AccountAddress();
+	}
+
+	@Override
+	@Consumes({"application/json", "application/xml"})
+	@PATCH
+	@Parameters(
+		value = {
+			@Parameter(in = ParameterIn.PATH, name = "externalReferenceCode")
+		}
+	)
+	@Path("/accountAddresses/by-externalReferenceCode/{externalReferenceCode}/")
+	@Produces({"application/json", "application/xml"})
+	@Tags(value = {@Tag(name = "AccountAddress")})
+	public Response patchAccountAddressByExternalReferenceCode(
+			@NotNull @Parameter(hidden = true)
+			@PathParam("externalReferenceCode") String externalReferenceCode,
+			AccountAddress accountAddress)
+		throws Exception {
+
+		Response.ResponseBuilder responseBuilder = Response.ok();
+
+		return responseBuilder.build();
 	}
 
 	@Override

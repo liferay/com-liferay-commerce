@@ -14,12 +14,6 @@
 
 package com.liferay.headless.commerce.admin.account.internal.graphql.query.v1_0;
 
-import java.util.Collection;
-
-import javax.annotation.Generated;
-
-import org.osgi.service.component.ComponentServiceObjects;
-
 import com.liferay.headless.commerce.admin.account.dto.v1_0.Account;
 import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountAddress;
 import com.liferay.headless.commerce.admin.account.dto.v1_0.AccountGroup;
@@ -42,6 +36,12 @@ import com.liferay.portal.vulcan.pagination.Pagination;
 import graphql.annotations.annotationTypes.GraphQLField;
 import graphql.annotations.annotationTypes.GraphQLInvokeDetached;
 import graphql.annotations.annotationTypes.GraphQLName;
+
+import java.util.Collection;
+
+import javax.annotation.Generated;
+
+import org.osgi.service.component.ComponentServiceObjects;
 
 /**
  * @author Alessio Antonio Rendina
@@ -154,6 +154,20 @@ public class Query {
 
 				return paginationPage.getItems();
 			});
+	}
+
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public AccountAddress getAccountAddressByExternalReferenceCode(
+			@GraphQLName("externalReferenceCode") String externalReferenceCode)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountAddressResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountAddressResource ->
+				accountAddressResource.getAccountAddressByExternalReferenceCode(
+					externalReferenceCode));
 	}
 
 	@GraphQLField

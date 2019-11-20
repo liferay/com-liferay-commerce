@@ -245,6 +245,35 @@ public class Mutation {
 						externalReferenceCode, accountAddress));
 	}
 
+	@GraphQLInvokeDetached
+	public Response deleteAccountAddressByExternalReferenceCode(
+			@GraphQLName("externalReferenceCode") String externalReferenceCode)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountAddressResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountAddressResource ->
+				accountAddressResource.
+					deleteAccountAddressByExternalReferenceCode(
+						externalReferenceCode));
+	}
+
+	@GraphQLInvokeDetached
+	public Response patchAccountAddressByExternalReferenceCode(
+			@GraphQLName("externalReferenceCode") String externalReferenceCode,
+			@GraphQLName("accountAddress") AccountAddress accountAddress)
+		throws Exception {
+
+		return _applyComponentServiceObjects(
+			_accountAddressResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountAddressResource ->
+				accountAddressResource.
+					patchAccountAddressByExternalReferenceCode(
+						externalReferenceCode, accountAddress));
+	}
+
 	@GraphQLField
 	@GraphQLInvokeDetached
 	public AccountAddress postAccountIdAccountAddress(
