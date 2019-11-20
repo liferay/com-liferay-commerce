@@ -740,7 +740,7 @@ public class CPInstanceHelperImpl implements CPInstanceHelper {
 				List<CPDefinitionOptionValueRel> cpDefinitionOptionValueRels =
 					null;
 
-				if (cpDefinitionOptionRel.isSkuContributor()) {
+				if (cpDefinitionOptionRel.isSkuContributor() && publicStore) {
 					cpDefinitionOptionValueRels = getCPDefinitionOptionValueRel(
 						cpDefinitionId, cpDefinitionOptionRel.getKey(),
 						filters);
