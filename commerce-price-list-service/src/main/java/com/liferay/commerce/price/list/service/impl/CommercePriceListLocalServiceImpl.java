@@ -657,7 +657,6 @@ public class CommercePriceListLocalServiceImpl
 	 *         matching reference code one will be updated
 	 * @param  neverExpire
 	 * @param  serviceContext
-	 * @return
 	 * @throws PortalException
 	 */
 	@Indexable(type = IndexableType.REINDEX)

@@ -26,7 +26,6 @@ public interface ScheduledTaskExecutorService {
 
 	/**
 	 * This method returns the name of the process type
-	 * @return
 	 */
 	public String getName();
 
