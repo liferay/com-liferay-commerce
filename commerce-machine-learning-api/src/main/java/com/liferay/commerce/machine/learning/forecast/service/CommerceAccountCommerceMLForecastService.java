@@ -29,6 +29,14 @@ import java.util.List;
 public interface CommerceAccountCommerceMLForecastService {
 
 	public CommerceAccountCommerceMLForecast
+			addCommerceAccountCommerceMLForecast(
+				CommerceAccountCommerceMLForecast
+					commerceAccountCommerceMLForecast)
+		throws PortalException;
+
+	public CommerceAccountCommerceMLForecast create();
+
+	public CommerceAccountCommerceMLForecast
 			getCommerceAccountCommerceMLForecast(
 				long companyId, long forecastId)
 		throws PortalException;
