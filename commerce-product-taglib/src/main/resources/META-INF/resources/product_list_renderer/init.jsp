@@ -20,7 +20,8 @@
 page import="com.liferay.commerce.product.content.constants.CPContentWebKeys" %><%@
 page import="com.liferay.commerce.product.content.render.list.CPContentListRenderer" %><%@
 page import="com.liferay.commerce.product.content.util.CPContentHelper" %><%@
-page import="com.liferay.commerce.product.data.source.CPDataSourceResult" %>
+page import="com.liferay.commerce.product.data.source.CPDataSourceResult" %><%@
+page import="com.liferay.taglib.servlet.PipingServletResponse" %>
 
 <%@ page import="java.util.Map" %>
 
