@@ -56,22 +56,21 @@ public class CommerceAccountGroupCommerceAccountRelLocalServiceImpl
 		}
 
 		CommerceAccountGroupCommerceAccountRel
-			commerceAccountGroupCommerceAccountRel2 =
+			commerceAccountGroupCommerceAccountRel =
 				commerceAccountGroupCommerceAccountRelPersistence.fetchByC_C(
 					commerceAccountGroupId, commerceAccountId);
 
-		if (commerceAccountGroupCommerceAccountRel2 != null) {
+		if (commerceAccountGroupCommerceAccountRel != null) {
 			throw new DuplicateCommerceAccountGroupCommerceAccountRelException(
-				"Account already associated to AccountGroup ");
+				"Account already associated to AccountGroup");
 		}
 
 		long commerceAccountGroupCommerceAccountRelId =
 			counterLocalService.increment();
 
-		CommerceAccountGroupCommerceAccountRel
-			commerceAccountGroupCommerceAccountRel =
-				commerceAccountGroupCommerceAccountRelPersistence.create(
-					commerceAccountGroupCommerceAccountRelId);
+		commerceAccountGroupCommerceAccountRel =
+			commerceAccountGroupCommerceAccountRelPersistence.create(
+				commerceAccountGroupCommerceAccountRelId);
 
 		commerceAccountGroupCommerceAccountRel.setCompanyId(
 			user.getCompanyId());
