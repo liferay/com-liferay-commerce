@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="./init.jsp" %>
+<%@ include file="/init.jsp" %>
 
 <%
 CommerceAdminModuleRegistry commerceAdminModuleRegistry = (CommerceAdminModuleRegistry)request.getAttribute(CommerceAdminWebKeys.COMMERCE_ADMIN_MODULE_REGISTRY);
