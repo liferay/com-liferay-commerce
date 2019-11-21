@@ -28,6 +28,12 @@ import java.util.List;
 @ProviderType
 public interface AssetCategoryCommerceMLForecastService {
 
+	public AssetCategoryCommerceMLForecast addAssetCategoryCommerceMLForecast(
+			AssetCategoryCommerceMLForecast assetCategoryCommerceMLForecast)
+		throws PortalException;
+
+	public AssetCategoryCommerceMLForecast create();
+
 	public AssetCategoryCommerceMLForecast getAssetCategoryCommerceMLForecast(
 			long companyId, long forecastId)
 		throws PortalException;
