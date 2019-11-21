@@ -51,6 +51,30 @@ public class CommerceAccountCommerceMLForecastServiceImpl
 
 	@Override
 	public CommerceAccountCommerceMLForecast
+			addCommerceAccountCommerceMLForecast(
+				CommerceAccountCommerceMLForecast
+					commerceAccountCommerceMLForecast)
+		throws PortalException {
+
+		long commerceMLForecastId = getHash(
+			commerceAccountCommerceMLForecast.getCommerceAccountId(),
+			commerceAccountCommerceMLForecast.getPeriod(),
+			commerceAccountCommerceMLForecast.getScope(),
+			commerceAccountCommerceMLForecast.getTarget(),
+			commerceAccountCommerceMLForecast.getTimestamp());
+
+		commerceAccountCommerceMLForecast.setForecastId(commerceMLForecastId);
+
+		return addCommerceMLForecast(commerceAccountCommerceMLForecast);
+	}
+
+	@Override
+	public CommerceAccountCommerceMLForecast create() {
+		return new CommerceAccountCommerceMLForecastImpl();
+	}
+
+	@Override
+	public CommerceAccountCommerceMLForecast
 			getCommerceAccountCommerceMLForecast(
 				long companyId, long forecastId)
 		throws PortalException {
@@ -104,6 +128,19 @@ public class CommerceAccountCommerceMLForecastServiceImpl
 			commerceMLIndexer.getIndexName(companyId), query);
 
 		return getCountResult(countSearchRequest);
+	}
+
+	@Override
+	protected Document toDocumentModel(
+		CommerceAccountCommerceMLForecast commerceAccountCommerceMLForecast) {
+
+		Document document = getBaseDocument(commerceAccountCommerceMLForecast);
+
+		document.addNumber(
+			CommerceMLForecastField.COMMERCE_ACCOUNT_ID,
+			commerceAccountCommerceMLForecast.getCommerceAccountId());
+
+		return document;
 	}
 
 	@Override
