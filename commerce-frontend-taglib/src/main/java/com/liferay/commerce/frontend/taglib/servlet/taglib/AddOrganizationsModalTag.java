@@ -14,50 +14,45 @@
 
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
+import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.AddOrganizationsModalItemRendererUtil;
+import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.AddOrganizationsModalItemRenderer;
 import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
-import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
-import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
-import com.liferay.petra.string.StringPool;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.PortalUtil;
-import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.commerce.product.catalog.CPCatalogEntry;
+import com.liferay.commerce.product.content.util.CPContentHelper;
+import com.liferay.taglib.util.IncludeTag;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.PageContext;
 
 /**
- * @author Fabio Diego Mastrorilli
+ * @author Gianmarco Brunialti Masera
  */
-public class AddOrganizationsModalTag extends ComponentRendererTag {
+
+public class AddOrganizationsModalTag extends IncludeTag {
 
 	@Override
-	public int doStartTag() {
-		putValue(
-			"organizationsAPI",
-			PortalUtil.getPortalURL(request) +
-				"/o/commerce-ui/search-organizations");
-		putValue("query", StringPool.BLANK);
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		putValue(
-			"spritemap",
-			themeDisplay.getPathThemeImages() + "/commerce-icons.svg");
-
-		setTemplateNamespace("AddOrganizationsModal.render");
+	public int doStartTag() throws JspException {
+		_cpContentHelper = ServletContextUtil.getCPContentHelper();
+		_addOrganizationsModalItemRenderer = AddOrganizationsModalItemRendererUtil.getRenderer();
 
 		return super.doStartTag();
 	}
 
 	@Override
-	public String getModule() {
-		NPMResolver npmResolver = ServletContextUtil.getNPMResolver();
+	public int doEndTag() throws JspException {
+		HttpServletResponse response =
+				(HttpServletResponse) pageContext.getResponse();
 
-		if (npmResolver == null) {
-			return StringPool.BLANK;
-		}
+		CPCatalogEntry cpCatalogEntry =
+				_cpContentHelper.getCPCatalogEntry(request);
 
-		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/add_organizations_modal" +
-				"/AddOrganizationsModal.es");
+		_addOrganizationsModalItemRenderer.render(cpCatalogEntry, request, response);
+
+		return super.doEndTag();
 	}
 
+	private CPContentHelper _cpContentHelper;
+
+	private AddOrganizationsModalItemRenderer _addOrganizationsModalItemRenderer;
 }

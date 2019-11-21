@@ -14,49 +14,44 @@
 
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
+import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.AddAccountModalItemRenderer;
+import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.AddAccountModalItemRendererUtil;
 import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
-import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
-import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
-import com.liferay.petra.string.StringPool;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.PortalUtil;
-import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.commerce.product.catalog.CPCatalogEntry;
+import com.liferay.commerce.product.content.util.CPContentHelper;
+import com.liferay.taglib.util.IncludeTag;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspException;
 
 /**
- * @author Fabio Diego Mastrorilli
+ * @author Gianmarco Brunialti Masera
  */
-public class AddAccountModalTag extends ComponentRendererTag {
+
+public class AddAccountModalTag extends IncludeTag {
 
 	@Override
-	public int doStartTag() {
-		putValue("query", StringPool.BLANK);
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		putValue(
-			"spritemap",
-			themeDisplay.getPathThemeImages() + "/commerce-icons.svg");
-
-		putValue(
-			"usersAPI",
-			PortalUtil.getPortalURL(request) + "/o/commerce-ui/search-users");
-
-		setTemplateNamespace("AddAccountModal.render");
+	public int doStartTag() throws JspException {
+		_cpContentHelper = ServletContextUtil.getCPContentHelper();
+		_addAccountModalItemRenderer = AddAccountModalItemRendererUtil.getRenderer();
 
 		return super.doStartTag();
 	}
 
 	@Override
-	public String getModule() {
-		NPMResolver npmResolver = ServletContextUtil.getNPMResolver();
+	public int doEndTag() throws JspException {
+		HttpServletResponse response =
+				(HttpServletResponse) pageContext.getResponse();
 
-		if (npmResolver == null) {
-			return StringPool.BLANK;
-		}
+		CPCatalogEntry cpCatalogEntry =
+				_cpContentHelper.getCPCatalogEntry(request);
 
-		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/add_account_modal/AddAccountModal.es");
+		_addAccountModalItemRenderer.render(cpCatalogEntry, request, response);
+
+		return super.doEndTag();
 	}
 
+	private AddAccountModalItemRenderer _addAccountModalItemRenderer;
+
+	private CPContentHelper _cpContentHelper;
 }

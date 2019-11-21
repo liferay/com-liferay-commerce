@@ -14,65 +14,54 @@
 
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
+import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.SearchBarItemRenderer;
+import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.SearchBarItemRendererUtil;
 import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
-import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
-import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
-import com.liferay.petra.string.StringPool;
-import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.commerce.product.catalog.CPCatalogEntry;
+import com.liferay.commerce.product.content.util.CPContentHelper;
+import com.liferay.taglib.util.IncludeTag;
 
-import java.util.Map;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspException;
 
 /**
- * @author Marco Leo
+ * @author Gianmarco Brunialti Masera
  */
-public class SearchBarTag extends ComponentRendererTag {
+
+public class SearchBarTag extends IncludeTag {
 
 	@Override
-	public int doStartTag() {
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		putValue(
-			"placeholder",
-			LanguageUtil.get(themeDisplay.getLocale(), "search"));
-
-		String query = ParamUtil.getString(request, "q");
-
-		putValue("query", query);
-
-		putValue(
-			"spritemap",
-			themeDisplay.getPathThemeImages() + "/commerce-icons.svg");
-
-		Map<String, Object> context = getContext();
-
-		String id = GetterUtil.getString(context.get("id"));
-
-		setComponentId(id);
-
-		setTemplateNamespace("SearchBar.render");
+	public int doStartTag() throws JspException {
+		_cpContentHelper = ServletContextUtil.getCPContentHelper();
+		_searchBarItemRenderer = SearchBarItemRendererUtil.getRenderer();
 
 		return super.doStartTag();
 	}
 
 	@Override
-	public String getModule() {
-		NPMResolver npmResolver = ServletContextUtil.getNPMResolver();
+	public int doEndTag() throws JspException {
+		HttpServletResponse response =
+				(HttpServletResponse) pageContext.getResponse();
 
-		if (npmResolver == null) {
-			return StringPool.BLANK;
-		}
+		CPCatalogEntry cpCatalogEntry =
+				_cpContentHelper.getCPCatalogEntry(request);
 
-		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/search_bar/SearchBar.es");
+		_searchBarItemRenderer.render(cpCatalogEntry, request, response);
+
+		return super.doEndTag();
+	}
+
+	@Override
+	public void cleanUp() {
+		request.removeAttribute("id");
 	}
 
 	public void setId(String id) {
-		putValue("id", id);
+		request.setAttribute("id", id);
 	}
+
+	private SearchBarItemRenderer _searchBarItemRenderer;
+
+	private CPContentHelper _cpContentHelper;
 
 }
