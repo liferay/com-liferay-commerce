@@ -458,8 +458,8 @@ public class CommerceOrderServiceImpl extends CommerceOrderServiceBaseImpl {
 
 		return commerceOrderLocalService.getCommerceOrders(
 			companyId, groupId, commerceAccountIds, keywords,
-			new int[] {CommerceOrderConstants.ORDER_STATUS_OPEN}, false, start,
-			end);
+			new int[] {CommerceOrderConstants.ORDER_STATUS_TO_TRANSMIT}, false,
+			start, end);
 	}
 
 	@Override
