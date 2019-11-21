@@ -17,6 +17,7 @@ package com.liferay.headless.commerce.admin.account.internal.odata.entity.v1_0;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.odata.entity.EntityField;
 import com.liferay.portal.odata.entity.EntityModel;
+import com.liferay.portal.odata.entity.IntegerEntityField;
 import com.liferay.portal.odata.entity.StringEntityField;
 
 import java.util.Map;
@@ -32,7 +33,9 @@ public class AccountEntityModel implements EntityModel {
 	public AccountEntityModel() {
 		_entityFieldsMap = Stream.of(
 			new StringEntityField(
-				"name", locale -> Field.getSortableFieldName(Field.NAME))
+				"name", locale -> Field.getSortableFieldName(Field.NAME)),
+			new IntegerEntityField(
+				"type", locale -> Field.getSortableFieldName(Field.TYPE))
 		).collect(
 			Collectors.toMap(EntityField::getName, Function.identity())
 		);
