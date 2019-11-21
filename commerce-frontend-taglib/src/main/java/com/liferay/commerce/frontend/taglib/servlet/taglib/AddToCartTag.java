@@ -14,115 +14,59 @@
 
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
-import com.liferay.commerce.account.model.CommerceAccount;
-import com.liferay.commerce.constants.CommerceWebKeys;
-import com.liferay.commerce.context.CommerceContext;
+import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.AddToCartItemRenderer;
+import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.AddToCartItemRendererUtil;
 import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
-import com.liferay.commerce.frontend.util.ProductHelper;
-import com.liferay.commerce.model.CommerceOrder;
-import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
-import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
-import com.liferay.petra.string.StringPool;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.commerce.product.catalog.CPCatalogEntry;
+import com.liferay.commerce.product.content.util.CPContentHelper;
 
-import java.util.Map;
+import com.liferay.taglib.util.IncludeTag;
 
-import javax.servlet.jsp.PageContext;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspException;
 
 /**
- * @author Fabio Diego Mastrorilli
- * @author Marco Leo
+ * @author Gianmarco Brunialti Masera
  */
-public class AddToCartTag extends ComponentRendererTag {
+
+public class AddToCartTag extends IncludeTag {
 
 	@Override
-	public int doStartTag() {
-		try {
-			CommerceContext commerceContext =
-				(CommerceContext)request.getAttribute(
-					CommerceWebKeys.COMMERCE_CONTEXT);
-
-			CommerceAccount commerceAccount =
-				commerceContext.getCommerceAccount();
-
-			Map<String, Object> context = getContext();
-
-			long cpInstanceId = GetterUtil.getLong(context.get("productId"));
-
-			String componentId = (String)context.getOrDefault(
-				"id", cpInstanceId + "AddToCartButtonId");
-
-			setComponentId(componentId);
-
-			putValue(
-				"cartAPI",
-				PortalUtil.getPortalURL(request) + "/o/commerce-ui/cart-item");
-
-			if (commerceAccount != null) {
-				putValue("accountId", commerceAccount.getCommerceAccountId());
-			}
-
-			CommerceOrder commerceOrder = commerceContext.getCommerceOrder();
-
-			int productOrderQuantity = 0;
-
-			if (commerceOrder != null) {
-				putValue("orderId", commerceOrder.getCommerceOrderId());
-
-				productOrderQuantity = commerceOrder.getCommerceOrderItemsCount(
-					cpInstanceId);
-			}
-
-			putValue("quantity", productOrderQuantity);
-
-			putValue("editMode", false);
-
-			putValue(
-				"settings",
-				_productHelper.getProductSettingsModel(cpInstanceId));
-
-			setTemplateNamespace("AddToCartButton.render");
-		}
-		catch (PortalException pe) {
-			_log.error(pe, pe);
-		}
+	public int doStartTag() throws JspException {
+		_cpContentHelper = ServletContextUtil.getCPContentHelper();
+		_addToCartItemRenderer = AddToCartItemRendererUtil.getRenderer();
 
 		return super.doStartTag();
 	}
 
 	@Override
-	public String getModule() {
-		NPMResolver npmResolver = ServletContextUtil.getNPMResolver();
+	public int doEndTag() throws JspException {
+		HttpServletResponse response =
+				(HttpServletResponse) pageContext.getResponse();
 
-		if (npmResolver == null) {
-			return StringPool.BLANK;
-		}
+		CPCatalogEntry cpCatalogEntry =
+				_cpContentHelper.getCPCatalogEntry(request);
 
-		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/add_to_cart/AddToCartButton.es");
-	}
+		_addToCartItemRenderer.render(cpCatalogEntry, request, response);
 
-	public void setCPInstanceId(long cpInstanceId) {
-		putValue("productId", cpInstanceId);
-	}
-
-	public void setId(String id) {
-		putValue("id", id);
+		return super.doEndTag();
 	}
 
 	@Override
-	public void setPageContext(PageContext pageContext) {
-		super.setPageContext(pageContext);
-
-		_productHelper = ServletContextUtil.getProductHelper();
+	public void cleanUp() {
+		request.removeAttribute("id");
+		request.removeAttribute("cpInstanceId");
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(AddToCartTag.class);
+	public void setId(String id) {
+		request.setAttribute("componentId", id);
+	}
 
-	private ProductHelper _productHelper;
+	public void setCPInstanceId(long cpInstanceId) {
+		request.setAttribute("cpInstanceId", cpInstanceId);
+    }
 
+	private AddToCartItemRenderer _addToCartItemRenderer;
+
+	private CPContentHelper _cpContentHelper;
 }

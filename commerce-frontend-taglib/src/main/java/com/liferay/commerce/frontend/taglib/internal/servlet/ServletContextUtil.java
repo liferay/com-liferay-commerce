@@ -21,7 +21,6 @@ import com.liferay.commerce.frontend.ClayTableSerializer;
 import com.liferay.commerce.frontend.CommerceDataProviderRegistry;
 import com.liferay.commerce.frontend.FilterFactoryRegistry;
 import com.liferay.commerce.frontend.util.ProductHelper;
-import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.product.content.util.CPContentHelper;
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 
@@ -60,10 +59,6 @@ public class ServletContextUtil {
 		getCommerceDataProviderRegistry() {
 
 		return _servletContextUtil._getCommerceDataProviderRegistry();
-	}
-
-	public static final CommerceOrderHttpHelper getCommerceOrderHttpHelper() {
-		return _servletContextUtil._getCommerceOrderHttpHelper();
 	}
 
 	public static final CPContentHelper getCPContentHelper() {
@@ -132,13 +127,6 @@ public class ServletContextUtil {
 	}
 
 	@Reference(unbind = "-")
-	protected void setCommerceOrderHttpHelper(
-		CommerceOrderHttpHelper commerceOrderHttpHelper) {
-
-		_commerceOrderHttpHelper = commerceOrderHttpHelper;
-	}
-
-	@Reference(unbind = "-")
 	protected void setCPContentHelper(CPContentHelper cpContentHelper) {
 		_cpContentHelper = cpContentHelper;
 	}
@@ -190,10 +178,6 @@ public class ServletContextUtil {
 		return _commerceDataProviderRegistry;
 	}
 
-	private CommerceOrderHttpHelper _getCommerceOrderHttpHelper() {
-		return _commerceOrderHttpHelper;
-	}
-
 	private CPContentHelper _getCPContentHelper() {
 		return _cpContentHelper;
 	}
@@ -222,7 +206,6 @@ public class ServletContextUtil {
 	private ClayTableRegistry _clayTableRegistry;
 	private ClayTableSerializer _clayTableSerializer;
 	private CommerceDataProviderRegistry _commerceDataProviderRegistry;
-	private CommerceOrderHttpHelper _commerceOrderHttpHelper;
 	private CPContentHelper _cpContentHelper;
 	private FilterFactoryRegistry _filterFactoryRegistry;
 	private NPMResolver _npmResolver;

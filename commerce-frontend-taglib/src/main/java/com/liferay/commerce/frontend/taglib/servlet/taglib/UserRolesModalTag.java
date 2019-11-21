@@ -14,116 +14,61 @@
 
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
-import com.liferay.commerce.account.model.CommerceAccount;
-import com.liferay.commerce.account.service.CommerceAccountServiceUtil;
-import com.liferay.commerce.frontend.taglib.internal.model.AccountRole;
-import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
-import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
-import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
-import com.liferay.petra.string.StringPool;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.model.Role;
-import com.liferay.portal.kernel.model.RoleConstants;
-import com.liferay.portal.kernel.model.UserGroupRole;
-import com.liferay.portal.kernel.service.RoleServiceUtil;
-import com.liferay.portal.kernel.service.UserGroupRoleLocalServiceUtil;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.PortalUtil;
-import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.UserRolesModalItemRenderer;
+import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.UserRolesModalItemRendererUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
+import com.liferay.commerce.product.catalog.CPCatalogEntry;
+import com.liferay.commerce.product.content.util.CPContentHelper;
+
+import com.liferay.taglib.util.IncludeTag;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspException;
 
 /**
- * @author Fabio Diego Mastrorilli
+ * @author Gianmarco Brunialti Masera
  */
-public class UserRolesModalTag extends ComponentRendererTag {
+
+public class UserRolesModalTag extends IncludeTag {
 
 	@Override
-	public int doStartTag() {
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		putValue(
-			"spritemap",
-			themeDisplay.getPathThemeImages() + "/commerce-icons.svg");
-
-		try {
-			List<AccountRole> selectedRoles = new ArrayList<>();
-
-			Map<String, Object> context = getContext();
-
-			long userId = GetterUtil.getLong(context.get("userId"));
-
-			long commerceAccountId = GetterUtil.getLong(
-				context.get("commerceAccountId"));
-
-			CommerceAccount commerceAccount =
-				CommerceAccountServiceUtil.getCommerceAccount(
-					commerceAccountId);
-
-			List<UserGroupRole> userGroupRoles =
-				UserGroupRoleLocalServiceUtil.getUserGroupRoles(
-					userId, commerceAccount.getCommerceAccountGroupId());
-
-			for (UserGroupRole userGroupRole : userGroupRoles) {
-				Role role = userGroupRole.getRole();
-
-				selectedRoles.add(
-					new AccountRole(role.getRoleId(), role.getName()));
-			}
-
-			putValue("selectedRoles", selectedRoles);
-
-			List<AccountRole> availableRoles = new ArrayList<>();
-
-			List<Role> roles = RoleServiceUtil.getRoles(
-				PortalUtil.getCompanyId(request),
-				new int[] {RoleConstants.TYPE_SITE});
-
-			for (Role role : roles) {
-				availableRoles.add(
-					new AccountRole(
-						role.getRoleId(),
-						role.getTitle(themeDisplay.getLocale())));
-			}
-
-			putValue("roles", availableRoles);
-		}
-		catch (PortalException pe) {
-			_log.error(pe, pe);
-		}
-
-		setTemplateNamespace("UserRolesModal.render");
+	public int doStartTag() throws JspException {
+		_cpContentHelper = ServletContextUtil.getCPContentHelper();
+		_userRolesModalItemRenderer = UserRolesModalItemRendererUtil.getRenderer();
 
 		return super.doStartTag();
 	}
 
 	@Override
-	public String getModule() {
-		NPMResolver npmResolver = ServletContextUtil.getNPMResolver();
+	public int doEndTag() throws JspException {
+		HttpServletResponse response =
+				(HttpServletResponse) pageContext.getResponse();
 
-		if (npmResolver == null) {
-			return StringPool.BLANK;
-		}
+		CPCatalogEntry cpCatalogEntry =
+				_cpContentHelper.getCPCatalogEntry(request);
 
-		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/user_roles_modal/UserRolesModal.es");
+		_userRolesModalItemRenderer.render(cpCatalogEntry, request, response);
+
+		return super.doEndTag();
+	}
+
+	@Override
+	public void cleanUp() {
+		request.removeAttribute("commerceAccountId");
+		request.removeAttribute("userId");
 	}
 
 	public void setCommerceAccountId(long commerceAccountId) {
-		putValue("commerceAccountId", commerceAccountId);
+		request.setAttribute("commerceAccountId", commerceAccountId);
 	}
 
 	public void setUserId(long userId) {
-		putValue("userId", userId);
+		request.setAttribute("userId", userId);
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
-		UserRolesModalTag.class);
+	private UserRolesModalItemRenderer _userRolesModalItemRenderer;
+
+	private CPContentHelper _cpContentHelper;
 
 }
