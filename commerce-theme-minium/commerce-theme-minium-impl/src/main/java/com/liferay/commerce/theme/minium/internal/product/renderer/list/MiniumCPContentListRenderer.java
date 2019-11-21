@@ -21,6 +21,7 @@ import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.constants.CPWebKeys;
 import com.liferay.commerce.product.content.render.list.CPContentListRenderer;
 import com.liferay.commerce.product.data.source.CPDataSourceResult;
+import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.frontend.taglib.servlet.taglib.util.JSPRenderer;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -96,9 +97,15 @@ public class MiniumCPContentListRenderer implements CPContentListRenderer {
 			skus.add(cpSku.getSku());
 		}
 
-		long commerceChannelGroupId =
-			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
+		long commerceChannelGroupId = 0;
+
+		CommerceChannel commerceChannel =
+			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
 				_portal.getScopeGroupId(httpServletRequest));
+
+		if (commerceChannel != null) {
+			commerceChannelGroupId = commerceChannel.getGroupId();
+		}
 
 		Map<String, Integer> stockQuantities =
 			_commerceInventoryEngine.getStockQuantities(

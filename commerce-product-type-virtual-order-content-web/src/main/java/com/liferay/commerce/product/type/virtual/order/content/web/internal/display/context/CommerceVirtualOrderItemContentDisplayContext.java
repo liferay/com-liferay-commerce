@@ -80,8 +80,7 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 				httpServletRequest);
 
 		_commerceAccount = commerceAccountHelper.getCurrentCommerceAccount(
-			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
-				_commerceVirtualOrderItemContentRequestHelper.getSiteGroupId()),
+			_commerceVirtualOrderItemContentRequestHelper.getChannelGroupId(),
 			httpServletRequest);
 
 		PortletDisplay portletDisplay =

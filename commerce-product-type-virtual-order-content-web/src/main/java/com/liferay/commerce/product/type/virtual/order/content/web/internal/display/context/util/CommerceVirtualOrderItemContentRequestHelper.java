@@ -14,7 +14,11 @@
 
 package com.liferay.commerce.product.type.virtual.order.content.web.internal.display.context.util;
 
+import com.liferay.commerce.product.model.CommerceChannel;
+import com.liferay.commerce.product.service.CommerceChannelLocalServiceUtil;
 import com.liferay.portal.kernel.display.context.util.BaseRequestHelper;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Company;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -28,6 +32,20 @@ public class CommerceVirtualOrderItemContentRequestHelper
 		HttpServletRequest httpServletRequest) {
 
 		super(httpServletRequest);
+	}
+
+	public long getChannelGroupId() throws PortalException {
+		CommerceChannel commerceChannel =
+			CommerceChannelLocalServiceUtil.fetchCommerceChannelBySiteGroupId(
+				getSiteGroupId());
+
+		if (commerceChannel == null) {
+			Company company = getCompany();
+
+			return company.getGroupId();
+		}
+
+		return commerceChannel.getGroupId();
 	}
 
 }

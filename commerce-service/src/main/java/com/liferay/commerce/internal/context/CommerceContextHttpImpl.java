@@ -28,6 +28,7 @@ import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.util.Portal;
@@ -112,8 +113,17 @@ public class CommerceContextHttpImpl implements CommerceContext {
 
 	@Override
 	public long getCommerceChannelGroupId() throws PortalException {
-		return _commerceChannelLocalService.
-			getCommerceChannelGroupIdBySiteGroupId(getSiteGroupId());
+		CommerceChannel commerceChannel =
+			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
+				getSiteGroupId());
+
+		if (commerceChannel == null) {
+			Company company = _portal.getCompany(_httpServletRequest);
+
+			return company.getGroupId();
+		}
+
+		return commerceChannel.getGroupId();
 	}
 
 	@Override
