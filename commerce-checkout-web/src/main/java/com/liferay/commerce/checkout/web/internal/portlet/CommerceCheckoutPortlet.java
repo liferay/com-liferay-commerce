@@ -103,16 +103,18 @@ public class CommerceCheckoutPortlet extends MVCPortlet {
 		try {
 			CommerceOrder commerceOrder = getCommerceOrder(renderRequest);
 
-			if (!isOrderApproved(commerceOrder)) {
-				HttpServletResponse httpServletResponse =
-					_portal.getHttpServletResponse(renderResponse);
+			if (commerceOrder != null) {
+				if (!isOrderApproved(commerceOrder)) {
+					HttpServletResponse httpServletResponse =
+						_portal.getHttpServletResponse(renderResponse);
 
-				httpServletResponse.sendRedirect(
-					getOrderDetailsURL(renderRequest));
+					httpServletResponse.sendRedirect(
+						getOrderDetailsURL(renderRequest));
+				}
+
+				renderRequest.setAttribute(
+					CommerceCheckoutWebKeys.COMMERCE_ORDER, commerceOrder);
 			}
-
-			renderRequest.setAttribute(
-				CommerceCheckoutWebKeys.COMMERCE_ORDER, commerceOrder);
 
 			CheckoutDisplayContext checkoutDisplayContext =
 				new CheckoutDisplayContext(
