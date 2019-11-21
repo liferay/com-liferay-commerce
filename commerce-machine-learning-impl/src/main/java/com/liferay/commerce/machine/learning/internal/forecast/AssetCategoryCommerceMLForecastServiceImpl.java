@@ -51,6 +51,29 @@ public class AssetCategoryCommerceMLForecastServiceImpl
 	implements AssetCategoryCommerceMLForecastService {
 
 	@Override
+	public AssetCategoryCommerceMLForecast addAssetCategoryCommerceMLForecast(
+			AssetCategoryCommerceMLForecast assetCategoryCommerceMLForecast)
+		throws PortalException {
+
+		long commerceMLForecastId = getHash(
+			assetCategoryCommerceMLForecast.getAssetCategoryId(),
+			assetCategoryCommerceMLForecast.getCommerceAccountId(),
+			assetCategoryCommerceMLForecast.getPeriod(),
+			assetCategoryCommerceMLForecast.getScope(),
+			assetCategoryCommerceMLForecast.getTarget(),
+			assetCategoryCommerceMLForecast.getTimestamp());
+
+		assetCategoryCommerceMLForecast.setForecastId(commerceMLForecastId);
+
+		return addCommerceMLForecast(assetCategoryCommerceMLForecast);
+	}
+
+	@Override
+	public AssetCategoryCommerceMLForecast create() {
+		return new AssetCategoryCommerceMLForecastImpl();
+	}
+
+	@Override
 	public AssetCategoryCommerceMLForecast getAssetCategoryCommerceMLForecast(
 			long companyId, long forecastId)
 		throws PortalException {
@@ -110,6 +133,22 @@ public class AssetCategoryCommerceMLForecastServiceImpl
 			commerceMLIndexer.getIndexName(companyId), query);
 
 		return getCountResult(countSearchRequest);
+	}
+
+	@Override
+	protected Document toDocumentModel(
+		AssetCategoryCommerceMLForecast assetCategoryCommerceMLForecast) {
+
+		Document document = getBaseDocument(assetCategoryCommerceMLForecast);
+
+		document.addNumber(
+			CommerceMLForecastField.COMMERCE_ACCOUNT_ID,
+			assetCategoryCommerceMLForecast.getCommerceAccountId());
+		document.addNumber(
+			Field.ASSET_CATEGORY_ID,
+			assetCategoryCommerceMLForecast.getAssetCategoryId());
+
+		return document;
 	}
 
 	@Override

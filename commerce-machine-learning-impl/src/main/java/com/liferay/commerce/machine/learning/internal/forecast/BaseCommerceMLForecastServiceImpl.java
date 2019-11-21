@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Query;
@@ -33,7 +34,10 @@ import com.liferay.portal.kernel.search.filter.TermFilter;
 import com.liferay.portal.kernel.search.generic.BooleanQueryImpl;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.search.engine.adapter.SearchEngineAdapter;
+import com.liferay.portal.search.engine.adapter.document.IndexDocumentRequest;
+import com.liferay.portal.search.engine.adapter.document.IndexDocumentResponse;
 import com.liferay.portal.search.engine.adapter.search.CountSearchRequest;
 import com.liferay.portal.search.engine.adapter.search.CountSearchResponse;
 import com.liferay.portal.search.engine.adapter.search.SearchSearchRequest;
@@ -65,6 +69,31 @@ import org.osgi.service.component.annotations.Reference;
  */
 public abstract class BaseCommerceMLForecastServiceImpl
 	<T extends CommerceMLForecast> {
+
+	protected T addCommerceMLForecast(T model) throws PortalException {
+		Document document = toDocumentModel(model);
+
+		document.addKeyword(Field.UID, String.valueOf(model.getForecastId()));
+
+		IndexDocumentRequest indexDocumentRequest = new IndexDocumentRequest(
+			commerceMLIndexer.getIndexName(model.getCompanyId()), document);
+
+		indexDocumentRequest.setType(_MAPPING_NAME);
+
+		IndexDocumentResponse indexDocumentResponse =
+			searchEngineAdapter.execute(indexDocumentRequest);
+
+		if ((indexDocumentResponse.getStatus() < 200) ||
+			(indexDocumentResponse.getStatus() >= 300)) {
+
+			throw new PortalException(
+				String.format(
+					"Index request return status: %d",
+					indexDocumentResponse.getStatus()));
+		}
+
+		return model;
+	}
 
 	protected BooleanFilter getBaseBooleanFilter(
 		String scope, String period, String target) {
@@ -152,6 +181,38 @@ public abstract class BaseCommerceMLForecastServiceImpl
 		}
 
 		return commerceMLForecast;
+	}
+
+	protected Document getBaseDocument(T commerceMLForecast) {
+		Document document = new DocumentImpl();
+
+		document.addNumber(
+			CommerceMLForecastField.ACTUAL, commerceMLForecast.getActual());
+		document.addNumber(Field.COMPANY_ID, commerceMLForecast.getCompanyId());
+		document.addNumber(
+			CommerceMLForecastField.FORECAST, commerceMLForecast.getForecast());
+		document.addNumber(
+			CommerceMLForecastField.FORECAST_ID,
+			commerceMLForecast.getForecastId());
+		document.addNumber(
+			CommerceMLForecastField.FORECAST_LOWER_BOUND,
+			commerceMLForecast.getForecastLowerBound());
+		document.addNumber(
+			CommerceMLForecastField.FORECAST_UPPER_BOUND,
+			commerceMLForecast.getForecastUpperBound());
+		document.addText(
+			CommerceMLForecastField.JOB_ID, commerceMLForecast.getJobId());
+		document.addText(
+			CommerceMLForecastField.PERIOD, commerceMLForecast.getPeriod());
+		document.addText(
+			CommerceMLForecastField.SCOPE, commerceMLForecast.getScope());
+		document.addText(
+			CommerceMLForecastField.TARGET, commerceMLForecast.getTarget());
+		document.addDate(
+			CommerceMLForecastField.TIMESTAMP,
+			commerceMLForecast.getTimestamp());
+
+		return document;
 	}
 
 	protected BooleanQuery getBaseQuery(
@@ -275,6 +336,16 @@ public abstract class BaseCommerceMLForecastServiceImpl
 		);
 	}
 
+	protected long getHash(Object... values) {
+		StringBuilder sb = new StringBuilder(values.length);
+
+		for (Object value : values) {
+			sb.append(value);
+		}
+
+		return HashUtil.hash(values.length, sb.toString());
+	}
+
 	protected List<T> getSearchResults(
 		SearchSearchRequest searchSearchRequest) {
 
@@ -331,6 +402,8 @@ public abstract class BaseCommerceMLForecastServiceImpl
 		return _toDate(startLocalDateTime);
 	}
 
+	protected abstract Document toDocumentModel(T model);
+
 	protected abstract T toForecastModel(Document document);
 
 	protected static final ZoneId DEFAULT_ZONE_OFFSET =
@@ -372,5 +445,8 @@ public abstract class BaseCommerceMLForecastServiceImpl
 	}
 
 	private static final String _INDEX_DATE_FORMAT_PATTERN = "yyyyMMddHHmmss";
+
+	private static final String _MAPPING_NAME =
+		"CommerceMLForecastDocumentType";
 
 }
