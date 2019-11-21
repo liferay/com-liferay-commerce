@@ -14,81 +14,47 @@
 
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
-import com.liferay.commerce.constants.CommerceWebKeys;
-import com.liferay.commerce.context.CommerceContext;
+import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.AddressModalItemRenderer;
+import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.AddressModalItemRendererUtil;
 import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
-import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
-import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
-import com.liferay.petra.string.StringPool;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.security.auth.AuthTokenUtil;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.PortalUtil;
-import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.commerce.product.catalog.CPCatalogEntry;
+import com.liferay.commerce.product.content.util.CPContentHelper;
+
+import com.liferay.taglib.util.IncludeTag;
+
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.PageContext;
 
 /**
- * @author Fabio Diego Mastrorilli
+ * @author Gianmarco Brunialti Masera
  */
-public class AddressModalTag extends ComponentRendererTag {
+
+public class AddressModalTag extends IncludeTag {
 
 	@Override
-	public int doStartTag() {
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		try {
-			CommerceContext commerceContext =
-				(CommerceContext)request.getAttribute(
-					CommerceWebKeys.COMMERCE_CONTEXT);
-
-			putValue(
-				"countriesAPI",
-				StringBundler.concat(
-					PortalUtil.getPortalURL(request),
-					"/o/commerce-ui/address/countries-by-channel-id?channelId=",
-					String.valueOf(commerceContext.getCommerceChannelId()),
-					"&p_auth=", AuthTokenUtil.getToken(request)));
-		}
-		catch (PortalException pe) {
-			_log.error(pe, pe);
-
-			putValue(
-				"countriesAPI",
-				StringBundler.concat(
-					PortalUtil.getPortalURL(request),
-					"/o/commerce-ui/address/countries/?p_auth=",
-					AuthTokenUtil.getToken(request)));
-		}
-
-		putValue(
-			"regionsAPI",
-			PortalUtil.getPortalURL(request) +
-				"/o/commerce-ui/address/regions/");
-		putValue(
-			"spritemap",
-			themeDisplay.getPathThemeImages() + "/commerce-icons.svg");
-
-		setTemplateNamespace("AddressModal.render");
+	public int doStartTag() throws JspException {
+		_cpContentHelper = ServletContextUtil.getCPContentHelper();
+		_addressModalItemRenderer = AddressModalItemRendererUtil.getRenderer();
 
 		return super.doStartTag();
 	}
 
 	@Override
-	public String getModule() {
-		NPMResolver npmResolver = ServletContextUtil.getNPMResolver();
+	public int doEndTag() throws JspException {
+		HttpServletResponse response =
+				(HttpServletResponse) pageContext.getResponse();
 
-		if (npmResolver == null) {
-			return StringPool.BLANK;
-		}
+		CPCatalogEntry cpCatalogEntry =
+				_cpContentHelper.getCPCatalogEntry(request);
 
-		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/address_modal/AddressModal.es");
+		_addressModalItemRenderer.render(cpCatalogEntry, request, response);
+
+		return super.doEndTag();
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
-		AddressModalTag.class);
+	private AddressModalItemRenderer _addressModalItemRenderer;
 
+	private CPContentHelper _cpContentHelper;
 }

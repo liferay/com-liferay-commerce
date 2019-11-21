@@ -14,113 +14,76 @@
 
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
-import com.liferay.commerce.constants.CommerceWebKeys;
-import com.liferay.commerce.context.CommerceContext;
-import com.liferay.commerce.frontend.model.PriceModel;
-import com.liferay.commerce.frontend.model.ProductSettingsModel;
+import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.PriceItemRenderer;
+import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.PriceItemRendererUtil;
 import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
-import com.liferay.commerce.frontend.util.ProductHelper;
-import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
-import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
-import com.liferay.petra.string.StringPool;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.commerce.product.catalog.CPCatalogEntry;
+import com.liferay.commerce.product.content.util.CPContentHelper;
+import com.liferay.taglib.util.IncludeTag;
 
-import java.util.Map;
-
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
 /**
- * @author Marco Leo
+ * @author Gianmarco Brunialti Masera
  */
-public class PriceTag extends ComponentRendererTag {
+
+public class PriceTag extends IncludeTag {
 
 	@Override
-	public int doStartTag() {
-		CommerceContext commerceContext = (CommerceContext)request.getAttribute(
-			CommerceWebKeys.COMMERCE_CONTEXT);
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		try {
-			Map<String, Object> context = getContext();
-
-			long cpInstanceId = (Long)context.getOrDefault("CPInstanceId", 0L);
-
-			int quantity = (Integer)context.getOrDefault("quantity", 1);
-
-			if (quantity <= 0) {
-				ProductSettingsModel productSettingsModel =
-					_productHelper.getProductSettingsModel(cpInstanceId);
-
-				quantity = productSettingsModel.getMinQuantity();
-			}
-
-			PriceModel priceModel = _productHelper.getPrice(
-				cpInstanceId, quantity, commerceContext,
-				themeDisplay.getLocale());
-
-			putValue("prices", priceModel);
-
-			setTemplateNamespace("Price.render");
-		}
-		catch (PortalException pe) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(pe, pe);
-			}
-
-			return SKIP_BODY;
-		}
+	public int doStartTag() throws JspException {
+		_cpContentHelper = ServletContextUtil.getCPContentHelper();
+		_priceItemRenderer = PriceItemRendererUtil.getRenderer();
 
 		return super.doStartTag();
 	}
 
 	@Override
-	public String getModule() {
-		NPMResolver npmResolver = ServletContextUtil.getNPMResolver();
+	public int doEndTag() throws JspException {
+		HttpServletResponse response =
+				(HttpServletResponse) pageContext.getResponse();
 
-		if (npmResolver == null) {
-			return StringPool.BLANK;
-		}
+		CPCatalogEntry cpCatalogEntry =
+				_cpContentHelper.getCPCatalogEntry(request);
 
-		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/price/Price.es");
-	}
+		_priceItemRenderer.render(cpCatalogEntry, request, response);
 
-	public void setAdditionalDiscountClasses(String additionalDiscountClasses) {
-		putValue("additionalDiscountClasses", additionalDiscountClasses);
-	}
-
-	public void setAdditionalPriceClasses(String additionalPriceClasses) {
-		putValue("additionalPriceClasses", additionalPriceClasses);
-	}
-
-	public void setAdditionalPromoPriceClasses(
-		String additionalPromoPriceClasses) {
-
-		putValue("additionalPromoPriceClasses", additionalPromoPriceClasses);
-	}
-
-	public void setCPInstanceId(long cpInstanceId) {
-		putValue("CPInstanceId", cpInstanceId);
+		return super.doEndTag();
 	}
 
 	@Override
-	public void setPageContext(PageContext pageContext) {
-		super.setPageContext(pageContext);
+	public void cleanUp() {
+		request.removeAttribute("id");
+		request.removeAttribute("quantity");
+		request.removeAttribute("CPInstanceId");
+		request.removeAttribute("additionalDiscountClasses");
+		request.removeAttribute("additionalPriceClasses");
+		request.removeAttribute("additionalPromoPriceClasses");
+	}
 
-		_productHelper = ServletContextUtil.getProductHelper();
+	public void setAdditionalDiscountClasses(String additionalDiscountClasses) {
+		request.setAttribute("additionalDiscountClasses", additionalDiscountClasses);
+	}
+
+	public void setAdditionalPriceClasses(String additionalPriceClasses) {
+		request.setAttribute("additionalPriceClasses", additionalPriceClasses);
+	}
+
+	public void setAdditionalPromoPriceClasses(String additionalPromoPriceClasses) {
+
+		request.setAttribute("additionalPromoPriceClasses", additionalPromoPriceClasses);
+	}
+
+	public void setCPInstanceId(long cpInstanceId) {
+		request.setAttribute("CPInstanceId", cpInstanceId);
 	}
 
 	public void setQuantity(String quantity) {
-		putValue("quantity", quantity);
+		request.setAttribute("quantity", quantity);
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(PriceTag.class);
+	private CPContentHelper _cpContentHelper;
 
-	private ProductHelper _productHelper;
-
+	private PriceItemRenderer _priceItemRenderer;
 }

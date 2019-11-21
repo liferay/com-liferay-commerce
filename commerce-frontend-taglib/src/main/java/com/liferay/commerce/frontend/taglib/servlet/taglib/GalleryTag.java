@@ -14,92 +14,60 @@
 
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
+import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.GalleryItemRenderer;
+import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.GalleryItemRendererUtil;
 import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
-import com.liferay.commerce.product.catalog.CPMedia;
+import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.content.util.CPContentHelper;
-import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
-import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
-import com.liferay.petra.string.StringPool;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.util.WebKeys;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import com.liferay.taglib.util.IncludeTag;
 
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
 /**
- * @author Fabio Mastrorilli
+ * @author Gianmarco Brunialti Masera
  */
-public class GalleryTag extends ComponentRendererTag {
+public class GalleryTag extends IncludeTag {
 
 	@Override
-	public int doStartTag() {
-		Map<String, Object> context = getContext();
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		String id = GetterUtil.getString(context.get("id"));
-		long cpDefinitionId = GetterUtil.getLong(context.get("cpDefinitionId"));
-
-		List<CPMedia> productImages = Collections.emptyList();
-
-		try {
-			productImages = _cpContentHelper.getImages(
-				cpDefinitionId, themeDisplay);
-		}
-		catch (PortalException pe) {
-			_log.error(pe, pe);
-		}
-
-		putValue("images", productImages);
-		putValue("selected", 0);
-
-		if (Validator.isNotNull(id)) {
-			setComponentId(id);
-		}
-
-		setTemplateNamespace("Gallery.render");
+	public int doStartTag() throws JspException {
+		_cpContentHelper = ServletContextUtil.getCPContentHelper();
+		_galleryItemRenderer = GalleryItemRendererUtil.getRenderer();
 
 		return super.doStartTag();
 	}
 
 	@Override
-	public String getModule() {
-		NPMResolver npmResolver = ServletContextUtil.getNPMResolver();
+	public int doEndTag() throws JspException {
+		HttpServletResponse response =
+				(HttpServletResponse) pageContext.getResponse();
 
-		if (npmResolver == null) {
-			return StringPool.BLANK;
-		}
+		CPCatalogEntry cpCatalogEntry =
+				_cpContentHelper.getCPCatalogEntry(request);
 
-		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/gallery/Gallery.es");
-	}
+		_galleryItemRenderer.render(cpCatalogEntry, request, response);
 
-	public void setCPDefinitionId(long cpDefinitionId) {
-		putValue("cpDefinitionId", cpDefinitionId);
-	}
-
-	public void setId(String id) {
-		putValue("id", id);
+		return super.doEndTag();
 	}
 
 	@Override
-	public void setPageContext(PageContext pageContext) {
-		super.setPageContext(pageContext);
-
-		_cpContentHelper = ServletContextUtil.getCPContentHelper();
+	public void cleanUp() {
+		request.removeAttribute("id");
+		request.removeAttribute("cpDefinitionId");
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(GalleryTag.class);
+	public void setId(String id) {
+		request.setAttribute("id", id);
+	}
+
+	public void setCPDefinitionId(long cpDefinitionId) {
+		request.setAttribute("cpDefinitionId", cpDefinitionId);
+	}
+
+	private GalleryItemRenderer _galleryItemRenderer;
 
 	private CPContentHelper _cpContentHelper;
-
 }

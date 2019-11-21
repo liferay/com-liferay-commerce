@@ -14,131 +14,45 @@
 
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
-import com.liferay.commerce.account.model.CommerceAccount;
-import com.liferay.commerce.constants.CommerceWebKeys;
-import com.liferay.commerce.context.CommerceContext;
+import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.MiniCartItemRenderer;
+import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.MiniCartItemRendererUtil;
 import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
-import com.liferay.commerce.model.CommerceOrder;
-import com.liferay.commerce.order.CommerceOrderHttpHelper;
-import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
-import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
-import com.liferay.petra.string.StringPool;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.PortalUtil;
-import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.commerce.product.catalog.CPCatalogEntry;
+import com.liferay.commerce.product.content.util.CPContentHelper;
+import com.liferay.taglib.util.IncludeTag;
 
-import java.util.Collections;
-
-import javax.portlet.PortletURL;
-
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
 /**
- * @author Marco Leo
- * @author Alessio Antonio Rendina
+ * @author Gianmarco Brunialti Masera
  */
-public class MiniCartTag extends ComponentRendererTag {
+
+public class MiniCartTag extends IncludeTag {
 
 	@Override
-	public int doStartTag() {
-		CommerceContext commerceContext = (CommerceContext)request.getAttribute(
-			CommerceWebKeys.COMMERCE_CONTEXT);
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		try {
-			putValue(
-				"cartAPI",
-				PortalUtil.getPortalURL(request) + "/o/commerce-ui/cart");
-
-			CommerceOrder commerceOrder = commerceContext.getCommerceOrder();
-
-			if (commerceOrder != null) {
-				putValue("orderId", commerceOrder.getCommerceOrderId());
-				putValue(
-					"commerceAccountId", commerceOrder.getCommerceAccountId());
-				putValue("workflowStatus", commerceOrder.getStatus());
-			}
-			else {
-				CommerceAccount commerceAccount =
-					commerceContext.getCommerceAccount();
-
-				if (commerceAccount != null) {
-					putValue(
-						"commerceAccountId",
-						commerceAccount.getCommerceAccountId());
-				}
-			}
-
-			PortletURL commerceCheckoutPortletURL =
-				_commerceOrderHttpHelper.getCommerceCheckoutPortletURL(request);
-
-			String checkoutURL = StringPool.BLANK;
-
-			if (commerceCheckoutPortletURL != null) {
-				checkoutURL = String.valueOf(commerceCheckoutPortletURL);
-			}
-
-			putValue("checkoutUrl", checkoutURL);
-
-			String detailsURL = StringPool.BLANK;
-
-			PortletURL commerceCartPortletURL =
-				_commerceOrderHttpHelper.getCommerceCartPortletURL(
-					request, commerceOrder);
-
-			if (commerceCartPortletURL != null) {
-				detailsURL = String.valueOf(commerceCartPortletURL);
-			}
-
-			putValue("detailsUrl", detailsURL);
-
-			putValue("isDisabled", false);
-			putValue("isOpen", false);
-			putValue("products", Collections.emptyList());
-			putValue("productsCount", 0);
-			putValue(
-				"spritemap",
-				themeDisplay.getPathThemeImages() + "/commerce-icons.svg");
-
-			setTemplateNamespace("MiniCart.render");
-		}
-		catch (PortalException pe) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(pe, pe);
-			}
-
-			return SKIP_BODY;
-		}
+	public int doStartTag() throws JspException {
+		_cpContentHelper = ServletContextUtil.getCPContentHelper();
+		_miniCartItemRenderer = MiniCartItemRendererUtil.getRenderer();
 
 		return super.doStartTag();
 	}
 
 	@Override
-	public String getModule() {
-		NPMResolver npmResolver = ServletContextUtil.getNPMResolver();
+	public int doEndTag() throws JspException {
+		HttpServletResponse response =
+				(HttpServletResponse) pageContext.getResponse();
 
-		if (npmResolver == null) {
-			return StringPool.BLANK;
-		}
+		CPCatalogEntry cpCatalogEntry =
+				_cpContentHelper.getCPCatalogEntry(request);
 
-		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/mini_cart/MiniCart.es");
+		_miniCartItemRenderer.render(cpCatalogEntry, request, response);
+
+		return super.doEndTag();
 	}
 
-	@Override
-	public void setPageContext(PageContext pageContext) {
-		_commerceOrderHttpHelper =
-			ServletContextUtil.getCommerceOrderHttpHelper();
+	private MiniCartItemRenderer _miniCartItemRenderer;
 
-		super.setPageContext(pageContext);
-	}
-
-	private static final Log _log = LogFactoryUtil.getLog(MiniCartTag.class);
-
-	private CommerceOrderHttpHelper _commerceOrderHttpHelper;
-
+	private CPContentHelper _cpContentHelper;
 }

@@ -14,35 +14,46 @@
 
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
+import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.QuantitySelectorItemRenderer;
+import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.QuantitySelectorItemRendererUtil;
 import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
-import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
-import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
-import com.liferay.petra.string.StringPool;
+import com.liferay.commerce.product.catalog.CPCatalogEntry;
+import com.liferay.commerce.product.content.util.CPContentHelper;
+import com.liferay.taglib.util.IncludeTag;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.PageContext;
 
 /**
- * @author Fabio Diego Mastrorilli
+ * @author Gianmarco Brunialti Masera
  */
-public class QuantitySelectorTag extends ComponentRendererTag {
+
+public class QuantitySelectorTag extends IncludeTag {
 
 	@Override
-	public int doStartTag() {
-		putValue("quantity", 0);
-
-		setTemplateNamespace("QuantitySelector.render");
+	public int doStartTag() throws JspException {
+		_cpContentHelper = ServletContextUtil.getCPContentHelper();
+		_quantitySelectorItemRenderer = QuantitySelectorItemRendererUtil.getRenderer();
 
 		return super.doStartTag();
 	}
 
 	@Override
-	public String getModule() {
-		NPMResolver npmResolver = ServletContextUtil.getNPMResolver();
+	public int doEndTag() throws JspException {
+		HttpServletResponse response =
+				(HttpServletResponse) pageContext.getResponse();
 
-		if (npmResolver == null) {
-			return StringPool.BLANK;
-		}
+		CPCatalogEntry cpCatalogEntry =
+				_cpContentHelper.getCPCatalogEntry(request);
 
-		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/quantity_selector/QuantitySelector.es");
+		_quantitySelectorItemRenderer.render(cpCatalogEntry, request, response);
+
+		return super.doEndTag();
 	}
+
+	private QuantitySelectorItemRenderer _quantitySelectorItemRenderer;
+
+	private CPContentHelper _cpContentHelper;
 
 }
