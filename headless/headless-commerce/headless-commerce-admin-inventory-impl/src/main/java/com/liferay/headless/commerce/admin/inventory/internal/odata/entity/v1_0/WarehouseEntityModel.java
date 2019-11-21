@@ -14,6 +14,8 @@
 
 package com.liferay.headless.commerce.admin.inventory.internal.odata.entity.v1_0;
 
+import com.liferay.portal.odata.entity.BooleanEntityField;
+import com.liferay.portal.odata.entity.DoubleEntityField;
 import com.liferay.portal.odata.entity.EntityField;
 import com.liferay.portal.odata.entity.EntityModel;
 import com.liferay.portal.odata.entity.StringEntityField;
@@ -30,9 +32,15 @@ public class WarehouseEntityModel implements EntityModel {
 
 	public WarehouseEntityModel() {
 		_entityFieldsMap = Stream.of(
+			new BooleanEntityField("active", locale -> "active"),
 			new StringEntityField("city", locale -> "city"),
-			new StringEntityField("street1", locale -> "street1"),
-			new StringEntityField("name", locale -> "name")
+			new StringEntityField(
+				"countryISOCode", locale -> "countryTwoLettersISOCode"),
+			new DoubleEntityField("latitude", locale -> "latitude"),
+			new DoubleEntityField("longitude", locale -> "longitude"),
+			new StringEntityField("name", locale -> "name"),
+			new StringEntityField("regionISOCode", locale -> "regionCode"),
+			new StringEntityField("street1", locale -> "street1")
 		).collect(
 			Collectors.toMap(EntityField::getName, Function.identity())
 		);
