@@ -24,9 +24,13 @@ List<CPCatalogEntry> cpCatalogEntries = cpDataSourceResult.getCPCatalogEntries()
 
 CommerceContext commerceContext = (CommerceContext)request.getAttribute(CommerceWebKeys.COMMERCE_CONTEXT);
 
+long commerceAccountId = 0;
+
 CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
 
-long commerceAccountId = GetterUtil.getLong(commerceAccount.getCommerceAccountId());
+if (commerceAccount != null) {
+	commerceAccountId = GetterUtil.getLong(commerceAccount.getCommerceAccountId());
+}
 
 HttpServletRequest originalHttpServletRequest = PortalUtil.getOriginalServletRequest(request);
 
