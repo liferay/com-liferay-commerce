@@ -18,6 +18,23 @@
     outline: none;
   }
 
+  &.btn-unstyled {
+    border: none;
+    border-radius: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    display: inline-block;
+    letter-spacing: normal;
+    line-height: inherit;
+    padding: 0;
+    text-transform: none;
+
+    &:focus,
+    &:focus-within {
+      box-shadow: none;
+    }
+  }
+
   &.btn-primary {
     background-color: $color-theme;
     border-color: $color-theme;
@@ -113,7 +130,7 @@
   }
 
   &.btn-monospaced {
-    border-radius: 50%;
+    border-radius: 8px;
   }
 
   &.btn-sm {

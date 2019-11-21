@@ -40,7 +40,7 @@ CommerceOrderContentDisplayContext commerceOrderContentDisplayContext = (Commerc
 			<aui:input name="deleteCommerceOrderIds" type="hidden" />
 
 			<clay:button
-				elementClasses="btn-fixed"
+				elementClasses="btn-fixed btn-primary"
 				label='<%= LanguageUtil.get(request, "add-order") %>'
 				size="lg"
 				style="primary"
