@@ -36,6 +36,7 @@ if (commerceTierPriceEntry != null) {
 }
 
 CPInstance cpInstance = commercePriceEntry.getCPInstance();
+
 CPDefinition cpDefinition = cpInstance.getCPDefinition();
 
 String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-tier-price-entries");
