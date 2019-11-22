@@ -61,8 +61,8 @@ public class AccountMemberDTOConverter implements DTOConverter {
 			{
 				accountId = commerceAccountUserRel.getCommerceAccountId();
 				name = user.getFullName();
-				userId = user.getUserId();
 				roles = _getRoles(commerceAccountUserRel, dtoConverterContext);
+				userId = user.getUserId();
 			}
 		};
 	}

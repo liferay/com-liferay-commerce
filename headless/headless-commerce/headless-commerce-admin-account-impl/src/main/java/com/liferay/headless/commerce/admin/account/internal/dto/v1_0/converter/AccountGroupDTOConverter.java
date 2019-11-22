@@ -50,9 +50,9 @@ public class AccountGroupDTOConverter implements DTOConverter {
 		return new AccountGroup() {
 			{
 				customFields = expandoBridge.getAttributes();
-				id = commerceAccountGroup.getCommerceAccountGroupId();
 				externalReferenceCode =
 					commerceAccountGroup.getExternalReferenceCode();
+				id = commerceAccountGroup.getCommerceAccountGroupId();
 				name = commerceAccountGroup.getName();
 			}
 		};
