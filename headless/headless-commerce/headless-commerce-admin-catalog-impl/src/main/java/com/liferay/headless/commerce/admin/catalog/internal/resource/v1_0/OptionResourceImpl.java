@@ -162,7 +162,7 @@ public class OptionResourceImpl
 
 		_updateOption(cpOption, option);
 
-		Response.ResponseBuilder responseBuilder = Response.ok();
+		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
 	}
