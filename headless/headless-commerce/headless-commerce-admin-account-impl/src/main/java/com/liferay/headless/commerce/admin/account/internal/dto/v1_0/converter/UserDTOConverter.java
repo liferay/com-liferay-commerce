@@ -50,8 +50,8 @@ public class UserDTOConverter implements DTOConverter {
 			{
 				email = user.getEmailAddress();
 				externalReferenceCode = user.getExternalReferenceCode();
-				id = user.getUserId();
 				firstName = user.getFirstName();
+				id = user.getUserId();
 				jobTitle = user.getJobTitle();
 				lastName = user.getLastName();
 				male = user.isMale();
