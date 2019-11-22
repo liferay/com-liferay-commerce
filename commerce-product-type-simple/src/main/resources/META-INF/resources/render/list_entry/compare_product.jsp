@@ -21,6 +21,7 @@ CPCompareContentHelper cpCompareContentHelper = (CPCompareContentHelper)request.
 CPContentHelper cpContentHelper = (CPContentHelper)request.getAttribute(CPContentWebKeys.CP_CONTENT_HELPER);
 
 CPCatalogEntry cpCatalogEntry = cpContentHelper.getCPCatalogEntry(request);
+
 CPSku cpSku = cpContentHelper.getDefaultCPSku(cpCatalogEntry);
 %>
 

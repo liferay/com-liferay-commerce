@@ -20,6 +20,7 @@
 CommerceDataIntegrationProcessLogDisplayContext commerceDataIntegrationProcessLogDisplayContext = (CommerceDataIntegrationProcessLogDisplayContext)request.getAttribute(WebKeys.PORTLET_DISPLAY_CONTEXT);
 
 CommerceDataIntegrationProcessLog commerceDataIntegrationProcessLog = commerceDataIntegrationProcessLogDisplayContext.getCommerceDataIntegrationProcessLog();
+
 long timeMillis = commerceDataIntegrationProcessLog.getEndDate().getTime() - commerceDataIntegrationProcessLog.getStartDate().getTime();
 
 String startDate = commerceDataIntegrationProcessLogDisplayContext.getFormattedDate(commerceDataIntegrationProcessLog.getStartDate());
