@@ -52,8 +52,8 @@ public class CatalogDTOConverter implements DTOConverter {
 				externalReferenceCode =
 					commerceCatalog.getExternalReferenceCode();
 				id = commerceCatalog.getCommerceCatalogId();
-				system = commerceCatalog.isSystem();
 				name = commerceCatalog.getName();
+				system = commerceCatalog.isSystem();
 			}
 		};
 	}
