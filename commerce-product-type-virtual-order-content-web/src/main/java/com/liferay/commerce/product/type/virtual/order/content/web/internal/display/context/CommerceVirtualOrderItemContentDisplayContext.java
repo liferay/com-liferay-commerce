@@ -304,16 +304,19 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 				getLiferayPortletRequest(),
 			getPortletURL(), null, "no-items-were-found");
 
+		long commerceChannelGroupId =
+			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
+				_commerceVirtualOrderItemContentRequestHelper.
+					getScopeGroupId());
+
 		int total =
 			_commerceVirtualOrderItemLocalService.
 				getCommerceVirtualOrderItemsCount(
-					_commerceVirtualOrderItemContentRequestHelper.
-						getScopeGroupId(),
-					_commerceVirtualOrderItemContentRequestHelper.getUserId());
+					commerceChannelGroupId,
+					_commerceAccount.getCommerceAccountId());
 		List<CommerceVirtualOrderItem> results =
 			_commerceVirtualOrderItemLocalService.getCommerceVirtualOrderItems(
-				_commerceVirtualOrderItemContentRequestHelper.getScopeGroupId(),
-				_commerceAccount.getCommerceAccountId(),
+				commerceChannelGroupId, _commerceAccount.getCommerceAccountId(),
 				_searchContainer.getStart(), _searchContainer.getEnd(),
 				new CommerceVirtualOrderItemCreateDateComparator());
 
