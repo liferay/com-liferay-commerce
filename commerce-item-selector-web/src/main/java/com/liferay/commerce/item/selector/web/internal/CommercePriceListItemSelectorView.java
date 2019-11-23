@@ -113,7 +113,10 @@ public class CommercePriceListItemSelectorView
 
 	private static final List<ItemSelectorReturnType>
 		_supportedItemSelectorReturnTypes = Collections.unmodifiableList(
-			ListUtil.fromArray(new UUIDItemSelectorReturnType()));
+			ListUtil.fromArray(
+				new ItemSelectorReturnType[] {
+					new UUIDItemSelectorReturnType()
+				}));
 
 	@Reference
 	private CommercePriceListService _commercePriceListService;
