@@ -112,7 +112,10 @@ public class CommerceCountryItemSelectorView
 
 	private static final List<ItemSelectorReturnType>
 		_supportedItemSelectorReturnTypes = Collections.unmodifiableList(
-			ListUtil.fromArray(new UUIDItemSelectorReturnType()));
+			ListUtil.fromArray(
+				new ItemSelectorReturnType[] {
+					new UUIDItemSelectorReturnType()
+				}));
 
 	@Reference
 	private CommerceCountryService _commerceCountryService;
