@@ -87,6 +87,7 @@ public class WarehouseItemResourceImpl extends BaseWarehouseItemResourceImpl {
 			deleteCommerceInventoryWarehouseItem(
 				commerceInventoryWarehouseItem.
 					getCommerceInventoryWarehouseItemId());
+
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
@@ -222,7 +223,7 @@ public class WarehouseItemResourceImpl extends BaseWarehouseItemResourceImpl {
 
 		_commerceInventoryWarehouseItemService.
 			updateCommerceInventoryWarehouseItem(
-				id, GetterUtil.getInteger(warehouseItem.getQuantity(), 0));
+				id, GetterUtil.getInteger(warehouseItem.getQuantity()));
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
@@ -249,7 +250,7 @@ public class WarehouseItemResourceImpl extends BaseWarehouseItemResourceImpl {
 			updateCommerceInventoryWarehouseItem(
 				commerceInventoryWarehouseItem.
 					getCommerceInventoryWarehouseItemId(),
-				GetterUtil.getInteger(warehouseItem.getQuantity(), 0));
+				GetterUtil.getInteger(warehouseItem.getQuantity()));
 
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
@@ -338,7 +339,8 @@ public class WarehouseItemResourceImpl extends BaseWarehouseItemResourceImpl {
 
 		if (commerceInventoryWarehouseItem != null) {
 			throw new DuplicateCommerceInventoryWarehouseItemException(
-				"External reference code already associated with this Warehouse");
+				"External reference code already associated with this " +
+					"Warehouse");
 		}
 
 		commerceInventoryWarehouseItem =
