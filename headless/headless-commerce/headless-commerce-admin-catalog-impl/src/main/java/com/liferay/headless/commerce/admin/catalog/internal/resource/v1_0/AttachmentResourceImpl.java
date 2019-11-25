@@ -24,19 +24,13 @@ import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Attachment;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.AttachmentBase64;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.AttachmentUrl;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Product;
-import com.liferay.headless.commerce.admin.catalog.internal.util.DateConfigUtil;
 import com.liferay.headless.commerce.admin.catalog.internal.util.v1_0.AttachmentUtil;
 import com.liferay.headless.commerce.admin.catalog.resource.v1_0.AttachmentResource;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterRegistry;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DefaultDTOConverterContext;
-import com.liferay.headless.commerce.core.util.DateConfig;
 import com.liferay.headless.commerce.core.util.ServiceContextHelper;
-import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.service.ClassNameLocalService;
-import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.util.CalendarFactoryUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.vulcan.fields.NestedField;
 import com.liferay.portal.vulcan.fields.NestedFieldId;
@@ -45,7 +39,6 @@ import com.liferay.portal.vulcan.pagination.Pagination;
 import com.liferay.upload.UniqueFileNameProvider;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.validation.constraints.NotNull;
@@ -398,75 +391,6 @@ public class AttachmentResourceImpl extends BaseAttachmentResourceImpl {
 		}
 
 		return attachments;
-	}
-
-	private Attachment _updateAttachment(
-			CPAttachmentFileEntry cpAttachmentFileEntry, Attachment attachment)
-		throws Exception {
-
-		ServiceContext serviceContext = _serviceContextHelper.getServiceContext(
-			cpAttachmentFileEntry.getGroupId());
-
-		Calendar displayCalendar = CalendarFactoryUtil.getCalendar(
-			serviceContext.getTimeZone());
-
-		if (attachment.getDisplayDate() != null) {
-			displayCalendar = DateConfigUtil.convertDateToCalendar(
-				attachment.getDisplayDate());
-		}
-
-		DateConfig displayDateConfig = new DateConfig(displayCalendar);
-
-		Calendar expirationCalendar = CalendarFactoryUtil.getCalendar(
-			serviceContext.getTimeZone());
-
-		expirationCalendar.add(Calendar.MONTH, 1);
-
-		if (attachment.getExpirationDate() != null) {
-			expirationCalendar = DateConfigUtil.convertDateToCalendar(
-				attachment.getExpirationDate());
-		}
-
-		DateConfig expirationDateConfig = new DateConfig(expirationCalendar);
-
-		FileEntry fileEntry = AttachmentUtil.addFileEntry(
-			attachment, serviceContext.getScopeGroupId(),
-			serviceContext.getUserId(), _uniqueFileNameProvider);
-
-		if (fileEntry == null) {
-			fileEntry = cpAttachmentFileEntry.getFileEntry();
-		}
-
-		cpAttachmentFileEntry =
-			_cpAttachmentFileEntryService.updateCPAttachmentFileEntry(
-				cpAttachmentFileEntry.getCPAttachmentFileEntryId(),
-				fileEntry.getFileEntryId(), displayDateConfig.getMonth(),
-				displayDateConfig.getDay(), displayDateConfig.getYear(),
-				displayDateConfig.getHour(), displayDateConfig.getMinute(),
-				expirationDateConfig.getMonth(), expirationDateConfig.getDay(),
-				expirationDateConfig.getYear(), expirationDateConfig.getHour(),
-				expirationDateConfig.getMinute(),
-				GetterUtil.getBoolean(
-					attachment.getNeverExpire(),
-					cpAttachmentFileEntry.getExpirationDate() == null),
-				AttachmentUtil.getTitleMap(cpAttachmentFileEntry, attachment),
-				GetterUtil.getString(
-					attachment.getOptions(), cpAttachmentFileEntry.getJson()),
-				GetterUtil.getDouble(
-					attachment.getPriority(),
-					cpAttachmentFileEntry.getPriority()),
-				GetterUtil.getInteger(
-					attachment.getType(), cpAttachmentFileEntry.getType()),
-				serviceContext);
-
-		DTOConverter attachmentDTOConverter =
-			_dtoConverterRegistry.getDTOConverter(
-				CPAttachmentFileEntry.class.getName());
-
-		return (Attachment)attachmentDTOConverter.toDTO(
-			new DefaultDTOConverterContext(
-				contextAcceptLanguage.getPreferredLocale(),
-				cpAttachmentFileEntry.getCPAttachmentFileEntryId()));
 	}
 
 	private Attachment _upsertAttachment(
