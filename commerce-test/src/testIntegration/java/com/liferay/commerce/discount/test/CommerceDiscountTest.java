@@ -145,7 +145,7 @@ public class CommerceDiscountTest {
 			CommerceCurrencyTestUtil.addCommerceCurrency();
 
 		CommerceContext commerceContext = new TestCommerceContext(
-			commerceCurrency, _user, _group, _commerceAccount, null);
+			commerceCurrency, null, _user, _group, _commerceAccount, null);
 
 		CommerceProductPrice commerceProductPrice =
 			_commerceProductPriceCalculation.getCommerceProductPrice(
@@ -205,7 +205,7 @@ public class CommerceDiscountTest {
 			CommerceCurrencyTestUtil.addCommerceCurrency();
 
 		CommerceContext commerceContext = new TestCommerceContext(
-			commerceCurrency, _user, _group, _commerceAccount, null);
+			commerceCurrency, null, _user, _group, _commerceAccount, null);
 
 		CommerceProductPrice commerceProductPrice =
 			_commerceProductPriceCalculation.getCommerceProductPrice(
@@ -304,7 +304,7 @@ public class CommerceDiscountTest {
 			CommerceCurrencyTestUtil.addCommerceCurrency();
 
 		CommerceContext commerceContext = new TestCommerceContext(
-			commerceCurrency, _user, _group, _commerceAccount, null);
+			commerceCurrency, null, _user, _group, _commerceAccount, null);
 
 		CommerceProductPrice commerceProductPrice1 =
 			_commerceProductPriceCalculation.getCommerceProductPrice(
@@ -482,7 +482,7 @@ public class CommerceDiscountTest {
 			CommerceCurrencyTestUtil.addCommerceCurrency();
 
 		CommerceContext commerceContext = new TestCommerceContext(
-			commerceCurrency, _user, _group, _commerceAccount, null);
+			commerceCurrency, null, _user, _group, _commerceAccount, null);
 
 		CommerceProductPrice commerceProductPrice1 =
 			_commerceProductPriceCalculation.getCommerceProductPrice(
@@ -622,13 +622,15 @@ public class CommerceDiscountTest {
 				cpDefinition.getCPDefinitionId());
 
 		CommerceContext commerceContext = new TestCommerceContext(
-			commerceCurrency, _user, _group, _commerceAccount, commerceOrder);
+			commerceCurrency, null, _user, _group, _commerceAccount,
+			commerceOrder);
 
 		commerceOrder = _commerceOrderLocalService.applyCouponCode(
 			commerceOrder.getCommerceOrderId(), couponCode, commerceContext);
 
 		commerceContext = new TestCommerceContext(
-			commerceCurrency, _user, _group, _commerceAccount, commerceOrder);
+			commerceCurrency, null, _user, _group, _commerceAccount,
+			commerceOrder);
 
 		_commerceOrders.add(commerceOrder);
 

@@ -42,18 +42,6 @@ public class TestCommerceContext implements CommerceContext {
 		_commerceOrder = commerceOrder;
 	}
 
-	public TestCommerceContext(
-		CommerceCurrency commerceCurrency, User contextUser, Group contextGroup,
-		CommerceAccount commerceAccount, CommerceOrder commerceOrder) {
-
-		_commerceCurrency = commerceCurrency;
-		_commerceChannel = null;
-		_contextUser = contextUser;
-		_contextGroup = contextGroup;
-		_commerceAccount = commerceAccount;
-		_commerceOrder = commerceOrder;
-	}
-
 	@Override
 	public CommerceAccount getCommerceAccount() {
 		return _commerceAccount;
