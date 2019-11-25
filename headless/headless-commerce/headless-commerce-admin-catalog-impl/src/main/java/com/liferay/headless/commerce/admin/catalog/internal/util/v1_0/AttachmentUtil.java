@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.TempFileEntryUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -107,13 +108,8 @@ public class AttachmentUtil {
 		throws Exception {
 
 		if (Validator.isNotNull(attachmentUrl.getSrc())) {
-			URL url = new URL(attachmentUrl.getSrc());
-
-			URLConnection urlConnection = url.openConnection();
-
-			urlConnection.connect();
-
-			File file = FileUtil.createTempFile(urlConnection.getInputStream());
+			File file = FileUtil.createTempFile(
+				HttpUtil.URLtoInputStream(attachmentUrl.getSrc()));
 
 			return _addFileEntry(
 				groupId, userId, file, MimeTypesUtil.getContentType(file),
@@ -338,9 +334,13 @@ public class AttachmentUtil {
 			file.getName(),
 			curFileName -> _exists(groupId, userId, curFileName));
 
-		return TempFileEntryUtil.addTempFileEntry(
+		FileEntry fileEntry = TempFileEntryUtil.addTempFileEntry(
 			groupId, userId, _TEMP_FILE_NAME, uniqueFileName, file,
 			contentType);
+
+		FileUtil.delete(file);
+
+		return fileEntry;
 	}
 
 	private static boolean _exists(
