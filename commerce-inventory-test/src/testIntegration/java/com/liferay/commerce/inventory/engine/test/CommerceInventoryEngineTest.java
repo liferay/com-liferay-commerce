@@ -139,11 +139,11 @@ public class CommerceInventoryEngineTest {
 	@Test
 	public void testBookedQuantityFromMultipleWarehouses() throws Exception {
 		frutillaRule.scenario(
-			"When the same warehouse item is added to 2 active warehouse the" +
-				"maximum bookable quantity is qual to the sum of the stock " +
+			"When the same warehouse item is added to 2 active warehouse the " +
+				"maximum bookable quantity is equal to the sum of the stock " +
 					"in both warehouses"
 		).given(
-			"2 active warehouse"
+			"2 active warehouses"
 		).and(
 			"A product sku in different quantities added to the warehouses"
 		).when(
@@ -203,11 +203,11 @@ public class CommerceInventoryEngineTest {
 		throws Exception {
 
 		frutillaRule.scenario(
-			"When the same warehouse item is added to 2 active warehouse the" +
-				"maximum bookable quantity is qual to the sum of the stock " +
+			"When the same warehouse item is added to 2 active warehouse the " +
+				"maximum bookable quantity is equal to the sum of the stock " +
 					"in both warehouses"
 		).given(
-			"2 active warehouse"
+			"2 active warehouses"
 		).and(
 			"A product sku in different quantities added to the warehouses"
 		).when(
@@ -353,10 +353,10 @@ public class CommerceInventoryEngineTest {
 	public void testConsumeQuantityFromMultipleWarehouses() throws Exception {
 		frutillaRule.scenario(
 			"When the same warehouse item is added to 2 active warehouse the " +
-				"maximum consumable quantity is qual to the sum of the stock " +
+				"maximum consumable quantity is equal to the sum of the stock " +
 					"in both warehouses"
 		).given(
-			"2 active warehouse"
+			"2 active warehouses"
 		).and(
 			"A product sku in different quantities added to the warehouses"
 		).when(
@@ -422,7 +422,7 @@ public class CommerceInventoryEngineTest {
 		).given(
 			"One warehouse is created with external reference"
 		).when(
-			"Another warehouse with same attributes is create"
+			"Another warehouse with same attributes is created"
 		).then(
 			"An exception shall be raised"
 		);
