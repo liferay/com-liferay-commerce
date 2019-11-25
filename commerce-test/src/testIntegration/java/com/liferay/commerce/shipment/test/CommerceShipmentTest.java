@@ -117,7 +117,7 @@ public class CommerceShipmentTest {
 	@Test(expected = CommerceOrderShippingAddressException.class)
 	public void testCheckoutWihoutShippingAddress() throws Exception {
 		frutillaRule.scenario(
-			"It should not be possible to create an order without shipping " +
+			"It should not be possible to create an order without shipments " +
 				"address"
 		).given(
 			"An order is created without a shipping address"
@@ -160,11 +160,11 @@ public class CommerceShipmentTest {
 	@Test
 	public void testCreateMultipleShippingForSameOrder() throws Exception {
 		frutillaRule.scenario(
-			"An order with multiple shippings is created"
+			"An order with multiple shipments is created"
 		).given(
-			"An order is created with a shipping associated"
+			"An order is created with a shipment associated"
 		).when(
-			"I try to add a second shipping to the same order"
+			"I try to add a second shipment to the same order"
 		).then(
 			"Multiple shipments are created"
 		);
@@ -181,30 +181,30 @@ public class CommerceShipmentTest {
 
 		_commerceOrders.add(commerceOrder);
 
-		CommerceShipment commerceShipment =
-			CommerceShipmentTestUtil.createEmptyOrderShipment(
-				commerceOrder.getGroupId(), commerceOrder.getCommerceOrderId());
-
 		CommerceShipment commerceShipment1 =
 			CommerceShipmentTestUtil.createEmptyOrderShipment(
 				commerceOrder.getGroupId(), commerceOrder.getCommerceOrderId());
 
-		Assert.assertEquals(
-			commerceOrder.getGroupId(), commerceShipment.getGroupId());
+		CommerceShipment commerceShipment2 =
+			CommerceShipmentTestUtil.createEmptyOrderShipment(
+				commerceOrder.getGroupId(), commerceOrder.getCommerceOrderId());
+
 		Assert.assertEquals(
 			commerceOrder.getGroupId(), commerceShipment1.getGroupId());
+		Assert.assertEquals(
+			commerceOrder.getGroupId(), commerceShipment2.getGroupId());
 	}
 
 	@Test
 	public void testCreateOrderShipment() throws Exception {
 		frutillaRule.scenario(
-			"An order with a shipping is created"
+			"An order with a shipment is created"
 		).given(
 			"An order"
 		).when(
-			"I add a shipping on that order"
+			"I add a shipment on that order"
 		).then(
-			"The shipping is associated to the order"
+			"The shipment is associated to the order"
 		);
 
 		CommerceChannel commerceChannel = _createCommerceChannel();
@@ -238,13 +238,13 @@ public class CommerceShipmentTest {
 	@Test
 	public void testCreateOrderWithItemsShipment() throws Exception {
 		frutillaRule.scenario(
-			"An order with a shipping is created"
+			"An order with a shipment is created"
 		).given(
 			"An order"
 		).when(
 			"I add an item to the order"
 		).then(
-			"The shipping is associated to the order and to the items"
+			"The shipment is associated to the order and to the items"
 		);
 
 		CPInstance cpInstance = _createCPInstance();
@@ -319,21 +319,21 @@ public class CommerceShipmentTest {
 	@Test
 	public void testCreateOrderWithShippingAmount() throws Exception {
 		frutillaRule.scenario(
-			"When a shipping amount is associated to an order the price " +
+			"When a shipping amount is associated with an order the price " +
 				"object is correctly set"
 		).given(
 			"An order"
 		).and(
-			"A shipping with a shipping amount set"
+			"A shipment with a shipping amount set"
 		).when(
-			"I attach the shipping to the order"
+			"I attach the shipment to the order"
 		).then(
 			"The price object has the shipping amount correctly set"
 		);
 
 		CPInstance cpInstance = _createCPInstance();
 
-		cpInstance.setPrice(BigDecimal.valueOf(25.0));
+		cpInstance.setPrice(BigDecimal.valueOf(25));
 
 		_cpInstanceLocalService.updateCPInstance(cpInstance);
 
@@ -349,7 +349,7 @@ public class CommerceShipmentTest {
 			_user.getUserId(), commerceInventoryWarehouse, cpInstance.getSku(),
 			quantity);
 
-		BigDecimal value = BigDecimal.valueOf(5.0);
+		BigDecimal value = BigDecimal.valueOf(5);
 
 		CommerceOrder commerceOrder =
 			CommerceTestUtil.createCommerceOrderForShipping(
@@ -369,9 +369,6 @@ public class CommerceShipmentTest {
 			commerceOrder.getCommerceOrderId(), cpInstance.getCPInstanceId(),
 			orderedQuantity, commerceContext);
 
-		// getCommerceOrderPrice(commerceOrder, true, commerceContext)
-		// --> AssertException
-
 		CommerceOrderPrice commerceOrderPrice =
 			_commerceOrderPriceCalculation.getCommerceOrderPrice(
 				commerceOrder, false, commerceContext);
@@ -389,16 +386,16 @@ public class CommerceShipmentTest {
 		).given(
 			"An order"
 		).and(
-			"A shipping with a shipping discount set"
+			"A shipment with a shipping discount set"
 		).when(
-			"I attach the shipping to the order"
+			"I attach the shipment to the order"
 		).then(
 			"The price object has the shipping discounts correctly set"
 		);
 
 		CPInstance cpInstance = _createCPInstance();
 
-		cpInstance.setPrice(BigDecimal.valueOf(25.0));
+		cpInstance.setPrice(BigDecimal.valueOf(25));
 
 		_cpInstanceLocalService.updateCPInstance(cpInstance);
 
@@ -414,7 +411,7 @@ public class CommerceShipmentTest {
 			_user.getUserId(), commerceInventoryWarehouse, cpInstance.getSku(),
 			quantity);
 
-		BigDecimal value = BigDecimal.valueOf(5.0);
+		BigDecimal value = BigDecimal.valueOf(5);
 
 		CommerceOrder commerceOrder =
 			CommerceTestUtil.createCommerceOrderForShipping(
@@ -470,7 +467,7 @@ public class CommerceShipmentTest {
 		).and(
 			"2 different CPInstance and 2 different shipments for the items"
 		).when(
-			"I attach the shipping to the items (one each)"
+			"I attach the shipment to the items (one each)"
 		).then(
 			"The items shall be correctly associated with their shipping " +
 				"details"
@@ -492,11 +489,11 @@ public class CommerceShipmentTest {
 
 		_commerceOrders.add(commerceOrder);
 
-		CommerceShipment commerceShipment =
+		CommerceShipment commerceShipment1 =
 			CommerceShipmentTestUtil.createEmptyOrderShipment(
 				commerceOrder.getGroupId(), commerceOrder.getCommerceOrderId());
 
-		CommerceShipment commerceShipment1 =
+		CommerceShipment commerceShipment2 =
 			CommerceShipmentTestUtil.createEmptyOrderShipment(
 				commerceOrder.getGroupId(), commerceOrder.getCommerceOrderId());
 
@@ -532,7 +529,7 @@ public class CommerceShipmentTest {
 
 		CommerceShipmentItem commerceShipmentItem =
 			_commerceShipmentItemLocalService.addCommerceShipmentItem(
-				commerceShipment.getCommerceShipmentId(),
+				commerceShipment1.getCommerceShipmentId(),
 				commerceOrderItem.getCommerceOrderItemId(),
 				commerceInventoryWarehouse.getCommerceInventoryWarehouseId(),
 				commerceOrderItem.getQuantity(),
@@ -541,7 +538,7 @@ public class CommerceShipmentTest {
 
 		CommerceShipmentItem commerceShipmentItem1 =
 			_commerceShipmentItemLocalService.addCommerceShipmentItem(
-				commerceShipment1.getCommerceShipmentId(),
+				commerceShipment2.getCommerceShipmentId(),
 				commerceOrderItem1.getCommerceOrderItemId(),
 				commerceInventoryWarehouse.getCommerceInventoryWarehouseId(),
 				commerceOrderItem1.getQuantity(),
@@ -549,9 +546,9 @@ public class CommerceShipmentTest {
 					commerceOrder.getGroupId()));
 
 		Assert.assertEquals(
-			commerceShipment, commerceShipmentItem.getCommerceShipment());
+			commerceShipment1, commerceShipmentItem.getCommerceShipment());
 		Assert.assertEquals(
-			commerceShipment1, commerceShipmentItem1.getCommerceShipment());
+			commerceShipment2, commerceShipmentItem1.getCommerceShipment());
 	}
 
 	@Test
@@ -561,7 +558,7 @@ public class CommerceShipmentTest {
 		).given(
 			"An order with an order item created as non shippable"
 		).when(
-			"I attach the shipping to the order and its items"
+			"I attach the shipment to the order and its items"
 		).then(
 			"The order shall be non shippable"
 		);
@@ -626,7 +623,7 @@ public class CommerceShipmentTest {
 		).and(
 			"The order status is updated to CANCELLED"
 		).when(
-			"I attach the shipping to the items (one each)"
+			"I attach the shipment to the items (one each)"
 		).then(
 			"An exception shall be raised"
 		);
@@ -664,14 +661,14 @@ public class CommerceShipmentTest {
 	@Test
 	public void testCreateShippingForItemsOnly() throws Exception {
 		frutillaRule.scenario(
-			"Attach a shipment to the order items without a shipping to the " +
+			"Attach a shipment to the order items without a shipment to the " +
 				"order"
 		).given(
 			"An order is created"
 		).and(
 			"2 order items are added to the order"
 		).when(
-			"I attach the shipping to the items"
+			"I attach the shipment to the items"
 		).then(
 			"Each item shall have a shipment item associated"
 		);
@@ -747,7 +744,7 @@ public class CommerceShipmentTest {
 		).given(
 			"An order with an order item associated to an inactive warehouse"
 		).when(
-			"I attach the shipping to the order and its items"
+			"I attach the shipment to the order and its items"
 		).then(
 			"An exception shall be raised"
 		);
@@ -807,7 +804,7 @@ public class CommerceShipmentTest {
 		).given(
 			"A channel"
 		).when(
-			"I attach the shipping using the channel groupId"
+			"I attach the shipment using the channel groupId"
 		).then(
 			"An exception shall be raised"
 		);
@@ -821,7 +818,7 @@ public class CommerceShipmentTest {
 	@Test(expected = CommerceShipmentItemQuantityException.class)
 	public void testUpdateShippingItemQuantity() throws Exception {
 		frutillaRule.scenario(
-			"Update ordered quantity for item shipment to be bigger than " +
+			"Update ordered quantity for shipping item to be bigger than " +
 				"inventory availability"
 		).given(
 			"An order with an order item associated to an active warehouse"
