@@ -133,7 +133,7 @@ public class CommerceOrderItemLocalServiceTest {
 				commerceCurrency.getCommerceCurrencyId());
 
 		CommerceContext commerceContext = new TestCommerceContext(
-			commerceCurrency, commerceChannel, commerceAccount, commerceOrder);
+			commerceCurrency, null, null, _group, null, null);
 
 		CommerceOrderItem commerceOrderItem =
 			_commerceOrderItemLocalService.addCommerceOrderItem(
@@ -215,7 +215,7 @@ public class CommerceOrderItemLocalServiceTest {
 				commerceCurrency.getCommerceCurrencyId());
 
 		CommerceContext commerceContext = new TestCommerceContext(
-			commerceCurrency, commerceChannel, commerceAccount, commerceOrder);
+			commerceCurrency, null, null, _group, null, null);
 
 		_commerceOrderItemLocalService.addCommerceOrderItem(
 			commerceOrder.getCommerceOrderId(), cpInstance.getCPInstanceId(), 1,
@@ -280,7 +280,7 @@ public class CommerceOrderItemLocalServiceTest {
 				commerceCurrency.getCommerceCurrencyId());
 
 		CommerceContext commerceContext = new TestCommerceContext(
-			commerceCurrency, commerceChannel, commerceAccount, commerceOrder);
+				commerceCurrency, null, null, _group, null, null);
 
 		_commerceOrderItemLocalService.addCommerceOrderItem(
 			commerceOrder.getCommerceOrderId(), cpInstance.getCPInstanceId(), 1,

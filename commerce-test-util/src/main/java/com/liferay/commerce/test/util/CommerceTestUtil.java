@@ -303,7 +303,7 @@ public class CommerceTestUtil {
 		}
 
 		CommerceContext commerceContext = new TestCommerceContext(
-			commerceOrder.getCommerceCurrency(), null, null, null,
+			commerceOrder.getCommerceCurrency(), null, null, null, null,
 			commerceOrder);
 
 		return addCommerceOrderItem(
@@ -415,7 +415,7 @@ public class CommerceTestUtil {
 				commerceOrder.getGroupId());
 
 		CommerceContext commerceContext = new TestCommerceContext(
-			commerceOrder.getCommerceCurrency(), null,
+			commerceOrder.getCommerceCurrency(), null, null,
 			serviceContext.getScopeGroup(), null, commerceOrder);
 
 		return CommerceOrderLocalServiceUtil.checkoutCommerceOrder(
@@ -431,7 +431,11 @@ public class CommerceTestUtil {
 		CommerceOrder commerceOrder = addB2CCommerceOrder(
 			companyId, userId, currencyId, siteGroupId);
 
-		int orderStatus = CommerceShipmentConstants.ALLOWED_ORDER_STATUSES[0];
+		int orderStatusIdx = RandomTestUtil.randomInt(
+			0, CommerceShipmentConstants.ALLOWED_ORDER_STATUSES.length - 1);
+
+		int orderStatus =
+			CommerceShipmentConstants.ALLOWED_ORDER_STATUSES[orderStatusIdx];
 
 		commerceOrder.setOrderStatus(orderStatus);
 
