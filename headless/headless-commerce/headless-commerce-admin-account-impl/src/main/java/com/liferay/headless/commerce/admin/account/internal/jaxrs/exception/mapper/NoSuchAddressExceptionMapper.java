@@ -14,14 +14,14 @@
 
 package com.liferay.headless.commerce.admin.account.internal.jaxrs.exception.mapper;
 
+import com.liferay.commerce.exception.NoSuchAddressException;
+import com.liferay.headless.commerce.core.exception.mapper.BaseExceptionMapper;
+
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 import org.osgi.service.component.annotations.Component;
-
-import com.liferay.commerce.exception.NoSuchAddressException;
-import com.liferay.headless.commerce.core.exception.mapper.BaseExceptionMapper;
 
 /**
  * @author Andrea Sbarra

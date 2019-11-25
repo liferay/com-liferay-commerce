@@ -76,6 +76,7 @@ public class AccountAddressResourceImpl extends BaseAccountAddressResourceImpl {
 
 		_commerceAddressService.deleteCommerceAddress(
 			commerceAddress.getCommerceAddressId());
+
 		Response.ResponseBuilder responseBuilder = Response.noContent();
 
 		return responseBuilder.build();
@@ -204,7 +205,7 @@ public class AccountAddressResourceImpl extends BaseAccountAddressResourceImpl {
 		}
 
 		if (commerceAddress != null) {
-			accountAddress = _toAccountAddress(
+			return _toAccountAddress(
 				_commerceAddressService.updateCommerceAddress(
 					commerceAddress.getCommerceAddressId(),
 					GetterUtil.getString(accountAddress.getName(), null),
@@ -221,12 +222,8 @@ public class AccountAddressResourceImpl extends BaseAccountAddressResourceImpl {
 						accountAddress.getType(), commerceAddress.getType()),
 					_serviceContextHelper.getServiceContext()));
 		}
-		else {
-			accountAddress = _addAccountAddress(
-				commerceAccount, accountAddress);
-		}
 
-		return accountAddress;
+		return _addAccountAddress(commerceAccount, accountAddress);
 	}
 
 	@Override
