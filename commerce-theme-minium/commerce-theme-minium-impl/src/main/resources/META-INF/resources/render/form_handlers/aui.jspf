@@ -67,11 +67,11 @@
 
                             if (response.promoPrice != null) {
                                 priceElement.innerHTML =
-                                    '<span class="price__value price__value--promo-price">' + response.promoPrice + '</span>' +
-                                    '<span class="price__value price__value--inactive">' + response.price + '</span>';
+                                    '<span class="price-value price-value-promo">' + response.promoPrice + '</span>' +
+                                    '<span class="price-value price-value-inactive">' + response.price + '</span>';
                             }
                             else if (response.price != null) {
-                                priceElement.innerHTML = '<span class="price__value">' + response.price + '</span>';
+                                priceElement.innerHTML = '<span class="price-value">' + response.price + '</span>';
                             }
                             else {
                                 priceElement.innerHTML = '';

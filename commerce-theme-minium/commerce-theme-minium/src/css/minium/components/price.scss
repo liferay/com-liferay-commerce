@@ -1,29 +1,13 @@
-.price {
-	&__value {
-		font-weight: 600;
-		font-weight: bold;
-		margin-right: 10px;
+.price-value {
+	&.price-value-discount {
+		color: $color-mood-bad
+	}
 
-		&--big {
-			font-size: 18px;
-		}
+	&.price-value-promo {
+		color: $color-mood-bad
+	}
 
-		&--discount {
-			color: $color-mood-bad
-		}
-
-		&--promo-price {
-			color: $color-mood-bad
-		}
-
-		&--inactive {
-			color: $color-fg-alt;
-			font-weight: normal;
-			text-decoration: line-through;
-		}
-
-		&:last-child {
-			margin-right: 0;
-		}
+	&.price-value-inactive {
+		color: $color-fg-alt;
 	}
 }
