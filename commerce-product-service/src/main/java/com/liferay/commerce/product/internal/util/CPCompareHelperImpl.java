@@ -19,6 +19,8 @@ import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.util.CPCompareHelper;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 
 import java.util.ArrayList;
@@ -51,8 +53,7 @@ public class CPCompareHelperImpl implements CPCompareHelper {
 	}
 
 	public List<Long> getCPDefinitionIds(
-			long groupId, long commerceAccountId, HttpSession httpSession)
-		throws PortalException {
+		long groupId, long commerceAccountId, HttpSession httpSession) {
 
 		List<Long> cpDefinitionIds = (List<Long>)httpSession.getAttribute(
 			_getSessionAttributeKey(groupId));
@@ -64,10 +65,20 @@ public class CPCompareHelperImpl implements CPCompareHelper {
 		List<Long> activeCPDefinitionIds = new ArrayList<>();
 
 		for (long cpDefinitionId : cpDefinitionIds) {
-			CPCatalogEntry cpCatalogEntry =
-				_cpDefinitionHelper.getCPCatalogEntry(
+			CPCatalogEntry cpCatalogEntry = null;
+
+			try {
+				cpCatalogEntry = _cpDefinitionHelper.getCPCatalogEntry(
 					commerceAccountId, groupId, cpDefinitionId,
 					LocaleUtil.getDefault());
+			}
+			catch (PortalException pe) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(pe, pe);
+				}
+
+				continue;
+			}
 
 			if (cpCatalogEntry != null) {
 				activeCPDefinitionIds.add(cpDefinitionId);
@@ -104,6 +115,9 @@ public class CPCompareHelperImpl implements CPCompareHelper {
 	private String _getSessionAttributeKey(long groupId) {
 		return "LIFERAY_SHARED_CP_DEFINITION_IDS_" + groupId;
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CPCompareHelperImpl.class);
 
 	@Reference
 	private CommerceAccountService _commerceAccountService;
