@@ -14,10 +14,13 @@
 
 package com.liferay.headless.commerce.machine.learning.internal.dto.v1_0.converter;
 
+import com.liferay.asset.kernel.model.AssetCategory;
+import com.liferay.asset.kernel.service.AssetCategoryLocalService;
 import com.liferay.commerce.machine.learning.forecast.model.AssetCategoryCommerceMLForecast;
 import com.liferay.commerce.machine.learning.forecast.service.AssetCategoryCommerceMLForecastService;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverter;
 import com.liferay.headless.commerce.core.dto.v1_0.converter.DTOConverterContext;
+import com.liferay.headless.commerce.core.util.LanguageUtils;
 import com.liferay.headless.commerce.machine.learning.dto.v1_0.AccountCategoryForecast;
 
 import org.osgi.service.component.annotations.Component;
@@ -51,12 +54,22 @@ public class AccountCategoryForecastDTOConverter implements DTOConverter {
 					compositeResourcePrimKey.getCompanyId(),
 					compositeResourcePrimKey.getForecastId());
 
+		AssetCategory assetCategory =
+			_assetCategoryLocalService.fetchAssetCategory(
+				assetCategoryCommerceMLForecast.getAssetCategoryId());
+
 		return new AccountCategoryForecast() {
 			{
 				account =
 					assetCategoryCommerceMLForecast.getCommerceAccountId();
 				actual = assetCategoryCommerceMLForecast.getActual();
 				category = assetCategoryCommerceMLForecast.getAssetCategoryId();
+
+				if (assetCategory != null) {
+					categoryTitle = LanguageUtils.getLanguageIdMap(
+						assetCategory.getTitleMap());
+				}
+
 				forecast = assetCategoryCommerceMLForecast.getForecast();
 				forecastLowerBound =
 					assetCategoryCommerceMLForecast.getForecastLowerBound();
@@ -71,5 +84,8 @@ public class AccountCategoryForecastDTOConverter implements DTOConverter {
 	@Reference
 	private AssetCategoryCommerceMLForecastService
 		_assetCategoryCommerceMLForecastService;
+
+	@Reference
+	private AssetCategoryLocalService _assetCategoryLocalService;
 
 }
