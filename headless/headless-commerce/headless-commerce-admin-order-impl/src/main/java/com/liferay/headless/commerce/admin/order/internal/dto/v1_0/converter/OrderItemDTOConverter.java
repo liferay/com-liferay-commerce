@@ -81,6 +81,7 @@ public class OrderItemDTOConverter implements DTOConverter {
 					commerceOrder.getExternalReferenceCode();
 				orderId = commerceOrder.getCommerceOrderId();
 				printedNote = commerceOrderItem.getPrintedNote();
+				promoPrice = commerceOrderItem.getPromoPrice();
 				quantity = commerceOrderItem.getQuantity();
 				requestedDeliveryDate =
 					commerceOrderItem.getRequestedDeliveryDate();
