@@ -31,11 +31,11 @@
 }
 
 @mixin specialPricesStyles() {
-  &--promo-price {
+  &.price-value-promo {
     color: $color-mood-bad;
   }
 
-  &--inactive {
+  &.price-value-inactive {
     font-size: 14px;
     margin-left: 10px;
     text-decoration: line-through;
@@ -45,7 +45,7 @@
     }
   }
 
-  &--discount {
+  &.price-value-discount {
     color: $color-mood-bad;
 
     &::before {

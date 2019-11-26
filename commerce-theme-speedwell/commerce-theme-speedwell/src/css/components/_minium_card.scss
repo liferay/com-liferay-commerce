@@ -205,27 +205,25 @@
       position: absolute;
     }
 
-    .price {
-      &__value {
+    .price-value {
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 27px;
+
+      @media only screen and (max-width: 767px) {
+        font-size: 14px;
+        line-height: 19px;
+      }
+
+      @include specialPricesStyles;
+
+      &-promo {
         font-size: 20px;
-        font-weight: 600;
-        line-height: 27px;
+      }
 
-        @media only screen and (max-width: 767px) {
-          font-size: 14px;
-          line-height: 19px;
-        }
-
-        @include specialPricesStyles;
-
-        &--promo-price {
-          font-size: 20px;
-        }
-
-        &--discount {
-          margin-left: 10px;
-          font-size: 14px;
-        }
+      &-discount {
+        margin-left: 10px;
+        font-size: 14px;
       }
     }
   }
