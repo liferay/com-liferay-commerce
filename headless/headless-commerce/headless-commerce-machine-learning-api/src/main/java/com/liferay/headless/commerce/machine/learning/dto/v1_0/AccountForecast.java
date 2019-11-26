@@ -20,8 +20,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import com.liferay.petra.function.UnsafeSupplier;
 import com.liferay.petra.string.StringBundler;
-import com.liferay.portal.vulcan.graphql.annotation.GraphQLField;
-import com.liferay.portal.vulcan.graphql.annotation.GraphQLName;
+
+import graphql.annotations.annotationTypes.GraphQLField;
+import graphql.annotations.annotationTypes.GraphQLName;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -35,8 +36,6 @@ import java.util.Objects;
 import java.util.Set;
 
 import javax.annotation.Generated;
-
-import javax.validation.Valid;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -79,7 +78,6 @@ public class AccountForecast {
 	protected Long account;
 
 	@Schema
-	@Valid
 	public Float getActual() {
 		return actual;
 	}
@@ -108,7 +106,6 @@ public class AccountForecast {
 	protected Float actual;
 
 	@Schema
-	@Valid
 	public Float getForecast() {
 		return forecast;
 	}
@@ -137,7 +134,6 @@ public class AccountForecast {
 	protected Float forecast;
 
 	@Schema
-	@Valid
 	public Float getForecastLowerBound() {
 		return forecastLowerBound;
 	}
@@ -166,7 +162,6 @@ public class AccountForecast {
 	protected Float forecastLowerBound;
 
 	@Schema
-	@Valid
 	public Float getForecastUpperBound() {
 		return forecastUpperBound;
 	}

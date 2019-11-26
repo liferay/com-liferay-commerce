@@ -20,8 +20,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import com.liferay.petra.function.UnsafeSupplier;
 import com.liferay.petra.string.StringBundler;
-import com.liferay.portal.vulcan.graphql.annotation.GraphQLField;
-import com.liferay.portal.vulcan.graphql.annotation.GraphQLName;
+
+import graphql.annotations.annotationTypes.GraphQLField;
+import graphql.annotations.annotationTypes.GraphQLName;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -35,8 +36,6 @@ import java.util.Objects;
 import java.util.Set;
 
 import javax.annotation.Generated;
-
-import javax.validation.Valid;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -79,7 +78,6 @@ public class AccountCategoryForecast {
 	protected Long account;
 
 	@Schema
-	@Valid
 	public Float getActual() {
 		return actual;
 	}
@@ -136,7 +134,35 @@ public class AccountCategoryForecast {
 	protected Long category;
 
 	@Schema
-	@Valid
+	public Map<String, String> getCategoryTitle() {
+		return categoryTitle;
+	}
+
+	public void setCategoryTitle(Map<String, String> categoryTitle) {
+		this.categoryTitle = categoryTitle;
+	}
+
+	@JsonIgnore
+	public void setCategoryTitle(
+		UnsafeSupplier<Map<String, String>, Exception>
+			categoryTitleUnsafeSupplier) {
+
+		try {
+			categoryTitle = categoryTitleUnsafeSupplier.get();
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@GraphQLField
+	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
+	protected Map<String, String> categoryTitle;
+
+	@Schema
 	public Float getForecast() {
 		return forecast;
 	}
@@ -165,7 +191,6 @@ public class AccountCategoryForecast {
 	protected Float forecast;
 
 	@Schema
-	@Valid
 	public Float getForecastLowerBound() {
 		return forecastLowerBound;
 	}
@@ -194,7 +219,6 @@ public class AccountCategoryForecast {
 	protected Float forecastLowerBound;
 
 	@Schema
-	@Valid
 	public Float getForecastUpperBound() {
 		return forecastUpperBound;
 	}
@@ -335,6 +359,16 @@ public class AccountCategoryForecast {
 			sb.append("\"category\": ");
 
 			sb.append(category);
+		}
+
+		if (categoryTitle != null) {
+			if (sb.length() > 1) {
+				sb.append(", ");
+			}
+
+			sb.append("\"categoryTitle\": ");
+
+			sb.append(_toJSON(categoryTitle));
 		}
 
 		if (forecast != null) {
