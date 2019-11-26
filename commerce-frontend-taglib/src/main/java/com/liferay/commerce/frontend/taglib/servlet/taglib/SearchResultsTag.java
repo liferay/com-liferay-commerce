@@ -14,76 +14,44 @@
 
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
-import com.liferay.commerce.account.model.CommerceAccount;
-import com.liferay.commerce.constants.CommerceWebKeys;
-import com.liferay.commerce.context.CommerceContext;
+import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.SearchResultsItemRenderer;
+import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.SearchResultsItemRendererUtil;
 import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
-import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
-import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
-import com.liferay.petra.string.StringPool;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.PortalUtil;
-import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.commerce.product.catalog.CPCatalogEntry;
+import com.liferay.commerce.product.content.util.CPContentHelper;
+import com.liferay.taglib.util.IncludeTag;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspException;
 
 /**
- * @author Marco Leo
+ * @author Gianmarco Brunialti Masera
  */
-public class SearchResultsTag extends ComponentRendererTag {
+
+public class SearchResultsTag extends IncludeTag {
 
 	@Override
-	public int doStartTag() {
-		putValue("queryString", StringPool.BLANK);
-
-		CommerceContext commerceContext = (CommerceContext)request.getAttribute(
-			CommerceWebKeys.COMMERCE_CONTEXT);
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		try {
-			CommerceAccount commerceAccount =
-				commerceContext.getCommerceAccount();
-
-			if (commerceAccount != null) {
-				putValue(
-					"commerceAccountId",
-					commerceAccount.getCommerceAccountId());
-			}
-		}
-		catch (PortalException pe) {
-			_log.error(pe, pe);
-		}
-
-		putValue(
-			"spritemap",
-			themeDisplay.getPathThemeImages() + "/commerce-icons.svg");
-
-		putValue(
-			"searchAPI",
-			PortalUtil.getPortalURL(request) + "/o/commerce-ui/search/");
-		putValue("visible", false);
-
-		setTemplateNamespace("SearchResults.render");
+	public int doStartTag() throws JspException {
+		_cpContentHelper = ServletContextUtil.getCPContentHelper();
+		_searchResultsItemRenderer = SearchResultsItemRendererUtil.getRenderer();
 
 		return super.doStartTag();
 	}
 
 	@Override
-	public String getModule() {
-		NPMResolver npmResolver = ServletContextUtil.getNPMResolver();
+	public int doEndTag() throws JspException {
+		HttpServletResponse response =
+				(HttpServletResponse) pageContext.getResponse();
 
-		if (npmResolver == null) {
-			return StringPool.BLANK;
-		}
+		CPCatalogEntry cpCatalogEntry =
+				_cpContentHelper.getCPCatalogEntry(request);
 
-		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/search_results/SearchResults.es");
+		_searchResultsItemRenderer.render(cpCatalogEntry, request, response);
+
+		return super.doEndTag();
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
-		SearchResultsTag.class);
+	private SearchResultsItemRenderer _searchResultsItemRenderer;
 
+	private CPContentHelper _cpContentHelper;
 }
