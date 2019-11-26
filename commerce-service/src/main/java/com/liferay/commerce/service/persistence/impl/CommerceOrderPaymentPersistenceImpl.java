@@ -703,18 +703,6 @@ public class CommerceOrderPaymentPersistenceImpl
 		}
 	}
 
-	public void clearCache(Set<Serializable> primaryKeys) {
-		finderCache.clearCache(FINDER_CLASS_NAME_ENTITY);
-		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
-		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		for (Serializable primaryKey : primaryKeys) {
-			entityCache.removeResult(
-				CommerceOrderPaymentModelImpl.ENTITY_CACHE_ENABLED,
-				CommerceOrderPaymentImpl.class, primaryKey);
-		}
-	}
-
 	/**
 	 * Creates a new commerce order payment with the primary key. Does not add the commerce order payment to the database.
 	 *
