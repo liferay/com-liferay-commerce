@@ -353,8 +353,8 @@ public class CommerceInventoryEngineTest {
 	public void testConsumeQuantityFromMultipleWarehouses() throws Exception {
 		frutillaRule.scenario(
 			"When the same warehouse item is added to 2 active warehouse the " +
-				"maximum consumable quantity is equal to the sum of the stock " +
-					"in both warehouses"
+				"maximum consumable quantity is equal to the sum of the " +
+					"stock in both warehouses"
 		).given(
 			"2 active warehouses"
 		).and(
