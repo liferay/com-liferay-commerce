@@ -17,89 +17,73 @@ package com.liferay.commerce.frontend.taglib.servlet.taglib;
 import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
 import com.liferay.commerce.product.catalog.CPMedia;
 import com.liferay.commerce.product.content.util.CPContentHelper;
-import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
-import com.liferay.frontend.taglib.soy.servlet.taglib.ComponentRendererTag;
-import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.taglib.util.IncludeTag;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
 /**
  * @author Fabio Mastrorilli
  */
-public class GalleryTag extends ComponentRendererTag {
+public class GalleryTag extends IncludeTag {
 
-	@Override
-	public int doStartTag() {
-		Map<String, Object> context = getContext();
+    @Override
+    protected void setAttributes(HttpServletRequest httpServletRequest) {
+        request.setAttribute("liferay-commerce:gallery:images", _images);
+    }
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
+    @Override
+    public int doStartTag() throws JspException {
+        ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+                WebKeys.THEME_DISPLAY);
 
-		String id = GetterUtil.getString(context.get("id"));
-		long cpDefinitionId = GetterUtil.getLong(context.get("cpDefinitionId"));
+        try {
+            _images = _cpContentHelper.getImages(
+                    _cpDefinitionId, themeDisplay);
+        }
+        catch (PortalException pe) {
+            _log.error(pe, pe);
+        }
 
-		List<CPMedia> productImages = Collections.emptyList();
+        return super.doStartTag();
+    }
 
-		try {
-			productImages = _cpContentHelper.getImages(
-				cpDefinitionId, themeDisplay);
-		}
-		catch (PortalException pe) {
-			_log.error(pe, pe);
-		}
+    @Override
+    public void setPageContext(PageContext pageContext) {
+        super.setPageContext(pageContext);
 
-		putValue("images", productImages);
-		putValue("selected", 0);
+        _cpContentHelper = ServletContextUtil.getCPContentHelper();
+        servletContext = ServletContextUtil.getServletContext();
+    }
 
-		if (Validator.isNotNull(id)) {
-			setComponentId(id);
-		}
+    private static final String _PAGE = "/gallery/page.jsp";
 
-		setTemplateNamespace("Gallery.render");
+    @Override
+    protected String getPage() {
+        return _PAGE;
+    }
 
-		return super.doStartTag();
-	}
+    @Override
+    protected void cleanUp() {
+        super.cleanUp();
 
-	@Override
-	public String getModule() {
-		NPMResolver npmResolver = ServletContextUtil.getNPMResolver();
+        _cpDefinitionId = 0;
+    }
 
-		if (npmResolver == null) {
-			return StringPool.BLANK;
-		}
+    public void setCPDefinitionId(long cpDefinitionId) {
+        _cpDefinitionId = cpDefinitionId;
+    }
 
-		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/gallery/Gallery.es");
-	}
-
-	public void setCPDefinitionId(long cpDefinitionId) {
-		putValue("cpDefinitionId", cpDefinitionId);
-	}
-
-	public void setId(String id) {
-		putValue("id", id);
-	}
-
-	@Override
-	public void setPageContext(PageContext pageContext) {
-		super.setPageContext(pageContext);
-
-		_cpContentHelper = ServletContextUtil.getCPContentHelper();
-	}
-
-	private static final Log _log = LogFactoryUtil.getLog(GalleryTag.class);
-
-	private CPContentHelper _cpContentHelper;
-
+    private static final Log _log = LogFactoryUtil.getLog(GalleryTag.class);
+    private long _cpDefinitionId;
+    private CPContentHelper _cpContentHelper;
+    private List<CPMedia> _images;
 }
