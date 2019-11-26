@@ -10,7 +10,7 @@
 	<@liferay_util["include"] page=top_head_include />
 </head>
 
-<#if themeDisplay.isSignedIn() && themeDisplay.getLayout().isPublicLayout()>
+<#if redirect_to_private_layouts && themeDisplay.isSignedIn() && themeDisplay.getLayout().isPublicLayout()>
 	<script>
 		window.location.replace("${themeDisplay.getPathFriendlyURLPrivateGroup() + themeDisplay.getScopeGroup().getFriendlyURL()}");
 	</script>

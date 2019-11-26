@@ -1,4 +1,5 @@
 <#assign
+	redirect_to_private_layouts = getterUtil.getBoolean(themeDisplay.getThemeSetting("redirect-to-private-layouts"))
 	show_top_menu = getterUtil.getBoolean(themeDisplay.getThemeSetting("show-top-menu"))
 	wide_layout = getterUtil.getBoolean(themeDisplay.getThemeSetting("wide-layout"))
 	userManagementUrl = commerceThemeMiniumHttpHelper.getAccountManagementPortletURL(request)
