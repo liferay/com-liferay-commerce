@@ -99,7 +99,6 @@ public interface CPDefinitionInventoryLocalService
 	 * @param allowedOrderQuantities
 	 * @param multipleOrderQuantity
 	 * @param serviceContext
-	 * @return
 	 * @throws PortalException
 	 * @deprecated As of Mueller (7.2.x), see {@link
 	 #addCPDefinitionInventory(long, String, String, boolean,
@@ -377,7 +376,6 @@ public interface CPDefinitionInventoryLocalService
 	 * @param allowedOrderQuantities
 	 * @param multipleOrderQuantity
 	 * @param serviceContext
-	 * @return
 	 * @throws PortalException
 	 * @deprecated As of Mueller (7.2.x), use {@link
 	 #updateCPDefinitionInventory(long, String, String, boolean,
