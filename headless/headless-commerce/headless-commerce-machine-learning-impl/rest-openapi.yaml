@@ -80,6 +80,10 @@ components:
                 category:
                     format: int64
                     type: integer
+                categoryTitle:
+                    additionalProperties:
+                        type: string
+                    type: object
                 forecast:
                     format: float
                     type: number
@@ -169,9 +173,6 @@ info:
         name: Commerce Team
     description:
         Liferay Commerce Forecast API
-    license:
-        name: "Apache 2.0"
-        url: "http://www.apache.org/licenses/LICENSE-2.0.html"
     title: Liferay Commerce Forecast API
     version: v1.0
 openapi: 3.0.0
@@ -235,130 +236,111 @@ paths:
                   schema:
                       type: integer
             responses:
-                200:
+                "200":
                     content:
                         application/json:
                             example:
-                                - actual: 126198
-                                  category: 2
-                                  timestamp: 2017-08-01T00:00:00.000Z
-                                  unit: pcs
-                                - actual: 150400
-                                  category: 2
-                                  timestamp: 2017-12-01T00:00:00.000Z
-                                  unit: pcs
-                                - actual: 177266
-                                  category: 2
-                                  timestamp: 2017-09-01T00:00:00.000Z
-                                  unit: pcs
-                                - actual: 192432
-                                  category: 2
-                                  timestamp: 2017-11-01T00:00:00.000Z
-                                  unit: pcs
-                                - actual: 210465
-                                  category: 2
-                                  timestamp: 2017-07-01T00:00:00.000Z
-                                  unit: pcs
-                                - actual: 246984
-                                  category: 1
-                                  timestamp: 2017-08-01T00:00:00.000Z
-                                  unit: pcs
-                                - actual: 254805
-                                  category: 1
-                                  timestamp: 2017-12-01T00:00:00.000Z
-                                  unit: pcs
-                                - actual: 304131.5
-                                  category: 2
-                                  timestamp: 2017-06-01T00:00:00.000Z
-                                  unit: pcs
-                                - actual: 341114
-                                  category: 1
-                                  timestamp: 2017-11-01T00:00:00.000Z
-                                  unit: pcs
-                                - actual: 371046
-                                  category: 2
-                                  forecast: 257032.38
-                                  forecast_lower_bound: -295959.4
-                                  forecast_upper_bound: 810024.1
-                                  timestamp: 2018-01-01T00:00:00.000Z
-                                  unit: pcs
-                                - actual: 373648
-                                  category: 1
-                                  timestamp: 2017-07-01T00:00:00.000Z
-                                  unit: pcs
-                                - actual: 381046
-                                  category: 2
-                                  forecast: 264262.47
-                                  forecast_lower_bound: -405616.44
-                                  forecast_upper_bound: 934141.4
-                                  timestamp: 2018-02-01T00:00:00.000Z
-                                  unit: pcs
-                                - actual: 415526
-                                  category: 2
-                                  timestamp: 2017-10-01T00:00:00.000Z
-                                  unit: pcs
-                                - actual: 428195
-                                  category: 1
-                                  forecast: 341156.06
-                                  forecast_lower_bound: -196911.53
-                                  forecast_upper_bound: 879223.6
-                                  timestamp: 2018-01-01T00:00:00.000Z
-                                  unit: pcs
-                                - actual: 441380
-                                  category: 1
-                                  timestamp: 2017-09-01T00:00:00.000Z
-                                  unit: pcs
-                                - actual: 574145.5
-                                  category: 1
-                                  forecast: 357949.7380752992
-                                  forecast_lower_bound: -169949.48
-                                  forecast_upper_bound: 885848.9548455138
-                                  timestamp: 2018-02-01T00:00:00.000Z
-                                  unit: pcs
-                                - actual: 579357
-                                  category: 1
-                                  timestamp: 2017-10-01T00:00:00.000Z
-                                  unit: pcs
-                                - actual: 579903.5
-                                  category: 1
-                                  timestamp: 2017-06-01T00:00:00.000Z
-                                  unit: pcs
-                                - category: 1
-                                  forecast: 410217.9
-                                  forecast_lower_bound: -107465.266
-                                  forecast_upper_bound: 927901.1
-                                  timestamp: 2018-03-01T00:00:00.000Z
-                                  unit: pcs
-                                - category: 1
-                                  forecast: 514895.12
-                                  forecast_lower_bound: -3468.954
-                                  forecast_upper_bound: 1033259.2
-                                  timestamp: 2018-04-01T00:00:00.000Z
-                                  unit: pcs
-                                - category: 1
-                                  forecast: 473034.75
-                                  forecast_lower_bound: -47860.043
-                                  forecast_upper_bound: 993929.5
-                                  timestamp: 2018-05-01T00:00:00.000Z
-                                  unit: pcs
-                                - category: 2
-                                  forecast: 243985.42
-                                  forecast_lower_bound: -487107.16
-                                  forecast_upper_bound: 975078
-                                  timestamp: 2018-03-01T00:00:00.000Z
-                                  unit: pcs
-                                - category: 2
-                                  forecast: 277306.4
-                                  forecast_lower_bound: -464114.16
-                                  forecast_upper_bound: 1018727
-                                  timestamp: 2018-04-01T00:00:00.000Z
-                                  unit: pcs
-                                - category: 2
-                                  forecast: 297306.4
-                                  forecast_lower_bound: -444114.16
-                                  forecast_upper_bound: 1038727
-                                  timestamp: 2018-05-01T00:00:00.000Z
-                                  unit: pcs
+                                items:
+                                    - account: 36415
+                                      actual: 43855
+                                      category: 36312
+                                      forecast: 1.4E-45
+                                      forecastLowerBound: 0
+                                      forecastUpperBound: 0
+                                      timestamp: 2018-01-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36415
+                                      actual: 46921.6
+                                      category: 36310
+                                      forecast: 1.4E-45
+                                      forecastLowerBound: 0
+                                      forecastUpperBound: 0
+                                      timestamp: 2018-01-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36415
+                                      actual: 2440
+                                      category: 36314
+                                      forecast: 1.4E-45
+                                      forecastLowerBound: 0
+                                      forecastUpperBound: 0
+                                      timestamp: 2018-01-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36415
+                                      actual: 43215
+                                      category: 36316
+                                      forecast: 1.4E-45
+                                      forecastLowerBound: 0
+                                      forecastUpperBound: 0
+                                      timestamp: 2018-01-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36415
+                                      actual: 11960
+                                      category: 36320
+                                      forecast: 1.4E-45
+                                      forecastLowerBound: 0
+                                      forecastUpperBound: 0
+                                      timestamp: 2018-01-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36415
+                                      actual: 251729
+                                      category: 36318
+                                      forecast: 1.4E-45
+                                      forecastLowerBound: 0
+                                      forecastUpperBound: 0
+                                      timestamp: 2018-01-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36425
+                                      actual: 135728.8
+                                      category: 36310
+                                      forecast: 1.4E-45
+                                      forecastLowerBound: 0
+                                      forecastUpperBound: 0
+                                      timestamp: 2018-01-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36425
+                                      actual: 180515
+                                      category: 36316
+                                      forecast: 1.4E-45
+                                      forecastLowerBound: 0
+                                      forecastUpperBound: 0
+                                      timestamp: 2018-01-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36425
+                                      actual: 152670
+                                      category: 36312
+                                      forecast: 1.4E-45
+                                      forecastLowerBound: 0
+                                      forecastUpperBound: 0
+                                      timestamp: 2018-01-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36425
+                                      actual: 93327
+                                      category: 36318
+                                      forecast: 1.4E-45
+                                      forecastLowerBound: 0
+                                      forecastUpperBound: 0
+                                      timestamp: 2018-01-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36425
+                                      actual: 5040
+                                      category: 36314
+                                      forecast: 1.4E-45
+                                      forecastLowerBound: 0
+                                      forecastUpperBound: 0
+                                      timestamp: 2018-01-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36425
+                                      actual: 39900
+                                      category: 36320
+                                      forecast: 1.4E-45
+                                      forecastLowerBound: 0
+                                      forecastUpperBound: 0
+                                      timestamp: 2018-01-01T00:00:00Z
+                                      unit: revenue
+                                lastPage: 1
+                                page: 1
+                                pageSize: 20
+                                totalCount: 12
                             schema:
                                 items:
                                     $ref: '#/components/schemas/AccountCategoryForecast'
@@ -370,10 +352,10 @@ paths:
                                 type: array
                     description:
                         Successful operation
-                400:
+                "400":
                     description:
                         Invalid input
-                401:
+                "401":
                     content:
                         application/json:
                             schema:
@@ -383,7 +365,7 @@ paths:
                                 $ref: '#/components/schemas/Error'
                     description:
                         Authentication information is missing or invalid
-                404:
+                "404":
                     content:
                         application/json:
                             schema:
@@ -393,7 +375,7 @@ paths:
                                 $ref: '#/components/schemas/Error'
                     description:
                         The specified resource was not found
-                500:
+                "500":
                     content:
                         application/json:
                             schema:
@@ -459,9 +441,183 @@ paths:
                   schema:
                       type: integer
             responses:
-                200:
+                "200":
                     content:
                         application/json:
+                            example:
+                                items:
+                                    - account: 36415
+                                      actual: 1.4E-45
+                                      forecast: 410459.44
+                                      forecastLowerBound: -21236.652
+                                      forecastUpperBound: 842155.5
+                                      timestamp: 2018-04-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36415
+                                      actual: 1.4E-45
+                                      forecast: 409315.44
+                                      forecastLowerBound: -22285.682
+                                      forecastUpperBound: 840916.56
+                                      timestamp: 2018-03-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36415
+                                      actual: 230225
+                                      forecast: 425982.1
+                                      forecastLowerBound: -63249.176
+                                      forecastUpperBound: 915213.4
+                                      timestamp: 2018-02-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36415
+                                      actual: 400120.6
+                                      forecast: 442232.75
+                                      forecastLowerBound: 9856.678
+                                      forecastUpperBound: 874608.9
+                                      timestamp: 2018-01-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36415
+                                      actual: 420215.2
+                                      forecast: 1.4E-45
+                                      forecastLowerBound: 0
+                                      forecastUpperBound: 0
+                                      timestamp: 2017-12-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36415
+                                      actual: 574000.8
+                                      forecast: 1.4E-45
+                                      forecastLowerBound: 0
+                                      forecastUpperBound: 0
+                                      timestamp: 2017-11-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36415
+                                      actual: 357431.6
+                                      forecast: 1.4E-45
+                                      forecastLowerBound: 0
+                                      forecastUpperBound: 0
+                                      timestamp: 2017-10-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36415
+                                      actual: 384831
+                                      forecast: 1.4E-45
+                                      forecastLowerBound: 0
+                                      forecastUpperBound: 0
+                                      timestamp: 2017-09-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36415
+                                      actual: 730314
+                                      forecast: 1.4E-45
+                                      forecastLowerBound: 0
+                                      forecastUpperBound: 0
+                                      timestamp: 2017-08-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36415
+                                      actual: 307055
+                                      forecast: 1.4E-45
+                                      forecastLowerBound: 0
+                                      forecastUpperBound: 0
+                                      timestamp: 2017-07-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36415
+                                      actual: 599931
+                                      forecast: 1.4E-45
+                                      forecastLowerBound: 0
+                                      forecastUpperBound: 0
+                                      timestamp: 2017-06-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36415
+                                      actual: 286286.6
+                                      forecast: 1.4E-45
+                                      forecastLowerBound: 0
+                                      forecastUpperBound: 0
+                                      timestamp: 2017-05-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36425
+                                      actual: 1.4E-45
+                                      forecast: 454099.03
+                                      forecastLowerBound: -373120.1
+                                      forecastUpperBound: 1281318.1
+                                      timestamp: 2018-04-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36425
+                                      actual: 1.4E-45
+                                      forecast: 458636.75
+                                      forecastLowerBound: -359997.84
+                                      forecastUpperBound: 1277271.4
+                                      timestamp: 2018-03-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36425
+                                      actual: 278663.6
+                                      forecast: 417194.34
+                                      forecastLowerBound: -467485.44
+                                      forecastUpperBound: 1301874.1
+                                      timestamp: 2018-02-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36425
+                                      actual: 607180.8
+                                      forecast: 556741.1
+                                      forecastLowerBound: -534401.2
+                                      forecastUpperBound: 1647883.4
+                                      timestamp: 2018-01-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36425
+                                      actual: 475485.4
+                                      forecast: 1.4E-45
+                                      forecastLowerBound: 0
+                                      forecastUpperBound: 0
+                                      timestamp: 2017-12-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36425
+                                      actual: 543114
+                                      forecast: 1.4E-45
+                                      forecastLowerBound: 0
+                                      forecastUpperBound: 0
+                                      timestamp: 2017-11-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36425
+                                      actual: 542683.8
+                                      forecast: 1.4E-45
+                                      forecastLowerBound: 0
+                                      forecastUpperBound: 0
+                                      timestamp: 2017-10-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36425
+                                      actual: 272531.2
+                                      forecast: 1.4E-45
+                                      forecastLowerBound: 0
+                                      forecastUpperBound: 0
+                                      timestamp: 2017-09-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36425
+                                      actual: 322792.4
+                                      forecast: 1.4E-45
+                                      forecastLowerBound: 0
+                                      forecastUpperBound: 0
+                                      timestamp: 2017-08-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36425
+                                      actual: 298547.6
+                                      forecast: 1.4E-45
+                                      forecastLowerBound: 0
+                                      forecastUpperBound: 0
+                                      timestamp: 2017-07-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36425
+                                      actual: 418839.2
+                                      forecast: 1.4E-45
+                                      forecastLowerBound: 0
+                                      forecastUpperBound: 0
+                                      timestamp: 2017-06-01T00:00:00Z
+                                      unit: revenue
+                                    - account: 36425
+                                      actual: 352542.6
+                                      forecast: 1.4E-45
+                                      forecastLowerBound: 0
+                                      forecastUpperBound: 0
+                                      timestamp: 2017-05-01T00:00:00Z
+                                      unit: revenue
+                                lastPage: 1
+                                page: 1
+                                pageSize: 24
+                                totalCount: 24
                             schema:
                                 items:
                                     $ref: '#/components/schemas/AccountForecast'
@@ -473,10 +629,10 @@ paths:
                                 type: array
                     description:
                         Successful operation
-                400:
+                "400":
                     description:
                         Invalid input
-                401:
+                "401":
                     content:
                         application/json:
                             schema:
@@ -486,7 +642,7 @@ paths:
                                 $ref: '#/components/schemas/Error'
                     description:
                         Authentication information is missing or invalid
-                404:
+                "404":
                     content:
                         application/json:
                             schema:
@@ -496,7 +652,7 @@ paths:
                                 $ref: '#/components/schemas/Error'
                     description:
                         The specified resource was not found
-                500:
+                "500":
                     content:
                         application/json:
                             schema:
