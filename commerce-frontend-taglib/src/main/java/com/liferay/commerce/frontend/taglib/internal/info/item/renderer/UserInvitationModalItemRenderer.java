@@ -15,6 +15,7 @@
 package com.liferay.commerce.frontend.taglib.internal.info.item.renderer;
 
 import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.InfoItemRendererUtil;
+import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -29,14 +30,25 @@ import java.util.Map;
  * @author Gianmarco Brunialti Masera
  */
 @Component(service = UserInvitationModalItemRenderer.class)
-public class UserInvitationModalItemRenderer extends AbstractProductItemRenderer {
+public class UserInvitationModalItemRenderer extends BaseSoyProductItemRenderer {
 
     private static final String COMPONENT_NAME = "user_invitation_modal";
 
     private static final String API_ENDPOINT = "/o/commerce-ui/search-users";
 
     @Override
-    protected Map<String, Object> getRenderingData(HttpServletRequest request) {
+    protected String getComponentName() {
+        return COMPONENT_NAME;
+    }
+
+
+    @Override
+    protected Log getLogger() {
+        return LogFactoryUtil.getLog(UserInvitationModalItemRenderer.class);
+    }
+
+    @Override
+    protected Map<String, Object> getRenderingData(CPCatalogEntry cpCatalogEntry, HttpServletRequest request) {
 
         Map<String, Object> data = new HashMap<>();
 
@@ -45,15 +57,5 @@ public class UserInvitationModalItemRenderer extends AbstractProductItemRenderer
         data.put("spritemap", InfoItemRendererUtil.getSpritemapPath(request));
 
         return data;
-    }
-
-    @Override
-    protected String getComponentName() {
-        return COMPONENT_NAME;
-    }
-
-    @Override
-    protected Log getLogger() {
-        return LogFactoryUtil.getLog(UserInvitationModalItemRenderer.class);
     }
 }

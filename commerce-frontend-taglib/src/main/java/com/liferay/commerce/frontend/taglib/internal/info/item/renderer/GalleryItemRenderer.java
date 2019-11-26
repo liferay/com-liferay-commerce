@@ -1,6 +1,7 @@
 package com.liferay.commerce.frontend.taglib.internal.info.item.renderer;
 
 import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.InfoItemRendererUtil;
+import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.content.util.CPContentHelper;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -16,7 +17,7 @@ import java.util.*;
  * @author Gianmarco Brunialti Masera
  */
 @Component(service = GalleryItemRenderer.class)
-public class GalleryItemRenderer extends AbstractProductItemRenderer {
+public class GalleryItemRenderer extends BaseSoyProductItemRenderer {
 
     private static final String COMPONENT_NAME = "gallery";
 
@@ -31,17 +32,21 @@ public class GalleryItemRenderer extends AbstractProductItemRenderer {
     }
 
     @Override
-    protected Map<String, Object> getRenderingData(HttpServletRequest request) throws PortalException {
+    protected Map<String, Object> getRenderingData(CPCatalogEntry cpCatalogEntry, HttpServletRequest request) throws PortalException {
         Map<String, Object> data = new HashMap<>();
 
         ThemeDisplay themeDisplay = InfoItemRendererUtil.getThemeDisplay(request);
-        long cpDefinitionId = (long) request.getAttribute("cpDefinitionId");
 
         data.put("selected", 0);
         data.put("images", _cpContentHelper.getImages(
-                cpDefinitionId, themeDisplay));
+                _getCPDefinitionId(cpCatalogEntry, request), themeDisplay));
 
         return data;
+    }
+
+    private long _getCPDefinitionId(CPCatalogEntry cpCatalogEntry, HttpServletRequest request) {
+        return Optional.of((long) request.getAttribute("cpDefinitionId"))
+                .orElse(cpCatalogEntry.getCPDefinitionId());
     }
 
     @Reference

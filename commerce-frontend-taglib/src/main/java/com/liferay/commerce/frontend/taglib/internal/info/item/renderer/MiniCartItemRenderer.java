@@ -19,6 +19,7 @@ import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.InfoItemRendererUtil;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
+import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -37,7 +38,7 @@ import java.util.Map;
  * @author Gianmarco Brunialti Masera
  */
 @Component(service = MiniCartItemRenderer.class)
-public class MiniCartItemRenderer extends AbstractProductItemRenderer {
+public class MiniCartItemRenderer extends BaseSoyProductItemRenderer {
 
     private static final String COMPONENT_NAME = "mini_cart";
 
@@ -55,7 +56,7 @@ public class MiniCartItemRenderer extends AbstractProductItemRenderer {
     }
 
     @Override
-    protected Map<String, Object> getRenderingData(HttpServletRequest request)
+    protected Map<String, Object> getRenderingData(CPCatalogEntry cpCatalogEntry, HttpServletRequest request)
             throws PortalException {
 
         Map<String, Object> data = new HashMap<>();

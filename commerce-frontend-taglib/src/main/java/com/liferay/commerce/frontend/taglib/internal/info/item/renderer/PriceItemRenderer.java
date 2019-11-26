@@ -20,6 +20,7 @@ import com.liferay.commerce.frontend.model.ProductSettingsModel;
 import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.InfoItemRendererUtil;
 
 import com.liferay.commerce.frontend.util.ProductHelper;
+import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -36,7 +37,7 @@ import java.util.Optional;
  * @author Gianmarco Brunialti Masera
  */
 @Component(service = PriceItemRenderer.class)
-public class PriceItemRenderer extends AbstractProductItemRenderer {
+public class PriceItemRenderer extends BaseSoyProductItemRenderer {
 
     private static final String COMPONENT_NAME = "price";
 
@@ -51,7 +52,7 @@ public class PriceItemRenderer extends AbstractProductItemRenderer {
     }
 
     @Override
-    protected Map<String, Object> getRenderingData(HttpServletRequest request)
+    protected Map<String, Object> getRenderingData(CPCatalogEntry cpCatalogEntry, HttpServletRequest request)
             throws PortalException {
 
         Map<String, Object> data = new HashMap<>();

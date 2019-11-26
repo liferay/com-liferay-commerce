@@ -34,8 +34,7 @@ import java.util.Optional;
 /**
  * @author Gianmarco Brunialti Masera
  */
-
-abstract public class AbstractProductItemRenderer
+abstract public class BaseSoyProductItemRenderer
         implements InfoItemRenderer<CPCatalogEntry> {
 
     private static final boolean IS_WRAPPER = true;
@@ -49,13 +48,13 @@ abstract public class AbstractProductItemRenderer
 
         try {
             Writer writer = response.getWriter();
-            Map<String, Object> data = getRenderingData(request);
+            Map<String, Object> data = getRenderingData(cpCatalogEntry, request);
             ComponentDescriptor soyComponentDescriptor = getDescriptor(request);
 
             _soyRenderer.renderSoyComponent(
                     request, writer, soyComponentDescriptor, data);
         } catch (Exception e) {
-            getLogger().error(e, e);
+            _log.error(e, e);
         }
     }
 
@@ -63,8 +62,8 @@ abstract public class AbstractProductItemRenderer
 
     protected abstract Log getLogger();
 
-    protected abstract Map<String, Object> getRenderingData(HttpServletRequest request)
-            throws Exception;
+    protected abstract Map<String, Object> getRenderingData(
+            CPCatalogEntry cpCatalogEntry, HttpServletRequest request) throws Exception;
 
     protected boolean getIsWrapper() { return IS_WRAPPER; }
 
@@ -96,4 +95,6 @@ abstract public class AbstractProductItemRenderer
 
     protected String TEMPLATE_NAMESPACE = StringBundler.concat(
             InfoItemRendererUtil.caseCamelize(getComponentName()), ".render");
+
+    protected Log _log = getLogger();
 }

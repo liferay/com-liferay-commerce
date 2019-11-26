@@ -3,6 +3,7 @@ package com.liferay.commerce.frontend.taglib.internal.info.item.renderer;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
+import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.service.CPDefinitionLocalServiceUtil;
 import com.liferay.commerce.product.util.CPCompareHelperUtil;
@@ -18,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component(service = CompareCheckboxItemRenderer.class)
-public class CompareCheckboxItemRenderer extends AbstractProductItemRenderer {
+public class CompareCheckboxItemRenderer extends BaseSoyProductItemRenderer {
 
     private static final String COMPONENT_NAME = "compare_checkbox";
 
@@ -33,7 +34,7 @@ public class CompareCheckboxItemRenderer extends AbstractProductItemRenderer {
     }
 
     @Override
-    protected Map<String, Object> getRenderingData(HttpServletRequest request) throws Exception {
+    protected Map<String, Object> getRenderingData(CPCatalogEntry cpCatalogEntry, HttpServletRequest request) throws Exception {
         long cpDefinitionId = (long) request.getAttribute("cpDefinitionId");
 
         Map<String, Object> data = new HashMap<>();

@@ -1,18 +1,12 @@
 package com.liferay.commerce.frontend.taglib.internal.info.item.renderer;
 
 import com.liferay.commerce.account.model.CommerceAccount;
-import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
-import com.liferay.commerce.frontend.template.soy.renderer.ComponentDescriptor;
-import com.liferay.commerce.frontend.template.soy.renderer.SoyComponentRenderer;
+import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.InfoItemRendererUtil;
 import com.liferay.commerce.frontend.util.ProductHelper;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
-import com.liferay.commerce.product.catalog.CPSku;
 import com.liferay.commerce.product.content.util.CPContentHelper;
-import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
-import com.liferay.info.renderer.InfoItemRenderer;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
@@ -21,8 +15,6 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -32,56 +24,41 @@ import java.util.Optional;
  */
 
 @Component(service = AddToCartItemRenderer.class)
-public class AddToCartItemRenderer implements InfoItemRenderer<CPCatalogEntry> {
+public class AddToCartItemRenderer extends BaseSoyProductItemRenderer {
 
-    private static final String MODULE_NAME =
-            "commerce-frontend-taglib/add_to_cart/AddToCartButton.es";
-
-    private static final String TEMPLATE_NAMESPACE = "AddToCartButton.render";
-    private static final boolean IS_WRAPPER = true;
-    private static final boolean RENDER_JAVASCRIPT = true;
-    private static final boolean POSITION_INLINE = true;
+    private static final String COMPONENT_NAME = "add_to_cart";
 
     private static final String API_ENDPOINT =
             "/o/commerce-ui/cart-item";
 
     @Override
-    public void render(CPCatalogEntry cpCatalogEntry,
-                       HttpServletRequest httpServletRequest,
-                       HttpServletResponse httpServletResponse) {
-
-        try {
-            CPSku cpSku = _cpContentHelper.getDefaultCPSku(cpCatalogEntry);
-
-            long cpInstanceId = cpSku.getCPInstanceId();
-
-            Map<String, Object> data = getRenderingData(httpServletRequest, cpInstanceId);
-            Writer writer = httpServletResponse.getWriter();
-            ComponentDescriptor soyComponentDescriptor = getDescriptor(httpServletRequest, cpInstanceId);
-
-            _soyRenderer.renderSoyComponent(
-                    httpServletRequest, writer, soyComponentDescriptor, data);
-
-        } catch (Exception e) {
-            _log.error(e, e);
-        }
+    protected String getComponentName() {
+        return COMPONENT_NAME;
     }
 
-    private Map<String, Object> getRenderingData(HttpServletRequest request,
-                                                 long cpInstanceId) throws PortalException {
-        CommerceContext commerceContext =
-                (CommerceContext)request.getAttribute(
-                        CommerceWebKeys.COMMERCE_CONTEXT);
+    @Override
+    protected Log getLogger() {
+        return LogFactoryUtil.getLog(AddToCartItemRenderer.class);
+    }
 
-        CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
-        CommerceOrder commerceOrder = commerceContext.getCommerceOrder();
+    @Override
+    protected Map<String, Object> getRenderingData(CPCatalogEntry cpCatalogEntry, HttpServletRequest request)
+            throws Exception {
 
         Map<String, Object> data = new HashMap<>();
+
+        _cpInstanceId = _getCPInstanceId(cpCatalogEntry);
+
+        CommerceContext commerceContext = InfoItemRendererUtil.getCommerceContext(request);
+
+        CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
+
+        CommerceOrder commerceOrder = commerceContext.getCommerceOrder();
 
         data.put("cartAPI", PortalUtil.getPortalURL(request) + API_ENDPOINT);
         data.put("portletId", request.getAttribute(WebKeys.PORTLET_ID));
         data.put("editMode", false);
-        data.put("productId", cpInstanceId);
+        data.put("productId", _cpInstanceId);
 
         if (commerceAccount != null) {
             data.put("accountId", commerceAccount.getCommerceAccountId());
@@ -93,38 +70,28 @@ public class AddToCartItemRenderer implements InfoItemRenderer<CPCatalogEntry> {
             data.put("orderId", commerceOrder.getCommerceOrderId());
 
             productOrderQuantity = commerceOrder
-                    .getCommerceOrderItemsCount(cpInstanceId);
+                    .getCommerceOrderItemsCount(_cpInstanceId);
         }
 
         data.put("quantity", productOrderQuantity);
 
-        data.put("settings", _productHelper.getProductSettingsModel(cpInstanceId));
+        data.put("settings", _productHelper.getProductSettingsModel(_cpInstanceId));
 
         return data;
     }
 
-    private ComponentDescriptor getDescriptor(HttpServletRequest request, long cpInstanceId) {
-        return new ComponentDescriptor(TEMPLATE_NAMESPACE,
-                _npmResolver.resolveModuleName(MODULE_NAME),
-                getComponentId(request, cpInstanceId),
-                null, IS_WRAPPER,
-                RENDER_JAVASCRIPT, POSITION_INLINE
-        );
-    }
-
-    private String getComponentId(HttpServletRequest request, long cpInstanceId) {
+    @Override
+    protected String getComponentId(HttpServletRequest request) {
         Optional<String> componentId = Optional.ofNullable(
                 (String) request.getAttribute("componentId"));
 
         return componentId.orElse(
-                cpInstanceId + "AddToCartButtonId");
+                _cpInstanceId + "AddToCartButtonId");
     }
 
-    @Reference
-    private NPMResolver _npmResolver;
-
-    @Reference
-    private SoyComponentRenderer _soyRenderer;
+    private long _getCPInstanceId(CPCatalogEntry cpCatalogEntry) throws Exception {
+        return _cpContentHelper.getDefaultCPSku(cpCatalogEntry).getCPInstanceId();
+    }
 
     @Reference
     private CPContentHelper _cpContentHelper;
@@ -132,5 +99,5 @@ public class AddToCartItemRenderer implements InfoItemRenderer<CPCatalogEntry> {
     @Reference
     private ProductHelper _productHelper;
 
-    private static final Log _log = LogFactoryUtil.getLog(AddToCartItemRenderer.class);
+    private long _cpInstanceId;
 }

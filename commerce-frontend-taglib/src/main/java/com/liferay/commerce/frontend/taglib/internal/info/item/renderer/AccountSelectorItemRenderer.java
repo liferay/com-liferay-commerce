@@ -22,6 +22,7 @@ import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.Inf
 import com.liferay.commerce.frontend.taglib.internal.model.CurrentAccountModel;
 import com.liferay.commerce.frontend.taglib.internal.model.CurrentOrderModel;
 import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -48,7 +49,7 @@ import java.util.Map;
  * @author Gianmarco Brunialti Masera
  */
 @Component(service = AccountSelectorItemRenderer.class)
-public class AccountSelectorItemRenderer extends AbstractProductItemRenderer {
+public class AccountSelectorItemRenderer extends BaseSoyProductItemRenderer {
 
     private static final String COMPONENT_NAME = "account_selector";
 
@@ -66,7 +67,9 @@ public class AccountSelectorItemRenderer extends AbstractProductItemRenderer {
     }
 
     @Override
-    protected Map<String, Object> getRenderingData(HttpServletRequest request) throws PortalException {
+    protected Map<String, Object> getRenderingData(CPCatalogEntry cpCatalogEntry, HttpServletRequest request)
+            throws PortalException {
+
         Map<String, Object> data = new HashMap<>();
 
         ThemeDisplay themeDisplay = InfoItemRendererUtil.getThemeDisplay(request);

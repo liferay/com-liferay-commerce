@@ -1,9 +1,9 @@
 package com.liferay.commerce.frontend.taglib.internal.info.item.renderer;
 
 import com.liferay.commerce.account.model.CommerceAccount;
-import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.InfoItemRendererUtil;
+import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -19,7 +19,7 @@ import java.util.Map;
  * @author Gianmarco Brunialti Masera
  */
 @Component(service = SearchResultsItemRenderer.class)
-public class SearchResultsItemRenderer extends AbstractProductItemRenderer {
+public class SearchResultsItemRenderer extends BaseSoyProductItemRenderer {
 
     private static final String COMPONENT_NAME = "search_results";
     private static final String API_ENDPOINT = "/o/commerce-ui/search/";
@@ -35,7 +35,7 @@ public class SearchResultsItemRenderer extends AbstractProductItemRenderer {
     }
 
     @Override
-    protected Map<String, Object> getRenderingData(HttpServletRequest request)
+    protected Map<String, Object> getRenderingData(CPCatalogEntry cpCatalogEntry, HttpServletRequest request)
             throws PortalException {
 
         Map<String, Object> data = new HashMap<>();
@@ -45,8 +45,7 @@ public class SearchResultsItemRenderer extends AbstractProductItemRenderer {
         data.put("spritemap", InfoItemRendererUtil.getSpritemapPath(request));
         data.put("visible", false);
 
-        CommerceContext commerceContext = (CommerceContext)request.getAttribute(
-                CommerceWebKeys.COMMERCE_CONTEXT);
+        CommerceContext commerceContext = InfoItemRendererUtil.getCommerceContext(request);
 
         CommerceAccount commerceAccount =
                 commerceContext.getCommerceAccount();

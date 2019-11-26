@@ -1,6 +1,7 @@
 package com.liferay.commerce.frontend.taglib.internal.info.item.renderer;
 
 import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.InfoItemRendererUtil;
+import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
@@ -11,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component(service = AddAccountModalItemRenderer.class)
-public class AddAccountModalItemRenderer extends AbstractProductItemRenderer {
+public class AddAccountModalItemRenderer extends BaseSoyProductItemRenderer {
 
     private static final String COMPONENT_NAME = "add_account_modal";
 
@@ -29,7 +30,7 @@ public class AddAccountModalItemRenderer extends AbstractProductItemRenderer {
     }
 
     @Override
-    protected Map<String, Object> getRenderingData(HttpServletRequest request) {
+    protected Map<String, Object> getRenderingData(CPCatalogEntry cpCatalogEntry, HttpServletRequest request) {
         Map<String, Object> data = new HashMap<>();
 
         data.put("usersAPI",

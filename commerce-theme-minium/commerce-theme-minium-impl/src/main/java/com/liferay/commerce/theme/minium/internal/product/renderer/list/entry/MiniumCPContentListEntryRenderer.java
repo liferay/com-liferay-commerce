@@ -310,7 +310,7 @@ public class MiniumCPContentListEntryRenderer
 		Set<String> dependencies = new HashSet<>();
 
 		dependencies.add(
-			"commerce-frontend-taglib/add_to_cart/AddToCartButton.es");
+			"commerce-frontend-taglib/add_to_cart/AddToCart.es");
 		dependencies.add(
 			"commerce-frontend-taglib/compare_checkbox/CompareCheckbox.es");
 		dependencies.add("commerce-frontend-taglib/price/Price.es");

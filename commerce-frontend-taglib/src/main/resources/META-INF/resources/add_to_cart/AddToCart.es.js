@@ -1,4 +1,4 @@
-import template from './AddToCartButton.soy';
+import template from './AddToCart.soy';
 import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 

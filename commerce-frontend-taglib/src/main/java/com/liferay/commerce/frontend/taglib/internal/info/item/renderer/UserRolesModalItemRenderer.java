@@ -19,6 +19,7 @@ import com.liferay.commerce.account.service.CommerceAccountServiceUtil;
 import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.InfoItemRendererUtil;
 import com.liferay.commerce.frontend.taglib.internal.model.AccountRole;
 
+import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -40,12 +41,22 @@ import java.util.*;
  * @author Gianmarco Brunialti Masera
  */
 @Component(service = UserRolesModalItemRenderer.class)
-public class UserRolesModalItemRenderer extends AbstractProductItemRenderer {
+public class UserRolesModalItemRenderer extends BaseSoyProductItemRenderer {
 
     private static final String COMPONENT_NAME = "user_roles_modal";
 
     @Override
-    protected Map<String, Object> getRenderingData(HttpServletRequest request)
+    protected String getComponentName() {
+        return COMPONENT_NAME;
+    }
+
+    @Override
+    protected Log getLogger() {
+        return LogFactoryUtil.getLog(UserRolesModalItemRenderer.class);
+    }
+
+    @Override
+    protected Map<String, Object> getRenderingData(CPCatalogEntry cpCatalogEntry, HttpServletRequest request)
             throws PortalException {
 
         Map<String, Object> data = new HashMap<>();
@@ -59,16 +70,6 @@ public class UserRolesModalItemRenderer extends AbstractProductItemRenderer {
         data.put("spritemap", InfoItemRendererUtil.getSpritemapPath(request));
 
         return data;
-    }
-
-    @Override
-    protected String getComponentName() {
-        return COMPONENT_NAME;
-    }
-
-    @Override
-    protected Log getLogger() {
-        return LogFactoryUtil.getLog(UserRolesModalItemRenderer.class);
     }
 
     private List<AccountRole> _getAvailableRoles(HttpServletRequest request)

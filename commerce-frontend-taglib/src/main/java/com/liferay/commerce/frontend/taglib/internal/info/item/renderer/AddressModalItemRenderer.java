@@ -3,6 +3,7 @@ package com.liferay.commerce.frontend.taglib.internal.info.item.renderer;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.InfoItemRendererUtil;
+import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -16,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component(service = AddressModalItemRenderer.class)
-public class AddressModalItemRenderer extends AbstractProductItemRenderer {
+public class AddressModalItemRenderer extends BaseSoyProductItemRenderer {
 
     private static final String COMPONENT_NAME = "address_modal";
 
@@ -39,7 +40,7 @@ public class AddressModalItemRenderer extends AbstractProductItemRenderer {
     }
 
     @Override
-    protected Map<String, Object> getRenderingData(HttpServletRequest request) {
+    protected Map<String, Object> getRenderingData(CPCatalogEntry cpCatalogEntry, HttpServletRequest request) {
         Map<String, Object> data = new HashMap<>();
 
         data.put("countriesAPI", _resolveCountriesEndpoint(request));
@@ -65,11 +66,13 @@ public class AddressModalItemRenderer extends AbstractProductItemRenderer {
                     "?channelId=", String.valueOf(commerceContext.getCommerceChannelId()),
                     "&p_auth=", authToken);
         } catch (PortalException pe) {
-            getLogger().error(pe, pe);
-
             countriesEndpoint = StringBundler.concat(
                     portalURL, COUNTRIES_API_ENDPOINT,
-                    "?p_auth=", AuthTokenUtil.getToken(request));
+                    "?p_auth=", authToken);
+
+            Log localLogger = getLogger();
+
+            localLogger.error(pe, pe);
         }
 
         return countriesEndpoint;
