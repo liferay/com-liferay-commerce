@@ -9,6 +9,7 @@
 	<theme id="minium" name="Minium">
 		<template-extension>ftl</template-extension>
 		<settings>
+			<setting configurable="true" key="redirect-to-private-layouts" type="checkbox" value="false" />
 			<setting configurable="true" key="show-top-menu" type="checkbox" value="false" />
 			<setting configurable="true" key="wide-layout" type="checkbox" value="false" />
 		</settings>
