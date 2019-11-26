@@ -20,25 +20,19 @@ import com.liferay.headless.commerce.machine.learning.resource.v1_0.AccountCateg
 import com.liferay.headless.commerce.machine.learning.resource.v1_0.AccountForecastResource;
 import com.liferay.petra.function.UnsafeConsumer;
 import com.liferay.petra.function.UnsafeFunction;
-import com.liferay.portal.kernel.model.Company;
-import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.search.Sort;
-import com.liferay.portal.kernel.search.filter.Filter;
-import com.liferay.portal.vulcan.accept.language.AcceptLanguage;
-import com.liferay.portal.vulcan.graphql.annotation.GraphQLField;
-import com.liferay.portal.vulcan.graphql.annotation.GraphQLName;
+import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
+import com.liferay.portal.kernel.service.CompanyLocalServiceUtil;
 import com.liferay.portal.vulcan.pagination.Page;
 import com.liferay.portal.vulcan.pagination.Pagination;
 
+import graphql.annotations.annotationTypes.GraphQLField;
+import graphql.annotations.annotationTypes.GraphQLInvokeDetached;
+import graphql.annotations.annotationTypes.GraphQLName;
+
+import java.util.Collection;
 import java.util.Date;
-import java.util.function.BiFunction;
 
 import javax.annotation.Generated;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import javax.ws.rs.core.UriInfo;
 
 import org.osgi.service.component.ComponentServiceObjects;
 
@@ -66,44 +60,13 @@ public class Query {
 			accountForecastResourceComponentServiceObjects;
 	}
 
-	/**
-	 * Invoke this method with the command line:
-	 *
-	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {accountCategoryForecastsByMonthlyRevenue(accountIds: ___, categoryIds: ___, forecastLength: ___, forecastStartDate: ___, historyLength: ___, page: ___, pageSize: ___){items {__}, page, pageSize, totalCount}}"}' -u 'test@liferay.com:test'
-	 */
 	@GraphQLField
-	public AccountCategoryForecastPage accountCategoryForecastsByMonthlyRevenue(
+	@GraphQLInvokeDetached
+	public Collection<AccountForecast> getAccountForecastsByMonthlyRevenuePage(
 			@GraphQLName("accountIds") Long[] accountIds,
-			@GraphQLName("categoryIds") Long[] categoryIds,
-			@GraphQLName("forecastLength") Integer forecastLength,
 			@GraphQLName("forecastStartDate") Date forecastStartDate,
 			@GraphQLName("historyLength") Integer historyLength,
-			@GraphQLName("pageSize") int pageSize,
-			@GraphQLName("page") int page)
-		throws Exception {
-
-		return _applyComponentServiceObjects(
-			_accountCategoryForecastResourceComponentServiceObjects,
-			this::_populateResourceContext,
-			accountCategoryForecastResource -> new AccountCategoryForecastPage(
-				accountCategoryForecastResource.
-					getAccountCategoryForecastsByMonthlyRevenuePage(
-						accountIds, categoryIds, forecastLength,
-						forecastStartDate, historyLength,
-						Pagination.of(page, pageSize))));
-	}
-
-	/**
-	 * Invoke this method with the command line:
-	 *
-	 * curl -H 'Content-Type: text/plain; charset=utf-8' -X 'POST' 'http://localhost:8080/o/graphql' -d $'{"query": "query {accountForecastsByMonthlyRevenue(accountIds: ___, forecastLength: ___, forecastStartDate: ___, historyLength: ___, page: ___, pageSize: ___){items {__}, page, pageSize, totalCount}}"}' -u 'test@liferay.com:test'
-	 */
-	@GraphQLField
-	public AccountForecastPage accountForecastsByMonthlyRevenue(
-			@GraphQLName("accountIds") Long[] accountIds,
 			@GraphQLName("forecastLength") Integer forecastLength,
-			@GraphQLName("forecastStartDate") Date forecastStartDate,
-			@GraphQLName("historyLength") Integer historyLength,
 			@GraphQLName("pageSize") int pageSize,
 			@GraphQLName("page") int page)
 		throws Exception {
@@ -111,58 +74,43 @@ public class Query {
 		return _applyComponentServiceObjects(
 			_accountForecastResourceComponentServiceObjects,
 			this::_populateResourceContext,
-			accountForecastResource -> new AccountForecastPage(
-				accountForecastResource.getAccountForecastsByMonthlyRevenuePage(
-					accountIds, forecastLength, forecastStartDate,
-					historyLength, Pagination.of(page, pageSize))));
+			accountForecastResource -> {
+				Page paginationPage =
+					accountForecastResource.
+						getAccountForecastsByMonthlyRevenuePage(
+							accountIds, forecastStartDate, historyLength,
+							forecastLength, Pagination.of(pageSize, page));
+
+				return paginationPage.getItems();
+			});
 	}
 
-	@GraphQLName("AccountCategoryForecastPage")
-	public class AccountCategoryForecastPage {
+	@GraphQLField
+	@GraphQLInvokeDetached
+	public Collection<AccountCategoryForecast>
+			getAccountCategoryForecastsByMonthlyRevenuePage(
+				@GraphQLName("categoryIds") Long[] categoryIds,
+				@GraphQLName("accountIds") Long[] accountIds,
+				@GraphQLName("forecastStartDate") Date forecastStartDate,
+				@GraphQLName("historyLength") Integer historyLength,
+				@GraphQLName("forecastLength") Integer forecastLength,
+				@GraphQLName("pageSize") int pageSize,
+				@GraphQLName("page") int page)
+		throws Exception {
 
-		public AccountCategoryForecastPage(Page accountCategoryForecastPage) {
-			items = accountCategoryForecastPage.getItems();
-			page = accountCategoryForecastPage.getPage();
-			pageSize = accountCategoryForecastPage.getPageSize();
-			totalCount = accountCategoryForecastPage.getTotalCount();
-		}
+		return _applyComponentServiceObjects(
+			_accountCategoryForecastResourceComponentServiceObjects,
+			this::_populateResourceContext,
+			accountCategoryForecastResource -> {
+				Page paginationPage =
+					accountCategoryForecastResource.
+						getAccountCategoryForecastsByMonthlyRevenuePage(
+							categoryIds, accountIds, forecastStartDate,
+							historyLength, forecastLength,
+							Pagination.of(pageSize, page));
 
-		@GraphQLField
-		protected java.util.Collection<AccountCategoryForecast> items;
-
-		@GraphQLField
-		protected long page;
-
-		@GraphQLField
-		protected long pageSize;
-
-		@GraphQLField
-		protected long totalCount;
-
-	}
-
-	@GraphQLName("AccountForecastPage")
-	public class AccountForecastPage {
-
-		public AccountForecastPage(Page accountForecastPage) {
-			items = accountForecastPage.getItems();
-			page = accountForecastPage.getPage();
-			pageSize = accountForecastPage.getPageSize();
-			totalCount = accountForecastPage.getTotalCount();
-		}
-
-		@GraphQLField
-		protected java.util.Collection<AccountForecast> items;
-
-		@GraphQLField
-		protected long page;
-
-		@GraphQLField
-		protected long pageSize;
-
-		@GraphQLField
-		protected long totalCount;
-
+				return paginationPage.getItems();
+			});
 	}
 
 	private <T, R, E1 extends Throwable, E2 extends Throwable> R
@@ -188,43 +136,23 @@ public class Query {
 			AccountCategoryForecastResource accountCategoryForecastResource)
 		throws Exception {
 
-		accountCategoryForecastResource.setContextAcceptLanguage(
-			_acceptLanguage);
-		accountCategoryForecastResource.setContextCompany(_company);
-		accountCategoryForecastResource.setContextHttpServletRequest(
-			_httpServletRequest);
-		accountCategoryForecastResource.setContextHttpServletResponse(
-			_httpServletResponse);
-		accountCategoryForecastResource.setContextUriInfo(_uriInfo);
-		accountCategoryForecastResource.setContextUser(_user);
+		accountCategoryForecastResource.setContextCompany(
+			CompanyLocalServiceUtil.getCompany(
+				CompanyThreadLocal.getCompanyId()));
 	}
 
 	private void _populateResourceContext(
 			AccountForecastResource accountForecastResource)
 		throws Exception {
 
-		accountForecastResource.setContextAcceptLanguage(_acceptLanguage);
-		accountForecastResource.setContextCompany(_company);
-		accountForecastResource.setContextHttpServletRequest(
-			_httpServletRequest);
-		accountForecastResource.setContextHttpServletResponse(
-			_httpServletResponse);
-		accountForecastResource.setContextUriInfo(_uriInfo);
-		accountForecastResource.setContextUser(_user);
+		accountForecastResource.setContextCompany(
+			CompanyLocalServiceUtil.getCompany(
+				CompanyThreadLocal.getCompanyId()));
 	}
 
 	private static ComponentServiceObjects<AccountCategoryForecastResource>
 		_accountCategoryForecastResourceComponentServiceObjects;
 	private static ComponentServiceObjects<AccountForecastResource>
 		_accountForecastResourceComponentServiceObjects;
-
-	private AcceptLanguage _acceptLanguage;
-	private BiFunction<Object, String, Filter> _filterBiFunction;
-	private BiFunction<Object, String, Sort[]> _sortsBiFunction;
-	private Company _company;
-	private HttpServletRequest _httpServletRequest;
-	private HttpServletResponse _httpServletResponse;
-	private UriInfo _uriInfo;
-	private User _user;
 
 }

@@ -50,8 +50,8 @@ public class AccountForecastResourceImpl
 
 	@Override
 	public Page<AccountForecast> getAccountForecastsByMonthlyRevenuePage(
-			Long[] accountIds, Integer forecastLength, Date forecastStartDate,
-			Integer historyLength, Pagination pagination)
+			Long[] accountIds, Date forecastStartDate, Integer historyLength,
+			Integer forecastLength, Pagination pagination)
 		throws Exception {
 
 		List<Long> commerceAccountIds =
