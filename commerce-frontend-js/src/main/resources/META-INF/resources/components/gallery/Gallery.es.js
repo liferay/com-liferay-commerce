@@ -34,7 +34,7 @@ export default class Gallery extends React.Component {
 
 	fullscreenOpen() {
 		if (!this.state.loading) {
-			this.imageLoad(this.props.images[this.state.selected].bigUrl).then(
+			this.imageLoad(this.props.images[this.state.selected].url).then(
 				() => {
 					this.setState({fullscreen: true});
 				}
@@ -85,7 +85,7 @@ export default class Gallery extends React.Component {
 
 	imageSelect(toSelect) {
 		if (toSelect !== this.state.selected && !this.state.loading) {
-			this.imageLoad(this.props.images[toSelect].smallUrl).then(() => {
+			this.imageLoad(this.props.images[toSelect].url).then(() => {
 				this.setState({selected: toSelect});
 			});
 		}
@@ -103,7 +103,7 @@ export default class Gallery extends React.Component {
 					onNext={images.length > 1 ? this.goToNext : null}
 					onPrev={images.length > 1 ? this.goToPrev : null}
 					onZoom={this.fullscreenOpen}
-					src={images[selected].smallUrl}
+					src={images[selected].url}
 					title={images[selected].title}
 				/>
 
@@ -122,7 +122,7 @@ export default class Gallery extends React.Component {
 						onClose={this.fullscreenClose}
 						onNext={images.length > 1 ? this.goToNext : null}
 						onPrev={images.length > 1 ? this.goToPrev : null}
-						src={images[selected].bigUrl}
+						src={images[selected].url}
 						title={images[selected].title}
 					/>
 				) : null}
@@ -135,8 +135,7 @@ Gallery.propTypes = {
 	background: PropTypes.string,
 	images: PropTypes.arrayOf(
 		PropTypes.shape({
-			bigUrl: PropTypes.string.isRequired,
-			smallUrl: PropTypes.string.isRequired,
+			url: PropTypes.string.isRequired,
 			thumbnailUrl: PropTypes.string.isRequired,
 			title: PropTypes.string.isRequired
 		})

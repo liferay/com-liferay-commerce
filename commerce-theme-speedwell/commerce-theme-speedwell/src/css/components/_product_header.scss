@@ -1,12 +1,12 @@
-.minium-product-header {
+.product-header {
 	margin-top: 40px;
 
-	&__tagline,
-	&__subtitle {
+	&-tagline,
+	&-subtitle {
 		display: none;
 	}
 
-	&__title {
+	&-title {
 		font-size: 36px;
 		font-weight: 300;
 		line-height: 60px;
