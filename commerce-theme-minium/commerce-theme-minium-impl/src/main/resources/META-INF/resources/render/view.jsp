@@ -32,27 +32,27 @@ String galleryId = PortalUtil.generateRandomKey(request, "gallery");
 <div class="product-detail" id="<portlet:namespace /><%= cpDefinitionId %>ProductContent">
 	<div class="row">
 		<div class="col-md-6 col-xs-12" id="minium-product-gallery">
-			<commerce-ui:gallery id="<%= galleryId %>" CPDefinitionId="<%= cpDefinitionId %>" />
+			<commerce-ui:gallery CPDefinitionId="<%= cpDefinitionId %>" />
 		</div>
 
 		<div class="col-md-6 col-xs-12">
-			<header class="minium-product-header">
+			<header class="product-header">
 				<commerce-ui:compare-checkbox
 					componentId="compareCheckbox"
 					CPDefinitionId="<%= cpDefinitionId %>"
 				/>
 
-				<h3 class="minium-product-header__tagline" data-text-cp-instance-sku>
+				<h3 class="product-header-tagline" data-text-cp-instance-sku>
 					<%= (cpSku == null) ? StringPool.BLANK : HtmlUtil.escape(cpSku.getSku()) %>
 				</h3>
 
-				<h2 class="minium-product-header__title"><%= HtmlUtil.escape(cpCatalogEntry.getName()) %></h2>
+				<h2 class="product-header-title"><%= HtmlUtil.escape(cpCatalogEntry.getName()) %></h2>
 
-				<h4 class="minium-product-header__subtitle" data-text-cp-instance-manufacturer-part-number>
+				<h4 class="product-header-subtitle" data-text-cp-instance-manufacturer-part-number>
 					<%= (cpSku == null) ? StringPool.BLANK : HtmlUtil.escape(cpSku.getManufacturerPartNumber()) %>
 				</h4>
 
-				<h4 class="minium-product-header__subtitle" data-text-cp-instance-gtin>
+				<h4 class="product-header-subtitle" data-text-cp-instance-gtin>
 					<%= (cpSku == null) ? StringPool.BLANK : HtmlUtil.escape(cpSku.getGtin()) %>
 				</h4>
 
@@ -124,63 +124,44 @@ List<CPMedia> cpAttachmentFileEntries = cpContentHelper.getCPAttachmentFileEntri
 %>
 
 <c:if test="<%= cpContentHelper.hasCPDefinitionSpecificationOptionValues(cpDefinitionId) %>">
-	<div class="row">
-		<div class="col">
-			<div class="commerce-panel">
-				<div class="commerce-panel__title"><%= LanguageUtil.get(resourceBundle, "specifications") %></div>
-				<div class="commerce-panel__content">
-					<dl class="specification-list">
+	<commerce-ui:panel title="<%= LanguageUtil.get(resourceBundle, "specifications") %>">
+		<dl class="specification-list">
+			<%
+				for (CPDefinitionSpecificationOptionValue cpDefinitionSpecificationOptionValue : cpDefinitionSpecificationOptionValues) {
+					CPSpecificationOption cpSpecificationOption = cpDefinitionSpecificationOptionValue.getCPSpecificationOption();
+			%>
+				<dt class="specification-term">
+					<%= HtmlUtil.escape(cpSpecificationOption.getTitle(languageId)) %>
+				</dt>
+				<dd class="specification-desc">
+					<%= HtmlUtil.escape(cpDefinitionSpecificationOptionValue.getValue(languageId)) %>
+				</dd>
+			<%
+				}
 
-						<%
-						for (CPDefinitionSpecificationOptionValue cpDefinitionSpecificationOptionValue : cpDefinitionSpecificationOptionValues) {
+				for (CPOptionCategory cpOptionCategory : cpOptionCategories) {
+					List<CPDefinitionSpecificationOptionValue> categorizedCPDefinitionSpecificationOptionValues = cpContentHelper.getCategorizedCPDefinitionSpecificationOptionValues(cpDefinitionId, cpOptionCategory.getCPOptionCategoryId());
+			%>
+				<c:if test="<%= !categorizedCPDefinitionSpecificationOptionValues.isEmpty() %>">
+					<%
+						for (CPDefinitionSpecificationOptionValue cpDefinitionSpecificationOptionValue : categorizedCPDefinitionSpecificationOptionValues) {
 							CPSpecificationOption cpSpecificationOption = cpDefinitionSpecificationOptionValue.getCPSpecificationOption();
-						%>
-
-							<dt class="specification-term">
-								<%= HtmlUtil.escape(cpSpecificationOption.getTitle(languageId)) %>
-							</dt>
-							<dd class="specification-desc">
-								<%= HtmlUtil.escape(cpDefinitionSpecificationOptionValue.getValue(languageId)) %>
-							</dd>
-
-						<%
+					%>
+						<dt class="specification-term">
+							<%= HtmlUtil.escape(cpSpecificationOption.getTitle(languageId)) %>
+						</dt>
+						<dd class="specification-desc">
+							<%= HtmlUtil.escape(cpDefinitionSpecificationOptionValue.getValue(languageId)) %>
+						</dd>
+					<%
 						}
-						%>
-
-						<%
-						for (CPOptionCategory cpOptionCategory : cpOptionCategories) {
-							List<CPDefinitionSpecificationOptionValue> categorizedCPDefinitionSpecificationOptionValues = cpContentHelper.getCategorizedCPDefinitionSpecificationOptionValues(cpDefinitionId, cpOptionCategory.getCPOptionCategoryId());
-						%>
-
-							<c:if test="<%= !categorizedCPDefinitionSpecificationOptionValues.isEmpty() %>">
-
-								<%
-								for (CPDefinitionSpecificationOptionValue cpDefinitionSpecificationOptionValue : categorizedCPDefinitionSpecificationOptionValues) {
-									CPSpecificationOption cpSpecificationOption = cpDefinitionSpecificationOptionValue.getCPSpecificationOption();
-								%>
-
-									<dt class="specification-term">
-										<%= HtmlUtil.escape(cpSpecificationOption.getTitle(languageId)) %>
-									</dt>
-									<dd class="specification-desc">
-										<%= HtmlUtil.escape(cpDefinitionSpecificationOptionValue.getValue(languageId)) %>
-									</dd>
-
-								<%
-								}
-								%>
-
-							</c:if>
-
-						<%
-						}
-						%>
-
-					</dl>
-				</div>
-			</div>
-		</div>
-	</div>
+					%>
+				</c:if>
+			<%
+				}
+			%>
+		</dl>
+	</commerce-ui:panel>
 </c:if>
 
 <c:if test="<%= !cpAttachmentFileEntries.isEmpty() %>">
