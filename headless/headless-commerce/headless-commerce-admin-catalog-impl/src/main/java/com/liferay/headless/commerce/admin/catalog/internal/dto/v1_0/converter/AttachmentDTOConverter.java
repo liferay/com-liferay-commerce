@@ -62,7 +62,7 @@ public class AttachmentDTOConverter implements DTOConverter {
 		Company company = _companyLocalService.getCompany(
 			cpAttachmentFileEntry.getCompanyId());
 
-		String portalURL = company.getPortalURL(company.getGroupId());
+		String portalURL = company.getPortalURL(0);
 
 		return new Attachment() {
 			{
