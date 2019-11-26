@@ -149,6 +149,7 @@ public class CommerceAddressLocalServiceImpl
 		commerceAddress.setPhoneNumber(phoneNumber);
 		commerceAddress.setType(type);
 		commerceAddress.setExternalReferenceCode(externalReferenceCode);
+
 		commerceAddressPersistence.update(commerceAddress);
 
 		return commerceAddress;
