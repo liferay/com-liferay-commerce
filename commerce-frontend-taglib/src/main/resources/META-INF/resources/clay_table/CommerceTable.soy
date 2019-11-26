@@ -181,16 +181,16 @@
 	<td>
 		{if isNonnull($item.promoPrice) and $item.promoPrice != ''}
 			<span class="price">
-				<span class="price__value price__value--promo-price">
+				<span class="price-value price-value-promo">
 					{$item.promoPrice}
 				</span>
-				<span class="price__value price__value--inactive">
+				<span class="price-value price-value-inactive">
 					{$value}
 				</span>
 			</span>
 		{else}
 			<span class="price">
-				<span class="price__value">
+				<span class="price-value">
 					{$value}
 				</span>
 			</span>

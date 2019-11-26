@@ -142,11 +142,11 @@
 
         if (productData.promoPrice != null) {
             priceElement.innerHTML =
-            '<span class="price__value price__value--promo-price">' + productData.promoPrice + '</span>' +
-            '<span class="price__value price__value--inactive">' + productData.price + '</span>';
+            '<span class="price-value price-value-promo">' + productData.promoPrice + '</span>' +
+            '<span class="price-value price-value-inactive">' + productData.price + '</span>';
         }
         else if (productData.price != null) {
-            priceElement.innerHTML = '<span class="price__value">' + productData.price + '</span>';
+            priceElement.innerHTML = '<span class="price-value">' + productData.price + '</span>';
         }
         else {
             priceElement.innerHTML = '';

@@ -165,15 +165,15 @@ Map<Long, List<CommerceOrderValidatorResult>> commerceOrderValidatorResultMap = 
 									<span class="price">
 										<c:choose>
 											<c:when test="<%= (unitPromoPriceMoney != null) && (promoPrice.compareTo(BigDecimal.ZERO) > 0) %>">
-												<span class="price__value price__value--promo-price">
+												<span class="price-value price-value-promo">
 													<%= HtmlUtil.escape(unitPromoPriceMoney.format(locale)) %>
 												</span>
-												<span class="price__value price__value--inactive">
+												<span class="price-value price-value-inactive">
 													<%= HtmlUtil.escape(unitPriceMoney.format(locale)) %>
 												</span>
 											</c:when>
 											<c:otherwise>
-												<span class="price__value {$additionalPriceClasses}">
+												<span class="price-value {$additionalPriceClasses}">
 													<%= HtmlUtil.escape(unitPriceMoney.format(locale)) %>
 												</span>
 											</c:otherwise>

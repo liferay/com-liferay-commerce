@@ -45,10 +45,10 @@
 	{@param? additionalPriceClasses: string}
 
 	<span class="price">
-		<span class="price__value price__value--promo-price {$additionalPromoPriceClasses}">
+		<span class="price-value price-value-promo {$additionalPromoPriceClasses}">
 			{$promoPrice}
 		</span>
-		<span class="price__value price__value--inactive {$additionalPriceClasses}">
+		<span class="price-value price-value-inactive {$additionalPriceClasses}">
 			{$price}
 		</span>
 	</span>
@@ -64,10 +64,10 @@
 	{@param? additionalPriceClasses: string}
 
 	<span class="price">
-		<span class="price__value {$additionalPriceClasses}">
+		<span class="price-value {$additionalPriceClasses}">
 			{$price}
 		</span>
-		<span class="price__value price__value--discount {$additionalDiscountClasses}">
+		<span class="price-value price-value-discount {$additionalDiscountClasses}">
 			{$discount}
 		</span>
 	</span>
@@ -81,7 +81,7 @@
 	{@param? additionalPriceClasses: string}
 
 	<span class="price">
-		<span class="price__value {$additionalPriceClasses}">
+		<span class="price-value {$additionalPriceClasses}">
 			{$price}
 		</span>
 	</span>
