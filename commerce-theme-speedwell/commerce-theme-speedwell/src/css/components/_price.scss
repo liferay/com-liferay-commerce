@@ -1,0 +1,54 @@
+.price {
+	align-items: normal;
+	display: grid;
+	grid-template-columns: 140px 1fr;
+
+	&__label {
+		font-size: .8em;
+		font-variant: small-caps;
+		font-weight: 500;
+		margin-bottom: 10px;
+		text-transform: lowercase;
+	}
+
+	&__value {
+		font-weight: 500;
+
+		&:first-letter {
+			margin-right: 2px;
+		}
+
+		&--big {
+			font-size: 18px;
+		}
+
+		&--discount {
+			color: $color-mood-bad;
+		}
+
+		&--percentages {
+			&::after {
+				color: $color-fg;
+				content: ' | ';
+			}
+
+			&:last-child::after {
+				content: '';
+			}
+		}
+
+		&--final-price,
+		&--promo-price {
+			color: $color-mood-bad;
+			font-size: 1.05em;
+			font-weight: 600;
+		}
+
+		&--inactive {
+			color: $color-fg-alt;
+			font-size: .8em;
+			font-weight: normal;
+			text-decoration: line-through;
+		}
+	}
+}

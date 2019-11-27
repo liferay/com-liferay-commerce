@@ -4,85 +4,111 @@
  * This renders the component's whole content.
  */
 {template .render}
-	{@param prices: [
-		price: string,
-		promoPrice: string|null,
-		discount: string|null
-	]}
-	{@param? additionalDiscountClasses: string}
-	{@param? additionalPriceClasses: string}
-	{@param? additionalPromoPriceClasses: string}
+    {@param prices: [
+    price: string,
+    promoPrice: string|null,
+    discountPercentage: string|null,
+    discountPercentages: ?,
+    finalPrice: string|null
+    ]}
+    {@param? additionalDiscountClasses: string}
+    {@param? additionalPromoPriceClasses: string}
 
-	{if isNonnull($prices.promoPrice)}
-		{call .promoPrice}
-			{param price: $prices.price /}
-			{param promoPrice: $prices.promoPrice /}
-			{param additionalPromoPriceClasses: $additionalPromoPriceClasses /}
-			{param additionalPriceClasses: $additionalPriceClasses /}
-		{/call}
-	{elseif isNonnull($prices.discount)}
-		{call .discount}
-			{param price: $prices.price /}
-			{param discount: $prices.discount /}
-			{param additionalDiscountClasses: $additionalDiscountClasses /}
-			{param additionalPriceClasses: $additionalPriceClasses /}
-		{/call}
-	{else}
-		{call .default}
-			{param price: $prices.price /}
-			{param additionalPriceClasses: $additionalPriceClasses /}
-		{/call}
-	{/if}
+    {let $inactiveClass kind="text"}
+        {if isNonnull($prices.promoPrice) or
+        (isNonnull($prices.discountPercentage) and
+        isNonnull($prices.finalPrice))}
+            {sp}price__value--inactive
+        {/if}
+    {/let}
+
+    <div class="price">
+        {call .default}
+            {param price: $prices.price /}
+            {param additionalPriceClasses: $inactiveClass /}
+        {/call}
+
+        {if isNonnull($prices.promoPrice) and isNonnull($prices.finalPrice)}
+            {call .promoPrice}
+                {param promoPrice: $prices.promoPrice /}
+                {param additionalPromoPriceClasses: $inactiveClass /}
+            {/call}
+        {elseif isNonnull($prices.promoPrice)}
+            {call .promoPrice}
+                {param promoPrice: $prices.promoPrice /}
+                {param additionalPromoPriceClasses: $additionalPromoPriceClasses /}
+            {/call}
+        {/if}
+
+        {if isNonnull($prices.finalPrice) and
+        (isNonnull($prices.discountPercentage) or
+        isNonnull($prices.discountPercentages))}
+
+            {call .discount}
+                {param percentage: $prices.discountPercentage /}
+                {param percentages: $prices.discountPercentages /}
+                {param finalPrice: $prices.finalPrice /}
+                {param additionalDiscountClasses: $additionalDiscountClasses /}
+            {/call}
+        {/if}
+    </div>
 {/template}
 
 /**
- * This renders the price and the discounted price.
+ * This renders the promo price.
  */
 {template .promoPrice}
-	{@param price: string}
-	{@param promoPrice: string}
-	{@param? additionalPromoPriceClasses: string}
-	{@param? additionalPriceClasses: string}
+    {@param promoPrice: string}
+    {@param? additionalPromoPriceClasses: string}
 
-	<span class="price">
-		<span class="price-value price-value-promo {$additionalPromoPriceClasses}">
-			{$promoPrice}
-		</span>
-		<span class="price-value price-value-inactive {$additionalPriceClasses}">
-			{$price}
-		</span>
-	</span>
+    <span class="price-label">
+        {msg desc="Promo price"}promo-price{/msg}
+    </span>
+    <span class="price-value price-value-promo {$additionalPromoPriceClasses}">
+        {$promoPrice}
+    </span>
 {/template}
 
 /**
- * This renders the price and the discount.
+ * This renders the discounted price.
  */
 {template .discount}
-	{@param price: string}
-	{@param discount: string}
-	{@param? additionalDiscountClasses: string}
-	{@param? additionalPriceClasses: string}
+    {@param finalPrice: string}
+    {@param? percentage: string}
+    {@param? percentages: ? }
+    {@param? additionalDiscountClasses: string}
 
-	<span class="price">
-		<span class="price-value {$additionalPriceClasses}">
-			{$price}
-		</span>
-		<span class="price-value price-value-discount {$additionalDiscountClasses}">
-			{$discount}
-		</span>
-	</span>
+    <span class="price__label">
+        {msg desc="Discount"}discount{/msg}
+    </span>
+    <span class="price-value price-value-discount">
+        {if isNonnull($percentages) and not($percentages[1] == '0')}
+            {foreach $value in $percentages}
+                <span class="price-value-percentages">{$value}</span>
+            {/foreach}
+        {else}
+            &ndash;{$percentage}%
+        {/if}
+    </span>
+    <span class="price__label">
+        {msg desc="Final price"}final-price{/msg}
+    </span>
+    <span class="price-value price-value-final-price {$additionalDiscountClasses}">
+        {$finalPrice}
+    </span>
 {/template}
 
 /**
  * This renders the normal price
  */
 {template .default}
-	{@param price: string}
-	{@param? additionalPriceClasses: string}
+    {@param price: string}
+    {@param? additionalPriceClasses: string}
 
-	<span class="price">
-		<span class="price-value {$additionalPriceClasses}">
-			{$price}
-		</span>
-	</span>
+    <span class="price-label">
+        {msg desc="Catalog price"}catalog-price{/msg}
+    </span>
+    <span class="price-value {$additionalPriceClasses}">
+        {$price}
+    </span>
 {/template}

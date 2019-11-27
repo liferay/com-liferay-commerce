@@ -2,7 +2,22 @@ import template from './Price.soy';
 import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
-class Price extends Component {}
+function truncateNullDecimals(decimalNumber) {
+	return !!decimalNumber && decimalNumber.includes('.00') ?
+		decimalNumber.split('.')[0] : decimalNumber;
+}
+
+class Price extends Component {
+	created() {
+		this.prices.discountPercentage = truncateNullDecimals(this.prices.discountPercentage);
+
+		if (!!this.prices.discountPercentages &&
+			this.prices.discountPercentages.length) {
+			this.prices.discountPercentages =
+				this.prices.discountPercentages.map(truncateNullDecimals);
+		}
+	}
+}
 
 Price.STATE = {
 	additionalDiscountClasses: Config.string(),
@@ -12,7 +27,9 @@ Price.STATE = {
 		{
 			price: Config.string().required(),
 			promoPrice: Config.string(),
-			discount: Config.string()
+			discountPercentage: Config.string(),
+			discountPercentages: Config.array().value(null),
+			finalPrice: Config.string()
 		}
 	)
 };

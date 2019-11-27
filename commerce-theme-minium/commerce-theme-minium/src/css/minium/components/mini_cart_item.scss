@@ -54,10 +54,17 @@
 		grid-area: price;
 		text-align: right;
 
-		.price-value {
-			display: block;
-			font-size: 1.1em;
-			margin: 0;
+
+		.price {
+			&-label {
+				display: none;
+			}
+
+			&-value {
+				display: block;
+				font-size: 1.1em;
+				margin: 0;
+			}
 		}
 	}
 
