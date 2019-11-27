@@ -134,18 +134,17 @@ public class AccountCategoryForecast {
 	protected Long category;
 
 	@Schema
-	public Map<String, String> getCategoryTitle() {
+	public String getCategoryTitle() {
 		return categoryTitle;
 	}
 
-	public void setCategoryTitle(Map<String, String> categoryTitle) {
+	public void setCategoryTitle(String categoryTitle) {
 		this.categoryTitle = categoryTitle;
 	}
 
 	@JsonIgnore
 	public void setCategoryTitle(
-		UnsafeSupplier<Map<String, String>, Exception>
-			categoryTitleUnsafeSupplier) {
+		UnsafeSupplier<String, Exception> categoryTitleUnsafeSupplier) {
 
 		try {
 			categoryTitle = categoryTitleUnsafeSupplier.get();
@@ -160,7 +159,7 @@ public class AccountCategoryForecast {
 
 	@GraphQLField
 	@JsonProperty(access = JsonProperty.Access.READ_WRITE)
-	protected Map<String, String> categoryTitle;
+	protected String categoryTitle;
 
 	@Schema
 	public Float getForecast() {
@@ -368,7 +367,11 @@ public class AccountCategoryForecast {
 
 			sb.append("\"categoryTitle\": ");
 
-			sb.append(_toJSON(categoryTitle));
+			sb.append("\"");
+
+			sb.append(_escape(categoryTitle));
+
+			sb.append("\"");
 		}
 
 		if (forecast != null) {
