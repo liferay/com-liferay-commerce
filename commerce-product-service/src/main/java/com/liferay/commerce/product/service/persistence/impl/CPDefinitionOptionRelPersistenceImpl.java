@@ -3254,263 +3254,6 @@ public class CPDefinitionOptionRelPersistenceImpl
 	private static final String _FINDER_COLUMN_C_C_CPOPTIONID_2 =
 		"cpDefinitionOptionRel.CPOptionId = ?";
 
-	private FinderPath _finderPathFetchByC_K;
-	private FinderPath _finderPathCountByC_K;
-
-	/**
-	 * Returns the cp definition option rel where CPDefinitionId = &#63; and key = &#63; or throws a <code>NoSuchCPDefinitionOptionRelException</code> if it could not be found.
-	 *
-	 * @param CPDefinitionId the cp definition ID
-	 * @param key the key
-	 * @return the matching cp definition option rel
-	 * @throws NoSuchCPDefinitionOptionRelException if a matching cp definition option rel could not be found
-	 */
-	@Override
-	public CPDefinitionOptionRel findByC_K(long CPDefinitionId, String key)
-		throws NoSuchCPDefinitionOptionRelException {
-
-		CPDefinitionOptionRel cpDefinitionOptionRel = fetchByC_K(
-			CPDefinitionId, key);
-
-		if (cpDefinitionOptionRel == null) {
-			StringBundler msg = new StringBundler(6);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("CPDefinitionId=");
-			msg.append(CPDefinitionId);
-
-			msg.append(", key=");
-			msg.append(key);
-
-			msg.append("}");
-
-			if (_log.isDebugEnabled()) {
-				_log.debug(msg.toString());
-			}
-
-			throw new NoSuchCPDefinitionOptionRelException(msg.toString());
-		}
-
-		return cpDefinitionOptionRel;
-	}
-
-	/**
-	 * Returns the cp definition option rel where CPDefinitionId = &#63; and key = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param CPDefinitionId the cp definition ID
-	 * @param key the key
-	 * @return the matching cp definition option rel, or <code>null</code> if a matching cp definition option rel could not be found
-	 */
-	@Override
-	public CPDefinitionOptionRel fetchByC_K(long CPDefinitionId, String key) {
-		return fetchByC_K(CPDefinitionId, key, true);
-	}
-
-	/**
-	 * Returns the cp definition option rel where CPDefinitionId = &#63; and key = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param CPDefinitionId the cp definition ID
-	 * @param key the key
-	 * @param useFinderCache whether to use the finder cache
-	 * @return the matching cp definition option rel, or <code>null</code> if a matching cp definition option rel could not be found
-	 */
-	@Override
-	public CPDefinitionOptionRel fetchByC_K(
-		long CPDefinitionId, String key, boolean useFinderCache) {
-
-		key = Objects.toString(key, "");
-
-		Object[] finderArgs = null;
-
-		if (useFinderCache) {
-			finderArgs = new Object[] {CPDefinitionId, key};
-		}
-
-		Object result = null;
-
-		if (useFinderCache) {
-			result = finderCache.getResult(
-				_finderPathFetchByC_K, finderArgs, this);
-		}
-
-		if (result instanceof CPDefinitionOptionRel) {
-			CPDefinitionOptionRel cpDefinitionOptionRel =
-				(CPDefinitionOptionRel)result;
-
-			if ((CPDefinitionId != cpDefinitionOptionRel.getCPDefinitionId()) ||
-				!Objects.equals(key, cpDefinitionOptionRel.getKey())) {
-
-				result = null;
-			}
-		}
-
-		if (result == null) {
-			StringBundler query = new StringBundler(4);
-
-			query.append(_SQL_SELECT_CPDEFINITIONOPTIONREL_WHERE);
-
-			query.append(_FINDER_COLUMN_C_K_CPDEFINITIONID_2);
-
-			boolean bindKey = false;
-
-			if (key.isEmpty()) {
-				query.append(_FINDER_COLUMN_C_K_KEY_3);
-			}
-			else {
-				bindKey = true;
-
-				query.append(_FINDER_COLUMN_C_K_KEY_2);
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(CPDefinitionId);
-
-				if (bindKey) {
-					qPos.add(key);
-				}
-
-				List<CPDefinitionOptionRel> list = q.list();
-
-				if (list.isEmpty()) {
-					if (useFinderCache) {
-						finderCache.putResult(
-							_finderPathFetchByC_K, finderArgs, list);
-					}
-				}
-				else {
-					CPDefinitionOptionRel cpDefinitionOptionRel = list.get(0);
-
-					result = cpDefinitionOptionRel;
-
-					cacheResult(cpDefinitionOptionRel);
-				}
-			}
-			catch (Exception e) {
-				if (useFinderCache) {
-					finderCache.removeResult(_finderPathFetchByC_K, finderArgs);
-				}
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		if (result instanceof List<?>) {
-			return null;
-		}
-		else {
-			return (CPDefinitionOptionRel)result;
-		}
-	}
-
-	/**
-	 * Removes the cp definition option rel where CPDefinitionId = &#63; and key = &#63; from the database.
-	 *
-	 * @param CPDefinitionId the cp definition ID
-	 * @param key the key
-	 * @return the cp definition option rel that was removed
-	 */
-	@Override
-	public CPDefinitionOptionRel removeByC_K(long CPDefinitionId, String key)
-		throws NoSuchCPDefinitionOptionRelException {
-
-		CPDefinitionOptionRel cpDefinitionOptionRel = findByC_K(
-			CPDefinitionId, key);
-
-		return remove(cpDefinitionOptionRel);
-	}
-
-	/**
-	 * Returns the number of cp definition option rels where CPDefinitionId = &#63; and key = &#63;.
-	 *
-	 * @param CPDefinitionId the cp definition ID
-	 * @param key the key
-	 * @return the number of matching cp definition option rels
-	 */
-	@Override
-	public int countByC_K(long CPDefinitionId, String key) {
-		key = Objects.toString(key, "");
-
-		FinderPath finderPath = _finderPathCountByC_K;
-
-		Object[] finderArgs = new Object[] {CPDefinitionId, key};
-
-		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(3);
-
-			query.append(_SQL_COUNT_CPDEFINITIONOPTIONREL_WHERE);
-
-			query.append(_FINDER_COLUMN_C_K_CPDEFINITIONID_2);
-
-			boolean bindKey = false;
-
-			if (key.isEmpty()) {
-				query.append(_FINDER_COLUMN_C_K_KEY_3);
-			}
-			else {
-				bindKey = true;
-
-				query.append(_FINDER_COLUMN_C_K_KEY_2);
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(CPDefinitionId);
-
-				if (bindKey) {
-					qPos.add(key);
-				}
-
-				count = (Long)q.uniqueResult();
-
-				finderCache.putResult(finderPath, finderArgs, count);
-			}
-			catch (Exception e) {
-				finderCache.removeResult(finderPath, finderArgs);
-
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	private static final String _FINDER_COLUMN_C_K_CPDEFINITIONID_2 =
-		"cpDefinitionOptionRel.CPDefinitionId = ? AND ";
-
-	private static final String _FINDER_COLUMN_C_K_KEY_2 =
-		"cpDefinitionOptionRel.key = ?";
-
-	private static final String _FINDER_COLUMN_C_K_KEY_3 =
-		"(cpDefinitionOptionRel.key IS NULL OR cpDefinitionOptionRel.key = '')";
-
 	private FinderPath _finderPathWithPaginationFindByC_SC;
 	private FinderPath _finderPathWithoutPaginationFindByC_SC;
 	private FinderPath _finderPathCountByC_SC;
@@ -4067,6 +3810,263 @@ public class CPDefinitionOptionRelPersistenceImpl
 	private static final String _FINDER_COLUMN_C_SC_SKUCONTRIBUTOR_2 =
 		"cpDefinitionOptionRel.skuContributor = ?";
 
+	private FinderPath _finderPathFetchByC_K;
+	private FinderPath _finderPathCountByC_K;
+
+	/**
+	 * Returns the cp definition option rel where CPDefinitionId = &#63; and key = &#63; or throws a <code>NoSuchCPDefinitionOptionRelException</code> if it could not be found.
+	 *
+	 * @param CPDefinitionId the cp definition ID
+	 * @param key the key
+	 * @return the matching cp definition option rel
+	 * @throws NoSuchCPDefinitionOptionRelException if a matching cp definition option rel could not be found
+	 */
+	@Override
+	public CPDefinitionOptionRel findByC_K(long CPDefinitionId, String key)
+		throws NoSuchCPDefinitionOptionRelException {
+
+		CPDefinitionOptionRel cpDefinitionOptionRel = fetchByC_K(
+			CPDefinitionId, key);
+
+		if (cpDefinitionOptionRel == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("CPDefinitionId=");
+			msg.append(CPDefinitionId);
+
+			msg.append(", key=");
+			msg.append(key);
+
+			msg.append("}");
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(msg.toString());
+			}
+
+			throw new NoSuchCPDefinitionOptionRelException(msg.toString());
+		}
+
+		return cpDefinitionOptionRel;
+	}
+
+	/**
+	 * Returns the cp definition option rel where CPDefinitionId = &#63; and key = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param CPDefinitionId the cp definition ID
+	 * @param key the key
+	 * @return the matching cp definition option rel, or <code>null</code> if a matching cp definition option rel could not be found
+	 */
+	@Override
+	public CPDefinitionOptionRel fetchByC_K(long CPDefinitionId, String key) {
+		return fetchByC_K(CPDefinitionId, key, true);
+	}
+
+	/**
+	 * Returns the cp definition option rel where CPDefinitionId = &#63; and key = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param CPDefinitionId the cp definition ID
+	 * @param key the key
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the matching cp definition option rel, or <code>null</code> if a matching cp definition option rel could not be found
+	 */
+	@Override
+	public CPDefinitionOptionRel fetchByC_K(
+		long CPDefinitionId, String key, boolean useFinderCache) {
+
+		key = Objects.toString(key, "");
+
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {CPDefinitionId, key};
+		}
+
+		Object result = null;
+
+		if (useFinderCache) {
+			result = finderCache.getResult(
+				_finderPathFetchByC_K, finderArgs, this);
+		}
+
+		if (result instanceof CPDefinitionOptionRel) {
+			CPDefinitionOptionRel cpDefinitionOptionRel =
+				(CPDefinitionOptionRel)result;
+
+			if ((CPDefinitionId != cpDefinitionOptionRel.getCPDefinitionId()) ||
+				!Objects.equals(key, cpDefinitionOptionRel.getKey())) {
+
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_SELECT_CPDEFINITIONOPTIONREL_WHERE);
+
+			query.append(_FINDER_COLUMN_C_K_CPDEFINITIONID_2);
+
+			boolean bindKey = false;
+
+			if (key.isEmpty()) {
+				query.append(_FINDER_COLUMN_C_K_KEY_3);
+			}
+			else {
+				bindKey = true;
+
+				query.append(_FINDER_COLUMN_C_K_KEY_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(CPDefinitionId);
+
+				if (bindKey) {
+					qPos.add(key);
+				}
+
+				List<CPDefinitionOptionRel> list = q.list();
+
+				if (list.isEmpty()) {
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByC_K, finderArgs, list);
+					}
+				}
+				else {
+					CPDefinitionOptionRel cpDefinitionOptionRel = list.get(0);
+
+					result = cpDefinitionOptionRel;
+
+					cacheResult(cpDefinitionOptionRel);
+				}
+			}
+			catch (Exception e) {
+				if (useFinderCache) {
+					finderCache.removeResult(_finderPathFetchByC_K, finderArgs);
+				}
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (CPDefinitionOptionRel)result;
+		}
+	}
+
+	/**
+	 * Removes the cp definition option rel where CPDefinitionId = &#63; and key = &#63; from the database.
+	 *
+	 * @param CPDefinitionId the cp definition ID
+	 * @param key the key
+	 * @return the cp definition option rel that was removed
+	 */
+	@Override
+	public CPDefinitionOptionRel removeByC_K(long CPDefinitionId, String key)
+		throws NoSuchCPDefinitionOptionRelException {
+
+		CPDefinitionOptionRel cpDefinitionOptionRel = findByC_K(
+			CPDefinitionId, key);
+
+		return remove(cpDefinitionOptionRel);
+	}
+
+	/**
+	 * Returns the number of cp definition option rels where CPDefinitionId = &#63; and key = &#63;.
+	 *
+	 * @param CPDefinitionId the cp definition ID
+	 * @param key the key
+	 * @return the number of matching cp definition option rels
+	 */
+	@Override
+	public int countByC_K(long CPDefinitionId, String key) {
+		key = Objects.toString(key, "");
+
+		FinderPath finderPath = _finderPathCountByC_K;
+
+		Object[] finderArgs = new Object[] {CPDefinitionId, key};
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_CPDEFINITIONOPTIONREL_WHERE);
+
+			query.append(_FINDER_COLUMN_C_K_CPDEFINITIONID_2);
+
+			boolean bindKey = false;
+
+			if (key.isEmpty()) {
+				query.append(_FINDER_COLUMN_C_K_KEY_3);
+			}
+			else {
+				bindKey = true;
+
+				query.append(_FINDER_COLUMN_C_K_KEY_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(CPDefinitionId);
+
+				if (bindKey) {
+					qPos.add(key);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_C_K_CPDEFINITIONID_2 =
+		"cpDefinitionOptionRel.CPDefinitionId = ? AND ";
+
+	private static final String _FINDER_COLUMN_C_K_KEY_2 =
+		"cpDefinitionOptionRel.key = ?";
+
+	private static final String _FINDER_COLUMN_C_K_KEY_3 =
+		"(cpDefinitionOptionRel.key IS NULL OR cpDefinitionOptionRel.key = '')";
+
 	public CPDefinitionOptionRelPersistenceImpl() {
 		setModelClass(CPDefinitionOptionRel.class);
 
@@ -4206,6 +4206,18 @@ public class CPDefinitionOptionRelPersistenceImpl
 
 			clearUniqueFindersCache(
 				(CPDefinitionOptionRelModelImpl)cpDefinitionOptionRel, true);
+		}
+	}
+
+	public void clearCache(Set<Serializable> primaryKeys) {
+		finderCache.clearCache(FINDER_CLASS_NAME_ENTITY);
+		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
+		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		for (Serializable primaryKey : primaryKeys) {
+			entityCache.removeResult(
+				CPDefinitionOptionRelModelImpl.ENTITY_CACHE_ENABLED,
+				CPDefinitionOptionRelImpl.class, primaryKey);
 		}
 	}
 
@@ -5297,21 +5309,6 @@ public class CPDefinitionOptionRelPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_C",
 			new String[] {Long.class.getName(), Long.class.getName()});
 
-		_finderPathFetchByC_K = new FinderPath(
-			CPDefinitionOptionRelModelImpl.ENTITY_CACHE_ENABLED,
-			CPDefinitionOptionRelModelImpl.FINDER_CACHE_ENABLED,
-			CPDefinitionOptionRelImpl.class, FINDER_CLASS_NAME_ENTITY,
-			"fetchByC_K",
-			new String[] {Long.class.getName(), String.class.getName()},
-			CPDefinitionOptionRelModelImpl.CPDEFINITIONID_COLUMN_BITMASK |
-			CPDefinitionOptionRelModelImpl.KEY_COLUMN_BITMASK);
-
-		_finderPathCountByC_K = new FinderPath(
-			CPDefinitionOptionRelModelImpl.ENTITY_CACHE_ENABLED,
-			CPDefinitionOptionRelModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_K",
-			new String[] {Long.class.getName(), String.class.getName()});
-
 		_finderPathWithPaginationFindByC_SC = new FinderPath(
 			CPDefinitionOptionRelModelImpl.ENTITY_CACHE_ENABLED,
 			CPDefinitionOptionRelModelImpl.FINDER_CACHE_ENABLED,
@@ -5338,6 +5335,21 @@ public class CPDefinitionOptionRelPersistenceImpl
 			CPDefinitionOptionRelModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_SC",
 			new String[] {Long.class.getName(), Boolean.class.getName()});
+
+		_finderPathFetchByC_K = new FinderPath(
+			CPDefinitionOptionRelModelImpl.ENTITY_CACHE_ENABLED,
+			CPDefinitionOptionRelModelImpl.FINDER_CACHE_ENABLED,
+			CPDefinitionOptionRelImpl.class, FINDER_CLASS_NAME_ENTITY,
+			"fetchByC_K",
+			new String[] {Long.class.getName(), String.class.getName()},
+			CPDefinitionOptionRelModelImpl.CPDEFINITIONID_COLUMN_BITMASK |
+			CPDefinitionOptionRelModelImpl.KEY_COLUMN_BITMASK);
+
+		_finderPathCountByC_K = new FinderPath(
+			CPDefinitionOptionRelModelImpl.ENTITY_CACHE_ENABLED,
+			CPDefinitionOptionRelModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByC_K",
+			new String[] {Long.class.getName(), String.class.getName()});
 	}
 
 	public void destroy() {
