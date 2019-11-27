@@ -1286,7 +1286,7 @@ paths:
                         'Successful operation'
                 '400':
                     description:
-                        "Invalid input. Happens if the search parameters are not passed\nor if the end date id prior to start date"
+                        "Invalid input. Happens if the search parameters are not passed\nor if the end date is prior to start date"
                 '401':
                     content:
                         application/json:
