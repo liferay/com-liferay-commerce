@@ -73,8 +73,10 @@ import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
@@ -189,8 +191,11 @@ public class CPDefinitionsImporter {
 			long catalogGroupId, String name, String shortDescription,
 			String description, String externalReferenceCode, String sku,
 			String taxCategory, long width, long height, long depth,
-			long weight, long[] assetCategoryIds, String[] assetTagNames,
-			ServiceContext serviceContext)
+			long weight, boolean subscriptionEnabled, int subscriptionLength,
+			String subscriptionType,
+			UnicodeProperties subscriptionTypeSettingsProperties,
+			long maxSubscriptionCycles, long[] assetCategoryIds,
+			String[] assetTagNames, ServiceContext serviceContext)
 		throws PortalException {
 
 		serviceContext.setAssetCategoryIds(assetCategoryIds);
@@ -246,7 +251,9 @@ public class CPDefinitionsImporter {
 			null, true, displayDateMonth, displayDateDay, displayDateYear,
 			displayDateHour, displayDateMinute, expirationDateMonth,
 			expirationDateDay, expirationDateYear, expirationDateHour,
-			expirationDateMinute, true, sku, false, 0, null, null, 0L,
+			expirationDateMinute, true, sku, subscriptionEnabled,
+			subscriptionLength, subscriptionType,
+			subscriptionTypeSettingsProperties, maxSubscriptionCycles,
 			externalReferenceCode, serviceContext);
 	}
 
@@ -300,6 +307,28 @@ public class CPDefinitionsImporter {
 				nameMap, Collections.emptyMap(), serviceContext);
 
 		return cpTaxCategory.getCPTaxCategoryId();
+	}
+
+	private UnicodeProperties _getSubscriptionTypeSettingsProperties(
+		JSONObject subscriptionInfoJSONObject) {
+
+		if (subscriptionInfoJSONObject == null) {
+			return null;
+		}
+
+		String subscriptionTypeSettingsProperties = GetterUtil.getString(
+			subscriptionInfoJSONObject.get(
+				"SubscriptionTypeSettingsProperties"));
+
+		if (Validator.isNull(subscriptionTypeSettingsProperties)) {
+			return null;
+		}
+
+		UnicodeProperties unicodeProperties = new UnicodeProperties(true);
+
+		unicodeProperties.fastLoad(subscriptionTypeSettingsProperties);
+
+		return unicodeProperties;
 	}
 
 	private CPDefinition _importCPDefinition(
@@ -372,6 +401,9 @@ public class CPDefinitionsImporter {
 		long length = jsonObject.getLong("Length");
 		long weight = jsonObject.getLong("Weight");
 
+		JSONObject subscriptionInfoJSONObject = jsonObject.getJSONObject(
+			"SubscriptionInfo");
+
 		long[] assetCategoryIds = ListUtil.toLongArray(
 			assetCategories, AssetCategory.CATEGORY_ID_ACCESSOR);
 
@@ -384,7 +416,17 @@ public class CPDefinitionsImporter {
 		cpDefinition = _addCPDefinition(
 			catalogGroupId, name, shortDescription, description,
 			externalReferenceCode, sku, taxCategory, width, height, length,
-			weight, assetCategoryIds, assetTagNames, serviceContext);
+			weight,
+			GetterUtil.getBoolean(
+				subscriptionInfoJSONObject.get("SubscriptionEnabled")),
+			GetterUtil.getInteger(
+				subscriptionInfoJSONObject.get("SubscriptionLength")),
+			GetterUtil.getString(
+				subscriptionInfoJSONObject.get("SubscriptionType")),
+			_getSubscriptionTypeSettingsProperties(subscriptionInfoJSONObject),
+			GetterUtil.getLong(
+				subscriptionInfoJSONObject.get("MaxSubscriptionCycles")),
+			assetCategoryIds, assetTagNames, serviceContext);
 
 		serviceContext.setWorkflowAction(originalWorkflowAction);
 
@@ -792,6 +834,9 @@ public class CPDefinitionsImporter {
 
 		String externalReferenceCode = FriendlyURLNormalizerUtil.normalize(sku);
 
+		JSONObject subscriptionInfoJSONObject = skuJSONObject.getJSONObject(
+			"SubscriptionInfo");
+
 		CPInstance cpInstance = _cpInstanceLocalService.addCPInstance(
 			cpDefinitionId, cpDefinition.getGroupId(), sku, null,
 			manufacturerPartNumber, true, optionsJSON, cpDefinition.getWidth(),
@@ -801,7 +846,19 @@ public class CPDefinitionsImporter {
 			externalReferenceCode, calendar.get(Calendar.MONTH),
 			calendar.get(Calendar.DAY_OF_MONTH), calendar.get(Calendar.YEAR),
 			calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE),
-			0, 0, 0, 0, 0, true, serviceContext);
+			0, 0, 0, 0, 0, true,
+			GetterUtil.getBoolean(
+				subscriptionInfoJSONObject.get("OverrideSubscriptionInfo")),
+			GetterUtil.getBoolean(
+				subscriptionInfoJSONObject.get("SubscriptionEnabled")),
+			GetterUtil.getInteger(
+				subscriptionInfoJSONObject.get("SubscriptionLength")),
+			GetterUtil.getString(
+				subscriptionInfoJSONObject.get("SubscriptionType")),
+			_getSubscriptionTypeSettingsProperties(subscriptionInfoJSONObject),
+			GetterUtil.getLong(
+				subscriptionInfoJSONObject.get("MaxSubscriptionCycles")),
+			serviceContext);
 
 		_addWarehouseQuantities(
 			skuJSONObject, commerceInventoryWarehouseIds, serviceContext,
