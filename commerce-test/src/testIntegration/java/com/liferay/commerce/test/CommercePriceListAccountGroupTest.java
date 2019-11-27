@@ -132,12 +132,12 @@ public class CommercePriceListAccountGroupTest {
 			"I associate to the price list one account group"
 		).and(
 			"The account trying to get the price list is in a different " +
-				"account group to the one associated to it"
+				"account group to the one associated with it"
 		).when(
 			"I try to get the price list"
 		).then(
 			"The price list should be returned only if the account belongs " +
-				"to the account group associated to it"
+				"to the account group associated with it"
 		);
 
 		CommerceAccountGroupTestUtil.addCommerceAccountToAccountGroup(
@@ -157,7 +157,7 @@ public class CommercePriceListAccountGroupTest {
 		actualCommercePriceList.get();
 	}
 
-	@Test(expected = Test.None.class)
+	@Test
 	public void testPriceListWithMultipleAccountGroups() throws Exception {
 		frutillaRule.scenario(
 			"Add a price list with multiple account groups"
@@ -171,34 +171,34 @@ public class CommercePriceListAccountGroupTest {
 			"I try to get the price list"
 		).then(
 			"The price list should be returned only if the account belongs " +
-				"to every account group associated to it"
+				"to every account group associated with it"
 		);
 
-		CommerceAccountGroup accountGroup1 =
+		CommerceAccountGroup commerceAccountGroup1 =
 			CommerceAccountGroupTestUtil.addCommerceAccountToAccountGroup(
 				_commerceAccount);
-		CommerceAccountGroup accountGroup2 =
+		CommerceAccountGroup commerceAccountGroup2 =
 			CommerceAccountGroupTestUtil.addCommerceAccountToAccountGroup(
 				_commerceAccount);
-		CommerceAccountGroup accountGroup3 =
+		CommerceAccountGroup commerceAccountGroup3 =
 			CommerceAccountGroupTestUtil.addCommerceAccountToAccountGroup(
 				_commerceAccount);
-		CommerceAccountGroup accountGroup4 =
+		CommerceAccountGroup commerceAccountGroup4 =
 			CommerceAccountGroupTestUtil.addCommerceAccountToAccountGroup(
 				_commerceAccount);
 
 		CommercePriceList commercePriceList =
 			CommercePriceListTestUtil.addUserPriceList(
-				_group.getGroupId(), 1, accountGroup1);
+				_group.getGroupId(), 1, commerceAccountGroup1);
 
 		CommercePriceListTestUtil.addUserPriceListToAccountGroup(
-			commercePriceList, accountGroup2);
+			commercePriceList, commerceAccountGroup2);
 
 		CommercePriceListTestUtil.addUserPriceListToAccountGroup(
-			commercePriceList, accountGroup3);
+			commercePriceList, commerceAccountGroup3);
 
 		CommercePriceListTestUtil.addUserPriceListToAccountGroup(
-			commercePriceList, accountGroup4);
+			commercePriceList, commerceAccountGroup4);
 
 		Optional<CommercePriceList> actualCommercePriceList =
 			CommercePriceListTestUtil.getCommercePriceList(
@@ -222,7 +222,7 @@ public class CommercePriceListAccountGroupTest {
 		).and(
 			"I associate to the price list an account groups and a role segment"
 		).and(
-			"The role segment's role is different from the one associated to " +
+			"The role segment's role is different from the one associated with " +
 				"the user"
 		).when(
 			"I try to get the price list"
@@ -234,13 +234,13 @@ public class CommercePriceListAccountGroupTest {
 
 		_userLocalService.addRoleUser(_role1.getRoleId(), _user);
 
-		CommerceAccountGroup commerceAccountGroup1 =
+		CommerceAccountGroup commerceAccountGroup =
 			CommerceAccountGroupTestUtil.addCommerceAccountToAccountGroup(
 				_commerceAccount);
 
 		CommercePriceList expectedCommercePriceList =
 			CommercePriceListTestUtil.addUserPriceList(
-				_group.getGroupId(), 1, commerceAccountGroup1);
+				_group.getGroupId(), 1, commerceAccountGroup);
 
 		CommercePriceListTestUtil.addRoleSegmentToPriceList(
 			expectedCommercePriceList, _role2.getRoleId());
