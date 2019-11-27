@@ -411,6 +411,34 @@ public interface CPAttachmentFileEntryLocalService
 			Map<String, Serializable> workflowContext)
 		throws PortalException;
 
+	/**
+	 * @param classNameId
+	 * @param classPK
+	 * @param fileEntryId
+	 * @param displayDateMonth
+	 * @param displayDateDay
+	 * @param displayDateYear
+	 * @param displayDateHour
+	 * @param displayDateMinute
+	 * @param expirationDateMonth
+	 * @param expirationDateDay
+	 * @param expirationDateYear
+	 * @param expirationDateHour
+	 * @param expirationDateMinute
+	 * @param neverExpire
+	 * @param titleMap
+	 * @param json
+	 * @param priority
+	 * @param type
+	 * @param externalReferenceCode
+	 * @param serviceContext
+	 * @throws PortalException
+	 * @deprecated As of Athanasius (7.3.x), use {@link
+	 #upsertCPAttachmentFileEntry(long, long, long, long, int,
+	 int, int, int, int, int, int, int, int, int, boolean, Map,
+	 String, double, int, String, ServiceContext)}
+	 */
+	@Deprecated
 	public CPAttachmentFileEntry upsertCPAttachmentFileEntry(
 			long groupId, long classNameId, long classPK, long fileEntryId,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
@@ -419,6 +447,18 @@ public interface CPAttachmentFileEntryLocalService
 			int expirationDateHour, int expirationDateMinute,
 			boolean neverExpire, Map<Locale, String> titleMap, String json,
 			double priority, int type, String externalReferenceCode,
+			ServiceContext serviceContext)
+		throws PortalException;
+
+	public CPAttachmentFileEntry upsertCPAttachmentFileEntry(
+			long classNameId, long classPK, long cpAttachmentFileEntryId,
+			long fileEntryId, int displayDateMonth, int displayDateDay,
+			int displayDateYear, int displayDateHour, int displayDateMinute,
+			int expirationDateMonth, int expirationDateDay,
+			int expirationDateYear, int expirationDateHour,
+			int expirationDateMinute, boolean neverExpire,
+			Map<Locale, String> titleMap, String json, double priority,
+			int type, String externalReferenceCode,
 			ServiceContext serviceContext)
 		throws PortalException;
 
