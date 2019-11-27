@@ -59,6 +59,7 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import java.math.BigDecimal;
 
 import java.util.Collections;
+import java.util.Locale;
 
 /**
  * @author Andrea Di Giorgi
@@ -294,7 +295,7 @@ public class CommerceTestUtil {
 
 		return CommerceCatalogServiceUtil.addCommerceCatalog(
 			RandomTestUtil.randomString(), commerceCurrencyCode,
-			LocaleUtil.US.getDisplayLanguage(), null,
+			LocaleUtil.toLanguageId(Locale.US), null,
 			ServiceContextTestUtil.getServiceContext(groupId));
 	}
 
@@ -386,32 +387,6 @@ public class CommerceTestUtil {
 				Collections.<String, String>emptyMap(), 1, true,
 				ServiceContextTestUtil.getServiceContext(groupId));
 	}
-
-	/*public static CommerceOrderItem addCommerceOrderItem(
-			long commerceOrderId, long cpInstanceId, int quantity)
-		throws Exception {
-
-		CommerceOrder commerceOrder =
-			CommerceOrderLocalServiceUtil.getCommerceOrder(commerceOrderId);
-
-		if (commerceOrder.getCommerceCurrency() == null) {
-			CommerceCurrency commerceCurrency =
-				CommerceCurrencyTestUtil.addCommerceCurrency(
-					commerceOrder.getGroupId());
-
-			commerceOrder.setCommerceCurrencyId(
-				commerceCurrency.getCommerceCurrencyId());
-
-			CommerceOrderLocalServiceUtil.updateCommerceOrder(commerceOrder);
-		}
-
-		CommerceContext commerceContext = new TestCommerceContext(
-			commerceOrder.getCommerceCurrency(), null, null, null,
-			commerceOrder);
-
-		return addCommerceOrderItem(
-			commerceOrderId, cpInstanceId, quantity, commerceContext);
-	}*/
 
 	public static CommerceShippingFixedOption addCommerceShippingFixedOption(
 			CommerceShippingMethod commerceShippingMethod)
