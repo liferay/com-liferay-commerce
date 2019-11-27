@@ -58,12 +58,8 @@ public class AttachmentUtil {
 		throws Exception {
 
 		if (Validator.isNotNull(attachment.getAttachment())) {
-			byte[] attachmentBytes = Base64.decode(attachment.getAttachment());
-
-			File file = FileUtil.createTempFile(attachmentBytes);
-
-			return _addFileEntry(
-				groupId, userId, file, MimeTypesUtil.getContentType(file),
+			return addFileEntry(
+				attachment.getAttachment(), groupId, userId,
 				uniqueFileNameProvider);
 		}
 
@@ -85,79 +81,47 @@ public class AttachmentUtil {
 	}
 
 	public static FileEntry addFileEntry(
-			AttachmentBase64 attachmentBase64, long groupId, long userId,
-			UniqueFileNameProvider uniqueFileNameProvider)
-		throws Exception {
-
-		if (Validator.isNotNull(attachmentBase64.getAttachment())) {
-			byte[] attachmentBytes = Base64.decode(
-				attachmentBase64.getAttachment());
-
-			File file = FileUtil.createTempFile(attachmentBytes);
-
-			return _addFileEntry(
-				groupId, userId, file, MimeTypesUtil.getContentType(file),
-				uniqueFileNameProvider);
-		}
-
-		return null;
-	}
-
-	public static FileEntry addFileEntry(
 			AttachmentUrl attachmentUrl, long groupId, long userId,
 			UniqueFileNameProvider uniqueFileNameProvider)
 		throws Exception {
 
-		if (Validator.isNotNull(attachmentUrl.getSrc())) {
-			File file = FileUtil.createTempFile(
-				HttpUtil.URLtoInputStream(attachmentUrl.getSrc()));
-
-			return _addFileEntry(
-				groupId, userId, file, MimeTypesUtil.getContentType(file),
-				uniqueFileNameProvider);
-		}
-
-		return null;
-	}
-
-	public static Map<Locale, String> getTitleMap(
-			CPAttachmentFileEntry cpAttachmentFileEntry, Attachment attachment)
-		throws PortalException {
-
-		if (attachment.getTitle() != null) {
-			return LanguageUtils.getLocalizedMap(attachment.getTitle());
-		}
-
-		if (cpAttachmentFileEntry == null) {
+		if (Validator.isNull(attachmentUrl.getSrc())) {
 			return null;
 		}
 
-		return cpAttachmentFileEntry.getTitleMap();
+		File file = FileUtil.createTempFile(
+			HttpUtil.URLtoInputStream(attachmentUrl.getSrc()));
+
+		return _addFileEntry(
+			groupId, userId, file, MimeTypesUtil.getContentType(file),
+			uniqueFileNameProvider);
+	}
+
+	public static FileEntry addFileEntry(
+			String base64EncodedContent, long groupId, long userId,
+			UniqueFileNameProvider uniqueFileNameProvider)
+		throws Exception {
+
+		if (Validator.isNull(base64EncodedContent)) {
+			return null;
+		}
+
+		byte[] attachmentBytes = Base64.decode(base64EncodedContent);
+
+		File file = FileUtil.createTempFile(attachmentBytes);
+
+		return _addFileEntry(
+			groupId, userId, file, MimeTypesUtil.getContentType(file),
+			uniqueFileNameProvider);
 	}
 
 	public static Map<Locale, String> getTitleMap(
 			CPAttachmentFileEntry cpAttachmentFileEntry,
-			AttachmentBase64 attachment)
+			Map<String, String> titleMap)
 		throws PortalException {
 
-		if (attachment.getTitle() != null) {
-			return LanguageUtils.getLocalizedMap(attachment.getTitle());
-		}
-
-		if (cpAttachmentFileEntry == null) {
-			return null;
-		}
-
-		return cpAttachmentFileEntry.getTitleMap();
-	}
-
-	public static Map<Locale, String> getTitleMap(
-			CPAttachmentFileEntry cpAttachmentFileEntry,
-			AttachmentUrl attachment)
-		throws PortalException {
-
-		if (attachment.getTitle() != null) {
-			return LanguageUtils.getLocalizedMap(attachment.getTitle());
+		if (titleMap != null) {
+			return LanguageUtils.getLocalizedMap(titleMap);
 		}
 
 		if (cpAttachmentFileEntry == null) {
@@ -217,7 +181,7 @@ public class AttachmentUtil {
 			expirationDateConfig.getYear(), expirationDateConfig.getHour(),
 			expirationDateConfig.getMinute(),
 			GetterUtil.get(attachment.getNeverExpire(), false),
-			getTitleMap(null, attachment),
+			getTitleMap(null, attachment.getTitle()),
 			GetterUtil.getString(attachment.getOptions()),
 			GetterUtil.getDouble(attachment.getPriority()), type,
 			attachment.getExternalReferenceCode(), serviceContext);
@@ -259,7 +223,7 @@ public class AttachmentUtil {
 		long fileEntryId = 0;
 
 		FileEntry fileEntry = addFileEntry(
-			attachmentBase64, serviceContext.getScopeGroupId(),
+			attachmentBase64.getAttachment(), serviceContext.getScopeGroupId(),
 			serviceContext.getUserId(), uniqueFileNameProvider);
 
 		if (fileEntry != null) {
@@ -274,7 +238,7 @@ public class AttachmentUtil {
 			expirationDateConfig.getYear(), expirationDateConfig.getHour(),
 			expirationDateConfig.getMinute(),
 			GetterUtil.get(attachmentBase64.getNeverExpire(), false),
-			getTitleMap(null, attachmentBase64),
+			getTitleMap(null, attachmentBase64.getTitle()),
 			GetterUtil.getString(attachmentBase64.getOptions()),
 			GetterUtil.getDouble(attachmentBase64.getPriority()), type,
 			attachmentBase64.getExternalReferenceCode(), serviceContext);
@@ -330,7 +294,7 @@ public class AttachmentUtil {
 			expirationDateConfig.getYear(), expirationDateConfig.getHour(),
 			expirationDateConfig.getMinute(),
 			GetterUtil.get(attachmentUrl.getNeverExpire(), false),
-			getTitleMap(null, attachmentUrl),
+			getTitleMap(null, attachmentUrl.getTitle()),
 			GetterUtil.getString(attachmentUrl.getOptions()),
 			GetterUtil.getDouble(attachmentUrl.getPriority()), type,
 			attachmentUrl.getExternalReferenceCode(), serviceContext);
