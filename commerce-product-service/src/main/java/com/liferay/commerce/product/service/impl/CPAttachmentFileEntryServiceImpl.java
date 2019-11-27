@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.security.permission.resource.PortletResourcePer
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Portal;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 import com.liferay.portlet.asset.service.permission.AssetCategoryPermission;
 
@@ -285,6 +286,7 @@ public class CPAttachmentFileEntryServiceImpl
 			json, priority, type, serviceContext);
 	}
 
+	@Deprecated
 	@Override
 	public CPAttachmentFileEntry upsertCPAttachmentFileEntry(
 			long classNameId, long classPK, long fileEntryId,
@@ -309,12 +311,55 @@ public class CPAttachmentFileEntryServiceImpl
 			checkCPAttachmentFileEntryPermissions(cpAttachmentFileEntry);
 		}
 
-		return cpAttachmentFileEntryLocalService.upsertCPAttachmentFileEntry(
-			classNameId, classPK, fileEntryId, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute,
+		return upsertCPAttachmentFileEntry(
+			classNameId, classPK, 0, fileEntryId, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, neverExpire, titleMap,
 			json, priority, type, externalReferenceCode, serviceContext);
+	}
+
+	@Override
+	public CPAttachmentFileEntry upsertCPAttachmentFileEntry(
+			long classNameId, long classPK, long cpAttachmentFileEntryId,
+			long fileEntryId, int displayDateMonth, int displayDateDay,
+			int displayDateYear, int displayDateHour, int displayDateMinute,
+			int expirationDateMonth, int expirationDateDay,
+			int expirationDateYear, int expirationDateHour,
+			int expirationDateMinute, boolean neverExpire,
+			Map<Locale, String> titleMap, String json, double priority,
+			int type, String externalReferenceCode,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		CPAttachmentFileEntry cpAttachmentFileEntry = null;
+
+		if (cpAttachmentFileEntryId != 0) {
+			cpAttachmentFileEntry =
+				cpAttachmentFileEntryPersistence.fetchByPrimaryKey(
+					cpAttachmentFileEntryId);
+		}
+		else if (Validator.isNotNull(externalReferenceCode)) {
+			cpAttachmentFileEntry =
+				cpAttachmentFileEntryPersistence.fetchByC_ERC(
+					serviceContext.getCompanyId(), externalReferenceCode);
+		}
+
+		if (cpAttachmentFileEntry == null) {
+			checkCPAttachmentFileEntryPermissions(
+				serviceContext.getScopeGroupId(), classNameId, classPK, type);
+		}
+		else {
+			checkCPAttachmentFileEntryPermissions(cpAttachmentFileEntry);
+		}
+
+		return cpAttachmentFileEntryLocalService.upsertCPAttachmentFileEntry(
+			classNameId, classPK, cpAttachmentFileEntryId, fileEntryId,
+			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
+			displayDateMinute, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			neverExpire, titleMap, json, priority, type, externalReferenceCode,
+			serviceContext);
 	}
 
 	protected void checkCPAttachmentFileEntryPermissions(
