@@ -1,13 +1,58 @@
-.price-value {
-	&.price-value-discount {
-		color: $color-mood-bad
-	}
+.price {
+  align-items: normal;
+  display: grid;
+  grid-template-columns: 140px 1fr;
 
-	&.price-value-promo {
-		color: $color-mood-bad
-	}
+  &-label {
+    font-size: .8em;
+    font-variant: small-caps;
+    font-weight: 500;
+    margin-bottom: 10px;
+    text-transform: lowercase;
+  }
 
-	&.price-value-inactive {
-		color: $color-fg-alt;
-	}
+  &-value {
+    font-weight: 500;
+
+    &:first-letter {
+      margin-right: 2px;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &-big {
+      font-size: 18px;
+    }
+
+    &-discount {
+      color: $color-mood-bad;
+    }
+
+    &-final,
+    &-promo {
+      color: $color-mood-bad;
+      font-size: 1.05em;
+      font-weight: 600;
+    }
+
+    &-inactive {
+      color: $color-fg-alt;
+      font-size: .8em;
+      font-weight: normal;
+      text-decoration: line-through;
+    }
+
+    &-percentages {
+      &::after {
+        color: $color-fg;
+        content: ' | ';
+      }
+
+      &:last-child::after {
+        content: '';
+      }
+    }
+  }
 }
