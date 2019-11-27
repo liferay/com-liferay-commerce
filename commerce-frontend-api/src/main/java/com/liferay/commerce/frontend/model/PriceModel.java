@@ -27,6 +27,18 @@ public class PriceModel {
 		return _discount;
 	}
 
+	public String getDiscountPercentage() {
+		return _discountPercentage;
+	}
+
+	public String[] getDiscountPercentages() {
+		return _discountPercentages;
+	}
+
+	public String getFinalPrice() {
+		return _finalPrice;
+	}
+
 	public String getPrice() {
 		return _price;
 	}
@@ -39,6 +51,18 @@ public class PriceModel {
 		_discount = discount;
 	}
 
+	public void setDiscountPercentage(String discountPercentage) {
+		_discountPercentage = discountPercentage;
+	}
+
+	public void setDiscountPercentages(String[] discountPercentages) {
+		_discountPercentages = discountPercentages;
+	}
+
+	public void setFinalPrice(String finalPrice) {
+		_finalPrice = finalPrice;
+	}
+
 	public void setPrice(String price) {
 		_price = price;
 	}
@@ -48,6 +72,9 @@ public class PriceModel {
 	}
 
 	private String _discount;
+	private String _discountPercentage;
+	private String[] _discountPercentages;
+	private String _finalPrice;
 	private String _price;
 	private String _promoPrice;
 
