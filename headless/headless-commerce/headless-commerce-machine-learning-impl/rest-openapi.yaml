@@ -81,9 +81,7 @@ components:
                     format: int64
                     type: integer
                 categoryTitle:
-                    additionalProperties:
-                        type: string
-                    type: object
+                    type: string
                 forecast:
                     format: float
                     type: number
