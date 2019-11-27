@@ -44,7 +44,7 @@ public class DDMFormValuesHelperImpl implements DDMFormValuesHelper {
 
 	/**
 	 * @deprecated As of Mueller (7.2.x), without direct replacement, as this
-	 * processing is no longer necessary
+	 *             processing is no longer necessary
 	 */
 	@Deprecated
 	@Override
