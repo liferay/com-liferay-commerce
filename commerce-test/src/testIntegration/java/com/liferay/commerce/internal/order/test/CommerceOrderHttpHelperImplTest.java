@@ -17,12 +17,11 @@ package com.liferay.commerce.internal.order.test;
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountLocalService;
-import com.liferay.commerce.account.service.CommerceAccountLocalServiceUtil;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
-import com.liferay.commerce.discount.service.CommerceDiscountLocalServiceUtil;
+import com.liferay.commerce.discount.service.CommerceDiscountLocalService;
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
@@ -30,7 +29,7 @@ import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.test.util.CPTestUtil;
-import com.liferay.commerce.service.CommerceOrderLocalServiceUtil;
+import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.test.util.CommerceInventoryTestUtil;
 import com.liferay.commerce.test.util.CommerceTestUtil;
 import com.liferay.commerce.test.util.TestCommerceContext;
@@ -40,8 +39,8 @@ import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.kernel.security.permission.PermissionCheckerFactoryUtil;
-import com.liferay.portal.kernel.service.GroupLocalServiceUtil;
-import com.liferay.portal.kernel.service.UserLocalServiceUtil;
+import com.liferay.portal.kernel.service.GroupLocalService;
+import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
@@ -131,14 +130,14 @@ public class CommerceOrderHttpHelperImplTest {
 		CentralizedThreadLocal.clearShortLivedThreadLocals();
 
 		for (CommerceOrder commerceOrder : _commerceOrders) {
-			CommerceOrderLocalServiceUtil.deleteCommerceOrder(commerceOrder);
+			_commerceOrderLocalService.deleteCommerceOrder(commerceOrder);
 		}
 
-		CommerceDiscountLocalServiceUtil.deleteCommerceDiscounts(
+		_commerceDiscountLocalService.deleteCommerceDiscounts(
 			_group.getCompanyId());
-		CommerceAccountLocalServiceUtil.deleteCommerceAccount(_commerceAccount);
-		GroupLocalServiceUtil.deleteGroup(_group);
-		UserLocalServiceUtil.deleteUser(_user);
+		_commerceAccountLocalService.deleteCommerceAccount(_commerceAccount);
+		_groupLocalService.deleteGroup(_group);
+		_userLocalService.deleteUser(_user);
 	}
 
 	@Test
@@ -223,16 +222,29 @@ public class CommerceOrderHttpHelperImplTest {
 	@DeleteAfterTestRun
 	private CommerceChannel _commerceChannel;
 
+	@Inject
+	private CommerceDiscountLocalService _commerceDiscountLocalService;
+
 	@DeleteAfterTestRun
 	private CommerceInventoryWarehouse _commerceInventoryWarehouse;
 
 	@Inject
 	private CommerceOrderHttpHelper _commerceOrderHttpHelper;
 
+	@Inject
+	private CommerceOrderLocalService _commerceOrderLocalService;
+
 	private List<CommerceOrder> _commerceOrders;
 	private Group _group;
+
+	@Inject
+	private GroupLocalService _groupLocalService;
+
 	private HttpServletRequest _httpServletRequest;
 	private ThemeDisplay _themeDisplay;
 	private User _user;
+
+	@Inject
+	private UserLocalService _userLocalService;
 
 }

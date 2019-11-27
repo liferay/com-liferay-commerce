@@ -168,10 +168,6 @@ public class CommercePriceListTestUtil {
 
 		User user = UserLocalServiceUtil.getUser(userId);
 
-		/*CommerceAccountGroupLocalServiceUtil.
-			getCommerceAccountGroupIds(
-				groupId, commerceAccountId, userId);*/
-
 		List<CommerceAccountGroup> commerceAccountGroups =
 			CommerceAccountGroupLocalServiceUtil.
 				getCommerceAccountGroupsByCommerceAccountId(commerceAccountId);
