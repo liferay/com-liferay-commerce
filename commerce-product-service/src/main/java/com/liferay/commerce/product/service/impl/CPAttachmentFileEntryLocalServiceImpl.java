@@ -561,6 +561,7 @@ public class CPAttachmentFileEntryLocalServiceImpl
 		return cpAttachmentFileEntry;
 	}
 
+	@Deprecated
 	@Override
 	public CPAttachmentFileEntry upsertCPAttachmentFileEntry(
 			long groupId, long classNameId, long classPK, long fileEntryId,
@@ -573,9 +574,39 @@ public class CPAttachmentFileEntryLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		CPAttachmentFileEntry cpAttachmentFileEntry =
-			cpAttachmentFileEntryPersistence.fetchByC_ERC(
-				serviceContext.getCompanyId(), externalReferenceCode);
+		return upsertCPAttachmentFileEntry(
+			classNameId, classPK, 0, fileEntryId, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire, titleMap,
+			json, priority, type, externalReferenceCode, serviceContext);
+	}
+
+	@Override
+	public CPAttachmentFileEntry upsertCPAttachmentFileEntry(
+			long classNameId, long classPK, long cpAttachmentFileEntryId,
+			long fileEntryId, int displayDateMonth, int displayDateDay,
+			int displayDateYear, int displayDateHour, int displayDateMinute,
+			int expirationDateMonth, int expirationDateDay,
+			int expirationDateYear, int expirationDateHour,
+			int expirationDateMinute, boolean neverExpire,
+			Map<Locale, String> titleMap, String json, double priority,
+			int type, String externalReferenceCode,
+			ServiceContext serviceContext)
+		throws PortalException {
+
+		CPAttachmentFileEntry cpAttachmentFileEntry = null;
+
+		if (cpAttachmentFileEntryId != 0) {
+			cpAttachmentFileEntry =
+				cpAttachmentFileEntryPersistence.fetchByPrimaryKey(
+					cpAttachmentFileEntryId);
+		}
+		else if (Validator.isNotNull(externalReferenceCode)) {
+			cpAttachmentFileEntry =
+				cpAttachmentFileEntryLocalService.fetchByExternalReferenceCode(
+					serviceContext.getCompanyId(), externalReferenceCode);
+		}
 
 		if (cpAttachmentFileEntry == null) {
 			cpAttachmentFileEntry =
