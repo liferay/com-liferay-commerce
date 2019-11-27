@@ -269,7 +269,7 @@ public class CommerceInventoryEngineTest {
 			_commerceInventoryEngine.getStockQuantity(
 				_company.getCompanyId(), _cpInstance1.getSku());
 
-		consumedQuantity = consumedQuantity + quantity;
+		consumedQuantity += quantity;
 
 		Assert.assertEquals(
 			companyStockQuantity - bookedQuantity,
@@ -288,7 +288,7 @@ public class CommerceInventoryEngineTest {
 			_commerceInventoryEngine.getStockQuantity(
 				_company.getCompanyId(), _cpInstance1.getSku());
 
-		consumedQuantity = consumedQuantity + quantity;
+		consumedQuantity += quantity;
 
 		Assert.assertEquals(
 			companyStockQuantity - consumedQuantity,
