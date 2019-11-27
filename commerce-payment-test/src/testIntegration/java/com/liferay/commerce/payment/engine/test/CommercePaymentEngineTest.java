@@ -47,6 +47,7 @@ import com.liferay.portal.test.rule.PermissionCheckerTestRule;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -141,7 +142,7 @@ public class CommercePaymentEngineTest {
 		CommerceCatalog commerceCatalog =
 			CommerceCatalogLocalServiceUtil.addCommerceCatalog(
 				RandomTestUtil.randomString(), commerceCurrency.getCode(),
-				LocaleUtil.US.getDisplayLanguage(), null,
+				LocaleUtil.toLanguageId(Locale.US), null,
 				ServiceContextTestUtil.getServiceContext(
 					_company.getGroupId()));
 
@@ -221,7 +222,7 @@ public class CommercePaymentEngineTest {
 		CommerceCatalog commerceCatalog =
 			CommerceCatalogLocalServiceUtil.addCommerceCatalog(
 				RandomTestUtil.randomString(), commerceCurrency.getCode(),
-				LocaleUtil.US.getDisplayLanguage(), null,
+				LocaleUtil.toLanguageId(Locale.US), null,
 				ServiceContextTestUtil.getServiceContext(
 					_company.getGroupId()));
 
