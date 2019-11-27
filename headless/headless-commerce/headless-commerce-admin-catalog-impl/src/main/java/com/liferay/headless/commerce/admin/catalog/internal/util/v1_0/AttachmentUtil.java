@@ -19,6 +19,7 @@ import com.liferay.commerce.product.service.CPAttachmentFileEntryService;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.Attachment;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.AttachmentBase64;
 import com.liferay.headless.commerce.admin.catalog.dto.v1_0.AttachmentUrl;
+import com.liferay.headless.commerce.admin.catalog.internal.jaxrs.exception.MethodRequiredParameterMissingException;
 import com.liferay.headless.commerce.admin.catalog.internal.util.DateConfigUtil;
 import com.liferay.headless.commerce.core.util.DateConfig;
 import com.liferay.headless.commerce.core.util.LanguageUtils;
@@ -173,6 +174,9 @@ public class AttachmentUtil {
 			ServiceContext serviceContext)
 		throws Exception {
 
+		_validateMethodRequiredParams(
+			attachment.getId(), attachment.getExternalReferenceCode());
+
 		Calendar displayCalendar = CalendarFactoryUtil.getCalendar(
 			serviceContext.getTimeZone());
 
@@ -206,7 +210,8 @@ public class AttachmentUtil {
 		}
 
 		return cpAttachmentFileEntryService.upsertCPAttachmentFileEntry(
-			classNameId, classPK, fileEntryId, displayDateConfig.getMonth(),
+			classNameId, classPK, GetterUtil.getLong(attachment.getId()),
+			fileEntryId, displayDateConfig.getMonth(),
 			displayDateConfig.getDay(), displayDateConfig.getYear(),
 			displayDateConfig.getHour(), displayDateConfig.getMinute(),
 			expirationDateConfig.getMonth(), expirationDateConfig.getDay(),
@@ -225,6 +230,10 @@ public class AttachmentUtil {
 			AttachmentBase64 attachmentBase64, long classNameId, long classPK,
 			int type, ServiceContext serviceContext)
 		throws Exception {
+
+		_validateMethodRequiredParams(
+			attachmentBase64.getId(),
+			attachmentBase64.getExternalReferenceCode());
 
 		Calendar displayCalendar = CalendarFactoryUtil.getCalendar(
 			serviceContext.getTimeZone());
@@ -259,7 +268,8 @@ public class AttachmentUtil {
 		}
 
 		return cpAttachmentFileEntryService.upsertCPAttachmentFileEntry(
-			classNameId, classPK, fileEntryId, displayDateConfig.getMonth(),
+			classNameId, classPK, GetterUtil.getLong(attachmentBase64.getId()),
+			fileEntryId, displayDateConfig.getMonth(),
 			displayDateConfig.getDay(), displayDateConfig.getYear(),
 			displayDateConfig.getHour(), displayDateConfig.getMinute(),
 			expirationDateConfig.getMonth(), expirationDateConfig.getDay(),
@@ -278,6 +288,9 @@ public class AttachmentUtil {
 			AttachmentUrl attachmentUrl, long classNameId, long classPK,
 			int type, ServiceContext serviceContext)
 		throws Exception {
+
+		_validateMethodRequiredParams(
+			attachmentUrl.getId(), attachmentUrl.getExternalReferenceCode());
 
 		Calendar displayCalendar = CalendarFactoryUtil.getCalendar(
 			serviceContext.getTimeZone());
@@ -312,7 +325,8 @@ public class AttachmentUtil {
 		}
 
 		return cpAttachmentFileEntryService.upsertCPAttachmentFileEntry(
-			classNameId, classPK, fileEntryId, displayDateConfig.getMonth(),
+			classNameId, classPK, GetterUtil.getLong(attachmentUrl.getId()),
+			fileEntryId, displayDateConfig.getMonth(),
 			displayDateConfig.getDay(), displayDateConfig.getYear(),
 			displayDateConfig.getHour(), displayDateConfig.getMinute(),
 			expirationDateConfig.getMonth(), expirationDateConfig.getDay(),
@@ -361,6 +375,17 @@ public class AttachmentUtil {
 			}
 
 			return false;
+		}
+	}
+
+	private static void _validateMethodRequiredParams(
+			Long id, String externalReferenceCode)
+		throws MethodRequiredParameterMissingException {
+
+		if (Validator.isNull(id) && Validator.isNull(externalReferenceCode)) {
+			throw new MethodRequiredParameterMissingException(
+				"Unable to complete operation if attachment misses both ID " +
+					"and externalReferenceCode");
 		}
 	}
 
