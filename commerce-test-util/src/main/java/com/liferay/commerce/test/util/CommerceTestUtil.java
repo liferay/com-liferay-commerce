@@ -73,38 +73,6 @@ public class CommerceTestUtil {
 			userId, StringPool.BLANK, StringPool.BLANK,
 			ServiceContextTestUtil.getServiceContext(groupId));
 	}
-	
-	public static CommerceOrder addB2CCommerceOrder(
-			long groupId, long userId, long commerceCurrencyId)
-		throws Exception {
-
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(groupId);
-
-		if (userId == 0) {
-			userId = serviceContext.getUserId();
-		}
-
-		if (commerceCurrencyId == 0) {
-			CommerceCurrency commerceCurrency =
-				CommerceCurrencyTestUtil.addCommerceCurrency(groupId);
-
-			commerceCurrencyId = commerceCurrency.getCommerceCurrencyId();
-		}
-
-		CommerceAccount commerceAccount =
-			CommerceAccountLocalServiceUtil.addPersonalCommerceAccount(
-				userId, StringPool.BLANK, StringPool.BLANK, serviceContext);
-
-		long commerceChannelGroupId =
-			CommerceChannelLocalServiceUtil.
-				getCommerceChannelGroupIdBySiteGroupId(groupId);
-
-		return CommerceOrderLocalServiceUtil.addCommerceOrder(
-			userId, commerceChannelGroupId,
-			commerceAccount.getCommerceAccountId(), commerceCurrencyId);
-	}
-
 
 	public static CommerceOrder addB2CCommerceOrder(
 			CommerceAccount commerceAccount, long commerceCurrencyId,
@@ -154,6 +122,37 @@ public class CommerceTestUtil {
 			userId, commerceChannelGroupId,
 			commerceAccount.getCommerceAccountId(),
 			commerceCurrency.getCommerceCurrencyId());
+	}
+
+	public static CommerceOrder addB2CCommerceOrder(
+			long groupId, long userId, long commerceCurrencyId)
+		throws Exception {
+
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
+
+		if (userId == 0) {
+			userId = serviceContext.getUserId();
+		}
+
+		if (commerceCurrencyId == 0) {
+			CommerceCurrency commerceCurrency =
+				CommerceCurrencyTestUtil.addCommerceCurrency(groupId);
+
+			commerceCurrencyId = commerceCurrency.getCommerceCurrencyId();
+		}
+
+		CommerceAccount commerceAccount =
+			CommerceAccountLocalServiceUtil.addPersonalCommerceAccount(
+				userId, StringPool.BLANK, StringPool.BLANK, serviceContext);
+
+		long commerceChannelGroupId =
+			CommerceChannelLocalServiceUtil.
+				getCommerceChannelGroupIdBySiteGroupId(groupId);
+
+		return CommerceOrderLocalServiceUtil.addCommerceOrder(
+			userId, commerceChannelGroupId,
+			commerceAccount.getCommerceAccountId(), commerceCurrencyId);
 	}
 
 	public static CommerceOrder addB2CCommerceOrder(
