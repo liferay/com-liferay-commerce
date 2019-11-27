@@ -22,6 +22,7 @@
 
 	&__input {
 		position: relative;
+		vertical-align: middle;
 
 		.minium-card &::before {
 			background-color: rgba(157, 158, 158, 0.5);
