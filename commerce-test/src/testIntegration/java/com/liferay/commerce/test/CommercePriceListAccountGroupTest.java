@@ -222,8 +222,8 @@ public class CommercePriceListAccountGroupTest {
 		).and(
 			"I associate to the price list an account groups and a role segment"
 		).and(
-			"The role segment's role is different from the one associated with " +
-				"the user"
+			"The role segment's role is different from the one associated " + 
+				"with the user"
 		).when(
 			"I try to get the price list"
 		).then(
