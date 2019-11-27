@@ -227,7 +227,9 @@
 				<div class="{$quantityChanged}">
 					{msg desc="Items added"}items-added{/msg}
 
-					<span class="added-quantity">{$quantity} {msg desc="in cart"}added{/msg}</span>
+					{if $quantity > 0}
+						<span class="added-quantity">{$quantity} {msg desc="in cart"}added{/msg}</span>
+					{/if}
 				</div>
 			{/if}
 		</div>

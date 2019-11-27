@@ -2,64 +2,64 @@
 
 @keyframes toInput {
   0% {
-    @include transformButton(
-                    0, 0,
-                    0, 0,
-                    100%, 100%,
-                    0,
-                    $color-theme-dark
-    );
+    @include transformButton(0, 0, 0, 0, 100%, 100%, 0, $color-theme-dark);
   }
 
   60% {
     @include transformButton(
-                    50%, 50%,
-                    -22px, -35px,
-                    70px, 44px,
-                    3px solid $inputOutline,
-                    rgba(255, 255, 255, 1)
+      50%,
+      50%,
+      -22px,
+      -35px,
+      70px,
+      44px,
+      3px solid $inputOutline,
+      rgba(255, 255, 255, 1)
     );
   }
 
   100% {
     @include transformButton(
-                    50%, 50%,
-                    -22px, -35px,
-                    70px, 44px,
-                    3px solid $inputOutline,
-                    rgba(255, 255, 255, 0)
+      50%,
+      50%,
+      -22px,
+      -35px,
+      70px,
+      44px,
+      3px solid $inputOutline,
+      rgba(255, 255, 255, 0)
     );
   }
 }
 
 @keyframes toSelect {
   0% {
-    @include transformButton(
-                    0, 0,
-                    0, 0,
-                    100%, 100%,
-                    0,
-                    $color-theme-dark
-    );
+    @include transformButton(0, 0, 0, 0, 100%, 100%, 0, $color-theme-dark);
   }
 
   60% {
     @include transformButton(
-                    50%, 50%,
-                    -22px, -35px,
-                    70px, 44px,
-                    3px solid $inputOutline,
-                    rgba(255, 255, 255, 1)
+      50%,
+      50%,
+      -22px,
+      -35px,
+      70px,
+      44px,
+      3px solid $inputOutline,
+      rgba(255, 255, 255, 1)
     );
   }
 
   100% {
     @include transformButton(
-                    50%, 50%,
-                    -22px, -35px,
-                    70px, 44px,
-                    3px solid $inputOutline,
-                    rgba(255, 255, 255, 0)
+      50%,
+      50%,
+      -22px,
+      -35px,
+      70px,
+      44px,
+      3px solid $inputOutline,
+      rgba(255, 255, 255, 0)
     );
   }
 }
@@ -67,11 +67,14 @@
 @keyframes toConfirm {
   0% {
     @include transformButton(
-                    50%, 50%,
-                    -22px, -35px,
-                    70px, 44px,
-                    3px solid $inputOutline,
-                    rgba(255, 255, 255, 1)
+      50%,
+      50%,
+      -22px,
+      -35px,
+      70px,
+      44px,
+      3px solid $inputOutline,
+      rgba(255, 255, 255, 1)
     );
     transform: rotate(0);
   }
@@ -79,89 +82,101 @@
   21% {
     @include constantSteps;
     @include transformButton(
-                    50%, 50%,
-                    -22px, -25px,
-                    44px, 44px,
-                    3px solid $color-mood-good,
-                    rgba(255, 255, 255, 1)
+      50%,
+      50%,
+      -22px,
+      -25px,
+      44px,
+      44px,
+      3px solid $color-mood-good,
+      rgba(255, 255, 255, 1)
     );
-    content: '';
-    transform: rotate(0deg)
+    content: "";
+    transform: rotate(0deg);
   }
 
   22% {
     @include constantSteps;
     @include transformButton(
-                    50%, 50%,
-                    -22px, -25px,
-                    44px, 44px,
-                    3px solid $color-mood-good,
-                    rgba(255, 255, 255, 1)
+      50%,
+      50%,
+      -22px,
+      -25px,
+      44px,
+      44px,
+      3px solid $color-mood-good,
+      rgba(255, 255, 255, 1)
     );
-    content: '';
-    transform: rotate(45deg)
+    content: "";
+    transform: rotate(45deg);
   }
 
   25% {
     @include constantSteps;
     @include transformButton(
-                    50%, 50%,
-                    -22px, -25px,
-                    44px, 44px,
-                    3px solid $color-mood-good,
-                    rgba(255, 255, 255, 1)
+      50%,
+      50%,
+      -22px,
+      -25px,
+      44px,
+      44px,
+      3px solid $color-mood-good,
+      rgba(255, 255, 255, 1)
     );
-    content: '˩';
-    transform: rotate(45deg)
+    content: "˩";
+    transform: rotate(45deg);
   }
 
   70% {
     @include constantSteps;
     @include transformButton(
-                    50%, 50%,
-                    -22px, -25px,
-                    44px, 44px,
-                    3px solid $color-mood-good,
-                    rgba(255, 255, 255, 1)
+      50%,
+      50%,
+      -22px,
+      -25px,
+      44px,
+      44px,
+      3px solid $color-mood-good,
+      rgba(255, 255, 255, 1)
     );
-    content: '˩';
-    transform: rotate(45deg)
+    content: "˩";
+    transform: rotate(45deg);
   }
 
   71% {
     @include constantSteps;
     @include transformButton(
-                    50%, 50%,
-                    -22px, -25px,
-                    44px, 44px,
-                    3px solid $color-mood-good,
-                    rgba(255, 255, 255, 1)
+      50%,
+      50%,
+      -22px,
+      -25px,
+      44px,
+      44px,
+      3px solid $color-mood-good,
+      rgba(255, 255, 255, 1)
     );
-    content: '';
-    transform: rotate(45deg)
+    content: "";
+    transform: rotate(45deg);
   }
 
   72% {
     @include constantSteps;
     @include transformButton(
-                    50%, 50%,
-                    -22px, -25px,
-                    44px, 44px,
-                    3px solid $color-mood-good,
-                    rgba(255, 255, 255, 1)
+      50%,
+      50%,
+      -22px,
+      -25px,
+      44px,
+      44px,
+      3px solid $color-mood-good,
+      rgba(255, 255, 255, 1)
     );
-    content: '';
-    transform: rotate(0)
+    content: "";
+    transform: rotate(0);
   }
 
   100% {
-    @include transformButton(
-                    0, 0,
-                    0, 0,
-                    100%, 100%,
-                    0,
-                    $color-mood-good
-    );
+    @include transformButton(0, 0, 0, 0, 100%, 100%, 0, $color-mood-good);
     border-radius: 4px;
   }
 }
@@ -206,6 +221,12 @@
   }
   to {
     transform: translate3d(-10, 0px, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes itemAdded {
+  to {
     opacity: 1;
   }
 }

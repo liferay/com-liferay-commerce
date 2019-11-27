@@ -6,15 +6,14 @@
 
   &--compact {
     ::selection {
-      background-color: #D0D0D0;
+      background-color: #d0d0d0;
     }
 
     background-color: $color-theme;
     border: 0 !important;
     min-width: 180px;
     position: relative;
-    transition: min-width .1s ease,
-    border .1s ease;
+    transition: min-width 0.1s ease, border 0.1s ease;
 
     @media only screen and (max-width: 767px) {
       height: 40px;
@@ -32,12 +31,12 @@
       border-radius: 6px;
       border: 3px solid transparent;
       box-sizing: border-box;
-      content: '';
+      content: "";
       display: block;
       height: 100%;
       position: absolute;
       top: 0;
-      transition: all .2s .5s ease;
+      transition: all 0.2s 0.5s ease;
       width: 100%;
     }
 
@@ -55,15 +54,18 @@
 
       &::before {
         @include transformButton(
-                        50%, 50%,
-                        -22px, -35px,
-                        70px, 44px,
-                        3px solid $inputOutline,
-                        rgba(255, 255, 255, 1)
+          50%,
+          50%,
+          -22px,
+          -35px,
+          70px,
+          44px,
+          3px solid $inputOutline,
+          rgba(255, 255, 255, 1)
         );
-        animation: toInput .3s ease-in 1 forwards;
+        animation: toInput 0.3s ease-in 1 forwards;
         border-radius: 4px;
-        content: '';
+        content: "";
         display: block;
         position: absolute;
       }
@@ -71,15 +73,18 @@
       &.with-select {
         &::before {
           @include transformButton(
-                          50%, 50%,
-                          -22px, -35px,
-                          70px, 44px,
-                          3px solid $inputOutline,
-                          rgba(255, 255, 255, 1)
+            50%,
+            50%,
+            -22px,
+            -35px,
+            70px,
+            44px,
+            3px solid $inputOutline,
+            rgba(255, 255, 255, 1)
           );
-          animation: toSelect .3s ease-in 1 forwards;
+          animation: toSelect 0.3s ease-in 1 forwards;
           border-radius: 4px;
-          content: '';
+          content: "";
           display: block;
           position: absolute;
         }
@@ -104,12 +109,12 @@
       &:hover .arrow__line {
         transform-origin: left center;
         transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
-        transition: transform .2s ease-in;
+        transition: transform 0.2s ease-in;
       }
 
       &:hover .arrow__tip {
         transform: translate3d(-16px, 0px, 0);
-        transition: transform .2s ease-in;
+        transition: transform 0.2s ease-in;
       }
 
       & .arrow {
@@ -118,7 +123,7 @@
 
         &__line {
           transform-origin: left center;
-          transform: scaleX(.70);
+          transform: scaleX(0.7);
         }
 
         &__tip {
@@ -135,18 +140,24 @@
       background-color: $color-mood-good !important;
       padding: 0;
       transition-delay: 0ms !important;
-      transition: all .1s ease;
+      transition: all 0.1s ease;
 
       .added-quantity {
+        align-items: center;
+        background-color: transparent;
         color: white;
+        display: flex;
+        height: 100%;
+        justify-content: right;
+        position: absolute;
+        top: 0;
+        transform: translate3d(250%, 0, 0);
+        width: inherit;
       }
 
       &:hover {
         .added-quantity {
-          color: white;
           display: none;
-          height: inherit;
-          width: inherit;
         }
       }
 
@@ -186,13 +197,13 @@
         width: 40px;
 
         &:nth-child(1) {
-          @include quantityButtonsAnimation('left');
+          @include quantityButtonsAnimation("left");
           transform-origin: right center;
           transform: translate3d(0px, 0, 0);
         }
 
         &:nth-child(3) {
-          @include quantityButtonsAnimation('right');
+          @include quantityButtonsAnimation("right");
           transform-origin: left center;
           transform: translate3d(0px, 0, 0);
         }
@@ -224,28 +235,20 @@
         align-self: center;
         bottom: 10px;
         display: flex;
-        transition: width .2s ease-out;
+        transition: width 0.2s ease-out;
         width: 100%;
 
         &.is-fixed {
           border-radius: 0;
           bottom: 0;
           position: fixed;
-          transition: width .2s ease-out;
+          transition: width 0.2s ease-out;
           width: 100%;
           z-index: 101;
         }
       }
 
       &.commerce-button--good {
-        &:hover {
-          .added-quantity {
-            display: none;
-            height: inherit;
-            width: inherit;
-          }
-        }
-
         &:hover::before {
           align-items: center;
           background-color: inherit;
@@ -295,8 +298,26 @@
       }
 
       &--disabled {
-        opacity: .5;
+        opacity: 0.5;
       }
     }
+  }
+
+  .added-quantity {
+    align-items: center;
+    animation: itemAdded 0.1s ease-out 1 forwards;
+    background-color: transparent;
+    color: #2a2a2a;
+    display: flex;
+    font-weight: normal;
+    height: 100%;
+    justify-content: right;
+    left: 110%;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    white-space: nowrap;
+    width: inherit;
   }
 }
