@@ -1,6 +1,9 @@
 <#assign
+	is_login_page = getterUtil.getBoolean(themeDisplay.getThemeSetting("is-login-page"))
 	redirect_to_private_layouts = getterUtil.getBoolean(themeDisplay.getThemeSetting("redirect-to-private-layouts"))
 	show_top_menu = getterUtil.getBoolean(themeDisplay.getThemeSetting("show-top-menu"))
+	show_topbar = getterUtil.getBoolean(themeDisplay.getThemeSetting("show-topbar"))
+	show_sidebar = getterUtil.getBoolean(themeDisplay.getThemeSetting("show-sidebar"))
 	wide_layout = getterUtil.getBoolean(themeDisplay.getThemeSetting("wide-layout"))
 	userManagementUrl = commerceThemeMiniumHttpHelper.getAccountManagementPortletURL(request)
 	wishlistUrl = commerceWishListHttpHelper.getCommerceWishListPortletURL(request)
