@@ -136,7 +136,27 @@ public class CommerceShipmentPersistenceTest {
 
 		newCommerceShipment.setCommerceAccountId(RandomTestUtil.nextLong());
 
-		newCommerceShipment.setCommerceAddressId(RandomTestUtil.nextLong());
+		newCommerceShipment.setShippingName(RandomTestUtil.randomString());
+
+		newCommerceShipment.setShippingDescription(
+			RandomTestUtil.randomString());
+
+		newCommerceShipment.setShippingStreet1(RandomTestUtil.randomString());
+
+		newCommerceShipment.setShippingStreet2(RandomTestUtil.randomString());
+
+		newCommerceShipment.setShippingStreet3(RandomTestUtil.randomString());
+
+		newCommerceShipment.setShippingCity(RandomTestUtil.randomString());
+
+		newCommerceShipment.setShippingZip(RandomTestUtil.randomString());
+
+		newCommerceShipment.setShippingRegionId(RandomTestUtil.nextLong());
+
+		newCommerceShipment.setShippingCountryId(RandomTestUtil.nextLong());
+
+		newCommerceShipment.setShippingPhoneNumber(
+			RandomTestUtil.randomString());
 
 		newCommerceShipment.setCommerceShippingMethodId(
 			RandomTestUtil.nextLong());
@@ -184,8 +204,35 @@ public class CommerceShipmentPersistenceTest {
 			existingCommerceShipment.getCommerceAccountId(),
 			newCommerceShipment.getCommerceAccountId());
 		Assert.assertEquals(
-			existingCommerceShipment.getCommerceAddressId(),
-			newCommerceShipment.getCommerceAddressId());
+			existingCommerceShipment.getShippingName(),
+			newCommerceShipment.getShippingName());
+		Assert.assertEquals(
+			existingCommerceShipment.getShippingDescription(),
+			newCommerceShipment.getShippingDescription());
+		Assert.assertEquals(
+			existingCommerceShipment.getShippingStreet1(),
+			newCommerceShipment.getShippingStreet1());
+		Assert.assertEquals(
+			existingCommerceShipment.getShippingStreet2(),
+			newCommerceShipment.getShippingStreet2());
+		Assert.assertEquals(
+			existingCommerceShipment.getShippingStreet3(),
+			newCommerceShipment.getShippingStreet3());
+		Assert.assertEquals(
+			existingCommerceShipment.getShippingCity(),
+			newCommerceShipment.getShippingCity());
+		Assert.assertEquals(
+			existingCommerceShipment.getShippingZip(),
+			newCommerceShipment.getShippingZip());
+		Assert.assertEquals(
+			existingCommerceShipment.getShippingRegionId(),
+			newCommerceShipment.getShippingRegionId());
+		Assert.assertEquals(
+			existingCommerceShipment.getShippingCountryId(),
+			newCommerceShipment.getShippingCountryId());
+		Assert.assertEquals(
+			existingCommerceShipment.getShippingPhoneNumber(),
+			newCommerceShipment.getShippingPhoneNumber());
 		Assert.assertEquals(
 			existingCommerceShipment.getCommerceShippingMethodId(),
 			newCommerceShipment.getCommerceShippingMethodId());
@@ -265,9 +312,13 @@ public class CommerceShipmentPersistenceTest {
 			"CommerceShipment", "commerceShipmentId", true, "groupId", true,
 			"companyId", true, "userId", true, "userName", true, "createDate",
 			true, "modifiedDate", true, "commerceAccountId", true,
-			"commerceAddressId", true, "commerceShippingMethodId", true,
-			"shippingOptionName", true, "carrier", true, "trackingNumber", true,
-			"shippingDate", true, "expectedDate", true, "status", true);
+			"shippingName", true, "shippingDescription", true,
+			"shippingStreet1", true, "shippingStreet2", true, "shippingStreet3",
+			true, "shippingCity", true, "shippingZip", true, "shippingRegionId",
+			true, "shippingCountryId", true, "shippingPhoneNumber", true,
+			"commerceShippingMethodId", true, "shippingOptionName", true,
+			"carrier", true, "trackingNumber", true, "shippingDate", true,
+			"expectedDate", true, "status", true);
 	}
 
 	@Test
@@ -506,7 +557,25 @@ public class CommerceShipmentPersistenceTest {
 
 		commerceShipment.setCommerceAccountId(RandomTestUtil.nextLong());
 
-		commerceShipment.setCommerceAddressId(RandomTestUtil.nextLong());
+		commerceShipment.setShippingName(RandomTestUtil.randomString());
+
+		commerceShipment.setShippingDescription(RandomTestUtil.randomString());
+
+		commerceShipment.setShippingStreet1(RandomTestUtil.randomString());
+
+		commerceShipment.setShippingStreet2(RandomTestUtil.randomString());
+
+		commerceShipment.setShippingStreet3(RandomTestUtil.randomString());
+
+		commerceShipment.setShippingCity(RandomTestUtil.randomString());
+
+		commerceShipment.setShippingZip(RandomTestUtil.randomString());
+
+		commerceShipment.setShippingRegionId(RandomTestUtil.nextLong());
+
+		commerceShipment.setShippingCountryId(RandomTestUtil.nextLong());
+
+		commerceShipment.setShippingPhoneNumber(RandomTestUtil.randomString());
 
 		commerceShipment.setCommerceShippingMethodId(RandomTestUtil.nextLong());
 

@@ -64,7 +64,7 @@ public class CommerceShipmentCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(33);
+		StringBundler sb = new StringBundler(51);
 
 		sb.append("{commerceShipmentId=");
 		sb.append(commerceShipmentId);
@@ -82,8 +82,26 @@ public class CommerceShipmentCacheModel
 		sb.append(modifiedDate);
 		sb.append(", commerceAccountId=");
 		sb.append(commerceAccountId);
-		sb.append(", commerceAddressId=");
-		sb.append(commerceAddressId);
+		sb.append(", shippingName=");
+		sb.append(shippingName);
+		sb.append(", shippingDescription=");
+		sb.append(shippingDescription);
+		sb.append(", shippingStreet1=");
+		sb.append(shippingStreet1);
+		sb.append(", shippingStreet2=");
+		sb.append(shippingStreet2);
+		sb.append(", shippingStreet3=");
+		sb.append(shippingStreet3);
+		sb.append(", shippingCity=");
+		sb.append(shippingCity);
+		sb.append(", shippingZip=");
+		sb.append(shippingZip);
+		sb.append(", shippingRegionId=");
+		sb.append(shippingRegionId);
+		sb.append(", shippingCountryId=");
+		sb.append(shippingCountryId);
+		sb.append(", shippingPhoneNumber=");
+		sb.append(shippingPhoneNumber);
 		sb.append(", commerceShippingMethodId=");
 		sb.append(commerceShippingMethodId);
 		sb.append(", shippingOptionName=");
@@ -134,7 +152,66 @@ public class CommerceShipmentCacheModel
 		}
 
 		commerceShipmentImpl.setCommerceAccountId(commerceAccountId);
-		commerceShipmentImpl.setCommerceAddressId(commerceAddressId);
+
+		if (shippingName == null) {
+			commerceShipmentImpl.setShippingName("");
+		}
+		else {
+			commerceShipmentImpl.setShippingName(shippingName);
+		}
+
+		if (shippingDescription == null) {
+			commerceShipmentImpl.setShippingDescription("");
+		}
+		else {
+			commerceShipmentImpl.setShippingDescription(shippingDescription);
+		}
+
+		if (shippingStreet1 == null) {
+			commerceShipmentImpl.setShippingStreet1("");
+		}
+		else {
+			commerceShipmentImpl.setShippingStreet1(shippingStreet1);
+		}
+
+		if (shippingStreet2 == null) {
+			commerceShipmentImpl.setShippingStreet2("");
+		}
+		else {
+			commerceShipmentImpl.setShippingStreet2(shippingStreet2);
+		}
+
+		if (shippingStreet3 == null) {
+			commerceShipmentImpl.setShippingStreet3("");
+		}
+		else {
+			commerceShipmentImpl.setShippingStreet3(shippingStreet3);
+		}
+
+		if (shippingCity == null) {
+			commerceShipmentImpl.setShippingCity("");
+		}
+		else {
+			commerceShipmentImpl.setShippingCity(shippingCity);
+		}
+
+		if (shippingZip == null) {
+			commerceShipmentImpl.setShippingZip("");
+		}
+		else {
+			commerceShipmentImpl.setShippingZip(shippingZip);
+		}
+
+		commerceShipmentImpl.setShippingRegionId(shippingRegionId);
+		commerceShipmentImpl.setShippingCountryId(shippingCountryId);
+
+		if (shippingPhoneNumber == null) {
+			commerceShipmentImpl.setShippingPhoneNumber("");
+		}
+		else {
+			commerceShipmentImpl.setShippingPhoneNumber(shippingPhoneNumber);
+		}
+
 		commerceShipmentImpl.setCommerceShippingMethodId(
 			commerceShippingMethodId);
 
@@ -194,8 +271,18 @@ public class CommerceShipmentCacheModel
 		modifiedDate = objectInput.readLong();
 
 		commerceAccountId = objectInput.readLong();
+		shippingName = objectInput.readUTF();
+		shippingDescription = objectInput.readUTF();
+		shippingStreet1 = objectInput.readUTF();
+		shippingStreet2 = objectInput.readUTF();
+		shippingStreet3 = objectInput.readUTF();
+		shippingCity = objectInput.readUTF();
+		shippingZip = objectInput.readUTF();
 
-		commerceAddressId = objectInput.readLong();
+		shippingRegionId = objectInput.readLong();
+
+		shippingCountryId = objectInput.readLong();
+		shippingPhoneNumber = objectInput.readUTF();
 
 		commerceShippingMethodId = objectInput.readLong();
 		shippingOptionName = objectInput.readUTF();
@@ -229,7 +316,65 @@ public class CommerceShipmentCacheModel
 
 		objectOutput.writeLong(commerceAccountId);
 
-		objectOutput.writeLong(commerceAddressId);
+		if (shippingName == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(shippingName);
+		}
+
+		if (shippingDescription == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(shippingDescription);
+		}
+
+		if (shippingStreet1 == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(shippingStreet1);
+		}
+
+		if (shippingStreet2 == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(shippingStreet2);
+		}
+
+		if (shippingStreet3 == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(shippingStreet3);
+		}
+
+		if (shippingCity == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(shippingCity);
+		}
+
+		if (shippingZip == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(shippingZip);
+		}
+
+		objectOutput.writeLong(shippingRegionId);
+
+		objectOutput.writeLong(shippingCountryId);
+
+		if (shippingPhoneNumber == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(shippingPhoneNumber);
+		}
 
 		objectOutput.writeLong(commerceShippingMethodId);
 
@@ -268,7 +413,16 @@ public class CommerceShipmentCacheModel
 	public long createDate;
 	public long modifiedDate;
 	public long commerceAccountId;
-	public long commerceAddressId;
+	public String shippingName;
+	public String shippingDescription;
+	public String shippingStreet1;
+	public String shippingStreet2;
+	public String shippingStreet3;
+	public String shippingCity;
+	public String shippingZip;
+	public long shippingRegionId;
+	public long shippingCountryId;
+	public String shippingPhoneNumber;
 	public long commerceShippingMethodId;
 	public String shippingOptionName;
 	public String carrier;

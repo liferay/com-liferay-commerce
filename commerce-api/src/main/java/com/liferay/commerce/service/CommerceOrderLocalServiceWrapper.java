@@ -737,6 +737,18 @@ public class CommerceOrderLocalServiceWrapper
 	public com.liferay.commerce.model.CommerceOrder updateBillingAddress(
 			long commerceOrderId, String name, String description,
 			String street1, String street2, String street3, String city,
+			String zip, long commerceRegionId, long commerceCountryId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceOrderLocalService.updateBillingAddress(
+			commerceOrderId, name, description, street1, street2, street3, city,
+			zip, commerceRegionId, commerceCountryId);
+	}
+
+	@Override
+	public com.liferay.commerce.model.CommerceOrder updateBillingAddress(
+			long commerceOrderId, String name, String description,
+			String street1, String street2, String street3, String city,
 			String zip, long commerceRegionId, long commerceCountryId,
 			String phoneNumber,
 			com.liferay.portal.kernel.service.ServiceContext serviceContext)
@@ -923,6 +935,18 @@ public class CommerceOrderLocalServiceWrapper
 
 		return _commerceOrderLocalService.updatePurchaseOrderNumber(
 			commerceOrderId, purchaseOrderNumber);
+	}
+
+	@Override
+	public com.liferay.commerce.model.CommerceOrder updateShippingAddress(
+			long commerceOrderId, String name, String description,
+			String street1, String street2, String street3, String city,
+			String zip, long commerceRegionId, long commerceCountryId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceOrderLocalService.updateShippingAddress(
+			commerceOrderId, name, description, street1, street2, street3, city,
+			zip, commerceRegionId, commerceCountryId);
 	}
 
 	@Override

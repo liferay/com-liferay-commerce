@@ -108,6 +108,18 @@ public class CommerceOrderModelImpl
 		{"totalDiscountPercentageLevel2", Types.DECIMAL},
 		{"totalDiscountPercentageLevel3", Types.DECIMAL},
 		{"totalDiscountPercentageLevel4", Types.DECIMAL},
+		{"billingName", Types.VARCHAR}, {"billingDescription", Types.VARCHAR},
+		{"billingStreet1", Types.VARCHAR}, {"billingStreet2", Types.VARCHAR},
+		{"billingStreet3", Types.VARCHAR}, {"billingCity", Types.VARCHAR},
+		{"billingZip", Types.VARCHAR}, {"billingRegionId", Types.BIGINT},
+		{"billingCountryId", Types.BIGINT},
+		{"billingPhoneNumber", Types.VARCHAR}, {"shippingName", Types.VARCHAR},
+		{"shippingDescription", Types.VARCHAR},
+		{"shippingStreet1", Types.VARCHAR}, {"shippingStreet2", Types.VARCHAR},
+		{"shippingStreet3", Types.VARCHAR}, {"shippingCity", Types.VARCHAR},
+		{"shippingZip", Types.VARCHAR}, {"shippingRegionId", Types.BIGINT},
+		{"shippingCountryId", Types.BIGINT},
+		{"shippingPhoneNumber", Types.VARCHAR},
 		{"advanceStatus", Types.VARCHAR}, {"paymentStatus", Types.INTEGER},
 		{"orderDate", Types.TIMESTAMP}, {"orderStatus", Types.INTEGER},
 		{"printedNote", Types.VARCHAR},
@@ -160,6 +172,26 @@ public class CommerceOrderModelImpl
 		TABLE_COLUMNS_MAP.put("totalDiscountPercentageLevel2", Types.DECIMAL);
 		TABLE_COLUMNS_MAP.put("totalDiscountPercentageLevel3", Types.DECIMAL);
 		TABLE_COLUMNS_MAP.put("totalDiscountPercentageLevel4", Types.DECIMAL);
+		TABLE_COLUMNS_MAP.put("billingName", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("billingDescription", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("billingStreet1", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("billingStreet2", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("billingStreet3", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("billingCity", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("billingZip", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("billingRegionId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("billingCountryId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("billingPhoneNumber", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("shippingName", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("shippingDescription", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("shippingStreet1", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("shippingStreet2", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("shippingStreet3", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("shippingCity", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("shippingZip", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("shippingRegionId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("shippingCountryId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("shippingPhoneNumber", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("advanceStatus", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("paymentStatus", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("orderDate", Types.TIMESTAMP);
@@ -174,7 +206,7 @@ public class CommerceOrderModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CommerceOrder (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,commerceOrderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceAccountId LONG,commerceCurrencyId LONG,billingAddressId LONG,shippingAddressId LONG,commercePaymentMethodKey VARCHAR(75) null,transactionId TEXT null,commerceShippingMethodId LONG,shippingOptionName VARCHAR(255) null,purchaseOrderNumber VARCHAR(75) null,couponCode VARCHAR(75) null,lastPriceUpdateDate DATE null,subtotal DECIMAL(30, 16) null,subtotalDiscountAmount DECIMAL(30, 16) null,subtotalDiscountPercentLevel1 DECIMAL(30, 16) null,subtotalDiscountPercentLevel2 DECIMAL(30, 16) null,subtotalDiscountPercentLevel3 DECIMAL(30, 16) null,subtotalDiscountPercentLevel4 DECIMAL(30, 16) null,shippingAmount DECIMAL(30, 16) null,shippingDiscountAmount DECIMAL(30, 16) null,shippingDiscountPercentLevel1 DECIMAL(30, 16) null,shippingDiscountPercentLevel2 DECIMAL(30, 16) null,shippingDiscountPercentLevel3 DECIMAL(30, 16) null,shippingDiscountPercentLevel4 DECIMAL(30, 16) null,taxAmount DECIMAL(30, 16) null,total DECIMAL(30, 16) null,totalDiscountAmount DECIMAL(30, 16) null,totalDiscountPercentageLevel1 DECIMAL(30, 16) null,totalDiscountPercentageLevel2 DECIMAL(30, 16) null,totalDiscountPercentageLevel3 DECIMAL(30, 16) null,totalDiscountPercentageLevel4 DECIMAL(30, 16) null,advanceStatus VARCHAR(75) null,paymentStatus INTEGER,orderDate DATE null,orderStatus INTEGER,printedNote STRING null,requestedDeliveryDate DATE null,manuallyAdjusted BOOLEAN,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+		"create table CommerceOrder (uuid_ VARCHAR(75) null,externalReferenceCode VARCHAR(75) null,commerceOrderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceAccountId LONG,commerceCurrencyId LONG,billingAddressId LONG,shippingAddressId LONG,commercePaymentMethodKey VARCHAR(75) null,transactionId TEXT null,commerceShippingMethodId LONG,shippingOptionName VARCHAR(255) null,purchaseOrderNumber VARCHAR(75) null,couponCode VARCHAR(75) null,lastPriceUpdateDate DATE null,subtotal DECIMAL(30, 16) null,subtotalDiscountAmount DECIMAL(30, 16) null,subtotalDiscountPercentLevel1 DECIMAL(30, 16) null,subtotalDiscountPercentLevel2 DECIMAL(30, 16) null,subtotalDiscountPercentLevel3 DECIMAL(30, 16) null,subtotalDiscountPercentLevel4 DECIMAL(30, 16) null,shippingAmount DECIMAL(30, 16) null,shippingDiscountAmount DECIMAL(30, 16) null,shippingDiscountPercentLevel1 DECIMAL(30, 16) null,shippingDiscountPercentLevel2 DECIMAL(30, 16) null,shippingDiscountPercentLevel3 DECIMAL(30, 16) null,shippingDiscountPercentLevel4 DECIMAL(30, 16) null,taxAmount DECIMAL(30, 16) null,total DECIMAL(30, 16) null,totalDiscountAmount DECIMAL(30, 16) null,totalDiscountPercentageLevel1 DECIMAL(30, 16) null,totalDiscountPercentageLevel2 DECIMAL(30, 16) null,totalDiscountPercentageLevel3 DECIMAL(30, 16) null,totalDiscountPercentageLevel4 DECIMAL(30, 16) null,billingName VARCHAR(75) null,billingDescription VARCHAR(75) null,billingStreet1 VARCHAR(75) null,billingStreet2 VARCHAR(75) null,billingStreet3 VARCHAR(75) null,billingCity VARCHAR(75) null,billingZip VARCHAR(75) null,billingRegionId LONG,billingCountryId LONG,billingPhoneNumber VARCHAR(75) null,shippingName VARCHAR(75) null,shippingDescription VARCHAR(75) null,shippingStreet1 VARCHAR(75) null,shippingStreet2 VARCHAR(75) null,shippingStreet3 VARCHAR(75) null,shippingCity VARCHAR(75) null,shippingZip VARCHAR(75) null,shippingRegionId LONG,shippingCountryId LONG,shippingPhoneNumber VARCHAR(75) null,advanceStatus VARCHAR(75) null,paymentStatus INTEGER,orderDate DATE null,orderStatus INTEGER,printedNote STRING null,requestedDeliveryDate DATE null,manuallyAdjusted BOOLEAN,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 
 	public static final String TABLE_SQL_DROP = "drop table CommerceOrder";
 
@@ -291,6 +323,26 @@ public class CommerceOrderModelImpl
 			soapModel.getTotalDiscountPercentageLevel3());
 		model.setTotalDiscountPercentageLevel4(
 			soapModel.getTotalDiscountPercentageLevel4());
+		model.setBillingName(soapModel.getBillingName());
+		model.setBillingDescription(soapModel.getBillingDescription());
+		model.setBillingStreet1(soapModel.getBillingStreet1());
+		model.setBillingStreet2(soapModel.getBillingStreet2());
+		model.setBillingStreet3(soapModel.getBillingStreet3());
+		model.setBillingCity(soapModel.getBillingCity());
+		model.setBillingZip(soapModel.getBillingZip());
+		model.setBillingRegionId(soapModel.getBillingRegionId());
+		model.setBillingCountryId(soapModel.getBillingCountryId());
+		model.setBillingPhoneNumber(soapModel.getBillingPhoneNumber());
+		model.setShippingName(soapModel.getShippingName());
+		model.setShippingDescription(soapModel.getShippingDescription());
+		model.setShippingStreet1(soapModel.getShippingStreet1());
+		model.setShippingStreet2(soapModel.getShippingStreet2());
+		model.setShippingStreet3(soapModel.getShippingStreet3());
+		model.setShippingCity(soapModel.getShippingCity());
+		model.setShippingZip(soapModel.getShippingZip());
+		model.setShippingRegionId(soapModel.getShippingRegionId());
+		model.setShippingCountryId(soapModel.getShippingCountryId());
+		model.setShippingPhoneNumber(soapModel.getShippingPhoneNumber());
 		model.setAdvanceStatus(soapModel.getAdvanceStatus());
 		model.setPaymentStatus(soapModel.getPaymentStatus());
 		model.setOrderDate(soapModel.getOrderDate());
@@ -1367,6 +1419,467 @@ public class CommerceOrderModelImpl
 
 			});
 		attributeGetterFunctions.put(
+			"billingName",
+			new Function<CommerceOrder, Object>() {
+
+				@Override
+				public Object apply(CommerceOrder commerceOrder) {
+					return commerceOrder.getBillingName();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"billingName",
+			new BiConsumer<CommerceOrder, Object>() {
+
+				@Override
+				public void accept(
+					CommerceOrder commerceOrder, Object billingNameObject) {
+
+					commerceOrder.setBillingName((String)billingNameObject);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"billingDescription",
+			new Function<CommerceOrder, Object>() {
+
+				@Override
+				public Object apply(CommerceOrder commerceOrder) {
+					return commerceOrder.getBillingDescription();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"billingDescription",
+			new BiConsumer<CommerceOrder, Object>() {
+
+				@Override
+				public void accept(
+					CommerceOrder commerceOrder,
+					Object billingDescriptionObject) {
+
+					commerceOrder.setBillingDescription(
+						(String)billingDescriptionObject);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"billingStreet1",
+			new Function<CommerceOrder, Object>() {
+
+				@Override
+				public Object apply(CommerceOrder commerceOrder) {
+					return commerceOrder.getBillingStreet1();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"billingStreet1",
+			new BiConsumer<CommerceOrder, Object>() {
+
+				@Override
+				public void accept(
+					CommerceOrder commerceOrder, Object billingStreet1Object) {
+
+					commerceOrder.setBillingStreet1(
+						(String)billingStreet1Object);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"billingStreet2",
+			new Function<CommerceOrder, Object>() {
+
+				@Override
+				public Object apply(CommerceOrder commerceOrder) {
+					return commerceOrder.getBillingStreet2();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"billingStreet2",
+			new BiConsumer<CommerceOrder, Object>() {
+
+				@Override
+				public void accept(
+					CommerceOrder commerceOrder, Object billingStreet2Object) {
+
+					commerceOrder.setBillingStreet2(
+						(String)billingStreet2Object);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"billingStreet3",
+			new Function<CommerceOrder, Object>() {
+
+				@Override
+				public Object apply(CommerceOrder commerceOrder) {
+					return commerceOrder.getBillingStreet3();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"billingStreet3",
+			new BiConsumer<CommerceOrder, Object>() {
+
+				@Override
+				public void accept(
+					CommerceOrder commerceOrder, Object billingStreet3Object) {
+
+					commerceOrder.setBillingStreet3(
+						(String)billingStreet3Object);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"billingCity",
+			new Function<CommerceOrder, Object>() {
+
+				@Override
+				public Object apply(CommerceOrder commerceOrder) {
+					return commerceOrder.getBillingCity();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"billingCity",
+			new BiConsumer<CommerceOrder, Object>() {
+
+				@Override
+				public void accept(
+					CommerceOrder commerceOrder, Object billingCityObject) {
+
+					commerceOrder.setBillingCity((String)billingCityObject);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"billingZip",
+			new Function<CommerceOrder, Object>() {
+
+				@Override
+				public Object apply(CommerceOrder commerceOrder) {
+					return commerceOrder.getBillingZip();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"billingZip",
+			new BiConsumer<CommerceOrder, Object>() {
+
+				@Override
+				public void accept(
+					CommerceOrder commerceOrder, Object billingZipObject) {
+
+					commerceOrder.setBillingZip((String)billingZipObject);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"billingRegionId",
+			new Function<CommerceOrder, Object>() {
+
+				@Override
+				public Object apply(CommerceOrder commerceOrder) {
+					return commerceOrder.getBillingRegionId();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"billingRegionId",
+			new BiConsumer<CommerceOrder, Object>() {
+
+				@Override
+				public void accept(
+					CommerceOrder commerceOrder, Object billingRegionIdObject) {
+
+					commerceOrder.setBillingRegionId(
+						(Long)billingRegionIdObject);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"billingCountryId",
+			new Function<CommerceOrder, Object>() {
+
+				@Override
+				public Object apply(CommerceOrder commerceOrder) {
+					return commerceOrder.getBillingCountryId();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"billingCountryId",
+			new BiConsumer<CommerceOrder, Object>() {
+
+				@Override
+				public void accept(
+					CommerceOrder commerceOrder,
+					Object billingCountryIdObject) {
+
+					commerceOrder.setBillingCountryId(
+						(Long)billingCountryIdObject);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"billingPhoneNumber",
+			new Function<CommerceOrder, Object>() {
+
+				@Override
+				public Object apply(CommerceOrder commerceOrder) {
+					return commerceOrder.getBillingPhoneNumber();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"billingPhoneNumber",
+			new BiConsumer<CommerceOrder, Object>() {
+
+				@Override
+				public void accept(
+					CommerceOrder commerceOrder,
+					Object billingPhoneNumberObject) {
+
+					commerceOrder.setBillingPhoneNumber(
+						(String)billingPhoneNumberObject);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"shippingName",
+			new Function<CommerceOrder, Object>() {
+
+				@Override
+				public Object apply(CommerceOrder commerceOrder) {
+					return commerceOrder.getShippingName();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"shippingName",
+			new BiConsumer<CommerceOrder, Object>() {
+
+				@Override
+				public void accept(
+					CommerceOrder commerceOrder, Object shippingNameObject) {
+
+					commerceOrder.setShippingName((String)shippingNameObject);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"shippingDescription",
+			new Function<CommerceOrder, Object>() {
+
+				@Override
+				public Object apply(CommerceOrder commerceOrder) {
+					return commerceOrder.getShippingDescription();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"shippingDescription",
+			new BiConsumer<CommerceOrder, Object>() {
+
+				@Override
+				public void accept(
+					CommerceOrder commerceOrder,
+					Object shippingDescriptionObject) {
+
+					commerceOrder.setShippingDescription(
+						(String)shippingDescriptionObject);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"shippingStreet1",
+			new Function<CommerceOrder, Object>() {
+
+				@Override
+				public Object apply(CommerceOrder commerceOrder) {
+					return commerceOrder.getShippingStreet1();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"shippingStreet1",
+			new BiConsumer<CommerceOrder, Object>() {
+
+				@Override
+				public void accept(
+					CommerceOrder commerceOrder, Object shippingStreet1Object) {
+
+					commerceOrder.setShippingStreet1(
+						(String)shippingStreet1Object);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"shippingStreet2",
+			new Function<CommerceOrder, Object>() {
+
+				@Override
+				public Object apply(CommerceOrder commerceOrder) {
+					return commerceOrder.getShippingStreet2();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"shippingStreet2",
+			new BiConsumer<CommerceOrder, Object>() {
+
+				@Override
+				public void accept(
+					CommerceOrder commerceOrder, Object shippingStreet2Object) {
+
+					commerceOrder.setShippingStreet2(
+						(String)shippingStreet2Object);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"shippingStreet3",
+			new Function<CommerceOrder, Object>() {
+
+				@Override
+				public Object apply(CommerceOrder commerceOrder) {
+					return commerceOrder.getShippingStreet3();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"shippingStreet3",
+			new BiConsumer<CommerceOrder, Object>() {
+
+				@Override
+				public void accept(
+					CommerceOrder commerceOrder, Object shippingStreet3Object) {
+
+					commerceOrder.setShippingStreet3(
+						(String)shippingStreet3Object);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"shippingCity",
+			new Function<CommerceOrder, Object>() {
+
+				@Override
+				public Object apply(CommerceOrder commerceOrder) {
+					return commerceOrder.getShippingCity();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"shippingCity",
+			new BiConsumer<CommerceOrder, Object>() {
+
+				@Override
+				public void accept(
+					CommerceOrder commerceOrder, Object shippingCityObject) {
+
+					commerceOrder.setShippingCity((String)shippingCityObject);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"shippingZip",
+			new Function<CommerceOrder, Object>() {
+
+				@Override
+				public Object apply(CommerceOrder commerceOrder) {
+					return commerceOrder.getShippingZip();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"shippingZip",
+			new BiConsumer<CommerceOrder, Object>() {
+
+				@Override
+				public void accept(
+					CommerceOrder commerceOrder, Object shippingZipObject) {
+
+					commerceOrder.setShippingZip((String)shippingZipObject);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"shippingRegionId",
+			new Function<CommerceOrder, Object>() {
+
+				@Override
+				public Object apply(CommerceOrder commerceOrder) {
+					return commerceOrder.getShippingRegionId();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"shippingRegionId",
+			new BiConsumer<CommerceOrder, Object>() {
+
+				@Override
+				public void accept(
+					CommerceOrder commerceOrder,
+					Object shippingRegionIdObject) {
+
+					commerceOrder.setShippingRegionId(
+						(Long)shippingRegionIdObject);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"shippingCountryId",
+			new Function<CommerceOrder, Object>() {
+
+				@Override
+				public Object apply(CommerceOrder commerceOrder) {
+					return commerceOrder.getShippingCountryId();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"shippingCountryId",
+			new BiConsumer<CommerceOrder, Object>() {
+
+				@Override
+				public void accept(
+					CommerceOrder commerceOrder,
+					Object shippingCountryIdObject) {
+
+					commerceOrder.setShippingCountryId(
+						(Long)shippingCountryIdObject);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"shippingPhoneNumber",
+			new Function<CommerceOrder, Object>() {
+
+				@Override
+				public Object apply(CommerceOrder commerceOrder) {
+					return commerceOrder.getShippingPhoneNumber();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"shippingPhoneNumber",
+			new BiConsumer<CommerceOrder, Object>() {
+
+				@Override
+				public void accept(
+					CommerceOrder commerceOrder,
+					Object shippingPhoneNumberObject) {
+
+					commerceOrder.setShippingPhoneNumber(
+						(String)shippingPhoneNumberObject);
+				}
+
+			});
+		attributeGetterFunctions.put(
 			"advanceStatus",
 			new Function<CommerceOrder, Object>() {
 
@@ -2241,6 +2754,306 @@ public class CommerceOrderModelImpl
 
 	@JSON
 	@Override
+	public String getBillingName() {
+		if (_billingName == null) {
+			return "";
+		}
+		else {
+			return _billingName;
+		}
+	}
+
+	@Override
+	public void setBillingName(String billingName) {
+		_billingName = billingName;
+	}
+
+	@JSON
+	@Override
+	public String getBillingDescription() {
+		if (_billingDescription == null) {
+			return "";
+		}
+		else {
+			return _billingDescription;
+		}
+	}
+
+	@Override
+	public void setBillingDescription(String billingDescription) {
+		_billingDescription = billingDescription;
+	}
+
+	@JSON
+	@Override
+	public String getBillingStreet1() {
+		if (_billingStreet1 == null) {
+			return "";
+		}
+		else {
+			return _billingStreet1;
+		}
+	}
+
+	@Override
+	public void setBillingStreet1(String billingStreet1) {
+		_billingStreet1 = billingStreet1;
+	}
+
+	@JSON
+	@Override
+	public String getBillingStreet2() {
+		if (_billingStreet2 == null) {
+			return "";
+		}
+		else {
+			return _billingStreet2;
+		}
+	}
+
+	@Override
+	public void setBillingStreet2(String billingStreet2) {
+		_billingStreet2 = billingStreet2;
+	}
+
+	@JSON
+	@Override
+	public String getBillingStreet3() {
+		if (_billingStreet3 == null) {
+			return "";
+		}
+		else {
+			return _billingStreet3;
+		}
+	}
+
+	@Override
+	public void setBillingStreet3(String billingStreet3) {
+		_billingStreet3 = billingStreet3;
+	}
+
+	@JSON
+	@Override
+	public String getBillingCity() {
+		if (_billingCity == null) {
+			return "";
+		}
+		else {
+			return _billingCity;
+		}
+	}
+
+	@Override
+	public void setBillingCity(String billingCity) {
+		_billingCity = billingCity;
+	}
+
+	@JSON
+	@Override
+	public String getBillingZip() {
+		if (_billingZip == null) {
+			return "";
+		}
+		else {
+			return _billingZip;
+		}
+	}
+
+	@Override
+	public void setBillingZip(String billingZip) {
+		_billingZip = billingZip;
+	}
+
+	@JSON
+	@Override
+	public long getBillingRegionId() {
+		return _billingRegionId;
+	}
+
+	@Override
+	public void setBillingRegionId(long billingRegionId) {
+		_billingRegionId = billingRegionId;
+	}
+
+	@JSON
+	@Override
+	public long getBillingCountryId() {
+		return _billingCountryId;
+	}
+
+	@Override
+	public void setBillingCountryId(long billingCountryId) {
+		_billingCountryId = billingCountryId;
+	}
+
+	@JSON
+	@Override
+	public String getBillingPhoneNumber() {
+		if (_billingPhoneNumber == null) {
+			return "";
+		}
+		else {
+			return _billingPhoneNumber;
+		}
+	}
+
+	@Override
+	public void setBillingPhoneNumber(String billingPhoneNumber) {
+		_billingPhoneNumber = billingPhoneNumber;
+	}
+
+	@JSON
+	@Override
+	public String getShippingName() {
+		if (_shippingName == null) {
+			return "";
+		}
+		else {
+			return _shippingName;
+		}
+	}
+
+	@Override
+	public void setShippingName(String shippingName) {
+		_shippingName = shippingName;
+	}
+
+	@JSON
+	@Override
+	public String getShippingDescription() {
+		if (_shippingDescription == null) {
+			return "";
+		}
+		else {
+			return _shippingDescription;
+		}
+	}
+
+	@Override
+	public void setShippingDescription(String shippingDescription) {
+		_shippingDescription = shippingDescription;
+	}
+
+	@JSON
+	@Override
+	public String getShippingStreet1() {
+		if (_shippingStreet1 == null) {
+			return "";
+		}
+		else {
+			return _shippingStreet1;
+		}
+	}
+
+	@Override
+	public void setShippingStreet1(String shippingStreet1) {
+		_shippingStreet1 = shippingStreet1;
+	}
+
+	@JSON
+	@Override
+	public String getShippingStreet2() {
+		if (_shippingStreet2 == null) {
+			return "";
+		}
+		else {
+			return _shippingStreet2;
+		}
+	}
+
+	@Override
+	public void setShippingStreet2(String shippingStreet2) {
+		_shippingStreet2 = shippingStreet2;
+	}
+
+	@JSON
+	@Override
+	public String getShippingStreet3() {
+		if (_shippingStreet3 == null) {
+			return "";
+		}
+		else {
+			return _shippingStreet3;
+		}
+	}
+
+	@Override
+	public void setShippingStreet3(String shippingStreet3) {
+		_shippingStreet3 = shippingStreet3;
+	}
+
+	@JSON
+	@Override
+	public String getShippingCity() {
+		if (_shippingCity == null) {
+			return "";
+		}
+		else {
+			return _shippingCity;
+		}
+	}
+
+	@Override
+	public void setShippingCity(String shippingCity) {
+		_shippingCity = shippingCity;
+	}
+
+	@JSON
+	@Override
+	public String getShippingZip() {
+		if (_shippingZip == null) {
+			return "";
+		}
+		else {
+			return _shippingZip;
+		}
+	}
+
+	@Override
+	public void setShippingZip(String shippingZip) {
+		_shippingZip = shippingZip;
+	}
+
+	@JSON
+	@Override
+	public long getShippingRegionId() {
+		return _shippingRegionId;
+	}
+
+	@Override
+	public void setShippingRegionId(long shippingRegionId) {
+		_shippingRegionId = shippingRegionId;
+	}
+
+	@JSON
+	@Override
+	public long getShippingCountryId() {
+		return _shippingCountryId;
+	}
+
+	@Override
+	public void setShippingCountryId(long shippingCountryId) {
+		_shippingCountryId = shippingCountryId;
+	}
+
+	@JSON
+	@Override
+	public String getShippingPhoneNumber() {
+		if (_shippingPhoneNumber == null) {
+			return "";
+		}
+		else {
+			return _shippingPhoneNumber;
+		}
+	}
+
+	@Override
+	public void setShippingPhoneNumber(String shippingPhoneNumber) {
+		_shippingPhoneNumber = shippingPhoneNumber;
+	}
+
+	@JSON
+	@Override
 	public String getAdvanceStatus() {
 		if (_advanceStatus == null) {
 			return "";
@@ -2586,6 +3399,26 @@ public class CommerceOrderModelImpl
 			getTotalDiscountPercentageLevel3());
 		commerceOrderImpl.setTotalDiscountPercentageLevel4(
 			getTotalDiscountPercentageLevel4());
+		commerceOrderImpl.setBillingName(getBillingName());
+		commerceOrderImpl.setBillingDescription(getBillingDescription());
+		commerceOrderImpl.setBillingStreet1(getBillingStreet1());
+		commerceOrderImpl.setBillingStreet2(getBillingStreet2());
+		commerceOrderImpl.setBillingStreet3(getBillingStreet3());
+		commerceOrderImpl.setBillingCity(getBillingCity());
+		commerceOrderImpl.setBillingZip(getBillingZip());
+		commerceOrderImpl.setBillingRegionId(getBillingRegionId());
+		commerceOrderImpl.setBillingCountryId(getBillingCountryId());
+		commerceOrderImpl.setBillingPhoneNumber(getBillingPhoneNumber());
+		commerceOrderImpl.setShippingName(getShippingName());
+		commerceOrderImpl.setShippingDescription(getShippingDescription());
+		commerceOrderImpl.setShippingStreet1(getShippingStreet1());
+		commerceOrderImpl.setShippingStreet2(getShippingStreet2());
+		commerceOrderImpl.setShippingStreet3(getShippingStreet3());
+		commerceOrderImpl.setShippingCity(getShippingCity());
+		commerceOrderImpl.setShippingZip(getShippingZip());
+		commerceOrderImpl.setShippingRegionId(getShippingRegionId());
+		commerceOrderImpl.setShippingCountryId(getShippingCountryId());
+		commerceOrderImpl.setShippingPhoneNumber(getShippingPhoneNumber());
 		commerceOrderImpl.setAdvanceStatus(getAdvanceStatus());
 		commerceOrderImpl.setPaymentStatus(getPaymentStatus());
 		commerceOrderImpl.setOrderDate(getOrderDate());
@@ -2886,6 +3719,152 @@ public class CommerceOrderModelImpl
 		commerceOrderCacheModel.totalDiscountPercentageLevel4 =
 			getTotalDiscountPercentageLevel4();
 
+		commerceOrderCacheModel.billingName = getBillingName();
+
+		String billingName = commerceOrderCacheModel.billingName;
+
+		if ((billingName != null) && (billingName.length() == 0)) {
+			commerceOrderCacheModel.billingName = null;
+		}
+
+		commerceOrderCacheModel.billingDescription = getBillingDescription();
+
+		String billingDescription = commerceOrderCacheModel.billingDescription;
+
+		if ((billingDescription != null) &&
+			(billingDescription.length() == 0)) {
+
+			commerceOrderCacheModel.billingDescription = null;
+		}
+
+		commerceOrderCacheModel.billingStreet1 = getBillingStreet1();
+
+		String billingStreet1 = commerceOrderCacheModel.billingStreet1;
+
+		if ((billingStreet1 != null) && (billingStreet1.length() == 0)) {
+			commerceOrderCacheModel.billingStreet1 = null;
+		}
+
+		commerceOrderCacheModel.billingStreet2 = getBillingStreet2();
+
+		String billingStreet2 = commerceOrderCacheModel.billingStreet2;
+
+		if ((billingStreet2 != null) && (billingStreet2.length() == 0)) {
+			commerceOrderCacheModel.billingStreet2 = null;
+		}
+
+		commerceOrderCacheModel.billingStreet3 = getBillingStreet3();
+
+		String billingStreet3 = commerceOrderCacheModel.billingStreet3;
+
+		if ((billingStreet3 != null) && (billingStreet3.length() == 0)) {
+			commerceOrderCacheModel.billingStreet3 = null;
+		}
+
+		commerceOrderCacheModel.billingCity = getBillingCity();
+
+		String billingCity = commerceOrderCacheModel.billingCity;
+
+		if ((billingCity != null) && (billingCity.length() == 0)) {
+			commerceOrderCacheModel.billingCity = null;
+		}
+
+		commerceOrderCacheModel.billingZip = getBillingZip();
+
+		String billingZip = commerceOrderCacheModel.billingZip;
+
+		if ((billingZip != null) && (billingZip.length() == 0)) {
+			commerceOrderCacheModel.billingZip = null;
+		}
+
+		commerceOrderCacheModel.billingRegionId = getBillingRegionId();
+
+		commerceOrderCacheModel.billingCountryId = getBillingCountryId();
+
+		commerceOrderCacheModel.billingPhoneNumber = getBillingPhoneNumber();
+
+		String billingPhoneNumber = commerceOrderCacheModel.billingPhoneNumber;
+
+		if ((billingPhoneNumber != null) &&
+			(billingPhoneNumber.length() == 0)) {
+
+			commerceOrderCacheModel.billingPhoneNumber = null;
+		}
+
+		commerceOrderCacheModel.shippingName = getShippingName();
+
+		String shippingName = commerceOrderCacheModel.shippingName;
+
+		if ((shippingName != null) && (shippingName.length() == 0)) {
+			commerceOrderCacheModel.shippingName = null;
+		}
+
+		commerceOrderCacheModel.shippingDescription = getShippingDescription();
+
+		String shippingDescription =
+			commerceOrderCacheModel.shippingDescription;
+
+		if ((shippingDescription != null) &&
+			(shippingDescription.length() == 0)) {
+
+			commerceOrderCacheModel.shippingDescription = null;
+		}
+
+		commerceOrderCacheModel.shippingStreet1 = getShippingStreet1();
+
+		String shippingStreet1 = commerceOrderCacheModel.shippingStreet1;
+
+		if ((shippingStreet1 != null) && (shippingStreet1.length() == 0)) {
+			commerceOrderCacheModel.shippingStreet1 = null;
+		}
+
+		commerceOrderCacheModel.shippingStreet2 = getShippingStreet2();
+
+		String shippingStreet2 = commerceOrderCacheModel.shippingStreet2;
+
+		if ((shippingStreet2 != null) && (shippingStreet2.length() == 0)) {
+			commerceOrderCacheModel.shippingStreet2 = null;
+		}
+
+		commerceOrderCacheModel.shippingStreet3 = getShippingStreet3();
+
+		String shippingStreet3 = commerceOrderCacheModel.shippingStreet3;
+
+		if ((shippingStreet3 != null) && (shippingStreet3.length() == 0)) {
+			commerceOrderCacheModel.shippingStreet3 = null;
+		}
+
+		commerceOrderCacheModel.shippingCity = getShippingCity();
+
+		String shippingCity = commerceOrderCacheModel.shippingCity;
+
+		if ((shippingCity != null) && (shippingCity.length() == 0)) {
+			commerceOrderCacheModel.shippingCity = null;
+		}
+
+		commerceOrderCacheModel.shippingZip = getShippingZip();
+
+		String shippingZip = commerceOrderCacheModel.shippingZip;
+
+		if ((shippingZip != null) && (shippingZip.length() == 0)) {
+			commerceOrderCacheModel.shippingZip = null;
+		}
+
+		commerceOrderCacheModel.shippingRegionId = getShippingRegionId();
+
+		commerceOrderCacheModel.shippingCountryId = getShippingCountryId();
+
+		commerceOrderCacheModel.shippingPhoneNumber = getShippingPhoneNumber();
+
+		String shippingPhoneNumber =
+			commerceOrderCacheModel.shippingPhoneNumber;
+
+		if ((shippingPhoneNumber != null) &&
+			(shippingPhoneNumber.length() == 0)) {
+
+			commerceOrderCacheModel.shippingPhoneNumber = null;
+		}
+
 		commerceOrderCacheModel.advanceStatus = getAdvanceStatus();
 
 		String advanceStatus = commerceOrderCacheModel.advanceStatus;
@@ -3076,6 +4055,26 @@ public class CommerceOrderModelImpl
 	private BigDecimal _totalDiscountPercentageLevel2;
 	private BigDecimal _totalDiscountPercentageLevel3;
 	private BigDecimal _totalDiscountPercentageLevel4;
+	private String _billingName;
+	private String _billingDescription;
+	private String _billingStreet1;
+	private String _billingStreet2;
+	private String _billingStreet3;
+	private String _billingCity;
+	private String _billingZip;
+	private long _billingRegionId;
+	private long _billingCountryId;
+	private String _billingPhoneNumber;
+	private String _shippingName;
+	private String _shippingDescription;
+	private String _shippingStreet1;
+	private String _shippingStreet2;
+	private String _shippingStreet3;
+	private String _shippingCity;
+	private String _shippingZip;
+	private long _shippingRegionId;
+	private long _shippingCountryId;
+	private String _shippingPhoneNumber;
 	private String _advanceStatus;
 	private int _paymentStatus;
 	private Date _orderDate;

@@ -222,6 +222,46 @@ public class CommerceOrderPersistenceTest {
 		newCommerceOrder.setTotalDiscountPercentageLevel4(
 			new BigDecimal(RandomTestUtil.nextDouble()));
 
+		newCommerceOrder.setBillingName(RandomTestUtil.randomString());
+
+		newCommerceOrder.setBillingDescription(RandomTestUtil.randomString());
+
+		newCommerceOrder.setBillingStreet1(RandomTestUtil.randomString());
+
+		newCommerceOrder.setBillingStreet2(RandomTestUtil.randomString());
+
+		newCommerceOrder.setBillingStreet3(RandomTestUtil.randomString());
+
+		newCommerceOrder.setBillingCity(RandomTestUtil.randomString());
+
+		newCommerceOrder.setBillingZip(RandomTestUtil.randomString());
+
+		newCommerceOrder.setBillingRegionId(RandomTestUtil.nextLong());
+
+		newCommerceOrder.setBillingCountryId(RandomTestUtil.nextLong());
+
+		newCommerceOrder.setBillingPhoneNumber(RandomTestUtil.randomString());
+
+		newCommerceOrder.setShippingName(RandomTestUtil.randomString());
+
+		newCommerceOrder.setShippingDescription(RandomTestUtil.randomString());
+
+		newCommerceOrder.setShippingStreet1(RandomTestUtil.randomString());
+
+		newCommerceOrder.setShippingStreet2(RandomTestUtil.randomString());
+
+		newCommerceOrder.setShippingStreet3(RandomTestUtil.randomString());
+
+		newCommerceOrder.setShippingCity(RandomTestUtil.randomString());
+
+		newCommerceOrder.setShippingZip(RandomTestUtil.randomString());
+
+		newCommerceOrder.setShippingRegionId(RandomTestUtil.nextLong());
+
+		newCommerceOrder.setShippingCountryId(RandomTestUtil.nextLong());
+
+		newCommerceOrder.setShippingPhoneNumber(RandomTestUtil.randomString());
+
 		newCommerceOrder.setAdvanceStatus(RandomTestUtil.randomString());
 
 		newCommerceOrder.setPaymentStatus(RandomTestUtil.nextInt());
@@ -363,6 +403,66 @@ public class CommerceOrderPersistenceTest {
 		Assert.assertEquals(
 			existingCommerceOrder.getTotalDiscountPercentageLevel4(),
 			newCommerceOrder.getTotalDiscountPercentageLevel4());
+		Assert.assertEquals(
+			existingCommerceOrder.getBillingName(),
+			newCommerceOrder.getBillingName());
+		Assert.assertEquals(
+			existingCommerceOrder.getBillingDescription(),
+			newCommerceOrder.getBillingDescription());
+		Assert.assertEquals(
+			existingCommerceOrder.getBillingStreet1(),
+			newCommerceOrder.getBillingStreet1());
+		Assert.assertEquals(
+			existingCommerceOrder.getBillingStreet2(),
+			newCommerceOrder.getBillingStreet2());
+		Assert.assertEquals(
+			existingCommerceOrder.getBillingStreet3(),
+			newCommerceOrder.getBillingStreet3());
+		Assert.assertEquals(
+			existingCommerceOrder.getBillingCity(),
+			newCommerceOrder.getBillingCity());
+		Assert.assertEquals(
+			existingCommerceOrder.getBillingZip(),
+			newCommerceOrder.getBillingZip());
+		Assert.assertEquals(
+			existingCommerceOrder.getBillingRegionId(),
+			newCommerceOrder.getBillingRegionId());
+		Assert.assertEquals(
+			existingCommerceOrder.getBillingCountryId(),
+			newCommerceOrder.getBillingCountryId());
+		Assert.assertEquals(
+			existingCommerceOrder.getBillingPhoneNumber(),
+			newCommerceOrder.getBillingPhoneNumber());
+		Assert.assertEquals(
+			existingCommerceOrder.getShippingName(),
+			newCommerceOrder.getShippingName());
+		Assert.assertEquals(
+			existingCommerceOrder.getShippingDescription(),
+			newCommerceOrder.getShippingDescription());
+		Assert.assertEquals(
+			existingCommerceOrder.getShippingStreet1(),
+			newCommerceOrder.getShippingStreet1());
+		Assert.assertEquals(
+			existingCommerceOrder.getShippingStreet2(),
+			newCommerceOrder.getShippingStreet2());
+		Assert.assertEquals(
+			existingCommerceOrder.getShippingStreet3(),
+			newCommerceOrder.getShippingStreet3());
+		Assert.assertEquals(
+			existingCommerceOrder.getShippingCity(),
+			newCommerceOrder.getShippingCity());
+		Assert.assertEquals(
+			existingCommerceOrder.getShippingZip(),
+			newCommerceOrder.getShippingZip());
+		Assert.assertEquals(
+			existingCommerceOrder.getShippingRegionId(),
+			newCommerceOrder.getShippingRegionId());
+		Assert.assertEquals(
+			existingCommerceOrder.getShippingCountryId(),
+			newCommerceOrder.getShippingCountryId());
+		Assert.assertEquals(
+			existingCommerceOrder.getShippingPhoneNumber(),
+			newCommerceOrder.getShippingPhoneNumber());
 		Assert.assertEquals(
 			existingCommerceOrder.getAdvanceStatus(),
 			newCommerceOrder.getAdvanceStatus());
@@ -551,11 +651,19 @@ public class CommerceOrderPersistenceTest {
 			"totalDiscountPercentageLevel1", true,
 			"totalDiscountPercentageLevel2", true,
 			"totalDiscountPercentageLevel3", true,
-			"totalDiscountPercentageLevel4", true, "advanceStatus", true,
-			"paymentStatus", true, "orderDate", true, "orderStatus", true,
-			"printedNote", true, "requestedDeliveryDate", true,
-			"manuallyAdjusted", true, "status", true, "statusByUserId", true,
-			"statusByUserName", true, "statusDate", true);
+			"totalDiscountPercentageLevel4", true, "billingName", true,
+			"billingDescription", true, "billingStreet1", true,
+			"billingStreet2", true, "billingStreet3", true, "billingCity", true,
+			"billingZip", true, "billingRegionId", true, "billingCountryId",
+			true, "billingPhoneNumber", true, "shippingName", true,
+			"shippingDescription", true, "shippingStreet1", true,
+			"shippingStreet2", true, "shippingStreet3", true, "shippingCity",
+			true, "shippingZip", true, "shippingRegionId", true,
+			"shippingCountryId", true, "shippingPhoneNumber", true,
+			"advanceStatus", true, "paymentStatus", true, "orderDate", true,
+			"orderStatus", true, "printedNote", true, "requestedDeliveryDate",
+			true, "manuallyAdjusted", true, "status", true, "statusByUserId",
+			true, "statusByUserName", true, "statusDate", true);
 	}
 
 	@Test
@@ -901,6 +1009,46 @@ public class CommerceOrderPersistenceTest {
 
 		commerceOrder.setTotalDiscountPercentageLevel4(
 			new BigDecimal(RandomTestUtil.nextDouble()));
+
+		commerceOrder.setBillingName(RandomTestUtil.randomString());
+
+		commerceOrder.setBillingDescription(RandomTestUtil.randomString());
+
+		commerceOrder.setBillingStreet1(RandomTestUtil.randomString());
+
+		commerceOrder.setBillingStreet2(RandomTestUtil.randomString());
+
+		commerceOrder.setBillingStreet3(RandomTestUtil.randomString());
+
+		commerceOrder.setBillingCity(RandomTestUtil.randomString());
+
+		commerceOrder.setBillingZip(RandomTestUtil.randomString());
+
+		commerceOrder.setBillingRegionId(RandomTestUtil.nextLong());
+
+		commerceOrder.setBillingCountryId(RandomTestUtil.nextLong());
+
+		commerceOrder.setBillingPhoneNumber(RandomTestUtil.randomString());
+
+		commerceOrder.setShippingName(RandomTestUtil.randomString());
+
+		commerceOrder.setShippingDescription(RandomTestUtil.randomString());
+
+		commerceOrder.setShippingStreet1(RandomTestUtil.randomString());
+
+		commerceOrder.setShippingStreet2(RandomTestUtil.randomString());
+
+		commerceOrder.setShippingStreet3(RandomTestUtil.randomString());
+
+		commerceOrder.setShippingCity(RandomTestUtil.randomString());
+
+		commerceOrder.setShippingZip(RandomTestUtil.randomString());
+
+		commerceOrder.setShippingRegionId(RandomTestUtil.nextLong());
+
+		commerceOrder.setShippingCountryId(RandomTestUtil.nextLong());
+
+		commerceOrder.setShippingPhoneNumber(RandomTestUtil.randomString());
 
 		commerceOrder.setAdvanceStatus(RandomTestUtil.randomString());
 

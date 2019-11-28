@@ -63,7 +63,16 @@ public class CommerceShipmentWrapper
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("commerceAccountId", getCommerceAccountId());
-		attributes.put("commerceAddressId", getCommerceAddressId());
+		attributes.put("shippingName", getShippingName());
+		attributes.put("shippingDescription", getShippingDescription());
+		attributes.put("shippingStreet1", getShippingStreet1());
+		attributes.put("shippingStreet2", getShippingStreet2());
+		attributes.put("shippingStreet3", getShippingStreet3());
+		attributes.put("shippingCity", getShippingCity());
+		attributes.put("shippingZip", getShippingZip());
+		attributes.put("shippingRegionId", getShippingRegionId());
+		attributes.put("shippingCountryId", getShippingCountryId());
+		attributes.put("shippingPhoneNumber", getShippingPhoneNumber());
 		attributes.put(
 			"commerceShippingMethodId", getCommerceShippingMethodId());
 		attributes.put("shippingOptionName", getShippingOptionName());
@@ -126,10 +135,66 @@ public class CommerceShipmentWrapper
 			setCommerceAccountId(commerceAccountId);
 		}
 
-		Long commerceAddressId = (Long)attributes.get("commerceAddressId");
+		String shippingName = (String)attributes.get("shippingName");
 
-		if (commerceAddressId != null) {
-			setCommerceAddressId(commerceAddressId);
+		if (shippingName != null) {
+			setShippingName(shippingName);
+		}
+
+		String shippingDescription = (String)attributes.get(
+			"shippingDescription");
+
+		if (shippingDescription != null) {
+			setShippingDescription(shippingDescription);
+		}
+
+		String shippingStreet1 = (String)attributes.get("shippingStreet1");
+
+		if (shippingStreet1 != null) {
+			setShippingStreet1(shippingStreet1);
+		}
+
+		String shippingStreet2 = (String)attributes.get("shippingStreet2");
+
+		if (shippingStreet2 != null) {
+			setShippingStreet2(shippingStreet2);
+		}
+
+		String shippingStreet3 = (String)attributes.get("shippingStreet3");
+
+		if (shippingStreet3 != null) {
+			setShippingStreet3(shippingStreet3);
+		}
+
+		String shippingCity = (String)attributes.get("shippingCity");
+
+		if (shippingCity != null) {
+			setShippingCity(shippingCity);
+		}
+
+		String shippingZip = (String)attributes.get("shippingZip");
+
+		if (shippingZip != null) {
+			setShippingZip(shippingZip);
+		}
+
+		Long shippingRegionId = (Long)attributes.get("shippingRegionId");
+
+		if (shippingRegionId != null) {
+			setShippingRegionId(shippingRegionId);
+		}
+
+		Long shippingCountryId = (Long)attributes.get("shippingCountryId");
+
+		if (shippingCountryId != null) {
+			setShippingCountryId(shippingCountryId);
+		}
+
+		String shippingPhoneNumber = (String)attributes.get(
+			"shippingPhoneNumber");
+
+		if (shippingPhoneNumber != null) {
+			setShippingPhoneNumber(shippingPhoneNumber);
 		}
 
 		Long commerceShippingMethodId = (Long)attributes.get(
@@ -234,16 +299,6 @@ public class CommerceShipmentWrapper
 	}
 
 	/**
-	 * Returns the commerce address ID of this commerce shipment.
-	 *
-	 * @return the commerce address ID of this commerce shipment
-	 */
-	@Override
-	public long getCommerceAddressId() {
-		return _commerceShipment.getCommerceAddressId();
-	}
-
-	/**
 	 * Returns the commerce shipment ID of this commerce shipment.
 	 *
 	 * @return the commerce shipment ID of this commerce shipment
@@ -341,6 +396,26 @@ public class CommerceShipmentWrapper
 	}
 
 	/**
+	 * Returns the shipping city of this commerce shipment.
+	 *
+	 * @return the shipping city of this commerce shipment
+	 */
+	@Override
+	public String getShippingCity() {
+		return _commerceShipment.getShippingCity();
+	}
+
+	/**
+	 * Returns the shipping country ID of this commerce shipment.
+	 *
+	 * @return the shipping country ID of this commerce shipment
+	 */
+	@Override
+	public long getShippingCountryId() {
+		return _commerceShipment.getShippingCountryId();
+	}
+
+	/**
 	 * Returns the shipping date of this commerce shipment.
 	 *
 	 * @return the shipping date of this commerce shipment
@@ -351,6 +426,26 @@ public class CommerceShipmentWrapper
 	}
 
 	/**
+	 * Returns the shipping description of this commerce shipment.
+	 *
+	 * @return the shipping description of this commerce shipment
+	 */
+	@Override
+	public String getShippingDescription() {
+		return _commerceShipment.getShippingDescription();
+	}
+
+	/**
+	 * Returns the shipping name of this commerce shipment.
+	 *
+	 * @return the shipping name of this commerce shipment
+	 */
+	@Override
+	public String getShippingName() {
+		return _commerceShipment.getShippingName();
+	}
+
+	/**
 	 * Returns the shipping option name of this commerce shipment.
 	 *
 	 * @return the shipping option name of this commerce shipment
@@ -358,6 +453,66 @@ public class CommerceShipmentWrapper
 	@Override
 	public String getShippingOptionName() {
 		return _commerceShipment.getShippingOptionName();
+	}
+
+	/**
+	 * Returns the shipping phone number of this commerce shipment.
+	 *
+	 * @return the shipping phone number of this commerce shipment
+	 */
+	@Override
+	public String getShippingPhoneNumber() {
+		return _commerceShipment.getShippingPhoneNumber();
+	}
+
+	/**
+	 * Returns the shipping region ID of this commerce shipment.
+	 *
+	 * @return the shipping region ID of this commerce shipment
+	 */
+	@Override
+	public long getShippingRegionId() {
+		return _commerceShipment.getShippingRegionId();
+	}
+
+	/**
+	 * Returns the shipping street1 of this commerce shipment.
+	 *
+	 * @return the shipping street1 of this commerce shipment
+	 */
+	@Override
+	public String getShippingStreet1() {
+		return _commerceShipment.getShippingStreet1();
+	}
+
+	/**
+	 * Returns the shipping street2 of this commerce shipment.
+	 *
+	 * @return the shipping street2 of this commerce shipment
+	 */
+	@Override
+	public String getShippingStreet2() {
+		return _commerceShipment.getShippingStreet2();
+	}
+
+	/**
+	 * Returns the shipping street3 of this commerce shipment.
+	 *
+	 * @return the shipping street3 of this commerce shipment
+	 */
+	@Override
+	public String getShippingStreet3() {
+		return _commerceShipment.getShippingStreet3();
+	}
+
+	/**
+	 * Returns the shipping zip of this commerce shipment.
+	 *
+	 * @return the shipping zip of this commerce shipment
+	 */
+	@Override
+	public String getShippingZip() {
+		return _commerceShipment.getShippingZip();
 	}
 
 	/**
@@ -463,16 +618,6 @@ public class CommerceShipmentWrapper
 	@Override
 	public void setCommerceAccountId(long commerceAccountId) {
 		_commerceShipment.setCommerceAccountId(commerceAccountId);
-	}
-
-	/**
-	 * Sets the commerce address ID of this commerce shipment.
-	 *
-	 * @param commerceAddressId the commerce address ID of this commerce shipment
-	 */
-	@Override
-	public void setCommerceAddressId(long commerceAddressId) {
-		_commerceShipment.setCommerceAddressId(commerceAddressId);
 	}
 
 	/**
@@ -583,6 +728,26 @@ public class CommerceShipmentWrapper
 	}
 
 	/**
+	 * Sets the shipping city of this commerce shipment.
+	 *
+	 * @param shippingCity the shipping city of this commerce shipment
+	 */
+	@Override
+	public void setShippingCity(String shippingCity) {
+		_commerceShipment.setShippingCity(shippingCity);
+	}
+
+	/**
+	 * Sets the shipping country ID of this commerce shipment.
+	 *
+	 * @param shippingCountryId the shipping country ID of this commerce shipment
+	 */
+	@Override
+	public void setShippingCountryId(long shippingCountryId) {
+		_commerceShipment.setShippingCountryId(shippingCountryId);
+	}
+
+	/**
 	 * Sets the shipping date of this commerce shipment.
 	 *
 	 * @param shippingDate the shipping date of this commerce shipment
@@ -593,6 +758,26 @@ public class CommerceShipmentWrapper
 	}
 
 	/**
+	 * Sets the shipping description of this commerce shipment.
+	 *
+	 * @param shippingDescription the shipping description of this commerce shipment
+	 */
+	@Override
+	public void setShippingDescription(String shippingDescription) {
+		_commerceShipment.setShippingDescription(shippingDescription);
+	}
+
+	/**
+	 * Sets the shipping name of this commerce shipment.
+	 *
+	 * @param shippingName the shipping name of this commerce shipment
+	 */
+	@Override
+	public void setShippingName(String shippingName) {
+		_commerceShipment.setShippingName(shippingName);
+	}
+
+	/**
 	 * Sets the shipping option name of this commerce shipment.
 	 *
 	 * @param shippingOptionName the shipping option name of this commerce shipment
@@ -600,6 +785,66 @@ public class CommerceShipmentWrapper
 	@Override
 	public void setShippingOptionName(String shippingOptionName) {
 		_commerceShipment.setShippingOptionName(shippingOptionName);
+	}
+
+	/**
+	 * Sets the shipping phone number of this commerce shipment.
+	 *
+	 * @param shippingPhoneNumber the shipping phone number of this commerce shipment
+	 */
+	@Override
+	public void setShippingPhoneNumber(String shippingPhoneNumber) {
+		_commerceShipment.setShippingPhoneNumber(shippingPhoneNumber);
+	}
+
+	/**
+	 * Sets the shipping region ID of this commerce shipment.
+	 *
+	 * @param shippingRegionId the shipping region ID of this commerce shipment
+	 */
+	@Override
+	public void setShippingRegionId(long shippingRegionId) {
+		_commerceShipment.setShippingRegionId(shippingRegionId);
+	}
+
+	/**
+	 * Sets the shipping street1 of this commerce shipment.
+	 *
+	 * @param shippingStreet1 the shipping street1 of this commerce shipment
+	 */
+	@Override
+	public void setShippingStreet1(String shippingStreet1) {
+		_commerceShipment.setShippingStreet1(shippingStreet1);
+	}
+
+	/**
+	 * Sets the shipping street2 of this commerce shipment.
+	 *
+	 * @param shippingStreet2 the shipping street2 of this commerce shipment
+	 */
+	@Override
+	public void setShippingStreet2(String shippingStreet2) {
+		_commerceShipment.setShippingStreet2(shippingStreet2);
+	}
+
+	/**
+	 * Sets the shipping street3 of this commerce shipment.
+	 *
+	 * @param shippingStreet3 the shipping street3 of this commerce shipment
+	 */
+	@Override
+	public void setShippingStreet3(String shippingStreet3) {
+		_commerceShipment.setShippingStreet3(shippingStreet3);
+	}
+
+	/**
+	 * Sets the shipping zip of this commerce shipment.
+	 *
+	 * @param shippingZip the shipping zip of this commerce shipment
+	 */
+	@Override
+	public void setShippingZip(String shippingZip) {
+		_commerceShipment.setShippingZip(shippingZip);
 	}
 
 	/**
