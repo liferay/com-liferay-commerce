@@ -28,6 +28,8 @@ PortletURL portletURL = commerceShipmentItemDisplayContext.getPortletURL();
 portletURL.setParameter("searchContainerId", "commerceShipmentItems");
 
 request.setAttribute("view.jsp-portletURL", portletURL);
+
+CommerceShipment commerceShipment = commerceShipmentItemDisplayContext.getCommerceShipment();
 %>
 
 <liferay-frontend:management-bar
@@ -40,14 +42,16 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 			selectedDisplayStyle="list"
 		/>
 
-		<liferay-frontend:add-menu
-			inline="<%= true %>"
-		>
-			<liferay-frontend:add-menu-item
-				title='<%= LanguageUtil.get(request, "add-shipment-item") %>'
-				url="<%= addCommerceShipmentItemsURL %>"
-			/>
-		</liferay-frontend:add-menu>
+		<c:if test="<%= ArrayUtil.contains(CommerceShipmentConstants.EDITABLE_SHIPMENT_STATUSES, commerceShipment.getStatus()) %>">
+			<liferay-frontend:add-menu
+				inline="<%= true %>"
+			>
+				<liferay-frontend:add-menu-item
+					title='<%= LanguageUtil.get(request, "add-shipment-item") %>'
+					url="<%= addCommerceShipmentItemsURL %>"
+				/>
+			</liferay-frontend:add-menu>
+		</c:if>
 	</liferay-frontend:management-bar-buttons>
 
 	<liferay-frontend:management-bar-filters>
@@ -59,6 +63,14 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 </liferay-frontend:management-bar>
 
 <div class="container-fluid-1280" id="<portlet:namespace />shipmentItemsContainer">
+	<liferay-ui:error exception="<%= CommerceShipmentStatusException.class %>" message="shipments-can-only-be-modified-if-they-have-a-processing-status" />
+
+	<c:if test="<%= !ArrayUtil.contains(CommerceShipmentConstants.EDITABLE_SHIPMENT_STATUSES, commerceShipment.getStatus()) %>">
+		<aui:alert closeable="<%= false %>" cssClass="mt-3" type="warning">
+			<liferay-ui:message key="shipments-can-only-be-modified-if-they-have-a-processing-status" />
+		</aui:alert>
+	</c:if>
+
 	<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
 		<aui:input name="<%= Constants.CMD %>" type="hidden" />
 		<aui:input name="redirect" type="hidden" value="<%= portletURL.toString() %>" />
@@ -110,10 +122,12 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 						value="<%= (commerceInventoryWarehouse == null) ? StringPool.BLANK : HtmlUtil.escape(commerceInventoryWarehouse.getName()) %>"
 					/>
 
-					<liferay-ui:search-container-column-jsp
-						cssClass="entry-action-column"
-						path="/shipment_item_action.jsp"
-					/>
+					<c:if test="<%= ArrayUtil.contains(CommerceShipmentConstants.EDITABLE_SHIPMENT_STATUSES, commerceShipment.getStatus()) %>">
+						<liferay-ui:search-container-column-jsp
+							cssClass="entry-action-column"
+							path="/shipment_item_action.jsp"
+						/>
+					</c:if>
 				</liferay-ui:search-container-row>
 
 				<liferay-ui:search-iterator

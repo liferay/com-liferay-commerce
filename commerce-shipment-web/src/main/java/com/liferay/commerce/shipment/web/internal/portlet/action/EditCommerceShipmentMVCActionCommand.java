@@ -15,6 +15,7 @@
 package com.liferay.commerce.shipment.web.internal.portlet.action;
 
 import com.liferay.commerce.constants.CommercePortletKeys;
+import com.liferay.commerce.constants.CommerceShipmentConstants;
 import com.liferay.commerce.exception.CommerceShipmentItemQuantityException;
 import com.liferay.commerce.exception.CommerceShipmentStatusException;
 import com.liferay.commerce.exception.NoSuchShipmentException;
@@ -34,6 +35,7 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -307,13 +309,32 @@ public class EditCommerceShipmentMVCActionCommand extends BaseMVCActionCommand {
 		CommerceShipment commerceShipment = null;
 
 		if (commerceShipmentId > 0) {
-			commerceShipment = _commerceShipmentService.updateCommerceShipment(
-				commerceShipmentId, name, description, street1, street2,
-				street3, city, zip, commerceRegionId, commerceCountryId,
-				phoneNumber, carrier, trackingNumber, status, shippingDateMonth,
-				shippingDateDay, shippingDateYear, shippingDateHour,
-				shippingDateMinute, expectedDateMonth, expectedDateDay,
-				expectedDateYear, expectedDateHour, expectedDateMinute);
+			commerceShipment = _commerceShipmentService.getCommerceShipment(
+				commerceShipmentId);
+
+			if (ArrayUtil.contains(
+					CommerceShipmentConstants.EDITABLE_SHIPMENT_STATUSES,
+					commerceShipment.getStatus())) {
+
+				commerceShipment =
+					_commerceShipmentService.updateCommerceShipment(
+						commerceShipmentId, name, description, street1, street2,
+						street3, city, zip, commerceRegionId, commerceCountryId,
+						phoneNumber, carrier, trackingNumber, status,
+						shippingDateMonth, shippingDateDay, shippingDateYear,
+						shippingDateHour, shippingDateMinute, expectedDateMonth,
+						expectedDateDay, expectedDateYear, expectedDateHour,
+						expectedDateMinute);
+			}
+			else {
+				commerceShipment =
+					_commerceShipmentService.updateCommerceShipment(
+						commerceShipmentId, carrier, trackingNumber, status,
+						shippingDateMonth, shippingDateDay, shippingDateYear,
+						shippingDateHour, shippingDateMinute, expectedDateMonth,
+						expectedDateDay, expectedDateYear, expectedDateHour,
+						expectedDateMinute);
+			}
 		}
 		else {
 			long commerceOrderId = ParamUtil.getLong(

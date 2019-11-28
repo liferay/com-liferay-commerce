@@ -51,7 +51,13 @@ if (commerceAddress != null) {
 	<liferay-ui:error exception="<%= CommerceShipmentStatusException.class %>" message="please-select-a-valid-status" />
 
 	<aui:fieldset-group markupView="lexicon">
-		<aui:fieldset>
+		<aui:fieldset id="address">
+			<c:if test="<%= !ArrayUtil.contains(CommerceShipmentConstants.EDITABLE_SHIPMENT_STATUSES, commerceShipment.getStatus()) %>">
+				<aui:alert closeable="<%= false %>" cssClass="mt-3" type="warning">
+					<liferay-ui:message key="shipments-can-only-be-modified-if-they-have-a-processing-status" />
+				</aui:alert>
+			</c:if>
+
 			<aui:row>
 				<aui:col width="<%= 50 %>">
 					<aui:input name="name" />
@@ -142,6 +148,12 @@ if (commerceAddress != null) {
 </aui:form>
 
 <aui:script use="aui-base,liferay-dynamic-select">
+	var addressSection = A.one('#<portlet:namespace />address');
+
+	if (address) {
+		Liferay.Util.toggleDisabled(address, <%= !ArrayUtil.contains(CommerceShipmentConstants.EDITABLE_SHIPMENT_STATUSES, commerceShipment.getStatus()) %>);
+	}
+
 	new Liferay.DynamicSelect(
 		[
 			{
