@@ -287,6 +287,33 @@ public class CPAttachmentFileEntryServiceImpl
 			json, priority, type, serviceContext);
 	}
 
+	/**
+	 * @param      classNameId
+	 * @param      classPK
+	 * @param      fileEntryId
+	 * @param      displayDateMonth
+	 * @param      displayDateDay
+	 * @param      displayDateYear
+	 * @param      displayDateHour
+	 * @param      displayDateMinute
+	 * @param      expirationDateMonth
+	 * @param      expirationDateDay
+	 * @param      expirationDateYear
+	 * @param      expirationDateHour
+	 * @param      expirationDateMinute
+	 * @param      neverExpire
+	 * @param      titleMap
+	 * @param      json
+	 * @param      priority
+	 * @param      type
+	 * @param      externalReferenceCode
+	 * @param      serviceContext
+	 * @throws     PortalException
+	 * @deprecated As of Athanasius (7.3.x), use {@link
+	 *             #upsertCPAttachmentFileEntry(long, long, long, long, int,
+	 *             int, int, int, int, int, int, int, int, int, boolean, Map,
+	 *             String, double, int, String, ServiceContext)}
+	 */
 	@Deprecated
 	@Override
 	public CPAttachmentFileEntry upsertCPAttachmentFileEntry(
