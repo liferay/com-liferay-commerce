@@ -1,27 +1,36 @@
+/**
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
 package com.liferay.commerce.frontend.fragment.renderer;
 
 import com.liferay.fragment.renderer.FragmentRenderer;
 import com.liferay.fragment.renderer.FragmentRendererContext;
 import com.liferay.info.item.renderer.InfoItemRenderer;
 import com.liferay.info.item.renderer.InfoItemRendererTracker;
-import com.liferay.portal.kernel.language.LanguageUtil;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.util.Locale;
-
+/**
+ * @author Gianmarco Brunialti Masera
+ */
 @Component(service = FragmentRenderer.class)
-public class CommerceFrontendFragmentRenderer extends BaseCommerceFragmentRenderer {
+public class GalleryFragmentRenderer extends BaseCommerceFragmentRenderer {
 
-    private static final String FRAGMENT_NAME = "Gallery";
-
-    @Override
-    protected String getFragmentName(Locale locale) {
-        return LanguageUtil.get(locale, FRAGMENT_NAME);
-    }
+    private static final String FRAGMENT_NAME = "gallery";
 
     @Override
     public void render(
@@ -29,11 +38,17 @@ public class CommerceFrontendFragmentRenderer extends BaseCommerceFragmentRender
             HttpServletRequest request,
             HttpServletResponse response) {
 
-        request.setAttribute(
-                "fragmentRendererContext", fragmentRendererContext);
+        request.setAttribute("fragmentRendererContext",
+                fragmentRendererContext);
 
-        InfoItemRenderer infoItemRenderer = _infoItemRendererTracker.getInfoItemRenderer(
-                "com.liferay.commerce.frontend.taglib.internal.info.item.renderer.GalleryItemRenderer");
+        InfoItemRenderer infoItemRenderer = _infoItemRendererTracker
+                .getInfoItemRenderer(INFO_ITEM_RENDERER_PACKAGE);
+
+    }
+
+    @Override
+    protected String getFragmentName() {
+        return FRAGMENT_NAME;
     }
 
     @Reference
