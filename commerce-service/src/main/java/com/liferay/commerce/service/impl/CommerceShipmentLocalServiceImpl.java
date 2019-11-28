@@ -340,7 +340,12 @@ public class CommerceShipmentLocalServiceImpl
 	}
 
 	protected void validate(int status, int oldStatus) throws PortalException {
-		if (status < oldStatus) {
+		if ((oldStatus !=
+				CommerceShipmentConstants.
+					SHIPMENT_STATUS_READY_TO_BE_SHIPPED) &&
+			(status != CommerceShipmentConstants.SHIPMENT_STATUS_PROCESSING) &&
+			(status < oldStatus)) {
+
 			throw new CommerceShipmentStatusException();
 		}
 	}
