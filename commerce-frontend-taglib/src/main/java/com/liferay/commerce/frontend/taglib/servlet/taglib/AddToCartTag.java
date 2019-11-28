@@ -26,8 +26,10 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.Map;
 
@@ -45,6 +47,10 @@ public class AddToCartTag extends ComponentRendererTag {
 			CommerceContext commerceContext =
 				(CommerceContext)request.getAttribute(
 					CommerceWebKeys.COMMERCE_CONTEXT);
+
+			ThemeDisplay themeDisplay =
+					(ThemeDisplay) request.getAttribute(
+							WebKeys.THEME_DISPLAY);
 
 			CommerceAccount commerceAccount =
 				commerceContext.getCommerceAccount();
@@ -85,6 +91,11 @@ public class AddToCartTag extends ComponentRendererTag {
 				"settings",
 				_productHelper.getProductSettingsModel(cpInstanceId));
 
+			putValue(
+					"spritemap",
+					themeDisplay.getPathThemeImages() + "/commerce-icons.svg"
+			);
+
 			setTemplateNamespace("AddToCartButton.render");
 		}
 		catch (PortalException pe) {
@@ -112,6 +123,10 @@ public class AddToCartTag extends ComponentRendererTag {
 
 	public void setId(String id) {
 		putValue("id", id);
+	}
+
+	public void setSpritemap(String spritemap) {
+		putValue("spritemap", spritemap);
 	}
 
 	@Override

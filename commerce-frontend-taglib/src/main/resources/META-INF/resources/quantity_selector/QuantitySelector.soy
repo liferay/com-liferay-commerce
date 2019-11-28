@@ -6,6 +6,7 @@
 	{@param? minQuantity: int}
 	{@param? maxQuantity: int}
 	{@param? allowedQuantities: list<number>}
+	{@param? quantitySelectorAdditionalClasses: string}
 	{@param? _prevAvailable: bool}
 	{@param? _nextAvailable: bool}
 	{@param? _handleFormSubmit: any}
@@ -15,34 +16,24 @@
 	{@param? _handleNextQuantityButtonPressed: any}
 	{@param? _handleSelectOption: any}
 
-	{let $prevClass kind="text"}
-		commerce-quantity-selector__btn
-		{if $_prevAvailable == false}
-			{sp}is-disabled
-		{/if}
-	{/let}
-
-	{let $nextClass kind="text"}
-		commerce-quantity-selector__btn
-		{if $_nextAvailable == false}
-			{sp}is-disabled
-		{/if}
-	{/let}
-
 	{let $quantitySelectorClasses kind="text"}
-		commerce-quantity-selector
+		quantity-selector
+		
+		{if $quantitySelectorAdditionalClasses}
+			{sp}{$quantitySelectorAdditionalClasses}
+		{/if}
 
-		{if $disabled == true}
-			{sp}commerce-quantity-selector--disabled
+		{if $disabled}
+			{sp}quantity-selector--disabled
 		{/if}
 	{/let}
 
-	<div class="{$quantitySelectorClasses}">
+	<form data-onsubmit="{$_handleFormSubmit}" class="{$quantitySelectorClasses}">
 		{if isNonnull($allowedQuantities)}
 			{let $selectAttributes kind="attributes"}
-				class="commerce-quantity-selector__select"
+				class="quantity-selector__select"
 				data-onchange="{$_handleSelectOption}"
-				{if $disabled == true}
+				{if $disabled}
 					disabled
 				{/if}
 			{/let}
@@ -61,46 +52,56 @@
 				</select>
 			</form>
 		{else}
-			{let $inputAttributes kind="attributes"}
-				name="quantity"
-				type="number"
-				class="commerce-quantity-selector__input"
-				data-onkeyup="{$_handleInputKeyUp}"
-				data-onkeydown="{$_handleArrowKeys}"
-				value="{$quantity}"
+			<div class="input-group justify-content-center">
+				<div class="input-group-item input-group-item-shrink input-group-prepend">
+					<button 
+						class="btn btn-monospaced btn-secondary" 
+						type="submit"
+						data-onclick="{$_handlePrevQuantityButtonPressed}"
+						{if $_prevAvailable == false}
+							{sp}disabled
+						{/if}
+					>
+						&ndash;
+					</button>
+				</div>
 
-				{if isNonnull($minQuantity)}
-					{sp}min="{$minQuantity}"
-				{/if}
+				<div class="input-group-item input-group-item-shrink input-group-prepend">
+					<input 
+						name="quantity"
+						type="number"
+						class="form-control"
+						data-onkeyup="{$_handleInputKeyUp}"
+						data-onkeydown="{$_handleArrowKeys}"
+						value="{$quantity}"
 
-				{if isNonnull($maxQuantity)}
-					{sp}max="{$maxQuantity}"
-				{/if}
+						{if isNonnull($minQuantity)}
+							{sp}min="{$minQuantity}"
+						{/if}
 
-				{if $disabled == true}
-					{sp}disabled
-				{/if}
-			{/let}
+						{if isNonnull($maxQuantity)}
+							{sp}max="{$maxQuantity}"
+						{/if}
 
-			<button
-				class="{$prevClass}"
-				data-onclick="{$_handlePrevQuantityButtonPressed}"
-				tabindex="-1"
-			>
-				&ndash;
-			</button>
+						{if $disabled}
+							{sp}disabled
+						{/if}
+					/>
+				</div>
 
-			<form data-onsubmit="{$_handleFormSubmit}">
-				<input {$inputAttributes} />
-			</form>
-
-			<button
-				class="{$nextClass}"
-				data-onclick="{$_handleNextQuantityButtonPressed}"
-				tabindex="-1"
-			>
-				+
-			</button>
+				<div class="input-group-item input-group-append input-group-item-shrink">
+					<button 
+						class="btn btn-monospaced btn-secondary"
+						type="submit"
+						data-onclick="{$_handleNextQuantityButtonPressed}"
+						{if $_nextAvailable == false}
+							{sp}disabled
+						{/if}
+					>
+						+
+					</button>
+				</div>
+			</div>
 		{/if}
-	</div>
+	</form>
 {/template}

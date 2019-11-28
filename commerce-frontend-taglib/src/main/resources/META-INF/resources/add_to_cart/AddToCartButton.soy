@@ -1,196 +1,54 @@
 {namespace AddToCartButton}
 
 {template .render}
-
 	{@param? disabled: bool }
-	{@param? buttonVariant: string }
+	{@param? buttonStyle: string }
 	{@param? accountId: number|string }
-	{@param? hasQuantityChanged: bool }
 	{@param? inputQuantity: int }
-	{@param quantity: int }
-	{@param editMode: bool }
+	{@param? updatingTransition: string}
+	{@param? quantity: int }
 	{@param settings: ? }
 	{@param spritemap: ? }
 
 	{@param? _handleSubmitClick: any }
-	{@param? _handleBtnClick: any }
-	{@param? _handleBtnFocus: any }
-	{@param? _handleBtnFocusin: any }
-	{@param? _handleBtnFocusout: any }
 	{@param? _updateQuantity: any }
 	{@param? _submitQuantity: any }
 
-	{let $variant kind="text"}
-		{if isNonnull($buttonVariant)}
-			{$buttonVariant}
+	{let $addToCartClasses kind="text"}
+		add-to-cart
+		
+		{if $buttonStyle == 'block'}
+			{sp}add-to-cart-block
 		{else}
-			inline
+			{sp}add-to-cart-inline
 		{/if}
 	{/let}
 
-	{delcall ButtonVariant variant="$variant"}
-		{param disabled: $disabled /}
-		{param accountId: $accountId /}
-		{param hasQuantityChanged: $hasQuantityChanged /}
-		{param quantity: $quantity /}
-		{param editMode: $editMode /}
-		{param settings: $settings /}
-		{param spritemap: $spritemap /}
-		{param inputQuantity: $inputQuantity /}
+	{let $iconContainerClasses kind="text"}
+		add-to-cart-icon-container inline-item inline-item-after
 
-		{param _handleSubmitClick: $_handleSubmitClick /}
-		{param _handleBtnClick: $_handleBtnClick /}
-		{param _handleBtnFocus: $_handleBtnFocus /}
-		{param _handleBtnFocusin: $_handleBtnFocusin /}
-		{param _handleBtnFocusout: $_handleBtnFocusout /}
-		{param _updateQuantity: $_updateQuantity /}
-		{param _submitQuantity: $_submitQuantity /}
-	{/delcall}
-{/template}
-
-{deltemplate ButtonVariant variant="'compact'"}
-	{@param? disabled: bool }
-	{@param? accountId: number|string }
-	{@param? hasQuantityChanged: bool }
-	{@param quantity: int }
-	{@param editMode: bool }
-	{@param settings: ? }
-	{@param spritemap: ? }
-	{@param? inputQuantity: int }
-
-	{@param? _handleSubmitClick: any }
-	{@param? _handleBtnClick: any }
-	{@param? _handleBtnFocus: any }
-	{@param? _handleBtnFocusin: any }
-	{@param? _handleBtnFocusout: any }
-	{@param? _updateQuantity: any }
-	{@param? _submitQuantity: any }
-
-	{let $btnClass kind="text"}
-		commerce-button{sp}commerce-button--small
-		{if $quantity > 0 and $editMode == false}
-			{sp}commerce-button--good
-		{/if}
-
-		{if $hasQuantityChanged == true}
-			{sp}quantity-changed
-		{/if}
-
-		{sp}add-to-cart-button{sp}add-to-cart-button--compact
-		{if $editMode == true}
-			{sp}add-to-cart-button--compact--edit
-
-			{if isNonnull($settings.allowedQuantities)}
-				{sp}with-select
-			{/if}
-		{/if}
-
-		{if (isNonnull($accountId) and isNonnull($disabled) and $disabled == false) == false }
-			{sp}commerce-button--disabled
+		{if $quantity and $quantity > 0}
+			{sp}active
 		{/if}
 	{/let}
 
-	<div
-			class="{$btnClass}"
-			data-add-more-label="{msg desc="Add more"}add-more{/msg}"
-			data-onclick="{$_handleBtnClick}"
-			data-onfocus="{$_handleBtnFocus}"
-			data-onfocusin="{$_handleBtnFocusin}"
-			data-onfocusout="{$_handleBtnFocusout}"
-			tabindex="0"
-	>
+	{let $quantityMarkerClasses kind="text"}
+		add-to-cart-quantity-marker
 
-		{if $editMode == false}
-			{if $quantity == 0}
-				{msg desc="Add to cart"}add-to-cart{/msg}
-			{else}
-				{let $quantityChanged kind="text"}
-					add-to-cart-button--compact__ok
-					{if $hasQuantityChanged == true}
-						{sp}quantity-changed
-					{/if}
-				{/let}
-
-				<div class="{$quantityChanged}">
-					<span class="added-quantity">{msg desc="Items added"}items-added{/msg}</span>
-				</div>
-			{/if}
-		{else}
-			{call QuantitySelector.render}
-				{param events: [
-				'submitQuantity' : $_submitQuantity,
-				'updateQuantity' : $_updateQuantity
-				] /}
-				{param quantity: $inputQuantity /}
-				{param minQuantity: $settings.minQuantity /}
-				{param maxQuantity: $settings.maxQuantity /}
-				{param multipleQuantity: $settings.multipleQuantity /}
-				{param allowedQuantities: $settings.allowedQuantities /}
-				{param disabled: $disabled /}
-			{/call}
-
-			<div
-				class="add-to-cart-button--compact__fwd"
-				data-onclick="{$_handleSubmitClick}">
-
-				<span class="arrow__line">
-					{call ClayIcon.render}
-						{param spritemap: $spritemap /}
-						{param symbol: 'line' /}
-					{/call}
-				</span>
-				<span class="arrow__tip">
-					{call ClayIcon.render}
-						{param spritemap: $spritemap /}
-						{param symbol: 'greater' /}
-					{/call}
-				</span>
-
-			</div>
-		{/if}
-	</div>
-{/deltemplate}
-
-{deltemplate ButtonVariant variant="'inline'"}
-	{@param quantity: int }
-	{@param editMode: bool }
-	{@param settings: ? }
-	{@param spritemap: ? }
-
-	{@param? disabled: bool }
-	{@param? accountId: number|string }
-	{@param? hasQuantityChanged: bool }
-	{@param? inputQuantity: int }
-
-	{@param? _handleSubmitClick: any }
-	{@param? _handleBtnClick: any }
-	{@param? _handleBtnFocus: any }
-	{@param? _handleBtnFocusin: any }
-	{@param? _handleBtnFocusout: any }
-	{@param? _updateQuantity: any }
-	{@param? _submitQuantity: any }
-
-	{let $btnClass kind="text"}
-		commerce-button
-
-		{if $hasQuantityChanged == true or $quantity > 0}
-			{sp}commerce-button--good{sp}quantity-changed
-		{/if}
-
-		{if $editMode == true}
-			{sp}add-to-cart-button--inline--edit
-		{/if}
-
-		{if (isNonnull($accountId) and (isNonnull($disabled) and $disabled == false)) == false }
-			{sp}commerce-button--disabled
+		{if $updatingTransition == 'adding'}
+			{sp}adding
+		{elseif $updatingTransition == 'incrementing'}
+			{sp}incrementing
+		{elseif $quantity and $quantity > 0}
+			{sp}active
 		{/if}
 	{/let}
 
-	<div class="add-to-cart-button--inline">
+	<div class="{$addToCartClasses}">
 		{call QuantitySelector.render}
 			{param events: [
-			'submitQuantity' : $_submitQuantity,
-			'updateQuantity' : $_updateQuantity
+				'submitQuantity' : $_submitQuantity,
+				'updateQuantity' : $_updateQuantity
 			] /}
 			{param quantity: $inputQuantity /}
 			{param minQuantity: $settings.minQuantity /}
@@ -200,36 +58,24 @@
 			{param disabled: $disabled /}
 		{/call}
 
-		<div
-			class="{$btnClass}"
-			data-add-more-label="{msg desc="Add more"}add-more{/msg}"
-			data-items-added-label="{msg desc="Items added"}items-added{/msg}"
+		<button
+			class="btn btn-primary btn-lg btn-add-to-cart"
 			data-onclick="{$_handleSubmitClick}"
-			data-onfocus="{$_handleBtnFocus}"
-			data-onfocusin="{$_handleBtnFocusin}"
-			data-onfocusout="{$_handleBtnFocusout}"
 			tabindex="0"
-		>
-			{if $hasQuantityChanged == false}
-				{if $quantity > 0}
-					{msg desc="Items added"}items-added{/msg}
-				{else}
-					{msg desc="Add to cart"}add-to-cart{/msg}
-				{/if}
-			{else}
-				{let $quantityChanged kind="text"}
-					add-to-cart-button__ok
-					{if $hasQuantityChanged == true}
-						{sp}quantity-changed
-					{/if}
-				{/let}
-
-				<div class="{$quantityChanged}">
-					{msg desc="Items added"}items-added{/msg}
-
-					<span class="added-quantity">{$quantity} {msg desc="in cart"}added{/msg}</span>
-				</div>
+			{if (isNonnull($accountId) and (isNonnull($disabled) and $disabled == false)) == false }
+				{sp}disabled
 			{/if}
-		</div>
+		>
+			{msg desc="Add to cart"}add-to-cart{/msg}
+			<span class="{$iconContainerClasses}">
+				<span class="add-to-cart-icon">
+					{call ClayIcon.render}
+						{param spritemap: $spritemap /}
+						{param symbol: 'shopping-cart' /}
+					{/call}
+				</span>
+				<span class="{$quantityMarkerClasses}" ref="marker"></span>
+			</span>
+		</button>
 	</div>
-{/deltemplate}
+{/template}

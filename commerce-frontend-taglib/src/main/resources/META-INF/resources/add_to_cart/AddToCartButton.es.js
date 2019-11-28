@@ -6,19 +6,6 @@ import '../quantity_selector/QuantitySelector.es';
 
 let notificationDidShow = false;
 
-const selectInput = (element) => {
-	const inputBox = element.querySelector('input');
-	const selectBox = element.querySelector('select');
-
-	if (inputBox) {
-		inputBox.focus();
-		inputBox.select();
-	}
-	else if (selectBox) {
-		selectBox.focus();
-	}
-};
-
 function showNotification(message, type) {
 	!notificationDidShow && AUI().use(
 		'liferay-notification',
@@ -64,13 +51,9 @@ function doFocusOut() {
 		parentElement.focus();
 	}
 	else if (parentElement) {
-
 		// IE compatibility
-
 		parentElement.parentElement.focus();
 	}
-
-	this.editMode = false;
 }
 
 function doSubmit() {
@@ -80,7 +63,7 @@ function doSubmit() {
 	formData.append('groupId', themeDisplay.getScopeGroupId());
 	formData.append('productId', this.productId);
 	formData.append('languageId', themeDisplay.getLanguageId());
-	formData.append('quantity', this.quantity);
+	formData.append('quantity', this.inputQuantity);
 	formData.append('options', this.options);
 
 	if (this.orderId) {
@@ -120,10 +103,9 @@ function doSubmit() {
 					);
 					this.orderId = jsonresponse.orderId;
 				}
-
-				this.initialQuantity = this.quantity;
-				this.hasQuantityChanged = true;
-				this.emit('submitQuantity', this.productId, this.quantity);
+				
+				this._animateMarker(this.quantity);
+				this.quantity = this.inputQuantity;
 			}
 			else if (jsonresponse.errorMessages) {
 				showNotification(jsonresponse.errorMessages[0], 'danger');
@@ -152,10 +134,27 @@ function doSubmit() {
 class AddToCartButton extends Component {
 
 	created() {
-		this.initialQuantity = this.quantity;
+		this.quantity = this.quantity;
 		resetInputQuantity.call(this);
-		this.hasQuantityChanged = false;
+		this._handleMarkerAnimation = this._handleMarkerAnimation.bind(this);
+	}
 
+	_animateMarker(prevQuantity) {
+		if(prevQuantity === 0) {
+			this.updatingTransition = 'adding';
+		} else {
+			this.updatingTransition = 'incrementing';
+		}
+		
+		this.refs.marker.addEventListener('animationend', this._handleMarkerAnimation, this);
+	}
+	
+	_handleMarkerAnimation() {
+		this.updatingTransition = null
+		this.refs.marker.removeEventListener('animationend', this._handleMarkerAnimation, this);
+	}
+
+	attached() {
 		window.Liferay.on('accountSelected', this._handleAccountChange, this);
 		window.Liferay.on('productRemovedFromCart', this._handleCartProductRemoval, this);
 	}
@@ -163,15 +162,6 @@ class AddToCartButton extends Component {
 	detached() {
 		window.Liferay.detach('accountSelected', this._handleAccountChange, this);
 		window.Liferay.detach('productRemovedFromCart', this._handleCartProductRemoval, this);
-	}
-
-	willReceiveState(changes) {
-		if (changes.editMode) {
-			setTimeout(
-				() => selectInput(this.element),
-				100
-			);
-		}
 	}
 
 	_updateQuantity(quantity) {
@@ -183,41 +173,15 @@ class AddToCartButton extends Component {
 		this._handleSubmitClick();
 	}
 
-	_enableEditMode() {
-		this.editMode = true;
-	}
-
-	_disableEditMode() {
-		this.editMode = false;
-		this.quantity = this.initialQuantity;
-		this.hasQuantityChanged = false;
-		doFocusOut.call(this);
-	}
-
-	_handleBtnClick(e) {
-		if (
-			!this.editMode &&
-            this.element === e.target &&
-            !this.disabled &&
-            !!this.accountId
-		) {
-			this._enableEditMode();
-		}
-		else if (!this.accountId) {
-			const message = Liferay.Language.get('no-account-selected');
-			const type = 'danger';
-
-			showNotification(message, type);
-		}
-	}
-
 	_handleAccountChange(e) {
 		this.accountId = e.accountId;
 		this.orderId = null;
+		//NOT CORRECT!!!
 		this.quantity = 0;
 		resetInputQuantity.call(this);
 	}
 
+<<<<<<< HEAD
 	_handleCartProductRemoval(e) {
 		if (e.productId === this.productId) {
 			this.quantity = 0;
@@ -232,20 +196,20 @@ class AddToCartButton extends Component {
 	_handleBtnFocusin() {
 		clearTimeout(this.closingTimeout);
 	}
-
-	_handleBtnFocusout(e) {
-		this.closingTimeout = setTimeout(
-			() => this._disableEditMode(),
-			(this.hasQuantityChanged ? 1000 : 100)
-		);
-	}
-
+=======
 	_handleSubmitClick() {
+		if (!this.accountId) {
+			const message = Liferay.Language.get('no-account-selected');
+			const type = 'danger';
+>>>>>>> COMMERCE-2491 add to cart button and quantity restyled and refactored
+
+			showNotification(message, type);
+		}
+
 		if (this.disabled) {
 			return null;
 		}
 
-		this.quantity = this.inputQuantity;
 		resetInputQuantity.call(this);
 
 		doSubmit.call(this)
@@ -262,16 +226,14 @@ AddToCartButton.STATE = {
 			Config.string()
 		]
 	),
-	buttonVariant: Config.oneOf(
+	buttonStyle: Config.oneOf(
 		[
-			'compact',
+			'block',
 			'inline'
 		]
 	).value('inline'),
 	cartAPI: Config.string().required(),
 	disabled: Config.bool().value(false),
-	editMode: Config.bool().value(false),
-	hasQuantityChanged: Config.bool().value(false),
 	inputQuantity: Config.number(),
 	options: Config.string().value('[]'),
 	orderId: Config.oneOfType(
@@ -280,13 +242,13 @@ AddToCartButton.STATE = {
 			Config.string()
 		]
 	),
+	quantity: Config.number(),
 	productId: Config.oneOfType(
 		[
 			Config.number(),
 			Config.string()
 		]
 	).required(),
-	quantity: Config.number().value(0),
 	settings: Config.shapeOf(
 		{
 			allowedQuantity: Config.array(Config.number()),
@@ -294,7 +256,13 @@ AddToCartButton.STATE = {
 			minQuantity: Config.number(),
 			multipleQuantity: Config.number()
 		}
-	).value({})
+	).value({}),
+	updatingTransition: Config.oneOf(
+		[
+			'adding',
+			'incrementing'
+		]
+	),
 };
 
 export {AddToCartButton};

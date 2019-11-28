@@ -160,10 +160,10 @@
 						{param settings: $settings /}
 						{param productId: $skuId /}
 						{param spritemap: $spritemap /}
-						{param buttonVariant: 'compact' /}
+						{param buttonStyle: 'block' /}
 					{/call}
 				{else}
-					<a class="commerce-button commerce-button--outline commerce-button--small" href="{$detailsLink}">
+					<a class="btn btn-secondary btn-add-to-cart btn-lg" href="{$detailsLink}">
 						{msg desc="View All Variants"}view-all-variants{/msg}
 					</a>
 				{/if}
