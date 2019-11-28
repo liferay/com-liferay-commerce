@@ -663,6 +663,12 @@ public class ProductResourceImpl
 				cpDefinition.getDescriptionMap());
 		}
 
+		boolean ignoreSKUCombinations = true;
+
+		if(cpDefinition != null) {
+			ignoreSKUCombinations = cpDefinition.isIgnoreSKUCombinations();
+		}
+
 		cpDefinition = _cpDefinitionService.upsertCPDefinition(
 			commerceCatalog.getGroupId(), _user.getUserId(),
 			LanguageUtils.getLocalizedMap(product.getName()),
@@ -671,7 +677,7 @@ public class ProductResourceImpl
 			LanguageUtils.getLocalizedMap(product.getMetaTitle()),
 			LanguageUtils.getLocalizedMap(product.getMetaDescription()),
 			LanguageUtils.getLocalizedMap(product.getMetaKeyword()),
-			product.getProductType(), true,
+			product.getProductType(), ignoreSKUCombinations,
 			GetterUtil.getBoolean(shippingConfiguration.getShippable(), true),
 			GetterUtil.getBoolean(
 				shippingConfiguration.getFreeShipping(), true),
