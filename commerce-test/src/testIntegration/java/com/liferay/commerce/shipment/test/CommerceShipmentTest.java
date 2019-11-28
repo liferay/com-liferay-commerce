@@ -517,7 +517,8 @@ public class CommerceShipmentTest {
 		CommerceOrderItem commerceOrderItem1 =
 			CommerceTestUtil.addCommerceOrderItem(
 				commerceOrder.getCommerceOrderId(),
-				cpInstance1.getCPInstanceId(), orderedQuantity, commerceContext);
+				cpInstance1.getCPInstanceId(), orderedQuantity,
+				commerceContext);
 
 		CommerceOrderItem commerceOrderItem2 =
 			CommerceTestUtil.addCommerceOrderItem(
