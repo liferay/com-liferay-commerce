@@ -5,6 +5,19 @@
 @import "./mixins.scss";
 @import "./utilities.scss";
 
+@import "./overrides/base.scss";
+@import "./overrides/button.scss";
+@import "./overrides/card.scss";
+@import "./overrides/input.scss";
+@import "./overrides/modal.scss";
+@import "./overrides/nav.scss";
+@import "./overrides/panel.scss";
+@import "./overrides/portlet.scss";
+@import "./overrides/table.scss";
+@import "overrides/checkout_page";
+@import "overrides/order_detail_page";
+@import "overrides/search_bar";
+
 @import "components/commerce_account_list";
 @import "components/commerce_account_selector";
 @import "components/commerce_account_switcher";
@@ -30,7 +43,6 @@
 @import "components/commerce_order_title";
 @import "components/commerce_panel";
 @import "components/commerce_product_details_modal";
-@import "components/commerce_quantity_selector";
 @import "components/commerce_search";
 @import "components/commerce_small_table";
 @import "components/commerce_suggestions";
@@ -57,26 +69,13 @@
 @import "./components/bom.scss";
 @import "./components/price.scss";
 @import "components/account_management";
-@import "components/add_to_cart_button";
 @import "components/added_input_item";
 @import "components/autocomplete_input";
 @import "components/main_link";
 @import "components/product_compare_checkbox";
 @import "components/product_detail";
 @import "components/product_header";
+@import "components/quantity_selector";
 @import "components/thumb_menu";
 @import "components/user_invitation";
 @import "components/user_item";
-
-@import "./overrides/base.scss";
-@import "./overrides/button.scss";
-@import "./overrides/card.scss";
-@import "./overrides/input.scss";
-@import "./overrides/modal.scss";
-@import "./overrides/nav.scss";
-@import "./overrides/panel.scss";
-@import "./overrides/portlet.scss";
-@import "./overrides/table.scss";
-@import "overrides/checkout_page";
-@import "overrides/order_detail_page";
-@import "overrides/search_bar";
