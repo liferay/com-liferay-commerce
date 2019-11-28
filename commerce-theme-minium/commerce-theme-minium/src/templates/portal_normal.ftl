@@ -55,7 +55,6 @@
 					</@>
 				</#if>
 			</div>
-
 		</div>
 
 		<#--  The toolbar is needed to create the shadow when scrolling  -->
