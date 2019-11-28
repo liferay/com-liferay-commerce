@@ -205,18 +205,152 @@ public interface CommerceShipmentModel
 	public void setCommerceAccountId(long commerceAccountId);
 
 	/**
-	 * Returns the commerce address ID of this commerce shipment.
+	 * Returns the shipping name of this commerce shipment.
 	 *
-	 * @return the commerce address ID of this commerce shipment
+	 * @return the shipping name of this commerce shipment
 	 */
-	public long getCommerceAddressId();
+	@AutoEscape
+	public String getShippingName();
 
 	/**
-	 * Sets the commerce address ID of this commerce shipment.
+	 * Sets the shipping name of this commerce shipment.
 	 *
-	 * @param commerceAddressId the commerce address ID of this commerce shipment
+	 * @param shippingName the shipping name of this commerce shipment
 	 */
-	public void setCommerceAddressId(long commerceAddressId);
+	public void setShippingName(String shippingName);
+
+	/**
+	 * Returns the shipping description of this commerce shipment.
+	 *
+	 * @return the shipping description of this commerce shipment
+	 */
+	@AutoEscape
+	public String getShippingDescription();
+
+	/**
+	 * Sets the shipping description of this commerce shipment.
+	 *
+	 * @param shippingDescription the shipping description of this commerce shipment
+	 */
+	public void setShippingDescription(String shippingDescription);
+
+	/**
+	 * Returns the shipping street1 of this commerce shipment.
+	 *
+	 * @return the shipping street1 of this commerce shipment
+	 */
+	@AutoEscape
+	public String getShippingStreet1();
+
+	/**
+	 * Sets the shipping street1 of this commerce shipment.
+	 *
+	 * @param shippingStreet1 the shipping street1 of this commerce shipment
+	 */
+	public void setShippingStreet1(String shippingStreet1);
+
+	/**
+	 * Returns the shipping street2 of this commerce shipment.
+	 *
+	 * @return the shipping street2 of this commerce shipment
+	 */
+	@AutoEscape
+	public String getShippingStreet2();
+
+	/**
+	 * Sets the shipping street2 of this commerce shipment.
+	 *
+	 * @param shippingStreet2 the shipping street2 of this commerce shipment
+	 */
+	public void setShippingStreet2(String shippingStreet2);
+
+	/**
+	 * Returns the shipping street3 of this commerce shipment.
+	 *
+	 * @return the shipping street3 of this commerce shipment
+	 */
+	@AutoEscape
+	public String getShippingStreet3();
+
+	/**
+	 * Sets the shipping street3 of this commerce shipment.
+	 *
+	 * @param shippingStreet3 the shipping street3 of this commerce shipment
+	 */
+	public void setShippingStreet3(String shippingStreet3);
+
+	/**
+	 * Returns the shipping city of this commerce shipment.
+	 *
+	 * @return the shipping city of this commerce shipment
+	 */
+	@AutoEscape
+	public String getShippingCity();
+
+	/**
+	 * Sets the shipping city of this commerce shipment.
+	 *
+	 * @param shippingCity the shipping city of this commerce shipment
+	 */
+	public void setShippingCity(String shippingCity);
+
+	/**
+	 * Returns the shipping zip of this commerce shipment.
+	 *
+	 * @return the shipping zip of this commerce shipment
+	 */
+	@AutoEscape
+	public String getShippingZip();
+
+	/**
+	 * Sets the shipping zip of this commerce shipment.
+	 *
+	 * @param shippingZip the shipping zip of this commerce shipment
+	 */
+	public void setShippingZip(String shippingZip);
+
+	/**
+	 * Returns the shipping region ID of this commerce shipment.
+	 *
+	 * @return the shipping region ID of this commerce shipment
+	 */
+	public long getShippingRegionId();
+
+	/**
+	 * Sets the shipping region ID of this commerce shipment.
+	 *
+	 * @param shippingRegionId the shipping region ID of this commerce shipment
+	 */
+	public void setShippingRegionId(long shippingRegionId);
+
+	/**
+	 * Returns the shipping country ID of this commerce shipment.
+	 *
+	 * @return the shipping country ID of this commerce shipment
+	 */
+	public long getShippingCountryId();
+
+	/**
+	 * Sets the shipping country ID of this commerce shipment.
+	 *
+	 * @param shippingCountryId the shipping country ID of this commerce shipment
+	 */
+	public void setShippingCountryId(long shippingCountryId);
+
+	/**
+	 * Returns the shipping phone number of this commerce shipment.
+	 *
+	 * @return the shipping phone number of this commerce shipment
+	 */
+	@AutoEscape
+	public String getShippingPhoneNumber();
+
+	/**
+	 * Sets the shipping phone number of this commerce shipment.
+	 *
+	 * @param shippingPhoneNumber the shipping phone number of this commerce shipment
+	 */
+	public void setShippingPhoneNumber(String shippingPhoneNumber);
 
 	/**
 	 * Returns the commerce shipping method ID of this commerce shipment.

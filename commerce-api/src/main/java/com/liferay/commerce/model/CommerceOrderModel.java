@@ -665,6 +665,302 @@ public interface CommerceOrderModel
 		BigDecimal totalDiscountPercentageLevel4);
 
 	/**
+	 * Returns the billing name of this commerce order.
+	 *
+	 * @return the billing name of this commerce order
+	 */
+	@AutoEscape
+	public String getBillingName();
+
+	/**
+	 * Sets the billing name of this commerce order.
+	 *
+	 * @param billingName the billing name of this commerce order
+	 */
+	public void setBillingName(String billingName);
+
+	/**
+	 * Returns the billing description of this commerce order.
+	 *
+	 * @return the billing description of this commerce order
+	 */
+	@AutoEscape
+	public String getBillingDescription();
+
+	/**
+	 * Sets the billing description of this commerce order.
+	 *
+	 * @param billingDescription the billing description of this commerce order
+	 */
+	public void setBillingDescription(String billingDescription);
+
+	/**
+	 * Returns the billing street1 of this commerce order.
+	 *
+	 * @return the billing street1 of this commerce order
+	 */
+	@AutoEscape
+	public String getBillingStreet1();
+
+	/**
+	 * Sets the billing street1 of this commerce order.
+	 *
+	 * @param billingStreet1 the billing street1 of this commerce order
+	 */
+	public void setBillingStreet1(String billingStreet1);
+
+	/**
+	 * Returns the billing street2 of this commerce order.
+	 *
+	 * @return the billing street2 of this commerce order
+	 */
+	@AutoEscape
+	public String getBillingStreet2();
+
+	/**
+	 * Sets the billing street2 of this commerce order.
+	 *
+	 * @param billingStreet2 the billing street2 of this commerce order
+	 */
+	public void setBillingStreet2(String billingStreet2);
+
+	/**
+	 * Returns the billing street3 of this commerce order.
+	 *
+	 * @return the billing street3 of this commerce order
+	 */
+	@AutoEscape
+	public String getBillingStreet3();
+
+	/**
+	 * Sets the billing street3 of this commerce order.
+	 *
+	 * @param billingStreet3 the billing street3 of this commerce order
+	 */
+	public void setBillingStreet3(String billingStreet3);
+
+	/**
+	 * Returns the billing city of this commerce order.
+	 *
+	 * @return the billing city of this commerce order
+	 */
+	@AutoEscape
+	public String getBillingCity();
+
+	/**
+	 * Sets the billing city of this commerce order.
+	 *
+	 * @param billingCity the billing city of this commerce order
+	 */
+	public void setBillingCity(String billingCity);
+
+	/**
+	 * Returns the billing zip of this commerce order.
+	 *
+	 * @return the billing zip of this commerce order
+	 */
+	@AutoEscape
+	public String getBillingZip();
+
+	/**
+	 * Sets the billing zip of this commerce order.
+	 *
+	 * @param billingZip the billing zip of this commerce order
+	 */
+	public void setBillingZip(String billingZip);
+
+	/**
+	 * Returns the billing region ID of this commerce order.
+	 *
+	 * @return the billing region ID of this commerce order
+	 */
+	public long getBillingRegionId();
+
+	/**
+	 * Sets the billing region ID of this commerce order.
+	 *
+	 * @param billingRegionId the billing region ID of this commerce order
+	 */
+	public void setBillingRegionId(long billingRegionId);
+
+	/**
+	 * Returns the billing country ID of this commerce order.
+	 *
+	 * @return the billing country ID of this commerce order
+	 */
+	public long getBillingCountryId();
+
+	/**
+	 * Sets the billing country ID of this commerce order.
+	 *
+	 * @param billingCountryId the billing country ID of this commerce order
+	 */
+	public void setBillingCountryId(long billingCountryId);
+
+	/**
+	 * Returns the billing phone number of this commerce order.
+	 *
+	 * @return the billing phone number of this commerce order
+	 */
+	@AutoEscape
+	public String getBillingPhoneNumber();
+
+	/**
+	 * Sets the billing phone number of this commerce order.
+	 *
+	 * @param billingPhoneNumber the billing phone number of this commerce order
+	 */
+	public void setBillingPhoneNumber(String billingPhoneNumber);
+
+	/**
+	 * Returns the shipping name of this commerce order.
+	 *
+	 * @return the shipping name of this commerce order
+	 */
+	@AutoEscape
+	public String getShippingName();
+
+	/**
+	 * Sets the shipping name of this commerce order.
+	 *
+	 * @param shippingName the shipping name of this commerce order
+	 */
+	public void setShippingName(String shippingName);
+
+	/**
+	 * Returns the shipping description of this commerce order.
+	 *
+	 * @return the shipping description of this commerce order
+	 */
+	@AutoEscape
+	public String getShippingDescription();
+
+	/**
+	 * Sets the shipping description of this commerce order.
+	 *
+	 * @param shippingDescription the shipping description of this commerce order
+	 */
+	public void setShippingDescription(String shippingDescription);
+
+	/**
+	 * Returns the shipping street1 of this commerce order.
+	 *
+	 * @return the shipping street1 of this commerce order
+	 */
+	@AutoEscape
+	public String getShippingStreet1();
+
+	/**
+	 * Sets the shipping street1 of this commerce order.
+	 *
+	 * @param shippingStreet1 the shipping street1 of this commerce order
+	 */
+	public void setShippingStreet1(String shippingStreet1);
+
+	/**
+	 * Returns the shipping street2 of this commerce order.
+	 *
+	 * @return the shipping street2 of this commerce order
+	 */
+	@AutoEscape
+	public String getShippingStreet2();
+
+	/**
+	 * Sets the shipping street2 of this commerce order.
+	 *
+	 * @param shippingStreet2 the shipping street2 of this commerce order
+	 */
+	public void setShippingStreet2(String shippingStreet2);
+
+	/**
+	 * Returns the shipping street3 of this commerce order.
+	 *
+	 * @return the shipping street3 of this commerce order
+	 */
+	@AutoEscape
+	public String getShippingStreet3();
+
+	/**
+	 * Sets the shipping street3 of this commerce order.
+	 *
+	 * @param shippingStreet3 the shipping street3 of this commerce order
+	 */
+	public void setShippingStreet3(String shippingStreet3);
+
+	/**
+	 * Returns the shipping city of this commerce order.
+	 *
+	 * @return the shipping city of this commerce order
+	 */
+	@AutoEscape
+	public String getShippingCity();
+
+	/**
+	 * Sets the shipping city of this commerce order.
+	 *
+	 * @param shippingCity the shipping city of this commerce order
+	 */
+	public void setShippingCity(String shippingCity);
+
+	/**
+	 * Returns the shipping zip of this commerce order.
+	 *
+	 * @return the shipping zip of this commerce order
+	 */
+	@AutoEscape
+	public String getShippingZip();
+
+	/**
+	 * Sets the shipping zip of this commerce order.
+	 *
+	 * @param shippingZip the shipping zip of this commerce order
+	 */
+	public void setShippingZip(String shippingZip);
+
+	/**
+	 * Returns the shipping region ID of this commerce order.
+	 *
+	 * @return the shipping region ID of this commerce order
+	 */
+	public long getShippingRegionId();
+
+	/**
+	 * Sets the shipping region ID of this commerce order.
+	 *
+	 * @param shippingRegionId the shipping region ID of this commerce order
+	 */
+	public void setShippingRegionId(long shippingRegionId);
+
+	/**
+	 * Returns the shipping country ID of this commerce order.
+	 *
+	 * @return the shipping country ID of this commerce order
+	 */
+	public long getShippingCountryId();
+
+	/**
+	 * Sets the shipping country ID of this commerce order.
+	 *
+	 * @param shippingCountryId the shipping country ID of this commerce order
+	 */
+	public void setShippingCountryId(long shippingCountryId);
+
+	/**
+	 * Returns the shipping phone number of this commerce order.
+	 *
+	 * @return the shipping phone number of this commerce order
+	 */
+	@AutoEscape
+	public String getShippingPhoneNumber();
+
+	/**
+	 * Sets the shipping phone number of this commerce order.
+	 *
+	 * @param shippingPhoneNumber the shipping phone number of this commerce order
+	 */
+	public void setShippingPhoneNumber(String shippingPhoneNumber);
+
+	/**
 	 * Returns the advance status of this commerce order.
 	 *
 	 * @return the advance status of this commerce order

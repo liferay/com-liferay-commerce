@@ -39,7 +39,16 @@ public class CommerceShipmentSoap implements Serializable {
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setCommerceAccountId(model.getCommerceAccountId());
-		soapModel.setCommerceAddressId(model.getCommerceAddressId());
+		soapModel.setShippingName(model.getShippingName());
+		soapModel.setShippingDescription(model.getShippingDescription());
+		soapModel.setShippingStreet1(model.getShippingStreet1());
+		soapModel.setShippingStreet2(model.getShippingStreet2());
+		soapModel.setShippingStreet3(model.getShippingStreet3());
+		soapModel.setShippingCity(model.getShippingCity());
+		soapModel.setShippingZip(model.getShippingZip());
+		soapModel.setShippingRegionId(model.getShippingRegionId());
+		soapModel.setShippingCountryId(model.getShippingCountryId());
+		soapModel.setShippingPhoneNumber(model.getShippingPhoneNumber());
 		soapModel.setCommerceShippingMethodId(
 			model.getCommerceShippingMethodId());
 		soapModel.setShippingOptionName(model.getShippingOptionName());
@@ -173,12 +182,84 @@ public class CommerceShipmentSoap implements Serializable {
 		_commerceAccountId = commerceAccountId;
 	}
 
-	public long getCommerceAddressId() {
-		return _commerceAddressId;
+	public String getShippingName() {
+		return _shippingName;
 	}
 
-	public void setCommerceAddressId(long commerceAddressId) {
-		_commerceAddressId = commerceAddressId;
+	public void setShippingName(String shippingName) {
+		_shippingName = shippingName;
+	}
+
+	public String getShippingDescription() {
+		return _shippingDescription;
+	}
+
+	public void setShippingDescription(String shippingDescription) {
+		_shippingDescription = shippingDescription;
+	}
+
+	public String getShippingStreet1() {
+		return _shippingStreet1;
+	}
+
+	public void setShippingStreet1(String shippingStreet1) {
+		_shippingStreet1 = shippingStreet1;
+	}
+
+	public String getShippingStreet2() {
+		return _shippingStreet2;
+	}
+
+	public void setShippingStreet2(String shippingStreet2) {
+		_shippingStreet2 = shippingStreet2;
+	}
+
+	public String getShippingStreet3() {
+		return _shippingStreet3;
+	}
+
+	public void setShippingStreet3(String shippingStreet3) {
+		_shippingStreet3 = shippingStreet3;
+	}
+
+	public String getShippingCity() {
+		return _shippingCity;
+	}
+
+	public void setShippingCity(String shippingCity) {
+		_shippingCity = shippingCity;
+	}
+
+	public String getShippingZip() {
+		return _shippingZip;
+	}
+
+	public void setShippingZip(String shippingZip) {
+		_shippingZip = shippingZip;
+	}
+
+	public long getShippingRegionId() {
+		return _shippingRegionId;
+	}
+
+	public void setShippingRegionId(long shippingRegionId) {
+		_shippingRegionId = shippingRegionId;
+	}
+
+	public long getShippingCountryId() {
+		return _shippingCountryId;
+	}
+
+	public void setShippingCountryId(long shippingCountryId) {
+		_shippingCountryId = shippingCountryId;
+	}
+
+	public String getShippingPhoneNumber() {
+		return _shippingPhoneNumber;
+	}
+
+	public void setShippingPhoneNumber(String shippingPhoneNumber) {
+		_shippingPhoneNumber = shippingPhoneNumber;
 	}
 
 	public long getCommerceShippingMethodId() {
@@ -245,7 +326,16 @@ public class CommerceShipmentSoap implements Serializable {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _commerceAccountId;
-	private long _commerceAddressId;
+	private String _shippingName;
+	private String _shippingDescription;
+	private String _shippingStreet1;
+	private String _shippingStreet2;
+	private String _shippingStreet3;
+	private String _shippingCity;
+	private String _shippingZip;
+	private long _shippingRegionId;
+	private long _shippingCountryId;
+	private String _shippingPhoneNumber;
 	private long _commerceShippingMethodId;
 	private String _shippingOptionName;
 	private String _carrier;

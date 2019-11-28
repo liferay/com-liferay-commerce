@@ -86,6 +86,26 @@ public class CommerceOrderSoap implements Serializable {
 			model.getTotalDiscountPercentageLevel3());
 		soapModel.setTotalDiscountPercentageLevel4(
 			model.getTotalDiscountPercentageLevel4());
+		soapModel.setBillingName(model.getBillingName());
+		soapModel.setBillingDescription(model.getBillingDescription());
+		soapModel.setBillingStreet1(model.getBillingStreet1());
+		soapModel.setBillingStreet2(model.getBillingStreet2());
+		soapModel.setBillingStreet3(model.getBillingStreet3());
+		soapModel.setBillingCity(model.getBillingCity());
+		soapModel.setBillingZip(model.getBillingZip());
+		soapModel.setBillingRegionId(model.getBillingRegionId());
+		soapModel.setBillingCountryId(model.getBillingCountryId());
+		soapModel.setBillingPhoneNumber(model.getBillingPhoneNumber());
+		soapModel.setShippingName(model.getShippingName());
+		soapModel.setShippingDescription(model.getShippingDescription());
+		soapModel.setShippingStreet1(model.getShippingStreet1());
+		soapModel.setShippingStreet2(model.getShippingStreet2());
+		soapModel.setShippingStreet3(model.getShippingStreet3());
+		soapModel.setShippingCity(model.getShippingCity());
+		soapModel.setShippingZip(model.getShippingZip());
+		soapModel.setShippingRegionId(model.getShippingRegionId());
+		soapModel.setShippingCountryId(model.getShippingCountryId());
+		soapModel.setShippingPhoneNumber(model.getShippingPhoneNumber());
 		soapModel.setAdvanceStatus(model.getAdvanceStatus());
 		soapModel.setPaymentStatus(model.getPaymentStatus());
 		soapModel.setOrderDate(model.getOrderDate());
@@ -486,6 +506,166 @@ public class CommerceOrderSoap implements Serializable {
 		_totalDiscountPercentageLevel4 = totalDiscountPercentageLevel4;
 	}
 
+	public String getBillingName() {
+		return _billingName;
+	}
+
+	public void setBillingName(String billingName) {
+		_billingName = billingName;
+	}
+
+	public String getBillingDescription() {
+		return _billingDescription;
+	}
+
+	public void setBillingDescription(String billingDescription) {
+		_billingDescription = billingDescription;
+	}
+
+	public String getBillingStreet1() {
+		return _billingStreet1;
+	}
+
+	public void setBillingStreet1(String billingStreet1) {
+		_billingStreet1 = billingStreet1;
+	}
+
+	public String getBillingStreet2() {
+		return _billingStreet2;
+	}
+
+	public void setBillingStreet2(String billingStreet2) {
+		_billingStreet2 = billingStreet2;
+	}
+
+	public String getBillingStreet3() {
+		return _billingStreet3;
+	}
+
+	public void setBillingStreet3(String billingStreet3) {
+		_billingStreet3 = billingStreet3;
+	}
+
+	public String getBillingCity() {
+		return _billingCity;
+	}
+
+	public void setBillingCity(String billingCity) {
+		_billingCity = billingCity;
+	}
+
+	public String getBillingZip() {
+		return _billingZip;
+	}
+
+	public void setBillingZip(String billingZip) {
+		_billingZip = billingZip;
+	}
+
+	public long getBillingRegionId() {
+		return _billingRegionId;
+	}
+
+	public void setBillingRegionId(long billingRegionId) {
+		_billingRegionId = billingRegionId;
+	}
+
+	public long getBillingCountryId() {
+		return _billingCountryId;
+	}
+
+	public void setBillingCountryId(long billingCountryId) {
+		_billingCountryId = billingCountryId;
+	}
+
+	public String getBillingPhoneNumber() {
+		return _billingPhoneNumber;
+	}
+
+	public void setBillingPhoneNumber(String billingPhoneNumber) {
+		_billingPhoneNumber = billingPhoneNumber;
+	}
+
+	public String getShippingName() {
+		return _shippingName;
+	}
+
+	public void setShippingName(String shippingName) {
+		_shippingName = shippingName;
+	}
+
+	public String getShippingDescription() {
+		return _shippingDescription;
+	}
+
+	public void setShippingDescription(String shippingDescription) {
+		_shippingDescription = shippingDescription;
+	}
+
+	public String getShippingStreet1() {
+		return _shippingStreet1;
+	}
+
+	public void setShippingStreet1(String shippingStreet1) {
+		_shippingStreet1 = shippingStreet1;
+	}
+
+	public String getShippingStreet2() {
+		return _shippingStreet2;
+	}
+
+	public void setShippingStreet2(String shippingStreet2) {
+		_shippingStreet2 = shippingStreet2;
+	}
+
+	public String getShippingStreet3() {
+		return _shippingStreet3;
+	}
+
+	public void setShippingStreet3(String shippingStreet3) {
+		_shippingStreet3 = shippingStreet3;
+	}
+
+	public String getShippingCity() {
+		return _shippingCity;
+	}
+
+	public void setShippingCity(String shippingCity) {
+		_shippingCity = shippingCity;
+	}
+
+	public String getShippingZip() {
+		return _shippingZip;
+	}
+
+	public void setShippingZip(String shippingZip) {
+		_shippingZip = shippingZip;
+	}
+
+	public long getShippingRegionId() {
+		return _shippingRegionId;
+	}
+
+	public void setShippingRegionId(long shippingRegionId) {
+		_shippingRegionId = shippingRegionId;
+	}
+
+	public long getShippingCountryId() {
+		return _shippingCountryId;
+	}
+
+	public void setShippingCountryId(long shippingCountryId) {
+		_shippingCountryId = shippingCountryId;
+	}
+
+	public String getShippingPhoneNumber() {
+		return _shippingPhoneNumber;
+	}
+
+	public void setShippingPhoneNumber(String shippingPhoneNumber) {
+		_shippingPhoneNumber = shippingPhoneNumber;
+	}
+
 	public String getAdvanceStatus() {
 		return _advanceStatus;
 	}
@@ -617,6 +797,26 @@ public class CommerceOrderSoap implements Serializable {
 	private BigDecimal _totalDiscountPercentageLevel2;
 	private BigDecimal _totalDiscountPercentageLevel3;
 	private BigDecimal _totalDiscountPercentageLevel4;
+	private String _billingName;
+	private String _billingDescription;
+	private String _billingStreet1;
+	private String _billingStreet2;
+	private String _billingStreet3;
+	private String _billingCity;
+	private String _billingZip;
+	private long _billingRegionId;
+	private long _billingCountryId;
+	private String _billingPhoneNumber;
+	private String _shippingName;
+	private String _shippingDescription;
+	private String _shippingStreet1;
+	private String _shippingStreet2;
+	private String _shippingStreet3;
+	private String _shippingCity;
+	private String _shippingZip;
+	private long _shippingRegionId;
+	private long _shippingCountryId;
+	private String _shippingPhoneNumber;
 	private String _advanceStatus;
 	private int _paymentStatus;
 	private Date _orderDate;

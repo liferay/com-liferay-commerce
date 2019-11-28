@@ -77,7 +77,12 @@ public class CommerceShipmentModelImpl
 		{"companyId", Types.BIGINT}, {"userId", Types.BIGINT},
 		{"userName", Types.VARCHAR}, {"createDate", Types.TIMESTAMP},
 		{"modifiedDate", Types.TIMESTAMP}, {"commerceAccountId", Types.BIGINT},
-		{"commerceAddressId", Types.BIGINT},
+		{"shippingName", Types.VARCHAR}, {"shippingDescription", Types.VARCHAR},
+		{"shippingStreet1", Types.VARCHAR}, {"shippingStreet2", Types.VARCHAR},
+		{"shippingStreet3", Types.VARCHAR}, {"shippingCity", Types.VARCHAR},
+		{"shippingZip", Types.VARCHAR}, {"shippingRegionId", Types.BIGINT},
+		{"shippingCountryId", Types.BIGINT},
+		{"shippingPhoneNumber", Types.VARCHAR},
 		{"commerceShippingMethodId", Types.BIGINT},
 		{"shippingOptionName", Types.VARCHAR}, {"carrier", Types.VARCHAR},
 		{"trackingNumber", Types.VARCHAR}, {"shippingDate", Types.TIMESTAMP},
@@ -96,7 +101,16 @@ public class CommerceShipmentModelImpl
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("modifiedDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("commerceAccountId", Types.BIGINT);
-		TABLE_COLUMNS_MAP.put("commerceAddressId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("shippingName", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("shippingDescription", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("shippingStreet1", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("shippingStreet2", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("shippingStreet3", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("shippingCity", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("shippingZip", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("shippingRegionId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("shippingCountryId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("shippingPhoneNumber", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("commerceShippingMethodId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("shippingOptionName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("carrier", Types.VARCHAR);
@@ -107,7 +121,7 @@ public class CommerceShipmentModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table CommerceShipment (commerceShipmentId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceAccountId LONG,commerceAddressId LONG,commerceShippingMethodId LONG,shippingOptionName VARCHAR(75) null,carrier VARCHAR(75) null,trackingNumber VARCHAR(75) null,shippingDate DATE null,expectedDate DATE null,status INTEGER)";
+		"create table CommerceShipment (commerceShipmentId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,commerceAccountId LONG,shippingName VARCHAR(75) null,shippingDescription VARCHAR(75) null,shippingStreet1 VARCHAR(75) null,shippingStreet2 VARCHAR(75) null,shippingStreet3 VARCHAR(75) null,shippingCity VARCHAR(75) null,shippingZip VARCHAR(75) null,shippingRegionId LONG,shippingCountryId LONG,shippingPhoneNumber VARCHAR(75) null,commerceShippingMethodId LONG,shippingOptionName VARCHAR(75) null,carrier VARCHAR(75) null,trackingNumber VARCHAR(75) null,shippingDate DATE null,expectedDate DATE null,status INTEGER)";
 
 	public static final String TABLE_SQL_DROP = "drop table CommerceShipment";
 
@@ -165,7 +179,16 @@ public class CommerceShipmentModelImpl
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setCommerceAccountId(soapModel.getCommerceAccountId());
-		model.setCommerceAddressId(soapModel.getCommerceAddressId());
+		model.setShippingName(soapModel.getShippingName());
+		model.setShippingDescription(soapModel.getShippingDescription());
+		model.setShippingStreet1(soapModel.getShippingStreet1());
+		model.setShippingStreet2(soapModel.getShippingStreet2());
+		model.setShippingStreet3(soapModel.getShippingStreet3());
+		model.setShippingCity(soapModel.getShippingCity());
+		model.setShippingZip(soapModel.getShippingZip());
+		model.setShippingRegionId(soapModel.getShippingRegionId());
+		model.setShippingCountryId(soapModel.getShippingCountryId());
+		model.setShippingPhoneNumber(soapModel.getShippingPhoneNumber());
 		model.setCommerceShippingMethodId(
 			soapModel.getCommerceShippingMethodId());
 		model.setShippingOptionName(soapModel.getShippingOptionName());
@@ -515,26 +538,241 @@ public class CommerceShipmentModelImpl
 
 			});
 		attributeGetterFunctions.put(
-			"commerceAddressId",
+			"shippingName",
 			new Function<CommerceShipment, Object>() {
 
 				@Override
 				public Object apply(CommerceShipment commerceShipment) {
-					return commerceShipment.getCommerceAddressId();
+					return commerceShipment.getShippingName();
 				}
 
 			});
 		attributeSetterBiConsumers.put(
-			"commerceAddressId",
+			"shippingName",
 			new BiConsumer<CommerceShipment, Object>() {
 
 				@Override
 				public void accept(
 					CommerceShipment commerceShipment,
-					Object commerceAddressIdObject) {
+					Object shippingNameObject) {
 
-					commerceShipment.setCommerceAddressId(
-						(Long)commerceAddressIdObject);
+					commerceShipment.setShippingName(
+						(String)shippingNameObject);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"shippingDescription",
+			new Function<CommerceShipment, Object>() {
+
+				@Override
+				public Object apply(CommerceShipment commerceShipment) {
+					return commerceShipment.getShippingDescription();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"shippingDescription",
+			new BiConsumer<CommerceShipment, Object>() {
+
+				@Override
+				public void accept(
+					CommerceShipment commerceShipment,
+					Object shippingDescriptionObject) {
+
+					commerceShipment.setShippingDescription(
+						(String)shippingDescriptionObject);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"shippingStreet1",
+			new Function<CommerceShipment, Object>() {
+
+				@Override
+				public Object apply(CommerceShipment commerceShipment) {
+					return commerceShipment.getShippingStreet1();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"shippingStreet1",
+			new BiConsumer<CommerceShipment, Object>() {
+
+				@Override
+				public void accept(
+					CommerceShipment commerceShipment,
+					Object shippingStreet1Object) {
+
+					commerceShipment.setShippingStreet1(
+						(String)shippingStreet1Object);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"shippingStreet2",
+			new Function<CommerceShipment, Object>() {
+
+				@Override
+				public Object apply(CommerceShipment commerceShipment) {
+					return commerceShipment.getShippingStreet2();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"shippingStreet2",
+			new BiConsumer<CommerceShipment, Object>() {
+
+				@Override
+				public void accept(
+					CommerceShipment commerceShipment,
+					Object shippingStreet2Object) {
+
+					commerceShipment.setShippingStreet2(
+						(String)shippingStreet2Object);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"shippingStreet3",
+			new Function<CommerceShipment, Object>() {
+
+				@Override
+				public Object apply(CommerceShipment commerceShipment) {
+					return commerceShipment.getShippingStreet3();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"shippingStreet3",
+			new BiConsumer<CommerceShipment, Object>() {
+
+				@Override
+				public void accept(
+					CommerceShipment commerceShipment,
+					Object shippingStreet3Object) {
+
+					commerceShipment.setShippingStreet3(
+						(String)shippingStreet3Object);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"shippingCity",
+			new Function<CommerceShipment, Object>() {
+
+				@Override
+				public Object apply(CommerceShipment commerceShipment) {
+					return commerceShipment.getShippingCity();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"shippingCity",
+			new BiConsumer<CommerceShipment, Object>() {
+
+				@Override
+				public void accept(
+					CommerceShipment commerceShipment,
+					Object shippingCityObject) {
+
+					commerceShipment.setShippingCity(
+						(String)shippingCityObject);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"shippingZip",
+			new Function<CommerceShipment, Object>() {
+
+				@Override
+				public Object apply(CommerceShipment commerceShipment) {
+					return commerceShipment.getShippingZip();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"shippingZip",
+			new BiConsumer<CommerceShipment, Object>() {
+
+				@Override
+				public void accept(
+					CommerceShipment commerceShipment,
+					Object shippingZipObject) {
+
+					commerceShipment.setShippingZip((String)shippingZipObject);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"shippingRegionId",
+			new Function<CommerceShipment, Object>() {
+
+				@Override
+				public Object apply(CommerceShipment commerceShipment) {
+					return commerceShipment.getShippingRegionId();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"shippingRegionId",
+			new BiConsumer<CommerceShipment, Object>() {
+
+				@Override
+				public void accept(
+					CommerceShipment commerceShipment,
+					Object shippingRegionIdObject) {
+
+					commerceShipment.setShippingRegionId(
+						(Long)shippingRegionIdObject);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"shippingCountryId",
+			new Function<CommerceShipment, Object>() {
+
+				@Override
+				public Object apply(CommerceShipment commerceShipment) {
+					return commerceShipment.getShippingCountryId();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"shippingCountryId",
+			new BiConsumer<CommerceShipment, Object>() {
+
+				@Override
+				public void accept(
+					CommerceShipment commerceShipment,
+					Object shippingCountryIdObject) {
+
+					commerceShipment.setShippingCountryId(
+						(Long)shippingCountryIdObject);
+				}
+
+			});
+		attributeGetterFunctions.put(
+			"shippingPhoneNumber",
+			new Function<CommerceShipment, Object>() {
+
+				@Override
+				public Object apply(CommerceShipment commerceShipment) {
+					return commerceShipment.getShippingPhoneNumber();
+				}
+
+			});
+		attributeSetterBiConsumers.put(
+			"shippingPhoneNumber",
+			new BiConsumer<CommerceShipment, Object>() {
+
+				@Override
+				public void accept(
+					CommerceShipment commerceShipment,
+					Object shippingPhoneNumberObject) {
+
+					commerceShipment.setShippingPhoneNumber(
+						(String)shippingPhoneNumberObject);
 				}
 
 			});
@@ -838,13 +1076,152 @@ public class CommerceShipmentModelImpl
 
 	@JSON
 	@Override
-	public long getCommerceAddressId() {
-		return _commerceAddressId;
+	public String getShippingName() {
+		if (_shippingName == null) {
+			return "";
+		}
+		else {
+			return _shippingName;
+		}
 	}
 
 	@Override
-	public void setCommerceAddressId(long commerceAddressId) {
-		_commerceAddressId = commerceAddressId;
+	public void setShippingName(String shippingName) {
+		_shippingName = shippingName;
+	}
+
+	@JSON
+	@Override
+	public String getShippingDescription() {
+		if (_shippingDescription == null) {
+			return "";
+		}
+		else {
+			return _shippingDescription;
+		}
+	}
+
+	@Override
+	public void setShippingDescription(String shippingDescription) {
+		_shippingDescription = shippingDescription;
+	}
+
+	@JSON
+	@Override
+	public String getShippingStreet1() {
+		if (_shippingStreet1 == null) {
+			return "";
+		}
+		else {
+			return _shippingStreet1;
+		}
+	}
+
+	@Override
+	public void setShippingStreet1(String shippingStreet1) {
+		_shippingStreet1 = shippingStreet1;
+	}
+
+	@JSON
+	@Override
+	public String getShippingStreet2() {
+		if (_shippingStreet2 == null) {
+			return "";
+		}
+		else {
+			return _shippingStreet2;
+		}
+	}
+
+	@Override
+	public void setShippingStreet2(String shippingStreet2) {
+		_shippingStreet2 = shippingStreet2;
+	}
+
+	@JSON
+	@Override
+	public String getShippingStreet3() {
+		if (_shippingStreet3 == null) {
+			return "";
+		}
+		else {
+			return _shippingStreet3;
+		}
+	}
+
+	@Override
+	public void setShippingStreet3(String shippingStreet3) {
+		_shippingStreet3 = shippingStreet3;
+	}
+
+	@JSON
+	@Override
+	public String getShippingCity() {
+		if (_shippingCity == null) {
+			return "";
+		}
+		else {
+			return _shippingCity;
+		}
+	}
+
+	@Override
+	public void setShippingCity(String shippingCity) {
+		_shippingCity = shippingCity;
+	}
+
+	@JSON
+	@Override
+	public String getShippingZip() {
+		if (_shippingZip == null) {
+			return "";
+		}
+		else {
+			return _shippingZip;
+		}
+	}
+
+	@Override
+	public void setShippingZip(String shippingZip) {
+		_shippingZip = shippingZip;
+	}
+
+	@JSON
+	@Override
+	public long getShippingRegionId() {
+		return _shippingRegionId;
+	}
+
+	@Override
+	public void setShippingRegionId(long shippingRegionId) {
+		_shippingRegionId = shippingRegionId;
+	}
+
+	@JSON
+	@Override
+	public long getShippingCountryId() {
+		return _shippingCountryId;
+	}
+
+	@Override
+	public void setShippingCountryId(long shippingCountryId) {
+		_shippingCountryId = shippingCountryId;
+	}
+
+	@JSON
+	@Override
+	public String getShippingPhoneNumber() {
+		if (_shippingPhoneNumber == null) {
+			return "";
+		}
+		else {
+			return _shippingPhoneNumber;
+		}
+	}
+
+	@Override
+	public void setShippingPhoneNumber(String shippingPhoneNumber) {
+		_shippingPhoneNumber = shippingPhoneNumber;
 	}
 
 	@JSON
@@ -995,7 +1372,16 @@ public class CommerceShipmentModelImpl
 		commerceShipmentImpl.setCreateDate(getCreateDate());
 		commerceShipmentImpl.setModifiedDate(getModifiedDate());
 		commerceShipmentImpl.setCommerceAccountId(getCommerceAccountId());
-		commerceShipmentImpl.setCommerceAddressId(getCommerceAddressId());
+		commerceShipmentImpl.setShippingName(getShippingName());
+		commerceShipmentImpl.setShippingDescription(getShippingDescription());
+		commerceShipmentImpl.setShippingStreet1(getShippingStreet1());
+		commerceShipmentImpl.setShippingStreet2(getShippingStreet2());
+		commerceShipmentImpl.setShippingStreet3(getShippingStreet3());
+		commerceShipmentImpl.setShippingCity(getShippingCity());
+		commerceShipmentImpl.setShippingZip(getShippingZip());
+		commerceShipmentImpl.setShippingRegionId(getShippingRegionId());
+		commerceShipmentImpl.setShippingCountryId(getShippingCountryId());
+		commerceShipmentImpl.setShippingPhoneNumber(getShippingPhoneNumber());
 		commerceShipmentImpl.setCommerceShippingMethodId(
 			getCommerceShippingMethodId());
 		commerceShipmentImpl.setShippingOptionName(getShippingOptionName());
@@ -1123,7 +1509,81 @@ public class CommerceShipmentModelImpl
 
 		commerceShipmentCacheModel.commerceAccountId = getCommerceAccountId();
 
-		commerceShipmentCacheModel.commerceAddressId = getCommerceAddressId();
+		commerceShipmentCacheModel.shippingName = getShippingName();
+
+		String shippingName = commerceShipmentCacheModel.shippingName;
+
+		if ((shippingName != null) && (shippingName.length() == 0)) {
+			commerceShipmentCacheModel.shippingName = null;
+		}
+
+		commerceShipmentCacheModel.shippingDescription =
+			getShippingDescription();
+
+		String shippingDescription =
+			commerceShipmentCacheModel.shippingDescription;
+
+		if ((shippingDescription != null) &&
+			(shippingDescription.length() == 0)) {
+
+			commerceShipmentCacheModel.shippingDescription = null;
+		}
+
+		commerceShipmentCacheModel.shippingStreet1 = getShippingStreet1();
+
+		String shippingStreet1 = commerceShipmentCacheModel.shippingStreet1;
+
+		if ((shippingStreet1 != null) && (shippingStreet1.length() == 0)) {
+			commerceShipmentCacheModel.shippingStreet1 = null;
+		}
+
+		commerceShipmentCacheModel.shippingStreet2 = getShippingStreet2();
+
+		String shippingStreet2 = commerceShipmentCacheModel.shippingStreet2;
+
+		if ((shippingStreet2 != null) && (shippingStreet2.length() == 0)) {
+			commerceShipmentCacheModel.shippingStreet2 = null;
+		}
+
+		commerceShipmentCacheModel.shippingStreet3 = getShippingStreet3();
+
+		String shippingStreet3 = commerceShipmentCacheModel.shippingStreet3;
+
+		if ((shippingStreet3 != null) && (shippingStreet3.length() == 0)) {
+			commerceShipmentCacheModel.shippingStreet3 = null;
+		}
+
+		commerceShipmentCacheModel.shippingCity = getShippingCity();
+
+		String shippingCity = commerceShipmentCacheModel.shippingCity;
+
+		if ((shippingCity != null) && (shippingCity.length() == 0)) {
+			commerceShipmentCacheModel.shippingCity = null;
+		}
+
+		commerceShipmentCacheModel.shippingZip = getShippingZip();
+
+		String shippingZip = commerceShipmentCacheModel.shippingZip;
+
+		if ((shippingZip != null) && (shippingZip.length() == 0)) {
+			commerceShipmentCacheModel.shippingZip = null;
+		}
+
+		commerceShipmentCacheModel.shippingRegionId = getShippingRegionId();
+
+		commerceShipmentCacheModel.shippingCountryId = getShippingCountryId();
+
+		commerceShipmentCacheModel.shippingPhoneNumber =
+			getShippingPhoneNumber();
+
+		String shippingPhoneNumber =
+			commerceShipmentCacheModel.shippingPhoneNumber;
+
+		if ((shippingPhoneNumber != null) &&
+			(shippingPhoneNumber.length() == 0)) {
+
+			commerceShipmentCacheModel.shippingPhoneNumber = null;
+		}
 
 		commerceShipmentCacheModel.commerceShippingMethodId =
 			getCommerceShippingMethodId();
@@ -1259,7 +1719,16 @@ public class CommerceShipmentModelImpl
 	private Date _modifiedDate;
 	private boolean _setModifiedDate;
 	private long _commerceAccountId;
-	private long _commerceAddressId;
+	private String _shippingName;
+	private String _shippingDescription;
+	private String _shippingStreet1;
+	private String _shippingStreet2;
+	private String _shippingStreet3;
+	private String _shippingCity;
+	private String _shippingZip;
+	private long _shippingRegionId;
+	private long _shippingCountryId;
+	private String _shippingPhoneNumber;
 	private long _commerceShippingMethodId;
 	private String _shippingOptionName;
 	private String _carrier;

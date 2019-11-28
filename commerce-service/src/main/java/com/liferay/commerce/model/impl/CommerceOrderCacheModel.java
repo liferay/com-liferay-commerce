@@ -64,7 +64,7 @@ public class CommerceOrderCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(101);
+		StringBundler sb = new StringBundler(141);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -144,6 +144,46 @@ public class CommerceOrderCacheModel
 		sb.append(totalDiscountPercentageLevel3);
 		sb.append(", totalDiscountPercentageLevel4=");
 		sb.append(totalDiscountPercentageLevel4);
+		sb.append(", billingName=");
+		sb.append(billingName);
+		sb.append(", billingDescription=");
+		sb.append(billingDescription);
+		sb.append(", billingStreet1=");
+		sb.append(billingStreet1);
+		sb.append(", billingStreet2=");
+		sb.append(billingStreet2);
+		sb.append(", billingStreet3=");
+		sb.append(billingStreet3);
+		sb.append(", billingCity=");
+		sb.append(billingCity);
+		sb.append(", billingZip=");
+		sb.append(billingZip);
+		sb.append(", billingRegionId=");
+		sb.append(billingRegionId);
+		sb.append(", billingCountryId=");
+		sb.append(billingCountryId);
+		sb.append(", billingPhoneNumber=");
+		sb.append(billingPhoneNumber);
+		sb.append(", shippingName=");
+		sb.append(shippingName);
+		sb.append(", shippingDescription=");
+		sb.append(shippingDescription);
+		sb.append(", shippingStreet1=");
+		sb.append(shippingStreet1);
+		sb.append(", shippingStreet2=");
+		sb.append(shippingStreet2);
+		sb.append(", shippingStreet3=");
+		sb.append(shippingStreet3);
+		sb.append(", shippingCity=");
+		sb.append(shippingCity);
+		sb.append(", shippingZip=");
+		sb.append(shippingZip);
+		sb.append(", shippingRegionId=");
+		sb.append(shippingRegionId);
+		sb.append(", shippingCountryId=");
+		sb.append(shippingCountryId);
+		sb.append(", shippingPhoneNumber=");
+		sb.append(shippingPhoneNumber);
 		sb.append(", advanceStatus=");
 		sb.append(advanceStatus);
 		sb.append(", paymentStatus=");
@@ -298,6 +338,124 @@ public class CommerceOrderCacheModel
 		commerceOrderImpl.setTotalDiscountPercentageLevel4(
 			totalDiscountPercentageLevel4);
 
+		if (billingName == null) {
+			commerceOrderImpl.setBillingName("");
+		}
+		else {
+			commerceOrderImpl.setBillingName(billingName);
+		}
+
+		if (billingDescription == null) {
+			commerceOrderImpl.setBillingDescription("");
+		}
+		else {
+			commerceOrderImpl.setBillingDescription(billingDescription);
+		}
+
+		if (billingStreet1 == null) {
+			commerceOrderImpl.setBillingStreet1("");
+		}
+		else {
+			commerceOrderImpl.setBillingStreet1(billingStreet1);
+		}
+
+		if (billingStreet2 == null) {
+			commerceOrderImpl.setBillingStreet2("");
+		}
+		else {
+			commerceOrderImpl.setBillingStreet2(billingStreet2);
+		}
+
+		if (billingStreet3 == null) {
+			commerceOrderImpl.setBillingStreet3("");
+		}
+		else {
+			commerceOrderImpl.setBillingStreet3(billingStreet3);
+		}
+
+		if (billingCity == null) {
+			commerceOrderImpl.setBillingCity("");
+		}
+		else {
+			commerceOrderImpl.setBillingCity(billingCity);
+		}
+
+		if (billingZip == null) {
+			commerceOrderImpl.setBillingZip("");
+		}
+		else {
+			commerceOrderImpl.setBillingZip(billingZip);
+		}
+
+		commerceOrderImpl.setBillingRegionId(billingRegionId);
+		commerceOrderImpl.setBillingCountryId(billingCountryId);
+
+		if (billingPhoneNumber == null) {
+			commerceOrderImpl.setBillingPhoneNumber("");
+		}
+		else {
+			commerceOrderImpl.setBillingPhoneNumber(billingPhoneNumber);
+		}
+
+		if (shippingName == null) {
+			commerceOrderImpl.setShippingName("");
+		}
+		else {
+			commerceOrderImpl.setShippingName(shippingName);
+		}
+
+		if (shippingDescription == null) {
+			commerceOrderImpl.setShippingDescription("");
+		}
+		else {
+			commerceOrderImpl.setShippingDescription(shippingDescription);
+		}
+
+		if (shippingStreet1 == null) {
+			commerceOrderImpl.setShippingStreet1("");
+		}
+		else {
+			commerceOrderImpl.setShippingStreet1(shippingStreet1);
+		}
+
+		if (shippingStreet2 == null) {
+			commerceOrderImpl.setShippingStreet2("");
+		}
+		else {
+			commerceOrderImpl.setShippingStreet2(shippingStreet2);
+		}
+
+		if (shippingStreet3 == null) {
+			commerceOrderImpl.setShippingStreet3("");
+		}
+		else {
+			commerceOrderImpl.setShippingStreet3(shippingStreet3);
+		}
+
+		if (shippingCity == null) {
+			commerceOrderImpl.setShippingCity("");
+		}
+		else {
+			commerceOrderImpl.setShippingCity(shippingCity);
+		}
+
+		if (shippingZip == null) {
+			commerceOrderImpl.setShippingZip("");
+		}
+		else {
+			commerceOrderImpl.setShippingZip(shippingZip);
+		}
+
+		commerceOrderImpl.setShippingRegionId(shippingRegionId);
+		commerceOrderImpl.setShippingCountryId(shippingCountryId);
+
+		if (shippingPhoneNumber == null) {
+			commerceOrderImpl.setShippingPhoneNumber("");
+		}
+		else {
+			commerceOrderImpl.setShippingPhoneNumber(shippingPhoneNumber);
+		}
+
 		if (advanceStatus == null) {
 			commerceOrderImpl.setAdvanceStatus("");
 		}
@@ -406,6 +564,30 @@ public class CommerceOrderCacheModel
 		totalDiscountPercentageLevel2 = (BigDecimal)objectInput.readObject();
 		totalDiscountPercentageLevel3 = (BigDecimal)objectInput.readObject();
 		totalDiscountPercentageLevel4 = (BigDecimal)objectInput.readObject();
+		billingName = objectInput.readUTF();
+		billingDescription = objectInput.readUTF();
+		billingStreet1 = objectInput.readUTF();
+		billingStreet2 = objectInput.readUTF();
+		billingStreet3 = objectInput.readUTF();
+		billingCity = objectInput.readUTF();
+		billingZip = objectInput.readUTF();
+
+		billingRegionId = objectInput.readLong();
+
+		billingCountryId = objectInput.readLong();
+		billingPhoneNumber = objectInput.readUTF();
+		shippingName = objectInput.readUTF();
+		shippingDescription = objectInput.readUTF();
+		shippingStreet1 = objectInput.readUTF();
+		shippingStreet2 = objectInput.readUTF();
+		shippingStreet3 = objectInput.readUTF();
+		shippingCity = objectInput.readUTF();
+		shippingZip = objectInput.readUTF();
+
+		shippingRegionId = objectInput.readLong();
+
+		shippingCountryId = objectInput.readLong();
+		shippingPhoneNumber = objectInput.readUTF();
 		advanceStatus = objectInput.readUTF();
 
 		paymentStatus = objectInput.readInt();
@@ -524,6 +706,126 @@ public class CommerceOrderCacheModel
 		objectOutput.writeObject(totalDiscountPercentageLevel3);
 		objectOutput.writeObject(totalDiscountPercentageLevel4);
 
+		if (billingName == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(billingName);
+		}
+
+		if (billingDescription == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(billingDescription);
+		}
+
+		if (billingStreet1 == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(billingStreet1);
+		}
+
+		if (billingStreet2 == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(billingStreet2);
+		}
+
+		if (billingStreet3 == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(billingStreet3);
+		}
+
+		if (billingCity == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(billingCity);
+		}
+
+		if (billingZip == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(billingZip);
+		}
+
+		objectOutput.writeLong(billingRegionId);
+
+		objectOutput.writeLong(billingCountryId);
+
+		if (billingPhoneNumber == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(billingPhoneNumber);
+		}
+
+		if (shippingName == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(shippingName);
+		}
+
+		if (shippingDescription == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(shippingDescription);
+		}
+
+		if (shippingStreet1 == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(shippingStreet1);
+		}
+
+		if (shippingStreet2 == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(shippingStreet2);
+		}
+
+		if (shippingStreet3 == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(shippingStreet3);
+		}
+
+		if (shippingCity == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(shippingCity);
+		}
+
+		if (shippingZip == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(shippingZip);
+		}
+
+		objectOutput.writeLong(shippingRegionId);
+
+		objectOutput.writeLong(shippingCountryId);
+
+		if (shippingPhoneNumber == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(shippingPhoneNumber);
+		}
+
 		if (advanceStatus == null) {
 			objectOutput.writeUTF("");
 		}
@@ -600,6 +902,26 @@ public class CommerceOrderCacheModel
 	public BigDecimal totalDiscountPercentageLevel2;
 	public BigDecimal totalDiscountPercentageLevel3;
 	public BigDecimal totalDiscountPercentageLevel4;
+	public String billingName;
+	public String billingDescription;
+	public String billingStreet1;
+	public String billingStreet2;
+	public String billingStreet3;
+	public String billingCity;
+	public String billingZip;
+	public long billingRegionId;
+	public long billingCountryId;
+	public String billingPhoneNumber;
+	public String shippingName;
+	public String shippingDescription;
+	public String shippingStreet1;
+	public String shippingStreet2;
+	public String shippingStreet3;
+	public String shippingCity;
+	public String shippingZip;
+	public long shippingRegionId;
+	public long shippingCountryId;
+	public String shippingPhoneNumber;
 	public String advanceStatus;
 	public int paymentStatus;
 	public long orderDate;
