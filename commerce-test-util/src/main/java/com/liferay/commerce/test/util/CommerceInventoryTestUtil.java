@@ -44,7 +44,7 @@ public class CommerceInventoryTestUtil {
 	}
 
 	public static CommerceInventoryWarehouse addCommerceInventoryWarehouse()
-		throws PortalException {
+		throws Exception {
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext();
@@ -61,13 +61,14 @@ public class CommerceInventoryTestUtil {
 				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
 				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
 				commerceRegion.getCode(),
-				commerceCountry.getTwoLettersISOCode(), 45.4386111, 12.3266667,
-				null, serviceContext);
+				commerceCountry.getTwoLettersISOCode(),
+				RandomTestUtil.nextDouble(), RandomTestUtil.nextDouble(), null,
+				serviceContext);
 	}
 
 	public static CommerceInventoryWarehouse addCommerceInventoryWarehouse(
 			long groupId)
-		throws PortalException {
+		throws Exception {
 
 		return addCommerceInventoryWarehouse(groupId, true);
 	}
@@ -91,8 +92,9 @@ public class CommerceInventoryTestUtil {
 				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
 				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
 				commerceRegion.getCode(),
-				commerceCountry.getTwoLettersISOCode(), 45.4386111, 12.3266667,
-				null, serviceContext);
+				commerceCountry.getTwoLettersISOCode(),
+				RandomTestUtil.nextDouble(), RandomTestUtil.nextDouble(), null,
+				serviceContext);
 	}
 
 	public static CommerceInventoryWarehouse addCommerceInventoryWarehouse(
