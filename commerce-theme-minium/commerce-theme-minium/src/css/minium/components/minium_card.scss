@@ -1,3 +1,6 @@
+
+$card-spacer: 20px;
+
 .minium-card {
 	align-items: center;
 	background: white;
@@ -8,7 +11,7 @@
 	flex-direction: column;
 	height: 100%;
 	overflow: hidden;
-	padding: 20px;
+	padding: $card-spacer;
 	position: relative;
 	text-align: center;
 	transition: box-shadow .2s ease-in-out;
@@ -20,6 +23,20 @@
 	&:focus {
 		box-shadow: $shadow-focus;
 		outline: none;
+	}
+
+	&__actions {
+		width: calc(100% + #{$card-spacer * 2});
+		margin-left: 0;
+		margin-bottom: -#{$card-spacer};
+
+		.btn-add-to-cart {
+			margin-top: $card-spacer;
+			display: flex;
+			width: 100%;
+			border-top-left-radius: 0px;
+			border-top-right-radius: 0px;
+		}
 	}
 
 	&__close {
@@ -86,11 +103,11 @@
 		background-repeat: no-repeat;
 		background-size: cover;
 		height: 0;
-		margin-top: -20px;
+		margin-top: -#{$card-spacer};
 		overflow: hidden;
 		padding-bottom: 75%;
 		position: relative;
-		width: calc(100% + 40px);
+		width: calc(100% + #{$card-spacer * 2});
 
 		&::before {
 			background: inherit;
@@ -146,9 +163,9 @@
 
 	&__compare-checkbox {
 		border-radius: 4px;
-		left: 20px;
+		left: $card-spacer;
 		position: absolute;
-		top: 20px;
+		top: $card-spacer;
 		z-index: 10;
 	}
 
