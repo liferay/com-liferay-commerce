@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 public class CommerceShipmentTestUtil {
 
 	public static CommerceShipment createOrderShipment(
-			long orderId, long warehouseId)
+			long commerceOrderId, long commerceWarehouseId)
 		throws PortalException {
 
 		ServiceContext serviceContext =
@@ -38,17 +38,17 @@ public class CommerceShipmentTestUtil {
 
 		CommerceShipment commerceShipment =
 			CommerceShipmentLocalServiceUtil.addCommerceShipment(
-				orderId, serviceContext);
+				commerceOrderId, serviceContext);
 
 		CommerceOrder commerceOrder =
-			CommerceOrderLocalServiceUtil.getCommerceOrder(orderId);
+			CommerceOrderLocalServiceUtil.getCommerceOrder(commerceOrderId);
 
 		for (CommerceOrderItem commerceOrderItem :
 				commerceOrder.getCommerceOrderItems()) {
 
 			CommerceShipmentItemLocalServiceUtil.addCommerceShipmentItem(
 				commerceShipment.getCommerceShipmentId(),
-				commerceOrderItem.getCommerceOrderItemId(), warehouseId,
+				commerceOrderItem.getCommerceOrderItemId(), commerceWarehouseId,
 				commerceOrderItem.getQuantity(), serviceContext);
 		}
 
@@ -56,7 +56,7 @@ public class CommerceShipmentTestUtil {
 	}
 
 	public static CommerceShipment createOrderShipment(
-			long groupId, long orderId, long warehouseId)
+			long groupId, long commerceOrderId, long commerceWarehouseId)
 		throws PortalException {
 
 		ServiceContext serviceContext =
@@ -64,17 +64,17 @@ public class CommerceShipmentTestUtil {
 
 		CommerceShipment commerceShipment =
 			CommerceShipmentLocalServiceUtil.addCommerceShipment(
-				orderId, serviceContext);
+				commerceOrderId, serviceContext);
 
 		CommerceOrder commerceOrder =
-			CommerceOrderLocalServiceUtil.getCommerceOrder(orderId);
+			CommerceOrderLocalServiceUtil.getCommerceOrder(commerceOrderId);
 
 		for (CommerceOrderItem commerceOrderItem :
 				commerceOrder.getCommerceOrderItems()) {
 
 			CommerceShipmentItemLocalServiceUtil.addCommerceShipmentItem(
 				commerceShipment.getCommerceShipmentId(),
-				commerceOrderItem.getCommerceOrderItemId(), warehouseId,
+				commerceOrderItem.getCommerceOrderItemId(), commerceWarehouseId,
 				commerceOrderItem.getQuantity(), serviceContext);
 		}
 
