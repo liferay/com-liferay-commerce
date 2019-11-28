@@ -59,7 +59,6 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import java.math.BigDecimal;
 
 import java.util.Collections;
-import java.util.Locale;
 
 /**
  * @author Andrea Di Giorgi
@@ -295,7 +294,7 @@ public class CommerceTestUtil {
 
 		return CommerceCatalogServiceUtil.addCommerceCatalog(
 			RandomTestUtil.randomString(), commerceCurrencyCode,
-			LocaleUtil.toLanguageId(Locale.US), null,
+			LocaleUtil.toLanguageId(LocaleUtil.US), null,
 			ServiceContextTestUtil.getServiceContext(groupId));
 	}
 

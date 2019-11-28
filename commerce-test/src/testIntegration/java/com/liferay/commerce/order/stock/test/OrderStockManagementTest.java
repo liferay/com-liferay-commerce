@@ -16,7 +16,7 @@ package com.liferay.commerce.order.stock.test;
 
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.commerce.currency.model.CommerceCurrency;
-import com.liferay.commerce.currency.service.CommerceCurrencyLocalServiceUtil;
+import com.liferay.commerce.currency.service.CommerceCurrencyLocalService;
 import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
 import com.liferay.commerce.exception.CommerceOrderValidatorException;
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
@@ -27,14 +27,14 @@ import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CommerceChannel;
-import com.liferay.commerce.product.service.CommerceChannelLocalServiceUtil;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.product.test.util.CPTestUtil;
 import com.liferay.commerce.service.CommerceOrderLocalServiceUtil;
 import com.liferay.commerce.shipment.test.util.CommerceShipmentTestUtil;
 import com.liferay.commerce.test.util.CommerceInventoryTestUtil;
 import com.liferay.commerce.test.util.CommerceTestUtil;
 import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.service.UserLocalServiceUtil;
+import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.util.UserTestUtil;
 import com.liferay.portal.test.rule.Inject;
@@ -84,10 +84,9 @@ public class OrderStockManagementTest {
 			CommerceOrderLocalServiceUtil.deleteCommerceOrder(commerceOrder);
 		}
 
-		CommerceCurrencyLocalServiceUtil.deleteCommerceCurrency(
-			_commerceCurrency);
-		CommerceChannelLocalServiceUtil.deleteCommerceChannel(_commerceChannel);
-		UserLocalServiceUtil.deleteUser(_user);
+		_commerceCurrencyLocalService.deleteCommerceCurrency(_commerceCurrency);
+		_commerceChannelLocalService.deleteCommerceChannel(_commerceChannel);
+		_userLocalService.deleteUser(_user);
 	}
 
 	@Test
@@ -366,7 +365,14 @@ public class OrderStockManagementTest {
 	public FrutillaRule frutillaRule = new FrutillaRule();
 
 	private CommerceChannel _commerceChannel;
+
+	@Inject
+	private CommerceChannelLocalService _commerceChannelLocalService;
+
 	private CommerceCurrency _commerceCurrency;
+
+	@Inject
+	private CommerceCurrencyLocalService _commerceCurrencyLocalService;
 
 	@Inject
 	private CommerceInventoryWarehouseItemLocalService
@@ -374,5 +380,8 @@ public class OrderStockManagementTest {
 
 	private List<CommerceOrder> _commerceOrders;
 	private User _user;
+
+	@Inject
+	private UserLocalService _userLocalService;
 
 }
