@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 
 /**
  * @author Alec Sloan
@@ -41,68 +42,72 @@ public class CommerceOrderAddressUpgradeProcess extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		PreparedStatement ps = connection.prepareStatement(
-			"select * from CommerceAddress where classNameId = ?");
+		long commerceOrderClassNameId = _classNameLocalService.getClassNameId(
+			CommerceOrder.class);
 
-		ps.setLong(
-			1, _classNameLocalService.getClassNameId(CommerceOrder.class));
+		try (Statement s = connection.createStatement(
+				ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+			ResultSet rs = s.executeQuery(
+				"select * from CommerceAddress where classNameId = " +
+					commerceOrderClassNameId)) {
 
-		ResultSet rs = ps.executeQuery();
+			// Create columns on CommerceOrder for placed order address info
 
-		// Create columns on CommerceOrder to hold address info for placed order
+			_addOrderAddressColumns();
 
-		_addOrderAddressColumns();
+			// Add to new billing address columns for placed orders
 
-		// Add to new billing address columns for placed orders
+			String updateOrderBillingAddressSQL = StringBundler.concat(
+				"update CommerceOrder set billingName = ?, billingDescription ",
+				"= ?, billingStreet1 = ?, billingStreet2 = ?, billingStreet3 ",
+				"= ?, billingCity = ?, billingZip = ?, billingRegionId = ?, ",
+				"billingCountryId = ?, billingPhoneNumber = ?, ",
+				"billingAddressId = 0 where billingAddressId = ?");
 
-		String updateOrderBillingAddressSQL = StringBundler.concat(
-			"update CommerceOrder set billingName = ?, billingDescription = ?,",
-			"billingStreet1 = ?, billingStreet2 = ?, billingStreet3 = ?,",
-			"billingCity = ?, billingZip = ?, billingRegionId = ?,",
-			"billingCountryId = ?, billingPhoneNumber = ?, billingAddressId = ",
-			"0 where billingAddressId = ?");
+			_updateAddressValues(rs, updateOrderBillingAddressSQL);
 
-		_updateAddressValues(rs, updateOrderBillingAddressSQL);
+			// Add to new Shipping address columns for placed orders
 
-		// Add to new Shipping address columns for placed orders
+			String updateOrderShippingAddressSQL = StringBundler.concat(
+				"update CommerceOrder set shippingName = ?, ",
+				"shippingDescription = ?, shippingStreet1 = ?, ",
+				"shippingStreet2 = ?, shippingStreet3 = ?, shippingCity = ?, ",
+				"shippingZip = ?, shippingRegionId = ?, shippingCountryId = ?",
+				", shippingPhoneNumber = ?, shippingAddressId = 0 where ",
+				"shippingAddressId = ?");
 
-		String updateOrderShippingAddressSQL = StringBundler.concat(
-			"update CommerceOrder set shippingName = ?, shippingDescription = ",
-			"?, shippingStreet1 = ?, shippingStreet2 = ?, shippingStreet3 = ?,",
-			"shippingCity = ?, shippingZip = ?, shippingRegionId = ?,",
-			"shippingCountryId = ?, shippingPhoneNumber = ?,",
-			"shippingAddressId = 0 where shippingAddressId = ?");
+			_updateAddressValues(rs, updateOrderShippingAddressSQL);
 
-		_updateAddressValues(rs, updateOrderShippingAddressSQL);
+			// Create columns on Shipment to hold shipping address info
 
-		// Create columns on Shipment to hold shipping address info
+			_addShipmentAddressColumns();
 
-		_addShipmentAddressColumns();
+			// Add to new Shipping address columns for shipments
 
-		// Add to new Shipping address columns for shipments
+			String updateShipmentAddressSQL = StringBundler.concat(
+				"update CommerceShipment set shippingName = ?,",
+				"shippingDescription = ?, shippingStreet1 = ?, ",
+				"shippingStreet2 = ?, shippingStreet3 = ?, shippingCity = ?, ",
+				"shippingZip = ?, shippingRegionId = ?, shippingCountryId = ?,",
+				"shippingPhoneNumber = ? where commerceAddressId = ?");
 
-		String updateShipmentAddressSQL = StringBundler.concat(
-			"update CommerceShipment set shippingName = ?,",
-			"shippingDescription = ?, shippingStreet1 = ?, shippingStreet2 = ",
-			"?, shippingStreet3 = ?, shippingCity = ?, shippingZip = ?,",
-			"shippingRegionId = ?, shippingCountryId = ?,",
-			"shippingPhoneNumber = ? where commerceAddressId = ?");
+			_updateAddressValues(rs, updateShipmentAddressSQL);
 
-		_updateAddressValues(rs, updateShipmentAddressSQL);
+			// Remove all addresses that belong to orders
 
-		// Remove all addresses that belong to orders
+			try (Statement s1 = connection.createStatement(
+					ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE)) {
 
-		PreparedStatement ps1 = connection.prepareStatement(
-			"delete from CommerceAddress where classNameId = ?");
+				s1.executeUpdate(
+					"delete from CommerceAddress where classNameId = " +
+						commerceOrderClassNameId);
+			}
 
-		ps1.setLong(
-			1, _classNameLocalService.getClassNameId(CommerceOrder.class));
+			// Drop stale column from CommerceShipment
 
-		ps1.execute();
-
-		// Drop stale column from CommerceShipment
-
-		_dropColumn(CommerceShipmentModelImpl.TABLE_NAME, "commerceAddressId");
+			_dropColumn(
+				CommerceShipmentModelImpl.TABLE_NAME, "commerceAddressId");
+		}
 	}
 
 	private void _addColumn(
