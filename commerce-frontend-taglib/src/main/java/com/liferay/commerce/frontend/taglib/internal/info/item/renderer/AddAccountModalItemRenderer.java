@@ -1,6 +1,6 @@
 package com.liferay.commerce.frontend.taglib.internal.info.item.renderer;
 
-import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.InfoItemRendererUtil;
+import com.liferay.commerce.frontend.util.ItemRendererUtil;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -37,7 +37,7 @@ public class AddAccountModalItemRenderer extends BaseSoyProductItemRenderer {
                 PortalUtil.getPortalURL(request) + API_ENDPOINT);
 
         data.put("spritemap",
-                InfoItemRendererUtil.getSpritemapPath(request));
+                ItemRendererUtil.getSpritemapPath(request));
 
         return data;
     }

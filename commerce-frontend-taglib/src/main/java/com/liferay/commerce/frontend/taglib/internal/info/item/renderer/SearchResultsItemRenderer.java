@@ -2,7 +2,7 @@ package com.liferay.commerce.frontend.taglib.internal.info.item.renderer;
 
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.context.CommerceContext;
-import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.InfoItemRendererUtil;
+import com.liferay.commerce.frontend.util.ItemRendererUtil;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -42,10 +42,10 @@ public class SearchResultsItemRenderer extends BaseSoyProductItemRenderer {
 
         data.put("searchAPI", PortalUtil.getPortalURL(request) + API_ENDPOINT);
         data.put("queryString", StringPool.BLANK);
-        data.put("spritemap", InfoItemRendererUtil.getSpritemapPath(request));
+        data.put("spritemap", ItemRendererUtil.getSpritemapPath(request));
         data.put("visible", false);
 
-        CommerceContext commerceContext = InfoItemRendererUtil.getCommerceContext(request);
+        CommerceContext commerceContext = ItemRendererUtil.getCommerceContext(request);
 
         CommerceAccount commerceAccount =
                 commerceContext.getCommerceAccount();

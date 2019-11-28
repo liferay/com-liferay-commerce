@@ -1,6 +1,6 @@
 package com.liferay.commerce.frontend.taglib.internal.info.item.renderer;
 
-import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.InfoItemRendererUtil;
+import com.liferay.commerce.frontend.util.ItemRendererUtil;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.content.util.CPContentHelper;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -32,10 +32,13 @@ public class GalleryItemRenderer extends BaseSoyProductItemRenderer {
     }
 
     @Override
-    protected Map<String, Object> getRenderingData(CPCatalogEntry cpCatalogEntry, HttpServletRequest request) throws PortalException {
+    protected Map<String, Object> getRenderingData(
+            CPCatalogEntry cpCatalogEntry, HttpServletRequest request)
+            throws PortalException {
+
         Map<String, Object> data = new HashMap<>();
 
-        ThemeDisplay themeDisplay = InfoItemRendererUtil.getThemeDisplay(request);
+        ThemeDisplay themeDisplay = ItemRendererUtil.getThemeDisplay(request);
 
         data.put("selected", 0);
         data.put("images", _cpContentHelper.getImages(

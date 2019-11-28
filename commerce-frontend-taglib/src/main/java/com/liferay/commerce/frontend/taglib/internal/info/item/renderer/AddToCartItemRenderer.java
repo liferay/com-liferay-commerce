@@ -2,7 +2,7 @@ package com.liferay.commerce.frontend.taglib.internal.info.item.renderer;
 
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.context.CommerceContext;
-import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.InfoItemRendererUtil;
+import com.liferay.commerce.frontend.util.ItemRendererUtil;
 import com.liferay.commerce.frontend.util.ProductHelper;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
@@ -49,7 +49,7 @@ public class AddToCartItemRenderer extends BaseSoyProductItemRenderer {
 
         _cpInstanceId = _getCPInstanceId(cpCatalogEntry);
 
-        CommerceContext commerceContext = InfoItemRendererUtil.getCommerceContext(request);
+        CommerceContext commerceContext = ItemRendererUtil.getCommerceContext(request);
 
         CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
 

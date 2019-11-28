@@ -2,7 +2,7 @@ package com.liferay.commerce.frontend.taglib.internal.info.item.renderer;
 
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
-import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.InfoItemRendererUtil;
+import com.liferay.commerce.frontend.util.ItemRendererUtil;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -45,7 +45,7 @@ public class AddressModalItemRenderer extends BaseSoyProductItemRenderer {
 
         data.put("countriesAPI", _resolveCountriesEndpoint(request));
         data.put("regionsAPI", PortalUtil.getPortalURL(request) + REGIONS_API_ENDPOINT);
-        data.put("spritemap", InfoItemRendererUtil.getSpritemapPath(request));
+        data.put("spritemap", ItemRendererUtil.getSpritemapPath(request));
 
         return data;
     }

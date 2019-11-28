@@ -17,7 +17,7 @@ package com.liferay.commerce.frontend.taglib.internal.info.item.renderer;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.frontend.model.PriceModel;
 import com.liferay.commerce.frontend.model.ProductSettingsModel;
-import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.InfoItemRendererUtil;
+import com.liferay.commerce.frontend.util.ItemRendererUtil;
 
 import com.liferay.commerce.frontend.util.ProductHelper;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
@@ -58,9 +58,9 @@ public class PriceItemRenderer extends BaseSoyProductItemRenderer {
         Map<String, Object> data = new HashMap<>();
 
         CommerceContext commerceContext =
-                InfoItemRendererUtil.getCommerceContext(request);
+                ItemRendererUtil.getCommerceContext(request);
         ThemeDisplay themeDisplay =
-                InfoItemRendererUtil.getThemeDisplay(request);
+                ItemRendererUtil.getThemeDisplay(request);
 
         long cpInstanceId = Optional.ofNullable(
                 (Long) request.getAttribute("CPInstanceId"))

@@ -23,7 +23,6 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Gianmarco Brunialti Masera
  */
-
 @Component(immediate = true, service = UserInvitationModalItemRendererUtil.class)
 public class UserInvitationModalItemRendererUtil {
 

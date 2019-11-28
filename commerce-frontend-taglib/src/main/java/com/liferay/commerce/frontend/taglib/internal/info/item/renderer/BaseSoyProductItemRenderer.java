@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.frontend.taglib.internal.info.item.renderer;
 
-import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.InfoItemRendererUtil;
+import com.liferay.commerce.frontend.util.ItemRendererUtil;
 import com.liferay.commerce.frontend.template.soy.renderer.ComponentDescriptor;
 import com.liferay.commerce.frontend.template.soy.renderer.SoyComponentRenderer;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
@@ -48,7 +48,8 @@ abstract public class BaseSoyProductItemRenderer
 
         try {
             Writer writer = response.getWriter();
-            Map<String, Object> data = getRenderingData(cpCatalogEntry, request);
+            Map<String, Object> data =
+                    getRenderingData(cpCatalogEntry, request);
             ComponentDescriptor soyComponentDescriptor = getDescriptor(request);
 
             _soyRenderer.renderSoyComponent(
@@ -63,7 +64,8 @@ abstract public class BaseSoyProductItemRenderer
     protected abstract Log getLogger();
 
     protected abstract Map<String, Object> getRenderingData(
-            CPCatalogEntry cpCatalogEntry, HttpServletRequest request) throws Exception;
+            CPCatalogEntry cpCatalogEntry,
+            HttpServletRequest request) throws Exception;
 
     protected boolean getIsWrapper() { return IS_WRAPPER; }
 
@@ -81,7 +83,8 @@ abstract public class BaseSoyProductItemRenderer
 
     protected String getComponentId(HttpServletRequest request) {
         return Optional.ofNullable((String) request.getAttribute("id"))
-                .orElse(PortalUtil.generateRandomKey(request, getComponentName()));
+                .orElse(PortalUtil.generateRandomKey(
+                        request, getComponentName()));
     }
 
     @Reference
@@ -91,10 +94,11 @@ abstract public class BaseSoyProductItemRenderer
     protected SoyComponentRenderer _soyRenderer;
 
     protected String MODULE_NAME =
-            InfoItemRendererUtil.composeModuleName(getComponentName());
+            ItemRendererUtil.composeModuleName(getComponentName());
 
     protected String TEMPLATE_NAMESPACE = StringBundler.concat(
-            InfoItemRendererUtil.caseCamelize(getComponentName()), ".render");
+            ItemRendererUtil.caseCamelize(
+                    getComponentName()), ".render");
 
     protected Log _log = getLogger();
 }

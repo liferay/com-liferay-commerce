@@ -18,7 +18,7 @@ import com.liferay.commerce.account.constants.CommerceAccountPortletKeys;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.context.CommerceContext;
-import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.InfoItemRendererUtil;
+import com.liferay.commerce.frontend.util.ItemRendererUtil;
 import com.liferay.commerce.frontend.taglib.internal.model.CurrentAccountModel;
 import com.liferay.commerce.frontend.taglib.internal.model.CurrentOrderModel;
 import com.liferay.commerce.model.CommerceOrder;
@@ -72,8 +72,8 @@ public class AccountSelectorItemRenderer extends BaseSoyProductItemRenderer {
 
         Map<String, Object> data = new HashMap<>();
 
-        ThemeDisplay themeDisplay = InfoItemRendererUtil.getThemeDisplay(request);
-        CommerceContext commerceContext = InfoItemRendererUtil.getCommerceContext(request);
+        ThemeDisplay themeDisplay = ItemRendererUtil.getThemeDisplay(request);
+        CommerceContext commerceContext = ItemRendererUtil.getCommerceContext(request);
 
         LayoutSet layoutSet = themeDisplay.getLayoutSet();
 
@@ -132,7 +132,7 @@ public class AccountSelectorItemRenderer extends BaseSoyProductItemRenderer {
 
         data.put("accountsAPI", PortalUtil.getPortalURL(request) + API_ENDPOINT);
         data.put("query", StringPool.BLANK);
-        data.put("spritemap", InfoItemRendererUtil.getSpritemapPath(request));
+        data.put("spritemap", ItemRendererUtil.getSpritemapPath(request));
 
         return data;
     }

@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.frontend.taglib.internal.info.item.renderer;
 
-import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.InfoItemRendererUtil;
+import com.liferay.commerce.frontend.util.ItemRendererUtil;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -50,9 +50,9 @@ public class SearchBarItemRenderer extends BaseSoyProductItemRenderer {
     protected Map<String, Object> getRenderingData(CPCatalogEntry cpCatalogEntry, HttpServletRequest request) {
         Map<String, Object> data = new HashMap<>();
 
-        Locale locale = InfoItemRendererUtil.getThemeDisplay(request).getLocale();
+        Locale locale = ItemRendererUtil.getThemeDisplay(request).getLocale();
 
-        data.put("spritemap", InfoItemRendererUtil.getSpritemapPath(request));
+        data.put("spritemap", ItemRendererUtil.getSpritemapPath(request));
         data.put("placeholder", LanguageUtil.get(locale, "search"));
         data.put("query", ParamUtil.getString(request, "q"));
 

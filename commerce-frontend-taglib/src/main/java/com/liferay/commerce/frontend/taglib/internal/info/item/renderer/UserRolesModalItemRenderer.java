@@ -16,7 +16,7 @@ package com.liferay.commerce.frontend.taglib.internal.info.item.renderer;
 
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountServiceUtil;
-import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.InfoItemRendererUtil;
+import com.liferay.commerce.frontend.util.ItemRendererUtil;
 import com.liferay.commerce.frontend.taglib.internal.model.AccountRole;
 
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
@@ -67,7 +67,7 @@ public class UserRolesModalItemRenderer extends BaseSoyProductItemRenderer {
         data.put("availableRoles", _getAvailableRoles(request));
         data.put("selectedRoles", _getSelectedRoles(userId, commerceAccountId));
 
-        data.put("spritemap", InfoItemRendererUtil.getSpritemapPath(request));
+        data.put("spritemap", ItemRendererUtil.getSpritemapPath(request));
 
         return data;
     }
@@ -84,7 +84,7 @@ public class UserRolesModalItemRenderer extends BaseSoyProductItemRenderer {
         for (Role role : roles) {
             availableRoles.add(new AccountRole(
                     role.getRoleId(),
-                    role.getTitle(InfoItemRendererUtil
+                    role.getTitle(ItemRendererUtil
                             .getThemeDisplay(request).getLocale())));
         }
 

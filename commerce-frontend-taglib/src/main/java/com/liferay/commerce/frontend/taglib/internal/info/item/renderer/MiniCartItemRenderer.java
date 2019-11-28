@@ -16,7 +16,7 @@ package com.liferay.commerce.frontend.taglib.internal.info.item.renderer;
 
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.context.CommerceContext;
-import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.InfoItemRendererUtil;
+import com.liferay.commerce.frontend.util.ItemRendererUtil;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
@@ -61,7 +61,7 @@ public class MiniCartItemRenderer extends BaseSoyProductItemRenderer {
 
         Map<String, Object> data = new HashMap<>();
 
-        CommerceContext commerceContext = InfoItemRendererUtil.getCommerceContext(request);
+        CommerceContext commerceContext = ItemRendererUtil.getCommerceContext(request);
         CommerceOrder commerceOrder = commerceContext.getCommerceOrder();
 
         if (Validator.isNotNull(commerceOrder)) {
@@ -106,7 +106,7 @@ public class MiniCartItemRenderer extends BaseSoyProductItemRenderer {
         data.put("productsCount", 0);
 
         data.put("cartAPI", PortalUtil.getPortalURL(request) + API_ENDPOINT);
-        data.put("spritemap", InfoItemRendererUtil.getSpritemapPath(request));
+        data.put("spritemap", ItemRendererUtil.getSpritemapPath(request));
 
         return data;
     }

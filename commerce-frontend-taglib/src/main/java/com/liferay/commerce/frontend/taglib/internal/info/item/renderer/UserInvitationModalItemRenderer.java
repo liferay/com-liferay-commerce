@@ -14,7 +14,7 @@
 
 package com.liferay.commerce.frontend.taglib.internal.info.item.renderer;
 
-import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.InfoItemRendererUtil;
+import com.liferay.commerce.frontend.util.ItemRendererUtil;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.log.Log;
@@ -54,7 +54,7 @@ public class UserInvitationModalItemRenderer extends BaseSoyProductItemRenderer 
 
         data.put("usersAPI", PortalUtil.getPortalURL(request) + API_ENDPOINT);
         data.put("query", StringPool.BLANK);
-        data.put("spritemap", InfoItemRendererUtil.getSpritemapPath(request));
+        data.put("spritemap", ItemRendererUtil.getSpritemapPath(request));
 
         return data;
     }
