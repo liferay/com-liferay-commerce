@@ -431,11 +431,11 @@ public class CommerceTestUtil {
 		CommerceOrder commerceOrder = addB2CCommerceOrder(
 			companyId, userId, currencyId, siteGroupId);
 
-		int orderStatusIdx = RandomTestUtil.randomInt(
+		int orderStatusIndex = RandomTestUtil.randomInt(
 			0, CommerceShipmentConstants.ALLOWED_ORDER_STATUSES.length - 1);
 
 		int orderStatus =
-			CommerceShipmentConstants.ALLOWED_ORDER_STATUSES[orderStatusIdx];
+			CommerceShipmentConstants.ALLOWED_ORDER_STATUSES[orderStatusIndex];
 
 		commerceOrder.setOrderStatus(orderStatus);
 
