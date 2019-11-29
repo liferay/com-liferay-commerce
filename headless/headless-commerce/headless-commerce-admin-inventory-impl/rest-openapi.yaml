@@ -4,7 +4,7 @@ components:
             properties:
                 errorCode:
                     description:
-                        'Internal error code mapping'
+                        "Internal error code mapping"
                     example: 996
                     readOnly: true
                     type: integer
@@ -18,7 +18,7 @@ components:
                     type: string
                 status:
                     description:
-                        'HTTP Status code'
+                        "HTTP Status code"
                     example: 404
                     readOnly: true
                     type: integer
@@ -34,14 +34,14 @@ components:
                     example: true
                     type: boolean
                 city:
-                    example: 'Diamond Bar'
+                    example: "Diamond Bar"
                     type: string
                 countryISOCode:
                     example: US
                     type: string
                 description:
                     type: string
-                    example: 'right stairs, first room on the left'
+                    example: "right stairs, first room on the left"
                 externalReferenceCode:
                     example: AB-34098-789-N
                     type: string
@@ -52,7 +52,7 @@ components:
                     type: integer
                 items:
                     items:
-                        $ref: '#/components/schemas/WarehouseItem'
+                        $ref: "#/components/schemas/WarehouseItem"
                     type: array
                 latitude:
                     example: 33.9976884
@@ -63,24 +63,24 @@ components:
                     format: double
                     type: number
                 name:
-                    example: 'Alessio Antonio Rendina'
+                    example: "Alessio Antonio Rendina"
                     type: string
                 regionISOCode:
                     example: CA
                     type: string
                 street1:
-                    example: '1400 Montefino Ave'
+                    example: "1400 Montefino Ave"
                     type: string
                 street2:
-                    example: '1st floor'
+                    example: "1st floor"
                     type: string
                 street3:
-                    example: 'suite 200'
+                    example: "suite 200"
                     type: string
                 type:
                     type: string
                 zip:
-                    example: '91765'
+                    example: "91765"
                     type: string
             type: object
         WarehouseItem:
@@ -130,25 +130,25 @@ components:
                 authorizationCode:
                     authorizationUrl: /oauth/authorize
                     scopes:
-                        CommerceOpenApiAdmin.admin: 'Grants access to admin operations'
-                        CommerceOpenApiAdmin.read: 'Grants read access'
-                        CommerceOpenApiAdmin.write: 'Grants write access'
+                        CommerceOpenApiAdmin.admin: "Grants access to admin operations"
+                        CommerceOpenApiAdmin.read: "Grants read access"
+                        CommerceOpenApiAdmin.write: "Grants write access"
                     tokenUrl: /oauth/token
             type: oauth2
 info:
     contact:
         email: team-commerce@liferay.com
-        name: 'Commerce Team'
+        name: "Commerce Team"
     description:
-        'Liferay Commerce Admin Inventory API'
+        "Liferay Commerce Admin Inventory API"
     license:
-        name: 'GNU Lesser General Public License 2.1'
-        url: 'https://www.gnu.org/licenses/lgpl-2.1.html'
-    title: 'Liferay Commerce Admin Inventory API'
+        name: "GNU Lesser General Public License 2.1"
+        url: "https://www.gnu.org/licenses/lgpl-2.1.html"
+    title: "Liferay Commerce Admin Inventory API"
     version: v1.0
 openapi: 3.0.0
 paths:
-    '/warehouseItems/by-externalReferenceCode/{externalReferenceCode}/':
+    "/warehouseItems/by-externalReferenceCode/{externalReferenceCode}/":
         delete:
             operationId: deleteWarehouseItemByExternalReferenceCode
             parameters:
@@ -158,31 +158,31 @@ paths:
                   required: true
                   schema:
                       description:
-                          'The resource external reference code'
+                          "The resource external reference code"
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
                   style: simple
             responses:
-                '204':
+                "204":
                     description:
-                        'No content'
-                '401':
+                        "No content"
+                "401":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Authentication information is missing or invalid'
+                        "Authentication information is missing or invalid"
             security:
                 - BasicAuth: []
                 - BearerAuth: []
                 - OAuth2:
                       - CommerceOpenApiAdmin.write
-            summary: 'Deletes a Warehouse Item by ID.'
+            summary: "Deletes a Warehouse Item by ID."
             tags:
                 - WarehouseItem
         get:
@@ -194,61 +194,61 @@ paths:
                   required: true
                   schema:
                       description:
-                          'The resource external reference code'
+                          "The resource external reference code"
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
                   style: simple
             responses:
-                '200':
+                "200":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/WarehouseItem'
+                                $ref: "#/components/schemas/WarehouseItem"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/WarehouseItem'
+                                $ref: "#/components/schemas/WarehouseItem"
                     description:
-                        'Successful operation'
-                '400':
+                        "Successful operation"
+                "400":
                     description:
-                        'Invalid input'
-                '401':
+                        "Invalid input"
+                "401":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Authentication information is missing or invalid'
-                '404':
+                        "Authentication information is missing or invalid"
+                "404":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'The specified resource was not found'
-                '500':
+                        "The specified resource was not found"
+                "500":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Unexpected error'
+                        "Unexpected error"
             security:
                 - BasicAuth: []
                 - BearerAuth: []
                 - OAuth2:
                       - CommerceOpenApiAdmin.read
-            summary: 'Gets a Warehouse Item by ID.'
+            summary: "Gets a Warehouse Item by ID."
             tags:
                 - WarehouseItem
         patch:
@@ -260,7 +260,7 @@ paths:
                   required: true
                   schema:
                       description:
-                          'The resource external reference code'
+                          "The resource external reference code"
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
@@ -269,57 +269,57 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/WarehouseItem'
+                            $ref: "#/components/schemas/WarehouseItem"
                     application/xml:
                         schema:
-                            $ref: '#/components/schemas/WarehouseItem'
+                            $ref: "#/components/schemas/WarehouseItem"
                 required: true
             responses:
-                '202':
+                "202":
                     description:
                         Async
-                '204':
+                "204":
                     description:
                         Updated
-                '400':
+                "400":
                     description:
-                        'Invalid input'
-                '401':
+                        "Invalid input"
+                "401":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Authentication information is missing or invalid'
-                '404':
+                        "Authentication information is missing or invalid"
+                "404":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'The specified resource was not found'
-                '500':
+                        "The specified resource was not found"
+                "500":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Unexpected error'
+                        "Unexpected error"
             security:
                 - BasicAuth: []
                 - BearerAuth: []
                 - OAuth2:
                       - CommerceOpenApiAdmin.write
-            summary: 'Updates a Warehouse Item by ID.'
+            summary: "Updates a Warehouse Item by ID."
             tags:
                 - WarehouseItem
         post:
@@ -331,7 +331,7 @@ paths:
                   required: true
                   schema:
                       description:
-                          'The resource external reference code'
+                          "The resource external reference code"
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
@@ -340,70 +340,70 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/WarehouseItem'
+                            $ref: "#/components/schemas/WarehouseItem"
                     application/xml:
                         schema:
-                            $ref: '#/components/schemas/WarehouseItem'
+                            $ref: "#/components/schemas/WarehouseItem"
                 required: true
             responses:
-                '201':
+                "201":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/WarehouseItem'
+                                $ref: "#/components/schemas/WarehouseItem"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/WarehouseItem'
+                                $ref: "#/components/schemas/WarehouseItem"
                     description:
                         Created
-                '202':
+                "202":
                     description:
-                        'Accepted - Async'
-                '204':
+                        "Accepted - Async"
+                "204":
                     description:
                         Updated
-                '400':
+                "400":
                     description:
-                        'Invalid input'
-                '401':
+                        "Invalid input"
+                "401":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Authentication information is missing or invalid'
-                '404':
+                        "Authentication information is missing or invalid"
+                "404":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'The specified resource was not found'
-                '500':
+                        "The specified resource was not found"
+                "500":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Unexpected error'
+                        "Unexpected error"
             security:
                 - BasicAuth: []
                 - BearerAuth: []
                 - OAuth2:
                       - CommerceOpenApiAdmin.write
-            summary: 'Creates a Warehouse Item by external reference code.'
+            summary: "Creates a Warehouse Item by external reference code."
             tags:
                 - WarehouseItem
-    '/warehouseItems/{id}':
+    "/warehouseItems/{id}":
         delete:
             operationId: deleteWarehouseItem
             parameters:
@@ -412,31 +412,31 @@ paths:
                   required: true
                   schema:
                       description:
-                          'The resource Id'
+                          "The resource Id"
                       example: 30130
                       format: int64
                       minimum: 0
                       type: integer
             responses:
-                '204':
+                "204":
                     description:
-                        'No content'
-                '401':
+                        "No content"
+                "401":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Authentication information is missing or invalid'
+                        "Authentication information is missing or invalid"
             security:
                 - BasicAuth: []
                 - BearerAuth: []
                 - OAuth2:
                       - CommerceOpenApiAdmin.write
-            summary: 'Deletes a Warehouse Item by ID.'
+            summary: "Deletes a Warehouse Item by ID."
             tags:
                 - WarehouseItem
         get:
@@ -447,61 +447,61 @@ paths:
                   required: true
                   schema:
                       description:
-                          'The resource Id'
+                          "The resource Id"
                       example: 30130
                       format: int64
                       minimum: 0
                       type: integer
             responses:
-                '200':
+                "200":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/WarehouseItem'
+                                $ref: "#/components/schemas/WarehouseItem"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/WarehouseItem'
+                                $ref: "#/components/schemas/WarehouseItem"
                     description:
-                        'Successful operation'
-                '400':
+                        "Successful operation"
+                "400":
                     description:
-                        'Invalid input'
-                '401':
+                        "Invalid input"
+                "401":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Authentication information is missing or invalid'
-                '404':
+                        "Authentication information is missing or invalid"
+                "404":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'The specified resource was not found'
-                '500':
+                        "The specified resource was not found"
+                "500":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Unexpected error'
+                        "Unexpected error"
             security:
                 - BasicAuth: []
                 - BearerAuth: []
                 - OAuth2:
                       - CommerceOpenApiAdmin.read
-            summary: 'Gets a Warehouse Item by ID.'
+            summary: "Gets a Warehouse Item by ID."
             tags:
                 - WarehouseItem
         patch:
@@ -512,7 +512,7 @@ paths:
                   required: true
                   schema:
                       description:
-                          'The resource Id'
+                          "The resource Id"
                       example: 30130
                       format: int64
                       minimum: 0
@@ -521,60 +521,60 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/WarehouseItem'
+                            $ref: "#/components/schemas/WarehouseItem"
                     application/xml:
                         schema:
-                            $ref: '#/components/schemas/WarehouseItem'
+                            $ref: "#/components/schemas/WarehouseItem"
                 required: true
             responses:
-                '202':
+                "202":
                     description:
                         Async
-                '204':
+                "204":
                     description:
                         Updated
-                '400':
+                "400":
                     description:
-                        'Invalid input'
-                '401':
+                        "Invalid input"
+                "401":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Authentication information is missing or invalid'
-                '404':
+                        "Authentication information is missing or invalid"
+                "404":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'The specified resource was not found'
-                '500':
+                        "The specified resource was not found"
+                "500":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Unexpected error'
+                        "Unexpected error"
             security:
                 - BasicAuth: []
                 - BearerAuth: []
                 - OAuth2:
                       - CommerceOpenApiAdmin.write
-            summary: 'Updates a Warehouse Item by ID.'
+            summary: "Updates a Warehouse Item by ID."
             tags:
                 - WarehouseItem
-    '/warehouses/by-externalReferenceCode/{externalReferenceCode}':
+    "/warehouses/by-externalReferenceCode/{externalReferenceCode}":
         delete:
             operationId: deleteWarehousByExternalReferenceCode
             parameters:
@@ -583,30 +583,30 @@ paths:
                   required: true
                   schema:
                       description:
-                          'The resource external reference code'
+                          "The resource external reference code"
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
             responses:
-                '204':
+                "204":
                     description:
-                        'No content'
-                '401':
+                        "No content"
+                "401":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Authentication information is missing or invalid'
+                        "Authentication information is missing or invalid"
             security:
                 - BasicAuth: []
                 - BearerAuth: []
                 - OAuth2:
                       - CommerceOpenApiAdmin.write
-            summary: 'Deletes a Warehouse by external reference code.'
+            summary: "Deletes a Warehouse by external reference code."
             tags:
                 - Warehouse
         get:
@@ -617,60 +617,60 @@ paths:
                   required: true
                   schema:
                       description:
-                          'The resource external reference code'
+                          "The resource external reference code"
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
             responses:
-                '200':
+                "200":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Warehouse'
+                                $ref: "#/components/schemas/Warehouse"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Warehouse'
+                                $ref: "#/components/schemas/Warehouse"
                     description:
-                        'Successful operation'
-                '400':
+                        "Successful operation"
+                "400":
                     description:
-                        'Invalid input'
-                '401':
+                        "Invalid input"
+                "401":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Authentication information is missing or invalid'
-                '404':
+                        "Authentication information is missing or invalid"
+                "404":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'The specified resource was not found'
-                '500':
+                        "The specified resource was not found"
+                "500":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Unexpected error'
+                        "Unexpected error"
             security:
                 - BasicAuth: []
                 - BearerAuth: []
                 - OAuth2:
                       - CommerceOpenApiAdmin.read
-            summary: 'Gets a Warehouse by external reference code.'
+            summary: "Gets a Warehouse by external reference code."
             tags:
                 - Warehouse
         patch:
@@ -681,7 +681,7 @@ paths:
                   required: true
                   schema:
                       description:
-                          'The resource external reference code'
+                          "The resource external reference code"
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
@@ -689,60 +689,60 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/Warehouse'
+                            $ref: "#/components/schemas/Warehouse"
                     application/xml:
                         schema:
-                            $ref: '#/components/schemas/Warehouse'
+                            $ref: "#/components/schemas/Warehouse"
                 required: true
             responses:
-                '202':
+                "202":
                     description:
                         Async
-                '204':
+                "204":
                     description:
                         Updated
-                '400':
+                "400":
                     description:
-                        'Invalid input'
-                '401':
+                        "Invalid input"
+                "401":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Authentication information is missing or invalid'
-                '404':
+                        "Authentication information is missing or invalid"
+                "404":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'The specified resource was not found'
-                '500':
+                        "The specified resource was not found"
+                "500":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Unexpected error'
+                        "Unexpected error"
             security:
                 - BasicAuth: []
                 - BearerAuth: []
                 - OAuth2:
                       - CommerceOpenApiAdmin.write
-            summary: 'Updates a Warehouse by external reference code.'
+            summary: "Updates a Warehouse by external reference code."
             tags:
                 - Warehouse
-    '/warehouses/by-externalReferenceCode/{externalReferenceCode}/warehouseItems/':
+    "/warehouses/by-externalReferenceCode/{externalReferenceCode}/warehouseItems/":
         get:
             operationId: getWarehousByExternalReferenceCodeWarehouseItemsPage
             parameters:
@@ -751,7 +751,7 @@ paths:
                   required: true
                   schema:
                       description:
-                          'The resource external reference code'
+                          "The resource external reference code"
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
@@ -766,59 +766,59 @@ paths:
                   schema:
                       type: integer
             responses:
-                '200':
+                "200":
                     content:
                         application/json:
                             schema:
                                 items:
-                                    $ref: '#/components/schemas/WarehouseItem'
+                                    $ref: "#/components/schemas/WarehouseItem"
                                 type: array
                         application/xml:
                             schema:
                                 items:
-                                    $ref: '#/components/schemas/WarehouseItem'
+                                    $ref: "#/components/schemas/WarehouseItem"
                                 type: array
                     description:
-                        'Successful operation'
-                '400':
+                        "Successful operation"
+                "400":
                     description:
-                        'Invalid input'
-                '401':
+                        "Invalid input"
+                "401":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Authentication information is missing or invalid'
-                '404':
+                        "Authentication information is missing or invalid"
+                "404":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'The specified resource was not found'
-                '500':
+                        "The specified resource was not found"
+                "500":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Unexpected error'
+                        "Unexpected error"
             security:
                 - BasicAuth: []
                 - BearerAuth: []
                 - OAuth2:
                       - CommerceOpenApiAdmin.read
-            summary: 'Gets a list of Warehouse Items related to an Warehouse.'
+            summary: "Gets a list of Warehouse Items related to an Warehouse."
             tags:
                 - WarehouseItem
         post:
@@ -829,7 +829,7 @@ paths:
                   required: true
                   schema:
                       description:
-                          'The resource external reference code'
+                          "The resource external reference code"
                       example: AB-34098-789-N
                       minLength: 1
                       type: string
@@ -837,70 +837,70 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/WarehouseItem'
+                            $ref: "#/components/schemas/WarehouseItem"
                     application/xml:
                         schema:
-                            $ref: '#/components/schemas/WarehouseItem'
+                            $ref: "#/components/schemas/WarehouseItem"
                 required: true
             responses:
-                '201':
+                "201":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/WarehouseItem'
+                                $ref: "#/components/schemas/WarehouseItem"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/WarehouseItem'
+                                $ref: "#/components/schemas/WarehouseItem"
                     description:
                         Created
-                '202':
+                "202":
                     description:
                         Async
-                '204':
+                "204":
                     description:
                         Updated
-                '400':
+                "400":
                     description:
-                        'Invalid input'
-                '401':
+                        "Invalid input"
+                "401":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Authentication information is missing or invalid'
-                '404':
+                        "Authentication information is missing or invalid"
+                "404":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'The specified resource was not found'
-                '500':
+                        "The specified resource was not found"
+                "500":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Unexpected error'
+                        "Unexpected error"
             security:
                 - BasicAuth: []
                 - BearerAuth: []
                 - OAuth2:
                       - CommerceOpenApiAdmin.write
-            summary: 'Creates or updates an Warehouse Item.'
+            summary: "Creates or updates an Warehouse Item."
             tags:
                 - WarehouseItem
-    '/warehouses/{id}':
+    "/warehouses/{id}":
         delete:
             operationId: deleteWarehousId
             parameters:
@@ -909,31 +909,31 @@ paths:
                   required: true
                   schema:
                       description:
-                          'The resource Id'
+                          "The resource Id"
                       example: 30130
                       format: int64
                       minimum: 0
                       type: integer
             responses:
-                '204':
+                "204":
                     description:
-                        'No content'
-                '401':
+                        "No content"
+                "401":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Authentication information is missing or invalid'
+                        "Authentication information is missing or invalid"
             security:
                 - BasicAuth: []
                 - BearerAuth: []
                 - OAuth2:
                       - CommerceOpenApiAdmin.write
-            summary: 'Deletes a Warehouse by ID.'
+            summary: "Deletes a Warehouse by ID."
             tags:
                 - Warehouse
         get:
@@ -944,61 +944,61 @@ paths:
                   required: true
                   schema:
                       description:
-                          'The resource Id'
+                          "The resource Id"
                       example: 30130
                       format: int64
                       minimum: 0
                       type: integer
             responses:
-                '200':
+                "200":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Warehouse'
+                                $ref: "#/components/schemas/Warehouse"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Warehouse'
+                                $ref: "#/components/schemas/Warehouse"
                     description:
-                        'Successful operation'
-                '400':
+                        "Successful operation"
+                "400":
                     description:
-                        'Invalid input'
-                '401':
+                        "Invalid input"
+                "401":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Authentication information is missing or invalid'
-                '404':
+                        "Authentication information is missing or invalid"
+                "404":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'The specified resource was not found'
-                '500':
+                        "The specified resource was not found"
+                "500":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Unexpected error'
+                        "Unexpected error"
             security:
                 - BasicAuth: []
                 - BearerAuth: []
                 - OAuth2:
                       - CommerceOpenApiAdmin.read
-            summary: 'Gets a Warehouse by ID.'
+            summary: "Gets a Warehouse by ID."
             tags:
                 - Warehouse
         patch:
@@ -1009,7 +1009,7 @@ paths:
                   required: true
                   schema:
                       description:
-                          'The resource Id'
+                          "The resource Id"
                       example: 30130
                       format: int64
                       minimum: 0
@@ -1018,60 +1018,60 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/Warehouse'
+                            $ref: "#/components/schemas/Warehouse"
                     application/xml:
                         schema:
-                            $ref: '#/components/schemas/Warehouse'
+                            $ref: "#/components/schemas/Warehouse"
                 required: true
             responses:
-                '202':
+                "202":
                     description:
                         Async
-                '204':
+                "204":
                     description:
                         Updated
-                '400':
+                "400":
                     description:
-                        'Invalid input'
-                '401':
+                        "Invalid input"
+                "401":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Authentication information is missing or invalid'
-                '404':
+                        "Authentication information is missing or invalid"
+                "404":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'The specified resource was not found'
-                '500':
+                        "The specified resource was not found"
+                "500":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Unexpected error'
+                        "Unexpected error"
             security:
                 - BasicAuth: []
                 - BearerAuth: []
                 - OAuth2:
                       - CommerceOpenApiAdmin.write
-            summary: 'Updates a Warehouse by ID.'
+            summary: "Updates a Warehouse by ID."
             tags:
                 - Warehouse
-    '/warehouses/{id}/warehouseItems/':
+    "/warehouses/{id}/warehouseItems/":
         get:
             operationId: getWarehousIdWarehouseItemsPage
             parameters:
@@ -1080,7 +1080,7 @@ paths:
                   required: true
                   schema:
                       description:
-                          'The resource Id'
+                          "The resource Id"
                       example: 30130
                       format: int64
                       minimum: 0
@@ -1096,59 +1096,59 @@ paths:
                   schema:
                       type: integer
             responses:
-                '200':
+                "200":
                     content:
                         application/json:
                             schema:
                                 items:
-                                    $ref: '#/components/schemas/WarehouseItem'
+                                    $ref: "#/components/schemas/WarehouseItem"
                                 type: array
                         application/xml:
                             schema:
                                 items:
-                                    $ref: '#/components/schemas/WarehouseItem'
+                                    $ref: "#/components/schemas/WarehouseItem"
                                 type: array
                     description:
-                        'Successful operation'
-                '400':
+                        "Successful operation"
+                "400":
                     description:
-                        'Invalid input'
-                '401':
+                        "Invalid input"
+                "401":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Authentication information is missing or invalid'
-                '404':
+                        "Authentication information is missing or invalid"
+                "404":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'The specified resource was not found'
-                '500':
+                        "The specified resource was not found"
+                "500":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Unexpected error'
+                        "Unexpected error"
             security:
                 - BasicAuth: []
                 - BearerAuth: []
                 - OAuth2:
                       - CommerceOpenApiAdmin.read
-            summary: 'Gets a list of Warehouse Items related to a Warehouse.'
+            summary: "Gets a list of Warehouse Items related to a Warehouse."
             tags:
                 - WarehouseItem
         post:
@@ -1159,7 +1159,7 @@ paths:
                   required: true
                   schema:
                       description:
-                          'The resource Id'
+                          "The resource Id"
                       example: 30130
                       format: int64
                       minimum: 0
@@ -1168,67 +1168,67 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/WarehouseItem'
+                            $ref: "#/components/schemas/WarehouseItem"
                     application/xml:
                         schema:
-                            $ref: '#/components/schemas/WarehouseItem'
+                            $ref: "#/components/schemas/WarehouseItem"
                 required: true
             responses:
-                '201':
+                "201":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/WarehouseItem'
+                                $ref: "#/components/schemas/WarehouseItem"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/WarehouseItem'
+                                $ref: "#/components/schemas/WarehouseItem"
                     description:
                         Created
-                '202':
+                "202":
                     description:
                         Async
-                '204':
+                "204":
                     description:
                         Updated
-                '400':
+                "400":
                     description:
-                        'Invalid input'
-                '401':
+                        "Invalid input"
+                "401":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Authentication information is missing or invalid'
-                '404':
+                        "Authentication information is missing or invalid"
+                "404":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'The specified resource was not found'
-                '500':
+                        "The specified resource was not found"
+                "500":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Unexpected error'
+                        "Unexpected error"
             security:
                 - BasicAuth: []
                 - BearerAuth: []
                 - OAuth2:
                       - CommerceOpenApiAdmin.write
-            summary: 'Creates or updates an Warehouse Item.'
+            summary: "Creates or updates an Warehouse Item."
             tags:
                 - WarehouseItem
     /warehouseItems/updated:
@@ -1270,53 +1270,53 @@ paths:
                       type: integer
                   style: form
             responses:
-                '200':
+                "200":
                     content:
                         application/json:
                             schema:
                                 items:
-                                    $ref: '#/components/schemas/WarehouseItem'
+                                    $ref: "#/components/schemas/WarehouseItem"
                                 type: array
                         application/xml:
                             schema:
                                 items:
-                                    $ref: '#/components/schemas/WarehouseItem'
+                                    $ref: "#/components/schemas/WarehouseItem"
                                 type: array
                     description:
-                        'Successful operation'
-                '400':
+                        "Successful operation"
+                "400":
                     description:
                         "Invalid input. Happens if the search parameters are not passed\nor if the end date is prior to start date"
-                '401':
+                "401":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Authentication information is missing or invalid'
-                '404':
+                        "Authentication information is missing or invalid"
+                "404":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'The specified resource was not found'
-                '500':
+                        "The specified resource was not found"
+                "500":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Unexpected error'
+                        "Unexpected error"
             security:
                 - BasicAuth: []
                 - BearerAuth: []
@@ -1350,59 +1350,59 @@ paths:
                   schema:
                       type: string
             responses:
-                '200':
+                "200":
                     content:
                         application/json:
                             schema:
                                 items:
-                                    $ref: '#/components/schemas/Warehouse'
+                                    $ref: "#/components/schemas/Warehouse"
                                 type: array
                         application/xml:
                             schema:
                                 items:
-                                    $ref: '#/components/schemas/Warehouse'
+                                    $ref: "#/components/schemas/Warehouse"
                                 type: array
                     description:
-                        'Successful operation'
-                '400':
+                        "Successful operation"
+                "400":
                     description:
-                        'Invalid input'
-                '401':
+                        "Invalid input"
+                "401":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Authentication information is missing or invalid'
-                '404':
+                        "Authentication information is missing or invalid"
+                "404":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'The specified resource was not found'
-                '500':
+                        "The specified resource was not found"
+                "500":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Unexpected error'
+                        "Unexpected error"
             security:
                 - BasicAuth: []
                 - BearerAuth: []
                 - OAuth2:
                       - CommerceOpenApiAdmin.read
-            summary: 'Gets a List of Warehouses.'
+            summary: "Gets a List of Warehouses."
             tags:
                 - Warehouse
         post:
@@ -1411,73 +1411,73 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/Warehouse'
+                            $ref: "#/components/schemas/Warehouse"
                     application/xml:
                         schema:
-                            $ref: '#/components/schemas/Warehouse'
+                            $ref: "#/components/schemas/Warehouse"
                 required: true
             responses:
-                '201':
+                "201":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Warehouse'
+                                $ref: "#/components/schemas/Warehouse"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Warehouse'
+                                $ref: "#/components/schemas/Warehouse"
                     description:
                         Created
-                '202':
+                "202":
                     description:
-                        'Accepted - Async'
-                '204':
+                        "Accepted - Async"
+                "204":
                     description:
                         Updated
-                '400':
+                "400":
                     description:
-                        'Invalid input'
-                '401':
+                        "Invalid input"
+                "401":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Authentication information is missing or invalid'
-                '404':
+                        "Authentication information is missing or invalid"
+                "404":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'The specified resource was not found'
-                '500':
+                        "The specified resource was not found"
+                "500":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
-                        'Unexpected error'
+                        "Unexpected error"
             security:
                 - BasicAuth: []
                 - BearerAuth: []
                 - OAuth2:
                       - CommerceOpenApiAdmin.write
-            summary: 'Creates or updates a Warehouse.'
+            summary: "Creates or updates a Warehouse."
             tags:
                 - Warehouse
 servers:
     - description:
-          'Liferay Commerce API server'
-      url: 'https://commerce.{environment}.liferay.com/commerce-admin-inventory/{basePath}'
+          "Liferay Commerce API server"
+      url: "https://commerce.{environment}.liferay.com/commerce-admin-inventory/{basePath}"
       variables:
           basePath:
               default: v1.0
@@ -1488,27 +1488,27 @@ servers:
                   - api.dev
                   - api.uat
     - description:
-          'Liferay Commerce Local Development (Hosts file)'
-      url: '{protocol}://{host}:{port}/o/commerce-admin-inventory/{basePath}'
+          "Liferay Commerce Local Development (Hosts file)"
+      url: "{protocol}://{host}:{port}/o/commerce-admin-inventory/{basePath}"
       variables:
           basePath:
               default: v1.0
           host:
               default: test.dev
           port:
-              default: '8080'
+              default: "8080"
               enum:
-                  - '443'
-                  - '8080'
-                  - '8443'
+                  - "443"
+                  - "8080"
+                  - "8443"
           protocol:
               default: http
               enum:
                   - http
                   - https
     - description:
-          'Liferay Commerce Local Development with Ngrok'
-      url: '{protocol}://{host}.ngrok.io/o/commerce-admin-inventory/{basePath}'
+          "Liferay Commerce Local Development with Ngrok"
+      url: "{protocol}://{host}.ngrok.io/o/commerce-admin-inventory/{basePath}"
       variables:
           basePath:
               default: v1.0
@@ -1520,5 +1520,5 @@ servers:
                   - http
                   - https
     - description:
-          'SwaggerHub API Auto Mocking'
-      url: 'https://virtserver.swaggerhub.com/liferay6/commerce-admin-inventory/v1.0'
+          "SwaggerHub API Auto Mocking"
+      url: "https://virtserver.swaggerhub.com/liferay6/commerce-admin-inventory/v1.0"
