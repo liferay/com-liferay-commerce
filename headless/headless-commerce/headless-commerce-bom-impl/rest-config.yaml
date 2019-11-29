@@ -1,5 +1,5 @@
 apiDir: "../headless-commerce-bom-api/src/main/java"
-apiPackagePath: "com.liferay.commerce.headless.bom"
+apiPackagePath: "com.liferay.headless.commerce.bom"
 application:
     baseURI: "/commerce-bom"
     className: "CommerceBOMApplication"
