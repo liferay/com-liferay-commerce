@@ -27,8 +27,27 @@ import javax.servlet.jsp.JspException;
 /**
  * @author Gianmarco Brunialti Masera
  */
-
 public class SearchBarTag extends IncludeTag {
+
+	@Override
+	public void cleanUp() {
+		super.cleanUp();
+
+		request.removeAttribute("id");
+	}
+
+	@Override
+	public int doEndTag() throws JspException {
+		HttpServletResponse response =
+			(HttpServletResponse)pageContext.getResponse();
+
+		CPCatalogEntry cpCatalogEntry = _cpContentHelper.getCPCatalogEntry(
+			request);
+
+		_searchBarItemRenderer.render(cpCatalogEntry, request, response);
+
+		return super.doEndTag();
+	}
 
 	@Override
 	public int doStartTag() throws JspException {
@@ -38,30 +57,11 @@ public class SearchBarTag extends IncludeTag {
 		return super.doStartTag();
 	}
 
-	@Override
-	public int doEndTag() throws JspException {
-		HttpServletResponse response =
-				(HttpServletResponse) pageContext.getResponse();
-
-		CPCatalogEntry cpCatalogEntry =
-				_cpContentHelper.getCPCatalogEntry(request);
-
-		_searchBarItemRenderer.render(cpCatalogEntry, request, response);
-
-		return super.doEndTag();
-	}
-
-	@Override
-	public void cleanUp() {
-		request.removeAttribute("id");
-	}
-
 	public void setId(String id) {
 		request.setAttribute("id", id);
 	}
 
-	private SearchBarItemRenderer _searchBarItemRenderer;
-
 	private CPContentHelper _cpContentHelper;
+	private SearchBarItemRenderer _searchBarItemRenderer;
 
 }

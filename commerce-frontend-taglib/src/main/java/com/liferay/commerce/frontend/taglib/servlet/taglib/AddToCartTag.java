@@ -19,7 +19,6 @@ import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.Add
 import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.content.util.CPContentHelper;
-
 import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletResponse;
@@ -28,8 +27,28 @@ import javax.servlet.jsp.JspException;
 /**
  * @author Gianmarco Brunialti Masera
  */
-
 public class AddToCartTag extends IncludeTag {
+
+	@Override
+	public void cleanUp() {
+		super.cleanUp();
+
+		request.removeAttribute("id");
+		request.removeAttribute("cpInstanceId");
+	}
+
+	@Override
+	public int doEndTag() throws JspException {
+		HttpServletResponse response =
+			(HttpServletResponse)pageContext.getResponse();
+
+		CPCatalogEntry cpCatalogEntry = _cpContentHelper.getCPCatalogEntry(
+			request);
+
+		_addToCartItemRenderer.render(cpCatalogEntry, request, response);
+
+		return super.doEndTag();
+	}
 
 	@Override
 	public int doStartTag() throws JspException {
@@ -39,34 +58,15 @@ public class AddToCartTag extends IncludeTag {
 		return super.doStartTag();
 	}
 
-	@Override
-	public int doEndTag() throws JspException {
-		HttpServletResponse response =
-				(HttpServletResponse) pageContext.getResponse();
-
-		CPCatalogEntry cpCatalogEntry =
-				_cpContentHelper.getCPCatalogEntry(request);
-
-		_addToCartItemRenderer.render(cpCatalogEntry, request, response);
-
-		return super.doEndTag();
-	}
-
-	@Override
-	public void cleanUp() {
-		request.removeAttribute("id");
-		request.removeAttribute("cpInstanceId");
+	public void setCPInstanceId(long cpInstanceId) {
+		request.setAttribute("cpInstanceId", cpInstanceId);
 	}
 
 	public void setId(String id) {
 		request.setAttribute("componentId", id);
 	}
 
-	public void setCPInstanceId(long cpInstanceId) {
-		request.setAttribute("cpInstanceId", cpInstanceId);
-    }
-
 	private AddToCartItemRenderer _addToCartItemRenderer;
-
 	private CPContentHelper _cpContentHelper;
+
 }

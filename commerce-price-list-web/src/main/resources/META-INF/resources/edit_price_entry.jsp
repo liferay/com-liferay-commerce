@@ -22,6 +22,7 @@ CommercePriceEntryDisplayContext commercePriceEntryDisplayContext = (CommercePri
 CommercePriceEntry commercePriceEntry = commercePriceEntryDisplayContext.getCommercePriceEntry();
 
 CPInstance cpInstance = commercePriceEntry.getCPInstance();
+
 CPDefinition cpDefinition = cpInstance.getCPDefinition();
 
 CommercePriceList commercePriceList = commercePriceEntryDisplayContext.getCommercePriceList();

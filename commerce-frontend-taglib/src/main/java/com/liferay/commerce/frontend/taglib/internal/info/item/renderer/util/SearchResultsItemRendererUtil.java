@@ -15,6 +15,7 @@
 package com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util;
 
 import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.SearchResultsItemRenderer;
+
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
@@ -23,33 +24,36 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Gianmarco Brunialti Masera
  */
-
 @Component(immediate = true, service = SearchResultsItemRendererUtil.class)
 public class SearchResultsItemRendererUtil {
 
-    public static final SearchResultsItemRenderer getRenderer() {
-        return _searchResultsItemRendererUtil._getRenderer();
-    }
+	public static final SearchResultsItemRenderer getRenderer() {
+		return _searchResultsItemRendererUtil._getRenderer();
+	}
 
-    private SearchResultsItemRenderer _getRenderer() {
-        return _searchResultsItemRenderer;
-    }
+	@Activate
+	protected void activate() {
+		_searchResultsItemRendererUtil = this;
+	}
 
-    @Activate
-    protected void activate() {
-        _searchResultsItemRendererUtil = this;
-    }
+	@Deactivate
+	protected void deactivate() {
+		_searchResultsItemRendererUtil = null;
+	}
 
-    @Deactivate
-    protected void deactivate() {
-        _searchResultsItemRendererUtil = null;
-    }
+	@Reference(unbind = "-")
+	protected void setSearchResultsItemRenderer(
+		SearchResultsItemRenderer searchResultsItemRenderer) {
 
-    @Reference(unbind = "-")
-    protected void setSearchResultsItemRenderer(SearchResultsItemRenderer searchResultsItemRenderer) {
-        _searchResultsItemRenderer = searchResultsItemRenderer;
-    }
+		_searchResultsItemRenderer = searchResultsItemRenderer;
+	}
 
-    private static SearchResultsItemRendererUtil _searchResultsItemRendererUtil;
-    private SearchResultsItemRenderer _searchResultsItemRenderer;
+	private SearchResultsItemRenderer _getRenderer() {
+		return _searchResultsItemRenderer;
+	}
+
+	private static SearchResultsItemRendererUtil _searchResultsItemRendererUtil;
+
+	private SearchResultsItemRenderer _searchResultsItemRenderer;
+
 }

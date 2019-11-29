@@ -27,31 +27,31 @@ import javax.servlet.jsp.JspException;
 /**
  * @author Gianmarco Brunialti Masera
  */
-
 public class AddAccountModalTag extends IncludeTag {
-
-	@Override
-	public int doStartTag() throws JspException {
-		_cpContentHelper = ServletContextUtil.getCPContentHelper();
-		_addAccountModalItemRenderer = AddAccountModalItemRendererUtil.getRenderer();
-
-		return super.doStartTag();
-	}
 
 	@Override
 	public int doEndTag() throws JspException {
 		HttpServletResponse response =
-				(HttpServletResponse) pageContext.getResponse();
+			(HttpServletResponse)pageContext.getResponse();
 
-		CPCatalogEntry cpCatalogEntry =
-				_cpContentHelper.getCPCatalogEntry(request);
+		CPCatalogEntry cpCatalogEntry = _cpContentHelper.getCPCatalogEntry(
+			request);
 
 		_addAccountModalItemRenderer.render(cpCatalogEntry, request, response);
 
 		return super.doEndTag();
 	}
 
-	private AddAccountModalItemRenderer _addAccountModalItemRenderer;
+	@Override
+	public int doStartTag() throws JspException {
+		_cpContentHelper = ServletContextUtil.getCPContentHelper();
+		_addAccountModalItemRenderer =
+			AddAccountModalItemRendererUtil.getRenderer();
 
+		return super.doStartTag();
+	}
+
+	private AddAccountModalItemRenderer _addAccountModalItemRenderer;
 	private CPContentHelper _cpContentHelper;
+
 }

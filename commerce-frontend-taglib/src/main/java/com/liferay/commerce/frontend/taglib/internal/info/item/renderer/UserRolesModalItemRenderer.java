@@ -16,9 +16,8 @@ package com.liferay.commerce.frontend.taglib.internal.info.item.renderer;
 
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountServiceUtil;
-import com.liferay.commerce.frontend.util.ItemRendererUtil;
 import com.liferay.commerce.frontend.taglib.internal.model.AccountRole;
-
+import com.liferay.commerce.frontend.util.ItemRendererUtil;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -30,12 +29,12 @@ import com.liferay.portal.kernel.service.RoleServiceUtil;
 import com.liferay.portal.kernel.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
-import org.osgi.service.component.annotations.Component;
 
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-import java.util.*;
+import org.osgi.service.component.annotations.Component;
 
 /**
  * @author Gianmarco Brunialti Masera
@@ -43,73 +42,80 @@ import java.util.*;
 @Component(service = UserRolesModalItemRenderer.class)
 public class UserRolesModalItemRenderer extends BaseSoyProductItemRenderer {
 
-    private static final String COMPONENT_NAME = "user_roles_modal";
+	@Override
+	protected String getComponentName() {
+		return COMPONENT_NAME;
+	}
 
-    @Override
-    protected String getComponentName() {
-        return COMPONENT_NAME;
-    }
+	@Override
+	protected Log getLogger() {
+		return LogFactoryUtil.getLog(UserRolesModalItemRenderer.class);
+	}
 
-    @Override
-    protected Log getLogger() {
-        return LogFactoryUtil.getLog(UserRolesModalItemRenderer.class);
-    }
+	@Override
+	protected Map<String, Object> getRenderingData(
+			CPCatalogEntry cpCatalogEntry, HttpServletRequest request)
+		throws PortalException {
 
-    @Override
-    protected Map<String, Object> getRenderingData(CPCatalogEntry cpCatalogEntry, HttpServletRequest request)
-            throws PortalException {
+		Map<String, Object> data = new HashMap<>();
 
-        Map<String, Object> data = new HashMap<>();
+		long userId = GetterUtil.getLong(request.getAttribute("userId"));
+		long commerceAccountId = GetterUtil.getLong(
+			request.getAttribute("commerceAccountId"));
 
-        long userId = GetterUtil.getLong(request.getAttribute(("userId")));
-        long commerceAccountId = GetterUtil.getLong(request.getAttribute("commerceAccountId"));
+		data.put("availableRoles", _getAvailableRoles(request));
+		data.put("selectedRoles", _getSelectedRoles(userId, commerceAccountId));
 
-        data.put("availableRoles", _getAvailableRoles(request));
-        data.put("selectedRoles", _getSelectedRoles(userId, commerceAccountId));
+		data.put("spritemap", ItemRendererUtil.getSpritemapPath(request));
 
-        data.put("spritemap", ItemRendererUtil.getSpritemapPath(request));
+		return data;
+	}
 
-        return data;
-    }
+	private List<AccountRole> _getAvailableRoles(HttpServletRequest request)
+		throws PortalException {
 
-    private List<AccountRole> _getAvailableRoles(HttpServletRequest request)
-            throws PortalException {
+		List<AccountRole> availableRoles = new ArrayList<>();
 
-        List<AccountRole> availableRoles = new ArrayList<>();
+		List<Role> roles = RoleServiceUtil.getRoles(
+			PortalUtil.getCompanyId(request),
+			new int[] {RoleConstants.TYPE_SITE});
 
-        List<Role> roles = RoleServiceUtil.getRoles(
-                PortalUtil.getCompanyId(request),
-                new int[]{RoleConstants.TYPE_SITE});
+		for (Role role : roles) {
+			availableRoles.add(
+				new AccountRole(
+					role.getRoleId(),
+					role.getTitle(
+						ItemRendererUtil.getThemeDisplay(
+							request
+						).getLocale())));
+		}
 
-        for (Role role : roles) {
-            availableRoles.add(new AccountRole(
-                    role.getRoleId(),
-                    role.getTitle(ItemRendererUtil
-                            .getThemeDisplay(request).getLocale())));
-        }
+		return availableRoles;
+	}
 
-        return availableRoles;
-    }
+	private List<AccountRole> _getSelectedRoles(
+			long userId, long commerceAccountId)
+		throws PortalException {
 
-    private List<AccountRole> _getSelectedRoles(long userId, long commerceAccountId)
-            throws PortalException {
+		CommerceAccount commerceAccount =
+			CommerceAccountServiceUtil.getCommerceAccount(commerceAccountId);
 
-        CommerceAccount commerceAccount = CommerceAccountServiceUtil
-                .getCommerceAccount(commerceAccountId);
+		List<AccountRole> selectedRoles = new ArrayList<>();
 
-        List<AccountRole> selectedRoles = new ArrayList<>();
+		List<UserGroupRole> userGroupRoles =
+			UserGroupRoleLocalServiceUtil.getUserGroupRoles(
+				userId, commerceAccount.getCommerceAccountGroupId());
 
-        List<UserGroupRole> userGroupRoles =
-                UserGroupRoleLocalServiceUtil.getUserGroupRoles(
-                        userId, commerceAccount.getCommerceAccountGroupId());
+		for (UserGroupRole userGroupRole : userGroupRoles) {
+			Role role = userGroupRole.getRole();
 
-        for (UserGroupRole userGroupRole : userGroupRoles) {
-            Role role = userGroupRole.getRole();
+			selectedRoles.add(
+				new AccountRole(role.getRoleId(), role.getName()));
+		}
 
-            selectedRoles.add(
-                    new AccountRole(role.getRoleId(), role.getName()));
-        }
+		return selectedRoles;
+	}
 
-        return selectedRoles;
-    }
+	private static final String COMPONENT_NAME = "user_roles_modal";
+
 }

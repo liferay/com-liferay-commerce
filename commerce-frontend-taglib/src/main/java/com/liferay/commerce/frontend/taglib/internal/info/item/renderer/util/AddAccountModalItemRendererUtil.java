@@ -15,6 +15,7 @@
 package com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util;
 
 import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.AddAccountModalItemRenderer;
+
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
@@ -26,21 +27,34 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true, service = AddAccountModalItemRendererUtil.class)
 public class AddAccountModalItemRendererUtil {
 
-    public static final AddAccountModalItemRenderer getRenderer() { return _addAccountModalItemRendererUtil._getRenderer(); }
+	public static final AddAccountModalItemRenderer getRenderer() {
+		return _addAccountModalItemRendererUtil._getRenderer();
+	}
 
-    private AddAccountModalItemRenderer _getRenderer() { return _addAccountModalItemRenderer; }
+	@Activate
+	protected void activate() {
+		_addAccountModalItemRendererUtil = this;
+	}
 
-    @Activate
-    protected void activate() { _addAccountModalItemRendererUtil = this; }
+	@Deactivate
+	protected void deactivate() {
+		_addAccountModalItemRendererUtil = null;
+	}
 
-    @Deactivate
-    protected void deactivate() { _addAccountModalItemRendererUtil = null; }
+	@Reference(unbind = "-")
+	protected void setAddAccountModalRenderer(
+		AddAccountModalItemRenderer addAccountModalItemRenderer) {
 
-    @Reference(unbind = "-")
-    protected void setAddAccountModalRenderer(AddAccountModalItemRenderer addAccountModalItemRenderer) {
-        _addAccountModalItemRenderer = addAccountModalItemRenderer;
-    }
+		_addAccountModalItemRenderer = addAccountModalItemRenderer;
+	}
 
-    private static AddAccountModalItemRendererUtil _addAccountModalItemRendererUtil;
-    private AddAccountModalItemRenderer _addAccountModalItemRenderer;
+	private AddAccountModalItemRenderer _getRenderer() {
+		return _addAccountModalItemRenderer;
+	}
+
+	private static AddAccountModalItemRendererUtil
+		_addAccountModalItemRendererUtil;
+
+	private AddAccountModalItemRenderer _addAccountModalItemRenderer;
+
 }

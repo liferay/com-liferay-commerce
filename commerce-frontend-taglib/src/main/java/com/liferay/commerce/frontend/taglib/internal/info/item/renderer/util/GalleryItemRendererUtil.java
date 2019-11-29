@@ -15,6 +15,7 @@
 package com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util;
 
 import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.GalleryItemRenderer;
+
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
@@ -23,33 +24,36 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Gianmarco Brunialti Masera
  */
-
 @Component(immediate = true, service = GalleryItemRendererUtil.class)
 public class GalleryItemRendererUtil {
 
-    public static final GalleryItemRenderer getRenderer() {
-        return _galleryItemRendererUtil._getRenderer();
-    }
+	public static final GalleryItemRenderer getRenderer() {
+		return _galleryItemRendererUtil._getRenderer();
+	}
 
-    private GalleryItemRenderer _getRenderer() {
-        return _galleryItemRenderer;
-    }
+	@Activate
+	protected void activate() {
+		_galleryItemRendererUtil = this;
+	}
 
-    @Activate
-    protected void activate() {
-        _galleryItemRendererUtil = this;
-    }
+	@Deactivate
+	protected void deactivate() {
+		_galleryItemRendererUtil = null;
+	}
 
-    @Deactivate
-    protected void deactivate() {
-        _galleryItemRendererUtil = null;
-    }
+	@Reference(unbind = "-")
+	protected void setGalleryItemRenderer(
+		GalleryItemRenderer galleryItemRenderer) {
 
-    @Reference(unbind = "-")
-    protected void setGalleryItemRenderer(GalleryItemRenderer galleryItemRenderer) {
-        _galleryItemRenderer = galleryItemRenderer;
-    }
+		_galleryItemRenderer = galleryItemRenderer;
+	}
 
-    private static GalleryItemRendererUtil _galleryItemRendererUtil;
-    private GalleryItemRenderer _galleryItemRenderer;
+	private GalleryItemRenderer _getRenderer() {
+		return _galleryItemRenderer;
+	}
+
+	private static GalleryItemRendererUtil _galleryItemRendererUtil;
+
+	private GalleryItemRenderer _galleryItemRenderer;
+
 }

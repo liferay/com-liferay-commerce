@@ -20,13 +20,14 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import org.osgi.service.component.annotations.Component;
 
-
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.osgi.service.component.annotations.Component;
 
 /**
  * @author Gianmarco Brunialti Masera
@@ -34,28 +35,33 @@ import java.util.Map;
 @Component(service = SearchBarItemRenderer.class)
 public class SearchBarItemRenderer extends BaseSoyProductItemRenderer {
 
-    private static final String COMPONENT_NAME = "search_bar";
+	@Override
+	protected String getComponentName() {
+		return COMPONENT_NAME;
+	}
 
-    @Override
-    protected String getComponentName() {
-        return COMPONENT_NAME;
-    }
+	@Override
+	protected Log getLogger() {
+		return LogFactoryUtil.getLog(SearchBarItemRenderer.class);
+	}
 
-    @Override
-    protected Log getLogger() {
-        return LogFactoryUtil.getLog(SearchBarItemRenderer.class);
-    }
+	@Override
+	protected Map<String, Object> getRenderingData(
+		CPCatalogEntry cpCatalogEntry, HttpServletRequest request) {
 
-    @Override
-    protected Map<String, Object> getRenderingData(CPCatalogEntry cpCatalogEntry, HttpServletRequest request) {
-        Map<String, Object> data = new HashMap<>();
+		Map<String, Object> data = new HashMap<>();
 
-        Locale locale = ItemRendererUtil.getThemeDisplay(request).getLocale();
+		Locale locale = ItemRendererUtil.getThemeDisplay(
+			request
+		).getLocale();
 
-        data.put("spritemap", ItemRendererUtil.getSpritemapPath(request));
-        data.put("placeholder", LanguageUtil.get(locale, "search"));
-        data.put("query", ParamUtil.getString(request, "q"));
+		data.put("placeholder", LanguageUtil.get(locale, "search"));
+		data.put("query", ParamUtil.getString(request, "q"));
+		data.put("spritemap", ItemRendererUtil.getSpritemapPath(request));
 
-        return data;
-    }
+		return data;
+	}
+
+	private static final String COMPONENT_NAME = "search_bar";
+
 }

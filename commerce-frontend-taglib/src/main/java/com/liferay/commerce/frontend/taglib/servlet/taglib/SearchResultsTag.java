@@ -27,31 +27,31 @@ import javax.servlet.jsp.JspException;
 /**
  * @author Gianmarco Brunialti Masera
  */
-
 public class SearchResultsTag extends IncludeTag {
-
-	@Override
-	public int doStartTag() throws JspException {
-		_cpContentHelper = ServletContextUtil.getCPContentHelper();
-		_searchResultsItemRenderer = SearchResultsItemRendererUtil.getRenderer();
-
-		return super.doStartTag();
-	}
 
 	@Override
 	public int doEndTag() throws JspException {
 		HttpServletResponse response =
-				(HttpServletResponse) pageContext.getResponse();
+			(HttpServletResponse)pageContext.getResponse();
 
-		CPCatalogEntry cpCatalogEntry =
-				_cpContentHelper.getCPCatalogEntry(request);
+		CPCatalogEntry cpCatalogEntry = _cpContentHelper.getCPCatalogEntry(
+			request);
 
 		_searchResultsItemRenderer.render(cpCatalogEntry, request, response);
 
 		return super.doEndTag();
 	}
 
-	private SearchResultsItemRenderer _searchResultsItemRenderer;
+	@Override
+	public int doStartTag() throws JspException {
+		_cpContentHelper = ServletContextUtil.getCPContentHelper();
+		_searchResultsItemRenderer =
+			SearchResultsItemRendererUtil.getRenderer();
+
+		return super.doStartTag();
+	}
 
 	private CPContentHelper _cpContentHelper;
+	private SearchResultsItemRenderer _searchResultsItemRenderer;
+
 }

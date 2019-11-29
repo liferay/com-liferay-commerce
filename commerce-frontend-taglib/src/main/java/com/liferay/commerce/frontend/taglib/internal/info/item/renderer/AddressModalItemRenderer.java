@@ -10,71 +10,79 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.security.auth.AuthTokenUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringBundler;
-import org.osgi.service.component.annotations.Component;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.osgi.service.component.annotations.Component;
 
 @Component(service = AddressModalItemRenderer.class)
 public class AddressModalItemRenderer extends BaseSoyProductItemRenderer {
 
-    private static final String COMPONENT_NAME = "address_modal";
+	@Override
+	protected String getComponentName() {
+		return COMPONENT_NAME;
+	}
 
-    private static final String REGIONS_API_ENDPOINT =
-            "/o/commerce-ui/address/regions/";
-    private static final String COUNTRIES_API_ENDPOINT =
-            "/o/commerce-ui/address/countries/";
-    private static final String COUNTRIES_BY_CHANNEL_API_ENDPOINT =
-            "/o/commerce-ui/address/countries-by-channel-id/";
+	@Override
+	protected Log getLogger() {
+		return LogFactoryUtil.getLog(AddressModalItemRenderer.class);
+	}
 
+	@Override
+	protected Map<String, Object> getRenderingData(
+		CPCatalogEntry cpCatalogEntry, HttpServletRequest request) {
 
-    @Override
-    protected String getComponentName() {
-        return COMPONENT_NAME;
-    }
+		Map<String, Object> data = new HashMap<>();
 
-    @Override
-    protected Log getLogger() {
-        return LogFactoryUtil.getLog(AddressModalItemRenderer.class);
-    }
+		data.put("countriesAPI", _resolveCountriesEndpoint(request));
+		data.put(
+			"regionsAPI",
+			PortalUtil.getPortalURL(request) + REGIONS_API_ENDPOINT);
+		data.put("spritemap", ItemRendererUtil.getSpritemapPath(request));
 
-    @Override
-    protected Map<String, Object> getRenderingData(CPCatalogEntry cpCatalogEntry, HttpServletRequest request) {
-        Map<String, Object> data = new HashMap<>();
+		return data;
+	}
 
-        data.put("countriesAPI", _resolveCountriesEndpoint(request));
-        data.put("regionsAPI", PortalUtil.getPortalURL(request) + REGIONS_API_ENDPOINT);
-        data.put("spritemap", ItemRendererUtil.getSpritemapPath(request));
+	private String _resolveCountriesEndpoint(HttpServletRequest request) {
+		String portalURL = PortalUtil.getPortalURL(request);
+		String authToken = AuthTokenUtil.getToken(request);
 
-        return data;
-    }
+		String countriesEndpoint;
 
-    private String _resolveCountriesEndpoint(HttpServletRequest request) {
-        String portalURL = PortalUtil.getPortalURL(request);
-        String authToken = AuthTokenUtil.getToken(request);
+		try {
+			CommerceContext commerceContext =
+				(CommerceContext)request.getAttribute(
+					CommerceWebKeys.COMMERCE_CONTEXT);
 
-        String countriesEndpoint;
+			countriesEndpoint = StringBundler.concat(
+				portalURL, COUNTRIES_BY_CHANNEL_API_ENDPOINT, "?channelId=",
+				String.valueOf(commerceContext.getCommerceChannelId()),
+				"&p_auth=", authToken);
+		}
+		catch (PortalException pe) {
+			countriesEndpoint = StringBundler.concat(
+				portalURL, COUNTRIES_API_ENDPOINT, "?p_auth=", authToken);
 
-        try {
-            CommerceContext commerceContext =
-                    (CommerceContext) request.getAttribute(
-                            CommerceWebKeys.COMMERCE_CONTEXT);
+			Log localLogger = getLogger();
 
-            countriesEndpoint = StringBundler.concat(
-                    portalURL, COUNTRIES_BY_CHANNEL_API_ENDPOINT,
-                    "?channelId=", String.valueOf(commerceContext.getCommerceChannelId()),
-                    "&p_auth=", authToken);
-        } catch (PortalException pe) {
-            countriesEndpoint = StringBundler.concat(
-                    portalURL, COUNTRIES_API_ENDPOINT,
-                    "?p_auth=", authToken);
+			localLogger.error(pe, pe);
+		}
 
-            Log localLogger = getLogger();
+		return countriesEndpoint;
+	}
 
-            localLogger.error(pe, pe);
-        }
+	private static final String COMPONENT_NAME = "address_modal";
 
-        return countriesEndpoint;
-    }
+	private static final String COUNTRIES_API_ENDPOINT =
+		"/o/commerce-ui/address/countries/";
+
+	private static final String COUNTRIES_BY_CHANNEL_API_ENDPOINT =
+		"/o/commerce-ui/address/countries-by-channel-id/";
+
+	private static final String REGIONS_API_ENDPOINT =
+		"/o/commerce-ui/address/regions/";
+
 }

@@ -15,6 +15,7 @@
 package com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util;
 
 import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.CompareCheckboxItemRenderer;
+
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
@@ -23,33 +24,37 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Gianmarco Brunialti Masera
  */
-
 @Component(immediate = true, service = CompareCheckboxItemRendererUtil.class)
 public class CompareCheckboxItemRendererUtil {
 
-    public static final CompareCheckboxItemRenderer getRenderer() {
-        return _compareCheckboxItemRendererUtil._getRenderer();
-    }
+	public static final CompareCheckboxItemRenderer getRenderer() {
+		return _compareCheckboxItemRendererUtil._getRenderer();
+	}
 
-    private CompareCheckboxItemRenderer _getRenderer() {
-        return _compareCheckboxRenderer;
-    }
+	@Activate
+	protected void activate() {
+		_compareCheckboxItemRendererUtil = this;
+	}
 
-    @Activate
-    protected void activate() {
-        _compareCheckboxItemRendererUtil = this;
-    }
+	@Deactivate
+	protected void deactivate() {
+		_compareCheckboxItemRendererUtil = null;
+	}
 
-    @Deactivate
-    protected void deactivate() {
-        _compareCheckboxItemRendererUtil = null;
-    }
+	@Reference(unbind = "-")
+	protected void setCompareCheckboxRenderer(
+		CompareCheckboxItemRenderer compareCheckboxRenderer) {
 
-    @Reference(unbind = "-")
-    protected void setCompareCheckboxRenderer(CompareCheckboxItemRenderer compareCheckboxRenderer) {
-        _compareCheckboxRenderer = compareCheckboxRenderer;
-    }
+		_compareCheckboxRenderer = compareCheckboxRenderer;
+	}
 
-    private static CompareCheckboxItemRendererUtil _compareCheckboxItemRendererUtil;
-    private CompareCheckboxItemRenderer _compareCheckboxRenderer;
+	private CompareCheckboxItemRenderer _getRenderer() {
+		return _compareCheckboxRenderer;
+	}
+
+	private static CompareCheckboxItemRendererUtil
+		_compareCheckboxItemRendererUtil;
+
+	private CompareCheckboxItemRenderer _compareCheckboxRenderer;
+
 }

@@ -24,28 +24,26 @@ import java.util.Locale;
 /**
  * @author Gianmarco Brunialti Masera
  */
-public abstract class BaseCommerceFragmentRenderer
-        implements FragmentRenderer {
+public abstract class BaseCommerceFragmentRenderer implements FragmentRenderer {
 
-    @Override
-    public String getCollectionKey() {
-        return COLLECTION_KEY;
-    }
+	@Override
+	public String getCollectionKey() {
+		return COLLECTION_KEY;
+	}
 
-    @Override
-    public String getLabel(Locale locale) {
-        return LanguageUtil.get(locale, getFragmentName());
-    }
+	@Override
+	public String getLabel(Locale locale) {
+		return LanguageUtil.get(locale, getFragmentName());
+	}
 
-    protected abstract String getFragmentName();
+	protected abstract String getFragmentName();
 
-    protected String INFO_ITEM_RENDERER_PACKAGE = StringBundler.concat(
-            "com.liferay.commerce.frontend.taglib.internal.info.item.renderer.",
-            ItemRendererUtil.caseCamelize(getFragmentName()),
-            ITEM_RENDERER_SUFFIX);
+	protected static final String ITEM_RENDERER_SUFFIX = "ItemRenderer";
 
-    private static final String COLLECTION_KEY = "commerce-components";
+	protected String INFO_ITEM_RENDERER_PACKAGE = StringBundler.concat(
+		"com.liferay.commerce.frontend.taglib.internal.info.item.renderer.",
+		ItemRendererUtil.caseCamelize(getFragmentName()), ITEM_RENDERER_SUFFIX);
 
-    protected static final String ITEM_RENDERER_SUFFIX =
-            "ItemRenderer";
+	private static final String COLLECTION_KEY = "commerce-components";
+
 }

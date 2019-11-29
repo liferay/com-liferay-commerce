@@ -18,9 +18,9 @@ import com.liferay.commerce.account.constants.CommerceAccountPortletKeys;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.context.CommerceContext;
-import com.liferay.commerce.frontend.util.ItemRendererUtil;
 import com.liferay.commerce.frontend.taglib.internal.model.CurrentAccountModel;
 import com.liferay.commerce.frontend.taglib.internal.model.CurrentOrderModel;
+import com.liferay.commerce.frontend.util.ItemRendererUtil;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.petra.string.StringPool;
@@ -36,14 +36,17 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.webserver.WebServerServletTokenUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
-import org.osgi.service.component.annotations.Component;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
+
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
+
+import org.osgi.service.component.annotations.Component;
 
 /**
  * @author Gianmarco Brunialti Masera
@@ -51,173 +54,169 @@ import java.util.Map;
 @Component(service = AccountSelectorItemRenderer.class)
 public class AccountSelectorItemRenderer extends BaseSoyProductItemRenderer {
 
-    private static final String COMPONENT_NAME = "account_selector";
+	@Override
+	protected String getComponentName() {
+		return COMPONENT_NAME;
+	}
 
-    private static final String API_ENDPOINT =
-            "/o/commerce-ui/";
+	@Override
+	protected Log getLogger() {
+		return LogFactoryUtil.getLog(AccountSelectorItemRenderer.class);
+	}
 
-    @Override
-    protected String getComponentName() {
-        return COMPONENT_NAME;
-    }
+	@Override
+	protected Map<String, Object> getRenderingData(
+			CPCatalogEntry cpCatalogEntry, HttpServletRequest request)
+		throws PortalException {
 
-    @Override
-    protected Log getLogger() {
-        return LogFactoryUtil.getLog(AccountSelectorItemRenderer.class);
-    }
+		Map<String, Object> data = new HashMap<>();
 
-    @Override
-    protected Map<String, Object> getRenderingData(CPCatalogEntry cpCatalogEntry, HttpServletRequest request)
-            throws PortalException {
+		ThemeDisplay themeDisplay = ItemRendererUtil.getThemeDisplay(request);
+		CommerceContext commerceContext = ItemRendererUtil.getCommerceContext(
+			request);
 
-        Map<String, Object> data = new HashMap<>();
+		LayoutSet layoutSet = themeDisplay.getLayoutSet();
 
-        ThemeDisplay themeDisplay = ItemRendererUtil.getThemeDisplay(request);
-        CommerceContext commerceContext = ItemRendererUtil.getCommerceContext(request);
+		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
 
-        LayoutSet layoutSet = themeDisplay.getLayoutSet();
+		if (commerceAccount != null) {
+			String thumbnailUrl = null;
 
-        CommerceAccount commerceAccount =
-                commerceContext.getCommerceAccount();
+			if (commerceAccount.getLogoId() == 0) {
+				thumbnailUrl =
+					themeDisplay.getPathImage() + "/organization_logo?img_id=0";
+			}
+			else {
+				thumbnailUrl = com.liferay.petra.string.StringBundler.concat(
+					themeDisplay.getPathImage(), "/organization_logo?img_id=",
+					commerceAccount.getLogoId(), "&t=",
+					WebServerServletTokenUtil.getToken(
+						commerceAccount.getLogoId()));
+			}
 
-        if (commerceAccount != null) {
-            String thumbnailUrl = null;
+			CurrentAccountModel currentAccountModel = new CurrentAccountModel(
+				commerceAccount.getCommerceAccountId(),
+				commerceAccount.getName(), thumbnailUrl);
 
-            if (commerceAccount.getLogoId() == 0) {
-                thumbnailUrl =
-                        themeDisplay.getPathImage() +
-                                "/organization_logo?img_id=0";
-            }
-            else {
-                thumbnailUrl = com.liferay.petra.string.StringBundler.concat(
-                        themeDisplay.getPathImage(),
-                        "/organization_logo?img_id=",
-                        commerceAccount.getLogoId(), "&t=",
-                        WebServerServletTokenUtil.getToken(
-                                commerceAccount.getLogoId()));
-            }
+			data.put("currentAccount", currentAccountModel);
+		}
 
-            CurrentAccountModel currentAccountModel =
-                    new CurrentAccountModel(
-                            commerceAccount.getCommerceAccountId(),
-                            commerceAccount.getName(), thumbnailUrl);
+		CommerceOrder commerceOrder = commerceContext.getCommerceOrder();
 
-            data.put("currentAccount", currentAccountModel);
-        }
+		if (commerceOrder != null) {
+			CurrentOrderModel currentOrderModel = new CurrentOrderModel(
+				commerceOrder.getCommerceOrderId(),
+				WorkflowConstants.getStatusLabel(commerceOrder.getStatus()));
 
-        CommerceOrder commerceOrder = commerceContext.getCommerceOrder();
+			data.put("currentOrder", currentOrderModel);
+		}
 
-        if (commerceOrder != null) {
-            CurrentOrderModel currentOrderModel = new CurrentOrderModel(
-                    commerceOrder.getCommerceOrderId(),
-                    WorkflowConstants.getStatusLabel(
-                            commerceOrder.getStatus()));
+		Layout accountManagementLayout = _getAccountManagementLayout(
+			themeDisplay.getScopeGroupId(), layoutSet.isPrivateLayout());
 
-            data.put("currentOrder", currentOrderModel);
-        }
+		data.put(
+			"viewAllAccountsLink",
+			PortalUtil.getLayoutFriendlyURL(
+				accountManagementLayout, themeDisplay));
 
-        Layout accountManagementLayout = _getAccountManagementLayout(
-                themeDisplay.getScopeGroupId(), layoutSet.isPrivateLayout());
+		data.put("createNewOrderLink", _getAddCommerceOrderURL(themeDisplay));
 
-        data.put(
-                "viewAllAccountsLink",
-                PortalUtil.getLayoutFriendlyURL(
-                        accountManagementLayout, themeDisplay));
+		data.put("viewAllOrdersLink", _getViewCommerceOrdersURL(themeDisplay));
 
-        data.put(
-                "createNewOrderLink", _getAddCommerceOrderURL(themeDisplay));
+		data.put(
+			"accountsAPI", PortalUtil.getPortalURL(request) + API_ENDPOINT);
+		data.put("query", StringPool.BLANK);
+		data.put("spritemap", ItemRendererUtil.getSpritemapPath(request));
 
-        data.put(
-                "viewAllOrdersLink", _getViewCommerceOrdersURL(themeDisplay));
+		return data;
+	}
 
-        data.put("accountsAPI", PortalUtil.getPortalURL(request) + API_ENDPOINT);
-        data.put("query", StringPool.BLANK);
-        data.put("spritemap", ItemRendererUtil.getSpritemapPath(request));
+	private Layout _getAccountManagementLayout(
+			long groupId, boolean privateLayout)
+		throws PortalException {
 
-        return data;
-    }
+		Layout layout = LayoutLocalServiceUtil.fetchLayoutByFriendlyURL(
+			groupId, privateLayout, "/accounts");
 
-    private Layout _getAccountManagementLayout(
-            long groupId, boolean privateLayout)
-            throws PortalException {
+		if (layout != null) {
+			return layout;
+		}
 
-        Layout layout = LayoutLocalServiceUtil.fetchLayoutByFriendlyURL(
-                groupId, privateLayout, "/accounts");
+		long plid = PortalUtil.getPlidFromPortletId(
+			groupId, CommerceAccountPortletKeys.COMMERCE_ACCOUNT);
 
-        if (layout != null) {
-            return layout;
-        }
+		if (plid > 0) {
+			layout = LayoutLocalServiceUtil.fetchLayout(plid);
+		}
 
-        long plid = PortalUtil.getPlidFromPortletId(
-                groupId, CommerceAccountPortletKeys.COMMERCE_ACCOUNT);
+		return layout;
+	}
 
-        if (plid > 0) {
-            layout = LayoutLocalServiceUtil.fetchLayout(plid);
-        }
+	private String _getAddCommerceOrderURL(ThemeDisplay themeDisplay)
+		throws PortalException {
 
-        return layout;
-    }
+		long plid = PortalUtil.getPlidFromPortletId(
+			themeDisplay.getScopeGroupId(),
+			CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT);
 
-    private String _getAddCommerceOrderURL(ThemeDisplay themeDisplay)
-            throws PortalException {
+		if (plid > 0) {
+			PortletURL portletURL = _getPortletURL(
+				themeDisplay.getRequest(),
+				CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT);
 
-        long plid = PortalUtil.getPlidFromPortletId(
-                themeDisplay.getScopeGroupId(),
-                CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT);
+			portletURL.setParameter(
+				ActionRequest.ACTION_NAME, "editCommerceOrder");
+			portletURL.setParameter(Constants.CMD, Constants.ADD);
 
-        if (plid > 0) {
-            PortletURL portletURL = _getPortletURL(
-                    themeDisplay.getRequest(),
-                    CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT);
+			return portletURL.toString();
+		}
 
-            portletURL.setParameter(
-                    ActionRequest.ACTION_NAME, "editCommerceOrder");
-            portletURL.setParameter(Constants.CMD, Constants.ADD);
+		return StringPool.BLANK;
+	}
 
-            return portletURL.toString();
-        }
+	private PortletURL _getPortletURL(
+			HttpServletRequest httpServletRequest, String portletId)
+		throws PortalException {
 
-        return StringPool.BLANK;
-    }
+		PortletURL portletURL = null;
 
-    private PortletURL _getPortletURL(
-            HttpServletRequest httpServletRequest, String portletId)
-            throws PortalException {
+		long groupId = PortalUtil.getScopeGroupId(httpServletRequest);
 
-        PortletURL portletURL = null;
+		long plid = PortalUtil.getPlidFromPortletId(groupId, portletId);
 
-        long groupId = PortalUtil.getScopeGroupId(httpServletRequest);
+		if (plid > 0) {
+			portletURL = PortletURLFactoryUtil.create(
+				httpServletRequest, portletId, plid,
+				PortletRequest.ACTION_PHASE);
+		}
+		else {
+			portletURL = PortletURLFactoryUtil.create(
+				httpServletRequest, portletId, PortletRequest.ACTION_PHASE);
+		}
 
-        long plid = PortalUtil.getPlidFromPortletId(groupId, portletId);
+		return portletURL;
+	}
 
-        if (plid > 0) {
-            portletURL = PortletURLFactoryUtil.create(
-                    httpServletRequest, portletId, plid,
-                    PortletRequest.ACTION_PHASE);
-        }
-        else {
-            portletURL = PortletURLFactoryUtil.create(
-                    httpServletRequest, portletId, PortletRequest.ACTION_PHASE);
-        }
+	private String _getViewCommerceOrdersURL(ThemeDisplay themeDisplay)
+		throws PortalException {
 
-        return portletURL;
-    }
+		long plid = PortalUtil.getPlidFromPortletId(
+			themeDisplay.getScopeGroupId(),
+			CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT);
 
-    private String _getViewCommerceOrdersURL(ThemeDisplay themeDisplay)
-            throws PortalException {
+		if (plid > 0) {
+			PortletURL portletURL = _getPortletURL(
+				themeDisplay.getRequest(),
+				CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT);
 
-        long plid = PortalUtil.getPlidFromPortletId(
-                themeDisplay.getScopeGroupId(),
-                CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT);
+			return portletURL.toString();
+		}
 
-        if (plid > 0) {
-            PortletURL portletURL = _getPortletURL(
-                    themeDisplay.getRequest(),
-                    CommercePortletKeys.COMMERCE_OPEN_ORDER_CONTENT);
+		return StringPool.BLANK;
+	}
 
-            return portletURL.toString();
-        }
+	private static final String API_ENDPOINT = "/o/commerce-ui/";
 
-        return StringPool.BLANK;
-    }
+	private static final String COMPONENT_NAME = "account_selector";
+
 }

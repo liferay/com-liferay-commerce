@@ -17,10 +17,8 @@ package com.liferay.commerce.frontend.taglib.servlet.taglib;
 import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.AccountSelectorItemRenderer;
 import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.AccountSelectorItemRendererUtil;
 import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
-
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.content.util.CPContentHelper;
-
 import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletResponse;
@@ -32,26 +30,28 @@ import javax.servlet.jsp.JspException;
 public class AccountSelectorTag extends IncludeTag {
 
 	@Override
-	public int doStartTag() throws JspException {
-		_cpContentHelper = ServletContextUtil.getCPContentHelper();
-		_accountSelectorItemRenderer = AccountSelectorItemRendererUtil.getRenderer();
-
-		return super.doStartTag();
-	}
-
-	@Override
 	public int doEndTag() throws JspException {
 		HttpServletResponse response =
-				(HttpServletResponse) pageContext.getResponse();
+			(HttpServletResponse)pageContext.getResponse();
 
-		CPCatalogEntry cpCatalogEntry =
-				_cpContentHelper.getCPCatalogEntry(request);
+		CPCatalogEntry cpCatalogEntry = _cpContentHelper.getCPCatalogEntry(
+			request);
 
 		_accountSelectorItemRenderer.render(cpCatalogEntry, request, response);
 
 		return super.doEndTag();
 	}
 
-	private CPContentHelper _cpContentHelper;
+	@Override
+	public int doStartTag() throws JspException {
+		_cpContentHelper = ServletContextUtil.getCPContentHelper();
+		_accountSelectorItemRenderer =
+			AccountSelectorItemRendererUtil.getRenderer();
+
+		return super.doStartTag();
+	}
+
 	private AccountSelectorItemRenderer _accountSelectorItemRenderer;
+	private CPContentHelper _cpContentHelper;
+
 }

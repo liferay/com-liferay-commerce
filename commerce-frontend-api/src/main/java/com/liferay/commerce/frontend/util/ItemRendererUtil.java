@@ -21,64 +21,72 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.WebKeys;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Gianmarco Brunialti Masera
  */
 public class ItemRendererUtil {
 
-    private static final String COMMERCE_ICONS = "commerce-icons.svg";
-    private static final String COMMERCE_FRONTEND_TAGLIB =
-            "commerce-frontend-taglib";
+	public static String caseCamelize(String input) {
+		String output = "";
 
-    public static final String getSpritemapPath(HttpServletRequest request) {
-        ThemeDisplay themeDisplay = getThemeDisplay(request);
+		String[] splitString = Optional.of(
+			input.split(StringPool.UNDERLINE)
+		).orElse(
+			input.split(StringPool.DASH)
+		);
 
-        return StringBundler.concat(
-                themeDisplay.getPathThemeImages(),
-                StringPool.FORWARD_SLASH, COMMERCE_ICONS);
-    }
+		if (splitString.length > 0) {
+			for (String inputChunk : splitString) {
+				output += _caseCamelize(inputChunk);
+			}
+		}
+		else {
+			output = _caseCamelize(input);
+		}
 
-    public static final String composeModuleName(String moduleDirectory) {
-        return StringBundler.concat(
-                COMMERCE_FRONTEND_TAGLIB, StringPool.FORWARD_SLASH,
-                moduleDirectory, StringPool.FORWARD_SLASH,
-                caseCamelize(moduleDirectory), ".es");
-    }
+		return output;
+	}
 
-    public static String caseCamelize(String input) {
-        String output = "";
+	public static final String composeModuleName(String moduleDirectory) {
+		return StringBundler.concat(
+			COMMERCE_FRONTEND_TAGLIB, StringPool.FORWARD_SLASH, moduleDirectory,
+			StringPool.FORWARD_SLASH, caseCamelize(moduleDirectory), ".es");
+	}
 
-        String[] splitString = Optional.of(input.split(StringPool.UNDERLINE))
-                .orElse(input.split(StringPool.DASH));
+	public static CommerceContext getCommerceContext(
+		HttpServletRequest request) {
 
-        if (splitString.length > 0) {
-            for (String inputChunk : splitString) {
-                output += _caseCamelize(inputChunk);
-            }
-        } else {
-            output = _caseCamelize(input);
-        }
+		return (CommerceContext)request.getAttribute(
+			CommerceWebKeys.COMMERCE_CONTEXT);
+	}
 
-        return output;
-    }
+	public static final String getSpritemapPath(HttpServletRequest request) {
+		ThemeDisplay themeDisplay = getThemeDisplay(request);
 
-    public static ThemeDisplay getThemeDisplay(HttpServletRequest request) {
-        return (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
-    }
+		return StringBundler.concat(
+			themeDisplay.getPathThemeImages(), StringPool.FORWARD_SLASH,
+			COMMERCE_ICONS);
+	}
 
-    public static CommerceContext getCommerceContext(
-            HttpServletRequest request) {
+	public static ThemeDisplay getThemeDisplay(HttpServletRequest request) {
+		return (ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
+	}
 
-        return (CommerceContext) request.getAttribute(
-                CommerceWebKeys.COMMERCE_CONTEXT);
-    }
+	private static String _caseCamelize(String input) {
+		return StringBundler.concat(
+			input.substring(
+				0, 1
+			).toUpperCase(),
+			input.substring(1));
+	}
 
-    private static String _caseCamelize(String input) {
-        return StringBundler.concat(
-                input.substring(0, 1).toUpperCase(),
-                input.substring(1));
-    }
+	private static final String COMMERCE_FRONTEND_TAGLIB =
+		"commerce-frontend-taglib";
+
+	private static final String COMMERCE_ICONS = "commerce-icons.svg";
+
 }

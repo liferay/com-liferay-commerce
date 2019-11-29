@@ -17,11 +17,13 @@ package com.liferay.commerce.frontend.taglib.internal.info.item.renderer;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import org.osgi.service.component.annotations.Component;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.osgi.service.component.annotations.Component;
 
 /**
  * @author Gianmarco Brunialti Masera
@@ -29,24 +31,27 @@ import java.util.Map;
 @Component(service = QuantitySelectorItemRenderer.class)
 public class QuantitySelectorItemRenderer extends BaseSoyProductItemRenderer {
 
-    private static final String COMPONENT_NAME = "quantity_selector";
+	@Override
+	protected String getComponentName() {
+		return COMPONENT_NAME;
+	}
 
-    @Override
-    protected String getComponentName() {
-        return COMPONENT_NAME;
-    }
+	@Override
+	protected Log getLogger() {
+		return LogFactoryUtil.getLog(QuantitySelectorItemRenderer.class);
+	}
 
-    @Override
-    protected Log getLogger() {
-        return LogFactoryUtil.getLog(QuantitySelectorItemRenderer.class);
-    }
+	@Override
+	protected Map<String, Object> getRenderingData(
+		CPCatalogEntry cpCatalogEntry, HttpServletRequest request) {
 
-    @Override
-    protected Map<String, Object> getRenderingData(CPCatalogEntry cpCatalogEntry, HttpServletRequest request) {
-        Map<String, Object> data = new HashMap<>();
+		Map<String, Object> data = new HashMap<>();
 
-        data.put("quantity", 0);
+		data.put("quantity", 0);
 
-        return data;
-    }
+		return data;
+	}
+
+	private static final String COMPONENT_NAME = "quantity_selector";
+
 }

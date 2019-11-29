@@ -10,68 +10,71 @@ import com.liferay.commerce.product.util.CPCompareHelperUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
-import org.osgi.service.component.annotations.Component;
-
-import javax.servlet.http.HttpServletRequest;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.osgi.service.component.annotations.Component;
+
 @Component(service = CompareCheckboxItemRenderer.class)
 public class CompareCheckboxItemRenderer extends BaseSoyProductItemRenderer {
 
-    private static final String COMPONENT_NAME = "compare_checkbox";
+	@Override
+	protected String getComponentName() {
+		return COMPONENT_NAME;
+	}
 
-    @Override
-    protected String getComponentName() {
-        return COMPONENT_NAME;
-    }
+	@Override
+	protected Log getLogger() {
+		return LogFactoryUtil.getLog(CompareCheckboxItemRenderer.class);
+	}
 
-    @Override
-    protected Log getLogger() {
-        return LogFactoryUtil.getLog(CompareCheckboxItemRenderer.class);
-    }
+	@Override
+	protected Map<String, Object> getRenderingData(
+			CPCatalogEntry cpCatalogEntry, HttpServletRequest request)
+		throws Exception {
 
-    @Override
-    protected Map<String, Object> getRenderingData(CPCatalogEntry cpCatalogEntry, HttpServletRequest request) throws Exception {
-        long cpDefinitionId = (long) request.getAttribute("cpDefinitionId");
+		long cpDefinitionId = (long)request.getAttribute("cpDefinitionId");
 
-        Map<String, Object> data = new HashMap<>();
+		Map<String, Object> data = new HashMap<>();
 
-        data.put("productId", cpDefinitionId);
-        data.put("checkboxVisible", true);
-        data.put("compareAvailable", true);
-        data.put("inCompare", false);
-        data.put("labelVisible", true);
+		data.put("checkboxVisible", true);
+		data.put("compareAvailable", true);
+		data.put("inCompare", false);
+		data.put("labelVisible", true);
+		data.put("productId", cpDefinitionId);
 
-        CPDefinition cpDefinition =
-                CPDefinitionLocalServiceUtil.getCPDefinition(cpDefinitionId);
+		CPDefinition cpDefinition =
+			CPDefinitionLocalServiceUtil.getCPDefinition(cpDefinitionId);
 
-        data.put("pictureUrl", cpDefinition.getDefaultImageThumbnailSrc());
+		data.put("pictureUrl", cpDefinition.getDefaultImageThumbnailSrc());
 
-        CommerceContext commerceContext =
-                (CommerceContext) request.getAttribute(
-                        CommerceWebKeys.COMMERCE_CONTEXT);
+		CommerceContext commerceContext = (CommerceContext)request.getAttribute(
+			CommerceWebKeys.COMMERCE_CONTEXT);
 
-        CommerceAccount commerceAccount =
-                commerceContext.getCommerceAccount();
+		CommerceAccount commerceAccount = commerceContext.getCommerceAccount();
 
-        long commerceAccountId = 0;
+		long commerceAccountId = 0;
 
-        if (commerceAccount != null) {
-            commerceAccountId = commerceAccount.getCommerceAccountId();
-        }
+		if (commerceAccount != null) {
+			commerceAccountId = commerceAccount.getCommerceAccountId();
+		}
 
-        HttpServletRequest originalHttpServletRequest =
-                PortalUtil.getOriginalServletRequest(request);
+		HttpServletRequest originalHttpServletRequest =
+			PortalUtil.getOriginalServletRequest(request);
 
-        List<Long> cpDefinitionIds = CPCompareHelperUtil.getCPDefinitionIds(
-                commerceContext.getCommerceChannelGroupId(), commerceAccountId,
-                originalHttpServletRequest.getSession());
+		List<Long> cpDefinitionIds = CPCompareHelperUtil.getCPDefinitionIds(
+			commerceContext.getCommerceChannelGroupId(), commerceAccountId,
+			originalHttpServletRequest.getSession());
 
-        data.put("inCompare", cpDefinitionIds.contains(cpDefinitionId));
+		data.put("inCompare", cpDefinitionIds.contains(cpDefinitionId));
 
-        return data;
-    }
+		return data;
+	}
+
+	private static final String COMPONENT_NAME = "compare_checkbox";
+
 }

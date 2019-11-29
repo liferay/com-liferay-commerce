@@ -16,11 +16,9 @@ package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
 import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.UserRolesModalItemRenderer;
 import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.UserRolesModalItemRendererUtil;
-
 import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.content.util.CPContentHelper;
-
 import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletResponse;
@@ -29,24 +27,23 @@ import javax.servlet.jsp.JspException;
 /**
  * @author Gianmarco Brunialti Masera
  */
-
 public class UserRolesModalTag extends IncludeTag {
 
 	@Override
-	public int doStartTag() throws JspException {
-		_cpContentHelper = ServletContextUtil.getCPContentHelper();
-		_userRolesModalItemRenderer = UserRolesModalItemRendererUtil.getRenderer();
+	public void cleanUp() {
+		super.cleanUp();
 
-		return super.doStartTag();
+		request.removeAttribute("commerceAccountId");
+		request.removeAttribute("userId");
 	}
 
 	@Override
 	public int doEndTag() throws JspException {
 		HttpServletResponse response =
-				(HttpServletResponse) pageContext.getResponse();
+			(HttpServletResponse)pageContext.getResponse();
 
-		CPCatalogEntry cpCatalogEntry =
-				_cpContentHelper.getCPCatalogEntry(request);
+		CPCatalogEntry cpCatalogEntry = _cpContentHelper.getCPCatalogEntry(
+			request);
 
 		_userRolesModalItemRenderer.render(cpCatalogEntry, request, response);
 
@@ -54,9 +51,12 @@ public class UserRolesModalTag extends IncludeTag {
 	}
 
 	@Override
-	public void cleanUp() {
-		request.removeAttribute("commerceAccountId");
-		request.removeAttribute("userId");
+	public int doStartTag() throws JspException {
+		_cpContentHelper = ServletContextUtil.getCPContentHelper();
+		_userRolesModalItemRenderer =
+			UserRolesModalItemRendererUtil.getRenderer();
+
+		return super.doStartTag();
 	}
 
 	public void setCommerceAccountId(long commerceAccountId) {
@@ -67,8 +67,7 @@ public class UserRolesModalTag extends IncludeTag {
 		request.setAttribute("userId", userId);
 	}
 
-	private UserRolesModalItemRenderer _userRolesModalItemRenderer;
-
 	private CPContentHelper _cpContentHelper;
+	private UserRolesModalItemRenderer _userRolesModalItemRenderer;
 
 }

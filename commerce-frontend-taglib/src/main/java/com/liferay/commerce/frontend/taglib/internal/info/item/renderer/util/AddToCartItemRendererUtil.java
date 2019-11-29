@@ -15,6 +15,7 @@
 package com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util;
 
 import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.AddToCartItemRenderer;
+
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
@@ -23,33 +24,36 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Gianmarco Brunialti Masera
  */
-
 @Component(immediate = true, service = AddToCartItemRendererUtil.class)
 public class AddToCartItemRendererUtil {
 
-    public static final AddToCartItemRenderer getRenderer() {
-        return _addToCartRendererUtil._getRenderer();
-    }
+	public static final AddToCartItemRenderer getRenderer() {
+		return _addToCartRendererUtil._getRenderer();
+	}
 
-    private AddToCartItemRenderer _getRenderer() {
-        return _addToCartItemRenderer;
-    }
+	@Activate
+	protected void activate() {
+		_addToCartRendererUtil = this;
+	}
 
-    @Activate
-    protected void activate() {
-        _addToCartRendererUtil = this;
-    }
+	@Deactivate
+	protected void deactivate() {
+		_addToCartRendererUtil = null;
+	}
 
-    @Deactivate
-    protected void deactivate() {
-        _addToCartRendererUtil = null;
-    }
+	@Reference(unbind = "-")
+	protected void setAddToCartItemRenderer(
+		AddToCartItemRenderer addToCartItemRenderer) {
 
-    @Reference(unbind = "-")
-    protected void setAddToCartItemRenderer(AddToCartItemRenderer addToCartItemRenderer) {
-        _addToCartItemRenderer = addToCartItemRenderer;
-    }
+		_addToCartItemRenderer = addToCartItemRenderer;
+	}
 
-    private static AddToCartItemRendererUtil _addToCartRendererUtil;
-    private AddToCartItemRenderer _addToCartItemRenderer;
+	private AddToCartItemRenderer _getRenderer() {
+		return _addToCartItemRenderer;
+	}
+
+	private static AddToCartItemRendererUtil _addToCartRendererUtil;
+
+	private AddToCartItemRenderer _addToCartItemRenderer;
+
 }

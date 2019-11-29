@@ -19,19 +19,28 @@ import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.Add
 import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.content.util.CPContentHelper;
-
 import com.liferay.taglib.util.IncludeTag;
-
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.PageContext;
 
 /**
  * @author Gianmarco Brunialti Masera
  */
-
 public class AddressModalTag extends IncludeTag {
+
+	@Override
+	public int doEndTag() throws JspException {
+		HttpServletResponse response =
+			(HttpServletResponse)pageContext.getResponse();
+
+		CPCatalogEntry cpCatalogEntry = _cpContentHelper.getCPCatalogEntry(
+			request);
+
+		_addressModalItemRenderer.render(cpCatalogEntry, request, response);
+
+		return super.doEndTag();
+	}
 
 	@Override
 	public int doStartTag() throws JspException {
@@ -41,20 +50,7 @@ public class AddressModalTag extends IncludeTag {
 		return super.doStartTag();
 	}
 
-	@Override
-	public int doEndTag() throws JspException {
-		HttpServletResponse response =
-				(HttpServletResponse) pageContext.getResponse();
-
-		CPCatalogEntry cpCatalogEntry =
-				_cpContentHelper.getCPCatalogEntry(request);
-
-		_addressModalItemRenderer.render(cpCatalogEntry, request, response);
-
-		return super.doEndTag();
-	}
-
 	private AddressModalItemRenderer _addressModalItemRenderer;
-
 	private CPContentHelper _cpContentHelper;
+
 }

@@ -23,37 +23,35 @@ import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.PageContext;
 
 /**
  * @author Gianmarco Brunialti Masera
  */
-
 public class QuantitySelectorTag extends IncludeTag {
-
-	@Override
-	public int doStartTag() throws JspException {
-		_cpContentHelper = ServletContextUtil.getCPContentHelper();
-		_quantitySelectorItemRenderer = QuantitySelectorItemRendererUtil.getRenderer();
-
-		return super.doStartTag();
-	}
 
 	@Override
 	public int doEndTag() throws JspException {
 		HttpServletResponse response =
-				(HttpServletResponse) pageContext.getResponse();
+			(HttpServletResponse)pageContext.getResponse();
 
-		CPCatalogEntry cpCatalogEntry =
-				_cpContentHelper.getCPCatalogEntry(request);
+		CPCatalogEntry cpCatalogEntry = _cpContentHelper.getCPCatalogEntry(
+			request);
 
 		_quantitySelectorItemRenderer.render(cpCatalogEntry, request, response);
 
 		return super.doEndTag();
 	}
 
-	private QuantitySelectorItemRenderer _quantitySelectorItemRenderer;
+	@Override
+	public int doStartTag() throws JspException {
+		_cpContentHelper = ServletContextUtil.getCPContentHelper();
+		_quantitySelectorItemRenderer =
+			QuantitySelectorItemRendererUtil.getRenderer();
+
+		return super.doStartTag();
+	}
 
 	private CPContentHelper _cpContentHelper;
+	private QuantitySelectorItemRenderer _quantitySelectorItemRenderer;
 
 }

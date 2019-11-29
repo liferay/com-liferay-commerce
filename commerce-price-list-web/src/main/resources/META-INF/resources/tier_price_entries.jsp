@@ -24,6 +24,7 @@ CommercePriceList commercePriceList = commerceTierPriceEntryDisplayContext.getCo
 CommercePriceEntry commercePriceEntry = commerceTierPriceEntryDisplayContext.getCommercePriceEntry();
 
 CPInstance cpInstance = commercePriceEntry.getCPInstance();
+
 CPDefinition cpDefinition = cpInstance.getCPDefinition();
 
 long commercePriceEntryId = commerceTierPriceEntryDisplayContext.getCommercePriceEntryId();

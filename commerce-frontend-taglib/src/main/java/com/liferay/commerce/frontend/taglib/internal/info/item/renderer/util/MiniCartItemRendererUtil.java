@@ -15,6 +15,7 @@
 package com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util;
 
 import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.MiniCartItemRenderer;
+
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
@@ -23,33 +24,36 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Gianmarco Brunialti Masera
  */
-
 @Component(immediate = true, service = MiniCartItemRendererUtil.class)
 public class MiniCartItemRendererUtil {
 
-    public static final MiniCartItemRenderer getRenderer() {
-        return _miniCartItemRendererUtil._getRenderer();
-    }
+	public static final MiniCartItemRenderer getRenderer() {
+		return _miniCartItemRendererUtil._getRenderer();
+	}
 
-    private MiniCartItemRenderer _getRenderer() {
-        return _miniCartItemRenderer;
-    }
+	@Activate
+	protected void activate() {
+		_miniCartItemRendererUtil = this;
+	}
 
-    @Activate
-    protected void activate() {
-        _miniCartItemRendererUtil = this;
-    }
+	@Deactivate
+	protected void deactivate() {
+		_miniCartItemRendererUtil = null;
+	}
 
-    @Deactivate
-    protected void deactivate() {
-        _miniCartItemRendererUtil = null;
-    }
+	@Reference(unbind = "-")
+	protected void setMiniCartItemRenderer(
+		MiniCartItemRenderer miniCartItemRenderer) {
 
-    @Reference(unbind = "-")
-    protected void setMiniCartItemRenderer(MiniCartItemRenderer miniCartItemRenderer) {
-        _miniCartItemRenderer = miniCartItemRenderer;
-    }
+		_miniCartItemRenderer = miniCartItemRenderer;
+	}
 
-    private static MiniCartItemRendererUtil _miniCartItemRendererUtil;
-    private MiniCartItemRenderer _miniCartItemRenderer;
+	private MiniCartItemRenderer _getRenderer() {
+		return _miniCartItemRenderer;
+	}
+
+	private static MiniCartItemRendererUtil _miniCartItemRendererUtil;
+
+	private MiniCartItemRenderer _miniCartItemRenderer;
+
 }

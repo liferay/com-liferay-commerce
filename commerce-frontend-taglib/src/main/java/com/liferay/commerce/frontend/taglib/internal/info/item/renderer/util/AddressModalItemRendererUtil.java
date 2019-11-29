@@ -15,6 +15,7 @@
 package com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util;
 
 import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.AddressModalItemRenderer;
+
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
@@ -23,33 +24,36 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Gianmarco Brunialti Masera
  */
-
 @Component(immediate = true, service = AddressModalItemRendererUtil.class)
 public class AddressModalItemRendererUtil {
 
-    public static final AddressModalItemRenderer getRenderer() {
-        return _addressModalItemRendererUtil._getRenderer();
-    }
+	public static final AddressModalItemRenderer getRenderer() {
+		return _addressModalItemRendererUtil._getRenderer();
+	}
 
-    private AddressModalItemRenderer _getRenderer() {
-        return _addressModalItemRenderer;
-    }
+	@Activate
+	protected void activate() {
+		_addressModalItemRendererUtil = this;
+	}
 
-    @Activate
-    protected void activate() {
-        _addressModalItemRendererUtil = this;
-    }
+	@Deactivate
+	protected void deactivate() {
+		_addressModalItemRendererUtil = null;
+	}
 
-    @Deactivate
-    protected void deactivate() {
-        _addressModalItemRendererUtil = null;
-    }
+	@Reference(unbind = "-")
+	protected void setAddressModalItemRenderer(
+		AddressModalItemRenderer addressModalItemRenderer) {
 
-    @Reference(unbind = "-")
-    protected void setAddressModalItemRenderer(AddressModalItemRenderer addressModalItemRenderer) {
-        _addressModalItemRenderer = addressModalItemRenderer;
-    }
+		_addressModalItemRenderer = addressModalItemRenderer;
+	}
 
-    private static AddressModalItemRendererUtil _addressModalItemRendererUtil;
-    private AddressModalItemRenderer _addressModalItemRenderer;
+	private AddressModalItemRenderer _getRenderer() {
+		return _addressModalItemRenderer;
+	}
+
+	private static AddressModalItemRendererUtil _addressModalItemRendererUtil;
+
+	private AddressModalItemRenderer _addressModalItemRenderer;
+
 }

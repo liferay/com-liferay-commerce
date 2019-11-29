@@ -15,6 +15,7 @@
 package com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util;
 
 import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.QuantitySelectorItemRenderer;
+
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
@@ -23,33 +24,37 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Gianmarco Brunialti Masera
  */
-
 @Component(immediate = true, service = QuantitySelectorItemRendererUtil.class)
 public class QuantitySelectorItemRendererUtil {
 
-    public static final QuantitySelectorItemRenderer getRenderer() {
-        return _quantitySelectorItemRendererUtil._getRenderer();
-    }
+	public static final QuantitySelectorItemRenderer getRenderer() {
+		return _quantitySelectorItemRendererUtil._getRenderer();
+	}
 
-    private QuantitySelectorItemRenderer _getRenderer() {
-        return _quantitySelectorItemRenderer;
-    }
+	@Activate
+	protected void activate() {
+		_quantitySelectorItemRendererUtil = this;
+	}
 
-    @Activate
-    protected void activate() {
-        _quantitySelectorItemRendererUtil = this;
-    }
+	@Deactivate
+	protected void deactivate() {
+		_quantitySelectorItemRendererUtil = null;
+	}
 
-    @Deactivate
-    protected void deactivate() {
-        _quantitySelectorItemRendererUtil = null;
-    }
+	@Reference(unbind = "-")
+	protected void setQuantitySelectorItemRenderer(
+		QuantitySelectorItemRenderer quantitySelectorItemRenderer) {
 
-    @Reference(unbind = "-")
-    protected void setQuantitySelectorItemRenderer(QuantitySelectorItemRenderer quantitySelectorItemRenderer) {
-        _quantitySelectorItemRenderer = quantitySelectorItemRenderer;
-    }
+		_quantitySelectorItemRenderer = quantitySelectorItemRenderer;
+	}
 
-    private static QuantitySelectorItemRendererUtil _quantitySelectorItemRendererUtil;
-    private QuantitySelectorItemRenderer _quantitySelectorItemRenderer;
+	private QuantitySelectorItemRenderer _getRenderer() {
+		return _quantitySelectorItemRenderer;
+	}
+
+	private static QuantitySelectorItemRendererUtil
+		_quantitySelectorItemRendererUtil;
+
+	private QuantitySelectorItemRenderer _quantitySelectorItemRenderer;
+
 }

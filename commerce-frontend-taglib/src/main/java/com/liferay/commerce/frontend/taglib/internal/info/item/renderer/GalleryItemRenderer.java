@@ -7,11 +7,13 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
+
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.*;
+
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Gianmarco Brunialti Masera
@@ -19,39 +21,47 @@ import java.util.*;
 @Component(service = GalleryItemRenderer.class)
 public class GalleryItemRenderer extends BaseSoyProductItemRenderer {
 
-    private static final String COMPONENT_NAME = "gallery";
+	@Override
+	protected String getComponentName() {
+		return COMPONENT_NAME;
+	}
 
-    @Override
-    protected String getComponentName() {
-        return COMPONENT_NAME;
-    }
+	@Override
+	protected Log getLogger() {
+		return LogFactoryUtil.getLog(GalleryItemRenderer.class);
+	}
 
-    @Override
-    protected Log getLogger() {
-        return LogFactoryUtil.getLog(GalleryItemRenderer.class);
-    }
+	@Override
+	protected Map<String, Object> getRenderingData(
+			CPCatalogEntry cpCatalogEntry, HttpServletRequest request)
+		throws PortalException {
 
-    @Override
-    protected Map<String, Object> getRenderingData(
-            CPCatalogEntry cpCatalogEntry, HttpServletRequest request)
-            throws PortalException {
+		Map<String, Object> data = new HashMap<>();
 
-        Map<String, Object> data = new HashMap<>();
+		ThemeDisplay themeDisplay = ItemRendererUtil.getThemeDisplay(request);
 
-        ThemeDisplay themeDisplay = ItemRendererUtil.getThemeDisplay(request);
+		data.put(
+			"images",
+			_cpContentHelper.getImages(
+				_getCPDefinitionId(cpCatalogEntry, request), themeDisplay));
+		data.put("selected", 0);
 
-        data.put("selected", 0);
-        data.put("images", _cpContentHelper.getImages(
-                _getCPDefinitionId(cpCatalogEntry, request), themeDisplay));
+		return data;
+	}
 
-        return data;
-    }
+	private long _getCPDefinitionId(
+		CPCatalogEntry cpCatalogEntry, HttpServletRequest request) {
 
-    private long _getCPDefinitionId(CPCatalogEntry cpCatalogEntry, HttpServletRequest request) {
-        return Optional.of((long) request.getAttribute("cpDefinitionId"))
-                .orElse(cpCatalogEntry.getCPDefinitionId());
-    }
+		return Optional.of(
+			(long)request.getAttribute("cpDefinitionId")
+		).orElse(
+			cpCatalogEntry.getCPDefinitionId()
+		);
+	}
 
-    @Reference
-    CPContentHelper _cpContentHelper;
+	private static final String COMPONENT_NAME = "gallery";
+
+	@Reference
+	CPContentHelper _cpContentHelper;
+
 }

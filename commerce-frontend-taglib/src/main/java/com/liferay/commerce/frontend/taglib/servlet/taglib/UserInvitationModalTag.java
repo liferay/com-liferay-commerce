@@ -23,36 +23,36 @@ import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.PageContext;
 
 /**
  * @author Gianmarco Brunialti Masera
  */
-
 public class UserInvitationModalTag extends IncludeTag {
-
-	@Override
-	public int doStartTag() throws JspException {
-		_cpContentHelper = ServletContextUtil.getCPContentHelper();
-		_userInvitationModalItemRenderer = UserInvitationModalItemRendererUtil.getRenderer();
-
-		return super.doStartTag();
-	}
 
 	@Override
 	public int doEndTag() throws JspException {
 		HttpServletResponse response =
-				(HttpServletResponse) pageContext.getResponse();
+			(HttpServletResponse)pageContext.getResponse();
 
-		CPCatalogEntry cpCatalogEntry =
-				_cpContentHelper.getCPCatalogEntry(request);
+		CPCatalogEntry cpCatalogEntry = _cpContentHelper.getCPCatalogEntry(
+			request);
 
-		_userInvitationModalItemRenderer.render(cpCatalogEntry, request, response);
+		_userInvitationModalItemRenderer.render(
+			cpCatalogEntry, request, response);
 
 		return super.doEndTag();
 	}
 
-	private UserInvitationModalItemRenderer _userInvitationModalItemRenderer;
+	@Override
+	public int doStartTag() throws JspException {
+		_cpContentHelper = ServletContextUtil.getCPContentHelper();
+		_userInvitationModalItemRenderer =
+			UserInvitationModalItemRendererUtil.getRenderer();
+
+		return super.doStartTag();
+	}
 
 	private CPContentHelper _cpContentHelper;
+	private UserInvitationModalItemRenderer _userInvitationModalItemRenderer;
+
 }

@@ -15,6 +15,7 @@
 package com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util;
 
 import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.UserRolesModalItemRenderer;
+
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
@@ -23,33 +24,37 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Gianmarco Brunialti Masera
  */
-
 @Component(immediate = true, service = UserRolesModalItemRendererUtil.class)
 public class UserRolesModalItemRendererUtil {
 
-    public static final UserRolesModalItemRenderer getRenderer() {
-        return _userRolesModalItemRendererUtil._getRenderer();
-    }
+	public static final UserRolesModalItemRenderer getRenderer() {
+		return _userRolesModalItemRendererUtil._getRenderer();
+	}
 
-    private UserRolesModalItemRenderer _getRenderer() {
-        return _userRolesModalItemRenderer;
-    }
+	@Activate
+	protected void activate() {
+		_userRolesModalItemRendererUtil = this;
+	}
 
-    @Activate
-    protected void activate() {
-        _userRolesModalItemRendererUtil = this;
-    }
+	@Deactivate
+	protected void deactivate() {
+		_userRolesModalItemRendererUtil = null;
+	}
 
-    @Deactivate
-    protected void deactivate() {
-        _userRolesModalItemRendererUtil = null;
-    }
+	@Reference(unbind = "-")
+	protected void setUserRolesModalItemRenderer(
+		UserRolesModalItemRenderer userRolesModalItemRenderer) {
 
-    @Reference(unbind = "-")
-    protected void setUserRolesModalItemRenderer(UserRolesModalItemRenderer userRolesModalItemRenderer) {
-        _userRolesModalItemRenderer = userRolesModalItemRenderer;
-    }
+		_userRolesModalItemRenderer = userRolesModalItemRenderer;
+	}
 
-    private static UserRolesModalItemRendererUtil _userRolesModalItemRendererUtil;
-    private UserRolesModalItemRenderer _userRolesModalItemRenderer;
+	private UserRolesModalItemRenderer _getRenderer() {
+		return _userRolesModalItemRenderer;
+	}
+
+	private static UserRolesModalItemRendererUtil
+		_userRolesModalItemRendererUtil;
+
+	private UserRolesModalItemRenderer _userRolesModalItemRenderer;
+
 }

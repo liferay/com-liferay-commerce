@@ -23,13 +23,24 @@ import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.PageContext;
 
 /**
  * @author Gianmarco Brunialti Masera
  */
-
 public class MiniCartTag extends IncludeTag {
+
+	@Override
+	public int doEndTag() throws JspException {
+		HttpServletResponse response =
+			(HttpServletResponse)pageContext.getResponse();
+
+		CPCatalogEntry cpCatalogEntry = _cpContentHelper.getCPCatalogEntry(
+			request);
+
+		_miniCartItemRenderer.render(cpCatalogEntry, request, response);
+
+		return super.doEndTag();
+	}
 
 	@Override
 	public int doStartTag() throws JspException {
@@ -39,20 +50,7 @@ public class MiniCartTag extends IncludeTag {
 		return super.doStartTag();
 	}
 
-	@Override
-	public int doEndTag() throws JspException {
-		HttpServletResponse response =
-				(HttpServletResponse) pageContext.getResponse();
-
-		CPCatalogEntry cpCatalogEntry =
-				_cpContentHelper.getCPCatalogEntry(request);
-
-		_miniCartItemRenderer.render(cpCatalogEntry, request, response);
-
-		return super.doEndTag();
-	}
-
+	private CPContentHelper _cpContentHelper;
 	private MiniCartItemRenderer _miniCartItemRenderer;
 
-	private CPContentHelper _cpContentHelper;
 }

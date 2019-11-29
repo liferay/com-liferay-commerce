@@ -31,20 +31,20 @@ import javax.servlet.jsp.PageContext;
 public class CompareCheckboxTag extends IncludeTag {
 
 	@Override
-	public int doStartTag() throws JspException {
-		_cpContentHelper = ServletContextUtil.getCPContentHelper();
-		_compareCheckboxItemRenderer = CompareCheckboxItemRendererUtil.getRenderer();
+	public void cleanUp() {
+		super.cleanUp();
 
-		return super.doStartTag();
+		request.removeAttribute("componentId");
+		request.removeAttribute("productId");
 	}
 
 	@Override
 	public int doEndTag() throws JspException {
 		HttpServletResponse response =
-				(HttpServletResponse) pageContext.getResponse();
+			(HttpServletResponse)pageContext.getResponse();
 
-		CPCatalogEntry cpCatalogEntry =
-				_cpContentHelper.getCPCatalogEntry(request);
+		CPCatalogEntry cpCatalogEntry = _cpContentHelper.getCPCatalogEntry(
+			request);
 
 		_compareCheckboxItemRenderer.render(cpCatalogEntry, request, response);
 
@@ -52,16 +52,21 @@ public class CompareCheckboxTag extends IncludeTag {
 	}
 
 	@Override
-	public void cleanUp() {
-		request.removeAttribute("componentId");
-		request.removeAttribute("productId");
+	public int doStartTag() throws JspException {
+		_cpContentHelper = ServletContextUtil.getCPContentHelper();
+		_compareCheckboxItemRenderer =
+			CompareCheckboxItemRendererUtil.getRenderer();
+
+		return super.doStartTag();
+	}
+
+	public void setComponentId(String componentId) {
+		request.setAttribute("componentId", componentId);
 	}
 
 	public void setCPDefinitionId(long cpDefinitionId) {
 		request.setAttribute("cpDefinitionId", cpDefinitionId);
 	}
-
-	public void setComponentId(String componentId) { request.setAttribute("componentId", componentId); }
 
 	@Override
 	public void setPageContext(PageContext pageContext) {
@@ -69,6 +74,6 @@ public class CompareCheckboxTag extends IncludeTag {
 	}
 
 	private CompareCheckboxItemRenderer _compareCheckboxItemRenderer;
-
 	private CPContentHelper _cpContentHelper;
+
 }

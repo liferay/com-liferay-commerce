@@ -18,6 +18,7 @@
 
 <%
 CPContentHelper cpContentHelper = (CPContentHelper)request.getAttribute(CPContentWebKeys.CP_CONTENT_HELPER);
+
 CPCatalogEntry cpCatalogEntry = cpContentHelper.getCPCatalogEntry(request);
 CPInstance cpInstance = cpContentHelper.getDefaultCPInstance(request);
 

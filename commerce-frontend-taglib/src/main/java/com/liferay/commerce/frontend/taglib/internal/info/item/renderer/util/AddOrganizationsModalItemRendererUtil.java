@@ -15,6 +15,7 @@
 package com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util;
 
 import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.AddOrganizationsModalItemRenderer;
+
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
@@ -23,33 +24,40 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Gianmarco Brunialti Masera
  */
-
-@Component(immediate = true, service = AddOrganizationsModalItemRendererUtil.class)
+@Component(
+	immediate = true, service = AddOrganizationsModalItemRendererUtil.class
+)
 public class AddOrganizationsModalItemRendererUtil {
 
-    public static final AddOrganizationsModalItemRenderer getRenderer() {
-        return _addOrganizationsModalItemRendererUtil._getRenderer();
-    }
+	public static final AddOrganizationsModalItemRenderer getRenderer() {
+		return _addOrganizationsModalItemRendererUtil._getRenderer();
+	}
 
-    private AddOrganizationsModalItemRenderer _getRenderer() {
-        return _addOrganizationsModalItemRenderer;
-    }
+	@Activate
+	protected void activate() {
+		_addOrganizationsModalItemRendererUtil = this;
+	}
 
-    @Activate
-    protected void activate() {
-        _addOrganizationsModalItemRendererUtil = this;
-    }
+	@Deactivate
+	protected void deactivate() {
+		_addOrganizationsModalItemRendererUtil = null;
+	}
 
-    @Deactivate
-    protected void deactivate() {
-        _addOrganizationsModalItemRendererUtil = null;
-    }
+	@Reference(unbind = "-")
+	protected void setAddOrganizationsModalRenderer(
+		AddOrganizationsModalItemRenderer addOrganizationsModalItemRenderer) {
 
-    @Reference(unbind = "-")
-    protected void setAddOrganizationsModalRenderer(AddOrganizationsModalItemRenderer addOrganizationsModalItemRenderer) {
-        _addOrganizationsModalItemRenderer = addOrganizationsModalItemRenderer;
-    }
+		_addOrganizationsModalItemRenderer = addOrganizationsModalItemRenderer;
+	}
 
-    private static AddOrganizationsModalItemRendererUtil _addOrganizationsModalItemRendererUtil;
-    private AddOrganizationsModalItemRenderer _addOrganizationsModalItemRenderer;
+	private AddOrganizationsModalItemRenderer _getRenderer() {
+		return _addOrganizationsModalItemRenderer;
+	}
+
+	private static AddOrganizationsModalItemRendererUtil
+		_addOrganizationsModalItemRendererUtil;
+
+	private AddOrganizationsModalItemRenderer
+		_addOrganizationsModalItemRenderer;
+
 }

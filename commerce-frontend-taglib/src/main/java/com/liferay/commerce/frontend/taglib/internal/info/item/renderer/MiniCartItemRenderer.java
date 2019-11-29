@@ -26,13 +26,17 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.Validator;
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
-import javax.portlet.PortletURL;
-import javax.servlet.http.HttpServletRequest;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.portlet.PortletURL;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Gianmarco Brunialti Masera
@@ -40,77 +44,83 @@ import java.util.Map;
 @Component(service = MiniCartItemRenderer.class)
 public class MiniCartItemRenderer extends BaseSoyProductItemRenderer {
 
-    private static final String COMPONENT_NAME = "mini_cart";
+	@Override
+	protected String getComponentName() {
+		return COMPONENT_NAME;
+	}
 
-    private static final String API_ENDPOINT =
-            "/o/commerce-ui/cart";
+	@Override
+	protected Log getLogger() {
+		return LogFactoryUtil.getLog(MiniCartItemRenderer.class);
+	}
 
-    @Override
-    protected String getComponentName() {
-        return COMPONENT_NAME;
-    }
+	@Override
+	protected Map<String, Object> getRenderingData(
+			CPCatalogEntry cpCatalogEntry, HttpServletRequest request)
+		throws PortalException {
 
-    @Override
-    protected Log getLogger() {
-        return LogFactoryUtil.getLog(MiniCartItemRenderer.class);
-    }
+		Map<String, Object> data = new HashMap<>();
 
-    @Override
-    protected Map<String, Object> getRenderingData(CPCatalogEntry cpCatalogEntry, HttpServletRequest request)
-            throws PortalException {
+		CommerceContext commerceContext = ItemRendererUtil.getCommerceContext(
+			request);
 
-        Map<String, Object> data = new HashMap<>();
+		CommerceOrder commerceOrder = commerceContext.getCommerceOrder();
 
-        CommerceContext commerceContext = ItemRendererUtil.getCommerceContext(request);
-        CommerceOrder commerceOrder = commerceContext.getCommerceOrder();
+		if (Validator.isNotNull(commerceOrder)) {
+			data.put("commerceAccountId", commerceOrder.getCommerceAccountId());
+			data.put("orderId", commerceOrder.getCommerceOrderId());
+			data.put("workflowStatus", commerceOrder.getStatus());
+		}
+		else {
+			CommerceAccount commerceAccount =
+				commerceContext.getCommerceAccount();
 
-        if (Validator.isNotNull(commerceOrder)) {
-            data.put("orderId", commerceOrder.getCommerceOrderId());
-            data.put("commerceAccountId", commerceOrder.getCommerceAccountId());
-            data.put("workflowStatus", commerceOrder.getStatus());
-        } else {
-            CommerceAccount commerceAccount =
-                    commerceContext.getCommerceAccount();
+			if (commerceAccount != null) {
+				data.put(
+					"commerceAccountId",
+					commerceAccount.getCommerceAccountId());
+			}
+		}
 
-            if (commerceAccount != null) {
-                data.put("commerceAccountId", commerceAccount.getCommerceAccountId());
-            }
-        }
+		PortletURL commerceCheckoutPortletURL =
+			_commerceOrderHttpHelper.getCommerceCheckoutPortletURL(request);
 
-        PortletURL commerceCheckoutPortletURL =
-                _commerceOrderHttpHelper.getCommerceCheckoutPortletURL(request);
+		String checkoutURL = StringPool.BLANK;
 
-        String checkoutURL = StringPool.BLANK;
+		if (commerceCheckoutPortletURL != null) {
+			checkoutURL = String.valueOf(commerceCheckoutPortletURL);
+		}
 
-        if (commerceCheckoutPortletURL != null) {
-            checkoutURL = String.valueOf(commerceCheckoutPortletURL);
-        }
+		data.put("checkoutUrl", checkoutURL);
 
-        data.put("checkoutUrl", checkoutURL);
+		String detailsURL = StringPool.BLANK;
 
-        String detailsURL = StringPool.BLANK;
+		PortletURL commerceCartPortletURL =
+			_commerceOrderHttpHelper.getCommerceCartPortletURL(
+				request, commerceOrder);
 
-        PortletURL commerceCartPortletURL =
-                _commerceOrderHttpHelper.getCommerceCartPortletURL(
-                        request, commerceOrder);
+		if (commerceCartPortletURL != null) {
+			detailsURL = String.valueOf(commerceCartPortletURL);
+		}
 
-        if (commerceCartPortletURL != null) {
-            detailsURL = String.valueOf(commerceCartPortletURL);
-        }
+		data.put("detailsUrl", detailsURL);
 
-        data.put("detailsUrl", detailsURL);
+		data.put("isDisabled", false);
+		data.put("isOpen", false);
+		data.put("products", Collections.emptyList());
+		data.put("productsCount", 0);
 
-        data.put("isDisabled", false);
-        data.put("isOpen", false);
-        data.put("products", Collections.emptyList());
-        data.put("productsCount", 0);
+		data.put("cartAPI", PortalUtil.getPortalURL(request) + API_ENDPOINT);
+		data.put("spritemap", ItemRendererUtil.getSpritemapPath(request));
 
-        data.put("cartAPI", PortalUtil.getPortalURL(request) + API_ENDPOINT);
-        data.put("spritemap", ItemRendererUtil.getSpritemapPath(request));
+		return data;
+	}
 
-        return data;
-    }
+	private static final String API_ENDPOINT = "/o/commerce-ui/cart";
 
-    @Reference
-    private CommerceOrderHttpHelper _commerceOrderHttpHelper;
+	private static final String COMPONENT_NAME = "mini_cart";
+
+	@Reference
+	private CommerceOrderHttpHelper _commerceOrderHttpHelper;
+
 }

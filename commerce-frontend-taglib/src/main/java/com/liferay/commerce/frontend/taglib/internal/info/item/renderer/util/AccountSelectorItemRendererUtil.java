@@ -15,6 +15,7 @@
 package com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util;
 
 import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.AccountSelectorItemRenderer;
+
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
@@ -23,25 +24,37 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Gianmarco Brunialti Masera
  */
-
 @Component(immediate = true, service = AccountSelectorItemRendererUtil.class)
 public class AccountSelectorItemRendererUtil {
 
-    public static final AccountSelectorItemRenderer getRenderer() { return _accountSelectorItemRendererUtil._getRenderer(); }
+	public static final AccountSelectorItemRenderer getRenderer() {
+		return _accountSelectorItemRendererUtil._getRenderer();
+	}
 
-    private AccountSelectorItemRenderer _getRenderer() { return _accountSelectorItemRenderer; }
+	@Activate
+	protected void activate() {
+		_accountSelectorItemRendererUtil = this;
+	}
 
-    @Activate
-    protected void activate() { _accountSelectorItemRendererUtil = this; }
+	@Deactivate
+	protected void deactivate() {
+		_accountSelectorItemRendererUtil = null;
+	}
 
-    @Deactivate
-    protected void deactivate() { _accountSelectorItemRendererUtil = null; }
+	@Reference(unbind = "-")
+	protected void setAccountSelectorItemRenderer(
+		AccountSelectorItemRenderer accountSelectorItemRenderer) {
 
-    @Reference(unbind = "-")
-    protected void setAccountSelectorItemRenderer(AccountSelectorItemRenderer accountSelectorItemRenderer) {
-        _accountSelectorItemRenderer = accountSelectorItemRenderer;
-    }
+		_accountSelectorItemRenderer = accountSelectorItemRenderer;
+	}
 
-    private static AccountSelectorItemRendererUtil _accountSelectorItemRendererUtil;
-    private AccountSelectorItemRenderer _accountSelectorItemRenderer;
+	private AccountSelectorItemRenderer _getRenderer() {
+		return _accountSelectorItemRenderer;
+	}
+
+	private static AccountSelectorItemRendererUtil
+		_accountSelectorItemRendererUtil;
+
+	private AccountSelectorItemRenderer _accountSelectorItemRenderer;
+
 }

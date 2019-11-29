@@ -14,91 +14,104 @@
 
 package com.liferay.commerce.frontend.taglib.internal.info.item.renderer;
 
-import com.liferay.commerce.frontend.util.ItemRendererUtil;
 import com.liferay.commerce.frontend.template.soy.renderer.ComponentDescriptor;
 import com.liferay.commerce.frontend.template.soy.renderer.SoyComponentRenderer;
+import com.liferay.commerce.frontend.util.ItemRendererUtil;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 import com.liferay.info.renderer.InfoItemRenderer;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringBundler;
-import org.osgi.service.component.annotations.Reference;
+
+import java.io.Writer;
+
+import java.util.Map;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.Writer;
-import java.util.Map;
-import java.util.Optional;
+
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Gianmarco Brunialti Masera
  */
 abstract public class BaseSoyProductItemRenderer
-        implements InfoItemRenderer<CPCatalogEntry> {
+	implements InfoItemRenderer<CPCatalogEntry> {
 
-    private static final boolean IS_WRAPPER = true;
-    private static final boolean RENDER_JAVASCRIPT = true;
-    private static final boolean POSITION_INLINE = true;
+	private static final boolean IS_WRAPPER = true;
 
-    @Override
-    public void render(CPCatalogEntry cpCatalogEntry,
-                       HttpServletRequest request,
-                       HttpServletResponse response) {
+	private static final boolean RENDER_JAVASCRIPT = true;
 
-        try {
-            Writer writer = response.getWriter();
-            Map<String, Object> data =
-                    getRenderingData(cpCatalogEntry, request);
-            ComponentDescriptor soyComponentDescriptor = getDescriptor(request);
+	private static final boolean POSITION_INLINE = true;
 
-            _soyRenderer.renderSoyComponent(
-                    request, writer, soyComponentDescriptor, data);
-        } catch (Exception e) {
-            _log.error(e, e);
-        }
-    }
+	@Override
+	public void render(
+		CPCatalogEntry cpCatalogEntry, HttpServletRequest request,
+		HttpServletResponse response) {
 
-    protected abstract String getComponentName();
+		try {
+			Writer writer = response.getWriter();
+			Map<String, Object> data = getRenderingData(
+				cpCatalogEntry, request);
+			ComponentDescriptor soyComponentDescriptor = getDescriptor(request);
 
-    protected abstract Log getLogger();
+			_soyRenderer.renderSoyComponent(
+				request, writer, soyComponentDescriptor, data);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
 
-    protected abstract Map<String, Object> getRenderingData(
-            CPCatalogEntry cpCatalogEntry,
-            HttpServletRequest request) throws Exception;
+	protected abstract String getComponentName();
 
-    protected boolean getIsWrapper() { return IS_WRAPPER; }
+	protected abstract Log getLogger();
 
-    protected boolean getRenderJavascript() { return RENDER_JAVASCRIPT; }
+	protected abstract Map<String, Object> getRenderingData(
+			CPCatalogEntry cpCatalogEntry, HttpServletRequest request)
+		throws Exception;
 
-    protected boolean getPositionInline() { return POSITION_INLINE; }
+	protected boolean getIsWrapper() {
+		return IS_WRAPPER;
+	}
 
-    protected ComponentDescriptor getDescriptor(HttpServletRequest request) {
-        return new ComponentDescriptor(TEMPLATE_NAMESPACE,
-                _npmResolver.resolveModuleName(MODULE_NAME),
-                getComponentId(request), null, getIsWrapper(),
-                getRenderJavascript(), getPositionInline()
-        );
-    }
+	protected boolean getRenderJavascript() {
+		return RENDER_JAVASCRIPT;
+	}
 
-    protected String getComponentId(HttpServletRequest request) {
-        return Optional.ofNullable((String) request.getAttribute("id"))
-                .orElse(PortalUtil.generateRandomKey(
-                        request, getComponentName()));
-    }
+	protected boolean getPositionInline() {
+		return POSITION_INLINE;
+	}
 
-    @Reference
-    protected NPMResolver _npmResolver;
+	protected ComponentDescriptor getDescriptor(HttpServletRequest request) {
+		return new ComponentDescriptor(
+			TEMPLATE_NAMESPACE, _npmResolver.resolveModuleName(MODULE_NAME),
+			getComponentId(request), null, getIsWrapper(),
+			getRenderJavascript(), getPositionInline());
+	}
 
-    @Reference
-    protected SoyComponentRenderer _soyRenderer;
+	protected String getComponentId(HttpServletRequest request) {
+		return Optional.ofNullable(
+			(String)request.getAttribute("id")
+		).orElse(
+			PortalUtil.generateRandomKey(request, getComponentName())
+		);
+	}
 
-    protected String MODULE_NAME =
-            ItemRendererUtil.composeModuleName(getComponentName());
+	@Reference
+	protected NPMResolver _npmResolver;
 
-    protected String TEMPLATE_NAMESPACE = StringBundler.concat(
-            ItemRendererUtil.caseCamelize(
-                    getComponentName()), ".render");
+	@Reference
+	protected SoyComponentRenderer _soyRenderer;
 
-    protected Log _log = getLogger();
+	protected String MODULE_NAME = ItemRendererUtil.composeModuleName(
+		getComponentName());
+
+	protected String TEMPLATE_NAMESPACE = StringBundler.concat(
+		ItemRendererUtil.caseCamelize(getComponentName()), ".render");
+
+	protected Log _log = getLogger();
+
 }

@@ -15,6 +15,7 @@
 package com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util;
 
 import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.PriceItemRenderer;
+
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
@@ -23,33 +24,34 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Gianmarco Brunialti Masera
  */
-
 @Component(immediate = true, service = PriceItemRendererUtil.class)
 public class PriceItemRendererUtil {
 
-    public static final PriceItemRenderer getRenderer() {
-        return _priceItemRendererUtil._getRenderer();
-    }
+	public static final PriceItemRenderer getRenderer() {
+		return _priceItemRendererUtil._getRenderer();
+	}
 
-    private PriceItemRenderer _getRenderer() {
-        return _priceItemRenderer;
-    }
+	@Activate
+	protected void activate() {
+		_priceItemRendererUtil = this;
+	}
 
-    @Activate
-    protected void activate() {
-        _priceItemRendererUtil = this;
-    }
+	@Deactivate
+	protected void deactivate() {
+		_priceItemRendererUtil = null;
+	}
 
-    @Deactivate
-    protected void deactivate() {
-        _priceItemRendererUtil = null;
-    }
+	@Reference(unbind = "-")
+	protected void setPriceItemRenderer(PriceItemRenderer priceItemRenderer) {
+		_priceItemRenderer = priceItemRenderer;
+	}
 
-    @Reference(unbind = "-")
-    protected void setPriceItemRenderer(PriceItemRenderer priceItemRenderer) {
-        _priceItemRenderer = priceItemRenderer;
-    }
+	private PriceItemRenderer _getRenderer() {
+		return _priceItemRenderer;
+	}
 
-    private static PriceItemRendererUtil _priceItemRendererUtil;
-    private PriceItemRenderer _priceItemRenderer;
+	private static PriceItemRendererUtil _priceItemRendererUtil;
+
+	private PriceItemRenderer _priceItemRenderer;
+
 }

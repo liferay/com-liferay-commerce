@@ -18,40 +18,40 @@ import com.liferay.fragment.renderer.FragmentRenderer;
 import com.liferay.fragment.renderer.FragmentRendererContext;
 import com.liferay.info.item.renderer.InfoItemRenderer;
 import com.liferay.info.item.renderer.InfoItemRendererTracker;
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Gianmarco Brunialti Masera
  */
 @Component(service = FragmentRenderer.class)
-public class MiniCartFragmentRenderer
-        extends BaseCommerceFragmentRenderer {
+public class MiniCartFragmentRenderer extends BaseCommerceFragmentRenderer {
 
-    private static final String FRAGMENT_NAME = "mini-cart";
+	@Override
+	public void render(
+		FragmentRendererContext fragmentRendererContext,
+		HttpServletRequest request, HttpServletResponse response) {
 
-    @Override
-    public void render(
-            FragmentRendererContext fragmentRendererContext,
-            HttpServletRequest request,
-            HttpServletResponse response) {
+		request.setAttribute(
+			"fragmentRendererContext", fragmentRendererContext);
 
-        request.setAttribute("fragmentRendererContext",
-                fragmentRendererContext);
+		InfoItemRenderer infoItemRenderer =
+			_infoItemRendererTracker.getInfoItemRenderer(
+				INFO_ITEM_RENDERER_PACKAGE);
+	}
 
-        InfoItemRenderer infoItemRenderer = _infoItemRendererTracker
-                .getInfoItemRenderer(INFO_ITEM_RENDERER_PACKAGE);
+	@Override
+	protected String getFragmentName() {
+		return FRAGMENT_NAME;
+	}
 
-    }
+	private static final String FRAGMENT_NAME = "mini-cart";
 
-    @Override
-    protected String getFragmentName() {
-        return FRAGMENT_NAME;
-    }
+	@Reference
+	private InfoItemRendererTracker _infoItemRendererTracker;
 
-    @Reference
-    private InfoItemRendererTracker _infoItemRendererTracker;
 }

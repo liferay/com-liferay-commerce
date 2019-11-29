@@ -23,13 +23,36 @@ import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.PageContext;
 
 /**
  * @author Gianmarco Brunialti Masera
  */
-
 public class PriceTag extends IncludeTag {
+
+	@Override
+	public void cleanUp() {
+		super.cleanUp();
+
+		request.removeAttribute("id");
+		request.removeAttribute("quantity");
+		request.removeAttribute("CPInstanceId");
+		request.removeAttribute("additionalDiscountClasses");
+		request.removeAttribute("additionalPriceClasses");
+		request.removeAttribute("additionalPromoPriceClasses");
+	}
+
+	@Override
+	public int doEndTag() throws JspException {
+		HttpServletResponse response =
+			(HttpServletResponse)pageContext.getResponse();
+
+		CPCatalogEntry cpCatalogEntry = _cpContentHelper.getCPCatalogEntry(
+			request);
+
+		_priceItemRenderer.render(cpCatalogEntry, request, response);
+
+		return super.doEndTag();
+	}
 
 	@Override
 	public int doStartTag() throws JspException {
@@ -39,40 +62,20 @@ public class PriceTag extends IncludeTag {
 		return super.doStartTag();
 	}
 
-	@Override
-	public int doEndTag() throws JspException {
-		HttpServletResponse response =
-				(HttpServletResponse) pageContext.getResponse();
-
-		CPCatalogEntry cpCatalogEntry =
-				_cpContentHelper.getCPCatalogEntry(request);
-
-		_priceItemRenderer.render(cpCatalogEntry, request, response);
-
-		return super.doEndTag();
-	}
-
-	@Override
-	public void cleanUp() {
-		request.removeAttribute("id");
-		request.removeAttribute("quantity");
-		request.removeAttribute("CPInstanceId");
-		request.removeAttribute("additionalDiscountClasses");
-		request.removeAttribute("additionalPriceClasses");
-		request.removeAttribute("additionalPromoPriceClasses");
-	}
-
 	public void setAdditionalDiscountClasses(String additionalDiscountClasses) {
-		request.setAttribute("additionalDiscountClasses", additionalDiscountClasses);
+		request.setAttribute(
+			"additionalDiscountClasses", additionalDiscountClasses);
 	}
 
 	public void setAdditionalPriceClasses(String additionalPriceClasses) {
 		request.setAttribute("additionalPriceClasses", additionalPriceClasses);
 	}
 
-	public void setAdditionalPromoPriceClasses(String additionalPromoPriceClasses) {
+	public void setAdditionalPromoPriceClasses(
+		String additionalPromoPriceClasses) {
 
-		request.setAttribute("additionalPromoPriceClasses", additionalPromoPriceClasses);
+		request.setAttribute(
+			"additionalPromoPriceClasses", additionalPromoPriceClasses);
 	}
 
 	public void setCPInstanceId(long cpInstanceId) {
@@ -84,6 +87,6 @@ public class PriceTag extends IncludeTag {
 	}
 
 	private CPContentHelper _cpContentHelper;
-
 	private PriceItemRenderer _priceItemRenderer;
+
 }

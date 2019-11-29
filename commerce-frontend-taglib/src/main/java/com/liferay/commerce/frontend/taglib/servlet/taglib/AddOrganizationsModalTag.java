@@ -14,8 +14,8 @@
 
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
-import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.AddOrganizationsModalItemRendererUtil;
 import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.AddOrganizationsModalItemRenderer;
+import com.liferay.commerce.frontend.taglib.internal.info.item.renderer.util.AddOrganizationsModalItemRendererUtil;
 import com.liferay.commerce.frontend.taglib.internal.servlet.ServletContextUtil;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.content.util.CPContentHelper;
@@ -23,36 +23,37 @@ import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.PageContext;
 
 /**
  * @author Gianmarco Brunialti Masera
  */
-
 public class AddOrganizationsModalTag extends IncludeTag {
-
-	@Override
-	public int doStartTag() throws JspException {
-		_cpContentHelper = ServletContextUtil.getCPContentHelper();
-		_addOrganizationsModalItemRenderer = AddOrganizationsModalItemRendererUtil.getRenderer();
-
-		return super.doStartTag();
-	}
 
 	@Override
 	public int doEndTag() throws JspException {
 		HttpServletResponse response =
-				(HttpServletResponse) pageContext.getResponse();
+			(HttpServletResponse)pageContext.getResponse();
 
-		CPCatalogEntry cpCatalogEntry =
-				_cpContentHelper.getCPCatalogEntry(request);
+		CPCatalogEntry cpCatalogEntry = _cpContentHelper.getCPCatalogEntry(
+			request);
 
-		_addOrganizationsModalItemRenderer.render(cpCatalogEntry, request, response);
+		_addOrganizationsModalItemRenderer.render(
+			cpCatalogEntry, request, response);
 
 		return super.doEndTag();
 	}
 
+	@Override
+	public int doStartTag() throws JspException {
+		_cpContentHelper = ServletContextUtil.getCPContentHelper();
+		_addOrganizationsModalItemRenderer =
+			AddOrganizationsModalItemRendererUtil.getRenderer();
+
+		return super.doStartTag();
+	}
+
+	private AddOrganizationsModalItemRenderer
+		_addOrganizationsModalItemRenderer;
 	private CPContentHelper _cpContentHelper;
 
-	private AddOrganizationsModalItemRenderer _addOrganizationsModalItemRenderer;
 }
