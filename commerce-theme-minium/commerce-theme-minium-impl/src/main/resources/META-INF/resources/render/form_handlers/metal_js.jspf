@@ -66,26 +66,24 @@
     }
 
     function updateAddToCart(productExists, cpInstanceId, formValues) {
-        const addToCartButton = Liferay.component('<%= addToCartId %>');
-
-        if(!addToCartButton) {
-            return;
-        }
-
-        if (productExists) {
-            addToCartButton.productId = cpInstanceId;
-            addToCartButton.options = formValues;
-            addToCartButton.quantity = 0;
-            addToCartButton.settings = {
-                maxQuantity: 1000,
-                minQuantity: 1,
-                multipleQuantities: 1
-            };
-            addToCartButton.disabled = false;
-        }
-        else {
-            addToCartButton.disabled = true;
-        }
+        Liferay.fire(
+            eventsDefinitions.CURRENT_PRODUCT_STATUS_CHANGED,
+            productExists
+            ? {
+                addToCartId: "<%= addToCartId %>"
+                productId: cpInstanceId,
+                options: formValues,
+                quantity: 0,
+                settings: {
+                    maxQuantity: 1000,
+                    minQuantity: 1,
+                    multipleQuantities: 1
+                },
+            }
+            : {
+                productId: null
+            }
+        )
     }
 
     function updateGallery() {
@@ -106,10 +104,7 @@
             }
         ).then(
             function(response) {
-                const ProductGallery = Liferay.component('<%= galleryId %>');
-
-                ProductGallery.selected = 0
-                ProductGallery.images = response.map(
+                const images = response.map(
                     function(image) {
                         return {
                             thumbnailUrl: image.url,
@@ -118,6 +113,9 @@
                         };
                     }
                 );
+                Liferay.fire(eventsDefinitions.PRODUCT_OPTIONS_CHANGED, {
+                    images: images
+                })
             }
         )
     }

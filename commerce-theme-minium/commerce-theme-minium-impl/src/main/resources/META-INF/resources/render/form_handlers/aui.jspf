@@ -1,4 +1,4 @@
-<aui:script>
+<aui:script require="commerce-frontend-js/utilities/eventsDefinitions.es as eventsDefinitions">
     AUI().use(
         'liferay-portlet-url', function(A) {
         Liferay.on(
@@ -34,20 +34,25 @@
                         }
                     ).then(
                         function(response) {
-                            if (response.cpInstanceExist) {
-                                AddToCartButton.productId = response.cpInstanceId;
-                                AddToCartButton.options = JSON.stringify(getFormValues());
-                                AddToCartButton.quantity = 0;
-                                AddToCartButton.settings = {
-                                    maxQuantity: 1000,
-                                    minQuantity: 1,
-                                    multipleQuantities: 1
-                                };
-                                AddToCartButton.disabled = false;
-                            }
-                            else {
-                                AddToCartButton.disabled = true;
-                            }
+                            Liferay.fire(
+                                eventsDefinitions.CURRENT_PRODUCT_STATUS_CHANGED,
+                                productExists
+                                ? {
+                                    addToCartId: "<%= addToCartId %>"
+                                    productId: cpInstanceId,
+                                    options: formValues,
+                                    quantity: 0,
+                                    settings: {
+                                        maxQuantity: 1000,
+                                        minQuantity: 1,
+                                        multipleQuantities: 1
+                                    },
+                                    disabled: false
+                                }
+                                : {
+                                    disabled: true
+                                }
+                            )
 
                             document.querySelector('[data-text-cp-instance-sku]').innerHTML = Liferay.Util.escape(response.sku) || '';
                             document.querySelector('[data-text-cp-instance-manufacturer-part-number]').innerHTML = Liferay.Util.escape(response.manufacturerPartNumber) || '';
@@ -94,8 +99,7 @@
                                 }
                             ).then(
                                 function(response) {
-                                    ProductGallery.selected = 0
-                                    ProductGallery.images = response.map(
+                                    const images = response.map(
                                         function(image) {
                                             return {
                                                 thumbnailUrl: image.url,
@@ -104,6 +108,9 @@
                                             };
                                         }
                                     );
+                                    Liferay.fire(eventsDefinitions.PRODUCT_OPTIONS_CHANGED, {
+                                        images: images
+                                    })
                                 }
                             )
                         }

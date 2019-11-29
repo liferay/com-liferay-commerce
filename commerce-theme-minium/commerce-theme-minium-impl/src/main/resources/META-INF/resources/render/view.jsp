@@ -29,9 +29,9 @@ String addToCartId = PortalUtil.generateRandomKey(request, "add-to-cart");
 String galleryId = PortalUtil.generateRandomKey(request, "gallery");
 %>
 
-<div class="product-detail" id="<portlet:namespace /><%= cpDefinitionId %>ProductContent">
+<div class="product-detail mb-3" id="<portlet:namespace /><%= cpDefinitionId %>ProductContent">
 	<div class="row">
-		<div class="col-md-6 col-xs-12" id="minium-product-gallery">
+		<div class="col-md-6 col-xs-12">
 			<commerce-ui:gallery CPDefinitionId="<%= cpDefinitionId %>" />
 		</div>
 
@@ -58,21 +58,21 @@ String galleryId = PortalUtil.generateRandomKey(request, "gallery");
 
 				<c:choose>
 					<c:when test="<%= cpSku != null %>">
-						<div class="availability"><%= cpContentHelper.getAvailabilityLabel(request) %></div>
-						<div class="availabilityEstimate"><%= cpContentHelper.getAvailabilityEstimateLabel(request) %></div>
-						<div class="stockQuantity"><%= cpContentHelper.getStockQuantityLabel(request) %></div>
+						<div class="availability mt-1"><%= cpContentHelper.getAvailabilityLabel(request) %></div>
+						<div class="availability-estimate mt-1"><%= cpContentHelper.getAvailabilityEstimateLabel(request) %></div>
+						<div class="stock-quantity mt-1"><%= cpContentHelper.getStockQuantityLabel(request) %></div>
 					</c:when>
 					<c:otherwise>
-						<div class="availability" data-text-cp-instance-availability></div>
-						<div class="availabilityEstimate" data-text-cp-instance-availability-estimate></div>
-						<div class="stockQuantity" data-text-cp-instance-stock-quantity></div>
+						<div class="availability mt-1" data-text-cp-instance-availability></div>
+						<div class="availability-estimate mt-1" data-text-cp-instance-availability-estimate></div>
+						<div class="stock-quantity mt-1" data-text-cp-instance-stock-quantity></div>
 					</c:otherwise>
 				</c:choose>
 			</header>
 
-			<p><%= cpCatalogEntry.getDescription() %></p>
+			<p class="procuct-description mt-3"><%= cpCatalogEntry.getDescription() %></p>
 
-			<h4 class="commerce-subscription-info w-100" data-text-cp-instance-subscription-info>
+			<h4 class="commerce-subscription-info mt-3 w-100" data-text-cp-instance-subscription-info>
 				<c:if test="<%= cpSku != null %>">
 					<liferay-commerce:subscription-info
 						CPInstanceId="<%= cpSku.getCPInstanceId() %>"
@@ -85,10 +85,9 @@ String galleryId = PortalUtil.generateRandomKey(request, "gallery");
 
 				<%@ include file="/render/form_handlers/aui.jspf" %>
 				<%@ include file="/render/form_handlers/metal_js.jspf" %>
-
 			</div>
 
-			<h2 class="commerce-price" data-text-cp-instance-price>
+			<h2 class="commerce-price mt-3" data-text-cp-instance-price>
 				<c:if test="<%= cpSku != null %>">
 					<commerce-ui:price
 						CPInstanceId="<%= cpSku.getCPInstanceId() %>"
@@ -96,16 +95,14 @@ String galleryId = PortalUtil.generateRandomKey(request, "gallery");
 				</c:if>
 			</h2>
 
-			<div>
-				<c:if test="<%= cpSku != null %>">
-					<liferay-commerce:tier-price
-						CPInstanceId="<%= cpSku.getCPInstanceId() %>"
-						taglibQuantityInputId='<%= renderResponse.getNamespace() + cpDefinitionId + "Quantity" %>'
-					/>
-				</c:if>
-			</div>
+			<c:if test="<%= cpSku != null %>">
+				<liferay-commerce:tier-price
+					CPInstanceId="<%= cpSku.getCPInstanceId() %>"
+					taglibQuantityInputId='<%= renderResponse.getNamespace() + cpDefinitionId + "Quantity" %>'
+				/>
+			</c:if>
 
-			<div class="product-detail__actions">
+			<div class="product-detail-actions mt-3">
 				<div class="autofit-col">
 					<commerce-ui:add-to-cart
 						CPInstanceId="<%= (cpSku == null) ? 0 : cpSku.getCPInstanceId() %>"
@@ -124,7 +121,10 @@ List<CPMedia> cpAttachmentFileEntries = cpContentHelper.getCPAttachmentFileEntri
 %>
 
 <c:if test="<%= cpContentHelper.hasCPDefinitionSpecificationOptionValues(cpDefinitionId) %>">
-	<commerce-ui:panel title="<%= LanguageUtil.get(resourceBundle, "specifications") %>">
+	<commerce-ui:panel
+			title="<%= LanguageUtil.get(resourceBundle, "specifications") %>"
+			elementClasses="mb-3"
+	>
 		<dl class="specification-list">
 			<%
 				for (CPDefinitionSpecificationOptionValue cpDefinitionSpecificationOptionValue : cpDefinitionSpecificationOptionValues) {
@@ -165,44 +165,39 @@ List<CPMedia> cpAttachmentFileEntries = cpContentHelper.getCPAttachmentFileEntri
 </c:if>
 
 <c:if test="<%= !cpAttachmentFileEntries.isEmpty() %>">
-	<div class="row">
-		<div class="col">
-			<div class="commerce-panel">
-				<div class="commerce-panel__title"><%= LanguageUtil.get(resourceBundle, "attachments") %></div>
-				<div class="commerce-panel__content">
-					<dl class="specification-list">
+	<commerce-ui:panel
+		title="<%= LanguageUtil.get(resourceBundle, "attachments") %>"
+		elementClasses="mb-3"
+	>
+		<dl class="specification-list">
 
-						<%
-						int attachmentsCount = 0;
+			<%
+				int attachmentsCount = 0;
 
-						for (CPMedia curCPAttachmentFileEntry : cpAttachmentFileEntries) {
-						%>
+				for (CPMedia curCPAttachmentFileEntry : cpAttachmentFileEntries) {
+			%>
 
-							<dt class="specification-term">
-								<%= HtmlUtil.escape(curCPAttachmentFileEntry.getTitle()) %>
-							</dt>
-							<dd class="specification-desc">
-								<aui:icon cssClass="icon-monospaced" image="download" markupView="lexicon" target="_blank" url="<%= curCPAttachmentFileEntry.getDownloadUrl() %>" />
-							</dd>
+			<dt class="specification-term">
+				<%= HtmlUtil.escape(curCPAttachmentFileEntry.getTitle()) %>
+			</dt>
+			<dd class="specification-desc">
+				<aui:icon cssClass="icon-monospaced" image="download" markupView="lexicon" target="_blank" url="<%= curCPAttachmentFileEntry.getDownloadUrl() %>" />
+			</dd>
 
-							<%
-							attachmentsCount = attachmentsCount + 1;
+			<%
+				attachmentsCount = attachmentsCount + 1;
 
-							if (attachmentsCount >= 2) {
-							%>
+				if (attachmentsCount >= 2) {
+			%>
 
-								<dt class="specification-empty specification-term"></dt>
-								<dd class="specification-desc specification-empty"></dd>
+			<dt class="specification-empty specification-term"></dt>
+			<dd class="specification-desc specification-empty"></dd>
 
-						<%
-								attachmentsCount = 0;
-							}
-						}
-						%>
-
-					</dl>
-				</div>
-			</div>
-		</div>
-	</div>
+			<%
+						attachmentsCount = 0;
+					}
+				}
+			%>
+		</dl>
+	</commerce-ui:panel>
 </c:if>

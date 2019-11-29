@@ -54,6 +54,12 @@
         border-color: darken( $color-theme-dark, 10% );
       }
     }
+
+    &[disabled] {
+      background-color: $color-theme;
+      border-color: $color-theme;
+      color: $color-bg;
+    }
   }
 
   &.btn-secondary {

@@ -6,20 +6,30 @@
     &-inline {
         display: flex;
 
+        .form-control {
+            width: 70px;
+        }
+
         .input-group,
         .form-control {
             height: 100%;
         }
-
-        .btn-add-to-cart {
-            margin-left: $spacer;
-        }
     }
 
     &-block {
-        .btn-add-to-cart {
-            margin-top: $spacer;
+        .form-control {
+            width: 60px;
         }
+    }
+}
+
+.btn-add-to-cart {
+    &-inline {
+        margin-left: $spacer;
+    }
+
+    &-block {
+        margin-top: $spacer;
     }
 }
 
