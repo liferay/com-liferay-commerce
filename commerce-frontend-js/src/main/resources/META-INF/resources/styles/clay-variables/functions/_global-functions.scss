@@ -8,7 +8,7 @@
 	@return map-remove((), 'key');
 }
 
-/// A function that returns a new map with all the keys and values including nested keys and values from both `$map1` and `$map2`. If both `$map1` and `$map2` have the same key, `$map2`’s value takes precedence.
+/// A function that returns a new map with all the keys and values including nested keys and values from both `$map1` and `$map2`. If both `$map1` and `$map2` have the same key, `$map2`'s value takes precedence.
 /// @param {Map, Null} $map1[()]
 /// @param {Map, Null} $map2[()]
 

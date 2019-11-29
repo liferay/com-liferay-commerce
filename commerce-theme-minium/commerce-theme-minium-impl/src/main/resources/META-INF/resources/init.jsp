@@ -26,8 +26,6 @@ taglib uri="http://liferay.com/tld/frontend" prefix="liferay-frontend" %><%@
 taglib uri="http://liferay.com/tld/portlet" prefix="liferay-portlet" %><%@
 taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
 taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
-<%@ taglib prefix="commerce-ui" uri="http://liferay.com/tld/commerce-ui" %>
-
 
 <%@ page import="com.liferay.commerce.product.catalog.CPCatalogEntry" %><%@
 page import="com.liferay.commerce.product.catalog.CPMedia" %><%@

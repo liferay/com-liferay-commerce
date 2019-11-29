@@ -38,9 +38,9 @@ function resetInputQuantity() {
 	this.inputQuantity = (
 		this.settings.allowedQuantities &&
 		this.settings.allowedQuantities.length
-	)
-		? this.settings.allowedQuantities[0]
-		: this.settings.minQuantity;
+	) ?
+		this.settings.allowedQuantities[0] :
+		this.settings.minQuantity;
 }
 
 function doSubmit() {
@@ -90,7 +90,7 @@ function doSubmit() {
 					);
 					this.orderId = jsonresponse.orderId;
 				}
-				
+
 				this._animateMarker(this.quantity);
 				this.quantity = this.inputQuantity;
 				resetInputQuantity.call(this);
@@ -128,17 +128,18 @@ class AddToCartButton extends Component {
 	}
 
 	_animateMarker(prevQuantity) {
-		if(prevQuantity === 0) {
+		if (prevQuantity === 0) {
 			this.updatingTransition = 'adding';
-		} else {
+		}
+ else {
 			this.updatingTransition = 'incrementing';
 		}
-		
+
 		this.refs.marker.addEventListener('animationend', this._handleMarkerAnimation, this);
 	}
-	
+
 	_handleMarkerAnimation() {
-		this.updatingTransition = null
+		this.updatingTransition = null;
 		this.refs.marker.removeEventListener('animationend', this._handleMarkerAnimation, this);
 	}
 
@@ -147,6 +148,7 @@ class AddToCartButton extends Component {
 		window.Liferay.on('productRemovedFromCart', this._handleCartProductRemoval, this);
 
 		// TODO: event definition to be imported as a constant
+
 		window.Liferay.on('current-product-status-changed', this._handleCurrentProductStatusChange, this);
 	}
 
@@ -155,6 +157,7 @@ class AddToCartButton extends Component {
 		window.Liferay.detach('productRemovedFromCart', this._handleCartProductRemoval, this);
 
 		// TODO: event definition to be imported as a constant
+
 		window.Liferay.detach('current-product-status-changed', this._handleCurrentProductStatusChange, this);
 	}
 
@@ -167,31 +170,32 @@ class AddToCartButton extends Component {
 		this._handleSubmitClick();
 	}
 
-	syncInputQuantity(e,f) {
-		console.log(e,f)
+	syncInputQuantity(e, f) {
+		console.log(e, f);
 	}
 
 	_handleCurrentProductStatusChange(e) {
-		if(this.id && (this.id !== e.addToCartId)) {
+		if (this.id && (this.id !== e.addToCartId)) {
 			return;
 		}
-		if(e.productId) {
+		if (e.productId) {
 			this.productId = e.productId;
 			this.options = e.options;
 			this.quantity = e.quantity;
 			this.settings = e.settings;
 			this.disabled = false;
-		} else {
+		}
+ else {
 			this.disabled = true;
 		}
-
-	}
+}
 
 	_handleAccountChange(e) {
 		this.accountId = e.accountId;
 		this.orderId = null;
 
 		// TODO: quantity should be imported from the ouside
+
 		this.quantity = 0;
 		resetInputQuantity.call(this);
 	}
@@ -215,7 +219,7 @@ class AddToCartButton extends Component {
 			return null;
 		}
 
-		doSubmit.call(this)
+		doSubmit.call(this);
 	}
 }
 
@@ -265,7 +269,7 @@ AddToCartButton.STATE = {
 			'adding',
 			'incrementing'
 		]
-	),
+	)
 };
 
 export {AddToCartButton};

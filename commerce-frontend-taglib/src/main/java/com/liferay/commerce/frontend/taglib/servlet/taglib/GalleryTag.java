@@ -35,55 +35,56 @@ import javax.servlet.jsp.PageContext;
  */
 public class GalleryTag extends IncludeTag {
 
-    @Override
-    protected void setAttributes(HttpServletRequest httpServletRequest) {
-        request.setAttribute("liferay-commerce:gallery:images", _images);
-    }
+	@Override
+	public int doStartTag() throws JspException {
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
-    @Override
-    public int doStartTag() throws JspException {
-        ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-                WebKeys.THEME_DISPLAY);
+		try {
+			_images = _cpContentHelper.getImages(_cpDefinitionId, themeDisplay);
+		}
+		catch (PortalException pe) {
+			_log.error(pe, pe);
+		}
 
-        try {
-            _images = _cpContentHelper.getImages(
-                    _cpDefinitionId, themeDisplay);
-        }
-        catch (PortalException pe) {
-            _log.error(pe, pe);
-        }
+		return super.doStartTag();
+	}
 
-        return super.doStartTag();
-    }
+	public void setCPDefinitionId(long cpDefinitionId) {
+		_cpDefinitionId = cpDefinitionId;
+	}
 
-    @Override
-    public void setPageContext(PageContext pageContext) {
-        super.setPageContext(pageContext);
+	@Override
+	public void setPageContext(PageContext pageContext) {
+		super.setPageContext(pageContext);
 
-        _cpContentHelper = ServletContextUtil.getCPContentHelper();
-        servletContext = ServletContextUtil.getServletContext();
-    }
+		_cpContentHelper = ServletContextUtil.getCPContentHelper();
+		servletContext = ServletContextUtil.getServletContext();
+	}
 
-    private static final String _PAGE = "/gallery/page.jsp";
+	@Override
+	protected void cleanUp() {
+		super.cleanUp();
 
-    @Override
-    protected String getPage() {
-        return _PAGE;
-    }
+		_cpDefinitionId = 0;
+	}
 
-    @Override
-    protected void cleanUp() {
-        super.cleanUp();
+	@Override
+	protected String getPage() {
+		return _PAGE;
+	}
 
-        _cpDefinitionId = 0;
-    }
+	@Override
+	protected void setAttributes(HttpServletRequest httpServletRequest) {
+		request.setAttribute("liferay-commerce:gallery:images", _images);
+	}
 
-    public void setCPDefinitionId(long cpDefinitionId) {
-        _cpDefinitionId = cpDefinitionId;
-    }
+	private static final String _PAGE = "/gallery/page.jsp";
 
-    private static final Log _log = LogFactoryUtil.getLog(GalleryTag.class);
-    private long _cpDefinitionId;
-    private CPContentHelper _cpContentHelper;
-    private List<CPMedia> _images;
+	private static final Log _log = LogFactoryUtil.getLog(GalleryTag.class);
+
+	private CPContentHelper _cpContentHelper;
+	private long _cpDefinitionId;
+	private List<CPMedia> _images;
+
 }

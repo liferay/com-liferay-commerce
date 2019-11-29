@@ -48,9 +48,8 @@ public class AddToCartTag extends ComponentRendererTag {
 				(CommerceContext)request.getAttribute(
 					CommerceWebKeys.COMMERCE_CONTEXT);
 
-			ThemeDisplay themeDisplay =
-					(ThemeDisplay) request.getAttribute(
-							WebKeys.THEME_DISPLAY);
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 			CommerceAccount commerceAccount =
 				commerceContext.getCommerceAccount();
@@ -92,9 +91,8 @@ public class AddToCartTag extends ComponentRendererTag {
 				_productHelper.getProductSettingsModel(cpInstanceId));
 
 			putValue(
-					"spritemap",
-					themeDisplay.getPathThemeImages() + "/commerce-icons.svg"
-			);
+				"spritemap",
+				themeDisplay.getPathThemeImages() + "/commerce-icons.svg");
 
 			setTemplateNamespace("AddToCartButton.render");
 		}
@@ -125,15 +123,15 @@ public class AddToCartTag extends ComponentRendererTag {
 		putValue("id", id);
 	}
 
-	public void setSpritemap(String spritemap) {
-		putValue("spritemap", spritemap);
-	}
-
 	@Override
 	public void setPageContext(PageContext pageContext) {
 		super.setPageContext(pageContext);
 
 		_productHelper = ServletContextUtil.getProductHelper();
+	}
+
+	public void setSpritemap(String spritemap) {
+		putValue("spritemap", spritemap);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(AddToCartTag.class);

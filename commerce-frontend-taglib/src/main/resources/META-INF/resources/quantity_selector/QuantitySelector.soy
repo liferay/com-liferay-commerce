@@ -16,7 +16,7 @@
 
 	{let $quantitySelectorClasses kind="text"}
 		quantity-selector
-		
+
 		{if $quantitySelectorAdditionalClasses}
 			{sp}{$quantitySelectorAdditionalClasses}
 		{/if}
@@ -26,7 +26,7 @@
 		{/if}
 	{/let}
 
-	<form data-onsubmit="{$_handleFormSubmit}" class="{$quantitySelectorClasses}">
+	<form class="{$quantitySelectorClasses}" data-onsubmit="{$_handleFormSubmit}">
 		{if isNonnull($allowedQuantities)}
 			{let $selectAttributes kind="attributes"}
 				class="form-control"
@@ -50,8 +50,8 @@
 		{else}
 			<div class="input-group justify-content-center">
 				<div class="input-group-item input-group-item-shrink input-group-prepend">
-					<button 
-						class="btn btn-monospaced btn-secondary h-100" 
+					<button
+						class="btn btn-monospaced btn-secondary h-100"
 						type="submit"
 						data-onclick="{$_handlePrevQuantityButtonPressed}"
 						{if $_prevAvailable == false}
@@ -63,7 +63,7 @@
 				</div>
 
 				<div class="input-group-item input-group-item-shrink input-group-prepend">
-					<input 
+					<input
 						name="quantity"
 						type="text"
 						class="form-control text-center"
@@ -80,8 +80,8 @@
 					/>
 				</div>
 
-				<div class="input-group-item input-group-append input-group-item-shrink">
-					<button 
+				<div class="input-group-append input-group-item input-group-item-shrink">
+					<button
 						class="btn btn-monospaced btn-secondary h-100"
 						type="submit"
 						data-onclick="{$_handleNextQuantityButtonPressed}"
