@@ -93,6 +93,7 @@ function doSubmit() {
 				
 				this._animateMarker(this.quantity);
 				this.quantity = this.inputQuantity;
+				resetInputQuantity.call(this);
 			}
 			else if (jsonresponse.errorMessages) {
 				showNotification(jsonresponse.errorMessages[0], 'danger');
@@ -157,13 +158,17 @@ class AddToCartButton extends Component {
 		window.Liferay.detach('current-product-status-changed', this._handleCurrentProductStatusChange, this);
 	}
 
-	_updateQuantity(quantity) {
+	_handleUpdateQuantity(quantity) {
 		this.inputQuantity = quantity;
 	}
 
-	_submitQuantity(quantity) {
-		this._updateQuantity(quantity);
+	_handleSubmitQuantity(quantity) {
+		this._handleUpdateQuantity(quantity);
 		this._handleSubmitClick();
+	}
+
+	syncInputQuantity(e,f) {
+		console.log(e,f)
 	}
 
 	_handleCurrentProductStatusChange(e) {
@@ -209,8 +214,6 @@ class AddToCartButton extends Component {
 		if (this.disabled) {
 			return null;
 		}
-
-		resetInputQuantity.call(this);
 
 		doSubmit.call(this)
 	}

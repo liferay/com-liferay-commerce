@@ -6,8 +6,12 @@
     &-inline {
         display: flex;
 
-        .form-control {
+        input {
             width: 70px;
+        }
+
+        select {
+            width: 90px;
         }
 
         .input-group,
@@ -17,8 +21,12 @@
     }
 
     &-block {
-        .form-control {
+        input {
             width: 60px;
+        }
+
+        select {
+            width: 80px;
         }
     }
 }
