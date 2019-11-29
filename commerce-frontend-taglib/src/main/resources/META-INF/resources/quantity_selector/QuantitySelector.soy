@@ -3,8 +3,6 @@
 {template .render}
 	{@param quantity: int|null}
 	{@param? disabled: bool}
-	{@param? minQuantity: int}
-	{@param? maxQuantity: int}
 	{@param? allowedQuantities: list<number>}
 	{@param? quantitySelectorAdditionalClasses: string}
 	{@param? _prevAvailable: bool}
@@ -55,7 +53,7 @@
 			<div class="input-group justify-content-center">
 				<div class="input-group-item input-group-item-shrink input-group-prepend">
 					<button 
-						class="btn btn-monospaced btn-secondary" 
+						class="btn btn-monospaced btn-secondary h-100" 
 						type="submit"
 						data-onclick="{$_handlePrevQuantityButtonPressed}"
 						{if $_prevAvailable == false}
@@ -69,20 +67,15 @@
 				<div class="input-group-item input-group-item-shrink input-group-prepend">
 					<input 
 						name="quantity"
-						type="number"
-						class="form-control"
+						type="text"
+						class="form-control text-center"
 						data-onkeyup="{$_handleInputKeyUp}"
 						data-onkeydown="{$_handleArrowKeys}"
-						value="{$quantity}"
-
-						{if isNonnull($minQuantity)}
-							{sp}min="{$minQuantity}"
+						{if $quantity}
+							value="{$quantity}"
+						{else}
+							value="1"
 						{/if}
-
-						{if isNonnull($maxQuantity)}
-							{sp}max="{$maxQuantity}"
-						{/if}
-
 						{if $disabled}
 							{sp}disabled
 						{/if}
@@ -91,7 +84,7 @@
 
 				<div class="input-group-item input-group-append input-group-item-shrink">
 					<button 
-						class="btn btn-monospaced btn-secondary"
+						class="btn btn-monospaced btn-secondary h-100"
 						type="submit"
 						data-onclick="{$_handleNextQuantityButtonPressed}"
 						{if $_nextAvailable == false}

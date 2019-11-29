@@ -38,7 +38,7 @@
                                 eventsDefinitions.CURRENT_PRODUCT_STATUS_CHANGED,
                                 productExists
                                 ? {
-                                    addToCartId: "<%= addToCartId %>"
+                                    addToCartId: "<%= addToCartId %>",
                                     productId: cpInstanceId,
                                     options: formValues,
                                     quantity: 0,
@@ -46,11 +46,11 @@
                                         maxQuantity: 1000,
                                         minQuantity: 1,
                                         multipleQuantities: 1
-                                    },
-                                    disabled: false
+                                    }
                                 }
                                 : {
-                                    disabled: true
+                                    addToCartId: "<%= addToCartId %>",
+                                    productId: null
                                 }
                             )
 
