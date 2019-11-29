@@ -35,25 +35,12 @@ function showNotification(message, type) {
 }
 
 function resetInputQuantity() {
-	setTimeout(
-		() => {
-			this.inputQuantity = (this.settings.allowedQuantities && this.settings.allowedQuantities.length) ?
-				this.settings.allowedQuantities[0] : this.settings.minQuantity;
-		}, 500);
-}
-
-function doFocusOut() {
-	const parentElement = this.element.parentElement;
-	const tabbableElement = !!parentElement &&
-        !!parentElement.closest && parentElement.closest('[tabindex="0"]');
-
-	if (tabbableElement) {
-		parentElement.focus();
-	}
-	else if (parentElement) {
-		// IE compatibility
-		parentElement.parentElement.focus();
-	}
+	this.inputQuantity = (
+		this.settings.allowedQuantities &&
+		this.settings.allowedQuantities.length
+	)
+		? this.settings.allowedQuantities[0]
+		: this.settings.minQuantity;
 }
 
 function doSubmit() {
@@ -157,11 +144,17 @@ class AddToCartButton extends Component {
 	attached() {
 		window.Liferay.on('accountSelected', this._handleAccountChange, this);
 		window.Liferay.on('productRemovedFromCart', this._handleCartProductRemoval, this);
+
+		// TODO: event definition to be imported as a constant
+		window.Liferay.on('current-product-status-changed', this._handleCurrentProductStatusChange, this);
 	}
 
 	detached() {
 		window.Liferay.detach('accountSelected', this._handleAccountChange, this);
 		window.Liferay.detach('productRemovedFromCart', this._handleCartProductRemoval, this);
+
+		// TODO: event definition to be imported as a constant
+		window.Liferay.detach('current-product-status-changed', this._handleCurrentProductStatusChange, this);
 	}
 
 	_updateQuantity(quantity) {
@@ -173,15 +166,31 @@ class AddToCartButton extends Component {
 		this._handleSubmitClick();
 	}
 
+	_handleCurrentProductStatusChange(e) {
+		if(this.id && (this.id !== e.addToCartId)) {
+			return;
+		}
+		if(e.productId) {
+			this.productId = e.productId;
+			this.options = e.options;
+			this.quantity = e.quantity;
+			this.settings = e.settings;
+			this.disabled = false;
+		} else {
+			this.disabled = true;
+		}
+
+	}
+
 	_handleAccountChange(e) {
 		this.accountId = e.accountId;
 		this.orderId = null;
-		//NOT CORRECT!!!
+
+		// TODO: quantity should be imported from the ouside
 		this.quantity = 0;
 		resetInputQuantity.call(this);
 	}
 
-<<<<<<< HEAD
 	_handleCartProductRemoval(e) {
 		if (e.productId === this.productId) {
 			this.quantity = 0;
@@ -189,19 +198,10 @@ class AddToCartButton extends Component {
 		}
 	}
 
-	_handleBtnFocus(e) {
-		this._handleBtnClick(e);
-	}
-
-	_handleBtnFocusin() {
-		clearTimeout(this.closingTimeout);
-	}
-=======
 	_handleSubmitClick() {
 		if (!this.accountId) {
 			const message = Liferay.Language.get('no-account-selected');
 			const type = 'danger';
->>>>>>> COMMERCE-2491 add to cart button and quantity restyled and refactored
 
 			showNotification(message, type);
 		}
@@ -213,13 +213,13 @@ class AddToCartButton extends Component {
 		resetInputQuantity.call(this);
 
 		doSubmit.call(this)
-			.then(() => doFocusOut.call(this));
 	}
 }
 
 Soy.register(AddToCartButton, template);
 
 AddToCartButton.STATE = {
+	id: Config.string(),
 	accountId: Config.oneOfType(
 		[
 			Config.number(),
