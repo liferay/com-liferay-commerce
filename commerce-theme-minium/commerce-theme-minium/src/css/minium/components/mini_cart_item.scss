@@ -1,6 +1,5 @@
 .commerce-cart-item {
 	$item-image-size: 70px;
-	$item-image-size-sm: 50px;
 
 	align-items: center;
 	border-bottom: 1px solid rgba(180,187,201,0.2);
@@ -13,7 +12,7 @@
 
 	grid-template-areas: "image content actions price delete";
 
-	grid-template-columns: $item-image-size 180px $item-image-size 75px;
+	grid-template-columns: 70px 1fr auto 70px min-content;
 	height: 94px;
 	overflow: hidden;
 	transition: height .2s ease-in, padding .1s ease-in;
@@ -65,6 +64,17 @@
 
 	&__actions {
 		grid-area: actions;
+
+		.quantity-selector {
+			.form-control {
+				max-width: 50px;
+				font-size: 14px;
+			}
+
+			.btn {
+				font-size: 20px;
+			}
+		}
 	}
 
 	&__options {
