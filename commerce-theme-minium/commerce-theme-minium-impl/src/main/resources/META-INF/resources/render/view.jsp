@@ -29,7 +29,7 @@ String addToCartId = PortalUtil.generateRandomKey(request, "add-to-cart");
 String galleryId = PortalUtil.generateRandomKey(request, "gallery");
 %>
 
-<div class="product-detail mb-3" id="<portlet:namespace /><%= cpDefinitionId %>ProductContent">
+<div class="product-detail mb-5" id="<portlet:namespace /><%= cpDefinitionId %>ProductContent">
 	<div class="row">
 		<div class="col-md-6 col-xs-12">
 			<commerce-ui:gallery CPDefinitionId="<%= cpDefinitionId %>" />
