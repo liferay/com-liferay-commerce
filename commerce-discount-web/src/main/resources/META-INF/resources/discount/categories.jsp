@@ -39,7 +39,7 @@ String assetCategoryIds = commerceDiscountRelDisplayContext.getAssetCategoryIds(
 
 				<liferay-asset:asset-categories-selector
 					categoryIds="<%= assetCategoryIds %>"
-					hiddenInput="addClassPKs"
+					hiddenInput="classPKs"
 				/>
 			</aui:fieldset>
 		</aui:fieldset-group>
