@@ -10,14 +10,51 @@
   letter-spacing: 1px;
   line-height: 1.25;
   padding: 10px 20px;
+  position: relative;
   text-decoration: none;
   text-transform: uppercase;
   white-space: nowrap;
+  overflow: hidden;
 
+  &::after {
+    transition: all ease-in-out .3s;
+  }
+
+  &:active,
   &:focus,
   &:focus-within {
-    box-shadow: $shadow-focus;
-    outline: none;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+  
+  &:not([disabled]):not(.disabled):not(.btn-unstyled):not(.btn-link) {
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: -30px;
+      margin-left: -30px;
+      height: 60px;
+      width: 60px;
+      border-radius: 50%;
+      opacity: 0;
+      pointer-events: none;
+      transition: all ease-in-out .6s;
+      transform: scale(5, 5);
+    }
+
+    &[disabled] {
+      cursor: not-allowed;;
+    }
+  
+    &:active::after {
+      padding: 0;
+      opacity: .2;
+      transition: 0s;
+      transform: scale(0, 0);
+    }
   }
 
   &.btn-unstyled {
@@ -44,21 +81,18 @@
 
     &:not([disabled]):not(.disabled) {
       &:hover {
-        background-color: $color-theme-dark;
-        border-color: $color-theme-dark;
+        background-color: $color-theme;
+        border-color: $color-theme;
       }
-  
-      &:active,
-      &:focus {
-        background-color: darken( $color-theme-dark, 10% );
-        border-color: darken( $color-theme-dark, 10% );
+      
+      &::after {
+        background-color: lighten($color-theme, 40%);
       }
     }
 
     &[disabled] {
-      background-color: $color-theme;
-      border-color: $color-theme;
-      color: $color-bg;
+      background-color: $color-disabled;
+      border-color: $color-disabled;
     }
   }
 
@@ -72,11 +106,21 @@
         background-color: $color-bg-medium;
       }
   
-      &:active,
-      &:focus {
+      &:active {
         color: $color-theme;
         background-color: $color-bg;
+        border-color: $color-theme;
       }
+
+      &::after {
+        background-color: $color-theme;
+      }
+    }
+
+    &[disabled] {
+      border-color: $color-disabled;
+      color: $color-disabled;
+      background: $color-bg;;
     }
   }
 
@@ -90,11 +134,9 @@
         background-color: darken( $color-mood-good, 10% );
         border-color: darken( $color-mood-good, 10% );
       }
-  
-      &:active,
-      &:focus {
-        background-color: darken( $color-mood-good, 20% );
-        border-color: darken( $color-mood-good, 20% );
+
+      &::after {
+        background-color: lighten($color-mood-good, 40%);
       }
     }
   }
@@ -160,10 +202,5 @@
   
   &.btn-fixed {
     min-width: 170px;
-  }
-
-  &[disabled] {
-    background-color: $color-disabled;
-    cursor: inherit;
   }
 }

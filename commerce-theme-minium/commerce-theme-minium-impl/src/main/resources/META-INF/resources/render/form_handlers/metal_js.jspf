@@ -70,7 +70,7 @@
             eventsDefinitions.CURRENT_PRODUCT_STATUS_CHANGED,
             productExists
             ? {
-                addToCartId: "<%= addToCartId %>"
+                addToCartId: "<%= addToCartId %>",
                 productId: cpInstanceId,
                 options: formValues,
                 quantity: 0,
@@ -81,6 +81,7 @@
                 },
             }
             : {
+                addToCartId: "<%= addToCartId %>",
                 productId: null
             }
         )

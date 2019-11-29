@@ -24,6 +24,16 @@
 		{/if}
 	{/let}
 
+	{let $btnAddToCartClasses kind="text"}
+		btn btn-primary btn-lg btn-add-to-cart
+		
+		{if $buttonStyle == 'block'}
+			{sp}btn-add-to-cart-block
+		{else}
+			{sp}btn-add-to-cart-inline
+		{/if}
+	{/let}
+
 	{let $iconContainerClasses kind="text"}
 		add-to-cart-icon-container inline-item inline-item-after
 
@@ -59,7 +69,7 @@
 		{/call}
 
 		<button
-			class="btn btn-primary btn-lg btn-add-to-cart"
+			class="{$btnAddToCartClasses}"
 			data-onclick="{$_handleSubmitClick}"
 			tabindex="0"
 			{if (isNonnull($accountId) and (isNonnull($disabled) and $disabled == false)) == false }
