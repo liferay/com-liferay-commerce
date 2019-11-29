@@ -1,4 +1,6 @@
-!!Speedwell && (Speedwell.features.searchBar = (function(w) {
+var Speedwell = Speedwell || { features: {} };
+
+Speedwell.features.searchBar = (function(w) {
 
     const searchToggles = w.document.querySelectorAll('.js-toggle-search'),
         HAS_SEARCH_CLASS = 'has-search',
@@ -20,7 +22,7 @@
                         el.classList.toggle(IS_ACTIVE_CLASS, status);
                     });
 
-                    Speedwell.getContainer()
+                    Speedwell.features.context.getContainer()
                         .classList.toggle(HAS_SEARCH_CLASS, status);
 
                     !!searchBarElement && searchBarElement
@@ -29,4 +31,4 @@
             }
         }
     }
-})(window));
+})(window);

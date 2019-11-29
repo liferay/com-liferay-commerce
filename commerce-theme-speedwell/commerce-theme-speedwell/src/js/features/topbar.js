@@ -1,4 +1,6 @@
-!!Speedwell && (Speedwell.features.topbar = (function(w) {
+var Speedwell = Speedwell || { features: {} };
+
+Speedwell.features.topbar = (function(w) {
     'use strict';
 
     const TOPBAR_CLASS = 'speedwell-topbar',
@@ -14,7 +16,7 @@
         SEARCH: { name: 'search' }
     };
 
-    const CONTAINER = Speedwell.getContainer();
+    const CONTAINER = Speedwell.features.context.getContainer();
 
     let TOPBAR,
         translucencyIsEnabled = false;
@@ -38,7 +40,7 @@
                 toggleWrapper.classList.toggle(IS_OPEN, !isOpen(toggleWrapper));
                 categoryNav.classList.remove(IS_OPEN);
 
-                if (Speedwell.isMobile()) {
+                if (Speedwell.features.context.isMobile()) {
                     hideFiltersButtonOnMenuOpen();
                 }
             });
@@ -105,4 +107,4 @@
 
         isOpen: isOpen
     }
-})(window));
+})(window);
