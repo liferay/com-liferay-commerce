@@ -98,7 +98,7 @@ components:
                     example: trasmitted
                     type: string
                 billingAddress:
-                    $ref: '#/components/schemas/BillingAddress'
+                    $ref: "#/components/schemas/BillingAddress"
                 billingAddressId:
                     example: 31130
                     format: int64
@@ -132,7 +132,7 @@ components:
                     type: integer
                 items:
                     items:
-                        $ref: '#/components/schemas/OrderItem'
+                        $ref: "#/components/schemas/OrderItem"
                     type: array
                 lastPriceUpdateDate:
                     example: 2017-07-21
@@ -170,7 +170,7 @@ components:
                     format: date
                     type: string
                 shippingAddress:
-                    $ref: '#/components/schemas/ShippingAddress'
+                    $ref: "#/components/schemas/ShippingAddress"
                 shippingAddressId:
                     example: 31130
                     format: int64
@@ -373,7 +373,7 @@ components:
                     minimum: 0
                     type: integer
                 shippingAddress:
-                    $ref: '#/components/schemas/ShippingAddress'
+                    $ref: "#/components/schemas/ShippingAddress"
                 shippingAddressId:
                     example: 31130
                     format: int64
@@ -529,10 +529,10 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
             security:
@@ -560,10 +560,10 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/OrderItem'
+                                $ref: "#/components/schemas/OrderItem"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/OrderItem'
+                                $ref: "#/components/schemas/OrderItem"
                     description:
                         Successful operation
                 400:
@@ -573,30 +573,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -623,10 +623,10 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/OrderItem'
+                            $ref: "#/components/schemas/OrderItem"
                     application/xml:
                         schema:
-                            $ref: '#/components/schemas/OrderItem'
+                            $ref: "#/components/schemas/OrderItem"
                 required: true
             responses:
                 202:
@@ -642,30 +642,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -698,10 +698,10 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
             security:
@@ -730,10 +730,10 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/OrderItem'
+                                $ref: "#/components/schemas/OrderItem"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/OrderItem'
+                                $ref: "#/components/schemas/OrderItem"
                     description:
                         Successful operation
                 400:
@@ -743,30 +743,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -794,10 +794,10 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/OrderItem'
+                            $ref: "#/components/schemas/OrderItem"
                     application/xml:
                         schema:
-                            $ref: '#/components/schemas/OrderItem'
+                            $ref: "#/components/schemas/OrderItem"
                 required: true
             responses:
                 202:
@@ -813,30 +813,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -868,10 +868,10 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
             security:
@@ -899,10 +899,10 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/OrderNote'
+                                $ref: "#/components/schemas/OrderNote"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/OrderNote'
+                                $ref: "#/components/schemas/OrderNote"
                     description:
                         Successful operation
                 400:
@@ -912,30 +912,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -962,10 +962,10 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/OrderNote'
+                            $ref: "#/components/schemas/OrderNote"
                     application/xml:
                         schema:
-                            $ref: '#/components/schemas/OrderNote'
+                            $ref: "#/components/schemas/OrderNote"
                 required: true
             responses:
                 202:
@@ -981,30 +981,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -1037,10 +1037,10 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
             security:
@@ -1069,10 +1069,10 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/OrderNote'
+                                $ref: "#/components/schemas/OrderNote"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/OrderNote'
+                                $ref: "#/components/schemas/OrderNote"
                     description:
                         Successful operation
                 400:
@@ -1082,30 +1082,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -1133,10 +1133,10 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/OrderNote'
+                            $ref: "#/components/schemas/OrderNote"
                     application/xml:
                         schema:
-                            $ref: '#/components/schemas/OrderNote'
+                            $ref: "#/components/schemas/OrderNote"
                 required: true
             responses:
                 202:
@@ -1152,30 +1152,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -1216,12 +1216,12 @@ paths:
                         application/json:
                             schema:
                                 items:
-                                    $ref: '#/components/schemas/Order'
+                                    $ref: "#/components/schemas/Order"
                                 type: array
                         application/xml:
                             schema:
                                 items:
-                                    $ref: '#/components/schemas/Order'
+                                    $ref: "#/components/schemas/Order"
                                 type: array
                     description:
                         Successful operation
@@ -1232,30 +1232,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -1272,20 +1272,20 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/Order'
+                            $ref: "#/components/schemas/Order"
                     application/xml:
                         schema:
-                            $ref: '#/components/schemas/Order'
+                            $ref: "#/components/schemas/Order"
                 required: true
             responses:
                 201:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Order'
+                                $ref: "#/components/schemas/Order"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Order'
+                                $ref: "#/components/schemas/Order"
                     description:
                         Created
                 202:
@@ -1301,30 +1301,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -1353,10 +1353,10 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/BillingAddress'
+                                $ref: "#/components/schemas/BillingAddress"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/BillingAddress'
+                                $ref: "#/components/schemas/BillingAddress"
                     description:
                         Successful operation
                 400:
@@ -1366,30 +1366,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -1416,10 +1416,10 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/BillingAddress'
+                            $ref: "#/components/schemas/BillingAddress"
                     application/xml:
                         schema:
-                            $ref: '#/components/schemas/BillingAddress'
+                            $ref: "#/components/schemas/BillingAddress"
                 required: true
             responses:
                 202:
@@ -1435,30 +1435,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -1498,12 +1498,12 @@ paths:
                         application/json:
                             schema:
                                 items:
-                                    $ref: '#/components/schemas/OrderItem'
+                                    $ref: "#/components/schemas/OrderItem"
                                 type: array
                         application/xml:
                             schema:
                                 items:
-                                    $ref: '#/components/schemas/OrderItem'
+                                    $ref: "#/components/schemas/OrderItem"
                                 type: array
                     description:
                         Successful operation
@@ -1514,30 +1514,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -1564,20 +1564,20 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/OrderItem'
+                            $ref: "#/components/schemas/OrderItem"
                     application/xml:
                         schema:
-                            $ref: '#/components/schemas/OrderItem'
+                            $ref: "#/components/schemas/OrderItem"
                 required: true
             responses:
                 201:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/OrderItem'
+                                $ref: "#/components/schemas/OrderItem"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/OrderItem'
+                                $ref: "#/components/schemas/OrderItem"
                     description:
                         Created
                 202:
@@ -1593,30 +1593,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -1656,12 +1656,12 @@ paths:
                         application/json:
                             schema:
                                 items:
-                                    $ref: '#/components/schemas/OrderNote'
+                                    $ref: "#/components/schemas/OrderNote"
                                 type: array
                         application/xml:
                             schema:
                                 items:
-                                    $ref: '#/components/schemas/OrderNote'
+                                    $ref: "#/components/schemas/OrderNote"
                                 type: array
                     description:
                         Successful operation
@@ -1672,30 +1672,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -1722,20 +1722,20 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/OrderNote'
+                            $ref: "#/components/schemas/OrderNote"
                     application/xml:
                         schema:
-                            $ref: '#/components/schemas/OrderNote'
+                            $ref: "#/components/schemas/OrderNote"
                 required: true
             responses:
                 201:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/OrderNote'
+                                $ref: "#/components/schemas/OrderNote"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/OrderNote'
+                                $ref: "#/components/schemas/OrderNote"
                     description:
                         Created
                 202:
@@ -1751,30 +1751,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -1803,10 +1803,10 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/ShippingAddress'
+                                $ref: "#/components/schemas/ShippingAddress"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/ShippingAddress'
+                                $ref: "#/components/schemas/ShippingAddress"
                     description:
                         Successful operation
                 400:
@@ -1816,30 +1816,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -1866,10 +1866,10 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/ShippingAddress'
+                            $ref: "#/components/schemas/ShippingAddress"
                     application/xml:
                         schema:
-                            $ref: '#/components/schemas/ShippingAddress'
+                            $ref: "#/components/schemas/ShippingAddress"
                 required: true
             responses:
                 202:
@@ -1885,30 +1885,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -1940,10 +1940,10 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
             security:
@@ -1971,10 +1971,10 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Order'
+                                $ref: "#/components/schemas/Order"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Order'
+                                $ref: "#/components/schemas/Order"
                     description:
                         Successful operation
                 400:
@@ -1984,30 +1984,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -2034,10 +2034,10 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/Order'
+                            $ref: "#/components/schemas/Order"
                     application/xml:
                         schema:
-                            $ref: '#/components/schemas/Order'
+                            $ref: "#/components/schemas/Order"
                 required: true
             responses:
                 202:
@@ -2053,30 +2053,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -2106,10 +2106,10 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/BillingAddress'
+                                $ref: "#/components/schemas/BillingAddress"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/BillingAddress'
+                                $ref: "#/components/schemas/BillingAddress"
                     description:
                         Successful operation
                 400:
@@ -2119,30 +2119,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -2170,10 +2170,10 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/BillingAddress'
+                            $ref: "#/components/schemas/BillingAddress"
                     application/xml:
                         schema:
-                            $ref: '#/components/schemas/BillingAddress'
+                            $ref: "#/components/schemas/BillingAddress"
                 required: true
             responses:
                 202:
@@ -2189,30 +2189,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -2253,12 +2253,12 @@ paths:
                         application/json:
                             schema:
                                 items:
-                                    $ref: '#/components/schemas/OrderItem'
+                                    $ref: "#/components/schemas/OrderItem"
                                 type: array
                         application/xml:
                             schema:
                                 items:
-                                    $ref: '#/components/schemas/OrderItem'
+                                    $ref: "#/components/schemas/OrderItem"
                                 type: array
                     description:
                         Successful operation
@@ -2269,30 +2269,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -2320,20 +2320,20 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/OrderItem'
+                            $ref: "#/components/schemas/OrderItem"
                     application/xml:
                         schema:
-                            $ref: '#/components/schemas/OrderItem'
+                            $ref: "#/components/schemas/OrderItem"
                 required: true
             responses:
                 201:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/OrderItem'
+                                $ref: "#/components/schemas/OrderItem"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/OrderItem'
+                                $ref: "#/components/schemas/OrderItem"
                     description:
                         Created
                 202:
@@ -2349,30 +2349,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -2413,12 +2413,12 @@ paths:
                         application/json:
                             schema:
                                 items:
-                                    $ref: '#/components/schemas/OrderNote'
+                                    $ref: "#/components/schemas/OrderNote"
                                 type: array
                         application/xml:
                             schema:
                                 items:
-                                    $ref: '#/components/schemas/OrderNote'
+                                    $ref: "#/components/schemas/OrderNote"
                                 type: array
                     description:
                         Successful operation
@@ -2429,30 +2429,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -2480,20 +2480,20 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/OrderNote'
+                            $ref: "#/components/schemas/OrderNote"
                     application/xml:
                         schema:
-                            $ref: '#/components/schemas/OrderNote'
+                            $ref: "#/components/schemas/OrderNote"
                 required: true
             responses:
                 201:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/OrderNote'
+                                $ref: "#/components/schemas/OrderNote"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/OrderNote'
+                                $ref: "#/components/schemas/OrderNote"
                     description:
                         Created
                 202:
@@ -2509,30 +2509,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -2562,10 +2562,10 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/ShippingAddress'
+                                $ref: "#/components/schemas/ShippingAddress"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/ShippingAddress'
+                                $ref: "#/components/schemas/ShippingAddress"
                     description:
                         Successful operation
                 400:
@@ -2575,30 +2575,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -2626,10 +2626,10 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/ShippingAddress'
+                            $ref: "#/components/schemas/ShippingAddress"
                     application/xml:
                         schema:
-                            $ref: '#/components/schemas/ShippingAddress'
+                            $ref: "#/components/schemas/ShippingAddress"
                 required: true
             responses:
                 202:
@@ -2645,30 +2645,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -2701,10 +2701,10 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
             security:
@@ -2733,10 +2733,10 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Order'
+                                $ref: "#/components/schemas/Order"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Order'
+                                $ref: "#/components/schemas/Order"
                     description:
                         Successful operation
                 400:
@@ -2746,30 +2746,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -2797,10 +2797,10 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/Order'
+                            $ref: "#/components/schemas/Order"
                     application/xml:
                         schema:
-                            $ref: '#/components/schemas/Order'
+                            $ref: "#/components/schemas/Order"
                 required: true
             responses:
                 202:
@@ -2816,30 +2816,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -2865,7 +2865,7 @@ servers:
                   - api.uat
     - description:
           Liferay Commerce Local Development (Hosts file)
-      url: '{protocol}://{host}:{port}/o/commerce-admin-order/{basePath}'
+      url: "{protocol}://{host}:{port}/o/commerce-admin-order/{basePath}"
       variables:
           basePath:
               default: v1.0
@@ -2884,7 +2884,7 @@ servers:
                   - https
     - description:
           Liferay Commerce Local Development with Ngrok
-      url: '{protocol}://{host}.ngrok.io/o/commerce-admin-order/{basePath}'
+      url: "{protocol}://{host}.ngrok.io/o/commerce-admin-order/{basePath}"
       variables:
           basePath:
               default: v1.0

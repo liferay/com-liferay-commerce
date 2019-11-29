@@ -52,20 +52,20 @@ components:
             content:
                 application/json:
                     schema:
-                        $ref: '#/components/schemas/Error'
+                        $ref: "#/components/schemas/Error"
                 application/xml:
                     schema:
-                        $ref: '#/components/schemas/Error'
+                        $ref: "#/components/schemas/Error"
             description:
                 The specified resource was not found
         UnauthorizedError:
             content:
                 application/json:
                     schema:
-                        $ref: '#/components/schemas/Error'
+                        $ref: "#/components/schemas/Error"
                 application/xml:
                     schema:
-                        $ref: '#/components/schemas/Error'
+                        $ref: "#/components/schemas/Error"
             description:
                 Authentication information is missing or invalid
     schemas:
@@ -341,12 +341,12 @@ paths:
                                 totalCount: 12
                             schema:
                                 items:
-                                    $ref: '#/components/schemas/AccountCategoryForecast'
+                                    $ref: "#/components/schemas/AccountCategoryForecast"
                                 type: array
                         application/xml:
                             schema:
                                 items:
-                                    $ref: '#/components/schemas/AccountCategoryForecast'
+                                    $ref: "#/components/schemas/AccountCategoryForecast"
                                 type: array
                     description:
                         Successful operation
@@ -357,30 +357,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 "404":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 "500":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -618,12 +618,12 @@ paths:
                                 totalCount: 24
                             schema:
                                 items:
-                                    $ref: '#/components/schemas/AccountForecast'
+                                    $ref: "#/components/schemas/AccountForecast"
                                 type: array
                         application/xml:
                             schema:
                                 items:
-                                    $ref: '#/components/schemas/AccountForecast'
+                                    $ref: "#/components/schemas/AccountForecast"
                                 type: array
                     description:
                         Successful operation
@@ -634,30 +634,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 "404":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 "500":
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -682,7 +682,7 @@ servers:
                   - api.uat
     - description:
           Liferay Commerce Local Development (Hosts file)
-      url: '{protocol}://{host}:{port}/o/commerce-forecast/{basePath}'
+      url: "{protocol}://{host}:{port}/o/commerce-forecast/{basePath}"
       variables:
           basePath:
               default: v1.0
@@ -701,7 +701,7 @@ servers:
                   - https
     - description:
           Liferay Commerce Local Development with Ngrok
-      url: '{protocol}://{host}.ngrok.io/o/commerce-forecast/{basePath}'
+      url: "{protocol}://{host}.ngrok.io/o/commerce-forecast/{basePath}"
       variables:
           basePath:
               default: v1.0

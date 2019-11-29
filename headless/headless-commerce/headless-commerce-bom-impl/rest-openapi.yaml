@@ -22,6 +22,27 @@ components:
                 example: Product1
                 type: string
             style: form
+    responses:
+        NotFound:
+            content:
+                application/json:
+                    schema:
+                        $ref: "#/components/schemas/Error"
+                application/xml:
+                    schema:
+                        $ref: "#/components/schemas/Error"
+            description:
+                The specified resource was not found
+        UnauthorizedError:
+            content:
+                application/json:
+                    schema:
+                        $ref: "#/components/schemas/Error"
+                application/xml:
+                    schema:
+                        $ref: "#/components/schemas/Error"
+            description:
+                Authentication information is missing or invalid
     schemas:
         Area:
             properties:
@@ -33,10 +54,10 @@ components:
                           street2: /Item/31130
                           thumbnail: /schema.jpg
                     items:
-                        $ref: '#/components/schemas/Breadcrumb'
+                        $ref: "#/components/schemas/Breadcrumb"
                     type: array
                 data:
-                    $ref: '#/components/schemas/AreaData'
+                    $ref: "#/components/schemas/AreaData"
             type: object
         AreaData:
             properties:
@@ -58,7 +79,7 @@ components:
                           thumbnailUrl: /product_thumbnail.png
                           url: /productUrl
                     items:
-                        $ref: '#/components/schemas/Product'
+                        $ref: "#/components/schemas/Product"
                     type: array
                 spots:
                     example:
@@ -68,7 +89,7 @@ components:
                           positionY: 33.54
                           productId: 29130
                     items:
-                        $ref: '#/components/schemas/Spot'
+                        $ref: "#/components/schemas/Spot"
                     type: array
         Brand:
             properties:
@@ -83,7 +104,7 @@ components:
                           name: Model 1
                           year: "2019"
                     items:
-                        $ref: '#/components/schemas/Model'
+                        $ref: "#/components/schemas/Model"
                     type: array
                 name:
                     example: Brand 1
@@ -136,10 +157,10 @@ components:
                           street2: /Item/31130
                           thumbnail: /schema.jpg
                     items:
-                        $ref: '#/components/schemas/Breadcrumb'
+                        $ref: "#/components/schemas/Breadcrumb"
                     type: array
                 data:
-                    $ref: '#/components/schemas/ItemData'
+                    $ref: "#/components/schemas/ItemData"
             type: object
         Item:
             properties:
@@ -177,7 +198,7 @@ components:
                                 year: "2019"
                           name: Brand 1
                     items:
-                        $ref: '#/components/schemas/Brand'
+                        $ref: "#/components/schemas/Brand"
                     type: array
                 content:
                     example:
@@ -187,7 +208,7 @@ components:
                           street2: /Item/31130
                           thumbnail: /schema.jpg
                     items:
-                        $ref: '#/components/schemas/Item'
+                        $ref: "#/components/schemas/Item"
                     type: array
                 products:
                     example:
@@ -198,7 +219,7 @@ components:
                           thumbnailUrl: /product_thumbnail.png
                           url: /productUrl
                     items:
-                        $ref: '#/components/schemas/Product'
+                        $ref: "#/components/schemas/Product"
                     type: array
                 spots:
                     example:
@@ -208,7 +229,7 @@ components:
                           positionY: 33.54
                           productId: 29130
                     items:
-                        $ref: '#/components/schemas/Spot'
+                        $ref: "#/components/schemas/Spot"
                     type: array
             type: object
         Model:
@@ -270,7 +291,7 @@ components:
                     minimum: 0
                     type: integer
                 position:
-                    $ref: '#/components/schemas/Position'
+                    $ref: "#/components/schemas/Position"
                 productId:
                     example: 123e4567-e89b-12d3-a456-426655440000
                     type: string
@@ -328,20 +349,20 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/Spot'
+                            $ref: "#/components/schemas/Spot"
                     application/xml:
                         schema:
-                            $ref: '#/components/schemas/Spot'
+                            $ref: "#/components/schemas/Spot"
                 required: true
             responses:
                 200:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Spot'
+                                $ref: "#/components/schemas/Spot"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Spot'
+                                $ref: "#/components/schemas/Spot"
                     description:
                         Created
                 400:
@@ -351,30 +372,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -421,10 +442,10 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
             security:
@@ -466,10 +487,10 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/Spot'
+                            $ref: "#/components/schemas/Spot"
                     application/xml:
                         schema:
-                            $ref: '#/components/schemas/Spot'
+                            $ref: "#/components/schemas/Spot"
                 required: true
             responses:
                 200:
@@ -482,30 +503,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -537,10 +558,10 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Area'
+                                $ref: "#/components/schemas/Area"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Area'
+                                $ref: "#/components/schemas/Area"
                     description:
                         Successful operation
                 400:
@@ -550,30 +571,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -605,10 +626,10 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Folder'
+                                $ref: "#/components/schemas/Folder"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Folder'
+                                $ref: "#/components/schemas/Folder"
                     description:
                         Successful operation
                 400:
@@ -618,30 +639,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -670,12 +691,12 @@ paths:
                         application/json:
                             schema:
                                 items:
-                                    $ref: '#/components/schemas/Product'
+                                    $ref: "#/components/schemas/Product"
                                 type: array
                         application/xml:
                             schema:
                                 items:
-                                    $ref: '#/components/schemas/Product'
+                                    $ref: "#/components/schemas/Product"
                                 type: array
                     description:
                         Successful operation
@@ -686,30 +707,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Authentication information is missing or invalid
                 404:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         The specified resource was not found
                 500:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                         application/xml:
                             schema:
-                                $ref: '#/components/schemas/Error'
+                                $ref: "#/components/schemas/Error"
                     description:
                         Unexpected error
             security:
@@ -735,7 +756,7 @@ servers:
                   - api.uat
     - description:
           Liferay Commerce Local Development (Hosts file)
-      url: '{protocol}://{host}:{port}/o/commerce-bom/{basePath}'
+      url: "{protocol}://{host}:{port}/o/commerce-bom/{basePath}"
       variables:
           basePath:
               default: v1.0
@@ -754,7 +775,7 @@ servers:
                   - https
     - description:
           Liferay Commerce Local Development with Ngrok
-      url: '{protocol}://{host}.ngrok.io/o/commerce-bom/{basePath}'
+      url: "{protocol}://{host}.ngrok.io/o/commerce-bom/{basePath}"
       variables:
           basePath:
               default: v1.0
