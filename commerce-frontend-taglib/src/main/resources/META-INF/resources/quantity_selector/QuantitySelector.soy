@@ -29,26 +29,24 @@
 	<form data-onsubmit="{$_handleFormSubmit}" class="{$quantitySelectorClasses}">
 		{if isNonnull($allowedQuantities)}
 			{let $selectAttributes kind="attributes"}
-				class="quantity-selector__select"
+				class="form-control"
 				data-onchange="{$_handleSelectOption}"
 				{if $disabled}
 					disabled
 				{/if}
 			{/let}
 
-			<form data-onsubmit="{$_handleFormSubmit}">
-				<select	{$selectAttributes}>
-					{foreach $option in $allowedQuantities}
-						{let $optionAttributes kind="attributes"}
-							value="{$option}"
-							{if $option == $quantity}
-								selected="selected"
-							{/if}
-						{/let}
-						<option {$optionAttributes}>{$option}</option>
-					{/foreach}
-				</select>
-			</form>
+			<select	{$selectAttributes}>
+				{foreach $option in $allowedQuantities}
+					{let $optionAttributes kind="attributes"}
+						value="{$option}"
+						{if $option == $quantity}
+							selected="selected"
+						{/if}
+					{/let}
+					<option {$optionAttributes}>{$option}</option>
+				{/foreach}
+			</select>
 		{else}
 			<div class="input-group justify-content-center">
 				<div class="input-group-item input-group-item-shrink input-group-prepend">
