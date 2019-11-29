@@ -41,8 +41,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -194,12 +192,6 @@ public class CPInstanceOptionsValuesDataProvider implements DDMDataProvider {
 
 	protected static class Output {
 
-		public Output(String name, String type, Object value) {
-			_name = name;
-			_type = type;
-			_value = value;
-		}
-
 		public static DDMDataProviderResponse toDDMDataProviderResponse(
 			List<Output> outputs) {
 
@@ -229,6 +221,12 @@ public class CPInstanceOptionsValuesDataProvider implements DDMDataProvider {
 			return DDMDataProviderResponse.of(ddmDataProviderResponseOutputs);
 		}
 
+		public Output(String name, String type, Object value) {
+			_name = name;
+			_type = type;
+			_value = value;
+		}
+
 		private final String _name;
 		private final String _type;
 		private final Object _value;
@@ -243,11 +241,11 @@ public class CPInstanceOptionsValuesDataProvider implements DDMDataProvider {
 		return GetterUtil.getLong(parameters.get(param));
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
-		CPInstanceOptionsValuesDataProvider.class);
-
 	private static final int _RELEASE_7_2_0_BUILD_NUMBER =
 		ReleaseInfo.RELEASE_7_1_0_BUILD_NUMBER + 100;
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CPInstanceOptionsValuesDataProvider.class);
 
 	@Reference
 	private CommerceProductViewPermission _commerceProductViewPermission;

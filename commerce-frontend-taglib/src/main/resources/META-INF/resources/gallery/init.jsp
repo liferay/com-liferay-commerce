@@ -15,23 +15,22 @@
 --%>
 
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %><%@
-        taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
+taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 
-<%@ page import="com.liferay.commerce.frontend.model.StepModel" %><%@
-        page import="com.liferay.petra.string.StringPool" %><%@
-        page import="com.liferay.portal.kernel.json.JSONFactoryUtil" %><%@
-        page import="com.liferay.portal.kernel.json.JSONSerializer" %><%@
-        page import="com.liferay.portal.kernel.util.PortalUtil" %>
+<%@ page import="com.liferay.commerce.product.catalog.CPMedia" %><%@
+page import="com.liferay.petra.string.StringPool" %><%@
+page import="com.liferay.portal.kernel.json.JSONFactoryUtil" %><%@
+page import="com.liferay.portal.kernel.json.JSONSerializer" %><%@
+page import="com.liferay.portal.kernel.util.PortalUtil" %>
 
 <%@ page import="java.util.List" %>
-<%@ page import="com.liferay.commerce.product.catalog.CPMedia" %>
 
 <liferay-theme:defineObjects />
 
 <%
-    List<CPMedia> images = (List<CPMedia>) request.getAttribute("liferay-commerce:gallery:images");
-    JSONSerializer jsonSerializer = JSONFactoryUtil.createJSONSerializer();
-    String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_gallery") + StringPool.UNDERLINE;
+	List<CPMedia> images = (List<CPMedia>)request.getAttribute("liferay-commerce:gallery:images");
+	JSONSerializer jsonSerializer = JSONFactoryUtil.createJSONSerializer();
+	String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_gallery") + StringPool.UNDERLINE;
 
-    String galleryId = randomNamespace + "gallery";
+	String galleryId = randomNamespace + "gallery";
 %>

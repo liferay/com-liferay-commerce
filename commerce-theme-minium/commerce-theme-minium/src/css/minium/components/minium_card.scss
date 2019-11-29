@@ -26,16 +26,16 @@ $card-spacer: 20px;
 	}
 
 	&__actions {
-		width: calc(100% + #{$card-spacer * 2});
-		margin-left: 0;
 		margin-bottom: -#{$card-spacer};
+		margin-left: 0;
+		width: calc(100% + #{$card-spacer * 2});
 
 		.btn-add-to-cart {
-			margin-top: 12px;
-			display: flex;
-			width: 100%;
 			border-top-left-radius: 0px;
 			border-top-right-radius: 0px;
+			display: flex;
+			margin-top: 12px;
+			width: 100%;
 		}
 	}
 
