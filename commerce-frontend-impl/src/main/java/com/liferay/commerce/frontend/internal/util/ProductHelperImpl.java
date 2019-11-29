@@ -113,8 +113,14 @@ public class ProductHelperImpl implements ProductHelper {
 			maxOrderQuantity = cpDefinitionInventory.getMaxOrderQuantity();
 			multipleQuantity = cpDefinitionInventory.getMultipleOrderQuantity();
 
-			productSettingsModel.setAllowedQuantities(
-				cpDefinitionInventory.getAllowedOrderQuantitiesArray());
+			int[] allowedOrderQuantitiesArray =
+					cpDefinitionInventory.getAllowedOrderQuantitiesArray();
+			if ((allowedOrderQuantitiesArray != null) &&
+					(allowedOrderQuantitiesArray.length > 0)) {
+				productSettingsModel.setAllowedQuantities(
+						allowedOrderQuantitiesArray);
+			}
+
 			productSettingsModel.setLowStockQuantity(
 				cpDefinitionInventory.getMinStockQuantity());
 			productSettingsModel.setShowAvailabilityDot(

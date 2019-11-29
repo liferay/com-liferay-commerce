@@ -66,8 +66,13 @@
 		grid-area: actions;
 
 		.quantity-selector {
-			.form-control {
+			input {
 				max-width: 50px;
+				font-size: 14px;
+			}
+
+			select {
+				max-width: 70px;
 				font-size: 14px;
 			}
 

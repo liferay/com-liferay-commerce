@@ -11,8 +11,8 @@
 	{@param spritemap: ? }
 
 	{@param? _handleSubmitClick: any }
-	{@param? _updateQuantity: any }
-	{@param? _submitQuantity: any }
+	{@param? _handleUpdateQuantity: any }
+	{@param? _handleSubmitQuantity: any }
 
 	{let $addToCartClasses kind="text"}
 		add-to-cart
@@ -57,8 +57,8 @@
 	<div class="{$addToCartClasses}">
 		{call QuantitySelector.render}
 			{param events: [
-				'submitQuantity' : $_submitQuantity,
-				'updateQuantity' : $_updateQuantity
+				'submitQuantity' : $_handleSubmitQuantity,
+				'updateQuantity' : $_handleUpdateQuantity
 			] /}
 			{param quantity: $inputQuantity /}
 			{param minQuantity: $settings.minQuantity /}
