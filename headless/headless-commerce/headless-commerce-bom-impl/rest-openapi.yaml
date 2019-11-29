@@ -22,27 +22,6 @@ components:
                 example: Product1
                 type: string
             style: form
-    responses:
-        NotFound:
-            content:
-                application/json:
-                    schema:
-                        $ref: '#/components/schemas/Error'
-                application/xml:
-                    schema:
-                        $ref: '#/components/schemas/Error'
-            description:
-                The specified resource was not found
-        UnauthorizedError:
-            content:
-                application/json:
-                    schema:
-                        $ref: '#/components/schemas/Error'
-                application/xml:
-                    schema:
-                        $ref: '#/components/schemas/Error'
-            description:
-                Authentication information is missing or invalid
     schemas:
         Area:
             properties:
