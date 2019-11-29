@@ -10,8 +10,8 @@
 @mixin clay-line-clamp($lines: 3, $line-height: $line-height-base, $font-size: 1em) {
 	display: block;
 	height: calc(#{$font-size} * #{$line-height} * #{$lines});
-	position: relative;
 	overflow: hidden;
+	position: relative;
 
 	@supports (-webkit-line-clamp: #{$lines}) {
 		-webkit-box-orient: vertical;  

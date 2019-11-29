@@ -115,8 +115,8 @@
 		}
 
 		.navbar-toggler-link {
-			height: $toggler-link-height;
 			font-size: $toggler-link-font-size;
+			height: $toggler-link-height;
 			line-height: $toggler-link-line-height;
 			margin-bottom: $toggler-link-margin-y;
 			margin-left: $toggler-link-margin-x;
@@ -153,11 +153,11 @@
 				margin-left: $btn-margin-x-mobile;
 				margin-right: $btn-margin-x-mobile;
 				margin-top: $btn-margin-y-mobile;
+				min-width: $btn-monospaced-size-mobile;
 				padding-bottom: $btn-padding-y-mobile;
 				padding-left: $btn-padding-x-mobile;
 				padding-right: $btn-padding-x-mobile;
 				padding-top: $btn-padding-y-mobile;
-				min-width: $btn-monospaced-size-mobile;
 			}
 
 			.nav-btn-monospaced {
@@ -305,11 +305,11 @@
 								margin-left: $btn-margin-x;
 								margin-right: $btn-margin-x;
 								margin-top: $btn-margin-y;
+								min-width: $btn-monospaced-size;
 								padding-bottom: $btn-padding-y;
 								padding-left: $btn-padding-x;
 								padding-right: $btn-padding-x;
 								padding-top: $btn-padding-y;
-								min-width: $btn-monospaced-size;
 							}
 						}
 
