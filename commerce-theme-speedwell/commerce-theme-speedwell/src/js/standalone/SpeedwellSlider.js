@@ -274,7 +274,7 @@ SpeedwellSlider.prototype = {
     }
 };
 
-Liferay.Loader.define('SpeedwellSlider', [], function() {
+Liferay.component('SpeedwellSlider', (function() {
     return {
         initialize(setupDOMSlideFn, renderSlideContentFn, interval) {
             const sliderContainer = window.document.querySelector('[data-will-load]');
@@ -283,6 +283,4 @@ Liferay.Loader.define('SpeedwellSlider', [], function() {
             return new SpeedwellSlider(sliderContainer, setupDOMSlideFn, renderSlideContentFn, interval);
         }
     };
-});
-
-Liferay.fire('sliderIsReady');
+})());

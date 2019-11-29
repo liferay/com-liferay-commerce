@@ -1,4 +1,6 @@
-!!Speedwell && (Speedwell.features.accessibility = (function(w) {
+var Speedwell = Speedwell || { features: {} };
+
+Speedwell.features.accessibility = (function(w) {
     'use strict';
 
     const KEYDOWN_EVENT = 'keydown',
@@ -33,4 +35,4 @@
             return isAccessible;
         }
     }
-})(window));
+})(window);

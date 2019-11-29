@@ -1,4 +1,6 @@
-!!Speedwell && (Speedwell.features.mobile = (function(w) {
+var Speedwell = Speedwell || { features: {} };
+
+Speedwell.features.mobile = (function(w) {
     'use strict';
 
     let filtersButton,
@@ -79,4 +81,4 @@
             return filtersButton;
         }
     }
-})(window));
+})(window);

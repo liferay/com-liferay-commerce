@@ -1,11 +1,9 @@
-var Speedwell = Speedwell || { features: {}, initializeFeatures: function() {} };
-
-
 AUI().ready(
 	function() {
 		console.log('%c[ AUI ready ]', 'background-color: #000; color: #00FFFF');
 
-		!!Speedwell && Speedwell.initializeFeatures();
+		!!Speedwell && !!Speedwell.features &&
+			Speedwell.features.init.initializeFeatures();
 	}
 );
 

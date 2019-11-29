@@ -1,8 +1,9 @@
-!!Speedwell && (Speedwell.features.scroll = (function(w) {
+var Speedwell = Speedwell || { features: {} };
+
+Speedwell.features.scroll = (function(w) {
     'use strict';
 
     const SCROLL_EVENT = 'scroll',
-        speedwellContainer = Speedwell.getContainer(),
         callbackQueueOnScroll = {};
 
     function sign(x) {
@@ -29,21 +30,6 @@
 
         if (!ticking) {
             w.requestAnimationFrame(function () {
-                /* if (Math.abs(lastKnownScrollOffset) > scrollThreshold) {
-                    speedwellContainer.classList.add(
-                        'is-scrolling-' + myMap.get(Math.sign(lastKnownScrollOffset))
-                    );
-
-                    speedwellContainer.classList.remove(
-                        'is-scrolling-' + myMap.get(-1 * Math.sign(lastKnownScrollOffset))
-                    );
-                }
-
-                speedwellContainer.classList.toggle(
-                    'is-scrolled',
-                    w.scrollY > scrollThreshold
-                ); */
-
                 ticking = false;
             });
 
@@ -68,4 +54,4 @@
             delete callbackQueueOnScroll[callback.name];
         }
     }
-})(window));
+})(window);

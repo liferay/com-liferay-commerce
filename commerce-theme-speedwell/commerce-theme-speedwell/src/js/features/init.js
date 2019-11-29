@@ -1,11 +1,14 @@
-!!Speedwell && _.extend(Speedwell, (function(w) {
+var Speedwell = Speedwell || { features: {} };
+
+Speedwell.features.init = (function(w) {
     'use strict';
 
     return {
         initializeFeatures: function() {
             setTimeout(function() {
                 Object.keys(Speedwell.features).forEach(function (feature) {
-                    Speedwell.features[feature].initialize();
+                    !!Speedwell.features[feature].initialize &&
+                        Speedwell.features[feature].initialize();
 
                     console.log(
                         '%c⊏ %cspeedwell%c ' +
@@ -19,4 +22,4 @@
             }, 350);
         }
     }
-})(window));
+})(window);

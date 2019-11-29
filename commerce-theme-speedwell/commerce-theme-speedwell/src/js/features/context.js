@@ -1,4 +1,6 @@
-!!Speedwell && _.extend(Speedwell, (function(w) {
+var Speedwell = Speedwell || { features: {} };
+
+Speedwell.features.context = (function(w) {
     'use strict';
 
     const SPEEDWELL = 'speedwell';
@@ -16,4 +18,4 @@
 
         isMobile: w.Liferay.Browser.isMobile
     }
-})(window));
+})(window);
