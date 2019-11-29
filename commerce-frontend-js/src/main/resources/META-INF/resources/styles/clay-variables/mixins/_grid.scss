@@ -14,8 +14,8 @@
 
 		> .col,
 		> [class*="col-"] {
-			padding-right: 0;
 			padding-left: 0;
+			padding-right: 0;
 		}
 	}
 }
@@ -154,17 +154,17 @@
 	border-width: $border-width;
 	color: $color;
 	display: $display;
-	font-family: $font-family;
-	font-size: $font-size;
-	font-weight: $font-weight;
 	flex-basis: $flex-basis;
 	flex-direction: $flex-direction;
 	flex-grow: $flex-grow;
 	flex-shrink: $flex-shrink;
 	flex-wrap: $flex-wrap;
 	float: $float;
-	justify-content: $justify-content;
+	font-family: $font-family;
+	font-size: $font-size;
+	font-weight: $font-weight;
 	height: $height;
+	justify-content: $justify-content;
 	line-height: $line-height;
 	margin-bottom: $margin-bottom;
 	margin-left: $margin-left;

@@ -9,14 +9,14 @@
 @import "mixins/deprecate";
 
 // Utilities
+@import "mixins/badge";
 @import "mixins/breakpoints";
 @import "mixins/hover";
 @import "mixins/image";
-@import "mixins/badge";
+@import "mixins/reset-text";
 @import "mixins/resize";
 @import "mixins/screen-reader";
 @import "mixins/size";
-@import "mixins/reset-text";
 @import "mixins/text-emphasis";
 @import "mixins/text-hide";
 @import "mixins/text-truncate";
@@ -26,11 +26,11 @@
 @import "mixins/alert";
 @import "mixins/buttons";
 @import "mixins/caret";
-@import "mixins/pagination";
-@import "mixins/lists";
-@import "mixins/list-group";
-@import "mixins/nav-divider";
 @import "mixins/forms";
+@import "mixins/list-group";
+@import "mixins/lists";
+@import "mixins/nav-divider";
+@import "mixins/pagination";
 @import "mixins/table-row";
 
 // // Skins
@@ -42,6 +42,6 @@
 
 // // Layout
 @import "mixins/clearfix";
-@import "mixins/grid-framework";
-@import "mixins/grid";
 @import "mixins/float";
+@import "mixins/grid";
+@import "mixins/grid-framework";

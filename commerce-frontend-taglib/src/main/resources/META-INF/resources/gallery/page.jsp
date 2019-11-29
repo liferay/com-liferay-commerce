@@ -19,11 +19,11 @@
 <div class="gallery-root" id="<%= galleryId %>"></div>
 
 <aui:script require="commerce-frontend-js/components/gallery/entry.es as gallery">
-    gallery.default(
-        "<%= galleryId %>",
-        "<%= galleryId %>",
-        {
-            images: <%= jsonSerializer.serializeDeep(images) %>,
-        }
-    );
+	gallery.default(
+		"<%= galleryId %>",
+		"<%= galleryId %>",
+		{
+			images: <%= jsonSerializer.serializeDeep(images) %>
+		}
+	);
 </aui:script>

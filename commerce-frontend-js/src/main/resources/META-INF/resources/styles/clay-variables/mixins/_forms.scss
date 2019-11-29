@@ -156,8 +156,8 @@
 
 	@if ($enabled) {
 		align-items: $align-items;
-		background-color: $bg;
 		background-clip: $bg-clip;
+		background-color: $bg;
 		background-image: $bg-image;
 		background-position: $bg-position;
 		background-repeat: $bg-repeat;
@@ -748,8 +748,8 @@
 		height: $thumb-height;
 		width: $thumb-width;
 
-		position: absolute;
 		margin-top: math-sign($thumb-height / 2);
+		position: absolute;
 		right: math-sign($thumb-width / 2);
 		top: 50%;
 	}
@@ -843,8 +843,8 @@
 				}
 
 				.tooltip {
-					visibility: visible;
 					opacity: 1;
+					visibility: visible;
 				}
 			}
 		}
@@ -859,8 +859,8 @@
 				}
 
 				.tooltip {
-					visibility: visible;
 					opacity: 1;
+					visibility: visible;
 				}
 			}
 		}
