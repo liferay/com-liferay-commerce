@@ -15,6 +15,8 @@
 package com.liferay.commerce.discount.web.internal.portlet.action;
 
 import com.liferay.asset.kernel.model.AssetCategory;
+import com.liferay.asset.kernel.model.AssetVocabulary;
+import com.liferay.asset.kernel.service.AssetVocabularyLocalService;
 import com.liferay.commerce.discount.constants.CommerceDiscountPortletKeys;
 import com.liferay.commerce.discount.exception.NoSuchDiscountException;
 import com.liferay.commerce.discount.exception.NoSuchDiscountRelException;
@@ -22,17 +24,22 @@ import com.liferay.commerce.discount.model.CommerceDiscountRel;
 import com.liferay.commerce.discount.service.CommerceDiscountRelService;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
+import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.portlet.ActionRequest;
@@ -63,29 +70,49 @@ public class EditCommerceDiscountRelMVCActionCommand
 		String className = ParamUtil.getString(actionRequest, "className");
 		long classPK = ParamUtil.getLong(actionRequest, "classPK");
 
-		long[] addClassPKs = null;
+		List<Long> classPKs = new ArrayList<>();
 
 		if (classPK > 0) {
-			addClassPKs = new long[] {classPK};
+			classPKs.add(classPK);
 		}
 		else {
-			addClassPKs = StringUtil.split(
-				ParamUtil.getString(actionRequest, "addClassPKs"), 0L);
+			classPKs = ListUtil.toList(
+				StringUtil.split(
+					ParamUtil.getString(actionRequest, "classPKs"), 0L));
 		}
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			CommerceDiscountRel.class.getName(), actionRequest);
 
 		if (className.equals(CPDefinition.class.getName())) {
-			for (long addClassPK : addClassPKs) {
+			for (long addClassPK : classPKs) {
 				_commerceDiscountRelService.addCommerceDiscountRel(
 					commerceDiscountId, className, addClassPK, serviceContext);
 			}
 		}
 
 		if (className.equals(AssetCategory.class.getName())) {
+			Group companyGroup = _groupLocalService.getCompanyGroup(
+				_portal.getCompanyId(actionRequest));
+
+			List<AssetVocabulary> assetVocabularies =
+				_assetVocabularyLocalService.getGroupVocabularies(
+					companyGroup.getGroupId(), false);
+
+			for (AssetVocabulary assetVocabulary : assetVocabularies) {
+				long classPKParam = ParamUtil.getLong(
+					actionRequest,
+					"classPKs_" + assetVocabulary.getVocabularyId());
+
+				if (classPKParam > 0) {
+					classPKs.add(classPKParam);
+				}
+			}
+
 			_updateAssetCategoryCommerceDiscountRels(
-				commerceDiscountId, className, addClassPKs, serviceContext);
+				commerceDiscountId, className,
+				ListUtil.toLongArray(classPKs, Long::longValue),
+				serviceContext);
 		}
 	}
 
@@ -179,6 +206,15 @@ public class EditCommerceDiscountRelMVCActionCommand
 	}
 
 	@Reference
+	private AssetVocabularyLocalService _assetVocabularyLocalService;
+
+	@Reference
 	private CommerceDiscountRelService _commerceDiscountRelService;
+
+	@Reference
+	private GroupLocalService _groupLocalService;
+
+	@Reference
+	private Portal _portal;
 
 }
