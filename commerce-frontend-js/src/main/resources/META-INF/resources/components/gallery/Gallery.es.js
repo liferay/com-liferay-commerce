@@ -4,6 +4,8 @@ import MainImage from './MainImage';
 import Overlay from './Overlay';
 import Thumbnails from './Thumbnails';
 
+import { PRODUCT_OPTIONS_CHANGED } from '../../utilities/eventsDefinitions.es';
+
 function fetchImage(url) {
 	return new Promise(resolve => {
 		const img = new Image();
@@ -30,6 +32,23 @@ export default class Gallery extends React.Component {
 		this.goToPrev = this.goToPrev.bind(this);
 		this.imageLoad = this.imageLoad.bind(this);
 		this.imageSelect = this.imageSelect.bind(this);
+		this._handleImagesUpdate = this._handleImagesUpdate.bind(this);
+	}
+
+	componentDidMount() {
+		Liferay.on(PRODUCT_OPTIONS_CHANGED, this._handleImagesUpdate, this)
+	}
+
+	componentWillUnmount() {
+		Liferay.detach(PRODUCT_OPTIONS_CHANGED, this._handleImagesUpdate, this)
+	}
+
+	_handleImagesUpdate(e) {
+		if(e.images) {
+			this.setState({
+				images: e.images
+			})
+		}
 	}
 
 	fullscreenOpen() {
