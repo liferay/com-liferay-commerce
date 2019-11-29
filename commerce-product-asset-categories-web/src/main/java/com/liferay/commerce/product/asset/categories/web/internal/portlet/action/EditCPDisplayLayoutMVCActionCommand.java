@@ -27,9 +27,11 @@ import com.liferay.commerce.product.service.CPDisplayLayoutService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocal;
 import com.liferay.portal.kernel.messaging.proxy.ProxyModeThreadLocalCloseable;
+import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
+import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -147,11 +149,12 @@ public class EditCPDisplayLayoutMVCActionCommand extends BaseMVCActionCommand {
 			classPKs.add(classPKParam);
 		}
 		else {
-			long groupId = _portal.getScopeGroupId(actionRequest);
+			Group companyGroup = _groupLocalService.getCompanyGroup(
+				_portal.getCompanyId(actionRequest));
 
 			List<AssetVocabulary> assetVocabularies =
 				_assetVocabularyLocalService.getGroupVocabularies(
-					groupId, false);
+					companyGroup.getGroupId(), false);
 
 			for (AssetVocabulary assetVocabulary : assetVocabularies) {
 				classPKParam = ParamUtil.getLong(
@@ -186,6 +189,9 @@ public class EditCPDisplayLayoutMVCActionCommand extends BaseMVCActionCommand {
 
 	@Reference
 	private CPDisplayLayoutService _cpDisplayLayoutService;
+
+	@Reference
+	private GroupLocalService _groupLocalService;
 
 	@Reference
 	private Portal _portal;
