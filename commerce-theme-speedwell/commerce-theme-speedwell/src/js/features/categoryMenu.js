@@ -1,4 +1,6 @@
-!!Speedwell && (Speedwell.features.categoryMenu = (function(w) {
+var Speedwell = Speedwell || { features: {} };
+
+Speedwell.features.categoryMenu = (function(w) {
     'use strict';
 
     const MAIN_LINK_SELECTOR = '.main-link',
@@ -8,7 +10,7 @@
     let linkElements,
         categoryNavigationElement;
 
-    const CONTAINER = Speedwell.getContainer();
+    const CONTAINER = Speedwell.features.context.getContainer();
 
     function showCategoryNavigationMenu(e) {
         const isCatalogLink = e.currentTarget.href.indexOf('/car-parts') > -1 ||
@@ -27,7 +29,7 @@
     }
 
     function attachListeners() {
-        if (!Speedwell.isMobile()) {
+        if (!Speedwell.features.context.isMobile()) {
             linkElements.forEach(function(link) {
                 link.addEventListener('mouseover', showCategoryNavigationMenu);
             });
@@ -44,8 +46,6 @@
 
         categoryNavigationElement =
             CONTAINER.querySelector(CATEGORY_NAV_SELECTOR);
-
-
     }
 
     return {
@@ -58,4 +58,4 @@
             return categoryNavigationElement;
         }
     }
-})(window));
+})(window);

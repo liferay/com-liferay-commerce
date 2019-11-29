@@ -63,93 +63,88 @@
 	</#if>
 
 	<script>
-		function requireBumperSlider() {
-			Liferay.Loader.require('SpeedwellSlider', [], function(impl) {
-				function setupDOM(state, index, dataset) {
-					const backgroundImage = {
-						container: this.sliderWrapper.querySelector('[data-slide-type="backgroundImage"]'),
-						slideClass: 'bg-slider__slide'
-					}, captionText = {
-						container: this.sliderWrapper.querySelector('[data-slide-type="captionText"]'),
-						slideClass: 'hint-text__name'
-					}, captionCategory = {
-						container: this.sliderWrapper.querySelector('[data-slide-type="captionCategory"]')
-					}, captionButton = {
-						container: this.sliderWrapper.querySelector('[data-slide-type="captionButton"]'),
-						slideClass: 'hint-text__call-to-action'
-					};
+		function enableBumperSlider(component) {
+			function setupDOM(state, index, dataset) {
+				const backgroundImage = {
+					container: this.sliderWrapper.querySelector('[data-slide-type="backgroundImage"]'),
+					slideClass: 'bg-slider__slide'
+				}, captionText = {
+					container: this.sliderWrapper.querySelector('[data-slide-type="captionText"]'),
+					slideClass: 'hint-text__name'
+				}, captionCategory = {
+					container: this.sliderWrapper.querySelector('[data-slide-type="captionCategory"]')
+				}, captionButton = {
+					container: this.sliderWrapper.querySelector('[data-slide-type="captionButton"]'),
+					slideClass: 'hint-text__call-to-action'
+				};
 
-					const backgroundImageSlide = window.document.createElement('div'),
+				const backgroundImageSlide = window.document.createElement('div'),
 						captionTextSlide = window.document.createElement('span'),
 						captionCategorySlide = window.document.createElement('span'),
 						captionButtonSlide = window.document.createElement('a');
 
-					backgroundImageSlide.classList.add(backgroundImage.slideClass);
-					captionTextSlide.classList.add(captionText.slideClass);
-					captionButtonSlide.classList.add(captionButton.slideClass);
+				backgroundImageSlide.classList.add(backgroundImage.slideClass);
+				captionTextSlide.classList.add(captionText.slideClass);
+				captionButtonSlide.classList.add(captionButton.slideClass);
 
-					const backgroundImageSlideImg = window.document.createElement('div');
+				const backgroundImageSlideImg = window.document.createElement('div');
 
-					backgroundImageSlideImg.setAttribute('style',
+				backgroundImageSlideImg.setAttribute('style',
 						'background-image: url(' + dataset[index].backgroundImageUrl + ')');
-					backgroundImageSlide.appendChild(backgroundImageSlideImg);
+				backgroundImageSlide.appendChild(backgroundImageSlideImg);
 
-					captionTextSlide.innerText = dataset[index].captionText;
+				captionTextSlide.innerText = dataset[index].captionText;
 
-					captionButtonSlide.href = dataset[index].captionButtonUrl;
-					captionButtonSlide.innerText = dataset[index].captionButtonLabel;
-					captionButtonSlide.role = 'button';
-					captionCategorySlide.innerText = dataset[index].captionCategory;
+				captionButtonSlide.href = dataset[index].captionButtonUrl;
+				captionButtonSlide.innerText = dataset[index].captionButtonLabel;
+				captionButtonSlide.role = 'button';
+				captionCategorySlide.innerText = dataset[index].captionCategory;
 
-					backgroundImageSlide.dataset.state = state;
-					captionButtonSlide.dataset.state = state;
-					captionCategorySlide.dataset.state = state;
-					captionTextSlide.dataset.state = state;
+				backgroundImageSlide.dataset.state = state;
+				captionButtonSlide.dataset.state = state;
+				captionCategorySlide.dataset.state = state;
+				captionTextSlide.dataset.state = state;
 
-					backgroundImage.container.appendChild(backgroundImageSlide);
-					captionButton.container.appendChild(captionButtonSlide);
-					captionCategory.container.appendChild(captionCategorySlide);
-					captionText.container.appendChild(captionTextSlide);
-				}
+				backgroundImage.container.appendChild(backgroundImageSlide);
+				captionButton.container.appendChild(captionButtonSlide);
+				captionCategory.container.appendChild(captionCategorySlide);
+				captionText.container.appendChild(captionTextSlide);
+			}
 
-				function renderSlide(sliderWrapper, nextSlideContent) {
-					const sliderContainers = Array.from(sliderWrapper.querySelectorAll('[data-slide-type]'));
+			function renderSlide(sliderWrapper, nextSlideContent) {
+				const sliderContainers = Array.from(sliderWrapper.querySelectorAll('[data-slide-type]'));
 
-					sliderContainers.forEach(container => {
-						const type = container.dataset.slideType;
-						const willBeNextElement = container.querySelector('[data-state="will-be-next"]');
+				sliderContainers.forEach(container => {
+					const type = container.dataset.slideType;
+					const willBeNextElement = container.querySelector('[data-state="will-be-next"]');
 
-						switch (type) {
-							case 'backgroundImage':
-								willBeNextElement.querySelector('div').setAttribute(
+					switch (type) {
+						case 'backgroundImage':
+							willBeNextElement.querySelector('div').setAttribute(
 									'style',
 									'background-image: url(' + nextSlideContent.backgroundImageUrl + ')'
-								);
-								break;
-							case 'captionText':
-								willBeNextElement.innerText = nextSlideContent.captionText;
-								break;
-							case 'captionCategory':
-								willBeNextElement.innerText = nextSlideContent.captionCategory;
-								break;
-							case 'captionButton':
-								willBeNextElement.innerText = nextSlideContent.captionButtonLabel;
-								willBeNextElement.href = nextSlideContent.captionButtonUrl;
-								break;
-							default:
-								break;
-						}
-					});
-				}
-				var autoSlidingInterval = 1000;
-				impl.initialize(setupDOM, renderSlide, autoSlidingInterval);
-			});
+							);
+							break;
+						case 'captionText':
+							willBeNextElement.innerText = nextSlideContent.captionText;
+							break;
+						case 'captionCategory':
+							willBeNextElement.innerText = nextSlideContent.captionCategory;
+							break;
+						case 'captionButton':
+							willBeNextElement.innerText = nextSlideContent.captionButtonLabel;
+							willBeNextElement.href = nextSlideContent.captionButtonUrl;
+							break;
+						default:
+							break;
+					}
+				});
+			}
+			var autoSlidingInterval = 1000;
+
+			component.initialize(setupDOM, renderSlide, autoSlidingInterval);
 		}
 
-		if (!!Liferay.Loader.getModules()['SpeedwellSlider']) {
-			requireBumperSlider();
-		} else {
-			Liferay.on('sliderIsReady', requireBumperSlider);
-		}
+		Liferay.componentReady('SpeedwellSlider').then(enableBumperSlider);
 	</script>
 </div>

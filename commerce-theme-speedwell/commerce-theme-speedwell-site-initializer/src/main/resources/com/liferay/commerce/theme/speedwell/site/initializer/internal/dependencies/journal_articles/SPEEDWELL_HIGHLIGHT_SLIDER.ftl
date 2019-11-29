@@ -42,108 +42,103 @@
 	</div>
 
 	<script>
-		function requireSpeedwellSlider() {
-			Liferay.Loader.require('SpeedwellSlider', [], function(impl) {
-				function setupDOMSlide(state, index, dataset) {
-					const backgroundImage = {
-						container: this.sliderWrapper.querySelector('[data-slide-type="backgroundImage"]'),
-						slideClass: 'bg-slider__slide'
-					}, captionImage = {
-						container: this.sliderWrapper.querySelector('[data-slide-type="captionImage"]'),
-						slideClass: 'hint-image-slider__slide'
-					}, captionText = {
-						container: this.sliderWrapper.querySelector('[data-slide-type="captionText"]'),
-						slideClass: 'hint-text__name'
-					}, captionCategory = {
-						container: this.sliderWrapper.querySelector('[data-slide-type="captionCategory"]')
-					}, captionButton = {
-						container: this.sliderWrapper.querySelector('[data-slide-type="captionButton"]'),
-						slideClass: 'hint-text__call-to-action'
-					};
+		function requireSpeedwellSlider(component) {
 
-					const backgroundImageSlide = window.document.createElement('div'),
+			function setupDOMSlide(state, index, dataset) {
+				const backgroundImage = {
+					container: this.sliderWrapper.querySelector('[data-slide-type="backgroundImage"]'),
+					slideClass: 'bg-slider__slide'
+				}, captionImage = {
+					container: this.sliderWrapper.querySelector('[data-slide-type="captionImage"]'),
+					slideClass: 'hint-image-slider__slide'
+				}, captionText = {
+					container: this.sliderWrapper.querySelector('[data-slide-type="captionText"]'),
+					slideClass: 'hint-text__name'
+				}, captionCategory = {
+					container: this.sliderWrapper.querySelector('[data-slide-type="captionCategory"]')
+				}, captionButton = {
+					container: this.sliderWrapper.querySelector('[data-slide-type="captionButton"]'),
+					slideClass: 'hint-text__call-to-action'
+				};
+
+				const backgroundImageSlide = window.document.createElement('div'),
 						captionImageSlide = window.document.createElement('div'),
 						captionTextSlide = window.document.createElement('span'),
 						captionCategorySlide = window.document.createElement('span'),
 						captionButtonSlide = window.document.createElement('a');
 
-					backgroundImageSlide.classList.add(backgroundImage.slideClass);
-					captionImageSlide.classList.add(captionImage.slideClass);
-					captionTextSlide.classList.add(captionText.slideClass);
-					captionButtonSlide.classList.add(captionButton.slideClass);
+				backgroundImageSlide.classList.add(backgroundImage.slideClass);
+				captionImageSlide.classList.add(captionImage.slideClass);
+				captionTextSlide.classList.add(captionText.slideClass);
+				captionButtonSlide.classList.add(captionButton.slideClass);
 
-					const backgroundImageSlideImg = window.document.createElement('div');
+				const backgroundImageSlideImg = window.document.createElement('div');
 
-					backgroundImageSlideImg.setAttribute('style',
+				backgroundImageSlideImg.setAttribute('style',
 						'background-image: url(' + dataset[index].backgroundImageUrl + ')');
-					backgroundImageSlide.appendChild(backgroundImageSlideImg);
+				backgroundImageSlide.appendChild(backgroundImageSlideImg);
 
-					captionImageSlide.setAttribute('style',
+				captionImageSlide.setAttribute('style',
 						'background-image: url(' + dataset[index].captionImageUrl + ')');
-					captionTextSlide.innerText = dataset[index].captionText;
+				captionTextSlide.innerText = dataset[index].captionText;
 
-					captionButtonSlide.href = dataset[index].captionButtonUrl;
-					captionButtonSlide.innerText = dataset[index].captionButtonLabel;
-					captionButtonSlide.role = 'button';
-					captionCategorySlide.innerText = dataset[index].captionCategory;
+				captionButtonSlide.href = dataset[index].captionButtonUrl;
+				captionButtonSlide.innerText = dataset[index].captionButtonLabel;
+				captionButtonSlide.role = 'button';
+				captionCategorySlide.innerText = dataset[index].captionCategory;
 
-					backgroundImageSlide.dataset.state = state;
-					captionButtonSlide.dataset.state = state;
-					captionCategorySlide.dataset.state = state;
-					captionImageSlide.dataset.state = state;
-					captionTextSlide.dataset.state = state;
+				backgroundImageSlide.dataset.state = state;
+				captionButtonSlide.dataset.state = state;
+				captionCategorySlide.dataset.state = state;
+				captionImageSlide.dataset.state = state;
+				captionTextSlide.dataset.state = state;
 
-					backgroundImage.container.appendChild(backgroundImageSlide);
-					captionButton.container.appendChild(captionButtonSlide);
-					captionCategory.container.appendChild(captionCategorySlide);
-					captionImage.container.appendChild(captionImageSlide);
-					captionText.container.appendChild(captionTextSlide);
-				}
+				backgroundImage.container.appendChild(backgroundImageSlide);
+				captionButton.container.appendChild(captionButtonSlide);
+				captionCategory.container.appendChild(captionCategorySlide);
+				captionImage.container.appendChild(captionImageSlide);
+				captionText.container.appendChild(captionTextSlide);
+			}
 
-				function renderSlideContent(sliderWrapper, nextSlideContent) {
-					const sliderContainers = Array.from(sliderWrapper.querySelectorAll('[data-slide-type]'));
+			function renderSlideContent(sliderWrapper, nextSlideContent) {
+				const sliderContainers = Array.from(sliderWrapper.querySelectorAll('[data-slide-type]'));
 
-					sliderContainers.forEach(container => {
-						const type = container.dataset.slideType;
-						const willBeNextElement = container.querySelector('[data-state="will-be-next"]');
+				sliderContainers.forEach(container => {
+					const type = container.dataset.slideType;
+					const willBeNextElement = container.querySelector('[data-state="will-be-next"]');
 
-						switch (type) {
-							case 'backgroundImage':
-								willBeNextElement.querySelector('div').setAttribute(
+					switch (type) {
+						case 'backgroundImage':
+							willBeNextElement.querySelector('div').setAttribute(
 									'style',
 									'background-image: url(' + nextSlideContent.backgroundImageUrl + ')'
-								);
-								break;
-							case 'captionImage':
-								willBeNextElement.setAttribute(
+							);
+							break;
+						case 'captionImage':
+							willBeNextElement.setAttribute(
 									'style',
 									'background-image: url(' + nextSlideContent.captionImageUrl + ')'
-								);
-								break;
-							case 'captionText':
-								willBeNextElement.innerText = nextSlideContent.captionText;
-								break;
-							case 'captionCategory':
-								willBeNextElement.innerText = nextSlideContent.captionCategory;
-								break;
-							case 'captionButton':
-								willBeNextElement.innerText = nextSlideContent.captionButtonLabel;
-								willBeNextElement.href = nextSlideContent.captionButtonUrl;
-								break;
-							default:
-								break;
-						}
-					});
-				}
+							);
+							break;
+						case 'captionText':
+							willBeNextElement.innerText = nextSlideContent.captionText;
+							break;
+						case 'captionCategory':
+							willBeNextElement.innerText = nextSlideContent.captionCategory;
+							break;
+						case 'captionButton':
+							willBeNextElement.innerText = nextSlideContent.captionButtonLabel;
+							willBeNextElement.href = nextSlideContent.captionButtonUrl;
+							break;
+						default:
+							break;
+					}
+				});
+			}
 
-				impl.initialize(setupDOMSlide, renderSlideContent);
-			});
+			component.initialize(setupDOMSlide, renderSlideContent);
 		}
 
-		if (!!Liferay.Loader.getModules()['SpeedwellSlider']) {
-			requireSpeedwellSlider();
-		} else {
-			Liferay.on('sliderIsReady', requireSpeedwellSlider);
-		}
+		Liferay.componentReady('SpeedwellSlider').then(requireSpeedwellSlider);
 	</script>
 </div>
