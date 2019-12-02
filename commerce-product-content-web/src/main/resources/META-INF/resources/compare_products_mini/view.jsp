@@ -23,6 +23,11 @@ CPDataSourceResult cpDataSourceResult = cpCompareContentMiniDisplayContext.getCP
 %>
 
 <c:choose>
+	<c:when test="<%= !cpCompareContentMiniDisplayContext.hasCommerceChannel() %>">
+		<div class="alert alert-info mx-auto">
+			<liferay-ui:message key="this-site-does-not-have-a-channel" />
+		</div>
+	</c:when>
 	<c:when test="<%= cpCompareContentMiniDisplayContext.isSelectionStyleADT() %>">
 
 		<%

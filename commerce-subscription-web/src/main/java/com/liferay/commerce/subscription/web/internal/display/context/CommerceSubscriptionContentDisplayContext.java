@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.subscription.web.internal.display.context;
 
+import com.liferay.commerce.constants.CommerceWebKeys;
+import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.product.display.context.util.CPRequestHelper;
 import com.liferay.commerce.product.model.CPInstance;
@@ -173,6 +175,22 @@ public class CommerceSubscriptionContentDisplayContext {
 		_searchContainer.setTotal(subscriptionEntriesCount);
 
 		return _searchContainer;
+	}
+
+	public boolean hasCommerceChannel() throws PortalException {
+		HttpServletRequest httpServletRequest = _cpRequestHelper.getRequest();
+
+		CommerceContext commerceContext =
+			(CommerceContext)httpServletRequest.getAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT);
+
+		long commerceChannelId = commerceContext.getCommerceChannelId();
+
+		if (commerceChannelId > 0) {
+			return true;
+		}
+
+		return false;
 	}
 
 	private final CommerceSubscriptionEntryService

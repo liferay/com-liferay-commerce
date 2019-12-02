@@ -23,6 +23,11 @@ List<CommerceAccount> commerceAccounts = commerceAccountDisplayContext.getCommer
 %>
 
 <c:choose>
+	<c:when test="<%= !commerceAccountDisplayContext.hasCommerceChannel() %>">
+		<div class="alert alert-info mx-auto">
+			<liferay-ui:message key="this-site-does-not-have-a-channel" />
+		</div>
+	</c:when>
 	<c:when test="<%= commerceAccountDisplayContext.getCommerceSiteType() == CommerceAccountConstants.SITE_TYPE_B2C %>">
 		<liferay-util:include page="/edit_user.jsp" servletContext="<%= application %>" />
 	</c:when>

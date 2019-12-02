@@ -29,6 +29,11 @@ List<CPCatalogEntry> results = cpCatalogEntrySearchContainer.getResults();
 %>
 
 <c:choose>
+	<c:when test="<%= !cpSearchResultsDisplayContext.hasCommerceChannel() %>">
+		<div class="alert alert-info mx-auto">
+			<liferay-ui:message key="this-site-does-not-have-a-channel" />
+		</div>
+	</c:when>
 	<c:when test="<%= cpSearchResultsDisplayContext.isSelectionStyleADT() %>">
 		<liferay-ddm:template-renderer
 			className="<%= CPSearchResultsPortlet.class.getName() %>"
