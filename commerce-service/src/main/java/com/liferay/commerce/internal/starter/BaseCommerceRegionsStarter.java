@@ -36,10 +36,10 @@ public abstract class BaseCommerceRegionsStarter
 
 	@Override
 	public void start(long userId) throws Exception {
-		User user = _userLocalService.getUser(userId);
+		User user = userLocalService.getUser(userId);
 
 		CommerceCountry commerceCountry =
-			_commerceCountryLocalService.fetchCommerceCountry(
+			commerceCountryLocalService.fetchCommerceCountry(
 				user.getCompanyId(), getCountryIsoCode());
 
 		if (commerceCountry == null) {
@@ -57,13 +57,25 @@ public abstract class BaseCommerceRegionsStarter
 
 	protected abstract String getFilePath();
 
+	@Reference
+	protected CommerceCountryLocalService commerceCountryLocalService;
+
+	@Reference
+	protected CommerceRegionLocalService commerceRegionLocalService;
+
+	@Reference
+	protected JSONFactory jsonFactory;
+
+	@Reference
+	protected UserLocalService userLocalService;
+
 	private JSONArray _getCommerceRegionsJSONArray() throws Exception {
 		Class<?> clazz = getClass();
 
 		String regionsJSON = StringUtil.read(
 			clazz.getClassLoader(), getFilePath(), false);
 
-		return _jsonFactory.createJSONArray(regionsJSON);
+		return jsonFactory.createJSONArray(regionsJSON);
 	}
 
 	private void _importCommerceRegions(
@@ -79,22 +91,10 @@ public abstract class BaseCommerceRegionsStarter
 			String name = jsonObject.getString("name");
 			double priority = jsonObject.getDouble("priority");
 
-			_commerceRegionLocalService.addCommerceRegion(
+			commerceRegionLocalService.addCommerceRegion(
 				commerceCountry.getCommerceCountryId(), name, code, priority,
 				true, serviceContext);
 		}
 	}
-
-	@Reference
-	private CommerceCountryLocalService _commerceCountryLocalService;
-
-	@Reference
-	private CommerceRegionLocalService _commerceRegionLocalService;
-
-	@Reference
-	private JSONFactory _jsonFactory;
-
-	@Reference
-	private UserLocalService _userLocalService;
 
 }
