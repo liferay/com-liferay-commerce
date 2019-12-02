@@ -63,7 +63,12 @@
 	</#if>
 
 	<script>
-		function enableBumperSlider(component) {
+		var Speedwell = Speedwell || { features: {} };
+
+		Speedwell.features.sliderCallbacks =
+				Speedwell.features.sliderCallbacks || [];
+
+		Speedwell.features.sliderCallbacks.push(function(component) {
 			function setupDOM(state, index, dataset) {
 				const backgroundImage = {
 					container: this.sliderWrapper.querySelector('[data-slide-type="backgroundImage"]'),
@@ -143,8 +148,6 @@
 			var autoSlidingInterval = 1000;
 
 			component.initialize(setupDOM, renderSlide, autoSlidingInterval);
-		}
-
-		Liferay.componentReady('SpeedwellSlider').then(enableBumperSlider);
+		});
 	</script>
 </div>

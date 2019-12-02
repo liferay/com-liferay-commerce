@@ -42,8 +42,12 @@
 	</div>
 
 	<script>
-		function requireSpeedwellSlider(component) {
+		var Speedwell = Speedwell || { features: {} };
 
+		Speedwell.features.sliderCallbacks =
+				Speedwell.features.sliderCallbacks || [];
+
+		Speedwell.features.sliderCallbacks.push(function(component) {
 			function setupDOMSlide(state, index, dataset) {
 				const backgroundImage = {
 					container: this.sliderWrapper.querySelector('[data-slide-type="backgroundImage"]'),
@@ -137,8 +141,6 @@
 			}
 
 			component.initialize(setupDOMSlide, renderSlideContent);
-		}
-
-		Liferay.componentReady('SpeedwellSlider').then(requireSpeedwellSlider);
+		});
 	</script>
 </div>
