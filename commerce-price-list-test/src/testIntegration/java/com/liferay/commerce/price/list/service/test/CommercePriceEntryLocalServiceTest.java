@@ -19,7 +19,6 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
-import com.liferay.commerce.price.list.exception.DuplicateCommercePriceEntryException;
 import com.liferay.commerce.price.list.model.CommercePriceEntry;
 import com.liferay.commerce.price.list.model.CommercePriceList;
 import com.liferay.commerce.price.list.service.CommercePriceEntryLocalService;
@@ -595,7 +594,7 @@ public class CommercePriceEntryLocalServiceTest {
 			updatedCommercePriceEntry);
 	}
 
-	@Test(expected = DuplicateCommercePriceEntryException.class)
+	@Test
 	public void testUpsertCommercePriceEntry4() throws Exception {
 		frutillaRule.scenario(
 			"Adding a new Price Entry on a Price List where the same SKU is " +

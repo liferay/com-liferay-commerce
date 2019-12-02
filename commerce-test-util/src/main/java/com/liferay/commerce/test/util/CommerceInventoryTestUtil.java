@@ -43,29 +43,6 @@ public class CommerceInventoryTestUtil {
 			RandomTestUtil.nextInt(), false, 0, true, serviceContext);
 	}
 
-	public static CommerceInventoryWarehouse addCommerceInventoryWarehouse(
-			long groupId)
-		throws Exception {
-
-		return addCommerceInventoryWarehouse(
-			groupId, RandomTestUtil.randomString(), true);
-	}
-
-	public static CommerceInventoryWarehouse addCommerceInventoryWarehouse(
-			long groupId, boolean active)
-		throws Exception {
-
-		return addCommerceInventoryWarehouse(
-			groupId, RandomTestUtil.randomString(), active);
-	}
-
-	public static CommerceInventoryWarehouse addCommerceInventoryWarehouse(
-			long groupId, String name)
-		throws Exception {
-
-		return addCommerceInventoryWarehouse(groupId, name, true);
-	}
-	
 	public static CommerceInventoryWarehouse addCommerceInventoryWarehouse()
 		throws Exception {
 
@@ -90,6 +67,29 @@ public class CommerceInventoryTestUtil {
 	}
 
 	public static CommerceInventoryWarehouse addCommerceInventoryWarehouse(
+			long groupId)
+		throws Exception {
+
+		return addCommerceInventoryWarehouse(
+			groupId, RandomTestUtil.randomString(), true);
+	}
+
+	public static CommerceInventoryWarehouse addCommerceInventoryWarehouse(
+			long groupId, boolean active)
+		throws Exception {
+
+		return addCommerceInventoryWarehouse(
+			groupId, RandomTestUtil.randomString(), active);
+	}
+
+	public static CommerceInventoryWarehouse addCommerceInventoryWarehouse(
+			long groupId, String name)
+		throws Exception {
+
+		return addCommerceInventoryWarehouse(groupId, name, true);
+	}
+
+	public static CommerceInventoryWarehouse addCommerceInventoryWarehouse(
 			long groupId, String name, boolean active)
 		throws Exception {
 
@@ -107,8 +107,9 @@ public class CommerceInventoryTestUtil {
 				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
 				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
 				RandomTestUtil.randomString(), commerceRegion.getCode(),
-				commerceCountry.getTwoLettersISOCode(), RandomTestUtil.nextDouble(), RandomTestUtil.nextDouble(),
-				null, serviceContext);
+				commerceCountry.getTwoLettersISOCode(),
+				RandomTestUtil.nextDouble(), RandomTestUtil.nextDouble(), null,
+				serviceContext);
 	}
 
 	public static CommerceInventoryWarehouseItem
@@ -144,6 +145,30 @@ public class CommerceInventoryTestUtil {
 				serviceContext.getUserId(),
 				commerceInventoryWarehouse.getCommerceInventoryWarehouseId(),
 				sku, quantity);
+	}
+
+	public static CommerceInventoryWarehouse
+			addCommerceInventoryWarehouseWithExternalReferenceCode(
+				long groupId, String name)
+		throws Exception {
+
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
+
+		CommerceCountry commerceCountry = addCommerceCountry(serviceContext);
+
+		CommerceRegion commerceRegion = addCommerceRegion(
+			commerceCountry.getCommerceCountryId(), serviceContext);
+
+		return CommerceInventoryWarehouseLocalServiceUtil.
+			addCommerceInventoryWarehouse(
+				name, RandomTestUtil.randomString(), true,
+				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
+				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
+				RandomTestUtil.randomString(), commerceRegion.getCode(),
+				commerceCountry.getTwoLettersISOCode(),
+				RandomTestUtil.randomDouble(), RandomTestUtil.randomDouble(),
+				RandomTestUtil.randomString(), serviceContext);
 	}
 
 	public static CommerceRegion addCommerceRegion(
