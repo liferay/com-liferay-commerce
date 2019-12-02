@@ -24,6 +24,7 @@ import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.context.CommerceContextFactory;
 import com.liferay.commerce.exception.CommerceOrderValidatorException;
 import com.liferay.commerce.frontend.internal.cart.model.Cart;
+import com.liferay.commerce.frontend.internal.cart.model.Coupon;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
@@ -33,6 +34,7 @@ import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceOrderService;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -68,9 +70,49 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 @Component(service = CommerceCartResource.class)
 public class CommerceCartResource {
+
+	@Path("/order/{orderId}/coupon-code/{couponCode}")
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response applyCouponCode(
+		@PathParam("orderId") long commerceOrderId,
+		@PathParam("couponCode") String couponCode,
+		@Context HttpServletRequest httpServletRequest) {
+
+		Coupon coupon = null;
+
+		try {
+			CommerceOrder commerceOrder =
+				_commerceOrderService.getCommerceOrder(commerceOrderId);
+
+			CommerceChannel commerceChannel =
+				_commerceChannelLocalService.getCommerceChannelByOrderGroupId(
+					commerceOrder.getGroupId());
+
+			CommerceContext commerceContext = _commerceContextFactory.create(
+				commerceOrder.getCompanyId(), commerceChannel.getSiteGroupId(),
+				_portal.getUserId(httpServletRequest),
+				commerceOrder.getCommerceOrderId(),
+				commerceOrder.getCommerceAccountId());
+
+			_commerceOrderService.applyCouponCode(
+				commerceOrder.getCommerceOrderId(), couponCode,
+				commerceContext);
+
+			coupon = new Coupon(couponCode);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			coupon = new Coupon(StringUtil.split(e.getLocalizedMessage()));
+		}
+
+		return getResponse(coupon);
+	}
 
 	@Consumes(MediaType.APPLICATION_JSON)
 	@DELETE
@@ -178,6 +220,43 @@ public class CommerceCartResource {
 		}
 
 		return getResponse(cart);
+	}
+
+	@Path("/order/{orderId}/coupon-code")
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response removeCouponCode(
+		@PathParam("orderId") long commerceOrderId,
+		@Context HttpServletRequest httpServletRequest) {
+
+		Coupon coupon = null;
+
+		try {
+			CommerceOrder commerceOrder =
+				_commerceOrderService.getCommerceOrder(commerceOrderId);
+
+			CommerceChannel commerceChannel =
+				_commerceChannelLocalService.getCommerceChannelByOrderGroupId(
+					commerceOrder.getGroupId());
+
+			CommerceContext commerceContext = _commerceContextFactory.create(
+				commerceOrder.getCompanyId(), commerceChannel.getSiteGroupId(),
+				_portal.getUserId(httpServletRequest),
+				commerceOrder.getCommerceOrderId(),
+				commerceOrder.getCommerceAccountId());
+
+			_commerceOrderService.applyCouponCode(
+				commerceOrder.getCommerceOrderId(), null, commerceContext);
+
+			coupon = new Coupon(StringPool.BLANK);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			coupon = new Coupon(StringUtil.split(e.getLocalizedMessage()));
+		}
+
+		return getResponse(coupon);
 	}
 
 	@Consumes(MediaType.APPLICATION_JSON)
