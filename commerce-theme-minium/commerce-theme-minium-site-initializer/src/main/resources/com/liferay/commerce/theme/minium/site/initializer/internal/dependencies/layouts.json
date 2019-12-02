@@ -246,6 +246,7 @@
 			"lfr-theme:regular:is-login-page": true,
 			"lfr-theme:regular:show-sidebar": false,
 			"lfr-theme:regular:show-topbar": false,
+			"lfr-theme:regular:wide-layout": true,
 			"sitemap-changefreq": "daily",
 			"sitemap-include": 1
 		},
