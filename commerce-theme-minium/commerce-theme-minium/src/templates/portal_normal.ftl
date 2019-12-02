@@ -66,9 +66,12 @@
 			</div>
 		</div>
 
-		<#--  The toolbar is needed to create the shadow when scrolling  -->
+		<#if show_topbar>
 
-		<div class="minium-frame__toolbar"></div>
+			<#--  The toolbar is needed to create the shadow when scrolling  -->
+
+			<div class="minium-frame__toolbar"></div>
+		</#if>
 
 		<div class="minium-frame__overlay">
 			<@liferay_commerce_ui["search-results"] />
