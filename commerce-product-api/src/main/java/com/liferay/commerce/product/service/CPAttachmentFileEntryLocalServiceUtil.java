@@ -52,6 +52,10 @@ public class CPAttachmentFileEntryLocalServiceUtil {
 		return getService().addCPAttachmentFileEntry(cpAttachmentFileEntry);
 	}
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), pass userId and groupId directly
+	 */
+	@Deprecated
 	public static com.liferay.commerce.product.model.CPAttachmentFileEntry
 			addCPAttachmentFileEntry(
 				long classNameId, long classPK, long fileEntryId,
@@ -75,9 +79,9 @@ public class CPAttachmentFileEntryLocalServiceUtil {
 
 	public static com.liferay.commerce.product.model.CPAttachmentFileEntry
 			addCPAttachmentFileEntry(
-				long classNameId, long classPK, long fileEntryId,
-				int displayDateMonth, int displayDateDay, int displayDateYear,
-				int displayDateHour, int displayDateMinute,
+				long userId, long groupId, long classNameId, long classPK,
+				long fileEntryId, int displayDateMonth, int displayDateDay,
+				int displayDateYear, int displayDateHour, int displayDateMinute,
 				int expirationDateMonth, int expirationDateDay,
 				int expirationDateYear, int expirationDateHour,
 				int expirationDateMinute, boolean neverExpire,
@@ -87,11 +91,12 @@ public class CPAttachmentFileEntryLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().addCPAttachmentFileEntry(
-			classNameId, classPK, fileEntryId, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire, titleMap,
-			json, priority, type, externalReferenceCode, serviceContext);
+			userId, groupId, classNameId, classPK, fileEntryId,
+			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
+			displayDateMinute, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			neverExpire, titleMap, json, priority, type, externalReferenceCode,
+			serviceContext);
 	}
 
 	public static void checkCPAttachmentFileEntries()
@@ -507,6 +512,27 @@ public class CPAttachmentFileEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.commerce.product.model.CPAttachmentFileEntry
+			updateCPAttachmentFileEntry(
+				long userId, long cpAttachmentFileEntryId, long fileEntryId,
+				int displayDateMonth, int displayDateDay, int displayDateYear,
+				int displayDateHour, int displayDateMinute,
+				int expirationDateMonth, int expirationDateDay,
+				int expirationDateYear, int expirationDateHour,
+				int expirationDateMinute, boolean neverExpire,
+				java.util.Map<java.util.Locale, String> titleMap, String json,
+				double priority, int type,
+				com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().updateCPAttachmentFileEntry(
+			userId, cpAttachmentFileEntryId, fileEntryId, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire, titleMap,
+			json, priority, type, serviceContext);
+	}
+
+	public static com.liferay.commerce.product.model.CPAttachmentFileEntry
 			updateStatus(
 				long userId, long cpAttachmentFileEntryId, int status,
 				com.liferay.portal.kernel.service.ServiceContext serviceContext,
@@ -520,7 +546,7 @@ public class CPAttachmentFileEntryLocalServiceUtil {
 
 	public static com.liferay.commerce.product.model.CPAttachmentFileEntry
 			upsertCPAttachmentFileEntry(
-				long classNameId, long classPK, long fileEntryId,
+				long groupId, long classNameId, long classPK, long fileEntryId,
 				int displayDateMonth, int displayDateDay, int displayDateYear,
 				int displayDateHour, int displayDateMinute,
 				int expirationDateMonth, int expirationDateDay,
@@ -532,8 +558,8 @@ public class CPAttachmentFileEntryLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().upsertCPAttachmentFileEntry(
-			classNameId, classPK, fileEntryId, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute,
+			groupId, classNameId, classPK, fileEntryId, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, neverExpire, titleMap,
 			json, priority, type, externalReferenceCode, serviceContext);

@@ -45,9 +45,9 @@ public class CPAttachmentFileEntryServiceUtil {
 	 */
 	public static com.liferay.commerce.product.model.CPAttachmentFileEntry
 			addCPAttachmentFileEntry(
-				long classNameId, long classPK, long fileEntryId,
-				int displayDateMonth, int displayDateDay, int displayDateYear,
-				int displayDateHour, int displayDateMinute,
+				long userId, long groupId, long classNameId, long classPK,
+				long fileEntryId, int displayDateMonth, int displayDateDay,
+				int displayDateYear, int displayDateHour, int displayDateMinute,
 				int expirationDateMonth, int expirationDateDay,
 				int expirationDateYear, int expirationDateHour,
 				int expirationDateMinute, boolean neverExpire,
@@ -57,11 +57,11 @@ public class CPAttachmentFileEntryServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().addCPAttachmentFileEntry(
-			classNameId, classPK, fileEntryId, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire, titleMap,
-			json, priority, type, serviceContext);
+			userId, groupId, classNameId, classPK, fileEntryId,
+			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
+			displayDateMinute, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			neverExpire, titleMap, json, priority, type, serviceContext);
 	}
 
 	public static void deleteCPAttachmentFileEntry(long cpAttachmentFileEntryId)
@@ -158,7 +158,7 @@ public class CPAttachmentFileEntryServiceUtil {
 
 	public static com.liferay.commerce.product.model.CPAttachmentFileEntry
 			upsertCPAttachmentFileEntry(
-				long classNameId, long classPK, long fileEntryId,
+				long groupId, long classNameId, long classPK, long fileEntryId,
 				int displayDateMonth, int displayDateDay, int displayDateYear,
 				int displayDateHour, int displayDateMinute,
 				int expirationDateMonth, int expirationDateDay,
@@ -170,8 +170,8 @@ public class CPAttachmentFileEntryServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return getService().upsertCPAttachmentFileEntry(
-			classNameId, classPK, fileEntryId, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute,
+			groupId, classNameId, classPK, fileEntryId, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, neverExpire, titleMap,
 			json, priority, type, externalReferenceCode, serviceContext);

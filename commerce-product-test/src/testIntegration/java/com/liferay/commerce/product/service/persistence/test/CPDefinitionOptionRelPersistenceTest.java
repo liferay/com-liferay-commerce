@@ -287,20 +287,20 @@ public class CPDefinitionOptionRelPersistenceTest {
 	}
 
 	@Test
+	public void testCountByC_SC() throws Exception {
+		_persistence.countByC_SC(
+			RandomTestUtil.nextLong(), RandomTestUtil.randomBoolean());
+
+		_persistence.countByC_SC(0L, RandomTestUtil.randomBoolean());
+	}
+
+	@Test
 	public void testCountByC_K() throws Exception {
 		_persistence.countByC_K(RandomTestUtil.nextLong(), "");
 
 		_persistence.countByC_K(0L, "null");
 
 		_persistence.countByC_K(0L, (String)null);
-	}
-
-	@Test
-	public void testCountByC_SC() throws Exception {
-		_persistence.countByC_SC(
-			RandomTestUtil.nextLong(), RandomTestUtil.randomBoolean());
-
-		_persistence.countByC_SC(0L, RandomTestUtil.randomBoolean());
 	}
 
 	@Test

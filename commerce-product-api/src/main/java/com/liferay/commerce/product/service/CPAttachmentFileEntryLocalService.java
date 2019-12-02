@@ -79,7 +79,10 @@ public interface CPAttachmentFileEntryLocalService
 	public CPAttachmentFileEntry addCPAttachmentFileEntry(
 		CPAttachmentFileEntry cpAttachmentFileEntry);
 
-	@Indexable(type = IndexableType.REINDEX)
+	/**
+	 * @deprecated As of Mueller (7.2.x), pass userId and groupId directly
+	 */
+	@Deprecated
 	public CPAttachmentFileEntry addCPAttachmentFileEntry(
 			long classNameId, long classPK, long fileEntryId,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
@@ -92,13 +95,14 @@ public interface CPAttachmentFileEntryLocalService
 
 	@Indexable(type = IndexableType.REINDEX)
 	public CPAttachmentFileEntry addCPAttachmentFileEntry(
-			long classNameId, long classPK, long fileEntryId,
-			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, int expirationDateMonth,
-			int expirationDateDay, int expirationDateYear,
-			int expirationDateHour, int expirationDateMinute,
-			boolean neverExpire, Map<Locale, String> titleMap, String json,
-			double priority, int type, String externalReferenceCode,
+			long userId, long groupId, long classNameId, long classPK,
+			long fileEntryId, int displayDateMonth, int displayDateDay,
+			int displayDateYear, int displayDateHour, int displayDateMinute,
+			int expirationDateMonth, int expirationDateDay,
+			int expirationDateYear, int expirationDateHour,
+			int expirationDateMinute, boolean neverExpire,
+			Map<Locale, String> titleMap, String json, double priority,
+			int type, String externalReferenceCode,
 			ServiceContext serviceContext)
 		throws PortalException;
 
@@ -390,6 +394,17 @@ public interface CPAttachmentFileEntryLocalService
 		throws PortalException;
 
 	@Indexable(type = IndexableType.REINDEX)
+	public CPAttachmentFileEntry updateCPAttachmentFileEntry(
+			long userId, long cpAttachmentFileEntryId, long fileEntryId,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
+			int expirationDateDay, int expirationDateYear,
+			int expirationDateHour, int expirationDateMinute,
+			boolean neverExpire, Map<Locale, String> titleMap, String json,
+			double priority, int type, ServiceContext serviceContext)
+		throws PortalException;
+
+	@Indexable(type = IndexableType.REINDEX)
 	public CPAttachmentFileEntry updateStatus(
 			long userId, long cpAttachmentFileEntryId, int status,
 			ServiceContext serviceContext,
@@ -397,7 +412,7 @@ public interface CPAttachmentFileEntryLocalService
 		throws PortalException;
 
 	public CPAttachmentFileEntry upsertCPAttachmentFileEntry(
-			long classNameId, long classPK, long fileEntryId,
+			long groupId, long classNameId, long classPK, long fileEntryId,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
