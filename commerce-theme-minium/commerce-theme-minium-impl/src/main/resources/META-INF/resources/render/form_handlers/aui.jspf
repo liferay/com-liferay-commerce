@@ -8,7 +8,7 @@
 				}
 
 				function checkCPInstance() {
-					const portletURL = Liferay.PortletURL.createActionURL();
+					var portletURL = Liferay.PortletURL.createActionURL();
 					var CP_CONTENT_WEB_PORTLET_KEY = 'com_liferay_commerce_product_content_web_internal_portlet_CPContentPortlet';
 					var CP_INSTANCE_CHANGE_EVENT = 'CPInstance:change';
 
@@ -18,13 +18,14 @@
 					portletURL.setParameter('groupId', themeDisplay.getScopeGroupId());
 					portletURL.setParameter('p_auth', Liferay.authToken);
 
-					const formData = new FormData();
-					formData.append('_' + CP_CONTENT_WEB_PORTLET_KEY + '_ddmFormValues', JSON.stringify(getFormValues()));
+					var optionFormData = new FormData();
+					var formValues = JSON.stringify(getFormValues())
+					optionFormData.append('_' + CP_CONTENT_WEB_PORTLET_KEY + '_ddmFormValues', formValues);
 
-					fetch(
+					return fetch(
 						portletURL,
 						{
-							body: formData,
+							body: optionFormData,
 							credentials: 'include',
 							method: 'post'
 						}
@@ -36,10 +37,10 @@
 						function(response) {
 							Liferay.fire(
 								eventsDefinitions.CURRENT_PRODUCT_STATUS_CHANGED,
-								productExists
+								response.cpInstanceExist
 								? {
 									addToCartId: "<%= addToCartId %>",
-									productId: cpInstanceId,
+									productId: response.cpInstanceId,
 									options: formValues,
 									quantity: 0,
 									settings: {
@@ -52,14 +53,14 @@
 									addToCartId: "<%= addToCartId %>",
 									productId: null
 								}
-							)
+							);
 
 							document.querySelector('[data-text-cp-instance-sku]').innerHTML = Liferay.Util.escape(response.sku) || '';
 							document.querySelector('[data-text-cp-instance-manufacturer-part-number]').innerHTML = Liferay.Util.escape(response.manufacturerPartNumber) || '';
 							document.querySelector('[data-text-cp-instance-gtin]').innerHTML = Liferay.Util.escape(response.gtin) || '';
-							const availabilityEstimateContainer = document.querySelector('[data-text-cp-instance-availability-estimate]');
-							const availabilityContainer = document.querySelector('[data-text-cp-instance-availability]')
-							const stockQuantityContainer = document.querySelector('[data-text-cp-instance-stock-quantity]')
+							var availabilityEstimateContainer = document.querySelector('[data-text-cp-instance-availability-estimate]');
+							var availabilityContainer = document.querySelector('[data-text-cp-instance-availability]')
+							var stockQuantityContainer = document.querySelector('[data-text-cp-instance-stock-quantity]')
 
 							if (availabilityEstimateContainer && availabilityContainer && stockQuantityContainer) {
 								availabilityContainer.innerHTML = response.availability || '';
@@ -82,11 +83,11 @@
 								priceElement.innerHTML = '';
 							}
 
-							const formData = new FormData();
-							formData.append('<portlet:namespace />ddmFormValues', JSON.stringify(getFormValues()));
+							var formData = new FormData();
+							formData.append('<portlet:namespace />ddmFormValues', formValues);
 							formData.append('groupId', themeDisplay.getScopeGroupId());
 
-							fetch(
+							return fetch(
 								'<%= String.valueOf(cpContentHelper.getViewAttachmentURL(liferayPortletRequest, liferayPortletResponse)) %>',
 								{
 									body: formData,
@@ -99,7 +100,7 @@
 								}
 							).then(
 								function(response) {
-									const images = response.map(
+									var images = response.map(
 										function(image) {
 											return {
 												thumbnailUrl: image.url,
@@ -130,11 +131,11 @@
 					);
 				}
 
-				const cpDefinitionId = <%= cpDefinitionId %>;
-				const form = Liferay.component('ProductOptions<%= cpDefinitionId %>DDMForm');
-				const AddToCartButton = Liferay.component('<%= addToCartId %>');
+				var cpDefinitionId = <%= cpDefinitionId %>;
+				var form = Liferay.component('ProductOptions<%= cpDefinitionId %>DDMForm');
+				var AddToCartButton = Liferay.component('<%= addToCartId %>');
 				AddToCartButton.disabled = true;
-				const ProductGallery = Liferay.component('<%= galleryId %>');
+				var ProductGallery = Liferay.component('<%= galleryId %>');
 
 				if (form) {
 					form.after('*:valueChange', ddmFormChange, {});
