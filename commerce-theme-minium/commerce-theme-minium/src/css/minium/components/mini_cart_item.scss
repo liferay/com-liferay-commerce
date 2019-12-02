@@ -1,5 +1,6 @@
 .commerce-cart-item {
 	$item-image-size: 70px;
+	$price-size: 70px;
 
 	align-items: center;
 	border-bottom: 1px solid rgba(180,187,201,0.2);
@@ -9,10 +10,8 @@
 	grid-gap: 15px;
 	padding: 10px;
 	position: relative;
-
 	grid-template-areas: "image content actions price delete";
-
-	grid-template-columns: 70px 1fr auto 70px min-content;
+	grid-template-columns: $item-image-size 1fr auto $price-size min-content;
 	height: 94px;
 	overflow: hidden;
 	transition: height .2s ease-in, padding .1s ease-in;

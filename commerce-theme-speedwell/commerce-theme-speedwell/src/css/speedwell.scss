@@ -1,13 +1,15 @@
 @import './variables';
 @import 'mixins';
 @import 'speedwell_mixins';
+
+@import "./overrides/button.scss";
+
 @import 'components/commerce_button';
 @import 'components/commerce_compare_table';
 @import 'components/commerce_icon';
 @import 'components/commerce_list';
 @import 'components/commerce_loader';
 @import 'components/commerce_panel';
-@import 'components/commerce_quantity_selector';
 @import 'components/commerce_search';
 @import 'components/commerce_orders';
 @import 'components/main_link';
@@ -18,6 +20,7 @@
 @import 'components/pagination_bar';
 @import 'components/product_detail';
 @import 'components/product_header';
+@import 'components/quantity_selector';
 @import 'components/specification_list';
 @import 'components/speedwell_breadcrumbs';
 @import 'components/speedwell_vertical_navbar';
@@ -25,7 +28,6 @@
 @import 'components/speedwell_account_management';
 @import 'components/speedwell_account';
 @import 'components/speedwell_account_dashboard';
-@import 'components/speedwell_add_to_cart_button';
 @import 'components/speedwell_cart';
 @import 'components/speedwell_cart_item';
 @import 'components/speedwell_footer';
