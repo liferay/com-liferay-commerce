@@ -49,7 +49,7 @@
 		{if $deleteButtonVisible and isNonnull($spritemap)}
 			<span
 				class="minium-card__delete"
-				data-onclick={$_handleRemoveProduct}
+				data-onclick="{$_handleRemoveProduct}"
 			>
 				{call ClayIcon.render}
 					{param spritemap: $spritemap /}

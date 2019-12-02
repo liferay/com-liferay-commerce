@@ -29,7 +29,7 @@
 			{if isNonnull($spritemap)}
 				<span
 					class="minium-products-compare__delete minium-products-compare__delete--{$visibilityClass}"
-					data-onclick={$_handleRemoveProduct}
+					data-onclick="{$_handleRemoveProduct}"
 				>
 					{call ClayIcon.render}
 						{param spritemap: $spritemap /}
