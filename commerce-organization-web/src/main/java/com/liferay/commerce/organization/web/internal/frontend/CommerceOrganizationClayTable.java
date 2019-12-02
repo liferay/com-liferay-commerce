@@ -93,8 +93,8 @@ public class CommerceOrganizationClayTable
 
 			ClayTableAction viewClayTableAction = new ClayTableAction(
 				StringPool.BLANK, viewURL, StringPool.BLANK,
-				LanguageUtil.get(httpServletRequest, "view-detail"), false,
-				false);
+				LanguageUtil.get(httpServletRequest, "view-detail"), null,
+				false, false);
 
 			clayTableActions.add(viewClayTableAction);
 
@@ -107,7 +107,7 @@ public class CommerceOrganizationClayTable
 					StringPool.BLANK, viewSubOrganizationsURL, StringPool.BLANK,
 					LanguageUtil.get(
 						httpServletRequest, "view-suborganizations"),
-					false, false);
+					null, false, false);
 
 			clayTableActions.add(viewSubOrganizationsClayTableAction);
 		}
@@ -128,7 +128,8 @@ public class CommerceOrganizationClayTable
 
 			ClayTableAction deleteClayTableAction = new ClayTableAction(
 				StringPool.BLANK, sb.toString(), StringPool.BLANK,
-				LanguageUtil.get(httpServletRequest, "delete"), false, false);
+				LanguageUtil.get(httpServletRequest, "delete"), null, false,
+				false);
 
 			clayTableActions.add(deleteClayTableAction);
 		}

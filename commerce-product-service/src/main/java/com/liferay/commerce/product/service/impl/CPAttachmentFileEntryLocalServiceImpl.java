@@ -46,7 +46,6 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.TempFileEntryUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 
@@ -98,7 +97,8 @@ public class CPAttachmentFileEntryLocalServiceImpl
 			int expirationDateYear, int expirationDateHour,
 			int expirationDateMinute, boolean neverExpire,
 			Map<Locale, String> titleMap, String json, double priority,
-			int type, String externalReferenceCode, ServiceContext serviceContext)
+			int type, String externalReferenceCode,
+			ServiceContext serviceContext)
 		throws PortalException {
 
 		// Commerce product attachment file entry

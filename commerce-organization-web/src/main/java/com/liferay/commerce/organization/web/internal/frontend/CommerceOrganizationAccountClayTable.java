@@ -109,7 +109,8 @@ public class CommerceOrganizationAccountClayTable
 
 			ClayTableAction deleteClayTableAction = new ClayTableAction(
 				StringPool.BLANK, sb.toString(), StringPool.BLANK,
-				LanguageUtil.get(httpServletRequest, "delete"), false, false);
+				LanguageUtil.get(httpServletRequest, "delete"), null, false,
+				false);
 
 			clayTableActions.add(deleteClayTableAction);
 		}
