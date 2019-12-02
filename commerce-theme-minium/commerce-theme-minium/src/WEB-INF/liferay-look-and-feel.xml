@@ -11,6 +11,9 @@
 		<settings>
 			<setting configurable="true" key="is-login-page" type="checkbox" value="false" />
 			<setting configurable="true" key="redirect-to-private-layouts" type="checkbox" value="false" />
+			<setting configurable="true" key="show-account-selector" type="checkbox" value="true" />
+			<setting configurable="true" key="show-mini-cart" type="checkbox" value="true" />
+			<setting configurable="true" key="show-search-bar" type="checkbox" value="true" />
 			<setting configurable="true" key="show-sidebar" type="checkbox" value="true" />
 			<setting configurable="true" key="show-top-menu" type="checkbox" value="false" />
 			<setting configurable="true" key="show-topbar" type="checkbox" value="true" />
