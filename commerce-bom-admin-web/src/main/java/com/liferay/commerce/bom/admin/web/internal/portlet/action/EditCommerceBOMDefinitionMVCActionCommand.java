@@ -201,9 +201,10 @@ public class EditCommerceBOMDefinitionMVCActionCommand
 			if (cpAttachmentFileEntry == null) {
 				cpAttachmentFileEntry =
 					_cpAttachmentFileEntryService.addCPAttachmentFileEntry(
-						classNameId, commerceBOMDefinitionId, fileEntryId,
-						month, dayOfMonth, year, hour, minute, 0, 0, 0, 0, 0,
-						true,
+						serviceContext.getUserId(),
+						serviceContext.getScopeGroupId(), classNameId,
+						commerceBOMDefinitionId, fileEntryId, month, dayOfMonth,
+						year, hour, minute, 0, 0, 0, 0, 0, true,
 						Collections.singletonMap(
 							serviceContext.getLocale(), name),
 						null, 0D, CPAttachmentFileEntryConstants.TYPE_IMAGE,
@@ -236,8 +237,10 @@ public class EditCommerceBOMDefinitionMVCActionCommand
 		else {
 			CPAttachmentFileEntry cpAttachmentFileEntry =
 				_cpAttachmentFileEntryService.addCPAttachmentFileEntry(
-					classNameId, commerceBOMDefinitionId, fileEntryId, month,
-					dayOfMonth, year, hour, minute, 0, 0, 0, 0, 0, true,
+					serviceContext.getUserId(),
+					serviceContext.getScopeGroupId(), classNameId,
+					commerceBOMDefinitionId, fileEntryId, month, dayOfMonth,
+					year, hour, minute, 0, 0, 0, 0, 0, true,
 					Collections.singletonMap(serviceContext.getLocale(), name),
 					null, 0D, CPAttachmentFileEntryConstants.TYPE_IMAGE,
 					serviceContext);

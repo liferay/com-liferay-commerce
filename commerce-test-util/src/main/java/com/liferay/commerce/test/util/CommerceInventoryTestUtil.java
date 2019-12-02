@@ -75,7 +75,7 @@ public class CommerceInventoryTestUtil {
 
 	public static CommerceInventoryWarehouse addCommerceInventoryWarehouse(
 			long groupId, boolean active)
-		throws PortalException {
+		throws Exception {
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(groupId);
