@@ -1,46 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import ClayChart from '@clayui/charts';
+import React from 'react';
+import ChartWrapper from '../ChartWrapper.es';
 
 export default function HistoryChart() {
-	const [loading, setLoading] = useState(true);
-
-	function chartInit() {
-		setLoading(false);
-	}
-
-	return <ClayChart
-		data={{
+	const chartData = {
+		data: {
 			columns: [
 				['2019', 30, 200, 100, 400, 150, 250, 50, 100, 250],
 				['2018', 100, 30, 200, 320, 50, 150, 230, 80, 150],
 			],
 			type: 'line',
 			order: null
-		}}
-		axis={{
+		},
+		axis: {
 			x: {
 				type: 'category',
 				categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']
 			}
-		}}
-		grid={{
+		},
+		grid: {
 			x: {
 				show: false,
 				// lines: COLUMNS[0].map((c, i) => ({value: i}))
 			}
-		}}
-		line={{
+		},
+		line: {
 			classes: ['bb-line-past', 'bb-line-present']
-		}}
-		color={{
+		},
+		color: {
 			pattern: ['#4B9BFF']
-		}}
-		point={{
+		},
+		point: {
 			show: false
-		}}
-		legend={{
+		},
+		legend: {
 			show: false
-		}}
-		oninit={chartInit}
-	/>;
+		},
+	}
+
+	return <ChartWrapper data={chartData} />;
 }

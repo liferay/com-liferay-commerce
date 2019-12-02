@@ -1,23 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import ClayChart from '@clayui/charts';
+import React from 'react';
+import ChartWrapper from '../ChartWrapper.es';
 
-export default function StatusChart({ commerceAccountId }) {
-	const [accountId, setAccountId] = useState(commerceAccountId);
-
-	Liferay.on('accountSelected', ({ accountId }) => setAccountId(accountId));
-
-	// useEffect(updateData, [accountId]);
-
-	return <ClayChart
-		data={{
+export default function StatusChart() {
+	const chartData = {
+		data: {
 			x: 'x',
 			columns: [
 				['x', 'Draft', 'Pending', 'Approved', 'Placed', 'Delivered'],
 				["quantity", 80000, 50000, 60000, 20000, 35000],
 			],
 			type: 'bar',
-		}}
-		axis={{
+		},
+		axis: {
 			x: {
 				type: 'category'
 			},
@@ -26,14 +20,16 @@ export default function StatusChart({ commerceAccountId }) {
 					count: 5
 				}
 			}
-		}}
-		grid={{
+		},
+		grid: {
 			x: {
 				show: false,
 			}
-		}}
-		legend={{
+		},
+		legend: {
 			show: false
-		}}
-	/>;
+		},
+	}
+
+	return <ChartWrapper data={chartData} />;
 }

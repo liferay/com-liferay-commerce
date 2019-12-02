@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import ClayChart from '@clayui/charts';
+import React, { useState, useEffect } from 'react';
+import ChartWrapper from '../ChartWrapper.es';
 
 const NULL_VALUE = 1.4E-45;
 
@@ -106,8 +106,6 @@ export default function ForecastChart({ commerceAccountId }) {
 	const [chartData, setChartData] = useState({});
 	const [accountId, setAccountId] = useState(commerceAccountId);
 
-	const chart = useRef();
-
 	Liferay.on('accountSelected', ({ accountId }) => setAccountId(accountId));
 
 	function updateData() {
@@ -129,15 +127,7 @@ export default function ForecastChart({ commerceAccountId }) {
 	useEffect(updateData, [accountId]);
 	useEffect(stopLoading, [chartData]);
 
-	if (!accountId) {
-		return <p>{Liferay.Language.get('no-account-selected')}</p>;
-	} else if (loading) {
-		return <span aria-hidden="true" class="loading-animation" />;
-	} else if (!chartData.data.columns.length) {
-		return <p>{Liferay.Language.get('no-data-available')}</p>;
-	} else {
-		return <>
-			<ClayChart {...chartData} />
-		</>;
-	}
+	return (!accountId) ?
+		<p>{Liferay.Language.get('no-account-selected')}</p> :
+		<ChartWrapper data={chartData} loading={loading} />
 }
