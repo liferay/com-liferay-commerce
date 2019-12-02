@@ -170,10 +170,6 @@ class AddToCartButton extends Component {
 		this._handleSubmitClick();
 	}
 
-	syncInputQuantity(e, f) {
-		console.log(e, f);
-	}
-
 	_handleCurrentProductStatusChange(e) {
 		if (this.id && (this.id !== e.addToCartId)) {
 			return;
@@ -242,7 +238,12 @@ AddToCartButton.STATE = {
 	cartAPI: Config.string().required(),
 	disabled: Config.bool().value(false),
 	inputQuantity: Config.number(),
-	options: Config.string().value('[]'),
+	options: Config.oneOfType(
+		[
+			Config.object(),
+			Config.string()
+		]
+	).value('[]'),
 	orderId: Config.oneOfType(
 		[
 			Config.number(),
