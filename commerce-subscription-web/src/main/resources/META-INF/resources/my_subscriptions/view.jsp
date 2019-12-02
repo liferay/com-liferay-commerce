@@ -22,105 +22,114 @@ CommerceSubscriptionContentDisplayContext commerceSubscriptionContentDisplayCont
 SearchContainer<CommerceSubscriptionEntry> commerceSubscriptionEntrySearchContainer = commerceSubscriptionContentDisplayContext.getSearchContainer();
 %>
 
-<div class="container-fluid-1280" id="<portlet:namespace />subscriptionEntriesContainer">
-	<div class="commerce-product-subscription-entries-container" id="<portlet:namespace />entriesContainer">
-		<liferay-ui:search-container
-			id="commerceSubscriptionEntries"
-			iteratorURL="<%= commerceSubscriptionContentDisplayContext.getPortletURL() %>"
-			searchContainer="<%= commerceSubscriptionEntrySearchContainer %>"
-		>
-			<liferay-ui:search-container-row
-				className="com.liferay.commerce.model.CommerceSubscriptionEntry"
-				cssClass="entry-display-style"
-				keyProperty="commerceSubscriptionEntryId"
-				modelVar="commerceSubscriptionEntry"
-			>
-
-				<%
-				CommerceOrderItem commerceOrderItem = commerceSubscriptionEntry.fetchCommerceOrderItem();
-
-				String thumbnailSrc = commerceSubscriptionContentDisplayContext.getCommerceSubscriptionEntryThumbnailSrc(commerceSubscriptionEntry, themeDisplay);
-
-				List<KeyValuePair> keyValuePairs = commerceSubscriptionContentDisplayContext.getKeyValuePairs(commerceSubscriptionEntry);
-
-				StringJoiner stringJoiner = new StringJoiner(StringPool.COMMA);
-
-				for (KeyValuePair keyValuePair : keyValuePairs) {
-					stringJoiner.add(keyValuePair.getValue());
-				}
-				%>
-
-				<liferay-ui:search-container-column-image
-					name="product"
-					src="<%= thumbnailSrc %>"
-				/>
-
-				<liferay-ui:search-container-column-text
-					name="description"
+<c:choose>
+	<c:when test="<%= !commerceSubscriptionContentDisplayContext.hasCommerceChannel() %>">
+		<div class="alert alert-info mx-auto">
+			<liferay-ui:message key="this-site-does-not-have-a-channel" />
+		</div>
+	</c:when>
+	<c:otherwise>
+		<div class="container-fluid-1280" id="<portlet:namespace />subscriptionEntriesContainer">
+			<div class="commerce-product-subscription-entries-container" id="<portlet:namespace />entriesContainer">
+				<liferay-ui:search-container
+					id="commerceSubscriptionEntries"
+					iteratorURL="<%= commerceSubscriptionContentDisplayContext.getPortletURL() %>"
+					searchContainer="<%= commerceSubscriptionEntrySearchContainer %>"
 				>
-					<a class="font-weight-bold" href="<%= commerceSubscriptionContentDisplayContext.getCPDefinitionURL(commerceSubscriptionEntry, themeDisplay) %>">
-						<%= (commerceOrderItem == null) ? StringPool.BLANK : HtmlUtil.escape(commerceOrderItem.getName(languageId)) %>
-					</a>
+					<liferay-ui:search-container-row
+						className="com.liferay.commerce.model.CommerceSubscriptionEntry"
+						cssClass="entry-display-style"
+						keyProperty="commerceSubscriptionEntryId"
+						modelVar="commerceSubscriptionEntry"
+					>
 
-					<h6 class="text-default">
-						<%= HtmlUtil.escape(stringJoiner.toString()) %>
-					</h6>
-				</liferay-ui:search-container-column-text>
+						<%
+						CommerceOrderItem commerceOrderItem = commerceSubscriptionEntry.fetchCommerceOrderItem();
 
-				<liferay-ui:search-container-column-text
-					name="status"
-				>
-					<h6 class="text-default">
-						<%= HtmlUtil.escape(LanguageUtil.get(request, CommerceSubscriptionEntryConstants.getSubscriptionStatusLabel(commerceSubscriptionEntry.getSubscriptionStatus()))) %>
-					</h6>
-				</liferay-ui:search-container-column-text>
+						String thumbnailSrc = commerceSubscriptionContentDisplayContext.getCommerceSubscriptionEntryThumbnailSrc(commerceSubscriptionEntry, themeDisplay);
 
-				<liferay-ui:search-container-column-date
-					name="start-date"
-					property="startDate"
-				/>
+						List<KeyValuePair> keyValuePairs = commerceSubscriptionContentDisplayContext.getKeyValuePairs(commerceSubscriptionEntry);
 
-				<liferay-ui:search-container-column-date
-					name="next-iteration-date"
-					property="nextIterationDate"
-				/>
+						StringJoiner stringJoiner = new StringJoiner(StringPool.COMMA);
 
-				<liferay-ui:search-container-column-text>
+						for (KeyValuePair keyValuePair : keyValuePairs) {
+							stringJoiner.add(keyValuePair.getValue());
+						}
+						%>
 
-					<%
-					DropdownItemList commerceSubscriptionEntryActionItemList = commerceSubscriptionContentDisplayContext.getCommerceSubscriptionEntryActionItemList(commerceSubscriptionEntry, renderRequest, renderResponse);
-					%>
+						<liferay-ui:search-container-column-image
+							name="product"
+							src="<%= thumbnailSrc %>"
+						/>
 
-					<c:if test="<%= commerceSubscriptionEntryActionItemList != null %>">
-						<c:choose>
-							<c:when test="<%= commerceSubscriptionEntryActionItemList.isEmpty() %>">
-							</c:when>
-							<c:when test="<%= commerceSubscriptionEntryActionItemList.size() > 1 %>">
-								<clay:dropdown-menu
-									dropdownItems="<%= commerceSubscriptionEntryActionItemList %>"
-								/>
-							</c:when>
-							<c:otherwise>
+						<liferay-ui:search-container-column-text
+							name="description"
+						>
+							<a class="font-weight-bold" href="<%= commerceSubscriptionContentDisplayContext.getCPDefinitionURL(commerceSubscriptionEntry, themeDisplay) %>">
+								<%= (commerceOrderItem == null) ? StringPool.BLANK : HtmlUtil.escape(commerceOrderItem.getName(languageId)) %>
+							</a>
 
-								<%
-								DropdownItem dropdownItem = commerceSubscriptionEntryActionItemList.get(0);
-								%>
+							<h6 class="text-default">
+								<%= HtmlUtil.escape(stringJoiner.toString()) %>
+							</h6>
+						</liferay-ui:search-container-column-text>
 
-								<clay:link
-									buttonStyle="secondary"
-									href='<%= String.valueOf(dropdownItem.get("href")) %>'
-									label='<%= String.valueOf(dropdownItem.get("label")) %>'
-								/>
-							</c:otherwise>
-						</c:choose>
-					</c:if>
-				</liferay-ui:search-container-column-text>
-			</liferay-ui:search-container-row>
+						<liferay-ui:search-container-column-text
+							name="status"
+						>
+							<h6 class="text-default">
+								<%= HtmlUtil.escape(LanguageUtil.get(request, CommerceSubscriptionEntryConstants.getSubscriptionStatusLabel(commerceSubscriptionEntry.getSubscriptionStatus()))) %>
+							</h6>
+						</liferay-ui:search-container-column-text>
 
-			<liferay-ui:search-iterator
-				displayStyle="list"
-				markupView="lexicon"
-			/>
-		</liferay-ui:search-container>
-	</div>
-</div>
+						<liferay-ui:search-container-column-date
+							name="start-date"
+							property="startDate"
+						/>
+
+						<liferay-ui:search-container-column-date
+							name="next-iteration-date"
+							property="nextIterationDate"
+						/>
+
+						<liferay-ui:search-container-column-text>
+
+							<%
+							DropdownItemList commerceSubscriptionEntryActionItemList = commerceSubscriptionContentDisplayContext.getCommerceSubscriptionEntryActionItemList(commerceSubscriptionEntry, renderRequest, renderResponse);
+							%>
+
+							<c:if test="<%= commerceSubscriptionEntryActionItemList != null %>">
+								<c:choose>
+									<c:when test="<%= commerceSubscriptionEntryActionItemList.isEmpty() %>">
+									</c:when>
+									<c:when test="<%= commerceSubscriptionEntryActionItemList.size() > 1 %>">
+										<clay:dropdown-menu
+											dropdownItems="<%= commerceSubscriptionEntryActionItemList %>"
+										/>
+									</c:when>
+									<c:otherwise>
+
+										<%
+										DropdownItem dropdownItem = commerceSubscriptionEntryActionItemList.get(0);
+										%>
+
+										<clay:link
+											buttonStyle="secondary"
+											href='<%= String.valueOf(dropdownItem.get("href")) %>'
+											label='<%= String.valueOf(dropdownItem.get("label")) %>'
+										/>
+									</c:otherwise>
+								</c:choose>
+							</c:if>
+						</liferay-ui:search-container-column-text>
+					</liferay-ui:search-container-row>
+
+					<liferay-ui:search-iterator
+						displayStyle="list"
+						markupView="lexicon"
+					/>
+				</liferay-ui:search-container>
+			</div>
+		</div>
+	</c:otherwise>
+</c:choose>

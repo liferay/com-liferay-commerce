@@ -15,10 +15,13 @@
 package com.liferay.commerce.checkout.web.internal.display.context;
 
 import com.liferay.commerce.constants.CommerceCheckoutWebKeys;
+import com.liferay.commerce.constants.CommerceWebKeys;
+import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.util.CommerceCheckoutStep;
 import com.liferay.commerce.util.CommerceCheckoutStepServicesTracker;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -31,6 +34,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Marco Leo
+ * @author Alessio Antonio Rendina
  */
 public class CheckoutDisplayContext {
 
@@ -102,6 +106,20 @@ public class CheckoutDisplayContext {
 		}
 
 		return commerceCheckoutStep.getName();
+	}
+
+	public boolean hasCommerceChannel() throws PortalException {
+		CommerceContext commerceContext =
+			(CommerceContext)_httpServletRequest.getAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT);
+
+		long commerceChannelId = commerceContext.getCommerceChannelId();
+
+		if (commerceChannelId > 0) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public boolean isEmptyCommerceOrder() {

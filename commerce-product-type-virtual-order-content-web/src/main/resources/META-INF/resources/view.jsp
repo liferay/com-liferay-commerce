@@ -28,126 +28,135 @@ SearchContainer<CommerceVirtualOrderItem> commerceVirtualOrderContentDisplayCont
 List<CommerceVirtualOrderItem> results = commerceVirtualOrderContentDisplayContextSearchContainer.getResults();
 %>
 
-<liferay-ddm:template-renderer
-	className="<%= CommerceVirtualOrderItemContentPortlet.class.getName() %>"
-	contextObjects="<%= contextObjects %>"
-	displayStyle="<%= commerceVirtualOrderItemContentDisplayContext.getDisplayStyle() %>"
-	displayStyleGroupId="<%= commerceVirtualOrderItemContentDisplayContext.getDisplayStyleGroupId() %>"
-	entries="<%= results %>"
->
-	<div class="container-fluid-1280" id="<portlet:namespace />virtualOrderItemsContainer">
-		<div class="commerce-virtual-order-items-container" id="<portlet:namespace />entriesContainer">
-			<liferay-ui:search-container
-				id="commerceVirtualOrderItems"
-				iteratorURL="<%= currentURLObj %>"
-				searchContainer="<%= commerceVirtualOrderContentDisplayContextSearchContainer %>"
-			>
-				<liferay-ui:search-container-row
-					className="com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem"
-					cssClass="entry-display-style"
-					keyProperty="commerceVirtualOrderItemId"
-					modelVar="commerceVirtualOrderItem"
-				>
-
-					<%
-					CommerceOrderItem commerceOrderItem = commerceVirtualOrderItem.getCommerceOrderItem();
-
-					String thumbnailSrc = commerceVirtualOrderItemContentDisplayContext.getCommerceOrderItemThumbnailSrc(commerceOrderItem);
-
-					List<KeyValuePair> keyValuePairs = commerceVirtualOrderItemContentDisplayContext.getKeyValuePairs(commerceOrderItem.getCPDefinitionId(), commerceOrderItem.getJson(), locale);
-
-					StringJoiner stringJoiner = new StringJoiner(StringPool.COMMA);
-
-					for (KeyValuePair keyValuePair : keyValuePairs) {
-						stringJoiner.add(keyValuePair.getValue());
-					}
-					%>
-
-					<liferay-ui:search-container-column-image
-						name="product"
-						src="<%= thumbnailSrc %>"
-					/>
-
-					<liferay-ui:search-container-column-text
-						name="description"
-					>
-						<%= HtmlUtil.escape(commerceOrderItem.getName(languageId)) %>
-
-						<h6 class="text-default">
-							<%= HtmlUtil.escape(stringJoiner.toString()) %>
-						</h6>
-					</liferay-ui:search-container-column-text>
-
-					<liferay-ui:search-container-column-text
-						cssClass="entry-action-column important"
-					>
-
-						<%
-						String downloadURL = commerceVirtualOrderItemContentDisplayContext.getDownloadURL(commerceVirtualOrderItem);
-
-						CPDefinitionVirtualSetting cpDefinitionVirtualSetting = commerceVirtualOrderItemContentDisplayContext.getCPDefinitionVirtualSetting(commerceOrderItem);
-
-						Map<String, Object> data = new HashMap<>();
-						boolean useDialog = false;
-
-						if ((cpDefinitionVirtualSetting != null) && cpDefinitionVirtualSetting.isTermsOfUseRequired()) {
-							data.put("destroyOnHide", true);
-							data.put("id", HtmlUtil.escape(portletDisplay.getNamespace()) + "viewTermsOfUseDialog");
-							data.put("title", HtmlUtil.escape(LanguageUtil.get(request, "terms-of-use")));
-
-							useDialog = true;
-						}
-
-						boolean hasDownloadCommerceVirtualOrderItemPermission = CommerceVirtualOrderItemPermission.contains(permissionChecker, commerceVirtualOrderItem, CommerceVirtualOrderActionKeys.DOWNLOAD_COMMERCE_VIRTUAL_ORDER_ITEM);
-						%>
-
-						<c:if test="<%= hasDownloadCommerceVirtualOrderItemPermission %>">
-							<aui:form action="<%= String.valueOf(commerceVirtualOrderItemContentDisplayContext.getDownloadResourceURL(commerceVirtualOrderItem.getCommerceVirtualOrderItemId())) %>" method="post" name='<%= commerceVirtualOrderItem.getCommerceVirtualOrderItemId() + "Fm" %>' />
-
-							<liferay-ui:icon
-								data="<%= data %>"
-								label="<%= true %>"
-								message="download"
-								url="<%= downloadURL %>"
-								useDialog="<%= useDialog %>"
-							/>
-						</c:if>
-					</liferay-ui:search-container-column-text>
-				</liferay-ui:search-container-row>
-
-				<liferay-ui:search-iterator
-					displayStyle="list"
-					markupView="lexicon"
-				/>
-			</liferay-ui:search-container>
+<c:choose>
+	<c:when test="<%= !commerceVirtualOrderItemContentDisplayContext.hasCommerceChannel() %>">
+		<div class="alert alert-info mx-auto">
+			<liferay-ui:message key="this-site-does-not-have-a-channel" />
 		</div>
-	</div>
+	</c:when>
+	<c:otherwise>
+		<liferay-ddm:template-renderer
+			className="<%= CommerceVirtualOrderItemContentPortlet.class.getName() %>"
+			contextObjects="<%= contextObjects %>"
+			displayStyle="<%= commerceVirtualOrderItemContentDisplayContext.getDisplayStyle() %>"
+			displayStyleGroupId="<%= commerceVirtualOrderItemContentDisplayContext.getDisplayStyleGroupId() %>"
+			entries="<%= results %>"
+		>
+			<div class="container-fluid-1280" id="<portlet:namespace />virtualOrderItemsContainer">
+				<div class="commerce-virtual-order-items-container" id="<portlet:namespace />entriesContainer">
+					<liferay-ui:search-container
+						id="commerceVirtualOrderItems"
+						iteratorURL="<%= currentURLObj %>"
+						searchContainer="<%= commerceVirtualOrderContentDisplayContextSearchContainer %>"
+					>
+						<liferay-ui:search-container-row
+							className="com.liferay.commerce.product.type.virtual.order.model.CommerceVirtualOrderItem"
+							cssClass="entry-display-style"
+							keyProperty="commerceVirtualOrderItemId"
+							modelVar="commerceVirtualOrderItem"
+						>
 
-	<aui:script>
-		Liferay.provide(
-			window,
-			'<portlet:namespace />closePopup',
-			function(dialogId) {
-				var dialog = Liferay.Util.Window.getById(dialogId);
+							<%
+							CommerceOrderItem commerceOrderItem = commerceVirtualOrderItem.getCommerceOrderItem();
 
-				dialog.destroy();
-			},
-			['liferay-util-window']
-		);
+							String thumbnailSrc = commerceVirtualOrderItemContentDisplayContext.getCommerceOrderItemThumbnailSrc(commerceOrderItem);
 
-		Liferay.provide(
-			window,
-			'<portlet:namespace />downloadCommerceVirtualOrderItem',
-			function(dialogId, commerceVirtualOrderItemId) {
-				<portlet:namespace />closePopup(dialogId);
+							List<KeyValuePair> keyValuePairs = commerceVirtualOrderItemContentDisplayContext.getKeyValuePairs(commerceOrderItem.getCPDefinitionId(), commerceOrderItem.getJson(), locale);
 
-				var formName = '#<portlet:namespace />' + commerceVirtualOrderItemId + 'Fm';
+							StringJoiner stringJoiner = new StringJoiner(StringPool.COMMA);
 
-				var form = AUI.$(formName);
+							for (KeyValuePair keyValuePair : keyValuePairs) {
+								stringJoiner.add(keyValuePair.getValue());
+							}
+							%>
 
-				submitForm(form);
-			},
-			['aui-base']
-		);
-	</aui:script>
-</liferay-ddm:template-renderer>
+							<liferay-ui:search-container-column-image
+								name="product"
+								src="<%= thumbnailSrc %>"
+							/>
+
+							<liferay-ui:search-container-column-text
+								name="description"
+							>
+								<%= HtmlUtil.escape(commerceOrderItem.getName(languageId)) %>
+
+								<h6 class="text-default">
+									<%= HtmlUtil.escape(stringJoiner.toString()) %>
+								</h6>
+							</liferay-ui:search-container-column-text>
+
+							<liferay-ui:search-container-column-text
+								cssClass="entry-action-column important"
+							>
+
+								<%
+								String downloadURL = commerceVirtualOrderItemContentDisplayContext.getDownloadURL(commerceVirtualOrderItem);
+
+								CPDefinitionVirtualSetting cpDefinitionVirtualSetting = commerceVirtualOrderItemContentDisplayContext.getCPDefinitionVirtualSetting(commerceOrderItem);
+
+								Map<String, Object> data = new HashMap<>();
+								boolean useDialog = false;
+
+								if ((cpDefinitionVirtualSetting != null) && cpDefinitionVirtualSetting.isTermsOfUseRequired()) {
+									data.put("destroyOnHide", true);
+									data.put("id", HtmlUtil.escape(portletDisplay.getNamespace()) + "viewTermsOfUseDialog");
+									data.put("title", HtmlUtil.escape(LanguageUtil.get(request, "terms-of-use")));
+
+									useDialog = true;
+								}
+
+								boolean hasDownloadCommerceVirtualOrderItemPermission = CommerceVirtualOrderItemPermission.contains(permissionChecker, commerceVirtualOrderItem, CommerceVirtualOrderActionKeys.DOWNLOAD_COMMERCE_VIRTUAL_ORDER_ITEM);
+								%>
+
+								<c:if test="<%= hasDownloadCommerceVirtualOrderItemPermission %>">
+									<aui:form action="<%= String.valueOf(commerceVirtualOrderItemContentDisplayContext.getDownloadResourceURL(commerceVirtualOrderItem.getCommerceVirtualOrderItemId())) %>" method="post" name='<%= commerceVirtualOrderItem.getCommerceVirtualOrderItemId() + "Fm" %>' />
+
+									<liferay-ui:icon
+										data="<%= data %>"
+										label="<%= true %>"
+										message="download"
+										url="<%= downloadURL %>"
+										useDialog="<%= useDialog %>"
+									/>
+								</c:if>
+							</liferay-ui:search-container-column-text>
+						</liferay-ui:search-container-row>
+
+						<liferay-ui:search-iterator
+							displayStyle="list"
+							markupView="lexicon"
+						/>
+					</liferay-ui:search-container>
+				</div>
+			</div>
+
+			<aui:script>
+				Liferay.provide(
+					window,
+					'<portlet:namespace />closePopup',
+					function(dialogId) {
+						var dialog = Liferay.Util.Window.getById(dialogId);
+
+						dialog.destroy();
+					},
+					['liferay-util-window']
+				);
+
+				Liferay.provide(
+					window,
+					'<portlet:namespace />downloadCommerceVirtualOrderItem',
+					function(dialogId, commerceVirtualOrderItemId) {
+						<portlet:namespace />closePopup(dialogId);
+
+						var formName = '#<portlet:namespace />' + commerceVirtualOrderItemId + 'Fm';
+
+						var form = AUI.$(formName);
+
+						submitForm(form);
+					},
+					['aui-base']
+				);
+			</aui:script>
+		</liferay-ddm:template-renderer>
+	</c:otherwise>
+</c:choose>

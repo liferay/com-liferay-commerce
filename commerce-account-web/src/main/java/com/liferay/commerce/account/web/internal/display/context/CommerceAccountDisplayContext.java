@@ -354,6 +354,23 @@ public class CommerceAccountDisplayContext {
 			getCurrentCommerceAccount(), actionId);
 	}
 
+	public boolean hasCommerceChannel() throws PortalException {
+		HttpServletRequest httpServletRequest =
+			_commerceAccountRequestHelper.getRequest();
+
+		CommerceContext commerceContext =
+			(CommerceContext)httpServletRequest.getAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT);
+
+		long commerceChannelId = commerceContext.getCommerceChannelId();
+
+		if (commerceChannelId > 0) {
+			return true;
+		}
+
+		return false;
+	}
+
 	public boolean hasManageCommerceAccountPermissions() {
 		if (PortalPermissionUtil.contains(
 				_commerceAccountRequestHelper.getPermissionChecker(),

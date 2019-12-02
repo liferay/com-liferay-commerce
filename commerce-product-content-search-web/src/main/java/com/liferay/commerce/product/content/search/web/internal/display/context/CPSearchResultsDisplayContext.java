@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.product.content.search.web.internal.display.context;
 
+import com.liferay.commerce.constants.CommerceWebKeys;
+import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.product.catalog.CPCatalogEntry;
 import com.liferay.commerce.product.constants.CPPortletKeys;
 import com.liferay.commerce.product.content.render.list.CPContentListRenderer;
@@ -29,6 +31,7 @@ import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.search.DisplayTerms;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.module.configuration.ConfigurationException;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.theme.PortletDisplay;
@@ -226,6 +229,20 @@ public class CPSearchResultsDisplayContext {
 
 	public String getSelectionStyle() {
 		return _cpSearchResultsPortletInstanceConfiguration.selectionStyle();
+	}
+
+	public boolean hasCommerceChannel() throws PortalException {
+		CommerceContext commerceContext =
+			(CommerceContext)_httpServletRequest.getAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT);
+
+		long commerceChannelId = commerceContext.getCommerceChannelId();
+
+		if (commerceChannelId > 0) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public boolean isPaginate() {
