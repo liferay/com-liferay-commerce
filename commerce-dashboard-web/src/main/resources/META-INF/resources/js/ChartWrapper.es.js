@@ -6,7 +6,7 @@ export default function ChartWrapper({ data, loading }) {
   const chart = useRef();
 
   const resize = useCallback(
-    () => chart.current.resize(),
+    () => chart.current && chart.current.resize(),
     [chart],
   );
 
