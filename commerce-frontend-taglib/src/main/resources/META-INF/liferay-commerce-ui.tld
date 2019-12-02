@@ -86,6 +86,17 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>coupon-code</name>
+		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.CouponCodeTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>commerceOrderId</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>long</type>
+		</attribute>
+	</tag>
+	<tag>
 		<name>gallery</name>
 		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.GalleryTag</tag-class>
 		<body-content>empty</body-content>
