@@ -129,6 +129,9 @@ public class CommerceOrderTest {
 			String.valueOf(CommerceAccountConstants.SITE_TYPE_B2B));
 
 		modifiableSettings.store();
+
+		_commerceCountryLocalService.deleteCommerceCountries(
+			_group.getCompanyId());
 	}
 
 	@After
@@ -383,7 +386,7 @@ public class CommerceOrderTest {
 		// Checkout a random number of orders
 
 		CommerceContext commerceContext = new TestCommerceContext(
-			_commerceCurrency, _user, _group, null, null);
+			_commerceCurrency, null, _user, _group, null, null);
 
 		List<CommerceOrder> placedCommerceOrders = new ArrayList<>();
 
@@ -591,7 +594,8 @@ public class CommerceOrderTest {
 			commerceOrder);
 
 		CommerceContext commerceContext = new TestCommerceContext(
-			_commerceCurrency, _user, _group, commerceAccount, commerceOrder);
+			_commerceCurrency, null, _user, _group, commerceAccount,
+			commerceOrder);
 
 		commerceOrder = _commerceOrderLocalService.checkoutCommerceOrder(
 			commerceOrder.getCommerceOrderId(), commerceContext,
@@ -625,7 +629,7 @@ public class CommerceOrderTest {
 			secondCommerceOrder);
 
 		CommerceContext secondCommerceContext = new TestCommerceContext(
-			_commerceCurrency, _user, _group, secondCommerceAccount,
+			_commerceCurrency, null, _user, _group, secondCommerceAccount,
 			secondCommerceOrder);
 
 		secondCommerceOrder = _commerceOrderLocalService.checkoutCommerceOrder(
@@ -817,7 +821,8 @@ public class CommerceOrderTest {
 			commerceOrder);
 
 		CommerceContext commerceContext = new TestCommerceContext(
-			_commerceCurrency, _user, _group, commerceAccount, commerceOrder);
+			_commerceCurrency, null, _user, _group, commerceAccount,
+			commerceOrder);
 
 		commerceOrder = _commerceOrderLocalService.checkoutCommerceOrder(
 			commerceOrder.getCommerceOrderId(), commerceContext,

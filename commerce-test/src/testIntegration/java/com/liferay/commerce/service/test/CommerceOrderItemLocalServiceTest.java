@@ -280,7 +280,7 @@ public class CommerceOrderItemLocalServiceTest {
 				commerceCurrency.getCommerceCurrencyId());
 
 		CommerceContext commerceContext = new TestCommerceContext(
-				commerceCurrency, null, null, _group, null, null);
+			commerceCurrency, null, null, _group, null, null);
 
 		_commerceOrderItemLocalService.addCommerceOrderItem(
 			commerceOrder.getCommerceOrderId(), cpInstance.getCPInstanceId(), 1,

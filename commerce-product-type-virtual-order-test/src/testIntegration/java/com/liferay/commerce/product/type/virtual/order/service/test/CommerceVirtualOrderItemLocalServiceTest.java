@@ -50,6 +50,7 @@ import com.liferay.portal.test.rule.PermissionCheckerTestRule;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.frutilla.FrutillaRule;
 
@@ -166,7 +167,14 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 				CommerceOrderConstants.ORDER_STATUS_TO_TRANSMIT,
 				commerceVirtualOrderItem.getActivationStatus());
 			Assert.assertEquals(0L, commerceVirtualOrderItem.getDuration());
-			Assert.assertEquals(null, commerceVirtualOrderItem.getEndDate());
+
+			if (Objects.equals(
+					commerceVirtualOrderItem.getActivationStatus(),
+					commerceOrder.getOrderStatus())) {
+
+				Assert.assertEquals(
+					null, commerceVirtualOrderItem.getEndDate());
+			}
 		}
 	}
 
