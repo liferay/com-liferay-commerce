@@ -130,10 +130,6 @@ public class AddToCartTag extends ComponentRendererTag {
 		_productHelper = ServletContextUtil.getProductHelper();
 	}
 
-	public void setSpritemap(String spritemap) {
-		putValue("spritemap", spritemap);
-	}
-
 	private static final Log _log = LogFactoryUtil.getLog(AddToCartTag.class);
 
 	private ProductHelper _productHelper;
