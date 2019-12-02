@@ -131,7 +131,7 @@ class AddToCartButton extends Component {
 		if (prevQuantity === 0) {
 			this.updatingTransition = 'adding';
 		}
- else {
+		else {
 			this.updatingTransition = 'incrementing';
 		}
 
@@ -185,10 +185,10 @@ class AddToCartButton extends Component {
 			this.settings = e.settings;
 			this.disabled = false;
 		}
- else {
+		else {
 			this.disabled = true;
 		}
-}
+	}
 
 	_handleAccountChange(e) {
 		this.accountId = e.accountId;

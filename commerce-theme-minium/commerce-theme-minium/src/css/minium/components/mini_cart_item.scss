@@ -8,12 +8,12 @@
 	display: grid;
 	font-size: 13px;
 	grid-gap: 15px;
-	padding: 10px;
-	position: relative;
 	grid-template-areas: "image content actions price delete";
 	grid-template-columns: $item-image-size 1fr auto $price-size min-content;
 	height: 94px;
 	overflow: hidden;
+	padding: 10px;
+	position: relative;
 	transition: height .2s ease-in, padding .1s ease-in;
 
 	&__image {
