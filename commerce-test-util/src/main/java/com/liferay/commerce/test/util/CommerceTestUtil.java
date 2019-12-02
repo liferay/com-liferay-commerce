@@ -65,6 +65,34 @@ import java.util.Collections;
  * @author Luca Pellizzon
  */
 public class CommerceTestUtil {
+	
+	public static CommerceOrder addB2BCommerceOrder(
+			long groupId, long userId, long commerceAccountId,
+			long commerceCurrencyId)
+		throws Exception {
+
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
+
+		if (userId == 0) {
+			userId = serviceContext.getUserId();
+		}
+
+		if (commerceCurrencyId == 0) {
+			CommerceCurrency commerceCurrency =
+				CommerceCurrencyTestUtil.addCommerceCurrency(groupId);
+
+			commerceCurrencyId = commerceCurrency.getCommerceCurrencyId();
+		}
+
+		long commerceChannelGroupId =
+			CommerceChannelLocalServiceUtil.
+				getCommerceChannelGroupIdBySiteGroupId(groupId);
+
+		return CommerceOrderLocalServiceUtil.addCommerceOrder(
+			userId, commerceChannelGroupId, commerceAccountId,
+			commerceCurrencyId);
+	}
 
 	public static CommerceAccount addAccount(long groupId, long userId)
 		throws Exception {
