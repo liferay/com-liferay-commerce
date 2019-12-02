@@ -107,13 +107,10 @@ public class AccountSelectorTag extends ComponentRendererTag {
 				putValue("currentOrder", currentOrderModel);
 			}
 
-			Layout accountManagementLayout = _getAccountManagementLayout(
-				themeDisplay.getScopeGroupId(), layoutSet.isPrivateLayout());
-
 			putValue(
 				"viewAllAccountsLink",
-				PortalUtil.getLayoutFriendlyURL(
-					accountManagementLayout, themeDisplay));
+				_getAccountManagementLayoutURL(
+					layoutSet.isPrivateLayout(), themeDisplay));
 
 			putValue(
 				"createNewOrderLink", _getAddCommerceOrderURL(themeDisplay));
@@ -146,25 +143,28 @@ public class AccountSelectorTag extends ComponentRendererTag {
 			"commerce-frontend-taglib/account_selector/AccountSelector.es");
 	}
 
-	private Layout _getAccountManagementLayout(
-			long groupId, boolean privateLayout)
+	private String _getAccountManagementLayoutURL(
+			boolean privateLayout, ThemeDisplay themeDisplay)
 		throws PortalException {
 
 		Layout layout = LayoutLocalServiceUtil.fetchLayoutByFriendlyURL(
-			groupId, privateLayout, "/accounts");
+			themeDisplay.getScopeGroupId(), privateLayout, "/accounts");
+
+		if (layout == null) {
+			long plid = PortalUtil.getPlidFromPortletId(
+				themeDisplay.getScopeGroupId(),
+				CommerceAccountPortletKeys.COMMERCE_ACCOUNT);
+
+			if (plid > 0) {
+				layout = LayoutLocalServiceUtil.fetchLayout(plid);
+			}
+		}
 
 		if (layout != null) {
-			return layout;
+			return PortalUtil.getLayoutFriendlyURL(layout, themeDisplay);
 		}
 
-		long plid = PortalUtil.getPlidFromPortletId(
-			groupId, CommerceAccountPortletKeys.COMMERCE_ACCOUNT);
-
-		if (plid > 0) {
-			layout = LayoutLocalServiceUtil.fetchLayout(plid);
-		}
-
-		return layout;
+		return StringPool.BLANK;
 	}
 
 	private String _getAddCommerceOrderURL(ThemeDisplay themeDisplay)
