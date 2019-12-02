@@ -235,6 +235,22 @@ public class CPCompareContentDisplayContext {
 		return _cpCompareContentPortletInstanceConfiguration.selectionStyle();
 	}
 
+	public boolean hasCommerceChannel() throws PortalException {
+		HttpServletRequest httpServletRequest = _cpRequestHelper.getRequest();
+
+		CommerceContext commerceContext =
+			(CommerceContext)httpServletRequest.getAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT);
+
+		long commerceChannelId = commerceContext.getCommerceChannelId();
+
+		if (commerceChannelId > 0) {
+			return true;
+		}
+
+		return false;
+	}
+
 	public boolean isSelectionStyleADT() {
 		String selectionStyle = getSelectionStyle();
 

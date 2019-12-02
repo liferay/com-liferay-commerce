@@ -16,6 +16,8 @@ package com.liferay.commerce.product.type.virtual.order.content.web.internal.dis
 
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
+import com.liferay.commerce.constants.CommerceWebKeys;
+import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
@@ -324,6 +326,23 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 		_searchContainer.setResults(results);
 
 		return _searchContainer;
+	}
+
+	public boolean hasCommerceChannel() throws PortalException {
+		HttpServletRequest httpServletRequest =
+			_commerceVirtualOrderItemContentRequestHelper.getRequest();
+
+		CommerceContext commerceContext =
+			(CommerceContext)httpServletRequest.getAttribute(
+				CommerceWebKeys.COMMERCE_CONTEXT);
+
+		long commerceChannelId = commerceContext.getCommerceChannelId();
+
+		if (commerceChannelId > 0) {
+			return true;
+		}
+
+		return false;
 	}
 
 	private JournalArticleDisplay _articleDisplay;
