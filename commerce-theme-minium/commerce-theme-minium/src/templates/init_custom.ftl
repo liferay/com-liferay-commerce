@@ -1,6 +1,9 @@
 <#assign
 	is_login_page = getterUtil.getBoolean(themeDisplay.getThemeSetting("is-login-page"))
 	redirect_to_private_layouts = getterUtil.getBoolean(themeDisplay.getThemeSetting("redirect-to-private-layouts"))
+	show_account_selector = getterUtil.getBoolean(themeDisplay.getThemeSetting("show-account-selector"))
+	show_mini_cart = getterUtil.getBoolean(themeDisplay.getThemeSetting("show-mini-cart"))
+	show_search_bar = getterUtil.getBoolean(themeDisplay.getThemeSetting("show-search-bar"))
 	show_top_menu = getterUtil.getBoolean(themeDisplay.getThemeSetting("show-top-menu"))
 	show_topbar = getterUtil.getBoolean(themeDisplay.getThemeSetting("show-topbar"))
 	show_sidebar = getterUtil.getBoolean(themeDisplay.getThemeSetting("show-sidebar"))

@@ -105,6 +105,10 @@
 			{
 				"hidden": true,
 				"layoutTemplateId": "1_column",
+				"lookAndFeel": {
+					"lfr-theme:regular:show-account-selector": false,
+					"lfr-theme:regular:show-mini-cart": false
+				},
 				"name": "Checkout",
 				"permissions": [
 					{
@@ -121,7 +125,7 @@
 					}
 				],
 				"privateLayout": true
-			}
+			},
 		]
 	},
 	{
