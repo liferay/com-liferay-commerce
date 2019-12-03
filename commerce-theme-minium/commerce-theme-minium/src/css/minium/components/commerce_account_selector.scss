@@ -8,7 +8,7 @@
 		"image title" min-content
 		"image info" min-content / 40px 201px;
 
-	@media screen and (max-width: 767px) {
+	@media screen and (max-width: $bp-small) {
 		grid-gap: 0;
 		grid-template-columns: 40px 0;
 	}
@@ -35,7 +35,7 @@
 		grid-area: title;
 		line-height: 1;
 
-		@media screen and (max-width: 767px) {
+		@media screen and (max-width: $bp-small) {
 			display: none;
 		}
 	}
@@ -46,7 +46,7 @@
 		line-height: 1;
 		margin-top: 4px;
 
-		@media screen and (max-width: 767px) {
+		@media screen and (max-width: $bp-small) {
 			display: none;
 		}
 

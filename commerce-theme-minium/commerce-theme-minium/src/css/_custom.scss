@@ -19,7 +19,7 @@ html {
 	body.has-control-menu.signed-in & .minium-frame__topbar {
 		top: $liferay-topbar-size;
 
-		@media screen and (max-width: 767px) {
+		@media screen and (max-width: $bp-xsmall) {
 			top: $liferay-topbar-size-small;
 		}
 	}
@@ -27,7 +27,7 @@ html {
 	body.has-control-menu.signed-in & .minium-frame__toolbar {
 		margin-top: $liferay-topbar-size;
 
-		@media screen and (max-width: 767px) {
+		@media screen and (max-width: $bp-xsmall) {
 			margin-top: $liferay-topbar-size-small;
 		}
 	}
@@ -35,7 +35,7 @@ html {
 	body.has-control-menu.signed-in & .minium-frame__sidebar {
 		top: $liferay-topbar-size;
 
-		@media screen and (max-width: 767px) {
+		@media screen and (max-width: $bp-xsmall) {
 			top: $liferay-topbar-size-small;
 		}
 	}

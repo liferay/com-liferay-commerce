@@ -6,9 +6,13 @@
   left: 0;
   position: fixed;
   right: 0;
-  top: $liferay-topbar-size;
+  top: $liferay-topbar-height;
   transition: background-color .2s $easeOutQuart;
   z-index: 988;
+
+  @media screen and (max-width: $bp-xsmall) {
+    top: $liferay-topbar-height-small;
+  }
 
   &__button,
   .speedwell-cart .commerce-topbar-button {
@@ -29,8 +33,11 @@
     width: 80px;
     z-index: 0;
 
-    @media screen and (min-width: 376px) and (max-width: 767px) {
+    @media screen and (min-width: $bp-xxsmall) and (max-width: $bp-small) {
       background-color: $color-bg;
+    }
+
+    @media screen and (max-width: $bp-small) {
       height: 70px;
       width: 60px;
     }
@@ -131,10 +138,6 @@
     }
   }
 
-  @media (max-width: 767px) {
-    top: 48px;
-  }
-
   &__menu {
     justify-content: left;
 
@@ -154,15 +157,11 @@
     grid-auto-flow: column;
     justify-content: right;
 
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: $bp-small) {
       .speedwell-account {
         display: none;
       }
     }
-  }
-
-  &__search {
-    // position: absolute;
   }
 }
 

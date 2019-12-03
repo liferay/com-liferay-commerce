@@ -16,7 +16,7 @@
     margin-bottom: 50px;
     width: 100%;
 
-    @media only screen and (max-width: 767px) {
+    @media only screen and (max-width: $bp-small) {
       margin-bottom: 25px;
     }
   }
@@ -34,7 +34,7 @@
     transition: border-color .2s ease-out;
     width: 30%;
 
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: $bp-small) {
       grid-template-columns: 85px 1fr;
       width: 100%;
     }

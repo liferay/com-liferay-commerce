@@ -18,7 +18,7 @@
 		width: 450px;
 		z-index: 1160;
 
-		@media screen and (max-width: 767px) {
+		@media screen and (max-width: $bp-small) {
 			left: $sm-gutter;
 			position: fixed;
 			right: $sm-gutter;
@@ -37,7 +37,7 @@
 			transition: max-height .2s ease-in, opacity .2s ease-in;
 			z-index: 1160;
 
-			@media screen and (max-width: 767px) {
+			@media screen and (max-width: $bp-small) {
 				right: 64px;
 			}
 		}

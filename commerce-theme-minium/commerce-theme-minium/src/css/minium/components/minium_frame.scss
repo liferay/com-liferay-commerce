@@ -37,10 +37,18 @@
 	}
 
 	&__content {
-		padding: #{$frame-size + $liferay-topbar-size} 0 0 $frame-size;
+		padding: #{$frame-size} 0 0 $frame-size;
 
 		@media screen and (hover: none) {
-			padding: #{$frame-size + $liferay-topbar-size} 0 $frame-size 0;
+			padding: #{$frame-size} 0 $frame-size 0;
+		}
+
+		.has-control-menu.signed-in & {
+			padding: #{$frame-size + $liferay-topbar-size} 0 0 $frame-size;
+
+			@media screen and (hover: none) {
+				padding: #{$frame-size + $liferay-topbar-size} 0 $frame-size 0;
+			}
 		}
 	}
 

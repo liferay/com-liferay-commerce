@@ -2,7 +2,7 @@
   display: flex;
   width: 80px;
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: $bp-small) {
     width: unset;
   }
 
@@ -20,7 +20,7 @@
     right: 160px;
     z-index: 3;
 
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: $bp-small) {
       right: 0;
     }
   }
@@ -71,12 +71,12 @@
     opacity: 1;
     position: fixed;
     right: 0;
-    top: calc(#{$liferay-topbar-size} + #{$speedwell-topbar-size});
+    top: calc(#{$liferay-topbar-height} + #{$topbar-height});
     transition-delay: 500ms !important;
     transition: opacity 200ms ease-in;
 
-    @media screen and (min-width: 376px) and (max-width: 767px) {
-      top: calc(#{$liferay-topbar-size-small} + #{$speedwell-topbar-size-small});
+    @media screen and (min-width: $bp-xxsmall) and (max-width: $bp-small) {
+      top: calc(#{$liferay-topbar-height-small} + #{$topbar-height-small});
 
       .commerce-suggestions {
         &__wrapper {
@@ -86,7 +86,7 @@
     }
 
     @media screen and (max-width: 375px) {
-      top: calc(#{$liferay-topbar-size-small} + #{$speedwell-topbar-size-small} - 11px);
+      top: calc(#{$liferay-topbar-height-small} + #{$topbar-height-small} - 11px);
 
       .commerce-suggestions {
         &__wrapper {

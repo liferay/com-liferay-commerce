@@ -10,7 +10,7 @@
     font-weight: 600;
     line-height: 12px;
 
-    @media only screen and (max-width: 767px) {
+    @media only screen and (max-width: $bp-small) {
       display: none;
     }
   }
@@ -45,7 +45,7 @@
         border-bottom: 2px solid currentColor;
       }
 
-      @media only screen and (max-width: 767px) {
+      @media only screen and (max-width: $bp-small) {
         &:first-child,
         &:last-child {
           display: none

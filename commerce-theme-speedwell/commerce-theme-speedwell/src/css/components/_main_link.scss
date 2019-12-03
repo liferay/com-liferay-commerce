@@ -28,7 +28,7 @@
     text-shadow: 0 0 0px #30CFA1;
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: $bp-small) {
     margin: 20px 0;
   }
 }

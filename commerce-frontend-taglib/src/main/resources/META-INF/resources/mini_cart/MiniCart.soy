@@ -91,58 +91,60 @@
 				{/call}
 			</button>
 
-			<div class="commerce-cart__top">
-				<div class="commerce-cart__products-quantity">
-					<strong>{$formattedProductsQuantity}</strong> {msg desc="Products"}products{/msg}
+			<div class="commerce-cart__container">
+				<div class="commerce-cart__top">
+					<div class="commerce-cart__products-quantity">
+						<strong>{$formattedProductsQuantity}</strong> {msg desc="Products"}products{/msg}
+					</div>
+					{if isNonnull($detailsUrl)}
+						<a class="commerce-link" href="{$detailsUrl}">{msg desc="View Details"}view-details{/msg}</a>
+					{/if}
 				</div>
-				{if isNonnull($detailsUrl)}
-					<a class="commerce-link" href="{$detailsUrl}">{msg desc="View Details"}view-details{/msg}</a>
+
+				<div class="commerce-cart__content">
+					{if isNonnull($products)}
+						{foreach $product in $products}
+							{call CommerceCartItem.render}
+								{param events: [
+									'submitQuantity' : $_handleSubmitQuantity,
+									'deleteItem' : $_handleDeleteItem,
+									'cancelItemDeletion' : $_handleCancelItemDeletion,
+								] /}
+								{param id: $product.id /}
+								{param name: $product.name /}
+								{param prices: $product.prices /}
+								{param sku: $product.sku /}
+								{param quantity: $product.quantity /}
+								{param thumbnail: $product.thumbnail /}
+								{param settings: $product.settings /}
+								{param options: $product.options /}
+								{param errorMessages: $product.errorMessages /}
+								{param deleting: $product.deleting /}
+								{param collapsed: $product.collapsed /}
+								{param updating: $product.updating /}
+								{param deleteDisabled: $product.deleteDisabled /}
+								{param spritemap: $spritemap /}
+							{/call}
+						{/foreach}
+					{/if}
+				</div>
+
+				{if isNonnull($summary)}
+					{call Summary.render}
+						{param checkoutUrl: $checkoutUrl /}
+						{param detailsUrl: $detailsUrl /}
+						{param subtotal: $summary.subtotal /}
+						{param total: $summary.total /}
+						{param discount: $summary.discount /}
+						{param itemsQuantity: $summary.itemsQuantity /}
+						{param productsQuantity: $formattedProductsQuantity /}
+						{param loading: $_loading /}
+						{param valid: $valid /}
+						{param status: $workflowStatus /}
+					{/call}
 				{/if}
+
 			</div>
-
-			<div class="commerce-cart__content">
-				{if isNonnull($products)}
-					{foreach $product in $products}
-						{call CommerceCartItem.render}
-							{param events: [
-								'submitQuantity' : $_handleSubmitQuantity,
-								'deleteItem' : $_handleDeleteItem,
-								'cancelItemDeletion' : $_handleCancelItemDeletion,
-							] /}
-							{param id: $product.id /}
-							{param name: $product.name /}
-							{param prices: $product.prices /}
-							{param sku: $product.sku /}
-							{param quantity: $product.quantity /}
-							{param thumbnail: $product.thumbnail /}
-							{param settings: $product.settings /}
-							{param options: $product.options /}
-							{param errorMessages: $product.errorMessages /}
-							{param deleting: $product.deleting /}
-							{param collapsed: $product.collapsed /}
-							{param updating: $product.updating /}
-							{param deleteDisabled: $product.deleteDisabled /}
-							{param spritemap: $spritemap /}
-						{/call}
-					{/foreach}
-				{/if}
-			</div>
-
-			{if isNonnull($summary)}
-				{call Summary.render}
-					{param checkoutUrl: $checkoutUrl /}
-					{param detailsUrl: $detailsUrl /}
-					{param subtotal: $summary.subtotal /}
-					{param total: $summary.total /}
-					{param discount: $summary.discount /}
-					{param itemsQuantity: $summary.itemsQuantity /}
-					{param productsQuantity: $formattedProductsQuantity /}
-					{param loading: $_loading /}
-					{param valid: $valid /}
-					{param status: $workflowStatus /}
-				{/call}
-			{/if}
-
 		</div>
 	</div>
 {/template}

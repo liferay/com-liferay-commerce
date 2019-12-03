@@ -23,7 +23,7 @@
 }
 
 .commerce-order-items {
-  @media only screen and (max-width: 767px) {
+  @media only screen and (max-width: $bp-small) {
     padding: 0;
   }
 
@@ -47,7 +47,7 @@
     .lfr-product-column {
       text-align: right;
 
-      @media only screen and (max-width: 767px) {
+      @media only screen and (max-width: $bp-small) {
         padding: 0 !important;
         text-align: center;
       }
@@ -62,7 +62,7 @@
     .lfr-description-column {
       min-width: 450px;
 
-      @media only screen and (max-width: 767px) {
+      @media only screen and (max-width: $bp-small) {
         min-width: 150px;
       }
 

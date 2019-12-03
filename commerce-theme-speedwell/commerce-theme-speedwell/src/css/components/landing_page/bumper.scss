@@ -42,7 +42,7 @@
     position: relative;
     width: 40% !important;
 
-    @media only screen and (max-width: 767px) {
+    @media only screen and (max-width: $bp-small) {
       width: 100% !important;
     }
 
@@ -55,7 +55,7 @@
         white-space: pre-wrap;
         width: 100%;
 
-        @media screen and (max-width:767px) {
+        @media screen and (max-width:$bp-small) {
           height: 130px;
           margin-bottom: .5em;
           max-height: 130px;
@@ -66,7 +66,7 @@
           font-size: 3em;
           line-height: 1.5em;
 
-          @media screen and (max-width:767px) {
+          @media screen and (max-width:$bp-small) {
             font-size: 1.8em;
           }
         }
@@ -92,7 +92,7 @@
       }
     }
 
-    @media screen and (max-width:767px) {
+    @media screen and (max-width:$bp-small) {
       max-width: 100%;
     }
   }
@@ -112,7 +112,7 @@
     width: 100%;
     z-index: 10;
 
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: $bp-small) {
       -webkit-overflow-scrolling: touch;
       -webkit-scroll-snap-type: x mandatory;
       justify-content: unset;
@@ -149,7 +149,7 @@
         height: 100%;
       }
 
-      @media screen and (max-width: 767px) {
+      @media screen and (max-width: $bp-small) {
         -webkit-scroll-snap-align: center;
         display: inline-grid;
         grid-template-columns: 60px 1fr;
@@ -173,7 +173,7 @@
           max-width: 60px;
           width: 100%;
 
-          @media only screen and (max-width: 767px) {
+          @media only screen and (max-width: $bp-small) {
             width: 70%;
           }
         }
@@ -185,7 +185,7 @@
     }
   }
 
-  @media screen and (max-width: 767px) {
-    height: calc(100vh - #{$liferay-topbar-size-small})
+  @media screen and (max-width: $bp-xsmall) {
+    height: calc(100vh - #{$liferay-topbar-height-small})
   }
 }

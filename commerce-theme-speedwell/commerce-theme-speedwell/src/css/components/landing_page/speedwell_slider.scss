@@ -200,7 +200,7 @@
         font-size: 1.6em;
         font-weight: 100;
 
-        @media screen and (max-width:767px) {
+        @media screen and (max-width:$bp-small) {
           font-size: 1.3em;
         }
       }

@@ -1,14 +1,14 @@
 .product-highlight {
   width: 100%;
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: $bp-small) {
     height: 30em;
   }
 
   .container {
     position: relative;
 
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: $bp-small) {
       .product-hint {
         font-size: 11px;
         grid-template-columns: 10em 1fr;
@@ -39,7 +39,7 @@
     }
   }
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: $bp-small) {
     .bg-slider {
       &__slide {
         width: 100%;
