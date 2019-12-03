@@ -183,13 +183,13 @@ $card-spacer: 20px;
 		.price {
 			display: block;
 
-			&__label {
+			&-label {
 				display: none;
 			}
 
-			&__value {
-				&--final-price,
-				&--promo-price {
+			&-value {
+				&-final,
+				&-promo {
 					margin-left: 10px;
 				}
 
