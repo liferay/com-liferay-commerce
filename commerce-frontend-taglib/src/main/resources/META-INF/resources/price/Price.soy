@@ -5,11 +5,11 @@
  */
 {template .render}
     {@param prices: [
-    price: string,
-    promoPrice: string|null,
-    discountPercentage: string|null,
-    discountPercentages: ?,
-    finalPrice: string|null
+        price: string,
+        promoPrice: string|null,
+        discountPercentage: string|null,
+        discountPercentages: ?,
+        finalPrice: string|null
     ]}
     {@param? additionalDiscountClasses: string}
     {@param? additionalPromoPriceClasses: string}
@@ -18,7 +18,7 @@
         {if isNonnull($prices.promoPrice) or
         (isNonnull($prices.discountPercentage) and
         isNonnull($prices.finalPrice))}
-            {sp}price__value--inactive
+            {sp}price-value-inactive
         {/if}
     {/let}
 
@@ -90,10 +90,10 @@
             &ndash;{$percentage}%
         {/if}
     </span>
-    <span class="price__label">
+    <span class="price-label">
         {msg desc="Final price"}final-price{/msg}
     </span>
-    <span class="price-value price-value-final-price {$additionalDiscountClasses}">
+    <span class="price-value price-value-final {$additionalDiscountClasses}">
         {$finalPrice}
     </span>
 {/template}
