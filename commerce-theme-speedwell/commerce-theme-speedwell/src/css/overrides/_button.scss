@@ -62,7 +62,6 @@
         z-index: -1;
       }
       
-      &:focus::after,
       &:hover::after {
         opacity: 1;
         transform: scaleX(1);

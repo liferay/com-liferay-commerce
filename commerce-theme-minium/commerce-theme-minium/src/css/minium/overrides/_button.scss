@@ -26,10 +26,7 @@
     left: 0;
     bottom: 0;
     z-index: -2;
-  }
-
-  &::after {
-    transition: all ease-in-out .3s;
+    transition: background-color .3s ease-in;
   }
 
   &:active,
@@ -64,7 +61,6 @@
       z-index: -1;
     }
     
-    &:focus::after,
     &:hover::after {
       opacity: 1;
       transform: scale(5, 5);
@@ -97,6 +93,10 @@
       &::before {
         background-color: $color-theme;
       }
+
+      &:hover::before {
+        background-color: $color-theme-dark;
+      }
       
       &::after {
         background-color: $color-theme-dark;
@@ -122,6 +122,10 @@
     }
 
     &:not([disabled]):not(.disabled) {
+      &:hover::before {
+        background-color: $color-border;
+      }
+
       &::after {
         background-color: $color-border;
       }
@@ -145,6 +149,10 @@
     &:not([disabled]):not(.disabled) {
       &::before {
         background-color: $color-mood-good;
+      }
+
+      &:hover::before {
+        background-color: darken( $color-mood-good, 10% );
       }
       
       &::after {
@@ -170,6 +178,10 @@
       &::before {
         background-color: $color-mood-bad;
       }
+
+      &:hover::before {
+        background-color: darken( $color-mood-bad, 10% );
+      }
       
       &::after {
         background-color: darken( $color-mood-bad, 10% );
@@ -193,6 +205,10 @@
     &:not([disabled]):not(.disabled) {
       &::before {
         background-color: $color-mood-neutral;
+      }
+
+      &:hover::before {
+        background-color: darken( $color-mood-neutral, 10% );
       }
       
       &::after {
