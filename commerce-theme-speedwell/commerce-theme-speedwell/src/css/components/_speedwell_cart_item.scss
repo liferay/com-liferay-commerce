@@ -17,7 +17,7 @@
   position: relative;
   transition: max-height .2s ease-in, padding .1s ease-in;
 
-  @media screen and (min-width: 376px) and (max-width: 767px) {
+  @media screen and (min-width: $bp-xxsmall) and (max-width: $bp-small) {
     grid-template-areas: "image content actions price"
                          "image price price" !important;
     grid-template-columns: $item-image-size-sm 120px $item-image-size 75px !important;
@@ -39,7 +39,7 @@
     overflow: hidden;
     width: 70px;
 
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: $bp-small) {
       height: 50px !important;
       width: 50px !important;
     }
@@ -51,7 +51,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: $bp-small) {
       font-size: 11px !important;
     }
 

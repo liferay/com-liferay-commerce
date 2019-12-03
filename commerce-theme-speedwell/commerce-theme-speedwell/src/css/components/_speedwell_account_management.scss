@@ -16,7 +16,7 @@
     display: flex;
     justify-content: flex-end;
 
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: $bp-small) {
       justify-content: center;
     }
 
@@ -28,7 +28,7 @@
       padding: 0;
       transform: translateX(-132%);
 
-      @media screen and (max-width: 767px) {
+      @media screen and (max-width: $bp-small) {
         transform: translateX(0);
       }
     }

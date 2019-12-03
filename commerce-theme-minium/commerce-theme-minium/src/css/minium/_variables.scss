@@ -39,8 +39,8 @@ $sm-gutter: 10px;
 $gutter: 20px;
 $lg-gutter: 40px;
 
-$liferay-topbar-size: 56px;
-$liferay-topbar-size-small: 49px;
+$liferay-topbar-size: 70px;
+$liferay-topbar-size-small: 60px;
 $frame-size: 70px;
 $frame-size-small: 56px;
 $sidebar-width: 300px;
@@ -50,3 +50,9 @@ $transition: ease 200ms;
 $micro-transition: ease 100ms;
 
 $standard-radius: 8px;
+
+//breakpoints 
+
+$bp-xxsmall: 376px;
+$bp-xsmall: 577px;
+$bp-small: 767px;

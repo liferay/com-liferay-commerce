@@ -18,7 +18,7 @@ body:not(.has-control-menu) {
   .speedwell-topbar {
     top: 0;
 
-    @media screen and (max-width: 767px) {
+    @media screen and (max-width: $bp-small) {
       top: 0;
     }
   }
@@ -33,14 +33,14 @@ body:not(.has-control-menu) {
 
   .speedwell-search__results,
   .speedwell-main-menu::before {
-    top: $speedwell-topbar-size;
+    top: $topbar-height;
 
-    @media screen and (max-width: 767px) {
-      top: $speedwell-topbar-size-small;
+    @media screen and (max-width: $bp-small) {
+      top: $topbar-height-small;
     }
 
     @media screen and (max-width: 375px) {
-      top: calc(#{$speedwell-topbar-size-small} - 10px);
+      top: calc(#{$topbar-height-small} - 10px);
     }
   }
 
@@ -49,38 +49,24 @@ body:not(.has-control-menu) {
   }
 
   .speedwell-main-menu__links {
-    top: calc(#{$speedwell-topbar-size} - 1px);
+    top: calc(#{$topbar-height} - 1px);
 
-    @media screen and (max-width: 767px) {
-      top: calc(#{$speedwell-topbar-size-small} - 10px);
-    }
-  }
-
-  .commerce-cart {
-    top: 0 !important;
-
-    &::before {
-      top: $speedwell-topbar-size;
-    }
-
-    @media screen and (max-width: 767px) {
-      &::before {
-        top: calc(#{$speedwell-topbar-size-small} - 1px);
-      }
+    @media screen and (max-width: $bp-small) {
+      top: calc(#{$topbar-height-small} - 10px);
     }
   }
 }
 
 body.has-control-menu {
   .speedwell-content {
-    padding-top: $speedwell-topbar-size !important;
+    padding-top: $topbar-height !important;
 
     @media only screen and (max-width: 375px) {
-      padding-top: calc(#{$speedwell-topbar-size-small} - 10px) !important;
+      padding-top: calc(#{$topbar-height-small} - 10px) !important;
     }
 
     @media only screen and (max-width: 450px) {
-      padding-top: $speedwell-topbar-size-small !important;
+      padding-top: $topbar-height-small !important;
     }
   }
 }

@@ -1,5 +1,5 @@
 .commerce-checkout {
-  @media only screen and (max-width: 767px) {
+  @media only screen and (max-width: $bp-small) {
     .commerce-multi-step-nav {
       display: none;
     }

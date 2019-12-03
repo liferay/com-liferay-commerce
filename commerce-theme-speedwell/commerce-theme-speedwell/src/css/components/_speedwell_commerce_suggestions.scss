@@ -2,12 +2,12 @@
   background: $color-bg-medium;
   display: flex;
   flex-direction: column;
-  max-height: calc(90vh - #{$frame-size * 2});
+  max-height: calc(90vh - #{$topbar-height * 2});
   overflow: hidden auto;
   position: relative;
 
   @media screen and (hover: none) {
-    max-height: calc(90vh - #{$frame-size * 3});
+    max-height: calc(90vh - #{$topbar-height * 3});
   }
 
   &.is-loading::before {

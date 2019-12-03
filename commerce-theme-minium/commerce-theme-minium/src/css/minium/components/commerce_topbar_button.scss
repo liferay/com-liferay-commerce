@@ -11,7 +11,7 @@
 	padding: 14px;
 	text-align: left;
 
-	@media screen and (max-width: 767px) {
+	@media screen and (max-width: $bp-small) {
 		height: $frame-size-small;
 		min-width: $frame-size-small;
 		padding: 0;
@@ -23,7 +23,7 @@
 	}
 
 	&__label {
-		@media screen and (max-width: 767px) {
+		@media screen and (max-width: $bp-small) {
 			display: none;
 		}
 	}

@@ -11,7 +11,7 @@
   justify-content: center;
   min-width: 180px;
 
-  @media only screen and (max-width: 767px) {
+  @media only screen and (max-width: $bp-small) {
     height: 40px;
     line-height: 40px;
     min-width: 135px;

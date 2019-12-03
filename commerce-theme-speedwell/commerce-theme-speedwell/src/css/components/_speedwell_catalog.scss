@@ -1,5 +1,5 @@
 .commerce-catalog {
-  @media only screen and (max-width: 767px) {
+  @media only screen and (max-width: $bp-small) {
     #column-1 {
       background-color: white;
       height: 100vh;
@@ -7,7 +7,7 @@
       opacity: 0;
       overflow-y: auto;
       overflow: hidden;
-      padding: $speedwell-topbar-size-small 24px 24px;
+      padding: $topbar-height-small 24px 24px;
       position: fixed;
       top: 0;
       transform: translateX(100%);
@@ -29,9 +29,9 @@
       &-header {
         background-color: white;
         border-bottom: 1px solid $color-mood-bad-bg;
-        height: $speedwell-topbar-size-small;
+        height: $topbar-height-small;
         left: 0;
-        line-height: $speedwell-topbar-size-small;
+        line-height: $topbar-height-small;
         position: absolute;
         text-align: center;
         top: 0;
@@ -39,7 +39,7 @@
 
         .title {
           font-size: 20px;
-          line-height: $speedwell-topbar-size-small;
+          line-height: $topbar-height-small;
         }
 
         .close-button {
