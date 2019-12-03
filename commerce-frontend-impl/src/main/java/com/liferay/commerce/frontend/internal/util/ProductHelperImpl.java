@@ -80,18 +80,17 @@ public class ProductHelperImpl implements ProductHelper {
 
 		if (discountValue != null) {
 			CommerceMoney discountAmount = discountValue.getDiscountAmount();
-			BigDecimal discountPercentage =
-				discountValue.getDiscountPercentage();
-			BigDecimal[] discountPercentages = discountValue.getPercentages();
 			CommerceMoney finalPrice = commerceProductPrice.getFinalPrice();
 
 			priceModel.setDiscount(discountAmount.format(locale));
 
 			priceModel.setDiscountPercentage(
-				_commercePriceFormatter.format(discountPercentage, locale));
+				_commercePriceFormatter.format(
+					discountValue.getDiscountPercentage(), locale));
 
 			priceModel.setDiscountPercentages(
-				_getFormattedDiscountPercentages(discountPercentages, locale));
+				_getFormattedDiscountPercentages(
+					discountValue.getPercentages(), locale));
 
 			priceModel.setFinalPrice(finalPrice.format(locale));
 		}
@@ -162,10 +161,7 @@ public class ProductHelperImpl implements ProductHelper {
 				_commercePriceFormatter.format(percentage, locale));
 		}
 
-		String[] discountPercentagesArray =
-			new String[formattedDiscountPercentages.size()];
-
-		return formattedDiscountPercentages.toArray(discountPercentagesArray);
+		return formattedDiscountPercentages.toArray(new String[0]);
 	}
 
 	@Reference
