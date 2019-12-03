@@ -95,8 +95,8 @@ public class CommerceAccountAddressClayTable
 		StringBundler sb = new StringBundler(7);
 
 		sb.append("deleteCommerceAddress");
-		sb.append(StringPool.APOSTROPHE);
 		sb.append(StringPool.OPEN_PARENTHESIS);
+		sb.append(StringPool.APOSTROPHE);
 		sb.append(address.getAddressId());
 		sb.append(StringPool.APOSTROPHE);
 		sb.append(StringPool.CLOSE_PARENTHESIS);
