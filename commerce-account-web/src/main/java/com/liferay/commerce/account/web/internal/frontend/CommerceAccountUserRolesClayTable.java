@@ -106,7 +106,8 @@ public class CommerceAccountUserRolesClayTable
 		List<UserGroupRole> userGroupRoles =
 			_userGroupRoleLocalService.getUserGroupRoles(
 				accountFilterImpl.getUserId(),
-				commerceAccount.getCommerceAccountGroupId());
+				commerceAccount.getCommerceAccountGroupId(),
+				pagination.getStartPosition(), pagination.getEndPosition());
 
 		List<AccountRole> accountRoles = new ArrayList<>();
 

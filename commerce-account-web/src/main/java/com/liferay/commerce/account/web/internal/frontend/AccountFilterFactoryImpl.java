@@ -32,7 +32,8 @@ import org.osgi.service.component.annotations.Component;
 		"commerce.data.provider.key=" + CommerceAccountAddressClayTable.NAME,
 		"commerce.data.provider.key=" + CommerceAccountClayTable.NAME,
 		"commerce.data.provider.key=" + CommerceAccountOrganizationClayTable.NAME,
-		"commerce.data.provider.key=" + CommerceAccountUserClayTable.NAME
+		"commerce.data.provider.key=" + CommerceAccountUserClayTable.NAME,
+		"commerce.data.provider.key=" + CommerceAccountUserRolesClayTable.NAME
 	},
 	service = FilterFactory.class
 )
