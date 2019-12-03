@@ -93,6 +93,10 @@ public class UserCommerceMLRecommendationCPDataSourceImpl
 			_commerceAccountHelper.getCurrentCommerceAccount(
 				httpServletRequest);
 
+		if (commerceAccount == null) {
+			return new CPDataSourceResult(Collections.emptyList(), 0);
+		}
+
 		CPCatalogEntry cpCatalogEntry =
 			(CPCatalogEntry)httpServletRequest.getAttribute(
 				CPWebKeys.CP_CATALOG_ENTRY);
