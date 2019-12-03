@@ -7,7 +7,7 @@
   opacity: 0;
   padding: 20px 30px;
 
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: $bp-small) {
     margin-top: 35px;
     padding: 20px 0 0 0;
   }
@@ -35,7 +35,7 @@
       margin: 20px 0;
       position: relative;
 
-      @media screen and (max-width: 767px) {
+      @media screen and (max-width: $bp-small) {
         margin-bottom: 30px;
         margin-top: -25px;
       }

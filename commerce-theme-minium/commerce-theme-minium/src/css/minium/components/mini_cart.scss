@@ -1,40 +1,28 @@
 .commerce-cart {
 	background-color: $color-bg;
-	bottom: 0;
+	top: 100%;
 	box-shadow: -20px 0 40px $color-shadow;
 	display: flex;
 	flex-direction: column;
 	max-width: 500px;
-	position: fixed;
+	position: absolute;
 	right: 0;
-	top: $frame-size;
 	transition:
 		box-shadow $transition,
 		transform $transition;
 	width: 100vw;
 	z-index: 1140;
+	height: calc(100vh - #{$frame-size});
 
-	@media screen and (max-width: 767px) {
-		top: $frame-size-small;
+	@media screen and (max-width: $bp-xsmall) {
+		height: calc(100vh - #{$frame-size-small});
 	}
 
-	@media screen and (hover: none) {
-		bottom: $frame-size;
-	}
+	.has-control-menu.signed-in & {
+		height: calc(100vh - #{$liferay-topbar-size + $frame-size});
 
-	@media screen and (hover: none) and (max-width: 767px) {
-		bottom: $frame-size-small;
-	}
-
-	.minium-frame.is-scrolling-down.is-scrolled & {
-		bottom: 0;
-	}
-
-	body.signed-in & {
-		top: $frame-size + $liferay-topbar-size;
-
-		@media screen and (max-width: 767px) {
-			top: $frame-size-small + $liferay-topbar-size-small;
+		@media screen and (max-width: $bp-xsmall) {
+			height: calc(100vh - #{$liferay-topbar-size-small + $frame-size-small});
 		}
 	}
 
@@ -45,6 +33,16 @@
 
 	.rtl &:not(.is-open) {
 		transform: translateX(-100%);
+	}
+
+	&__container {
+		position: absolute;
+		top: 0;
+		right: 0;
+		height: 100%;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
 	}
 
 	&__top {

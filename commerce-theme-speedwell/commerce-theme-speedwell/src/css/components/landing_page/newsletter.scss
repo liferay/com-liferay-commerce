@@ -25,7 +25,7 @@
       position: relative;
       width: 540px;
 
-      @media screen and (max-width: 767px) {
+      @media screen and (max-width: $bp-small) {
         width: 366px;
       }
 
