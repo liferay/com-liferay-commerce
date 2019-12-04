@@ -40,4 +40,9 @@ public interface CommercePriceFormatter {
 	public String format(long companyId, BigDecimal price, Locale locale)
 		throws PortalException;
 
+	public String format(
+			long companyId, String commerceCurrencyCode, BigDecimal price,
+			Locale locale)
+		throws PortalException;
+
 }
