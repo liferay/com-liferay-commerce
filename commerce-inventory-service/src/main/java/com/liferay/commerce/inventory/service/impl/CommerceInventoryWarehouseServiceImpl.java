@@ -116,6 +116,19 @@ public class CommerceInventoryWarehouseServiceImpl
 
 	@Override
 	public List<CommerceInventoryWarehouse> getCommerceInventoryWarehouses(
+			long companyId, boolean active)
+		throws PortalException {
+
+		PortalPermissionUtil.check(
+			getPermissionChecker(),
+			CommerceInventoryActionKeys.MANAGE_INVENTORY);
+
+		return commerceInventoryWarehouseLocalService.
+			getCommerceInventoryWarehouses(companyId, active);
+	}
+
+	@Override
+	public List<CommerceInventoryWarehouse> getCommerceInventoryWarehouses(
 			long companyId, boolean active, String commerceCountryCode,
 			int start, int end,
 			OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
