@@ -303,11 +303,9 @@ public class CommerceShipmentItemLocalServiceImpl
 			return;
 		}
 
-		CPInstance cpInstance = commerceOrderItem.getCPInstance();
-
 		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
 			_fetchCommerceInventoryWarehouseItem(
-				commerceShipmentItemId, cpInstance.getSku());
+				commerceShipmentItemId, commerceOrderItem.getSku());
 
 		if (commerceInventoryWarehouseItem == null) {
 			return;
