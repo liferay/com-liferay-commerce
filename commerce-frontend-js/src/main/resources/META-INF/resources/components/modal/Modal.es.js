@@ -4,7 +4,7 @@ import ClayModal, {useModal} from '@clayui/modal';
 import PropTypes from 'prop-types';
 import React, {useState, useRef, useEffect} from 'react';
 
-import {OPEN} from '../../utilities/eventsDefinitions.es';
+import {OPEN, OPEN_MODAL} from '../../utilities/eventsDefinitions.es';
 
 const Modal = props => {
 	const [visible, setVisible] = useState(props.visible || false);
@@ -54,12 +54,14 @@ const Modal = props => {
 		function cleanUpListeners(e) {
 			if (e.portletId === props.portletId) {
 				Liferay.detach(OPEN, handleOpenEvent);
+				Liferay.detach(OPEN_MODAL, handleOpenEvent);
 				Liferay.detach('destroyPortlet', cleanUpListeners);
 			}
 		}
 
 		if (Liferay.on) {
 			Liferay.on(OPEN, handleOpenEvent);
+			Liferay.on(OPEN_MODAL, handleOpenEvent);
 			Liferay.on('destroyPortlet', cleanUpListeners);
 		}
 	}, [props.id, props.portletId]);
