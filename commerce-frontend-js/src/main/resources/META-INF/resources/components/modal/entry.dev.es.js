@@ -1,6 +1,7 @@
 import React from 'react';
 
-import {launcher} from '../utilities/index.es';
+import {launcher} from '../../utilities/index.es';
+import {OPEN_MODAL} from '../../utilities/eventsDefinitions.es';
 import modalLauncher from './entry.es';
 
 const props = {
@@ -10,7 +11,7 @@ const props = {
 		}
 	],
 	closeOnSubmit: true,
-	id: 'zeasc',
+	id: 'test-modal-id',
 	showCancel: true,
 	size: 'full-screen',
 	spritemap: './assets/icons.svg',
@@ -25,12 +26,11 @@ launcher(
 	() => (
 		<button
 			className="btn btn-primary"
-			onClick={() => window.dispatchEvent(new Event('zeasc-open'))}
+			onClick={() => Liferay.fire(OPEN_MODAL, {id: 'test-modal-id'})}
 		>
 			Open modal
 		</button>
 	),
 	'modal-trigger-root',
-	'modal-trigger-root',
-	props
+	'modal-trigger-root'
 );
