@@ -1,4 +1,5 @@
 import ClayButton from '@clayui/button';
+import ClayLoadingIndicator from '@clayui/loading-indicator';
 import ClayModal, {useModal} from '@clayui/modal';
 import PropTypes from 'prop-types';
 import React, {useState, useRef, useEffect} from 'react';
@@ -7,6 +8,7 @@ import {OPEN} from '../../utilities/eventsDefinitions.es';
 
 const Modal = props => {
 	const [visible, setVisible] = useState(props.visible || false);
+	const [loading, setLoading] = useState(false)
 
 	function reset() {
 		if (props.onClose) {
@@ -21,6 +23,7 @@ const Modal = props => {
 				? props.submitActiveAtLoading
 				: true
 		);
+		setLoading(false);
 	}
 
 	const [iframeLoadingCounter, setIframeLoadingCounter] = useState(0);
@@ -43,6 +46,7 @@ const Modal = props => {
 
 		function handleOpenEvent(data) {
 			if (props.id === data.id) {
+				setLoading(true);
 				setVisible(true);
 			}
 		}
@@ -65,13 +69,13 @@ const Modal = props => {
 	}
 
 	useEffect(() => {
-		switch (true) {
-			case iframeLoadingCounter > 1:
-				return _handleFormSubmit();
-			case iframeLoadingCounter === 1:
-				return _handleIframeFirstLoad();
-			default:
-				break;
+		
+		if(iframeLoadingCounter > 1) {
+			_handleFormSubmit();
+		}
+		
+		if(iframeLoadingCounter === 1) {
+			_handleIframeFirstLoad();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [iframeLoadingCounter]);
@@ -87,6 +91,8 @@ const Modal = props => {
 	}
 
 	function _handleIframeFirstLoad() {
+		setLoading(false);
+
 		const iframeDocument = iframeRef.current.contentDocument;
 		const iframeWindow = iframeRef.current.contentWindow;
 
@@ -165,6 +171,11 @@ const Modal = props => {
 					src={props.url}
 					title={props.title}
 				/>
+				{loading && 
+					<div className="loader-container">
+						<ClayLoadingIndicator />
+					</div>
+				}
 			</div>
 			{(props.showSubmit ||
 				props.submitLabel ||
