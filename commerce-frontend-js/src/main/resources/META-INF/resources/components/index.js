@@ -39,5 +39,12 @@ module.exports = [
     folder: "step_tracker",
     name: "Step tracker",
     page: "step_tracker.html"
+  },
+  {
+    entry: "entry.es.js",
+    entry_dev: "entry.dev.es.js",
+    folder: "modal",
+    name: "Modal",
+    page: "modal.html"
   }
 ];
