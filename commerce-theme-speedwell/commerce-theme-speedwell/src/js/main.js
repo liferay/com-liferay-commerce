@@ -1,10 +1,9 @@
 AUI().ready(
 	function() {
-		if (!!Speedwell && !!Speedwell.features) {
+		if (!!Speedwell && !!Speedwell.features && !!Speedwell.features.init) {
 			Speedwell.features.init.initializeFeatures();
 
 			Speedwell.features.sliders = [];
-			Speedwell.features.sliderCallbacks = [];
 
 			if ('sliderCallbacks' in Speedwell.features &&
 				Speedwell.features.sliderCallbacks.length) {
