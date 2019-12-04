@@ -308,11 +308,9 @@ public class CommerceShipmentItemLocalServiceImpl
 			return;
 		}
 
-		CPInstance cpInstance = commerceOrderItem.getCPInstance();
-
 		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
 			_fetchCommerceInventoryWarehouseItem(
-				commerceShipmentItemId, cpInstance.getSku());
+				commerceShipmentItemId, commerceOrderItem.getSku());
 
 		if (commerceInventoryWarehouseItem == null) {
 			return;
@@ -349,7 +347,7 @@ public class CommerceShipmentItemLocalServiceImpl
 				public Void call() throws Exception {
 					Message message = new Message();
 
-					message.put("cpInstanceId", cpInstance.getCPInstanceId());
+					message.put("cpInstanceId", commerceOrderItem.getCPInstanceId());
 
 					MessageBusUtil.sendMessage(
 						CommerceDestinationNames.STOCK_QUANTITY, message);

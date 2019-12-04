@@ -296,12 +296,10 @@ public class CommerceOrderItemLocalServiceImpl
 		CommerceOrderItem commerceOrderItem =
 			commerceOrderItemPersistence.findByPrimaryKey(commerceOrderItemId);
 
-		CPInstance cpInstance = commerceOrderItem.getCPInstance();
-
 		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
 			_commerceInventoryWarehouseItemLocalService.
 				fetchCommerceInventoryWarehouseItem(
-					commerceInventoryWarehouseId, cpInstance.getSku());
+					commerceInventoryWarehouseId, commerceOrderItem.getSku());
 
 		if (commerceInventoryWarehouseItem == null) {
 			return 0;
