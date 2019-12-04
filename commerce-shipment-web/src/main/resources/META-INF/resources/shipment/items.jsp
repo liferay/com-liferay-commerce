@@ -42,7 +42,7 @@ CommerceShipment commerceShipment = commerceShipmentItemDisplayContext.getCommer
 			selectedDisplayStyle="list"
 		/>
 
-		<c:if test="<%= ArrayUtil.contains(CommerceShipmentConstants.EDITABLE_SHIPMENT_STATUSES, commerceShipment.getStatus()) %>">
+		<c:if test="<%= commerceShipment.getStatus() == CommerceShipmentConstants.SHIPMENT_STATUS_PROCESSING %>">
 			<liferay-frontend:add-menu
 				inline="<%= true %>"
 			>
@@ -63,11 +63,9 @@ CommerceShipment commerceShipment = commerceShipmentItemDisplayContext.getCommer
 </liferay-frontend:management-bar>
 
 <div class="container-fluid-1280" id="<portlet:namespace />shipmentItemsContainer">
-	<liferay-ui:error exception="<%= CommerceShipmentStatusException.class %>" message="shipments-can-only-be-modified-if-they-have-a-processing-status" />
-
-	<c:if test="<%= !ArrayUtil.contains(CommerceShipmentConstants.EDITABLE_SHIPMENT_STATUSES, commerceShipment.getStatus()) %>">
+	<c:if test="<%= commerceShipment.getStatus() > CommerceShipmentConstants.SHIPMENT_STATUS_PROCESSING %>">
 		<aui:alert closeable="<%= false %>" cssClass="mt-3" type="warning">
-			<liferay-ui:message key="shipments-can-only-be-modified-if-they-have-a-processing-status" />
+			<liferay-ui:message key="shipment-items-can-only-be-modified-if-the-shipment-is-processing" />
 		</aui:alert>
 	</c:if>
 
@@ -122,7 +120,7 @@ CommerceShipment commerceShipment = commerceShipmentItemDisplayContext.getCommer
 						value="<%= (commerceInventoryWarehouse == null) ? StringPool.BLANK : HtmlUtil.escape(commerceInventoryWarehouse.getName()) %>"
 					/>
 
-					<c:if test="<%= ArrayUtil.contains(CommerceShipmentConstants.EDITABLE_SHIPMENT_STATUSES, commerceShipment.getStatus()) %>">
+					<c:if test="<%= commerceShipment.getStatus() > CommerceShipmentConstants.SHIPMENT_STATUS_READY_TO_BE_SHIPPED %>">
 						<liferay-ui:search-container-column-jsp
 							cssClass="entry-action-column"
 							path="/shipment_item_action.jsp"

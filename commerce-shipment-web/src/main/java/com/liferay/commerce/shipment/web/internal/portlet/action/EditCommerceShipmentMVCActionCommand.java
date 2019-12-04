@@ -35,7 +35,6 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -312,9 +311,8 @@ public class EditCommerceShipmentMVCActionCommand extends BaseMVCActionCommand {
 			commerceShipment = _commerceShipmentService.getCommerceShipment(
 				commerceShipmentId);
 
-			if (ArrayUtil.contains(
-					CommerceShipmentConstants.EDITABLE_SHIPMENT_STATUSES,
-					commerceShipment.getStatus())) {
+			if (commerceShipment.getStatus() ==
+					CommerceShipmentConstants.SHIPMENT_STATUS_PROCESSING) {
 
 				commerceShipment =
 					_commerceShipmentService.updateCommerceShipment(
@@ -326,7 +324,10 @@ public class EditCommerceShipmentMVCActionCommand extends BaseMVCActionCommand {
 						expectedDateDay, expectedDateYear, expectedDateHour,
 						expectedDateMinute);
 			}
-			else {
+			else if (commerceShipment.getStatus() ==
+						CommerceShipmentConstants.
+							SHIPMENT_STATUS_READY_TO_BE_SHIPPED) {
+
 				commerceShipment =
 					_commerceShipmentService.updateCommerceShipment(
 						commerceShipmentId, carrier, trackingNumber, status,
@@ -334,6 +335,9 @@ public class EditCommerceShipmentMVCActionCommand extends BaseMVCActionCommand {
 						shippingDateHour, shippingDateMinute, expectedDateMonth,
 						expectedDateDay, expectedDateYear, expectedDateHour,
 						expectedDateMinute);
+			}
+			else {
+				throw new CommerceShipmentStatusException();
 			}
 		}
 		else {
