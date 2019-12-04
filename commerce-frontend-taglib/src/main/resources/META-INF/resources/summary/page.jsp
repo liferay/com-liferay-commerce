@@ -23,7 +23,7 @@
 		"<%= summaryId %>",
 		"<%= summaryId %>",
 		{
-			items: <%= jsonSerializer.serializeDeep(items) %>,
+			items: <%= jsonSerializer.serializeDeep(items) %>
 		}
 	);
 </aui:script>
