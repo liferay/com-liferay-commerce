@@ -4,6 +4,9 @@ import {launcher} from '../../utilities/index.es';
 import {OPEN_MODAL} from '../../utilities/eventsDefinitions.es';
 import modalLauncher from './entry.es';
 
+import './_modal.scss';
+import '../../styles/main.scss';
+
 const props = {
 	actions: [
 		{
@@ -17,7 +20,7 @@ const props = {
 	spritemap: './assets/icons.svg',
 	submitLabel: 'Create',
 	title: 'Title',
-	url: 'http://localhost:9000/form.html'
+	url: 'http://localhost:9000/modal-content.html'
 };
 
 modalLauncher('modal', 'modal-root', props);
