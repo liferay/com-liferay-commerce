@@ -86,6 +86,19 @@ public class CommercePriceFormatterImpl implements CommercePriceFormatter {
 		return format(commerceCurrency, price, locale);
 	}
 
+	@Override
+	public String format(
+			long companyId, String commerceCurrencyCode, BigDecimal price,
+			Locale locale)
+		throws PortalException {
+
+		CommerceCurrency commerceCurrency =
+			_commerceCurrencyLocalService.getCommerceCurrency(
+				companyId, commerceCurrencyCode);
+
+		return format(commerceCurrency, price, locale);
+	}
+
 	@Activate
 	@Modified
 	protected void activate(Map<String, Object> properties) {
