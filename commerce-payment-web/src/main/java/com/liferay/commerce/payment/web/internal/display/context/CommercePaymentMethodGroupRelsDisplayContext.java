@@ -206,9 +206,6 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 					themeDisplay.getLocale()));
 		}
 
-		commercePaymentMethodGroupRelsCount +=
-			commercePaymentMethodGroupRels.size();
-
 		_searchContainer.setResults(commercePaymentMethodGroupRels);
 		_searchContainer.setTotal(commercePaymentMethodGroupRelsCount);
 
