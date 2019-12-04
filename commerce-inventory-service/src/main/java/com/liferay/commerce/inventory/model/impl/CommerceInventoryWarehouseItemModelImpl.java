@@ -357,10 +357,10 @@ public class CommerceInventoryWarehouseItemModelImpl
 				public void accept(
 					CommerceInventoryWarehouseItem
 						commerceInventoryWarehouseItem,
-					Object externalReferenceCode) {
+					Object externalReferenceCodeObject) {
 
 					commerceInventoryWarehouseItem.setExternalReferenceCode(
-						(String)externalReferenceCode);
+						(String)externalReferenceCodeObject);
 				}
 
 			});
@@ -386,11 +386,11 @@ public class CommerceInventoryWarehouseItemModelImpl
 				public void accept(
 					CommerceInventoryWarehouseItem
 						commerceInventoryWarehouseItem,
-					Object commerceInventoryWarehouseItemId) {
+					Object commerceInventoryWarehouseItemIdObject) {
 
 					commerceInventoryWarehouseItem.
 						setCommerceInventoryWarehouseItemId(
-							(Long)commerceInventoryWarehouseItemId);
+							(Long)commerceInventoryWarehouseItemIdObject);
 				}
 
 			});
@@ -415,10 +415,10 @@ public class CommerceInventoryWarehouseItemModelImpl
 				public void accept(
 					CommerceInventoryWarehouseItem
 						commerceInventoryWarehouseItem,
-					Object companyId) {
+					Object companyIdObject) {
 
 					commerceInventoryWarehouseItem.setCompanyId(
-						(Long)companyId);
+						(Long)companyIdObject);
 				}
 
 			});
@@ -443,9 +443,10 @@ public class CommerceInventoryWarehouseItemModelImpl
 				public void accept(
 					CommerceInventoryWarehouseItem
 						commerceInventoryWarehouseItem,
-					Object userId) {
+					Object userIdObject) {
 
-					commerceInventoryWarehouseItem.setUserId((Long)userId);
+					commerceInventoryWarehouseItem.setUserId(
+						(Long)userIdObject);
 				}
 
 			});
@@ -470,10 +471,10 @@ public class CommerceInventoryWarehouseItemModelImpl
 				public void accept(
 					CommerceInventoryWarehouseItem
 						commerceInventoryWarehouseItem,
-					Object userName) {
+					Object userNameObject) {
 
 					commerceInventoryWarehouseItem.setUserName(
-						(String)userName);
+						(String)userNameObject);
 				}
 
 			});
@@ -498,10 +499,10 @@ public class CommerceInventoryWarehouseItemModelImpl
 				public void accept(
 					CommerceInventoryWarehouseItem
 						commerceInventoryWarehouseItem,
-					Object createDate) {
+					Object createDateObject) {
 
 					commerceInventoryWarehouseItem.setCreateDate(
-						(Date)createDate);
+						(Date)createDateObject);
 				}
 
 			});
@@ -526,10 +527,10 @@ public class CommerceInventoryWarehouseItemModelImpl
 				public void accept(
 					CommerceInventoryWarehouseItem
 						commerceInventoryWarehouseItem,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
 					commerceInventoryWarehouseItem.setModifiedDate(
-						(Date)modifiedDate);
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -555,11 +556,11 @@ public class CommerceInventoryWarehouseItemModelImpl
 				public void accept(
 					CommerceInventoryWarehouseItem
 						commerceInventoryWarehouseItem,
-					Object commerceInventoryWarehouseId) {
+					Object commerceInventoryWarehouseIdObject) {
 
 					commerceInventoryWarehouseItem.
 						setCommerceInventoryWarehouseId(
-							(Long)commerceInventoryWarehouseId);
+							(Long)commerceInventoryWarehouseIdObject);
 				}
 
 			});
@@ -584,9 +585,9 @@ public class CommerceInventoryWarehouseItemModelImpl
 				public void accept(
 					CommerceInventoryWarehouseItem
 						commerceInventoryWarehouseItem,
-					Object sku) {
+					Object skuObject) {
 
-					commerceInventoryWarehouseItem.setSku((String)sku);
+					commerceInventoryWarehouseItem.setSku((String)skuObject);
 				}
 
 			});
@@ -611,10 +612,10 @@ public class CommerceInventoryWarehouseItemModelImpl
 				public void accept(
 					CommerceInventoryWarehouseItem
 						commerceInventoryWarehouseItem,
-					Object quantity) {
+					Object quantityObject) {
 
 					commerceInventoryWarehouseItem.setQuantity(
-						(Integer)quantity);
+						(Integer)quantityObject);
 				}
 
 			});
@@ -639,10 +640,10 @@ public class CommerceInventoryWarehouseItemModelImpl
 				public void accept(
 					CommerceInventoryWarehouseItem
 						commerceInventoryWarehouseItem,
-					Object reservedQuantity) {
+					Object reservedQuantityObject) {
 
 					commerceInventoryWarehouseItem.setReservedQuantity(
-						(Integer)reservedQuantity);
+						(Integer)reservedQuantityObject);
 				}
 
 			});
