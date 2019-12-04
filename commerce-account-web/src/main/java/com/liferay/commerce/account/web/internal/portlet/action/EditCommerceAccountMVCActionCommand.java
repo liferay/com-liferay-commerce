@@ -23,6 +23,7 @@ import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.account.service.CommerceAccountService;
 import com.liferay.commerce.account.util.CommerceAccountHelper;
 import com.liferay.commerce.exception.NoSuchAddressException;
+import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -164,7 +165,9 @@ public class EditCommerceAccountMVCActionCommand extends BaseMVCActionCommand {
 
 		_commerceAccountHelper.setCurrentCommerceAccount(
 			_portal.getHttpServletRequest(actionRequest),
-			_portal.getScopeGroupId(actionRequest), commerceAccountId);
+			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
+				_portal.getScopeGroupId(actionRequest)),
+			commerceAccountId);
 	}
 
 	protected CommerceAccount updateCommerceAccount(ActionRequest actionRequest)
@@ -237,6 +240,9 @@ public class EditCommerceAccountMVCActionCommand extends BaseMVCActionCommand {
 
 	@Reference
 	private CommerceAddressService _commerceAddressService;
+
+	@Reference
+	private CommerceChannelLocalService _commerceChannelLocalService;
 
 	@Reference
 	private DLAppLocalService _dlAppLocalService;
