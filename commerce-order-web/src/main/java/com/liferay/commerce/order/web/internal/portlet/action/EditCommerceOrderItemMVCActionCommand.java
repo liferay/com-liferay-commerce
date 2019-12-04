@@ -17,6 +17,7 @@ package com.liferay.commerce.order.web.internal.portlet.action;
 import com.liferay.commerce.constants.CommercePortletKeys;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
+import com.liferay.commerce.exception.CommerceOrderValidatorException;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.product.model.CPInstance;
@@ -27,6 +28,7 @@ import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -115,14 +117,23 @@ public class EditCommerceOrderItemMVCActionCommand
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
-		if (cmd.equals(Constants.ADD)) {
-			addCommerceOrderItems(actionRequest);
+		try {
+			if (cmd.equals(Constants.ADD)) {
+				addCommerceOrderItems(actionRequest);
+			}
+			else if (cmd.equals(Constants.UPDATE)) {
+				updateCommerceOrderItem(actionRequest);
+			}
+			else if (cmd.equals(Constants.DELETE)) {
+				deleteCommerceOrderItems(actionRequest);
+			}
 		}
-		else if (cmd.equals(Constants.UPDATE)) {
-			updateCommerceOrderItem(actionRequest);
-		}
-		else if (cmd.equals(Constants.DELETE)) {
-			deleteCommerceOrderItems(actionRequest);
+		catch (CommerceOrderValidatorException cove) {
+			SessionErrors.add(actionRequest, cove.getClass(), cove);
+
+			String redirect = ParamUtil.getString(actionRequest, "redirect");
+
+			sendRedirect(actionRequest, actionResponse, redirect);
 		}
 	}
 
