@@ -41,6 +41,24 @@ portletDisplay.setURLBack(redirect);
 	<aui:input name="commerceOrderId" type="hidden" value="<%= commerceOrderItem.getCommerceOrderId() %>" />
 	<aui:input name="commerceOrderItemId" type="hidden" value="<%= commerceOrderItem.getCommerceOrderItemId() %>" />
 
+	<liferay-ui:error exception="<%= CommerceOrderValidatorException.class %>">
+
+		<%
+		CommerceOrderValidatorException cove = (CommerceOrderValidatorException)errorException;
+
+		if (cove != null) {
+			for (CommerceOrderValidatorResult commerceOrderValidatorResult : cove.getCommerceOrderValidatorResults()) {
+		%>
+
+				<liferay-ui:message key="<%= commerceOrderValidatorResult.getLocalizedMessage() %>" />
+
+		<%
+			}
+		}
+		%>
+
+	</liferay-ui:error>
+
 	<aui:fieldset-group markupView="lexicon">
 		<aui:fieldset>
 			<aui:input bean="<%= commerceOrderItem %>" name="quantity" />
