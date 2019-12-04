@@ -13,25 +13,24 @@
  * details.
  */
 --%>
-<%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
+<%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %><%@
+taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 
-<%@ page import="com.liferay.portal.kernel.util.PortalUtil" %>
-<%@ page import="com.liferay.petra.string.StringPool" %>
-
-<%@ page import="com.liferay.commerce.frontend.model.SummaryItem" %>
+<%@ page import="com.liferay.commerce.frontend.model.SummaryItem" %><%@
+page import="com.liferay.petra.string.StringPool" %><%@
+page import="com.liferay.portal.kernel.json.JSONFactoryUtil" %><%@
+page import="com.liferay.portal.kernel.json.JSONSerializer" %><%@
+page import="com.liferay.portal.kernel.util.PortalUtil" %>
 
 <%@ page import="java.util.List" %>
-<%@ page import="com.liferay.portal.kernel.json.JSONSerializer" %>
-<%@ page import="com.liferay.portal.kernel.json.JSONFactoryUtil" %>
 
 <liferay-theme:defineObjects />
 
 <%
-    List<SummaryItem> items = (List<SummaryItem>)request.getAttribute("liferay-commerce:summary:items");
-    String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_summary") + StringPool.UNDERLINE;
-    String summaryId = randomNamespace + "summary-id";
-    JSONSerializer jsonSerializer = JSONFactoryUtil.createJSONSerializer();
+	List<SummaryItem> items = (List<SummaryItem>)request.getAttribute("liferay-commerce:summary:items");
+	String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_summary") + StringPool.UNDERLINE;
+
+	String summaryId = randomNamespace + "summary-id";
+	JSONSerializer jsonSerializer = JSONFactoryUtil.createJSONSerializer();
 %>
