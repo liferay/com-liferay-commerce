@@ -304,9 +304,6 @@ public class MiniumCPContentListEntryRenderer
 			"spritemap",
 			themeDisplay.getPathThemeImages() + "/commerce-icons.svg");
 
-		String moduleName = _npmResolver.resolveModuleName(
-			"commerce-theme-minium-impl/product_card/ProductCard.es");
-
 		Set<String> dependencies = new HashSet<>();
 
 		dependencies.add(
@@ -316,8 +313,9 @@ public class MiniumCPContentListEntryRenderer
 		dependencies.add("commerce-frontend-taglib/price/Price.es");
 
 		ComponentDescriptor componentDescriptor = new ComponentDescriptor(
-			"ProductCard.render", moduleName, null, dependencies, false, true,
-			false);
+			"ProductCard.render",
+			"commerce-frontend-taglib/product_card/ProductCard.es", null,
+			dependencies, false, true, false);
 
 		_soyComponentRenderer.renderSoyComponent(
 			httpServletRequest, httpServletResponse, componentDescriptor,

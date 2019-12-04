@@ -154,11 +154,10 @@ public class MiniumCPCompareListRenderer implements CPContentListRenderer {
 		editCompareProductActionURL.setParameter(
 			ActionRequest.ACTION_NAME, "editCompareProduct");
 
-		String moduleName = _npmResolver.resolveModuleName(
-			"commerce-theme-minium-impl/products_compare/ProductsCompare.es");
-
 		ComponentDescriptor testDescriptor = new ComponentDescriptor(
-			"ProductsCompare.render", moduleName, null, null);
+			"ProductsCompare.render",
+			"commerce-frontend-taglib/products_compare/ProductsCompare.es",
+			null, null);
 
 		Map<String, Object> context = new HashMap<>();
 
