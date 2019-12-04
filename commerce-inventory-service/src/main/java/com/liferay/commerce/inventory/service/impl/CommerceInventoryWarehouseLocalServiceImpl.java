@@ -195,6 +195,14 @@ public class CommerceInventoryWarehouseLocalServiceImpl
 
 	@Override
 	public List<CommerceInventoryWarehouse> getCommerceInventoryWarehouses(
+		long companyId, boolean active) {
+
+		return commerceInventoryWarehousePersistence.findByC_A(
+			companyId, active);
+	}
+
+	@Override
+	public List<CommerceInventoryWarehouse> getCommerceInventoryWarehouses(
 		long companyId, boolean active, String commerceCountryCode, int start,
 		int end,
 		OrderByComparator<CommerceInventoryWarehouse> orderByComparator) {
