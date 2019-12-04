@@ -48,11 +48,24 @@ public class CommerceShipmentServiceWrapper
 			commerceOrderId, serviceContext);
 	}
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), pass boolean for restoring stock
+	 */
+	@Deprecated
 	@Override
 	public void deleteCommerceShipment(long commerceShipmentId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		_commerceShipmentService.deleteCommerceShipment(commerceShipmentId);
+	}
+
+	@Override
+	public void deleteCommerceShipment(
+			long commerceShipmentId, boolean restoreStockQuantity)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		_commerceShipmentService.deleteCommerceShipment(
+			commerceShipmentId, restoreStockQuantity);
 	}
 
 	@Override

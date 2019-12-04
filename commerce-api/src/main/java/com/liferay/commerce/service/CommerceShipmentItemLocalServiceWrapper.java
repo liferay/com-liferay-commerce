@@ -82,6 +82,7 @@ public class CommerceShipmentItemLocalServiceWrapper
 	 * @param commerceShipmentItem the commerce shipment item
 	 * @return the commerce shipment item that was removed
 	 */
+	@Deprecated
 	@Override
 	public com.liferay.commerce.model.CommerceShipmentItem
 		deleteCommerceShipmentItem(
@@ -92,6 +93,18 @@ public class CommerceShipmentItemLocalServiceWrapper
 			commerceShipmentItem);
 	}
 
+	@Override
+	public com.liferay.commerce.model.CommerceShipmentItem
+			deleteCommerceShipmentItem(
+				com.liferay.commerce.model.CommerceShipmentItem
+					commerceShipmentItem,
+				boolean restoreStockQuantity)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceShipmentItemLocalService.deleteCommerceShipmentItem(
+			commerceShipmentItem, restoreStockQuantity);
+	}
+
 	/**
 	 * Deletes the commerce shipment item with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
@@ -99,6 +112,7 @@ public class CommerceShipmentItemLocalServiceWrapper
 	 * @return the commerce shipment item that was removed
 	 * @throws PortalException if a commerce shipment item with the primary key could not be found
 	 */
+	@Deprecated
 	@Override
 	public com.liferay.commerce.model.CommerceShipmentItem
 			deleteCommerceShipmentItem(long commerceShipmentItemId)
@@ -109,9 +123,31 @@ public class CommerceShipmentItemLocalServiceWrapper
 	}
 
 	@Override
-	public void deleteCommerceShipmentItems(long commerceShipment) {
+	public void deleteCommerceShipmentItem(
+			long commerceShipmentItemId, boolean restoreStockQuantity)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		_commerceShipmentItemLocalService.deleteCommerceShipmentItem(
+			commerceShipmentItemId, restoreStockQuantity);
+	}
+
+	/**
+	 * @deprecated As of Mueller (7.2.x), pass boolean for restoring stock
+	 */
+	@Deprecated
+	@Override
+	public void deleteCommerceShipmentItems(long commerceShipmentId) {
 		_commerceShipmentItemLocalService.deleteCommerceShipmentItems(
-			commerceShipment);
+			commerceShipmentId);
+	}
+
+	@Override
+	public void deleteCommerceShipmentItems(
+			long commerceShipmentId, boolean restoreStockQuantity)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		_commerceShipmentItemLocalService.deleteCommerceShipmentItems(
+			commerceShipmentId, restoreStockQuantity);
 	}
 
 	/**

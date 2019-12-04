@@ -337,10 +337,10 @@ public class CommerceInventoryAuditModelImpl
 				@Override
 				public void accept(
 					CommerceInventoryAudit commerceInventoryAudit,
-					Object commerceInventoryAuditId) {
+					Object commerceInventoryAuditIdObject) {
 
 					commerceInventoryAudit.setCommerceInventoryAuditId(
-						(Long)commerceInventoryAuditId);
+						(Long)commerceInventoryAuditIdObject);
 				}
 
 			});
@@ -363,9 +363,9 @@ public class CommerceInventoryAuditModelImpl
 				@Override
 				public void accept(
 					CommerceInventoryAudit commerceInventoryAudit,
-					Object companyId) {
+					Object companyIdObject) {
 
-					commerceInventoryAudit.setCompanyId((Long)companyId);
+					commerceInventoryAudit.setCompanyId((Long)companyIdObject);
 				}
 
 			});
@@ -388,9 +388,9 @@ public class CommerceInventoryAuditModelImpl
 				@Override
 				public void accept(
 					CommerceInventoryAudit commerceInventoryAudit,
-					Object userId) {
+					Object userIdObject) {
 
-					commerceInventoryAudit.setUserId((Long)userId);
+					commerceInventoryAudit.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -413,9 +413,9 @@ public class CommerceInventoryAuditModelImpl
 				@Override
 				public void accept(
 					CommerceInventoryAudit commerceInventoryAudit,
-					Object userName) {
+					Object userNameObject) {
 
-					commerceInventoryAudit.setUserName((String)userName);
+					commerceInventoryAudit.setUserName((String)userNameObject);
 				}
 
 			});
@@ -438,9 +438,10 @@ public class CommerceInventoryAuditModelImpl
 				@Override
 				public void accept(
 					CommerceInventoryAudit commerceInventoryAudit,
-					Object createDate) {
+					Object createDateObject) {
 
-					commerceInventoryAudit.setCreateDate((Date)createDate);
+					commerceInventoryAudit.setCreateDate(
+						(Date)createDateObject);
 				}
 
 			});
@@ -463,9 +464,10 @@ public class CommerceInventoryAuditModelImpl
 				@Override
 				public void accept(
 					CommerceInventoryAudit commerceInventoryAudit,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
-					commerceInventoryAudit.setModifiedDate((Date)modifiedDate);
+					commerceInventoryAudit.setModifiedDate(
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -487,9 +489,10 @@ public class CommerceInventoryAuditModelImpl
 
 				@Override
 				public void accept(
-					CommerceInventoryAudit commerceInventoryAudit, Object sku) {
+					CommerceInventoryAudit commerceInventoryAudit,
+					Object skuObject) {
 
-					commerceInventoryAudit.setSku((String)sku);
+					commerceInventoryAudit.setSku((String)skuObject);
 				}
 
 			});
@@ -512,9 +515,10 @@ public class CommerceInventoryAuditModelImpl
 				@Override
 				public void accept(
 					CommerceInventoryAudit commerceInventoryAudit,
-					Object description) {
+					Object descriptionObject) {
 
-					commerceInventoryAudit.setDescription((String)description);
+					commerceInventoryAudit.setDescription(
+						(String)descriptionObject);
 				}
 
 			});
@@ -537,9 +541,9 @@ public class CommerceInventoryAuditModelImpl
 				@Override
 				public void accept(
 					CommerceInventoryAudit commerceInventoryAudit,
-					Object quantity) {
+					Object quantityObject) {
 
-					commerceInventoryAudit.setQuantity((Integer)quantity);
+					commerceInventoryAudit.setQuantity((Integer)quantityObject);
 				}
 
 			});

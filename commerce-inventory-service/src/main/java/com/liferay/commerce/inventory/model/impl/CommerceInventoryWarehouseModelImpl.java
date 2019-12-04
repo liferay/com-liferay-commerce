@@ -374,10 +374,10 @@ public class CommerceInventoryWarehouseModelImpl
 				@Override
 				public void accept(
 					CommerceInventoryWarehouse commerceInventoryWarehouse,
-					Object externalReferenceCode) {
+					Object externalReferenceCodeObject) {
 
 					commerceInventoryWarehouse.setExternalReferenceCode(
-						(String)externalReferenceCode);
+						(String)externalReferenceCodeObject);
 				}
 
 			});
@@ -401,10 +401,10 @@ public class CommerceInventoryWarehouseModelImpl
 				@Override
 				public void accept(
 					CommerceInventoryWarehouse commerceInventoryWarehouse,
-					Object commerceInventoryWarehouseId) {
+					Object commerceInventoryWarehouseIdObject) {
 
 					commerceInventoryWarehouse.setCommerceInventoryWarehouseId(
-						(Long)commerceInventoryWarehouseId);
+						(Long)commerceInventoryWarehouseIdObject);
 				}
 
 			});
@@ -427,9 +427,10 @@ public class CommerceInventoryWarehouseModelImpl
 				@Override
 				public void accept(
 					CommerceInventoryWarehouse commerceInventoryWarehouse,
-					Object companyId) {
+					Object companyIdObject) {
 
-					commerceInventoryWarehouse.setCompanyId((Long)companyId);
+					commerceInventoryWarehouse.setCompanyId(
+						(Long)companyIdObject);
 				}
 
 			});
@@ -452,9 +453,9 @@ public class CommerceInventoryWarehouseModelImpl
 				@Override
 				public void accept(
 					CommerceInventoryWarehouse commerceInventoryWarehouse,
-					Object userId) {
+					Object userIdObject) {
 
-					commerceInventoryWarehouse.setUserId((Long)userId);
+					commerceInventoryWarehouse.setUserId((Long)userIdObject);
 				}
 
 			});
@@ -477,9 +478,10 @@ public class CommerceInventoryWarehouseModelImpl
 				@Override
 				public void accept(
 					CommerceInventoryWarehouse commerceInventoryWarehouse,
-					Object userName) {
+					Object userNameObject) {
 
-					commerceInventoryWarehouse.setUserName((String)userName);
+					commerceInventoryWarehouse.setUserName(
+						(String)userNameObject);
 				}
 
 			});
@@ -502,9 +504,10 @@ public class CommerceInventoryWarehouseModelImpl
 				@Override
 				public void accept(
 					CommerceInventoryWarehouse commerceInventoryWarehouse,
-					Object createDate) {
+					Object createDateObject) {
 
-					commerceInventoryWarehouse.setCreateDate((Date)createDate);
+					commerceInventoryWarehouse.setCreateDate(
+						(Date)createDateObject);
 				}
 
 			});
@@ -527,10 +530,10 @@ public class CommerceInventoryWarehouseModelImpl
 				@Override
 				public void accept(
 					CommerceInventoryWarehouse commerceInventoryWarehouse,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
 					commerceInventoryWarehouse.setModifiedDate(
-						(Date)modifiedDate);
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -553,9 +556,9 @@ public class CommerceInventoryWarehouseModelImpl
 				@Override
 				public void accept(
 					CommerceInventoryWarehouse commerceInventoryWarehouse,
-					Object name) {
+					Object nameObject) {
 
-					commerceInventoryWarehouse.setName((String)name);
+					commerceInventoryWarehouse.setName((String)nameObject);
 				}
 
 			});
@@ -578,10 +581,10 @@ public class CommerceInventoryWarehouseModelImpl
 				@Override
 				public void accept(
 					CommerceInventoryWarehouse commerceInventoryWarehouse,
-					Object description) {
+					Object descriptionObject) {
 
 					commerceInventoryWarehouse.setDescription(
-						(String)description);
+						(String)descriptionObject);
 				}
 
 			});
@@ -604,9 +607,9 @@ public class CommerceInventoryWarehouseModelImpl
 				@Override
 				public void accept(
 					CommerceInventoryWarehouse commerceInventoryWarehouse,
-					Object active) {
+					Object activeObject) {
 
-					commerceInventoryWarehouse.setActive((Boolean)active);
+					commerceInventoryWarehouse.setActive((Boolean)activeObject);
 				}
 
 			});
@@ -629,9 +632,10 @@ public class CommerceInventoryWarehouseModelImpl
 				@Override
 				public void accept(
 					CommerceInventoryWarehouse commerceInventoryWarehouse,
-					Object street1) {
+					Object street1Object) {
 
-					commerceInventoryWarehouse.setStreet1((String)street1);
+					commerceInventoryWarehouse.setStreet1(
+						(String)street1Object);
 				}
 
 			});
@@ -654,9 +658,10 @@ public class CommerceInventoryWarehouseModelImpl
 				@Override
 				public void accept(
 					CommerceInventoryWarehouse commerceInventoryWarehouse,
-					Object street2) {
+					Object street2Object) {
 
-					commerceInventoryWarehouse.setStreet2((String)street2);
+					commerceInventoryWarehouse.setStreet2(
+						(String)street2Object);
 				}
 
 			});
@@ -679,9 +684,10 @@ public class CommerceInventoryWarehouseModelImpl
 				@Override
 				public void accept(
 					CommerceInventoryWarehouse commerceInventoryWarehouse,
-					Object street3) {
+					Object street3Object) {
 
-					commerceInventoryWarehouse.setStreet3((String)street3);
+					commerceInventoryWarehouse.setStreet3(
+						(String)street3Object);
 				}
 
 			});
@@ -704,9 +710,9 @@ public class CommerceInventoryWarehouseModelImpl
 				@Override
 				public void accept(
 					CommerceInventoryWarehouse commerceInventoryWarehouse,
-					Object city) {
+					Object cityObject) {
 
-					commerceInventoryWarehouse.setCity((String)city);
+					commerceInventoryWarehouse.setCity((String)cityObject);
 				}
 
 			});
@@ -729,9 +735,9 @@ public class CommerceInventoryWarehouseModelImpl
 				@Override
 				public void accept(
 					CommerceInventoryWarehouse commerceInventoryWarehouse,
-					Object zip) {
+					Object zipObject) {
 
-					commerceInventoryWarehouse.setZip((String)zip);
+					commerceInventoryWarehouse.setZip((String)zipObject);
 				}
 
 			});
@@ -754,10 +760,10 @@ public class CommerceInventoryWarehouseModelImpl
 				@Override
 				public void accept(
 					CommerceInventoryWarehouse commerceInventoryWarehouse,
-					Object commerceRegionCode) {
+					Object commerceRegionCodeObject) {
 
 					commerceInventoryWarehouse.setCommerceRegionCode(
-						(String)commerceRegionCode);
+						(String)commerceRegionCodeObject);
 				}
 
 			});
@@ -781,10 +787,10 @@ public class CommerceInventoryWarehouseModelImpl
 				@Override
 				public void accept(
 					CommerceInventoryWarehouse commerceInventoryWarehouse,
-					Object countryTwoLettersISOCode) {
+					Object countryTwoLettersISOCodeObject) {
 
 					commerceInventoryWarehouse.setCountryTwoLettersISOCode(
-						(String)countryTwoLettersISOCode);
+						(String)countryTwoLettersISOCodeObject);
 				}
 
 			});
@@ -807,9 +813,10 @@ public class CommerceInventoryWarehouseModelImpl
 				@Override
 				public void accept(
 					CommerceInventoryWarehouse commerceInventoryWarehouse,
-					Object latitude) {
+					Object latitudeObject) {
 
-					commerceInventoryWarehouse.setLatitude((Double)latitude);
+					commerceInventoryWarehouse.setLatitude(
+						(Double)latitudeObject);
 				}
 
 			});
@@ -832,9 +839,10 @@ public class CommerceInventoryWarehouseModelImpl
 				@Override
 				public void accept(
 					CommerceInventoryWarehouse commerceInventoryWarehouse,
-					Object longitude) {
+					Object longitudeObject) {
 
-					commerceInventoryWarehouse.setLongitude((Double)longitude);
+					commerceInventoryWarehouse.setLongitude(
+						(Double)longitudeObject);
 				}
 
 			});
@@ -857,9 +865,9 @@ public class CommerceInventoryWarehouseModelImpl
 				@Override
 				public void accept(
 					CommerceInventoryWarehouse commerceInventoryWarehouse,
-					Object type) {
+					Object typeObject) {
 
-					commerceInventoryWarehouse.setType((String)type);
+					commerceInventoryWarehouse.setType((String)typeObject);
 				}
 
 			});

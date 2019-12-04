@@ -125,6 +125,41 @@ public class CommerceShipmentServiceHttp {
 		}
 	}
 
+	public static void deleteCommerceShipment(
+			HttpPrincipal httpPrincipal, long commerceShipmentId,
+			boolean restoreStockQuantity)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				CommerceShipmentServiceUtil.class, "deleteCommerceShipment",
+				_deleteCommerceShipmentParameterTypes2);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, commerceShipmentId, restoreStockQuantity);
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					e);
+			}
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static com.liferay.commerce.model.CommerceShipment
 			getCommerceShipment(
 				HttpPrincipal httpPrincipal, long commerceShipmentId)
@@ -133,7 +168,7 @@ public class CommerceShipmentServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceShipmentServiceUtil.class, "getCommerceShipment",
-				_getCommerceShipmentParameterTypes2);
+				_getCommerceShipmentParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceShipmentId);
@@ -176,7 +211,7 @@ public class CommerceShipmentServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceShipmentServiceUtil.class, "getCommerceShipments",
-				_getCommerceShipmentsParameterTypes3);
+				_getCommerceShipmentsParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, companyId, status, start, end, orderByComparator);
@@ -219,7 +254,7 @@ public class CommerceShipmentServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceShipmentServiceUtil.class, "getCommerceShipments",
-				_getCommerceShipmentsParameterTypes4);
+				_getCommerceShipmentsParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, companyId, start, end, orderByComparator);
@@ -258,7 +293,7 @@ public class CommerceShipmentServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceShipmentServiceUtil.class, "getCommerceShipmentsCount",
-				_getCommerceShipmentsCountParameterTypes5);
+				_getCommerceShipmentsCountParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, companyId);
@@ -296,7 +331,7 @@ public class CommerceShipmentServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceShipmentServiceUtil.class, "getCommerceShipmentsCount",
-				_getCommerceShipmentsCountParameterTypes6);
+				_getCommerceShipmentsCountParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, companyId, status);
@@ -341,7 +376,7 @@ public class CommerceShipmentServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceShipmentServiceUtil.class, "updateCommerceShipment",
-				_updateCommerceShipmentParameterTypes7);
+				_updateCommerceShipmentParameterTypes8);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceShipmentId, carrier, trackingNumber, status,
@@ -392,7 +427,7 @@ public class CommerceShipmentServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				CommerceShipmentServiceUtil.class, "updateCommerceShipment",
-				_updateCommerceShipmentParameterTypes8);
+				_updateCommerceShipmentParameterTypes9);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, commerceShipmentId, name, description, street1,
@@ -438,29 +473,31 @@ public class CommerceShipmentServiceHttp {
 		};
 	private static final Class<?>[] _deleteCommerceShipmentParameterTypes1 =
 		new Class[] {long.class};
-	private static final Class<?>[] _getCommerceShipmentParameterTypes2 =
+	private static final Class<?>[] _deleteCommerceShipmentParameterTypes2 =
+		new Class[] {long.class, boolean.class};
+	private static final Class<?>[] _getCommerceShipmentParameterTypes3 =
 		new Class[] {long.class};
-	private static final Class<?>[] _getCommerceShipmentsParameterTypes3 =
+	private static final Class<?>[] _getCommerceShipmentsParameterTypes4 =
 		new Class[] {
 			long.class, int.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
-	private static final Class<?>[] _getCommerceShipmentsParameterTypes4 =
+	private static final Class<?>[] _getCommerceShipmentsParameterTypes5 =
 		new Class[] {
 			long.class, int.class, int.class,
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
-	private static final Class<?>[] _getCommerceShipmentsCountParameterTypes5 =
-		new Class[] {long.class};
 	private static final Class<?>[] _getCommerceShipmentsCountParameterTypes6 =
+		new Class[] {long.class};
+	private static final Class<?>[] _getCommerceShipmentsCountParameterTypes7 =
 		new Class[] {long.class, int.class};
-	private static final Class<?>[] _updateCommerceShipmentParameterTypes7 =
+	private static final Class<?>[] _updateCommerceShipmentParameterTypes8 =
 		new Class[] {
 			long.class, String.class, String.class, int.class, int.class,
 			int.class, int.class, int.class, int.class, int.class, int.class,
 			int.class, int.class, int.class
 		};
-	private static final Class<?>[] _updateCommerceShipmentParameterTypes8 =
+	private static final Class<?>[] _updateCommerceShipmentParameterTypes9 =
 		new Class[] {
 			long.class, String.class, String.class, String.class, String.class,
 			String.class, String.class, String.class, long.class, long.class,
