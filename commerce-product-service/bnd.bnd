@@ -33,5 +33,5 @@ Import-Package:\
 	com.liferay.portal.kernel.workflow;version="[7.4.0,9.0.0)",\
 	\
 	*
-Liferay-Require-SchemaVersion: 1.10.1
+Liferay-Require-SchemaVersion: 1.11.0
 Liferay-Service: true
