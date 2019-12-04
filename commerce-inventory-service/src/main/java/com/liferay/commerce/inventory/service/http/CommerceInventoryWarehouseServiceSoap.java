@@ -187,6 +187,28 @@ public class CommerceInventoryWarehouseServiceSoap {
 
 	public static
 		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap[]
+				getCommerceInventoryWarehouses(long companyId, boolean active)
+			throws RemoteException {
+
+		try {
+			java.util.List
+				<com.liferay.commerce.inventory.model.
+					CommerceInventoryWarehouse> returnValue =
+						CommerceInventoryWarehouseServiceUtil.
+							getCommerceInventoryWarehouses(companyId, active);
+
+			return com.liferay.commerce.inventory.model.
+				CommerceInventoryWarehouseSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static
+		com.liferay.commerce.inventory.model.CommerceInventoryWarehouseSoap[]
 				getCommerceInventoryWarehouses(
 					long companyId, boolean active, String commerceCountryCode,
 					int start, int end,

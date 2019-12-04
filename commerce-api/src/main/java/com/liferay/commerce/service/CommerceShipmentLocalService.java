@@ -94,10 +94,16 @@ public interface CommerceShipmentLocalService
 	 * @param commerceShipment the commerce shipment
 	 * @return the commerce shipment that was removed
 	 */
+	@Deprecated
+	@Indexable(type = IndexableType.DELETE)
+	public CommerceShipment deleteCommerceShipment(
+		CommerceShipment commerceShipment);
+
 	@Indexable(type = IndexableType.DELETE)
 	@SystemEvent(type = SystemEventConstants.TYPE_DELETE)
 	public CommerceShipment deleteCommerceShipment(
-		CommerceShipment commerceShipment);
+			CommerceShipment commerceShipment, boolean restoreStockQuantity)
+		throws PortalException;
 
 	/**
 	 * Deletes the commerce shipment with the primary key from the database. Also notifies the appropriate model listeners.

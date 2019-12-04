@@ -357,11 +357,11 @@ public class CommerceInventoryReplenishmentItemModelImpl
 				public void accept(
 					CommerceInventoryReplenishmentItem
 						commerceInventoryReplenishmentItem,
-					Object commerceInventoryReplenishmentItemId) {
+					Object commerceInventoryReplenishmentItemIdObject) {
 
 					commerceInventoryReplenishmentItem.
 						setCommerceInventoryReplenishmentItemId(
-							(Long)commerceInventoryReplenishmentItemId);
+							(Long)commerceInventoryReplenishmentItemIdObject);
 				}
 
 			});
@@ -386,10 +386,10 @@ public class CommerceInventoryReplenishmentItemModelImpl
 				public void accept(
 					CommerceInventoryReplenishmentItem
 						commerceInventoryReplenishmentItem,
-					Object companyId) {
+					Object companyIdObject) {
 
 					commerceInventoryReplenishmentItem.setCompanyId(
-						(Long)companyId);
+						(Long)companyIdObject);
 				}
 
 			});
@@ -414,9 +414,10 @@ public class CommerceInventoryReplenishmentItemModelImpl
 				public void accept(
 					CommerceInventoryReplenishmentItem
 						commerceInventoryReplenishmentItem,
-					Object userId) {
+					Object userIdObject) {
 
-					commerceInventoryReplenishmentItem.setUserId((Long)userId);
+					commerceInventoryReplenishmentItem.setUserId(
+						(Long)userIdObject);
 				}
 
 			});
@@ -441,10 +442,10 @@ public class CommerceInventoryReplenishmentItemModelImpl
 				public void accept(
 					CommerceInventoryReplenishmentItem
 						commerceInventoryReplenishmentItem,
-					Object userName) {
+					Object userNameObject) {
 
 					commerceInventoryReplenishmentItem.setUserName(
-						(String)userName);
+						(String)userNameObject);
 				}
 
 			});
@@ -469,10 +470,10 @@ public class CommerceInventoryReplenishmentItemModelImpl
 				public void accept(
 					CommerceInventoryReplenishmentItem
 						commerceInventoryReplenishmentItem,
-					Object createDate) {
+					Object createDateObject) {
 
 					commerceInventoryReplenishmentItem.setCreateDate(
-						(Date)createDate);
+						(Date)createDateObject);
 				}
 
 			});
@@ -497,10 +498,10 @@ public class CommerceInventoryReplenishmentItemModelImpl
 				public void accept(
 					CommerceInventoryReplenishmentItem
 						commerceInventoryReplenishmentItem,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
 					commerceInventoryReplenishmentItem.setModifiedDate(
-						(Date)modifiedDate);
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -526,11 +527,11 @@ public class CommerceInventoryReplenishmentItemModelImpl
 				public void accept(
 					CommerceInventoryReplenishmentItem
 						commerceInventoryReplenishmentItem,
-					Object commerceInventoryWarehouseId) {
+					Object commerceInventoryWarehouseIdObject) {
 
 					commerceInventoryReplenishmentItem.
 						setCommerceInventoryWarehouseId(
-							(Long)commerceInventoryWarehouseId);
+							(Long)commerceInventoryWarehouseIdObject);
 				}
 
 			});
@@ -555,9 +556,10 @@ public class CommerceInventoryReplenishmentItemModelImpl
 				public void accept(
 					CommerceInventoryReplenishmentItem
 						commerceInventoryReplenishmentItem,
-					Object sku) {
+					Object skuObject) {
 
-					commerceInventoryReplenishmentItem.setSku((String)sku);
+					commerceInventoryReplenishmentItem.setSku(
+						(String)skuObject);
 				}
 
 			});
@@ -583,10 +585,10 @@ public class CommerceInventoryReplenishmentItemModelImpl
 				public void accept(
 					CommerceInventoryReplenishmentItem
 						commerceInventoryReplenishmentItem,
-					Object availabilityDate) {
+					Object availabilityDateObject) {
 
 					commerceInventoryReplenishmentItem.setAvailabilityDate(
-						(Date)availabilityDate);
+						(Date)availabilityDateObject);
 				}
 
 			});
@@ -611,10 +613,10 @@ public class CommerceInventoryReplenishmentItemModelImpl
 				public void accept(
 					CommerceInventoryReplenishmentItem
 						commerceInventoryReplenishmentItem,
-					Object quantity) {
+					Object quantityObject) {
 
 					commerceInventoryReplenishmentItem.setQuantity(
-						(Integer)quantity);
+						(Integer)quantityObject);
 				}
 
 			});

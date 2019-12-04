@@ -97,10 +97,17 @@ public interface CommerceShipmentItemLocalService
 	 * @param commerceShipmentItem the commerce shipment item
 	 * @return the commerce shipment item that was removed
 	 */
+	@Deprecated
+	@Indexable(type = IndexableType.DELETE)
+	public CommerceShipmentItem deleteCommerceShipmentItem(
+		CommerceShipmentItem commerceShipmentItem);
+
 	@Indexable(type = IndexableType.DELETE)
 	@SystemEvent(type = SystemEventConstants.TYPE_DELETE)
 	public CommerceShipmentItem deleteCommerceShipmentItem(
-		CommerceShipmentItem commerceShipmentItem);
+			CommerceShipmentItem commerceShipmentItem,
+			boolean restoreStockQuantity)
+		throws PortalException;
 
 	/**
 	 * Deletes the commerce shipment item with the primary key from the database. Also notifies the appropriate model listeners.
@@ -109,12 +116,25 @@ public interface CommerceShipmentItemLocalService
 	 * @return the commerce shipment item that was removed
 	 * @throws PortalException if a commerce shipment item with the primary key could not be found
 	 */
+	@Deprecated
 	@Indexable(type = IndexableType.DELETE)
 	public CommerceShipmentItem deleteCommerceShipmentItem(
 			long commerceShipmentItemId)
 		throws PortalException;
 
-	public void deleteCommerceShipmentItems(long commerceShipment);
+	public void deleteCommerceShipmentItem(
+			long commerceShipmentItemId, boolean restoreStockQuantity)
+		throws PortalException;
+
+	/**
+	 * @deprecated As of Mueller (7.2.x), pass boolean for restoring stock
+	 */
+	@Deprecated
+	public void deleteCommerceShipmentItems(long commerceShipmentId);
+
+	public void deleteCommerceShipmentItems(
+			long commerceShipmentId, boolean restoreStockQuantity)
+		throws PortalException;
 
 	/**
 	 * @throws PortalException

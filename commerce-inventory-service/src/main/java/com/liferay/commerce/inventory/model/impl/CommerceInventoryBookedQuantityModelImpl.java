@@ -350,11 +350,11 @@ public class CommerceInventoryBookedQuantityModelImpl
 				public void accept(
 					CommerceInventoryBookedQuantity
 						commerceInventoryBookedQuantity,
-					Object commerceInventoryBookedQuantityId) {
+					Object commerceInventoryBookedQuantityIdObject) {
 
 					commerceInventoryBookedQuantity.
 						setCommerceInventoryBookedQuantityId(
-							(Long)commerceInventoryBookedQuantityId);
+							(Long)commerceInventoryBookedQuantityIdObject);
 				}
 
 			});
@@ -379,10 +379,10 @@ public class CommerceInventoryBookedQuantityModelImpl
 				public void accept(
 					CommerceInventoryBookedQuantity
 						commerceInventoryBookedQuantity,
-					Object companyId) {
+					Object companyIdObject) {
 
 					commerceInventoryBookedQuantity.setCompanyId(
-						(Long)companyId);
+						(Long)companyIdObject);
 				}
 
 			});
@@ -407,9 +407,10 @@ public class CommerceInventoryBookedQuantityModelImpl
 				public void accept(
 					CommerceInventoryBookedQuantity
 						commerceInventoryBookedQuantity,
-					Object userId) {
+					Object userIdObject) {
 
-					commerceInventoryBookedQuantity.setUserId((Long)userId);
+					commerceInventoryBookedQuantity.setUserId(
+						(Long)userIdObject);
 				}
 
 			});
@@ -434,10 +435,10 @@ public class CommerceInventoryBookedQuantityModelImpl
 				public void accept(
 					CommerceInventoryBookedQuantity
 						commerceInventoryBookedQuantity,
-					Object userName) {
+					Object userNameObject) {
 
 					commerceInventoryBookedQuantity.setUserName(
-						(String)userName);
+						(String)userNameObject);
 				}
 
 			});
@@ -462,10 +463,10 @@ public class CommerceInventoryBookedQuantityModelImpl
 				public void accept(
 					CommerceInventoryBookedQuantity
 						commerceInventoryBookedQuantity,
-					Object createDate) {
+					Object createDateObject) {
 
 					commerceInventoryBookedQuantity.setCreateDate(
-						(Date)createDate);
+						(Date)createDateObject);
 				}
 
 			});
@@ -490,10 +491,10 @@ public class CommerceInventoryBookedQuantityModelImpl
 				public void accept(
 					CommerceInventoryBookedQuantity
 						commerceInventoryBookedQuantity,
-					Object modifiedDate) {
+					Object modifiedDateObject) {
 
 					commerceInventoryBookedQuantity.setModifiedDate(
-						(Date)modifiedDate);
+						(Date)modifiedDateObject);
 				}
 
 			});
@@ -518,9 +519,9 @@ public class CommerceInventoryBookedQuantityModelImpl
 				public void accept(
 					CommerceInventoryBookedQuantity
 						commerceInventoryBookedQuantity,
-					Object sku) {
+					Object skuObject) {
 
-					commerceInventoryBookedQuantity.setSku((String)sku);
+					commerceInventoryBookedQuantity.setSku((String)skuObject);
 				}
 
 			});
@@ -545,10 +546,10 @@ public class CommerceInventoryBookedQuantityModelImpl
 				public void accept(
 					CommerceInventoryBookedQuantity
 						commerceInventoryBookedQuantity,
-					Object quantity) {
+					Object quantityObject) {
 
 					commerceInventoryBookedQuantity.setQuantity(
-						(Integer)quantity);
+						(Integer)quantityObject);
 				}
 
 			});
@@ -573,10 +574,10 @@ public class CommerceInventoryBookedQuantityModelImpl
 				public void accept(
 					CommerceInventoryBookedQuantity
 						commerceInventoryBookedQuantity,
-					Object expirationDate) {
+					Object expirationDateObject) {
 
 					commerceInventoryBookedQuantity.setExpirationDate(
-						(Date)expirationDate);
+						(Date)expirationDateObject);
 				}
 
 			});
@@ -601,10 +602,10 @@ public class CommerceInventoryBookedQuantityModelImpl
 				public void accept(
 					CommerceInventoryBookedQuantity
 						commerceInventoryBookedQuantity,
-					Object bookedNote) {
+					Object bookedNoteObject) {
 
 					commerceInventoryBookedQuantity.setBookedNote(
-						(String)bookedNote);
+						(String)bookedNoteObject);
 				}
 
 			});

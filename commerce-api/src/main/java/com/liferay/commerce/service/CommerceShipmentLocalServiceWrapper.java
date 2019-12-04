@@ -77,12 +77,23 @@ public class CommerceShipmentLocalServiceWrapper
 	 * @param commerceShipment the commerce shipment
 	 * @return the commerce shipment that was removed
 	 */
+	@Deprecated
 	@Override
 	public com.liferay.commerce.model.CommerceShipment deleteCommerceShipment(
 		com.liferay.commerce.model.CommerceShipment commerceShipment) {
 
 		return _commerceShipmentLocalService.deleteCommerceShipment(
 			commerceShipment);
+	}
+
+	@Override
+	public com.liferay.commerce.model.CommerceShipment deleteCommerceShipment(
+			com.liferay.commerce.model.CommerceShipment commerceShipment,
+			boolean restoreStockQuantity)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commerceShipmentLocalService.deleteCommerceShipment(
+			commerceShipment, restoreStockQuantity);
 	}
 
 	/**

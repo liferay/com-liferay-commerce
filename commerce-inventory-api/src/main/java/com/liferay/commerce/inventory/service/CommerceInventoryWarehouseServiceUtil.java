@@ -103,6 +103,14 @@ public class CommerceInventoryWarehouseServiceUtil {
 
 	public static java.util.List
 		<com.liferay.commerce.inventory.model.CommerceInventoryWarehouse>
+				getCommerceInventoryWarehouses(long companyId, boolean active)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().getCommerceInventoryWarehouses(companyId, active);
+	}
+
+	public static java.util.List
+		<com.liferay.commerce.inventory.model.CommerceInventoryWarehouse>
 				getCommerceInventoryWarehouses(
 					long companyId, boolean active, String commerceCountryCode,
 					int start, int end,

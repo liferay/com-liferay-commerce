@@ -91,6 +91,11 @@ public interface CommerceInventoryWarehouseService extends BaseService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceInventoryWarehouse> getCommerceInventoryWarehouses(
+			long companyId, boolean active)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceInventoryWarehouse> getCommerceInventoryWarehouses(
 			long companyId, boolean active, String commerceCountryCode,
 			int start, int end,
 			OrderByComparator<CommerceInventoryWarehouse> orderByComparator)
