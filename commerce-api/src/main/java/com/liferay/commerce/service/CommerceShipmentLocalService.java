@@ -224,6 +224,11 @@ public interface CommerceShipmentLocalService
 		long[] groupIds, int start, int end,
 		OrderByComparator<CommerceShipment> orderByComparator);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceShipment> getCommerceShipments(
+		long[] groupIds, long commerceAddressId, int start, int end,
+		OrderByComparator<CommerceShipment> orderByComparator);
+
 	/**
 	 * Returns the number of commerce shipments.
 	 *
@@ -237,6 +242,10 @@ public interface CommerceShipmentLocalService
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCommerceShipmentsCount(long[] groupIds, int status);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommerceShipmentsCount(
+		long[] groupIds, long commerceAddressId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
