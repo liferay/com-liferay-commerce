@@ -78,6 +78,7 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 					<liferay-ui:search-container
 						id="commerceShipments"
 						iteratorURL="<%= portletURL %>"
+						rowChecker="<%= commerceShipmentDisplayContext.getRowChecker() %>"
 						searchContainer="<%= commerceShipmentDisplayContext.getSearchContainer() %>"
 					>
 						<liferay-ui:search-container-row
