@@ -8,20 +8,6 @@ import ManagementBar from './management_bar/index.es';
 import Pagination from './pagination/index.es';
 import Table from './table/Table.es';
 
-// function getApiEndpoint(dataSetAPI, pageSize, currentPage = 1, filters = []) {
-// 	const formattedFilters = Object.keys(filters)
-// 		.map(filter => {
-// 			return `${encodeURIComponent(filter)}=${encodeURIComponent(
-// 				filters[el]
-// 			)}`;
-// 		})
-// 		.join('&');
-
-// 	const endpoint = `${dataSetAPI}&pageSize=${pageSize}&page=${currentPage}&p_auth=${Liferay.authToken}&${formattedFilters}`;
-
-// 	return endpoint;
-// }
-
 function DatasetDisplay(props) {
 	const [selectedItemsId, setselectedItemsId] = useState([]);
 
