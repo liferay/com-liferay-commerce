@@ -94,6 +94,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceShipmentsPort
 
 			<%
 			Map<String, String> dataAttributes = new HashMap<>();
+
 			dataAttributes.put("panel-url", rowURL.toString());
 			dataAttributes.put("target", renderResponse.getNamespace() + "sidePanel");
 			%>
@@ -168,7 +169,7 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceShipmentsPort
 			spritemap: "<%= themeDisplay.getPathThemeImages() + "/clay/icons.svg" %>",
 			portalWrapperId: "<portlet:namespace />side-panel-wrapper",
 			topAnchor: document.getElementById('commerce-admin-header'),
-			onUpdate: function(e){console.log(e)}
+			onUpdate: function(e){}
 		}
 	);
 
