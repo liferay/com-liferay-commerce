@@ -232,6 +232,28 @@ public class CommercePaymentMethodGroupRelLocalServiceImpl
 	@Override
 	public List<CommercePaymentMethodGroupRel>
 		getCommercePaymentMethodGroupRels(
+			long groupId, boolean active, int start, int end,
+			OrderByComparator<CommercePaymentMethodGroupRel>
+				orderByComparator) {
+
+		return commercePaymentMethodGroupRelPersistence.findByG_A(
+			groupId, active, start, end, orderByComparator);
+	}
+
+	@Override
+	public List<CommercePaymentMethodGroupRel>
+		getCommercePaymentMethodGroupRels(
+			long groupId, int start, int end,
+			OrderByComparator<CommercePaymentMethodGroupRel>
+				orderByComparator) {
+
+		return commercePaymentMethodGroupRelPersistence.findByGroupId(
+			groupId, start, end, orderByComparator);
+	}
+
+	@Override
+	public List<CommercePaymentMethodGroupRel>
+		getCommercePaymentMethodGroupRels(
 			long groupId, long commerceCountryId, boolean active) {
 
 		List<CommercePaymentMethodGroupRel>
@@ -258,6 +280,11 @@ public class CommercePaymentMethodGroupRelLocalServiceImpl
 		}
 
 		return filteredCommercePaymentMethodGroupRels;
+	}
+
+	@Override
+	public int getCommercePaymentMethodGroupRelsCount(long groupId) {
+		return commercePaymentMethodGroupRelPersistence.countByGroupId(groupId);
 	}
 
 	@Override
