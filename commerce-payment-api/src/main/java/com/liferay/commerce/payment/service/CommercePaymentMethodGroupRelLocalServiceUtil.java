@@ -256,6 +256,14 @@ public class CommercePaymentMethodGroupRelLocalServiceUtil {
 			commercePaymentMethodGroupRelId);
 	}
 
+	public static
+		com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel
+			fetchCommercePaymentMethodGroupRel(long groupId, String engineKey) {
+
+		return getService().fetchCommercePaymentMethodGroupRel(
+			groupId, engineKey);
+	}
+
 	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery
 		getActionableDynamicQuery() {
 

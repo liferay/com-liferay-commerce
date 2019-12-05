@@ -4558,6 +4558,603 @@ public class CommerceOrderPersistenceImpl
 	private static final String _FINDER_COLUMN_G_C_COMMERCEACCOUNTID_2 =
 		"commerceOrder.commerceAccountId = ?";
 
+	private FinderPath _finderPathWithPaginationFindByG_CP;
+	private FinderPath _finderPathWithoutPaginationFindByG_CP;
+	private FinderPath _finderPathCountByG_CP;
+
+	/**
+	 * Returns all the commerce orders where groupId = &#63; and commercePaymentMethodKey = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param commercePaymentMethodKey the commerce payment method key
+	 * @return the matching commerce orders
+	 */
+	@Override
+	public List<CommerceOrder> findByG_CP(
+		long groupId, String commercePaymentMethodKey) {
+
+		return findByG_CP(
+			groupId, commercePaymentMethodKey, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the commerce orders where groupId = &#63; and commercePaymentMethodKey = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CommerceOrderModelImpl</code>.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param commercePaymentMethodKey the commerce payment method key
+	 * @param start the lower bound of the range of commerce orders
+	 * @param end the upper bound of the range of commerce orders (not inclusive)
+	 * @return the range of matching commerce orders
+	 */
+	@Override
+	public List<CommerceOrder> findByG_CP(
+		long groupId, String commercePaymentMethodKey, int start, int end) {
+
+		return findByG_CP(groupId, commercePaymentMethodKey, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce orders where groupId = &#63; and commercePaymentMethodKey = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CommerceOrderModelImpl</code>.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param commercePaymentMethodKey the commerce payment method key
+	 * @param start the lower bound of the range of commerce orders
+	 * @param end the upper bound of the range of commerce orders (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching commerce orders
+	 */
+	@Override
+	public List<CommerceOrder> findByG_CP(
+		long groupId, String commercePaymentMethodKey, int start, int end,
+		OrderByComparator<CommerceOrder> orderByComparator) {
+
+		return findByG_CP(
+			groupId, commercePaymentMethodKey, start, end, orderByComparator,
+			true);
+	}
+
+	/**
+	 * Returns an ordered range of all the commerce orders where groupId = &#63; and commercePaymentMethodKey = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CommerceOrderModelImpl</code>.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param commercePaymentMethodKey the commerce payment method key
+	 * @param start the lower bound of the range of commerce orders
+	 * @param end the upper bound of the range of commerce orders (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching commerce orders
+	 */
+	@Override
+	public List<CommerceOrder> findByG_CP(
+		long groupId, String commercePaymentMethodKey, int start, int end,
+		OrderByComparator<CommerceOrder> orderByComparator,
+		boolean useFinderCache) {
+
+		commercePaymentMethodKey = Objects.toString(
+			commercePaymentMethodKey, "");
+
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+			(orderByComparator == null)) {
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByG_CP;
+				finderArgs = new Object[] {groupId, commercePaymentMethodKey};
+			}
+		}
+		else if (useFinderCache) {
+			finderPath = _finderPathWithPaginationFindByG_CP;
+			finderArgs = new Object[] {
+				groupId, commercePaymentMethodKey, start, end, orderByComparator
+			};
+		}
+
+		List<CommerceOrder> list = null;
+
+		if (useFinderCache) {
+			list = (List<CommerceOrder>)finderCache.getResult(
+				finderPath, finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (CommerceOrder commerceOrder : list) {
+					if ((groupId != commerceOrder.getGroupId()) ||
+						!commercePaymentMethodKey.equals(
+							commerceOrder.getCommercePaymentMethodKey())) {
+
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(
+					4 + (orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_COMMERCEORDER_WHERE);
+
+			query.append(_FINDER_COLUMN_G_CP_GROUPID_2);
+
+			boolean bindCommercePaymentMethodKey = false;
+
+			if (commercePaymentMethodKey.isEmpty()) {
+				query.append(_FINDER_COLUMN_G_CP_COMMERCEPAYMENTMETHODKEY_3);
+			}
+			else {
+				bindCommercePaymentMethodKey = true;
+
+				query.append(_FINDER_COLUMN_G_CP_COMMERCEPAYMENTMETHODKEY_2);
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
+			}
+			else {
+				query.append(CommerceOrderModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (bindCommercePaymentMethodKey) {
+					qPos.add(commercePaymentMethodKey);
+				}
+
+				list = (List<CommerceOrder>)QueryUtil.list(
+					q, getDialect(), start, end);
+
+				cacheResult(list);
+
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
+			}
+			catch (Exception e) {
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first commerce order in the ordered set where groupId = &#63; and commercePaymentMethodKey = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param commercePaymentMethodKey the commerce payment method key
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce order
+	 * @throws NoSuchOrderException if a matching commerce order could not be found
+	 */
+	@Override
+	public CommerceOrder findByG_CP_First(
+			long groupId, String commercePaymentMethodKey,
+			OrderByComparator<CommerceOrder> orderByComparator)
+		throws NoSuchOrderException {
+
+		CommerceOrder commerceOrder = fetchByG_CP_First(
+			groupId, commercePaymentMethodKey, orderByComparator);
+
+		if (commerceOrder != null) {
+			return commerceOrder;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("groupId=");
+		msg.append(groupId);
+
+		msg.append(", commercePaymentMethodKey=");
+		msg.append(commercePaymentMethodKey);
+
+		msg.append("}");
+
+		throw new NoSuchOrderException(msg.toString());
+	}
+
+	/**
+	 * Returns the first commerce order in the ordered set where groupId = &#63; and commercePaymentMethodKey = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param commercePaymentMethodKey the commerce payment method key
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching commerce order, or <code>null</code> if a matching commerce order could not be found
+	 */
+	@Override
+	public CommerceOrder fetchByG_CP_First(
+		long groupId, String commercePaymentMethodKey,
+		OrderByComparator<CommerceOrder> orderByComparator) {
+
+		List<CommerceOrder> list = findByG_CP(
+			groupId, commercePaymentMethodKey, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last commerce order in the ordered set where groupId = &#63; and commercePaymentMethodKey = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param commercePaymentMethodKey the commerce payment method key
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce order
+	 * @throws NoSuchOrderException if a matching commerce order could not be found
+	 */
+	@Override
+	public CommerceOrder findByG_CP_Last(
+			long groupId, String commercePaymentMethodKey,
+			OrderByComparator<CommerceOrder> orderByComparator)
+		throws NoSuchOrderException {
+
+		CommerceOrder commerceOrder = fetchByG_CP_Last(
+			groupId, commercePaymentMethodKey, orderByComparator);
+
+		if (commerceOrder != null) {
+			return commerceOrder;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("groupId=");
+		msg.append(groupId);
+
+		msg.append(", commercePaymentMethodKey=");
+		msg.append(commercePaymentMethodKey);
+
+		msg.append("}");
+
+		throw new NoSuchOrderException(msg.toString());
+	}
+
+	/**
+	 * Returns the last commerce order in the ordered set where groupId = &#63; and commercePaymentMethodKey = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param commercePaymentMethodKey the commerce payment method key
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching commerce order, or <code>null</code> if a matching commerce order could not be found
+	 */
+	@Override
+	public CommerceOrder fetchByG_CP_Last(
+		long groupId, String commercePaymentMethodKey,
+		OrderByComparator<CommerceOrder> orderByComparator) {
+
+		int count = countByG_CP(groupId, commercePaymentMethodKey);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<CommerceOrder> list = findByG_CP(
+			groupId, commercePaymentMethodKey, count - 1, count,
+			orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the commerce orders before and after the current commerce order in the ordered set where groupId = &#63; and commercePaymentMethodKey = &#63;.
+	 *
+	 * @param commerceOrderId the primary key of the current commerce order
+	 * @param groupId the group ID
+	 * @param commercePaymentMethodKey the commerce payment method key
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next commerce order
+	 * @throws NoSuchOrderException if a commerce order with the primary key could not be found
+	 */
+	@Override
+	public CommerceOrder[] findByG_CP_PrevAndNext(
+			long commerceOrderId, long groupId, String commercePaymentMethodKey,
+			OrderByComparator<CommerceOrder> orderByComparator)
+		throws NoSuchOrderException {
+
+		commercePaymentMethodKey = Objects.toString(
+			commercePaymentMethodKey, "");
+
+		CommerceOrder commerceOrder = findByPrimaryKey(commerceOrderId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CommerceOrder[] array = new CommerceOrderImpl[3];
+
+			array[0] = getByG_CP_PrevAndNext(
+				session, commerceOrder, groupId, commercePaymentMethodKey,
+				orderByComparator, true);
+
+			array[1] = commerceOrder;
+
+			array[2] = getByG_CP_PrevAndNext(
+				session, commerceOrder, groupId, commercePaymentMethodKey,
+				orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected CommerceOrder getByG_CP_PrevAndNext(
+		Session session, CommerceOrder commerceOrder, long groupId,
+		String commercePaymentMethodKey,
+		OrderByComparator<CommerceOrder> orderByComparator, boolean previous) {
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(
+				5 + (orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(4);
+		}
+
+		query.append(_SQL_SELECT_COMMERCEORDER_WHERE);
+
+		query.append(_FINDER_COLUMN_G_CP_GROUPID_2);
+
+		boolean bindCommercePaymentMethodKey = false;
+
+		if (commercePaymentMethodKey.isEmpty()) {
+			query.append(_FINDER_COLUMN_G_CP_COMMERCEPAYMENTMETHODKEY_3);
+		}
+		else {
+			bindCommercePaymentMethodKey = true;
+
+			query.append(_FINDER_COLUMN_G_CP_COMMERCEPAYMENTMETHODKEY_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(CommerceOrderModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		if (bindCommercePaymentMethodKey) {
+			qPos.add(commercePaymentMethodKey);
+		}
+
+		if (orderByComparator != null) {
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						commerceOrder)) {
+
+				qPos.add(orderByConditionValue);
+			}
+		}
+
+		List<CommerceOrder> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the commerce orders where groupId = &#63; and commercePaymentMethodKey = &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 * @param commercePaymentMethodKey the commerce payment method key
+	 */
+	@Override
+	public void removeByG_CP(long groupId, String commercePaymentMethodKey) {
+		for (CommerceOrder commerceOrder :
+				findByG_CP(
+					groupId, commercePaymentMethodKey, QueryUtil.ALL_POS,
+					QueryUtil.ALL_POS, null)) {
+
+			remove(commerceOrder);
+		}
+	}
+
+	/**
+	 * Returns the number of commerce orders where groupId = &#63; and commercePaymentMethodKey = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param commercePaymentMethodKey the commerce payment method key
+	 * @return the number of matching commerce orders
+	 */
+	@Override
+	public int countByG_CP(long groupId, String commercePaymentMethodKey) {
+		commercePaymentMethodKey = Objects.toString(
+			commercePaymentMethodKey, "");
+
+		FinderPath finderPath = _finderPathCountByG_CP;
+
+		Object[] finderArgs = new Object[] {groupId, commercePaymentMethodKey};
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_COMMERCEORDER_WHERE);
+
+			query.append(_FINDER_COLUMN_G_CP_GROUPID_2);
+
+			boolean bindCommercePaymentMethodKey = false;
+
+			if (commercePaymentMethodKey.isEmpty()) {
+				query.append(_FINDER_COLUMN_G_CP_COMMERCEPAYMENTMETHODKEY_3);
+			}
+			else {
+				bindCommercePaymentMethodKey = true;
+
+				query.append(_FINDER_COLUMN_G_CP_COMMERCEPAYMENTMETHODKEY_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (bindCommercePaymentMethodKey) {
+					qPos.add(commercePaymentMethodKey);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_G_CP_GROUPID_2 =
+		"commerceOrder.groupId = ? AND ";
+
+	private static final String _FINDER_COLUMN_G_CP_COMMERCEPAYMENTMETHODKEY_2 =
+		"commerceOrder.commercePaymentMethodKey = ?";
+
+	private static final String _FINDER_COLUMN_G_CP_COMMERCEPAYMENTMETHODKEY_3 =
+		"(commerceOrder.commercePaymentMethodKey IS NULL OR commerceOrder.commercePaymentMethodKey = '')";
+
 	private FinderPath _finderPathWithPaginationFindByG_U_O;
 	private FinderPath _finderPathWithoutPaginationFindByG_U_O;
 	private FinderPath _finderPathCountByG_U_O;
@@ -7102,6 +7699,15 @@ public class CommerceOrderPersistenceImpl
 
 			args = new Object[] {
 				commerceOrderModelImpl.getGroupId(),
+				commerceOrderModelImpl.getCommercePaymentMethodKey()
+			};
+
+			finderCache.removeResult(_finderPathCountByG_CP, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByG_CP, args);
+
+			args = new Object[] {
+				commerceOrderModelImpl.getGroupId(),
 				commerceOrderModelImpl.getUserId(),
 				commerceOrderModelImpl.getOrderStatus()
 			};
@@ -7295,6 +7901,29 @@ public class CommerceOrderPersistenceImpl
 				finderCache.removeResult(_finderPathCountByG_C, args);
 				finderCache.removeResult(
 					_finderPathWithoutPaginationFindByG_C, args);
+			}
+
+			if ((commerceOrderModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByG_CP.getColumnBitmask()) !=
+					 0) {
+
+				Object[] args = new Object[] {
+					commerceOrderModelImpl.getOriginalGroupId(),
+					commerceOrderModelImpl.getOriginalCommercePaymentMethodKey()
+				};
+
+				finderCache.removeResult(_finderPathCountByG_CP, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByG_CP, args);
+
+				args = new Object[] {
+					commerceOrderModelImpl.getGroupId(),
+					commerceOrderModelImpl.getCommercePaymentMethodKey()
+				};
+
+				finderCache.removeResult(_finderPathCountByG_CP, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByG_CP, args);
 			}
 
 			if ((commerceOrderModelImpl.getColumnBitmask() &
@@ -7990,6 +8619,33 @@ public class CommerceOrderPersistenceImpl
 			CommerceOrderModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_C",
 			new String[] {Long.class.getName(), Long.class.getName()});
+
+		_finderPathWithPaginationFindByG_CP = new FinderPath(
+			CommerceOrderModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceOrderModelImpl.FINDER_CACHE_ENABLED,
+			CommerceOrderImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByG_CP",
+			new String[] {
+				Long.class.getName(), String.class.getName(),
+				Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByG_CP = new FinderPath(
+			CommerceOrderModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceOrderModelImpl.FINDER_CACHE_ENABLED,
+			CommerceOrderImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findByG_CP",
+			new String[] {Long.class.getName(), String.class.getName()},
+			CommerceOrderModelImpl.GROUPID_COLUMN_BITMASK |
+			CommerceOrderModelImpl.COMMERCEPAYMENTMETHODKEY_COLUMN_BITMASK |
+			CommerceOrderModelImpl.CREATEDATE_COLUMN_BITMASK);
+
+		_finderPathCountByG_CP = new FinderPath(
+			CommerceOrderModelImpl.ENTITY_CACHE_ENABLED,
+			CommerceOrderModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_CP",
+			new String[] {Long.class.getName(), String.class.getName()});
 
 		_finderPathWithPaginationFindByG_U_O = new FinderPath(
 			CommerceOrderModelImpl.ENTITY_CACHE_ENABLED,

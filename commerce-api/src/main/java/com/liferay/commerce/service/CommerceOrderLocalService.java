@@ -343,6 +343,10 @@ public interface CommerceOrderLocalService
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommerceOrder> getCommerceOrders(
+		long groupId, String commercePaymentMethodKey);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommerceOrder> getCommerceOrdersByBillingAddress(
 		long billingAddressId);
 

@@ -299,6 +299,16 @@ public class CommerceSubscriptionEntryLocalServiceWrapper
 			fetchCommerceSubscriptionEntry(commerceSubscriptionEntryId);
 	}
 
+	@Override
+	public com.liferay.commerce.model.CommerceSubscriptionEntry
+		fetchCommerceSubscriptionEntryByCommerceOrderItemId(
+			long commerceOrderItemId) {
+
+		return _commerceSubscriptionEntryLocalService.
+			fetchCommerceSubscriptionEntryByCommerceOrderItemId(
+				commerceOrderItemId);
+	}
+
 	/**
 	 * Returns the commerce subscription entry matching the UUID and group.
 	 *
