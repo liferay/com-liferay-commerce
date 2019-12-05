@@ -238,6 +238,40 @@ public class CommercePaymentMethodGroupRelServiceImpl
 	@Override
 	public List<CommercePaymentMethodGroupRel>
 			getCommercePaymentMethodGroupRels(
+				long groupId, boolean active, int start, int end,
+				OrderByComparator<CommercePaymentMethodGroupRel>
+					orderByComparator)
+		throws PortalException {
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), groupId,
+			CommerceActionKeys.MANAGE_COMMERCE_PAYMENT_METHODS);
+
+		return commercePaymentMethodGroupRelLocalService.
+			getCommercePaymentMethodGroupRels(
+				groupId, active, start, end, orderByComparator);
+	}
+
+	@Override
+	public List<CommercePaymentMethodGroupRel>
+			getCommercePaymentMethodGroupRels(
+				long groupId, int start, int end,
+				OrderByComparator<CommercePaymentMethodGroupRel>
+					orderByComparator)
+		throws PortalException {
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), groupId,
+			CommerceActionKeys.MANAGE_COMMERCE_PAYMENT_METHODS);
+
+		return commercePaymentMethodGroupRelLocalService.
+			getCommercePaymentMethodGroupRels(
+				groupId, start, end, orderByComparator);
+	}
+
+	@Override
+	public List<CommercePaymentMethodGroupRel>
+			getCommercePaymentMethodGroupRels(
 				long groupId, long commerceCountryId, boolean active)
 		throws PortalException {
 
@@ -248,6 +282,18 @@ public class CommercePaymentMethodGroupRelServiceImpl
 		return commercePaymentMethodGroupRelLocalService.
 			getCommercePaymentMethodGroupRels(
 				groupId, commerceCountryId, active);
+	}
+
+	@Override
+	public int getCommercePaymentMethodGroupRelsCount(long groupId)
+		throws PortalException {
+
+		_portletResourcePermission.check(
+			getPermissionChecker(), groupId,
+			CommerceActionKeys.MANAGE_COMMERCE_PAYMENT_METHODS);
+
+		return commercePaymentMethodGroupRelLocalService.
+			getCommercePaymentMethodGroupRelsCount(groupId);
 	}
 
 	@Override
