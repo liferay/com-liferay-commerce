@@ -24,9 +24,6 @@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 page import="com.liferay.portal.kernel.util.PortalUtil" %><%@
 page import="com.liferay.portal.kernel.util.Validator" %>
 
-<%@ page import="java.util.HashMap" %><%@
-page import="java.util.Map" %>
-
 <liferay-theme:defineObjects />
 
 <%
