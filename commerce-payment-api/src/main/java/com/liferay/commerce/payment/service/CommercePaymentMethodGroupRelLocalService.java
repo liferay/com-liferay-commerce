@@ -207,6 +207,10 @@ public interface CommercePaymentMethodGroupRelLocalService
 		long commercePaymentMethodGroupRelId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public CommercePaymentMethodGroupRel fetchCommercePaymentMethodGroupRel(
+		long groupId, String engineKey);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

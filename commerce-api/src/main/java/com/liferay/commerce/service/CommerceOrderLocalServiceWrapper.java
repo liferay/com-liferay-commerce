@@ -481,6 +481,14 @@ public class CommerceOrderLocalServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.commerce.model.CommerceOrder>
+		getCommerceOrders(long groupId, String commercePaymentMethodKey) {
+
+		return _commerceOrderLocalService.getCommerceOrders(
+			groupId, commercePaymentMethodKey);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.model.CommerceOrder>
 		getCommerceOrdersByBillingAddress(long billingAddressId) {
 
 		return _commerceOrderLocalService.getCommerceOrdersByBillingAddress(
