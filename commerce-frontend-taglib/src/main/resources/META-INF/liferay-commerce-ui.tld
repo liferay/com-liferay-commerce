@@ -507,6 +507,61 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>table-react</name>
+		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.TableTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>dataProviderKey</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>deltaParam</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>disableAJAX</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>boolean</type>
+		</attribute>
+		<attribute>
+			<name>filter</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>com.liferay.commerce.frontend.Filter</type>
+		</attribute>
+		<attribute>
+			<name>itemPerPage</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>int</type>
+		</attribute>
+		<attribute>
+			<name>namespace</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>pageNumber</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>int</type>
+		</attribute>
+		<attribute>
+			<name>portletURL</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>javax.portlet.PortletURL</type>
+		</attribute>
+		<attribute>
+			<name>tableName</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>user-invitation-modal</name>
 		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.UserInvitationModalTag</tag-class>
 		<body-content>empty</body-content>
