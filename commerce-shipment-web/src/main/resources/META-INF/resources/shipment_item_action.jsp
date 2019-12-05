@@ -22,7 +22,26 @@ CommerceShipmentItemDisplayContext commerceShipmentItemDisplayContext = (Commerc
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 CommerceShipmentItem commerceShipmentItem = (CommerceShipmentItem)row.getObject();
+
+CommerceShipment commerceShipment = commerceShipmentItem.getCommerceShipment();
+
+String modalId = "modal" + commerceShipment.getCommerceShipmentId();
 %>
+
+<portlet:actionURL name="editCommerceShipmentItem" var="deleteURL">
+	<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+	<portlet:param name="redirect" value="<%= currentURL %>" />
+	<portlet:param name="commerceShipmentId" value="<%= String.valueOf(commerceShipmentItem.getCommerceShipmentId()) %>" />
+	<portlet:param name="commerceShipmentItemId" value="<%= String.valueOf(commerceShipmentItem.getCommerceShipmentItemId()) %>" />
+</portlet:actionURL>
+
+<portlet:actionURL name="editCommerceShipmentItem" var="deleteAndRestockURL">
+	<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+	<portlet:param name="redirect" value="<%= currentURL %>" />
+	<portlet:param name="commerceShipmentId" value="<%= String.valueOf(commerceShipmentItem.getCommerceShipmentId()) %>" />
+	<portlet:param name="commerceShipmentItemId" value="<%= String.valueOf(commerceShipmentItem.getCommerceShipmentItemId()) %>" />
+	<portlet:param name="restoreStockQuantity" value="true" />
+</portlet:actionURL>
 
 <liferay-ui:icon-menu
 	direction="left-side"
@@ -32,28 +51,88 @@ CommerceShipmentItem commerceShipmentItem = (CommerceShipmentItem)row.getObject(
 	showWhenSingleIcon="<%= true %>"
 >
 	<c:if test="<%= commerceShipmentItemDisplayContext.hasManageCommerceShipmentsPermission() %>">
-		<portlet:renderURL var="editURL">
-			<portlet:param name="mvcRenderCommandName" value="editCommerceShipmentItem" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="commerceShipmentId" value="<%= String.valueOf(commerceShipmentItem.getCommerceShipmentId()) %>" />
-			<portlet:param name="commerceShipmentItemId" value="<%= String.valueOf(commerceShipmentItem.getCommerceShipmentItemId()) %>" />
-		</portlet:renderURL>
+		<c:if test="<%= commerceShipment.getStatus() == CommerceShipmentConstants.SHIPMENT_STATUS_PROCESSING %>">
+			<portlet:renderURL var="editURL">
+				<portlet:param name="mvcRenderCommandName" value="editCommerceShipmentItem" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="commerceShipmentId" value="<%= String.valueOf(commerceShipmentItem.getCommerceShipmentId()) %>" />
+				<portlet:param name="commerceShipmentItemId" value="<%= String.valueOf(commerceShipmentItem.getCommerceShipmentItemId()) %>" />
+			</portlet:renderURL>
+
+			<liferay-ui:icon
+				message="edit"
+				url="<%= editURL %>"
+			/>
+		</c:if>
 
 		<liferay-ui:icon
-			message="edit"
-			url="<%= editURL %>"
-		/>
-
-		<portlet:actionURL name="editCommerceShipmentItem" var="deleteURL">
-			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="commerceShipmentId" value="<%= String.valueOf(commerceShipmentItem.getCommerceShipmentId()) %>" />
-			<portlet:param name="commerceShipmentItemId" value="<%= String.valueOf(commerceShipmentItem.getCommerceShipmentItemId()) %>" />
-		</portlet:actionURL>
-
-		<liferay-ui:icon-delete
-			label="<%= true %>"
-			url="<%= deleteURL %>"
+			id='<%= "deleteShipmentItem-" + modalId %>'
+			message="delete"
+			url="<%= (commerceShipment.getStatus() > CommerceShipmentConstants.SHIPMENT_STATUS_READY_TO_BE_SHIPPED) ? StringPool.POUND : deleteAndRestockURL %>"
 		/>
 	</c:if>
 </liferay-ui:icon-menu>
+
+<c:if test="<%= commerceShipment.getStatus() > CommerceShipmentConstants.SHIPMENT_STATUS_READY_TO_BE_SHIPPED %>">
+	<div class="warning-modal" id="<%= modalId %>"></div>
+
+	<aui:script use="aui-base">
+		A.use(
+			'aui-modal',
+			function(A) {
+				var <%= modalId %> = new A.Modal(
+					{
+						bodyContent: '<p><liferay-ui:message key="you-are-deleting-an-item-from-a-shipment-that-has-been-marked-as-shipped" /></p>',
+						centered: true,
+						draggable: false,
+						destroyOnHide: false,
+						headerContent: '<h2><liferay-ui:message key="do-you-wish-to-restock-this-product" /></h2>',
+						modal: true,
+						boundingBox: '#<%= modalId %>',
+						width: 450
+					}
+				);
+
+				<%= modalId %>.addToolbar(
+					[
+						{
+							cssClass: 'btn-primary',
+							label: '<liferay-ui:message key="yes" />',
+							on: {
+								click: function() {
+									window.location.replace('<%= deleteAndRestockURL %>');
+								}
+							}
+						},
+						{
+							cssClass: 'btn-primary',
+							label: '<liferay-ui:message key="no" />',
+							on: {
+								click: function() {
+									window.location.replace('<%= deleteURL %>');
+								}
+							}
+						},
+						{
+							label: '<liferay-ui:message key="cancel" />',
+							on: {
+								click: function() {
+									<%= modalId %>.hide();
+								}
+							}
+						}
+					]
+				);
+
+				A.one("#<portlet:namespace />deleteShipmentItem-<%= modalId %>").on(
+					'click',
+					function(e) {
+						e.preventDefault();
+						<%= modalId %>.render();
+						<%= modalId %>.show();
+					}
+				);
+			}
+		);
+	</aui:script>
+</c:if>
