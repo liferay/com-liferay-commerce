@@ -191,16 +191,6 @@
 		</attribute>
 	</tag>
 	<tag>
-		<name>summary-table</name>
-		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.SummaryTableTag</tag-class>
-		<body-content>JSP</body-content>
-		<attribute>
-			<name>data</name>
-			<required>true</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-	</tag>
-	<tag>
 		<name>mini-cart</name>
 		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.MiniCartTag</tag-class>
 		<body-content>empty</body-content>
@@ -402,6 +392,16 @@
 		<body-content>JSP</body-content>
 		<attribute>
 			<name>items</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<name>summary-table</name>
+		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.SummaryTableTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>data</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
