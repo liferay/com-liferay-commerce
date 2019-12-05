@@ -29,8 +29,11 @@ import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.service.CommerceShipmentItemLocalServiceUtil;
 import com.liferay.commerce.service.CommerceShipmentService;
 import com.liferay.commerce.shipment.web.internal.portlet.action.ActionHelper;
+import com.liferay.commerce.shipment.web.internal.search.CommerceShipmentChecker;
 import com.liferay.commerce.shipment.web.internal.util.CommerceShipmentPortletUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
+import com.liferay.portal.kernel.dao.search.RowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -198,6 +201,11 @@ public class CommerceShipmentDisplayContext
 		portletURL.setParameter("navigation", getNavigation());
 
 		return portletURL;
+	}
+
+	@Override
+	public RowChecker getRowChecker() {
+		return new CommerceShipmentChecker(liferayPortletResponse);
 	}
 
 	@Override
