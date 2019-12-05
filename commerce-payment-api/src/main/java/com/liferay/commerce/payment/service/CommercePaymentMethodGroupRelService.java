@@ -128,7 +128,27 @@ public interface CommercePaymentMethodGroupRelService extends BaseService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<CommercePaymentMethodGroupRel>
 			getCommercePaymentMethodGroupRels(
+				long groupId, boolean active, int start, int end,
+				OrderByComparator<CommercePaymentMethodGroupRel>
+					orderByComparator)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommercePaymentMethodGroupRel>
+			getCommercePaymentMethodGroupRels(
+				long groupId, int start, int end,
+				OrderByComparator<CommercePaymentMethodGroupRel>
+					orderByComparator)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CommercePaymentMethodGroupRel>
+			getCommercePaymentMethodGroupRels(
 				long groupId, long commerceCountryId, boolean active)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getCommercePaymentMethodGroupRelsCount(long groupId)
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

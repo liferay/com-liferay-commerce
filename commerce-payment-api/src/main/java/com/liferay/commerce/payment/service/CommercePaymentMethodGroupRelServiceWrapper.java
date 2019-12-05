@@ -173,12 +173,50 @@ public class CommercePaymentMethodGroupRelServiceWrapper
 	public java.util.List
 		<com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel>
 				getCommercePaymentMethodGroupRels(
+					long groupId, boolean active, int start, int end,
+					com.liferay.portal.kernel.util.OrderByComparator
+						<com.liferay.commerce.payment.model.
+							CommercePaymentMethodGroupRel> orderByComparator)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commercePaymentMethodGroupRelService.
+			getCommercePaymentMethodGroupRels(
+				groupId, active, start, end, orderByComparator);
+	}
+
+	@Override
+	public java.util.List
+		<com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel>
+				getCommercePaymentMethodGroupRels(
+					long groupId, int start, int end,
+					com.liferay.portal.kernel.util.OrderByComparator
+						<com.liferay.commerce.payment.model.
+							CommercePaymentMethodGroupRel> orderByComparator)
+			throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commercePaymentMethodGroupRelService.
+			getCommercePaymentMethodGroupRels(
+				groupId, start, end, orderByComparator);
+	}
+
+	@Override
+	public java.util.List
+		<com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel>
+				getCommercePaymentMethodGroupRels(
 					long groupId, long commerceCountryId, boolean active)
 			throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _commercePaymentMethodGroupRelService.
 			getCommercePaymentMethodGroupRels(
 				groupId, commerceCountryId, active);
+	}
+
+	@Override
+	public int getCommercePaymentMethodGroupRelsCount(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _commercePaymentMethodGroupRelService.
+			getCommercePaymentMethodGroupRelsCount(groupId);
 	}
 
 	@Override

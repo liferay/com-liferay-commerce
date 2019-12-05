@@ -292,6 +292,60 @@ public class CommercePaymentMethodGroupRelServiceSoap {
 	public static
 		com.liferay.commerce.payment.model.CommercePaymentMethodGroupRelSoap[]
 				getCommercePaymentMethodGroupRels(
+					long groupId, boolean active, int start, int end,
+					com.liferay.portal.kernel.util.OrderByComparator
+						<com.liferay.commerce.payment.model.
+							CommercePaymentMethodGroupRel> orderByComparator)
+			throws RemoteException {
+
+		try {
+			java.util.List
+				<com.liferay.commerce.payment.model.
+					CommercePaymentMethodGroupRel> returnValue =
+						CommercePaymentMethodGroupRelServiceUtil.
+							getCommercePaymentMethodGroupRels(
+								groupId, active, start, end, orderByComparator);
+
+			return com.liferay.commerce.payment.model.
+				CommercePaymentMethodGroupRelSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static
+		com.liferay.commerce.payment.model.CommercePaymentMethodGroupRelSoap[]
+				getCommercePaymentMethodGroupRels(
+					long groupId, int start, int end,
+					com.liferay.portal.kernel.util.OrderByComparator
+						<com.liferay.commerce.payment.model.
+							CommercePaymentMethodGroupRel> orderByComparator)
+			throws RemoteException {
+
+		try {
+			java.util.List
+				<com.liferay.commerce.payment.model.
+					CommercePaymentMethodGroupRel> returnValue =
+						CommercePaymentMethodGroupRelServiceUtil.
+							getCommercePaymentMethodGroupRels(
+								groupId, start, end, orderByComparator);
+
+			return com.liferay.commerce.payment.model.
+				CommercePaymentMethodGroupRelSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static
+		com.liferay.commerce.payment.model.CommercePaymentMethodGroupRelSoap[]
+				getCommercePaymentMethodGroupRels(
 					long groupId, long commerceCountryId, boolean active)
 			throws RemoteException {
 
@@ -321,6 +375,23 @@ public class CommercePaymentMethodGroupRelServiceSoap {
 			int returnValue =
 				CommercePaymentMethodGroupRelServiceUtil.
 					getCommercePaymentMethodGroupRelsCount(groupId, active);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getCommercePaymentMethodGroupRelsCount(long groupId)
+		throws RemoteException {
+
+		try {
+			int returnValue =
+				CommercePaymentMethodGroupRelServiceUtil.
+					getCommercePaymentMethodGroupRelsCount(groupId);
 
 			return returnValue;
 		}
