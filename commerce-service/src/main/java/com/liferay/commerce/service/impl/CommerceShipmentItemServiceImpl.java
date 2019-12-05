@@ -51,8 +51,20 @@ public class CommerceShipmentItemServiceImpl
 			commerceInventoryWarehouseId, quantity, serviceContext);
 	}
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), pass boolean for restoring stock
+	 */
+	@Deprecated
 	@Override
 	public void deleteCommerceShipmentItem(long commerceShipmentItemId)
+		throws PortalException {
+
+		deleteCommerceShipmentItem(commerceShipmentItemId, false);
+	}
+
+	@Override
+	public void deleteCommerceShipmentItem(
+			long commerceShipmentItemId, boolean restoreStockQuantity)
 		throws PortalException {
 
 		CommerceShipmentItem commerceShipmentItem =
@@ -64,7 +76,7 @@ public class CommerceShipmentItemServiceImpl
 			CommerceActionKeys.MANAGE_COMMERCE_SHIPMENTS);
 
 		commerceShipmentItemLocalService.deleteCommerceShipmentItem(
-			commerceShipmentItem);
+			commerceShipmentItem, restoreStockQuantity);
 	}
 
 	@Override
