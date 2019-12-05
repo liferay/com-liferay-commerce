@@ -270,6 +270,14 @@ public class CommercePaymentMethodGroupRelLocalServiceWrapper
 	}
 
 	@Override
+	public com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel
+		fetchCommercePaymentMethodGroupRel(long groupId, String engineKey) {
+
+		return _commercePaymentMethodGroupRelLocalService.
+			fetchCommercePaymentMethodGroupRel(groupId, engineKey);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery
 		getActionableDynamicQuery() {
 

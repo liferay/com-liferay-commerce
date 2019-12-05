@@ -446,6 +446,13 @@ public class CommerceOrderLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.commerce.model.CommerceOrder>
+		getCommerceOrders(long groupId, String commercePaymentMethodKey) {
+
+		return getService().getCommerceOrders(
+			groupId, commercePaymentMethodKey);
+	}
+
+	public static java.util.List<com.liferay.commerce.model.CommerceOrder>
 		getCommerceOrdersByBillingAddress(long billingAddressId) {
 
 		return getService().getCommerceOrdersByBillingAddress(billingAddressId);
