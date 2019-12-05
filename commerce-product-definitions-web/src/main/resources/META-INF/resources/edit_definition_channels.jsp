@@ -37,26 +37,28 @@ long[] commerceChannelIds = cpDefinitionChannelDisplayContext.getCommerceChannel
 			<aui:fieldset>
 				<aui:input checked="<%= cpDefinition.isChannelFilterEnabled() %>" label="enable-filter-channels" name="channelFilterEnabled" type="toggle-switch" value="<%= cpDefinition.isChannelFilterEnabled() %>" />
 
-				<c:choose>
-					<c:when test="<%= commerceChannels.isEmpty() %>">
-						<div class="alert alert-info">
-							<liferay-ui:message key="there-are-no-channels" />
-						</div>
-					</c:when>
-					<c:otherwise>
+				<c:if test="<%= cpDefinition.isChannelFilterEnabled() %>">
+					<c:choose>
+						<c:when test="<%= commerceChannels.isEmpty() %>">
+							<div class="alert alert-info">
+								<liferay-ui:message key="there-are-no-channels" />
+							</div>
+						</c:when>
+						<c:otherwise>
 
-						<%
-						for (CommerceChannel commerceChannel : commerceChannels) {
-						%>
+							<%
+							for (CommerceChannel commerceChannel : commerceChannels) {
+							%>
 
-							<aui:input checked="<%= ArrayUtil.contains(commerceChannelIds, commerceChannel.getCommerceChannelId()) %>" label="<%= commerceChannel.getName() %>" name='<%= "commerceChannelId_" + commerceChannel.getCommerceChannelId() %>' onChange='<%= renderResponse.getNamespace() + "fulfillCommerceChannelIds();" %>' type="checkbox" value="<%= commerceChannel.getCommerceChannelId() %>" />
+								<aui:input checked="<%= ArrayUtil.contains(commerceChannelIds, commerceChannel.getCommerceChannelId()) %>" disabled="<%= !cpDefinition.isChannelFilterEnabled() %>" label="<%= commerceChannel.getName() %>" name='<%= "commerceChannelId_" + commerceChannel.getCommerceChannelId() %>' onChange='<%= renderResponse.getNamespace() + "fulfillCommerceChannelIds();" %>' type="checkbox" value="<%= commerceChannel.getCommerceChannelId() %>" />
 
-						<%
-						}
-						%>
+							<%
+							}
+							%>
 
-					</c:otherwise>
-				</c:choose>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
 
 				<aui:button-row>
 					<aui:button cssClass="btn-lg" type="submit" />
