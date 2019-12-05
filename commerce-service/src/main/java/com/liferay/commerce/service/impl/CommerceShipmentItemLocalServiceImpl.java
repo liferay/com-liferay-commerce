@@ -24,7 +24,6 @@ import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemLoca
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceShipmentItem;
-import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.service.base.CommerceShipmentItemLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -102,11 +101,40 @@ public class CommerceShipmentItemLocalServiceImpl
 		return commerceShipmentItem;
 	}
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), pass boolean for restoring stock
+	 */
+	@Deprecated
+	@Override
+	public CommerceShipmentItem deleteCommerceShipmentItem(
+		CommerceShipmentItem commerceShipmentItem) {
+
+		try {
+			deleteCommerceShipmentItem(commerceShipmentItem, false);
+		}
+		catch (PortalException pe) {
+			_log.error(pe, pe);
+		}
+
+		return commerceShipmentItem;
+	}
+
 	@Indexable(type = IndexableType.DELETE)
 	@Override
 	@SystemEvent(type = SystemEventConstants.TYPE_DELETE)
 	public CommerceShipmentItem deleteCommerceShipmentItem(
-		CommerceShipmentItem commerceShipmentItem) {
+			CommerceShipmentItem commerceShipmentItem,
+			boolean restoreStockQuantity)
+		throws PortalException {
+
+		commerceShipmentItemPersistence.remove(commerceShipmentItem);
+
+		if (!restoreStockQuantity) {
+			commerceOrderItemLocalService.updateCommerceOrderItem(
+				commerceShipmentItem.getCommerceOrderItemId(), 0);
+
+			return commerceShipmentItem;
+		}
 
 		// Commerce order item
 
@@ -128,13 +156,13 @@ public class CommerceShipmentItemLocalServiceImpl
 			_log.error(pe, pe);
 		}
 
-		// Commerce shipment item
-
-		commerceShipmentItemPersistence.remove(commerceShipmentItem);
-
 		return commerceShipmentItem;
 	}
 
+	/**
+	 * @deprecated As of Mueller (7.2.x), pass boolean for restoring stock
+	 */
+	@Deprecated
 	@Override
 	public CommerceShipmentItem deleteCommerceShipmentItem(
 			long commerceShipmentItemId)
@@ -144,12 +172,43 @@ public class CommerceShipmentItemLocalServiceImpl
 			commerceShipmentItemPersistence.findByPrimaryKey(
 				commerceShipmentItemId);
 
-		return commerceShipmentItemLocalService.deleteCommerceShipmentItem(
-			commerceShipmentItem);
+		deleteCommerceShipmentItem(commerceShipmentItem, false);
+
+		return commerceShipmentItem;
 	}
 
 	@Override
+	public void deleteCommerceShipmentItem(
+			long commerceShipmentItemId, boolean restoreStockQuantity)
+		throws PortalException {
+
+		CommerceShipmentItem commerceShipmentItem =
+			commerceShipmentItemPersistence.findByPrimaryKey(
+				commerceShipmentItemId);
+
+		commerceShipmentItemLocalService.deleteCommerceShipmentItem(
+			commerceShipmentItem, restoreStockQuantity);
+	}
+
+	/**
+	 * @deprecated As of Mueller (7.2.x), pass boolean for restoring stock
+	 */
+	@Deprecated
+	@Override
 	public void deleteCommerceShipmentItems(long commerceShipmentId) {
+		try {
+			deleteCommerceShipmentItems(commerceShipmentId, false);
+		}
+		catch (PortalException pe) {
+			_log.error(pe, pe);
+		}
+	}
+
+	@Override
+	public void deleteCommerceShipmentItems(
+			long commerceShipmentId, boolean restoreStockQuantity)
+		throws PortalException {
+
 		List<CommerceShipmentItem> commerceShipmentItems =
 			commerceShipmentItemPersistence.findByCommerceShipment(
 				commerceShipmentId);
@@ -158,7 +217,7 @@ public class CommerceShipmentItemLocalServiceImpl
 				commerceShipmentItems) {
 
 			commerceShipmentItemLocalService.deleteCommerceShipmentItem(
-				commerceShipmentItem);
+				commerceShipmentItem, restoreStockQuantity);
 		}
 	}
 
