@@ -32,7 +32,6 @@ import com.liferay.commerce.shipment.web.internal.portlet.action.ActionHelper;
 import com.liferay.commerce.shipment.web.internal.search.CommerceShipmentChecker;
 import com.liferay.commerce.shipment.web.internal.util.CommerceShipmentPortletUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
-import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.dao.search.RowChecker;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -104,25 +103,31 @@ public class CommerceShipmentDisplayContext
 		return _commerceInventoryWarehouses;
 	}
 
-	public long getCommerceOrderId(long commerceShipmentId)
+	public long[] getCommerceOrderIds(long commerceShipmentId)
 		throws PortalException {
 
 		List<CommerceShipmentItem> commerceShipmentItems =
 			CommerceShipmentItemLocalServiceUtil.getCommerceShipmentItems(
-				commerceShipmentId, 0, 1, null);
+				commerceShipmentId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
-		if (commerceShipmentItems.isEmpty()) {
-			return 0;
+		Stream<CommerceShipmentItem> stream = commerceShipmentItems.stream();
+
+		long[] commerceOrderItemIds = stream.mapToLong(
+			CommerceShipmentItem::getCommerceOrderItemId
+		).toArray();
+
+		long[] commerceOrderIds = new long[0];
+
+		for (long commerceOrderItemId : commerceOrderItemIds) {
+			CommerceOrderItem commerceOrderItem =
+				_commerceOrderItemService.getCommerceOrderItem(
+					commerceOrderItemId);
+
+			commerceOrderIds = ArrayUtil.append(
+				commerceOrderIds, commerceOrderItem.getCommerceOrderId());
 		}
 
-		CommerceShipmentItem commerceShipmentItem = commerceShipmentItems.get(
-			0);
-
-		CommerceOrderItem commerceOrderItem =
-			_commerceOrderItemService.getCommerceOrderItem(
-				commerceShipmentItem.getCommerceOrderItemId());
-
-		return commerceOrderItem.getCommerceOrderId();
+		return ArrayUtil.unique(commerceOrderIds);
 	}
 
 	public List<CommerceOrderItem> getCommerceOrderItems(long commerceOrderId)

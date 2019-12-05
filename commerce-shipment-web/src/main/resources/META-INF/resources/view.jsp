@@ -102,15 +102,10 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 								property="commerceShipmentId"
 							/>
 
-							<%
-							long commerceOrderId = commerceShipmentDisplayContext.getCommerceOrderId(commerceShipment.getCommerceShipmentId());
-							%>
-
-							<liferay-ui:search-container-column-text
-								cssClass="important"
-								href="<%= commerceShipmentDisplayContext.getCommerceOrderUrl(commerceOrderId) %>"
-								name="order-number"
-								value="<%= (commerceOrderId == 0) ? StringPool.BLANK : String.valueOf(commerceOrderId) %>"
+							<liferay-ui:search-container-column-jsp
+								cssClass="entry-action-column"
+								name="order-ids"
+								path="/shipment_order_ids.jsp"
 							/>
 
 							<liferay-ui:search-container-column-text
