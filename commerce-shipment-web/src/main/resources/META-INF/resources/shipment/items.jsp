@@ -32,43 +32,44 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 CommerceShipment commerceShipment = commerceShipmentItemDisplayContext.getCommerceShipment();
 %>
 
-<liferay-frontend:management-bar
-	searchContainerId="commerceShipmentItems"
->
-	<liferay-frontend:management-bar-buttons>
-		<liferay-frontend:management-bar-display-buttons
-			displayViews='<%= new String[] {"list"} %>'
-			portletURL="<%= portletURL %>"
-			selectedDisplayStyle="list"
-		/>
-
-		<c:if test="<%= commerceShipment.getStatus() == CommerceShipmentConstants.SHIPMENT_STATUS_PROCESSING %>">
-			<liferay-frontend:add-menu
-				inline="<%= true %>"
-			>
-				<liferay-frontend:add-menu-item
-					title='<%= LanguageUtil.get(request, "add-shipment-item") %>'
-					url="<%= addCommerceShipmentItemsURL %>"
-				/>
-			</liferay-frontend:add-menu>
-		</c:if>
-	</liferay-frontend:management-bar-buttons>
-
-	<liferay-frontend:management-bar-filters>
-		<liferay-frontend:management-bar-navigation
-			navigationKeys='<%= new String[] {"all"} %>'
-			portletURL="<%= portletURL %>"
-		/>
-	</liferay-frontend:management-bar-filters>
-</liferay-frontend:management-bar>
-
-<div class="container-fluid-1280" id="<portlet:namespace />shipmentItemsContainer">
-	<c:if test="<%= commerceShipment.getStatus() > CommerceShipmentConstants.SHIPMENT_STATUS_PROCESSING %>">
+<c:choose>
+	<c:when test="<%= commerceShipment.getStatus() != CommerceShipmentConstants.SHIPMENT_STATUS_PROCESSING %>">
 		<aui:alert closeable="<%= false %>" cssClass="mt-3" type="warning">
 			<liferay-ui:message key="shipment-items-can-only-be-modified-if-the-shipment-is-processing" />
 		</aui:alert>
-	</c:if>
+	</c:when>
+	<c:otherwise>
+		<liferay-frontend:management-bar
+			searchContainerId="commerceShipmentItems"
+		>
+			<liferay-frontend:management-bar-buttons>
+				<liferay-frontend:management-bar-display-buttons
+					displayViews='<%= new String[] {"list"} %>'
+					portletURL="<%= portletURL %>"
+					selectedDisplayStyle="list"
+				/>
 
+				<liferay-frontend:add-menu
+					inline="<%= true %>"
+				>
+					<liferay-frontend:add-menu-item
+						title='<%= LanguageUtil.get(request, "add-shipment-item") %>'
+						url="<%= addCommerceShipmentItemsURL %>"
+					/>
+				</liferay-frontend:add-menu>
+			</liferay-frontend:management-bar-buttons>
+
+			<liferay-frontend:management-bar-filters>
+				<liferay-frontend:management-bar-navigation
+					navigationKeys='<%= new String[] {"all"} %>'
+					portletURL="<%= portletURL %>"
+				/>
+			</liferay-frontend:management-bar-filters>
+		</liferay-frontend:management-bar>
+	</c:otherwise>
+</c:choose>
+
+<div class="container-fluid-1280" id="<portlet:namespace />shipmentItemsContainer">
 	<aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
 		<aui:input name="<%= Constants.CMD %>" type="hidden" />
 		<aui:input name="redirect" type="hidden" value="<%= portletURL.toString() %>" />
@@ -120,12 +121,10 @@ CommerceShipment commerceShipment = commerceShipmentItemDisplayContext.getCommer
 						value="<%= (commerceInventoryWarehouse == null) ? StringPool.BLANK : HtmlUtil.escape(commerceInventoryWarehouse.getName()) %>"
 					/>
 
-					<c:if test="<%= commerceShipment.getStatus() > CommerceShipmentConstants.SHIPMENT_STATUS_READY_TO_BE_SHIPPED %>">
-						<liferay-ui:search-container-column-jsp
-							cssClass="entry-action-column"
-							path="/shipment_item_action.jsp"
-						/>
-					</c:if>
+					<liferay-ui:search-container-column-jsp
+						cssClass="entry-action-column"
+						path="/shipment_item_action.jsp"
+					/>
 				</liferay-ui:search-container-row>
 
 				<liferay-ui:search-iterator
