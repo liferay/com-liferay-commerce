@@ -112,9 +112,12 @@ public class EditCommerceShipmentMVCActionCommand extends BaseMVCActionCommand {
 				0L);
 		}
 
+		boolean restoreStockQuantity = ParamUtil.getBoolean(
+			actionRequest, "restoreStockQuantity");
+
 		for (long deleteCommerceShipmentId : deleteCommerceShipmentIds) {
 			_commerceShipmentService.deleteCommerceShipment(
-				deleteCommerceShipmentId);
+				deleteCommerceShipmentId, restoreStockQuantity);
 		}
 	}
 

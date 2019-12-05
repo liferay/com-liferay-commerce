@@ -72,11 +72,14 @@ public class EditCommerceShipmentItemMVCActionCommand
 				0L);
 		}
 
+		boolean restoreStockQuantity = ParamUtil.getBoolean(
+			actionRequest, "restoreStockQuantity");
+
 		for (long deleteCommerceShipmentItemId :
 				deleteCommerceShipmentItemIds) {
 
 			_commerceShipmentItemService.deleteCommerceShipmentItem(
-				deleteCommerceShipmentItemId);
+				deleteCommerceShipmentItemId, restoreStockQuantity);
 		}
 	}
 
