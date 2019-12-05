@@ -2,7 +2,7 @@ import ClayIcon from '@clayui/icon';
 import ClayLink from '@clayui/link';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect } from 'react';
 import TableContext from '../../DatasetDisplayContext.es';
 
 function submit(action, method = 'get', form) {
@@ -16,6 +16,18 @@ function submit(action, method = 'get', form) {
 }
 
 function BulkActions(props) {
+	function handleActionClick(actionDefinition, formRef) {
+		if(typeof actionDefinition.action === 'function') {
+			actionDefinition.action(props.selectedItemsId)
+		} else {
+			submit(
+				actionDefinition.action,
+				actionDefinition.method || 'get',
+				formRef
+			)
+		}
+	}
+
 	return (
 		<TableContext.Consumer>
 			{({formRef}) => (
@@ -49,13 +61,7 @@ function BulkActions(props) {
 										i > 0 && 'ml-1'
 									)}
 									key={actionDefinition.label}
-									onClick={() =>
-										submit(
-											actionDefinition.action,
-											actionDefinition.method,
-											formRef
-										)
-									}
+									onClick={() => handleActionClick(actionDefinition, formRef)}
 								>
 									<ClayIcon symbol={actionDefinition.icon} />
 								</button>
@@ -71,7 +77,10 @@ function BulkActions(props) {
 BulkActions.propTypes = {
 	bulkActions: PropTypes.arrayOf(
 		PropTypes.shape({
-			action: PropTypes.string.isRequired,
+			action: PropTypes.oneOfType([
+				PropTypes.string,
+				PropTypes.func
+			]).isRequired,
 			icon: PropTypes.string.isRequired,
 			label: PropTypes.string.isRequired,
 			method: PropTypes.string
