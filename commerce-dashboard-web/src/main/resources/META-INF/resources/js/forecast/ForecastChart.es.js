@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ChartWrapper from '../ChartWrapper.es';
-import { loadData } from './utils.es';
+import { loadData } from '../utils/index.es';
 
 export default function ForecastChart({ commerceAccountId }) {
 	const [loading, setLoading] = useState(true);
