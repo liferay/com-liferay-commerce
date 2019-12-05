@@ -37,7 +37,9 @@ export default class SidePanel extends React.Component {
 		}
 		if(this.props.containerSelector) {
 			const container = document.querySelector(this.props.containerSelector);
-			container.classList.add('with-side-panel');
+			if(container) {
+				container.classList.add('with-side-panel');
+			}
 		}
 		if (Liferay) {
 			Liferay.on(OPEN_SIDE_PANEL, this.handlePanelOpenEvent);
