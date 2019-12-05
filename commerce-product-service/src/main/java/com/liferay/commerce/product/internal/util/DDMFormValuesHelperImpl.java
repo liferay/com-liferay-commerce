@@ -124,16 +124,12 @@ public class DDMFormValuesHelperImpl implements DDMFormValuesHelper {
 
 		JSONArray valueJSONArray = jsonObject.getJSONArray("value");
 
-		for (int i = 0; i < valueJSONArray.length(); i++) {
-			String valueKey = valueJSONArray.getString(i);
-
-			if (Validator.isNotNull(valueKey)) {
-				ddmFormFieldValue.setValue(new UnlocalizedValue(valueKey));
-			}
-			else {
-				ddmFormFieldValue.setValue(
-					new UnlocalizedValue(StringPool.BLANK));
-			}
+		if (valueJSONArray != null) {
+			ddmFormFieldValue.setValue(
+				new UnlocalizedValue(valueJSONArray.toString()));
+		}
+		else {
+			ddmFormFieldValue.setValue(new UnlocalizedValue(StringPool.BLANK));
 		}
 
 		return ddmFormFieldValue;
