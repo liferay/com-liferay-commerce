@@ -108,8 +108,8 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 
 	<div class="col-12">
 		<commerce-ui:panel
+			actionUrl="<%= editBillingAddressURL %>"
 			elementClasses="flex-fill"
-			headerActionUrl="<%= editBillingAddressURL %>"
 			title='<%= LanguageUtil.get(request, "info") %>'
 		>
 			<div class="row vertically-divided">
@@ -437,9 +437,9 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 		/>
 
 		<commerce-ui:panel
-			headerActionId="order-summary-modal"
-			headerActionLabel='<%= LanguageUtil.get(request, "edit") %>'
-			headerActionUrl="<%= editOrderSummaryURL %>"
+			actionLabel='<%= LanguageUtil.get(request, "edit") %>'
+			actionTargetId="order-summary-modal"
+			actionUrl="<%= editOrderSummaryURL %>"
 			title='<%= LanguageUtil.get(request, "order-summary") %>'
 		>
 			<commerce-ui:summary-table
