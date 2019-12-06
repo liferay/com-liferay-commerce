@@ -12,7 +12,7 @@ launcher('dataset-display', 'dataset-display-root-id', {
 					id: 'sidePanelTestId',
 					options: {
 						slug: 'edit',
-						url: `/edit-content?ids=${ids.join(',')}`,
+						url: `/side-panel/edit.html?ids=${ids.join(',')}`,
 					}
 				})
 			},

@@ -38,13 +38,13 @@ module.exports = [
     entry_dev: "entry.dev.es.js",
     folder: "side_panel",
     name: "Side panel",
-    page: "side_panel.html"
+    page: "side-panel.html"
   },
   {
     entry: "entry.es.js",
     entry_dev: "entry.dev.es.js",
     folder: "step_tracker",
     name: "Step tracker",
-    page: "step_tracker.html"
+    page: "step-tracker.html"
   }
 ];
