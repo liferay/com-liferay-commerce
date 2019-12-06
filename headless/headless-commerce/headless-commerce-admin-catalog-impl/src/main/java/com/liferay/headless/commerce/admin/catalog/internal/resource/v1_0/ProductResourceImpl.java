@@ -600,6 +600,17 @@ public class ProductResourceImpl
 				cpDefinition.getPrimaryKey(), expando);
 		}
 
+		// Workflow
+
+		if (!product.getActive()) {
+			Map<String, Serializable> workflowContext = new HashMap<>();
+
+			_cpDefinitionService.updateStatus(
+				_user.getUserId(), cpDefinition.getCPDefinitionId(),
+				WorkflowConstants.STATUS_INACTIVE, serviceContext,
+				workflowContext);
+		}
+
 		// Update nested resources
 
 		cpDefinition = _updateNestedResources(
