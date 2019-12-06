@@ -17,6 +17,7 @@ package com.liferay.commerce.product.internal.upgrade;
 import com.liferay.asset.kernel.service.AssetCategoryLocalService;
 import com.liferay.commerce.product.internal.upgrade.v1_10_1.CommerceSiteTypeUpgradeProcess;
 import com.liferay.commerce.product.internal.upgrade.v1_11_0.CPAttachmentFileEntryGroupUpgradeProcess;
+import com.liferay.commerce.product.internal.upgrade.v1_11_1.CPDisplayLayoutUpgradeProcess;
 import com.liferay.commerce.product.internal.upgrade.v1_2_0.ProductSubscriptionUpgradeProcess;
 import com.liferay.commerce.product.internal.upgrade.v1_3_0.CPAttachmentFileEntryUpgradeProcess;
 import com.liferay.commerce.product.internal.upgrade.v1_3_0.CPDefinitionLinkUpgradeProcess;
@@ -37,6 +38,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.service.ClassNameLocalService;
 import com.liferay.portal.kernel.service.GroupLocalService;
+import com.liferay.portal.kernel.service.LayoutLocalService;
 import com.liferay.portal.kernel.settings.SettingsFactory;
 import com.liferay.portal.kernel.upgrade.DummyUpgradeProcess;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
@@ -121,6 +123,10 @@ public class CommerceProductUpgradeStepRegistrator
 			new CPAttachmentFileEntryGroupUpgradeProcess(
 				_assetCategoryLocalService, _classNameLocalService));
 
+		registry.register(
+			_SCHEMA_VERSION_1_11_0, _SCHEMA_VERSION_1_11_1,
+			new CPDisplayLayoutUpgradeProcess(_layoutLocalService));
+
 		if (_log.isInfoEnabled()) {
 			_log.info("COMMERCE PRODUCT UPGRADE STEP REGISTRATOR FINISHED");
 		}
@@ -152,6 +158,8 @@ public class CommerceProductUpgradeStepRegistrator
 
 	private static final String _SCHEMA_VERSION_1_11_0 = "1.11.0";
 
+	private static final String _SCHEMA_VERSION_1_11_1 = "1.11.1";
+
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommerceProductUpgradeStepRegistrator.class);
 
@@ -169,6 +177,9 @@ public class CommerceProductUpgradeStepRegistrator
 
 	@Reference
 	private JSONFactory _jsonFactory;
+
+	@Reference
+	private LayoutLocalService _layoutLocalService;
 
 	@Reference
 	private SettingsFactory _settingsFactory;
