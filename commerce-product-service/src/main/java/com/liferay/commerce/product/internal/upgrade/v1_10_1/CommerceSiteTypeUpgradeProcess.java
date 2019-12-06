@@ -16,9 +16,13 @@ package com.liferay.commerce.product.internal.upgrade.v1_10_1;
 
 import com.liferay.commerce.account.configuration.CommerceAccountGroupServiceConfiguration;
 import com.liferay.commerce.account.constants.CommerceAccountConstants;
+import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
+import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.service.ClassNameLocalService;
+import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.settings.ModifiableSettings;
 import com.liferay.portal.kernel.settings.Settings;
@@ -26,6 +30,7 @@ import com.liferay.portal.kernel.settings.SettingsFactory;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
@@ -34,11 +39,13 @@ import java.sql.Statement;
 public class CommerceSiteTypeUpgradeProcess extends UpgradeProcess {
 
 	public CommerceSiteTypeUpgradeProcess(
-		CommerceChannelLocalService commerceChannelLocalService,
+		ClassNameLocalService classNameLocalService,
+		GroupLocalService groupLocalService,
 		ConfigurationProvider configurationProvider,
 		SettingsFactory settingsFactory) {
 
-		_commerceChannelLocalService = commerceChannelLocalService;
+		_classNameLocalService = classNameLocalService;
+		_groupLocalService = groupLocalService;
 		_configurationProvider = configurationProvider;
 		_settingsFactory = settingsFactory;
 	}
@@ -66,8 +73,7 @@ public class CommerceSiteTypeUpgradeProcess extends UpgradeProcess {
 
 				Settings settings = _settingsFactory.getSettings(
 					new GroupServiceSettingsLocator(
-						_commerceChannelLocalService.
-							getCommerceChannelGroupIdBySiteGroupId(groupId),
+						_getCommerceChannelGroupIdBySiteGroupId(groupId),
 						CommerceAccountConstants.SERVICE_NAME));
 
 				ModifiableSettings modifiableSettings =
@@ -87,8 +93,40 @@ public class CommerceSiteTypeUpgradeProcess extends UpgradeProcess {
 		}
 	}
 
-	private final CommerceChannelLocalService _commerceChannelLocalService;
+	private long _getCommerceChannelGroupIdBySiteGroupId(long groupId)
+		throws SQLException {
+
+		long companyId = 0;
+		long commerceChannelId = 0;
+
+		String sql = "select * from CommerceChannel where siteGroupId = " +
+			groupId + " limit 1";
+
+		try (Statement s = connection.createStatement();
+			ResultSet rs = s.executeQuery(sql)) {
+
+			if (rs.next()) {
+				companyId = rs.getLong("companyId");
+				commerceChannelId = rs.getLong("commerceChannelId");
+			}
+		}
+
+		long classNameId = _classNameLocalService.getClassNameId(
+			CommerceChannel.class.getName());
+
+		Group group = _groupLocalService.fetchGroup(
+			companyId, classNameId, commerceChannelId);
+
+		if (group != null) {
+			return group.getGroupId();
+		}
+
+		return 0;
+	}
+
+	private final ClassNameLocalService _classNameLocalService;
 	private final ConfigurationProvider _configurationProvider;
+	private final GroupLocalService _groupLocalService;
 	private final SettingsFactory _settingsFactory;
 
 }
