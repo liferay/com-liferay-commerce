@@ -31,7 +31,6 @@ import com.liferay.commerce.product.internal.upgrade.v1_6_0.CPDefinitionTrashEnt
 import com.liferay.commerce.product.internal.upgrade.v1_6_0.CommerceCatalogUpgradeProcess;
 import com.liferay.commerce.product.internal.upgrade.v1_6_0.CommerceChannelUpgradeProcess;
 import com.liferay.commerce.product.internal.upgrade.v1_7_0.CPDefinitionFiltersUpgradeProcess;
-import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.log.Log;
@@ -168,9 +167,6 @@ public class CommerceProductUpgradeStepRegistrator
 
 	@Reference
 	private ConfigurationProvider _configurationProvider;
-
-	@Reference
-	private CPDefinitionLocalService _cpDefinitionLocalService;
 
 	@Reference
 	private GroupLocalService _groupLocalService;
