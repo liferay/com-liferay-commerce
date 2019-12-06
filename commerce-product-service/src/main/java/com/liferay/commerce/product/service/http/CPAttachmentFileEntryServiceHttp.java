@@ -508,8 +508,8 @@ public class CPAttachmentFileEntryServiceHttp {
 
 	public static com.liferay.commerce.product.model.CPAttachmentFileEntry
 			upsertCPAttachmentFileEntry(
-				HttpPrincipal httpPrincipal, long classNameId, long classPK,
-				long cpAttachmentFileEntryId, long fileEntryId,
+				HttpPrincipal httpPrincipal, long groupId, long classNameId,
+				long classPK, long cpAttachmentFileEntryId, long fileEntryId,
 				int displayDateMonth, int displayDateDay, int displayDateYear,
 				int displayDateHour, int displayDateMinute,
 				int expirationDateMonth, int expirationDateDay,
@@ -527,12 +527,13 @@ public class CPAttachmentFileEntryServiceHttp {
 				_upsertCPAttachmentFileEntryParameterTypes10);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, classNameId, classPK, cpAttachmentFileEntryId,
-				fileEntryId, displayDateMonth, displayDateDay, displayDateYear,
-				displayDateHour, displayDateMinute, expirationDateMonth,
-				expirationDateDay, expirationDateYear, expirationDateHour,
-				expirationDateMinute, neverExpire, titleMap, json, priority,
-				type, externalReferenceCode, serviceContext);
+				methodKey, groupId, classNameId, classPK,
+				cpAttachmentFileEntryId, fileEntryId, displayDateMonth,
+				displayDateDay, displayDateYear, displayDateHour,
+				displayDateMinute, expirationDateMonth, expirationDateDay,
+				expirationDateYear, expirationDateHour, expirationDateMinute,
+				neverExpire, titleMap, json, priority, type,
+				externalReferenceCode, serviceContext);
 
 			Object returnObj = null;
 
@@ -612,11 +613,11 @@ public class CPAttachmentFileEntryServiceHttp {
 		};
 	private static final Class<?>[]
 		_upsertCPAttachmentFileEntryParameterTypes10 = new Class[] {
-			long.class, long.class, long.class, long.class, int.class,
+			long.class, long.class, long.class, long.class, long.class,
 			int.class, int.class, int.class, int.class, int.class, int.class,
-			int.class, int.class, int.class, boolean.class, java.util.Map.class,
-			String.class, double.class, int.class, String.class,
-			com.liferay.portal.kernel.service.ServiceContext.class
+			int.class, int.class, int.class, int.class, boolean.class,
+			java.util.Map.class, String.class, double.class, int.class,
+			String.class, com.liferay.portal.kernel.service.ServiceContext.class
 		};
 
 }

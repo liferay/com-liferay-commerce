@@ -359,9 +359,10 @@ public class CPAttachmentFileEntryServiceSoap {
 
 	public static com.liferay.commerce.product.model.CPAttachmentFileEntrySoap
 			upsertCPAttachmentFileEntry(
-				long classNameId, long classPK, long cpAttachmentFileEntryId,
-				long fileEntryId, int displayDateMonth, int displayDateDay,
-				int displayDateYear, int displayDateHour, int displayDateMinute,
+				long groupId, long classNameId, long classPK,
+				long cpAttachmentFileEntryId, long fileEntryId,
+				int displayDateMonth, int displayDateDay, int displayDateYear,
+				int displayDateHour, int displayDateMinute,
 				int expirationDateMonth, int expirationDateDay,
 				int expirationDateYear, int expirationDateHour,
 				int expirationDateMinute, boolean neverExpire,
@@ -379,9 +380,10 @@ public class CPAttachmentFileEntryServiceSoap {
 				returnValue =
 					CPAttachmentFileEntryServiceUtil.
 						upsertCPAttachmentFileEntry(
-							classNameId, classPK, cpAttachmentFileEntryId,
-							fileEntryId, displayDateMonth, displayDateDay,
-							displayDateYear, displayDateHour, displayDateMinute,
+							groupId, classNameId, classPK,
+							cpAttachmentFileEntryId, fileEntryId,
+							displayDateMonth, displayDateDay, displayDateYear,
+							displayDateHour, displayDateMinute,
 							expirationDateMonth, expirationDateDay,
 							expirationDateYear, expirationDateHour,
 							expirationDateMinute, neverExpire, titleMap, json,
