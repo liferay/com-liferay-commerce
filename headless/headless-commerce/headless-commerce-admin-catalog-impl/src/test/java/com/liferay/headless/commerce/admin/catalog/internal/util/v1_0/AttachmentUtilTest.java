@@ -75,7 +75,7 @@ public class AttachmentUtilTest extends PowerMockito {
 		throws Exception {
 
 		AttachmentUtil.upsertCPAttachmentFileEntry(
-			null, null, new Attachment(), 0, 0, 0, new ServiceContext());
+			0, null, null, new Attachment(), 0, 0, 0, new ServiceContext());
 	}
 
 	@Test(expected = MethodRequiredParameterMissingException.class)
