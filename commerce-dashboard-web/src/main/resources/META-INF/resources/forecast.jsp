@@ -31,9 +31,13 @@ long commerceAccountId = (long)request.getAttribute("commerceAccountId");
 <aui:script require='<%= npmResolver.resolveModuleName("commerce-dashboard-web/js/forecast/index.es") + " as chart" %>'>
 chart.default(
 	'forecastChart',
-		'<%= forecastChartRootElementId %>',
-		{
-	  commerceAccountId: '<%= commerceAccountId %>'
+	'<%= forecastChartRootElementId %>',
+	{
+		APIBaseUrl: `/o/headless-commerce-machine-learning/v1.0/accountCategoryForecasts/by-monthlyRevenue`,
+		accountIdParamName: 'accountIds',
+		commerceAccountId: '<%= commerceAccountId %>',
+		noAccountErrorMessage: Liferay.Language.get('no-account-selected'),
+		noDataErrorMessage: Liferay.Language.get('no-data-available'),
 	}
 );
 </aui:script>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ChartWrapper from '../ChartWrapper.es';
 import { loadData } from '../utils/index.es';
 
-export default function ForecastChart({ commerceAccountId }) {
+export default function ForecastChart({ accountIdParamName, APIBaseUrl, commerceAccountId, noAccountErrorMessage, noDataErrorMessage }) {
 	const [loading, setLoading] = useState(true);
 	const [chartData, setChartData] = useState({});
 	const [accountId, setAccountId] = useState(commerceAccountId);
@@ -10,7 +10,7 @@ export default function ForecastChart({ commerceAccountId }) {
 	Liferay.on('accountSelected', ({ accountId }) => setAccountId(accountId));
 
 	function updateData() {
-		const APIUrl = `/o/headless-commerce-machine-learning/v1.0/accountCategoryForecasts/by-monthlyRevenue?accountIds=${accountId}&pageSize=100`;
+		const APIUrl = `${APIBaseUrl}?${accountIdParamName}=${accountId}&pageSize=200`;
 
 		startLoading();
 		loadData(APIUrl).then(setChartData);
@@ -28,6 +28,6 @@ export default function ForecastChart({ commerceAccountId }) {
 	useEffect(stopLoading, [chartData]);
 
 	return (!accountId) ?
-		<p>{Liferay.Language.get('no-account-selected')}</p> :
-		<ChartWrapper data={chartData} loading={loading} />
+		<p>{noAccountErrorMessage}</p> :
+		<ChartWrapper data={chartData} loading={loading} noDataErrorMessage={noDataErrorMessage} />
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import ChartWrapper from '../ChartWrapper.es';
 
-export default function StatusChart() {
+export default function StatusChart(accountIdParamName, APIBaseUrl, commerceAccountId, noAccountErrorMessage, noDataErrorMessage) {
 	const chartData = {
 		data: {
 			x: 'x',
@@ -31,5 +31,5 @@ export default function StatusChart() {
 		},
 	}
 
-	return <ChartWrapper data={chartData} />;
+	return <ChartWrapper data={chartData} noDataErrorMessage={noDataErrorMessage} />;
 }

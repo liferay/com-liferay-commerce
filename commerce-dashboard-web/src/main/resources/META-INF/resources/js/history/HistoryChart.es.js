@@ -1,7 +1,7 @@
 import React from 'react';
 import ChartWrapper from '../ChartWrapper.es';
 
-export default function HistoryChart() {
+export default function HistoryChart({ accountIdParamName, APIBaseUrl, commerceAccountId, noAccountErrorMessage, noDataErrorMessage }) {
 	const chartData = {
 		data: {
 			columns: [
@@ -37,5 +37,5 @@ export default function HistoryChart() {
 		},
 	}
 
-	return <ChartWrapper data={chartData} />;
+	return <ChartWrapper data={chartData} noDataErrorMessage={noDataErrorMessage} />;
 }

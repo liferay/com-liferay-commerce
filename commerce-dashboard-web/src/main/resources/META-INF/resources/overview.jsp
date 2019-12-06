@@ -31,9 +31,13 @@ long commerceAccountId = (long)request.getAttribute("commerceAccountId");
 <aui:script require='<%= npmResolver.resolveModuleName("commerce-dashboard-web/js/overview/index.es") + " as chart" %>'>
 chart.default(
 	'overviewChart',
-		'<%= overviewChartRootElementId %>',
-		{
-	  commerceAccountId: '<%= commerceAccountId %>'
+	'<%= overviewChartRootElementId %>',
+	{
+		APIBaseUrl: `/o/----`,
+		accountIdParamName: '----',
+		commerceAccountId: '<%= commerceAccountId %>',
+		noAccountErrorMessage: Liferay.Language.get('no-account-selected'),
+		noDataErrorMessage: Liferay.Language.get('no-data-available'),
 	}
 );
 </aui:script>

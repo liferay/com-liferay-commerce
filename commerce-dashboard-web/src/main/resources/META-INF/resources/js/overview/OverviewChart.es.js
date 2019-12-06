@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ClayChart from '@clayui/charts';
 
-export default function OverviewChart({ commerceAccountId }) {
+export default function OverviewChart(accountIdParamName, APIBaseUrl, commerceAccountId, noAccountErrorMessage, noDataErrorMessage) {
 	const [accountId, setAccountId] = useState(commerceAccountId);
 
 	Liferay.on('accountSelected', ({ accountId }) => setAccountId(accountId));
