@@ -124,8 +124,9 @@ public class CommerceOrderItemClayTable
 				orderItem.getOrderItemId(), httpServletRequest);
 
 			ClayTableAction deleteClayTableAction = new ClayTableAction(
-				deleteURL.toString(), StringPool.BLANK,
-				LanguageUtil.get(httpServletRequest, "delete"), false, false);
+				StringPool.BLANK, deleteURL.toString(), StringPool.BLANK,
+				LanguageUtil.get(httpServletRequest, "delete"),
+				StringPool.BLANK, false, false);
 
 			clayTableActions.add(deleteClayTableAction);
 		}
