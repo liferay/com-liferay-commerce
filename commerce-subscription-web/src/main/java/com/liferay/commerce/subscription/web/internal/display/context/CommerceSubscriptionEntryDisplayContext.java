@@ -15,7 +15,6 @@
 package com.liferay.commerce.subscription.web.internal.display.context;
 
 import com.liferay.commerce.constants.CommerceActionKeys;
-import com.liferay.commerce.constants.CommerceSubscriptionEntryConstants;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
@@ -339,38 +338,23 @@ public class CommerceSubscriptionEntryDisplayContext {
 		}
 
 		String emptyResultsMessage = "there-are-no-subscriptions";
-		Long maxSubscriptionCycles = null;
-		Integer subscriptionStatus =
-			CommerceSubscriptionEntryConstants.SUBSCRIPTION_STATUS_ANY;
 
 		String navigation = getNavigation();
 
 		if (navigation.equals("active")) {
 			emptyResultsMessage = "there-are-no-active-subscriptions";
-			subscriptionStatus =
-				CommerceSubscriptionEntryConstants.SUBSCRIPTION_STATUS_ACTIVE;
 		}
 		else if (navigation.equals("suspended")) {
 			emptyResultsMessage = "there-are-no-suspended-subscriptions";
-			subscriptionStatus =
-				CommerceSubscriptionEntryConstants.
-					SUBSCRIPTION_STATUS_SUSPENDED;
 		}
 		else if (navigation.equals("cancelled")) {
 			emptyResultsMessage = "there-are-no-cancelled-subscriptions";
-			subscriptionStatus =
-				CommerceSubscriptionEntryConstants.
-					SUBSCRIPTION_STATUS_CANCELLED;
 		}
 		else if (navigation.equals("completed")) {
 			emptyResultsMessage = "there-are-no-completed-subscriptions";
-			subscriptionStatus =
-				CommerceSubscriptionEntryConstants.
-					SUBSCRIPTION_STATUS_COMPLETED;
 		}
 		else if (navigation.equals("never-ends")) {
 			emptyResultsMessage = "there-are-no-unlimited-subscriptions";
-			maxSubscriptionCycles = 0L;
 		}
 
 		_searchContainer = new SearchContainer<>(
