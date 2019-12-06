@@ -581,6 +581,9 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
+		<finder name="LayoutUuid" return-type="Collection">
+			<finder-column name="layoutUuid" />
+		</finder>
 		<finder name="G_C" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="classNameId" />
