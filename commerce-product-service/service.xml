@@ -585,6 +585,10 @@
 			<finder-column name="groupId" />
 			<finder-column name="classNameId" />
 		</finder>
+		<finder name="G_L" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="layoutUuid" />
+		</finder>
 		<finder name="C_C" return-type="CPDisplayLayout" unique="true">
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
