@@ -451,14 +451,14 @@ public interface CPAttachmentFileEntryLocalService
 		throws PortalException;
 
 	public CPAttachmentFileEntry upsertCPAttachmentFileEntry(
-			long classNameId, long classPK, long cpAttachmentFileEntryId,
-			long fileEntryId, int displayDateMonth, int displayDateDay,
-			int displayDateYear, int displayDateHour, int displayDateMinute,
-			int expirationDateMonth, int expirationDateDay,
-			int expirationDateYear, int expirationDateHour,
-			int expirationDateMinute, boolean neverExpire,
-			Map<Locale, String> titleMap, String json, double priority,
-			int type, String externalReferenceCode,
+			long groupId, long classNameId, long classPK,
+			long cpAttachmentFileEntryId, long fileEntryId,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
+			int expirationDateDay, int expirationDateYear,
+			int expirationDateHour, int expirationDateMinute,
+			boolean neverExpire, Map<Locale, String> titleMap, String json,
+			double priority, int type, String externalReferenceCode,
 			ServiceContext serviceContext)
 		throws PortalException;
 

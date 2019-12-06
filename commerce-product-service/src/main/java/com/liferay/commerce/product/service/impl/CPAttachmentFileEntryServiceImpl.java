@@ -349,14 +349,14 @@ public class CPAttachmentFileEntryServiceImpl
 
 	@Override
 	public CPAttachmentFileEntry upsertCPAttachmentFileEntry(
-            long groupId, long classNameId, long classPK, long cpAttachmentFileEntryId,
-			long fileEntryId, int displayDateMonth, int displayDateDay,
-			int displayDateYear, int displayDateHour, int displayDateMinute,
-			int expirationDateMonth, int expirationDateDay,
-			int expirationDateYear, int expirationDateHour,
-			int expirationDateMinute, boolean neverExpire,
-			Map<Locale, String> titleMap, String json, double priority,
-			int type, String externalReferenceCode,
+			long groupId, long classNameId, long classPK,
+			long cpAttachmentFileEntryId, long fileEntryId,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
+			int expirationDateDay, int expirationDateYear,
+			int expirationDateHour, int expirationDateMinute,
+			boolean neverExpire, Map<Locale, String> titleMap, String json,
+			double priority, int type, String externalReferenceCode,
 			ServiceContext serviceContext)
 		throws PortalException {
 
@@ -382,7 +382,7 @@ public class CPAttachmentFileEntryServiceImpl
 		}
 
 		return cpAttachmentFileEntryLocalService.upsertCPAttachmentFileEntry(
-                groupId, classNameId, classPK, cpAttachmentFileEntryId, fileEntryId,
+			groupId, classNameId, classPK, cpAttachmentFileEntryId, fileEntryId,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, expirationDateMonth, expirationDateDay,
 			expirationDateYear, expirationDateHour, expirationDateMinute,
