@@ -140,9 +140,11 @@ public class CPDisplayLayoutModelImpl
 
 	public static final long GROUPID_COLUMN_BITMASK = 8L;
 
-	public static final long UUID_COLUMN_BITMASK = 16L;
+	public static final long LAYOUTUUID_COLUMN_BITMASK = 16L;
 
-	public static final long CPDISPLAYLAYOUTID_COLUMN_BITMASK = 32L;
+	public static final long UUID_COLUMN_BITMASK = 32L;
+
+	public static final long CPDISPLAYLAYOUTID_COLUMN_BITMASK = 64L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -810,7 +812,17 @@ public class CPDisplayLayoutModelImpl
 
 	@Override
 	public void setLayoutUuid(String layoutUuid) {
+		_columnBitmask |= LAYOUTUUID_COLUMN_BITMASK;
+
+		if (_originalLayoutUuid == null) {
+			_originalLayoutUuid = _layoutUuid;
+		}
+
 		_layoutUuid = layoutUuid;
+	}
+
+	public String getOriginalLayoutUuid() {
+		return GetterUtil.getString(_originalLayoutUuid);
 	}
 
 	@Override
@@ -952,6 +964,9 @@ public class CPDisplayLayoutModelImpl
 			cpDisplayLayoutModelImpl._classPK;
 
 		cpDisplayLayoutModelImpl._setOriginalClassPK = false;
+
+		cpDisplayLayoutModelImpl._originalLayoutUuid =
+			cpDisplayLayoutModelImpl._layoutUuid;
 
 		cpDisplayLayoutModelImpl._columnBitmask = 0;
 	}
@@ -1109,6 +1124,7 @@ public class CPDisplayLayoutModelImpl
 	private long _originalClassPK;
 	private boolean _setOriginalClassPK;
 	private String _layoutUuid;
+	private String _originalLayoutUuid;
 	private long _columnBitmask;
 	private CPDisplayLayout _escapedModel;
 

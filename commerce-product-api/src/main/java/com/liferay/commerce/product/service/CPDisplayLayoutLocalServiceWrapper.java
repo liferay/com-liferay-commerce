@@ -118,6 +118,12 @@ public class CPDisplayLayoutLocalServiceWrapper
 			CPDisplayLayoutId);
 	}
 
+	@Override
+	public void deleteCPDisplayLayoutByG_L(long groupId, String layoutUuid) {
+		_cpDisplayLayoutLocalService.deleteCPDisplayLayoutByG_L(
+			groupId, layoutUuid);
+	}
+
 	/**
 	 * @throws PortalException
 	 */
@@ -235,6 +241,15 @@ public class CPDisplayLayoutLocalServiceWrapper
 
 		return _cpDisplayLayoutLocalService.fetchCPDisplayLayout(
 			CPDisplayLayoutId);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.product.model.CPDisplayLayout>
+		fetchCPDisplayLayoutByG_L(
+			long groupId, String layoutUuid, int start, int end) {
+
+		return _cpDisplayLayoutLocalService.fetchCPDisplayLayoutByG_L(
+			groupId, layoutUuid, start, end);
 	}
 
 	/**
