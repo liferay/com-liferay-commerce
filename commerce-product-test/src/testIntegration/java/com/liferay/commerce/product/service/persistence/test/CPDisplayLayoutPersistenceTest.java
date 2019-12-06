@@ -218,6 +218,15 @@ public class CPDisplayLayoutPersistenceTest {
 	}
 
 	@Test
+	public void testCountByLayoutUuid() throws Exception {
+		_persistence.countByLayoutUuid("");
+
+		_persistence.countByLayoutUuid("null");
+
+		_persistence.countByLayoutUuid((String)null);
+	}
+
+	@Test
 	public void testCountByG_C() throws Exception {
 		_persistence.countByG_C(
 			RandomTestUtil.nextLong(), RandomTestUtil.nextLong());

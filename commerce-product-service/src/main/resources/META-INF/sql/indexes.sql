@@ -49,6 +49,7 @@ create unique index IX_34516B9 on CPDefinitionOptionValueRel (uuid_[$COLUMN_LENG
 
 create unique index IX_290BF7BA on CPDisplayLayout (classNameId, classPK);
 create index IX_71FB6E49 on CPDisplayLayout (groupId, classNameId);
+create index IX_409112DE on CPDisplayLayout (layoutUuid[$COLUMN_LENGTH:75$]);
 create index IX_EEFA81D9 on CPDisplayLayout (uuid_[$COLUMN_LENGTH:75$], companyId);
 create unique index IX_68BBAA9B on CPDisplayLayout (uuid_[$COLUMN_LENGTH:75$], groupId);
 

@@ -221,6 +221,15 @@ public class CPDisplayLayoutLocalServiceUtil {
 		return getService().fetchCPDisplayLayout(CPDisplayLayoutId);
 	}
 
+	public static java.util.List
+		<com.liferay.commerce.product.model.CPDisplayLayout>
+			fetchCPDisplayLayoutByLayoutUuid(
+				String layoutUuid, int start, int end) {
+
+		return getService().fetchCPDisplayLayoutByLayoutUuid(
+			layoutUuid, start, end);
+	}
+
 	/**
 	 * Returns the cp display layout matching the UUID and group.
 	 *

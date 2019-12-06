@@ -714,6 +714,182 @@ public class CPDisplayLayoutUtil {
 	}
 
 	/**
+	 * Returns all the cp display layouts where layoutUuid = &#63;.
+	 *
+	 * @param layoutUuid the layout uuid
+	 * @return the matching cp display layouts
+	 */
+	public static List<CPDisplayLayout> findByLayoutUuid(String layoutUuid) {
+		return getPersistence().findByLayoutUuid(layoutUuid);
+	}
+
+	/**
+	 * Returns a range of all the cp display layouts where layoutUuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CPDisplayLayoutModelImpl</code>.
+	 * </p>
+	 *
+	 * @param layoutUuid the layout uuid
+	 * @param start the lower bound of the range of cp display layouts
+	 * @param end the upper bound of the range of cp display layouts (not inclusive)
+	 * @return the range of matching cp display layouts
+	 */
+	public static List<CPDisplayLayout> findByLayoutUuid(
+		String layoutUuid, int start, int end) {
+
+		return getPersistence().findByLayoutUuid(layoutUuid, start, end);
+	}
+
+	/**
+	 * Returns an ordered range of all the cp display layouts where layoutUuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CPDisplayLayoutModelImpl</code>.
+	 * </p>
+	 *
+	 * @param layoutUuid the layout uuid
+	 * @param start the lower bound of the range of cp display layouts
+	 * @param end the upper bound of the range of cp display layouts (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching cp display layouts
+	 */
+	public static List<CPDisplayLayout> findByLayoutUuid(
+		String layoutUuid, int start, int end,
+		OrderByComparator<CPDisplayLayout> orderByComparator) {
+
+		return getPersistence().findByLayoutUuid(
+			layoutUuid, start, end, orderByComparator);
+	}
+
+	/**
+	 * Returns an ordered range of all the cp display layouts where layoutUuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CPDisplayLayoutModelImpl</code>.
+	 * </p>
+	 *
+	 * @param layoutUuid the layout uuid
+	 * @param start the lower bound of the range of cp display layouts
+	 * @param end the upper bound of the range of cp display layouts (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching cp display layouts
+	 */
+	public static List<CPDisplayLayout> findByLayoutUuid(
+		String layoutUuid, int start, int end,
+		OrderByComparator<CPDisplayLayout> orderByComparator,
+		boolean useFinderCache) {
+
+		return getPersistence().findByLayoutUuid(
+			layoutUuid, start, end, orderByComparator, useFinderCache);
+	}
+
+	/**
+	 * Returns the first cp display layout in the ordered set where layoutUuid = &#63;.
+	 *
+	 * @param layoutUuid the layout uuid
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching cp display layout
+	 * @throws NoSuchCPDisplayLayoutException if a matching cp display layout could not be found
+	 */
+	public static CPDisplayLayout findByLayoutUuid_First(
+			String layoutUuid,
+			OrderByComparator<CPDisplayLayout> orderByComparator)
+		throws com.liferay.commerce.product.exception.
+			NoSuchCPDisplayLayoutException {
+
+		return getPersistence().findByLayoutUuid_First(
+			layoutUuid, orderByComparator);
+	}
+
+	/**
+	 * Returns the first cp display layout in the ordered set where layoutUuid = &#63;.
+	 *
+	 * @param layoutUuid the layout uuid
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching cp display layout, or <code>null</code> if a matching cp display layout could not be found
+	 */
+	public static CPDisplayLayout fetchByLayoutUuid_First(
+		String layoutUuid,
+		OrderByComparator<CPDisplayLayout> orderByComparator) {
+
+		return getPersistence().fetchByLayoutUuid_First(
+			layoutUuid, orderByComparator);
+	}
+
+	/**
+	 * Returns the last cp display layout in the ordered set where layoutUuid = &#63;.
+	 *
+	 * @param layoutUuid the layout uuid
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching cp display layout
+	 * @throws NoSuchCPDisplayLayoutException if a matching cp display layout could not be found
+	 */
+	public static CPDisplayLayout findByLayoutUuid_Last(
+			String layoutUuid,
+			OrderByComparator<CPDisplayLayout> orderByComparator)
+		throws com.liferay.commerce.product.exception.
+			NoSuchCPDisplayLayoutException {
+
+		return getPersistence().findByLayoutUuid_Last(
+			layoutUuid, orderByComparator);
+	}
+
+	/**
+	 * Returns the last cp display layout in the ordered set where layoutUuid = &#63;.
+	 *
+	 * @param layoutUuid the layout uuid
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching cp display layout, or <code>null</code> if a matching cp display layout could not be found
+	 */
+	public static CPDisplayLayout fetchByLayoutUuid_Last(
+		String layoutUuid,
+		OrderByComparator<CPDisplayLayout> orderByComparator) {
+
+		return getPersistence().fetchByLayoutUuid_Last(
+			layoutUuid, orderByComparator);
+	}
+
+	/**
+	 * Returns the cp display layouts before and after the current cp display layout in the ordered set where layoutUuid = &#63;.
+	 *
+	 * @param CPDisplayLayoutId the primary key of the current cp display layout
+	 * @param layoutUuid the layout uuid
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next cp display layout
+	 * @throws NoSuchCPDisplayLayoutException if a cp display layout with the primary key could not be found
+	 */
+	public static CPDisplayLayout[] findByLayoutUuid_PrevAndNext(
+			long CPDisplayLayoutId, String layoutUuid,
+			OrderByComparator<CPDisplayLayout> orderByComparator)
+		throws com.liferay.commerce.product.exception.
+			NoSuchCPDisplayLayoutException {
+
+		return getPersistence().findByLayoutUuid_PrevAndNext(
+			CPDisplayLayoutId, layoutUuid, orderByComparator);
+	}
+
+	/**
+	 * Removes all the cp display layouts where layoutUuid = &#63; from the database.
+	 *
+	 * @param layoutUuid the layout uuid
+	 */
+	public static void removeByLayoutUuid(String layoutUuid) {
+		getPersistence().removeByLayoutUuid(layoutUuid);
+	}
+
+	/**
+	 * Returns the number of cp display layouts where layoutUuid = &#63;.
+	 *
+	 * @param layoutUuid the layout uuid
+	 * @return the number of matching cp display layouts
+	 */
+	public static int countByLayoutUuid(String layoutUuid) {
+		return getPersistence().countByLayoutUuid(layoutUuid);
+	}
+
+	/**
 	 * Returns all the cp display layouts where groupId = &#63; and classNameId = &#63;.
 	 *
 	 * @param groupId the group ID

@@ -190,6 +190,10 @@ public interface CPDisplayLayoutLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPDisplayLayout fetchCPDisplayLayout(long CPDisplayLayoutId);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CPDisplayLayout> fetchCPDisplayLayoutByLayoutUuid(
+		String layoutUuid, int start, int end);
+
 	/**
 	 * Returns the cp display layout matching the UUID and group.
 	 *

@@ -1970,6 +1970,557 @@ public class CPDisplayLayoutPersistenceImpl
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 =
 		"cpDisplayLayout.groupId = ?";
 
+	private FinderPath _finderPathWithPaginationFindByLayoutUuid;
+	private FinderPath _finderPathWithoutPaginationFindByLayoutUuid;
+	private FinderPath _finderPathCountByLayoutUuid;
+
+	/**
+	 * Returns all the cp display layouts where layoutUuid = &#63;.
+	 *
+	 * @param layoutUuid the layout uuid
+	 * @return the matching cp display layouts
+	 */
+	@Override
+	public List<CPDisplayLayout> findByLayoutUuid(String layoutUuid) {
+		return findByLayoutUuid(
+			layoutUuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the cp display layouts where layoutUuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CPDisplayLayoutModelImpl</code>.
+	 * </p>
+	 *
+	 * @param layoutUuid the layout uuid
+	 * @param start the lower bound of the range of cp display layouts
+	 * @param end the upper bound of the range of cp display layouts (not inclusive)
+	 * @return the range of matching cp display layouts
+	 */
+	@Override
+	public List<CPDisplayLayout> findByLayoutUuid(
+		String layoutUuid, int start, int end) {
+
+		return findByLayoutUuid(layoutUuid, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the cp display layouts where layoutUuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CPDisplayLayoutModelImpl</code>.
+	 * </p>
+	 *
+	 * @param layoutUuid the layout uuid
+	 * @param start the lower bound of the range of cp display layouts
+	 * @param end the upper bound of the range of cp display layouts (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching cp display layouts
+	 */
+	@Override
+	public List<CPDisplayLayout> findByLayoutUuid(
+		String layoutUuid, int start, int end,
+		OrderByComparator<CPDisplayLayout> orderByComparator) {
+
+		return findByLayoutUuid(
+			layoutUuid, start, end, orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the cp display layouts where layoutUuid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CPDisplayLayoutModelImpl</code>.
+	 * </p>
+	 *
+	 * @param layoutUuid the layout uuid
+	 * @param start the lower bound of the range of cp display layouts
+	 * @param end the upper bound of the range of cp display layouts (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching cp display layouts
+	 */
+	@Override
+	public List<CPDisplayLayout> findByLayoutUuid(
+		String layoutUuid, int start, int end,
+		OrderByComparator<CPDisplayLayout> orderByComparator,
+		boolean useFinderCache) {
+
+		layoutUuid = Objects.toString(layoutUuid, "");
+
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+			(orderByComparator == null)) {
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByLayoutUuid;
+				finderArgs = new Object[] {layoutUuid};
+			}
+		}
+		else if (useFinderCache) {
+			finderPath = _finderPathWithPaginationFindByLayoutUuid;
+			finderArgs = new Object[] {
+				layoutUuid, start, end, orderByComparator
+			};
+		}
+
+		List<CPDisplayLayout> list = null;
+
+		if (useFinderCache) {
+			list = (List<CPDisplayLayout>)finderCache.getResult(
+				finderPath, finderArgs, this);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (CPDisplayLayout cpDisplayLayout : list) {
+					if (!layoutUuid.equals(cpDisplayLayout.getLayoutUuid())) {
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_CPDISPLAYLAYOUT_WHERE);
+
+			boolean bindLayoutUuid = false;
+
+			if (layoutUuid.isEmpty()) {
+				query.append(_FINDER_COLUMN_LAYOUTUUID_LAYOUTUUID_3);
+			}
+			else {
+				bindLayoutUuid = true;
+
+				query.append(_FINDER_COLUMN_LAYOUTUUID_LAYOUTUUID_2);
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(
+					query, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
+			}
+			else {
+				query.append(CPDisplayLayoutModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindLayoutUuid) {
+					qPos.add(layoutUuid);
+				}
+
+				list = (List<CPDisplayLayout>)QueryUtil.list(
+					q, getDialect(), start, end);
+
+				cacheResult(list);
+
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
+			}
+			catch (Exception e) {
+				if (useFinderCache) {
+					finderCache.removeResult(finderPath, finderArgs);
+				}
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first cp display layout in the ordered set where layoutUuid = &#63;.
+	 *
+	 * @param layoutUuid the layout uuid
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching cp display layout
+	 * @throws NoSuchCPDisplayLayoutException if a matching cp display layout could not be found
+	 */
+	@Override
+	public CPDisplayLayout findByLayoutUuid_First(
+			String layoutUuid,
+			OrderByComparator<CPDisplayLayout> orderByComparator)
+		throws NoSuchCPDisplayLayoutException {
+
+		CPDisplayLayout cpDisplayLayout = fetchByLayoutUuid_First(
+			layoutUuid, orderByComparator);
+
+		if (cpDisplayLayout != null) {
+			return cpDisplayLayout;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("layoutUuid=");
+		msg.append(layoutUuid);
+
+		msg.append("}");
+
+		throw new NoSuchCPDisplayLayoutException(msg.toString());
+	}
+
+	/**
+	 * Returns the first cp display layout in the ordered set where layoutUuid = &#63;.
+	 *
+	 * @param layoutUuid the layout uuid
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching cp display layout, or <code>null</code> if a matching cp display layout could not be found
+	 */
+	@Override
+	public CPDisplayLayout fetchByLayoutUuid_First(
+		String layoutUuid,
+		OrderByComparator<CPDisplayLayout> orderByComparator) {
+
+		List<CPDisplayLayout> list = findByLayoutUuid(
+			layoutUuid, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last cp display layout in the ordered set where layoutUuid = &#63;.
+	 *
+	 * @param layoutUuid the layout uuid
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching cp display layout
+	 * @throws NoSuchCPDisplayLayoutException if a matching cp display layout could not be found
+	 */
+	@Override
+	public CPDisplayLayout findByLayoutUuid_Last(
+			String layoutUuid,
+			OrderByComparator<CPDisplayLayout> orderByComparator)
+		throws NoSuchCPDisplayLayoutException {
+
+		CPDisplayLayout cpDisplayLayout = fetchByLayoutUuid_Last(
+			layoutUuid, orderByComparator);
+
+		if (cpDisplayLayout != null) {
+			return cpDisplayLayout;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("layoutUuid=");
+		msg.append(layoutUuid);
+
+		msg.append("}");
+
+		throw new NoSuchCPDisplayLayoutException(msg.toString());
+	}
+
+	/**
+	 * Returns the last cp display layout in the ordered set where layoutUuid = &#63;.
+	 *
+	 * @param layoutUuid the layout uuid
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching cp display layout, or <code>null</code> if a matching cp display layout could not be found
+	 */
+	@Override
+	public CPDisplayLayout fetchByLayoutUuid_Last(
+		String layoutUuid,
+		OrderByComparator<CPDisplayLayout> orderByComparator) {
+
+		int count = countByLayoutUuid(layoutUuid);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<CPDisplayLayout> list = findByLayoutUuid(
+			layoutUuid, count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the cp display layouts before and after the current cp display layout in the ordered set where layoutUuid = &#63;.
+	 *
+	 * @param CPDisplayLayoutId the primary key of the current cp display layout
+	 * @param layoutUuid the layout uuid
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next cp display layout
+	 * @throws NoSuchCPDisplayLayoutException if a cp display layout with the primary key could not be found
+	 */
+	@Override
+	public CPDisplayLayout[] findByLayoutUuid_PrevAndNext(
+			long CPDisplayLayoutId, String layoutUuid,
+			OrderByComparator<CPDisplayLayout> orderByComparator)
+		throws NoSuchCPDisplayLayoutException {
+
+		layoutUuid = Objects.toString(layoutUuid, "");
+
+		CPDisplayLayout cpDisplayLayout = findByPrimaryKey(CPDisplayLayoutId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CPDisplayLayout[] array = new CPDisplayLayoutImpl[3];
+
+			array[0] = getByLayoutUuid_PrevAndNext(
+				session, cpDisplayLayout, layoutUuid, orderByComparator, true);
+
+			array[1] = cpDisplayLayout;
+
+			array[2] = getByLayoutUuid_PrevAndNext(
+				session, cpDisplayLayout, layoutUuid, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected CPDisplayLayout getByLayoutUuid_PrevAndNext(
+		Session session, CPDisplayLayout cpDisplayLayout, String layoutUuid,
+		OrderByComparator<CPDisplayLayout> orderByComparator,
+		boolean previous) {
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(
+				4 + (orderByComparator.getOrderByConditionFields().length * 3) +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_CPDISPLAYLAYOUT_WHERE);
+
+		boolean bindLayoutUuid = false;
+
+		if (layoutUuid.isEmpty()) {
+			query.append(_FINDER_COLUMN_LAYOUTUUID_LAYOUTUUID_3);
+		}
+		else {
+			bindLayoutUuid = true;
+
+			query.append(_FINDER_COLUMN_LAYOUTUUID_LAYOUTUUID_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields =
+				orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(CPDisplayLayoutModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		if (bindLayoutUuid) {
+			qPos.add(layoutUuid);
+		}
+
+		if (orderByComparator != null) {
+			for (Object orderByConditionValue :
+					orderByComparator.getOrderByConditionValues(
+						cpDisplayLayout)) {
+
+				qPos.add(orderByConditionValue);
+			}
+		}
+
+		List<CPDisplayLayout> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the cp display layouts where layoutUuid = &#63; from the database.
+	 *
+	 * @param layoutUuid the layout uuid
+	 */
+	@Override
+	public void removeByLayoutUuid(String layoutUuid) {
+		for (CPDisplayLayout cpDisplayLayout :
+				findByLayoutUuid(
+					layoutUuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+
+			remove(cpDisplayLayout);
+		}
+	}
+
+	/**
+	 * Returns the number of cp display layouts where layoutUuid = &#63;.
+	 *
+	 * @param layoutUuid the layout uuid
+	 * @return the number of matching cp display layouts
+	 */
+	@Override
+	public int countByLayoutUuid(String layoutUuid) {
+		layoutUuid = Objects.toString(layoutUuid, "");
+
+		FinderPath finderPath = _finderPathCountByLayoutUuid;
+
+		Object[] finderArgs = new Object[] {layoutUuid};
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_CPDISPLAYLAYOUT_WHERE);
+
+			boolean bindLayoutUuid = false;
+
+			if (layoutUuid.isEmpty()) {
+				query.append(_FINDER_COLUMN_LAYOUTUUID_LAYOUTUUID_3);
+			}
+			else {
+				bindLayoutUuid = true;
+
+				query.append(_FINDER_COLUMN_LAYOUTUUID_LAYOUTUUID_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindLayoutUuid) {
+					qPos.add(layoutUuid);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				finderCache.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_LAYOUTUUID_LAYOUTUUID_2 =
+		"cpDisplayLayout.layoutUuid = ?";
+
+	private static final String _FINDER_COLUMN_LAYOUTUUID_LAYOUTUUID_3 =
+		"(cpDisplayLayout.layoutUuid IS NULL OR cpDisplayLayout.layoutUuid = '')";
+
 	private FinderPath _finderPathWithPaginationFindByG_C;
 	private FinderPath _finderPathWithoutPaginationFindByG_C;
 	private FinderPath _finderPathCountByG_C;
@@ -3161,6 +3712,12 @@ public class CPDisplayLayoutPersistenceImpl
 			finderCache.removeResult(
 				_finderPathWithoutPaginationFindByGroupId, args);
 
+			args = new Object[] {cpDisplayLayoutModelImpl.getLayoutUuid()};
+
+			finderCache.removeResult(_finderPathCountByLayoutUuid, args);
+			finderCache.removeResult(
+				_finderPathWithoutPaginationFindByLayoutUuid, args);
+
 			args = new Object[] {
 				cpDisplayLayoutModelImpl.getGroupId(),
 				cpDisplayLayoutModelImpl.getClassNameId()
@@ -3234,6 +3791,25 @@ public class CPDisplayLayoutPersistenceImpl
 				finderCache.removeResult(_finderPathCountByGroupId, args);
 				finderCache.removeResult(
 					_finderPathWithoutPaginationFindByGroupId, args);
+			}
+
+			if ((cpDisplayLayoutModelImpl.getColumnBitmask() &
+				 _finderPathWithoutPaginationFindByLayoutUuid.
+					 getColumnBitmask()) != 0) {
+
+				Object[] args = new Object[] {
+					cpDisplayLayoutModelImpl.getOriginalLayoutUuid()
+				};
+
+				finderCache.removeResult(_finderPathCountByLayoutUuid, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByLayoutUuid, args);
+
+				args = new Object[] {cpDisplayLayoutModelImpl.getLayoutUuid()};
+
+				finderCache.removeResult(_finderPathCountByLayoutUuid, args);
+				finderCache.removeResult(
+					_finderPathWithoutPaginationFindByLayoutUuid, args);
 			}
 
 			if ((cpDisplayLayoutModelImpl.getColumnBitmask() &
@@ -3783,6 +4359,30 @@ public class CPDisplayLayoutPersistenceImpl
 			CPDisplayLayoutModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByGroupId",
 			new String[] {Long.class.getName()});
+
+		_finderPathWithPaginationFindByLayoutUuid = new FinderPath(
+			CPDisplayLayoutModelImpl.ENTITY_CACHE_ENABLED,
+			CPDisplayLayoutModelImpl.FINDER_CACHE_ENABLED,
+			CPDisplayLayoutImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByLayoutUuid",
+			new String[] {
+				String.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			});
+
+		_finderPathWithoutPaginationFindByLayoutUuid = new FinderPath(
+			CPDisplayLayoutModelImpl.ENTITY_CACHE_ENABLED,
+			CPDisplayLayoutModelImpl.FINDER_CACHE_ENABLED,
+			CPDisplayLayoutImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByLayoutUuid",
+			new String[] {String.class.getName()},
+			CPDisplayLayoutModelImpl.LAYOUTUUID_COLUMN_BITMASK);
+
+		_finderPathCountByLayoutUuid = new FinderPath(
+			CPDisplayLayoutModelImpl.ENTITY_CACHE_ENABLED,
+			CPDisplayLayoutModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByLayoutUuid",
+			new String[] {String.class.getName()});
 
 		_finderPathWithPaginationFindByG_C = new FinderPath(
 			CPDisplayLayoutModelImpl.ENTITY_CACHE_ENABLED,
