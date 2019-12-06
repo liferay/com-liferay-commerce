@@ -131,6 +131,40 @@ PortalUtil.addPortletBreadcrumbEntry(request, title, StringPool.BLANK, data);
 </div>
 
 <aui:script>
+	function getMetalJsFormData(metalJsForm) {
+		if(!metalJsForm) {
+			return []
+		}
+
+		var renderer = Object.values(metalJsForm.refs)[0];
+
+		return Object.values(renderer.refs)
+			.map(
+				function(option) {
+					return {
+						key: option.fieldName,
+						value: option.value
+					}
+				}
+			)
+	}
+
+	Liferay.componentReady("ProductOptions<%= cpDefinitionId %>")
+		.then(function(ddmForm) {
+			if(!ddmForm.on) {
+				return;
+			}
+			ddmForm.on(
+				'fieldEdited',
+				function() {
+					var fieldValues = getMetalJsFormData(ddmForm);
+
+					var form = AUI.$(document.<portlet:namespace />fm);
+					form.fm('ddmFormValues').val(JSON.stringify(fieldValues));
+				}
+			)
+		});
+
 	function <portlet:namespace />saveAttachmentFileEntry(forceDisable) {
 		var form = AUI.$(document.<portlet:namespace />fm);
 
