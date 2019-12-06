@@ -221,9 +221,14 @@ public class WarehouseItemResourceImpl extends BaseWarehouseItemResourceImpl {
 	public Response patchWarehouseItem(Long id, WarehouseItem warehouseItem)
 		throws Exception {
 
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
+			_commerceInventoryWarehouseService.getCommerceInventoryWarehouse(
+				id);
+
 		_commerceInventoryWarehouseItemService.
 			updateCommerceInventoryWarehouseItem(
-				id, GetterUtil.getInteger(warehouseItem.getQuantity()));
+				commerceInventoryWarehouse.getCommerceInventoryWarehouseId(),
+				GetterUtil.getInteger(warehouseItem.getQuantity()));
 
 		Response.ResponseBuilder responseBuilder = Response.ok();
 
@@ -368,11 +373,18 @@ public class WarehouseItemResourceImpl extends BaseWarehouseItemResourceImpl {
 			Long id, WarehouseItem warehouseItem)
 		throws Exception {
 
+		CommerceInventoryWarehouse commerceInventoryWarehouse =
+			_commerceInventoryWarehouseService.getCommerceInventoryWarehouse(
+				id);
+
 		CommerceInventoryWarehouseItem commerceInventoryWarehouseItem =
 			_commerceInventoryWarehouseItemService.
 				addCommerceInventoryWarehouseItem(
-					_user.getUserId(), id, warehouseItem.getSku(),
-					warehouseItem.getQuantity());
+					_user.getUserId(),
+					commerceInventoryWarehouse.
+						getCommerceInventoryWarehouseId(),
+					warehouseItem.getExternalReferenceCode(),
+					warehouseItem.getSku(), warehouseItem.getQuantity());
 
 		DTOConverter warehouseItemDTOConverter =
 			_dtoConverterRegistry.getDTOConverter(
