@@ -96,6 +96,12 @@ CommerceShipment commerceShipment = commerceShipmentItemDisplayContext.getCommer
 
 					<liferay-ui:search-container-column-text
 						cssClass="table-cell-content"
+						name="order-id"
+						value="<%= (commerceOrderItem == null) ? StringPool.BLANK : String.valueOf(commerceOrderItem.getCommerceOrderId()) %>"
+					/>
+
+					<liferay-ui:search-container-column-text
+						cssClass="table-cell-content"
 						name="sku"
 						value="<%= (commerceOrderItem == null) ? StringPool.BLANK : HtmlUtil.escape(commerceOrderItem.getSku()) %>"
 					/>
