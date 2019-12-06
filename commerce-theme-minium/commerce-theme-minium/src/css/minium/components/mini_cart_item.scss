@@ -56,6 +56,8 @@
 
 
 		.price {
+			grid-template-columns: unset;
+
 			&-label {
 				display: none;
 			}
