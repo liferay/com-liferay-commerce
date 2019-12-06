@@ -26,6 +26,8 @@ import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.Validator;
 
+import java.util.List;
+
 /**
  * @author Marco Leo
  * @author Alessio Antonio Rendina
@@ -118,6 +120,14 @@ public class CPDisplayLayoutLocalServiceImpl
 	public CPDisplayLayout fetchCPDisplayLayout(Class<?> clazz, long classPK) {
 		return cpDisplayLayoutPersistence.fetchByC_C(
 			classNameLocalService.getClassNameId(clazz), classPK);
+	}
+
+	@Override
+	public List<CPDisplayLayout> fetchCPDisplayLayoutByLayoutUuid(
+		String layoutUuid, int start, int end) {
+
+		return cpDisplayLayoutPersistence.findByLayoutUuid(
+			layoutUuid, start, end);
 	}
 
 	@Indexable(type = IndexableType.REINDEX)
