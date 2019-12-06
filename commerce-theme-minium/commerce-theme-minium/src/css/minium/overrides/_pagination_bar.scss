@@ -1,0 +1,35 @@
+#minium .commerce-catalog {
+  .pagination-results {
+    display: none;
+  }
+
+  .pagination {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    li {
+      margin: 0 5px;
+      box-sizing: border-box;
+      padding: 5px 10px;
+
+      &:first-child,
+      &:last-child {
+        display: none;
+      }
+
+      a {
+        color: $color-fg-alt;
+      }
+
+      &:hover,
+      &.active {
+        border-bottom: 3px solid $color-theme;
+
+        a {
+          color: $color-theme;
+        }
+      }
+    }
+  }
+}
