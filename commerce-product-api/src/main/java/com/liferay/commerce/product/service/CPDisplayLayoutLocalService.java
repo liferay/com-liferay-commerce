@@ -111,6 +111,8 @@ public interface CPDisplayLayoutLocalService
 	public CPDisplayLayout deleteCPDisplayLayout(long CPDisplayLayoutId)
 		throws PortalException;
 
+	public void deleteCPDisplayLayoutByG_L(long groupId, String layoutUuid);
+
 	/**
 	 * @throws PortalException
 	 */
@@ -189,6 +191,10 @@ public interface CPDisplayLayoutLocalService
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public CPDisplayLayout fetchCPDisplayLayout(long CPDisplayLayoutId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<CPDisplayLayout> fetchCPDisplayLayoutByG_L(
+		long groupId, String layoutUuid, int start, int end);
 
 	/**
 	 * Returns the cp display layout matching the UUID and group.

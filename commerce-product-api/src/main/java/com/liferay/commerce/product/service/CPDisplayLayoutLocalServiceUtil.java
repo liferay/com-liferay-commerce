@@ -113,6 +113,12 @@ public class CPDisplayLayoutLocalServiceUtil {
 		return getService().deleteCPDisplayLayout(CPDisplayLayoutId);
 	}
 
+	public static void deleteCPDisplayLayoutByG_L(
+		long groupId, String layoutUuid) {
+
+		getService().deleteCPDisplayLayoutByG_L(groupId, layoutUuid);
+	}
+
 	/**
 	 * @throws PortalException
 	 */
@@ -219,6 +225,15 @@ public class CPDisplayLayoutLocalServiceUtil {
 		fetchCPDisplayLayout(long CPDisplayLayoutId) {
 
 		return getService().fetchCPDisplayLayout(CPDisplayLayoutId);
+	}
+
+	public static java.util.List
+		<com.liferay.commerce.product.model.CPDisplayLayout>
+			fetchCPDisplayLayoutByG_L(
+				long groupId, String layoutUuid, int start, int end) {
+
+		return getService().fetchCPDisplayLayoutByG_L(
+			groupId, layoutUuid, start, end);
 	}
 
 	/**
