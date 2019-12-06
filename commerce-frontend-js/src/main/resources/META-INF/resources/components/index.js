@@ -4,7 +4,7 @@ module.exports = [
     entry_dev: "entry.dev.es.js",
     folder: "dataset_display",
     name: "Dataset display",
-    page: "dataset_display.html"
+    page: "dataset-display.html"
   },
   {
     entry: "entry.es.js",
@@ -31,14 +31,14 @@ module.exports = [
     entry_dev: "entry.dev.es.js",
     folder: "side_panel",
     name: "Side panel",
-    page: "side_panel.html"
+    page: "side-panel.html"
   },
   {
     entry: "entry.es.js",
     entry_dev: "entry.dev.es.js",
     folder: "step_tracker",
     name: "Step tracker",
-    page: "step_tracker.html"
+    page: "step-tracker.html"
   },
   {
     entry: "entry.es.js",
