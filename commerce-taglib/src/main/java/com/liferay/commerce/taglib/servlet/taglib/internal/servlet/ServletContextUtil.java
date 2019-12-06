@@ -19,6 +19,7 @@ import com.liferay.application.list.PanelCategoryRegistry;
 import com.liferay.commerce.currency.util.CommercePriceFormatter;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.order.CommerceOrderHelper;
+import com.liferay.commerce.order.CommerceOrderValidatorRegistry;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
 import com.liferay.commerce.price.list.service.CommercePriceListLocalService;
 import com.liferay.commerce.product.util.CPDefinitionHelper;
@@ -49,6 +50,12 @@ public class ServletContextUtil {
 		getCommerceOrderModelResourcePermission() {
 
 		return _servletContextUtil._getCommerceOrderModelResourcePermission();
+	}
+
+	public static final CommerceOrderValidatorRegistry
+		getCommerceOrderValidatorRegistry() {
+
+		return _servletContextUtil._getCommerceOrderValidatorRegistry();
 	}
 
 	public static final CommerceProductPriceCalculation
@@ -121,6 +128,13 @@ public class ServletContextUtil {
 	}
 
 	@Reference(unbind = "-")
+	protected void setCommerceOrderValidatorRegistry(
+		CommerceOrderValidatorRegistry commerceOrderValidatorRegistry) {
+
+		_commerceOrderValidatorRegistry = commerceOrderValidatorRegistry;
+	}
+
+	@Reference(unbind = "-")
 	protected void setCommercePriceCalculation(
 		CommerceProductPriceCalculation commerceProductPriceCalculation) {
 
@@ -190,6 +204,12 @@ public class ServletContextUtil {
 		return _commerceOrderModelResourcePermission;
 	}
 
+	private CommerceOrderValidatorRegistry
+		_getCommerceOrderValidatorRegistry() {
+
+		return _commerceOrderValidatorRegistry;
+	}
+
 	private CommerceProductPriceCalculation _getCommercePriceCalculation() {
 		return _commerceProductPriceCalculation;
 	}
@@ -231,6 +251,7 @@ public class ServletContextUtil {
 	private CommerceOrderHelper _commerceOrderHelper;
 	private ModelResourcePermission<CommerceOrder>
 		_commerceOrderModelResourcePermission;
+	private CommerceOrderValidatorRegistry _commerceOrderValidatorRegistry;
 	private CommercePriceFormatter _commercePriceFormatter;
 	private CommercePriceListLocalService _commercePriceListLocalService;
 	private CommerceProductPriceCalculation _commerceProductPriceCalculation;
