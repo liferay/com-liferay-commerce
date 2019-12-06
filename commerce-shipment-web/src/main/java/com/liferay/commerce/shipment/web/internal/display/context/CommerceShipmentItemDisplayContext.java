@@ -18,7 +18,6 @@ import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseService;
 import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceCountry;
-import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.model.CommerceShipment;
 import com.liferay.commerce.model.CommerceShipmentItem;
@@ -67,12 +66,6 @@ public class CommerceShipmentItemDisplayContext
 	public String getAddCommerceShipmentItemsURL() throws PortalException {
 		PortletURL portletURL = liferayPortletResponse.createRenderURL();
 
-		SearchContainer<CommerceShipmentItem>
-			commerceShipmentItemSearchContainer = getSearchContainer();
-
-		List<CommerceShipmentItem> commerceShipmentItems =
-			commerceShipmentItemSearchContainer.getResults();
-
 		portletURL.setParameter(
 			"redirect", PortalUtil.getCurrentURL(httpServletRequest));
 
@@ -81,25 +74,7 @@ public class CommerceShipmentItemDisplayContext
 				"commerceShipmentId", String.valueOf(getCommerceShipmentId()));
 		}
 
-		if (commerceShipmentItems.isEmpty()) {
-			portletURL.setParameter(
-				"mvcRenderCommandName", "editCommerceShipment");
-		}
-		else {
-			portletURL.setParameter(
-				"mvcRenderCommandName", "selectCommerceShipmentItems");
-
-			CommerceShipmentItem commerceShipmentItem =
-				commerceShipmentItems.get(0);
-
-			CommerceOrderItem commerceOrderItem =
-				_commerceOrderItemService.getCommerceOrderItem(
-					commerceShipmentItem.getCommerceOrderItemId());
-
-			portletURL.setParameter(
-				"commerceOrderId",
-				String.valueOf(commerceOrderItem.getCommerceOrderId()));
-		}
+		portletURL.setParameter("mvcRenderCommandName", "editCommerceShipment");
 
 		return portletURL.toString();
 	}
