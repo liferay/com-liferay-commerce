@@ -132,62 +132,6 @@ public class AttachmentUtil {
 	}
 
 	public static CPAttachmentFileEntry upsertCPAttachmentFileEntry(
-            long groupId, CPAttachmentFileEntryService cpAttachmentFileEntryService,
-			UniqueFileNameProvider uniqueFileNameProvider,
-			Attachment attachment, long classNameId, long classPK, int type,
-			ServiceContext serviceContext)
-		throws Exception {
-
-        _validateMethodRequiredParams(
-                attachment.getId(), attachment.getExternalReferenceCode());
-
-		Calendar displayCalendar = CalendarFactoryUtil.getCalendar(
-			serviceContext.getTimeZone());
-
-		if (attachment.getDisplayDate() != null) {
-			displayCalendar = DateConfigUtil.convertDateToCalendar(
-				attachment.getDisplayDate());
-		}
-
-		DateConfig displayDateConfig = new DateConfig(displayCalendar);
-
-		Calendar expirationCalendar = CalendarFactoryUtil.getCalendar(
-			serviceContext.getTimeZone());
-
-		expirationCalendar.add(Calendar.MONTH, 1);
-
-		if (attachment.getExpirationDate() != null) {
-			expirationCalendar = DateConfigUtil.convertDateToCalendar(
-				attachment.getExpirationDate());
-		}
-
-		DateConfig expirationDateConfig = new DateConfig(expirationCalendar);
-
-		long fileEntryId = 0;
-
-		FileEntry fileEntry = addFileEntry(
-			attachment, serviceContext.getScopeGroupId(),
-			serviceContext.getUserId(), uniqueFileNameProvider);
-
-		if (fileEntry != null) {
-			fileEntryId = fileEntry.getFileEntryId();
-		}
-
-		return cpAttachmentFileEntryService.upsertCPAttachmentFileEntry(
-                groupId, classNameId, classPK, GetterUtil.getLong(attachment.getId()), fileEntryId, displayDateConfig.getMonth(),
-			displayDateConfig.getDay(), displayDateConfig.getYear(),
-			displayDateConfig.getHour(), displayDateConfig.getMinute(),
-			expirationDateConfig.getMonth(), expirationDateConfig.getDay(),
-			expirationDateConfig.getYear(), expirationDateConfig.getHour(),
-			expirationDateConfig.getMinute(),
-			GetterUtil.get(attachment.getNeverExpire(), false),
-			getTitleMap(null, attachment.getTitle()),
-			GetterUtil.getString(attachment.getOptions()),
-			GetterUtil.getDouble(attachment.getPriority()), type,
-			attachment.getExternalReferenceCode(), serviceContext);
-	}
-
-	public static CPAttachmentFileEntry upsertCPAttachmentFileEntry(
 			CPAttachmentFileEntryService cpAttachmentFileEntryService,
 			UniqueFileNameProvider uniqueFileNameProvider,
 			AttachmentBase64 attachmentBase64, long classNameId, long classPK,
@@ -231,12 +175,13 @@ public class AttachmentUtil {
 		}
 
 		return cpAttachmentFileEntryService.upsertCPAttachmentFileEntry(
-                serviceContext.getScopeGroupId(),classNameId, classPK,  GetterUtil.getLong(attachmentBase64.getId()), fileEntryId, displayDateConfig.getMonth(),
-			displayDateConfig.getDay(), displayDateConfig.getYear(),
-			displayDateConfig.getHour(), displayDateConfig.getMinute(),
-			expirationDateConfig.getMonth(), expirationDateConfig.getDay(),
-			expirationDateConfig.getYear(), expirationDateConfig.getHour(),
-			expirationDateConfig.getMinute(),
+			serviceContext.getScopeGroupId(), classNameId, classPK,
+			GetterUtil.getLong(attachmentBase64.getId()), fileEntryId,
+			displayDateConfig.getMonth(), displayDateConfig.getDay(),
+			displayDateConfig.getYear(), displayDateConfig.getHour(),
+			displayDateConfig.getMinute(), expirationDateConfig.getMonth(),
+			expirationDateConfig.getDay(), expirationDateConfig.getYear(),
+			expirationDateConfig.getHour(), expirationDateConfig.getMinute(),
 			GetterUtil.get(attachmentBase64.getNeverExpire(), false),
 			getTitleMap(null, attachmentBase64.getTitle()),
 			GetterUtil.getString(attachmentBase64.getOptions()),
@@ -287,17 +232,76 @@ public class AttachmentUtil {
 		}
 
 		return cpAttachmentFileEntryService.upsertCPAttachmentFileEntry(
-                serviceContext.getScopeGroupId(), classNameId, classPK,  GetterUtil.getLong(attachmentUrl.getId()), fileEntryId, displayDateConfig.getMonth(),
-			displayDateConfig.getDay(), displayDateConfig.getYear(),
-			displayDateConfig.getHour(), displayDateConfig.getMinute(),
-			expirationDateConfig.getMonth(), expirationDateConfig.getDay(),
-			expirationDateConfig.getYear(), expirationDateConfig.getHour(),
-			expirationDateConfig.getMinute(),
+			serviceContext.getScopeGroupId(), classNameId, classPK,
+			GetterUtil.getLong(attachmentUrl.getId()), fileEntryId,
+			displayDateConfig.getMonth(), displayDateConfig.getDay(),
+			displayDateConfig.getYear(), displayDateConfig.getHour(),
+			displayDateConfig.getMinute(), expirationDateConfig.getMonth(),
+			expirationDateConfig.getDay(), expirationDateConfig.getYear(),
+			expirationDateConfig.getHour(), expirationDateConfig.getMinute(),
 			GetterUtil.get(attachmentUrl.getNeverExpire(), false),
 			getTitleMap(null, attachmentUrl.getTitle()),
 			GetterUtil.getString(attachmentUrl.getOptions()),
 			GetterUtil.getDouble(attachmentUrl.getPriority()), type,
 			attachmentUrl.getExternalReferenceCode(), serviceContext);
+	}
+
+	public static CPAttachmentFileEntry upsertCPAttachmentFileEntry(
+			long groupId,
+			CPAttachmentFileEntryService cpAttachmentFileEntryService,
+			UniqueFileNameProvider uniqueFileNameProvider,
+			Attachment attachment, long classNameId, long classPK, int type,
+			ServiceContext serviceContext)
+		throws Exception {
+
+		_validateMethodRequiredParams(
+			attachment.getId(), attachment.getExternalReferenceCode());
+
+		Calendar displayCalendar = CalendarFactoryUtil.getCalendar(
+			serviceContext.getTimeZone());
+
+		if (attachment.getDisplayDate() != null) {
+			displayCalendar = DateConfigUtil.convertDateToCalendar(
+				attachment.getDisplayDate());
+		}
+
+		DateConfig displayDateConfig = new DateConfig(displayCalendar);
+
+		Calendar expirationCalendar = CalendarFactoryUtil.getCalendar(
+			serviceContext.getTimeZone());
+
+		expirationCalendar.add(Calendar.MONTH, 1);
+
+		if (attachment.getExpirationDate() != null) {
+			expirationCalendar = DateConfigUtil.convertDateToCalendar(
+				attachment.getExpirationDate());
+		}
+
+		DateConfig expirationDateConfig = new DateConfig(expirationCalendar);
+
+		long fileEntryId = 0;
+
+		FileEntry fileEntry = addFileEntry(
+			attachment, serviceContext.getScopeGroupId(),
+			serviceContext.getUserId(), uniqueFileNameProvider);
+
+		if (fileEntry != null) {
+			fileEntryId = fileEntry.getFileEntryId();
+		}
+
+		return cpAttachmentFileEntryService.upsertCPAttachmentFileEntry(
+			groupId, classNameId, classPK,
+			GetterUtil.getLong(attachment.getId()), fileEntryId,
+			displayDateConfig.getMonth(), displayDateConfig.getDay(),
+			displayDateConfig.getYear(), displayDateConfig.getHour(),
+			displayDateConfig.getMinute(), expirationDateConfig.getMonth(),
+			expirationDateConfig.getDay(), expirationDateConfig.getYear(),
+			expirationDateConfig.getHour(), expirationDateConfig.getMinute(),
+			GetterUtil.get(attachment.getNeverExpire(), false),
+			getTitleMap(null, attachment.getTitle()),
+			GetterUtil.getString(attachment.getOptions()),
+			GetterUtil.getDouble(attachment.getPriority()), type,
+			attachment.getExternalReferenceCode(), serviceContext);
 	}
 
 	private static FileEntry _addFileEntry(
