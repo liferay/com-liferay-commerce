@@ -18,8 +18,8 @@
 
 <div class="table-root" id="<%= containerId %>"></div>
 
-<aui:script require="commerce-frontend-js/js/smart_table/entry.es as SmartTable">
-    new SmartTable.default(
+<aui:script require="commerce-frontend-js/components/dataset_display/entry.es as table">
+    table.default(
         "<%= containerId %>",
         "<%= containerId %>",
         Object.assign(
