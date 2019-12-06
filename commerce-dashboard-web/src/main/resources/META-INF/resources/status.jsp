@@ -37,7 +37,7 @@ chart.default(
 		accountIdParamName: '----',
 		commerceAccountId: '<%= commerceAccountId %>',
 		noAccountErrorMessage: Liferay.Language.get('no-account-selected'),
-		noDataErrorMessage: Liferay.Language.get('no-data-available'),
+		noDataErrorMessage: Liferay.Language.get('no-data-available')
 	}
 );
 </aui:script>
