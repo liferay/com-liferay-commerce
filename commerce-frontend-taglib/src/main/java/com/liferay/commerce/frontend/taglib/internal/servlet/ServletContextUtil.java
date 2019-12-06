@@ -75,7 +75,7 @@ public class ServletContextUtil {
 	public static final CPSubscriptionTypeRegistry
 		getCPSubscriptionTypeRegistry() {
 
-		return _instance._getCPSubscriptionTypeRegistry();
+		return _servletContextUtil._getCPSubscriptionTypeRegistry();
 	}
 
 	public static final FilterFactoryRegistry getFilterFactoryRegistry() {
