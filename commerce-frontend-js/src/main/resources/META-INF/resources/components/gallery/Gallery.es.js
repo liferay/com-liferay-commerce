@@ -20,6 +20,7 @@ export default class Gallery extends React.Component {
 
 		this.state = {
 			fullscreen: false,
+			images: this.props.images,
 			loaded: new Set(),
 			loading: false,
 			selected: 0
@@ -46,14 +47,15 @@ export default class Gallery extends React.Component {
 	_handleImagesUpdate(e) {
 		if(e.images) {
 			this.setState({
-				images: e.images
+				images: e.images,
+				selected: 0
 			})
 		}
 	}
 
 	fullscreenOpen() {
 		if (!this.state.loading) {
-			this.imageLoad(this.props.images[this.state.selected].url).then(
+			this.imageLoad(this.state.images[this.state.selected].url).then(
 				() => {
 					this.setState({fullscreen: true});
 				}
@@ -67,7 +69,7 @@ export default class Gallery extends React.Component {
 
 	goTo(pos) {
 		this.imageSelect(
-			(this.props.images.length + pos) % this.props.images.length
+			(this.state.images.length + pos) % this.state.images.length
 		);
 	}
 
@@ -104,15 +106,15 @@ export default class Gallery extends React.Component {
 
 	imageSelect(toSelect) {
 		if (toSelect !== this.state.selected && !this.state.loading) {
-			this.imageLoad(this.props.images[toSelect].url).then(() => {
+			this.imageLoad(this.state.images[toSelect].url).then(() => {
 				this.setState({selected: toSelect});
 			});
 		}
 	}
 
 	render() {
-		const {images, background} = this.props;
-		const {fullscreen, loading, selected} = this.state;
+		const {background} = this.props;
+		const {fullscreen, images, loading, selected} = this.state;
 
 		return (
 			<div className="product-gallery">

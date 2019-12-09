@@ -102,9 +102,9 @@
 		)
 	}
 
-	function updateGallery() {
+	function updateGallery(productsData) {
 		const formData = new FormData();
-		formData.append('<portlet:namespace />ddmFormValues', JSON.stringify(getFormData()));
+		formData.append('<portlet:namespace />ddmFormValues', productsData.formData);
 		formData.append('groupId', themeDisplay.getScopeGroupId());
 
 		fetch(
