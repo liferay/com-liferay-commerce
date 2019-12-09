@@ -36,36 +36,38 @@ public class CPDisplayLayoutUpgradeProcess extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		Statement s = connection.createStatement(
-			ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+		try (Statement s =
+				connection.createStatement(
+					ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
 
-		ResultSet r = s.executeQuery(_SELECT_CPDISPLAYLAYOUT_SQL);
+			ResultSet r = s.executeQuery(_SELECT_CPDISPLAYLAYOUT_SQL)) {
 
-		while (r.next()) {
-			long cpDisplayLayoutId = r.getLong("CPDisplayLayoutId");
+			while (r.next()) {
+				long cpDisplayLayoutId = r.getLong("CPDisplayLayoutId");
 
-			long groupId = r.getLong("groupId");
+				long groupId = r.getLong("groupId");
 
-			String layoutUuid = r.getString("layoutUuid");
+				String layoutUuid = r.getString("layoutUuid");
 
-			Layout layout = _getLayout(groupId, layoutUuid);
+				Layout layout = _fetchLayout(groupId, layoutUuid);
 
-			if (layout == null) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(
+				if (layout == null) {
+					if (_log.isDebugEnabled()) {
+						_log.debug(
+							String.format(
+								"Removing CPDisplayLayout entry id: %s",
+								cpDisplayLayoutId));
+					}
+
+					runSQL(
 						String.format(
-							"Removing orphan CPDisplayLayout entry id: %s",
-							cpDisplayLayoutId));
+							_DELETE_CPDISPLAYLAYOUT_SQL, cpDisplayLayoutId));
 				}
-
-				runSQL(
-					String.format(
-						_DELETE_CPDISPLAYLAYOUT_SQL, cpDisplayLayoutId));
 			}
 		}
 	}
 
-	private Layout _getLayout(long groupId, String layoutUuid) {
+	private Layout _fetchLayout(long groupId, String layoutUuid) {
 		Layout layout = _layoutLocalService.fetchLayout(
 			layoutUuid, groupId, false);
 
@@ -73,11 +75,11 @@ public class CPDisplayLayoutUpgradeProcess extends UpgradeProcess {
 			return layout;
 		}
 
-		return _layoutLocalService.fetchLayout(layoutUuid, groupId, false);
+		return _layoutLocalService.fetchLayout(layoutUuid, groupId, true);
 	}
 
 	private static final String _DELETE_CPDISPLAYLAYOUT_SQL =
-		"DELETE FROM CPDisplayLayout where '%s'";
+		"DELETE FROM CPDisplayLayout where CPDisplayLayoutId = '%s'";
 
 	private static final String _SELECT_CPDISPLAYLAYOUT_SQL =
 		"SELECT CPDisplayLayoutId, groupId, layoutUuid FROM CPDisplayLayout";
