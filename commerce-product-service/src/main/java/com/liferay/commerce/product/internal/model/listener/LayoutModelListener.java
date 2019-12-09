@@ -31,8 +31,9 @@ public class LayoutModelListener extends BaseModelListener<Layout> {
 
 	@Override
 	public void onAfterRemove(Layout layout) throws ModelListenerException {
-		_cpDisplayLayoutLocalService.deleteCPDisplayLayoutByG_L(
-			layout.getGroupId(), layout.getUuid());
+		_cpDisplayLayoutLocalService.
+			deleteCPDisplayLayoutByGroupIdAndLayoutUuid(
+				layout.getGroupId(), layout.getUuid());
 	}
 
 	@Reference
