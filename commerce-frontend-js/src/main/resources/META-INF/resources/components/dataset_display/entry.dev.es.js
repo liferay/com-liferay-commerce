@@ -2,9 +2,8 @@ import launcher from './entry.es';
 
 import '../../styles/main.scss';
 import { OPEN_SIDE_PANEL } from '../../utilities/eventsDefinitions.es';
-import Sidepanel from '../side_panel/entry.es';
 
-launcher('dataset-display', 'dataset-display', {
+launcher('dataset-display', 'dataset-display-root-id', {
 	apiUrl: '/o/headless-commerce-admin-order/v1.0/orders/37174/orderItems',
 	bulkActions: [
 		{

@@ -2,6 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 const {defineServerResponses} = require('./dev/fakeServerUtilities');
+const components = require('./src/main/resources/META-INF/resources/components/index');
 
 const outputPath = path.resolve(__dirname, './dev/public');
 
@@ -12,7 +13,7 @@ const getComponentPath = (component, entry) => path.join(
 	'resources',
 	'META-INF',
 	'resources',
-	'js',
+	'components',
 	component,
 	entry
 );
@@ -25,11 +26,8 @@ module.exports = {
 		},
 		compress: false,
 		contentBase: './dev/public',
-		// disableHostCheck: true,
-		// historyApiFallback: true,
-		// hot: true,
 		open: true,
-		openPage: 'table.html',
+		openPage: 'index.html',
 		port: 9000,
 		proxy: {
 			'/o': {
@@ -37,20 +35,12 @@ module.exports = {
 			}
 		},
 		publicPath: '/',
-		// filename: path.join(outputPath, '/bundle.js'),
 	},
 	devtool: 'inline-source-map',
-	entry: {
-		// add_or_create: getComponentPath('add_or_create', 'entry.dev.es.js'),
-		// assign_to: getComponentPath('assign_to', 'entry.dev.es.js'),
-		// gallery: getComponentPath('gallery', 'entry.dev.es.js'),
-		// modal: getComponentPath('modal', 'entry.dev.es.js'),
-		// side_panel: getComponentPath('side_panel', 'entry.dev.es.js'),
-		// step_tracker: getComponentPath('step_tracker', 'entry.dev.es.js'),
-		table: getComponentPath('smart_table', 'entry.dev.es.js'),
-		// table_toolbar: getComponentPath('table_toolbar', 'entry.dev.es.js'),
-		// utilities: getComponentPath('utilities', 'index.es.js'),
-	},
+	entry: components.reduce((comp, current) => {
+		comp[current.folder] = getComponentPath(current.folder, current.entry_dev)
+		return comp;
+	}, {}),
 	mode: 'development',
 	module: {
 		rules: [

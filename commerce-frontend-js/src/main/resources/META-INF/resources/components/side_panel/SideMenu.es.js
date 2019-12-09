@@ -1,7 +1,7 @@
 import React from 'react';
 import ClayIcon from '@clayui/icon';
 import classNames from 'classnames';
-import ClayButton from '@clayui/button/lib/Button';
+import ClayButton from '@clayui/button';
 
 export default function SideMenu(props) {
 	return (
