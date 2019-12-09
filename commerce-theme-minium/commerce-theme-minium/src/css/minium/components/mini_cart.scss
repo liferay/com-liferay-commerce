@@ -1,4 +1,12 @@
 .commerce-cart {
+	$minicart-width: 500px;
+
+	@function getOpeningTranslation($direction) {
+		@return translateX(if($direction == left, -1, 1) *
+		($minicart-width + $liferay-sidebars-width));
+	}
+
+
 	background-color: $color-bg;
 	box-shadow: -20px 0 40px $color-shadow;
 	display: flex;
@@ -11,7 +19,7 @@
 		box-shadow $transition,
 		transform $transition;
 	height: calc(100vh - #{$frame-size});
-	width: 100vw;
+	width: $minicart-width;
 	z-index: 1140;
 
 	@media screen and (max-width: $bp-xsmall) {
@@ -28,11 +36,15 @@
 
 	&:not(.is-open) {
 		box-shadow: 0 0 0 $color-shadow;
-		transform: translateX(100%);
+		transform: getOpeningTranslation(right);
+	}
+
+	.rtl & {
+		left: 0;
 	}
 
 	.rtl &:not(.is-open) {
-		transform: translateX(-100%);
+		transform: getOpeningTranslation(left);
 	}
 
 	&__container {
