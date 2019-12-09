@@ -95,12 +95,12 @@ public class AttachmentUtilTest extends PowerMockito {
 	}
 
 	private static final Map<String, String> _titleMap =
-		new HashMap<String, String>() {
-			{
-				put("en_US", "Written in English");
-				put("hr_HR", "Napisano na Hrvatskom");
-				put("it", "Scritto nel Italiano");
-			}
-		};
+		HashMapBuilder.<String, String>put(
+			"en_US", "Written in English"
+		).put(
+			"hr_HR", "Napisano na Hrvatskom"
+		).put(
+			"it", "Scritto nel Italiano"
+		).build();
 
 }

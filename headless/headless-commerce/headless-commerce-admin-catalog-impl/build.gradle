@@ -18,5 +18,4 @@ dependencies {
 	compileOnly project(":apps:commerce:headless:headless-commerce:headless-commerce-admin-catalog-api")
 
 	testCompile group: "org.mockito", name: "mockito-core", version: "1.10.8"
-
 }
