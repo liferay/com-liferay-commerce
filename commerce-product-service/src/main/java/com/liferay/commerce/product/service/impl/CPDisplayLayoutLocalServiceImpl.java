@@ -117,7 +117,9 @@ public class CPDisplayLayoutLocalServiceImpl
 	}
 
 	@Override
-	public void deleteCPDisplayLayoutByG_L(long groupId, String layoutUuid) {
+	public void deleteCPDisplayLayoutByGroupIdAndLayoutUuid(
+		long groupId, String layoutUuid) {
+
 		cpDisplayLayoutPersistence.removeByG_L(groupId, layoutUuid);
 	}
 
@@ -128,7 +130,7 @@ public class CPDisplayLayoutLocalServiceImpl
 	}
 
 	@Override
-	public List<CPDisplayLayout> fetchCPDisplayLayoutByG_L(
+	public List<CPDisplayLayout> fetchCPDisplayLayoutByGroupIdAndLayoutUuid(
 		long groupId, String layoutUuid, int start, int end) {
 
 		return cpDisplayLayoutPersistence.findByG_L(
