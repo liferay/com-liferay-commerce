@@ -23,7 +23,6 @@ import com.liferay.commerce.frontend.FilterFactoryRegistry;
 import com.liferay.commerce.frontend.util.ProductHelper;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.product.content.util.CPContentHelper;
-import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 
 import javax.servlet.ServletContext;
@@ -35,7 +34,6 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Marco Leo
- * @author Alessio Antonio Rendina
  */
 @Component(immediate = true, service = ServletContextUtil.class)
 public class ServletContextUtil {
@@ -70,12 +68,6 @@ public class ServletContextUtil {
 
 	public static final CPContentHelper getCPContentHelper() {
 		return _servletContextUtil._getCPContentHelper();
-	}
-
-	public static final CPSubscriptionTypeRegistry
-		getCPSubscriptionTypeRegistry() {
-
-		return _servletContextUtil._getCPSubscriptionTypeRegistry();
 	}
 
 	public static final FilterFactoryRegistry getFilterFactoryRegistry() {
@@ -151,12 +143,6 @@ public class ServletContextUtil {
 		_cpContentHelper = cpContentHelper;
 	}
 
-	protected void setCPSubscriptionTypeRegistry(
-		CPSubscriptionTypeRegistry cpSubscriptionTypeRegistry) {
-
-		_cpSubscriptionTypeRegistry = cpSubscriptionTypeRegistry;
-	}
-
 	@Reference(unbind = "-")
 	protected void setFilterFactoryRegistry(
 		FilterFactoryRegistry filterFactoryRegistry) {
@@ -212,10 +198,6 @@ public class ServletContextUtil {
 		return _cpContentHelper;
 	}
 
-	private CPSubscriptionTypeRegistry _getCPSubscriptionTypeRegistry() {
-		return _cpSubscriptionTypeRegistry;
-	}
-
 	private FilterFactoryRegistry _getFilterFactoryRegistry() {
 		return _filterFactoryRegistry;
 	}
@@ -242,7 +224,6 @@ public class ServletContextUtil {
 	private CommerceDataProviderRegistry _commerceDataProviderRegistry;
 	private CommerceOrderHttpHelper _commerceOrderHttpHelper;
 	private CPContentHelper _cpContentHelper;
-	private CPSubscriptionTypeRegistry _cpSubscriptionTypeRegistry;
 	private FilterFactoryRegistry _filterFactoryRegistry;
 	private NPMResolver _npmResolver;
 	private ProductHelper _productHelper;
