@@ -87,7 +87,7 @@ public class PriceTag extends ComponentRendererTag {
 		}
 
 		return npmResolver.resolveModuleName(
-			"commerce-frontend-taglib/js/price/Price.es");
+			"commerce-frontend-taglib/price/Price.es");
 	}
 
 	public void setAdditionalDiscountClasses(String additionalDiscountClasses) {
