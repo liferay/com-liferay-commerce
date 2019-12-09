@@ -2,7 +2,7 @@ import launcher from './entry.es';
 
 import '../../styles/main.scss';
 
-window.SidePanel = launcher('sidePanel', 'side-panel', {
+window.SidePanel = launcher('sidePanel', 'side-panel-root-id', {
 	containerSelector: '.smart-table-wrapper',
 	id: 'sidePanelTestId',
 	size: 'md',

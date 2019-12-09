@@ -23,7 +23,7 @@ const props = {
 	url: 'http://localhost:9000/modal-content.html'
 };
 
-modalLauncher('modal', 'modal-root', props);
+modalLauncher('modal', 'modal-root-id', props);
 
 launcher(
 	() => (
@@ -34,6 +34,6 @@ launcher(
 			Open modal
 		</button>
 	),
-	'modal-trigger-root',
-	'modal-trigger-root'
+	'modal-trigger',
+	'modal-trigger-root-id'
 );

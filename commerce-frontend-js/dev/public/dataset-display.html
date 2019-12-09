@@ -10,7 +10,7 @@
 
 	<meta content="#000000" name="theme-color" />
 
-	<title>React App</title>
+	<title>Dataset display component</title>
 
 	<link href="https://cdn.jsdelivr.net/npm/clay/lib/css/atlas.css" rel="stylesheet" />
 </head>
@@ -19,15 +19,9 @@
 	<noscript>You need to enable JavaScript to run this app.</noscript>
 
 	<div class="container mb-5">
-		<div id="side-panel"></div>
-		<div id="dataset-display"></div>
+		<div id="side-panel-root-id"></div>
+		<div id="dataset-display-root-id"></div>
 	</div>
-
-	<script>
-		if (window.parent !== window) {
-			window.__REACT_DEVTOOLS_GLOBAL_HOOK__ = window.parent.__REACT_DEVTOOLS_GLOBAL_HOOK__;
-		}
-	</script>
 
 	<script type="text/javascript" src="/dataset_display.js"></script>
 	<script type="text/javascript" src="/side_panel.js"></script>

@@ -4,7 +4,7 @@ module.exports = [
     entry_dev: "entry.dev.es.js",
     folder: "dataset_display",
     name: "Dataset display",
-    page: "dataset_display.html"
+    page: "dataset-display.html"
   },
   {
     entry: "entry.es.js",
@@ -29,6 +29,13 @@ module.exports = [
   {
     entry: "entry.es.js",
     entry_dev: "entry.dev.es.js",
+    folder: "modal",
+    name: "Modal",
+    page: "modal.html"
+  },
+  {
+    entry: "entry.es.js",
+    entry_dev: "entry.dev.es.js",
     folder: "side_panel",
     name: "Side panel",
     page: "side_panel.html"
@@ -39,12 +46,5 @@ module.exports = [
     folder: "step_tracker",
     name: "Step tracker",
     page: "step_tracker.html"
-  },
-  {
-    entry: "entry.es.js",
-    entry_dev: "entry.dev.es.js",
-    folder: "modal",
-    name: "Modal",
-    page: "modal.html"
   }
 ];
