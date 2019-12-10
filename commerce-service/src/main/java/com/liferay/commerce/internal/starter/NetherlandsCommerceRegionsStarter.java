@@ -15,6 +15,9 @@
 package com.liferay.commerce.internal.starter;
 
 import com.liferay.commerce.starter.CommerceRegionsStarter;
+import com.liferay.portal.kernel.language.LanguageUtil;
+
+import java.util.Locale;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -30,6 +33,11 @@ public class NetherlandsCommerceRegionsStarter
 	extends BaseCommerceRegionsStarter {
 
 	public static final int NETHERLANDS_NUMERIC_ISO_CODE = 528;
+
+	@Override
+	public String getLabel(Locale locale) {
+		return LanguageUtil.get(locale, "netherlands");
+	}
 
 	@Override
 	protected int getCountryIsoCode() {

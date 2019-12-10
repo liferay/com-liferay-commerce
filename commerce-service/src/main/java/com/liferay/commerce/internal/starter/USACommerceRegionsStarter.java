@@ -34,11 +34,6 @@ public class USACommerceRegionsStarter extends BaseCommerceRegionsStarter {
 	public static final int USA_NUMERIC_ISO_CODE = 840;
 
 	@Override
-	public String getKey() {
-		return String.valueOf(USA_NUMERIC_ISO_CODE);
-	}
-
-	@Override
 	public String getLabel(Locale locale) {
 		return LanguageUtil.get(locale, "usa");
 	}

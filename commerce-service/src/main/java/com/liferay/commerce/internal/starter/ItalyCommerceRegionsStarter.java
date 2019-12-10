@@ -34,11 +34,6 @@ public class ItalyCommerceRegionsStarter extends BaseCommerceRegionsStarter {
 	public static final int ITALY_NUMERIC_ISO_CODE = 380;
 
 	@Override
-	public String getKey() {
-		return String.valueOf(ITALY_NUMERIC_ISO_CODE);
-	}
-
-	@Override
 	public String getLabel(Locale locale) {
 		return LanguageUtil.get(locale, "italy");
 	}
