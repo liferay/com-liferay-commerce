@@ -42,6 +42,7 @@ export function showNotification(
 }
 
 if (!window.Liferay) {
+
 	window.Liferay = {
 		Language: {
 			get: v => v
@@ -50,15 +51,15 @@ if (!window.Liferay) {
 			window.removeEventListener(name, fn);
 		},
 		fire: (name, payload) => {
-			const e = new CustomEvent(name, {
-				detail: payload
-			});
+			var e = document.createEvent( 'CustomEvent' );
+			e.initCustomEvent(name);
+			if(payload) {
+				Object.keys(payload).forEach(key => { e[key] = payload[key] })
+			}
 			window.dispatchEvent(e);
 		},
 		on: (name, fn) => {
-			window.addEventListener(name, e => {
-				fn({...e, ...e.detail});
-			});
+			window.addEventListener(name, fn);
 		}
 	};
 }
@@ -72,7 +73,6 @@ export function launcher(Component, componentId, rootId, props) {
 
 	let componentInstance = null;
 
-	// eslint-disable-next-line
 	ReactDOM.render(
 		Component.prototype.render ? (
 			<Component
