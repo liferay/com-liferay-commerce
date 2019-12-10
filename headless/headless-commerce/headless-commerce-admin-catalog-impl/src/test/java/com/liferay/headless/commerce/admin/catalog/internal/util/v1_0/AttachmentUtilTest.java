@@ -21,7 +21,6 @@ import com.liferay.headless.commerce.admin.catalog.internal.jaxrs.exception.Meth
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 
-import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
@@ -94,13 +93,12 @@ public class AttachmentUtilTest extends PowerMockito {
 			null, null, new AttachmentUrl(), 0, 0, 0, new ServiceContext());
 	}
 
-	private static final Map<String, String> _titleMap =
-		HashMapBuilder.<String, String>put(
-			"en_US", "Written in English"
-		).put(
-			"hr_HR", "Napisano na Hrvatskom"
-		).put(
-			"it", "Scritto nel Italiano"
-		).build();
+	private static final Map<String, String> _titleMap = HashMapBuilder.put(
+		"en_US", "Written in English"
+	).put(
+		"hr_HR", "Napisano na Hrvatskom"
+	).put(
+		"it", "Scritto nel Italiano"
+	).build();
 
 }
