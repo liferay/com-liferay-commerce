@@ -36,7 +36,7 @@ public class SouthKoreaCommerceRegionsStarter
 
 	@Override
 	public String getLabel(Locale locale) {
-		return LanguageUtil.get(locale, "south-korea");
+		return LanguageUtil.get(locale, "country.south-korea");
 	}
 
 	@Override

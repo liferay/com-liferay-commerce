@@ -36,7 +36,7 @@ public class ArgentinaCommerceRegionsStarter
 
 	@Override
 	public String getLabel(Locale locale) {
-		return LanguageUtil.get(locale, "argentina");
+		return LanguageUtil.get(locale, "country.argentina");
 	}
 
 	@Override

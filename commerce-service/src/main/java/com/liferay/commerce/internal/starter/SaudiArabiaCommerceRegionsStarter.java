@@ -36,7 +36,7 @@ public class SaudiArabiaCommerceRegionsStarter
 
 	@Override
 	public String getLabel(Locale locale) {
-		return LanguageUtil.get(locale, "saudi-arabia");
+		return LanguageUtil.get(locale, "country.saudi-arabia");
 	}
 
 	@Override

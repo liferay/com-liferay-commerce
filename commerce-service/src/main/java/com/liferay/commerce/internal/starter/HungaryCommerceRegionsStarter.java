@@ -35,7 +35,7 @@ public class HungaryCommerceRegionsStarter extends BaseCommerceRegionsStarter {
 
 	@Override
 	public String getLabel(Locale locale) {
-		return LanguageUtil.get(locale, "hungary");
+		return LanguageUtil.get(locale, "country.hungary");
 	}
 
 	@Override
