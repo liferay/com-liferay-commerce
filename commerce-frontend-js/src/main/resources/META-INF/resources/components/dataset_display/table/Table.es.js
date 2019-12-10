@@ -2,7 +2,6 @@ import ClayTable from '@clayui/table';
 import PropTypes from 'prop-types';
 import React, {useState} from 'react';
 
-import Modal from '../../modal/Modal.es';
 import DatasetDisplayContext from '../DatasetDisplayContext.es';
 import EmptyResultMessage from './EmptyResultMessage.es';
 import TableContext from './TableContext.es';
@@ -55,7 +54,6 @@ const idToCellTemplateMapping = {
 	dropdown: Dropdown,
 	imageTitle: ImageText,
 	link: Link,
-	modalLink: ModalLink,
 	price: Price,
 	sidePanelLink: SidePanelLink
 };
@@ -85,16 +83,13 @@ function Table(props) {
 		props.selectedItemsId,
 		props.items
 	);
-	const containsModal = props.schema.fields.find(
-		field => field.contentRenderer === 'modalLink'
-	);
 
 	const [modalProps, setModalProps] = useState({});
 	const [sidePanelProps, setSidePanelProps] = useState({});
 
 	return (
 		<DatasetDisplayContext.Consumer>
-			{({formRef, loadData}) => (
+			{({formRef}) => (
 				<TableContext.Provider
 					value={{
 						modalProps,
@@ -103,9 +98,6 @@ function Table(props) {
 						sidePanelProps
 					}}
 				>
-					{containsModal && (
-						<Modal onSubmit={loadData} {...modalProps} />
-					)}
 					<form ref={formRef}>
 						<ClayTable borderless>
 							<ClayTable.Head>
@@ -122,8 +114,9 @@ function Table(props) {
 															.length &&
 														!allElementsSelected
 													}
+													name={'table-head-selector'}
 													onSelect={props.onSelect}
-													value={null}
+													value={'table-head-selector'}
 												/>
 											) : null}
 										</ClayTable.Cell>

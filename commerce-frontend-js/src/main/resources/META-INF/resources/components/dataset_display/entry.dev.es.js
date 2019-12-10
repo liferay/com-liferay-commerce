@@ -1,29 +1,21 @@
 import launcher from './entry.es';
 
 import '../../styles/main.scss';
-import { OPEN_SIDE_PANEL } from '../../utilities/eventsDefinitions.es';
 
 launcher('dataset-display', 'dataset-display-root-id', {
 	apiUrl: '/o/headless-commerce-admin-order/v1.0/orders/37174/orderItems',
 	bulkActions: [
 		{
-			action: (ids) => {
-				Liferay.fire(OPEN_SIDE_PANEL, {
-					id: 'sidePanelTestId',
-					options: {
-						slug: 'edit',
-						url: `/side-panel/edit.html?ids=${ids.join(',')}`,
-					}
-				})
-			},
 			icon: 'plus',
-			label: 'Add'
+			label: 'Add',
+			sidePanelCompatible: true,
+			url: '/side-panel/edit.html',
 		},
 		{
-			action: '/delete',
 			icon: 'trash',
 			label: 'Delete',
-			method: 'delete'
+			method: 'delete',
+			url: '/delete',
 		}
 	],
 	currentPage: 1,
@@ -123,10 +115,11 @@ launcher('dataset-display', 'dataset-display-root-id', {
 			discountPercentageLevel4: 0,
 			finalPrice: 200,
 			id: 37175,
-			name: {
-				label: 'ABS Sensor',
-				url: '/form.html'
-			},
+			// name: {
+			// 	label: 'ABS Sensor',
+			// 	url: '/form.html'
+			// },
+			name: 'ABS Sensor',
 			orderId: 37174,
 			quantity: 4,
 			shippedQuantity: 0,
@@ -150,10 +143,11 @@ launcher('dataset-display', 'dataset-display-root-id', {
 			discountPercentageLevel4: 0,
 			finalPrice: 304,
 			id: 37176,
-			name: {
-				label: 'Ball Joints',
-				url: '/form.html'
-			},
+			// name: {
+			// 	label: 'Ball Joints',
+			// 	url: '/form.html'
+			// },
+			name: 'Ball Joints',
 			orderId: 37174,
 			quantity: 2,
 			shippedQuantity: 0,
@@ -181,10 +175,11 @@ launcher('dataset-display', 'dataset-display-root-id', {
 			discountPercentageLevel4: 0,
 			finalPrice: 70,
 			id: 37177,
-			name: {
-				label: 'Bearings',
-				url: '/form.html'
-			},
+			// name: {
+			// 	label: 'Bearings',
+			// 	url: '/form.html'
+			// },
+			name: 'Bearings',
 			orderId: 37174,
 			quantity: 1,
 			shippedQuantity: 0,
@@ -208,10 +203,11 @@ launcher('dataset-display', 'dataset-display-root-id', {
 			discountPercentageLevel4: 0,
 			finalPrice: 37.8,
 			id: 37178,
-			name: {
-				label: 'Brake Pads',
-				url: '/form.html'
-			},
+			// name: {
+			// 	label: 'Brake Pads',
+			// 	url: '/form.html'
+			// },
+			name: 'Brake Pads',
 			orderId: 37174,
 			quantity: 2,
 			shippedQuantity: 0,
@@ -235,10 +231,11 @@ launcher('dataset-display', 'dataset-display-root-id', {
 			discountPercentageLevel4: 0,
 			finalPrice: 400,
 			id: 37197,
-			name: {
-				label: 'Brake Rotors',
-				url: '/form.html'
-			},
+			// name: {
+			// 	label: 'Brake Rotors',
+			// 	url: '/form.html'
+			// },
+			name: 'Brake Rotors',
 			orderId: 37174,
 			quantity: 10,
 			shippedQuantity: 0,
@@ -262,10 +259,11 @@ launcher('dataset-display', 'dataset-display-root-id', {
 			discountPercentageLevel4: 0,
 			finalPrice: 36,
 			id: 37198,
-			name: {
-				label: 'Bushings',
-				url: '/form.html'
-			},
+			// name: {
+			// 	label: 'Bushings',
+			// 	url: '/form.html'
+			// },
+			name: 'Bushings',
 			orderId: 37174,
 			quantity: 2,
 			shippedQuantity: 0,
@@ -289,10 +287,11 @@ launcher('dataset-display', 'dataset-display-root-id', {
 			discountPercentageLevel4: 0,
 			finalPrice: 90,
 			id: 37199,
-			name: {
-				label: 'Calipers',
-				url: '/form.html'
-			},
+			// name: {
+			// 	label: 'Calipers',
+			// 	url: '/form.html'
+			// },
+			name: 'Calipers',
 			orderId: 37174,
 			quantity: 1,
 			shippedQuantity: 0,
@@ -316,10 +315,11 @@ launcher('dataset-display', 'dataset-display-root-id', {
 			discountPercentageLevel4: 0,
 			finalPrice: 4170,
 			id: 37200,
-			name: {
-				label: 'Cams',
-				url: '/form.html'
-			},
+			// name: {
+			// 	label: 'Cams',
+			// 	url: '/form.html'
+			// },
+			name: 'Cams',
 			orderId: 37174,
 			quantity: 6,
 			shippedQuantity: 0,
@@ -343,10 +343,11 @@ launcher('dataset-display', 'dataset-display-root-id', {
 			discountPercentageLevel4: 0,
 			finalPrice: 624,
 			id: 37201,
-			name: {
-				label: 'Coil Spring - Rear',
-				url: '/form.html'
-			},
+			// name: {
+			// 	label: 'Coil Spring - Rear',
+			// 	url: '/form.html'
+			// },
+			name: 'Coil Spring - Rear',
 			orderId: 37174,
 			quantity: 6,
 			shippedQuantity: 0,
@@ -370,10 +371,11 @@ launcher('dataset-display', 'dataset-display-root-id', {
 			discountPercentageLevel4: 0,
 			finalPrice: 623,
 			id: 37202,
-			name: {
-				label: 'CV Axles',
-				url: '/form.html'
-			},
+			// name: {
+			// 	label: 'CV Axles',
+			// 	url: '/form.html'
+			// },
+			name: 'CV Axles',
 			orderId: 37174,
 			quantity: 7,
 			shippedQuantity: 0,
@@ -397,10 +399,11 @@ launcher('dataset-display', 'dataset-display-root-id', {
 			discountPercentageLevel4: 0,
 			finalPrice: 1068,
 			id: 37203,
-			name: {
-				label: 'CV Axles',
-				url: '/form.html'
-			},
+			// name: {
+			// 	label: 'CV Axles',
+			// 	url: '/form.html'
+			// },
+			name: 'CV Axles',
 			orderId: 37174,
 			quantity: 12,
 			shippedQuantity: 0,
@@ -424,10 +427,11 @@ launcher('dataset-display', 'dataset-display-root-id', {
 			discountPercentageLevel4: 0,
 			finalPrice: 10550,
 			id: 37204,
-			name: {
-				label: 'Differential Ring and Pinion - Universal',
-				url: '/form.html'
-			},
+			// name: {
+			// 	label: 'Differential Ring and Pinion - Universal',
+			// 	url: '/form.html'
+			// },
+			name: 'Differential Ring and Pinion - Universal',
 			orderId: 37174,
 			quantity: 50,
 			shippedQuantity: 0,
@@ -451,10 +455,11 @@ launcher('dataset-display', 'dataset-display-root-id', {
 			discountPercentageLevel4: 0,
 			finalPrice: 396,
 			id: 37205,
-			name: {
-				label: 'Drive Shafts',
-				url: '/form.html'
-			},
+			// name: {
+			// 	label: 'Drive Shafts',
+			// 	url: '/form.html'
+			// },
+			name: 'Drive Shafts',
 			orderId: 37174,
 			quantity: 1,
 			shippedQuantity: 0,
@@ -513,7 +518,7 @@ launcher('dataset-display', 'dataset-display-root-id', {
 				sortable: false
 			},
 			{
-				contentRenderer: 'modalLink',
+				// contentRenderer: 'modalLink',
 				fieldName: 'name',
 				label: 'name',
 				sortable: false
@@ -540,7 +545,6 @@ launcher('dataset-display', 'dataset-display-root-id', {
 			}
 		]
 	},
-	selectable: true,
 	showPagination: true,
 	sidePanelId: 'sidePanelTestId',
 	spritemap: './assets/icons.svg',

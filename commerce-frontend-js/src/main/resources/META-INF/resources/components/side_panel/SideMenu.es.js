@@ -15,12 +15,12 @@ export default function SideMenu(props) {
 								props.active === item.slug && 'active'
 							)
 						}
+						displayType="unstyled"
+						monospaced
 						onClick={(e) => {
 							e.preventDefault();
 							props.open(item.href, item.slug)
 						}}
-						displayType="unstyled"
-						monospaced
 					>
 						<ClayIcon symbol={item.icon} />
 					</ClayButton>

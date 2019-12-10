@@ -12,13 +12,13 @@ export default class SidePanel extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			active: null,
 			currentUrl: props.url || null,
 			loading: true,
 			moving: false,
 			size: props.size || 'md',
 			topDistance: 0,
 			visible: !!props.visible,
-			active: null
 		};
 		this.handleContentLoaded = this.handleContentLoaded.bind(this);
 		this.close = this.close.bind(this);
