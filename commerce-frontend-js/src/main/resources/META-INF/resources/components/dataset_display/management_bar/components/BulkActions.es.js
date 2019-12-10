@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import TableContext from '../../DatasetDisplayContext.es';
+import { OPEN_SIDE_PANEL } from '../../../../utilities/eventsDefinitions.es';
 
 function submit(action, method = 'get', form) {
 	if (!form.current) {
@@ -16,12 +17,19 @@ function submit(action, method = 'get', form) {
 }
 
 function BulkActions(props) {
-	function handleActionClick(actionDefinition, formRef) {
-		if(typeof actionDefinition.action === 'function') {
-			actionDefinition.action(props.selectedItemsId)
+	function handleActionClick(actionDefinition, formRef, loadData, sidePanelId) {
+		if(actionDefinition.sidePanelCompatible) {
+			Liferay.fire(OPEN_SIDE_PANEL, {
+				id: sidePanelId,
+				options: {
+					onAfterSubmit: () => loadData(),
+					slug: actionDefinition.slug || null,
+					url: actionDefinition.url,
+				}
+			})
 		} else {
 			submit(
-				actionDefinition.action,
+				actionDefinition.url,
 				actionDefinition.method || 'get',
 				formRef
 			)
@@ -30,7 +38,7 @@ function BulkActions(props) {
 
 	return (
 		<TableContext.Consumer>
-			{({formRef}) => (
+			{({formRef, loadData, sidePanelId}) => (
 				<nav className="management-bar-primary navbar navbar-expand-md pb-2 pt-2 subnav-tbar">
 					<div className="container-fluid container-fluid-max-xl py-1">
 						<ul className="navbar-nav">
@@ -61,7 +69,7 @@ function BulkActions(props) {
 										i > 0 && 'ml-1'
 									)}
 									key={actionDefinition.label}
-									onClick={() => handleActionClick(actionDefinition, formRef)}
+									onClick={() => handleActionClick(actionDefinition, formRef, loadData, sidePanelId)}
 								>
 									<ClayIcon symbol={actionDefinition.icon} />
 								</button>
@@ -77,13 +85,11 @@ function BulkActions(props) {
 BulkActions.propTypes = {
 	bulkActions: PropTypes.arrayOf(
 		PropTypes.shape({
-			action: PropTypes.oneOfType([
-				PropTypes.string,
-				PropTypes.func
-			]).isRequired,
 			icon: PropTypes.string.isRequired,
 			label: PropTypes.string.isRequired,
-			method: PropTypes.string
+			method: PropTypes.string,
+			sidePanelCompatible: PropTypes.bool,
+			url: PropTypes.string.isRequired,
 		})
 	),
 	selectedItemsId: PropTypes.array.isRequired,

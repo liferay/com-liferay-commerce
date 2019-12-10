@@ -13,8 +13,8 @@ function DatasetDisplay(props) {
 
 	const formRef = useRef(null);
 
-	const selectItems = (checked, val = null) => {
-		if (!val) {
+	const selectItems = (checked, val) => {
+		if (val === 'table-head-selector') {
 			if (checked) {
 				setselectedItemsId(props.items.map(el => el.id));
 			} else {
@@ -54,7 +54,7 @@ function DatasetDisplay(props) {
 			items={props.items}
 			onSelect={selectItems}
 			schema={props.schema}
-			selectable={props.selectable}
+			selectable={props.bulkActions && !!props.bulkActions.length}
 			selectedItemsId={selectedItemsId}
 		/>
 	);
@@ -120,7 +120,6 @@ DatasetDisplay.propTypes = {
 	paginationEntries: PropTypes.array.isRequired,
 	paginationSelectedEntry: PropTypes.number.isRequired,
 	schema: PropTypes.object.isRequired,
-	selectable: PropTypes.bool,
 	showPagination: PropTypes.bool,
 	sidePanelId: PropTypes.string,
 	spritemap: PropTypes.string.isRequired,

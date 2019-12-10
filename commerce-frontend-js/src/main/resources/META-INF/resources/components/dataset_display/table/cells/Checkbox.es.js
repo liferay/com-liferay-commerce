@@ -4,8 +4,8 @@ import React from 'react';
 function Checkbox(props) {
 	return (
 		<ClayCheckbox
-			onChange={() => props.onSelect(!props.checked, props.value)}
 			{...props}
+			onChange={() => props.onSelect(!props.checked, props.value)}
 		/>
 	);
 }
