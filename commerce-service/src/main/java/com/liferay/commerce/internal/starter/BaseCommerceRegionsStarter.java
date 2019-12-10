@@ -35,6 +35,11 @@ public abstract class BaseCommerceRegionsStarter
 	implements CommerceRegionsStarter {
 
 	@Override
+	public String getKey() {
+		return String.valueOf(getCountryIsoCode());
+	}
+
+	@Override
 	public void start(long userId) throws Exception {
 		User user = userLocalService.getUser(userId);
 

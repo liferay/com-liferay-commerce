@@ -15,7 +15,6 @@
 package com.liferay.commerce.address.web.internal.portlet.action;
 
 import com.liferay.commerce.admin.constants.CommerceAdminPortletKeys;
-import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.starter.CommerceRegionsStarter;
 import com.liferay.commerce.starter.CommerceRegionsStarterRegistry;
 import com.liferay.portal.kernel.json.JSONFactory;
@@ -24,12 +23,12 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
-import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
 
@@ -75,11 +74,11 @@ public class ImportCommerceRegionsMVCActionCommand
 				_commerceRegionsStarterRegistry.getCommerceRegionsStarter(key);
 
 			if (commerceRegionsStarter != null) {
-				ServiceContext serviceContext =
-					ServiceContextFactory.getInstance(
-						CommerceRegion.class.getName(), httpServletRequest);
+				ThemeDisplay themeDisplay =
+					(ThemeDisplay)httpServletRequest.getAttribute(
+						WebKeys.THEME_DISPLAY);
 
-				commerceRegionsStarter.start(serviceContext);
+				commerceRegionsStarter.start(themeDisplay.getUserId());
 
 				jsonObject.put("success", true);
 			}
