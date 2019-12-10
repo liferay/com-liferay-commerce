@@ -35,7 +35,7 @@ public class CuracaoCommerceRegionsStarter extends BaseCommerceRegionsStarter {
 
 	@Override
 	public String getLabel(Locale locale) {
-		return LanguageUtil.get(locale, "curacao");
+		return LanguageUtil.get(locale, "country.curacao");
 	}
 
 	@Override

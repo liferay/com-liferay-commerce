@@ -35,7 +35,7 @@ public class ChinaCommerceRegionsStarter extends BaseCommerceRegionsStarter {
 
 	@Override
 	public String getLabel(Locale locale) {
-		return LanguageUtil.get(locale, "china");
+		return LanguageUtil.get(locale, "country.china");
 	}
 
 	@Override

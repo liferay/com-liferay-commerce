@@ -36,7 +36,7 @@ public class IndonesiaCommerceRegionsStarter
 
 	@Override
 	public String getLabel(Locale locale) {
-		return LanguageUtil.get(locale, "indonesia");
+		return LanguageUtil.get(locale, "country.indonesia");
 	}
 
 	@Override
