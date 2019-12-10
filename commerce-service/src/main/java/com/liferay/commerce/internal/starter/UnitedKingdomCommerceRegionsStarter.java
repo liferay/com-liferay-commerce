@@ -36,7 +36,7 @@ public class UnitedKingdomCommerceRegionsStarter
 
 	@Override
 	public String getLabel(Locale locale) {
-		return LanguageUtil.get(locale, "united-kingdom");
+		return LanguageUtil.get(locale, "country.united-kingdom");
 	}
 
 	@Override

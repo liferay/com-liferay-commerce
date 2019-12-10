@@ -35,7 +35,7 @@ public class GermanyCommerceRegionsStarter extends BaseCommerceRegionsStarter {
 
 	@Override
 	public String getLabel(Locale locale) {
-		return LanguageUtil.get(locale, "germany");
+		return LanguageUtil.get(locale, "country.germany");
 	}
 
 	@Override

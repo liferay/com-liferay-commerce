@@ -36,7 +36,7 @@ public class NetherlandsCommerceRegionsStarter
 
 	@Override
 	public String getLabel(Locale locale) {
-		return LanguageUtil.get(locale, "netherlands");
+		return LanguageUtil.get(locale, "country.netherlands");
 	}
 
 	@Override

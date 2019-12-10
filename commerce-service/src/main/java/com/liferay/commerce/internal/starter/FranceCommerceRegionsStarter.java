@@ -35,7 +35,7 @@ public class FranceCommerceRegionsStarter extends BaseCommerceRegionsStarter {
 
 	@Override
 	public String getLabel(Locale locale) {
-		return LanguageUtil.get(locale, "france");
+		return LanguageUtil.get(locale, "country.france");
 	}
 
 	@Override

@@ -35,7 +35,7 @@ public class IsraelCommerceRegionsStarter extends BaseCommerceRegionsStarter {
 
 	@Override
 	public String getLabel(Locale locale) {
-		return LanguageUtil.get(locale, "israel");
+		return LanguageUtil.get(locale, "country.israel");
 	}
 
 	@Override
