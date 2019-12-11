@@ -26,6 +26,7 @@
 
 	<form class="form-group mt-4">
 		<label for="firstNameInput">Query string:</label>
+
 		<input
 			class="form-control"
 			id="idsInput"
@@ -33,17 +34,17 @@
 			type="text"
 		/>
 
-		<button 
+		<button
 			class="btn btn-primary mt-3"
 			type="submit"
 		>
 			Submit
 		</button>
 	</form>
-	
+
 	<script>
 		document.querySelector("#idsInput").value = document.location.search;
-		
+
 		if (window.parent !== window) {
 			window.__REACT_DEVTOOLS_GLOBAL_HOOK__ = window.parent.__REACT_DEVTOOLS_GLOBAL_HOOK__;
 		}
