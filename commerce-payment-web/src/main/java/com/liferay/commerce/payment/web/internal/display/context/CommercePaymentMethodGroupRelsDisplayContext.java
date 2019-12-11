@@ -190,8 +190,6 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 		_searchContainer = new SearchContainer<>(
 			_renderRequest, getPortletURL(), null, emptyResultsMessage);
 
-		long groupId = themeDisplay.getScopeGroupId();
-
 		List<CommercePaymentMethodGroupRel> commercePaymentMethodGroupRels =
 			null;
 		int commercePaymentMethodGroupRelsCount = 0;
@@ -205,21 +203,24 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 			commercePaymentMethodGroupRels =
 				_commercePaymentMethodGroupRelService.
 					getCommercePaymentMethodGroupRels(
-						groupId, active, _searchContainer.getStart(),
-						_searchContainer.getEnd(),
+						themeDisplay.getScopeGroupId(), active,
+						_searchContainer.getStart(), _searchContainer.getEnd(),
 						commercePaymentMethodGroupRelNameOrderByComparator);
 			commercePaymentMethodGroupRelsCount =
 				_commercePaymentMethodGroupRelService.
-					getCommercePaymentMethodGroupRelsCount(groupId, active);
+					getCommercePaymentMethodGroupRelsCount(
+						themeDisplay.getScopeGroupId(), active);
 		}
 		else {
 			commercePaymentMethodGroupRels =
 				_commercePaymentMethodGroupRelService.
-					getCommercePaymentMethodGroupRels(groupId);
+					getCommercePaymentMethodGroupRels(
+						themeDisplay.getScopeGroupId());
 
 			commercePaymentMethodGroupRelsCount =
 				_commercePaymentMethodGroupRelService.
-					getCommercePaymentMethodGroupRelsCount(groupId);
+					getCommercePaymentMethodGroupRelsCount(
+						themeDisplay.getScopeGroupId());
 		}
 
 		if (ListUtil.isNotEmpty(commercePaymentMethodGroupRels)) {

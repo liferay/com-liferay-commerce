@@ -169,7 +169,7 @@ boolean hasManageCommerceSubscriptionEntryPermission = commerceSubscriptionEntry
 					String paymentMethod = LanguageUtil.get(request, commerceOrder.getCommercePaymentMethodKey());
 
 					if (!commerceSubscriptionEntryDisplayContext.isPaymentMethodActive(commerceOrder.getCommercePaymentMethodKey())) {
-						paymentMethod += StringPool.DOUBLE_SPACE + StringPool.OPEN_PARENTHESIS + LanguageUtil.get(request, "inactive") + StringPool.CLOSE_PARENTHESIS;
+						paymentMethod = LanguageUtil.format(request, "x-inactive", paymentMethod);
 					}
 					%>
 
