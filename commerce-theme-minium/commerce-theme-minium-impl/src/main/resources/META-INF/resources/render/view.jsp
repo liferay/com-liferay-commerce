@@ -74,7 +74,7 @@ String galleryId = PortalUtil.generateRandomKey(request, "gallery");
 
 			<h4 class="commerce-subscription-info mt-3 w-100" data-text-cp-instance-subscription-info>
 				<c:if test="<%= cpSku != null %>">
-					<liferay-commerce:subscription-info
+					<commerce-ui:product-subscription-info
 						CPInstanceId="<%= cpSku.getCPInstanceId() %>"
 					/>
 				</c:if>

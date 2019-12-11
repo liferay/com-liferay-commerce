@@ -351,9 +351,8 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceOrderItemsPor
 										<%= HtmlUtil.escape(unitPrice.format(locale)) %>
 									</span>
 									<span class="commerce-subscription-info">
-										<liferay-commerce:subscription-info
-											commerceOrderItemId="<%= curCommerceOrder.isOpen() ? 0 : commerceOrderItem.getCommerceOrderItemId() %>"
-											CPInstanceId="<%= commerceOrderItem.getCPInstanceId() %>"
+										<commerce-ui:order-subscription-info
+											commerceOrderItemId="<%= commerceOrderItem.getCommerceOrderItemId() %>"
 											showDuration="<%= false %>"
 										/>
 									</span>
