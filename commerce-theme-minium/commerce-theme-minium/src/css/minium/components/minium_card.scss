@@ -181,7 +181,9 @@ $card-spacer: 20px;
 		min-height: 33px;
 
 		.price {
-			display: block;
+			align-items: center;
+			display: flex;
+			flex-direction: row-reverse;
 
 			&-label {
 				display: none;
@@ -193,11 +195,11 @@ $card-spacer: 20px;
 					margin-left: 10px;
 				}
 
-				&--inactive {
+				&-inactive {
 					font-size: 1em;
 				}
 
-				&--discount {
+				&-discount {
 					display: none;
 				}
 			}
