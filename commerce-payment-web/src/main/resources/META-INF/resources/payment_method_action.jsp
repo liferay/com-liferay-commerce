@@ -25,9 +25,7 @@ CommercePaymentMethodGroupRel commercePaymentMethodGroupRel = (CommercePaymentMe
 
 String engineKey = commercePaymentMethodGroupRel.getEngineKey();
 
-String modalId = "modal" + engineKey;
-
-boolean isLastRecurringPaymentMethod = commercePaymentMethodGroupRelsDisplayContext.isLastRecurringPaymentMethod(engineKey);
+boolean lastRecurringPaymentMethod = commercePaymentMethodGroupRelsDisplayContext.isLastRecurringPaymentMethod(engineKey);
 %>
 
 <portlet:actionURL name="editCommercePaymentMethodGroupRel" var="setActiveURL">
@@ -59,7 +57,7 @@ boolean isLastRecurringPaymentMethod = commercePaymentMethodGroupRelsDisplayCont
 		/>
 
 		<liferay-ui:icon
-			id='<%= "togglePaymentMethod-" + modalId %>'
+			id='<%= "togglePaymentMethod" + engineKey %>'
 			message='<%= commercePaymentMethodGroupRel.isActive() ? "deactivate" : "activate" %>'
 			url="<%= commercePaymentMethodGroupRel.isActive() ? StringPool.POUND : setActiveURL %>"
 		/>
@@ -79,11 +77,9 @@ boolean isLastRecurringPaymentMethod = commercePaymentMethodGroupRelsDisplayCont
 </liferay-ui:icon-menu>
 
 <c:choose>
-	<c:when test="<%= isLastRecurringPaymentMethod && commercePaymentMethodGroupRel.isActive() %>">
-		<div class="warning-modal" id="<%= modalId %>"></div>
-
+	<c:when test="<%= lastRecurringPaymentMethod && commercePaymentMethodGroupRel.isActive() %>">
 		<aui:script use="aui-base">
-			A.one("#<portlet:namespace />togglePaymentMethod-<%= modalId %>").on(
+			A.one("#<portlet:namespace />togglePaymentMethod<%= engineKey %>").on(
 				'click',
 				function(e) {
 					if (confirm('<liferay-ui:message key="there-might-be-subscriptions-that-depend-on-this-payment-method-if-you-deactivate-it-you-will-have-to-manually-manage-those-subscriptions-and-all-subcription-products-in-the-current-channel-will-be-disabled" />')) {
@@ -95,7 +91,7 @@ boolean isLastRecurringPaymentMethod = commercePaymentMethodGroupRelsDisplayCont
 	</c:when>
 	<c:otherwise>
 		<aui:script use="aui-base">
-			A.one("#<portlet:namespace />togglePaymentMethod-<%= modalId %>").on(
+			A.one("#<portlet:namespace />togglePaymentMethod<%= engineKey %>").on(
 				'click',
 				function() {
 					window.location.replace('<%= setActiveURL %>');

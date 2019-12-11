@@ -331,74 +331,7 @@ public class CommercePaymentMethodGroupRelLocalServiceImpl
 		commercePaymentMethodGroupRel.setActive(active);
 
 		if (!active) {
-			Map<String, CommercePaymentMethod> commercePaymentMethodsMap =
-				_commercePaymentMethodRegistry.getCommercePaymentMethods();
-
-			List<CommercePaymentMethod> recurringCommercePaymentMethods =
-				new ArrayList<>();
-
-			for (CommercePaymentMethod commercePaymentMethod :
-					commercePaymentMethodsMap.values()) {
-
-				if (commercePaymentMethod.isProcessRecurringEnabled()) {
-					recurringCommercePaymentMethods.add(commercePaymentMethod);
-				}
-			}
-
-			if (recurringCommercePaymentMethods.size() == 1) {
-				CommercePaymentMethod lastRecurringCommercePaymentMethod =
-					recurringCommercePaymentMethods.get(0);
-
-				String lastRecurringCommercePaymentMethodKey =
-					lastRecurringCommercePaymentMethod.getKey();
-
-				if (!lastRecurringCommercePaymentMethodKey.equals(
-						commercePaymentMethodGroupRel.getEngineKey())) {
-
-					return commercePaymentMethodGroupRelPersistence.update(
-						commercePaymentMethodGroupRel);
-				}
-
-				SearchContext searchContext = new SearchContext();
-
-				Map<String, Serializable> attributes = new HashMap<>();
-
-				attributes.put(Field.STATUS, WorkflowConstants.STATUS_APPROVED);
-
-				attributes.put(CPField.PUBLISHED, true);
-				attributes.put(CPField.SUBSCRIPTION_ENABLED, true);
-
-				long groupId = commercePaymentMethodGroupRel.getGroupId();
-
-				attributes.put("commerceChannelGroupId", groupId);
-
-				searchContext.setAttributes(attributes);
-
-				searchContext.setCompanyId(
-					commercePaymentMethodGroupRel.getCompanyId());
-
-				CPDataSourceResult cpDataSourceResult =
-					_cpDefinitionHelper.search(
-						groupId, searchContext, new CPQuery(),
-						QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-
-				List<CPCatalogEntry> cpCatalogEntries =
-					cpDataSourceResult.getCPCatalogEntries();
-
-				for (CPCatalogEntry cpCatalogEntry : cpCatalogEntries) {
-					CPDefinition cpDefinition =
-						_cpDefinitionLocalService.fetchCPDefinition(
-							cpCatalogEntry.getCPDefinitionId());
-
-					if (cpDefinition != null) {
-						cpDefinition.setSubscriptionEnabled(false);
-						cpDefinition.setStatus(WorkflowConstants.STATUS_DRAFT);
-
-						_cpDefinitionLocalService.updateCPDefinition(
-							cpDefinition);
-					}
-				}
-			}
+			_deactivateSubscriptionProducts(commercePaymentMethodGroupRel);
 		}
 
 		return commercePaymentMethodGroupRelPersistence.update(
@@ -462,6 +395,76 @@ public class CommercePaymentMethodGroupRelLocalServiceImpl
 
 		if (Validator.isNull(engineKey)) {
 			throw new CommercePaymentMethodGroupRelEngineKeyException();
+		}
+	}
+
+	private void _deactivateSubscriptionProducts(
+			CommercePaymentMethodGroupRel commercePaymentMethodGroupRel)
+		throws PortalException {
+
+		Map<String, CommercePaymentMethod> commercePaymentMethodsMap =
+			_commercePaymentMethodRegistry.getCommercePaymentMethods();
+
+		List<CommercePaymentMethod> recurringCommercePaymentMethods =
+			new ArrayList<>();
+
+		for (CommercePaymentMethod commercePaymentMethod :
+				commercePaymentMethodsMap.values()) {
+
+			if (commercePaymentMethod.isProcessRecurringEnabled()) {
+				recurringCommercePaymentMethods.add(commercePaymentMethod);
+			}
+		}
+
+		if (recurringCommercePaymentMethods.size() == 1) {
+			CommercePaymentMethod lastRecurringCommercePaymentMethod =
+				recurringCommercePaymentMethods.get(0);
+
+			String lastRecurringCommercePaymentMethodKey =
+				lastRecurringCommercePaymentMethod.getKey();
+
+			if (!lastRecurringCommercePaymentMethodKey.equals(
+					commercePaymentMethodGroupRel.getEngineKey())) {
+
+				return;
+			}
+
+			SearchContext searchContext = new SearchContext();
+
+			Map<String, Serializable> attributes = new HashMap<>();
+
+			attributes.put(CPField.PUBLISHED, true);
+			attributes.put(CPField.SUBSCRIPTION_ENABLED, true);
+			attributes.put(Field.STATUS, WorkflowConstants.STATUS_APPROVED);
+
+			long groupId = commercePaymentMethodGroupRel.getGroupId();
+
+			attributes.put("commerceChannelGroupId", groupId);
+
+			searchContext.setAttributes(attributes);
+
+			searchContext.setCompanyId(
+				commercePaymentMethodGroupRel.getCompanyId());
+
+			CPDataSourceResult cpDataSourceResult = _cpDefinitionHelper.search(
+				groupId, searchContext, new CPQuery(), QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS);
+
+			List<CPCatalogEntry> cpCatalogEntries =
+				cpDataSourceResult.getCPCatalogEntries();
+
+			for (CPCatalogEntry cpCatalogEntry : cpCatalogEntries) {
+				CPDefinition cpDefinition =
+					_cpDefinitionLocalService.fetchCPDefinition(
+						cpCatalogEntry.getCPDefinitionId());
+
+				if (cpDefinition != null) {
+					cpDefinition.setSubscriptionEnabled(false);
+					cpDefinition.setStatus(WorkflowConstants.STATUS_DRAFT);
+
+					_cpDefinitionLocalService.updateCPDefinition(cpDefinition);
+				}
+			}
 		}
 	}
 
