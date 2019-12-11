@@ -83,18 +83,6 @@ boolean isLastRecurringPaymentMethod = commercePaymentMethodGroupRelsDisplayCont
 
 <c:choose>
 	<c:when test="<%= ((subscriptionEntryCount > 0) || isLastRecurringPaymentMethod) && commercePaymentMethodGroupRel.isActive() %>">
-		<style>
-			.warning-modal .modal-header {
-				background-color: #feefef;
-				border-color: #f48989;
-				color: #da1414;
-			}
-
-			.warning-modal p {
-				font-size: 16px;
-			}
-		</style>
-
 		<div class="warning-modal" id="<%= modalId %>"></div>
 
 		<%
@@ -110,54 +98,9 @@ boolean isLastRecurringPaymentMethod = commercePaymentMethodGroupRelsDisplayCont
 		%>
 
 		<aui:script use="aui-base">
-			A.use(
-				'aui-modal',
-				function(A) {
-					var <%= modalId %> = new A.Modal(
-						{
-							bodyContent: '<p><liferay-ui:message key="<%= deactivationWarning %>" /><p>',
-							centered: true,
-							draggable: false,
-							destroyOnHide: false,
-							headerContent: '<h2><liferay-ui:message key="are-you-sure" /></h2>',
-							modal: true,
-							boundingBox: '#<%= modalId %>',
-							width: 450
-						}
-					);
-
-					<%= modalId %>.addToolbar(
-						[
-							{
-								label: '<liferay-ui:message key="cancel" />',
-								on: {
-									click: function() {
-										<%= modalId %>.hide();
-									}
-								}
-							},
-							{
-								cssClass: 'btn-danger',
-								label: '<liferay-ui:message key="proceed" />',
-								on: {
-									click: function() {
-										window.location.replace('<%= setActiveURL %>');
-									}
-								}
-							}
-						]
-					);
-
-					A.one("#<portlet:namespace />togglePaymentMethod-<%= modalId %>").on(
-						'click',
-						function(e) {
-							e.preventDefault();
-							<%= modalId %>.render();
-							<%= modalId %>.show();
-						}
-					);
-				}
-			);
+			if (confirm('<%= deactivationWarning %>')) {
+				window.location.replace('<%= setActiveURL %>');
+			}
 		</aui:script>
 	</c:when>
 	<c:otherwise>
