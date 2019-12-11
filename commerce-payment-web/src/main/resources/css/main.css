@@ -1,0 +1,9 @@
+.warning-modal .modal-header {
+    background-color: #feefef;
+    border-color: #f48989;
+    color: #da1414;
+}
+
+.warning-modal p {
+    font-size: 16px;
+}
