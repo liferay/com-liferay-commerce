@@ -294,15 +294,15 @@ public class TableTag extends IncludeTag {
 	private void _setTableContext() {
 		ClayTable clayTable = _clayTableRegistry.getClayTable(_tableName);
 
-		_clayTableContext = _clayTableSerializer.serialize(clayTable, PortalUtil.getLocale(request));
+		_clayTableContext = _clayTableSerializer.serialize(
+			clayTable, PortalUtil.getLocale(request));
 
 		_id = clayTable.getId() + "CommerceTable";
 	}
 
 	private static final String _PAGE = "/table/page.jsp";
 
-	private static final Log _log = LogFactoryUtil.getLog(
-		TableTag.class);
+	private static final Log _log = LogFactoryUtil.getLog(TableTag.class);
 
 	private Map<String, Object> _clayTableContext;
 	private ClayTableDataJSONBuilder _clayTableDataJSONBuilder;
