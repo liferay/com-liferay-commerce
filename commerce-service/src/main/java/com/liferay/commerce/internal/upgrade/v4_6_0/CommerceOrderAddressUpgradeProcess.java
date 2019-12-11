@@ -115,25 +115,25 @@ public class CommerceOrderAddressUpgradeProcess
 	private void _addOrderAddressColumns() throws Exception {
 		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
-			"billingName", "STRING");
+			"billingName", "VARCHAR(75)");
 		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
 			"billingDescription", "STRING");
 		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
-			"billingStreet1", "STRING");
+			"billingStreet1", "VARCHAR(75)");
 		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
-			"billingStreet2", "STRING");
+			"billingStreet2", "VARCHAR(75)");
 		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
-			"billingStreet3", "STRING");
+			"billingStreet3", "VARCHAR(75)");
 		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
-			"billingCity", "STRING");
+			"billingCity", "VARCHAR(75)");
 		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
-			"billingZip", "STRING");
+			"billingZip", "VARCHAR(75)");
 		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
 			"billingRegionId", "LONG");
@@ -142,28 +142,28 @@ public class CommerceOrderAddressUpgradeProcess
 			"billingCountryId", "LONG");
 		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
-			"billingPhoneNumber", "STRING");
+			"billingPhoneNumber", "VARCHAR(75)");
 		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
-			"shippingName", "STRING");
+			"shippingName", "VARCHAR(75)");
 		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
 			"shippingDescription", "STRING");
 		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
-			"shippingStreet1", "STRING");
+			"shippingStreet1", "VARCHAR(75)");
 		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
-			"shippingStreet2", "STRING");
+			"shippingStreet2", "VARCHAR(75)");
 		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
-			"shippingStreet3", "STRING");
+			"shippingStreet3", "VARCHAR(75)");
 		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
-			"shippingCity", "STRING");
+			"shippingCity", "VARCHAR(75)");
 		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
-			"shippingZip", "STRING");
+			"shippingZip", "VARCHAR(75)");
 		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
 			"shippingRegionId", "LONG");
@@ -172,32 +172,32 @@ public class CommerceOrderAddressUpgradeProcess
 			"shippingCountryId", "LONG");
 		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
-			"shippingPhoneNumber", "STRING");
+			"shippingPhoneNumber", "VARCHAR(75)");
 	}
 
 	private void _addShipmentAddressColumns() throws Exception {
 		addColumn(
 			CommerceShipmentModelImpl.class,
-			CommerceShipmentModelImpl.TABLE_NAME, "shippingName", "STRING");
+			CommerceShipmentModelImpl.TABLE_NAME, "shippingName", "VARCHAR(75)");
 		addColumn(
 			CommerceShipmentModelImpl.class,
 			CommerceShipmentModelImpl.TABLE_NAME, "shippingDescription",
 			"STRING");
 		addColumn(
 			CommerceShipmentModelImpl.class,
-			CommerceShipmentModelImpl.TABLE_NAME, "shippingStreet1", "STRING");
+			CommerceShipmentModelImpl.TABLE_NAME, "shippingStreet1", "VARCHAR(75)");
 		addColumn(
 			CommerceShipmentModelImpl.class,
-			CommerceShipmentModelImpl.TABLE_NAME, "shippingStreet2", "STRING");
+			CommerceShipmentModelImpl.TABLE_NAME, "shippingStreet2", "VARCHAR(75)");
 		addColumn(
 			CommerceShipmentModelImpl.class,
-			CommerceShipmentModelImpl.TABLE_NAME, "shippingStreet3", "STRING");
+			CommerceShipmentModelImpl.TABLE_NAME, "shippingStreet3", "VARCHAR(75)");
 		addColumn(
 			CommerceShipmentModelImpl.class,
-			CommerceShipmentModelImpl.TABLE_NAME, "shippingCity", "STRING");
+			CommerceShipmentModelImpl.TABLE_NAME, "shippingCity", "VARCHAR(75)");
 		addColumn(
 			CommerceShipmentModelImpl.class,
-			CommerceShipmentModelImpl.TABLE_NAME, "shippingZip", "STRING");
+			CommerceShipmentModelImpl.TABLE_NAME, "shippingZip", "VARCHAR(75)");
 		addColumn(
 			CommerceShipmentModelImpl.class,
 			CommerceShipmentModelImpl.TABLE_NAME, "shippingRegionId", "LONG");
@@ -207,7 +207,7 @@ public class CommerceOrderAddressUpgradeProcess
 		addColumn(
 			CommerceShipmentModelImpl.class,
 			CommerceShipmentModelImpl.TABLE_NAME, "shippingPhoneNumber",
-			"STRING");
+			"VARCHAR(75)");
 	}
 
 	private void _updateAddressValues(ResultSet rs, String updateSql)
