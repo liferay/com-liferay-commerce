@@ -15,9 +15,6 @@
 package com.liferay.commerce.payment.web.internal.display.context;
 
 import com.liferay.commerce.constants.CommerceActionKeys;
-import com.liferay.commerce.model.CommerceOrder;
-import com.liferay.commerce.model.CommerceOrderItem;
-import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.payment.constants.CommercePaymentScreenNavigationConstants;
 import com.liferay.commerce.payment.method.CommercePaymentMethod;
 import com.liferay.commerce.payment.method.CommercePaymentMethodRegistry;
@@ -166,18 +163,6 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 		return portletURL;
 	}
 
-	public int getRecurringCPDefinitionsCount(
-			CommercePaymentMethodGroupRel commercePaymentMethodGroupRel)
-		throws PortalException {
-
-		if (commercePaymentMethodGroupRel == null) {
-			return 0;
-		}
-
-		return _cpDefinitionLocalService.getCPDefinitionsCount(
-			commercePaymentMethodGroupRel.getGroupId(), true);
-	}
-
 	public SearchContainer<CommercePaymentMethodGroupRel> getSearchContainer()
 		throws PortalException {
 
@@ -255,41 +240,6 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 			_renderRequest, "screenNavigationCategoryKey",
 			CommercePaymentScreenNavigationConstants.
 				CATEGORY_KEY_COMMERCE_PAYMENT_METHOD_DETAILS);
-	}
-
-	public int getSubscriptionEntryCount(String engineKey)
-		throws PortalException {
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)_renderRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		int activeSubscriptions = 0;
-
-		long groupId =
-			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
-				themeDisplay.getSiteGroupId());
-
-		List<CommerceOrder> commerceOrders =
-			_commerceOrderLocalService.getCommerceOrders(groupId, engineKey);
-
-		for (CommerceOrder commerceOrder : commerceOrders) {
-			for (CommerceOrderItem commerceOrderItem :
-					commerceOrder.getCommerceOrderItems()) {
-
-				if (commerceOrderItem.isSubscription()) {
-					CommerceSubscriptionEntry commerceSubscriptionEntry =
-						_commerceSubscriptionEntryLocalService.
-							fetchCommerceSubscriptionEntryByCommerceOrderItemId(
-								commerceOrderItem.getCommerceOrderItemId());
-
-					if (commerceSubscriptionEntry != null) {
-						activeSubscriptions++;
-					}
-				}
-			}
-		}
-
-		return activeSubscriptions;
 	}
 
 	public boolean hasManageCommercePaymentMethodGroupRelsPermission() {
