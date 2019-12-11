@@ -167,10 +167,6 @@ public class CommerceShipmentClayTable
 
 		List<Shipment> shipments = new ArrayList<>();
 
-		RenderResponse renderResponse =
-			(RenderResponse)httpServletRequest.getAttribute(
-				JavaConstants.JAVAX_PORTLET_RESPONSE);
-
 		long commerceOrderId = ParamUtil.getLong(
 			httpServletRequest, "commerceOrderId");
 
@@ -191,7 +187,6 @@ public class CommerceShipmentClayTable
 					_getShipmentPanelURL(
 						commerceShipment.getCommerceShipmentId(),
 						httpServletRequest),
-					renderResponse.getNamespace() + "sidePanel",
 					_getDescriptiveAddress(commerceShipment),
 					commerceShipment.getCreateDate(),
 					LanguageUtil.get(

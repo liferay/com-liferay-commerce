@@ -193,10 +193,6 @@ public class CommerceOrderItemClayTable
 			companyId, _portal.getScopeGroupId(controlPanelPlid),
 			_portal.getUserId(httpServletRequest), 0, 0);
 
-		RenderResponse renderResponse =
-			(RenderResponse)httpServletRequest.getAttribute(
-				JavaConstants.JAVAX_PORTLET_RESPONSE);
-
 		BaseModelSearchResult<CommerceOrderItem> baseModelSearchResult =
 			_getBaseModelSearchResult(httpServletRequest, filter, pagination);
 
@@ -238,7 +234,6 @@ public class CommerceOrderItemClayTable
 					_getOrderItemPanelURL(
 						commerceOrderItem.getCommerceOrderItemId(),
 						httpServletRequest),
-					renderResponse.getNamespace() + "sidePanel",
 					commerceOrderItem.getName(locale), price,
 					_getSubscriptionDuration(
 						commerceOrderItem, locale, httpServletRequest),
@@ -281,18 +276,18 @@ public class CommerceOrderItemClayTable
 		Sort sort = SortFactoryUtil.getSort(
 			CommerceOrderItem.class, _orderByCol, _orderByType);
 
-		OrderItemFilterImpl orderItemFilter = (OrderItemFilterImpl)filter;
+		OrderItemFilterImpl orderItemFilterImpl = (OrderItemFilterImpl)filter;
 
 		if (orderItemFilter.isAdvancedSearch()) {
 			baseModelSearchResult = _commerceOrderItemService.search(
-				commerceOrder.getCommerceOrderId(), orderItemFilter.getSku(),
-				orderItemFilter.getName(), orderItemFilter.isAndOperator(),
-				start, end, sort);
+				commerceOrder.getCommerceOrderId(),
+				orderItemFilterImpl.getSku(), orderItemFilterImpl.getName(),
+				orderItemFilterImpl.isAndOperator(), start, end, sort);
 		}
 		else {
 			baseModelSearchResult = _commerceOrderItemService.search(
 				commerceOrder.getCommerceOrderId(),
-				orderItemFilter.getKeywords(), start, end, sort);
+				orderItemFilterImpl.getKeywords(), start, end, sort);
 		}
 
 		return baseModelSearchResult;
@@ -372,7 +367,6 @@ public class CommerceOrderItemClayTable
 			CommerceOrder commerceOrder = commerceOrderItem.getCommerceOrder();
 
 			if (commerceOrder.isOpen()) {
-				String period = StringPool.BLANK;
 
 				CPInstance cpInstance = commerceOrderItem.getCPInstance();
 
@@ -383,6 +377,8 @@ public class CommerceOrderItemClayTable
 					return subscriptionDuration;
 				}
 
+				String period = StringPool.BLANK;
+				
 				CPSubscriptionType cpSubscriptionType =
 					_cpSubscriptionTypeRegistry.getCPSubscriptionType(
 						cpSubscriptionInfo.getSubscriptionType());

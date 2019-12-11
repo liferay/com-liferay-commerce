@@ -22,13 +22,11 @@ import java.util.Date;
 public class Shipment {
 
 	public Shipment(
-		long shipmentId, String panelUrl, String panelTarget, String address,
-		Date createDate, String statusLabel, String statusStyle,
-		String tracking) {
+		long shipmentId, String panelUrl, String address, Date createDate,
+		String statusLabel, String statusStyle, String tracking) {
 
 		_shipmentId = shipmentId;
 		_panelUrl = panelUrl;
-		_panelTarget = panelTarget;
 		_address = address;
 		_createDate = createDate;
 		_statusLabel = statusLabel;
@@ -42,10 +40,6 @@ public class Shipment {
 
 	public Date getCreateDate() {
 		return _createDate;
-	}
-
-	public String getPanelTarget() {
-		return _panelTarget;
 	}
 
 	public String getPanelUrl() {
@@ -70,7 +64,6 @@ public class Shipment {
 
 	private final String _address;
 	private final Date _createDate;
-	private final String _panelTarget;
 	private final String _panelUrl;
 	private final long _shipmentId;
 	private final String _statusLabel;

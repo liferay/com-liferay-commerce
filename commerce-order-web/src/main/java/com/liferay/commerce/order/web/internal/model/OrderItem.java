@@ -21,15 +21,14 @@ public class OrderItem {
 
 	public OrderItem(
 		long orderItemId, long orderId, String sku, String panelUrl,
-		String panelTarget, String name, String price,
-		String subscriptionDuration, String subscriptionPeriod, String discount,
-		int quantity, String total) {
+		String name, String price, String subscriptionDuration,
+		String subscriptionPeriod, String discount, int quantity,
+		String total) {
 
 		_orderItemId = orderItemId;
 		_orderId = orderId;
 		_sku = sku;
 		_panelUrl = panelUrl;
-		_panelTarget = panelTarget;
 		_name = name;
 		_price = price;
 		_subscriptionDuration = subscriptionDuration;
@@ -53,10 +52,6 @@ public class OrderItem {
 
 	public long getOrderItemId() {
 		return _orderItemId;
-	}
-
-	public String getPanelTarget() {
-		return _panelTarget;
 	}
 
 	public String getPanelUrl() {
@@ -91,7 +86,6 @@ public class OrderItem {
 	private final String _name;
 	private final long _orderId;
 	private final long _orderItemId;
-	private final String _panelTarget;
 	private final String _panelUrl;
 	private final String _price;
 	private final int _quantity;
