@@ -54,6 +54,7 @@ page import="com.liferay.commerce.order.web.internal.display.context.CommerceOrd
 page import="com.liferay.commerce.order.web.internal.display.context.CommerceOrderListDisplayContext" %><%@
 page import="com.liferay.commerce.order.web.internal.display.context.CommerceOrderNoteEditDisplayContext" %><%@
 page import="com.liferay.commerce.order.web.internal.display.context.CommerceOrderSettingsDisplayContext" %><%@
+page import="com.liferay.commerce.order.web.internal.frontend.CommerceOrderItemClayTable" %><%@
 page import="com.liferay.commerce.order.web.internal.frontend.CommerceShipmentClayTable" %><%@
 page import="com.liferay.commerce.order.web.internal.frontend.CommerceShipmentItemClayTable" %><%@
 page import="com.liferay.commerce.order.web.internal.search.CommerceOrderDisplayTerms" %><%@
