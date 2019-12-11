@@ -21,6 +21,7 @@ create index IX_1F4B9C67 on CPDefinition (CProductId, status);
 create index IX_217AF702 on CPDefinition (companyId);
 create index IX_A465D100 on CPDefinition (displayDate, status);
 create index IX_419350EA on CPDefinition (groupId, status);
+create index IX_99C4ED10 on CPDefinition (groupId, subscriptionEnabled);
 create index IX_8EA585DA on CPDefinition (uuid_[$COLUMN_LENGTH:75$], companyId);
 create unique index IX_BA9BADC on CPDefinition (uuid_[$COLUMN_LENGTH:75$], groupId);
 
