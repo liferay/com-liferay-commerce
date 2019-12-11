@@ -83,12 +83,12 @@ String modalId = "modal" + commerceShipment.getCommerceShipmentId();
 				var <%= modalId %> = new A.Modal(
 					{
 						bodyContent: '<p><liferay-ui:message key="you-are-deleting-an-item-from-a-shipment-that-has-been-marked-as-shipped" /></p>',
+						boundingBox: '#<%= modalId %>',
 						centered: true,
-						draggable: false,
 						destroyOnHide: false,
+						draggable: false,
 						headerContent: '<h2><liferay-ui:message key="do-you-wish-to-restock-this-product" /></h2>',
 						modal: true,
-						boundingBox: '#<%= modalId %>',
 						width: 450
 					}
 				);
