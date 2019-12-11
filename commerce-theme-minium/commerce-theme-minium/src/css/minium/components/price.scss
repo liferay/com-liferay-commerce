@@ -1,5 +1,5 @@
 .price {
-  align-items: normal;
+  align-items: center;
   display: grid;
   grid-template-columns: 140px 1fr;
 
@@ -12,34 +12,32 @@
   }
 
   &-value {
+    font-size: 20px;
     font-weight: 500;
 
     &:first-letter {
-      margin-right: 2px;
+      margin-left: 4px;
+      margin-right: 4px;
     }
 
     &:last-child {
       margin-right: 0;
     }
 
-    &-big {
-      font-size: 18px;
-    }
-
     &-discount {
       color: $color-mood-bad;
     }
 
+    &-big,
     &-final,
     &-promo {
       color: $color-mood-bad;
-      font-size: 1.05em;
       font-weight: 600;
     }
 
     &-inactive {
-      color: $color-fg-alt;
-      font-size: .8em;
+      color: $color-fg-alt !important;
+      font-size: 14px;
       font-weight: normal;
       text-decoration: line-through;
     }

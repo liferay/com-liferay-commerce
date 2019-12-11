@@ -22,8 +22,8 @@
   .pagination {
     justify-content: center;
 
-    li {
-      a {
+    .page-item {
+      .page-link {
         background: transparent;
         border: 0;
         color: $stroke;
@@ -41,7 +41,7 @@
         opacity: 0.5;
       }
 
-      &.active a {
+      &.active .page-link {
         border-bottom: 2px solid currentColor;
       }
 
