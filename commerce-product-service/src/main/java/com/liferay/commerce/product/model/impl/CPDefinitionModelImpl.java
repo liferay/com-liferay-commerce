@@ -197,9 +197,11 @@ public class CPDefinitionModelImpl
 
 	public static final long STATUS_COLUMN_BITMASK = 32L;
 
-	public static final long UUID_COLUMN_BITMASK = 64L;
+	public static final long SUBSCRIPTIONENABLED_COLUMN_BITMASK = 64L;
 
-	public static final long CREATEDATE_COLUMN_BITMASK = 128L;
+	public static final long UUID_COLUMN_BITMASK = 128L;
+
+	public static final long CREATEDATE_COLUMN_BITMASK = 256L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -2264,7 +2266,19 @@ public class CPDefinitionModelImpl
 
 	@Override
 	public void setSubscriptionEnabled(boolean subscriptionEnabled) {
+		_columnBitmask |= SUBSCRIPTIONENABLED_COLUMN_BITMASK;
+
+		if (!_setOriginalSubscriptionEnabled) {
+			_setOriginalSubscriptionEnabled = true;
+
+			_originalSubscriptionEnabled = _subscriptionEnabled;
+		}
+
 		_subscriptionEnabled = subscriptionEnabled;
+	}
+
+	public boolean getOriginalSubscriptionEnabled() {
+		return _originalSubscriptionEnabled;
 	}
 
 	@JSON
@@ -2708,6 +2722,11 @@ public class CPDefinitionModelImpl
 		cpDefinitionModelImpl._originalDisplayDate =
 			cpDefinitionModelImpl._displayDate;
 
+		cpDefinitionModelImpl._originalSubscriptionEnabled =
+			cpDefinitionModelImpl._subscriptionEnabled;
+
+		cpDefinitionModelImpl._setOriginalSubscriptionEnabled = false;
+
 		cpDefinitionModelImpl._originalStatus = cpDefinitionModelImpl._status;
 
 		cpDefinitionModelImpl._setOriginalStatus = false;
@@ -3014,6 +3033,8 @@ public class CPDefinitionModelImpl
 	private Date _expirationDate;
 	private Date _lastPublishDate;
 	private boolean _subscriptionEnabled;
+	private boolean _originalSubscriptionEnabled;
+	private boolean _setOriginalSubscriptionEnabled;
 	private int _subscriptionLength;
 	private String _subscriptionType;
 	private String _subscriptionTypeSettings;

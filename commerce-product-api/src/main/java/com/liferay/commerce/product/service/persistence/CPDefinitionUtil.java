@@ -1064,6 +1064,197 @@ public class CPDefinitionUtil {
 	}
 
 	/**
+	 * Returns all the cp definitions where groupId = &#63; and subscriptionEnabled = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param subscriptionEnabled the subscription enabled
+	 * @return the matching cp definitions
+	 */
+	public static List<CPDefinition> findByG_SE(
+		long groupId, boolean subscriptionEnabled) {
+
+		return getPersistence().findByG_SE(groupId, subscriptionEnabled);
+	}
+
+	/**
+	 * Returns a range of all the cp definitions where groupId = &#63; and subscriptionEnabled = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CPDefinitionModelImpl</code>.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param subscriptionEnabled the subscription enabled
+	 * @param start the lower bound of the range of cp definitions
+	 * @param end the upper bound of the range of cp definitions (not inclusive)
+	 * @return the range of matching cp definitions
+	 */
+	public static List<CPDefinition> findByG_SE(
+		long groupId, boolean subscriptionEnabled, int start, int end) {
+
+		return getPersistence().findByG_SE(
+			groupId, subscriptionEnabled, start, end);
+	}
+
+	/**
+	 * Returns an ordered range of all the cp definitions where groupId = &#63; and subscriptionEnabled = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CPDefinitionModelImpl</code>.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param subscriptionEnabled the subscription enabled
+	 * @param start the lower bound of the range of cp definitions
+	 * @param end the upper bound of the range of cp definitions (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching cp definitions
+	 */
+	public static List<CPDefinition> findByG_SE(
+		long groupId, boolean subscriptionEnabled, int start, int end,
+		OrderByComparator<CPDefinition> orderByComparator) {
+
+		return getPersistence().findByG_SE(
+			groupId, subscriptionEnabled, start, end, orderByComparator);
+	}
+
+	/**
+	 * Returns an ordered range of all the cp definitions where groupId = &#63; and subscriptionEnabled = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CPDefinitionModelImpl</code>.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param subscriptionEnabled the subscription enabled
+	 * @param start the lower bound of the range of cp definitions
+	 * @param end the upper bound of the range of cp definitions (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching cp definitions
+	 */
+	public static List<CPDefinition> findByG_SE(
+		long groupId, boolean subscriptionEnabled, int start, int end,
+		OrderByComparator<CPDefinition> orderByComparator,
+		boolean useFinderCache) {
+
+		return getPersistence().findByG_SE(
+			groupId, subscriptionEnabled, start, end, orderByComparator,
+			useFinderCache);
+	}
+
+	/**
+	 * Returns the first cp definition in the ordered set where groupId = &#63; and subscriptionEnabled = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param subscriptionEnabled the subscription enabled
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching cp definition
+	 * @throws NoSuchCPDefinitionException if a matching cp definition could not be found
+	 */
+	public static CPDefinition findByG_SE_First(
+			long groupId, boolean subscriptionEnabled,
+			OrderByComparator<CPDefinition> orderByComparator)
+		throws com.liferay.commerce.product.exception.
+			NoSuchCPDefinitionException {
+
+		return getPersistence().findByG_SE_First(
+			groupId, subscriptionEnabled, orderByComparator);
+	}
+
+	/**
+	 * Returns the first cp definition in the ordered set where groupId = &#63; and subscriptionEnabled = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param subscriptionEnabled the subscription enabled
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching cp definition, or <code>null</code> if a matching cp definition could not be found
+	 */
+	public static CPDefinition fetchByG_SE_First(
+		long groupId, boolean subscriptionEnabled,
+		OrderByComparator<CPDefinition> orderByComparator) {
+
+		return getPersistence().fetchByG_SE_First(
+			groupId, subscriptionEnabled, orderByComparator);
+	}
+
+	/**
+	 * Returns the last cp definition in the ordered set where groupId = &#63; and subscriptionEnabled = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param subscriptionEnabled the subscription enabled
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching cp definition
+	 * @throws NoSuchCPDefinitionException if a matching cp definition could not be found
+	 */
+	public static CPDefinition findByG_SE_Last(
+			long groupId, boolean subscriptionEnabled,
+			OrderByComparator<CPDefinition> orderByComparator)
+		throws com.liferay.commerce.product.exception.
+			NoSuchCPDefinitionException {
+
+		return getPersistence().findByG_SE_Last(
+			groupId, subscriptionEnabled, orderByComparator);
+	}
+
+	/**
+	 * Returns the last cp definition in the ordered set where groupId = &#63; and subscriptionEnabled = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param subscriptionEnabled the subscription enabled
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching cp definition, or <code>null</code> if a matching cp definition could not be found
+	 */
+	public static CPDefinition fetchByG_SE_Last(
+		long groupId, boolean subscriptionEnabled,
+		OrderByComparator<CPDefinition> orderByComparator) {
+
+		return getPersistence().fetchByG_SE_Last(
+			groupId, subscriptionEnabled, orderByComparator);
+	}
+
+	/**
+	 * Returns the cp definitions before and after the current cp definition in the ordered set where groupId = &#63; and subscriptionEnabled = &#63;.
+	 *
+	 * @param CPDefinitionId the primary key of the current cp definition
+	 * @param groupId the group ID
+	 * @param subscriptionEnabled the subscription enabled
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next cp definition
+	 * @throws NoSuchCPDefinitionException if a cp definition with the primary key could not be found
+	 */
+	public static CPDefinition[] findByG_SE_PrevAndNext(
+			long CPDefinitionId, long groupId, boolean subscriptionEnabled,
+			OrderByComparator<CPDefinition> orderByComparator)
+		throws com.liferay.commerce.product.exception.
+			NoSuchCPDefinitionException {
+
+		return getPersistence().findByG_SE_PrevAndNext(
+			CPDefinitionId, groupId, subscriptionEnabled, orderByComparator);
+	}
+
+	/**
+	 * Removes all the cp definitions where groupId = &#63; and subscriptionEnabled = &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 * @param subscriptionEnabled the subscription enabled
+	 */
+	public static void removeByG_SE(long groupId, boolean subscriptionEnabled) {
+		getPersistence().removeByG_SE(groupId, subscriptionEnabled);
+	}
+
+	/**
+	 * Returns the number of cp definitions where groupId = &#63; and subscriptionEnabled = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param subscriptionEnabled the subscription enabled
+	 * @return the number of matching cp definitions
+	 */
+	public static int countByG_SE(long groupId, boolean subscriptionEnabled) {
+		return getPersistence().countByG_SE(groupId, subscriptionEnabled);
+	}
+
+	/**
 	 * Returns all the cp definitions where groupId = &#63; and status = &#63;.
 	 *
 	 * @param groupId the group ID

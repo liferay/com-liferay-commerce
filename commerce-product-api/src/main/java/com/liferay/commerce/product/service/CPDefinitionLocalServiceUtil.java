@@ -411,6 +411,13 @@ public class CPDefinitionLocalServiceUtil {
 
 	public static java.util.List
 		<com.liferay.commerce.product.model.CPDefinition> getCPDefinitions(
+			long groupId, boolean subscriptionEnabled) {
+
+		return getService().getCPDefinitions(groupId, subscriptionEnabled);
+	}
+
+	public static java.util.List
+		<com.liferay.commerce.product.model.CPDefinition> getCPDefinitions(
 			long groupId, int status, int start, int end) {
 
 		return getService().getCPDefinitions(groupId, status, start, end);
@@ -483,6 +490,12 @@ public class CPDefinitionLocalServiceUtil {
 	 */
 	public static int getCPDefinitionsCount() {
 		return getService().getCPDefinitionsCount();
+	}
+
+	public static int getCPDefinitionsCount(
+		long groupId, boolean subscriptionEnabled) {
+
+		return getService().getCPDefinitionsCount(groupId, subscriptionEnabled);
 	}
 
 	public static int getCPDefinitionsCount(long groupId, int status) {

@@ -442,6 +442,14 @@ public class CPDefinitionLocalServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.commerce.product.model.CPDefinition>
+		getCPDefinitions(long groupId, boolean subscriptionEnabled) {
+
+		return _cpDefinitionLocalService.getCPDefinitions(
+			groupId, subscriptionEnabled);
+	}
+
+	@Override
+	public java.util.List<com.liferay.commerce.product.model.CPDefinition>
 		getCPDefinitions(long groupId, int status, int start, int end) {
 
 		return _cpDefinitionLocalService.getCPDefinitions(
@@ -519,6 +527,14 @@ public class CPDefinitionLocalServiceWrapper
 	@Override
 	public int getCPDefinitionsCount() {
 		return _cpDefinitionLocalService.getCPDefinitionsCount();
+	}
+
+	@Override
+	public int getCPDefinitionsCount(
+		long groupId, boolean subscriptionEnabled) {
+
+		return _cpDefinitionLocalService.getCPDefinitionsCount(
+			groupId, subscriptionEnabled);
 	}
 
 	@Override
