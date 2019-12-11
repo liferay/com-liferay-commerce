@@ -19,12 +19,8 @@ import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.impl.CommerceOrderModelImpl;
 import com.liferay.commerce.model.impl.CommerceShipmentModelImpl;
 import com.liferay.petra.string.StringBundler;
-import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.jdbc.AutoBatchPreparedStatementUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.service.ClassNameLocalService;
-import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -178,23 +174,28 @@ public class CommerceOrderAddressUpgradeProcess
 	private void _addShipmentAddressColumns() throws Exception {
 		addColumn(
 			CommerceShipmentModelImpl.class,
-			CommerceShipmentModelImpl.TABLE_NAME, "shippingName", "VARCHAR(75)");
+			CommerceShipmentModelImpl.TABLE_NAME, "shippingName",
+			"VARCHAR(75)");
 		addColumn(
 			CommerceShipmentModelImpl.class,
 			CommerceShipmentModelImpl.TABLE_NAME, "shippingDescription",
 			"STRING");
 		addColumn(
 			CommerceShipmentModelImpl.class,
-			CommerceShipmentModelImpl.TABLE_NAME, "shippingStreet1", "VARCHAR(75)");
+			CommerceShipmentModelImpl.TABLE_NAME, "shippingStreet1",
+			"VARCHAR(75)");
 		addColumn(
 			CommerceShipmentModelImpl.class,
-			CommerceShipmentModelImpl.TABLE_NAME, "shippingStreet2", "VARCHAR(75)");
+			CommerceShipmentModelImpl.TABLE_NAME, "shippingStreet2",
+			"VARCHAR(75)");
 		addColumn(
 			CommerceShipmentModelImpl.class,
-			CommerceShipmentModelImpl.TABLE_NAME, "shippingStreet3", "VARCHAR(75)");
+			CommerceShipmentModelImpl.TABLE_NAME, "shippingStreet3",
+			"VARCHAR(75)");
 		addColumn(
 			CommerceShipmentModelImpl.class,
-			CommerceShipmentModelImpl.TABLE_NAME, "shippingCity", "VARCHAR(75)");
+			CommerceShipmentModelImpl.TABLE_NAME, "shippingCity",
+			"VARCHAR(75)");
 		addColumn(
 			CommerceShipmentModelImpl.class,
 			CommerceShipmentModelImpl.TABLE_NAME, "shippingZip", "VARCHAR(75)");
@@ -240,9 +241,6 @@ public class CommerceOrderAddressUpgradeProcess
 
 		rs.first();
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		CommerceOrderAddressUpgradeProcess.class);
 
 	private final ClassNameLocalService _classNameLocalService;
 
