@@ -1,32 +1,48 @@
 .price {
-	align-items: normal;
+	align-items: center;
 	display: grid;
 	grid-template-columns: 140px 1fr;
 
-	&__label {
-		font-size: .8em;
+	&-label {
+		font-size: 18px;
 		font-variant: small-caps;
 		font-weight: 500;
 		margin-bottom: 10px;
 		text-transform: lowercase;
 	}
 
-	&__value {
+	&-value {
+		font-size: 20px;
 		font-weight: 500;
 
 		&:first-letter {
-			margin-right: 2px;
+			margin-left: 4px;
+			margin-right: 4px;
 		}
 
-		&--big {
-			font-size: 18px;
+		&:last-child {
+			margin-right: 0;
 		}
 
-		&--discount {
+		&-discount {
 			color: $color-mood-bad;
 		}
 
-		&--percentages {
+		&-big,
+		&-final,
+		&-promo {
+			color: $color-mood-bad;
+			font-weight: 600;
+		}
+
+		&-inactive {
+			color: $color-fg-alt !important;
+			font-size: 14px;
+			font-weight: normal;
+			text-decoration: line-through;
+		}
+
+		&-percentages {
 			&::after {
 				color: $color-fg;
 				content: ' | ';
@@ -35,20 +51,6 @@
 			&:last-child::after {
 				content: '';
 			}
-		}
-
-		&--final-price,
-		&--promo-price {
-			color: $color-mood-bad;
-			font-size: 1.05em;
-			font-weight: 600;
-		}
-
-		&--inactive {
-			color: $color-fg-alt;
-			font-size: .8em;
-			font-weight: normal;
-			text-decoration: line-through;
 		}
 	}
 }
