@@ -27,9 +27,6 @@ String engineKey = commercePaymentMethodGroupRel.getEngineKey();
 
 String modalId = "modal" + engineKey;
 
-int subscriptionEntryCount = commercePaymentMethodGroupRelsDisplayContext.getSubscriptionEntryCount(engineKey);
-int recurringCPDefinitionsCount = commercePaymentMethodGroupRelsDisplayContext.getRecurringCPDefinitionsCount(commercePaymentMethodGroupRel);
-
 boolean isLastRecurringPaymentMethod = commercePaymentMethodGroupRelsDisplayContext.isLastRecurringPaymentMethod(engineKey);
 %>
 
@@ -82,25 +79,18 @@ boolean isLastRecurringPaymentMethod = commercePaymentMethodGroupRelsDisplayCont
 </liferay-ui:icon-menu>
 
 <c:choose>
-	<c:when test="<%= ((subscriptionEntryCount > 0) || isLastRecurringPaymentMethod) && commercePaymentMethodGroupRel.isActive() %>">
+	<c:when test="<%= isLastRecurringPaymentMethod && commercePaymentMethodGroupRel.isActive() %>">
 		<div class="warning-modal" id="<%= modalId %>"></div>
 
-		<%
-			String deactivationWarning = StringPool.BLANK;
-
-			if (subscriptionEntryCount > 0) {
-				deactivationWarning += LanguageUtil.format(locale, "there-are-x-subscriptions-that-depend-on-this-payment-method-if-you-deactivate-it-you-will-have-to-manually-manage-those-subscriptions", subscriptionEntryCount);
-			}
-
-			if (isLastRecurringPaymentMethod) {
-				deactivationWarning += "<br /><br />" + LanguageUtil.format(locale, "deactivating-this-payment-method-will-disable-x-subcription-products", recurringCPDefinitionsCount);
-			}
-		%>
-
 		<aui:script use="aui-base">
-			if (confirm('<%= deactivationWarning %>')) {
-				window.location.replace('<%= setActiveURL %>');
-			}
+			A.one("#<portlet:namespace />togglePaymentMethod-<%= modalId %>").on(
+				'click',
+				function(e) {
+					if (confirm('<liferay-ui:message key="there-might-be-subscriptions-that-depend-on-this-payment-method-if-you-deactivate-it-you-will-have-to-manually-manage-those-subscriptions-and-all-subcription-products-in-the-current-channel-will-be-disabled" />')) {
+						window.location.replace('<%= setActiveURL %>');
+					}
+				}
+			);
 		</aui:script>
 	</c:when>
 	<c:otherwise>
