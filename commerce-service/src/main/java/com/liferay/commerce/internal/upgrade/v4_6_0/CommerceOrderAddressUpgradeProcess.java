@@ -14,6 +14,7 @@
 
 package com.liferay.commerce.internal.upgrade.v4_6_0;
 
+import com.liferay.commerce.internal.upgrade.base.BaseCommerceServiceUpgradeProcess;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.impl.CommerceOrderModelImpl;
 import com.liferay.commerce.model.impl.CommerceShipmentModelImpl;
@@ -32,7 +33,8 @@ import java.sql.Statement;
 /**
  * @author Alec Sloan
  */
-public class CommerceOrderAddressUpgradeProcess extends UpgradeProcess {
+public class CommerceOrderAddressUpgradeProcess
+	extends BaseCommerceServiceUpgradeProcess {
 
 	public CommerceOrderAddressUpgradeProcess(
 		ClassNameLocalService classNameLocalService) {
@@ -105,158 +107,107 @@ public class CommerceOrderAddressUpgradeProcess extends UpgradeProcess {
 
 			// Drop stale column from CommerceShipment
 
-			_dropColumn(
+			dropColumn(
 				CommerceShipmentModelImpl.TABLE_NAME, "commerceAddressId");
 		}
 	}
 
-	private void _addColumn(
-			Class<?> entityClass, String tableName, String columnName,
-			String columnType)
-		throws Exception {
-
-		if (_log.isInfoEnabled()) {
-			_log.info(
-				String.format(
-					"Adding column %s to table %s", columnName, tableName));
-		}
-
-		if (!hasColumn(tableName, columnName)) {
-			alter(
-				entityClass,
-				new AlterTableAddColumn(
-					columnName + StringPool.SPACE + columnType));
-		}
-		else {
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					String.format(
-						"Column %s already exists on table %s", columnName,
-						tableName));
-			}
-		}
-	}
-
 	private void _addOrderAddressColumns() throws Exception {
-		_addColumn(
+		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
 			"billingName", "STRING");
-		_addColumn(
+		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
 			"billingDescription", "STRING");
-		_addColumn(
+		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
 			"billingStreet1", "STRING");
-		_addColumn(
+		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
 			"billingStreet2", "STRING");
-		_addColumn(
+		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
 			"billingStreet3", "STRING");
-		_addColumn(
+		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
 			"billingCity", "STRING");
-		_addColumn(
+		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
 			"billingZip", "STRING");
-		_addColumn(
+		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
 			"billingRegionId", "LONG");
-		_addColumn(
+		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
 			"billingCountryId", "LONG");
-		_addColumn(
+		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
 			"billingPhoneNumber", "STRING");
-		_addColumn(
+		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
 			"shippingName", "STRING");
-		_addColumn(
+		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
 			"shippingDescription", "STRING");
-		_addColumn(
+		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
 			"shippingStreet1", "STRING");
-		_addColumn(
+		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
 			"shippingStreet2", "STRING");
-		_addColumn(
+		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
 			"shippingStreet3", "STRING");
-		_addColumn(
+		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
 			"shippingCity", "STRING");
-		_addColumn(
+		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
 			"shippingZip", "STRING");
-		_addColumn(
+		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
 			"shippingRegionId", "LONG");
-		_addColumn(
+		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
 			"shippingCountryId", "LONG");
-		_addColumn(
+		addColumn(
 			CommerceOrderModelImpl.class, CommerceOrderModelImpl.TABLE_NAME,
 			"shippingPhoneNumber", "STRING");
 	}
 
 	private void _addShipmentAddressColumns() throws Exception {
-		_addColumn(
+		addColumn(
 			CommerceShipmentModelImpl.class,
 			CommerceShipmentModelImpl.TABLE_NAME, "shippingName", "STRING");
-		_addColumn(
+		addColumn(
 			CommerceShipmentModelImpl.class,
 			CommerceShipmentModelImpl.TABLE_NAME, "shippingDescription",
 			"STRING");
-		_addColumn(
+		addColumn(
 			CommerceShipmentModelImpl.class,
 			CommerceShipmentModelImpl.TABLE_NAME, "shippingStreet1", "STRING");
-		_addColumn(
+		addColumn(
 			CommerceShipmentModelImpl.class,
 			CommerceShipmentModelImpl.TABLE_NAME, "shippingStreet2", "STRING");
-		_addColumn(
+		addColumn(
 			CommerceShipmentModelImpl.class,
 			CommerceShipmentModelImpl.TABLE_NAME, "shippingStreet3", "STRING");
-		_addColumn(
+		addColumn(
 			CommerceShipmentModelImpl.class,
 			CommerceShipmentModelImpl.TABLE_NAME, "shippingCity", "STRING");
-		_addColumn(
+		addColumn(
 			CommerceShipmentModelImpl.class,
 			CommerceShipmentModelImpl.TABLE_NAME, "shippingZip", "STRING");
-		_addColumn(
+		addColumn(
 			CommerceShipmentModelImpl.class,
 			CommerceShipmentModelImpl.TABLE_NAME, "shippingRegionId", "LONG");
-		_addColumn(
+		addColumn(
 			CommerceShipmentModelImpl.class,
 			CommerceShipmentModelImpl.TABLE_NAME, "shippingCountryId", "LONG");
-		_addColumn(
+		addColumn(
 			CommerceShipmentModelImpl.class,
 			CommerceShipmentModelImpl.TABLE_NAME, "shippingPhoneNumber",
 			"STRING");
-	}
-
-	private void _dropColumn(String tableName, String columnName)
-		throws Exception {
-
-		if (_log.isInfoEnabled()) {
-			_log.info(
-				String.format(
-					"Dropping column %s from table %s", columnName, tableName));
-		}
-
-		if (hasColumn(tableName, columnName)) {
-			runSQL(
-				com.liferay.portal.kernel.util.StringBundler.concat(
-					"alter table ", tableName, " drop column ", columnName));
-		}
-		else {
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					String.format(
-						"Column %s already does not exist on table %s",
-						columnName, tableName));
-			}
-		}
 	}
 
 	private void _updateAddressValues(ResultSet rs, String updateSql)
