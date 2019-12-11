@@ -359,44 +359,16 @@ public class CommercePaymentMethodGroupRelLocalServiceImpl
 						commercePaymentMethodGroupRel);
 				}
 
-				SearchContext searchContext = new SearchContext();
+				List<CPDefinition> cpDefinitions =
+					_cpDefinitionLocalService.getCPDefinitions(
+						commercePaymentMethodGroupRel.getGroupId(), true);
 
-				Map<String, Serializable> attributes = new HashMap<>();
+				for (CPDefinition cpDefinition : cpDefinitions) {
+					cpDefinition.setSubscriptionEnabled(false);
+					cpDefinition.setStatus(WorkflowConstants.STATUS_DRAFT);
 
-				attributes.put(Field.STATUS, WorkflowConstants.STATUS_APPROVED);
-
-				attributes.put(CPField.PUBLISHED, true);
-				attributes.put(CPField.SUBSCRIPTION_ENABLED, true);
-
-				long groupId = commercePaymentMethodGroupRel.getGroupId();
-
-				attributes.put("commerceChannelGroupId", groupId);
-
-				searchContext.setAttributes(attributes);
-
-				searchContext.setCompanyId(
-					commercePaymentMethodGroupRel.getCompanyId());
-
-				CPDataSourceResult cpDataSourceResult =
-					_cpDefinitionHelper.search(
-						groupId, searchContext, new CPQuery(),
-						QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-
-				List<CPCatalogEntry> cpCatalogEntries =
-					cpDataSourceResult.getCPCatalogEntries();
-
-				for (CPCatalogEntry cpCatalogEntry : cpCatalogEntries) {
-					CPDefinition cpDefinition =
-						_cpDefinitionLocalService.fetchCPDefinition(
-							cpCatalogEntry.getCPDefinitionId());
-
-					if (cpDefinition != null) {
-						cpDefinition.setSubscriptionEnabled(false);
-						cpDefinition.setStatus(WorkflowConstants.STATUS_DRAFT);
-
-						_cpDefinitionLocalService.updateCPDefinition(
-							cpDefinition);
-					}
+					_cpDefinitionLocalService.updateCPDefinition(
+						cpDefinition);
 				}
 			}
 		}

@@ -19,8 +19,8 @@ import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.payment.method.CommercePaymentMethodRegistry;
 import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelService;
 import com.liferay.commerce.payment.web.internal.display.context.CommercePaymentMethodGroupRelsDisplayContext;
+import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.service.CommerceSubscriptionEntryLocalService;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
@@ -69,7 +69,7 @@ public class EditCommercePaymentMethodGroupRelMVCRenderCommand
 						_commercePaymentMethodRegistry,
 						_commercePaymentMethodGroupRelService,
 						_commerceSubscriptionEntryLocalService,
-						_cpDefinitionHelper, _portletResourcePermission,
+						_cpDefinitionLocalService, _portletResourcePermission,
 						renderRequest, renderResponse);
 
 			renderRequest.setAttribute(
@@ -106,7 +106,7 @@ public class EditCommercePaymentMethodGroupRelMVCRenderCommand
 		_commerceSubscriptionEntryLocalService;
 
 	@Reference
-	private CPDefinitionHelper _cpDefinitionHelper;
+	private CPDefinitionLocalService _cpDefinitionLocalService;
 
 	@Reference
 	private Portal _portal;
