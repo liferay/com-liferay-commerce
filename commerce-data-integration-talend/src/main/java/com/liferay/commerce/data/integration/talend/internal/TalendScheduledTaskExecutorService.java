@@ -74,6 +74,10 @@ public class TalendScheduledTaskExecutorService
 
 		String rootDirectoryName = null;
 
+		File tempFile = null;
+		File log = null;
+		File error = null;
+
 		try {
 			commerceDataIntegrationProcess =
 				_commerceDataIntegrationProcessLocalService.
@@ -92,7 +96,7 @@ public class TalendScheduledTaskExecutorService
 
 			InputStream inputStream = fileEntry.getContentStream();
 
-			File tempFile = FileUtil.createTempFile(inputStream);
+			tempFile = FileUtil.createTempFile(inputStream);
 
 			File tempFolder = FileUtil.createTempFolder();
 
@@ -105,8 +109,8 @@ public class TalendScheduledTaskExecutorService
 
 			String sh = strings[0];
 
-			File log = FileUtil.createTempFile();
-			File error = FileUtil.createTempFile();
+			log = FileUtil.createTempFile();
+			error = FileUtil.createTempFile();
 
 			ProcessBuilder oerm = new ProcessBuilder("chmod", "+x", sh);
 
@@ -181,6 +185,18 @@ public class TalendScheduledTaskExecutorService
 		}
 		finally {
 			FileUtil.deltree(rootDirectoryName);
+
+			if (error != null) {
+				FileUtil.delete(error);
+			}
+
+			if (log != null) {
+				FileUtil.delete(log);
+			}
+
+			if (tempFile != null) {
+				FileUtil.delete(tempFile);
+			}
 		}
 	}
 
