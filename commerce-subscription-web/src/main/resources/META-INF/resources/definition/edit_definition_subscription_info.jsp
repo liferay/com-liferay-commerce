@@ -52,7 +52,11 @@ if (cpSubscriptionType != null) {
 
 CPSubscriptionTypeJSPContributor cpSubscriptionTypeJSPContributor = cpDefinitionSubscriptionInfoDisplayContext.getCPSubscriptionTypeJSPContributor(subscriptionType);
 
-boolean ending = maxSubscriptionCycles > 0;
+boolean ending = false;
+
+if (maxSubscriptionCycles > 0) {
+	ending = true;
+}
 %>
 
 <c:choose>

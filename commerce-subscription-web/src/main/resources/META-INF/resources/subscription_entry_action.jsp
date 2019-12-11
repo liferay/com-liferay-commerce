@@ -21,9 +21,9 @@ CommerceSubscriptionEntryDisplayContext commerceSubscriptionEntryDisplayContext 
 
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-CommerceSubscriptionEntry commerceSubscriptionEntry = (CommerceSubscriptionEntry)row.getObject();
-
 int subscriptionStatus = CommerceSubscriptionEntryConstants.SUBSCRIPTION_STATUS_ANY;
+
+CommerceSubscriptionEntry commerceSubscriptionEntry = (CommerceSubscriptionEntry)row.getObject();
 
 if (commerceSubscriptionEntry != null) {
 	subscriptionStatus = commerceSubscriptionEntry.getSubscriptionStatus();
