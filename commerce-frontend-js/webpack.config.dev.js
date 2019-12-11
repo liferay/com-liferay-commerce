@@ -1,5 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const webpack = require('webpack');
+
 
 const {defineServerResponses} = require('./dev/fakeServerUtilities');
 const components = require('./src/main/resources/META-INF/resources/components/index');
@@ -73,6 +75,7 @@ module.exports = {
 		path: outputPath,
 	},
 	plugins: [
+		new webpack.optimize.ModuleConcatenationPlugin(),
 		new HtmlWebpackPlugin({
 			inject: false,
 			template: path.resolve(__dirname, './dev/public/index.html'),

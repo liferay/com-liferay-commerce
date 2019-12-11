@@ -2,9 +2,10 @@ import ClayIcon from '@clayui/icon';
 import ClayLink from '@clayui/link';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import TableContext from '../../DatasetDisplayContext.es';
 import { OPEN_SIDE_PANEL } from '../../../../utilities/eventsDefinitions.es';
+import { getOpenedSidePanel, registeredPanels, getSidePanelData } from '../../../../utilities/sidePanels.es';
 
 function submit(action, method = 'get', form) {
 	if (!form.current) {
@@ -16,17 +17,41 @@ function submit(action, method = 'get', form) {
 	form.current.submit();
 }
 
+function getQueryString(ids) {
+	return `?ids=${ids.join(',')}`;
+}
+
+function getRichPayload(payload, ids) {
+	const richPayload = {
+		...payload,
+		options: {
+			...payload.options,
+			url: payload.options.baseUrl + getQueryString(ids)
+		}
+	};
+	return richPayload;
+}
+
 function BulkActions(props) {
+	const [currentSidePanelActionPayload, setCurrentSidePanelActionPayload] = useState(null);
+	
 	function handleActionClick(actionDefinition, formRef, loadData, sidePanelId) {
 		if(actionDefinition.sidePanelCompatible) {
-			Liferay.fire(OPEN_SIDE_PANEL, {
+			const sidePanelActionPayload = {
 				id: sidePanelId,
 				options: {
+					baseUrl: actionDefinition.url,
 					onAfterSubmit: () => loadData(),
 					slug: actionDefinition.slug || null,
-					url: actionDefinition.url,
 				}
-			})
+			}
+			
+			Liferay.fire(
+				OPEN_SIDE_PANEL,
+				getRichPayload(sidePanelActionPayload, props.selectedItemsId)
+			);
+
+			setCurrentSidePanelActionPayload(sidePanelActionPayload)
 		} else {
 			submit(
 				actionDefinition.url,
@@ -35,6 +60,32 @@ function BulkActions(props) {
 			)
 		}
 	}
+
+	useEffect(
+		() => {
+			if(!currentSidePanelActionPayload) {
+				return;
+			}
+
+			const currentOpenedSidePanel = getOpenedSidePanel();
+
+			if(
+				currentOpenedSidePanel &&
+				(currentOpenedSidePanel.id === currentSidePanelActionPayload.id) &&
+				(currentOpenedSidePanel.url.indexOf(currentSidePanelActionPayload.options.baseUrl) > -1)
+			) {
+				Liferay.fire(
+					OPEN_SIDE_PANEL,
+					getRichPayload(currentSidePanelActionPayload, props.selectedItemsId)
+				);
+			}
+
+		},
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[
+			props.selectedItemsId
+		]
+	)
 
 	return (
 		<TableContext.Consumer>
