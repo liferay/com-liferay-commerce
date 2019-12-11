@@ -24,7 +24,7 @@
 
 	<h1>Edit</h1>
 
-	<div class="form-group mt-4">
+	<form class="form-group mt-4">
 		<label for="firstNameInput">Query string:</label>
 		<input
 			class="form-control"
@@ -32,7 +32,14 @@
 			placeholder="Ids"
 			type="text"
 		/>
-	</div>
+
+		<button 
+			class="btn btn-primary mt-3"
+			type="submit"
+		>
+			Submit
+		</button>
+	</form>
 	
 	<script>
 		document.querySelector("#idsInput").value = document.location.search;

@@ -1,8 +1,9 @@
-import launcher from './entry.es';
+import datasetDisplayLauncher from './entry.es';
+import sidePanelLauncher from './../side_panel/entry.es';
 
 import '../../styles/main.scss';
 
-launcher('dataset-display', 'dataset-display-root-id', {
+datasetDisplayLauncher('dataset-display', 'dataset-display-root-id', {
 	apiUrl: '/o/headless-commerce-admin-order/v1.0/orders/37174/orderItems',
 	bulkActions: [
 		{
@@ -550,4 +551,29 @@ launcher('dataset-display', 'dataset-display-root-id', {
 	spritemap: './assets/icons.svg',
 	tableTitle: 'Orders',
 	totalItems: 4
+});
+
+sidePanelLauncher('sidePanel', 'side-panel-root-id', {
+	containerSelector: '.smart-table-wrapper',
+	id: 'sidePanelTestId',
+	size: 'md',
+	spritemap: './assets/icons.svg',
+	topAnchorSelector: '.top-anchor',
+	items: [
+		{
+			slug: 'comments',
+			href: '/side-panel/comments.html',
+			icon: 'comments'
+		},
+		{
+			slug: 'edit',
+			href: '/side-panel/edit.html',
+			icon: 'pencil'
+		},
+		{
+			slug: 'changelog',
+			href: '/side-panel/changelog.html',
+			icon: 'restore'
+		},
+	]
 });

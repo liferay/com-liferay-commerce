@@ -30,6 +30,7 @@ function DatasetDisplay(props) {
 	};
 
 	function loadData() {
+		console.log('newdata')
 		return;
 	}
 
