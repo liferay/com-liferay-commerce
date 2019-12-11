@@ -142,6 +142,30 @@
 		<field name="totalDiscountPercentageLevel2" type="BigDecimal" />
 		<field name="totalDiscountPercentageLevel3" type="BigDecimal" />
 		<field name="totalDiscountPercentageLevel4" type="BigDecimal" />
+		<field name="billingName" type="String" />
+		<field name="billingDescription" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+		<field name="billingStreet1" type="String" />
+		<field name="billingStreet2" type="String" />
+		<field name="billingStreet3" type="String" />
+		<field name="billingCity" type="String" />
+		<field name="billingZip" type="String" />
+		<field name="billingRegionId" type="long" />
+		<field name="billingCountryId" type="long" />
+		<field name="billingPhoneNumber" type="String" />
+		<field name="shippingName" type="String" />
+		<field name="shippingDescription" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+		<field name="shippingStreet1" type="String" />
+		<field name="shippingStreet2" type="String" />
+		<field name="shippingStreet3" type="String" />
+		<field name="shippingCity" type="String" />
+		<field name="shippingZip" type="String" />
+		<field name="shippingRegionId" type="long" />
+		<field name="shippingCountryId" type="long" />
+		<field name="shippingPhoneNumber" type="String" />
 		<field name="advanceStatus" type="String" />
 		<field name="paymentStatus" type="int" />
 		<field name="orderDate" type="Date" />
