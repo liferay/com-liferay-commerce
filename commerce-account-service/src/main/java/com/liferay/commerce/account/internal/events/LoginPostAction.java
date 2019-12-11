@@ -52,9 +52,8 @@ public class LoginPostAction extends Action {
 			if (commerceAccountServiceConfiguration.
 					applyDefaultRoleToExistingUsers()) {
 
-				long userId = _portal.getUserId(httpServletRequest);
-
-				_commerceAccountUserRelLocalService.addDefaultRoles(userId);
+				_commerceAccountUserRelLocalService.addDefaultRoles(
+					_portal.getUserId(httpServletRequest));
 			}
 		}
 		catch (Exception e) {

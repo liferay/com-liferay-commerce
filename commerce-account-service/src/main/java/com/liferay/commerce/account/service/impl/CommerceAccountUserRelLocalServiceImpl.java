@@ -149,8 +149,6 @@ public class CommerceAccountUserRelLocalServiceImpl
 
 	@Override
 	public void addDefaultRoles(long userId) throws PortalException {
-		User user = userLocalService.getUser(userId);
-
 		CommerceAccountServiceConfiguration
 			commerceAccountServiceConfiguration =
 				_configurationProvider.getSystemConfiguration(
@@ -161,6 +159,8 @@ public class CommerceAccountUserRelLocalServiceImpl
 		if ((siteRoles == null) && ArrayUtil.isEmpty(siteRoles)) {
 			return;
 		}
+
+		User user = userLocalService.getUser(userId);
 
 		Set<Role> roles = new HashSet<>();
 
