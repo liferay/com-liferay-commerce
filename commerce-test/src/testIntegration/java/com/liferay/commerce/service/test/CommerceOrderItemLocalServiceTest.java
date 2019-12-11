@@ -21,7 +21,9 @@ import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
 import com.liferay.commerce.exception.CommerceOrderValidatorException;
+import com.liferay.commerce.inventory.model.CommerceInventoryBookedQuantity;
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
+import com.liferay.commerce.inventory.service.CommerceInventoryBookedQuantityLocalService;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.product.model.CPDefinition;
@@ -36,6 +38,7 @@ import com.liferay.commerce.test.util.CommerceInventoryTestUtil;
 import com.liferay.commerce.test.util.CommerceTestUtil;
 import com.liferay.commerce.test.util.TestCommerceContext;
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -75,6 +78,20 @@ public class CommerceOrderItemLocalServiceTest {
 
 	@Before
 	public void setUp() throws Exception {
+		List<CommerceInventoryBookedQuantity>
+			commerceInventoryBookedQuantities =
+				_commerceBookedQuantityLocalService.
+					getCommerceInventoryBookedQuantities(
+						QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+		for (CommerceInventoryBookedQuantity commerceInventoryBookedQuantity :
+				commerceInventoryBookedQuantities) {
+
+			_commerceBookedQuantityLocalService.
+				deleteCommerceInventoryBookedQuantity(
+					commerceInventoryBookedQuantity);
+		}
+
 		_group = GroupTestUtil.addGroup();
 		_user = UserTestUtil.addUser();
 	}
@@ -292,6 +309,10 @@ public class CommerceOrderItemLocalServiceTest {
 
 	@Inject
 	private CommerceAccountLocalService _commerceAccountLocalService;
+
+	@Inject
+	private CommerceInventoryBookedQuantityLocalService
+		_commerceBookedQuantityLocalService;
 
 	@Inject
 	private CommerceOrderItemLocalService _commerceOrderItemLocalService;
