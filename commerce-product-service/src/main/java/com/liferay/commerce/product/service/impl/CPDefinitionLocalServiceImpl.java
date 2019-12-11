@@ -857,6 +857,13 @@ public class CPDefinitionLocalServiceImpl
 
 	@Override
 	public List<CPDefinition> getCPDefinitions(
+		long groupId, boolean subscriptionEnabled) {
+
+		return cpDefinitionPersistence.findByG_SE(groupId, subscriptionEnabled);
+	}
+
+	@Override
+	public List<CPDefinition> getCPDefinitions(
 		long groupId, int status, int start, int end) {
 
 		if (status == WorkflowConstants.STATUS_ANY) {
@@ -890,6 +897,14 @@ public class CPDefinitionLocalServiceImpl
 
 		return cpDefinitionFinder.findByG_P_S(
 			groupId, productTypeName, languageId, queryDefinition);
+	}
+
+	@Override
+	public int getCPDefinitionsCount(
+		long groupId, boolean subscriptionEnabled) {
+
+		return cpDefinitionPersistence.countByG_SE(
+			groupId, subscriptionEnabled);
 	}
 
 	@Override
