@@ -20,8 +20,6 @@ import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
 import com.liferay.commerce.product.definitions.web.servlet.taglib.ui.CPDefinitionScreenNavigationConstants;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CommerceCatalog;
-import com.liferay.commerce.product.service.CPDefinitionService;
-import com.liferay.commerce.product.service.CommerceCatalogService;
 import com.liferay.commerce.product.util.CPSubscriptionTypeJSPContributorRegistry;
 import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
 import com.liferay.commerce.subscription.web.internal.display.context.CPDefinitionSubscriptionInfoDisplayContext;
@@ -115,8 +113,7 @@ public class CPDefinitionSubscriptionScreenNavigationEntry
 				new CPDefinitionSubscriptionInfoDisplayContext(
 					_actionHelper, httpServletRequest,
 					_commercePaymentMethodGroupRelLocalService,
-					_commercePaymentMethodRegistry, _commerceCatalogService,
-					_cpDefinitionService,
+					_commercePaymentMethodRegistry,
 					_cpSubscriptionTypeJSPContributorRegistry,
 					_cpSubscriptionTypeRegistry);
 
@@ -142,17 +139,11 @@ public class CPDefinitionSubscriptionScreenNavigationEntry
 		_commerceCatalogModelResourcePermission;
 
 	@Reference
-	private CommerceCatalogService _commerceCatalogService;
-
-	@Reference
 	private CommercePaymentMethodGroupRelLocalService
 		_commercePaymentMethodGroupRelLocalService;
 
 	@Reference
 	private CommercePaymentMethodRegistry _commercePaymentMethodRegistry;
-
-	@Reference
-	private CPDefinitionService _cpDefinitionService;
 
 	@Reference
 	private CPSubscriptionTypeJSPContributorRegistry
