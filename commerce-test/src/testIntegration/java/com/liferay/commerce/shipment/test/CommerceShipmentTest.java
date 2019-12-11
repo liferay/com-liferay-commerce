@@ -228,9 +228,36 @@ public class CommerceShipmentTest {
 			commerceShipment.getCommerceAccount());
 		Assert.assertEquals(
 			commerceOrder.getGroupId(), commerceShipment.getGroupId());
+
 		Assert.assertEquals(
-			commerceOrder.getShippingAddressId(),
-			commerceShipment.getCommerceAddressId());
+			commerceOrder.getShippingName(),
+			commerceShipment.getShippingName());
+		Assert.assertEquals(
+			commerceOrder.getShippingDescription(),
+			commerceShipment.getShippingDescription());
+		Assert.assertEquals(
+			commerceOrder.getShippingStreet1(),
+			commerceShipment.getShippingStreet1());
+		Assert.assertEquals(
+			commerceOrder.getShippingStreet2(),
+			commerceShipment.getShippingStreet2());
+		Assert.assertEquals(
+			commerceOrder.getShippingStreet3(),
+			commerceShipment.getShippingStreet3());
+		Assert.assertEquals(
+			commerceOrder.getShippingCity(),
+			commerceShipment.getShippingCity());
+		Assert.assertEquals(
+			commerceOrder.getShippingZip(), commerceShipment.getShippingZip());
+		Assert.assertEquals(
+			commerceOrder.getShippingRegionId(),
+			commerceShipment.getShippingRegionId());
+		Assert.assertEquals(
+			commerceOrder.getShippingCountryId(),
+			commerceShipment.getShippingCountryId());
+		Assert.assertEquals(
+			commerceOrder.getShippingPhoneNumber(),
+			commerceShipment.getShippingPhoneNumber());
 	}
 
 	@Test
