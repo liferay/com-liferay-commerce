@@ -72,7 +72,8 @@ public class TableTag extends IncludeTag {
 			_setItems();
 			_setPagination();
 
-			StringBundler sb = new StringBundler(11);
+			StringBundler sb = new StringBundler(
+				11 + (_contextParams.size() * 2));
 
 			sb.append(PortalUtil.getPortalURL(request));
 			sb.append("/o/commerce-ui/commerce-data-set/");
@@ -86,6 +87,11 @@ public class TableTag extends IncludeTag {
 			sb.append("&portletId=");
 			sb.append(portletDisplay.getId());
 
+			for (Map.Entry<String, String> entry : _contextParams.entrySet()) {
+				sb.append("&" + entry.getKey() + "=");
+				sb.append(entry.getValue());
+			}
+
 			_dataSetAPI = sb.toString();
 
 			_spritemap =
@@ -98,6 +104,10 @@ public class TableTag extends IncludeTag {
 		return super.doStartTag();
 	}
 
+	public void setContextParams(Map<String, String> contextParams) {
+		_contextParams = contextParams;
+	}
+
 	public void setDataProviderKey(String dataProviderKey) {
 		_dataProviderKey = dataProviderKey;
 	}
@@ -108,10 +118,6 @@ public class TableTag extends IncludeTag {
 
 	public void setDisableAJAX(boolean disableAJAX) {
 		_disableAJAX = disableAJAX;
-	}
-
-	public void setFilter(Filter filter) {
-		_filter = filter;
 	}
 
 	public void setItemPerPage(int itemPerPage) {
@@ -154,11 +160,11 @@ public class TableTag extends IncludeTag {
 		super.cleanUp();
 
 		_clayTableContext = null;
+		_contextParams = new java.util.HashMap<>();
 		_dataProviderKey = null;
 		_dataSetAPI = null;
 		_deltaParam = null;
 		_disableAJAX = false;
-		_filter = null;
 		_id = null;
 		_itemPerPage = 0;
 		_items = null;
@@ -222,7 +228,6 @@ public class TableTag extends IncludeTag {
 		request.setAttribute("liferay-commerce:table:deltaParam", _deltaParam);
 		request.setAttribute(
 			"liferay-commerce:table:disableAJAX", _disableAJAX);
-		request.setAttribute("liferay-commerce:table:filter", _filter);
 		request.setAttribute(
 			"liferay-commerce:table:itemPerPage", _itemPerPage);
 		request.setAttribute("liferay-commerce:table:items", _items);
@@ -249,15 +254,13 @@ public class TableTag extends IncludeTag {
 			_commerceDataProviderRegistry.getCommerceDataProvider(
 				_dataProviderKey);
 
-		if (_filter == null) {
-			FilterFactory filterFactory =
-				_filterFactoryRegistry.getFilterFactory(_dataProviderKey);
+		FilterFactory filterFactory = _filterFactoryRegistry.getFilterFactory(
+			_dataProviderKey);
 
-			_filter = filterFactory.create(request);
-		}
+		Filter filter = filterFactory.create(request);
 
 		List<Object> items = commerceDataSetDataProvider.getItems(
-			request, _filter, new PaginationImpl(_itemPerPage, _pageNumber),
+			request, filter, new PaginationImpl(_itemPerPage, _pageNumber),
 			null);
 
 		String json = _clayTableDataJSONBuilder.build(
@@ -265,7 +268,7 @@ public class TableTag extends IncludeTag {
 
 		_items = JSONFactoryUtil.looseDeserialize(json);
 
-		_totalItems = commerceDataSetDataProvider.countItems(request, _filter);
+		_totalItems = commerceDataSetDataProvider.countItems(request, filter);
 
 		if (_totalItems > getMinPageSize()) {
 			_showPagination = true;
@@ -309,11 +312,11 @@ public class TableTag extends IncludeTag {
 	private ClayTableRegistry _clayTableRegistry;
 	private ClayTableSerializer _clayTableSerializer;
 	private CommerceDataProviderRegistry _commerceDataProviderRegistry;
+	private Map<String, String> _contextParams;
 	private String _dataProviderKey;
 	private String _dataSetAPI;
 	private String _deltaParam;
 	private boolean _disableAJAX;
-	private Filter _filter;
 	private FilterFactoryRegistry _filterFactoryRegistry;
 	private String _id;
 	private int _itemPerPage;

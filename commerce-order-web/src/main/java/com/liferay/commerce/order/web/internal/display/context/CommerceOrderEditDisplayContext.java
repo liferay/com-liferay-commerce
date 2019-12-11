@@ -33,7 +33,6 @@ import com.liferay.commerce.notification.model.CommerceNotificationTemplate;
 import com.liferay.commerce.notification.service.CommerceNotificationQueueEntryLocalService;
 import com.liferay.commerce.notification.service.CommerceNotificationTemplateService;
 import com.liferay.commerce.order.web.internal.display.context.util.CommerceOrderRequestHelper;
-import com.liferay.commerce.order.web.internal.frontend.OrderItemFilterImpl;
 import com.liferay.commerce.order.web.internal.servlet.taglib.ui.CommerceOrderScreenNavigationConstants;
 import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
 import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelService;
@@ -661,28 +660,6 @@ public class CommerceOrderEditDisplayContext {
 		return ParamUtil.getString(
 			_commerceOrderRequestHelper.getLiferayPortletRequest(),
 			"orderByType", "desc");
-	}
-
-	public OrderItemFilterImpl getOrderItemFilter() throws PortalException {
-		OrderItemFilterImpl orderItemFilter = new OrderItemFilterImpl();
-
-		orderItemFilter.setAdvancedSearch(
-			ParamUtil.getBoolean(
-				_commerceOrderRequestHelper.getRequest(), "advancedSearch"));
-		orderItemFilter.setAndOperator(
-			ParamUtil.getBoolean(
-				_commerceOrderRequestHelper.getRequest(), "andOperator", true));
-		orderItemFilter.setKeywords(
-			ParamUtil.getString(
-				_commerceOrderRequestHelper.getRequest(), "keywords"));
-		orderItemFilter.setName(
-			ParamUtil.getString(
-				_commerceOrderRequestHelper.getRequest(), "name"));
-		orderItemFilter.setSku(
-			ParamUtil.getString(
-				_commerceOrderRequestHelper.getRequest(), "sku"));
-
-		return orderItemFilter;
 	}
 
 	public List<StepModel> getOrderSteps() throws PortalException {

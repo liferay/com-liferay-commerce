@@ -46,7 +46,6 @@ import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.service.permission.PortalPermissionUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -56,7 +55,6 @@ import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.PortletURL;
-import javax.portlet.RenderResponse;
 import javax.portlet.WindowStateException;
 
 import javax.servlet.http.HttpServletRequest;

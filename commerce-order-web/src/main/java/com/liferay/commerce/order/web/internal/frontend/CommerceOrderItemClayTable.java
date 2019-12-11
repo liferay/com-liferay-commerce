@@ -61,7 +61,6 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -75,7 +74,6 @@ import java.util.Locale;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.PortletURL;
-import javax.portlet.RenderResponse;
 import javax.portlet.WindowStateException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -278,7 +276,7 @@ public class CommerceOrderItemClayTable
 
 		OrderItemFilterImpl orderItemFilterImpl = (OrderItemFilterImpl)filter;
 
-		if (orderItemFilter.isAdvancedSearch()) {
+		if (orderItemFilterImpl.isAdvancedSearch()) {
 			baseModelSearchResult = _commerceOrderItemService.search(
 				commerceOrder.getCommerceOrderId(),
 				orderItemFilterImpl.getSku(), orderItemFilterImpl.getName(),
@@ -367,7 +365,6 @@ public class CommerceOrderItemClayTable
 			CommerceOrder commerceOrder = commerceOrderItem.getCommerceOrder();
 
 			if (commerceOrder.isOpen()) {
-
 				CPInstance cpInstance = commerceOrderItem.getCPInstance();
 
 				CPSubscriptionInfo cpSubscriptionInfo =
@@ -378,7 +375,7 @@ public class CommerceOrderItemClayTable
 				}
 
 				String period = StringPool.BLANK;
-				
+
 				CPSubscriptionType cpSubscriptionType =
 					_cpSubscriptionTypeRegistry.getCPSubscriptionType(
 						cpSubscriptionInfo.getSubscriptionType());

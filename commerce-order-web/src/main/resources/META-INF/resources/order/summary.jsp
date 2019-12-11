@@ -1,3 +1,5 @@
+<%@ page import="java.util.HashMap" %>
+
 <%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
@@ -240,9 +242,16 @@ CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder()
 		<commerce-ui:panel
 			title='<%= LanguageUtil.get(request, "items") %>'
 		>
+
+			<%
+			java.util.Map<String, String> contextParams = new java.util.HashMap<>();
+
+			contextParams.put("commerceOrderId", String.valueOf(commerceOrder.getCommerceOrderId()));
+			%>
+
 			<commerce-ui:table-react
+				contextParams="<%= contextParams %>"
 				dataProviderKey="<%= CommerceOrderItemClayTable.NAME %>"
-				filter="<%= commerceOrderEditDisplayContext.getOrderItemFilter() %>"
 				itemPerPage="<%= 5 %>"
 				namespace="<%= renderResponse.getNamespace() %>"
 				pageNumber="<%= 1 %>"

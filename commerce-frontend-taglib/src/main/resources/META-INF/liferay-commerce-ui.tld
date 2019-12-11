@@ -511,6 +511,12 @@
 		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.TableTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
+			<name>contextParams</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.util.Map</type>
+		</attribute>
+		<attribute>
 			<name>dataProviderKey</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -525,12 +531,6 @@
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 			<type>boolean</type>
-		</attribute>
-		<attribute>
-			<name>filter</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-			<type>com.liferay.commerce.frontend.Filter</type>
 		</attribute>
 		<attribute>
 			<name>itemPerPage</name>
