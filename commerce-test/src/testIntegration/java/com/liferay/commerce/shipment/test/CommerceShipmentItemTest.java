@@ -119,9 +119,9 @@ public class CommerceShipmentItemTest {
 		).and(
 			"A CPInstance"
 		).when(
-			"A Shipment Item is added to a shipment"
+			"A Shipment Item is added to a Shipment"
 		).then(
-			"That shipment should contain the shipment Item"
+			"That Shipment should contain the Shipment Item"
 		);
 
 		List<CommerceShipmentItem> commerceShipmentItems =
