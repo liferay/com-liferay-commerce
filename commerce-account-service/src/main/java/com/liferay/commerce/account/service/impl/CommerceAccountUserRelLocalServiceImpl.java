@@ -165,7 +165,7 @@ public class CommerceAccountUserRelLocalServiceImpl
 		Set<Role> roles = new HashSet<>();
 
 		for (String siteRole : siteRoles) {
-			Role role = rolePersistence.fetchByC_N(
+			Role role = roleLocalService.fetchRole(
 				user.getCompanyId(), siteRole);
 
 			if ((role == null) || (role.getType() != RoleConstants.TYPE_SITE)) {
