@@ -26,18 +26,12 @@ import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelService
 import com.liferay.commerce.payment.util.comparator.CommercePaymentMethodGroupRelNameComparator;
 import com.liferay.commerce.payment.util.comparator.CommercePaymentMethodGroupRelNameOrderByComparator;
 import com.liferay.commerce.payment.web.internal.admin.PaymentMethodsCommerceAdminModule;
-import com.liferay.commerce.product.catalog.CPQuery;
-import com.liferay.commerce.product.constants.CPField;
-import com.liferay.commerce.product.data.source.CPDataSourceResult;
+import com.liferay.commerce.product.service.CPDefinitionLocalService;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
-import com.liferay.commerce.product.util.CPDefinitionHelper;
 import com.liferay.commerce.service.CommerceOrderLocalService;
 import com.liferay.commerce.service.CommerceSubscriptionEntryLocalService;
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.search.Field;
-import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -48,12 +42,8 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.kernel.workflow.WorkflowConstants;
-
-import java.io.Serializable;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -79,7 +69,7 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 			commercePaymentMethodGroupRelService,
 		CommerceSubscriptionEntryLocalService
 			commerceSubscriptionEntryLocalService,
-		CPDefinitionHelper cpDefinitionHelper,
+		CPDefinitionLocalService cpDefinitionLocalService,
 		PortletResourcePermission portletResourcePermission,
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
@@ -90,7 +80,7 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 			commercePaymentMethodGroupRelService;
 		_commerceSubscriptionEntryLocalService =
 			commerceSubscriptionEntryLocalService;
-		_cpDefinitionHelper = cpDefinitionHelper;
+		_cpDefinitionLocalService = cpDefinitionLocalService;
 		_portletResourcePermission = portletResourcePermission;
 		_defaultCommercePaymentMethodGroupRels = new ArrayList<>();
 		_renderRequest = renderRequest;
@@ -180,35 +170,12 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 			CommercePaymentMethodGroupRel commercePaymentMethodGroupRel)
 		throws PortalException {
 
-		if ((commercePaymentMethodGroupRel == null) ||
-			(commercePaymentMethodGroupRel.getGroupId() == 0)) {
-
+		if (commercePaymentMethodGroupRel == null) {
 			return 0;
 		}
 
-		SearchContext searchContext = new SearchContext();
-
-		Map<String, Serializable> attributes = new HashMap<>();
-
-		attributes.put(Field.STATUS, WorkflowConstants.STATUS_APPROVED);
-
-		attributes.put(CPField.PUBLISHED, true);
-		attributes.put(CPField.SUBSCRIPTION_ENABLED, true);
-
-		long groupId = commercePaymentMethodGroupRel.getGroupId();
-
-		attributes.put("commerceChannelGroupId", groupId);
-
-		searchContext.setAttributes(attributes);
-
-		searchContext.setCompanyId(
-			commercePaymentMethodGroupRel.getCompanyId());
-
-		CPDataSourceResult cpDataSourceResult = _cpDefinitionHelper.search(
-			groupId, searchContext, new CPQuery(), QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS);
-
-		return cpDataSourceResult.getLength();
+		return _cpDefinitionLocalService.getCPDefinitionsCount(
+			commercePaymentMethodGroupRel.getGroupId(), true);
 	}
 
 	public SearchContainer<CommercePaymentMethodGroupRel> getSearchContainer()
@@ -452,7 +419,7 @@ public class CommercePaymentMethodGroupRelsDisplayContext {
 	private final CommercePaymentMethodRegistry _commercePaymentMethodRegistry;
 	private final CommerceSubscriptionEntryLocalService
 		_commerceSubscriptionEntryLocalService;
-	private final CPDefinitionHelper _cpDefinitionHelper;
+	private final CPDefinitionLocalService _cpDefinitionLocalService;
 	private List<CommercePaymentMethodGroupRel>
 		_defaultCommercePaymentMethodGroupRels;
 	private final PortletResourcePermission _portletResourcePermission;
