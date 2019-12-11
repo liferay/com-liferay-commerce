@@ -118,7 +118,7 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 		CommerceCatalog commerceCatalog =
 			_commerceCatalogLocalService.addCommerceCatalog(
 				RandomTestUtil.randomString(), commerceCurrency.getCode(),
-				LocaleUtil.US.getDisplayLanguage(), null,
+				LocaleUtil.toLanguageId(LocaleUtil.US), null,
 				ServiceContextTestUtil.getServiceContext(
 					_company.getGroupId()));
 
@@ -128,8 +128,8 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 
 		VirtualCPTypeTestUtil.addCPDefinitionVirtualSetting(
 			commerceCatalog.getGroupId(), cpDefinition.getModelClassName(),
-			cpDefinition.getCPDefinitionId(), 0L,
-			CommerceOrderConstants.ORDER_STATUS_TO_TRANSMIT, 0L, 0L, 0L);
+			cpDefinition.getCPDefinitionId(), 0,
+			CommerceOrderConstants.ORDER_STATUS_TO_TRANSMIT, 0, 0, 0);
 
 		CommerceTestUtil.addBackOrderCPDefinitionInventory(cpDefinition);
 
@@ -205,7 +205,7 @@ public class CommerceVirtualOrderItemLocalServiceTest {
 		CommerceCatalog commerceCatalog =
 			_commerceCatalogLocalService.addCommerceCatalog(
 				RandomTestUtil.randomString(), commerceCurrency.getCode(),
-				LocaleUtil.US.getDisplayLanguage(), null,
+				LocaleUtil.toLanguageId(LocaleUtil.US), null,
 				ServiceContextTestUtil.getServiceContext(
 					_company.getGroupId()));
 
