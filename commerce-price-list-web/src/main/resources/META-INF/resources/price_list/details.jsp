@@ -100,7 +100,7 @@ if (parentCommercePriceList != null) {
 	total="<%= parentCommercePriceLists.size() %>"
 >
 	<liferay-ui:search-container-results
-		results="<%= parentCommercePriceList %>"
+		results="<%= parentCommercePriceLists %>"
 	/>
 
 	<liferay-ui:search-container-row
