@@ -365,19 +365,19 @@ public class CommerceVirtualOrderItemLocalServiceImpl
 			CommerceVirtualOrderItem commerceVirtualOrderItem)
 		throws PortalException {
 
+		long duration = commerceVirtualOrderItem.getDuration();
+
+		if (duration == 0) {
+			return new Date(Long.MIN_VALUE);
+		}
+
 		User defaultUser = userLocalService.getDefaultUser(
 			commerceVirtualOrderItem.getCompanyId());
 
 		Calendar calendar = CalendarFactoryUtil.getCalendar(
 			defaultUser.getTimeZone());
 
-		long duration = commerceVirtualOrderItem.getDuration();
-
-		if (duration > 0) {
-			duration = calendar.getTimeInMillis() + duration;
-
-			calendar.setTimeInMillis(duration);
-		}
+		calendar.setTimeInMillis(calendar.getTimeInMillis() + duration);
 
 		return calendar.getTime();
 	}
