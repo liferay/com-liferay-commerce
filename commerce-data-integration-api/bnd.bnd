@@ -1,6 +1,6 @@
 Bundle-Name: Liferay Commerce Data Integration API
 Bundle-SymbolicName: com.liferay.commerce.data.integration.api
-Bundle-Version: 2.0.0
+Bundle-Version: 2.0.1
 Export-Package:\
 	com.liferay.commerce.data.integration.constants,\
 	com.liferay.commerce.data.integration.exception,\
