@@ -82,7 +82,7 @@ boolean lastRecurringPaymentMethod = commercePaymentMethodGroupRelsDisplayContex
 			A.one("#<portlet:namespace />togglePaymentMethod<%= engineKey %>").on(
 				'click',
 				function(e) {
-					if (confirm('<liferay-ui:message key="there-might-be-subscriptions-that-depend-on-this-payment-method-if-you-deactivate-it-you-will-have-to-manually-manage-those-subscriptions-and-all-subcription-products-in-the-current-channel-will-be-disabled" />')) {
+					if (confirm('<liferay-ui:message key="there-might-be-subscriptions-that-depend-on-this-payment-method-if-you-deactivate-it-you-will-have-to-manually-manage-those-subscriptions" />')) {
 						window.location.replace('<%= setActiveURL %>');
 					}
 				}
