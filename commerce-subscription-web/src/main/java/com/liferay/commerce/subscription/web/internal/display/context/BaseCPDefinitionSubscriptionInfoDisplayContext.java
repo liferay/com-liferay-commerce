@@ -14,21 +14,14 @@
 
 package com.liferay.commerce.subscription.web.internal.display.context;
 
-import com.liferay.commerce.payment.method.CommercePaymentMethod;
 import com.liferay.commerce.payment.method.CommercePaymentMethodRegistry;
-import com.liferay.commerce.payment.model.CommercePaymentMethodGroupRel;
 import com.liferay.commerce.payment.service.CommercePaymentMethodGroupRelLocalService;
 import com.liferay.commerce.product.definitions.web.display.context.BaseCPDefinitionsDisplayContext;
 import com.liferay.commerce.product.definitions.web.portlet.action.ActionHelper;
-import com.liferay.commerce.product.model.CPDefinition;
-import com.liferay.commerce.product.model.CommerceChannel;
-import com.liferay.commerce.product.model.CommerceChannelRel;
-import com.liferay.commerce.product.service.CommerceChannelRelLocalServiceUtil;
 import com.liferay.commerce.product.util.CPSubscriptionType;
 import com.liferay.commerce.product.util.CPSubscriptionTypeJSPContributor;
 import com.liferay.commerce.product.util.CPSubscriptionTypeJSPContributorRegistry;
 import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
-import com.liferay.portal.kernel.exception.PortalException;
 
 import java.util.List;
 
@@ -73,45 +66,6 @@ public class BaseCPDefinitionSubscriptionInfoDisplayContext
 
 	public List<CPSubscriptionType> getCPSubscriptionTypes() {
 		return _cpSubscriptionTypeRegistry.getCPSubscriptionTypes();
-	}
-
-	public boolean hasRecurringPaymentMethod() throws PortalException {
-		List<CommerceChannelRel> commerceChannelRels =
-			CommerceChannelRelLocalServiceUtil.getCommerceChannelRels(
-				CPDefinition.class.getName(), getCPDefinitionId(), -1, -1,
-				null);
-
-		for (CommerceChannelRel commerceChannelRel : commerceChannelRels) {
-			boolean channelHasRecurringPaymentMethod = false;
-
-			CommerceChannel commerceChannel =
-				commerceChannelRel.getCommerceChannel();
-
-			List<CommercePaymentMethodGroupRel> commercePaymentMethodGroupRels =
-				_commercePaymentMethodGroupRelLocalService.
-					getCommercePaymentMethodGroupRels(
-						commerceChannel.getSiteGroupId(), true);
-
-			for (CommercePaymentMethodGroupRel commercePaymentMethodGroupRel :
-					commercePaymentMethodGroupRels) {
-
-				if (commercePaymentMethodGroupRel.isActive()) {
-					CommercePaymentMethod commercePaymentMethod =
-						_commercePaymentMethodRegistry.getCommercePaymentMethod(
-							commercePaymentMethodGroupRel.getEngineKey());
-
-					if (commercePaymentMethod.isProcessRecurringEnabled()) {
-						channelHasRecurringPaymentMethod = true;
-					}
-				}
-			}
-
-			if (!channelHasRecurringPaymentMethod) {
-				return false;
-			}
-		}
-
-		return true;
 	}
 
 	private final CommercePaymentMethodGroupRelLocalService
