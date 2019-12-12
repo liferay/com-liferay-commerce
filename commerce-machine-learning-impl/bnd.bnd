@@ -1,6 +1,6 @@
 Bundle-Name: Liferay Commerce Machine Learning Implementation
 Bundle-SymbolicName: com.liferay.commerce.machine.learning.impl
-Bundle-Version: 2.0.0
+Bundle-Version: 2.0.1
 Import-Package:\
 	com.liferay.portal.search.engine.adapter.document;version="[1.3.0,3.0.0)",\
 	com.liferay.portal.search.engine.adapter.search;version="[2.1.0,4.0.0)",\
