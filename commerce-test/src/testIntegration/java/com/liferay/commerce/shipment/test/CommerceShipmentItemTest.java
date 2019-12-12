@@ -20,9 +20,11 @@ import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.currency.test.util.CommerceCurrencyTestUtil;
 import com.liferay.commerce.exception.CommerceShipmentStatusException;
+import com.liferay.commerce.inventory.engine.CommerceInventoryEngine;
 import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceShipment;
 import com.liferay.commerce.model.CommerceShipmentItem;
+import com.liferay.commerce.product.model.CPInstance;
 import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.model.CommerceChannelConstants;
 import com.liferay.commerce.product.service.CommerceChannelLocalServiceUtil;
@@ -34,6 +36,7 @@ import com.liferay.commerce.shipment.test.util.CommerceShipmentTestUtil;
 import com.liferay.commerce.test.util.CommerceTestUtil;
 import com.liferay.commerce.test.util.TestCommerceContext;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -44,7 +47,6 @@ import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 import com.liferay.portal.kernel.test.util.UserTestUtil;
 import com.liferay.portal.test.rule.Inject;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
-import com.liferay.portal.test.rule.PermissionCheckerTestRule;
 
 import java.util.List;
 
@@ -66,9 +68,7 @@ public class CommerceShipmentItemTest {
 	@ClassRule
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
-		new AggregateTestRule(
-			new LiferayIntegrationTestRule(),
-			PermissionCheckerTestRule.INSTANCE);
+		new LiferayIntegrationTestRule();
 
 	@Before
 	public void setUp() throws Exception {
@@ -81,11 +81,10 @@ public class CommerceShipmentItemTest {
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
-		CommerceChannel commerceChannel =
-			CommerceChannelLocalServiceUtil.addCommerceChannel(
-				_group.getGroupId(), "Test Channel",
-				CommerceChannelConstants.CHANNEL_TYPE_SITE, null,
-				_commerceCurrency.getCode(), null, serviceContext);
+		_commerceChannel = CommerceChannelLocalServiceUtil.addCommerceChannel(
+			_group.getGroupId(), "Test Channel",
+			CommerceChannelConstants.CHANNEL_TYPE_SITE, null,
+			_commerceCurrency.getCode(), null, serviceContext);
 
 		_commerceOrder = CommerceTestUtil.addB2CCommerceOrder(
 			_group.getGroupId(), _user.getUserId(),
@@ -95,17 +94,16 @@ public class CommerceShipmentItemTest {
 			_group.getGroupId(), _commerceOrder.getCommerceOrderId());
 
 		_commerceContext = new TestCommerceContext(
-			_commerceCurrency, commerceChannel, _user, _group,
+			_commerceCurrency, _commerceChannel, _user, _group,
 			_commerceOrder.getCommerceAccount(), _commerceOrder);
 
 		_commerceShipmentItem =
 			CommerceShipmentTestUtil.addCommerceShipmentItem(
-				_commerceContext, CPTestUtil.addCPInstance(_group.getGroupId()),
+				_commerceContext,
+				CPTestUtil.addCPInstanceWithRandomSku(_group.getGroupId()),
 				_group.getGroupId(), _user.getUserId(),
 				_commerceOrder.getCommerceOrderId(),
-				_commerceShipment.getCommerceShipmentId());
-
-		CommerceChannelLocalServiceUtil.deleteCommerceChannel(commerceChannel);
+				_commerceShipment.getCommerceShipmentId(), 2, 1);
 	}
 
 	@Test
@@ -167,10 +165,11 @@ public class CommerceShipmentItemTest {
 				_commerceShipment);
 
 		CommerceShipmentTestUtil.addCommerceShipmentItem(
-			_commerceContext, CPTestUtil.addCPInstance(_group.getGroupId()),
+			_commerceContext,
+			CPTestUtil.addCPInstanceWithRandomSku(_group.getGroupId()),
 			_group.getGroupId(), _user.getUserId(),
 			_commerceOrder.getCommerceOrderId(),
-			_commerceShipment.getCommerceShipmentId());
+			_commerceShipment.getCommerceShipmentId(), 1, 1);
 
 		Assert.assertEquals(
 			_commerceShipment.getStatus(),
@@ -180,23 +179,34 @@ public class CommerceShipmentItemTest {
 	}
 
 	@Test
-	public void testDeleteCommerceShipmentItemOnShippedShipment()
+	public void testDeleteShipmentItemAndDoNotRestoreStockQuantity()
 		throws Exception {
 
 		frutillaRule.scenario(
-			"Try to delete a Shipment Item after a shipment is marked as " +
-				"shipped"
+			"Delete a Shipment Item after a shipment is marked as shipped " +
+				"and do not restock the sku"
 		).given(
 			"A Group"
 		).and(
 			"A ShipmentItem"
 		).and(
 			"A CPInstance"
-		).when(
+		).and(
 			"A Shipment is marked as shipped"
+		).when(
+			"The Shipment Item is deleted and we do not restock the item"
 		).then(
-			"Shipment Items should not be able to be added"
+			"Our inventory should contain not that item quantity"
 		);
+
+		CPInstance cpInstance = CPTestUtil.addCPInstanceWithRandomSku(
+			_group.getGroupId());
+
+		CommerceShipmentItem commerceShipmentItem =
+			CommerceShipmentTestUtil.addCommerceShipmentItem(
+				_commerceContext, cpInstance, _group.getGroupId(),
+				_user.getUserId(), _commerceOrder.getCommerceOrderId(),
+				_commerceShipment.getCommerceShipmentId(), 1, 1);
 
 		_commerceShipment.setStatus(
 			CommerceShipmentConstants.SHIPMENT_STATUS_SHIPPED);
@@ -206,17 +216,62 @@ public class CommerceShipmentItemTest {
 				_commerceShipment);
 
 		CommerceShipmentItemLocalServiceUtil.deleteCommerceShipmentItem(
-			_commerceShipmentItem);
+			commerceShipmentItem, false);
 
-		Assert.assertEquals(
-			_commerceShipment.getStatus(),
+		int actualCPInstanceStockQuantity =
+			_commerceInventoryEngine.getStockQuantity(
+				_user.getCompanyId(), cpInstance.getSku());
+
+		Assert.assertNotEquals(1, actualCPInstanceStockQuantity);
+
+		_resetCommerceShipment();
+	}
+
+	@Test
+	public void testDeleteShipmentItemAndRestoreStockQuantity()
+		throws Exception {
+
+		frutillaRule.scenario(
+			"Delete a Shipment Item after a shipment is marked as shipped " +
+				"and restock the sku"
+		).given(
+			"A Group"
+		).and(
+			"A ShipmentItem"
+		).and(
+			"A CPInstance"
+		).and(
+			"A Shipment is marked as shipped"
+		).when(
+			"The Shipment Item is deleted and we restock the item"
+		).then(
+			"Our inventory should contain the original item quantity"
+		);
+
+		CPInstance cpInstance = CPTestUtil.addCPInstanceWithRandomSku(
+			_group.getGroupId());
+
+		CommerceShipmentItem commerceShipmentItem =
+			CommerceShipmentTestUtil.addCommerceShipmentItem(
+				_commerceContext, cpInstance, _group.getGroupId(),
+				_user.getUserId(), _commerceOrder.getCommerceOrderId(),
+				_commerceShipment.getCommerceShipmentId(), 1, 1);
+
+		_commerceShipment.setStatus(
 			CommerceShipmentConstants.SHIPMENT_STATUS_SHIPPED);
 
-		CommerceShipmentItem actualCommerceShipmentItem =
-			_commerceShipmentItemLocalService.fetchCommerceShipmentItem(
-				_commerceShipmentItem.getCommerceShipmentItemId());
+		_commerceShipment =
+			CommerceShipmentLocalServiceUtil.updateCommerceShipment(
+				_commerceShipment);
 
-		Assert.assertEquals(_commerceShipmentItem, actualCommerceShipmentItem);
+		CommerceShipmentItemLocalServiceUtil.deleteCommerceShipmentItem(
+			commerceShipmentItem, true);
+
+		int actualCPInstanceStockQuantity =
+			_commerceInventoryEngine.getStockQuantity(
+				_user.getCompanyId(), cpInstance.getSku());
+
+		Assert.assertEquals(1, actualCPInstanceStockQuantity);
 
 		_resetCommerceShipment();
 	}
@@ -232,8 +287,6 @@ public class CommerceShipmentItemTest {
 			"A Group"
 		).and(
 			"A ShipmentItem"
-		).and(
-			"A CPInstance"
 		).when(
 			"A Shipment is marked as shipped"
 		).then(
@@ -264,25 +317,23 @@ public class CommerceShipmentItemTest {
 	@Rule
 	public FrutillaRule frutillaRule = new FrutillaRule();
 
-	private void _resetCommerceShipment() {
-		_commerceShipment.setStatus(
-			CommerceShipmentConstants.SHIPMENT_STATUS_PROCESSING);
+	private void _resetCommerceShipment() throws PortalException {
+		CommerceShipmentLocalServiceUtil.deleteCommerceShipment(
+			_commerceShipment, false);
 
-		_commerceShipment =
-			CommerceShipmentLocalServiceUtil.updateCommerceShipment(
-				_commerceShipment);
-
-		_commerceShipmentItemLocalService.deleteCommerceShipmentItems(
-			_commerceShipment.getCommerceShipmentId());
-
-		_commerceShipmentItemLocalService.addCommerceShipmentItem(
-			_commerceShipmentItem);
+		CommerceShipmentLocalServiceUtil.addCommerceShipment(_commerceShipment);
 	}
+
+	@DeleteAfterTestRun
+	private CommerceChannel _commerceChannel;
 
 	private CommerceContext _commerceContext;
 
 	@DeleteAfterTestRun
 	private CommerceCurrency _commerceCurrency;
+
+	@Inject
+	private CommerceInventoryEngine _commerceInventoryEngine;
 
 	@DeleteAfterTestRun
 	private CommerceOrder _commerceOrder;

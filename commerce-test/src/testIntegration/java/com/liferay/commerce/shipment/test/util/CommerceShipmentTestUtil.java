@@ -44,7 +44,7 @@ public class CommerceShipmentTestUtil {
 	public static CommerceShipmentItem addCommerceShipmentItem(
 			CommerceContext commerceContext, CPInstance cpInstance,
 			long groupId, long userId, long commerceOrderId,
-			long commerceShipmentId)
+			long commerceShipmentId, int createQuantity, int addQuantity)
 		throws Exception {
 
 		CommerceCurrency commerceCurrency =
@@ -54,8 +54,8 @@ public class CommerceShipmentTestUtil {
 			ServiceContextTestUtil.getServiceContext(groupId);
 
 		CommerceChannel commerceChannel =
-			CommerceChannelLocalServiceUtil.fetchCommerceChannelBySiteGroupId(
-				groupId);
+			CommerceChannelLocalServiceUtil.fetchCommerceChannel(
+				commerceContext.getCommerceChannelId());
 
 		if (commerceChannel == null) {
 			commerceChannel =
@@ -74,17 +74,18 @@ public class CommerceShipmentTestUtil {
 			commerceChannel.getCommerceChannelId(), serviceContext);
 
 		CommerceInventoryTestUtil.addCommerceInventoryWarehouseItem(
-			userId, commerceInventoryWarehouse, cpInstance.getSku(), 2);
+			userId, commerceInventoryWarehouse, cpInstance.getSku(),
+			createQuantity);
 
 		CommerceOrderItem commerceOrderItem =
 			CommerceTestUtil.addCommerceOrderItem(
-				commerceOrderId, cpInstance.getCPInstanceId(), 2,
+				commerceOrderId, cpInstance.getCPInstanceId(), createQuantity,
 				commerceContext);
 
 		return CommerceShipmentItemLocalServiceUtil.addCommerceShipmentItem(
 			commerceShipmentId, commerceOrderItem.getCommerceOrderItemId(),
-			commerceInventoryWarehouse.getCommerceInventoryWarehouseId(), 1,
-			serviceContext);
+			commerceInventoryWarehouse.getCommerceInventoryWarehouseId(),
+			addQuantity, serviceContext);
 	}
 
 	public static CommerceShipment createEmptyOrderShipment(
