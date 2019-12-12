@@ -27,6 +27,7 @@ import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
 
 import javax.servlet.ServletContext;
 
+import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
@@ -202,6 +203,21 @@ public class ServletContextUtil {
 		return _filterFactoryRegistry;
 	}
 
+	public static final ConfigurationProvider getConfigurationProvider() {
+		return _servletContextUtil._getConfigurationProvider();
+	}
+
+	private ConfigurationProvider _getConfigurationProvider() {
+		return _configurationProvider;
+	}
+
+	@Reference(unbind = "-")
+	protected void setConfigurationProvider(
+			ConfigurationProvider configurationProvider) {
+
+		_configurationProvider = configurationProvider;
+	}
+
 	private NPMResolver _getNPMResolver() {
 		return _npmResolver;
 	}
@@ -227,6 +243,7 @@ public class ServletContextUtil {
 	private FilterFactoryRegistry _filterFactoryRegistry;
 	private NPMResolver _npmResolver;
 	private ProductHelper _productHelper;
+	private ConfigurationProvider _configurationProvider;
 	private ServletContext _servletContext;
 
 }
