@@ -17,7 +17,7 @@ const FiltersDropdown = () => {
 	useEffect(() => {
 		const results = state.filters.filter(filter => {
 			switch (true) {
-				case !!filter.value:
+				case !!filter.invisible:
 					return false;
 				case query &&
 					!(
@@ -38,14 +38,9 @@ const FiltersDropdown = () => {
 			active={active}
 			onActiveChange={setActive}
 			trigger={
-				<button
-					aria-expanded="false"
-					aria-haspopup="true"
-					className="btn btn-unstyled dropdown-toggle p-2 text-secondary"
-					data-toggle="dropdown"
-				>
+				<button className="btn btn-unstyled dropdown-toggle p-2 text-secondary">
 					<span className="navbar-text-truncate">
-						{Liferay.Language.get('add-filters')}
+						{Liferay.Language.get('set-filters')}
 					</span>
 					{active ? (
 						<Icon className="ml-2" symbol="caret-top" />

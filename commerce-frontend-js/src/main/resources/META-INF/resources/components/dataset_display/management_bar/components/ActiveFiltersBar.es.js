@@ -8,7 +8,7 @@ const ActiveFiltersBar = props => {
 	const {actions, state} = getAppContext();
 
 	const filtersActive = state.filters.reduce(
-		(acc, filter) => (filter.value ? acc.concat(filter.slug) : acc),
+		(acc, filter) => (filter.value && !filter.invisible ? acc.concat(filter.slug) : acc),
 		[]
 	);
 

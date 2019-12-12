@@ -1,11 +1,15 @@
 import Icon from '@clayui/icon';
-import React from 'react';
+import React, { useState } from 'react';
 
 import getAppContext from './Context.es';
 import FiltersDropdown from './FiltersDropdown.es';
 
 const NavBar = () => {
 	const {actions, state} = getAppContext();
+
+	const [ keywordValue, updateKeywordValue ] = useState(
+		state.filters.find(f => f.slug === 'keyword').value || ''
+	);
 
 	return (
 		<nav className="management-bar management-bar-light navbar navbar-expand-md">
@@ -18,7 +22,7 @@ const NavBar = () => {
 						<form
 							onSubmit={e => {
 								e.preventDefault();
-								state.onFilterChange();
+								actions.updateFilterValue('keyword', keywordValue)
 							}}
 							role="search"
 						>
@@ -26,16 +30,12 @@ const NavBar = () => {
 								<div className="input-group-item">
 									<input
 										className="form-control input-group-inset input-group-inset-after"
-										onChange={e =>
-											actions.updateInputSearchValue(
-												e.target.value
-											)
-										}
+										onChange={e => updateKeywordValue(e.target.value)}
 										placeholder={Liferay.Language.get(
 											'search-for'
 										)}
 										type="text"
-										value={state.inputSearch.value || ''}
+										value={keywordValue}
 									/>
 									<span className="input-group-inset-item input-group-inset-item-after">
 										<button

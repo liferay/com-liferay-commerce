@@ -4,7 +4,7 @@ import sidePanelLauncher from './../side_panel/entry.es';
 import '../../styles/main.scss';
 
 datasetDisplayLauncher('dataset-display', 'dataset-display-root-id', {
-	apiUrl: '/o/headless-commerce-admin-order/v1.0/orders/37174/orderItems',
+	apiUrl: 'http://localhost:8080/o/commerce-ui/commerce-data-set/20124/commerceOrderItems/commerceOrderItems?plid=1&portletId=com_liferay_commerce_order_web_internal_portlet_CommerceOrderPortlet&commerceOrderId=38938',
 	bulkActions: [
 		{
 			icon: 'plus',
@@ -24,7 +24,7 @@ datasetDisplayLauncher('dataset-display', 'dataset-display-root-id', {
 	filters: [
 		{
 			label: 'Text test',
-			operator: 'contains',
+			operator: 'eq',
 			slug: 'text-test',
 			type: 'text',
 			value: 'Test input'
@@ -78,7 +78,7 @@ datasetDisplayLauncher('dataset-display', 'dataset-display-root-id', {
 				}
 			],
 			label: 'Checkbox test',
-			operator: 'contains',
+			operator: 'eq',
 			slug: 'checkbox-test',
 			type: 'checkbox',
 			value: ['first-option', 'third-option']
@@ -88,22 +88,22 @@ datasetDisplayLauncher('dataset-display', 'dataset-display-root-id', {
 			label: 'Number test',
 			max: 200,
 			min: 20,
-			operator: 'eq',
+			operator: 'gt',
 			slug: 'number-test',
 			type: 'number',
 			value: 123
 		},
-		{
-			label: 'Date test',
-			operator: 'eq',
-			slug: 'date-test',
-			type: 'date',
-			value: {
-				day: 1,
-				month: 2,
-				year: 1
-			}
-		}
+		// {
+		// 	label: 'Date test',
+		// 	operator: 'eq',
+		// 	slug: 'date-test',
+		// 	type: 'date',
+		// 	value: {
+		// 		day: 1,
+		// 		month: 2,
+		// 		year: 1
+		// 	}
+		// }
 	],
 	id: 'tableTest',
 	items: [
@@ -159,8 +159,8 @@ datasetDisplayLauncher('dataset-display', 'dataset-display-root-id', {
 				url: '/sidepanel-1.html'
 			},
 			comments: {
+				name: "Square pls",
 				quantity: "This is a test! I don't like this number btw",
-				name: "Square pls"
 			},
 			skuExternalReferenceCode: 'min38794',
 			skuId: 36456,
