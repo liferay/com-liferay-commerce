@@ -82,7 +82,8 @@
 		{msg desc="Discount"}discount{/msg}
 	</span>
 	<span class="price-value price-value-discount">
-		{if isNonnull($percentages) and not($percentages[1] == '0')}
+		{if isNonnull($percentages) and
+		(not($percentages[1] == '0') and not($percentages[1] == '0.00'))}
 			{foreach $value in $percentages}
 				<span class="price-value-percentages">{$value}</span>
 			{/foreach}
