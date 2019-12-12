@@ -9,6 +9,14 @@ function truncateNullDecimals(decimalNumber) {
 
 class Price extends Component {
 	created() {
+		this._formatDiscountPercentages();
+	}
+
+	willReceiveState(changes) {
+		this._formatDiscountPercentages();
+	}
+
+	_formatDiscountPercentages() {
 		this.prices.discountPercentage = truncateNullDecimals(this.prices.discountPercentage);
 
 		if (!!this.prices.discountPercentages &&

@@ -131,7 +131,7 @@
     font-size: 12px;
     line-height: 1;
     margin-bottom: 0;
-    margin-top: 24px;
+    margin-top: 14px;
   }
 
   &__empty_sku {
@@ -220,16 +220,27 @@
         font-weight: 600;
         line-height: 27px;
 
+        &-discount,
+        &-inactive {
+          display: none;
+        }
+
+        &-final,
+        &-promo {
+          margin-right: 10px !important;
+        }
+
+        &-inactive:nth-child(2) {
+          display: block !important;
+          font-size: 1em;
+        }
+
         @media only screen and (max-width: $bp-small) {
           font-size: 14px;
           line-height: 19px;
         }
 
         @include specialPricesStyles;
-
-        &-discount {
-          display: none;
-        }
       }
     }
   }
