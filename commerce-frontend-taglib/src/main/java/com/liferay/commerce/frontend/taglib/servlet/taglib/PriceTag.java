@@ -35,8 +35,6 @@ import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.Map;
 
-import javax.servlet.Servlet;
-import javax.servlet.ServletContext;
 import javax.servlet.jsp.PageContext;
 
 /**
@@ -70,13 +68,14 @@ public class PriceTag extends ComponentRendererTag {
 				themeDisplay.getLocale());
 
 			CommercePriceConfiguration commercePriceConfiguration =
-					_configurationProvider.getConfiguration(
-							CommercePriceConfiguration.class,
-							new SystemSettingsLocator(
-									CommerceConstants.PRICE_SERVICE_NAME));
+				_configurationProvider.getConfiguration(
+					CommercePriceConfiguration.class,
+					new SystemSettingsLocator(
+						CommerceConstants.PRICE_SERVICE_NAME));
 
-			putValue("displayDiscountLevels",
-					commercePriceConfiguration.displayDiscountLevels());
+			putValue(
+				"displayDiscountLevels",
+				commercePriceConfiguration.displayDiscountLevels());
 
 			putValue("prices", priceModel);
 
@@ -137,7 +136,7 @@ public class PriceTag extends ComponentRendererTag {
 
 	private static final Log _log = LogFactoryUtil.getLog(PriceTag.class);
 
-	private ProductHelper _productHelper;
 	private ConfigurationProvider _configurationProvider;
+	private ProductHelper _productHelper;
 
 }
