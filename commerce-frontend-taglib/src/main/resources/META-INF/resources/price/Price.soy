@@ -13,6 +13,7 @@
 	]}
 	{@param? additionalDiscountClasses: string}
 	{@param? additionalPromoPriceClasses: string}
+	{@param? displayDiscountLevels: bool}
 
 	{let $inactiveClass kind="text"}
 		{if isNonnull($prices.promoPrice) or
@@ -47,6 +48,7 @@
 			{call .discount}
 				{param percentage: $prices.discountPercentage /}
 				{param percentages: $prices.discountPercentages /}
+				{param displayDiscountLevels: $displayDiscountLevels /}
 				{param finalPrice: $prices.finalPrice /}
 				{param additionalDiscountClasses: $additionalDiscountClasses /}
 			{/call}
@@ -77,13 +79,13 @@
 	{@param? percentage: string}
 	{@param? percentages: ? }
 	{@param? additionalDiscountClasses: string}
+	{@param? displayDiscountLevels: bool}
 
 	<span class="price-label">
 		{msg desc="Discount"}discount{/msg}
 	</span>
 	<span class="price-value price-value-discount">
-		{if isNonnull($percentages) and
-		(not($percentages[1] == '0') and not($percentages[1] == '0.00'))}
+		{if isNonnull($percentages) and $displayDiscountLevels == true}
 			{foreach $value in $percentages}
 				<span class="price-value-percentages">{$value}</span>
 			{/foreach}

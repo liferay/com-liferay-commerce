@@ -14,6 +14,8 @@
 
 package com.liferay.commerce.frontend.taglib.servlet.taglib;
 
+import com.liferay.commerce.configuration.CommercePriceConfiguration;
+import com.liferay.commerce.constants.CommerceConstants;
 import com.liferay.commerce.constants.CommerceWebKeys;
 import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.frontend.model.PriceModel;
@@ -26,11 +28,15 @@ import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
+import com.liferay.portal.kernel.settings.SystemSettingsLocator;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.Map;
 
+import javax.servlet.Servlet;
+import javax.servlet.ServletContext;
 import javax.servlet.jsp.PageContext;
 
 /**
@@ -62,6 +68,15 @@ public class PriceTag extends ComponentRendererTag {
 			PriceModel priceModel = _productHelper.getPrice(
 				cpInstanceId, quantity, commerceContext,
 				themeDisplay.getLocale());
+
+			CommercePriceConfiguration commercePriceConfiguration =
+					_configurationProvider.getConfiguration(
+							CommercePriceConfiguration.class,
+							new SystemSettingsLocator(
+									CommerceConstants.PRICE_SERVICE_NAME));
+
+			putValue("displayDiscountLevels",
+					commercePriceConfiguration.displayDiscountLevels());
 
 			putValue("prices", priceModel);
 
@@ -113,6 +128,7 @@ public class PriceTag extends ComponentRendererTag {
 		super.setPageContext(pageContext);
 
 		_productHelper = ServletContextUtil.getProductHelper();
+		_configurationProvider = ServletContextUtil.getConfigurationProvider();
 	}
 
 	public void setQuantity(String quantity) {
@@ -122,5 +138,6 @@ public class PriceTag extends ComponentRendererTag {
 	private static final Log _log = LogFactoryUtil.getLog(PriceTag.class);
 
 	private ProductHelper _productHelper;
+	private ConfigurationProvider _configurationProvider;
 
 }

@@ -2,35 +2,13 @@ import template from './Price.soy';
 import Component from 'metal-component';
 import Soy, {Config} from 'metal-soy';
 
-function truncateNullDecimals(decimalNumber) {
-	return !!decimalNumber && decimalNumber.includes('.00') ?
-		decimalNumber.split('.')[0] : decimalNumber;
-}
-
-class Price extends Component {
-	created() {
-		this._formatDiscountPercentages();
-	}
-
-	willReceiveState(changes) {
-		this._formatDiscountPercentages();
-	}
-
-	_formatDiscountPercentages() {
-		this.prices.discountPercentage = truncateNullDecimals(this.prices.discountPercentage);
-
-		if (!!this.prices.discountPercentages &&
-			this.prices.discountPercentages.length) {
-			this.prices.discountPercentages =
-				this.prices.discountPercentages.map(truncateNullDecimals);
-		}
-	}
-}
+class Price extends Component {}
 
 Price.STATE = {
 	additionalDiscountClasses: Config.string(),
 	additionalPromoPriceClasses: Config.string(),
 	additionalPriceClasses: Config.string(),
+	displayDiscountLevels: Config.bool().value(false),
 	prices: Config.shapeOf(
 		{
 			price: Config.string().required(),
