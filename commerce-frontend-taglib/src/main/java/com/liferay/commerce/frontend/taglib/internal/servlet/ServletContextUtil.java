@@ -24,10 +24,10 @@ import com.liferay.commerce.frontend.util.ProductHelper;
 import com.liferay.commerce.order.CommerceOrderHttpHelper;
 import com.liferay.commerce.product.content.util.CPContentHelper;
 import com.liferay.frontend.js.loader.modules.extender.npm.NPMResolver;
+import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 
 import javax.servlet.ServletContext;
 
-import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
@@ -65,6 +65,10 @@ public class ServletContextUtil {
 
 	public static final CommerceOrderHttpHelper getCommerceOrderHttpHelper() {
 		return _servletContextUtil._getCommerceOrderHttpHelper();
+	}
+
+	public static final ConfigurationProvider getConfigurationProvider() {
+		return _servletContextUtil._getConfigurationProvider();
 	}
 
 	public static final CPContentHelper getCPContentHelper() {
@@ -140,6 +144,13 @@ public class ServletContextUtil {
 	}
 
 	@Reference(unbind = "-")
+	protected void setConfigurationProvider(
+		ConfigurationProvider configurationProvider) {
+
+		_configurationProvider = configurationProvider;
+	}
+
+	@Reference(unbind = "-")
 	protected void setCPContentHelper(CPContentHelper cpContentHelper) {
 		_cpContentHelper = cpContentHelper;
 	}
@@ -195,27 +206,16 @@ public class ServletContextUtil {
 		return _commerceOrderHttpHelper;
 	}
 
+	private ConfigurationProvider _getConfigurationProvider() {
+		return _configurationProvider;
+	}
+
 	private CPContentHelper _getCPContentHelper() {
 		return _cpContentHelper;
 	}
 
 	private FilterFactoryRegistry _getFilterFactoryRegistry() {
 		return _filterFactoryRegistry;
-	}
-
-	public static final ConfigurationProvider getConfigurationProvider() {
-		return _servletContextUtil._getConfigurationProvider();
-	}
-
-	private ConfigurationProvider _getConfigurationProvider() {
-		return _configurationProvider;
-	}
-
-	@Reference(unbind = "-")
-	protected void setConfigurationProvider(
-			ConfigurationProvider configurationProvider) {
-
-		_configurationProvider = configurationProvider;
 	}
 
 	private NPMResolver _getNPMResolver() {
@@ -239,11 +239,11 @@ public class ServletContextUtil {
 	private ClayTableSerializer _clayTableSerializer;
 	private CommerceDataProviderRegistry _commerceDataProviderRegistry;
 	private CommerceOrderHttpHelper _commerceOrderHttpHelper;
+	private ConfigurationProvider _configurationProvider;
 	private CPContentHelper _cpContentHelper;
 	private FilterFactoryRegistry _filterFactoryRegistry;
 	private NPMResolver _npmResolver;
 	private ProductHelper _productHelper;
-	private ConfigurationProvider _configurationProvider;
 	private ServletContext _servletContext;
 
 }
