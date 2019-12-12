@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 
 import ActiveFiltersBar from './components/ActiveFiltersBar.es';
 import BulkActions from './components/BulkActions.es';
@@ -8,24 +8,14 @@ import NavBar from './components/NavBar.es';
 
 const ManagementBar = props => {
 	const {state} = useAppState();
-	const [initialized, setInitialized] = useState(false);
 
 	useEffect(() => {
-		if (!initialized) {
-			return setInitialized(true);
+		if (state.filters.find(filter => filter.slug === 'keyword')) {
+			props.onFiltersChange(state.filters);
 		}
-		if (props.onFilterChange) {
-			const serializedFilters = state.filters.concat({
-				label: '',
-				operator: 'contains',
-				slug: 'keyword',
-				type: 'text',
-				value: state.inputSearch.value
-			});
-			props.onFilterChange(serializedFilters);
-		}
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [initialized, state.inputSearch.value, state]);
+	}, [JSON.stringify(state.filters)]);
 
 	return (
 		<>
@@ -37,7 +27,9 @@ const ManagementBar = props => {
 					totalItemsCount={props.totalItemsCount}
 				/>
 			) : (
-				<NavBar />
+				<NavBar
+					onFiltersChange={props.onFiltersChange}
+				/>
 			)}
 			<ActiveFiltersBar disabled={!!props.selectedItemsId.length} />
 		</>
@@ -46,8 +38,17 @@ const ManagementBar = props => {
 
 const Wrapper = props => {
 	const {filters, ...otherProps} = props;
+
+	const richFilters = filters.concat({
+		invisible: true,
+		label: '',
+		operator: 'startswith',
+		slug: 'keyword',
+		type: 'text',
+	});
+
 	return (
-		<StoreProvider filters={filters}>
+		<StoreProvider filters={richFilters}>
 			<ManagementBar {...otherProps} />
 		</StoreProvider>
 	);
@@ -57,21 +58,15 @@ const baseValues = {
 	label: PropTypes.string,
 	operator: PropTypes.oneOf([
 		'eq',
-		'neq',
-		'isnull',
-		'isnotnull',
-		'lt',
-		'lte',
+		'ne',
 		'gt',
-		'gte',
-		'startswith',
-		'doesnotstartwith',
-		'endswith',
-		'doesnotendwith',
-		'contains',
-		'doesnotcontain',
-		'isempty',
-		'isnotempty'
+		'ge',
+		'lt',
+		'le',
+		'and',
+		'or',
+		'not',
+		'startswith'
 	]),
 	slug: PropTypes.string
 };
@@ -134,11 +129,11 @@ Wrapper.propTypes = {
 			})
 		])
 	),
-	onFilterChange: PropTypes.func.isRequired
+	onFiltersChange: PropTypes.func.isRequired
 };
 
 Wrapper.defaultProps = {
-	filters: []
+	filters: [],
 };
 
 export default Wrapper;

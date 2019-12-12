@@ -25,6 +25,9 @@ export function showNotification(
 	closeable = true,
 	duration = 500
 ) {
+	if(!AUI) {
+		return;
+	}
 	AUI().use('liferay-notification', () => {
 		new Liferay.Notification({
 			closeable,

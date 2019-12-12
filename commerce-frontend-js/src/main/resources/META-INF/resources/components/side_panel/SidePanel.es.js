@@ -231,11 +231,13 @@ export default class SidePanel extends React.Component {
 				ref={this.panel}
 				style={{top: this.state.topDistance}}
 			>
-				<SideMenu
-					active={this.state.active}
-					items={this.props.items}
-					open={this.open}
-				/>
+				{this.props.items && this.props.items.length && (
+					<SideMenu
+						active={this.state.active}
+						items={this.props.items}
+						open={this.open}
+					/>
+				)}
 
 				<ClayButton
 					className="btn-close"
@@ -283,5 +285,6 @@ SidePanel.propTypes = {
 	items: PropTypes.any,
 	size: PropTypes.string,
 	spritemap: PropTypes.string,
-	topAnchorSelector: PropTypes.any
+	topAnchorSelector: PropTypes.any,
+	portalWrapperId: PropTypes.string
 }

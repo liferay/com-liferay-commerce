@@ -1,17 +1,50 @@
 import {ClayIconSpriteContext} from '@clayui/icon';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 
 import DatasetDisplayContext from './DatasetDisplayContext.es';
 import ManagementBar from './management_bar/index.es';
 import Pagination from './pagination/index.es';
 import Table from './table/Table.es';
 
+import {createOdataFilterStrings} from '../../utilities/odata.es';
+import {showNotification} from '../../utilities/index.es'
+
+function loadData(apiUrl, filters) {
+	const filterString = createOdataFilterStrings(filters);
+	const authString = `p_auth=${window.Liferay.authToken}`;
+	const url = `${apiUrl}&${authString}&${filterString}`
+
+	return fetch(url)
+		.then(response => response.json())
+}
+
 function DatasetDisplay(props) {
 	const [selectedItemsId, setselectedItemsId] = useState([]);
-
+	const [filters, updateFilters] = useState(props.filters);
+	const [items, updateItems] = useState(props.items)
 	const formRef = useRef(null);
+
+	useEffect(() => {
+		loadData(props.apiUrl, filters.filter(e => !!e.value))
+			.then((dataSetData) => {
+				if(dataSetData instanceof Array) {
+					return updateItems(dataSetData)
+				}
+
+				updateItems(dataSetData.items)
+				//TODO: updatingPagination and filters
+			})
+			.catch((e) => {
+				console.error(e)
+				showNotification(
+					Liferay.Language.get('unexpected-error'),
+					'danger'
+				)
+			})
+
+	}, [filters, props.apiUrl])
 
 	const selectItems = (checked, val) => {
 		if (val === 'table-head-selector') {
@@ -29,11 +62,6 @@ function DatasetDisplay(props) {
 		}
 	};
 
-	function loadData() {
-		console.log('newdata')
-		return;
-	}
-
 	const managementBar = (
 		<ManagementBar
 			actionButton={{
@@ -42,8 +70,8 @@ function DatasetDisplay(props) {
 				onClick: () => {}
 			}}
 			bulkActions={props.bulkActions}
-			filters={props.filters}
-			onFilterChange={() => {}}
+			filters={filters}
+			onFiltersChange={updateFilters}
 			selectAllItems={() => selectItems(true)}
 			selectedItemsId={selectedItemsId}
 			totalItemsCount={props.items.length}
@@ -52,7 +80,7 @@ function DatasetDisplay(props) {
 
 	const table = (
 		<Table
-			items={props.items}
+			items={items}
 			onSelect={selectItems}
 			schema={props.schema}
 			selectable={props.bulkActions && !!props.bulkActions.length}
@@ -65,7 +93,7 @@ function DatasetDisplay(props) {
 			value={{
 				formRef,
 				loadData,
-				sidePanelId: props.sidePanelId
+				sidePanelId: props.sidePanelId,
 			}}
 		>
 			<ClayIconSpriteContext.Provider value={props.spritemap}>
@@ -108,11 +136,9 @@ function DatasetDisplay(props) {
 }
 
 DatasetDisplay.propTypes = {
+	apiUrl: PropTypes.string.isRequired,
 	bulkActions: PropTypes.array,
 	currentPage: PropTypes.number.isRequired,
-	// dataProviderKey: PropTypes.string.isRequired,
-	// dataSetAPI: PropTypes.string.isRequired,
-	// disableAJAX: PropTypes.bool,
 	filters: PropTypes.array,
 	id: PropTypes.string.isRequired,
 	items: PropTypes.array.isRequired,

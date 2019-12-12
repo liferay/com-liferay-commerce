@@ -347,7 +347,7 @@ CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder()
 			portalWrapperId: "<portlet:namespace />side-panel-wrapper",
 			size: "lg",
 			spritemap: "<%= themeDisplay.getPathThemeImages() + "/clay/icons.svg" %>",
-			topAnchor: document.getElementById('commerce-admin-header')
+			topAnchorSelector: "#commerce-admin-header"
 		}
 	);
 </aui:script>

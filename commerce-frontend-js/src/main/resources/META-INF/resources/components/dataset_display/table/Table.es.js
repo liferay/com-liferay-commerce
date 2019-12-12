@@ -10,7 +10,6 @@ import Default from './cells/Default.es';
 import Dropdown from './cells/Dropdown.es';
 import ImageText from './cells/ImageText.es';
 import Link from './cells/Link.es';
-import ModalLink from './cells/ModalLink.es';
 import Price from './cells/Price.es';
 import SidePanelLink from './cells/SidePanelLink.es';
 import {ClayTooltipProvider} from '@clayui/tooltip';

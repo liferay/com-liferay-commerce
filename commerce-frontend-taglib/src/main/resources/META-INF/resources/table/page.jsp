@@ -26,10 +26,83 @@
 			<%= jsonSerializer.serializeDeep(clayTableContext) %>,
 			{
 				dataProviderKey : "<%= dataProviderKey %>",
-				dataSetAPI : "<%= dataSetAPI %>",
+				apiUrl : "<%= dataSetAPI %>",
 				deltaParam : "<%= deltaParam %>",
 				disableAJAX : <%= disableAJAX %>,
-				filter : <%= jsonSerializer.serializeDeep(filter) %>,
+				// filters : <%= jsonSerializer.serializeDeep(filter) %>,
+				filters : [
+					{
+						label: 'Text test',
+						operator: 'contains',
+						slug: 'text-test',
+						type: 'text',
+						value: 'Test input'
+					},
+					{
+						items: [
+							{
+								label: 'First option',
+								value: 'first-option'
+							},
+							{
+								label: 'Second option',
+								value: 'second-option'
+							}
+						],
+						label: 'Select test',
+						operator: 'eq',
+						slug: 'select-test',
+						type: 'select',
+						value: 'second-option'
+					},
+					{
+						items: [
+							{
+								label: 'First option',
+								value: 'first-option'
+							},
+							{
+								label: 'Second option',
+								value: 'second-option'
+							}
+						],
+						label: 'Radio test',
+						operator: 'eq',
+						slug: 'radio-test',
+						type: 'radio'
+					},
+					{
+						items: [
+							{
+								label: 'First option',
+								value: 'first-option'
+							},
+							{
+								label: 'Second option',
+								value: 'second-option'
+							},
+							{
+								label: 'Third option',
+								value: 'third-option'
+							}
+						],
+						label: 'Checkbox test',
+						operator: 'contains',
+						slug: 'checkbox-test',
+						type: 'checkbox',
+						value: ['first-option', 'third-option']
+					},
+					{
+						inputText: '$',
+						label: 'Number test',
+						max: 200,
+						min: 20,
+						operator: 'eq',
+						slug: 'number-test',
+						type: 'number',
+						value: 123
+					}
+				],
 				itemPerPage : <%= itemPerPage %>,
 				items : <%= jsonSerializer.serializeDeep(items) %>,
 				namespace : "<%= namespace %>",
