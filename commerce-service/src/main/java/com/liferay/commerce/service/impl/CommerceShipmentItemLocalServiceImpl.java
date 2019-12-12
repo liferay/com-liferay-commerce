@@ -14,8 +14,10 @@
 
 package com.liferay.commerce.service.impl;
 
+import com.liferay.commerce.constants.CommerceShipmentConstants;
 import com.liferay.commerce.exception.CommerceShipmentInactiveWarehouseException;
 import com.liferay.commerce.exception.CommerceShipmentItemQuantityException;
+import com.liferay.commerce.exception.CommerceShipmentStatusException;
 import com.liferay.commerce.inventory.engine.CommerceInventoryEngine;
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouse;
 import com.liferay.commerce.inventory.model.CommerceInventoryWarehouseItem;
@@ -23,6 +25,7 @@ import com.liferay.commerce.inventory.service.CommerceInventoryBookedQuantityLoc
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseItemLocalService;
 import com.liferay.commerce.inventory.service.CommerceInventoryWarehouseLocalService;
 import com.liferay.commerce.model.CommerceOrderItem;
+import com.liferay.commerce.model.CommerceShipment;
 import com.liferay.commerce.model.CommerceShipmentItem;
 import com.liferay.commerce.service.base.CommerceShipmentItemLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -65,8 +68,10 @@ public class CommerceShipmentItemLocalServiceImpl
 				commerceOrderItemId);
 
 		validate(
-			commerceOrderItem, commerceInventoryWarehouseId, quantity,
-			quantity);
+			commerceOrderItem,
+			commerceShipmentLocalService.getCommerceShipment(
+				commerceShipmentId),
+			commerceInventoryWarehouseId, quantity, quantity);
 
 		long commerceShipmentItemId = counterLocalService.increment();
 
@@ -129,16 +134,20 @@ public class CommerceShipmentItemLocalServiceImpl
 
 		commerceShipmentItemPersistence.remove(commerceShipmentItem);
 
+		// Commerce order item
+
+		CommerceOrderItem commerceOrderItem =
+			commerceOrderItemLocalService.fetchCommerceOrderItem(
+				commerceShipmentItem.getCommerceOrderItemId());
+
 		if (!restoreStockQuantity) {
-			commerceOrderItemLocalService.updateCommerceOrderItem(
-				commerceShipmentItem.getCommerceOrderItemId(), 0);
+			if (commerceOrderItem != null) {
+				commerceOrderItemLocalService.updateCommerceOrderItem(
+					commerceShipmentItem.getCommerceOrderItemId(), 0);
+			}
 
 			return commerceShipmentItem;
 		}
-
-		// Commerce order item
-
-		CommerceOrderItem commerceOrderItem = null;
 
 		int shippedQuantity = commerceShipmentItem.getQuantity() * -1;
 
@@ -270,7 +279,7 @@ public class CommerceShipmentItemLocalServiceImpl
 				commerceShipmentItem.getCommerceOrderItemId());
 
 		validate(
-			commerceOrderItem,
+			commerceOrderItem, commerceShipmentItem.getCommerceShipment(),
 			commerceShipmentItem.getCommerceInventoryWarehouseId(), quantity,
 			newQuantity);
 
@@ -288,6 +297,7 @@ public class CommerceShipmentItemLocalServiceImpl
 
 	protected void validate(
 			CommerceOrderItem commerceOrderItem,
+			CommerceShipment commerceShipment,
 			long commerceInventoryWarehouseId, int quantity, int newQuantity)
 		throws PortalException {
 
@@ -313,6 +323,13 @@ public class CommerceShipmentItemLocalServiceImpl
 			(newQuantity > commerceInventoryWarehouseQuantity)) {
 
 			throw new CommerceShipmentItemQuantityException();
+		}
+
+		if ((commerceShipment != null) &&
+			(commerceShipment.getStatus() !=
+				CommerceShipmentConstants.SHIPMENT_STATUS_PROCESSING)) {
+
+			throw new CommerceShipmentStatusException();
 		}
 	}
 
