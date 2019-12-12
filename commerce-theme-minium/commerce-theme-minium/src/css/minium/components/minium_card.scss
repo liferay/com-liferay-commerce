@@ -6,7 +6,7 @@ $card-spacer: 20px;
 	background: white;
 	border-radius: 5px;
 	box-shadow: 0 17px 56px 0 rgba(52, 55, 62, 0);
-	color: $color-fg-alt;
+	color: $color-fg;
 	display: flex;
 	flex-direction: column;
 	height: 100%;
@@ -34,8 +34,14 @@ $card-spacer: 20px;
 			border-top-left-radius: 0px;
 			border-top-right-radius: 0px;
 			display: flex;
+			font-size: 11px !important;
+			height: 50px !important;
 			margin-top: 12px;
 			width: 100%;
+		}
+
+		.quantity-selector .btn {
+			width: 40px;
 		}
 	}
 
@@ -126,11 +132,12 @@ $card-spacer: 20px;
 	}
 
 	&__sku {
+		color: $color-fg-alt;
 		display: inline-block;
 		font-size: 12px;
 		line-height: 1;
-		margin-bottom: 8px;
-		margin-top: 24px;
+		margin-bottom: 5px;
+		margin-top: 14px;
 	}
 
 	&__empty_sku {
@@ -145,9 +152,9 @@ $card-spacer: 20px;
 	&__name {
 		color: inherit;
 		font-size: 17px;
-		font-weight: 600;
+		font-weight: 500;
 		line-height: 1;
-		margin-bottom: 15px;
+		margin-bottom: 8px;
 
 		&:hover {
 		 color: inherit;
@@ -176,8 +183,7 @@ $card-spacer: 20px;
 	}
 
 	&__price {
-		line-height: 1;
-		margin: 8px 0 20px 0;
+		line-height: 21px;
 		min-height: 33px;
 
 		.price {
@@ -190,17 +196,21 @@ $card-spacer: 20px;
 			}
 
 			&-value {
+				font-weight: 500 !important;
+
+				&-discount,
+				&-inactive {
+					display: none;
+				}
+
 				&-final,
 				&-promo {
-					margin-left: 10px;
+					margin-right: 10px !important;
 				}
 
-				&-inactive {
+				&-inactive:nth-child(2) {
+					display: block !important;
 					font-size: 1em;
-				}
-
-				&-discount {
-					display: none;
 				}
 			}
 		}
