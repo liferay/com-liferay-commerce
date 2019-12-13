@@ -396,8 +396,12 @@ public class CommerceSubscriptionEntryDisplayContext {
 
 		CommercePaymentMethodGroupRel commercePaymentMethodGroupRel =
 			_commercePaymentMethodGroupRelLocalService.
-				getCommercePaymentMethodGroupRel(
-					_themeDisplay.getScopeGroupId(), engineKey);
+				fetchCommercePaymentMethodGroupRel(
+					_cpRequestHelper.getScopeGroupId(), engineKey);
+
+		if (commercePaymentMethodGroupRel == null) {
+			return false;
+		}
 
 		return commercePaymentMethodGroupRel.isActive();
 	}
