@@ -26,14 +26,21 @@ import com.liferay.commerce.frontend.Pagination;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.order.content.web.internal.frontend.util.CommerceOrderClayTableUtil;
 import com.liferay.commerce.order.content.web.internal.model.OrderItem;
+import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CPSubscriptionInfo;
 import com.liferay.commerce.product.util.CPInstanceHelper;
+import com.liferay.commerce.product.util.CPSubscriptionType;
+import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
 import com.liferay.commerce.service.CommerceOrderItemService;
+import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.math.BigDecimal;
@@ -169,6 +176,39 @@ public class CommercePlacedOrderItemClayTable
 							themeDisplay);
 				}
 
+				CPInstance cpInstance = commerceOrderItem.getCPInstance();
+
+				CPSubscriptionInfo cpSubscriptionInfo =
+					cpInstance.getCPSubscriptionInfo();
+
+				String formattedSubscriptionPeriod = null;
+
+				if (cpSubscriptionInfo != null) {
+					String period = StringPool.BLANK;
+
+					CPSubscriptionType cpSubscriptionType =
+						_cpSubscriptionTypeRegistry.getCPSubscriptionType(
+							cpSubscriptionInfo.getSubscriptionType());
+
+					if (cpSubscriptionType != null) {
+						period = cpSubscriptionType.getLabel(
+							themeDisplay.getLocale());
+
+						if (cpSubscriptionInfo.getSubscriptionLength() > 1) {
+							period = LanguageUtil.get(
+								locale,
+								StringUtil.toLowerCase(period) +
+									CharPool.LOWER_CASE_S);
+						}
+					}
+
+					formattedSubscriptionPeriod = LanguageUtil.format(
+						locale, "every-x-x",
+						new Object[] {
+							cpSubscriptionInfo.getSubscriptionLength(), period
+						});
+				}
+
 				orderItems.add(
 					new OrderItem(
 						commerceOrderItem.getCommerceOrderItemId(),
@@ -181,7 +221,7 @@ public class CommercePlacedOrderItemClayTable
 						_cpInstanceHelper.getCPInstanceThumbnailSrc(
 							commerceOrderItem.getCPInstanceId()),
 						viewShipmentURL, commerceOrderItem.getShippedQuantity(),
-						null));
+						null, formattedSubscriptionPeriod));
 			}
 		}
 		catch (Exception e) {
@@ -207,5 +247,8 @@ public class CommercePlacedOrderItemClayTable
 
 	@Reference
 	private CPInstanceHelper _cpInstanceHelper;
+
+	@Reference
+	private CPSubscriptionTypeRegistry _cpSubscriptionTypeRegistry;
 
 }

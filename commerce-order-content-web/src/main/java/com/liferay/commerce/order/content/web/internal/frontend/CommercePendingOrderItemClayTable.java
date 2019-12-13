@@ -31,10 +31,14 @@ import com.liferay.commerce.order.CommerceOrderValidatorRegistry;
 import com.liferay.commerce.order.CommerceOrderValidatorResult;
 import com.liferay.commerce.order.content.web.internal.frontend.util.CommerceOrderClayTableUtil;
 import com.liferay.commerce.order.content.web.internal.model.OrderItem;
-import com.liferay.commerce.price.CommerceProductPriceCalculation;
+import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CPSubscriptionInfo;
 import com.liferay.commerce.product.util.CPInstanceHelper;
+import com.liferay.commerce.product.util.CPSubscriptionType;
+import com.liferay.commerce.product.util.CPSubscriptionTypeRegistry;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceOrderService;
+import com.liferay.petra.string.CharPool;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -48,12 +52,14 @@ import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.math.BigDecimal;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.portlet.ActionRequest;
@@ -257,6 +263,41 @@ public class CommercePendingOrderItemClayTable
 						commerceOrderValidatorResult.getLocalizedMessage());
 				}
 
+				CPInstance cpInstance = commerceOrderItem.getCPInstance();
+
+				CPSubscriptionInfo cpSubscriptionInfo =
+					cpInstance.getCPSubscriptionInfo();
+
+				String formattedSubscriptionPeriod = null;
+
+				if (cpSubscriptionInfo != null) {
+					Locale locale = themeDisplay.getLocale();
+
+					String period = StringPool.BLANK;
+
+					CPSubscriptionType cpSubscriptionType =
+						_cpSubscriptionTypeRegistry.getCPSubscriptionType(
+							cpSubscriptionInfo.getSubscriptionType());
+
+					if (cpSubscriptionType != null) {
+						period = cpSubscriptionType.getLabel(
+							themeDisplay.getLocale());
+
+						if (cpSubscriptionInfo.getSubscriptionLength() > 1) {
+							period = LanguageUtil.get(
+								locale,
+								StringUtil.toLowerCase(period) +
+									CharPool.LOWER_CASE_S);
+						}
+					}
+
+					formattedSubscriptionPeriod = LanguageUtil.format(
+						locale, "every-x-x",
+						new Object[] {
+							cpSubscriptionInfo.getSubscriptionLength(), period
+						});
+				}
+
 				orderItems.add(
 					new OrderItem(
 						commerceOrderItem.getCommerceOrderItemId(),
@@ -271,7 +312,8 @@ public class CommercePendingOrderItemClayTable
 						CommerceOrderClayTableUtil.getViewShipmentURL(
 							commerceOrderItem.getCommerceOrderId(),
 							themeDisplay),
-						0, ArrayUtil.toStringArray(errorMessages)));
+						0, ArrayUtil.toStringArray(errorMessages),
+						formattedSubscriptionPeriod));
 			}
 		}
 		catch (Exception e) {
@@ -321,10 +363,10 @@ public class CommercePendingOrderItemClayTable
 	private CommerceOrderValidatorRegistry _commerceOrderValidatorRegistry;
 
 	@Reference
-	private CommerceProductPriceCalculation _commerceProductPriceCalculation;
+	private CPInstanceHelper _cpInstanceHelper;
 
 	@Reference
-	private CPInstanceHelper _cpInstanceHelper;
+	private CPSubscriptionTypeRegistry _cpSubscriptionTypeRegistry;
 
 	@Reference(
 		target = "(model.class.name=com.liferay.commerce.model.CommerceOrder)"

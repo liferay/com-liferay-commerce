@@ -195,5 +195,12 @@
 				</span>
 			</span>
 		{/if}
+		{if isNonnull($item.formattedSubscriptionPeriod) and $item.formattedSubscriptionPeriod != ''}
+			<span class="commerce-subscription-info">
+				<span class="product-subscription-period">
+					({$item.formattedSubscriptionPeriod})
+				</span>
+			</span>
+		{/if}
 	</td>
 {/deltemplate}
