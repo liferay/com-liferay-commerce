@@ -38,7 +38,7 @@ const NumberFilter = props => {
 				<ClayButton
 					className="btn-sm"
 					disabled={value === props.value}
-					onClick={() => actions.updateFilterValue(props.slug, value)}
+					onClick={() => actions.updateFilterValue(props.id, value)}
 				>
 					{props.panelType === 'edit'
 						? Liferay.Language.get('edit-filter')

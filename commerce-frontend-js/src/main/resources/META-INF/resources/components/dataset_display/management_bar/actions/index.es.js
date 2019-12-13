@@ -1,13 +1,12 @@
 export const actionsDefinition = {
 	RESET_FILTERS_VALUE: 'resetFiltersValue',
 	UPDATE_FILTER_VALUE: 'updateFilterValue',
-	UPDATE_INPUT_SEARCH_VALUE: 'updateInputSearchValue'
 };
 
-const updateFilterValue = dispatch => (slug, value = null) =>
+const updateFilterValue = dispatch => (id, value = null) =>
 	dispatch({
 		payload: {
-			slug,
+			id,
 			value
 		},
 		type: actionsDefinition.UPDATE_FILTER_VALUE

@@ -43,7 +43,7 @@ const DateFilter = props => {
 			<div className="mt-2">
 				<ClayButton
 					className="btn-sm"
-					onClick={() => actions.updateFilterValue(props.slug, value)}
+					onClick={() => actions.updateFilterValue(props.id, value)}
 					// disabled={prettifyDateTimeValue(value) === prettifyDateTimeValue(props.value)}
 				>
 					{props.panelType === 'edit'

@@ -5,7 +5,7 @@ function Checkbox(props) {
 	return (
 		<ClayCheckbox
 			{...props}
-			onChange={() => props.onSelect(!props.checked, props.value)}
+			onChange={() => props.onSelect(props.value, !props.checked)}
 		/>
 	);
 }

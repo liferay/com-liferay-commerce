@@ -23,7 +23,7 @@ const Resume = props => {
 			)}
 			closeButtonProps={{
 				disabled: props.disabled,
-				onClick: () => actions.updateFilterValue(props.slug, null)
+				onClick: () => actions.updateFilterValue(props.id, null)
 			}}
 			role="button"
 		>

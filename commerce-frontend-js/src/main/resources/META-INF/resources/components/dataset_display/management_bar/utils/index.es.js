@@ -8,7 +8,7 @@ import RadioFilter from '../components/filters/Radio.es';
 import SelectFilter from '../components/filters/Select.es';
 import TextFilter from '../components/filters/Text.es';
 
-export const filterSlugToComponentMap = {
+export const filterIdToComponentMap = {
 	checkbox: CheckboxesFilter,
 	date: DateFilter,
 	'date-time': DateTimeFilter,
@@ -19,7 +19,7 @@ export const filterSlugToComponentMap = {
 };
 
 export const renderFilter = (item, panelType) => {
-	const Filter = filterSlugToComponentMap[item.type];
+	const Filter = filterIdToComponentMap[item.type];
 
 	return <Filter {...item} panelType={panelType} />;
 };

@@ -19,17 +19,17 @@ datasetDisplayLauncher('dataset-display', 'dataset-display-root-id', {
 			url: '/delete',
 		}
 	],
-	currentPage: 1,
 	fetchAtLoading: true,
 	filters: [
 		{
+			id: 'text-test',
 			label: 'Text test',
 			operator: 'eq',
-			slug: 'text-test',
 			type: 'text',
 			value: 'Test input'
 		},
 		{
+			id: 'select-test',
 			items: [
 				{
 					label: 'First option',
@@ -42,11 +42,11 @@ datasetDisplayLauncher('dataset-display', 'dataset-display-root-id', {
 			],
 			label: 'Select test',
 			operator: 'eq',
-			slug: 'select-test',
 			type: 'select',
 			value: 'second-option'
 		},
 		{
+			id: 'radio-test',
 			items: [
 				{
 					label: 'First option',
@@ -59,10 +59,10 @@ datasetDisplayLauncher('dataset-display', 'dataset-display-root-id', {
 			],
 			label: 'Radio test',
 			operator: 'eq',
-			slug: 'radio-test',
 			type: 'radio'
 		},
 		{
+			id: 'checkbox-test',
 			items: [
 				{
 					label: 'First option',
@@ -79,20 +79,25 @@ datasetDisplayLauncher('dataset-display', 'dataset-display-root-id', {
 			],
 			label: 'Checkbox test',
 			operator: 'eq',
-			slug: 'checkbox-test',
 			type: 'checkbox',
 			value: ['first-option', 'third-option']
 		},
 		{
+			id: 'number-test',
 			inputText: '$',
 			label: 'Number test',
 			max: 200,
 			min: 20,
 			operator: 'gt',
-			slug: 'number-test',
 			type: 'number',
 			value: 123
 		},
+		{
+			id: 'product-name',
+			main: true,
+			placeholder: 'Product name',
+			value: 'Test input',
+		}
 		// {
 		// 	label: 'Date test',
 		// 	operator: 'eq',
@@ -477,39 +482,33 @@ datasetDisplayLauncher('dataset-display', 'dataset-display-root-id', {
 		}
 	],
 	pageSize: 5,
-	paginationEntries: [
-		{
-			href:
-				'http://localhost:8080/group/test-1/pending-orders?p_p_id=com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet_delta=5',
-			label: 5
-		},
-		{
-			href:
-				'http://localhost:8080/group/test-1/pending-orders?p_p_id=com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet_delta=10',
-			label: 10
-		},
-		{
-			href:
-				'http://localhost:8080/group/test-1/pending-orders?p_p_id=com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet_delta=20',
-			label: 20
-		},
-		{
-			href:
-				'http://localhost:8080/group/test-1/pending-orders?p_p_id=com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet_delta=30',
-			label: 30
-		},
-		{
-			href:
-				'http://localhost:8080/group/test-1/pending-orders?p_p_id=com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet_delta=50',
-			label: 50
-		},
-		{
-			href:
-				'http://localhost:8080/group/test-1/pending-orders?p_p_id=com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet_delta=75',
-			label: 75
-		}
-	],
-	paginationSelectedEntry: 0,
+	pagination: {
+		deltas: [
+			{
+				label: 5
+			},
+			{
+				label: 10
+			},
+			{
+				label: 20
+			},
+			{
+				label: 30
+			},
+			{
+				label: 50
+			},
+			{
+				href:
+					'http://localhost:8080/group/test-1/pending-orders?p_p_id=com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet_delta=75',
+				label: 75
+			}
+		],
+		initialDelta: 10,
+		initialPageNumber: 1,
+		initialTotalItems: 40
+	},
 	schema: {
 		fields: [
 			{
@@ -556,24 +555,24 @@ datasetDisplayLauncher('dataset-display', 'dataset-display-root-id', {
 sidePanelLauncher('sidePanel', 'side-panel-root-id', {
 	containerSelector: '.smart-table-wrapper',
 	id: 'sidePanelTestId',
+	items: [
+		{
+			href: '/side-panel/comments.html',
+			icon: 'comments',
+			slug: 'comments',
+		},
+		{
+			href: '/side-panel/edit.html',
+			icon: 'pencil',
+			slug: 'edit',
+		},
+		{
+			href: '/side-panel/changelog.html',
+			icon: 'restore',
+			slug: 'changelog',
+		},
+	],
 	size: 'md',
 	spritemap: './assets/icons.svg',
 	topAnchorSelector: '.top-anchor',
-	items: [
-		{
-			slug: 'comments',
-			href: '/side-panel/comments.html',
-			icon: 'comments'
-		},
-		{
-			slug: 'edit',
-			href: '/side-panel/edit.html',
-			icon: 'pencil'
-		},
-		{
-			slug: 'changelog',
-			href: '/side-panel/changelog.html',
-			icon: 'restore'
-		},
-	]
 });

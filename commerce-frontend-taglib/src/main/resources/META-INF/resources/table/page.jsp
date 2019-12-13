@@ -25,16 +25,13 @@
 		Object.assign(
 			<%= jsonSerializer.serializeDeep(clayTableContext) %>,
 			{
-				dataProviderKey : "<%= dataProviderKey %>",
 				apiUrl : "<%= dataSetAPI %>",
-				deltaParam : "<%= deltaParam %>",
-				disableAJAX : <%= disableAJAX %>,
 				// filters : <%= jsonSerializer.serializeDeep(filter) %>,
 				filters : [
 					{
 						label: 'Text test',
 						operator: 'contains',
-						slug: 'text-test',
+						id: 'text-test',
 						type: 'text',
 						value: 'Test input'
 					},
@@ -51,7 +48,7 @@
 						],
 						label: 'Select test',
 						operator: 'eq',
-						slug: 'select-test',
+						id: 'select-test',
 						type: 'select',
 						value: 'second-option'
 					},
@@ -68,7 +65,7 @@
 						],
 						label: 'Radio test',
 						operator: 'eq',
-						slug: 'radio-test',
+						id: 'radio-test',
 						type: 'radio'
 					},
 					{
@@ -88,7 +85,7 @@
 						],
 						label: 'Checkbox test',
 						operator: 'contains',
-						slug: 'checkbox-test',
+						id: 'checkbox-test',
 						type: 'checkbox',
 						value: ['first-option', 'third-option']
 					},
@@ -98,22 +95,24 @@
 						max: 200,
 						min: 20,
 						operator: 'eq',
-						slug: 'number-test',
+						id: 'number-test',
 						type: 'number',
 						value: 123
 					}
 				],
-				itemPerPage : <%= itemPerPage %>,
+				dataProviderKey : "<%= dataProviderKey %>",
+				id : "<%= tableName %>",
 				items : <%= jsonSerializer.serializeDeep(items) %>,
-				namespace : "<%= namespace %>",
-				pageNumber : <%= pageNumber %>,
-				paginationEntries : <%= jsonSerializer.serializeDeep(paginationEntries) %>,
-				paginationSelectedEntry : <%= paginationSelectedEntry %>,
-				portletURL : "<%= portletURL %>",
 				showPagination : <%= showPagination %>,
+				pagination : {
+					delta : <%= itemPerPage %>,
+					deltas : <%= jsonSerializer.serializeDeep(paginationEntries) %>,
+					initialPageNumber : <%= pageNumber %>,
+					initialTotalItems : <%= totalItems %>
+				},
+				namespace : "<%= namespace %>",
+				portletURL : "<%= portletURL %>",
 				spritemap : "<%= spritemap %>",
-				tableName : "<%= tableName %>",
-				totalItems : <%= totalItems %>
 			}
 		)
 	);

@@ -15,7 +15,7 @@ export interface DateTimeFormat {
 }
 
 export interface BaseFilterProps extends React.HTMLAttributes<HTMLDivElement>{
-	slug: string,
+	key: string,
 	label: string,
 	operator:
 		'eq'

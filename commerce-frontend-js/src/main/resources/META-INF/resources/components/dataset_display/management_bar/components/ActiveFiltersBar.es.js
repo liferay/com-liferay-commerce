@@ -8,7 +8,7 @@ const ActiveFiltersBar = props => {
 	const {actions, state} = getAppContext();
 
 	const filtersActive = state.filters.reduce(
-		(acc, filter) => (filter.value && !filter.invisible ? acc.concat(filter.slug) : acc),
+		(acc, filter) => ((filter.value && !filter.invisible && !filter.main) ? acc.concat(filter.id) : acc),
 		[]
 	);
 
@@ -17,22 +17,22 @@ const ActiveFiltersBar = props => {
 			<ul className="tbar-nav">
 				<li className="p-0 tbar-item tbar-item-expand">
 					<div className="tbar-section">
-						{filtersActive.map(slug => {
+						{filtersActive.map(id => {
 							const filter = state.filters.reduce(
 								(found, filter) =>
 									found ||
-									(filter.slug === slug ? filter : null),
+									(filter.id === id ? filter : null),
 								null
 							);
 
 							if (!filter) {
-								throw new Error(`Filter "${slug}" not found.`);
+								throw new Error(`Filter "${id}" not found.`);
 							}
 
 							return (
 								<FilterResume
 									disabled={props.disabled}
-									key={filter.slug}
+									key={filter.id}
 									{...filter}
 								/>
 							);
