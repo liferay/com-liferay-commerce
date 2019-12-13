@@ -35,6 +35,7 @@ import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.service.CommerceOrderItemService;
 import com.liferay.commerce.service.CommerceOrderService;
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -153,13 +154,9 @@ public class CommerceCartResource {
 			_commerceOrderItemService.deleteCommerceOrderItem(
 				commerceOrderItem.getCommerceOrderItemId(), commerceContext);
 
-			PortletURL portletURL =
-				_commerceOrderHttpHelper.getCommerceCartPortletURL(
-					themeDisplay.getScopeGroupId(), httpServletRequest,
-					commerceOrder);
-
 			cart = _commerceCartResourceUtil.getCart(
-				commerceOrder.getCommerceOrderId(), portletURL.toString(),
+				commerceOrder.getCommerceOrderId(),
+				_getDetailsURL(commerceOrder, themeDisplay),
 				themeDisplay.getLocale(), commerceContext, true);
 		}
 		catch (Exception e) {
@@ -201,16 +198,11 @@ public class CommerceCartResource {
 
 			themeDisplay.setScopeGroupId(commerceChannel.getSiteGroupId());
 
-			PortletURL portletURL =
-				_commerceOrderHttpHelper.getCommerceCartPortletURL(
-					themeDisplay.getScopeGroupId(), httpServletRequest,
-					commerceOrder);
-
 			boolean valid = _commerceOrderValidatorRegistry.isValid(
 				themeDisplay.getLocale(), commerceOrder);
 
 			cart = _commerceCartResourceUtil.getCart(
-				commerceOrderId, portletURL.toString(),
+				commerceOrderId, _getDetailsURL(commerceOrder, themeDisplay),
 				themeDisplay.getLocale(), commerceContext, valid);
 		}
 		catch (Exception e) {
@@ -305,13 +297,9 @@ public class CommerceCartResource {
 				commerceOrderItem.getCommerceOrderItemId(), quantity,
 				commerceContext, serviceContext);
 
-			PortletURL portletURL =
-				_commerceOrderHttpHelper.getCommerceCartPortletURL(
-					themeDisplay.getScopeGroupId(), httpServletRequest,
-					commerceOrder);
-
 			cart = _commerceCartResourceUtil.getCart(
-				commerceOrder.getCommerceOrderId(), portletURL.toString(),
+				commerceOrder.getCommerceOrderId(),
+				_getDetailsURL(commerceOrder, themeDisplay),
 				themeDisplay.getLocale(), commerceContext, true);
 		}
 		catch (Exception e) {
@@ -389,13 +377,9 @@ public class CommerceCartResource {
 					commerceOrder.getCommerceOrderId(), cpInstanceId, quantity,
 					0, options, commerceContext, serviceContext);
 
-			PortletURL portletURL =
-				_commerceOrderHttpHelper.getCommerceCartPortletURL(
-					themeDisplay.getScopeGroupId(), httpServletRequest,
-					commerceOrder);
-
 			cart = _commerceCartResourceUtil.getCart(
-				commerceOrderItem.getCommerceOrderId(), portletURL.toString(),
+				commerceOrderItem.getCommerceOrderId(),
+				_getDetailsURL(commerceOrder, themeDisplay),
 				themeDisplay.getLocale(), commerceContext, true);
 		}
 		catch (Exception e) {
@@ -454,6 +438,22 @@ public class CommerceCartResource {
 		}
 
 		return errorMessages;
+	}
+
+	private String _getDetailsURL(
+			CommerceOrder commerceOrder, ThemeDisplay themeDisplay)
+		throws PortalException {
+
+		PortletURL portletURL =
+			_commerceOrderHttpHelper.getCommerceCartPortletURL(
+				themeDisplay.getScopeGroupId(), themeDisplay.getRequest(),
+				commerceOrder);
+
+		if (portletURL != null) {
+			return portletURL.toString();
+		}
+
+		return _portal.getHomeURL(themeDisplay.getRequest());
 	}
 
 	private static final ObjectMapper _OBJECT_MAPPER = new ObjectMapper() {
