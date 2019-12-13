@@ -71,6 +71,12 @@ public class CommerceContextImpl implements CommerceContext {
 	}
 
 	@Override
+	public CommerceChannel fetchCommerceChannel() throws PortalException {
+		return _commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
+			getSiteGroupId());
+	}
+
+	@Override
 	public CommerceAccount getCommerceAccount() throws PortalException {
 		if (_commerceAccount != null) {
 			return _commerceAccount;

@@ -19,6 +19,7 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.commerce.account.model.CommerceAccount;
 import com.liferay.commerce.currency.model.CommerceCurrency;
 import com.liferay.commerce.model.CommerceOrder;
+import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.portal.kernel.exception.PortalException;
 
 import java.io.Serializable;
@@ -29,6 +30,8 @@ import java.io.Serializable;
  */
 @ProviderType
 public interface CommerceContext extends Serializable {
+
+	public CommerceChannel fetchCommerceChannel() throws PortalException;
 
 	public CommerceAccount getCommerceAccount() throws PortalException;
 

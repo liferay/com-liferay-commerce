@@ -43,6 +43,11 @@ public class TestCommerceContext implements CommerceContext {
 	}
 
 	@Override
+	public CommerceChannel fetchCommerceChannel() throws PortalException {
+		return _commerceChannel;
+	}
+
+	@Override
 	public CommerceAccount getCommerceAccount() {
 		return _commerceAccount;
 	}

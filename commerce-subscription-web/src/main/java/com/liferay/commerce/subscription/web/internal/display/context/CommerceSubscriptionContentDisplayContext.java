@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -162,21 +163,26 @@ public class CommerceSubscriptionContentDisplayContext {
 		OrderByComparator<CommerceSubscriptionEntry> orderByComparator =
 			new CommerceSubscriptionEntryCreateDateComparator();
 
-		List<CommerceSubscriptionEntry> subscriptionEntries =
-			_commerceSubscriptionEntryService.getCommerceSubscriptionEntries(
-				_cpRequestHelper.getCompanyId(),
-				_cpRequestHelper.getChannelGroupId(),
-				_cpRequestHelper.getUserId(), _searchContainer.getStart(),
-				_searchContainer.getEnd(), orderByComparator);
+		long channelGroupId = _cpRequestHelper.fetchChannelGroupId();
+		List<CommerceSubscriptionEntry> subscriptionEntries = new ArrayList<>();
+		int subscriptionEntriesCount = 0;
+
+		if (channelGroupId > 0) {
+			subscriptionEntries =
+				_commerceSubscriptionEntryService.
+					getCommerceSubscriptionEntries(
+						_cpRequestHelper.getCompanyId(), channelGroupId,
+						_cpRequestHelper.getUserId(),
+						_searchContainer.getStart(), _searchContainer.getEnd(),
+						orderByComparator);
+			subscriptionEntriesCount =
+				_commerceSubscriptionEntryService.
+					getCommerceSubscriptionEntriesCount(
+						_cpRequestHelper.getCompanyId(), channelGroupId,
+						_cpRequestHelper.getUserId());
+		}
 
 		_searchContainer.setResults(subscriptionEntries);
-
-		int subscriptionEntriesCount =
-			_commerceSubscriptionEntryService.
-				getCommerceSubscriptionEntriesCount(
-					_cpRequestHelper.getCompanyId(),
-					_cpRequestHelper.getChannelGroupId(),
-					_cpRequestHelper.getUserId());
 
 		_searchContainer.setTotal(subscriptionEntriesCount);
 

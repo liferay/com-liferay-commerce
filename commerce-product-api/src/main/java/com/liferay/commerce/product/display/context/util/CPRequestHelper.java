@@ -14,9 +14,11 @@
 
 package com.liferay.commerce.product.display.context.util;
 
+import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelLocalServiceUtil;
 import com.liferay.portal.kernel.display.context.util.BaseRequestHelper;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.util.JavaConstants;
 
 import javax.portlet.PortletPreferences;
@@ -40,6 +42,24 @@ public class CPRequestHelper extends BaseRequestHelper {
 			JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 		_portletPreferences = _renderRequest.getPreferences();
+	}
+
+	/**
+	 * Fetching channel first, if not found return the default value 0.
+	 */
+	public long fetchChannelGroupId() throws PortalException {
+		CommerceChannel commerceChannel =
+			CommerceChannelLocalServiceUtil.fetchCommerceChannelBySiteGroupId(
+				getScopeGroupId());
+
+		if (commerceChannel == null) {
+			return 0;
+		}
+
+		Group group = CommerceChannelLocalServiceUtil.getCommerceChannelGroup(
+			commerceChannel.getCommerceChannelId());
+
+		return group.getGroupId();
 	}
 
 	public long getChannelGroupId() throws PortalException {

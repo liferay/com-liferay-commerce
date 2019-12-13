@@ -21,6 +21,7 @@ import com.liferay.commerce.context.CommerceContext;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.product.model.CPDefinition;
 import com.liferay.commerce.product.model.CPInstance;
+import com.liferay.commerce.product.model.CommerceChannel;
 import com.liferay.commerce.product.service.CommerceChannelLocalService;
 import com.liferay.commerce.product.type.virtual.model.CPDefinitionVirtualSetting;
 import com.liferay.commerce.product.type.virtual.order.content.web.internal.display.context.util.CommerceVirtualOrderItemContentRequestHelper;
@@ -45,6 +46,7 @@ import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -81,10 +83,21 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 			new CommerceVirtualOrderItemContentRequestHelper(
 				httpServletRequest);
 
-		_commerceAccount = commerceAccountHelper.getCurrentCommerceAccount(
-			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
-				_commerceVirtualOrderItemContentRequestHelper.getSiteGroupId()),
-			httpServletRequest);
+		CommerceChannel commerceChannel =
+			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
+				_commerceVirtualOrderItemContentRequestHelper.getSiteGroupId());
+
+		if (commerceChannel != null) {
+			_commerceAccount = commerceAccountHelper.getCurrentCommerceAccount(
+				_commerceChannelLocalService.
+					getCommerceChannelGroupIdBySiteGroupId(
+						_commerceVirtualOrderItemContentRequestHelper.
+							getSiteGroupId()),
+				httpServletRequest);
+		}
+		else {
+			_commerceAccount = null;
+		}
 
 		PortletDisplay portletDisplay =
 			_commerceVirtualOrderItemContentRequestHelper.getPortletDisplay();
@@ -306,21 +319,35 @@ public class CommerceVirtualOrderItemContentDisplayContext {
 				getLiferayPortletRequest(),
 			getPortletURL(), null, "no-items-were-found");
 
-		long commerceChannelGroupId =
-			_commerceChannelLocalService.getCommerceChannelGroupIdBySiteGroupId(
+		CommerceChannel commerceChannel =
+			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
 				_commerceVirtualOrderItemContentRequestHelper.
 					getScopeGroupId());
 
-		int total =
-			_commerceVirtualOrderItemLocalService.
-				getCommerceVirtualOrderItemsCount(
-					commerceChannelGroupId,
-					_commerceAccount.getCommerceAccountId());
-		List<CommerceVirtualOrderItem> results =
-			_commerceVirtualOrderItemLocalService.getCommerceVirtualOrderItems(
-				commerceChannelGroupId, _commerceAccount.getCommerceAccountId(),
-				_searchContainer.getStart(), _searchContainer.getEnd(),
-				new CommerceVirtualOrderItemCreateDateComparator());
+		int total = 0;
+
+		List<CommerceVirtualOrderItem> results = new ArrayList<>();
+
+		if (commerceChannel != null) {
+			long commerceChannelGroupId =
+				_commerceChannelLocalService.
+					getCommerceChannelGroupIdBySiteGroupId(
+						_commerceVirtualOrderItemContentRequestHelper.
+							getScopeGroupId());
+
+			total =
+				_commerceVirtualOrderItemLocalService.
+					getCommerceVirtualOrderItemsCount(
+						commerceChannelGroupId,
+						_commerceAccount.getCommerceAccountId());
+			results =
+				_commerceVirtualOrderItemLocalService.
+					getCommerceVirtualOrderItems(
+						commerceChannelGroupId,
+						_commerceAccount.getCommerceAccountId(),
+						_searchContainer.getStart(), _searchContainer.getEnd(),
+						new CommerceVirtualOrderItemCreateDateComparator());
+		}
 
 		_searchContainer.setTotal(total);
 		_searchContainer.setResults(results);

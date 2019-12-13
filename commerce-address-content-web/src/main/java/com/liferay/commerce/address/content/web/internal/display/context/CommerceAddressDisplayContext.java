@@ -24,6 +24,7 @@ import com.liferay.commerce.model.CommerceAddress;
 import com.liferay.commerce.model.CommerceCountry;
 import com.liferay.commerce.model.CommerceRegion;
 import com.liferay.commerce.product.display.context.util.CPRequestHelper;
+import com.liferay.commerce.product.exception.NoSuchChannelException;
 import com.liferay.commerce.service.CommerceAddressService;
 import com.liferay.commerce.service.CommerceCountryService;
 import com.liferay.commerce.service.CommerceRegionService;
@@ -41,6 +42,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.portlet.ActionRequest;
@@ -269,16 +271,24 @@ public class CommerceAddressDisplayContext {
 		_searchContainer.setOrderByComparator(orderByComparator);
 		_searchContainer.setOrderByType("desc");
 
-		CommerceAccount commerceAccount = getCommerceAccount();
+		try {
+			CommerceAccount commerceAccount = getCommerceAccount();
 
-		BaseModelSearchResult<CommerceAddress> baseModelSearchResult =
-			_commerceAddressService.searchCommerceAddresses(
-				commerceAccount.getCompanyId(), CommerceAccount.class.getName(),
-				commerceAccount.getCommerceAccountId(), null,
-				_searchContainer.getStart(), _searchContainer.getEnd(), null);
+			BaseModelSearchResult<CommerceAddress> baseModelSearchResult =
+				_commerceAddressService.searchCommerceAddresses(
+					commerceAccount.getCompanyId(),
+					CommerceAccount.class.getName(),
+					commerceAccount.getCommerceAccountId(), null,
+					_searchContainer.getStart(), _searchContainer.getEnd(),
+					null);
 
-		_searchContainer.setTotal(baseModelSearchResult.getLength());
-		_searchContainer.setResults(baseModelSearchResult.getBaseModels());
+			_searchContainer.setTotal(baseModelSearchResult.getLength());
+			_searchContainer.setResults(baseModelSearchResult.getBaseModels());
+		}
+		catch (NoSuchChannelException nsce) {
+			_searchContainer.setTotal(0);
+			_searchContainer.setResults(new ArrayList<>());
+		}
 
 		return _searchContainer;
 	}
