@@ -18,7 +18,7 @@ const reducer = (state = initialState, action) => {
 				filters: state.filters.map(el => ({
 					...el,
 					value:
-						action.payload.slug === el.slug
+						action.payload.id === el.id
 							? action.payload.value
 							: el.value
 				}))
@@ -30,14 +30,6 @@ const reducer = (state = initialState, action) => {
 					...el,
 					value: null
 				}))
-			};
-		case actionsDefinition.UPDATE_INPUT_SEARCH_VALUE:
-			return {
-				...state,
-				inputSearch: {
-					...state.inputSearch,
-					value: action.payload
-				}
 			};
 		default:
 			return state;

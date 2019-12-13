@@ -10,9 +10,7 @@ const ManagementBar = props => {
 	const {state} = useAppState();
 
 	useEffect(() => {
-		if (state.filters.find(filter => filter.slug === 'keyword')) {
-			props.onFiltersChange(state.filters);
-		}
+		props.onFiltersChange(state.filters);
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(state.filters)]);
@@ -39,23 +37,17 @@ const ManagementBar = props => {
 const Wrapper = props => {
 	const {filters, ...otherProps} = props;
 
-	const richFilters = filters.concat({
-		invisible: true,
-		label: '',
-		operator: 'startswith',
-		slug: 'keyword',
-		type: 'text',
-	});
-
 	return (
-		<StoreProvider filters={richFilters}>
+		<StoreProvider filters={filters}>
 			<ManagementBar {...otherProps} />
 		</StoreProvider>
 	);
 };
 
 const baseValues = {
-	label: PropTypes.string,
+	id: PropTypes.string.isRequired,
+	invisible: PropTypes.bool,
+	label: PropTypes.string.isRequired,
 	operator: PropTypes.oneOf([
 		'eq',
 		'ne',
@@ -67,13 +59,23 @@ const baseValues = {
 		'or',
 		'not',
 		'startswith'
-	]),
-	slug: PropTypes.string
+	]).isRequired,
 };
 
 Wrapper.propTypes = {
 	filters: PropTypes.arrayOf(
 		PropTypes.oneOfType([
+			PropTypes.shape({
+				id: PropTypes.string,
+				main: PropTypes.bool,
+				value: PropTypes.string
+			}),
+			PropTypes.shape({
+				...baseValues,
+				inputText: PropTypes.string,
+				type: PropTypes.oneOf(['text']).isRequired,
+				value: PropTypes.string
+			}),
 			PropTypes.shape({
 				...baseValues,
 				inputText: PropTypes.string,

@@ -25,7 +25,7 @@ export function showNotification(
 	closeable = true,
 	duration = 500
 ) {
-	if(!AUI) {
+	if(!window.AUI) {
 		return;
 	}
 	AUI().use('liferay-notification', () => {
@@ -44,8 +44,15 @@ export function showNotification(
 	});
 }
 
-if (!window.Liferay) {
+export function showErrorNotification(e) {
+	console.error(e)
+	showNotification(
+		Liferay.Language.get('unexpected-error'),
+		'danger'
+	)
+}
 
+if (!window.Liferay) {
 	window.Liferay = {
 		Language: {
 			get: v => v

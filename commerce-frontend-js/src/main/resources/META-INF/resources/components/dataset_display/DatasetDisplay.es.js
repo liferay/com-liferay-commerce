@@ -1,20 +1,22 @@
 import {ClayIconSpriteContext} from '@clayui/icon';
+import {ClayPaginationBarWithBasicItems} from '@clayui/pagination-bar';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef, useEffect, useCallback} from 'react';
 
 import DatasetDisplayContext from './DatasetDisplayContext.es';
 import ManagementBar from './management_bar/index.es';
-import Pagination from './pagination/index.es';
 import Table from './table/Table.es';
 
 import {createOdataFilterStrings} from '../../utilities/odata.es';
-import {showNotification} from '../../utilities/index.es'
+import {showNotification} from '../../utilities/index.es';
+import {formatFilters} from '../../utilities/filters.es';
 
-function loadData(apiUrl, filters) {
+function loadData(apiUrl, filters, delta, page = 1) {
 	const filterString = createOdataFilterStrings(filters);
 	const authString = `p_auth=${window.Liferay.authToken}`;
-	const url = `${apiUrl}&${authString}&${filterString}`
+	const pagination = `pageSize=${delta}&page=${page}`
+	const url = `${apiUrl}&${authString}&${pagination}&${filterString}`
 
 	return fetch(url)
 		.then(response => response.json())
@@ -22,19 +24,31 @@ function loadData(apiUrl, filters) {
 
 function DatasetDisplay(props) {
 	const [selectedItemsId, setselectedItemsId] = useState([]);
-	const [filters, updateFilters] = useState(props.filters);
+	const [filters, updateFilters] = useState(formatFilters(props.filters));
 	const [items, updateItems] = useState(props.items)
+	const [pageNumber, setPageNumber] = useState(props.pagination.initialPageNumber || 1);
+	const [delta, setDelta] = useState(props.pagination.initialDelta);
+	const [totalItems, setTotalItems] = useState(props.pagination.initialTotalItems);
 	const formRef = useRef(null);
 
-	useEffect(() => {
-		loadData(props.apiUrl, filters.filter(e => !!e.value))
-			.then((dataSetData) => {
-				if(dataSetData instanceof Array) {
-					return updateItems(dataSetData)
+	function updateDataset(dataSetData) {
+		if(dataSetData instanceof Array) {
+			return updateItems(dataSetData)
+		}
+		setTotalItems(dataSetData)
+		updateItems(dataSetData.items)
+	}
+	
+	function getData(apiUrl, filters, delta, pageNumber, showSuccessNotification = false) {
+		return loadData(apiUrl, filters, delta, pageNumber)
+			.then(updateDataset)
+			.then(() => {
+				if(showSuccessNotification) {
+					showNotification(
+						Liferay.Language.get('table-data-updated'),
+						'success'
+					)
 				}
-
-				updateItems(dataSetData.items)
-				//TODO: updatingPagination and filters
 			})
 			.catch((e) => {
 				console.error(e)
@@ -43,11 +57,15 @@ function DatasetDisplay(props) {
 					'danger'
 				)
 			})
+	};
 
-	}, [filters, props.apiUrl])
+	useEffect(() => {
+		getData(props.apiUrl, filters.filter(e => !!e.value), delta, pageNumber)
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [props.apiUrl, filters, delta, pageNumber])
 
-	const selectItems = (checked, val) => {
-		if (val === 'table-head-selector') {
+	const selectItems = (val, checked) => {
+		if (val === 'all-items') {
 			if (checked) {
 				setselectedItemsId(props.items.map(el => el.id));
 			} else {
@@ -72,7 +90,7 @@ function DatasetDisplay(props) {
 			bulkActions={props.bulkActions}
 			filters={filters}
 			onFiltersChange={updateFilters}
-			selectAllItems={() => selectItems(true)}
+			selectAllItems={() => selectItems('all-items', true)}
 			selectedItemsId={selectedItemsId}
 			totalItemsCount={props.items.length}
 		/>
@@ -92,7 +110,7 @@ function DatasetDisplay(props) {
 		<DatasetDisplayContext.Provider
 			value={{
 				formRef,
-				loadData,
+				loadData: () => getData(props.apiUrl, filters.filter(e => !!e.value), delta, pageNumber, true),
 				sidePanelId: props.sidePanelId,
 			}}
 		>
@@ -116,17 +134,17 @@ function DatasetDisplay(props) {
 				</div>
 				<div className={classNames(props.paginationWrapperCssClasses)}>
 					{props.showPagination && (
-						<Pagination
-							currentPage={props.currentPage}
-							onDeltaChange={() => {}}
-							onEntryChange={() => {}}
-							onPageChange={() => {}}
-							pageSize={props.pageSize}
-							paginationEntries={props.paginationEntries}
-							paginationSelectedEntry={
-								props.paginationSelectedEntry
-							}
-							totalItems={props.totalItems}
+						<ClayPaginationBarWithBasicItems
+							activeDelta={delta}
+							activePage={pageNumber}
+							deltas={props.deltas}
+							ellipsisBuffer={3}
+							onDeltaChange={(deltaVal) => {
+								setPageNumber(1);
+								setDelta(deltaVal);
+							}}
+							onPageChange={setPageNumber}
+							totalItems={totalItems}
 						/>
 					)}
 				</div>
@@ -138,27 +156,28 @@ function DatasetDisplay(props) {
 DatasetDisplay.propTypes = {
 	apiUrl: PropTypes.string.isRequired,
 	bulkActions: PropTypes.array,
-	currentPage: PropTypes.number.isRequired,
 	filters: PropTypes.array,
 	id: PropTypes.string.isRequired,
 	items: PropTypes.array.isRequired,
 	managementBarWrapperCssClasses: PropTypes.string,
-	pageSize: PropTypes.number.isRequired,
-	paginationEntries: PropTypes.array.isRequired,
-	paginationSelectedEntry: PropTypes.number.isRequired,
+	pagination: PropTypes.shape({
+		deltas: PropTypes.array.isRequired,
+		initialDelta: PropTypes.number.isRequired,
+		initialPageNumber: PropTypes.number,
+		initialTotalItems: PropTypes.number.isRequired,
+	}),
 	schema: PropTypes.object.isRequired,
 	showPagination: PropTypes.bool,
 	sidePanelId: PropTypes.string,
 	spritemap: PropTypes.string.isRequired,
 	tableTitle: PropTypes.string,
 	tableWrapperCssClasses: PropTypes.string,
-	totalItems: PropTypes.number,
 	wrapTableIntoCard: PropTypes.bool,
 	wrapperCssClasses: PropTypes.string
 };
 
 DatasetDisplay.defaultProps = {
-	currentPage: 1,
+	currentPageNumber: 1,
 	showPagination: true
 };
 

@@ -1,15 +1,11 @@
-import Icon from '@clayui/icon';
-import React, { useState } from 'react';
-
+import React from 'react';
 import getAppContext from './Context.es';
 import FiltersDropdown from './FiltersDropdown.es';
+import MainSearch from './MainSearch.es';
 
 const NavBar = () => {
-	const {actions, state} = getAppContext();
-
-	const [ keywordValue, updateKeywordValue ] = useState(
-		state.filters.find(f => f.slug === 'keyword').value || ''
-	);
+	const {state} = getAppContext();
+	const mainFilter = state.filters.find(f => f.main);
 
 	return (
 		<nav className="management-bar management-bar-light navbar navbar-expand-md">
@@ -18,43 +14,7 @@ const NavBar = () => {
 					<FiltersDropdown />
 				</ul>
 				<div className="navbar-form navbar-form-autofit navbar-overlay navbar-overlay-sm-down">
-					<div className="d-inline">
-						<form
-							onSubmit={e => {
-								e.preventDefault();
-								actions.updateFilterValue('keyword', keywordValue)
-							}}
-							role="search"
-						>
-							<div className="input-group">
-								<div className="input-group-item">
-									<input
-										className="form-control input-group-inset input-group-inset-after"
-										onChange={e => updateKeywordValue(e.target.value)}
-										placeholder={Liferay.Language.get(
-											'search-for'
-										)}
-										type="text"
-										value={keywordValue}
-									/>
-									<span className="input-group-inset-item input-group-inset-item-after">
-										<button
-											className="btn btn-unstyled"
-											type="submit"
-										>
-											<Icon symbol="search" />
-										</button>
-										<button
-											className="btn btn-unstyled d-none"
-											type="button"
-										>
-											<Icon symbol="times" />
-										</button>
-									</span>
-								</div>
-							</div>
-						</form>
-					</div>
+					{mainFilter ? <MainSearch /> : null}
 				</div>
 				{/* <ul className="navbar-nav">
 					{state.actionButton && (

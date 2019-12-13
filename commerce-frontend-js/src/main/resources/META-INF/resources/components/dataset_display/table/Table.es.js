@@ -115,7 +115,7 @@ function Table(props) {
 													}
 													name={'table-head-selector'}
 													onSelect={props.onSelect}
-													value={'table-head-selector'}
+													value={'all-items'}
 												/>
 											) : null}
 										</ClayTable.Cell>
@@ -162,13 +162,13 @@ function Table(props) {
 												: null;
 											return (
 												<TableCell
+													comment={comment}
 													data={otherProps}
 													fieldName={field.fieldName}
 													key={field.fieldName}
 													template={
 														field.contentRenderer
 													}
-													comment={comment}
 													value={value}
 												/>
 											);

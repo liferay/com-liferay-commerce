@@ -58,7 +58,7 @@ const DateFilter = props => {
 						prettifyDateValue(value) ===
 							prettifyDateValue(props.value) || !valid
 					}
-					onClick={() => actions.updateFilterValue(props.slug, value)}
+					onClick={() => actions.updateFilterValue(props.id, value)}
 				>
 					{props.panelType === 'edit'
 						? Liferay.Language.get('edit-filter')

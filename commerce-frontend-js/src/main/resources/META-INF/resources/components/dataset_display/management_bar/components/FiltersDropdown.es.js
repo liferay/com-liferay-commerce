@@ -11,17 +11,19 @@ const FiltersDropdown = () => {
 	const [query, setQuery] = useState('');
 	const {state} = getAppContext();
 	const [visibleFilters, setVisibleFilter] = useState(
-		state.filters.filter(filter => !filter.value)
+		state.filters.filter(filter => !(filter.main || filter.invisible))
 	);
 
 	useEffect(() => {
 		const results = state.filters.filter(filter => {
 			switch (true) {
+				case !!filter.main:
+					return false;
 				case !!filter.invisible:
 					return false;
 				case query &&
 					!(
-						filter.slug.toLowerCase().includes(query) ||
+						filter.id.toLowerCase().includes(query) ||
 						filter.label.toLowerCase().includes(query)
 					):
 					return false;
@@ -50,30 +52,28 @@ const FiltersDropdown = () => {
 				</button>
 			}
 		>
+			<ClayDropDown.Search
+				onChange={e => setQuery(e.target.value)}
+				value={query}
+			/>
 			{visibleFilters.length ? (
-				<>
-					<ClayDropDown.Search
-						onChange={e => setQuery(e.target.value)}
-						value={query}
-					/>
-					<ClayDropDown.ItemList>
-						{visibleFilters.map(item => (
-							<ClayPanel
-								className="mb-0"
-								collapsable
-								displayTitle={item.label}
-								key={item.slug}
-								showCollapseIcon={true}
-							>
-								<ClayPanel.Body className="filter-body">
-									{renderFilter(item, 'add')}
-								</ClayPanel.Body>
-							</ClayPanel>
-						))}
-					</ClayDropDown.ItemList>
-				</>
+				<ClayDropDown.ItemList>
+					{visibleFilters.map(item => (
+						<ClayPanel
+							className="mb-0"
+							collapsable
+							displayTitle={item.label}
+							key={item.id}
+							showCollapseIcon={true}
+						>
+							<ClayPanel.Body className="filter-body">
+								{renderFilter(item, 'add')}
+							</ClayPanel.Body>
+						</ClayPanel>
+					))}
+				</ClayDropDown.ItemList>
 			) : (
-				<div className="px-3 py-2 text-muted">
+				<div className="dropdown-section text-muted">
 					{Liferay.Language.get('no-filters-available')}
 				</div>
 			)}
