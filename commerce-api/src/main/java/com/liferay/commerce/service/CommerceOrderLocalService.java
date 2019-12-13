@@ -489,6 +489,13 @@ public interface CommerceOrderLocalService
 	public CommerceOrder updateBillingAddress(
 			long commerceOrderId, String name, String description,
 			String street1, String street2, String street3, String city,
+			String zip, long commerceRegionId, long commerceCountryId)
+		throws PortalException;
+
+	@Indexable(type = IndexableType.REINDEX)
+	public CommerceOrder updateBillingAddress(
+			long commerceOrderId, String name, String description,
+			String street1, String street2, String street3, String city,
 			String zip, long commerceRegionId, long commerceCountryId,
 			String phoneNumber, ServiceContext serviceContext)
 		throws PortalException;
@@ -589,6 +596,13 @@ public interface CommerceOrderLocalService
 	@Indexable(type = IndexableType.REINDEX)
 	public CommerceOrder updatePurchaseOrderNumber(
 			long commerceOrderId, String purchaseOrderNumber)
+		throws PortalException;
+
+	@Indexable(type = IndexableType.REINDEX)
+	public CommerceOrder updateShippingAddress(
+			long commerceOrderId, String name, String description,
+			String street1, String street2, String street3, String city,
+			String zip, long commerceRegionId, long commerceCountryId)
 		throws PortalException;
 
 	@Indexable(type = IndexableType.REINDEX)

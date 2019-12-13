@@ -681,6 +681,17 @@ public class CommerceOrderLocalServiceUtil {
 	public static com.liferay.commerce.model.CommerceOrder updateBillingAddress(
 			long commerceOrderId, String name, String description,
 			String street1, String street2, String street3, String city,
+			String zip, long commerceRegionId, long commerceCountryId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().updateBillingAddress(
+			commerceOrderId, name, description, street1, street2, street3, city,
+			zip, commerceRegionId, commerceCountryId);
+	}
+
+	public static com.liferay.commerce.model.CommerceOrder updateBillingAddress(
+			long commerceOrderId, String name, String description,
+			String street1, String street2, String street3, String city,
 			String zip, long commerceRegionId, long commerceCountryId,
 			String phoneNumber,
 			com.liferay.portal.kernel.service.ServiceContext serviceContext)
@@ -853,6 +864,18 @@ public class CommerceOrderLocalServiceUtil {
 
 		return getService().updatePurchaseOrderNumber(
 			commerceOrderId, purchaseOrderNumber);
+	}
+
+	public static com.liferay.commerce.model.CommerceOrder
+			updateShippingAddress(
+				long commerceOrderId, String name, String description,
+				String street1, String street2, String street3, String city,
+				String zip, long commerceRegionId, long commerceCountryId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return getService().updateShippingAddress(
+			commerceOrderId, name, description, street1, street2, street3, city,
+			zip, commerceRegionId, commerceCountryId);
 	}
 
 	public static com.liferay.commerce.model.CommerceOrder
