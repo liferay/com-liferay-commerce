@@ -38,6 +38,10 @@
                     .portlet-body {
                         height: 100%;
 
+                        > div {
+                            height: 100%;
+                        }
+
                         .journal-content-article {
                             height: 100%;
 
