@@ -425,9 +425,12 @@ public class CPDefinitionsImporter {
 		if (subscriptionInfoJSONObject != null) {
 			subscriptionEnabled = GetterUtil.getBoolean(
 				subscriptionInfoJSONObject.get("SubscriptionEnabled"));
-			subscriptionLength = GetterUtil.getInteger("SubscriptionLength");
-			subscriptionType = GetterUtil.getString("SubscriptionType");
-			maxSubscriptionCycles = GetterUtil.getLong("MaxSubscriptionCycles");
+			subscriptionLength = GetterUtil.getInteger(
+				subscriptionInfoJSONObject.get("SubscriptionLength"));
+			subscriptionType = GetterUtil.getString(
+				subscriptionInfoJSONObject.get("SubscriptionType"));
+			maxSubscriptionCycles = GetterUtil.getLong(
+				subscriptionInfoJSONObject.get("MaxSubscriptionCycles"));
 		}
 
 		long[] assetCategoryIds = ListUtil.toLongArray(
@@ -867,9 +870,12 @@ public class CPDefinitionsImporter {
 				subscriptionInfoJSONObject.get("OverrideSubscriptionInfo"));
 			subscriptionEnabled = GetterUtil.getBoolean(
 				subscriptionInfoJSONObject.get("SubscriptionEnabled"));
-			subscriptionLength = GetterUtil.getInteger("SubscriptionLength");
-			subscriptionType = GetterUtil.getString("SubscriptionType");
-			maxSubscriptionCycles = GetterUtil.getLong("MaxSubscriptionCycles");
+			subscriptionLength = GetterUtil.getInteger(
+				subscriptionInfoJSONObject.get("SubscriptionLength"));
+			subscriptionType = GetterUtil.getString(
+				subscriptionInfoJSONObject.get("SubscriptionType"));
+			maxSubscriptionCycles = GetterUtil.getLong(
+				subscriptionInfoJSONObject.get("MaxSubscriptionCycles"));
 		}
 
 		CPInstance cpInstance = _cpInstanceLocalService.addCPInstance(
