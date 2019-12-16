@@ -25,12 +25,12 @@ List<CommercePaymentMethodGroupRel> commercePaymentMethods = commerceOrderEditDi
 
 <portlet:actionURL name="editCommerceOrder" var="editCommerceOrderPaymentMethodActionURL" />
 
-<aui:form action="<%= editCommerceOrderPaymentMethodActionURL %>" cssClass="container-fluid-1280 p-0" method="post" name="fm">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="paymentMethod" />
-	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-	<aui:input name="commerceOrderId" type="hidden" value="<%= commerceOrder.getCommerceOrderId() %>" />
+<commerce-ui:modal-content>
+	<aui:form action="<%= editCommerceOrderPaymentMethodActionURL %>" cssClass="container-fluid-1280 p-0" method="post" name="fm">
+		<aui:input name="<%= Constants.CMD %>" type="hidden" value="paymentMethod" />
+		<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+		<aui:input name="commerceOrderId" type="hidden" value="<%= commerceOrder.getCommerceOrderId() %>" />
 
-	<div class="border-0 sheet">
 		<liferay-ui:error exception="<%= CommerceOrderPaymentMethodException.class %>" message="please-select-a-valid-payment-method" />
 
 		<c:choose>
@@ -73,7 +73,7 @@ List<CommercePaymentMethodGroupRel> commercePaymentMethods = commerceOrderEditDi
 				</ul>
 			</c:otherwise>
 		</c:choose>
-	</div>
 
-	<aui:button type="submit" />
-</aui:form>
+		<aui:button type="submit" />
+	</aui:form>
+</commerce-ui:modal-content>

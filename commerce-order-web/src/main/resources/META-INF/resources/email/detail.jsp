@@ -22,7 +22,7 @@ CommerceOrderEditDisplayContext commerceOrderEditDisplayContext = (CommerceOrder
 CommerceNotificationQueueEntry commerceNotificationQueueEntry = commerceOrderEditDisplayContext.getCommerceNotificationQueueEntry();
 %>
 
-<div class="border-0 sheet">
+<commerce-ui:modal-content>
 	<div class="commerce-notification-queue-entry-header"></div>
 
 	<div class="commerce-notification-queue-entry-type">
@@ -39,4 +39,4 @@ CommerceNotificationQueueEntry commerceNotificationQueueEntry = commerceOrderEdi
 	<div class="commerce-notification-queue-entry-body">
 		<%= commerceNotificationQueueEntry.getBody() %>
 	</div>
-</div>
+</commerce-ui:modal-content>

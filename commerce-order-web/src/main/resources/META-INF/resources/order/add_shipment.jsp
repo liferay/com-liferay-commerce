@@ -24,12 +24,12 @@ CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder()
 
 <portlet:actionURL name="editCommerceOrder" var="editCommerceOrderShipmentActionURL" />
 
-<aui:form action="<%= editCommerceOrderShipmentActionURL %>" cssClass="container-fluid-1280 p-0" method="post" name="fm">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="shipment" />
-	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-	<aui:input name="commerceOrderId" type="hidden" value="<%= commerceOrder.getCommerceOrderId() %>" />
+<commerce-ui:modal-content>
+	<aui:form action="<%= editCommerceOrderShipmentActionURL %>" cssClass="container-fluid-1280 p-0" method="post" name="fm">
+		<aui:input name="<%= Constants.CMD %>" type="hidden" value="shipment" />
+		<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+		<aui:input name="commerceOrderId" type="hidden" value="<%= commerceOrder.getCommerceOrderId() %>" />
 
-	<div class="border-0 sheet">
 		<aui:select label="send-to" name="commerceAddressId" required="<%= true %>">
 
 			<%
@@ -43,7 +43,7 @@ CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder()
 			%>
 
 		</aui:select>
-	</div>
 
-	<aui:button type="submit" />
-</aui:form>
+		<aui:button type="submit" />
+	</aui:form>
+</commerce-ui:modal-content>
