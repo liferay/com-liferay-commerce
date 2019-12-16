@@ -492,6 +492,16 @@ const dataSetDisplayProps = {
 			unitPrice: 396
 		}
 	],
+	sorting: [
+		{
+			direction: 'ASC',
+			fieldName: 'discountAmount',
+		},
+		{
+			direction: 'DESC',
+			fieldName: 'name',
+		}
+	],
 	pageSize: 5,
 	pagination: {
 		deltas: [
@@ -526,7 +536,7 @@ const dataSetDisplayProps = {
 				contentRenderer: 'sidePanelLink',
 				fieldName: 'sku',
 				label: 'sku',
-				sortable: false
+				sortable: true
 			},
 			{
 				fieldName: 'name',
@@ -536,17 +546,17 @@ const dataSetDisplayProps = {
 			{
 				fieldName: 'unitPrice',
 				label: 'price',
-				sortable: false
+				sortable: true
 			},
 			{
 				fieldName: 'discountAmount',
 				label: 'discount',
-				sortable: false
+				sortable: true
 			},
 			{
 				fieldName: 'quantity',
 				label: 'quantity',
-				sortable: false
+				sortable: true
 			},
 			{
 				fieldName: 'finalPrice',
