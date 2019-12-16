@@ -5,10 +5,9 @@ import React, { useState } from 'react';
 import DatasetDisplayContext from '../DatasetDisplayContext.es';
 import EmptyResultMessage from './EmptyResultMessage.es';
 import TableContext from './TableContext.es';
-import Checkbox from './cellTemplate/Checkbox.es';
 import Comment from './cellTemplate/Comment.es';
 import { getCustomCellTemplate } from '../utils/tableCellRenderer.es';
-import ClayIcon from '@clayui/icon';
+import TableHeadRow from './TableHeadRow.es';
 
 function TableCell(props) {
 	const { template, ...otherProps } = props;
@@ -52,52 +51,16 @@ function Table(props) {
 				>
 					<form ref={formRef}>
 						<ClayTable borderless>
-							<ClayTable.Head>
-								<ClayTable.Row>
-									{props.selectable && (
-										<ClayTable.Cell headingCell>
-											{props.items.length ? (
-												<Checkbox
-													checked={
-														allElementsSelected
-													}
-													indeterminate={
-														props.selectedItemsId
-															.length &&
-														!allElementsSelected
-													}
-													name={'table-head-selector'}
-													onSelect={props.onSelect}
-													value={'all-items'}
-												/>
-											) : null}
-										</ClayTable.Cell>
-									)}
-									{props.schema.fields.map(field => (
-										<ClayTable.Cell
-											className="table-cell-expand-smaller"
-											headingCell
-											headingTitle
-											key={field.fieldName}
-										>
-											{field.sortable ? (
-												<a className="inline-item text-truncate-inline" href="#">
-													{field.label}
-													<span className="inline-item inline-item-after">
-														<ClayIcon
-															draggable
-															symbol="order-arrow-up"
-														/>
-													</span>
-												</a>
-											) : field.label}
-										</ClayTable.Cell>
-									))}
-									{showActionItems && (
-										<ClayTable.Cell headingCell />
-									)}
-								</ClayTable.Row>
-							</ClayTable.Head>
+							<TableHeadRow
+								allElementsSelected={allElementsSelected}
+								itemsQuantity={props.items.length}
+								onSelect={props.onSelect}
+								schema={props.schema}
+								selectable={props.selectable}
+								selectedItemsId={props.selectedItemsId}
+								showActionItems={showActionItems}
+								sorting={props.sorting}
+							/>
 							<ClayTable.Body>
 								{props.items.map(item => (
 									<ClayTable.Row key={item.id}>
@@ -170,7 +133,8 @@ Table.propTypes = {
 	),
 	schema: PropTypes.shape({
 		fields: PropTypes.array.isRequired
-	}).isRequired
+	}).isRequired,
+	selectedItemsId: PropTypes.array
 };
 
 Table.defaultProps = {

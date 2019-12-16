@@ -77,3 +77,16 @@
     }
   }
 }
+
+.sorting-icons-wrapper {
+  .sorting-icon {
+    &:nth-child(2) {
+      position: relative;
+      left: -6px;
+    }
+
+    &:not(.active) {
+      opacity: .5;
+    }
+  }
+}

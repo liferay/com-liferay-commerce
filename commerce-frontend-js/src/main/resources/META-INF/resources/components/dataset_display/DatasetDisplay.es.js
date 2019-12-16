@@ -12,11 +12,12 @@ import {createOdataFilterStrings} from '../../utilities/odata.es';
 import {showNotification} from '../../utilities/index.es';
 import {formatFilters} from '../../utilities/filters.es';
 
-function loadData(apiUrl, filters, delta, page = 1) {
-	const filterString = createOdataFilterStrings(filters);
-	const authString = `p_auth=${window.Liferay.authToken}`;
-	const pagination = `pageSize=${delta}&page=${page}`
-	const url = `${apiUrl}&${authString}&${pagination}&${filterString}`
+function loadData(apiUrl, filters, delta, page = 1, sorting = []) {
+	const filterString = `&${createOdataFilterStrings(filters)}`;
+	const authString = `&p_auth=${window.Liferay.authToken}`;
+	const pagination = `&pageSize=${delta}&page=${page}`;
+	const sortingString = sorting.length ? `&orderBy=${JSON.stringify(sorting)}` : ``;
+	const url = `${apiUrl}${authString}${pagination}${sortingString}${filterString}`
 
 	return fetch(url)
 		.then(response => response.json())
@@ -25,6 +26,7 @@ function loadData(apiUrl, filters, delta, page = 1) {
 function DatasetDisplay(props) {
 	const [selectedItemsId, setselectedItemsId] = useState([]);
 	const [filters, updateFilters] = useState(formatFilters(props.filters));
+	const [sorting, updateSorting] = useState(props.sorting)
 	const [items, updateItems] = useState(props.items)
 	const [pageNumber, setPageNumber] = useState(props.pagination.initialPageNumber || 1);
 	const [delta, setDelta] = useState(props.pagination.initialDelta || props.pagination.deltas[0].label);
@@ -39,8 +41,8 @@ function DatasetDisplay(props) {
 		updateItems(dataSetData.items)
 	}
 	
-	function getData(apiUrl, filters, delta, pageNumber, showSuccessNotification = false) {
-		return loadData(apiUrl, filters, delta, pageNumber)
+	function getData(apiUrl, filters, delta, pageNumber, sorting, showSuccessNotification = false) {
+		return loadData(apiUrl, filters, delta, pageNumber, sorting)
 			.then(updateDataset)
 			.then(() => {
 				if(showSuccessNotification) {
@@ -60,9 +62,9 @@ function DatasetDisplay(props) {
 	};
 
 	useEffect(() => {
-		getData(props.apiUrl, filters.filter(e => !!e.value), delta, pageNumber)
+		getData(props.apiUrl, filters.filter(e => !!e.value), delta, pageNumber, sorting)
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [props.apiUrl, filters, delta, pageNumber])
+	}, [props.apiUrl, filters, delta, pageNumber, sorting])
 
 	const selectItems = (val, checked) => {
 		if (val === 'all-items') {
@@ -84,8 +86,10 @@ function DatasetDisplay(props) {
 		<DatasetDisplayContext.Provider
 			value={{
 				formRef,
-				loadData: () => getData(props.apiUrl, filters.filter(e => !!e.value), delta, pageNumber, true),
+				loadData: () => getData(props.apiUrl, filters.filter(e => !!e.value), delta, pageNumber, sorting, true),
 				sidePanelId: props.sidePanelId,
+				sorting,
+				updateSorting,
 			}}
 		>
 			<ClayIconSpriteContext.Provider value={props.spritemap}>
@@ -112,6 +116,7 @@ function DatasetDisplay(props) {
 						<Table
 							items={items}
 							onSelect={selectItems}
+							sorting={sorting}
 							schema={props.schema}
 							selectable={props.bulkActions && !!props.bulkActions.length}
 							selectedItemsId={selectedItemsId}
@@ -161,6 +166,7 @@ DatasetDisplay.propTypes = {
 	showManagementBar: PropTypes.bool,
 	showPagination: PropTypes.bool,
 	sidePanelId: PropTypes.string,
+	sorting: PropTypes.array,
 	spritemap: PropTypes.string.isRequired,
 	tableTitle: PropTypes.string,
 	tableWrapperCssClasses: PropTypes.string,
