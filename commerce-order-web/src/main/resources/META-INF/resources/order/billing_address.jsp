@@ -29,14 +29,14 @@ long commerceRegionId = BeanParamUtil.getLong(commerceAddress, request, "commerc
 
 <portlet:actionURL name="editCommerceOrder" var="editCommerceOrderBillingAddressActionURL" />
 
-<aui:form action="<%= editCommerceOrderBillingAddressActionURL %>" cssClass="container-fluid-1280 p-0" method="post" name="fm">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="billingAddress" />
-	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-	<aui:input name="commerceOrderId" type="hidden" value="<%= commerceOrder.getCommerceOrderId() %>" />
+<commerce-ui:modal-content>
+	<aui:form action="<%= editCommerceOrderBillingAddressActionURL %>" cssClass="container-fluid-1280 p-0" method="post" name="fm">
+		<aui:input name="<%= Constants.CMD %>" type="hidden" value="billingAddress" />
+		<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+		<aui:input name="commerceOrderId" type="hidden" value="<%= commerceOrder.getCommerceOrderId() %>" />
 
-	<aui:model-context bean="<%= commerceAddress %>" model="<%= CommerceAddress.class %>" />
+		<aui:model-context bean="<%= commerceAddress %>" model="<%= CommerceAddress.class %>" />
 
-	<div class="address-fields border-0 sheet">
 		<aui:input name="name" wrapperCssClass="form-group-item" />
 
 		<aui:input name="phoneNumber" wrapperCssClass="form-group-item" />
@@ -50,10 +50,10 @@ long commerceRegionId = BeanParamUtil.getLong(commerceAddress, request, "commerc
 		<aui:input name="city" wrapperCssClass="form-group-item" />
 
 		<aui:select label="region" name="commerceRegionId" wrapperCssClass="form-group-item" />
-	</div>
 
-	<aui:button type="submit" />
-</aui:form>
+		<aui:button type="submit" />
+	</aui:form>
+</commerce-ui:modal-content>
 
 <aui:script use="liferay-dynamic-select">
 	new Liferay.DynamicSelect(

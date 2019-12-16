@@ -55,7 +55,7 @@ CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder()
 			<c:choose>
 				<c:when test="<%= Validator.isNull(commerceOrderPaymentMethodName) %>">
 					<div class="align-items-center d-flex payment-info">
-						<span class="ml-3 payment-name text-muted">
+						<span class="text-muted">
 							<%= LanguageUtil.get(request, "click-add-to-insert") %>
 						</span>
 					</div>

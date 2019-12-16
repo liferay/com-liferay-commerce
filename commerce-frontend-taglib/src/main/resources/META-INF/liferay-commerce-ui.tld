@@ -107,6 +107,46 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>modal-content</name>
+		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.ModalContentTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>modalId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>title</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>showCloseButton</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<name>side-panel-content</name>
+		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.SidePanelContentTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>sidePanelId</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>title</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>showCloseButton</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<description><![CDATA[Creates a configurable header.]]></description>
 		<name>header</name>
 		<tag-class>com.liferay.commerce.frontend.taglib.servlet.taglib.HeaderTag</tag-class>

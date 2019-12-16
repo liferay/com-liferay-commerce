@@ -24,14 +24,14 @@ CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder()
 
 <portlet:actionURL name="editCommerceOrder" var="editCommerceOrderSummaryActionURL" />
 
-<aui:form action="<%= editCommerceOrderSummaryActionURL %>" cssClass="container-fluid-1280 p-0" method="post" name="fm">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="orderSummary" />
-	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-	<aui:input name="commerceOrderId" type="hidden" value="<%= commerceOrder.getCommerceOrderId() %>" />
+<commerce-ui:modal-content>
+	<aui:form action="<%= editCommerceOrderSummaryActionURL %>" cssClass="container-fluid-1280 p-0" method="post" name="fm">
+		<aui:input name="<%= Constants.CMD %>" type="hidden" value="orderSummary" />
+		<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+		<aui:input name="commerceOrderId" type="hidden" value="<%= commerceOrder.getCommerceOrderId() %>" />
 
-	<aui:model-context bean="<%= commerceOrder %>" model="<%= CommerceOrder.class %>" />
+		<aui:model-context bean="<%= commerceOrder %>" model="<%= CommerceOrder.class %>" />
 
-	<div class="border-0 sheet">
 		<aui:input label="items-subtotal" name="subtotal" wrapperCssClass="form-group-item" />
 
 		<aui:input label="items-subtotal-discount" name="subtotalDiscountAmount" wrapperCssClass="form-group-item" />
@@ -47,7 +47,7 @@ CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder()
 		<aui:input label="shipping-and-handing-discount" name="shippingDiscountAmount" wrapperCssClass="form-group-item" />
 
 		<aui:input label="grand-total" name="total" wrapperCssClass="form-group-item" />
-	</div>
 
-	<aui:button type="submit" />
-</aui:form>
+		<aui:button type="submit" />
+	</aui:form>
+</commerce-ui:modal-content>
