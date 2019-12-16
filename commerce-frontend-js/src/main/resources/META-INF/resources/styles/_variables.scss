@@ -1,3 +1,12 @@
 $spacer: 1rem;
 $danger: #DA1414;
-$gray-600: #6B6C7E !default;
+$gray-600: #6B6C7E;
+
+$spacers: (
+    0: 0,
+    1: $spacer * .25,
+    2: $spacer * .5,
+    3: $spacer,
+    4: $spacer * 1.5,
+    5: $spacer * 3,
+);

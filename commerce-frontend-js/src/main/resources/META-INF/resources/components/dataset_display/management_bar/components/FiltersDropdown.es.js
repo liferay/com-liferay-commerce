@@ -3,7 +3,7 @@ import Icon from '@clayui/icon';
 import ClayPanel from '@clayui/panel';
 import React, {useState, useEffect} from 'react';
 
-import {renderFilter} from '../utils/index.es';
+import {renderFilter} from '../../utils/filterCellRenderer.es';
 import getAppContext from './Context.es';
 
 const FiltersDropdown = () => {

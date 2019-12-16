@@ -2,7 +2,7 @@ import {ClayIconSpriteContext} from '@clayui/icon';
 import {ClayPaginationBarWithBasicItems} from '@clayui/pagination-bar';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import React, {useState, useRef, useEffect, useCallback} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 
 import DatasetDisplayContext from './DatasetDisplayContext.es';
 import ManagementBar from './management_bar/index.es';
@@ -27,7 +27,7 @@ function DatasetDisplay(props) {
 	const [filters, updateFilters] = useState(formatFilters(props.filters));
 	const [items, updateItems] = useState(props.items)
 	const [pageNumber, setPageNumber] = useState(props.pagination.initialPageNumber || 1);
-	const [delta, setDelta] = useState(props.pagination.initialDelta);
+	const [delta, setDelta] = useState(props.pagination.initialDelta || props.pagination.deltas[0].label);
 	const [totalItems, setTotalItems] = useState(props.pagination.initialTotalItems);
 	const formRef = useRef(null);
 
@@ -80,32 +80,6 @@ function DatasetDisplay(props) {
 		}
 	};
 
-	const managementBar = (
-		<ManagementBar
-			actionButton={{
-				icon: 'plus',
-				label: 'Add',
-				onClick: () => {}
-			}}
-			bulkActions={props.bulkActions}
-			filters={filters}
-			onFiltersChange={updateFilters}
-			selectAllItems={() => selectItems('all-items', true)}
-			selectedItemsId={selectedItemsId}
-			totalItemsCount={props.items.length}
-		/>
-	);
-
-	const table = (
-		<Table
-			items={items}
-			onSelect={selectItems}
-			schema={props.schema}
-			selectable={props.bulkActions && !!props.bulkActions.length}
-			selectedItemsId={selectedItemsId}
-		/>
-	);
-
 	return (
 		<DatasetDisplayContext.Provider
 			value={{
@@ -115,25 +89,37 @@ function DatasetDisplay(props) {
 			}}
 		>
 			<ClayIconSpriteContext.Provider value={props.spritemap}>
-				<div
-					className={classNames(
-						'smart-table-wrapper',
-						props.wrapperCssClasses
-					)}
-				>
-					<div
-						className={classNames(
-							props.managementBarWrapperCssClasses
-						)}
-					>
-						{managementBar}
-					</div>
+				<div className={classNames('smart-table-wrapper', props.wrapperCssClasses)}>
+					{ props.showManagementBar ? (
+						<div className={classNames(props.managementBarWrapperCssClasses)}>
+							<ManagementBar
+								actionButton={{
+									icon: 'plus',
+									label: 'Add',
+									onClick: () => {}
+								}}
+								bulkActions={props.bulkActions}
+								filters={filters}
+								onFiltersChange={updateFilters}
+								selectAllItems={() => selectItems('all-items', true)}
+								selectedItemsId={selectedItemsId}
+								totalItemsCount={props.items.length}
+							/>
+						</div>
+					) : null}
+
 					<div className={classNames(props.tableWrapperCssClasses)}>
-						{table}
+						<Table
+							items={items}
+							onSelect={selectItems}
+							schema={props.schema}
+							selectable={props.bulkActions && !!props.bulkActions.length}
+							selectedItemsId={selectedItemsId}
+						/>
 					</div>
 				</div>
-				<div className={classNames(props.paginationWrapperCssClasses)}>
-					{props.showPagination && (
+				{props.showPagination && props.pagination && items && items.length ? (
+					<div className={classNames(props.paginationWrapperCssClasses)}>
 						<ClayPaginationBarWithBasicItems
 							activeDelta={delta}
 							activePage={pageNumber}
@@ -146,8 +132,8 @@ function DatasetDisplay(props) {
 							onPageChange={setPageNumber}
 							totalItems={totalItems}
 						/>
-					)}
-				</div>
+					</div>
+				) : null}
 			</ClayIconSpriteContext.Provider>
 		</DatasetDisplayContext.Provider>
 	);
@@ -161,12 +147,18 @@ DatasetDisplay.propTypes = {
 	items: PropTypes.array.isRequired,
 	managementBarWrapperCssClasses: PropTypes.string,
 	pagination: PropTypes.shape({
-		deltas: PropTypes.array.isRequired,
+		deltas: PropTypes.arrayOf(
+			PropTypes.shape({
+				href: PropTypes.string,
+				label: PropTypes.number.isRequired,
+			}).isRequired,
+		),
 		initialDelta: PropTypes.number.isRequired,
 		initialPageNumber: PropTypes.number,
 		initialTotalItems: PropTypes.number.isRequired,
 	}),
 	schema: PropTypes.object.isRequired,
+	showManagementBar: PropTypes.bool,
 	showPagination: PropTypes.bool,
 	sidePanelId: PropTypes.string,
 	spritemap: PropTypes.string.isRequired,
@@ -177,8 +169,8 @@ DatasetDisplay.propTypes = {
 };
 
 DatasetDisplay.defaultProps = {
-	currentPageNumber: 1,
-	showPagination: true
+	showManagementBar: true,
+	showPagination: true,
 };
 
 export default DatasetDisplay;

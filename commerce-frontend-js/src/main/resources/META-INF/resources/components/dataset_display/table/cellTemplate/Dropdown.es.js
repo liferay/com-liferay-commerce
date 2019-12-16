@@ -5,6 +5,7 @@ import React, {useState} from 'react';
 
 function Dropdown(props) {
 	const [active, setActive] = useState(false);
+
 	return (
 		<ClayDropDown
 			active={active}
@@ -19,6 +20,11 @@ function Dropdown(props) {
 				<ClayDropDown.Group>
 					{props.value.map((item, i) => (
 						<ClayDropDown.Item href={item.href} key={i}>
+							{item.icon && (
+								<span className="pr-2">
+									<ClayIcon symbol={item.icon} />
+								</span>
+							)}
 							{item.label}
 						</ClayDropDown.Item>
 					))}

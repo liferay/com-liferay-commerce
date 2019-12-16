@@ -4,8 +4,8 @@ import ClayLabel from '@clayui/label';
 import classNames from 'classnames';
 import React, {useState} from 'react';
 
-import {prettifyFilterValue} from '../../utils/dates.es';
-import {renderFilter} from '../../utils/index.es';
+import {prettifyFilterValue} from '../../../utils/dates.es';
+import {renderFilter} from '../../../utils/filterCellRenderer.es';
 import getAppContext from '../Context.es';
 
 const Resume = props => {
