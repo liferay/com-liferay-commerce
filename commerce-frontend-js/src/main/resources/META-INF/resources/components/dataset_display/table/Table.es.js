@@ -1,69 +1,25 @@
 import ClayTable from '@clayui/table';
 import PropTypes from 'prop-types';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 import DatasetDisplayContext from '../DatasetDisplayContext.es';
 import EmptyResultMessage from './EmptyResultMessage.es';
 import TableContext from './TableContext.es';
-import Checkbox from './cells/Checkbox.es';
-import Default from './cells/Default.es';
-import Dropdown from './cells/Dropdown.es';
-import ImageText from './cells/ImageText.es';
-import Link from './cells/Link.es';
-import Price from './cells/Price.es';
-import SidePanelLink from './cells/SidePanelLink.es';
-import {ClayTooltipProvider} from '@clayui/tooltip';
+import Checkbox from './cellTemplate/Checkbox.es';
+import Comment from './cellTemplate/Comment.es';
+import { getCustomCellTemplate } from '../utils/tableCellRenderer.es';
 import ClayIcon from '@clayui/icon';
-import ClayButton from '@clayui/button';
-
-function Comment(props) {
-	return (
-		<ClayTooltipProvider>
-			<ClayButton
-				className="cell-comment text-warning px-1 my-n2 ml-2 inline-item"
-				data-tooltip-align="top"
-				data-tooltip-delay={0}
-				displayType="link"
-				title={props.comment}
-			>
-				<ClayIcon symbol="info-circle" />
-			</ClayButton>
-		</ClayTooltipProvider>
-	)
-}
 
 function TableCell(props) {
-	const {template, ...otherProps} = props;
-	const Template = getCustomTemplate(template);
+	const { template, ...otherProps } = props;
+	const Template = getCustomCellTemplate(template);
+
 	return (
 		<ClayTable.Cell>
 			<Template {...otherProps} />
-			{props.comment && (
-				<Comment comment={props.comment} />
-			)}
+			{props.comment && <Comment>{props.comment}</Comment>}
 		</ClayTable.Cell>
 	);
-}
-
-const idToCellTemplateMapping = {
-	checkbox: Checkbox,
-	commerceTableCellImageName: ImageText,
-	commerceTablePrice: Price,
-	default: Default,
-	dropdown: Dropdown,
-	imageTitle: ImageText,
-	link: Link,
-	price: Price,
-	sidePanelLink: SidePanelLink
-};
-
-function getCustomTemplate(id, customTemplates = {}) {
-	const templates = {
-		...idToCellTemplateMapping,
-		...customTemplates
-	};
-
-	return templates[id] || templates.default;
 }
 
 function areAllElementsSelected(selectedItemsId, allItems) {
@@ -83,16 +39,13 @@ function Table(props) {
 		props.items
 	);
 
-	const [modalProps, setModalProps] = useState({});
 	const [sidePanelProps, setSidePanelProps] = useState({});
 
-	return (
+	return props.items.length ? (
 		<DatasetDisplayContext.Consumer>
-			{({formRef}) => (
+			{({ formRef }) => (
 				<TableContext.Provider
 					value={{
-						modalProps,
-						setModalProps,
 						setSidePanelProps,
 						sidePanelProps
 					}}
@@ -127,7 +80,17 @@ function Table(props) {
 											headingTitle
 											key={field.fieldName}
 										>
-											{field.label}
+											{field.sortable ? (
+												<a className="inline-item text-truncate-inline" href="#">
+													{field.label}
+													<span className="inline-item inline-item-after">
+														<ClayIcon
+															draggable
+															symbol="order-arrow-up"
+														/>
+													</span>
+												</a>
+											) : field.label}
 										</ClayTable.Cell>
 									))}
 									{showActionItems && (
@@ -157,8 +120,10 @@ function Table(props) {
 												[fieldName]: value,
 												...otherProps
 											} = item;
-											const comment = otherProps.comments 
-												? otherProps.comments[field.fieldName] 
+											const comment = otherProps.comments
+												? otherProps.comments[
+														field.fieldName
+												  ]
 												: null;
 											return (
 												<TableCell
@@ -173,29 +138,43 @@ function Table(props) {
 												/>
 											);
 										})}
-										{showActionItems && (
-											<TableCell
-												template="dropdown"
-												value={item.actionItems}
-											/>
-										)}
+										{showActionItems ? (
+											item.actionItems ? (
+												<TableCell
+													template="dropdown"
+													value={item.actionItems}
+												/>
+											) : (
+												<ClayTable.Cell />
+											)
+										) : null}
 									</ClayTable.Row>
 								))}
 							</ClayTable.Body>
 						</ClayTable>
-						{!props.items.length && <EmptyResultMessage />}
 					</form>
 				</TableContext.Provider>
 			)}
 		</DatasetDisplayContext.Consumer>
+	) : (
+		<EmptyResultMessage />
 	);
 }
 
 Table.propTypes = {
-	items: PropTypes.array.isRequired,
+	items: PropTypes.arrayOf(
+		PropTypes.shape({
+			id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+				.isRequired
+		})
+	),
 	schema: PropTypes.shape({
 		fields: PropTypes.array.isRequired
 	}).isRequired
+};
+
+Table.defaultProps = {
+	items: []
 };
 
 export default Table;

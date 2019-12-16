@@ -283,8 +283,8 @@ export default class SidePanel extends React.Component {
 SidePanel.propTypes = {
 	id: PropTypes.string,
 	items: PropTypes.any,
+	portalWrapperId: PropTypes.string,
 	size: PropTypes.string,
 	spritemap: PropTypes.string,
 	topAnchorSelector: PropTypes.any,
-	portalWrapperId: PropTypes.string
 }

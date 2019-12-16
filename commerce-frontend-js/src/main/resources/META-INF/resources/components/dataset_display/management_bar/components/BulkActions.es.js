@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import React, {useState, useEffect} from 'react';
 import TableContext from '../../DatasetDisplayContext.es';
 import { OPEN_SIDE_PANEL } from '../../../../utilities/eventsDefinitions.es';
-import { getOpenedSidePanel, registeredPanels, getSidePanelData } from '../../../../utilities/sidePanels.es';
+import { getOpenedSidePanel } from '../../../../utilities/sidePanels.es';
 
 function submit(action, method = 'get', form) {
 	if (!form.current) {

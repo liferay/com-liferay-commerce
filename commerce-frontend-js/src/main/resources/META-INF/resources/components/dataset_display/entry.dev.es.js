@@ -3,7 +3,7 @@ import sidePanelLauncher from './../side_panel/entry.es';
 
 import '../../styles/main.scss';
 
-datasetDisplayLauncher('dataset-display', 'dataset-display-root-id', {
+const dataSetDisplayProps = {
 	apiUrl: 'http://localhost:8080/o/commerce-ui/commerce-data-set/20124/commerceOrderItems/commerceOrderItems?plid=1&portletId=com_liferay_commerce_order_web_internal_portlet_CommerceOrderPortlet&commerceOrderId=38938',
 	bulkActions: [
 		{
@@ -19,7 +19,6 @@ datasetDisplayLauncher('dataset-display', 'dataset-display-root-id', {
 			url: '/delete',
 		}
 	],
-	fetchAtLoading: true,
 	filters: [
 		{
 			id: 'text-test',
@@ -113,6 +112,18 @@ datasetDisplayLauncher('dataset-display', 'dataset-display-root-id', {
 	id: 'tableTest',
 	items: [
 		{
+			actionItems: [
+				{
+					cssClasses: "",
+					href: "http://localhost:8080/group/guest/~/control_panel/manage?p_p_id=com_liferay_commerce_order_web_internal_portlet_CommerceOrderPortlet&p_p_lifecycle=0&p_p_state=maximized&_com_liferay_commerce_order_web_internal_portlet_CommerceOrderPortlet_javax.portlet.action=editCommerceOrderItem&_com_liferay_commerce_order_web_internal_portlet_CommerceOrderPortlet_cmd=delete&_com_liferay_commerce_order_web_internal_portlet_CommerceOrderPortlet_redirect=%2Fgroup%2Fguest%2F%7E%2Fcontrol_panel%2Fmanage%3Fp_p_id%3Dcom_liferay_commerce_order_web_internal_portlet_CommerceOrderPortlet%26p_p_lifecycle%3D0%26p_p_state%3Dmaximized%26p_p_mode%3Dview%26_com_liferay_commerce_order_web_internal_portlet_CommerceOrderPortlet_redirect%3Dhttp%253A%252F%252Flocalhost%253A8080%252Fgroup%252Fguest%252F%7E%252Fcontrol_panel%252Fmanage%253Fp_p_id%253Dcom_liferay_commerce_order_web_internal_portlet_CommerceOrderPortlet%2526p_p_lifecycle%253D0%2526p_p_state%253Dmaximized%2526p_p_mode%253Dview%2526p_p_auth%253DVLNBjvR0%26_com_liferay_commerce_order_web_internal_portlet_CommerceOrderPortlet_mvcRenderCommandName%3DeditCommerceOrder%26_com_liferay_commerce_order_web_internal_portlet_CommerceOrderPortlet_commerceOrderId%3D38938%26p_p_auth%3DVLNBjvR0&_com_liferay_commerce_order_web_internal_portlet_CommerceOrderPortlet_commerceOrderItemId=38943&p_p_auth=VLNBjvR0",
+					icon: "trash",
+					label: "Delete",
+					onClick: "",
+					order: 0,
+					quickAction: false,
+					separator: false,
+				}
+			],
 			bookedQuantityId: 0,
 			discountAmount: 0,
 			discountPercentageLevel1: 0,
@@ -518,10 +529,9 @@ datasetDisplayLauncher('dataset-display', 'dataset-display-root-id', {
 				sortable: false
 			},
 			{
-				// contentRenderer: 'modalLink',
 				fieldName: 'name',
 				label: 'name',
-				sortable: false
+				sortable: true
 			},
 			{
 				fieldName: 'unitPrice',
@@ -550,7 +560,44 @@ datasetDisplayLauncher('dataset-display', 'dataset-display-root-id', {
 	spritemap: './assets/icons.svg',
 	tableTitle: 'Orders',
 	totalItems: 4
-});
+}
+
+// dataSetDisplayProps.items = [
+// 	{
+// 		id: 1,
+// 		name: 'Ball Joints',
+// 		sku: {
+// 			label: 'MIN38794',
+// 			url: '/sidepanel-1.html'
+// 		},
+// 		status: {
+// 			label: 'Delivered',
+// 			style: 'success'
+// 		}
+// 	}
+// ];
+
+// dataSetDisplayProps.schema.fields = [
+// 	{
+// 		contentRenderer: 'sidePanelLink',
+// 		fieldName: 'sku',
+// 		label: 'sku',
+// 		sortable: false
+// 	},
+// 	{
+// 		fieldName: 'name',
+// 		label: 'name',
+// 		sortable: false
+// 	},
+// 	{
+// 		contentRenderer: 'label',
+// 		fieldName: 'status',
+// 		label: 'Status',
+// 		sortable: false
+// 	}
+// ]
+
+datasetDisplayLauncher('dataset-display', 'dataset-display-root-id', dataSetDisplayProps);
 
 sidePanelLauncher('sidePanel', 'side-panel-root-id', {
 	containerSelector: '.smart-table-wrapper',
