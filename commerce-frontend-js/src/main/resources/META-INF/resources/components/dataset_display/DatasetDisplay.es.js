@@ -177,6 +177,7 @@ DatasetDisplay.propTypes = {
 DatasetDisplay.defaultProps = {
 	showManagementBar: true,
 	showPagination: true,
+	sorting: [],
 };
 
 export default DatasetDisplay;

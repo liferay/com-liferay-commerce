@@ -2,6 +2,7 @@ import ClayDropDown from '@clayui/drop-down';
 import Icon from '@clayui/icon';
 import ClayPanel from '@clayui/panel';
 import React, {useState, useEffect} from 'react';
+import classNames from 'classnames'
 
 import {renderFilter} from '../../utils/filterCellRenderer.es';
 import getAppContext from './Context.es';
@@ -60,14 +61,14 @@ const FiltersDropdown = () => {
 				<ClayDropDown.ItemList>
 					{visibleFilters.map(item => (
 						<ClayPanel
-							className="mb-0"
+							className={classNames(`mb-0 filter-panel-head`, item.value && 'active')}
 							collapsable
 							displayTitle={item.label}
 							key={item.id}
 							showCollapseIcon={true}
 						>
 							<ClayPanel.Body className="filter-body">
-								{renderFilter(item, 'add')}
+								{renderFilter(item, item.value ? 'edit' : 'add')}
 							</ClayPanel.Body>
 						</ClayPanel>
 					))}

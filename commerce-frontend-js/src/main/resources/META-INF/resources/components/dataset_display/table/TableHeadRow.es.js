@@ -20,10 +20,10 @@ function TableHeadCell(props) {
 			}) : el)
 			context.updateSorting(updatedSortedElements)
 		} else {
-			context.updateSorting(context.sorting.concat({
+			context.updateSorting([{
 				direction: 'ASC',
 				fieldName: props.fieldName
-			}))
+			}])
 		}
 	}
 
