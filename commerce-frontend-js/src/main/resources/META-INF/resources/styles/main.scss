@@ -90,3 +90,9 @@
     }
   }
 }
+
+.filter-panel-head {
+  &.active .panel-header-link {
+    background-color: $info-bc;
+  }
+}

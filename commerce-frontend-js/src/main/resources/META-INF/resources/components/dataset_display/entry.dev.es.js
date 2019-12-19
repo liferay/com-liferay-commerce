@@ -91,12 +91,12 @@ const dataSetDisplayProps = {
 			type: 'number',
 			value: 123
 		},
-		{
-			id: 'product-name',
-			main: true,
-			placeholder: 'Product name',
-			value: 'Test input',
-		}
+		// {
+		// 	id: 'product-name',
+		// 	main: true,
+		// 	placeholder: 'Product name',
+		// 	value: 'Test input',
+		// }
 		// {
 		// 	label: 'Date test',
 		// 	operator: 'eq',
@@ -492,16 +492,7 @@ const dataSetDisplayProps = {
 			unitPrice: 396
 		}
 	],
-	sorting: [
-		{
-			direction: 'ASC',
-			fieldName: 'discountAmount',
-		},
-		{
-			direction: 'DESC',
-			fieldName: 'name',
-		}
-	],
+	sorting: [],
 	pageSize: 5,
 	pagination: {
 		deltas: [
