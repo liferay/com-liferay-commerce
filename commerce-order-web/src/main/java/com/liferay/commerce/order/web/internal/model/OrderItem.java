@@ -20,15 +20,13 @@ package com.liferay.commerce.order.web.internal.model;
 public class OrderItem {
 
 	public OrderItem(
-		long orderItemId, long orderId, String sku, String panelUrl,
-		String name, String price, String subscriptionDuration,
-		String subscriptionPeriod, String discount, int quantity,
-		String total) {
+		long orderItemId, long orderId, Sku sku, String name, String price,
+		String subscriptionDuration, String subscriptionPeriod, String discount,
+		int quantity, String total) {
 
 		_orderItemId = orderItemId;
 		_orderId = orderId;
 		_sku = sku;
-		_panelUrl = panelUrl;
 		_name = name;
 		_price = price;
 		_subscriptionDuration = subscriptionDuration;
@@ -54,10 +52,6 @@ public class OrderItem {
 		return _orderItemId;
 	}
 
-	public String getPanelUrl() {
-		return _panelUrl;
-	}
-
 	public String getPrice() {
 		return _price;
 	}
@@ -66,7 +60,7 @@ public class OrderItem {
 		return _quantity;
 	}
 
-	public String getSku() {
+	public Sku getSku() {
 		return _sku;
 	}
 
@@ -86,10 +80,9 @@ public class OrderItem {
 	private final String _name;
 	private final long _orderId;
 	private final long _orderItemId;
-	private final String _panelUrl;
 	private final String _price;
 	private final int _quantity;
-	private final String _sku;
+	private final Sku _sku;
 	private final String _subscriptionDuration;
 	private final String _subscriptionPeriod;
 	private final String _total;

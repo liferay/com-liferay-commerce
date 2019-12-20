@@ -33,6 +33,7 @@ import com.liferay.commerce.model.CommerceOrder;
 import com.liferay.commerce.model.CommerceOrderItem;
 import com.liferay.commerce.model.CommerceSubscriptionEntry;
 import com.liferay.commerce.order.web.internal.model.OrderItem;
+import com.liferay.commerce.order.web.internal.model.Sku;
 import com.liferay.commerce.order.web.internal.security.permission.resource.CommerceOrderPermission;
 import com.liferay.commerce.price.CommerceProductPrice;
 import com.liferay.commerce.price.CommerceProductPriceCalculation;
@@ -150,7 +151,7 @@ public class CommerceOrderItemClayTable
 		ClayTableSchemaField skuField = clayTableSchemaBuilder.addField(
 			"sku", "sku");
 
-		skuField.setContentRenderer("commerceTableCellSidePanelLink");
+		skuField.setContentRenderer("sidePanelLink");
 
 		clayTableSchemaBuilder.addField("name", "name");
 
@@ -228,10 +229,11 @@ public class CommerceOrderItemClayTable
 				new OrderItem(
 					commerceOrderItem.getCommerceOrderItemId(),
 					commerceOrderItem.getCommerceOrderId(),
-					commerceOrderItem.getSku(),
-					_getOrderItemPanelURL(
-						commerceOrderItem.getCommerceOrderItemId(),
-						httpServletRequest),
+					new Sku(
+						commerceOrderItem.getSku(),
+						_getOrderItemPanelURL(
+							commerceOrderItem.getCommerceOrderItemId(),
+							httpServletRequest)),
 					commerceOrderItem.getName(locale), price,
 					_getSubscriptionDuration(
 						commerceOrderItem, locale, httpServletRequest),
