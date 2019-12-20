@@ -58,12 +58,14 @@ public class CommerceContextImpl implements CommerceContext {
 		_commerceOrderService = commerceOrderService;
 
 		try {
-			_commerceAccountGroupServiceConfiguration =
-				configurationProvider.getConfiguration(
-					CommerceAccountGroupServiceConfiguration.class,
-					new GroupServiceSettingsLocator(
-						getCommerceChannelGroupId(),
-						CommerceAccountConstants.SERVICE_NAME));
+			if (getCommerceChannelGroupId() > 0) {
+				_commerceAccountGroupServiceConfiguration =
+					configurationProvider.getConfiguration(
+						CommerceAccountGroupServiceConfiguration.class,
+						new GroupServiceSettingsLocator(
+							getCommerceChannelGroupId(),
+							CommerceAccountConstants.SERVICE_NAME));
+			}
 		}
 		catch (PortalException pe) {
 			_log.error(pe, pe);
@@ -103,8 +105,15 @@ public class CommerceContextImpl implements CommerceContext {
 
 	@Override
 	public long getCommerceChannelGroupId() throws PortalException {
-		return _commerceChannelLocalService.
-			getCommerceChannelGroupIdBySiteGroupId(getSiteGroupId());
+		CommerceChannel commerceChannel =
+			_commerceChannelLocalService.fetchCommerceChannelBySiteGroupId(
+				getSiteGroupId());
+
+		if (commerceChannel == null) {
+			return 0;
+		}
+
+		return commerceChannel.getGroupId();
 	}
 
 	@Override
