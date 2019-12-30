@@ -43,7 +43,5 @@ CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder()
 			%>
 
 		</aui:select>
-
-		<aui:button type="submit" />
 	</aui:form>
 </commerce-ui:modal-content>

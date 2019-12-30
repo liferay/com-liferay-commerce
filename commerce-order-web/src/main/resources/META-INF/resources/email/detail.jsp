@@ -22,7 +22,10 @@ CommerceOrderEditDisplayContext commerceOrderEditDisplayContext = (CommerceOrder
 CommerceNotificationQueueEntry commerceNotificationQueueEntry = commerceOrderEditDisplayContext.getCommerceNotificationQueueEntry();
 %>
 
-<commerce-ui:modal-content>
+<commerce-ui:modal-content
+	showCancelButton="<%= false %>"
+	showSumitButton="<%= false %>"
+>
 	<div class="commerce-notification-queue-entry-header"></div>
 
 	<div class="commerce-notification-queue-entry-type">

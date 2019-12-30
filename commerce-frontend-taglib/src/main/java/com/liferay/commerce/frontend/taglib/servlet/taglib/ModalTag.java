@@ -33,10 +33,6 @@ public class ModalTag extends IncludeTag {
 		return _cancelLabel;
 	}
 
-	public Boolean getCloseOnSubmit() {
-		return _closeOnSubmit;
-	}
-
 	public String getDeleteLabel() {
 		return _deleteLabel;
 	}
@@ -45,15 +41,19 @@ public class ModalTag extends IncludeTag {
 		return _id;
 	}
 
-	public Boolean getShowCancel() {
+	public boolean getRefreshPageOnClose() {
+		return _refreshPageOnClose;
+	}
+
+	public boolean getShowCancel() {
 		return _showCancel;
 	}
 
-	public Boolean getShowDelete() {
+	public boolean getShowDelete() {
 		return _showDelete;
 	}
 
-	public Boolean getShowSubmit() {
+	public boolean getShowSubmit() {
 		return _showSubmit;
 	}
 
@@ -63,10 +63,6 @@ public class ModalTag extends IncludeTag {
 
 	public String getSpritemap() {
 		return _spritemap;
-	}
-
-	public Boolean getSubmitAvailableAtLoading() {
-		return _submitAvailableAtLoading;
 	}
 
 	public String getSubmitLabel() {
@@ -85,10 +81,6 @@ public class ModalTag extends IncludeTag {
 		_cancelLabel = cancelLabel;
 	}
 
-	public void setCloseOnSubmit(Boolean closeOnSubmit) {
-		_closeOnSubmit = closeOnSubmit;
-	}
-
 	public void setDeleteLabel(String deleteLabel) {
 		_deleteLabel = deleteLabel;
 	}
@@ -104,15 +96,19 @@ public class ModalTag extends IncludeTag {
 		servletContext = ServletContextUtil.getServletContext();
 	}
 
-	public void setShowCancel(Boolean showCancel) {
+	public void setRefreshPageOnClose(boolean refreshPageOnClose) {
+		_refreshPageOnClose = refreshPageOnClose;
+	}
+
+	public void setShowCancel(boolean showCancel) {
 		_showCancel = showCancel;
 	}
 
-	public void setShowDelete(Boolean showDelete) {
+	public void setShowDelete(boolean showDelete) {
 		_showDelete = showDelete;
 	}
 
-	public void setShowSubmit(Boolean showSubmit) {
+	public void setShowSubmit(boolean showSubmit) {
 		_showSubmit = showSubmit;
 	}
 
@@ -122,10 +118,6 @@ public class ModalTag extends IncludeTag {
 
 	public void setSpritemap(String spritemap) {
 		_spritemap = spritemap;
-	}
-
-	public void setSubmitAvailableAtLoading(Boolean submitAvailableAtLoading) {
-		_submitAvailableAtLoading = submitAvailableAtLoading;
 	}
 
 	public void setSubmitLabel(String submitLabel) {
@@ -145,15 +137,14 @@ public class ModalTag extends IncludeTag {
 		super.cleanUp();
 
 		_cancelLabel = StringPool.BLANK;
-		_closeOnSubmit = false;
 		_deleteLabel = StringPool.BLANK;
 		_id = StringPool.BLANK;
+		_refreshPageOnClose = false;
 		_showCancel = false;
 		_showDelete = false;
 		_showSubmit = false;
 		_size = StringPool.BLANK;
 		_spritemap = StringPool.BLANK;
-		_submitAvailableAtLoading = false;
 		_submitLabel = StringPool.BLANK;
 		_title = StringPool.BLANK;
 		_url = StringPool.BLANK;
@@ -176,18 +167,15 @@ public class ModalTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-commerce:modal:cancelLabel", _cancelLabel);
 		request.setAttribute(
-			"liferay-commerce:modal:closeOnSubmit", _closeOnSubmit);
-		request.setAttribute(
 			"liferay-commerce:modal:deleteLabel", _deleteLabel);
 		request.setAttribute("liferay-commerce:modal:id", _id);
+		request.setAttribute(
+			"liferay-commerce:modal:refreshPageOnClose", _refreshPageOnClose);
 		request.setAttribute("liferay-commerce:modal:showCancel", _showCancel);
 		request.setAttribute("liferay-commerce:modal:showDelete", _showDelete);
 		request.setAttribute("liferay-commerce:modal:showSubmit", _showSubmit);
 		request.setAttribute("liferay-commerce:modal:size", _size);
 		request.setAttribute("liferay-commerce:modal:spritemap", _spritemap);
-		request.setAttribute(
-			"liferay-commerce:modal:submitAvailableAtLoading",
-			_submitAvailableAtLoading);
 		request.setAttribute(
 			"liferay-commerce:modal:submitLabel", _submitLabel);
 		request.setAttribute("liferay-commerce:modal:title", _title);
@@ -197,15 +185,14 @@ public class ModalTag extends IncludeTag {
 	private static final String _PAGE = "/modal/page.jsp";
 
 	private String _cancelLabel = StringPool.BLANK;
-	private boolean _closeOnSubmit;
 	private String _deleteLabel = StringPool.BLANK;
 	private String _id = StringPool.BLANK;
+	private boolean _refreshPageOnClose;
 	private boolean _showCancel;
 	private boolean _showDelete;
 	private boolean _showSubmit;
 	private String _size = StringPool.BLANK;
 	private String _spritemap = StringPool.BLANK;
-	private boolean _submitAvailableAtLoading;
 	private String _submitLabel = StringPool.BLANK;
 	private String _title = StringPool.BLANK;
 	private String _url = StringPool.BLANK;

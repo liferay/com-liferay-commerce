@@ -18,14 +18,14 @@
 
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %><%@
 taglib uri="http://liferay.com/tld/clay" prefix="clay" %><%@
-taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
+taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
+taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
 <%@ page import="com.liferay.commerce.frontend.model.HeaderActionModel" %><%@
 page import="com.liferay.frontend.taglib.clay.servlet.taglib.util.DropdownItem" %><%@
 page import="com.liferay.petra.string.StringPool" %><%@
 page import="com.liferay.portal.kernel.model.WorkflowedModel" %><%@
 page import="com.liferay.portal.kernel.util.HtmlUtil" %><%@
-page import="com.liferay.portal.kernel.util.PortalUtil" %><%@
 page import="com.liferay.portal.kernel.util.Validator" %>
 
 <%@ page import="java.util.List" %>
@@ -43,7 +43,9 @@ String spritemap = (String)request.getAttribute("liferay-commerce:header:spritem
 String version = (String)request.getAttribute("liferay-commerce:header:version");
 String previewUrl = (String)request.getAttribute("liferay-commerce:header:previewUrl");
 String thumbnailUrl = (String)request.getAttribute("liferay-commerce:header:thumbnailUrl");
-List<HeaderActionModel> headerActionModels = (List<HeaderActionModel>)request.getAttribute("liferay-commerce:header:headerActionModels");
+List<HeaderActionModel> actions = (List<HeaderActionModel>)request.getAttribute("liferay-commerce:header:actions");
 List<DropdownItem> dropdownItems = (List<DropdownItem>)request.getAttribute("liferay-commerce:header:dropdownItems");
-String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_header") + StringPool.UNDERLINE;
+String erc = (String)request.getAttribute("liferay-commerce:header:externalReferenceCode");
+String ercEditUrl = (String)request.getAttribute("liferay-commerce:header:externalReferenceCodeEditUrl");
+String assignerModalUrl = (String)request.getAttribute("liferay-commerce:header:assignerModalUrl");
 %>

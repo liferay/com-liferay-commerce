@@ -30,8 +30,6 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceShipmentsPort
 <commerce-ui:modal
 	closeOnSubmit="<%= true %>"
 	id="add-shipment-modal"
-	showCancel="<%= true %>"
-	showSubmit="<%= true %>"
 	size="lg"
 	title='<%= LanguageUtil.get(request, "create-new-shipment") %>'
 	url="<%= editCommerceShipmentURL %>"

@@ -27,10 +27,34 @@
   }
 
   &-header {
-    padding: map-get($spacers, 4);
+    background-color: white;
+    padding: map-get($spacers, 3) map-get($spacers, 4);
+    position: sticky;
+    top: 0;
+    z-index: 100;
   }
 
   &-content {
     padding: map-get($spacers, 4);
   }
+
+  &-footer {
+    align-items: center;
+    background-color: white;
+    border-top: 1px solid #E7E7ED;
+    bottom: 0;
+    display: flex;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    left: 0;
+    padding: map-get($spacers, 3) map-get($spacers, 4);
+    position: fixed;
+    right: 0;
+  }
+}
+
+.modal-iframe-header {
+  position: sticky;
+  top: 0;
 }

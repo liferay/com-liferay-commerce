@@ -73,7 +73,5 @@ List<CommercePaymentMethodGroupRel> commercePaymentMethods = commerceOrderEditDi
 				</ul>
 			</c:otherwise>
 		</c:choose>
-
-		<aui:button type="submit" />
 	</aui:form>
 </commerce-ui:modal-content>

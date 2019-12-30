@@ -105,14 +105,14 @@
 				items : <%= jsonSerializer.serializeDeep(items) %>,
 				showPagination : <%= showPagination %>,
 				pagination : {
-					delta : <%= itemPerPage %>,
 					deltas : <%= jsonSerializer.serializeDeep(paginationEntries) %>,
+					initialDelta : <%= itemPerPage %>,
 					initialPageNumber : <%= pageNumber %>,
 					initialTotalItems : <%= totalItems %>
 				},
 				namespace : "<%= namespace %>",
 				portletURL : "<%= portletURL %>",
-				spritemap : "<%= spritemap %>",
+				spritemap : "<%= spritemap %>"
 			}
 		)
 	);

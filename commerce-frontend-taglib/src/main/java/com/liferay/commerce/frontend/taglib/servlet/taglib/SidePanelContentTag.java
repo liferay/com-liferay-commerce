@@ -45,28 +45,16 @@ public class SidePanelContentTag extends IncludeTag {
 		return EVAL_BODY_INCLUDE;
 	}
 
-	public String getSidePanelId() {
-		return _sidePanelId;
-	}
-
 	public boolean getShowCloseButton() {
 		return _showCloseButton;
 	}
 
+	public String getSidePanelId() {
+		return _sidePanelId;
+	}
+
 	public String getTitle() {
 		return _title;
-	}
-
-	public void setSidePanelId(String sidePanelId) {
-		_sidePanelId = sidePanelId;
-	}
-
-	public void setShowCloseButton(boolean showCloseButton) {
-		_showCloseButton = showCloseButton;
-	}
-
-	public void setTitle(String title) {
-		_title = title;
 	}
 
 	@Override
@@ -74,6 +62,18 @@ public class SidePanelContentTag extends IncludeTag {
 		super.setPageContext(pageContext);
 
 		servletContext = ServletContextUtil.getServletContext();
+	}
+
+	public void setShowCloseButton(boolean showCloseButton) {
+		_showCloseButton = showCloseButton;
+	}
+
+	public void setSidePanelId(String sidePanelId) {
+		_sidePanelId = sidePanelId;
+	}
+
+	public void setTitle(String title) {
+		_title = title;
 	}
 
 	@Override

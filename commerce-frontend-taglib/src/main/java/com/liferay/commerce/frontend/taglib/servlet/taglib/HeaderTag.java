@@ -32,6 +32,14 @@ import javax.servlet.jsp.PageContext;
  */
 public class HeaderTag extends IncludeTag {
 
+	public List<HeaderActionModel> getActions() {
+		return _actions;
+	}
+
+	public String getAssignerModalUrl() {
+		return _assignerModalUrl;
+	}
+
 	public Object getBean() {
 		return _bean;
 	}
@@ -44,12 +52,16 @@ public class HeaderTag extends IncludeTag {
 		return _dropdownItems;
 	}
 
-	public boolean getFullWidth() {
-		return _fullWidth;
+	public String getExternalReferenceCode() {
+		return _externalReferenceCode;
 	}
 
-	public List<HeaderActionModel> getHeaderActions() {
-		return _headerActionModels;
+	public String getExternalReferenceCodeEditUrl() {
+		return _externalReferenceCodeEditUrl;
+	}
+
+	public boolean getFullWidth() {
+		return _fullWidth;
 	}
 
 	public Class<?> getModel() {
@@ -80,6 +92,14 @@ public class HeaderTag extends IncludeTag {
 		return _wrapperCssClasses;
 	}
 
+	public void setActions(List<HeaderActionModel> actions) {
+		_actions = actions;
+	}
+
+	public void setAssignerModalUrl(String assignerModalUrl) {
+		_assignerModalUrl = assignerModalUrl;
+	}
+
 	public void setBean(Object bean) {
 		_bean = bean;
 	}
@@ -92,12 +112,18 @@ public class HeaderTag extends IncludeTag {
 		_dropdownItems = dropdownItems;
 	}
 
-	public void setFullWidth(boolean fullWidth) {
-		_fullWidth = fullWidth;
+	public void setExternalReferenceCode(String externalReferenceCode) {
+		_externalReferenceCode = externalReferenceCode;
 	}
 
-	public void setHeaderActions(List<HeaderActionModel> headerActionModels) {
-		_headerActionModels = headerActionModels;
+	public void setExternalReferenceCodeEditUrl(
+		String externalReferenceCodeEditUrl) {
+
+		_externalReferenceCodeEditUrl = externalReferenceCodeEditUrl;
+	}
+
+	public void setFullWidth(boolean fullWidth) {
+		_fullWidth = fullWidth;
 	}
 
 	public void setModel(Class<?> model) {
@@ -139,11 +165,14 @@ public class HeaderTag extends IncludeTag {
 	protected void cleanUp() {
 		super.cleanUp();
 
+		_actions = null;
+		_assignerModalUrl = null;
 		_bean = null;
 		_cssClasses = null;
 		_dropdownItems = null;
+		_externalReferenceCode = null;
+		_externalReferenceCodeEditUrl = null;
 		_fullWidth = false;
-		_headerActionModels = null;
 		_model = null;
 		_previewUrl = null;
 		_spritemap = null;
@@ -167,15 +196,22 @@ public class HeaderTag extends IncludeTag {
 			_spritemap = themeDisplay.getPathThemeImages() + "/clay/icons.svg";
 		}
 
+		request.setAttribute("liferay-commerce:header:actions", _actions);
+		request.setAttribute(
+			"liferay-commerce:header:assignerModalUrl", _assignerModalUrl);
 		request.setAttribute("liferay-commerce:header:bean", _bean);
 		request.setAttribute("liferay-commerce:header:cssClasses", _cssClasses);
 		request.setAttribute(
 			"liferay-commerce:header:dropdownItems", _dropdownItems);
+		request.setAttribute(
+			"liferay-commerce:header:externalReferenceCode",
+			_externalReferenceCode);
+		request.setAttribute(
+			"liferay-commerce:header:externalReferenceCodeEditUrl",
+			_externalReferenceCodeEditUrl);
 		request.setAttribute("liferay-commerce:header:fullWidth", _fullWidth);
 		request.setAttribute(
 			"liferay-commerce:header:hasWorkflow", Boolean.FALSE);
-		request.setAttribute(
-			"liferay-commerce:header:headerActionModels", _headerActionModels);
 		request.setAttribute("liferay-commerce:header:model", _model);
 		request.setAttribute("liferay-commerce:header:previewUrl", _previewUrl);
 		request.setAttribute("liferay-commerce:header:spritemap", _spritemap);
@@ -189,11 +225,14 @@ public class HeaderTag extends IncludeTag {
 
 	private static final String _PAGE = "/header/page.jsp";
 
+	private List<HeaderActionModel> _actions;
+	private String _assignerModalUrl;
 	private Object _bean;
 	private String _cssClasses;
 	private List<DropdownItem> _dropdownItems;
+	private String _externalReferenceCode;
+	private String _externalReferenceCodeEditUrl;
 	private boolean _fullWidth;
-	private List<HeaderActionModel> _headerActionModels;
 	private Class<?> _model;
 	private String _previewUrl;
 	private String _spritemap;

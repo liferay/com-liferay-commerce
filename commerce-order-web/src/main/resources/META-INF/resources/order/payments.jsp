@@ -33,8 +33,6 @@ CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder()
 		<commerce-ui:modal
 			closeOnSubmit="<%= true %>"
 			id="order-payment-method-modal"
-			showCancel="<%= true %>"
-			showSubmit="<%= true %>"
 			size="lg"
 			title='<%= LanguageUtil.get(request, "payment-method") %>'
 			url="<%= editOrderPaymentMethodURL %>"

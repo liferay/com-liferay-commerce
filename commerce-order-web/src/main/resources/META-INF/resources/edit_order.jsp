@@ -1,3 +1,5 @@
+
+
 <%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
@@ -41,9 +43,12 @@ else {
 %>
 
 <commerce-ui:header
+	actions="<%= commerceOrderEditDisplayContext.getHeaderActionModels() %>"
+	assignerModalUrl="/assigner/modal/url"
 	bean="<%= commerceOrder %>"
 	dropdownItems="<%= commerceOrderEditDisplayContext.getDropdownItems() %>"
-	headerActions="<%= commerceOrderEditDisplayContext.getHeaderActionModels() %>"
+	externalReferenceCode="123asd"
+	externalReferenceCodeEditUrl="/external/reference/code/edit/url"
 	model="<%= CommerceOrder.class %>"
 	thumbnailUrl="<%= commerceOrderEditDisplayContext.getCommerceAccountThumbnailURL() %>"
 	title="<%= headerTitle %>"

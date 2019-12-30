@@ -16,5 +16,56 @@
 
 <%@ include file="/modal_content/init.jsp" %>
 
-    </div>
+	</div>
+
+	<c:if test="<%= Validator.isNotNull(submitButtonLabel) || showCancelButton || showSubmitButton %>">
+		<div class="modal-iframe-footer">
+			<c:if test="<%= showCancelButton %>">
+				<button class="btn btn-secondary ml-3 modal-closer"><%= LanguageUtil.get(request, "cancel") %></button>
+			</c:if>
+
+			<c:if test="<%= showSubmitButton || Validator.isNotNull(submitButtonLabel) %>">
+				<button class="btn btn-primary form-submitter ml-3">
+					<%= Validator.isNotNull(submitButtonLabel) ? submitButtonLabel : LanguageUtil.get(request, "submit") %>
+				</button>
+			</c:if>
+		</div>
+	</c:if>
 </div>
+
+<aui:script require="commerce-frontend-js/utilities/eventsDefinitions.es as events, commerce-frontend-js/utilities/index.es as utilities">
+	document.querySelectorAll(".modal-closer").forEach(function(trigger) {
+		trigger.addEventListener("click", function(e) {
+		  e.preventDefault();
+		  window.parent.Liferay.fire(events.CLOSE_MODAL);
+		})
+	})
+
+	document.querySelectorAll(".form-submitter").forEach(function(trigger) {
+		trigger.addEventListener("click", function(e) {
+			e.preventDefault();
+			var form = document.querySelector("form");
+			if(form) {
+				submitForm(form);
+			} else {
+				throw new Error("no forms found");
+			}
+		})
+	})
+
+	var iframeContent = document.querySelector(".modal-iframe-content");
+	var iframeFooter = document.querySelector(".modal-iframe-footer");
+
+	if(iframeContent && iframeFooter) {
+		function adjustBottomSpace() {
+			iframeContent.style.marginBottom = iframeFooter.offsetHeight + "px"
+		}
+
+		var debouncedAdjustBottomSpace = utilities.debounce(adjustBottomSpace, 300);
+
+		adjustBottomSpace();
+
+		window.addEventListener("resize", debouncedAdjustBottomSpace);
+	}
+
+</aui:script>

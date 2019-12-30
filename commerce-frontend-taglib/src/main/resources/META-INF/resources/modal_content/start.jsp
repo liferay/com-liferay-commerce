@@ -18,9 +18,15 @@
 
 <div class="modal-iframe-wrapper">
 	<c:if test="<%= Validator.isNotNull(title) %>">
-		<header class="modal-iframe-header">
-			<h2 class="title"><%= title %></h2>
+		<header class="modal-header modal-iframe-header">
+			<h2 class="modal-title"><%= title %></h2>
+
+			<button aria-label="close" class="btn btn-unstyled close modal-closer" type="button">
+				<clay:icon
+					symbol="times"
+				/>
+			</button>
 		</header>
 	</c:if>
-	<div class="modal-iframe-content">
 
+	<div class="modal-iframe-content">
