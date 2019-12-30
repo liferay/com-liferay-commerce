@@ -4,50 +4,53 @@ import ClayModal, {useModal} from '@clayui/modal';
 import PropTypes from 'prop-types';
 import React, {useState, useRef, useEffect} from 'react';
 
-import {OPEN, OPEN_MODAL} from '../../utilities/eventsDefinitions.es';
+import {OPEN, OPEN_MODAL, CLOSE_MODAL} from '../../utilities/eventsDefinitions.es';
+
+let test = 0;
 
 const Modal = props => {
-	const [visible, setVisible] = useState(props.visible || false);
-	const [loading, setLoading] = useState(false)
-
-	function reset() {
-		if (props.onClose) {
-			props.onClose();
-		}
-		if (typeof props.visible === 'undefined') {
-			setVisible(false);
-		}
-		setIframeLoadingCounter(0);
-		setSubmitActive(
-			typeof props.submitActiveAtLoading === 'boolean'
-				? props.submitActiveAtLoading
-				: true
-		);
-		setLoading(false);
-	}
-
+	const [visible, setVisible] = useState(false);
+	const [loading, setLoading] = useState(false);
+	const [onClose, setOnClose] = useState(null);
 	const [iframeLoadingCounter, setIframeLoadingCounter] = useState(0);
-	const [submitActive, setSubmitActive] = useState(
-		typeof props.submitActiveAtLoading === 'boolean'
-			? props.submitActiveAtLoading
-			: true
-	);
+	const [title, setTitle] = useState(props.title);
+	const [url, setUrl] = useState(props.url);
 	const iframeRef = useRef(null);
-	const {observer, onClose} = useModal({onClose: reset});
-
-	useEffect(() => {
-		setVisible(props.visible);
-	}, [props.visible]);
-
-	useEffect(() => {
-		if (!props.id) {
-			return;
+	
+	const {observer, onClose: closeModal} = useModal({onClose: () => {
+		if(iframeLoadingCounter > 1) {
+			if (onClose) {
+				onClose();
+			} else if (props.onClose) {
+				props.onClose()
+			}
 		}
+		
+		setIframeLoadingCounter(() => 0);
+		test = 0;
+		setLoading(false);
+		setVisible(false);
+	}});
 
+	useEffect(() => {
 		function handleOpenEvent(data) {
-			if (props.id === data.id) {
-				setLoading(true);
-				setVisible(true);
+			if ((props.id !== data.id) || visible) {
+				return;
+			}
+
+			setLoading(true);
+			setVisible(true);
+
+			if(data.url) {
+				setUrl(data.url);
+			}
+
+			if(data.onClose) {
+				setOnClose(data.onClose);
+			}
+
+			if(data.title) {
+				setTitle(data.title);
 			}
 		}
 
@@ -55,6 +58,7 @@ const Modal = props => {
 			if (e.portletId === props.portletId) {
 				Liferay.detach(OPEN, handleOpenEvent);
 				Liferay.detach(OPEN_MODAL, handleOpenEvent);
+				Liferay.detach(CLOSE_MODAL, closeModal);
 				Liferay.detach('destroyPortlet', cleanUpListeners);
 			}
 		}
@@ -62,95 +66,45 @@ const Modal = props => {
 		if (Liferay.on) {
 			Liferay.on(OPEN, handleOpenEvent);
 			Liferay.on(OPEN_MODAL, handleOpenEvent);
+			Liferay.on(CLOSE_MODAL, closeModal);
 			Liferay.on('destroyPortlet', cleanUpListeners);
 		}
-	}, [props.id, props.portletId]);
 
-	function _handleIframeLoad() {
-		setIframeLoadingCounter(iframeLoadingCounter + 1);
-	}
+		return () => cleanUpListeners({portletId: props.portletId})
+	}, [props.id, props.portletId, closeModal]);
 
 	useEffect(() => {
-		
-		if(iframeLoadingCounter > 1) {
-			_handleFormSubmit();
-		}
-		
-		if(iframeLoadingCounter === 1) {
-			_handleIframeFirstLoad();
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [iframeLoadingCounter]);
+		setOnClose(() => props.onClose);
+	}, [])
 
-	function _handleFormSubmit() {
-		setSubmitActive(false);
-
-		if (props.closeOnSubmit) {
-			setTimeout(() => {
-				onClose();
-			}, 1000);
-		}
-	}
-
-	function _handleIframeFirstLoad() {
+	function handleIframeLoad() {
 		setLoading(false);
-
+		setIframeLoadingCounter(c => c + 1);
+		test++;
+		
 		const iframeDocument = iframeRef.current.contentDocument;
 		const iframeWindow = iframeRef.current.contentWindow;
-
-		if (iframeDocument) {
-			iframeDocument
-				.querySelector('body')
-				.classList.add('within-commerce-iframe');
-		}
-
-		if ((props.showSubmit || props.submitLabel) && iframeDocument) {
-			const iframeForm = iframeDocument.querySelector('form');
-
-			iframeForm.addEventListener('submitAvailable', () =>
-				enableSubmit()
-			);
-			iframeForm.addEventListener('submitUnavailable', () =>
-				disableSubmit()
-			);
-
+		
+		if (iframeDocument && iframeWindow) {
 			if (iframeWindow.Liferay && iframeWindow.Liferay.on) {
 				iframeWindow.Liferay.on('endNavigate', e => {
 					e.preventDefault();
-					_handleIframeLoad();
+					setIframeLoadingCounter(c => c + 1);
+					test++;
 				});
 			}
 		}
 	}
 
-	function setSubmitAvailability(state) {
-		setSubmitActive(state);
-	}
-
-	function enableSubmit() {
-		setSubmitAvailability(true);
-	}
-
-	function disableSubmit() {
-		setSubmitAvailability(false);
-	}
-
-	function _submit(e) {
+	function handleClickOnSubmit(e) {
 		e.preventDefault();
-		try {
-			const iframeForm = iframeRef.current.contentDocument.querySelector(
-				'form'
-			);
-			const iframeSubmitButton = iframeForm.querySelector(
-				'[type="submit"]'
-			);
+		const iframeForm = iframeRef.current.contentDocument.querySelector(
+			'form'
+		);
 
-			if (iframeSubmitButton) {
-				iframeSubmitButton.click();
-			} else {
-				iframeForm.submit();
-			}
-		} catch (error) {
+		if (iframeForm) {
+			iframeRef.current.contentWindow.submitForm(iframeForm)
+		} else {
 			throw new Error('Form not available');
 		}
 	}
@@ -162,16 +116,16 @@ const Modal = props => {
 			spritemap={props.spritemap}
 			status={props.status}
 		>
-			{props.title && <ClayModal.Header>{props.title}</ClayModal.Header>}
+			{title && <ClayModal.Header>{title}</ClayModal.Header>}
 			<div
 				className="modal-body modal-body-iframe"
 				style={{height: '450px', maxHeight: '100%'}}
 			>
 				<iframe
-					onLoad={_handleIframeLoad}
+					onLoad={handleIframeLoad}
 					ref={iframeRef}
-					src={props.url}
-					title={props.title}
+					src={url}
+					title={title}
 				/>
 				{loading && 
 					<div className="loader-container">
@@ -189,7 +143,7 @@ const Modal = props => {
 							{(props.showCancel || props.cancelLabel) && (
 								<ClayButton
 									displayType="secondary"
-									onClick={onClose}
+									onClick={closeModal}
 								>
 									{props.cancelLabel ||
 										Liferay.Language.get('cancel')}
@@ -197,9 +151,8 @@ const Modal = props => {
 							)}
 							{(props.showSubmit || props.submitLabel) && (
 								<ClayButton
-									disabled={!submitActive}
 									displayType="primary"
-									onClick={_submit}
+									onClick={handleClickOnSubmit}
 								>
 									{props.submitLabel ||
 										Liferay.Language.get('submit')}
@@ -216,7 +169,7 @@ const Modal = props => {
 Modal.propTypes = {
 	cancelLabel: PropTypes.string,
 	closeOnSubmit: PropTypes.bool,
-	id: PropTypes.string,
+	id: PropTypes.string.isRequired,
 	onClose: PropTypes.func,
 	portletId: PropTypes.string,
 	showCancel: PropTypes.bool,
@@ -224,7 +177,6 @@ Modal.propTypes = {
 	size: PropTypes.string,
 	spritemap: PropTypes.string,
 	status: PropTypes.string,
-	submitActiveAtLoading: PropTypes.bool,
 	submitLabel: PropTypes.string,
 	title: PropTypes.string,
 	url: PropTypes.string

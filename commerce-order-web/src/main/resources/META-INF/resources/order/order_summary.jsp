@@ -47,7 +47,5 @@ CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder()
 		<aui:input label="shipping-and-handing-discount" name="shippingDiscountAmount" wrapperCssClass="form-group-item" />
 
 		<aui:input label="grand-total" name="total" wrapperCssClass="form-group-item" />
-
-		<aui:button type="submit" />
 	</aui:form>
 </commerce-ui:modal-content>

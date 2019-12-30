@@ -17,17 +17,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %><%@
-taglib uri="http://liferay.com/tld/clay" prefix="clay" %><%@
 taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 
-<%@ page import="com.liferay.petra.string.StringPool" %><%@
-page import="com.liferay.portal.kernel.util.PortalUtil" %><%@
-page import="com.liferay.portal.kernel.util.Validator" %>
+<%@ page import="com.liferay.portal.kernel.util.Validator" %>
 
 <liferay-theme:defineObjects />
 
 <%
 String title = (String)request.getAttribute("liferay-commerce:side-panel-content:title");
-String sidePanelId = (String)request.getAttribute("liferay-commerce:side-panel-content:sidePanelId");
-String showCloseButton = (String)request.getAttribute("liferay-commerce:side-panel-content:showCloseButton");
 %>

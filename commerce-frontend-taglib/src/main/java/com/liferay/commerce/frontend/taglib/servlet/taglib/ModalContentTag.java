@@ -34,11 +34,14 @@ public class ModalContentTag extends IncludeTag {
 
 	@Override
 	public int doStartTag() throws JspException {
-		setAttributeNamespace(_ATTRIBUTE_NAMESPACE);
-
-		setNamespacedAttribute(request, "modalId", _modalId);
-		setNamespacedAttribute(request, "title", _title);
-		setNamespacedAttribute(request, "showCloseButton", _showCloseButton);
+		request.setAttribute(_ATTRIBUTE_NAMESPACE + "modalId", _modalId);
+		request.setAttribute(
+			_ATTRIBUTE_NAMESPACE + "showCancelButton", _showCancelButton);
+		request.setAttribute(
+			_ATTRIBUTE_NAMESPACE + "showSubmitButton", _showSubmitButton);
+		request.setAttribute(
+			_ATTRIBUTE_NAMESPACE + "submitButtonLabel", _submitButtonLabel);
+		request.setAttribute(_ATTRIBUTE_NAMESPACE + "title", _title);
 
 		super.doStartTag();
 
@@ -49,8 +52,16 @@ public class ModalContentTag extends IncludeTag {
 		return _modalId;
 	}
 
-	public boolean getShowCloseButton() {
-		return _showCloseButton;
+	public boolean getShowCancelButton() {
+		return _showCancelButton;
+	}
+
+	public boolean getShowSubmitButton() {
+		return _showSubmitButton;
+	}
+
+	public String getSubmitButtonLabel() {
+		return _submitButtonLabel;
 	}
 
 	public String getTitle() {
@@ -61,14 +72,6 @@ public class ModalContentTag extends IncludeTag {
 		_modalId = modalId;
 	}
 
-	public void setShowCloseButton(boolean showCloseButton) {
-		_showCloseButton = showCloseButton;
-	}
-
-	public void setTitle(String title) {
-		_title = title;
-	}
-
 	@Override
 	public void setPageContext(PageContext pageContext) {
 		super.setPageContext(pageContext);
@@ -76,12 +79,30 @@ public class ModalContentTag extends IncludeTag {
 		servletContext = ServletContextUtil.getServletContext();
 	}
 
+	public void setShowCancelButton(boolean showCancelButton) {
+		_showCancelButton = showCancelButton;
+	}
+
+	public void setShowSubmitButton(boolean showSubmitButton) {
+		_showSubmitButton = showSubmitButton;
+	}
+
+	public void setSubmitButtonLabel(String submitButtonLabel) {
+		_submitButtonLabel = submitButtonLabel;
+	}
+
+	public void setTitle(String title) {
+		_title = title;
+	}
+
 	@Override
 	protected void cleanUp() {
 		super.cleanUp();
 
-		_showCloseButton = false;
 		_modalId = null;
+		_showCancelButton = true;
+		_showSubmitButton = true;
+		_submitButtonLabel = null;
 		_title = null;
 	}
 
@@ -102,8 +123,10 @@ public class ModalContentTag extends IncludeTag {
 
 	private static final String _START_PAGE = "/modal_content/start.jsp";
 
-	private boolean _showCloseButton;
 	private String _modalId;
+	private boolean _showCancelButton = true;
+	private boolean _showSubmitButton = true;
+	private String _submitButtonLabel;
 	private String _title;
 
 }

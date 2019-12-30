@@ -30,12 +30,9 @@ CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder()
 </liferay-portlet:renderURL>
 
 <commerce-ui:modal
-	closeOnSubmit="<%= true %>"
 	id="billing-address-modal"
-	showCancel="<%= true %>"
-	showSubmit="<%= true %>"
+	refreshPageOnClose="<%= true %>"
 	size="lg"
-	title='<%= LanguageUtil.get(request, "billing-address") %>'
 	url="<%= editBillingAddressURL %>"
 />
 
@@ -45,10 +42,8 @@ CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder()
 </liferay-portlet:renderURL>
 
 <commerce-ui:modal
-	closeOnSubmit="<%= true %>"
 	id="shipping-address-modal"
-	showCancel="<%= true %>"
-	showSubmit="<%= true %>"
+	refreshPageOnClose="<%= true %>"
 	size="lg"
 	title='<%= LanguageUtil.get(request, "shipping-address") %>'
 	url="<%= editShippingAddressURL %>"
@@ -60,10 +55,8 @@ CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder()
 </liferay-portlet:renderURL>
 
 <commerce-ui:modal
-	closeOnSubmit="<%= true %>"
 	id="purchase-order-number-modal"
-	showCancel="<%= true %>"
-	showSubmit="<%= true %>"
+	refreshPageOnClose="<%= true %>"
 	size="lg"
 	title='<%= LanguageUtil.get(request, "purchase-order-number") %>'
 	url="<%= editPurchaseOrderNumberURL %>"
@@ -75,10 +68,8 @@ CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder()
 </liferay-portlet:renderURL>
 
 <commerce-ui:modal
-	closeOnSubmit="<%= true %>"
 	id="requested-delivery-date-modal"
-	showCancel="<%= true %>"
-	showSubmit="<%= true %>"
+	refreshPageOnClose="<%= true %>"
 	size="lg"
 	title='<%= LanguageUtil.get(request, "requested-delivery-date") %>'
 	url="<%= editRequestedDeliveryDateURL %>"
@@ -90,10 +81,8 @@ CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder()
 </liferay-portlet:renderURL>
 
 <commerce-ui:modal
-	closeOnSubmit="<%= true %>"
 	id="printed-note-modal"
-	showCancel="<%= true %>"
-	showSubmit="<%= true %>"
+	refreshPageOnClose="<%= true %>"
 	size="lg"
 	title='<%= LanguageUtil.get(request, "printed-note") %>'
 	url="<%= editPrintedNoteURL %>"
@@ -268,10 +257,8 @@ CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder()
 		</liferay-portlet:renderURL>
 
 		<commerce-ui:modal
-			closeOnSubmit="<%= true %>"
 			id="order-summary-modal"
-			showCancel="<%= true %>"
-			showSubmit="<%= true %>"
+			refreshPageOnClose="<%= true %>"
 			size="lg"
 			title='<%= LanguageUtil.get(request, "order-summary") %>'
 			url="<%= editOrderSummaryURL %>"
@@ -347,7 +334,7 @@ CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder()
 			portalWrapperId: "<portlet:namespace />side-panel-wrapper",
 			size: "lg",
 			spritemap: "<%= themeDisplay.getPathThemeImages() + "/clay/icons.svg" %>",
-			topAnchorSelector: "#commerce-admin-header"
+			topAnchorSelector: ".commerce-header"
 		}
 	);
 </aui:script>

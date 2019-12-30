@@ -10,6 +10,8 @@ import { exposeSidePanel } from '../../utilities/sidePanels.es';
 import SideMenu from './SideMenu.es';
 import { ClayIconSpriteContext } from '@clayui/icon';
 import PropTypes from 'prop-types';
+import Modal from '../modal/Modal.es';
+import { iframeHandlerModalId } from '../../utilities/iframes.es';
 export default class SidePanel extends React.Component {
 	constructor(props) {
 		super(props);
@@ -206,10 +208,6 @@ export default class SidePanel extends React.Component {
 				'body'
 			);
 	
-			iframeBody.classList.add('within-commerce-iframe');
-	
-			const submitButton = iframeBody.querySelector('[type="submit"]');
-
 			if (submitButton) {
 				submitButton.addEventListener('click', this.handleIframeClickOnSubmit);
 			}
@@ -226,43 +224,46 @@ export default class SidePanel extends React.Component {
 				: '';
 
 		const content = (
-			<div
-				className={`side-panel side-panel-${this.state.size} ${visibility} ${loading}`}
-				ref={this.panel}
-				style={{top: this.state.topDistance}}
-			>
-				{this.props.items && this.props.items.length && (
-					<SideMenu
-						active={this.state.active}
-						items={this.props.items}
-						open={this.open}
-					/>
-				)}
-
-				<ClayButton
-					className="btn-close"
-					displayType="monospaced"
-					onClick={() => this.close()}
+			<>
+				<Modal id={iframeHandlerModalId} />
+				<div
+					className={`side-panel side-panel-${this.state.size} ${visibility} ${loading}`}
+					ref={this.panel}
+					style={{top: this.state.topDistance}}
 				>
-					<ClayIcon spritemap={this.props.spritemap} symbol="times" />
-				</ClayButton>
+					{this.props.items && this.props.items.length && (
+						<SideMenu
+							active={this.state.active}
+							items={this.props.items}
+							open={this.open}
+						/>
+					)}
 
-				<div className="tab-content">
-					<div className="loader">
-						<ClayLoadingIndicator />
-					</div>
-					<div className="active fade show tab-pane" role="tabpanel">
-						{!(this.state.moving && this.state.visible) && (
-							<iframe
-								frameBorder="0"
-								onLoad={this.handleContentLoaded}
-								ref={this.iframeRef}
-								src={this.state.currentUrl}
-							></iframe>
-						)}
+					<ClayButton
+						className="btn-close"
+						displayType="monospaced"
+						onClick={() => this.close()}
+					>
+						<ClayIcon spritemap={this.props.spritemap} symbol="times" />
+					</ClayButton>
+
+					<div className="tab-content">
+						<div className="loader">
+							<ClayLoadingIndicator />
+						</div>
+						<div className="active fade show tab-pane" role="tabpanel">
+							{!(this.state.moving && this.state.visible) && (
+								<iframe
+									frameBorder="0"
+									onLoad={this.handleContentLoaded}
+									ref={this.iframeRef}
+									src={this.state.currentUrl}
+								></iframe>
+							)}
+						</div>
 					</div>
 				</div>
-			</div>
+			</>
 		)
 
 		return ReactDOM.createPortal(

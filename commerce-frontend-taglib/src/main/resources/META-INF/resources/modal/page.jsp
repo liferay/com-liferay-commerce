@@ -33,14 +33,7 @@ String containerId = randomNamespace + "modal-root";
 			size: "<%= size %>",
 			title: "<%= title %>",
 			spritemap: "<%= spritemap %>",
-			showSubmit: <%= showSubmit %>,
-			submitLabel: "<%= submitLabel %>",
-			closeOnSubmit: <%= closeOnSubmit %>,
-			submitAvailableAtLoading: <%= submitAvailableAtLoading %>,
-			showDelete: <%= showDelete %>,
-			deleteLabel: "<%= deleteLabel %>",
-			showCancel: <%= showCancel %>,
-			cancelLabel: "<%= cancelLabel %>"
+			onClose: <%= refreshPageOnClose %> ? function() { window.location.reload() } : null
 		}
 	);
 </aui:script>

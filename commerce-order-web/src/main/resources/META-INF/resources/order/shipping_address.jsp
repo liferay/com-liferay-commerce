@@ -50,8 +50,6 @@ long commerceRegionId = BeanParamUtil.getLong(commerceAddress, request, "commerc
 		<aui:input name="city" wrapperCssClass="form-group-item" />
 
 		<aui:select label="region" name="commerceRegionId" wrapperCssClass="form-group-item" />
-
-		<aui:button type="submit" />
 	</aui:form>
 </commerce-ui:modal-content>
 

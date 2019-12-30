@@ -2,7 +2,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
 
-
 const {defineServerResponses} = require('./dev/fakeServerUtilities');
 const components = require('./src/main/resources/META-INF/resources/components/index');
 
@@ -82,6 +81,6 @@ module.exports = {
 		}),
 	],
 	resolve: {
-		extensions: ['.js', '.jsx', '.ts', '.tsx'],
+		extensions: ['.js', '.jsx'],
 	},
 };

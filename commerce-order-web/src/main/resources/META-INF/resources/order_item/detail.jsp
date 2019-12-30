@@ -36,45 +36,60 @@ portletDisplay.setURLBack(redirect);
 
 <portlet:actionURL name="editCommerceOrderItem" var="editCommerceOrderItemActionURL" />
 
-<aui:form action="<%= editCommerceOrderItemActionURL %>" cssClass="container-fluid-1280" method="post" name="fm">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
-	<aui:input name="commerceOrderId" type="hidden" value="<%= commerceOrderItem.getCommerceOrderId() %>" />
-	<aui:input name="commerceOrderItemId" type="hidden" value="<%= commerceOrderItem.getCommerceOrderItemId() %>" />
+<commerce-ui:side-panel-content>
+	<aui:form action="<%= editCommerceOrderItemActionURL %>" cssClass="container-fluid-1280" method="post" name="fm">
+		<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
+		<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+		<aui:input name="commerceOrderId" type="hidden" value="<%= commerceOrderItem.getCommerceOrderId() %>" />
+		<aui:input name="commerceOrderItemId" type="hidden" value="<%= commerceOrderItem.getCommerceOrderItemId() %>" />
 
-	<liferay-ui:error exception="<%= CommerceOrderValidatorException.class %>">
+		<liferay-ui:error exception="<%= CommerceOrderValidatorException.class %>">
 
-		<%
-		CommerceOrderValidatorException cove = (CommerceOrderValidatorException)errorException;
+			<%
+			CommerceOrderValidatorException cove = (CommerceOrderValidatorException)errorException;
 
-		if (cove != null) {
-			for (CommerceOrderValidatorResult commerceOrderValidatorResult : cove.getCommerceOrderValidatorResults()) {
-		%>
+			if (cove != null) {
+				for (CommerceOrderValidatorResult commerceOrderValidatorResult : cove.getCommerceOrderValidatorResults()) {
+			%>
 
-				<liferay-ui:message key="<%= commerceOrderValidatorResult.getLocalizedMessage() %>" />
+					<liferay-ui:message key="<%= commerceOrderValidatorResult.getLocalizedMessage() %>" />
 
-		<%
+			<%
+				}
 			}
-		}
-		%>
+			%>
 
-	</liferay-ui:error>
+		</liferay-ui:error>
 
-	<aui:fieldset-group markupView="lexicon">
-		<aui:fieldset>
-			<aui:input bean="<%= commerceOrderItem %>" name="quantity" />
+		<aui:fieldset-group markupView="lexicon">
+			<aui:fieldset>
+				<aui:input bean="<%= commerceOrderItem %>" name="quantity" />
 
-			<c:if test="<%= !commerceOrder.isOpen() %>">
-				<aui:input name="price" suffix="<%= HtmlUtil.escape(commerceCurrency.getCode()) %>" type="text" value="<%= commerceCurrency.round(commerceOrderItem.getUnitPrice()) %>">
-					<aui:validator name="number" />
-				</aui:input>
-			</c:if>
-		</aui:fieldset>
-	</aui:fieldset-group>
+				<c:if test="<%= !commerceOrder.isOpen() %>">
+					<aui:input name="price" suffix="<%= HtmlUtil.escape(commerceCurrency.getCode()) %>" type="text" value="<%= commerceCurrency.round(commerceOrderItem.getUnitPrice()) %>">
+						<aui:validator name="number" />
+					</aui:input>
+				</c:if>
+			</aui:fieldset>
+		</aui:fieldset-group>
 
-	<aui:button-row>
-		<aui:button cssClass="btn-lg" type="submit" />
+		<aui:button-row>
+			<aui:button cssClass="btn-lg" type="submit" />
 
-		<aui:button cssClass="btn-lg" href="<%= redirect %>" type="cancel" />
-	</aui:button-row>
-</aui:form>
+			<aui:button cssClass="btn-lg" href="<%= redirect %>" type="cancel" />
+		</aui:button-row>
+	</aui:form>
+
+	<button class="btn btn-secondary" id="modal-opener">open modal</button>
+
+	<aui:script require="commerce-frontend-js/utilities/eventsDefinitions.es as events">
+		document.querySelector('#modal-opener').addEventListener('click', function(e) {
+			e.preventDefault();
+
+			Liferay.fire(events.OPEN_MODAL, {
+				title: 'Modal from side panel',
+				url: '/test/url'
+			})
+		})
+	</aui:script>
+</commerce-ui:side-panel-content>

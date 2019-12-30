@@ -20,14 +20,14 @@
 taglib uri="http://liferay.com/tld/clay" prefix="clay" %><%@
 taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 
-<%@ page import="com.liferay.petra.string.StringPool" %><%@
-page import="com.liferay.portal.kernel.util.PortalUtil" %><%@
+<%@ page import="com.liferay.portal.kernel.language.LanguageUtil" %><%@
 page import="com.liferay.portal.kernel.util.Validator" %>
 
 <liferay-theme:defineObjects />
 
 <%
 String title = (String)request.getAttribute("liferay-commerce:modal-content:title");
-String modalId = (String)request.getAttribute("liferay-commerce:modal-content:modalId");
-String showCloseButton = (String)request.getAttribute("liferay-commerce:modal-content:showCloseButton");
+boolean showCancelButton = (boolean)request.getAttribute("liferay-commerce:modal-content:showCancelButton");
+boolean showSubmitButton = (boolean)request.getAttribute("liferay-commerce:modal-content:showSubmitButton");
+String submitButtonLabel = (String)request.getAttribute("liferay-commerce:modal-content:submitButtonLabel");
 %>

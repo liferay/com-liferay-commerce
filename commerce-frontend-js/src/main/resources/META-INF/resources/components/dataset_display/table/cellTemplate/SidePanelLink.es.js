@@ -1,4 +1,3 @@
-import ClayLink from '@clayui/link';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -17,8 +16,8 @@ function SidePanelLink(props) {
 	return (
 		<DatasetDisplayContext.Consumer>
 			{({loadData, sidePanelId}) => (
-				<ClayLink
-					href="#"
+				<button
+					className="btn btn-link p-0"
 					onClick={e => {
 						e.preventDefault();
 						fireOpenSidePanelEvent(sidePanelId, {
@@ -28,7 +27,7 @@ function SidePanelLink(props) {
 					}}
 				>
 					{props.value.label}
-				</ClayLink>
+				</button>
 			)}
 		</DatasetDisplayContext.Consumer>
 	);

@@ -31,8 +31,7 @@ CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder()
 		<aui:input name="commerceOrderId" type="hidden" value="<%= commerceOrder.getCommerceOrderId() %>" />
 
 		<aui:model-context bean="<%= commerceOrder %>" model="<%= CommerceOrder.class %>" />
-		<aui:input name="printedNote" wrapperCssClass="form-group-item" />
 
-		<aui:button type="submit" />
+		<aui:input name="printedNote" wrapperCssClass="form-group-item" />
 	</aui:form>
 </commerce-ui:modal-content>
