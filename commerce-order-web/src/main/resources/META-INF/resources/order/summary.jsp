@@ -91,34 +91,34 @@ CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder()
 <div class="row">
 	<div class="col-12 mb-4">
 		<commerce-ui:step-tracker
-				steps="<%= commerceOrderEditDisplayContext.getOrderSteps() %>"
+			steps="<%= commerceOrderEditDisplayContext.getOrderSteps() %>"
 		/>
 	</div>
 
 	<div class="col-12">
 		<commerce-ui:panel
-				elementClasses="flex-fill"
-				title='<%= LanguageUtil.get(request, "info") %>'
+			elementClasses="flex-fill"
+			title='<%= LanguageUtil.get(request, "info") %>'
 		>
 			<div class="row vertically-divided">
 				<div class="col-md-4">
 
 					<%
-						CommerceAddress billingAddress = commerceOrder.getBillingAddress();
+					CommerceAddress billingAddress = commerceOrder.getBillingAddress();
 					%>
 
 					<commerce-ui:info-box
-							actionLabel='<%= LanguageUtil.get(request, (billingAddress == null) ? "add" : "edit") %>'
-							actionTargetId="billing-address-modal"
-							actionUrl="<%= editBillingAddressURL %>"
-							elementClasses="py-3"
-							title='<%= LanguageUtil.get(request, "billing-address") %>'
+						actionLabel='<%= LanguageUtil.get(request, (billingAddress == null) ? "add" : "edit") %>'
+						actionTargetId="billing-address-modal"
+						actionUrl="<%= editBillingAddressURL %>"
+						elementClasses="py-3"
+						title='<%= LanguageUtil.get(request, "billing-address") %>'
 					>
 						<c:choose>
 							<c:when test="<%= billingAddress == null %>">
-							<span class="text-muted">
-								<%= LanguageUtil.get(request, "click-add-to-insert") %>
-							</span>
+								<span class="text-muted">
+									<%= LanguageUtil.get(request, "click-add-to-insert") %>
+								</span>
 							</c:when>
 							<c:otherwise>
 								<%= HtmlUtil.escape(commerceOrderEditDisplayContext.getDescriptiveCommerceAddress(billingAddress)) %>
@@ -127,21 +127,21 @@ CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder()
 					</commerce-ui:info-box>
 
 					<%
-						CommerceAddress shippingAddress = commerceOrder.getShippingAddress();
+					CommerceAddress shippingAddress = commerceOrder.getShippingAddress();
 					%>
 
 					<commerce-ui:info-box
-							actionLabel='<%= LanguageUtil.get(request, (shippingAddress == null) ? "add" : "edit") %>'
-							actionTargetId="shipping-address-modal"
-							actionUrl="<%= editShippingAddressURL %>"
-							elementClasses="py-3"
-							title='<%= LanguageUtil.get(request, "shipping-address") %>'
+						actionLabel='<%= LanguageUtil.get(request, (shippingAddress == null) ? "add" : "edit") %>'
+						actionTargetId="shipping-address-modal"
+						actionUrl="<%= editShippingAddressURL %>"
+						elementClasses="py-3"
+						title='<%= LanguageUtil.get(request, "shipping-address") %>'
 					>
 						<c:choose>
 							<c:when test="<%= shippingAddress == null %>">
-							<span class="text-muted">
-								<%= LanguageUtil.get(request, "click-add-to-insert") %>
-							</span>
+								<span class="text-muted">
+									<%= LanguageUtil.get(request, "click-add-to-insert") %>
+								</span>
 							</c:when>
 							<c:otherwise>
 								<%= HtmlUtil.escape(commerceOrderEditDisplayContext.getDescriptiveCommerceAddress(shippingAddress)) %>
@@ -153,21 +153,21 @@ CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder()
 				<div class="col-md-4">
 
 					<%
-						String purchaseOrderNumber = commerceOrder.getPurchaseOrderNumber();
+					String purchaseOrderNumber = commerceOrder.getPurchaseOrderNumber();
 					%>
 
 					<commerce-ui:info-box
-							actionLabel='<%= LanguageUtil.get(request, Validator.isNull(purchaseOrderNumber) ? "add" : "edit") %>'
-							actionTargetId="purchase-order-number-modal"
-							actionUrl="<%= editPurchaseOrderNumberURL %>"
-							elementClasses="py-3"
-							title='<%= LanguageUtil.get(request, "purchase-order-number") %>'
+						actionLabel='<%= LanguageUtil.get(request, Validator.isNull(purchaseOrderNumber) ? "add" : "edit") %>'
+						actionTargetId="purchase-order-number-modal"
+						actionUrl="<%= editPurchaseOrderNumberURL %>"
+						elementClasses="py-3"
+						title='<%= LanguageUtil.get(request, "purchase-order-number") %>'
 					>
 						<c:choose>
 							<c:when test="<%= Validator.isNull(purchaseOrderNumber) %>">
-							<span class="text-muted">
-								<%= LanguageUtil.get(request, "click-add-to-insert") %>
-							</span>
+								<span class="text-muted">
+									<%= LanguageUtil.get(request, "click-add-to-insert") %>
+								</span>
 							</c:when>
 							<c:otherwise>
 								<%= HtmlUtil.escape(purchaseOrderNumber) %>
@@ -176,21 +176,21 @@ CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder()
 					</commerce-ui:info-box>
 
 					<%
-						Date requestedDeliveryDate = commerceOrder.getRequestedDeliveryDate();
+					Date requestedDeliveryDate = commerceOrder.getRequestedDeliveryDate();
 					%>
 
 					<commerce-ui:info-box
-							actionLabel='<%= LanguageUtil.get(request, (requestedDeliveryDate == null) ? "add" : "edit") %>'
-							actionTargetId="requested-delivery-date-modal"
-							actionUrl="<%= editRequestedDeliveryDateURL %>"
-							elementClasses="py-3"
-							title='<%= LanguageUtil.get(request, "requested-delivery-date") %>'
+						actionLabel='<%= LanguageUtil.get(request, (requestedDeliveryDate == null) ? "add" : "edit") %>'
+						actionTargetId="requested-delivery-date-modal"
+						actionUrl="<%= editRequestedDeliveryDateURL %>"
+						elementClasses="py-3"
+						title='<%= LanguageUtil.get(request, "requested-delivery-date") %>'
 					>
 						<c:choose>
 							<c:when test="<%= requestedDeliveryDate == null %>">
-							<span class="text-muted">
-								<%= LanguageUtil.get(request, "click-add-to-insert") %>
-							</span>
+								<span class="text-muted">
+									<%= LanguageUtil.get(request, "click-add-to-insert") %>
+								</span>
 							</c:when>
 							<c:otherwise>
 								<%= commerceOrderEditDisplayContext.getCommerceOrderDateTime(requestedDeliveryDate) %>
@@ -200,22 +200,22 @@ CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder()
 				</div>
 
 				<%
-					String printedNote = commerceOrder.getPrintedNote();
+				String printedNote = commerceOrder.getPrintedNote();
 				%>
 
 				<div class="col-md-4">
 					<commerce-ui:info-box
-							actionLabel='<%= LanguageUtil.get(request, Validator.isNull(printedNote) ? "add" : "edit") %>'
-							actionTargetId="printed-note-modal"
-							actionUrl="<%= editPrintedNoteURL %>"
-							elementClasses="py-3"
-							title='<%= LanguageUtil.get(request, "printed-note") %>'
+						actionLabel='<%= LanguageUtil.get(request, Validator.isNull(printedNote) ? "add" : "edit") %>'
+						actionTargetId="printed-note-modal"
+						actionUrl="<%= editPrintedNoteURL %>"
+						elementClasses="py-3"
+						title='<%= LanguageUtil.get(request, "printed-note") %>'
 					>
 						<c:choose>
 							<c:when test="<%= Validator.isNull(printedNote) %>">
-							<span class="text-muted">
-								<%= LanguageUtil.get(request, "click-add-to-insert") %>
-							</span>
+								<span class="text-muted">
+									<%= LanguageUtil.get(request, "click-add-to-insert") %>
+								</span>
 							</c:when>
 							<c:otherwise>
 								<%= HtmlUtil.escape(printedNote) %>
@@ -229,25 +229,25 @@ CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder()
 
 	<div class="col-12">
 		<commerce-ui:panel
-				title='<%= LanguageUtil.get(request, "items") %>'
-				bodyClasses="p-0"
+			bodyClasses="p-0"
+			title='<%= LanguageUtil.get(request, "items") %>'
 		>
 
 			<%
-				java.util.Map<String, String> contextParams = new java.util.HashMap<>();
+			java.util.Map<String, String> contextParams = new java.util.HashMap<>();
 
-				contextParams.put("commerceOrderId", String.valueOf(commerceOrder.getCommerceOrderId()));
+			contextParams.put("commerceOrderId", String.valueOf(commerceOrder.getCommerceOrderId()));
 			%>
 
 			<commerce-ui:table-react
-					contextParams="<%= contextParams %>"
-					dataProviderKey="<%= CommerceOrderItemClayTable.NAME %>"
-					itemsPerPage="<%= 10 %>"
-					namespace="<%= renderResponse.getNamespace() %>"
-					pageNumber="<%= 1 %>"
-					stackedLayout="<%= false %>"
-					portletURL="<%= commerceOrderEditDisplayContext.getCommerceOrderItemsPortletURL() %>"
-					tableName="<%= CommerceOrderItemClayTable.NAME %>"
+				contextParams="<%= contextParams %>"
+				dataProviderKey="<%= CommerceOrderItemClayTable.NAME %>"
+				itemsPerPage="<%= 10 %>"
+				namespace="<%= renderResponse.getNamespace() %>"
+				pageNumber="<%= 1 %>"
+				portletURL="<%= commerceOrderEditDisplayContext.getCommerceOrderItemsPortletURL() %>"
+				stackedLayout="<%= false %>"
+				tableName="<%= CommerceOrderItemClayTable.NAME %>"
 			/>
 		</commerce-ui:panel>
 	</div>
@@ -259,21 +259,21 @@ CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder()
 		</liferay-portlet:renderURL>
 
 		<commerce-ui:modal
-				id="order-summary-modal"
-				refreshPageOnClose="<%= true %>"
-				size="lg"
-				title='<%= LanguageUtil.get(request, "order-summary") %>'
-				url="<%= editOrderSummaryURL %>"
+			id="order-summary-modal"
+			refreshPageOnClose="<%= true %>"
+			size="lg"
+			title='<%= LanguageUtil.get(request, "order-summary") %>'
+			url="<%= editOrderSummaryURL %>"
 		/>
 
 		<commerce-ui:panel
-				actionLabel='<%= LanguageUtil.get(request, "edit") %>'
-				actionTargetId="order-summary-modal"
-				actionUrl="<%= editOrderSummaryURL %>"
-				title='<%= LanguageUtil.get(request, "order-summary") %>'
+			actionLabel='<%= LanguageUtil.get(request, "edit") %>'
+			actionTargetId="order-summary-modal"
+			actionUrl="<%= editOrderSummaryURL %>"
+			title='<%= LanguageUtil.get(request, "order-summary") %>'
 		>
 			<commerce-ui:summary-table
-					data="<%= commerceOrderEditDisplayContext.getSummary() %>"
+				data="<%= commerceOrderEditDisplayContext.getSummary() %>"
 			/>
 		</commerce-ui:panel>
 	</div>
@@ -293,4 +293,3 @@ CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder()
 		}
 	);
 </aui:script>
-

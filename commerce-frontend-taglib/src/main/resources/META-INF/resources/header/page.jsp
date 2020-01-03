@@ -184,7 +184,7 @@ page import="java.util.Map" %>
 						</div>
 					</c:if>
 
-					<div class="col-auto align-items-center border-left d-flex pl-3">
+					<div class="align-items-center border-left col-auto d-flex pl-3">
 						<clay:dropdown-menu
 							buttonType="button"
 							dropdownItems="<%= dropdownItems %>"
@@ -217,8 +217,8 @@ page import="java.util.Map" %>
 	var debouncedUpdateMenuDistanceFromTop = utilities.debounce(updateMenuDistanceFromTop, 200)
 
 	if(pageHeader) {
-	    pageHeader.classList.add("sticky-header-menu");
-	    updateMenuDistanceFromTop()
+		pageHeader.classList.add("sticky-header-menu");
+		updateMenuDistanceFromTop()
 	}
 
 	window.addEventListener("resize", debouncedUpdateMenuDistanceFromTop)

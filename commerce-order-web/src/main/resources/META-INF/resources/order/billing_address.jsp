@@ -1,4 +1,6 @@
-<%@ page import="org.apache.commons.codec.language.bm.Lang" %><%--
+
+
+<%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
@@ -29,7 +31,9 @@ long commerceRegionId = BeanParamUtil.getLong(commerceAddress, request, "commerc
 
 <portlet:actionURL name="editCommerceOrder" var="editCommerceOrderBillingAddressActionURL" />
 
-<commerce-ui:modal-content title='<%= LanguageUtil.get(request, "edit-billing-address")%>'>
+<commerce-ui:modal-content
+	title='<%= LanguageUtil.get(request, "edit-billing-address") %>'
+>
 	<aui:form action="<%= editCommerceOrderBillingAddressActionURL %>" cssClass="container-fluid-1280 p-0" method="post" name="fm">
 		<aui:input name="<%= Constants.CMD %>" type="hidden" value="billingAddress" />
 		<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
