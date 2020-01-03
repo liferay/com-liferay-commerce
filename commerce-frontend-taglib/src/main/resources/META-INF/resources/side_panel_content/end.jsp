@@ -16,5 +16,16 @@
 
 <%@ include file="/side_panel_content/init.jsp" %>
 
+<c:if test="<%= Validator.isNotNull(title) %>">
+		</div>
 	</div>
-</div>
+</c:if>
+
+<aui:script require="commerce-frontend-js/utilities/eventsDefinitions.es as events">
+	document.querySelectorAll(".side-panel-closer").forEach(function(trigger) {
+		trigger.addEventListener("click", function(e) {
+			e.preventDefault();
+			window.parent.Liferay.fire(events.CLOSE_SIDE_PANEL);
+		})
+	})
+</aui:script>

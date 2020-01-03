@@ -4,7 +4,7 @@ import React, {useState} from 'react';
 
 import getAppContext from '../Context.es';
 
-const RadioFilter = props => {
+function RadioFilter(props) {
 	const {actions} = getAppContext();
 	const [value, setValue] = useState(props.value);
 

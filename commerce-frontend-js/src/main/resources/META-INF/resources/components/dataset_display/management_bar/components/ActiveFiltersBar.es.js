@@ -4,7 +4,7 @@ import React from 'react';
 import getAppContext from './Context.es';
 import FilterResume from './filters/Resume.es';
 
-const ActiveFiltersBar = props => {
+function ActiveFiltersBar(props) {
 	const {actions, state} = getAppContext();
 
 	const filtersActive = state.filters.reduce(
@@ -13,7 +13,7 @@ const ActiveFiltersBar = props => {
 	);
 
 	return filtersActive.length ? (
-		<nav className="subnav-tbar subnav-tbar-primary subnav-tbar-light p-3 border-top">
+		<nav className="subnav-tbar subnav-tbar-primary subnav-tbar-light p-3 border-top mb-0">
 			<ul className="tbar-nav">
 				<li className="p-0 tbar-item tbar-item-expand">
 					<div className="tbar-section">

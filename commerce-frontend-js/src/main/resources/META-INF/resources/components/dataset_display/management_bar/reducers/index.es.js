@@ -1,7 +1,6 @@
 import {actionsDefinition} from '../actions/index.es';
 
 export const initialState = {
-	actionButton: null,
 	filters: [],
 	inputSearch: {
 		placeholder: Liferay.Language.get('search-item'),
@@ -10,7 +9,7 @@ export const initialState = {
 	onFiltersChange: null
 };
 
-const reducer = (state = initialState, action) => {
+function reducer(state = initialState, action) {
 	switch (action.type) {
 		case actionsDefinition.UPDATE_FILTER_VALUE:
 			return {

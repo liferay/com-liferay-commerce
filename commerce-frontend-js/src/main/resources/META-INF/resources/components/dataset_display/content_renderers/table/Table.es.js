@@ -2,12 +2,12 @@ import ClayTable from '@clayui/table';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
-import DatasetDisplayContext from '../DatasetDisplayContext.es';
-import EmptyResultMessage from './EmptyResultMessage.es';
+import DatasetDisplayContext from '../../DatasetDisplayContext.es';
 import TableContext from './TableContext.es';
 import Comment from './cellTemplate/Comment.es';
-import { getCustomCellTemplate } from '../utils/tableCellRenderer.es';
+import { getCustomCellTemplate } from '../../utilities/tableCells.es';
 import TableHeadRow from './TableHeadRow.es';
+import ActionsDropdown from '../common/ActionsDropdown.es';
 
 function TableCell(props) {
 	const { template, ...otherProps } = props;
@@ -40,7 +40,7 @@ function Table(props) {
 
 	const [sidePanelProps, setSidePanelProps] = useState({});
 
-	return props.items.length ? (
+	return (
 		<DatasetDisplayContext.Consumer>
 			{({ formRef }) => (
 				<TableContext.Provider
@@ -103,10 +103,11 @@ function Table(props) {
 										})}
 										{showActionItems ? (
 											item.actionItems ? (
-												<TableCell
-													template="dropdown"
-													value={item.actionItems}
-												/>
+												<ClayTable.Cell>
+													<ActionsDropdown
+														items={item.actionItems}
+													/>
+												</ClayTable.Cell >
 											) : (
 												<ClayTable.Cell />
 											)
@@ -119,9 +120,7 @@ function Table(props) {
 				</TableContext.Provider>
 			)}
 		</DatasetDisplayContext.Consumer>
-	) : (
-		<EmptyResultMessage />
-	);
+	)
 }
 
 Table.propTypes = {

@@ -3,7 +3,7 @@ import ClayDropDown from '@clayui/drop-down';
 import ClayIcon from '@clayui/icon';
 import React, {useState} from 'react';
 
-function Dropdown(props) {
+function ActionsDropdown(props) {
 	const [active, setActive] = useState(false);
 
 	return (
@@ -11,14 +11,14 @@ function Dropdown(props) {
 			active={active}
 			onActiveChange={setActive}
 			trigger={
-				<ClayButton displayType="unstyled" monospaced>
+				<ClayButton className="btn-sm px-1" displayType="unstyled">
 					<ClayIcon symbol="ellipsis-v" />
 				</ClayButton>
 			}
 		>
 			<ClayDropDown.ItemList>
 				<ClayDropDown.Group>
-					{props.value.map((item, i) => (
+					{props.items.map((item, i) => (
 						<ClayDropDown.Item href={item.href} key={i}>
 							{item.icon && (
 								<span className="pr-2">
@@ -34,4 +34,4 @@ function Dropdown(props) {
 	);
 }
 
-export default Dropdown;
+export default ActionsDropdown;

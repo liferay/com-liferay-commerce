@@ -4,7 +4,7 @@ import React, {useState} from 'react';
 
 import getAppContext from '../Context.es';
 
-const CheckboxesFilter = props => {
+function CheckboxesFilter(props) {
 	const {actions} = getAppContext();
 	const [value, setValue] = useState(props.value);
 

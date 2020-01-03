@@ -6,7 +6,7 @@ import BulkActions from './components/BulkActions.es';
 import useAppState, {StoreProvider} from './components/Context.es';
 import NavBar from './components/NavBar.es';
 
-const ManagementBar = props => {
+function ManagementBar(props) {
 	const {state} = useAppState();
 
 	useEffect(() => {
@@ -26,7 +26,7 @@ const ManagementBar = props => {
 				/>
 			) : (
 				<NavBar
-					onFiltersChange={props.onFiltersChange}
+					creationMenuItems={props.creationMenuItems}
 				/>
 			)}
 			<ActiveFiltersBar disabled={!!props.selectedItemsId.length} />
@@ -34,7 +34,7 @@ const ManagementBar = props => {
 	);
 };
 
-const Wrapper = props => {
+function Wrapper(props) {
 	const {filters, ...otherProps} = props;
 
 	return (
@@ -63,6 +63,7 @@ const baseValues = {
 };
 
 Wrapper.propTypes = {
+	creationMenuItems: PropTypes.array,
 	filters: PropTypes.arrayOf(
 		PropTypes.oneOfType([
 			PropTypes.shape({

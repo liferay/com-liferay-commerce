@@ -56,7 +56,7 @@ else {
 
 <div id="<portlet:namespace />editOrderContainer">
 	<liferay-frontend:screen-navigation
-		fullContainerCssClass="mt-4 w-100"
+		fullContainerCssClass="col-12 pt-4"
 		key="<%= CommerceOrderScreenNavigationConstants.SCREEN_NAVIGATION_KEY_COMMERCE_ORDER_GENERAL %>"
 		modelBean="<%= commerceOrder %>"
 		portletURL="<%= currentURLObj %>"

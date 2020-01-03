@@ -1,30 +1,27 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import {OPEN_SIDE_PANEL} from '../../../../utilities/eventsDefinitions.es';
-import DatasetDisplayContext from '../../DatasetDisplayContext.es';
-
-function fireOpenSidePanelEvent(id, options) {
-	const payload = {
-		id,
-		options
-	};
-	Liferay.fire(OPEN_SIDE_PANEL, payload);
-}
+import {OPEN_SIDE_PANEL} from '../../../../../utilities/eventsDefinitions.es';
+import DatasetDisplayContext from '../../../DatasetDisplayContext.es';
 
 function SidePanelLink(props) {
+	function handleClickOnLink(e, payload) {
+		e.preventDefault();
+
+		Liferay.fire(OPEN_SIDE_PANEL, payload);
+	}
+
 	return (
 		<DatasetDisplayContext.Consumer>
 			{({loadData, sidePanelId}) => (
 				<button
-					className="btn btn-link p-0"
-					onClick={e => {
-						e.preventDefault();
-						fireOpenSidePanelEvent(sidePanelId, {
-							onSubmit: loadData,
-							url: props.value.url
-						});
-					}}
+					className="btn btn-link btn-sm p-0"
+					onClick={e => handleClickOnLink(e, {
+						id: sidePanelId,
+						onSubmit: loadData,
+						url: props.value.url,
+						size: props.value.size
+					})}
 				>
 					{props.value.label}
 				</button>

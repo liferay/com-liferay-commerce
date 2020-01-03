@@ -18,13 +18,21 @@
 
 <aui:script require="commerce-frontend-js/utilities/iframes.es as iframesUtils">
 	iframesUtils.initializeIframeListeners();
+
+	var pageMenu = document.querySelector(".page-header");
+	var pageHeader = document.querySelector(".side-panel-iframe-header");
+
+	if(!pageMenu && pageHeader) {
+	    pageHeader.classList.add('side-panel-iframe-header-sticked');
+	}
+
 </aui:script>
 
-<div class="side-panel-iframe-wrapper">
-	<c:if test="<%= Validator.isNotNull(title) %>">
-		<header class="side-panel-iframe-header">
-			<h2 class="title"><%= title %></h2>
-		</header>
-	</c:if>
+<c:if test="<%= Validator.isNotNull(title) %>">
+	<div class="side-panel-iframe-body card">
+		<h4 class="side-panel-iframe-header card-header py-3">
+			<%= title %>
+		</h4>
 
-	<div class="side-panel-iframe-content">
+		<div class="side-panel-iframe-content card-body">
+</c:if>

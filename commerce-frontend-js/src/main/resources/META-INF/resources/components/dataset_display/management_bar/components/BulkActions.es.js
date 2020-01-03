@@ -24,10 +24,7 @@ function getQueryString(ids) {
 function getRichPayload(payload, ids) {
 	const richPayload = {
 		...payload,
-		options: {
-			...payload.options,
-			url: payload.options.baseUrl + getQueryString(ids)
-		}
+		url: payload.baseUrl + getQueryString(ids)
 	};
 	return richPayload;
 }
@@ -38,12 +35,10 @@ function BulkActions(props) {
 	function handleActionClick(actionDefinition, formRef, loadData, sidePanelId) {
 		if(actionDefinition.sidePanelCompatible) {
 			const sidePanelActionPayload = {
+				baseUrl: actionDefinition.url,
 				id: sidePanelId,
-				options: {
-					baseUrl: actionDefinition.url,
-					onAfterSubmit: () => loadData(),
-					slug: actionDefinition.slug || null,
-				}
+				onAfterSubmit: () => loadData(),
+				slug: actionDefinition.slug || null,
 			}
 			
 			Liferay.fire(
@@ -55,7 +50,7 @@ function BulkActions(props) {
 		} else {
 			submit(
 				actionDefinition.url,
-				actionDefinition.method || 'get',
+				actionDefinition.method || 'post',
 				formRef
 			)
 		}
@@ -72,7 +67,7 @@ function BulkActions(props) {
 			if(
 				currentOpenedSidePanel &&
 				(currentOpenedSidePanel.id === currentSidePanelActionPayload.id) &&
-				(currentOpenedSidePanel.url.indexOf(currentSidePanelActionPayload.options.baseUrl) > -1)
+				(currentOpenedSidePanel.url.indexOf(currentSidePanelActionPayload.baseUrl) > -1)
 			) {
 				Liferay.fire(
 					OPEN_SIDE_PANEL,

@@ -4,7 +4,7 @@ import React, {useState} from 'react';
 
 import getAppContext from '../Context.es';
 
-const NumberFilter = props => {
+function NumberFilter(props) {
 	const {actions} = getAppContext();
 	const [value, setValue] = useState(props.value);
 

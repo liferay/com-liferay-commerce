@@ -6,9 +6,7 @@ import React, {useState, useRef, useEffect} from 'react';
 
 import {OPEN, OPEN_MODAL, CLOSE_MODAL} from '../../utilities/eventsDefinitions.es';
 
-let test = 0;
-
-const Modal = props => {
+function Modal(props) {
 	const [visible, setVisible] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const [onClose, setOnClose] = useState(null);
@@ -27,7 +25,6 @@ const Modal = props => {
 		}
 		
 		setIframeLoadingCounter(() => 0);
-		test = 0;
 		setLoading(false);
 		setVisible(false);
 	}});
@@ -46,7 +43,7 @@ const Modal = props => {
 			}
 
 			if(data.onClose) {
-				setOnClose(data.onClose);
+				setOnClose(() => data.onClose);
 			}
 
 			if(data.title) {
@@ -75,12 +72,11 @@ const Modal = props => {
 
 	useEffect(() => {
 		setOnClose(() => props.onClose);
-	}, [])
+	}, [props.onClose])
 
 	function handleIframeLoad() {
 		setLoading(false);
 		setIframeLoadingCounter(c => c + 1);
-		test++;
 		
 		const iframeDocument = iframeRef.current.contentDocument;
 		const iframeWindow = iframeRef.current.contentWindow;
@@ -90,7 +86,6 @@ const Modal = props => {
 				iframeWindow.Liferay.on('endNavigate', e => {
 					e.preventDefault();
 					setIframeLoadingCounter(c => c + 1);
-					test++;
 				});
 			}
 		}
@@ -112,7 +107,7 @@ const Modal = props => {
 	return visible ? (
 		<ClayModal
 			observer={observer}
-			size={"lg"}
+			size="lg"
 			spritemap={props.spritemap}
 			status={props.status}
 		>

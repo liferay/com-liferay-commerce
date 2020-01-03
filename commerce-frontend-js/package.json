@@ -12,7 +12,7 @@
 		"@clayui/icon": "^3.0.0",
 		"@clayui/label": "^3.0.1",
 		"@clayui/link": "^3.0.0",
-		"@clayui/list": "^3.0.0",
+		"@clayui/list": "^3.0.4",
 		"@clayui/loading-indicator": "^3.0.0",
 		"@clayui/modal": "^3.0.0",
 		"@clayui/pagination-bar": "^3.0.4",

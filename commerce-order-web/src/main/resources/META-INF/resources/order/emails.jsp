@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.HashMap" %><%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
@@ -116,39 +117,13 @@ CommerceOrderEditDisplayContext commerceOrderEditDisplayContext = (CommerceOrder
 <div id="<portlet:namespace />side-panel-wrapper"></div>
 
 <aui:script require="commerce-frontend-js/js/side_panel/entry.es as SidePanel">
-	new SidePanel.default(
+	sidePanel.default(
 		"<portlet:namespace />sidePanel",
 		"<portlet:namespace />side-panel-root",
 		{
 			portalWrapperId: "<portlet:namespace />side-panel-wrapper",
-			size: "lg",
 			spritemap: "<%= themeDisplay.getPathThemeImages() + "/clay/icons.svg" %>",
-			topAnchor: document.getElementById('commerce-admin-header')
+			topAnchorSelector: ".commerce-header"
 		}
 	);
-
-	Promise.all(
-		[
-			Liferay.componentReady('<portlet:namespace />commerceNotificationQueueEntries'),
-			Liferay.componentReady('<portlet:namespace />sidePanel')
-		]
-	).then(function(
-		[
-			table,
-			panel
-		]
-		) {
-			document.getElementById('<portlet:namespace />commerceNotificationQueueEntries')
-				.addEventListener(
-					'click',
-					function(e) {
-						e.preventDefault();
-
-						if (e.target.dataset.target === '<portlet:namespace />sidePanel') {
-							panel.open(e.target.dataset.panelUrl);
-						}
-					}
-				)
-		}
-	)
 </aui:script>

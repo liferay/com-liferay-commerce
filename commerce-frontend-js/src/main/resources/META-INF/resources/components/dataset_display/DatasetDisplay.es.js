@@ -6,24 +6,32 @@ import React, {useState, useRef, useEffect} from 'react';
 
 import DatasetDisplayContext from './DatasetDisplayContext.es';
 import ManagementBar from './management_bar/index.es';
-import Table from './table/Table.es';
+
+import Modal from '../modal/Modal.es';
 
 import {createOdataFilterStrings} from '../../utilities/odata.es';
 import {showNotification} from '../../utilities/index.es';
-import {formatFilters} from '../../utilities/filters.es';
+import {formatFilters} from './utilities/filters.es';
+import {getRenderers} from './utilities/contentRenderers.es';
+
+import EmptyResultMessage from './EmptyResultMessage.es';
+
+export const datasetDisplaySupportModalId = 'dataset-display-support-modal'
 
 function loadData(apiUrl, filters, delta, page = 1, sorting = []) {
 	const filterString = `&${createOdataFilterStrings(filters)}`;
 	const authString = `&p_auth=${window.Liferay.authToken}`;
 	const pagination = `&pageSize=${delta}&page=${page}`;
 	const sortingString = sorting.length ? `&orderBy=${JSON.stringify(sorting)}` : ``;
-	const url = `${apiUrl}${authString}${pagination}${sortingString}${filterString}`
+	const url = `${apiUrl}${authString}${pagination}${sortingString}${filterString}`;
 
 	return fetch(url)
 		.then(response => response.json())
 }
 
 function DatasetDisplay(props) {
+	const contentRenderers = getRenderers(props.contentRenderers);
+
 	const [selectedItemsId, setselectedItemsId] = useState([]);
 	const [filters, updateFilters] = useState(formatFilters(props.filters));
 	const [sorting, updateSorting] = useState(props.sorting)
@@ -31,14 +39,18 @@ function DatasetDisplay(props) {
 	const [pageNumber, setPageNumber] = useState(props.pagination.initialPageNumber || 1);
 	const [delta, setDelta] = useState(props.pagination.initialDelta || props.pagination.deltas[0].label);
 	const [totalItems, setTotalItems] = useState(props.pagination.initialTotalItems);
+	const [activeContentRenderer, setActiveContentRenderer] = useState(props.activeContentRenderer || contentRenderers.find((el) => el.default).id);
+
+	const ContentRendererComponent = contentRenderers.find(renderer => renderer.id === activeContentRenderer).component;
+
 	const formRef = useRef(null);
 
 	function updateDataset(dataSetData) {
 		if(dataSetData instanceof Array) {
-			return updateItems(dataSetData)
+			return updateItems(dataSetData);
 		}
-		setTotalItems(dataSetData)
-		updateItems(dataSetData.items)
+		updateItems(dataSetData.items);
+		setTotalItems(dataSetData.totalItems);
 	}
 	
 	function getData(apiUrl, filters, delta, pageNumber, sorting, showSuccessNotification = false) {
@@ -93,38 +105,45 @@ function DatasetDisplay(props) {
 			}}
 		>
 			<ClayIconSpriteContext.Provider value={props.spritemap}>
-				<div className={classNames('smart-table-wrapper', props.wrapperCssClasses)}>
+				<Modal id={datasetDisplaySupportModalId} />
+				<div className={classNames('dataset-display', props.wrapperCssClasses, props.stackedLayout && 'dataset-display-stacked')}>
 					{ props.showManagementBar ? (
-						<div className={classNames(props.managementBarWrapperCssClasses)}>
+						<div className={classNames("dataset-display-management-bar-wrapper", props.managementBarWrapperCssClasses)}>
 							<ManagementBar
-								actionButton={{
-									icon: 'plus',
-									label: 'Add',
-									onClick: () => {}
-								}}
+								activeContentRenderer={activeContentRenderer}
 								bulkActions={props.bulkActions}
+								contentRenderers={props.contentRenderers}
+								creationMenuItems={props.creationMenuItems}
 								filters={filters}
 								onFiltersChange={updateFilters}
 								selectAllItems={() => selectItems('all-items', true)}
 								selectedItemsId={selectedItemsId}
+								setActiveContentRenderer={setActiveContentRenderer}
+								sidePanelId={props.sidePanelId}
 								totalItemsCount={props.items.length}
 							/>
 						</div>
 					) : null}
-
-					<div className={classNames(props.tableWrapperCssClasses)}>
-						<Table
-							items={items}
-							onSelect={selectItems}
-							sorting={sorting}
-							schema={props.schema}
-							selectable={props.bulkActions && !!props.bulkActions.length}
-							selectedItemsId={selectedItemsId}
-						/>
+					<div className={classNames("dataset-display-content-wrapper", props.contentWrapperCssClasses)}>
+						{
+							items && items.length ? (
+								<ContentRendererComponent
+									items={items}
+									onSelect={selectItems}
+									schema={props.schema}
+									selectable={props.bulkActions && !!props.bulkActions.length}
+									selectedItemsId={selectedItemsId}
+									sidePanelId={props.sidePanelId}
+									sorting={sorting}
+								/>
+							) : (
+								<EmptyResultMessage />
+							)
+						}
 					</div>
 				</div>
-				{props.showPagination && props.pagination && items && items.length ? (
-					<div className={classNames(props.paginationWrapperCssClasses)}>
+				{props.showPagination && props.pagination && items.length ? (
+					<div className={classNames("dataset-display-pagination-wrapper", props.paginationWrapperCssClasses)}>
 						<ClayPaginationBarWithBasicItems
 							activeDelta={delta}
 							activePage={pageNumber}
@@ -145,8 +164,20 @@ function DatasetDisplay(props) {
 }
 
 DatasetDisplay.propTypes = {
+	activeContentRenderer: PropTypes.string,
 	apiUrl: PropTypes.string.isRequired,
 	bulkActions: PropTypes.array,
+	contentRenderers: PropTypes.arrayOf(
+		PropTypes.shape({
+			component: PropTypes.any.isRequired,
+			default: PropTypes.bool,
+			icon: PropTypes.string,
+			id: PropTypes.string,
+			label: PropTypes.string,
+		})
+	),
+	contentWrapperCssClasses: PropTypes.string,
+	creationMenuItems: PropTypes.array,
 	filters: PropTypes.array,
 	id: PropTypes.string.isRequired,
 	items: PropTypes.array.isRequired,
@@ -162,22 +193,23 @@ DatasetDisplay.propTypes = {
 		initialPageNumber: PropTypes.number,
 		initialTotalItems: PropTypes.number.isRequired,
 	}),
-	schema: PropTypes.object.isRequired,
+	schema: PropTypes.object,
 	showManagementBar: PropTypes.bool,
 	showPagination: PropTypes.bool,
 	sidePanelId: PropTypes.string,
 	sorting: PropTypes.array,
 	spritemap: PropTypes.string.isRequired,
-	tableTitle: PropTypes.string,
-	tableWrapperCssClasses: PropTypes.string,
-	wrapTableIntoCard: PropTypes.bool,
+	stackedLayout: PropTypes.bool,
 	wrapperCssClasses: PropTypes.string
 };
 
 DatasetDisplay.defaultProps = {
+	filters: [],
+	items: [],
 	showManagementBar: true,
 	showPagination: true,
 	sorting: [],
+	stackedLayout: true
 };
 
 export default DatasetDisplay;

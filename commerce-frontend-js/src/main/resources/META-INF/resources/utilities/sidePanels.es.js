@@ -28,5 +28,3 @@ export function getOpenedSidePanel() {
 
     return openedSidePanel;
 }
-
-window.getOpenedSidePanel = getOpenedSidePanel;
