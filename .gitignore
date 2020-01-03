@@ -10,6 +10,7 @@
 bin/
 build/
 classes/
+out/
 ivy.xml.MD5
 lib/
 liferay-hook.xml.processed

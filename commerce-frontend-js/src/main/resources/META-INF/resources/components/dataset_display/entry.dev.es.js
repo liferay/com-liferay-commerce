@@ -19,6 +19,27 @@ const dataSetDisplayProps = {
 			url: '/delete',
 		}
 	],
+	creationMenuItems: [
+		{
+			href: "/standard/edit",
+			label: 'Add'
+		},
+		{
+			label: 'Add via modal',
+			type: 'modal',
+			url: 'modal/url'
+		},
+		{
+			apiUrl: 'api/endpoint',
+			editableFields: [
+				'name',
+				'quantity',
+				'quantity'
+			],
+			label: 'Add via inline',
+			type: 'inline',
+		}
+	],
 	filters: [
 		{
 			id: 'text-test',
@@ -132,10 +153,6 @@ const dataSetDisplayProps = {
 			discountPercentageLevel4: 0,
 			finalPrice: 200,
 			id: 37175,
-			// name: {
-			// 	label: 'ABS Sensor',
-			// 	url: '/form.html'
-			// },
 			name: 'ABS Sensor',
 			orderId: 37174,
 			quantity: 4,
@@ -153,6 +170,10 @@ const dataSetDisplayProps = {
 		},
 		{
 			bookedQuantityId: 0,
+			comments: {
+				name: "Square pls",
+				quantity: "This is a test! I don't like this number btw",
+			},
 			discountAmount: 0,
 			discountPercentageLevel1: 0,
 			discountPercentageLevel2: 0,
@@ -160,10 +181,6 @@ const dataSetDisplayProps = {
 			discountPercentageLevel4: 0,
 			finalPrice: 304,
 			id: 37176,
-			// name: {
-			// 	label: 'Ball Joints',
-			// 	url: '/form.html'
-			// },
 			name: 'Ball Joints',
 			orderId: 37174,
 			quantity: 2,
@@ -173,10 +190,6 @@ const dataSetDisplayProps = {
 			sku: {
 				label: 'MIN38794',
 				url: '/sidepanel-1.html'
-			},
-			comments: {
-				name: "Square pls",
-				quantity: "This is a test! I don't like this number btw",
 			},
 			skuExternalReferenceCode: 'min38794',
 			skuId: 36456,
@@ -192,10 +205,6 @@ const dataSetDisplayProps = {
 			discountPercentageLevel4: 0,
 			finalPrice: 70,
 			id: 37177,
-			// name: {
-			// 	label: 'Bearings',
-			// 	url: '/form.html'
-			// },
 			name: 'Bearings',
 			orderId: 37174,
 			quantity: 1,
@@ -220,10 +229,6 @@ const dataSetDisplayProps = {
 			discountPercentageLevel4: 0,
 			finalPrice: 37.8,
 			id: 37178,
-			// name: {
-			// 	label: 'Brake Pads',
-			// 	url: '/form.html'
-			// },
 			name: 'Brake Pads',
 			orderId: 37174,
 			quantity: 2,
@@ -248,10 +253,6 @@ const dataSetDisplayProps = {
 			discountPercentageLevel4: 0,
 			finalPrice: 400,
 			id: 37197,
-			// name: {
-			// 	label: 'Brake Rotors',
-			// 	url: '/form.html'
-			// },
 			name: 'Brake Rotors',
 			orderId: 37174,
 			quantity: 10,
@@ -276,10 +277,6 @@ const dataSetDisplayProps = {
 			discountPercentageLevel4: 0,
 			finalPrice: 36,
 			id: 37198,
-			// name: {
-			// 	label: 'Bushings',
-			// 	url: '/form.html'
-			// },
 			name: 'Bushings',
 			orderId: 37174,
 			quantity: 2,
@@ -304,10 +301,6 @@ const dataSetDisplayProps = {
 			discountPercentageLevel4: 0,
 			finalPrice: 90,
 			id: 37199,
-			// name: {
-			// 	label: 'Calipers',
-			// 	url: '/form.html'
-			// },
 			name: 'Calipers',
 			orderId: 37174,
 			quantity: 1,
@@ -316,7 +309,8 @@ const dataSetDisplayProps = {
 			shippingAddressId: 0,
 			sku: {
 				label: 'MIN93021',
-				url: '/sidepanel-1.html'
+				url: '/sidepanel-1.html',
+				size: 'lg'
 			},
 			skuExternalReferenceCode: 'min93021',
 			skuId: 35900,
@@ -332,10 +326,6 @@ const dataSetDisplayProps = {
 			discountPercentageLevel4: 0,
 			finalPrice: 4170,
 			id: 37200,
-			// name: {
-			// 	label: 'Cams',
-			// 	url: '/form.html'
-			// },
 			name: 'Cams',
 			orderId: 37174,
 			quantity: 6,
@@ -344,7 +334,8 @@ const dataSetDisplayProps = {
 			shippingAddressId: 0,
 			sku: {
 				label: 'MIN00674',
-				url: '/sidepanel-1.html'
+				url: '/sidepanel-1.html',
+				size: 'sm'
 			},
 			skuExternalReferenceCode: 'min00674',
 			skuId: 36132,
@@ -360,10 +351,6 @@ const dataSetDisplayProps = {
 			discountPercentageLevel4: 0,
 			finalPrice: 624,
 			id: 37201,
-			// name: {
-			// 	label: 'Coil Spring - Rear',
-			// 	url: '/form.html'
-			// },
 			name: 'Coil Spring - Rear',
 			orderId: 37174,
 			quantity: 6,
@@ -388,10 +375,6 @@ const dataSetDisplayProps = {
 			discountPercentageLevel4: 0,
 			finalPrice: 623,
 			id: 37202,
-			// name: {
-			// 	label: 'CV Axles',
-			// 	url: '/form.html'
-			// },
 			name: 'CV Axles',
 			orderId: 37174,
 			quantity: 7,
@@ -416,10 +399,6 @@ const dataSetDisplayProps = {
 			discountPercentageLevel4: 0,
 			finalPrice: 1068,
 			id: 37203,
-			// name: {
-			// 	label: 'CV Axles',
-			// 	url: '/form.html'
-			// },
 			name: 'CV Axles',
 			orderId: 37174,
 			quantity: 12,
@@ -444,10 +423,6 @@ const dataSetDisplayProps = {
 			discountPercentageLevel4: 0,
 			finalPrice: 10550,
 			id: 37204,
-			// name: {
-			// 	label: 'Differential Ring and Pinion - Universal',
-			// 	url: '/form.html'
-			// },
 			name: 'Differential Ring and Pinion - Universal',
 			orderId: 37174,
 			quantity: 50,
@@ -472,10 +447,6 @@ const dataSetDisplayProps = {
 			discountPercentageLevel4: 0,
 			finalPrice: 396,
 			id: 37205,
-			// name: {
-			// 	label: 'Drive Shafts',
-			// 	url: '/form.html'
-			// },
 			name: 'Drive Shafts',
 			orderId: 37174,
 			quantity: 1,
@@ -492,7 +463,6 @@ const dataSetDisplayProps = {
 			unitPrice: 396
 		}
 	],
-	sorting: [],
 	pageSize: 5,
 	pagination: {
 		deltas: [
@@ -559,49 +529,118 @@ const dataSetDisplayProps = {
 	showPagination: true,
 	sidePanelId: 'sidePanelTestId',
 	spritemap: './assets/icons.svg',
-	tableTitle: 'Orders',
-	totalItems: 4
+	stackedLayout: false,
 }
 
-// dataSetDisplayProps.items = [
-// 	{
-// 		id: 1,
-// 		name: 'Ball Joints',
-// 		sku: {
-// 			label: 'MIN38794',
-// 			url: '/sidepanel-1.html'
-// 		},
-// 		status: {
-// 			label: 'Delivered',
-// 			style: 'success'
-// 		}
-// 	}
-// ];
-
-// dataSetDisplayProps.schema.fields = [
-// 	{
-// 		contentRenderer: 'sidePanelLink',
-// 		fieldName: 'sku',
-// 		label: 'sku',
-// 		sortable: false
-// 	},
-// 	{
-// 		fieldName: 'name',
-// 		label: 'name',
-// 		sortable: false
-// 	},
-// 	{
-// 		contentRenderer: 'label',
-// 		fieldName: 'status',
-// 		label: 'Status',
-// 		sortable: false
-// 	}
-// ]
+const emailsDataSetDisplayProps = {
+	activeContentRenderer: 'emails-list',
+	apiUrl: 'http://localhost:8080/o/commerce-ui/commerce-data-set/20124/commerceOrderItems/commerceOrderItems?plid=1&portletId=com_liferay_commerce_order_web_internal_portlet_CommerceOrderPortlet&commerceOrderId=38938',
+	creationMenuItems: [
+		{
+			href: "/standard/edit",
+			label: 'Add'
+		},
+		{
+			label: 'Add via modal',
+			type: 'modal',
+			url: 'modal/url'
+		},
+		{
+			apiUrl: 'api/endpoint',
+			editableFields: [
+				'name',
+				'quantity',
+				'quantity'
+			],
+			label: 'Add via inline',
+			type: 'inline',
+		}
+	],
+	id: 'emailsDatasetDIsplay',
+	items: [
+		{
+			abstract: "Pellentesque in ipsum id orci porta dapibus. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Nulla quis lorem ut libero malesuada feugiat. Pellentesque in ipsum id orci porta dapibus...",
+			actionItems: [
+				{
+					href: "/delete/action/url",
+					icon: "trash",
+					label: "Delete",
+				}
+			],
+			author: {
+				avatarUrl: "https://via.placeholder.com/150",
+				email: "john.doe@gmail.com",
+				name: "John Doe",
+			},
+			date: "1 day ago",
+			status: {
+				displayStyle: 'danger',
+				label: "Order not placed"
+			},
+			subject: "Mauris blandit aliquet elit, eget tincidunt nibh pulvinar.",
+			url: "/side-panel/email.html",
+		},
+		{
+			abstract: "Cras ultricies ligula sed magna dictum porta. Donec rutrum congue leo eget malesuada. Proin eget tortor risus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Quisque velit nisi, pretium ut lacinia in, elementum id enim...",
+			actionItems: [
+				{
+					href: "/delete/action/url",
+					icon: "trash",
+					label: "Delete",
+				}
+			],
+			author: {
+				avatarUrl: "https://via.placeholder.com/150",
+				email: "john.doe@gmail.com",
+				name: "John Doe",
+			},
+			date: "14th April 2018",
+			status: {
+				displayStyle: 'success',
+				label: "Order placed"
+			},
+			subject: "Curabitur aliquet quam id dui posuere blandit. Proin eget tortor risus.",
+			url: "/side-panel/email.html",
+		}
+	],
+	pageSize: 5,
+	pagination: {
+		deltas: [
+			{
+				label: 5
+			},
+			{
+				label: 10
+			},
+			{
+				label: 20
+			},
+			{
+				label: 30
+			},
+			{
+				label: 50
+			},
+			{
+				href:
+					'http://localhost:8080/group/test-1/pending-orders?p_p_id=com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_com_liferay_commerce_order_content_web_internal_portlet_CommerceOpenOrderContentPortlet_delta=75',
+				label: 75
+			}
+		],
+		initialDelta: 10,
+		initialPageNumber: 1,
+		initialTotalItems: 40
+	},
+	showPagination: true,
+	sidePanelId: 'sidePanelTestId',
+	spritemap: './assets/icons.svg'
+}
 
 datasetDisplayLauncher('dataset-display', 'dataset-display-root-id', dataSetDisplayProps);
+datasetDisplayLauncher('emails-dataset-display', 'emails-dataset-display-root-id', emailsDataSetDisplayProps);
 
 sidePanelLauncher('sidePanel', 'side-panel-root-id', {
-	containerSelector: '.smart-table-wrapper',
+	containerSelector: '.container',
 	id: 'sidePanelTestId',
 	items: [
 		{

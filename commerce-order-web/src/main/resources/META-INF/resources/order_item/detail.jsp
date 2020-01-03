@@ -36,8 +36,8 @@ portletDisplay.setURLBack(redirect);
 
 <portlet:actionURL name="editCommerceOrderItem" var="editCommerceOrderItemActionURL" />
 
-<commerce-ui:side-panel-content>
-	<aui:form action="<%= editCommerceOrderItemActionURL %>" cssClass="container-fluid-1280" method="post" name="fm">
+<commerce-ui:side-panel-content title="Test title">
+	<aui:form action="<%= editCommerceOrderItemActionURL %>" method="post" name="fm">
 		<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 		<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 		<aui:input name="commerceOrderId" type="hidden" value="<%= commerceOrderItem.getCommerceOrderId() %>" />
@@ -61,17 +61,13 @@ portletDisplay.setURLBack(redirect);
 
 		</liferay-ui:error>
 
-		<aui:fieldset-group markupView="lexicon">
-			<aui:fieldset>
-				<aui:input bean="<%= commerceOrderItem %>" name="quantity" />
+        <aui:input bean="<%= commerceOrderItem %>" name="quantity" />
 
-				<c:if test="<%= !commerceOrder.isOpen() %>">
-					<aui:input name="price" suffix="<%= HtmlUtil.escape(commerceCurrency.getCode()) %>" type="text" value="<%= commerceCurrency.round(commerceOrderItem.getUnitPrice()) %>">
-						<aui:validator name="number" />
-					</aui:input>
-				</c:if>
-			</aui:fieldset>
-		</aui:fieldset-group>
+        <c:if test="<%= !commerceOrder.isOpen() %>">
+            <aui:input name="price" suffix="<%= HtmlUtil.escape(commerceCurrency.getCode()) %>" type="text" value="<%= commerceCurrency.round(commerceOrderItem.getUnitPrice()) %>">
+                <aui:validator name="number" />
+            </aui:input>
+        </c:if>
 
 		<aui:button-row>
 			<aui:button cssClass="btn-lg" type="submit" />

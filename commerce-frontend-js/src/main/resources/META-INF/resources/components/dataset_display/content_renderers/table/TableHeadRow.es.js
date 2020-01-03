@@ -5,14 +5,16 @@ import classNames from 'classnames'
 
 import Checkbox from './cellTemplate/Checkbox.es';
 import ClayIcon from '@clayui/icon';
-import DatasetDisplayContext from '../DatasetDisplayContext.es'
+import DatasetDisplayContext from '../../DatasetDisplayContext.es'
 
 function TableHeadCell(props) {
 	const context = useContext(DatasetDisplayContext);
 
 	const sortingMatch = context.sorting.find((el) => el.fieldName === props.fieldName)
 
-	function _handleSortingCellClick() {
+	function _handleSortingCellClick(e) {
+		e.preventDefault();
+
 		if(sortingMatch) {
 			const updatedSortedElements = context.sorting.map((el) => el.fieldName === props.fieldName ? ({
 				...el,

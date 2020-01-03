@@ -4,7 +4,7 @@ import React, {useState} from 'react';
 
 import getAppContext from '../Context.es';
 
-const SelectFilter = props => {
+function SelectFilter(props) {
 	const {actions} = getAppContext();
 	const [value, setValue] = useState(props.value);
 

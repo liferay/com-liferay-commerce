@@ -116,12 +116,12 @@ public class TableTag extends IncludeTag {
 		_deltaParam = deltaParam;
 	}
 
-	public void setDisableAJAX(boolean disableAJAX) {
-		_disableAJAX = disableAJAX;
+	public void setStackedLayout(boolean stackedLayout) {
+		_stackedLayout = stackedLayout;
 	}
 
-	public void setItemPerPage(int itemPerPage) {
-		_itemPerPage = itemPerPage;
+	public void setItemsPerPage(int itemsPerPage) {
+		_itemsPerPage = itemsPerPage;
 	}
 
 	public void setNamespace(String namespace) {
@@ -164,9 +164,9 @@ public class TableTag extends IncludeTag {
 		_dataProviderKey = null;
 		_dataSetAPI = null;
 		_deltaParam = null;
-		_disableAJAX = false;
+		_stackedLayout = false;
 		_id = null;
-		_itemPerPage = 0;
+		_itemsPerPage = 0;
 		_items = null;
 		_namespace = null;
 		_pageNumber = 0;
@@ -227,9 +227,9 @@ public class TableTag extends IncludeTag {
 		request.setAttribute("liferay-commerce:table:dataSetAPI", _dataSetAPI);
 		request.setAttribute("liferay-commerce:table:deltaParam", _deltaParam);
 		request.setAttribute(
-			"liferay-commerce:table:disableAJAX", _disableAJAX);
+			"liferay-commerce:table:stackedLayout", _stackedLayout);
 		request.setAttribute(
-			"liferay-commerce:table:itemPerPage", _itemPerPage);
+			"liferay-commerce:table:itemsPerPage", _itemsPerPage);
 		request.setAttribute("liferay-commerce:table:items", _items);
 		request.setAttribute("liferay-commerce:table:namespace", _namespace);
 		request.setAttribute("liferay-commerce:table:pageNumber", _pageNumber);
@@ -260,7 +260,7 @@ public class TableTag extends IncludeTag {
 		Filter filter = filterFactory.create(request);
 
 		List<Object> items = commerceDataSetDataProvider.getItems(
-			request, filter, new PaginationImpl(_itemPerPage, _pageNumber),
+			request, filter, new PaginationImpl(_itemsPerPage, _pageNumber),
 			null);
 
 		String json = _clayTableDataJSONBuilder.build(
@@ -284,7 +284,7 @@ public class TableTag extends IncludeTag {
 		Stream<ClayPaginationEntry> stream = _paginationEntries.stream();
 
 		ClayPaginationEntry clayPaginationEntry = stream.filter(
-			entry -> entry.getLabel() == _itemPerPage
+			entry -> entry.getLabel() == _itemsPerPage
 		).findAny(
 		).orElse(
 			null
@@ -316,10 +316,10 @@ public class TableTag extends IncludeTag {
 	private String _dataProviderKey;
 	private String _dataSetAPI;
 	private String _deltaParam;
-	private boolean _disableAJAX;
+	private boolean _stackedLayout;
 	private FilterFactoryRegistry _filterFactoryRegistry;
 	private String _id;
-	private int _itemPerPage;
+	private int _itemsPerPage;
 	private Object _items;
 	private String _namespace;
 	private int _pageNumber;

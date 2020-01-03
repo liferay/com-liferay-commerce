@@ -4,11 +4,11 @@ import ClayLabel from '@clayui/label';
 import classNames from 'classnames';
 import React, {useState} from 'react';
 
-import {prettifyFilterValue} from '../../../utils/dates.es';
-import {renderFilter} from '../../../utils/filterCellRenderer.es';
+import {prettifyFilterValue} from '../../../utilities/dates.es';
+import {renderFilter} from '../../../utilities/filters.es';
 import getAppContext from '../Context.es';
 
-const Resume = props => {
+function Resume(props) {
 	const {actions} = getAppContext();
 	const [open, setOpen] = useState(false);
 

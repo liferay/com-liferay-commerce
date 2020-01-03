@@ -184,7 +184,7 @@ page import="java.util.Map" %>
 						</div>
 					</c:if>
 
-					<div class="align-items-center border-left d-flex pl-3">
+					<div class="col-auto align-items-center border-left d-flex pl-3">
 						<clay:dropdown-menu
 							buttonType="button"
 							dropdownItems="<%= dropdownItems %>"
@@ -204,3 +204,22 @@ page import="java.util.Map" %>
 		</div>
 	</div>
 </div>
+
+<aui:script require="commerce-frontend-js/utilities/index.es as utilities">
+	var pageHeader = document.querySelector(".page-header");
+	var commerceHeader = document.querySelector(".commerce-header");
+
+	function updateMenuDistanceFromTop() {
+		var distanceFromTop = commerceHeader.getClientRects()[0].bottom;
+		pageHeader.style.top = distanceFromTop + "px"
+	}
+
+	var debouncedUpdateMenuDistanceFromTop = utilities.debounce(updateMenuDistanceFromTop, 200)
+
+	if(pageHeader) {
+	    pageHeader.classList.add("sticky-header-menu");
+	    updateMenuDistanceFromTop()
+	}
+
+	window.addEventListener("resize", debouncedUpdateMenuDistanceFromTop)
+</aui:script>

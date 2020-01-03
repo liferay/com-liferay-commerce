@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import classNames from 'classnames'
 import getAppContext from './Context.es';
 
-const MainSearch = () => {
+function MainSearch() {
 	const {actions, state} = getAppContext();
 	const mainFilter = state.filters.find(f => f.main);
 

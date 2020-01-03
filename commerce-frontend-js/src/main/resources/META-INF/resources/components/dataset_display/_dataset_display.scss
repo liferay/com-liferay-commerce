@@ -1,0 +1,46 @@
+.dataset-display {
+    .table-responsive {
+        margin-bottom: 0;
+    }
+    .table {
+        td:first-child,
+        th:first-child,
+        .table-cell-start {
+            padding-left: map-get($spacers, 3);
+        }
+
+        td:last-child,
+        th:last-child,
+        .table-cell-end {
+            padding-right: map-get($spacers, 3);
+        }
+    }
+
+    &-management-bar-wrapper {
+        border-bottom: 1px solid $border-color;
+    }
+    
+    &-content-wrapper {
+        margin-bottom: map-get($spacers, 3);
+    }
+
+    &-pagination-wrapper {
+        margin: 0 map-get($spacers, 3) map-get($spacers, 2)
+    }
+
+    &-stacked {
+        .dataset-display-management-bar-wrapper {
+            margin-bottom: map-get($spacers, 3);
+            border: 1px solid $border-color;
+        }
+        
+        .dataset-display-content-wrapper {
+            margin-bottom: map-get($spacers, 3);
+            border: 1px solid $border-color;
+        }
+
+        .dataset-display-pagination-wrapper {
+            margin: 0
+        }
+    }
+}

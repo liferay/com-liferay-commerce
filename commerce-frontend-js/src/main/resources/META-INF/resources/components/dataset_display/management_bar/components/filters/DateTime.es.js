@@ -2,7 +2,7 @@ import ClayButton from '@clayui/button';
 import ClayDatePicker from '@clayui/date-picker';
 import React, {useState} from 'react';
 
-import {prettifyDateTimeValue} from '../../../utils/dates.es';
+import {prettifyDateTimeValue} from '../../../utilities/dates.es';
 import getAppContext from '../Context.es';
 
 const getDateTimeObj = value => {
@@ -18,7 +18,7 @@ const getDateTimeObj = value => {
 	};
 };
 
-const DateFilter = props => {
+function DateFilter(props) {
 	const {actions} = getAppContext();
 
 	const [value, setValue] = useState(props.value);

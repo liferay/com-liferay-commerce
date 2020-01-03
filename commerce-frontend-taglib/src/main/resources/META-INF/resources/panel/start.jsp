@@ -23,7 +23,7 @@
 
 <div class="<%= cardCssClasses %>">
 	<c:if test="<%= Validator.isNotNull(actionLabel) || Validator.isNotNull(actionIcon) || Validator.isNotNull(title) %>">
-		<div class="align-items-center card-header d-flex justify-content-between">
+		<h4 class="align-items-center card-header d-flex justify-content-between py-3">
 			<%= title %>
 
 			<c:if test="<%= Validator.isNotNull(actionTargetId) %>">
@@ -61,7 +61,7 @@
 					/>
 				</c:when>
 			</c:choose>
-		</div>
+		</h4>
 	</c:if>
 
 	<div class="<%= bodyCssClasses %>">

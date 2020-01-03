@@ -4,10 +4,10 @@ import ClayPanel from '@clayui/panel';
 import React, {useState, useEffect} from 'react';
 import classNames from 'classnames'
 
-import {renderFilter} from '../../utils/filterCellRenderer.es';
+import {renderFilter} from '../../utilities/filters.es';
 import getAppContext from './Context.es';
 
-const FiltersDropdown = () => {
+function FiltersDropdown() {
 	const [active, setActive] = useState(false);
 	const [query, setQuery] = useState('');
 	const {state} = getAppContext();
@@ -75,7 +75,7 @@ const FiltersDropdown = () => {
 				</ClayDropDown.ItemList>
 			) : (
 				<div className="dropdown-section text-muted">
-					{Liferay.Language.get('no-filters-available')}
+					{Liferay.Language.get('no-filters-found')}
 				</div>
 			)}
 		</ClayDropDown>

@@ -28,53 +28,31 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceShipmentsPort
 </liferay-portlet:renderURL>
 
 <commerce-ui:modal
-	closeOnSubmit="<%= true %>"
+	refreshPageOnClose="<%= true %>"
 	id="add-shipment-modal"
 	size="lg"
 	title='<%= LanguageUtil.get(request, "create-new-shipment") %>'
 	url="<%= editCommerceShipmentURL %>"
 />
 
-<liferay-frontend:management-bar
-	searchContainerId="commerceShipments"
->
-	<liferay-frontend:management-bar-filters>
-		<liferay-frontend:management-bar-sort
-			orderByCol="<%= commerceOrderEditDisplayContext.getOrderByCol() %>"
-			orderByType="<%= commerceOrderEditDisplayContext.getOrderByType() %>"
-			orderColumns='<%= new String[] {"create-date"} %>'
-			portletURL="<%= portletURL %>"
-		/>
-	</liferay-frontend:management-bar-filters>
+<!-- TODO: creationMenu to be passed in order to add a new shipment -->
 
-	<liferay-frontend:management-bar-buttons>
-		<liferay-frontend:add-menu
-			inline="<%= true %>"
-		>
-			<liferay-frontend:add-menu-item
-				id="addCommerceShipment"
-				title='<%= LanguageUtil.get(request, "add-shipment") %>'
-				url="<%= editCommerceShipmentURL %>"
-			/>
-		</liferay-frontend:add-menu>
-	</liferay-frontend:management-bar-buttons>
 
-	<liferay-frontend:management-bar-action-buttons>
-		<liferay-frontend:management-bar-button
-			href='<%= "javascript:" + renderResponse.getNamespace() + "deleteCommerceShipments();" %>'
-			icon="times"
-			label="delete"
-		/>
-	</liferay-frontend:management-bar-action-buttons>
-</liferay-frontend:management-bar>
+<%
+	CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder();
+	java.util.Map<String, String> contextParams = new java.util.HashMap<>();
+	contextParams.put("commerceOrderId", String.valueOf(commerceOrder.getCommerceOrderId()));
+%>
 
-<commerce-ui:table
+<commerce-ui:table-react
+	contextParams="<%= contextParams %>"
 	dataProviderKey="<%= CommerceShipmentClayTable.NAME %>"
-	itemPerPage="<%= 5 %>"
+	itemsPerPage="<%= 10 %>"
 	namespace="<%= renderResponse.getNamespace() %>"
 	pageNumber="<%= 1 %>"
 	portletURL="<%= portletURL %>"
 	tableName="<%= CommerceShipmentClayTable.NAME %>"
+	stackedLayout="<%= true %>"
 />
 
 <aui:script>
@@ -94,41 +72,14 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceShipmentsPort
 <div id="<portlet:namespace />side-panel-root"></div>
 <div id="<portlet:namespace />side-panel-wrapper"></div>
 
-<aui:script require="commerce-frontend-js/js/side_panel/entry.es as SidePanel">
-	new SidePanel.default(
+<aui:script require="commerce-frontend-js/components/side_panel/entry.es as sidePanel">
+	sidePanel.default(
 		"<portlet:namespace />sidePanel",
 		"<portlet:namespace />side-panel-root",
 		{
-			size: "lg",
-			spritemap: "<%= themeDisplay.getPathThemeImages() + "/clay/icons.svg" %>",
 			portalWrapperId: "<portlet:namespace />side-panel-wrapper",
-			topAnchor: document.getElementById('commerce-admin-header'),
-			onUpdate: function(e){console.log(e)}
+			spritemap: "<%= themeDisplay.getPathThemeImages() + "/clay/icons.svg" %>",
+			topAnchorSelector: ".commerce-header"
 		}
 	);
-
-	Promise.all(
-		[
-			Liferay.componentReady('commerceShipmentsCommerceTable'),
-			Liferay.componentReady('<portlet:namespace />sidePanel')
-		]
-	).then(function(
-		[
-			table,
-			panel
-		]
-	) {
-		document.getElementById('commerceShipmentsCommerceTable')
-			.addEventListener(
-				'click',
-				function(e) {
-					e.preventDefault();
-
-					if (e.target.dataset.target === '<portlet:namespace />sidePanel') {
-						panel.open(e.target.dataset.panelUrl);
-					}
-				}
-			)
-		}
-	)
 </aui:script>
