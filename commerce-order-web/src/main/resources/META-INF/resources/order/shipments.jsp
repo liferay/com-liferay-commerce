@@ -28,8 +28,8 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceShipmentsPort
 </liferay-portlet:renderURL>
 
 <commerce-ui:modal
-	refreshPageOnClose="<%= true %>"
 	id="add-shipment-modal"
+	refreshPageOnClose="<%= true %>"
 	size="lg"
 	title='<%= LanguageUtil.get(request, "create-new-shipment") %>'
 	url="<%= editCommerceShipmentURL %>"
@@ -37,11 +37,10 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceShipmentsPort
 
 <!-- TODO: creationMenu to be passed in order to add a new shipment -->
 
-
 <%
-	CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder();
-	java.util.Map<String, String> contextParams = new java.util.HashMap<>();
-	contextParams.put("commerceOrderId", String.valueOf(commerceOrder.getCommerceOrderId()));
+CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder();
+java.util.Map<String, String> contextParams = new java.util.HashMap<>();
+contextParams.put("commerceOrderId", String.valueOf(commerceOrder.getCommerceOrderId()));
 %>
 
 <commerce-ui:table-react
@@ -51,8 +50,8 @@ PortletURL portletURL = commerceOrderEditDisplayContext.getCommerceShipmentsPort
 	namespace="<%= renderResponse.getNamespace() %>"
 	pageNumber="<%= 1 %>"
 	portletURL="<%= portletURL %>"
-	tableName="<%= CommerceShipmentClayTable.NAME %>"
 	stackedLayout="<%= true %>"
+	tableName="<%= CommerceShipmentClayTable.NAME %>"
 />
 
 <aui:script>

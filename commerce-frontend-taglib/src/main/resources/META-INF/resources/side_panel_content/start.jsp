@@ -23,16 +23,16 @@
 	var pageHeader = document.querySelector(".side-panel-iframe-header");
 
 	if(!pageMenu && pageHeader) {
-	    pageHeader.classList.add('side-panel-iframe-header-sticked');
+		pageHeader.classList.add('side-panel-iframe-header-sticked');
 	}
 
 </aui:script>
 
 <c:if test="<%= Validator.isNotNull(title) %>">
-	<div class="side-panel-iframe-body card">
-		<h4 class="side-panel-iframe-header card-header py-3">
+	<div class="card side-panel-iframe-body">
+		<h4 class="card-header py-3 side-panel-iframe-header">
 			<%= title %>
 		</h4>
 
-		<div class="side-panel-iframe-content card-body">
+		<div class="card-body side-panel-iframe-content">
 </c:if>

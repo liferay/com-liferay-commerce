@@ -31,8 +31,8 @@ CommerceOrder commerceOrder = commerceOrderEditDisplayContext.getCommerceOrder()
 		</liferay-portlet:renderURL>
 
 		<commerce-ui:modal
-			refreshPageOnClose="<%= true %>"
 			id="order-payment-method-modal"
+			refreshPageOnClose="<%= true %>"
 			size="lg"
 			title='<%= LanguageUtil.get(request, "payment-method") %>'
 			url="<%= editOrderPaymentMethodURL %>"
