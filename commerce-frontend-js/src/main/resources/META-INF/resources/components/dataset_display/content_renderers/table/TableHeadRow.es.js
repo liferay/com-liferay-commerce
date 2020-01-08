@@ -31,17 +31,17 @@ function TableHeadCell(props) {
 
 	return (
 		<ClayTable.Cell
-			className="table-cell-expand-smaller"
+			className={props.className}
 			headingCell
 			headingTitle
 		>
 			{props.sortable ? (
 				<a 
-					className="inline-item text-truncate-inline" 
+					className="inline-item text-truncate-inline text-nowrap" 
 					href="#"
 					onClick={_handleSortingCellClick}
 				>
-					{props.label}
+					{props.label || ''}
 					<span className="inline-item inline-item-after sorting-icons-wrapper">
 						<ClayIcon
 							className={classNames("sorting-icon", (sortingMatch && (sortingMatch.direction === 'ASC')) && 'active')}
@@ -55,12 +55,40 @@ function TableHeadCell(props) {
 						/>
 					</span>
 				</a>
-			) : props.label}
+			) : (props.label || '')}
 		</ClayTable.Cell>
 	)
 }
 
 function TableHeadRow(props) {
+
+	const getColumns = (fields) => {
+		let firstElementGotExpanded = false;
+
+		return fields.map((field) => {
+			let expandedClass = null;
+			
+			if(field.contentRenderer === 'picture') {
+				expandedClass = null;
+			} else if (!firstElementGotExpanded) {
+				expandedClass = 'table-cell-expand';
+				firstElementGotExpanded = true
+			} else {
+				expandedClass = 'table-cell-expand-smaller';
+			}
+			
+			return (
+				<TableHeadCell
+					className={expandedClass}
+					fieldName={field.fieldName}
+					key={field.fieldName}
+					label={field.label}
+					sortable={field.sortable}
+				/>
+			)
+		})
+	}
+
 	return (
 		<ClayTable.Head>
 			<ClayTable.Row>
@@ -83,16 +111,7 @@ function TableHeadRow(props) {
 						) : null}
 					</ClayTable.Cell>
 				)}
-				{props.schema.fields.map(field => {
-					return (
-						<TableHeadCell
-							fieldName={field.fieldName}
-							key={field.fieldName}
-							label={field.label}
-							sortable={field.sortable}
-						/>
-					)
-				})}
+				{getColumns(props.schema.fields)}
 				{props.showActionItems && (
 					<ClayTable.Cell headingCell />
 				)}
@@ -109,7 +128,7 @@ TableHeadRow.propTypes = {
 			PropTypes.shape({
 				contentRenderer: PropTypes.string,
 				fieldName: PropTypes.string.isRequired,
-				label: PropTypes.string.isRequired,
+				label: PropTypes.string,
 				sortable: PropTypes.bool
 			}).isRequired
 		)

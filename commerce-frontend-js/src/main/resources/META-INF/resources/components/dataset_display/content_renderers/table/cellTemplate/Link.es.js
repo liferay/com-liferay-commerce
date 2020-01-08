@@ -1,10 +1,12 @@
 import ClayLink from '@clayui/link';
 import React from 'react';
+import DefaultContent from './Default.es';
+
 
 function Link(props) {
 	return (
-		<ClayLink data-target={props.target} href={props.href || '#'}>
-			{props.value}
+		<ClayLink href={props.value.href}>
+			<DefaultContent {...props} />
 		</ClayLink>
 	);
 }

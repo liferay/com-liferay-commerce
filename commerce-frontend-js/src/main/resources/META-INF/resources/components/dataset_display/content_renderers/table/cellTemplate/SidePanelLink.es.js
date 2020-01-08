@@ -3,6 +3,7 @@ import React from 'react';
 
 import {OPEN_SIDE_PANEL} from '../../../../../utilities/eventsDefinitions.es';
 import DatasetDisplayContext from '../../../DatasetDisplayContext.es';
+import DefaultContent from './Default.es';
 
 function SidePanelLink(props) {
 	function handleClickOnLink(e, payload) {
@@ -19,11 +20,11 @@ function SidePanelLink(props) {
 					onClick={e => handleClickOnLink(e, {
 						id: sidePanelId,
 						onSubmit: loadData,
+						size: props.value.size,
 						url: props.value.url,
-						size: props.value.size
 					})}
 				>
-					{props.value.label}
+					<DefaultContent {...props} />
 				</button>
 			)}
 		</DatasetDisplayContext.Consumer>

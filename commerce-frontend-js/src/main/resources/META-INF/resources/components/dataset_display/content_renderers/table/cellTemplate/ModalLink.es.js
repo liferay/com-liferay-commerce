@@ -2,33 +2,42 @@ import ClayLink from '@clayui/link';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import TableContext from '../TableContext.es';
+import {OPEN_MODAL} from '../../../../../utilities/eventsDefinitions.es';
+import DatasetDisplayContext from '../../../DatasetDisplayContext.es';
+
+import DefaultContent from './Default.es';
 
 function ModalLink(props) {
+	function handleClickOnLink(e, payload) {
+		e.preventDefault();
+
+		Liferay.fire(OPEN_MODAL, payload);
+	}
+
 	return (
-		<TableContext.Consumer>
-			{({modalProps, setModalProps}) => (
+		<DatasetDisplayContext.Consumer>
+			{({loadData, modalId}) => (
 				<ClayLink
 					href="#"
-					onClick={() => {
-						setModalProps({
-							...modalProps,
-							onSubmit: () => {},
-							url: props.value.url
-						});
-					}}
+					onClick={e => handleClickOnLink(e, {
+						id: modalId,
+						onSubmit: loadData,
+						size: props.value.size,
+						title: props.value.title,
+						url: props.value.url,
+					})}
 				>
-					{props.value.label}
+					<DefaultContent {...props} />
 				</ClayLink>
 			)}
-		</TableContext.Consumer>
+		</DatasetDisplayContext.Consumer>
 	);
 }
 
 ModalLink.propTypes = {
 	value: PropTypes.shape({
-		label: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-			.isRequired,
+		icon: PropTypes.string,
+		label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 		url: PropTypes.string.isRequired
 	}).isRequired
 };

@@ -4,7 +4,7 @@ import React from 'react';
 
 function Label(props) {
 	return (
-		<ClayLabel displayType={props.value.style || 'info'}>
+		<ClayLabel displayType={props.value.displayStyle || 'info'}>
 			{typeof props.value === 'string' ? props.value : props.value.label}
 		</ClayLabel>
 	);
@@ -13,14 +13,14 @@ function Label(props) {
 Label.propTypes = {
 	value: PropTypes.oneOfType([
 		PropTypes.shape({
-			label: PropTypes.string,
-			style: PropTypes.oneOf([
+			displayStyle: PropTypes.oneOf([
 				'success',
 				'info',
 				'secondary',
 				'warning',
 				'danger'
-			])
+			]),
+			label: PropTypes.string,
 		}),
 		PropTypes.string
 	])
