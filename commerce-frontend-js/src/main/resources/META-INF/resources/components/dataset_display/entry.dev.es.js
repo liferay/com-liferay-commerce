@@ -146,6 +146,10 @@ const dataSetDisplayProps = {
 				}
 			],
 			bookedQuantityId: 0,
+			date: {
+				icon: 'date',
+				url: '/modal/date/url'
+			},
 			discountAmount: 0,
 			discountPercentageLevel1: 0,
 			discountPercentageLevel2: 0,
@@ -154,7 +158,10 @@ const dataSetDisplayProps = {
 			finalPrice: 200,
 			id: 37175,
 			name: 'ABS Sensor',
-			orderId: 37174,
+			order: {
+				label: '#37174',
+				url: '/modal/order/url'
+			},
 			quantity: 4,
 			shippedQuantity: 0,
 			shippingAddress: {},
@@ -165,7 +172,17 @@ const dataSetDisplayProps = {
 			},
 			skuExternalReferenceCode: 'min93015',
 			skuId: 35663,
+			status: {
+				displayStyle: 'info',
+				label: 'delivered',
+			},
 			subscription: false,
+			thumbnail: {
+				alt: 'ABS Sensor',
+				shape: 'rounded',
+				size: 'lg',
+				url: 'https://via.placeholder.com/150',
+			},
 			unitPrice: 50
 		},
 		{
@@ -173,6 +190,10 @@ const dataSetDisplayProps = {
 			comments: {
 				name: "Square pls",
 				quantity: "This is a test! I don't like this number btw",
+			},
+			date: {
+				icon: 'date',
+				url: '/modal/date/url'
 			},
 			discountAmount: 0,
 			discountPercentageLevel1: 0,
@@ -182,7 +203,10 @@ const dataSetDisplayProps = {
 			finalPrice: 304,
 			id: 37176,
 			name: 'Ball Joints',
-			orderId: 37174,
+			order: {
+				label: '#37174',
+				url: '/modal/order/url'
+			},
 			quantity: 2,
 			shippedQuantity: 0,
 			shippingAddress: {},
@@ -193,11 +217,25 @@ const dataSetDisplayProps = {
 			},
 			skuExternalReferenceCode: 'min38794',
 			skuId: 36456,
+			status: {
+				displayStyle: 'secondary',
+				label: 'delivered',
+			},
 			subscription: false,
+			thumbnail: {
+				alt: 'ABS Sensor',
+				shape: 'rounded',
+				size: 'lg',
+				url: 'https://via.placeholder.com/150',
+			},
 			unitPrice: 152
 		},
 		{
 			bookedQuantityId: 0,
+			date: {
+				icon: 'date',
+				url: '/modal/date/url'
+			},
 			discountAmount: 0,
 			discountPercentageLevel1: 0,
 			discountPercentageLevel2: 0,
@@ -206,7 +244,10 @@ const dataSetDisplayProps = {
 			finalPrice: 70,
 			id: 37177,
 			name: 'Bearings',
-			orderId: 37174,
+			order: {
+				label: '#37174',
+				url: '/modal/order/url'
+			},
 			quantity: 1,
 			shippedQuantity: 0,
 			shippingAddress: {},
@@ -218,10 +259,20 @@ const dataSetDisplayProps = {
 			skuExternalReferenceCode: 'min00673',
 			skuId: 36114,
 			subscription: false,
+			thumbnail: {
+				alt: 'ABS Sensor',
+				shape: 'rounded',
+				size: 'lg',
+				url: 'https://via.placeholder.com/150',
+			},
 			unitPrice: 70
 		},
 		{
 			bookedQuantityId: 0,
+			date: {
+				icon: 'date',
+				url: '/modal/date/url'
+			},
 			discountAmount: 0,
 			discountPercentageLevel1: 0,
 			discountPercentageLevel2: 0,
@@ -230,7 +281,10 @@ const dataSetDisplayProps = {
 			finalPrice: 37.8,
 			id: 37178,
 			name: 'Brake Pads',
-			orderId: 37174,
+			order: {
+				label: '#37174',
+				url: '/modal/order/url'
+			},
 			quantity: 2,
 			shippedQuantity: 0,
 			shippingAddress: {},
@@ -241,11 +295,25 @@ const dataSetDisplayProps = {
 			},
 			skuExternalReferenceCode: 'min93018',
 			skuId: 35798,
+			status: {
+				displayStyle: 'success',
+				label: 'delivered',
+			},
 			subscription: false,
+			thumbnail: {
+				alt: 'ABS Sensor',
+				shape: 'rounded',
+				size: 'lg',
+				url: 'https://via.placeholder.com/150',
+			},
 			unitPrice: 21
 		},
 		{
 			bookedQuantityId: 0,
+			date: {
+				icon: 'date',
+				url: '/modal/date/url'
+			},
 			discountAmount: 0,
 			discountPercentageLevel1: 0,
 			discountPercentageLevel2: 0,
@@ -254,7 +322,10 @@ const dataSetDisplayProps = {
 			finalPrice: 400,
 			id: 37197,
 			name: 'Brake Rotors',
-			orderId: 37174,
+			order: {
+				label: '#37174',
+				url: '/modal/order/url'
+			},
 			quantity: 10,
 			shippedQuantity: 0,
 			shippingAddress: {},
@@ -265,11 +336,25 @@ const dataSetDisplayProps = {
 			},
 			skuExternalReferenceCode: 'min93020',
 			skuId: 35872,
+			status: {
+				displayStyle: 'warning',
+				label: 'delivered',
+			},
 			subscription: false,
+			thumbnail: {
+				alt: 'ABS Sensor',
+				shape: 'rounded',
+				size: 'lg',
+				url: 'https://via.placeholder.com/150',
+			},
 			unitPrice: 40
 		},
 		{
 			bookedQuantityId: 0,
+			date: {
+				icon: 'date',
+				url: '/modal/date/url'
+			},
 			discountAmount: 0,
 			discountPercentageLevel1: 0,
 			discountPercentageLevel2: 0,
@@ -278,7 +363,10 @@ const dataSetDisplayProps = {
 			finalPrice: 36,
 			id: 37198,
 			name: 'Bushings',
-			orderId: 37174,
+			order: {
+				label: '#37174',
+				url: '/modal/order/url'
+			},
 			quantity: 2,
 			shippedQuantity: 0,
 			shippingAddress: {},
@@ -289,11 +377,25 @@ const dataSetDisplayProps = {
 			},
 			skuExternalReferenceCode: 'min38795',
 			skuId: 36474,
+			status: {
+				displayStyle: 'danger',
+				label: 'delivered',
+			},
 			subscription: false,
+			thumbnail: {
+				alt: 'ABS Sensor',
+				shape: 'rounded',
+				size: 'lg',
+				url: 'https://via.placeholder.com/150',
+			},
 			unitPrice: 18
 		},
 		{
 			bookedQuantityId: 0,
+			date: {
+				icon: 'date',
+				url: '/modal/date/url'
+			},
 			discountAmount: 0,
 			discountPercentageLevel1: 0,
 			discountPercentageLevel2: 0,
@@ -302,23 +404,40 @@ const dataSetDisplayProps = {
 			finalPrice: 90,
 			id: 37199,
 			name: 'Calipers',
-			orderId: 37174,
+			order: {
+				label: '#37174',
+				url: '/modal/order/url'
+			},
 			quantity: 1,
 			shippedQuantity: 0,
 			shippingAddress: {},
 			shippingAddressId: 0,
 			sku: {
 				label: 'MIN93021',
+				size: 'lg',
 				url: '/sidepanel-1.html',
-				size: 'lg'
 			},
 			skuExternalReferenceCode: 'min93021',
 			skuId: 35900,
+			status: {
+				displayStyle: 'success',
+				label: 'delivered',
+			},
 			subscription: false,
+			thumbnail: {
+				alt: 'ABS Sensor',
+				shape: 'rounded',
+				size: 'lg',
+				url: 'https://via.placeholder.com/150',
+			},
 			unitPrice: 90
 		},
 		{
 			bookedQuantityId: 0,
+			date: {
+				icon: 'date',
+				url: '/modal/date/url'
+			},
 			discountAmount: 0,
 			discountPercentageLevel1: 0,
 			discountPercentageLevel2: 0,
@@ -327,23 +446,40 @@ const dataSetDisplayProps = {
 			finalPrice: 4170,
 			id: 37200,
 			name: 'Cams',
-			orderId: 37174,
+			order: {
+				label: '#37174',
+				url: '/modal/order/url'
+			},
 			quantity: 6,
 			shippedQuantity: 0,
 			shippingAddress: {},
 			shippingAddressId: 0,
 			sku: {
 				label: 'MIN00674',
+				size: 'sm',
 				url: '/sidepanel-1.html',
-				size: 'sm'
 			},
 			skuExternalReferenceCode: 'min00674',
 			skuId: 36132,
+			status: {
+				displayStyle: 'success',
+				label: 'delivered',
+			},
 			subscription: false,
+			thumbnail: {
+				alt: 'ABS Sensor',
+				shape: 'rounded',
+				size: 'lg',
+				url: 'https://via.placeholder.com/150',
+			},
 			unitPrice: 695
 		},
 		{
 			bookedQuantityId: 0,
+			date: {
+				icon: 'date',
+				url: '/modal/date/url'
+			},
 			discountAmount: 0,
 			discountPercentageLevel1: 0,
 			discountPercentageLevel2: 0,
@@ -352,7 +488,10 @@ const dataSetDisplayProps = {
 			finalPrice: 624,
 			id: 37201,
 			name: 'Coil Spring - Rear',
-			orderId: 37174,
+			order: {
+				label: '#37174',
+				url: '/modal/order/url'
+			},
 			quantity: 6,
 			shippedQuantity: 0,
 			shippingAddress: {},
@@ -363,11 +502,25 @@ const dataSetDisplayProps = {
 			},
 			skuExternalReferenceCode: 'min38799',
 			skuId: 36553,
+			status: {
+				displayStyle: 'success',
+				label: 'delivered',
+			},
 			subscription: false,
+			thumbnail: {
+				alt: 'ABS Sensor',
+				shape: 'rounded',
+				size: 'lg',
+				url: 'https://via.placeholder.com/150',
+			},
 			unitPrice: 104
 		},
 		{
 			bookedQuantityId: 0,
+			date: {
+				icon: 'date',
+				url: '/modal/date/url'
+			},
 			discountAmount: 0,
 			discountPercentageLevel1: 0,
 			discountPercentageLevel2: 0,
@@ -376,7 +529,10 @@ const dataSetDisplayProps = {
 			finalPrice: 623,
 			id: 37202,
 			name: 'CV Axles',
-			orderId: 37174,
+			order: {
+				label: '#37174',
+				url: '/modal/order/url'
+			},
 			quantity: 7,
 			shippedQuantity: 0,
 			shippingAddress: {},
@@ -387,11 +543,25 @@ const dataSetDisplayProps = {
 			},
 			skuExternalReferenceCode: 'min38796',
 			skuId: 36492,
+			status: {
+				displayStyle: 'success',
+				label: 'delivered',
+			},
 			subscription: false,
+			thumbnail: {
+				alt: 'ABS Sensor',
+				shape: 'rounded',
+				size: 'lg',
+				url: 'https://via.placeholder.com/150',
+			},
 			unitPrice: 89
 		},
 		{
 			bookedQuantityId: 0,
+			date: {
+				icon: 'date',
+				url: '/modal/date/url'
+			},
 			discountAmount: 0,
 			discountPercentageLevel1: 0,
 			discountPercentageLevel2: 0,
@@ -400,7 +570,10 @@ const dataSetDisplayProps = {
 			finalPrice: 1068,
 			id: 37203,
 			name: 'CV Axles',
-			orderId: 37174,
+			order: {
+				label: '#37174',
+				url: '/modal/order/url'
+			},
 			quantity: 12,
 			shippedQuantity: 0,
 			shippingAddress: {},
@@ -411,11 +584,25 @@ const dataSetDisplayProps = {
 			},
 			skuExternalReferenceCode: 'min55853',
 			skuId: 36700,
+			status: {
+				displayStyle: 'success',
+				label: 'delivered',
+			},
 			subscription: false,
+			thumbnail: {
+				alt: 'ABS Sensor',
+				shape: 'rounded',
+				size: 'lg',
+				url: 'https://via.placeholder.com/150',
+			},
 			unitPrice: 89
 		},
 		{
 			bookedQuantityId: 0,
+			date: {
+				icon: 'date',
+				url: '/modal/date/url'
+			},
 			discountAmount: 0,
 			discountPercentageLevel1: 0,
 			discountPercentageLevel2: 0,
@@ -424,7 +611,10 @@ const dataSetDisplayProps = {
 			finalPrice: 10550,
 			id: 37204,
 			name: 'Differential Ring and Pinion - Universal',
-			orderId: 37174,
+			order: {
+				label: '#37174',
+				url: '/modal/order/url'
+			},
 			quantity: 50,
 			shippedQuantity: 0,
 			shippingAddress: {},
@@ -435,11 +625,25 @@ const dataSetDisplayProps = {
 			},
 			skuExternalReferenceCode: 'min38801',
 			skuId: 36604,
+			status: {
+				displayStyle: 'success',
+				label: 'delivered',
+			},
 			subscription: false,
+			thumbnail: {
+				alt: 'ABS Sensor',
+				shape: 'rounded',
+				size: 'lg',
+				url: 'https://via.placeholder.com/150',
+			},
 			unitPrice: 211
 		},
 		{
 			bookedQuantityId: 0,
+			date: {
+				icon: 'date',
+				url: '/modal/date/url'
+			},
 			discountAmount: 0,
 			discountPercentageLevel1: 0,
 			discountPercentageLevel2: 0,
@@ -448,7 +652,10 @@ const dataSetDisplayProps = {
 			finalPrice: 396,
 			id: 37205,
 			name: 'Drive Shafts',
-			orderId: 37174,
+			order: {
+				label: '#37174',
+				url: '/modal/order/url'
+			},
 			quantity: 1,
 			shippedQuantity: 0,
 			shippingAddress: {},
@@ -459,7 +666,17 @@ const dataSetDisplayProps = {
 			},
 			skuExternalReferenceCode: 'min55855',
 			skuId: 36744,
+			status: {
+				displayStyle: 'success',
+				label: 'delivered',
+			},
 			subscription: false,
+			thumbnail: {
+				alt: 'ABS Sensor',
+				shape: 'rounded',
+				size: 'lg',
+				url: 'https://via.placeholder.com/150',
+			},
 			unitPrice: 396
 		}
 	],
@@ -494,36 +711,50 @@ const dataSetDisplayProps = {
 	schema: {
 		fields: [
 			{
+				contentRenderer: 'picture',
+				fieldName: 'thumbnail',
+				label: '',
+			},
+			{
 				contentRenderer: 'sidePanelLink',
 				fieldName: 'sku',
-				label: 'sku',
-				sortable: true
+				label: 'SKU',
+				sortable: true,
 			},
 			{
 				fieldName: 'name',
-				label: 'name',
+				label: 'Name',
 				sortable: true
 			},
 			{
 				fieldName: 'unitPrice',
-				label: 'price',
+				label: 'Price',
 				sortable: true
 			},
 			{
-				fieldName: 'discountAmount',
-				label: 'discount',
-				sortable: true
+				contentRenderer: 'modalLink',
+				fieldName: 'order',
+				label: 'Order',
+			},
+			{
+				contentRenderer: 'label',
+				fieldName: 'status',
+				label: 'Status',
 			},
 			{
 				fieldName: 'quantity',
-				label: 'quantity',
+				label: 'Quantity',
 				sortable: true
 			},
 			{
 				fieldName: 'finalPrice',
-				label: 'total',
+				label: 'Total',
 				sortable: false
-			}
+			},
+			{
+				contentRenderer: 'modalLink',
+				fieldName: 'date',
+			},
 		]
 	},
 	showPagination: true,

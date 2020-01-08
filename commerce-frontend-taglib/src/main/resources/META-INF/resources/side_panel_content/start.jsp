@@ -23,9 +23,8 @@
 	var pageHeader = document.querySelector(".side-panel-iframe-header");
 
 	if(!pageMenu && pageHeader) {
-		pageHeader.classList.add('side-panel-iframe-header-sticked');
+		pageHeader.classList.add('side-panel-iframe-header-sticky');
 	}
-
 </aui:script>
 
 <c:if test="<%= Validator.isNotNull(title) %>">

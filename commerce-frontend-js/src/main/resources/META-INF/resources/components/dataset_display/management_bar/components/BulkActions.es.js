@@ -17,11 +17,11 @@ function submit(action, method = 'get', form) {
 	form.current.submit();
 }
 
-function getQueryString(ids) {
+function getQueryString(ids = []) {
 	return `?ids=${ids.join(',')}`;
 }
 
-function getRichPayload(payload, ids) {
+function getRichPayload(payload, ids = []) {
 	const richPayload = {
 		...payload,
 		url: payload.baseUrl + getQueryString(ids)
@@ -82,7 +82,7 @@ function BulkActions(props) {
 		]
 	)
 
-	return (
+	return props.selectedItemsId.length ? (
 		<TableContext.Consumer>
 			{({formRef, loadData, sidePanelId}) => (
 				<nav className="management-bar-primary navbar navbar-expand-md pb-2 pt-2 subnav-tbar">
@@ -125,7 +125,7 @@ function BulkActions(props) {
 				</nav>
 			)}
 		</TableContext.Consumer>
-	);
+	) : null;
 }
 
 BulkActions.propTypes = {

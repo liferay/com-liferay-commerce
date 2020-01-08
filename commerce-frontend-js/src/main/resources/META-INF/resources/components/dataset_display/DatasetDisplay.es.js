@@ -99,6 +99,7 @@ function DatasetDisplay(props) {
 			value={{
 				formRef,
 				loadData: () => getData(props.apiUrl, filters.filter(e => !!e.value), delta, pageNumber, sorting, true),
+				modalId: datasetDisplaySupportModalId,
 				sidePanelId: props.sidePanelId,
 				sorting,
 				updateSorting,

@@ -10,6 +10,10 @@ import TableHeadRow from './TableHeadRow.es';
 import ActionsDropdown from '../common/ActionsDropdown.es';
 
 function TableCell(props) {
+	if(!props.value) {
+		return (<ClayTable.Cell />)
+	}
+
 	const { template, ...otherProps } = props;
 	const Template = getCustomCellTemplate(template);
 

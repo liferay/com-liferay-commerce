@@ -17,17 +17,14 @@ function ManagementBar(props) {
 
 	return (
 		<>
-			{props.selectedItemsId.length ? (
-				<BulkActions
-					bulkActions={props.bulkActions}
-					selectAllItems={props.selectAllItems}
-					selectedItemsId={props.selectedItemsId}
-					totalItemsCount={props.totalItemsCount}
-				/>
-			) : (
-				<NavBar
-					creationMenuItems={props.creationMenuItems}
-				/>
+			<BulkActions
+				bulkActions={props.bulkActions}
+				selectAllItems={props.selectAllItems}
+				selectedItemsId={props.selectedItemsId}
+				totalItemsCount={props.totalItemsCount}
+			/>
+			{!props.selectedItemsId.length && (
+				<NavBar creationMenuItems={props.creationMenuItems} />
 			)}
 			<ActiveFiltersBar disabled={!!props.selectedItemsId.length} />
 		</>

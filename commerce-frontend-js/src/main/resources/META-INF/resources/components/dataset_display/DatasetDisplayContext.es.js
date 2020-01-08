@@ -5,6 +5,7 @@ const DatasetDisplayContext = React.createContext({
 	formRef: null,
 	inlineEditingDetails: null,
 	loadData: () => {},
+	modalId: null,
 	sidePanelId: null,
 	sorting: [],
 	updateSorting: () => {},
