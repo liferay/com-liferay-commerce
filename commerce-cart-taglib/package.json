@@ -9,7 +9,7 @@
 	},
 	"devDependencies": {
 		"check-source-formatting": "^2.0.6",
-		"liferay-npm-scripts": "7.1.0"
+		"liferay-npm-scripts": "32.7.0"
 	},
 	"name": "commerce-cart-taglib",
 	"scripts": {
